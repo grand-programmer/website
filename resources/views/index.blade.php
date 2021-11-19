@@ -60,7 +60,7 @@
 </script>
 <script src="/js/jquery.js"></script>
 <script src="{{asset('js/vue-fullpage.min.js')}}"></script>
-<script src="/js/app.js"></script>
+<script src="/js/mix/app.js"></script>
 <script src="/vendors/bootstrap-selector/js/bootstrap-select.min.js"></script>
 <script src="/vendors/image-dropdown/jquery.dd.min.js"></script>
 <script src="/vendors/camera-slider/jquery.easing.1.3.js"></script>
