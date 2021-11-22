@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Models\Menu;
+use App\Models\Page;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,7 +17,7 @@ use Illuminate\Support\Facades\Route;
     Lfm::routes();
 });*/
 Route::any('/test',function(){
-    echo "sadfsd";
+   echo 'test';
 });
 Route::get('/{any}', function () {
     return view('index');

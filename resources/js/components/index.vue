@@ -474,7 +474,7 @@
                                         </div>
                                     </div>
                                     <div class="panel panel-default">
-                                        <div class="panel-heading" role="tab" id="headingFive">
+                                        <div class="panel-heading" role="tab" id="headingSix">
                                             <h4 class="panel-title">
                                                 <a class="collapsed" role="button" data-bs-toggle="collapse"
                                                    data-bs-parent="#accordion"
@@ -682,8 +682,8 @@ export default {
                 anchors: ['0', '1', '2', '3', '4', '5'],
                 sectionsColor: ['#fff', '#faf9f9', '#fff', '#efefef', '#fff', '#fff'],
                 css3: true,
-                menu: '.logo_area',
-                fixedElements:'body > .footer_links, .logo_area',
+                //menu: '.logo_area',
+                fixedElements:'body > .footer_links',
                 lazyLoading: true,
                 navigation: true,
                 slideSelector: '.fslide',
@@ -694,7 +694,8 @@ export default {
                 afterLoad: function (origin, destination, direction) {
 
                     skipPages(origin, destination, direction);
-                    $('body').click('.logo_link',function(){
+                    $('body').on('click','a.logo_link',function(){
+                        console.log('asd');
                         fullpage_api.moveTo(1);
                     })
                 }

@@ -62,15 +62,6 @@
 <script>
 export default {
     name: 'Onepage',
-    data() {
-        return {
-            options: {
-                anchors: ['0', '1'],
-                lockAnchors: true,
-            },
-        }
-    },
-
 }
 </script>
 <style>

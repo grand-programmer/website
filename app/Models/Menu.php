@@ -21,7 +21,7 @@ class Menu extends Model
     ];
     public function children()
     {
-        return $this->hasMany('App\Models\Menu', 'parent', 'id');
+        return $this->hasMany('App\Models\Menu', 'parent', 'id')->orderBy('sort_number');
     }
     public static function boot(){
         parent::boot();

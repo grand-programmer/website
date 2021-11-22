@@ -1,7 +1,7 @@
 {
-    "/js/app.js": "/js/app.js",
-    "/js/pdfmake.js": "/js/pdfmake.js",
-    "/js/canvg.js": "/js/canvg.js",
-    "/js/xlsx.js": "/js/xlsx.js",
-    "/css/app.css": "/css/app.css"
+    "/js/mix/app.js": "/js/mix/app.js",
+    "/js/mix/pdfmake.js": "/js/mix/pdfmake.js",
+    "/js/mix/canvg.js": "/js/mix/canvg.js",
+    "/js/mix/xlsx.js": "/js/mix/xlsx.js",
+    "/css/mix/app.css": "/css/mix/app.css"
 }

@@ -24,6 +24,7 @@ class MenuResource extends JsonResource
             'title'=>$this->title,
             'type'=>$this->type,
             'url'=>($this->type===1) ? '/page/' . Page::find($this->relation_id)['slug'] : $this->url,
+            'children'=>($this->children)??$this->children,
         ];
     }
 }
