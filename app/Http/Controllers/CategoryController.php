@@ -18,7 +18,7 @@ class CategoryController extends Controller
     {
         $data = $request->only('limit');
         if (isset($data['limit']))
-            return Category::with('children')->get()->limit((int)$data['limit'])->toJson();
+            return Category::with('children')->limit((int)$data['limit'])->get()->toJson();
         else
             return Category::with('children')->get()->toJson();
     }
