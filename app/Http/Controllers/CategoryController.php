@@ -16,9 +16,11 @@ class CategoryController extends Controller
      */
     public function index(Request $request)
     {
-        $data= $request->only('limit');
-        dd($data);
-        return Category::with('children')->get()->toJson();
+        $data = $request->only('limit');
+        if (isset($data['limit']))
+            return Category::with('children')->get()->limit((int)$data['limit'])->toJson();
+        else
+            return Category::with('children')->get()->toJson();
     }
 
     /**
@@ -78,7 +80,7 @@ class CategoryController extends Controller
         if (isset($data['withnews']))
             return response()->json($category->with(['news' => function ($query) {
                 $query->orderby('created_at', 'desc');
-            }])->where('id',$category->id)->get()[0], 200);
+            }])->where('id', $category->id)->get()[0], 200);
         else
             return response()->json($category, 200);
 
