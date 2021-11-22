@@ -14,8 +14,10 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function index()
+    public function index(Request $request)
     {
+        $data= $request->only('limit');
+        dd($data);
         return Category::with('children')->get()->toJson();
     }
 

@@ -80,7 +80,10 @@ const apiClient = {
     //////////////////////// News End /////////////////////////////
 
     //////////////////////// Categories Begin/////////////////////////////
-    async readCategories() {
+    async readCategories(limit=0) {
+        if(limit>0)
+        return  await axios.get(apiUrl+"categories?limit="+limit);
+        else
         return  await axios.get(apiUrl+"categories");
     },
     async readCategoriesForSelect() {

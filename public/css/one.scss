@@ -637,7 +637,7 @@ $f: calc(1.732 * #{$s} + (-6 * #{$m}) - 1px);
         bottom: 0;
         background-position: right;
         filter: grayscale(100%);
-        z-index: -5;
+        z-index: 1;
     }
 
     .foydali-resurslar.row {
@@ -717,7 +717,7 @@ $f: calc(1.732 * #{$s} + (-6 * #{$m}) - 1px);
         bottom: 0;
         background-position: right;
         filter: grayscale(100%);
-        z-index: -5;
+        z-index: 1;
     }
 
     .mobil-ilovalar {
@@ -1875,7 +1875,7 @@ a.read_more {
                 color: #26a55b;
                 font-size: 14px;
                 font-family: "Montserrat";
-                font-weight: 500;
+                font-weight: 600;
             }
 
             &:before {
