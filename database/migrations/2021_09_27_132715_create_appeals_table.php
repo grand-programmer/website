@@ -15,13 +15,17 @@ class CreateAppealsTable extends Migration
     {
         Schema::create('appeals', function (Blueprint $table) {
             $table->id();
-            $table->string('fio');
-            $table->smallInteger('appeal_type')->default(0);
+            $table->string('name')->nullable();
+            $table->string('lastname')->nullable();
+            $table->string('surname')->nullable();
             $table->string('address')->nullable();
             $table->string('email')->nullable();
             $table->string('phone');
-            $table->integer('authority')->nullable();
-            $table->integer('sphere')->nullable();
+            $table->integer('state')->default(0);
+            $table->boolean('retry')->default(false);
+            $table->boolean('yur_shaxs')->default(false);
+            $table->string('work')->nullable();
+            $table->date('date_birth')->nullable();
             $table->text('text');
             $table->string('number')->nullable();
             $table->timestamps();

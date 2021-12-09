@@ -4,6 +4,8 @@
     <router-link to="/" class="logo_link">
         <div class="pull-left logo_neno" >
             <img src="/img/gtk_image.png" alt="">
+            <img class="christmas" src="/img/icons/ChristmasTree.svg" alt="">
+
             <p>Ўзбекистон Республикаси Давлат божхона қўмитаси</p>
         </div></router-link >
     <!--==========Menu area==========-->

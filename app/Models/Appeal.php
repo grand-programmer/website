@@ -11,13 +11,17 @@ class Appeal extends Model
     use HasFactory;
 
     protected $fillable = [
-        'fio',
-        'appeal_type',
+        'name',
+        'surname',
+        'lastname',
         'address',
         'email',
         'phone',
-        'authority',
-        'sphere',
+        'state',
+        'retry',
+        'yur_shaxs',
+        'work',
+        'date_birth',
         'text',
     ];
     protected static function boot()
@@ -25,6 +29,7 @@ class Appeal extends Model
         parent::boot();
         static::saving(function ($model) {
             $model->number = Str::random(10);
+            $model->retry = $model->retry ? 1 : 0;
         });
     }
 }

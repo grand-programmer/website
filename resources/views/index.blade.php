@@ -25,7 +25,7 @@
     <link href="{{secure_asset('/css/style.css')}}" rel="stylesheet">
     <link href="{{secure_asset('/css/fullpage.css')}}" rel="stylesheet">
     <link href="{{secure_asset('/css/all.css')}}" rel="stylesheet">
-    <link href="{{asset('/css/one.css')}}" rel="stylesheet">
+    <link href="{{asset('/css/one.css')}}" rel="stylesheet" type="text/css" charset="utf-8">
     <link href="{{asset('/css/slick.css')}}" rel="stylesheet">
     <link href="{{asset('/css/slick-theme.css')}}" rel="stylesheet">
     <link href="{{asset('/css/responsive.css')}}" rel="stylesheet">
@@ -42,8 +42,8 @@
     <!--==========Logo area==========-->
     <v-app app>
     <!--==========End Logo area==========-->
- <router-view></router-view>
-        </v-app>
+        <router-view></router-view>
+    </v-app>
 </div>
 
 <script>

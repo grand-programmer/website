@@ -36,7 +36,7 @@
                                     <h3 class="fadeInLeft animated">Интеграциялашган таъриф</h3>
                                     <h4 class="fadeInLeft animated">Божхона ахборот тизими</h4>
                                     <p class="fadeInUp animated">Божхона тўловлари ҳисобини олинг</p>
-                                    <a class="s_readmore_btn fadeInUp animated" href="#">Хизматдан фойдаланиш</a>
+                                    <a class="s_readmore_btn fadeInUp animated" href="http://tarif.customs.uz" target="_blank">Хизматдан фойдаланиш</a>
                                     <!--<a class="s_contact_btn fadeInUp animated" href="#">Contact Us</a>-->
                                 </div>
                                 <div class="slider_image slider-2">
@@ -51,7 +51,7 @@
                                     <h3 class="fadeInLeft animated">Э-транзит</h3>
                                     <h4 class="fadeInLeft animated">Божхона ахборот тизими</h4>
                                     <p class="fadeInUp animated">Чегарадан юкларни электрон декларация қилинг</p>
-                                    <a class="s_readmore_btn fadeInUp animated" href="#">Хизматдан фойдаланиш</a>
+                                    <a class="s_readmore_btn fadeInUp animated" target="_blank" href="http://cargo.customs.uz">Хизматдан фойдаланиш</a>
                                     <!--<a class="s_contact_btn fadeInUp animated" href="#">Contact Us</a>-->
                                 </div>
                                 <div class="slider_image slider-2">
@@ -67,7 +67,7 @@
                                     <p class="fadeInUp animated">Чегарадан товарлар олиб ўтишда сертификат ва
                                         рухсатномаларни
                                         ушбу ахборот тизими ёрдамида олинг.</p>
-                                    <a class="s_readmore_btn fadeInUp animated" href="#">Хизматдан фойдаланиш</a>
+                                    <a class="s_readmore_btn fadeInUp animated" href="http://singlewindow.uz" target="_blank">Хизматдан фойдаланиш</a>
                                     <!--<a class="s_contact_btn fadeInUp animated" href="#">Contact Us</a>-->
                                 </div>
                                 <div class="slider_image slider-2">
@@ -83,7 +83,7 @@
                                     <h4 class="fadeInLeft animated">Божхона ахборот тизими</h4>
                                     <p class="fadeInUp animated">Чегарадан товарлар олиб ўтишда сертификат ва
                                         рухсатномаларни ушбу ахборот тизими ёрдамида олинг.</p>
-                                    <a class="s_readmore_btn fadeInUp animated" href="#">Хизматдан фойдаланиш</a>
+                                    <a class="s_readmore_btn fadeInUp animated" href="http://singlewindow.uz" target="_blank">Хизматдан фойдаланиш</a>
                                     <!--<a class="s_contact_btn fadeInUp animated" href="#">Contact Us</a>-->
                                 </div>
                                 <div class="slider_image slider-2">
@@ -700,5 +700,10 @@ if(origin.index===1 && destination.index===0 && pageloaded==1)
 
 
 <style scoped>
-
+.v-application{
+    font-family: "Montserrat", sans-serif;
+}
+h1, h2, h3, h4, h5, h6{
+    font-family: "Montserrat", sans-serif;
+}
 </style>

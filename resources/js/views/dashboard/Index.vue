@@ -11,6 +11,7 @@
 </template>
 
 <script>
+
 export default {
     name: 'DashboardIndex',
 
@@ -24,6 +25,7 @@ export default {
     data: () => ({
         expandOnHover: false,
     }),
+
 
 }
 </script>

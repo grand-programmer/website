@@ -249,7 +249,7 @@
                             </a>
                         </div>
                         <div class="col-md-2 portfolio_single p1">
-                            <a href="/services/appeals" target="_blank" class="portfolio-card">
+                            <router-link to="/services/appeals"  class="portfolio-card">
                                 <div class="portfolio_image">
                                     <img src="/img/icons/elektron-murojaat.png"/>
                                 </div>
@@ -257,7 +257,7 @@
                                     <p>Электрон мурожаат йўлаш</p>
 
                                 </div>
-                            </a>
+                            </router-link>
                         </div>
                         <div class="col-md-2 portfolio_single p1">
                             <a href="https://e-navbat.customs.uz" target="_blank" class="portfolio-card">

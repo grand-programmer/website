@@ -5,11 +5,14 @@ const multipartformdata = {
     }
 }
 const apiClient = {
+    async addAppeals(requestData) {
+        return  await axios.get(apiUrl+"appeal",requestData);
+    },
     async readAppeals() {
         return  await axios.get(apiUrl+"appeal");
     },
     async checkAppeal(requestData) {
-        return  await axios.post(apiUrl+"checkAppeal",requestData);
+        return  await axios.post(apiUrl+"appeal/checkAppeal",requestData);
     },
     async deleteAppeal(appealId) {
         return await axios.delete(apiUrl+"appeal/"+appealId);
@@ -61,8 +64,9 @@ const apiClient = {
     async readMenusFront() {
         return  await axios.get(apiUrl+"menu/front");
     },
-    async readMenus() {
-        return  await axios.get(apiUrl+"menu");
+    async readMenus(parent=null) {
+        if(parent==null) return  await axios.get(apiUrl+"menu");
+        else return  await axios.get(apiUrl+"menu?parent=" + parent);
     },
 
     async addMenu(requestData) {
@@ -107,38 +111,5 @@ const apiClient = {
     },
     //////////////////////// Categories End /////////////////////////////
 
-    async readMembers() {
-        const response = await axios.get("/member");
-        return response.data;
-    },
-    async createMember(requestData) {
-        const response = await axios.post("/member", requestData);
-        return response.data;
-    },
-    async readBooks() {
-        const response = await axios.get("/book");
-        return response.data;
-    },
-    async createBook(requestData) {
-        const response = await axios.post("/book", requestData);
-        return response.data;
-    },
-    async deleteBook(bookId) {
-        const response = await axios.delete("/book/"+bookId);
-        return response.data;
-    },
-    async lendBook(requestData) {
-        console.log(requestData);
-        const response = await axios.post("/book/lend", requestData);
-        return response.data;
-    },
-    async readBook(bookId) {
-        const response = await axios.get("/book/"+bookId);
-        return response.data;
-    },
-    async updateBook(bookId, requestData) {
-        const response = await axios.patch("/book/"+bookId, requestData);
-        return response.data;
-    }
 };
 export default apiClient;

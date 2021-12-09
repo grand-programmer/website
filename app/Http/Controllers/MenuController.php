@@ -17,8 +17,12 @@ class MenuController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $data=$request->only('parent');
+        if(isset($data['parent']))
+        return MenuResource::collection(Menu::where('parent',$data['parent'])->get());
+
         return MenuResource::collection(Menu::all());
     }
 
@@ -199,6 +203,50 @@ class MenuController extends Controller
             if ($validator->fails()) {
                 return response()->json(['error' => $validator->errors()], 401);
             }
+
+            try {
+                if ($data['type'] == 1) {
+                    $menuData = [
+                        'type' => $data['type'],
+                        'title' => $data['title'],
+                        'status' => $data['status'],
+                        'sort_number' => $data['sort_number'],
+                        'parent' => $data['parent'],
+                        'relation_id' => $data['page_id'],
+                    ];
+                }
+                if ($data['type'] == 0) {
+                    $custom_menu_link = [
+                        'url' => $data['url'],
+                        'title' => $data['title'],
+                        'status' => $data['status'],
+                        'sort_number' => $data['sort_number'],
+                    ];
+                    if($customMenu=CustomMenuLink::where(['type'=>0,'url'=>$data['url']])->first())
+                    {
+                        $customMenu->update($custom_menu_link);
+                    }else {
+                    $customMenu = CustomMenuLink::create($custom_menu_link);
+                    $menuData = [
+                        'type' => $data['type'],
+                        'url' => $data['url'],
+                        'title' => $data['title'],
+                        'status' => $data['status'],
+                        'sort_number' => $data['sort_number'],
+                        'parent' => $data['parent'],
+                        'relation_id' => $customMenu->id,
+                    ];}
+                }
+                $menu->update($menuData);
+                //$appeal->number = Str::random(10);
+                $menu->save();
+            } catch (Exception $e) {
+                return response()->json(['error' => $e->getMessage()], 401);
+            }
+
+
+
+
 
             try {
                 $menu->update($data);

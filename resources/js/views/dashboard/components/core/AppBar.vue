@@ -106,15 +106,27 @@
       </v-list>
     </v-menu>
 
-    <v-btn
-      class="ml-2"
-      min-width="0"
-      text
-      to="/pages/user"
-    >
-      <v-icon>mdi-account</v-icon>
-    </v-btn>
+              <v-menu offset-y>
+                  <template v-slot:activator="{ on, attrs }">
+                      <v-btn
+                          class="ml-2"
+                          min-width="0"
+                          v-bind="attrs"
+                          v-on="on"
+                          text>
+                          <v-icon>mdi-account</v-icon>
+                      </v-btn>
+                  </template>
+                  <v-list>
+                      <v-list-item to="/user">Профил</v-list-item>
+<!--                      <v-list-item> <v-list-item-title>Settings</v-list-item-title></v-list-item>-->
+                      <v-list-item @click.prevent="$auth.logout()" href="#">Чиқиш</v-list-item>
+                  </v-list>
+              </v-menu>
+
+
   </v-app-bar>
+
 </template>
 
 <script>

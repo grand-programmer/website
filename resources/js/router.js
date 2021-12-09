@@ -16,6 +16,9 @@ const routes = [
 
         path: '',
         component: Index,
+        meta: {
+            auth: undefined,
+        },
         children:
             [
                 {
@@ -28,6 +31,9 @@ const routes = [
 
         path: '/',
         component: OnePage,
+        meta: {
+            auth: undefined,
+        },
         children:
             [
                 {
@@ -67,10 +73,10 @@ const routes = [
                     path: 'page/',
                     component: {
                         template: '<router-view></router-view>',
-                        script:' export default {}'
+                        script: ' export default {}'
 
                     },
-                    children:[
+                    children: [
                         {
                             path: ':id',
                             component: () => import('./views/frontend/pages/index'),
@@ -78,6 +84,36 @@ const routes = [
                         }
                     ]
                 },
+                {
+                    name: 'login',
+                    path: '/login',
+                    component: () => import('./views/pages/Login'),
+                    meta: {
+                        auth: false,
+                        authRedirect: '/403',
+                        notFoundRedirect: '/403',
+                        forbiddenRedirect: '/403',
+                        routeAuth:'/403'
+                    }
+                },
+                {
+                    name: '403',
+                    path: '/403',
+                    component: () => import('./views/pages/403'),
+                    meta: {
+                        auth: undefined,
+
+                    }
+                },                {
+                    name: '404',
+                    path: '/404',
+                    component: () => import('./views/pages/404'),
+                    meta: {
+                        auth: undefined,
+
+                    }
+                },
+
 
 
             ],
@@ -86,6 +122,10 @@ const routes = [
     {
         path: '/admin/',
         component: () => import('./views/dashboard/Index'),
+        meta: {
+            //auth:true
+            auth: {roles: 2, redirect: {name: 'login'}, forbiddenRedirect: '/403'}
+        },
         children: [
             // Dashboard
             {
@@ -105,24 +145,24 @@ const routes = [
                 path: 'pages/',
                 component: {
                     template: '<router-view></router-view>',
-                    script:' export default {}'
+                    script: ' export default {}'
                 },
                 children:
                     [
                         {
-                            name:"Сахифалар",
+                            name: "Сахифалар",
                             path: '',
                             component: () => import('./views/dashboard/pages/index'),
 
                         },
                         {
-                            name:"Сахифа яратиш",
+                            name: "Сахифа яратиш",
                             path: 'create',
                             component: () => import('./views/dashboard/pages/create'),
 
                         },
                         {
-                            name:"Сахифани тахрирлаш",
+                            name: "Сахифани тахрирлаш",
                             path: 'edit/:id',
                             component: () => import('./views/dashboard/pages/edit'),
 
@@ -136,24 +176,24 @@ const routes = [
                 path: 'news/',
                 component: {
                     template: '<router-view></router-view>',
-                    script:' export default {}'
+                    script: ' export default {}'
                 },
                 children:
                     [
                         {
-                            name:"Янгиликлар",
+                            name: "Янгиликлар",
                             path: '',
                             component: () => import('./views/dashboard/news/index'),
 
                         },
                         {
-                            name:"Янгилик яратиш",
+                            name: "Янгилик яратиш",
                             path: 'create',
                             component: () => import('./views/dashboard/news/create'),
 
                         },
                         {
-                            name:"Янгиликни тахрирлаш",
+                            name: "Янгиликни тахрирлаш",
                             path: 'edit/:id',
                             component: () => import('./views/dashboard/news/edit'),
 
@@ -168,24 +208,24 @@ const routes = [
                 path: 'categories/',
                 component: {
                     template: '<router-view></router-view>',
-                    script:' export default {}'
+                    script: ' export default {}'
                 },
                 children:
                     [
                         {
-                            name:"Категориялар",
+                            name: "Категориялар",
                             path: '',
                             component: () => import('./views/dashboard/news/categories/index'),
 
                         },
                         {
-                            name:"Категория яратиш",
+                            name: "Категория яратиш",
                             path: 'create',
                             component: () => import('./views/dashboard/news/categories/create'),
 
                         },
                         {
-                            name:"Категорияни тахрирлаш",
+                            name: "Категорияни тахрирлаш",
                             path: 'edit/:id',
                             component: () => import('./views/dashboard/news/categories/edit'),
 
@@ -200,26 +240,32 @@ const routes = [
                 path: 'menu/',
                 component: {
                     template: '<router-view></router-view>',
-                    script:' export default {}'
+                    script: ' export default {}'
                 },
                 children:
                     [
                         {
-                            name:"Менюлар",
+                            name: "Менюлар",
                             path: '',
                             component: () => import('./views/dashboard/menus/index'),
 
                         },
                         {
-                            name:"Меню яратиш",
+                            name: "Меню яратиш",
                             path: 'create',
                             component: () => import('./views/dashboard/menus/create'),
 
                         },
                         {
-                            name:"Меню тахрирлаш",
+                            name: "Меню тахрирлаш",
                             path: 'edit/:id',
                             component: () => import('./views/dashboard/menus/edit'),
+
+                        },
+                        {
+                            name: "Подменюлар",
+                            path: 'view/:id',
+                            component: () => import('./views/dashboard/menus/view'),
 
                         },
 
@@ -227,11 +273,11 @@ const routes = [
 
             },
 // News
-/*            {
-                name: 'Янгиликлар',
-                path: 'news/',
-                component: () => import('./views/dashboard/News'),
-            },*/
+            /*            {
+                            name: 'Янгиликлар',
+                            path: 'news/',
+                            component: () => import('./views/dashboard/News'),
+                        },*/
             /*{
                 name: 'User Profile',
                 path: 'pages/user',
@@ -242,12 +288,15 @@ const routes = [
                 path: 'components/notifications',
                 component: () => import('./views/dashboard/component/Notifications'),
             },
+
             {
                 path: '*',
                 redirect: '/'
             }
         ]
-    }];
+    },
+
+];
 
 
 export default new vueRouter({
@@ -255,4 +304,5 @@ export default new vueRouter({
     base: process.env.BASE_URL,
     routes: routes
 });
+
 

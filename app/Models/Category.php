@@ -23,7 +23,7 @@ class Category extends Model
     {
         parent::boot();
 
-        static::created(function ($model) {
+        static::saving(function ($model) {
             $model->slug = $model->createSlug($model->title);// Str::slug($model->title);
         });
     }
@@ -32,7 +32,7 @@ class Category extends Model
     {
         if (static::whereSlug($slug = MainHelper::slug($title))->exists()) {
             $max = static::whereTitle($title)->latest('id')->skip(1)->value('slug');
-
+            if (!$max) return $slug;
             if (is_numeric($max[-1])) {
                 return preg_replace_callback('/(\d+)$/', function ($mathces) {
                     return $mathces[1] + 1;

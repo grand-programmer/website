@@ -33,7 +33,7 @@
 .borderRadiusBtm ul li:first-child {
   -moz-border-radius: 5px 5px 0 0;
   border-radius: 5px 5px 0 0;
-  border-bottom: 1 solid #c3c3c3; }
+  border-bottom: 1px solid #c3c3c3; }
 
 .ddcommon .disabled img, .ddcommon .disabled span, .ddcommon.disabledAll {
   opacity: .5;
