@@ -367,7 +367,6 @@ export default {
                 alert_text: '',
                 multiple: false,
             },
-            menu: [],
             breadcrumb_items: [
                 {
                     text: 'Асосий саҳифа',

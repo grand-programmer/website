@@ -2613,17 +2613,20 @@ $tc-primary-color: #4776b3;
     path {
         transition: all ease .3s;
         cursor: pointer;
+        stroke-width: 0.6px;
+        stroke: #112e04;
+        fill: #437859;
     }
 
     path:hover {
         fill: #549243;
-        stroke: #207709;
-        stroke-width: 2px;
+/*        stroke: #207709;
+        stroke-width: 2px;*/
     }
 
     path.active {
         fill: $tc-secondary-color !important;
-        stroke: #ffdbc4;
+        stroke: #112e04;
         stroke-width: 1px;
     }
 
@@ -2634,6 +2637,7 @@ $tc-primary-color: #4776b3;
 
         .card-body {
             padding: 50px 40px 35px;
+            position: relative;
 
             .card-title {
                 font-size: 22px;
@@ -2706,7 +2710,7 @@ $tc-primary-color: #4776b3;
         .card-body {
             ul.list-unstyled {
                 margin-top: 47px;
-                margin-bottom: 81px;
+                //margin-bottom: 81px;
 
                 li {
                     font-size: 15px;

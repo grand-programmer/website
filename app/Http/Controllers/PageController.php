@@ -31,9 +31,10 @@ class PageController extends Controller
                 ->get()->transform(function ($item) {
                     if(Menu::find($item->parent)->parent !== 0) {
 
-                        if ($item['type'] == 1) {
-                            $page = Page::find($item->relation_id);
+                        if ($item['type'] == 1 ) {
+                            if($page = Page::find($item->relation_id))
                             $item['url'] = "/page/" . $page->slug;
+                            else $item['url'] = "/page/" . $item['url'];
                         }
                         if ($item['url'] == '#' and !(count($item->children) > 0)) return false;
                         return $item;

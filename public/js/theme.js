@@ -665,6 +665,7 @@ var ie_data = {
 
 $(document).ready(function () {
 
+
 function home_main_slider() {
     if ($('.slider_inner').length) {
         $('.slider_inner').camera({
@@ -672,7 +673,7 @@ function home_main_slider() {
             loader: false,
             navigation: true,
             autoPlay: true,
-            time: 4000,
+            time: 3000,
             playPause: false,
             pagination: false,
             thumbnails: false,

@@ -1,4 +1,14 @@
 <template><div class="one-page">
+    <v-overlay
+        :opacity="1"
+        color="#fff"
+        :value="show" z-index="5000"
+    >
+        <v-progress-circular indeterminate size="200" color="#39ae69">
+            <img src="/img/gtk_image.png" height="160" width="160"/>
+        </v-progress-circular>
+    </v-overlay>
+
     <v-header></v-header>
 <v-hududiy></v-hududiy>
 
@@ -24,7 +34,7 @@
                                 <p>
                                     ЎзМАА Интернет-ОАВ гувоҳномаси № 0902
                                 </p>
-                                <p> © 2001-2021 Ўзбекистон Республикаси Давлат божхона қўмитаси.
+                                <p> © 2001-2022 Ўзбекистон Республикаси Давлат божхона қўмитаси.
                                 </p>
 
                             </div>
@@ -35,24 +45,10 @@
                         <div class="footer_widget_inner">
                             <div class="f_navigation_widget">
                                 <ul>
-                                    <li><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>Қўмита
-                                        ҳақида</a>
+                                    <li  v-for="(link,index) in menu[0]" :key="index">
+                                        <router-link :to="link.url"><i class="fa fa-angle-right" aria-hidden="true"></i>{{ link.title }}</router-link>
                                     </li>
-                                    <li><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>Фаолият</a>
-                                    </li>
-                                    <li><a href="#"><i class="fa fa-angle-right"
-                                                       aria-hidden="true"></i>Ҳужжатлар</a></li>
-                                    <li><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>Очиқ
-                                        қўмита</a>
-                                    </li>
-                                    <li><a href="#"><i class="fa fa-angle-right"
-                                                       aria-hidden="true"></i>Статистика</a>
-                                    </li>
-                                    <li><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>Оав
-                                        учун</a>
-                                    </li>
-                                    <li><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>Боғланиш</a>
-                                    </li>
+
                                 </ul>
                             </div>
                         </div>
@@ -139,12 +135,64 @@
 </div>
 </template>
 <script>
+let _loadingInterval = 0;
+import {mapState} from 'vuex';
+import loadingBar from "../../components/base/loadingbar.vue";
+
 export default {
     name: 'Onepage',
+    data() {
+        return {
+            links: [],
+            show:false
+        }
+
+    },
+    components:{
+        loadingBar,
+        MySnack: () => import('../../views/dashboard/component/snack'),
+    },
+    methods:{
+        showProgress(show) {
+            this.show = show;
+        },
+        start() {
+            this.showProgress(true);
+            this.percent = 0;
+
+            _loadingInterval = setInterval(() => {
+                this.percent = this.percent + 1;
+            }, 500)
+        },
+        stop() {
+            clearInterval(_loadingInterval);
+            this.percent = 100;
+
+            setTimeout(() => {
+                this.showProgress(false);
+            }, 500);
+        }
+    },
+
+    watch: {
+        loading: function (val, oldVal) {
+            if (val) {
+                this.start();
+            } else {
+                this.stop();
+            }
+        }
+    },
+    computed: {
+        ...mapState(['menu','loading'])
+    },
 }
 </script>
 <style>
 html{
     overflow: visible !important;
+}
+.v-snack:not(.v-snack--absolute){
+    top:100px;
 }
 </style>

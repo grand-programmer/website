@@ -12,6 +12,10 @@ driverOAuth2Facebook.params.client_id = '196729390739201';
 
 /**
  * Authentication configuration, some of the options can be override in method calls
+ *
+ * https://websanova.com/docs/vue-auth/options/request#redirect
+ *
+ * https://jwt-auth.readthedocs.io/en/develop/auth-guard/#methods
  */
 
 const config = {
@@ -43,29 +47,29 @@ const config = {
 
     // API endpoints used in Vue Auth.
     registerData: {
-        url: 'auth/register',
+        url: '/auth/register',
         method: 'POST',
         redirect: '/login'
     },
     loginData: {
-        url: 'auth/login1',
+        url: '/auth/login',
         method: 'POST',
         redirect: '',
         fetchUser: true
     },
     logoutData: {
-        url: 'auth/logout',
+        url: '/auth/logout',
         method: 'POST',
         redirect: '/',
         makeRequest: true
     },
     fetchData: {
-        url: 'auth/user',
+        url: '/auth/user',
         method: 'GET',
         enabled: true
     },
     refreshData: {
-        url: 'auth/refresh',
+        url: '/auth/refresh',
         method: 'GET',
         enabled: true,
         interval: 30

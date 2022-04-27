@@ -427,10 +427,7 @@ export default {
                     this.page.menu=null;
                 }
             }).catch((error) => {
-                this.$store.dispatch('setSnackbar', {
-                    color: 'error',
-                    text: 'Маълумотларни юклашда хатолик содир бўлди!'
-                });
+                this.$toast.error(`Маълумотларни юклашда хатолик содир бўлди!`)
                 this.$router.replace("/admin/pages").catch(() => {
                 });
             })
@@ -457,10 +454,7 @@ export default {
                 console.log(this.menus)
 
             }).catch((error) => {
-                this.$store.dispatch('setSnackbar', {
-                    color: 'error',
-                    text: 'Маълумотларни юклашда хатолик содир бўлди!'
-                });
+                this.$toast.error(`Маълумотларни юклашда хатолик содир бўлди!`)
                 console.log(error)
             })
         },
@@ -473,15 +467,9 @@ export default {
             if (isValid) {
                 this.page.inMenu=this.pageInMenu;
                 api.updatePage(this.page.id, this.page).then((response) => {
-                    this.$store.dispatch('setSnackbar', {
-                        color: 'default',
-                        text: 'Маълумотларни омадли тарзда юкланди!'
-                    });
+                    this.$toast.success(`Маълумотларни омадли тарзда юкланди!`)
                 }).catch((error) => {
-                    this.$store.dispatch('setSnackbar', {
-                        color: 'error',
-                        text: 'Маълумотларни юклашда хатолик содир бўлди!'
-                    });
+                    this.$toast.error(`Маълумотларни юклашда хатолик содир бўлди!`)
 
                 })
             }

@@ -256,7 +256,7 @@ export default {
             api.readCategoriesForSelect().then((response) => {
                 this.categories = response.data;
             }).catch((error) => {
-                this.$store.dispatch('setSnackbar', {color: 'error'});
+                this.$toast.error(`Маълумотларни юклашда хатолик содир бўлди!`)
                 console.log(error);
             })
         },
@@ -313,9 +313,9 @@ export default {
                 }
                 data.append("_method", "put");
                 api.updateNews(this.news.id, data).then((response) => {
-                    this.$store.dispatch('setSnackbar', {color: 'success', text: 'Маълумотлар омадли тарзда юкланди!'});
+                    this.$toast.success(`Маълумотларни омадли тарзда юкланди!`)
                 }).catch((error) => {
-                    this.$store.dispatch('setSnackbar', {color: 'error', text: 'Маълумотларни юклашда хатолик юз берди!'});
+                    this.$toast.error(`Маълумотларни юклашда хатолик содир бўлди!`)
                     console.log(error)
                 })
             }

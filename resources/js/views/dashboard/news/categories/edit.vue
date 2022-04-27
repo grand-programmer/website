@@ -128,7 +128,7 @@ export default {
             api.readCategory(this.$route.params.id).then((response) => {
                 this.category = response.data;
             }).catch((error) => {
-                this.$store.dispatch('setSnackbar', {color: 'error'});
+                this.$toast.error(`Маълумотларни юклашда хатолик содир бўлди!`)
                 this.$router.replace("/admin/categories").catch(() => {
                 });
 
@@ -142,10 +142,10 @@ export default {
             const isValid = await this.$refs.categoriesForm.validate();
             if (isValid) {
                 api.updateCategory(this.category.id, this.category).then((response) => {
-                    this.$store.dispatch('setSnackbar', {color: 'default'});
+                    R;
                 }).catch((error) => {
                     console.log(error)
-                    this.$store.dispatch('setSnackbar', {color: 'error'});
+                    this.$toast.error(`Маълумотларни юклашда хатолик содир бўлди!`)
                 })
             }
 

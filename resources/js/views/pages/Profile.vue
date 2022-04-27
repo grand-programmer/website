@@ -1,0 +1,312 @@
+<template>
+    <div class="section">
+        <div class="whitebreadcrumb breadcrumb-site">
+            <v-container>
+                <v-breadcrumbs :items="breadcrumb_items">
+                    <template v-slot:divider>
+                        <v-icon>mdi-chevron-right</v-icon>
+                    </template>
+                </v-breadcrumbs>
+            </v-container>
+        </div>
+
+        <v-container class="mening_arizalarim">
+            <v-row>
+                <v-col cols="3">
+                    <v-card
+                        class="mx-auto mt-9"
+                    >
+                        <v-navigation-drawer permanent class="accent-4 w-100">
+                            <v-list>
+                                <!--                                <v-list-item>
+                                                                    <v-list-item-avatar>
+                                                                        <v-img :src="'/public/images/users/'+ $auth.user().id +'.jpg'"></v-img>
+                                                                    </v-list-item-avatar>
+                                                                </v-list-item>-->
+
+                                <v-list-item link>
+                                    <v-list-item-content>
+                                        <v-list-item-title class="text-h6">
+                                            {{ $auth.user().first_name }} {{ $auth.user().sur_name }}
+                                        </v-list-item-title>
+                                        <v-list-item-subtitle>{{ $auth.user().email }}</v-list-item-subtitle>
+                                    </v-list-item-content>
+
+                                    <v-list-item-action>
+                                        <v-icon>mdi-menu-down</v-icon>
+                                    </v-list-item-action>
+                                </v-list-item>
+                            </v-list>
+                            <v-divider></v-divider>
+                            <v-list
+                                nav
+                                dense
+                            >
+                                <v-list-item-group
+                                    v-model="selectedItem"
+                                    color="primary"
+                                >
+                                    <v-list-item
+                                        v-for="(item, i) in items"
+                                        :key="i"
+                                        :to="item.link"
+                                    >
+                                        <v-list-item-icon>
+                                            <v-icon v-text="item.icon"></v-icon>
+                                        </v-list-item-icon>
+
+                                        <v-list-item-content>
+                                            <v-list-item-title v-text="item.text"></v-list-item-title>
+                                        </v-list-item-content>
+                                    </v-list-item>
+                                </v-list-item-group>
+                            </v-list>
+                        </v-navigation-drawer>
+                    </v-card>
+
+                    <!--                    <v-card class="p-3" elevation="1">
+                                            <div class="d-flex align-items-center justify-space-between user_info">
+                                                <img  :src="'/public/images/users/'+ $auth.user().id +'.jpg'" alt="Фойдаланувчи сурати">
+                                                <p>
+                                                    {{$auth.user().first_name}} {{$auth.user().sur_name}} {{$auth.user().mid_name}}
+                                                </p>
+
+                                            </div>
+                                            <v-row>
+
+                                            </v-row>
+
+                                        </v-card>-->
+                </v-col>
+                <v-col cols="9">
+                    <v-card class="mt-9 p-3 mening_profilim" elevation="1">
+                        <h3 class="my-5 mb-10">Менинг профилим</h3>
+
+                        <v-container>
+                            <v-row class="dashed-border">
+                                <v-col cols="12">
+                                    <v-row class="align-items-start">
+                                        <v-col cols="2">
+                                            <img class="w-100" :src="'/public/images/users/'+ $auth.user().id +'.jpg'"/>
+                                        </v-col>
+                                        <v-col cols="10" class="profile-item border-0 mt-5">
+
+
+                                            <h4>{{ $auth.user().first_name}} {{ $auth.user().sur_name}} {{ $auth.user().mid_name}}</h4>
+                                            <span>{{ $auth.user().pin }}</span>
+                                        </v-col>
+                                    </v-row>
+                                </v-col>
+                                <v-col cols="4" class="profile-item">
+                                    <span>Туғилган сана</span>
+                                    <span>{{ $auth.user().birth_date }}</span>
+                                </v-col>
+                                <v-col cols="4" class="profile-item">
+                                    <span>Туғилган жойи</span>
+                                    <span>{{ $auth.user().birth_place }}</span>
+                                </v-col>
+                                <v-col cols="4" class="profile-item">
+                                    <span>Яшаш жойи</span>
+                                    <span>{{ $auth.user().per_adr }}</span>
+                                </v-col>
+                                <v-col cols="4" class="profile-item" v-if="$auth.user().email">
+                                    <span>Электрон почта</span>
+                                    <span>{{ $auth.user().email }}</span>
+                                </v-col>
+                                <v-col cols="4" class="profile-item" v-if="$auth.user().phone">
+                                    <span>Телефон рақами</span>
+                                    <span>{{ $auth.user().phone }}</span>
+                                </v-col>
+                            </v-row>
+
+                        </v-container>
+
+
+                        <!--                        <h3 class="my-5">Менинг аризаларим</h3>
+
+                                                <v-row>
+                                                    <v-col cols="12">
+                                                        <div class="vacancy-filter">
+                                                            <v-row class=" mt-3">
+                                                                <v-col cols="2">
+                                                                    <v-text-field
+                                                                        label="Ариза рақами"
+                                                                    ></v-text-field>
+                                                                </v-col>
+                                                                <v-col cols="3">
+                                                                    <v-menu
+                                                                        ref="menu_sanadan"
+                                                                        v-model="menu_sanadan"
+                                                                        :close-on-content-click="false"
+                                                                        transition="scale-transition"
+                                                                        offset-y
+                                                                        min-width="auto"
+                                                                    >
+                                                                        <template v-slot:activator="{ on, attrs }">
+                                                                            <v-text-field
+                                                                                v-model="filter.date_sanadan"
+                                                                                label="Санадан"
+                                                                                prepend-icon="mdi-calendar"
+                                                                                readonly
+                                                                                v-bind="attrs"
+                                                                                v-on="on"
+                                                                            ></v-text-field>
+                                                                        </template>
+                                                                        <v-date-picker
+                                                                            class="m-0"
+                                                                            :active-picker.sync="activePickerDan"
+                                                                            v-model="filter.date_sanadan"
+                                                                            :max="(new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10)"
+                                                                            min="1950-01-01"
+                                                                            @change="save_sanadan"
+                                                                        ></v-date-picker>
+                                                                    </v-menu>
+                                                                </v-col>
+                                                                <v-col cols="3">
+                                                                    <v-menu
+                                                                        ref="menu_sanagacha"
+                                                                        v-model="menu_sanagacha"
+                                                                        :close-on-content-click="false"
+                                                                        transition="scale-transition"
+                                                                        offset-y
+                                                                        min-width="auto"
+                                                                    >
+                                                                        <template v-slot:activator="{ on, attrs }">
+                                                                            <v-text-field
+                                                                                v-model="filter.date_sanagacha"
+                                                                                label="Санагача"
+                                                                                prepend-icon="mdi-calendar"
+                                                                                readonly
+                                                                                v-bind="attrs"
+                                                                                v-on="on"
+                                                                            ></v-text-field>
+                                                                        </template>
+                                                                        <v-date-picker
+                                                                            class="m-0"
+                                                                            :active-picker.sync="activePickerGacha"
+                                                                            v-model="filter.date_sanagacha"
+                                                                            :max="(new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10)"
+                                                                            min="1950-01-01"
+                                                                            @change="save_sanagacha"
+                                                                        ></v-date-picker>
+                                                                    </v-menu>
+                                                                </v-col>
+                                                                <v-col cols="3">
+                                                                    <v-autocomplete
+                                                                        v-model="filter.type"
+                                                                        :items="types"
+                                                                        label="Ариза тури"
+                                                                    ></v-autocomplete>
+                                                                </v-col>
+                                                                <v-col cols="1" class="d-flex justify-content-center">
+                                                                    <v-btn
+                                                                        fab
+                                                                        dark
+                                                                        small
+                                                                        color="primary"
+                                                                        center
+                                                                    >
+                                                                        <v-icon dark>mdi-magnify</v-icon>
+                                                                    </v-btn>
+                                                                </v-col>
+                                                            </v-row>
+                                                        </div>
+
+                                                    </v-col>
+
+                                                </v-row>
+
+
+                                                <v-row>
+                                                    <v-col cols="12">
+                                                        <v-data-table
+                                                            :headers="headers"
+                                                            :items="apps"
+                                                            :items-per-page="5"
+                                                        ></v-data-table>
+
+                                                    </v-col>
+                                                </v-row>-->
+                    </v-card>
+                </v-col>
+            </v-row>
+
+        </v-container>
+    </div>
+</template>
+<script>
+export default {
+    name: "MyProfile",
+    data() {
+        return {
+            breadcrumb_items: [
+                {
+                    text: 'Асосий саҳифа',
+                    to: '/',
+                    disabled: false,
+                    exact: true,
+                },
+                {
+                    text: 'Хизматлар',
+                    to: '/profile',
+                    disabled: true,
+                    exact: true,
+                },
+            ],
+            selectedItem: 0,
+            items: [
+                {text: 'Профил', icon: 'mdi-account', link: '/profile'},
+                {text: 'Менинг аризаларим', icon: 'mdi-history', link: '/applications'},
+                {text: 'Хизматлар', icon: 'mdi-star', link: '/services'},
+            ],
+
+        }
+    },
+    created() {
+        if (this.$route.query.code) {
+
+            this.auth();
+
+        } else if (!this.$auth.check()) {
+            this.$router.push('/login')
+        }
+    },
+    methods: {
+        auth() {
+            var redirect = this.$auth.redirect()
+            var _this = this
+
+            this.$store.commit('setLoading', true)
+            this.$auth.login({
+                data: {
+                    code: _this.$route.query.code
+                },
+                success: function () {
+                    // handle redirection
+                    this.success = true
+                    const redirectTo = 'admin';
+                    //this.$auth.role=
+                    this.$router.push('/profile')
+                },
+                error: function () {
+                    _this.has_error = true
+                    _this.error = res.error
+                },
+                redirect: (this.$route.params.slug==='admin')?'/admin':'/profile',
+                //rememberMe: true,
+                fetchUser: true
+            }).then((res) => {
+                _this.has_error = true
+                _this.error = res.error
+                _this.$store.commit('setLoading', false);
+            }).catch((err) => {
+                _this.has_error = true
+                _this.error = 'login_error'
+            })
+
+        }
+
+    }
+}
+</script>
+

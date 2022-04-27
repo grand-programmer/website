@@ -49,7 +49,7 @@
         "alpha_spaces": "The {_field_} field may only contain alphabetic characters as well as spaces",
         "between": "The {_field_} field must be between {min} and {max}",
         "confirmed": "The {_field_} field confirmation does not match",
-        "digits": "The {_field_} field must be numeric and exactly contain {length} digits",
+        "digits": "{_field_} майдони фақат рақамлардан иборат бўлиши ва узунлиги {length} рақамга тенг бўлиши лозим",
         "dimensions": "The {_field_} field must be {width} pixels by {height} pixels",
         "email": "{_field_} майдонига тўғри email ни киритинг!",
         "excluded": "The {_field_} field is not a valid value",

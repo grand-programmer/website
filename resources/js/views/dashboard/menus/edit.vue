@@ -176,21 +176,18 @@ export default {
             api.readOneMenu(this.$route.params.id).then((response) => {
                 this.menu = response.data.data;
             }).catch((error) => {
-                this.$store.dispatch('setSnackbar', {color: 'error', text: 'Маълумотларни юклашда хатолик содир бўлди!'});
+                this.$toast.error(`Маълумотларни юклашда хатолик содир бўлди!`)
                 this.$router.replace("/admin/menu").catch(()=>{});
             });
             api.readPages().then((response) => {
                 this.pages = response.data;
             }).catch((error) => {
-                this.$store.dispatch('setSnackbar', {
-                    color: 'error',
-                    text: 'Сахифларни олишда муааммо бор!'
-                });
+                this.$toast.error(`Сахифларни олишда муааммо бор!`)
             })
             api.readMenusForSelect().then((response) => {
                 this.menus= response.data;
             }).catch((error) => {
-                this.$store.dispatch('setSnackbar', {color: 'error', text: 'Маълумотларни юклашда хатолик содир бўлди!'});
+                this.$toast.error(`Маълумотларни юклашда хатолик содир бўлди!`)
                 this.$router.replace("/admin/menu").catch(()=>{});
             })
         },
@@ -203,9 +200,9 @@ export default {
             if (isValid) {
                 this.menu.sort_number=parseInt(this.menu.sort_number);
                 api.updateMenu(this.menu.id, this.menu).then((response) => {
-                    this.$store.dispatch('setSnackbar', {color: 'default', text: 'Маълумотларни омадли тарзда юкланди!'});
+                    this.$toast.success(`Маълумотларни омадли тарзда юкланди!`)
                 }).catch((error) => {
-                    this.$store.dispatch('setSnackbar', {color: 'error', text: 'Маълумотларни юклашда хатолик содир бўлди!'});
+                    this.$toast.error(`Маълумотларни юклашда хатолик содир бўлди!`)
                 })
             }
         },

@@ -1,15 +1,29 @@
 $("body").on("click", ".hududiy_boshqarmalar a", function () {
 
+      // setTimeout($('.hududiy').toggleClass('show'),2000);
+
     if ($('.hududiy.section').css("display") == 'none') {
         pageloaded = 0;
 
-        fullpage_api.moveTo('0');
+        if (typeof fullpage_api !== 'undefined' && !$(".v-application--wrap > div").hasClass("one-page")) {
+            fullpage_api.moveTo('0');
+        }
         $('.hududiy.section').css("display", "table !important");
         $('.hududiy.section').removeClass('skip');
+
+        /*else {
+
+            $('.hududiy.section').dropdown('hide');
+
+        }*/
 //    $('#sharedMap').animate({top:"0"},1500);
 
 
+
+
     } else {
+       // $('.hududiy.section').dropdown('hide');
+
         pageloaded = 1;
         //  $('#sharedMap').animate({top:"-100%"},1500);
         $('.hududiy').css("display", "none !important");
@@ -18,6 +32,8 @@ $("body").on("click", ".hududiy_boshqarmalar a", function () {
         $(this).attr('aria-expanded', false);
         /* fullpage.moveTo('1');*/
     }
+
+
 });
 $("body").on("click", ".footer_links_arrow", function () {
     if ($(this).closest(".footer_links").hasClass('active')) {
@@ -37,20 +53,32 @@ $("body").on('click', "#sharedMap path", function () {
     $dataId = $(this).attr('data-id');
     $('#sharedMapInfo .card-body').css('display', 'none');
     $activeCardBody = $('.card-body').filter('[data-id="' + $dataId + '"]').show();
+    $(".boshqarma_rasmi").css("background-image", "url(/images/hududiy/" + $dataId + ".jpg)");
     $mapCard.hide();
     $activeCardBody.fadeIn();
     if ($activeCardBody.length == 2) {
         $activeCardBody.first().addClass('d-none');
     }
 });
+/*
+$(document).mouseup(function (e) {
+    var container = $(".hududiy.section.collapse");
+    if (!container.is(e.target) && container.has(e.target).length === 0) {
+        container.removeClass("show", "collapse");
+    }
 
-$description = $(".map-description");
+    /!*    var container = new Array();
+        container.push($('#item_1'));
+        container.push($('#item_2'));
 
-$mapSection.hover(function () {
-    $(this).attr("class", "enabled_heyo");
-    $description.addClass('active');
-    $description.html($(this).attr('data-title'));
-}, function () {
-    $description.removeClass('active');
+        $.each(container, function(key, value) {
+            if (!$(value).is(e.target) // if the target of the click isn't the container...
+                && $(value).has(e.target).length === 0) // ... nor a descendant of the container
+            {
+                $(value).hide();
+            }
+        });*!/
 });
+*/
+
 

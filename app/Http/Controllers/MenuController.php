@@ -52,18 +52,29 @@ class MenuController extends Controller
         return Menu::with('children')->where('parent', 0)->where('status', 1)->orderby('sort_number', 'asc')->get()->transform(function ($item) {
             if ($item->children) {
                 foreach ($item->children as $child) {
-                    if ($child->type == 1) {
+                    if ($child->type == 1 ) {
+                        if(Page::find($child->relation_id))
                         $child->url = '/page/' . Page::find($child->relation_id)->slug;
+                        else
+                            $child->url = '/page/' .$child->url;
                     };
                     if ($child->children) {
                         foreach ($child->children as $subchild) {
-                            if ($subchild->type == 1) {
-                                $subchild->url = '/page/' . Page::find($subchild->relation_id)->slug;
+                            if ($subchild->type == 1 ) {
+                                if(Page::find($subchild->relation_id))
+                                    $subchild->url = '/page/' . Page::find($subchild->relation_id)->slug;
+                                else
+                                    $subchild->url = '/page/' .$subchild->url;
                             };
                             if ($subchild->children) {
                                 foreach ($subchild->children as $sch) {
                                     if ($sch->type == 1) {
-                                        $sch->url = '/page/' . Page::find($sch->relation_id)->slug;
+                                        if(Page::find($sch->relation_id))
+                                            $sch->url = '/page/' . Page::find($sch->relation_id)->slug;
+                                        else
+                                            $sch->url = '/page/' .$sch->url;
+
+
                                     };
 
                                 }
@@ -205,6 +216,7 @@ class MenuController extends Controller
             }
 
             try {
+
                 if ($data['type'] == 1) {
                     $menuData = [
                         'type' => $data['type'],
@@ -214,6 +226,7 @@ class MenuController extends Controller
                         'parent' => $data['parent'],
                         'relation_id' => $data['page_id'],
                     ];
+                    $menu->update($menuData);
                 }
                 if ($data['type'] == 0) {
                     $custom_menu_link = [
@@ -222,7 +235,7 @@ class MenuController extends Controller
                         'status' => $data['status'],
                         'sort_number' => $data['sort_number'],
                     ];
-                    if($customMenu=CustomMenuLink::where(['type'=>0,'url'=>$data['url']])->first())
+                    if($customMenu=CustomMenuLink::where(['url'=>$data['url']])->first())
                     {
                         $customMenu->update($custom_menu_link);
                     }else {
@@ -235,9 +248,11 @@ class MenuController extends Controller
                         'sort_number' => $data['sort_number'],
                         'parent' => $data['parent'],
                         'relation_id' => $customMenu->id,
-                    ];}
+                    ];
+                        $menu->update($menuData);
+                    }
                 }
-                $menu->update($menuData);
+
                 //$appeal->number = Str::random(10);
                 $menu->save();
             } catch (Exception $e) {

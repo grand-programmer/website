@@ -125,6 +125,28 @@ export default {
 
             },
             {
+                title: 'Ходисалар',
+                icon: 'mdi-calendar',
+                to: '/admin/events',
+
+            },
+            {
+                title: 'Рахбарият',
+                icon: 'mdi-account',
+                to: '/admin/rahbariyat',
+            },
+            {
+                title: 'Марказий аппарат бошқармалари',
+                icon: 'mdi-account',
+                to: '/admin/apparat',
+            },
+            {
+                title: 'Ҳудудий бошқармалар',
+                icon: 'mdi-yurt',
+                to: '/admin/orgs',
+
+            },
+            {
                 icon: 'mdi-account',
                 title: 'user',
                 to: '/admin/pages/user',

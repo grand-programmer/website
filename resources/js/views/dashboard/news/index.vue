@@ -189,11 +189,11 @@ export default {
                 if (response.status == 200) {
                     this.initialize();
                     this.dialogDelete = false
-                    this.$store.dispatch('setSnackbar', {color: 'default', text: 'Янгилик омадли тарзда ўчирилди!'});
+                    this.$toast.success(`Янгилик омадли тарзда ўчирилди!`)
                 }
             }).catch((error) => {
                 console.log(error)
-                this.$store.dispatch('setSnackbar', {color: 'error', text: 'Хатолик юз берди!}!'});
+                this.$toast.error(`Хатолик содир бўлди!`)
             })
 
         },

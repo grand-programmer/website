@@ -666,28 +666,549 @@ var ie_data = {
 };
 import * as am4core from "@amcharts/amcharts4/core";
 import * as am4charts from "@amcharts/amcharts4/charts";
+
+
 import * as am4maps from "@amcharts/amcharts4/maps";
 import am4geodata_data_countries2 from "@amcharts/amcharts4-geodata/data/countries2";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 
+import * as am5 from "@amcharts/amcharts5";
+import * as am5xy from "@amcharts/amcharts5/xy";
+import * as am5percent from "@amcharts/amcharts5/percent";
+import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
+
+const regions = {
+    3: 'Андижон вилояти',
+    14: 'Наманган вилояти',
+    6: 'Бухоро вилояти',
+    26: 'Тошкент шаҳри',
+    30: 'Фарғона вилояти',
+    27: 'Тошкент вилояти',
+    10: 'Қашқадарё вилояти',
+    8: 'Жиззах вилояти',
+    18: 'Самаркандская обл',
+    12: 'Навоийская обл',
+    24: 'Сирдарё вилояти',
+    33: 'Хоразм вилояти',
+    22: 'Сурхондарё вилояти',
+    35: 'Қорақалпоғистон Респ.',
+};
+
 export default {
     name: 'IndexScripts',
-    mounted() {
+    data() {
+        return {
+            month:0,
+            year:2022,
 
-        slide1(true);
-        slide2(true);
+
+
+            importExportData: [
+                {
+                    "country": "Қорақалпоғистон Респ.",
+                    "import": 8900,
+                    "export": 25000
+                }, {
+                    "country": "Хоразм вилояти",
+                    "import": 54,
+                    "export": 39
+                }, {
+                    "country": "Бухоро вилояти",
+                    "import": 57,
+                    "export": 53
+                }, {
+                    "country": "Навоий вилояти",
+                    "import": 50,
+                    "export": 28
+                }, {
+                    "country": "Самарқанд вилояти",
+                    "import": 63,
+                    "export": 75
+                }, {
+                    "country": "Сурхондарё вилояти",
+                    "import": 90,
+                    "export": 57
+                }, {
+                    "country": "Қашқадарё вилояти",
+                    "import": 98,
+                    "export": 99
+                }, {
+                    "country": "Сирдарё вилояти",
+                    "import": 63,
+                    "export": 50
+                }, {
+                    "country": "Жиззах вилояти",
+                    "import": 53,
+                    "export": 15
+                }, {
+                    "country": "Тошкент вилояти",
+                    "import": 74,
+                    "export": 89
+                }, {
+                    "country": "Андижон вилояти",
+                    "import": 67,
+                    "export": 60
+                }, {
+                    "country": "Фарғона вилояти",
+                    "import": 75,
+                    "export": 76
+                }, {
+                    "country": "Наманган вилояти",
+                    "import": 73,
+                    "export": 78
+                }, {
+                    "country": "Тошкент шаҳри",
+                    "import": 89,
+                    "export": 102
+                },],
+            route: null,
+            //routeColumnChart: null
+        }
+    },
+    mounted() {
+        this.createRootColumnChart();
+       // slide1(true);
+        //slide2(true);
         //slide3(true);
-        //slide4(true);
+       // slide4(true);
         //slide5(true);
         //slide6(true);
-        slide7();
+        // slide7();
         //slide8();
         //slide9();
-        slide10();
-        slide11();
-        slide12();
-        slide13();
+        // slide10();
+        // slide11();
+        // slide12();
+        // slide13();
 
+    },
+    methods: {
+        createRootColumnChart() {
+            var importExportData = [];
+            let importExport = [];
+
+
+            ///this.importExportData = importExport;
+            //series.data.setAll(importExport);
+
+
+            /* await axios.get("api/v1/stat?rejim[0]=ИМ40&year=2022&rejim[1]=ЭК10")
+                 .then(function (response) {
+                     if (response.data) {
+                         let data = response.data;
+
+                         //console.log(data)
+
+                         Object.keys(data).map(function (item, index) {
+                             let itemdata = {};
+                             Object.keys(data[item]).map(function (imex, index) {
+                                 if (data[item][imex].rejim == "ИМ")
+                                     itemdata.import = data[item][imex].sumg38;
+                                 else
+                                     itemdata.export = data[item][imex].sumg38;
+                                 itemdata.country = data[item][imex].loc;
+                             })
+                             importExport.push(itemdata)
+                         });
+                         console.log(this);
+
+                        // const importExportData = importExport;
+                         //console.log(importExportData);
+
+                     }
+
+                 })
+                 .catch(error => {
+                     this.errorMessage = error.message;
+                     console.error("There was an error!", error);
+                 });*/
+
+            // this.importExportData = importExport;
+            if (this.route != null) this.route.dispose()
+            this.route = am5.Root.new('columnchart1');
+            this.route._logo = false;
+
+        },
+        createRootPieChart() {
+            this.route.dispose()
+            this.route = am5.Root.new('columnchart2');
+            this.route._logo = false;
+        },
+        createRootMultipleValue() {
+            this.route.dispose()
+            this.route = am5.Root.new('columnchart3');
+            this.route._logo = false;
+        },
+        async clusteredColumn() {
+            //clusteredColumn('columnchart1', this.importExportData);
+            let d = this.route; //am5.Root.new('columnchart1');
+            //this.route=d;
+            // Set themes
+            // https://www.amcharts.com/docs/v5/concepts/themes/
+            d.setThemes([
+                am5themes_Animated.new(d)
+            ]);
+            d.container.children.clear();
+
+            // Create chart
+            // https://www.amcharts.com/docs/v5/charts/xy-chart/
+            let chart = d.container.children.push(am5xy.XYChart.new(d, {
+                // panX: true,
+                // panY: true,
+                //wheelX: "panX",
+                /// wheelY: "zoomX",
+                layout: d.verticalLayout
+            }));
+
+
+            // Add legend
+            // https://www.amcharts.com/docs/v5/charts/xy-chart/legend-xy-series/
+            let legend = chart.children.push(
+                am5.Legend.new(d, {
+                    // centerX: am5.p50,
+                    x: 0,
+                    paddingTop: 40
+                })
+            );
+
+            let data = this.importExportData;
+
+
+            // Create axes
+            // https://www.amcharts.com/docs/v5/charts/xy-chart/axes/
+
+            var xRenderer = am5xy.AxisRendererX.new(d, {minGridDistance: 30});
+            xRenderer.labels.template.setAll({
+                rotation: -90,
+                centerY: am5.p50,
+                centerX: am5.p100,
+                paddingRight: 15
+            });
+
+            let xAxis = chart.xAxes.push(am5xy.CategoryAxis.new(d, {
+                categoryField: "region",
+                /*        renderer: am5xy.AxisRendererX.new(root, {
+                            cellStartLocation: 0.1,
+                            cellEndLocation: 0.9,
+                        }),    */
+                renderer: xRenderer,
+                tooltip: am5.Tooltip.new(d, {})
+            }));
+            //xAxis.renderer.labels.template.rotation = -90;
+            //label.rotation = -90;
+            //xAxis.renderer.labels.template.rotation = 360;
+            let importExport = [];
+            await am5.net.load("api/v1/stat?name=hududimex&month="+this.month+"&year="+this.year).then(function (result) {
+                // This gets executed when data finishes loading
+                // ... do something
+                const m = am5.JSONParser.parse(result.response);
+               //const m = JSON.parse(result.response);
+               //data = m.data;
+                data=JSON.parse(JSON.stringify(m.data));
+                data.sort((a, b) => (a.import < b.import) ? 1 : -1)
+                xAxis.data.setAll(data);
+
+            }).catch(function (result) {
+                // This gets executed if there was an error loading URL
+                // ... handle error
+                console.log("Error loading " + result);
+            });
+           /* axios
+                .get('api/v1/stat?name=hududimex&year=2022')
+                .then(response => (data = response))
+            const finalData = JSON.parse(JSON.stringify(data));
+
+
+            console.log(JSON.parse(JSON.stringify(data)));*/
+            //xAxis.data.setAll(finalData );
+            /// xAxis.data.setAll(data);
+
+            let yAxis = chart.yAxes.push(am5xy.ValueAxis.new(d, {
+                renderer: am5xy.AxisRendererY.new(d, {})
+            }));
+
+
+// Add series
+// https://www.amcharts.com/docs/v5/charts/xy-chart/series/
+            function makeSeries(name, fieldName) {
+                let series = chart.series.push(am5xy.ColumnSeries.new(d, {
+                    name: name,
+                    xAxis: xAxis,
+                    yAxis: yAxis,
+                    valueYField: fieldName,
+                    categoryXField: "region"
+                }));
+
+                series.columns.template.setAll({
+                    tooltipText: "{name} - {valueY}, {categoryX}",
+                    width: am5.percent(90),
+                    tooltipY: 0,
+                    cornerRadiusTL: 5,
+                    cornerRadiusTR: 5
+                });
+
+                series.data.setAll(data);
+
+                // Make stuff animate on load
+                // https://www.amcharts.com/docs/v5/concepts/animations/
+                series.appear();
+
+                series.bullets.push(function () {
+                    return am5.Bullet.new(d, {
+                        locationY: 0,
+                        sprite: am5.Label.new(d, {
+                            text: "{valueY}",
+                            fill: d.interfaceColors.get("alternativeText"),
+                            centerY: 0,
+                            centerX: am5.p50,
+                            populateText: true
+                        })
+                    });
+                });
+
+                legend.data.push(series);
+            }
+
+            makeSeries("Import", "import");
+            makeSeries("Export", "export");
+
+
+// Make stuff animate on load
+// https://www.amcharts.com/docs/v5/concepts/animations/
+            chart.appear(1000, 1000);
+
+
+        },
+        pieChart() {
+            let root = this.route
+// Set themes
+// https://www.amcharts.com/docs/v5/concepts/themes/
+            root.setThemes([
+                am5themes_Animated.new(root)
+            ]);
+            root.container.children.clear();
+
+// Create chart
+// https://www.amcharts.com/docs/v5/charts/percent-charts/pie-chart/
+// start and end angle must be set both for chart and series
+            let chart = root.container.children.push(am5percent.PieChart.new(root, {
+                startAngle: 180,
+                endAngle: 360,
+                layout: root.verticalLayout,
+                innerRadius: am5.percent(50)
+            }));
+
+// Create series
+// https://www.amcharts.com/docs/v5/charts/percent-charts/pie-chart/#Series
+// start and end angle must be set both for chart and series
+            let series = chart.series.push(am5percent.PieSeries.new(root, {
+                startAngle: 180,
+                endAngle: 360,
+                valueField: "value",
+                categoryField: "category",
+                alignLabels: false
+            }));
+
+            series.states.create("hidden", {
+                startAngle: 180,
+                endAngle: 180
+            });
+
+            series.slices.template.setAll({
+                cornerRadius: 5
+            });
+
+            series.ticks.template.setAll({
+                forceHidden: true
+            });
+
+// Set data
+// https://www.amcharts.com/docs/v5/charts/percent-charts/pie-chart/#Setting_data
+            series.data.setAll([
+                {value: 10, category: "One"},
+                {value: 9, category: "Two"},
+                {value: 6, category: "Three"},
+                {value: 5, category: "Four"},
+
+            ]);
+
+            series.appear(1000, 100);
+        },
+        multipleValue() {
+            let root = this.route
+
+
+// Set themes
+// https://www.amcharts.com/docs/v5/concepts/themes/
+            root.setThemes([
+                am5themes_Animated.new(root)
+            ]);
+            root.container.children.clear();
+// Create chart
+// https://www.amcharts.com/docs/v5/charts/xy-chart/
+            let chart = root.container.children.push(
+                am5xy.XYChart.new(root, {
+                    focusable: true,
+                    panX: true,
+                    panY: true,
+                    wheelX: false,
+                    wheelY: false,
+                    paddingTop: 50,
+                    layout: root.verticalLayout
+                })
+            );
+
+
+            // let easing = am5.ease.linear;
+            chart.get("colors").set("step", 3);
+
+// Create axes
+// https://www.amcharts.com/docs/v5/charts/xy-chart/axes/
+            let xAxis = chart.xAxes.push(
+                am5xy.DateAxis.new(root, {
+                    maxDeviation: 0.1,
+                    groupData: false,
+                    baseInterval: {
+                        timeUnit: "day",
+                        count: 1
+                    },
+                    renderer: am5xy.AxisRendererX.new(root, {}),
+                    tooltip: am5.Tooltip.new(root, {})
+                })
+            );
+            var legend = chart.children.push(
+                am5.Legend.new(root, {
+                    //centerX: am5.p50,
+                    x: 0,
+                    y: am5.percent(95),
+                    height: 50,
+                    nameField: "categoryX"
+
+                })
+            );
+
+            /*// Make series change state when legend item is hovered
+                        legend.itemContainers.template.states.create("hover", {});
+
+                        legend.itemContainers.template.events.on("pointerover", function(e) {
+                            e.target.dataItem.dataContext.hover();
+                        });
+                        legend.itemContainers.template.events.on("pointerout", function(e) {
+                            e.target.dataItem.dataContext.unhover();
+                        });*/
+
+            function createAxisAndSeries(startValue, opposite, bullet, fieldName) {
+                let yRenderer = am5xy.AxisRendererY.new(root, {
+                    opposite: opposite
+                });
+                let yAxis = chart.yAxes.push(
+                    am5xy.ValueAxis.new(root, {
+                        maxDeviation: 1,
+                        renderer: yRenderer
+                    })
+                );
+
+
+                if (chart.yAxes.indexOf(yAxis) > 0) {
+                    yAxis.set("syncWithAxis", chart.yAxes.getIndex(0));
+                }
+
+                // Add series
+                // https://www.amcharts.com/docs/v5/charts/xy-chart/series/
+                let series = chart.series.push(
+                    am5xy.LineSeries.new(root, {
+                        xAxis: xAxis,
+                        name: fieldName,
+                        yAxis: yAxis,
+                        valueYField: "value",
+                        valueXField: "date",
+                        tooltip: am5.Tooltip.new(root, {
+                            pointerOrientation: "horizontal",
+                            labelText: "{valueY}"
+                        })
+                    })
+                );
+
+
+                series.bullets.push(function () {
+                    return am5.Bullet.new(root, {
+                        sprite: am5.Circle.new(root, {
+                            strokeWidth: 3,
+                            stroke: series.get("stroke"),
+                            radius: 5,
+                            fill: root.interfaceColors.get("background")
+                        })
+                    });
+                });
+
+                //series.fills.template.setAll({ fillOpacity: 0.2, visible: true });
+                series.strokes.template.setAll({strokeWidth: 1});
+
+                yRenderer.grid.template.set("strokeOpacity", 0.05);
+                yRenderer.labels.template.set("fill", series.get("fill"));
+                yRenderer.setAll({
+                    stroke: series.get("fill"),
+                    strokeOpacity: 1,
+                    opacity: 1
+                });
+
+                // Set up data processor to parse string dates
+                // https://www.amcharts.com/docs/v5/concepts/data/#Pre_processing_data
+                series.data.processor = am5.DataProcessor.new(root, {
+                    dateFormat: "yyyy-MM-dd",
+                    dateFields: ["date"]
+                });
+
+                series.data.setAll(generateChartData(startValue));
+                legend.data.push(series);
+            }
+
+// Add cursor
+// https://www.amcharts.com/docs/v5/charts/xy-chart/cursor/
+            let cursor = chart.set("cursor", am5xy.XYCursor.new(root, {
+                xAxis: xAxis,
+                behavior: "none"
+            }));
+            cursor.lineY.set("visible", false);
+
+// add scrollbar
+            /*            chart.set("scrollbarX", am5.Scrollbar.new(root, {
+                            orientation: "horizontal"
+                        }));*/
+
+            createAxisAndSeries(100, false, "triangle", "Import");
+            createAxisAndSeries(1000, true, "rectangle", "Export");
+            //createAxisAndSeries(8000, true);
+
+// Make stuff animate on load
+// https://www.amcharts.com/docs/v5/concepts/animations/
+            chart.appear(600, 100);
+
+// Generates random data, quite different range
+            function generateChartData(value) {
+                let data = [];
+                let firstDate = new Date();
+                firstDate.setDate(firstDate.getDate() - 100);
+                firstDate.setHours(0, 0, 0, 0);
+
+                for (var i = 0; i < 100; i++) {
+                    let newDate = new Date(firstDate);
+                    newDate.setDate(newDate.getDate() + i);
+
+                    value += Math.round(
+                        ((Math.random() < 0.5 ? 1 : -1) * Math.random() * value) / 20
+                    );
+
+                    data.push({
+                        date: newDate,
+                        value: value
+                    });
+                }
+                return data;
+            }
+
+
+        }
     }
 }
 
@@ -2046,43 +2567,44 @@ function slide13() {
 
 // Add data
         //chart.data = generateChartData();
-        chart.data = [{
-            "date": "Январ",
-            "eksport": 1529700.372,
-            "import": 494188.643,
-        }, {
-            "date": "Феврал",
-            "eksport": 1729321.771,
-            "import": 620444.635,
-        }, {
-            "date": "Март",
-            "eksport": 1645064.588,
-            "import": 719510.625,
-        }, {
-            "date": "Апрел",
-            "eksport": 2134802.868,
-            "import": 680519.875,
-        }, {
-            "date": "Май",
-            "eksport": 2195268.149,
-            "import": 720490.931,
-        }, {
-            "date": "Июн",
-            "eksport": 2340290.863,
-            "import": 752485.586,
-        }, {
-            "date": "Июл",
-            "eksport": 2303757.400,
-            "import": 750031.074,
-        }, {
-            "date": "Август",
-            "eksport": 2552272.791,
-            "import": 729334.771,
-        }, {
-            "date": "Сентябр",
-            "eksport": 420607.716,
-            "import": 116304.949,
-        },];
+        chart.data = [
+            {
+                "date": "Январ",
+                "eksport": 1529700.372,
+                "import": 494188.643,
+            }, {
+                "date": "Феврал",
+                "eksport": 1729321.771,
+                "import": 620444.635,
+            }, {
+                "date": "Март",
+                "eksport": 1645064.588,
+                "import": 719510.625,
+            }, {
+                "date": "Апрел",
+                "eksport": 2134802.868,
+                "import": 680519.875,
+            }, {
+                "date": "Май",
+                "eksport": 2195268.149,
+                "import": 720490.931,
+            }, {
+                "date": "Июн",
+                "eksport": 2340290.863,
+                "import": 752485.586,
+            }, {
+                "date": "Июл",
+                "eksport": 2303757.400,
+                "import": 750031.074,
+            }, {
+                "date": "Август",
+                "eksport": 2552272.791,
+                "import": 729334.771,
+            }, {
+                "date": "Сентябр",
+                "eksport": 420607.716,
+                "import": 116304.949,
+            },];
 // Create axes
         var dateAxis = chart.xAxes.push(new am4charts.CategoryAxis());
         //dateAxis.renderer.minGridDistance = 50;
@@ -2210,8 +2732,360 @@ function slide13() {
     }); // end am4core.ready()
 }
 
+function barChartVertical(chartId, reptype) {
+
+    am4core.ready(function () {
+
+// Themes begin
+        am4core.useTheme(am4themes_animated);
+// Themes end
+
+// Create chart instance
+        var chart = am4core.create(chartId, am4charts.XYChart);
+
+
+// Add data
+
+        chart.data = [
+            {
+                "country": "Қорақалпоғистон Респ.",
+                "import": 89,
+                "export": 25
+            }, {
+                "country": "Хоразм вилояти",
+                "import": 54,
+                "export": 39
+            }, {
+                "country": "Бухоро вилояти",
+                "import": 57,
+                "export": 53
+            }, {
+                "country": "Навоий вилояти",
+                "import": 50,
+                "export": 28
+            }, {
+                "country": "Самарқанд вилояти",
+                "import": 63,
+                "export": 75
+            }, {
+                "country": "Сурхондарё вилояти",
+                "import": 90,
+                "export": 57
+            }, {
+                "country": "Қашқадарё вилояти",
+                "import": 98,
+                "export": 99
+            }, {
+                "country": "Сирдарё вилояти",
+                "import": 63,
+                "export": 50
+            }, {
+                "country": "Жиззах вилояти",
+                "import": 53,
+                "export": 15
+            }, {
+                "country": "Тошкент вилояти",
+                "import": 74,
+                "export": 89
+            }, {
+                "country": "Андижон вилояти",
+                "import": 67,
+                "export": 60
+            }, {
+                "country": "Фарғона вилояти",
+                "import": 75,
+                "export": 76
+            }, {
+                "country": "Наманган вилояти",
+                "import": 73,
+                "export": 78
+            }, {
+                "country": "Тошкент шаҳри",
+                "import": 89,
+                "export": 102
+            },];
+
+
+// Create axes
+        var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
+        categoryAxis.dataFields.category = "country";
+        categoryAxis.renderer.grid.template.location = 1;
+        categoryAxis.renderer.minGridDistance = 0;
+        categoryAxis.renderer.labels.template.horizontalCenter = "right";
+        categoryAxis.renderer.labels.template.verticalCenter = "top";
+        categoryAxis.renderer.labels.template.rotation = 270;
+        categoryAxis.tooltip.disabled = false;
+        categoryAxis.renderer.minHeight = 110;
+        categoryAxis.renderer.grid.template.disabled = true;
+        categoryAxis.renderer.labels.template.disabled = false;
+
+        var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+        valueAxis.renderer.minWidth = 50;
+        valueAxis.renderer.grid.template.disabled = true;
+        valueAxis.renderer.labels.template.disabled = false;
+// Create series
+        var series = chart.series.push(new am4charts.ColumnSeries());
+        series.sequencedInterpolation = true;
+        series.dataFields.valueY = "import";
+        series.dataFields.categoryX = "country";
+        series.tooltipText = "[{categoryX}: bold]{valueY}[/]";
+        series.columns.template.strokeWidth = 0;
+
+        series.tooltip.pointerOrientation = "vertical";
+
+        series.columns.template.column.cornerRadiusTopLeft = 10;
+        series.columns.template.column.cornerRadiusTopRight = 10;
+        series.columns.template.column.fillOpacity = 0.8;
+        var series2 = chart.series.push(new am4charts.ColumnSeries());
+        series2.sequencedInterpolation = true;
+        series2.dataFields.valueY = "export";
+        series2.dataFields.categoryX = "country";
+        series2.tooltipText = "[{categoryX}: bold]{valueY}[/]";
+        series2.columns.template.strokeWidth = 0;
+
+        series2.tooltip.pointerOrientation = "vertical";
+
+        series2.columns.template.column.cornerRadiusTopLeft = 10;
+        series2.columns.template.column.cornerRadiusTopRight = 10;
+        series2.columns.template.column.fillOpacity = 0.5;
+        var label = series.columns.template.createChild(am4core.Label);
+        label.text = "{valueY}";
+        label.valign = "top";
+        label.dy = 10;
+        label.strokeWidth = 0;
+        label.align = "center";
+        label.fill = am4core.color("#fff");
+        var label = series2.columns.template.createChild(am4core.Label);
+        label.text = "{valueY}";
+        label.valign = "top";
+        label.dy = 10;
+        label.strokeWidth = 0;
+        label.align = "center";
+        label.fill = am4core.color("#fff");
+        /*        var labelBullet = series.bullets.push(new am4charts.LabelBullet())
+                labelBullet.label.verticalCenter = "top";
+                labelBullet.label.dx = 1;
+                labelBullet.label.text = "{values.valueX.workingValue.formatNumber('#a')}";
+                labelBullet.locationY = 1;*/
+
+// on hover, make corner radiuses bigger
+        var hoverState = series.columns.template.column.states.create("hover");
+        hoverState.properties.cornerRadiusTopLeft = 0;
+        hoverState.properties.cornerRadiusTopRight = 0;
+        hoverState.properties.fillOpacity = 1;
+        series.columns.template.adapter.add("fill", function (fill, target) {
+            /*            if(target.dataItem.categoryX=='Чилонзор')
+                        return chart.colors.getIndex(target.dataItem.index);*/
+            /*            switch(target.dataItem.categoryX) {
+                            case 'Чилонзор': return am4core.color("#0168dd");
+                            case 'Чилонзор': return am4core.color("#0168dd");
+                            case 'Чилонзор': return am4core.color("#0168dd");
+                            case 'Чилонзор': return am4core.color("#0168dd");
+                            case 'Чилонзор': return am4core.color("#0168dd");
+                            case 'Чилонзор': return am4core.color("#0168dd");
+                            case 'Чилонзор': return am4core.color("#0168dd");
+                        }*/
+            return chart.colors.getIndex(1);
+            //return chart.colors.getIndex(target.dataItem.index);
+        });
+        series2.columns.template.adapter.add("fill", function (fill, target) {
+            /*            if(target.dataItem.categoryX=='Чилонзор')
+                        return chart.colors.getIndex(target.dataItem.index);*/
+            /*            switch(target.dataItem.categoryX) {
+                            case 'Чилонзор': return am4core.color("#0168dd");
+                            case 'Чилонзор': return am4core.color("#0168dd");
+                            case 'Чилонзор': return am4core.color("#0168dd");
+                            case 'Чилонзор': return am4core.color("#0168dd");
+                            case 'Чилонзор': return am4core.color("#0168dd");
+                            case 'Чилонзор': return am4core.color("#0168dd");
+                            case 'Чилонзор': return am4core.color("#0168dd");
+                        }*/
+            //return chart.colors.getIndex(target.dataItem.index);
+            return chart.colors.getIndex(2);
+        });
+//        series.heatRules.push({ target: series.columns.template, property: "fill", dataField: "valueY", min: am4core.color("#e5dc36"), max: am4core.color("#7f3720") });
+
+// Cursor
+        chart.cursor = new am4charts.XYCursor();
+
+    }); // end am4core.ready()
+}
+
+function clusteredColumn(chartId, data = null) {
+    var d = am5.Root.new(chartId);
+// Set themes
+// https://www.amcharts.com/docs/v5/concepts/themes/
+    d.setThemes([
+        am5themes_Animated.new(d)
+    ]);
+    d._logo = true;
+    d.container.children.clear();
+
+// Create chart
+// https://www.amcharts.com/docs/v5/charts/xy-chart/
+    let chart = d.container.children.push(am5xy.XYChart.new(d, {
+        // panX: true,
+        // panY: true,
+        //wheelX: "panX",
+        /// wheelY: "zoomX",
+        layout: d.verticalLayout
+    }));
+
+
+// Add legend
+// https://www.amcharts.com/docs/v5/charts/xy-chart/legend-xy-series/
+    let legend = chart.children.push(
+        am5.Legend.new(d, {
+            // centerX: am5.p50,
+            x: 0,
+            paddingTop: 40
+        })
+    );
+
+    if (data == null) data = [
+        {
+            "country": "Қорақалпоғистон Респ.",
+            "import": 89,
+            "export": 25
+        }, {
+            "country": "Хоразм вилояти",
+            "import": 54,
+            "export": 39
+        }, {
+            "country": "Бухоро вилояти",
+            "import": 57,
+            "export": 53
+        }, {
+            "country": "Навоий вилояти",
+            "import": 50,
+            "export": 28
+        }, {
+            "country": "Самарқанд вилояти",
+            "import": 63,
+            "export": 75
+        }, {
+            "country": "Сурхондарё вилояти",
+            "import": 90,
+            "export": 57
+        }, {
+            "country": "Қашқадарё вилояти",
+            "import": 98,
+            "export": 99
+        }, {
+            "country": "Сирдарё вилояти",
+            "import": 63,
+            "export": 50
+        }, {
+            "country": "Жиззах вилояти",
+            "import": 53,
+            "export": 15
+        }, {
+            "country": "Тошкент вилояти",
+            "import": 74,
+            "export": 89
+        }, {
+            "country": "Андижон вилояти",
+            "import": 67,
+            "export": 60
+        }, {
+            "country": "Фарғона вилояти",
+            "import": 75,
+            "export": 76
+        }, {
+            "country": "Наманган вилояти",
+            "import": 73,
+            "export": 78
+        }, {
+            "country": "Тошкент шаҳри",
+            "import": 89,
+            "export": 102
+        },];
+
+
+// Create axes
+// https://www.amcharts.com/docs/v5/charts/xy-chart/axes/
+
+    var xRenderer = am5xy.AxisRendererX.new(d, {minGridDistance: 30});
+    xRenderer.labels.template.setAll({
+        rotation: -90,
+        centerY: am5.p50,
+        centerX: am5.p100,
+        paddingRight: 15
+    });
+
+    let xAxis = chart.xAxes.push(am5xy.CategoryAxis.new(d, {
+        categoryField: "country",
+        /*        renderer: am5xy.AxisRendererX.new(root, {
+                    cellStartLocation: 0.1,
+                    cellEndLocation: 0.9,
+                }),    */
+        renderer: xRenderer,
+        tooltip: am5.Tooltip.new(d, {})
+    }));
+    //xAxis.renderer.labels.template.rotation = -90;
+    //label.rotation = -90;
+    //xAxis.renderer.labels.template.rotation = 360;
+
+    xAxis.data.setAll(data);
+
+    let yAxis = chart.yAxes.push(am5xy.ValueAxis.new(d, {
+        renderer: am5xy.AxisRendererY.new(d, {})
+    }));
+
+
+// Add series
+// https://www.amcharts.com/docs/v5/charts/xy-chart/series/
+    function makeSeries(name, fieldName) {
+        let series = chart.series.push(am5xy.ColumnSeries.new(d, {
+            name: name,
+            xAxis: xAxis,
+            yAxis: yAxis,
+            valueYField: fieldName,
+            categoryXField: "country"
+        }));
+
+        series.columns.template.setAll({
+            tooltipText: "{name} - {valueY}, {categoryX}",
+            width: am5.percent(90),
+            tooltipY: 0,
+            cornerRadiusTL: 5,
+            cornerRadiusTR: 5
+        });
+
+        series.data.setAll(data);
+
+        // Make stuff animate on load
+        // https://www.amcharts.com/docs/v5/concepts/animations/
+        series.appear();
+
+        series.bullets.push(function () {
+            return am5.Bullet.new(d, {
+                locationY: 0,
+                sprite: am5.Label.new(d, {
+                    text: "{valueY}",
+                    fill: d.interfaceColors.get("alternativeText"),
+                    centerY: 0,
+                    centerX: am5.p50,
+                    populateText: true
+                })
+            });
+        });
+
+        legend.data.push(series);
+    }
+
+    makeSeries("Import", "import");
+    makeSeries("Export", "export");
+
+
+// Make stuff animate on load
+// https://www.amcharts.com/docs/v5/concepts/animations/
+    chart.appear(1000, 100);
+
+}
 
 $(document).ready(function () {
+
     var height = $("#carouselExampleDark").outerHeight();
     var width = $("#carouselExampleDark").outerWidth() / 2;
     $(".carousel-item img").css("min-height", height + "px");

@@ -12,7 +12,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class User extends Authenticatable implements JWTSubject
 {
-    use HasFactory, Authorizable,Notifiable;
+    use HasFactory, Authorizable, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -23,6 +23,24 @@ class User extends Authenticatable implements JWTSubject
         'name',
         'email',
         'password',
+        "first_name",
+        "sur_name",
+        "mid_name",
+        "birth_date",
+        "ctzn",
+        "per_adr",
+        "tin",
+        "gd",
+        "natn",
+        "_pport_issue_date",
+        "_pport_expr_date",
+        "pport_no",
+        "pin",
+        "birth_place",
+        "valid",
+        "user_type",
+        "ret_cd",
+        "legal_info",
     ];
 
     /**
@@ -43,7 +61,6 @@ class User extends Authenticatable implements JWTSubject
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
     public function roles()
     {
         return $this

@@ -433,10 +433,7 @@ export default {
 
                 this.pages = response.data;
             }).catch((error) => {
-                this.$store.dispatch('setSnackbar', {
-                    color: 'error',
-                    text: 'Маълумотларни юклашда хатолик содир бўлди!'
-                });
+                this.$toast.error(`Маълумотларни юклашда хатолик содир бўлди!`)
                 console.log(error)
             })
             api.readMenusFront().then((response) => {
@@ -459,10 +456,7 @@ export default {
                 console.log(this.menus)
 
             }).catch((error) => {
-                this.$store.dispatch('setSnackbar', {
-                    color: 'error',
-                    text: 'Маълумотларни юклашда хатолик содир бўлди!'
-                });
+                this.$toast.error(`Маълумотларни юклашда хатолик содир бўлди!`)
                 console.log(error)
             })
         },/*
@@ -490,24 +484,15 @@ export default {
                 const isValid = await this.$refs.pageForm.validate();
                 if (isValid) {
                     if (this.menu && !(this.editedItem.menu > 0)) {
-                        this.$store.dispatch('setSnackbar', {
-                            color: 'warning',
-                            text: 'Сиз юқори даража менюни танламадингиз!'
-                        });
+                        this.$toast.warning(`Сиз юқори даража менюни танламадингиз!`)
                         return false;
                     }
                     this.editedItem.inMenu = this.menu;
                     api.addPage(this.editedItem).then((response) => {
-                        this.$store.dispatch('setSnackbar', {
-                            color: 'default',
-                            text: 'Маълумотларни омадли тарзда юкланди!'
-                        });
+                        this.$toast.success(`Маълумотларни омадли тарзда юкланди!`)
                         this.close()
                     }).catch((error) => {
-                        this.$store.dispatch('setSnackbar', {
-                            color: 'error',
-                            text: 'Маълумотларни юклашда хатолик содир бўлди!'
-                        });
+                        this.$toast.error(`Маълумотларни юклашда хатолик содир бўлди!`)
                         console.log(error)
                     })
                 }

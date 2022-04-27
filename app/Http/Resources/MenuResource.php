@@ -15,6 +15,15 @@ class MenuResource extends JsonResource
      */
     public function toArray($request)
     {
+        if($this->type===1){
+            if(Page::find($this->relation_id)){
+                $url='/page/' . Page::find($this->relation_id)['slug'];
+            }
+            else $url='/page/'.$this->url;
+        }
+        else $url=$this->url;
+
+
         return [
             'id'=>$this->id,
             'parent'=>$this->parent,
@@ -23,7 +32,7 @@ class MenuResource extends JsonResource
             'status'=>$this->status,
             'title'=>$this->title,
             'type'=>$this->type,
-            'url'=>($this->type===1) ? '/page/' . Page::find($this->relation_id)['slug'] : $this->url,
+            'url'=>$url,
             'children'=>($this->children)??$this->children,
         ];
     }

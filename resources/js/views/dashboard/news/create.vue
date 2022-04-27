@@ -242,7 +242,7 @@ export default {
                 this.categories = response.data;
             }).catch((error) => {
                 console.log(error);
-                this.$store.dispatch('setSnackbar', {color: 'error', text: 'Категорияларни олишда хатолик юз берди!'});
+                this.$toast.error('Категорияларни олишда хатолик юз берди!');
 
             });
 
@@ -281,11 +281,11 @@ export default {
                             data.append(key, this.editedItem[key]);
                     }
                     api.addNews(data).then((response) => {
-                        this.$store.dispatch('setSnackbar', {color: 'default'});
+                        this.$toast.success(`Маълумотларни омадли тарзда юкланди!`);
                         this.close();
 
                     }).catch((error) => {
-                        this.$store.dispatch('setSnackbar', {color: 'error'});
+                        this.$toast.error(`Маълумотларни юклашда хатолик содир бўлди!`)
                         console.log(error)
                     })
                 }

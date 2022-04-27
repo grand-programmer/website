@@ -2,8 +2,9 @@
     <v-snackbar
         width="30%"
         light
-        :value="true"
-        color="default"
+        v-model="snackbar"
+        background-color="pink lighten-3"
+        color="pink lighten-1"
         transition="scroll-y-reverse-transition"
         top
         right
@@ -15,7 +16,7 @@
             <v-icon color="indigo"
                     right
                     v-bind="attrs"
-                    @click="snackbar.showing = false"
+                    @click="snackbar = false"
             >mdi-close
             </v-icon>
         </template>
@@ -25,6 +26,8 @@
             absolute
             bottom
             right
+            background-color="pink lighten-3"
+            color="pink lighten-1"
             :value="Math.floor(100 * (currentTime / timeout))"
         />
     </v-snackbar>
@@ -36,12 +39,13 @@ export default {
         timeout: {
             default: 5 * 1000,
         },
-        color: '',
+        color: 'default',
 
     },
 
     data() {
         return {
+            snackbar:true,
             currentTime: 0,
             timeInterval: null,
             style: ''
@@ -50,12 +54,17 @@ export default {
 
     methods: {
         startProgress() {
-            console.log('asd');
             this.timeInterval = setInterval(() => {
                 this.currentTime += 150;
             }, 150);
+
+            this.$emit("input", false);
+
+        },
+        removeSnack(){
             this.$emit("input", false);
         }
+
     },
 
     beforeCreate() {

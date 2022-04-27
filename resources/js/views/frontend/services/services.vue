@@ -12,10 +12,21 @@
         </div>
 
         <!--==========Portfolio area==========-->
-        <div class="portfolio_area">
+        <div class="portfolio_area 1">
 
+            <v-container fluid class="p-0" style="max-width: unset">
+                <v-row>
+                    <v-col cols="1" offset="10" class="p-0 d-flex justify-content-end">
+                        <div class="position-absolute py-8 " style="z-index:11">
+                            <a href="#" class="d-none">Login</a>
 
-            <h2 class="text-center portfolio_title">Рақамли божхона</h2>
+                        </div>
+                    </v-col>
+                </v-row>
+            </v-container>
+
+            <!--
+                        <h2 class="text-center portfolio_title">Рақамли божхона</h2>-->
 
             <div class="container">
                 <ul class="nav nav-pills mb-3 portfolio_menu" id="pills-tab" role="tablist">
@@ -49,6 +60,17 @@
                 <div class="tab-pane active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
                     <div class="portfolio-background1"></div>
                     <div class="tab-container">
+                        <div class="col-md-2 portfolio_single p1">
+                            <router-link to="/services/vacancy" class="portfolio-card">
+                                <div class="portfolio_image">
+                                    <img src="/img/icons/ishga-kirish-uchun-navbat.png"/>
+                                </div>
+                                <div class="portfolio_text">
+                                    <p>Ишга кириш учун электрон навбат</p>
+
+                                </div>
+                            </router-link>
+                        </div>
                         <div class="col-md-2 portfolio_single p1">
                             <a target="_blank" href="//my.gov.uz/uz/service/209" class="portfolio-card">
                                 <div class="portfolio_image">
@@ -131,7 +153,8 @@
                         </div>
 
                         <div class="col-md-2 portfolio_single p1">
-                            <a href="https://my.gov.uz/uz/list-of-declaration-persons/default/force" target="_blank" class="portfolio-card">
+                            <a href="https://my.gov.uz/uz/list-of-declaration-persons/default/force" target="_blank"
+                               class="portfolio-card">
                                 <div class="portfolio_image">
                                     <img src="/img/icons/deklaratsiyalovchi-shaxlar-ruyhati.png"/>
                                 </div>
@@ -166,7 +189,8 @@
                         </div>
 
                         <div class="col-md-2 portfolio_single p1">
-                            <a href="http://service.customs.uz/autogtd_report/index.jsp?pc=9#" target="_blank" class="portfolio-card">
+                            <a href="http://service.customs.uz/autogtd_report/index.jsp?pc=9#" target="_blank"
+                               class="portfolio-card">
                                 <div class="portfolio_image">
                                     <img src="/img/icons/tovarlar-importi.png"/>
                                 </div>
@@ -226,17 +250,6 @@
                             </a>
                         </div>
 
-                        <div class="col-md-2 portfolio_single p1">
-                            <a href="http://nomzod.customs.uz/" target="_blank" class="portfolio-card">
-                                <div class="portfolio_image">
-                                    <img src="/img/icons/ishga-kirish-uchun-navbat.png"/>
-                                </div>
-                                <div class="portfolio_text">
-                                    <p>Ишга кириш учун электрон навбат</p>
-
-                                </div>
-                            </a>
-                        </div>
 
                         <div class="col-md-2 portfolio_single p1">
                             <a href="https://dep.customs.uz/qarzdor/" target="_blank" class="portfolio-card">
@@ -249,7 +262,7 @@
                             </a>
                         </div>
                         <div class="col-md-2 portfolio_single p1">
-                            <router-link to="/services/appeals"  class="portfolio-card">
+                            <router-link to="/services/appeals" class="portfolio-card">
                                 <div class="portfolio_image">
                                     <img src="/img/icons/elektron-murojaat.png"/>
                                 </div>
@@ -327,7 +340,9 @@
                                         <div class="portfolio_text">Импорт <br>қилинадиган товарларнинг нарх
                                             маълумотлари бюллетени
                                         </div>
-                                        <div class="download_links"><p><a href="https://data.gov.uz/uz/datasets/download/7/xml">XML</a><br/><a href="https://data.gov.uz/uz/datasets/download/7/json">JSON</a><br/><a
+                                        <div class="download_links"><p><a
+                                            href="https://data.gov.uz/uz/datasets/download/7/xml">XML</a><br/><a
+                                            href="https://data.gov.uz/uz/datasets/download/7/json">JSON</a><br/><a
                                             href="https://data.gov.uz/uz/datasets/download/7/csv">CSV</a></p></div>
                                     </div>
 
@@ -338,8 +353,11 @@
                                         <div class="portfolio_text">Расмийлаштир <br/>илган божхона юк декларациялари
                                             сони
                                         </div>
-                                        <div class="download_links"><p><a href="https://data.egov.uz/apiData/MainData/GetByFile?id=610256952a2e256d868e82d3&fileType=2&tableType=2">XML</a><br/><a href="https://data.egov.uz/apiData/MainData/GetByFile?id=610256952a2e256d868e82d3&fileType=1&tableType=2">JSON</a><br/><a
-                                            href="https://data.egov.uz/apiData/MainData/GetByFile?id=610256952a2e256d868e82d3&fileType=4&tableType=2">CSV</a></p></div>
+                                        <div class="download_links"><p><a
+                                            href="https://data.egov.uz/apiData/MainData/GetByFile?id=610256952a2e256d868e82d3&fileType=2&tableType=2">XML</a><br/><a
+                                            href="https://data.egov.uz/apiData/MainData/GetByFile?id=610256952a2e256d868e82d3&fileType=1&tableType=2">JSON</a><br/><a
+                                            href="https://data.egov.uz/apiData/MainData/GetByFile?id=610256952a2e256d868e82d3&fileType=4&tableType=2">CSV</a>
+                                        </p></div>
                                     </div>
 
                                 </div>
@@ -348,8 +366,11 @@
                                     <div class="portfolio_content">
                                         <div class="portfolio_text">Божсиз савдо дўконларига оид маълумотлар
                                         </div>
-                                        <div class="download_links"><p><a href="https://data.egov.uz/apiData/MainData/GetByFile?id=610257982a2e256d868e82db&fileType=2&tableType=2">XML</a><br/><a href="https://data.egov.uz/apiData/MainData/GetByFile?id=610257982a2e256d868e82db&fileType=2&tableType=2">JSON</a><br/><a
-                                            href="https://data.egov.uz/apiData/MainData/GetByFile?id=610257982a2e256d868e82db&fileType=4&tableType=2">CSV</a></p></div>
+                                        <div class="download_links"><p><a
+                                            href="https://data.egov.uz/apiData/MainData/GetByFile?id=610257982a2e256d868e82db&fileType=2&tableType=2">XML</a><br/><a
+                                            href="https://data.egov.uz/apiData/MainData/GetByFile?id=610257982a2e256d868e82db&fileType=2&tableType=2">JSON</a><br/><a
+                                            href="https://data.egov.uz/apiData/MainData/GetByFile?id=610257982a2e256d868e82db&fileType=4&tableType=2">CSV</a>
+                                        </p></div>
                                     </div>
 
                                 </div>
@@ -359,8 +380,11 @@
                                         <div class="portfolio_text">Ҳудудий божхона бошқармаларнинг ғазна шахсий ҳисоб
                                             варағи <br/> маълумотлари
                                         </div>
-                                        <div class="download_links"><p><a href="https://data.egov.uz/apiData/MainData/GetByFile?id=610255a12a2e256d868e82cc&fileType=2&tableType=2">XML</a><br/><a href="https://data.egov.uz/apiData/MainData/GetByFile?id=610255a12a2e256d868e82cc&fileType=1&tableType=2">JSON</a><br/><a
-                                            href="https://data.egov.uz/apiData/MainData/GetByFile?id=610255a12a2e256d868e82cc&fileType=4&tableType=2">CSV</a></p></div>
+                                        <div class="download_links"><p><a
+                                            href="https://data.egov.uz/apiData/MainData/GetByFile?id=610255a12a2e256d868e82cc&fileType=2&tableType=2">XML</a><br/><a
+                                            href="https://data.egov.uz/apiData/MainData/GetByFile?id=610255a12a2e256d868e82cc&fileType=1&tableType=2">JSON</a><br/><a
+                                            href="https://data.egov.uz/apiData/MainData/GetByFile?id=610255a12a2e256d868e82cc&fileType=4&tableType=2">CSV</a>
+                                        </p></div>
                                     </div>
 
                                 </div>
@@ -369,8 +393,11 @@
                                     <div class="portfolio_content">
                                         <div class="portfolio_text">Божхона омборлари тўғрисида маълумотлар
                                         </div>
-                                        <div class="download_links"><p><a href="https://data.egov.uz/apiData/MainData/GetByFile?id=610258012a2e256d868e82dd&fileType=2&tableType=2">XML</a><br/><a href="https://data.egov.uz/apiData/MainData/GetByFile?id=610258012a2e256d868e82dd&fileType=1&tableType=2">JSON</a><br/><a
-                                            href="https://data.egov.uz/apiData/MainData/GetByFile?id=610258012a2e256d868e82dd&fileType=4&tableType=2">CSV</a></p></div>
+                                        <div class="download_links"><p><a
+                                            href="https://data.egov.uz/apiData/MainData/GetByFile?id=610258012a2e256d868e82dd&fileType=2&tableType=2">XML</a><br/><a
+                                            href="https://data.egov.uz/apiData/MainData/GetByFile?id=610258012a2e256d868e82dd&fileType=1&tableType=2">JSON</a><br/><a
+                                            href="https://data.egov.uz/apiData/MainData/GetByFile?id=610258012a2e256d868e82dd&fileType=4&tableType=2">CSV</a>
+                                        </p></div>
                                     </div>
 
                                 </div>
@@ -379,8 +406,11 @@
                                     <div class="portfolio_content">
                                         <div class="portfolio_text"> Ҳалқаро йўл-ташувчилар конвенциясини бузган <br/>ташувчилар
                                         </div>
-                                        <div class="download_links"><p><a href="https://data.egov.uz/apiData/MainData/GetByFile?id=61025bcb2a2e256d868e82f3&fileType=2&tableType=2">XML</a><br/><a href="https://data.egov.uz/apiData/MainData/GetByFile?id=61025bcb2a2e256d868e82f3&fileType=1&tableType=2">JSON</a><br/><a
-                                            href="https://data.egov.uz/apiData/MainData/GetByFile?id=61025bcb2a2e256d868e82f3&fileType=4&tableType=2">CSV</a></p></div>
+                                        <div class="download_links"><p><a
+                                            href="https://data.egov.uz/apiData/MainData/GetByFile?id=61025bcb2a2e256d868e82f3&fileType=2&tableType=2">XML</a><br/><a
+                                            href="https://data.egov.uz/apiData/MainData/GetByFile?id=61025bcb2a2e256d868e82f3&fileType=1&tableType=2">JSON</a><br/><a
+                                            href="https://data.egov.uz/apiData/MainData/GetByFile?id=61025bcb2a2e256d868e82f3&fileType=4&tableType=2">CSV</a>
+                                        </p></div>
                                     </div>
 
                                 </div>
@@ -390,8 +420,11 @@
                                         <div class="portfolio_text">Божхона <br/> имтиёзларини назарда тутувчи норматив
                                             ҳужжатлар <br/>базаси
                                         </div>
-                                        <div class="download_links"><p><a href="https://data.egov.uz/apiData/MainData/GetByFile?id=6102560e2a2e256d868e82d0&fileType=2&tableType=2">XML</a><br/><a href="https://data.egov.uz/apiData/MainData/GetByFile?id=6102560e2a2e256d868e82d0&fileType=1&tableType=2">JSON</a><br/><a
-                                            href="https://data.egov.uz/apiData/MainData/GetByFile?id=6102560e2a2e256d868e82d0&fileType=4&tableType=2">CSV</a></p></div>
+                                        <div class="download_links"><p><a
+                                            href="https://data.egov.uz/apiData/MainData/GetByFile?id=6102560e2a2e256d868e82d0&fileType=2&tableType=2">XML</a><br/><a
+                                            href="https://data.egov.uz/apiData/MainData/GetByFile?id=6102560e2a2e256d868e82d0&fileType=1&tableType=2">JSON</a><br/><a
+                                            href="https://data.egov.uz/apiData/MainData/GetByFile?id=6102560e2a2e256d868e82d0&fileType=4&tableType=2">CSV</a>
+                                        </p></div>
                                     </div>
 
                                 </div>
@@ -400,8 +433,11 @@
                                     <div class="portfolio_content">
                                         <div class="portfolio_text"> Ҳалқаро шартномалар рўйҳати
                                         </div>
-                                        <div class="download_links"><p><a href="https://data.egov.uz/apiData/MainData/GetByFile?id=61025ab02a2e256d868e82f1&fileType=2&tableType=2">XML</a><br/><a href="https://data.egov.uz/apiData/MainData/GetByFile?id=61025ab02a2e256d868e82f1&fileType=1&tableType=2">JSON</a><br/><a
-                                            href="https://data.egov.uz/apiData/MainData/GetByFile?id=61025ab02a2e256d868e82f1&fileType=4&tableType=2">CSV</a></p></div>
+                                        <div class="download_links"><p><a
+                                            href="https://data.egov.uz/apiData/MainData/GetByFile?id=61025ab02a2e256d868e82f1&fileType=2&tableType=2">XML</a><br/><a
+                                            href="https://data.egov.uz/apiData/MainData/GetByFile?id=61025ab02a2e256d868e82f1&fileType=1&tableType=2">JSON</a><br/><a
+                                            href="https://data.egov.uz/apiData/MainData/GetByFile?id=61025ab02a2e256d868e82f1&fileType=4&tableType=2">CSV</a>
+                                        </p></div>
                                     </div>
 
                                 </div>
@@ -410,8 +446,11 @@
                                     <div class="portfolio_content">
                                         <div class="portfolio_text"> Эркин омборлар тўғрисида маълумотлар
                                         </div>
-                                        <div class="download_links"><p><a href="https://data.egov.uz/apiData/MainData/GetByFile?id=610257632a2e256d868e82d9&fileType=2&tableType=2">XML</a><br/><a href="https://data.egov.uz/apiData/MainData/GetByFile?id=610257632a2e256d868e82d9&fileType=1&tableType=2">JSON</a><br/><a
-                                            href="https://data.egov.uz/apiData/MainData/GetByFile?id=610257632a2e256d868e82d9&fileType=4&tableType=2">CSV</a></p></div>
+                                        <div class="download_links"><p><a
+                                            href="https://data.egov.uz/apiData/MainData/GetByFile?id=610257632a2e256d868e82d9&fileType=2&tableType=2">XML</a><br/><a
+                                            href="https://data.egov.uz/apiData/MainData/GetByFile?id=610257632a2e256d868e82d9&fileType=1&tableType=2">JSON</a><br/><a
+                                            href="https://data.egov.uz/apiData/MainData/GetByFile?id=610257632a2e256d868e82d9&fileType=4&tableType=2">CSV</a>
+                                        </p></div>
                                     </div>
 
                                 </div>
@@ -421,8 +460,11 @@
                                         <div class="portfolio_text"> Экспорт расмийлаштируви учун сарфланган вақт бўйича
                                             постлар рейтинги
                                         </div>
-                                        <div class="download_links"><p><a href="https://data.egov.uz/apiData/MainData/GetByFile?id=61025d552a2e256d868e8300&fileType=2&tableType=2">XML</a><br/><a href="https://data.egov.uz/apiData/MainData/GetByFile?id=61025d552a2e256d868e8300&fileType=1&tableType=2">JSON</a><br/><a
-                                            href="https://data.egov.uz/apiData/MainData/GetByFile?id=61025d552a2e256d868e8300&fileType=4&tableType=2">CSV</a></p></div>
+                                        <div class="download_links"><p><a
+                                            href="https://data.egov.uz/apiData/MainData/GetByFile?id=61025d552a2e256d868e8300&fileType=2&tableType=2">XML</a><br/><a
+                                            href="https://data.egov.uz/apiData/MainData/GetByFile?id=61025d552a2e256d868e8300&fileType=1&tableType=2">JSON</a><br/><a
+                                            href="https://data.egov.uz/apiData/MainData/GetByFile?id=61025d552a2e256d868e8300&fileType=4&tableType=2">CSV</a>
+                                        </p></div>
                                     </div>
 
                                 </div>
@@ -432,8 +474,11 @@
                                         <div class="portfolio_text"> Импорт расмийлаштируви учун сарфланган вақт бўйича
                                             постлар рейтинги
                                         </div>
-                                        <div class="download_links"><p><a href="https://data.egov.uz/apiData/MainData/GetByFile?id=61025d852a2e256d868e8304&fileType=2&tableType=2">XML</a><br/><a href="https://data.egov.uz/apiData/MainData/GetByFile?id=61025d852a2e256d868e8304&fileType=1&tableType=2">JSON</a><br/><a
-                                            href="https://data.egov.uz/apiData/MainData/GetByFile?id=61025d852a2e256d868e8304&fileType=4&tableType=2">CSV</a></p></div>
+                                        <div class="download_links"><p><a
+                                            href="https://data.egov.uz/apiData/MainData/GetByFile?id=61025d852a2e256d868e8304&fileType=2&tableType=2">XML</a><br/><a
+                                            href="https://data.egov.uz/apiData/MainData/GetByFile?id=61025d852a2e256d868e8304&fileType=1&tableType=2">JSON</a><br/><a
+                                            href="https://data.egov.uz/apiData/MainData/GetByFile?id=61025d852a2e256d868e8304&fileType=4&tableType=2">CSV</a>
+                                        </p></div>
                                     </div>
 
                                 </div>
@@ -442,8 +487,11 @@
                                     <div class="portfolio_content">
                                         <div class="portfolio_text"> Божхона постлари классификаторлари
                                         </div>
-                                        <div class="download_links"><p><a href="https://data.egov.uz/apiData/MainData/GetByFile?id=610256d82a2e256d868e82d5&fileType=2&tableType=2">XML</a><br/><a href="https://data.egov.uz/apiData/MainData/GetByFile?id=610256d82a2e256d868e82d5&fileType=1&tableType=2">JSON</a><br/><a
-                                            href="https://data.egov.uz/apiData/MainData/GetByFile?id=610256d82a2e256d868e82d5&fileType=4&tableType=2">CSV</a></p></div>
+                                        <div class="download_links"><p><a
+                                            href="https://data.egov.uz/apiData/MainData/GetByFile?id=610256d82a2e256d868e82d5&fileType=2&tableType=2">XML</a><br/><a
+                                            href="https://data.egov.uz/apiData/MainData/GetByFile?id=610256d82a2e256d868e82d5&fileType=1&tableType=2">JSON</a><br/><a
+                                            href="https://data.egov.uz/apiData/MainData/GetByFile?id=610256d82a2e256d868e82d5&fileType=4&tableType=2">CSV</a>
+                                        </p></div>
                                     </div>
 
                                 </div>
@@ -453,8 +501,11 @@
                                         <div class="portfolio_text"> Давлат <br/> чегарасидан темир йўл ва автомобиллар
                                             ўтказиш пунктлари рўйхати
                                         </div>
-                                        <div class="download_links"><p><a href="https://data.egov.uz/apiData/MainData/GetByFile?id=61025dd82a2e256d868e8306&fileType=2&tableType=2">XML</a><br/><a href="https://data.egov.uz/apiData/MainData/GetByFile?id=61025dd82a2e256d868e8306&fileType=1&tableType=2">JSON</a><br/><a
-                                            href="https://data.egov.uz/apiData/MainData/GetByFile?id=61025dd82a2e256d868e8306&fileType=4&tableType=2">CSV</a></p></div>
+                                        <div class="download_links"><p><a
+                                            href="https://data.egov.uz/apiData/MainData/GetByFile?id=61025dd82a2e256d868e8306&fileType=2&tableType=2">XML</a><br/><a
+                                            href="https://data.egov.uz/apiData/MainData/GetByFile?id=61025dd82a2e256d868e8306&fileType=1&tableType=2">JSON</a><br/><a
+                                            href="https://data.egov.uz/apiData/MainData/GetByFile?id=61025dd82a2e256d868e8306&fileType=4&tableType=2">CSV</a>
+                                        </p></div>
                                     </div>
 
                                 </div>
@@ -464,8 +515,11 @@
                                         <div class="portfolio_text"> Чегара орқали ҳаракатланган юк автотранспорти
                                             божхона расмийлаштрувига сарфланган <br/> вақт
                                         </div>
-                                        <div class="download_links"><p><a href="https://data.egov.uz/apiData/MainData/GetByFile?id=61025e382a2e256d868e830c&fileType=2&tableType=2">XML</a><br/><a href="https://data.egov.uz/apiData/MainData/GetByFile?id=61025e382a2e256d868e830c&fileType=1&tableType=2">JSON</a><br/><a
-                                            href="https://data.egov.uz/apiData/MainData/GetByFile?id=61025e382a2e256d868e830c&fileType=4&tableType=2">CSV</a></p></div>
+                                        <div class="download_links"><p><a
+                                            href="https://data.egov.uz/apiData/MainData/GetByFile?id=61025e382a2e256d868e830c&fileType=2&tableType=2">XML</a><br/><a
+                                            href="https://data.egov.uz/apiData/MainData/GetByFile?id=61025e382a2e256d868e830c&fileType=1&tableType=2">JSON</a><br/><a
+                                            href="https://data.egov.uz/apiData/MainData/GetByFile?id=61025e382a2e256d868e830c&fileType=4&tableType=2">CSV</a>
+                                        </p></div>
                                     </div>
 
                                 </div>
@@ -475,8 +529,11 @@
                                         <div class="portfolio_text"> Республикага импорт қилинган товарлар ҳақида
                                             маълумот
                                         </div>
-                                        <div class="download_links"><p><a href="https://data.egov.uz/apiData/MainData/GetByFile?id=61025cab2a2e256d868e82fc&fileType=2&tableType=2">XML</a><br/><a href="https://data.egov.uz/apiData/MainData/GetByFile?id=61025cab2a2e256d868e82fc&fileType=1&tableType=2">JSON</a><br/><a
-                                            href="https://data.egov.uz/apiData/MainData/GetByFile?id=61025cab2a2e256d868e82fc&fileType=4&tableType=2">CSV</a></p></div>
+                                        <div class="download_links"><p><a
+                                            href="https://data.egov.uz/apiData/MainData/GetByFile?id=61025cab2a2e256d868e82fc&fileType=2&tableType=2">XML</a><br/><a
+                                            href="https://data.egov.uz/apiData/MainData/GetByFile?id=61025cab2a2e256d868e82fc&fileType=1&tableType=2">JSON</a><br/><a
+                                            href="https://data.egov.uz/apiData/MainData/GetByFile?id=61025cab2a2e256d868e82fc&fileType=4&tableType=2">CSV</a>
+                                        </p></div>
                                     </div>
 
                                 </div>
@@ -486,7 +543,9 @@
                                         <div class="portfolio_text"> Давлат божхона қўмитасига келиб тушган мурожаатлар
                                             статистикаси
                                         </div>
-                                        <div class="download_links"><p><a href="https://data.gov.uz/uz/datasets/download/16697/xml">XML</a><br/><a href="https://data.gov.uz/uz/datasets/download/16697/json">JSON</a><br/><a
+                                        <div class="download_links"><p><a
+                                            href="https://data.gov.uz/uz/datasets/download/16697/xml">XML</a><br/><a
+                                            href="https://data.gov.uz/uz/datasets/download/16697/json">JSON</a><br/><a
                                             href="https://data.gov.uz/uz/datasets/download/16697/csv">CSV</a></p></div>
                                     </div>
 
@@ -508,14 +567,16 @@
                                 </div>
                             </a>
                             <a class="foydali-resurs col-4" href="#">
-                                <div class="foydali-resurs-image" style="background-image: url(/img/icons/intellektual-mulk.png)">
+                                <div class="foydali-resurs-image"
+                                     style="background-image: url(/img/icons/intellektual-mulk.png)">
                                 </div>
                                 <div class="foydali-resurs-text">интеллектуал мулк объектлари реестри
 
                                 </div>
                             </a>
                             <a class="foydali-resurs col-4" href="#">
-                                <div class="foydali-resurs-image" style="background-image: url(/img/icons/meva-sabzavot.png)">
+                                <div class="foydali-resurs-image"
+                                     style="background-image: url(/img/icons/meva-sabzavot.png)">
                                 </div>
                                 <div class="foydali-resurs-text">Экспорт қилинган мева-сабзавот махсулотлари
 
@@ -529,7 +590,8 @@
                                 </div>
                             </a>
                             <a class="foydali-resurs col-4" href="#">
-                                <div class="foydali-resurs-image"  style="background-image: url(/img/icons/import-qiymati.png)">
+                                <div class="foydali-resurs-image"
+                                     style="background-image: url(/img/icons/import-qiymati.png)">
                                 </div>
                                 <div class="foydali-resurs-text">Импорт товарларнинг божхона қиймати
 
@@ -543,19 +605,34 @@
                     <div class="background"></div>
                     <div class="tab-container">
                         <div class="mobil-ilovalar row">
-                            <a class="mobil-ilova col-6"href="https://data.gov.uz/uz/datasets/download/16697/xml" target="_blank">
-                                <div class="mobil-ilova-image" style="background-image: url(/img/service/akt-sverki.png)">
+                            <a class="mobil-ilova col-4" href="https://play.google.com/store/apps/details?id=uz.eskishahar.app.aktsverki"
+                               target="_blank">
+                                <div class="mobil-ilova-image"
+                                     style="background-image: url(/img/service/akt-sverki.png)">
                                 </div>
-                                <div class="mobil-ilova-text">Божхона тўловлари бўйича солиштирув далолатномаси бўйича он-лайн маълумот олиш мобил иловаси
+                                <div class="mobil-ilova-text">Божхона тўловлари бўйича солиштирув далолатномаси бўйича
+                                    он-лайн маълумот олиш мобил иловаси
 
                                 </div>
                             </a>
 
 
-                            <a class="mobil-ilova col-6" target="_blank" href="https://play.google.com/store/apps/details?id=uz.uzbi.audit">
-                                <div class="mobil-ilova-image" style="background-image: url(/img/service/bojxona-auditi.png)">
+                            <a class="mobil-ilova col-4" target="_blank"
+                               href="https://play.google.com/store/apps/details?id=uz.uzbi.audit">
+                                <div class="mobil-ilova-image"
+                                     style="background-image: url(/img/service/bojxona-auditi.png)">
                                 </div>
-                                <div class="mobil-ilova-text">Божхона аудити бўйича билим ва кўникмаларни оширишга мўлжалланган мобил илова
+                                <div class="mobil-ilova-text">Божхона аудити бўйича билим ва кўникмаларни оширишга
+                                    мўлжалланган мобил илова
+
+                                </div>
+                            </a>
+                            <a class="mobil-ilova col-4" target="_blank"
+                               href="https://play.google.com/store/apps/details?id=uz.eskishahar.app.tranzitlite">
+                                <div class="mobil-ilova-image"
+                                     style="background-image: url(/img/service/transit-mobil.png)">
+                                </div>
+                                <div class="mobil-ilova-text">Чегара божхона пости орқали ҳаракатланувчи транспорт воситалари ҳақида олдиндан маълумот тақдим этиш мобил иловаси
 
                                 </div>
                             </a>

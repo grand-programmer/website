@@ -97,10 +97,7 @@ export default {
                 });
                 this.breadcrumb_items[1].text = this.category.title;
             }).catch((error) => {
-                this.$store.dispatch('setSnackbar', {
-                    color: 'error',
-                    text: 'Маълумотларни юклашда хатолик содир бўлди!'
-                });
+                this.$toast.error(`Маълумотларни юклашда хатолик содир бўлди!`)
                 this.$router.replace("/").catch(() => {
                 });
             });
@@ -115,10 +112,7 @@ export default {
                     return i;
                 });
             }).catch((error) => {
-                this.$store.dispatch('setSnackbar', {
-                    color: 'error',
-                    text: 'Маълумотларни юклашда хатолик содир бўлди!'
-                });
+                this.$toast.error(`Маълумотларни юклашда хатолик содир бўлди!`)
             })
         },
     }

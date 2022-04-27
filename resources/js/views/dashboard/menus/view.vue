@@ -205,10 +205,7 @@ console.log(index)
                     })
                 }
             }).catch((error) => {
-                this.$store.dispatch('setSnackbar', {
-                    color: 'error',
-                    text: 'Маълумотларни юклашда хатолик содир бўлди!'
-                });
+                this.$toast.error(`Маълумотларни юклашда хатолик содир бўлди!`)
                 this.$router.replace("/admin/menu").catch(() => {
                 });
             });

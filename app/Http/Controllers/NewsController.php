@@ -7,12 +7,29 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use App\Models\News;
+use App\Http\Resources\NewsResource;
 
 class NewsController extends Controller
 {
     public function index()
     {
-        return News::with('categories')->orderby('created_at','desc')->get()->toJson();
+        $news=News::with('categories')->orderby('created_at','desc')->limit(6)->get()->transform(function($item){
+            return [
+                'id'=>$item->id,
+                'title'=>$item->title,
+                'categories'=>$item->categories,/*function() use ($item){
+                    return  [
+                      $item->
+                    ];
+                },*/
+                //'description'=>$item->description,
+                'image'=>$item->image,
+                'short'=>$item->short,
+                'slug'=>$item->slug,
+                'created_at'=>date("d.m.Y H:i",strtotime($item->created_at)),
+            ];
+        });
+        return $news;
     }
 
     /**

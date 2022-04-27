@@ -20,6 +20,9 @@ import axios from 'axios'
 import Vue from 'vue'
 //import VueAuth from '@websanova/vue-auth'
 import VueAxios from 'vue-axios'
+import VueFullPage from 'vue-fullpage.js'
+
+Vue.use(VueFullPage);
 import VueRouter from 'vue-router'
 //import Index from './Index'
 import authConfig from './auth'
@@ -27,7 +30,6 @@ import router from './router'
 
 window.Vue = require('vue').default;
 import 'fullpage.js/vendors/scrolloverflow' // Optional. When using scrollOverflow:true
-import VueFullPage from 'vue-fullpage.js'
 
 
 //import vuetify from './vuetify';
@@ -35,7 +37,6 @@ import VueMask from 'v-mask'
 
 Vue.use(VueMask);
 
-Vue.use(VueFullPage);
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -58,20 +59,37 @@ import './plugins/base'
 import './plugins/chartist'
 import './plugins/vee-validate'
 import vuetify from './vuetify'
-
+import AOS from 'aos';
+import 'aos/dist/aos.css'; // You can also use <link> for styles
+// ..
+AOS.init();
 Vue.router = router
 Vue.use(VueRouter)
+
+
 
 //axios
 /*import axios from 'axios'
 import VueAxios from 'vue-axios'*/
-
+var VueCookie = require('vue-cookie');
+// Tell Vue to use the plugin
+Vue.use(VueCookie);
 Vue.use(VueAxios, axios)
 /*axios.defaults.baseURL = '/api/v1'*/
 
 import auth from '@websanova/vue-auth/dist/v2/vue-auth.esm.js';
 
-
+import Toast from "vue-toastification";
+// Import the CSS or use your own!
+import "vue-toastification/dist/index.css";
+Vue.use(Toast,{
+    transition: "Vue-Toastification__bounce",
+    maxToasts: 4,
+    newestOnTop: true,
+    timeout: 3000,
+///    position:"top-center"
+});
+////https://github.com/Maronato/vue-toastification/tree/main/examples
 //Vue.use(auth, authConfig);
 
 import driverAuthBearer from '@websanova/vue-auth/dist/drivers/auth/bearer.esm.js';
@@ -102,11 +120,11 @@ Vue.use(auth, {
         rolesKey: 'role',
         tokenDefaultName: 'laravel-jwt-auth',
         tokenStore: ['localStorage'],
-        loginData: {url: '/api/v1/auth/login', method: 'POST', fetchUser: true, redirect: '/admin' },
+        loginData: {url: '/api/v1/auth/login', method: 'POST', fetchUser: true, redirect: '/profile'},
         registerData: {url: '/api/v1/auth/register', method: 'POST', fetchUser: true},
-        fetchData: { url: '/api/v1/auth/user', method: 'GET',enabled: true},
-        refreshData: { url: '/api/v1/auth/refresh', method: 'GET',enabled: true,interval: 30},
-        logoutData: { url: 'api/v1/auth/logout', method: 'POST', redirect: '/login', makeRequest: true},
+        fetchData: {url: '/api/v1/auth/user', method: 'GET', enabled: true},
+        refreshData: {url: '/api/v1/auth/refresh', method: 'GET', enabled: true, interval: 30},
+        logoutData: {url: '/api/v1/auth/logout', method: 'POST', redirect: '/login', makeRequest: true},
     }
 });
 
@@ -210,6 +228,7 @@ Vue.use(VueRouter)
 Vue.use(VueAuth, auth)
 */
 
+
 const app = new Vue({
     el: '#app',
     name: 'app',
@@ -218,6 +237,22 @@ const app = new Vue({
     store,
     i18n,
 }).$mount('#app');
+
+router.beforeEach((to, from, next) => {
+    app.$store.commit('setLoading', true)
+
+
+    // Simulate request
+    setTimeout(() => {
+        next();
+    }, 1000)
+
+});
+
+router.afterEach(() => {
+    app.$store.commit('setLoading', false)
+});
+
 
 
 

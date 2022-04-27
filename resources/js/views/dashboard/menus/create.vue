@@ -195,19 +195,14 @@ export default {
             api.readMenusForSelect(5).then((response) => {
                 this.menus = response.data;
             }).catch((error) => {
-                this.$store.dispatch('setSnackbar', {
-                    color: 'error',
-                    text: 'Менюларни олишда муаммо бор!'
-                });
+                this.$toast.error(`Менюларни олишда муаммо бор!`)
+
                 console.log(error)
             })
             api.readPages().then((response) => {
                 this.pages = response.data;
             }).catch((error) => {
-                this.$store.dispatch('setSnackbar', {
-                    color: 'error',
-                    text: 'Сахифларни олишда муааммо бор!'
-                });
+                this.$toast.error(`Сахифаларни олишда муааммо бор!`);
             })
         },
 
@@ -224,16 +219,10 @@ export default {
                 if (isValid) {
                     this.editedItem.sort_number=parseInt(this.editedItem.sort_number);
                     api.addMenu(this.editedItem).then((response) => {
-                        this.$store.dispatch('setSnackbar', {
-                            color: 'default',
-                            text: 'Маълумотларни омадли тарзда юкланди!'
-                        });
+                        this.$toast.success(`Маълумотларни омадли тарзда юкланди!`)
                         this.close()
                     }).catch((error) => {
-                        this.$store.dispatch('setSnackbar', {
-                            color: 'error',
-                            text: 'Маълумотларни юклашда хатолик содир бўлди!'
-                        });
+                        this.$toast.error(`Маълумотларни юклашда хатолик содир бўлди!`)
                         console.log(error)
                     })
                 }

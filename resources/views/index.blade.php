@@ -25,7 +25,7 @@
     <link href="{{secure_asset('/css/style.css')}}" rel="stylesheet">
     <link href="{{secure_asset('/css/fullpage.css')}}" rel="stylesheet">
     <link href="{{secure_asset('/css/all.css')}}" rel="stylesheet">
-    <link href="{{asset('/css/one.css')}}" rel="stylesheet" type="text/css" charset="utf-8">
+    <link href="{{asset('/css/mix/one.css')}}" rel="stylesheet" type="text/css" charset="utf-8">
     <link href="{{asset('/css/slick.css')}}" rel="stylesheet">
     <link href="{{asset('/css/slick-theme.css')}}" rel="stylesheet">
     <link href="{{asset('/css/responsive.css')}}" rel="stylesheet">
@@ -39,6 +39,7 @@
 <body>
 
 <div id="app">
+
     <!--==========Logo area==========-->
     <v-app app>
     <!--==========End Logo area==========-->
@@ -59,7 +60,7 @@
 
 </script>
 <script src="/js/jquery.js"></script>
-<script src="{{asset('js/vue-fullpage.min.js')}}"></script>
+{{--<script src="{{asset('js/11vue-fullpage.min.js')}}"></script>--}}
 <script src="/js/mix/app.js"></script>
 <script src="/vendors/bootstrap-selector/js/bootstrap-select.min.js"></script>
 <script src="/vendors/image-dropdown/jquery.dd.min.js"></script>
