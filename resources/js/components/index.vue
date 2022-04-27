@@ -19,6 +19,10 @@
                 <!--==========End Logo area==========-->
 
 
+
+
+
+
                 <!--==========Main Slider area==========-->
                 <div class="main_slider_area" style="height: calc(100vh - 60px); width: 100%">
                     <router-link class="all_news" to="/services">
@@ -38,7 +42,6 @@
 
                         <p> Барча хизматлар </p></router-link>
                     <div class="slider_inner">
-
 
 
                         <div data-thumb="/img/custom/slider-9.png" data-src="/img/custom/077.png">
@@ -61,7 +64,8 @@
                                 <div class="slider_text absolute_right">
                                     <h3 class="fadeInLeft animated">E-ARHIV</h3>
                                     <h4 class="fadeInLeft animated">Божхона ахборот тизими</h4>
-                                    <p class="fadeInUp animated">Божхона ахборот тизмиларига =ужжатларингизни жойланг</p>
+                                    <p class="fadeInUp animated">Божхона ахборот тизмиларига =ужжатларингизни
+                                        жойланг</p>
                                     <a class="s_readmore_btn fadeInUp animated" target="_blank"
                                        href="https://ed2.customs.uz/E_ARXIV/authentication">Хизматдан фойдаланиш</a>
                                     <!--<a class="s_contact_btn fadeInUp animated" href="#">Contact Us</a>-->
@@ -88,7 +92,7 @@
                         </div>
 
 
-                        <div data-thumb="/img/custom/slider-5.jpg" data-src="/img/custom/slider-5.jpg" >
+                        <div data-thumb="/img/custom/slider-5.jpg" data-src="/img/custom/slider-5.jpg">
                             <div class="container">
                                 <div class="slider_text absolute_right">
                                     <h3 class="fadeInLeft animated">Интеграциялашган таъриф</h3>
@@ -128,7 +132,8 @@
                                 <div class="slider_text absolute_left">
                                     <h3 class="fadeInLeft animated">Ишга кириш учун онлайн ариза бериш</h3>
                                     <h4 class="fadeInLeft animated">Божхона ахборот тизими</h4>
-                                    <p class="fadeInUp animated">Божхона хизмати органларидаги вакансиялар рўйхатини билиб олинг ҳамда ишга кириш учун онлайн ариза юборинг</p>
+                                    <p class="fadeInUp animated">Божхона хизмати органларидаги вакансиялар рўйхатини
+                                        билиб олинг ҳамда ишга кириш учун онлайн ариза юборинг</p>
                                     <a class="s_readmore_btn fadeInUp animated" to="/services/vacancy"
                                        target="_blank">Хизматдан фойдаланиш</a>
                                     <!--<a class="s_contact_btn fadeInUp animated" href="#">Contact Us</a>-->
@@ -671,7 +676,7 @@
                                                     қўмита</a>
                                                 </li>
                                                 <li><a href="https://charts.customs.uz"><i class="fa fa-angle-right"
-                                                                   aria-hidden="true"></i>Статистика</a>
+                                                                                           aria-hidden="true"></i>Статистика</a>
                                                 </li>
                                                 <li><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>Оав
                                                     учун</a>
@@ -860,13 +865,12 @@ export default {
         },
         year: function (v) {
             if (this.year == (new Date).getYear()) {
-                if(this.month>=(new Date).getMonth()) this.month=0;
+                if (this.month >= (new Date).getMonth()) this.month = 0;
                 this.months.map(function (item) {
                     if (item.value >= (new Date).getMonth()) item.disabled = true;
                     return item;
                 })
-            }
-            else this.months.map(function (item) {
+            } else this.months.map(function (item) {
                 item.disabled = false;
                 return item;
             })
@@ -962,7 +966,7 @@ function skipPages(origin, destination, direction) {
     if (destination.index == 1) {
         $('#fp-nav ul li span').css('background', '#fff');
     } else $('#fp-nav ul li span').css('background', '#000')
-    if(origin.index === 0 && destination.index === 1 && pageloaded == 0){
+    if (origin.index === 0 && destination.index === 1 && pageloaded == 0) {
         fullpage_api.moveTo('2', 2);
     }
     if (origin.index === 1 && destination.index === 0 && pageloaded == 1) {
@@ -978,7 +982,7 @@ function skipPages(origin, destination, direction) {
 
             $('.hududiy.section').addClass('skip');
             $('.hududiy.section').css("display", "none !important;");
-            fullpage_api.silentMoveTo(destination.index-1);
+            fullpage_api.silentMoveTo(destination.index - 1);
             pageloaded = pageloaded + 1;
         }
     }

@@ -3,5 +3,8 @@
     "/js/mix/pdfmake.js": "/js/mix/pdfmake.js",
     "/js/mix/canvg.js": "/js/mix/canvg.js",
     "/js/mix/xlsx.js": "/js/mix/xlsx.js",
-    "/css/mix/app.css": "/css/mix/app.css"
+    "/css/style.css": "/css/style.css",
+    "/css/mix/app.css": "/css/mix/app.css",
+    "/css/mix/vacancy.css": "/css/mix/vacancy.css",
+    "/css/mix/one.css": "/css/mix/one.css"
 }
