@@ -4,11 +4,15 @@
 
         <li class="nav-item dropdown" :class="($route.params.id==link.id) ? 'active' : '' "
             v-for="(link,index) in links" :key="index">
-            <router-link class="nav-link dropdown-toggle" data-bs-toggle="dropdown" :to="link.url" v-if="link.children && link.children[0]">
+
+            <router-link class="nav-link dropdown-toggle" data-bs-toggle="dropdown" :to="link.url"
+                         v-if="link.children && link.children[0]">
                 <span class="menu_slider"></span>{{ link.title }}
             </router-link>
-            <router-link class="nav-link" :to="link.url" v-else ><span class="menu_slider"></span>{{ link.title }}
+
+            <router-link class="nav-link" :to="link.url" v-else><span class="menu_slider"></span>{{ link.title }}
             </router-link>
+
             <ul class="dropdown-menu" v-if="(link.children && link.children[0])">
                 <li v-for="(sublink,index) in link.children" :key="index" v-if="sublink ">
                     <router-link :to="sublink.url" class="dropdown-item"> {{ sublink.title }}</router-link>
@@ -16,8 +20,10 @@
                         <li v-for="(sublinkchildren,index) in sublink.children" :key="index" v-if="sublinkchildren">
                             <router-link :to="sublinkchildren.url" class="dropdown-item"> {{ sublinkchildren.title }}
                             </router-link>
-                            <ul class="submenu dropdown-menu" v-if="(sublinkchildren.children && sublinkchildren.children[0])">
-                                <li v-for="(slch,index) in sublinkchildren.children" :key="index + slch.id " v-if="slch">
+                            <ul class="submenu dropdown-menu"
+                                v-if="(sublinkchildren.children && sublinkchildren.children[0])">
+                                <li v-for="(slch,index) in sublinkchildren.children" :key="index + slch.id "
+                                    v-if="slch">
                                     <router-link :to="slch.url" class="dropdown-item"> {{ slch.title }}
                                     </router-link>
 
@@ -70,7 +76,7 @@ export default {
         initialize() {
             api.readMenusFront().then((response) => {
                 this.links = response.data;
-                this.$store.dispatch('SET_MENU',this.links);
+                this.$store.dispatch('SET_MENU', this.links);
             }).catch((error) => {
                 console.log(error)
             })
@@ -156,7 +162,8 @@ document.addEventListener("DOMContentLoaded", function () {
     max-width: 15vw;
     width: max-content;
 }
-.navbar-nav .dropdown-menu > li > a{
+
+.navbar-nav .dropdown-menu > li > a {
     white-space: unset;
 }
 

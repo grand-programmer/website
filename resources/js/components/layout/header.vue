@@ -3,12 +3,64 @@
         <div class="container-fluid">
             <router-link to="/" class="logo_link">
                 <div class="pull-left logo_neno">
-                    <img src="/img/gtk_image.png" alt="">
-                    <img class="christmas" src="/img/icons/ChristmasTree.svg" alt="">
-
+                    <img src="/img/gtk_image.png" alt="logo">
                     <p>Ўзбекистон Республикаси Давлат божхона қўмитаси</p>
                 </div>
             </router-link>
+            <!--==========Menu area==========-->
+
+            <!--==========End Menu area==========-->
+            <div class="pull-right contact_details_area">
+                <div class="container">
+                    <div class="pull-right header_language">
+                        <div class="header_social mr-5">
+                            <a href="#"><i class="fa fa-university"></i> <span style="color:#000;">Давлат рамзлари</span></a>
+                        </div>
+                        <div class="header_social mr-5">
+                            <v-menu offset-y left v-if="$auth.check()">
+                                <template v-slot:activator="{ on, attrs }">
+                                    <div
+                                        v-bind="attrs"
+                                        v-on="on"
+                                        class="d-flex align-items-center"
+                                    >
+                                        <v-btn
+                                            class="mr-1"
+                                            elevation="0"
+                                            x-small
+                                            fab
+                                            color="primary"
+                                        >
+<!--                                            <v-img :src="'/public/images/users/'+ $auth.user().id +'.jpg'"></v-img>-->
+                                            <v-icon>mdi-account</v-icon>
+
+                                        </v-btn>
+                                        <p style="    width: min-content; font-size: 12px; text-align: center; margin: 0 10px; font-weight: 600;">
+                                            {{$auth.user().first_name}} {{$auth.user().sur_name}}</p>
+                                    </div>
+                                </template>
+                                <v-list><!--
+                                    <v-list-item to="/services">Менинг аризаларим</v-list-item>-->
+                                    <v-list-item to="/profile">Менинг профилим</v-list-item>
+                                    <v-list-item to="/applications">Менинг аризаларим</v-list-item>
+                                    <!--                      <v-list-item> <v-list-item-title>Settings</v-list-item-title></v-list-item>-->
+                                    <v-list-item @click.prevent="$auth.logout({
+                        makeRequest: true,
+                        redirect: {name: 'login'},
+                    })" href="#">Чиқиш
+                                    </v-list-item>
+                                </v-list>
+                            </v-menu>
+                            <router-link v-if="!$auth.check()" to="/login" ><i class="fas fa-sign-in-alt"></i> Кириш</router-link>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+
             <!--==========Menu area==========-->
             <div class="main_menu_area">
                 <nav class="navbar navbar-default">
@@ -55,43 +107,7 @@
             <div class="pull-right contact_details_area">
                 <div class="container">
                     <div class="pull-right header_language">
-                        <div class="header_social mr-5">
-                            <v-menu offset-y left v-if="$auth.check()">
-                                <template v-slot:activator="{ on, attrs }">
-                                    <div
-                                        v-bind="attrs"
-                                        v-on="on"
-                                        class="d-flex align-items-center"
-                                    >
-                                        <v-btn
-                                            class="mr-1"
-                                            elevation="0"
-                                            x-small
-                                            fab
-                                            color="primary"
-                                        >
-<!--                                            <v-img :src="'/public/images/users/'+ $auth.user().id +'.jpg'"></v-img>-->
-                                            <v-icon>mdi-account</v-icon>
 
-                                        </v-btn>
-                                        <p style="    width: min-content; font-size: 12px; text-align: center; margin: 0 10px; font-weight: 600;">
-                                            {{$auth.user().first_name}} {{$auth.user().sur_name}}</p>
-                                    </div>
-                                </template>
-                                <v-list><!--
-                                    <v-list-item to="/services">Менинг аризаларим</v-list-item>-->
-                                    <v-list-item to="/profile">Менинг профилим</v-list-item>
-                                    <v-list-item to="/applications">Менинг аризаларим</v-list-item>
-                                    <!--                      <v-list-item> <v-list-item-title>Settings</v-list-item-title></v-list-item>-->
-                                    <v-list-item @click.prevent="$auth.logout({
-                        makeRequest: true,
-                        redirect: {name: 'login'},
-                    })" href="#">Чиқиш
-                                    </v-list-item>
-                                </v-list>
-                            </v-menu>
-                            <router-link v-if="!$auth.check()" to="/login" ><v-icon>mdi-enter</v-icon>Кабинетга кириш</router-link>
-                        </div>
                         <div class="selector">
                             <select name="countries" id="countries" style="width:300px;">
                                 <option value='uz' data-image="/img/uz-flag.jpg" data-imagecss="flag uz"
