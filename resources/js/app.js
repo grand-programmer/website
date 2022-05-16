@@ -67,7 +67,6 @@ Vue.router = router
 Vue.use(VueRouter)
 
 
-
 //axios
 /*import axios from 'axios'
 import VueAxios from 'vue-axios'*/
@@ -82,7 +81,8 @@ import auth from '@websanova/vue-auth/dist/v2/vue-auth.esm.js';
 import Toast from "vue-toastification";
 // Import the CSS or use your own!
 import "vue-toastification/dist/index.css";
-Vue.use(Toast,{
+
+Vue.use(Toast, {
     transition: "Vue-Toastification__bounce",
     maxToasts: 4,
     newestOnTop: true,

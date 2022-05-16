@@ -47,59 +47,26 @@
   border-radius: 15px;
 }
 
-.navbar-nav {
-  flex-direction: row !important;
-}
 
-.navbar-nav.nav {
-  display: flex;
-  justify-content: space-between;
-  flex-direction: row;
-}
-
-.dropdown-toggle::after {
-  display: none;
-}
 
 .navbar-nav li:hover .menu_slider {
-  width: calc(100% - 50px);
+  width: calc(100% - 10px);
 }
 
-.navbar-nav li:hover .dropdown-menu.show a {
-  color: #000;
-}
 
-.navbar-nav li .dropdown-menu li {
-  padding-left: 24px !important;
-  border-bottom: 1px solid #dfdfdf;
-  padding-top: 10px !important;
-  padding-bottom: 10px !important;
-}
-.navbar-nav li .dropdown-menu li a {
-  color: #000 !important;
-  line-height: 1.5 !important;
-  font-family: Montserrat, serif;
-}
 
 .nav-item.dropdown:hover > ul.dropdown-menu {
   display: block !important;
 }
 
-.nav-item .submenu {
-  top: -1px !important;
-}
 
-ul.nav.navbar-nav li ul.dropdown-menu {
-  padding-bottom: 0 !important;
-  padding-top: 0 !important;
-}
 
 .logo_area {
   padding: 5px;
   position: fixed;
   display: block;
   width: 100%;
-  /*height: 60px;*/
+  height: 60px;
   z-index: 10000;
   background-color: #fff;
   box-shadow: 0 0 7px 0 #ccc;
@@ -120,22 +87,10 @@ ul.nav.navbar-nav li ul.dropdown-menu {
 }
 .logo_area .logo_neno .christmas {
   display: none;
-  /*
-  position: absolute;
-  left: 0;
-  animation-name: cf3FadeInOut;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
-  animation-duration: 2s;
-  animation-direction: alternate;
-  z-index: 11;*/
+
 }
 .logo_area .logo_neno img {
-  /*            animation-name: cf3FadeOutIn;
-              animation-timing-function: ease-in-out;
-              animation-iteration-count: infinite;
-              animation-duration: 2s;
-              animation-direction: alternate;*/
+
   width: 50px;
   margin-top: -17px;
   margin-bottom: -20px;
@@ -151,20 +106,7 @@ ul.nav.navbar-nav li ul.dropdown-menu {
   padding-left: 10px;
   margin-bottom: 0;
   position: relative;
-  /*            &::after {
-                  content: "";
-                  width: 30px;
-                  height: 30px;
-                  background-image: url(/img/icons/christmas_hat.png);
-                  display: block;
-                  position: absolute;
-                  z-index: 1555;
-                  top: -8px;
-                  right: 8px;
-                  background-size: contain;
-                  transform: rotate(
-                          24deg);
-              }*/
+
 }
 .logo_area .contact_details_area .contact_item {
   padding-right: 140px;
@@ -222,9 +164,9 @@ ul#pills-tab {
   line-height: 3;
 }
 
-.navbar.navbar-default > .container {
-  height: 45px;
-}
+/*.navbar.navbar-default > .container {*/
+/*  height: 45px;*/
+/*}*/
 
 .fp-tableCell {
   vertical-align: top;
@@ -273,7 +215,7 @@ ul#pills-tab {
   background: #dfe2e0;
 }
 
-.header_language .selector .dd.ddcommon .ddChild {
+.header_language .dd.ddcommon .ddChild {
   height: auto !important;
   border: none;
 }
@@ -1565,14 +1507,14 @@ body .logo_area {
   top: 0;
 }
 
-ul.nav.navbar-nav li ul.dropdown-menu {
-  position: absolute;
-  transition: unset;
-}
-ul.nav.navbar-nav li ul.dropdown-menu.submenu {
-  max-height: 50vh;
-  overflow-y: auto;
-}
+/*ul.nav.navbar-nav li ul.dropdown-menu {*/
+/*  position: absolute;*/
+/*  transition: unset;*/
+/*}*/
+/*ul.nav.navbar-nav li ul.dropdown-menu.submenu {*/
+/*  max-height: 50vh;*/
+/*  overflow-y: auto;*/
+/*}*/
 
 .main_menu_area .navbar.navbar-default .navbar-collapse .nav.navbar-nav li.submenu .dropdown-menu {
   background-color: #fff;
@@ -4249,3 +4191,6 @@ html body .Vue-Toastification__container.top-right {
   fill: #fff;
   background-size: 100%;
 }
+
+
+/*888555*/

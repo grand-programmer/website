@@ -15,16 +15,15 @@
             <div class="section" id="section0">
 
                 <!--==========Logo area==========-->
-                <div class="top_menu_space" style="height: 60px;width: 100%"></div>
+                <div class="top_menu_space" style="height: 120px; width: 100%;">
+
+
+                </div>
                 <!--==========End Logo area==========-->
 
 
-
-
-
-
                 <!--==========Main Slider area==========-->
-                <div class="main_slider_area" style="height: calc(100vh - 60px); width: 100%">
+                <div class="main_slider_area" style="height: calc(100vh - 120px); width: 100%">
                     <router-link class="all_news" to="/services">
                         <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
                              xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -987,6 +986,7 @@ function skipPages(origin, destination, direction) {
         }
     }
 }
+
 
 </script>
 
