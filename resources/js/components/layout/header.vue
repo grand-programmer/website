@@ -11,6 +11,7 @@
                                 <span>Ўзбекистон Республикаси <br> Давлат божхона қўмитаси</span>
 
                             </router-link>
+
                         </div>
 
                         <div class="header-settings">
@@ -70,10 +71,9 @@
 
                             </div>
 
-
                             <div class="header-lang">
 
-                                    <span id="lang_selected" title="Tilni tanlang">ЎЗБ</span>
+                                <span id="lang_selected" title="Tilni tanlang">ЎЗБ</span>
 
                                 <div id="lang_selector" class="language-dropdown" >
                                     <label for="toggle" class="lang-flag lang-en"
@@ -97,6 +97,7 @@
 
 
                             </div>
+
 
 
                         </div>

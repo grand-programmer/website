@@ -4723,7 +4723,7 @@ html body .Vue-Toastification__container.top-right {
     margin-left: 30px;
     align-items: center;
     justify-content: center;
-    float: left;
+
     display: flex;
     padding-top: 80px;
 }

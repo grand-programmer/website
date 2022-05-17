@@ -3536,8 +3536,9 @@ body.modal-open .mm-slideout {
 
     .header-settings {
         text-align: center;
-        display: block;
-        height: auto;
+       display: block;
+        height: 0;
+
     }
 
     .header-item {
@@ -3546,8 +3547,9 @@ body.modal-open .mm-slideout {
 
 
     .header-logo {
-        flex: 0 0 100%;
+        flex: 0 0 10%;
         width: 100%;
+
     }
 
     .header-logo span {
@@ -3556,7 +3558,12 @@ body.modal-open .mm-slideout {
         max-width: 100%;
 
     }
+.header-lang{
 
+    margin-left: 0;
+    padding-top: 8px;
+
+}
 
 
     .header-logo  img {
