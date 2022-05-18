@@ -921,14 +921,30 @@ a.openMenu1 {
 /*    }*/
 
 /*}*/
+
+@media (max-width: 1870px){
+.tort{
+    display: none!important;
+}
+}
+
 @media (max-width: 1480px) {
 
     .header-main {
-        padding: 15px 0;
+        /*padding: 15px 0;*/
     }
 
+    .header-menu {
+        display: none!important;
+    }
+    .tort{
+        display: flex!important;
+    }
+    .menu-container{
+        display: block;
+    }
     .header-settings {
-        height: 70px;
+        /*height: 70px;*/
     }
 
     .header-logo a img {
@@ -957,9 +973,6 @@ a.openMenu1 {
         line-height: 20px;
     }
 
-    .header-menu__main .header-search {
-        margin-left: 45px;
-    }
 
     .header-item {
         padding-left: 45px;
@@ -1034,7 +1047,9 @@ a.openMenu1 {
 }
 
 @media (max-width: 1280px) {
-
+    .tort{
+        display: none!important;
+    }
 
     .header-item {
         padding-left: 30px;
@@ -1073,10 +1088,7 @@ a.openMenu1 {
 }
 
 @media (max-width: 991px) {
-    .header-item.header-special,
-    .header-item.header-mail {
-        display: none;
-    }
+
 
 
     .sidebar {
@@ -1104,9 +1116,7 @@ a.openMenu1 {
         margin-right: 5px;
     }
 
-    .header-menu__main .header-search {
-        margin-left: 30px;
-    }
+
 
 
     .v-pills-m {
@@ -1145,8 +1155,11 @@ a.openMenu1 {
 }
 
 
-@media (max-width: 650px) {
-
+@media (max-width: 700px) {
+    .header-item.header-special,
+    .header-item.header-mail {
+        display: none;
+    }
 
 }
 
@@ -1176,16 +1189,22 @@ a.openMenu1 {
     }
 
     .header-logo span {
+        font-size: 10px;
         text-align: center;
         display: block;
-        max-width: 100%;
+        max-width: 90%;
 
     }
+    .header-logo a span {
+          font-size: 12px!important;
+          text-align: center;
+
+
+      }
 
     .header-lang {
 
-        margin-left: 0;
-        padding-top: 8px;
+      display: none;
 
     }
 
@@ -1196,13 +1215,10 @@ a.openMenu1 {
         margin-bottom: 5px;
     }
 
-    .header-main {
-        padding: 10px 0;
-    }
+    /*.header-main {*/
+    /*    padding: 10px 0;*/
+    /*}*/
 
-    .header-menu {
-        height: 50px;
-    }
 
 
     .mobile-phones > a {
@@ -1218,24 +1234,19 @@ a.openMenu1 {
         margin-right: 5px;
     }
 
-    .header-menu__main .header-search {
-        margin-left: 20px;
+    #plus {
+        display: flex !important;
     }
-
 
 }
 
 @media (max-width: 360px) {
-    .mobile-phones > a:nth-child(1) {
-        display: none;
-    }
+
 
 }
 
 @media (max-width: 680px) {
-    .howWeWork--section {
-        display: none !important;
-    }
+
 
 }
 

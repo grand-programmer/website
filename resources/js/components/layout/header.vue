@@ -5,7 +5,7 @@
             <div class="header-main">
                 <div class="container mt-0">
                     <div class="header-top">
-<!--                        Logo area-->
+                        <!--                        Logo area-->
                         <div class="header-logo">
                             <router-link to="/" class="header-logo">
                                 <img src="/img/gtk_image.png" alt="">
@@ -14,8 +14,8 @@
                             </router-link>
 
                         </div>
-<!--                        end logo area-->
-<!--                        menu area-->
+                        <!--                        end logo area-->
+                        <!--                        menu area-->
                         <div class="header-menu">
                             <!--                            <a href="#" class="hamburger"><i class="fa fa-bars"></i></a>-->
 
@@ -80,7 +80,7 @@
                             <!--                            End mobile menu-->
 
                         </div>
-<!--                        end menu area-->
+                        <!--                        end menu area-->
 
                         <div class="header-settings">
                             <div class="header-item header-mail">
@@ -89,14 +89,14 @@
                                     <a href=".hududiy.section" data-toggle="collapse" role="button"
                                        aria-expanded="false" class="d-inline">
                                         <i class="fas fa-map-marker-alt mr-1 "></i>
-                                        <span>Ҳудудий бошқармалар</span>
+                                        <span class="tort">Ҳудудий бошқармалар</span>
                                     </a>
                                     <!--                                <ul class="dropdown-menu">
                                                                         <li><a href="contact.html">Contact</a></li>
                                                                         <li><a href="contact-2.html">Contact - 02</a></li>
                                                                     </ul>-->
                                 </li>
-
+                                <!--Kabinetga kirish-->
                                 <v-menu offset-y left v-if="$auth.check()">
                                     <template v-slot:activator="{ on, attrs }">
                                         <div
@@ -132,9 +132,9 @@
                                     </v-list>
                                 </v-menu>
                                 <router-link v-if="!$auth.check()" to="/login"><i
-                                    class="fas fa-sign-in-alt"></i><span>Кабинетга кириш</span>
+                                    class="fas fa-sign-in-alt"></i><span class="tort">Кабинетга кириш</span>
                                 </router-link>
-
+                                <!--end kabinet area-->
 
                             </div>
                             <!--Language area-->
@@ -167,6 +167,156 @@
                             <!--End language area-->
 
                         </div>
+                        <div id="menu-container">
+                            <div id="menu-wrapper">
+                                <div id="hamburger-menu">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </div>
+                                <!-- hamburger-menu -->
+                            </div>
+                            <!-- menu-wrapper -->
+                            <ul class="menu-list accordion " style="margin-top: 13px">
+                                <div class="header-settings" id="plus">
+                                    <div class="header-item header-mail">
+                                        <li class="hududiy_boshqarmalar">
+
+                                            <a href=".hududiy.section" data-toggle="collapse" role="button"
+                                               aria-expanded="false" class="d-inline">
+                                                <i class="fas fa-map-marker-alt mr-1 "></i>
+                                                <span class="tort">Ҳудудий бошқармалар</span>
+                                            </a>
+                                            <!--                                <ul class="dropdown-menu">
+                                                                                <li><a href="contact.html">Contact</a></li>
+                                                                                <li><a href="contact-2.html">Contact - 02</a></li>
+                                                                            </ul>-->
+                                        </li>
+                                        <!--Kabinetga kirish-->
+                                        <v-menu offset-y left v-if="$auth.check()">
+                                            <template v-slot:activator="{ on, attrs }">
+                                                <div
+                                                    v-bind="attrs"
+                                                    v-on="on"
+                                                    class="d-flex align-items-center"
+                                                >
+                                                    <v-btn
+                                                        class="mr-1"
+                                                        elevation="0"
+                                                        x-small
+                                                        fab
+                                                        color="primary"
+                                                    >
+                                                        <!--                                            <v-img :src="'/public/images/users/'+ $auth.user().id +'.jpg'"></v-img>-->
+                                                        <v-icon>mdi-account</v-icon>
+
+                                                    </v-btn>
+                                                    <p style="    width: min-content; font-size: 12px; text-align: center; margin: 0 10px; font-weight: 600;">
+                                                        {{ $auth.user().first_name }} {{ $auth.user().sur_name }}</p>
+                                                </div>
+                                            </template>
+                                            <v-list><!--
+                                    <v-list-item to="/services">Менинг аризаларим</v-list-item>-->
+                                                <v-list-item to="/profile">Менинг профилим</v-list-item>
+                                                <v-list-item to="/applications">Менинг аризаларим</v-list-item>
+                                                <!--                      <v-list-item> <v-list-item-title>Settings</v-list-item-title></v-list-item>-->
+                                                <v-list-item @click.prevent="$auth.logout({
+                        makeRequest: true,
+                        redirect: {name: 'login'},
+                    })" href="#">Чиқиш
+                                                </v-list-item>
+                                            </v-list>
+                                        </v-menu>
+                                        <router-link v-if="!$auth.check()" to="/login"><i
+                                            class="fas fa-sign-in-alt"></i><span class="tort">Кабинетга кириш</span>
+                                        </router-link>
+                                        <!--end kabinet area-->
+
+                                    </div>
+                                    <!--Language area-->
+                                    <div class="header-lang">
+
+                                        <span id="lang_selected" title="Tilni tanlang">ЎЗБ</span>
+
+                                        <div id="lang_selector" class="language-dropdown">
+                                            <label for="toggle" class="lang-flag lang-en"
+                                                   title="Tilni tanlang">
+                                                <span class="flag"></span>
+                                            </label>
+                                            <ul class="lang-list">
+                                                <li class="lang lang-en selected" title="ЎЗБ">
+                                                    <span class="flag"></span>
+                                                </li>
+                                                <li class="lang lang-pt" title="РУС">
+                                                    <span class="flag"></span>
+                                                </li>
+                                                <li class="lang lang-es" title="ENG">
+                                                    <span class="flag"></span>
+                                                </li>
+                                            </ul>
+
+                                        </div>
+
+
+                                    </div>
+
+                                    <!--End language area-->
+
+                                </div>
+                                <li id="nav1" class="toggle accordion-toggle">
+                                    <span class="icon-plus"></span>
+                                    <a class="menu-link" href="#">ҚЎМИТА ҲАҚИДА</a>
+                                </li>
+                                <!-- accordion-toggle -->
+                                <ul class="menu-submenu accordion-content">
+                                    <li><a class="head" href="#">Submenu1</a></li>
+                                    <li><a class="head" href="#">Submenu2</a></li>
+                                    <li><a class="head" href="#">Submenu3</a></li>
+                                </ul>
+                                <!-- menu-submenu accordon-content-->
+                                <li id="nav2" class="toggle accordion-toggle">
+                                    <span class="icon-plus"></span>
+                                    <a class="menu-link" href="#">БОЖХОНА НАЗОРАТИ</a>
+                                </li>
+                                <!-- accordion-toggle -->
+                                <ul class="menu-submenu accordion-content">
+                                    <li><a class="head" href="#">Submenu1</a></li>
+                                    <li><a class="head" href="#">Submenu2</a></li>
+                                </ul>
+                                <!-- menu-submenu accordon-content-->
+                                <li id="nav3" class="toggle accordion-toggle">
+                                    <span class="icon-plus"></span>
+                                    <a class="menu-link" href="#">ОАВ УЧУН</a>
+                                </li>
+                                <!-- accordion-toggle -->
+                                <ul class="menu-submenu accordion-content">
+                                    <li><a class="head" href="#">Submenu1</a></li>
+                                    <li><a class="head" href="#">Submenu2</a></li>
+                                    <li><a class="head" href="#">Submenu3</a></li>
+                                    <li><a class="head" href="#">Submenu4</a></li>
+                                </ul>
+                                <!-- menu-submenu accordon-content-->
+                                <li id="nav3" class="toggle accordion-toggle">
+                                    <span class="icon-plus"></span>
+                                    <a class="menu-link" href="#">БОҒЛАНИШ</a>
+                                </li>
+                                <!-- accordion-toggle -->
+                                <ul class="menu-submenu accordion-content">
+                                    <li><a class="head" href="#">Submenu1</a></li>
+                                    <li><a class="head" href="#">Submenu2</a></li>
+                                    <li><a class="head" href="#">Submenu3</a></li>
+                                    <li><a class="head" href="#">Submenu4</a></li>
+                                </ul>
+                                <li id="nav3" class="toggle accordion-toggle">
+
+                                    <a class="menu-link" href="#">СТАТИСТИКА</a>
+                                </li>
+
+                            </ul>
+                            <!-- menu-list accordion-->
+
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -270,7 +420,44 @@ $(document).ready(function () {
     });
 })
 //end language
+$(function () {
+    function slideMenu() {
+        var activeState = $("#menu-container .menu-list").hasClass("active");
+        $("#menu-container .menu-list").animate(
+            {left: activeState ? "0%" : "-100%"},
+            400
+        );
+    }
 
+    $("#menu-wrapper").click(function (event) {
+        event.stopPropagation();
+        $("#hamburger-menu").toggleClass("open");
+        $("#menu-container .menu-list").toggleClass("active");
+        slideMenu();
+
+        $("body").toggleClass("overflow-hidden");
+    });
+
+    $(".menu-list")
+        .find(".accordion-toggle")
+        .click(function () {
+            $(this).next().toggleClass("open").slideToggle("fast");
+            $(this)
+                .toggleClass("active-tab")
+                .find(".menu-link")
+                .toggleClass("active");
+
+            $(".menu-list .accordion-content")
+                .not($(this).next())
+                .slideUp("fast")
+                .removeClass("open");
+            $(".menu-list .accordion-toggle")
+                .not(jQuery(this))
+                .removeClass("active-tab")
+                .find(".menu-link")
+                .removeClass("active");
+        });
+}); // jQuery load
 
 </script>
 <style>
@@ -322,15 +509,161 @@ $(document).ready(function () {
 
 
 /*mobile*/
+#menu-wrapper {
+    overflow: hidden;
+    max-width: 100%;
+    cursor: pointer;
+}
+
+
+#menu-wrapper #hamburger-menu {
+    position: relative;
+    width: 25px;
+    height: 20px;
+    margin: 20px;
+}
+
+#menu-wrapper #hamburger-menu span {
+    opacity: 1;
+    left: 0;
+    display: block;
+    width: 100%;
+    height: 2px;
+    border-radius: 10px;
+    color: black;
+    background-color: #000;
+    position: absolute;
+    transform: rotate(0deg);
+    transition: .4s ease-in-out;
+}
+
+#menu-wrapper #hamburger-menu span:nth-child(1) {
+    top: 0;
+}
+
+#menu-wrapper #hamburger-menu span:nth-child(2) {
+    top: 9px;
+}
+
+#menu-wrapper #hamburger-menu span:nth-child(3) {
+    top: 18px;
+}
+
+#menu-wrapper #hamburger-menu.open span:nth-child(1) {
+    transform: translateY(9px) rotate(135deg);
+}
+
+#menu-wrapper #hamburger-menu.open span:nth-child(2) {
+    opacity: 0;
+    transform: translateX(-60px);
+}
+
+#menu-wrapper #hamburger-menu.open span:nth-child(3) {
+    transform: translateY(-9px) rotate(-135deg);
+}
+
+#menu-container .menu-list .menu-submenu {
+    padding: 20px !important;
+    left: 10%;
+}
+
+#menu-container .menu-list {
+    padding-left: 0;
+    display: block;
+    position: absolute;
+    width: 100%;
+    max-width: 450px;
+    background: white;
+    box-shadow: rgba(100, 100, 100, 0.2) 6px 2px 10px;
+    z-index: 999;
+    overflow-y: auto;
+    overflow-x: hidden;
+    left: -100%;
+}
+
+#menu-container .menu-list li.accordion-toggle, #menu-container .menu-list .menu-login {
+    font-size: 16px;
+    padding: 20px;
+    text-transform: uppercase;
+    border-top: 1px solid #dbdcd2;
+}
+
+#menu-container .menu-list li:first-of-type {
+    border-top: 0;
+}
+
+.accordion-toggle, .accordion-content {
+    cursor: pointer;
+    font-size: 16px;
+    position: relative;
+    letter-spacing: 1px;
+}
+
+.accordion-content {
+    display: none;
+}
+
+.accordion-toggle a:before, .accordion-toggle a:after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: 30px;
+    width: 15px;
+    height: 2px;
+    margin-top: -1px;
+    background-color: #5a5858;
+    transform-origin: 50% 50%;
+    transition: all 0.3s ease-out;
+}
+
+.accordion-toggle a:before {
+    transform: rotate(-90deg);
+    opacity: 1;
+    z-index: 2;
+}
+
+.accordion-toggle.active-tab {
+    background: #000;
+
+    transition: all 0.3s ease;
+}
+
+.accordion-toggle a.active:before {
+    transform: rotate(0deg);
+    background: #fff !important;
+}
+
+.accordion-toggle a.active:after {
+    transform: rotate(180deg);
+    background: #fff !important;
+    opacity: 0;
+}
+
+#menu-wrapper {
+    display: none !important;
+}
 
 
 
+@media (max-width: 1480px) {
+    #menu-wrapper {
+        display: block !important;
+    }
+}
+
+@media (max-width: 576px) {
+    #menu-wrapper #hamburger-menu {
+        position: absolute;
+        margin-top: -50px;
+        left: 80%;
+    }
+    #plus {
+        display: flex !important;
+    }
 
 
-
-
-
-
+}
 
 /* ============ small devices .end// ============ */
 </style>
