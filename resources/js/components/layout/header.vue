@@ -5,6 +5,7 @@
             <div class="header-main">
                 <div class="container mt-0">
                     <div class="header-top">
+<!--                        Logo area-->
                         <div class="header-logo">
                             <router-link to="/" class="header-logo">
                                 <img src="/img/gtk_image.png" alt="">
@@ -13,6 +14,73 @@
                             </router-link>
 
                         </div>
+<!--                        end logo area-->
+<!--                        menu area-->
+                        <div class="header-menu">
+                            <!--                            <a href="#" class="hamburger"><i class="fa fa-bars"></i></a>-->
+
+                            <div class="new-navbar desktop-menu navbar-expand-lg navbar-collapse ">
+
+                                <!--                                <top-v-menu></top-v-menu>-->
+                                <ul class="nav navbar-nav" id="main-menu" style=" white-space: unset !important;">
+                                    <li class="dropdown nav-item" :class="($route.params.id==link.id) ? 'active' : '' "
+                                        v-for="(link,index) in links" :key="index">
+
+                                        <router-link class="nav-link dropdown-toggle" data-bs-toggle="dropdown"
+                                                     :to="link.url"
+                                                     v-if="link.children && link.children[0]">
+                                            <span class="menu_slider"></span>{{ link.title }}
+                                        </router-link>
+
+                                        <router-link class="nav-link" :to="link.url" v-else><span
+                                            class="menu_slider"></span>{{ link.title }}
+                                        </router-link>
+
+                                        <ul class="dropdown-menu "
+                                            v-if="(link.children && link.children[0])">
+                                            <li v-for="(sublink,index) in link.children" :key="index" v-if="sublink ">
+                                                <router-link :to="sublink.url" class="dropdown-item"> {{
+                                                        sublink.title
+                                                    }}
+                                                </router-link>
+                                                <ul class="submenu dropdown-menu"
+                                                    v-if="(sublink.children && sublink.children[0])">
+                                                    <li v-for="(sublinkchildren,index) in sublink.children" :key="index"
+                                                        v-if="sublinkchildren">
+                                                        <router-link :to="sublinkchildren.url" class="dropdown-item">
+                                                            {{ sublinkchildren.title }}
+                                                        </router-link>
+                                                        <ul class="submenu dropdown-menu"
+                                                            v-if="(sublinkchildren.children && sublinkchildren.children[0])">
+                                                            <li v-for="(slch,index) in sublinkchildren.children"
+                                                                :key="index + slch.id "
+                                                                v-if="slch">
+                                                                <router-link :to="slch.url" class="dropdown-item">
+                                                                    {{ slch.title }}
+                                                                </router-link>
+
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                            </li>
+
+
+                                        </ul>
+
+                                    </li>
+
+
+                                </ul>
+                            </div>
+
+                            <!--                            Mobile menu -->
+
+
+                            <!--                            End mobile menu-->
+
+                        </div>
+<!--                        end menu area-->
 
                         <div class="header-settings">
                             <div class="header-item header-mail">
@@ -102,168 +170,7 @@
                     </div>
                 </div>
             </div>
-            <div class="header-menu">
-                <div class="container">
-                    <div class="header-menu__main">
-                        <div class="menu">
-                            <!--                            <a href="#" class="hamburger"><i class="fa fa-bars"></i></a>-->
-                            <div role="navigation">
-                                <div id="menuToggle">
-                                    <input type="checkbox"/>
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
-                                    <ul id="menu">
-                                        <li class="dropdown nav-item"
-                                            :class="($route.params.id==link.id) ? 'active' : '' "
-                                            v-for="(link,index) in links" :key="index">
 
-                                            <router-link class="nav-link dropdown-toggle" data-bs-toggle="dropdown"
-                                                         :to="link.url"
-                                                         v-if="link.children && link.children[0]">
-                                                <span class="menu_slider"></span>{{ link.title }}
-                                            </router-link>
-
-                                            <router-link class="nav-link" :to="link.url" v-else><span
-                                                class="menu_slider"></span>{{ link.title }}
-                                            </router-link>
-
-                                            <ul class="dropdown-menu "
-                                                v-if="(link.children && link.children[0])">
-                                                <li v-for="(sublink,index) in link.children" :key="index"
-                                                    v-if="sublink ">
-                                                    <router-link :to="sublink.url" class="dropdown-item"> {{
-                                                            sublink.title
-                                                        }}
-                                                    </router-link>
-                                                    <ul class="submenu dropdown-menu"
-                                                        v-if="(sublink.children && sublink.children[0])">
-                                                        <li v-for="(sublinkchildren,index) in sublink.children"
-                                                            :key="index"
-                                                            v-if="sublinkchildren">
-                                                            <router-link :to="sublinkchildren.url"
-                                                                         class="dropdown-item">
-                                                                {{ sublinkchildren.title }}
-                                                            </router-link>
-                                                            <ul class="submenu dropdown-menu"
-                                                                v-if="(sublinkchildren.children && sublinkchildren.children[0])">
-                                                                <li v-for="(slch,index) in sublinkchildren.children"
-                                                                    :key="index + slch.id "
-                                                                    v-if="slch">
-                                                                    <router-link :to="slch.url" class="dropdown-item">
-                                                                        {{ slch.title }}
-                                                                    </router-link>
-
-                                                                </li>
-                                                            </ul>
-                                                        </li>
-                                                    </ul>
-                                                </li>
-
-
-                                            </ul>
-
-                                        </li>
-
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="new-navbar desktop-menu navbar-expand-lg navbar-collapse ">
-                                <!--                                <top-v-menu></top-v-menu>-->
-                                <ul class="nav navbar-nav" id="main-menu" style=" white-space: unset !important;">
-                                    <li class="dropdown nav-item" :class="($route.params.id==link.id) ? 'active' : '' "
-                                        v-for="(link,index) in links" :key="index">
-
-                                        <router-link class="nav-link dropdown-toggle" data-bs-toggle="dropdown"
-                                                     :to="link.url"
-                                                     v-if="link.children && link.children[0]">
-                                            <span class="menu_slider"></span>{{ link.title }}
-                                        </router-link>
-
-                                        <router-link class="nav-link" :to="link.url" v-else><span
-                                            class="menu_slider"></span>{{ link.title }}
-                                        </router-link>
-
-                                        <ul class="dropdown-menu "
-                                            v-if="(link.children && link.children[0])">
-                                            <li v-for="(sublink,index) in link.children" :key="index" v-if="sublink ">
-                                                <router-link :to="sublink.url" class="dropdown-item"> {{
-                                                        sublink.title
-                                                    }}
-                                                </router-link>
-                                                <ul class="submenu dropdown-menu"
-                                                    v-if="(sublink.children && sublink.children[0])">
-                                                    <li v-for="(sublinkchildren,index) in sublink.children" :key="index"
-                                                        v-if="sublinkchildren">
-                                                        <router-link :to="sublinkchildren.url" class="dropdown-item">
-                                                            {{ sublinkchildren.title }}
-                                                        </router-link>
-                                                        <ul class="submenu dropdown-menu"
-                                                            v-if="(sublinkchildren.children && sublinkchildren.children[0])">
-                                                            <li v-for="(slch,index) in sublinkchildren.children"
-                                                                :key="index + slch.id "
-                                                                v-if="slch">
-                                                                <router-link :to="slch.url" class="dropdown-item">
-                                                                    {{ slch.title }}
-                                                                </router-link>
-
-                                                            </li>
-                                                        </ul>
-                                                    </li>
-                                                </ul>
-                                            </li>
-
-
-                                        </ul>
-
-                                    </li>
-
-
-                                </ul>
-                            </div>
-
-                            <!--                            Mobile menu -->
-
-
-                            <!--                            End mobile menu-->
-
-                        </div>
-
-                        <div class="mobile-phones">
-
-                            <!--                                                    <a href="#" data-toggle="modal"-->
-                            <!--                                                       data-target="#request" class="animate-element delay9 fadeInUp">ОФОРМИТЬ ЗАЯВКУ</a>-->
-                            <!--                        <a href="#" class="vi-open"><i class="icons icon-eyeglass"></i></a>-->
-
-
-                        </div>
-
-                        <div class="header-search">
-                            <a href="#" class="header-search-button  search-toggle"><i
-                                class="fa fa-search" style="color: #fff!important;"></i></a>
-                            <div class="thim-widget-courses-searching thim-widget-courses-searching-base">
-                                <div class="thim-course-search-overlay">
-                                    <div class="courses-searching layout-overlay vi-nopart">
-                                        <div class="search-popup-bg"></div>
-                                        <form action="#" method="get" accept-charset="utf-8">
-                                            <input type="text" value="" name="word" placeholder="Излаш"
-                                                   class="thim-s form-control courses-search-input vi-nopart"
-                                                   autocomplete="off">
-                                            <button type="submit" class="vi-nopart"><i
-                                                class="fa fa-search vi-nopart"></i>
-                                            </button>
-                                            <span class="widget-search-close vi-nopart"></span>
-                                        </form>
-                                        <ul class="courses-list-search list-unstyled search-visible"></ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
-                    </div>
-                </div>
-            </div>
 
         </div>
 
@@ -417,97 +324,6 @@ $(document).ready(function () {
 /*mobile*/
 
 
-#menuToggle {
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    top: 3px;
-    left: 10px;
-    z-index: 99999;
-    -webkit-user-select: none;
-    user-select: none;
-}
-
-#menuToggle input {
-    display: flex;
-    width: 40px;
-    height: 32px;
-    position: absolute;
-    cursor: pointer;
-    opacity: 0;
-    z-index: 2;
-}
-
-#menuToggle span {
-    display: flex;
-    width: 29px;
-    height: 2px;
-    margin-bottom: 5px;
-    position: relative;
-    background: #ffffff;
-    border-radius: 3px;
-    z-index: 1;
-    transform-origin: 5px 0px;
-    transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1),
-    background 0.5s cubic-bezier(0.77, 0.2, 0.05, 1), opacity 0.55s ease;
-}
-
-#menuToggle span:first-child {
-    transform-origin: 0% 0%;
-}
-
-#menuToggle span:nth-last-child(2) {
-    transform-origin: 0% 100%;
-}
-
-#menuToggle input:checked ~ span {
-    opacity: 1;
-    transform: rotate(45deg) translate(-3px, -1px);
-    background: #36383f;
-}
-
-#menuToggle input:checked ~ span:nth-last-child(3) {
-    opacity: 0;
-    transform: rotate(0deg) scale(0.2, 0.2);
-}
-
-#menuToggle input:checked ~ span:nth-last-child(2) {
-    transform: rotate(-45deg) translate(0, -1px);
-}
-
-#menu {
-    left: 20px;
-    position: absolute;
-    width: 360px;
-    height: 400px;
-    box-shadow: 0 0 10px #85888c;
-    margin: -40px 0 0 -50px;
-    padding-top: 50px;
-
-    background-color: #73a83e;
-    -webkit-font-smoothing: antialiased;
-    transform-origin: 0% 0%;
-    transform: translate(-100%, 0);
-    transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
-    white-space: unset !important;
-    text-align: center;
-}
-
-#menu li {
-    white-space: unset !important;
-    padding: 10px 50px;
-    transition-delay: 2s;
-}
-
-#menuToggle input:checked ~ ul {
-    transform: none;
-    white-space: unset !important;
-}
-
-#menu .dropdown-menu > li > a {
-    white-space: unset !important;
-
-}
 
 
 
