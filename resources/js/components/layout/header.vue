@@ -80,13 +80,13 @@
                                         <span class="flag"></span>
                                     </label>
                                     <ul class="lang-list">
-                                        <li class="lang lang-en selected" title="EN">
+                                        <li class="lang lang-en selected" title="ЎЗБ">
                                             <span class="flag"></span>
                                         </li>
-                                        <li class="lang lang-pt" title="PT">
+                                        <li class="lang lang-pt" title="РУС">
                                             <span class="flag"></span>
                                         </li>
-                                        <li class="lang lang-es" title="ES">
+                                        <li class="lang lang-es" title="ENG">
                                             <span class="flag"></span>
                                         </li>
                                     </ul>
@@ -508,6 +508,7 @@ $(document).ready(function () {
     white-space: unset !important;
 
 }
+
 
 
 

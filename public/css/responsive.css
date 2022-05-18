@@ -415,8 +415,8 @@
 
 .header-logo a span {
     font-family: 'Montserrat-Medium', sans-serif;
-    color:  rgb(36, 155, 115);
-    text-shadow: 0 0 8px  rgb(36, 155, 115);
+    color: rgb(36, 155, 115);
+    text-shadow: 0 0 8px rgb(36, 155, 115);
     max-width: 300px;
     text-transform: uppercase;
     font-weight: 600;
@@ -446,7 +446,6 @@
 }
 
 
-
 .header-item {
     padding-left: 75px;
     display: -webkit-box;
@@ -474,7 +473,7 @@
     margin-left: 15px;
 }
 
-.header-item a i  {
+.header-item a i {
     font-size: 25px;
     color: #249b73;
 }
@@ -512,7 +511,7 @@
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
-    background-color: rgb(115,168,62);
+    background-color: rgb(115, 168, 62);
 }
 
 .header-menu__main {
@@ -560,11 +559,13 @@
 .navbar-nav .dropdown-menu > li > a {
     white-space: unset;
 }
+
 .header-menu ul li a {
     font-family: 'Montserrat-Medium', sans-serif;
     color: #fff;
     font-size: 16px;
 }
+
 .header-menu .submenu ul li a {
     display: block;
     font-family: 'Montserrat-Medium', sans-serif;
@@ -763,17 +764,148 @@ a.openMenu1 {
 
 /* End Header */
 
-.dropdown-menu > li > a{
+.dropdown-menu > li > a {
     border-bottom: 1px solid #0a5008;
-    margin-top: 5px!important;
-    color: #0a5008!important;
+    margin-top: 5px !important;
+    color: #0a5008 !important;
 }
-#menuToggle{
-    display: none!important;
+
+#menuToggle {
+    display: none !important;
 }
-/*Menu mobile*/
+
+/*Menu lang*/
+
+.header-lang {
+    display: flex;
+    padding-top: 60px;
+    font-weight: 550;
+}
+
+#lang_selected {
+    margin-left: 10px;
+    padding-top: 24px;
+
+}
+
+.shadow-1, .language-dropdown label, .language-dropdown ul.lang-list {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+.shadow-2, .language-dropdown.open label {
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+.shadow-3 {
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+}
+
+.shadow-4 {
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+.shadow-5 {
+    box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+}
 
 
+.language-dropdown {
+    display: inline-block;
+    margin: 20px 10px;
+}
+
+.language-dropdown .lang-en {
+    border-left: 4px solid #1ABC9C;
+}
+
+.language-dropdown .lang-en .flag {
+    background-image: url("../img/uz_flag.svg");
+}
+
+.language-dropdown .lang-pt {
+    border-left: 4px solid #1a43ab;
+}
+
+.language-dropdown .lang-pt .flag {
+    background-image: url("../img/ru_flag.png");
+}
+
+.language-dropdown .lang-es {
+    border-left: 4px solid #E2162C;
+}
+
+.language-dropdown .lang-es .flag {
+    background-image: url("../img/uk.png");
+}
+
+.language-dropdown label, .language-dropdown ul li {
+    display: block;
+    width: 40px;
+    height: 28px;
+    background: #fff;
+    padding: 0px 6px;
+    cursor: pointer;
+}
+
+.language-dropdown ul.lang-list {
+    position: relative;
+    visibility: hidden;
+    opacity: 0;
+    z-index: 1;
+}
+
+.language-dropdown ul.lang-list li {
+    border-bottom: 1px solid #ECECEC;
+}
+
+.language-dropdown ul.lang-list li:last-child {
+    border-bottom-right-radius: 2px;
+    border-bottom-left-radius: 2px;
+}
+
+.language-dropdown ul.lang-list li.selected {
+    display: none;
+}
+
+.language-dropdown label {
+    position: relative;
+    border-bottom: 1px solid #ECECEC;
+    border-radius: 3px;
+    z-index: 2;
+}
+
+.language-dropdown .lang-flag .flag, .language-dropdown .lang-list .lang .flag {
+    float: left;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    background-size: 30px 20px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.language-dropdown.open ul.lang-list {
+    visibility: visible;
+    opacity: 1;
+}
+
+.language-dropdown.open label {
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+.animate, .lang-flag, .lang-list {
+    cursor: pointer;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    -ms-transition: all 0.5s;
+    -ms-transition: all 0.5s;
+    transition: all 0.5s;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -ms-backface-visibility: hidden;
+}
 
 /*@media screen and (max-width: 1132px) and (min-width: 1200px){*/
 /*    .main_menu_area .hududiy_boshqarmalar a span{*/
@@ -969,7 +1101,6 @@ a.openMenu1 {
     }
 
 
-
     .v-pills-m {
         display: block;
     }
@@ -991,13 +1122,15 @@ a.openMenu1 {
 }
 
 @media (max-width: 767px) {
-    .desktop-menu{
+    .desktop-menu {
         display: none;
     }
-    #menuToggle{
-        display: block!important;
+
+    #menuToggle {
+        display: block !important;
 
     }
+
     /*#menu{*/
     /*    margin: -38px 0 0 -180px!important;*/
     /*}*/
@@ -1018,7 +1151,7 @@ a.openMenu1 {
 
     .header-settings {
         text-align: center;
-       display: block;
+        display: block;
         height: 0;
 
     }
@@ -1040,15 +1173,16 @@ a.openMenu1 {
         max-width: 100%;
 
     }
-.header-lang{
 
-    margin-left: 0;
-    padding-top: 8px;
+    .header-lang {
 
-}
+        margin-left: 0;
+        padding-top: 8px;
+
+    }
 
 
-    .header-logo  img {
+    .header-logo img {
         height: 60px;
         margin: 0;
         margin-bottom: 5px;
@@ -1096,19 +1230,21 @@ a.openMenu1 {
     }
 
 }
+
 @media (max-width: 1905px) {
-.tut span {
- display: none!important;
-}
+    .tut span {
+        display: none !important;
+    }
 
 }
+
 .dropdown .nav-item a:hover {
-    background: #fff!important;
-    color: #249b73 !important; ;
+    background: #fff !important;
+    color: #249b73 !important;;
 }
 
 
-.dropdown-menu.animated.fadeInUp.show{
+.dropdown-menu.animated.fadeInUp.show {
     inset: unset !important;
 }
 
