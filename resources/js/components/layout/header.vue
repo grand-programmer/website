@@ -22,7 +22,7 @@
                             <div class="new-navbar desktop-menu navbar-expand-lg navbar-collapse ">
 
                                 <!--                                <top-v-menu></top-v-menu>-->
-                                <ul class="nav navbar-nav" id="main-menu" style=" white-space: unset !important;">
+                                <ul class="nav navbar-nav" id="main-menu" style=" color : #000 !important;">
                                     <li class="dropdown nav-item" :class="($route.params.id==link.id) ? 'active' : '' "
                                         v-for="(link,index) in links" :key="index">
 
@@ -645,7 +645,6 @@ $(function () {
 }
 
 
-
 @media (max-width: 1480px) {
     #menu-wrapper {
         display: block !important;
@@ -658,6 +657,7 @@ $(function () {
         margin-top: -50px;
         left: 80%;
     }
+
     #plus {
         display: flex !important;
     }
