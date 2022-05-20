@@ -662,8 +662,9 @@ $(function () {
     #plus {
         display: flex !important;
     }
+
     #menu-container .header-settings {
-        display: block!important;
+        display: block !important;
     }
 
 
