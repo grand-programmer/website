@@ -3,7 +3,7 @@
 
         <div class="header">
             <div class="header-main">
-                <div class="container mt-0">
+                <div class="container-fluid" style="padding-top: 6px;">
                     <div class="header-top">
                         <!--                        Logo area-->
                         <div class="header-logo">
@@ -178,7 +178,56 @@
                             </div>
                             <!-- menu-wrapper -->
                             <ul class="menu-list accordion " style="margin-top: 13px">
-                                <div class="header-settings" id="plus">
+
+                                <li id="nav1" class="toggle accordion-toggle">
+                                    <span class="icon-plus"></span>
+                                    <a class="menu-link" href="#">ҚЎМИТА ҲАҚИДА</a>
+                                </li>
+                                <!-- accordion-toggle -->
+                                <ul class="menu-submenu accordion-content">
+                                    <li><a class="head" href="#">Submenu1</a></li>
+                                    <li><a class="head" href="#">Submenu2</a></li>
+                                    <li><a class="head" href="#">Submenu3</a></li>
+                                </ul>
+                                <!-- menu-submenu accordon-content-->
+                                <li id="nav2" class="toggle accordion-toggle">
+                                    <span class="icon-plus"></span>
+                                    <a class="menu-link" href="#">БОЖХОНА НАЗОРАТИ</a>
+                                </li>
+                                <!-- accordion-toggle -->
+                                <ul class="menu-submenu accordion-content">
+                                    <li><a class="head" href="#">Submenu1</a></li>
+                                    <li><a class="head" href="#">Submenu2</a></li>
+                                </ul>
+                                <!-- menu-submenu accordon-content-->
+                                <li id="nav3" class="toggle accordion-toggle">
+                                    <span class="icon-plus"></span>
+                                    <a class="menu-link" href="#">ОАВ УЧУН</a>
+                                </li>
+                                <!-- accordion-toggle -->
+                                <ul class="menu-submenu accordion-content">
+                                    <li><a class="head" href="#">Submenu1</a></li>
+                                    <li><a class="head" href="#">Submenu2</a></li>
+                                    <li><a class="head" href="#">Submenu3</a></li>
+                                    <li><a class="head" href="#">Submenu4</a></li>
+                                </ul>
+                                <!-- menu-submenu accordon-content-->
+                                <li id="nav3" class="toggle accordion-toggle">
+                                    <span class="icon-plus"></span>
+                                    <a class="menu-link" href="#">БОҒЛАНИШ</a>
+                                </li>
+                                <!-- accordion-toggle -->
+                                <ul class="menu-submenu accordion-content">
+                                    <li><a class="head" href="#">Submenu1</a></li>
+                                    <li><a class="head" href="#">Submenu2</a></li>
+                                    <li><a class="head" href="#">Submenu3</a></li>
+                                    <li><a class="head" href="#">Submenu4</a></li>
+                                </ul>
+                                <li id="nav3" class="toggle accordion-toggle">
+
+                                    <a class="menu-link" href="#">СТАТИСТИКА</a>
+                                </li>
+                                <div class="header-settings d-none" id="plus">
                                     <div class="header-item header-mail">
                                         <li class="hududiy_boshqarmalar">
 
@@ -263,56 +312,8 @@
                                     <!--End language area-->
 
                                 </div>
-                                <li id="nav1" class="toggle accordion-toggle">
-                                    <span class="icon-plus"></span>
-                                    <a class="menu-link" href="#">ҚЎМИТА ҲАҚИДА</a>
-                                </li>
-                                <!-- accordion-toggle -->
-                                <ul class="menu-submenu accordion-content">
-                                    <li><a class="head" href="#">Submenu1</a></li>
-                                    <li><a class="head" href="#">Submenu2</a></li>
-                                    <li><a class="head" href="#">Submenu3</a></li>
-                                </ul>
-                                <!-- menu-submenu accordon-content-->
-                                <li id="nav2" class="toggle accordion-toggle">
-                                    <span class="icon-plus"></span>
-                                    <a class="menu-link" href="#">БОЖХОНА НАЗОРАТИ</a>
-                                </li>
-                                <!-- accordion-toggle -->
-                                <ul class="menu-submenu accordion-content">
-                                    <li><a class="head" href="#">Submenu1</a></li>
-                                    <li><a class="head" href="#">Submenu2</a></li>
-                                </ul>
-                                <!-- menu-submenu accordon-content-->
-                                <li id="nav3" class="toggle accordion-toggle">
-                                    <span class="icon-plus"></span>
-                                    <a class="menu-link" href="#">ОАВ УЧУН</a>
-                                </li>
-                                <!-- accordion-toggle -->
-                                <ul class="menu-submenu accordion-content">
-                                    <li><a class="head" href="#">Submenu1</a></li>
-                                    <li><a class="head" href="#">Submenu2</a></li>
-                                    <li><a class="head" href="#">Submenu3</a></li>
-                                    <li><a class="head" href="#">Submenu4</a></li>
-                                </ul>
-                                <!-- menu-submenu accordon-content-->
-                                <li id="nav3" class="toggle accordion-toggle">
-                                    <span class="icon-plus"></span>
-                                    <a class="menu-link" href="#">БОҒЛАНИШ</a>
-                                </li>
-                                <!-- accordion-toggle -->
-                                <ul class="menu-submenu accordion-content">
-                                    <li><a class="head" href="#">Submenu1</a></li>
-                                    <li><a class="head" href="#">Submenu2</a></li>
-                                    <li><a class="head" href="#">Submenu3</a></li>
-                                    <li><a class="head" href="#">Submenu4</a></li>
-                                </ul>
-                                <li id="nav3" class="toggle accordion-toggle">
-
-                                    <a class="menu-link" href="#">СТАТИСТИКА</a>
-                                </li>
-
                             </ul>
+
                             <!-- menu-list accordion-->
 
                         </div>
@@ -520,7 +521,7 @@ $(function () {
     position: relative;
     width: 25px;
     height: 20px;
-    margin: 20px;
+    margin-top: 16px;
 }
 
 #menu-wrapper #hamburger-menu span {
@@ -654,12 +655,15 @@ $(function () {
 @media (max-width: 576px) {
     #menu-wrapper #hamburger-menu {
         position: absolute;
-        margin-top: -50px;
+        margin-top: -38px;
         left: 80%;
     }
 
     #plus {
         display: flex !important;
+    }
+    #menu-container .header-settings {
+        display: block!important;
     }
 
 

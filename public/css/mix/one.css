@@ -65,7 +65,7 @@
   width: calc(100% - 10px);
 }
 
-.navbar-nav li:hover .dropdown-menu  a {
+.navbar-nav li:hover .dropdown-menu.show a {
   color: #000;
 }
 
@@ -95,7 +95,7 @@ ul.nav.navbar-nav li ul.dropdown-menu {
 }
 
 .logo_area {
-  /*padding: 5px;*/
+
   position: fixed;
   display: block;
   width: 100%;
@@ -878,7 +878,7 @@ section.content_block .tab-content > .tab-pane {
   max-width: 1300px;
 }
 
-.nav.navbar-nav li a {
+.header .nav.navbar-nav li a {
   background: none;
   box-shadow: none;
   color: #000;
