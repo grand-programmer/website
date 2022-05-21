@@ -62,7 +62,7 @@
 }
 
 .navbar-nav li:hover .menu_slider {
-  width: calc(100% - 10px);
+  width: calc(100% - 50px);
 }
 
 .navbar-nav li:hover .dropdown-menu.show a {
@@ -95,7 +95,7 @@ ul.nav.navbar-nav li ul.dropdown-menu {
 }
 
 .logo_area {
-
+  padding: 5px;
   position: fixed;
   display: block;
   width: 100%;

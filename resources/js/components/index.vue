@@ -214,8 +214,14 @@
                         <h3 class="text-center bolimlar_title"></h3>
                         <div class="row">
                             <div class="col-md-3 bolim">
-                                <div class="bolim_image"><img src="/img/service/user-icon.png"></div>
+                                <div class="bolim_image">
+                                    <lottie-player src="![](../../../public/img/lottie/ser1.json)"
+                                                   background="transparent" speed="1"
+                                                   style="width: 100px; height: 100px;" loop
+                                                   autoplay></lottie-player>
+                                </div>
                                 <div class="bolim_title">Жисмоний шахслар учун</div>
+
                                 <div class="bolim_description">Жисмоний шахслар учун керакли хизматлар ва маълумотларни
                                     билиб
                                     олинг
