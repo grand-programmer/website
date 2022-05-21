@@ -876,6 +876,12 @@ section.content_block .tab-content > .tab-pane {
 
 .section .container {
   max-width: 1300px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    height: 100vh;
+    font-family: "Open Sans";
 }
 
 body .main_menu_area .navbar.navbar-default .navbar-collapse .nav.navbar-nav li a {
