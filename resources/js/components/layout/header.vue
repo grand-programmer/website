@@ -177,7 +177,7 @@
                                 <!-- hamburger-menu -->
                             </div>
                             <!-- menu-wrapper -->
-                            <ul class="menu-list accordion " style="margin-top: 13px">
+                            <ul class="menu-list accordion " style="margin-top: 25px">
 
                                 <li id="nav1" class="toggle accordion-toggle">
                                     <span class="icon-plus"></span>
@@ -521,7 +521,7 @@ $(function () {
     position: relative;
     width: 25px;
     height: 20px;
-    margin-top: 16px;
+    margin-top: 19px;
 }
 
 #menu-wrapper #hamburger-menu span {
@@ -574,6 +574,7 @@ $(function () {
     position: absolute;
     width: 100%;
     max-width: 450px;
+    height: 1024px;
     background: white;
     box-shadow: rgba(100, 100, 100, 0.2) 6px 2px 10px;
     z-index: 999;
@@ -656,7 +657,10 @@ $(function () {
     #menu-wrapper #hamburger-menu {
         position: absolute;
         margin-top: -38px;
-        left: 80%;
+        left: 83%;
+    }
+    .menu-list {
+        margin-top: 5px!important;
     }
 
     #plus {
