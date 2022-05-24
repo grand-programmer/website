@@ -62,7 +62,7 @@
 }
 
 .navbar-nav li:hover .menu_slider {
-  width: calc(100% - 50px);
+  width: calc(100% - 10px);
 }
 
 .navbar-nav li:hover .dropdown-menu.show a {
