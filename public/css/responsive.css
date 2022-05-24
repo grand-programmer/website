@@ -90,7 +90,7 @@
     .footer_area .footer_widget_area .col-md-3 {
         margin-bottom: 40px;
         clear: both;
-        overflow: hidden;
+        /*overflow: hidden;*/
     }
 
     .main_menu_area .navbar.navbar-default .navbar-collapse .nav.navbar-nav li a {
@@ -454,6 +454,19 @@
     height: 55px;
     position: relative;
 }
+.m-settings {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: end;
+    -ms-flex-pack: end;
+    justify-content: center;
+    height: 55px;
+    position: relative;
+}
 
 
 .header-item {
@@ -778,6 +791,7 @@ a.openMenu1 {
 /* End Header */
 
 .dropdown-menu > li > a {
+    white-space: unset!important;
     /*border-bottom: 1px solid #0a5008;*/
     /*margin-top: 5px !important;*/
     /*color: #0a5008 !important;*/
@@ -792,6 +806,11 @@ a.openMenu1 {
 
 
 .header-lang {
+    display: flex;
+    padding-top: 60px;
+    /*font-weight: 550;*/
+}
+.mm-lang {
     display: flex;
     padding-top: 60px;
     /*font-weight: 550;*/
@@ -1360,17 +1379,17 @@ p.small {
     margin-left: auto;
     margin-right: auto;
     transition: transform 900ms ease 0s;
-    width: 60px;
+    width: 80px;
 
 }
 
 .card_img img {
-    width: 60px;
-    height: 60px;
+    width: 80px;
+    height: 80px;
 }
 
 .card4:hover .card_img {
-    transform: rotateY(360deg);
+    transform: rotateY(180deg);
 
 }
 
@@ -1385,6 +1404,13 @@ p.small {
     align-items: start;
     background-image: linear-gradient(-45deg, #33af0a 1%, #36a163 100%);
 }
+.small_text{
+    font-min-size: 10px;
+    margin-top: 10px;
+    text-align: center;
+    white-space: unset;
+    color: rgba(58, 56, 56, 0.97);
+}
 
 .card4 .go-arrow {
     transform: skew(-6deg);
@@ -1398,7 +1424,10 @@ p.small {
 }
 
 .card4 h3 {
-    margin-top: 8px;
+    margin-top: 10px;
+    text-align: center;
+    white-space: unset;
+    color: #000;
 }
 
 .card4:hover .go-corner {
@@ -1408,3 +1437,6 @@ p.small {
 .card4:hover .go-arrow {
     opacity: 1;
 }
+
+
+

@@ -294,18 +294,18 @@
                 <div class="container">
 
 
-                    <a class="card4" href="#">
-                        <div class="card_img "><img src="/img/service/opendata.png" alt="" ></div>
+                    <div class="card4" >
+                        <div class="card_img "><img src="/img/plane.svg" alt="" ></div>
 
                         <h3>This is option 4</h3>
-                        <p class="small">Card description with lots of great facts and interesting details.</p>
+                        <p class="small_text">Card description with lots of great facts and interesting details.</p>
                         <div class="dimmer"></div>
                         <div class="go-corner" href="#">
                             <div class="go-arrow">
                                 →
                             </div>
                         </div>
-                    </a>
+                    </div>
 
 
                 </div>

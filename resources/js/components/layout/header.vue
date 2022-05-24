@@ -179,57 +179,61 @@
                             <!-- menu-wrapper -->
                             <ul class="menu-list accordion " style="margin-top: 25px">
 
-                                <li id="nav1" class="toggle accordion-toggle">
-                                    <span class="icon-plus"></span>
-                                    <a class="menu-link" href="#">ҚЎМИТА ҲАҚИДА</a>
-                                </li>
-                                <!-- accordion-toggle -->
-                                <ul class="menu-submenu accordion-content">
-                                    <li><a class="head" href="#">Submenu1</a></li>
-                                    <li><a class="head" href="#">Submenu2</a></li>
-                                    <li><a class="head" href="#">Submenu3</a></li>
-                                </ul>
-                                <!-- menu-submenu accordon-content-->
-                                <li id="nav2" class="toggle accordion-toggle">
-                                    <span class="icon-plus"></span>
-                                    <a class="menu-link" href="#">БОЖХОНА НАЗОРАТИ</a>
-                                </li>
-                                <!-- accordion-toggle -->
-                                <ul class="menu-submenu accordion-content">
-                                    <li><a class="head" href="#">Submenu1</a></li>
-                                    <li><a class="head" href="#">Submenu2</a></li>
-                                </ul>
-                                <!-- menu-submenu accordon-content-->
-                                <li id="nav3" class="toggle accordion-toggle">
-                                    <span class="icon-plus"></span>
-                                    <a class="menu-link" href="#">ОАВ УЧУН</a>
-                                </li>
-                                <!-- accordion-toggle -->
-                                <ul class="menu-submenu accordion-content">
-                                    <li><a class="head" href="#">Submenu1</a></li>
-                                    <li><a class="head" href="#">Submenu2</a></li>
-                                    <li><a class="head" href="#">Submenu3</a></li>
-                                    <li><a class="head" href="#">Submenu4</a></li>
-                                </ul>
-                                <!-- menu-submenu accordon-content-->
-                                <li id="nav3" class="toggle accordion-toggle">
-                                    <span class="icon-plus"></span>
-                                    <a class="menu-link" href="#">БОҒЛАНИШ</a>
-                                </li>
-                                <!-- accordion-toggle -->
-                                <ul class="menu-submenu accordion-content">
-                                    <li><a class="head" href="#">Submenu1</a></li>
-                                    <li><a class="head" href="#">Submenu2</a></li>
-                                    <li><a class="head" href="#">Submenu3</a></li>
-                                    <li><a class="head" href="#">Submenu4</a></li>
-                                </ul>
-                                <li id="nav3" class="toggle accordion-toggle">
+                                <li id="main-menu" class="toggle accordion-toggle"
+                                    :class="($route.params.id==link.id) ? 'active' : '' "
+                                    v-for="(link,index) in links" :key="index">
+                                    <router-link class="nav-link dropdown-toggle" data-bs-toggle="dropdown"
+                                                 :to="link.url"
+                                                 v-if="link.children && link.children[0]">
+                                        <span class="menu_slider"></span>{{ link.title }}
+                                    </router-link>
 
-                                    <a class="menu-link" href="#">СТАТИСТИКА</a>
+                                    <router-link class="nav-link" :to="link.url" v-else><span
+                                        class="menu_slider"></span>{{ link.title }}
+                                    </router-link>
+
+                                    <ul class="dropdown-menu  "
+                                        v-if="(link.children && link.children[0])">
+                                        <li v-for="(sublink,index) in link.children" :key="index" v-if="sublink ">
+                                            <router-link :to="sublink.url" class="dropdown-item"> {{
+                                                    sublink.title
+                                                }}
+                                            </router-link>
+                                            <ul class="submenu accordion-content"
+                                                v-if="(sublink.children && sublink.children[0])">
+                                                <li v-for="(sublinkchildren,index) in sublink.children" :key="index"
+                                                    v-if="sublinkchildren">
+                                                    <router-link :to="sublinkchildren.url" class="dropdown-item">
+                                                        {{ sublinkchildren.title }}
+                                                    </router-link>
+                                                    <ul class="submenu dropdown-menu"
+                                                        v-if="(sublinkchildren.children && sublinkchildren.children[0])">
+                                                        <li v-for="(slch,index) in sublinkchildren.children"
+                                                            :key="index + slch.id "
+                                                            v-if="slch">
+                                                            <router-link :to="slch.url" class="dropdown-item">
+                                                                {{ slch.title }}
+                                                            </router-link>
+
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </li>
+
+
+                                    </ul>
+
+                                    <span class="icon-plus"></span>
+
                                 </li>
-                                <div class="header-settings d-none" id="plus">
-                                    <div class="header-item header-mail">
-                                        <li class="hududiy_boshqarmalar">
+
+
+                                <div class="m-settings d-flex " style="display: block;
+    margin-left: auto;
+    margin-right: auto;">
+
+                                        <div class="hududiy_boshqarmalar">
 
                                             <a href=".hududiy.section" data-toggle="collapse" role="button"
                                                aria-expanded="false" class="d-inline">
@@ -240,52 +244,54 @@
                                                                                 <li><a href="contact.html">Contact</a></li>
                                                                                 <li><a href="contact-2.html">Contact - 02</a></li>
                                                                             </ul>-->
-                                        </li>
+                                        </div>
                                         <!--Kabinetga kirish-->
-                                        <v-menu offset-y left v-if="$auth.check()">
-                                            <template v-slot:activator="{ on, attrs }">
-                                                <div
-                                                    v-bind="attrs"
-                                                    v-on="on"
-                                                    class="d-flex align-items-center"
-                                                >
-                                                    <v-btn
-                                                        class="mr-1"
-                                                        elevation="0"
-                                                        x-small
-                                                        fab
-                                                        color="primary"
+                                        <div class="d-flex">
+                                            <v-menu offset-y left v-if="$auth.check()">
+                                                <template v-slot:activator="{ on, attrs }">
+                                                    <div
+                                                        v-bind="attrs"
+                                                        v-on="on"
+                                                        class="d-flex align-items-center"
                                                     >
-                                                        <!--                                            <v-img :src="'/public/images/users/'+ $auth.user().id +'.jpg'"></v-img>-->
-                                                        <v-icon>mdi-account</v-icon>
+                                                        <v-btn
+                                                            class="mr-1"
+                                                            elevation="0"
+                                                            x-small
+                                                            fab
+                                                            color="primary"
+                                                        >
+                                                            <!--                                            <v-img :src="'/public/images/users/'+ $auth.user().id +'.jpg'"></v-img>-->
+                                                            <v-icon>mdi-account</v-icon>
 
-                                                    </v-btn>
-                                                    <p style="    width: min-content; font-size: 12px; text-align: center; margin: 0 10px; font-weight: 600;">
-                                                        {{ $auth.user().first_name }} {{ $auth.user().sur_name }}</p>
-                                                </div>
-                                            </template>
-                                            <v-list><!--
+                                                        </v-btn>
+                                                        <p style="    width: min-content; font-size: 12px; text-align: center; margin: 0 10px; font-weight: 600;">
+                                                            {{ $auth.user().first_name }} {{ $auth.user().sur_name }}</p>
+                                                    </div>
+                                                </template>
+                                                <v-list><!--
                                     <v-list-item to="/services">Менинг аризаларим</v-list-item>-->
-                                                <v-list-item to="/profile">Менинг профилим</v-list-item>
-                                                <v-list-item to="/applications">Менинг аризаларим</v-list-item>
-                                                <!--                      <v-list-item> <v-list-item-title>Settings</v-list-item-title></v-list-item>-->
-                                                <v-list-item @click.prevent="$auth.logout({
+                                                    <v-list-item to="/profile">Менинг профилим</v-list-item>
+                                                    <v-list-item to="/applications">Менинг аризаларим</v-list-item>
+                                                    <!--                      <v-list-item> <v-list-item-title>Settings</v-list-item-title></v-list-item>-->
+                                                    <v-list-item @click.prevent="$auth.logout({
                         makeRequest: true,
                         redirect: {name: 'login'},
                     })" href="#">Чиқиш
-                                                </v-list-item>
-                                            </v-list>
-                                        </v-menu>
-                                        <router-link v-if="!$auth.check()" to="/login"><i
-                                            class="fas fa-sign-in-alt"></i><span class="tort">Кабинетга кириш</span>
-                                        </router-link>
+                                                    </v-list-item>
+                                                </v-list>
+                                            </v-menu>
+                                            <router-link v-if="!$auth.check()" to="/login"><i
+                                                class="fas fa-sign-in-alt"></i>
+                                            </router-link>
+                                        </div>
                                         <!--end kabinet area-->
 
-                                    </div>
-                                    <!--Language area-->
-                                    <div class="header-lang">
 
-                                        <span id="lang_selected" title="Tilni tanlang">ЎЗБ</span>
+                                    <!--Language area-->
+                                    <div class="mm-lang">
+
+
 
                                         <div id="lang_selector" class="language-dropdown">
                                             <label for="toggle" class="lang-flag lang-en"
@@ -563,10 +569,11 @@ $(function () {
     transform: translateY(-9px) rotate(-135deg);
 }
 
-#menu-container .menu-list .menu-submenu {
-    padding: 20px !important;
-    left: 10%;
-}
+/*#menu-container .menu-list .menu-submenu {*/
+/*    white-space: unset;*/
+/*    padding: 20px !important;*/
+/*    left: 10%;*/
+/*}*/
 
 #menu-container .menu-list {
     padding-left: 0;
@@ -585,6 +592,7 @@ $(function () {
 
 #menu-container .menu-list li.accordion-toggle, #menu-container .menu-list .menu-login {
     font-size: 16px;
+    text-align: center;
     padding: 20px;
     text-transform: uppercase;
     border-top: 1px solid #dbdcd2;
@@ -659,17 +667,12 @@ $(function () {
         margin-top: -38px;
         left: 83%;
     }
+
     .menu-list {
-        margin-top: 5px!important;
+        margin-top: 5px !important;
     }
 
-    #plus {
-        display: flex !important;
-    }
 
-    #menu-container .header-settings {
-        display: block !important;
-    }
 
 
 }
