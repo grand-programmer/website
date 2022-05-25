@@ -224,7 +224,7 @@
 
                                     </ul>
 
-                                    <span class="icon-plus"></span>
+
 
                                 </li>
 
@@ -613,25 +613,25 @@ $(function () {
     display: none;
 }
 
-.accordion-toggle a:before, .accordion-toggle a:after {
-    content: '';
-    display: block;
-    position: absolute;
-    top: 50%;
-    right: 30px;
-    width: 15px;
-    height: 2px;
-    margin-top: -1px;
-    background-color: #5a5858;
-    transform-origin: 50% 50%;
-    transition: all 0.3s ease-out;
-}
+/*.accordion-toggle a:before, .accordion-toggle a:after {*/
+/*    content: '';*/
+/*    display: block;*/
+/*    position: absolute;*/
+/*    top: 50%;*/
+/*    right: 30px;*/
+/*    width: 15px;*/
+/*    height: 2px;*/
+/*    margin-top: -1px;*/
+/*    background-color: #5a5858;*/
+/*    transform-origin: 50% 50%;*/
+/*    transition: all 0.3s ease-out;*/
+/*}*/
 
-.accordion-toggle a:before {
-    transform: rotate(-90deg);
-    opacity: 1;
-    z-index: 2;
-}
+/*.accordion-toggle a:before {*/
+/*    transform: rotate(-90deg);*/
+/*    opacity: 1;*/
+/*    z-index: 2;*/
+/*}*/
 
 .accordion-toggle.active-tab {
     background: #000;

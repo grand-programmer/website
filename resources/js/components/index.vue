@@ -15,7 +15,7 @@
             <div class="section" id="section0">
 
                 <!--==========Logo area==========-->
-                <div class="top_menu_space" style="height: 60px; width: 100%;">
+                <div class="top_menu_space" style=" width: 100%;">
 
 
                 </div>
@@ -23,7 +23,7 @@
 
 
                 <!--==========Main Slider area==========-->
-                <div class="main_slider_area" style="height: calc(100vh - 60px); width: 100%">
+                <div class="main_slider_area" style="padding-top: 70px; width: 100%">
                     <router-link class="all_news" to="/services">
                         <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
                              xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -292,20 +292,170 @@
                 <!--                    </div>-->
                 <!--                </div>-->
                 <div class="container">
+                    <h3 class="text-center section_title">БЎЛИМЛАР</h3>
+
+                  <div class="row pb-8" >
+                      <div class="card4">
+                          <div class="card_img "><img src="../../../public/img/svgrepo/man.svg" alt=""></div>
+
+                          <h3>Жисмоний шахслар учун</h3>
+                          <p class="small_text">Жисмоний шахслар учун керакли хизматлар ва маълумотларни
+                              билиб олинг</p>
+                          <div class="dimmer"></div>
+                          <div class="go-corner" href="#">
+                              <div class="go-arrow">
+                                  →
+                              </div>
+                          </div>
+                      </div>
+                      <div class="card4">
+                          <div class="card_img "><img src="/img/plane.svg" alt=""></div>
+
+                          <h3>ТИФ иштирокчилари учун</h3>
+                          <p class="small_text">ТИФ иштирокчилари учун керакли хизматлар ва маълумотларни
+                              билиб олинг</p>
+                          <div class="dimmer"></div>
+                          <div class="go-corner" href="#">
+                              <div class="go-arrow">
+                                  →
+                              </div>
+                          </div>
+                      </div>
+                      <div class="card4">
+                          <div class="card_img "><img src="/img/plane.svg" alt=""></div>
+
+                          <h3>Жисмоний шахслар учун</h3>
+                          <p class="small_text">Жисмоний шахслар учун керакли хизматлар ва маълумотларни
+                              билиб олинг</p>
+                          <div class="dimmer"></div>
+                          <div class="go-corner" href="#">
+                              <div class="go-arrow">
+                                  →
+                              </div>
+                          </div>
+                      </div>
+                      <div class="card4">
+                          <div class="card_img "><img src="/img/plane.svg" alt=""></div>
+
+                          <h3>Жисмоний шахслар учун</h3>
+                          <p class="small_text">Жисмоний шахслар учун керакли хизматлар ва маълумотларни
+                              билиб олинг</p>
+                          <div class="dimmer"></div>
+                          <div class="go-corner" href="#">
+                              <div class="go-arrow">
+                                  →
+                              </div>
+                          </div>
+                      </div>
+
+                      <div class="card4">
+                          <div class="card_img "><img src="/img/plane.svg" alt=""></div>
+
+                          <h3>Жисмоний шахслар учун</h3>
+                          <p class="small_text">Жисмоний шахслар учун керакли хизматлар ва маълумотларни
+                              билиб олинг</p>
+                          <div class="dimmer"></div>
+                          <div class="go-corner" href="#">
+                              <div class="go-arrow">
+                                  →
+                              </div>
+                          </div>
+                      </div>
+                      <div class="card4">
+                          <div class="card_img "><img src="/img/plane.svg" alt=""></div>
+
+                          <h3>Жисмоний шахслар учун</h3>
+                          <p class="small_text">Жисмоний шахслар учун керакли хизматлар ва маълумотларни
+                              билиб олинг</p>
+                          <div class="dimmer"></div>
+                          <div class="go-corner" href="#">
+                              <div class="go-arrow">
+                                  →
+                              </div>
+                          </div>
+                      </div>
+                      <div class="card4">
+                          <div class="card_img "><img src="/img/plane.svg" alt=""></div>
+
+                          <h3>Жисмоний шахслар учун</h3>
+                          <p class="small_text">Жисмоний шахслар учун керакли хизматлар ва маълумотларни
+                              билиб олинг</p>
+                          <div class="dimmer"></div>
+                          <div class="go-corner" href="#">
+                              <div class="go-arrow">
+                                  →
+                              </div>
+                          </div>
+                      </div>
+                      <div class="card4">
+                          <div class="card_img "><img src="/img/plane.svg" alt=""></div>
+
+                          <h3>Жисмоний шахслар учун</h3>
+                          <p class="small_text">Жисмоний шахслар учун керакли хизматлар ва маълумотларни
+                              билиб олинг</p>
+                          <div class="dimmer"></div>
+                          <div class="go-corner" href="#">
+                              <div class="go-arrow">
+                                  →
+                              </div>
+                          </div>
+                      </div>
+
+                      <div class="card4">
+                          <div class="card_img "><img src="/img/plane.svg" alt=""></div>
+
+                          <h3>Жисмоний шахслар учун</h3>
+                          <p class="small_text">Жисмоний шахслар учун керакли хизматлар ва маълумотларни
+                              билиб олинг</p>
+                          <div class="dimmer"></div>
+                          <div class="go-corner" href="#">
+                              <div class="go-arrow">
+                                  →
+                              </div>
+                          </div>
+                      </div>
+                      <div class="card4">
+                          <div class="card_img "><img src="/img/plane.svg" alt=""></div>
+
+                          <h3>Жисмоний шахслар учун</h3>
+                          <p class="small_text">Жисмоний шахслар учун керакли хизматлар ва маълумотларни
+                              билиб олинг</p>
+                          <div class="dimmer"></div>
+                          <div class="go-corner" href="#">
+                              <div class="go-arrow">
+                                  →
+                              </div>
+                          </div>
+                      </div>
+                      <div class="card4">
+                          <div class="card_img "><img src="/img/plane.svg" alt=""></div>
+
+                          <h3>Жисмоний шахслар учун</h3>
+                          <p class="small_text">Жисмоний шахслар учун керакли хизматлар ва маълумотларни
+                              билиб олинг</p>
+                          <div class="dimmer"></div>
+                          <div class="go-corner" href="#">
+                              <div class="go-arrow">
+                                  →
+                              </div>
+                          </div>
+                      </div>
+                      <div class="card4">
+                          <div class="card_img "><img src="/img/plane.svg" alt=""></div>
+
+                          <h3>Жисмоний шахслар учун</h3>
+                          <p class="small_text">Жисмоний шахслар учун керакли хизматлар ва маълумотларни
+                              билиб олинг</p>
+                          <div class="dimmer"></div>
+                          <div class="go-corner" href="#">
+                              <div class="go-arrow">
+                                  →
+                              </div>
+                          </div>
+                      </div>
+                  </div>
 
 
-                    <div class="card4" >
-                        <div class="card_img "><img src="/img/plane.svg" alt="" ></div>
-
-                        <h3>This is option 4</h3>
-                        <p class="small_text">Card description with lots of great facts and interesting details.</p>
-                        <div class="dimmer"></div>
-                        <div class="go-corner" href="#">
-                            <div class="go-arrow">
-                                →
-                            </div>
-                        </div>
-                    </div>
 
 
                 </div>
@@ -1016,9 +1166,7 @@ function skipPages(origin, destination, direction) {
     }
 }
 
-$(".card").hover(function () {
-    $(this).find(".icon").toggleClass("animated swing");
-});
+
 
 </script>
 

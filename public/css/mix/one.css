@@ -77,7 +77,7 @@
 }
 .navbar-nav li .dropdown-menu li a {
   color: #000 !important;
-  line-height: 1.5 !important;
+  padding: 0 !important;
   font-family: Montserrat, serif;
 }
 
@@ -95,7 +95,6 @@ ul.nav.navbar-nav li ul.dropdown-menu {
 }
 
 .logo_area {
-  /*padding: 5px;*/
   position: fixed;
   display: block;
   width: 100%;
@@ -742,6 +741,18 @@ section.content_block .tab-content > .tab-pane {
   width: 50%;
   margin: -55px auto;
   margin-bottom: 20px;
+}
+
+.section_title {
+  padding-bottom: 8px;
+  color: #2f4c3b;
+  text-transform: uppercase;
+  border-bottom: 3px solid #26a55b;
+  width: 50%;
+  padding-top: 80px;
+  margin-bottom: 20px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 #section2 .bolimlar {
@@ -1570,7 +1581,7 @@ ul.nav.navbar-nav li ul.dropdown-menu {
   transition: unset;
 }
 ul.nav.navbar-nav li ul.dropdown-menu.submenu {
-  max-height: 50vh;
+  max-height: 70vh;
   overflow-y: auto;
 }
 

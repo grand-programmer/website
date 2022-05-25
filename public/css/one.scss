@@ -64,7 +64,7 @@
 }
 
 .navbar-nav li:hover .menu_slider {
-    width: calc(100% - 50px);
+    width: calc(100% - 10px);
 }
 
 .navbar-nav li:hover .dropdown-menu.show a {
@@ -79,7 +79,7 @@
 
     a {
         color: #000 !important;
-        line-height: 1.5 !important;
+        padding: 0!important;
         font-family: Montserrat, serif;
 
     }
@@ -99,7 +99,7 @@ ul.nav.navbar-nav li ul.dropdown-menu {
 }
 
 .logo_area {
-    padding: 5px;
+    //padding: 5px;
     position: fixed;
     display: block;
     width: 100%;
@@ -848,6 +848,17 @@ section.content_block .tab-content > .tab-pane {
     width: 50%;
     margin: -55px auto;
     margin-bottom: 20px;
+}
+.section_title {
+    padding-bottom: 8px;
+    color: #2f4c3b;
+    text-transform: uppercase;
+    border-bottom: 3px solid #26a55b;
+    width: 50%;
+padding-top: 80px;
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 #section2 {
@@ -1754,8 +1765,9 @@ ul.nav.navbar-nav li ul.dropdown-menu {
     position: absolute;
     transition: unset;
 
+
     &.submenu {
-        max-height: 50vh;
+        max-height: 70vh;
         overflow-y: auto;
     }
 }
