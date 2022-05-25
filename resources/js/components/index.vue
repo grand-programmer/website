@@ -294,168 +294,124 @@
                 <div class="container">
                     <h3 class="text-center section_title">БЎЛИМЛАР</h3>
 
-                  <div class="row pb-8" >
-                      <div class="card4">
-                          <div class="card_img "><img src="../../../public/img/svgrepo/man.svg" alt=""></div>
+                    <div class="row pb-8">
+                        <div class="card4">
+                            <div class="card_img "><img src="/img/svgrepo/man.svg" alt=""></div>
 
-                          <h3>Жисмоний шахслар учун</h3>
-                          <p class="small_text">Жисмоний шахслар учун керакли хизматлар ва маълумотларни
-                              билиб олинг</p>
-                          <div class="dimmer"></div>
-                          <div class="go-corner" href="#">
-                              <div class="go-arrow">
-                                  →
-                              </div>
-                          </div>
-                      </div>
-                      <div class="card4">
-                          <div class="card_img "><img src="/img/plane.svg" alt=""></div>
+                            <h3>Жисмоний шахслар учун</h3>
+                            <p class="small_text">Жисмоний шахслар учун керакли хизматлар ва маълумотларни
+                                билиб олинг</p>
+                            <div class="dimmer"></div>
+                            <div class="go-corner" href="#">
+                                <div class="go-arrow">
+                                    →
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card4">
+                            <div class="card_img "><img src="/img/svgrepo/tif.svg" alt=""></div>
 
-                          <h3>ТИФ иштирокчилари учун</h3>
-                          <p class="small_text">ТИФ иштирокчилари учун керакли хизматлар ва маълумотларни
-                              билиб олинг</p>
-                          <div class="dimmer"></div>
-                          <div class="go-corner" href="#">
-                              <div class="go-arrow">
-                                  →
-                              </div>
-                          </div>
-                      </div>
-                      <div class="card4">
-                          <div class="card_img "><img src="/img/plane.svg" alt=""></div>
+                            <h3>ТИФ иштирокчилари учун</h3>
+                            <p class="small_text">ТИФ иштирокчилари учун керакли хизматлар ва маълумотларни
+                                билиб олинг</p>
+                            <div class="dimmer"></div>
+                            <div class="go-corner" href="#">
+                                <div class="go-arrow">
+                                    →
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card4">
+                            <div class="card_img "><img src="/img/svgrepo/message.svg" alt=""></div>
 
-                          <h3>Жисмоний шахслар учун</h3>
-                          <p class="small_text">Жисмоний шахслар учун керакли хизматлар ва маълумотларни
-                              билиб олинг</p>
-                          <div class="dimmer"></div>
-                          <div class="go-corner" href="#">
-                              <div class="go-arrow">
-                                  →
-                              </div>
-                          </div>
-                      </div>
-                      <div class="card4">
-                          <div class="card_img "><img src="/img/plane.svg" alt=""></div>
+                            <h3>Мурожаатлар</h3>
+                            <p class="small_text">Божхона қўмитасига мурожаатлар юбориш, кўриб чиқилиши тўғрисидаги
+                                маълумотлар</p>
+                            <div class="dimmer"></div>
+                            <div class="go-corner" href="#">
+                                <div class="go-arrow">
+                                    →
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card4">
+                            <div class="card_img "><img src="/img/svgrepo/doc.svg" alt=""></div>
 
-                          <h3>Жисмоний шахслар учун</h3>
-                          <p class="small_text">Жисмоний шахслар учун керакли хизматлар ва маълумотларни
-                              билиб олинг</p>
-                          <div class="dimmer"></div>
-                          <div class="go-corner" href="#">
-                              <div class="go-arrow">
-                                  →
-                              </div>
-                          </div>
-                      </div>
+                            <h3>Сўровнома</h3>
+                            <p class="small_text">Божхона Қўмитасининг очиқ маълумотларини кўчириб
+                                олишингиз
+                                мумкин</p>
+                            <div class="dimmer"></div>
+                            <div class="go-corner" href="#">
+                                <div class="go-arrow">
+                                    →
+                                </div>
+                            </div>
+                        </div>
 
-                      <div class="card4">
-                          <div class="card_img "><img src="/img/plane.svg" alt=""></div>
+                        <div class="card4">
+                            <div class="card_img "><img src="/img/svgrepo/loc.svg" alt=""></div>
 
-                          <h3>Жисмоний шахслар учун</h3>
-                          <p class="small_text">Жисмоний шахслар учун керакли хизматлар ва маълумотларни
-                              билиб олинг</p>
-                          <div class="dimmer"></div>
-                          <div class="go-corner" href="#">
-                              <div class="go-arrow">
-                                  →
-                              </div>
-                          </div>
-                      </div>
-                      <div class="card4">
-                          <div class="card_img "><img src="/img/plane.svg" alt=""></div>
+                            <h3>Қизил ва яшил йўлак</h3>
+                            <p class="small_text">Божхона постларида қизил ва яшил йўлаклар бўйича маълумотлар</p>
+                            <div class="dimmer"></div>
+                            <div class="go-corner" href="#">
+                                <div class="go-arrow">
+                                    →
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card4">
+                            <div class="card_img "><img src="/img/svgrepo/camera.svg" alt=""></div>
 
-                          <h3>Жисмоний шахслар учун</h3>
-                          <p class="small_text">Жисмоний шахслар учун керакли хизматлар ва маълумотларни
-                              билиб олинг</p>
-                          <div class="dimmer"></div>
-                          <div class="go-corner" href="#">
-                              <div class="go-arrow">
-                                  →
-                              </div>
-                          </div>
-                      </div>
-                      <div class="card4">
-                          <div class="card_img "><img src="/img/plane.svg" alt=""></div>
+                            <h3>Кузатув камералари</h3>
+                            <p class="small_text">Божхона қўмитаси кузатув камералари тўғрисидаги маълумотлар</p>
+                            <div class="dimmer"></div>
+                            <div class="go-corner" href="#">
+                                <div class="go-arrow">
+                                    →
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card4">
+                            <div class="card_img "><img src="/img/svgrepo/deal.svg" alt=""></div>
 
-                          <h3>Жисмоний шахслар учун</h3>
-                          <p class="small_text">Жисмоний шахслар учун керакли хизматлар ва маълумотларни
-                              билиб олинг</p>
-                          <div class="dimmer"></div>
-                          <div class="go-corner" href="#">
-                              <div class="go-arrow">
-                                  →
-                              </div>
-                          </div>
-                      </div>
-                      <div class="card4">
-                          <div class="card_img "><img src="/img/plane.svg" alt=""></div>
+                            <h3>Коррупцияга қарши курашиш</h3>
+                            <p class="small_text">Божхона Қўмитасининг коррупцияга қарши курашиш борасидаги ишлари</p>
+                            <div class="dimmer"></div>
+                            <div class="go-corner" href="#">
+                                <div class="go-arrow">
+                                    →
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card4">
+                            <div class="card_img "><img src="/img/svgrepo/artif.svg" alt=""></div>
 
-                          <h3>Жисмоний шахслар учун</h3>
-                          <p class="small_text">Жисмоний шахслар учун керакли хизматлар ва маълумотларни
-                              билиб олинг</p>
-                          <div class="dimmer"></div>
-                          <div class="go-corner" href="#">
-                              <div class="go-arrow">
-                                  →
-                              </div>
-                          </div>
-                      </div>
+                            <h3>Интеллектуал мулк</h3>
+                            <p class="small_text">Интеллектуал мулк объектлари божхона реестри</p>
+                            <div class="dimmer"></div>
+                            <div class="go-corner" href="#">
+                                <div class="go-arrow">
+                                    →
+                                </div>
+                            </div>
+                        </div>
 
-                      <div class="card4">
-                          <div class="card_img "><img src="/img/plane.svg" alt=""></div>
+                        <div class="card4">
+                            <div class="card_img "><img src="/img/svgrepo/barcode.svg" alt=""></div>
 
-                          <h3>Жисмоний шахслар учун</h3>
-                          <p class="small_text">Жисмоний шахслар учун керакли хизматлар ва маълумотларни
-                              билиб олинг</p>
-                          <div class="dimmer"></div>
-                          <div class="go-corner" href="#">
-                              <div class="go-arrow">
-                                  →
-                              </div>
-                          </div>
-                      </div>
-                      <div class="card4">
-                          <div class="card_img "><img src="/img/plane.svg" alt=""></div>
+                            <h3>ТИФ номенклатураси</h3>
+                            <p class="small_text">Интеллектуал мулк объектлари божхона реестри</p>
+                            <div class="dimmer"></div>
+                            <div class="go-corner" href="#">
+                                <div class="go-arrow">
+                                    →
+                                </div>
+                            </div>
+                        </div>
 
-                          <h3>Жисмоний шахслар учун</h3>
-                          <p class="small_text">Жисмоний шахслар учун керакли хизматлар ва маълумотларни
-                              билиб олинг</p>
-                          <div class="dimmer"></div>
-                          <div class="go-corner" href="#">
-                              <div class="go-arrow">
-                                  →
-                              </div>
-                          </div>
-                      </div>
-                      <div class="card4">
-                          <div class="card_img "><img src="/img/plane.svg" alt=""></div>
-
-                          <h3>Жисмоний шахслар учун</h3>
-                          <p class="small_text">Жисмоний шахслар учун керакли хизматлар ва маълумотларни
-                              билиб олинг</p>
-                          <div class="dimmer"></div>
-                          <div class="go-corner" href="#">
-                              <div class="go-arrow">
-                                  →
-                              </div>
-                          </div>
-                      </div>
-                      <div class="card4">
-                          <div class="card_img "><img src="/img/plane.svg" alt=""></div>
-
-                          <h3>Жисмоний шахслар учун</h3>
-                          <p class="small_text">Жисмоний шахслар учун керакли хизматлар ва маълумотларни
-                              билиб олинг</p>
-                          <div class="dimmer"></div>
-                          <div class="go-corner" href="#">
-                              <div class="go-arrow">
-                                  →
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-
-
+                    </div>
 
 
                 </div>
@@ -1165,7 +1121,6 @@ function skipPages(origin, destination, direction) {
         }
     }
 }
-
 
 
 </script>
