@@ -1373,11 +1373,11 @@ p.small {
     display: block;
     top: 30px;
     position: relative;
-    max-width: 262px;
+    max-width: 330px;
     background-color: #ffffff;
     border-radius: 4px;
-    padding: 32px 24px;
-    margin-bottom: 12px;
+    padding: 14px 17px;
+    margin-bottom: 25px;
 
     text-decoration: none;
     overflow: hidden;
@@ -1387,23 +1387,51 @@ p.small {
 .card_img {
 
     display: block;
-    margin-left: auto;
+
     margin-right: auto;
-    transition: transform 900ms ease 0s;
-    width: 80px;
+
+    width: 70px;
 
 }
 
 .card_img img {
-    width: 80px;
-    height: 80px;
+    width: 70px;
+    height: 70px;
 }
 
-.card4:hover .card_img {
-    transform: rotateY(180deg);
+.card4:hover  .card_img{
+
+    animation: pulse 1s linear infinite;
 
 }
 
+@-webkit-keyframes pulse {
+    25% {
+        -webkit-transform: scale(1.05);
+        transform: scale(1.05);
+        opacity: 1;
+
+    }
+
+    75% {
+        -webkit-transform: scale(0.9);
+        transform: scale(0.9);
+        opacity: 1;
+
+    }
+}
+
+@keyframes pulse {
+    25% {
+        -webkit-transform: scale(1.05);
+        transform: scale(1.05);
+    }
+
+    75% {
+        -webkit-transform: scale(0.9);
+        transform: scale(0.9);
+    }
+}
 .card4 .go-corner {
 
     height: 100%;
@@ -1417,7 +1445,7 @@ p.small {
 }
 .small_text{
     font-min-size: 10px;
-    margin-top: 10px;
+    margin-top: 32px;
     text-align: center;
     white-space: unset;
     color: rgba(58, 56, 56, 0.97);
@@ -1435,7 +1463,10 @@ p.small {
 }
 
 .card4 h3 {
-    margin-top: 10px;
+    font-size: 20px;
+    width: 165px;
+    margin-left: 91px!important;
+    margin-top: -74px;
     text-align: center;
     white-space: unset;
     color: #000;
