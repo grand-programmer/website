@@ -426,6 +426,137 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="card4">
+                            <div class="card_img "><img src="/img/service/man.svg" alt="" ></div>
+
+                            <h3>Жисмоний шахслар учун</h3>
+                            <p class="small_text">Жисмоний шахслар учун керакли хизматлар ва маълумотларни
+                                билиб олинг</p>
+                            <div class="dimmer"></div>
+                            <div class="go-corner" href="#">
+                                <div class="go-arrow">
+                                    →
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card4">
+                            <div class="card_img "><img src="/img/service/tif.svg" alt=""></div>
+
+                            <h3>ТИФ иштирокчилари учун</h3>
+                            <p class="small_text">ТИФ иштирокчилари учун керакли хизматлар ва маълумотларни
+                                билиб олинг</p>
+                            <div class="dimmer"></div>
+                            <div class="go-corner" href="#">
+                                <div class="go-arrow">
+                                    →
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card4">
+                            <div class="card_img "><img src="/img/service/message.svg" alt=""></div>
+
+                            <h3 style="margin-top: -49px!important;">Мурожаатлар</h3>
+                            <p class="small_text">Божхона қўмитасига мурожаатлар юбориш, кўриб чиқилиши тўғрисидаги
+                                маълумотлар</p>
+                            <div class="dimmer"></div>
+                            <div class="go-corner" href="#">
+                                <div class="go-arrow">
+                                    →
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card4">
+                            <div class="card_img "><img src="/img/service/folder.svg" alt=""></div>
+
+                            <h3 style="margin-top: -49px!important;">Сўровнома</h3>
+                            <p class="small_text">Божхона Қўмитасининг очиқ маълумотларини кўчириб
+                                олишингиз
+                                мумкин</p>
+                            <div class="dimmer"></div>
+                            <div class="go-corner" href="#">
+                                <div class="go-arrow">
+                                    →
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card4">
+                            <div class="card_img "><img src="/img/service/way.svg" alt=""></div>
+
+                            <h3>Қизил ва яшил йўлак</h3>
+                            <p class="small_text">Божхона постларида қизил ва яшил йўлаклар бўйича маълумотлар</p>
+                            <div class="dimmer"></div>
+                            <div class="go-corner" href="#">
+                                <div class="go-arrow">
+                                    →
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card4">
+                            <div class="card_img "><img src="/img/service/camera.svg" alt=""></div>
+
+                            <h3>Кузатув камералари</h3>
+                            <p class="small_text">Божхона қўмитаси кузатув камералари тўғрисидаги маълумотлар</p>
+                            <div class="dimmer"></div>
+                            <div class="go-corner" href="#">
+                                <div class="go-arrow">
+                                    →
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card4">
+                            <div class="card_img "><img src="/img/service/corruption.svg" alt=""></div>
+
+                            <h3>Коррупцияга қарши курашиш</h3>
+                            <p class="small_text">Божхона Қўмитасининг коррупцияга қарши курашиш борасидаги ишлари</p>
+                            <div class="dimmer"></div>
+                            <div class="go-corner" href="#">
+                                <div class="go-arrow">
+                                    →
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card4">
+                            <div class="card_img "><img src="/img/service/artif.svg" alt=""></div>
+
+                            <h3>Интеллектуал мулк</h3>
+                            <p class="small_text">Интеллектуал мулк объектлари божхона реестри</p>
+                            <div class="dimmer"></div>
+                            <div class="go-corner" href="#">
+                                <div class="go-arrow">
+                                    →
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card4">
+                            <div class="card_img "><img src="/img/service/barcode.svg" alt=""></div>
+
+                            <h3>ТИФ номенклатураси</h3>
+                            <p class="small_text">Интеллектуал мулк объектлари божхона реестри</p>
+                            <div class="dimmer"></div>
+                            <div class="go-corner" href="#">
+                                <div class="go-arrow">
+                                    →
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card4">
+                            <div class="card_img "><img src="/img/service/message.svg" alt=""></div>
+
+                            <h3 style="margin-top: -49px!important;">Мурожаатлар</h3>
+                            <p class="small_text">Божхона қўмитасига мурожаатлар юбориш, кўриб чиқилиши тўғрисидаги
+                                маълумотлар</p>
+                            <div class="dimmer"></div>
+                            <div class="go-corner" href="#">
+                                <div class="go-arrow">
+                                    →
+                                </div>
+                            </div>
+                        </div>
 
                     </div>
 
@@ -867,6 +998,7 @@ import index_scripts from '../components/homepage/scripts';
 import NewsInHome from './homepage/news';
 import FrontCalendar from './homepage/calendar';
 import loadingBar from "../components/base/loadingbar.vue";
+
 
 
 export default {
