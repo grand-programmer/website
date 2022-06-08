@@ -24,6 +24,7 @@
 
                 <!--==========Main Slider area==========-->
                 <div class="main_slider_area" style="padding-top: 70px; width: 100%">
+
                     <router-link class="all_news" to="/services">
                         <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
                              xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -40,8 +41,66 @@
 
 
                         <p> Барча хизматлар </p></router-link>
-                    <div class="slider_inner">
 
+                    <div class="main-wrapper">
+                        <a href="http://blogs.ziyonet.uz/uz" target="_blank">
+                            <div class="hex green-dark hover_effect">
+                                <div class="circle"><i class="far fa-list-alt"></i></div>
+                                <div class="ribbon">Sayt-satellitlar</div>
+                            </div>
+                        </a>
+                        <a href="http://ask.ziyonet.uz/uz" target="_blank">
+                            <div class="hex purple hover_effect">
+                                <div class="circle"><i class="fas fa-comments"></i></div>
+                                <div class="ribbon">Savol-javoblar</div>
+                            </div>
+                        </a>
+                        <a href="http://games.ziyonet.uz/uz" target="_blank">
+                            <div class="hex teal hover_effect">
+                                <div class="circle"><i class="fas fa-gamepad"></i></div>
+                                <div class="ribbon">O‘yinlar</div>
+                            </div>
+                        </a>
+                        <a href="http://institutions.ziyonet.uz/uz" target="_blank">
+                            <div class="hex blue hover_effect">
+                                <div class="circle"><i class="fas fa-university"></i></div>
+                                <div class="ribbon">Ta‘lim muassasalari</div>
+                            </div>
+                        </a>
+                        <a href="http://abiturient.ziyonet.uz/uz" target="_blank">
+                            <div class="hex blue-dark hover_effect">
+                                <div class="circle"><i class="fas fa-user-graduate"></i></div>
+                                <div class="ribbon">Abituriyent</div>
+                            </div>
+                        </a>
+                        <a href="http://sport.ziyonet.uz/" target="_blank">
+                            <div class="hex green hover_effect">
+                                <div class="circle"><i class="fas fa-trophy"></i></div>
+                                <div class="ribbon">Sport</div>
+                            </div>
+                        </a>
+                        <a href="http://blogs.ziyonet.uz/uz" target="_blank">
+                            <div class="hex green-dark hover_effect">
+                                <div class="circle"><i class="far fa-list-alt"></i></div>
+                                <div class="ribbon">Sayt-satellitlar</div>
+                            </div>
+                        </a>
+                        <a href="http://arboblar.uz/" target="_blank">
+                            <div class="hex silver hover_effect">
+                                <div class="circle"><i class="fa fa-user fa-street-view"></i></div>
+                                <div class="ribbon">Arboblar</div>
+                            </div>
+                        </a>
+                        <a href="http://army.ziyonet.uz/uz" target="_blank">
+                            <div class="hex gold hover_effect">
+                                <div class="circle"><i class="fas fa-fighter-jet"></i></div>
+                                <div class="ribbon">Armiya va yoshlar</div>
+                            </div>
+                        </a>
+                    </div>
+
+
+                    <div class="slider_inner">
 
                         <div data-thumb="/img/custom/slider-9.png" data-src="/img/custom/077.png">
                             <div class="container">
