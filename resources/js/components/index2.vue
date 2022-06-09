@@ -42,10 +42,154 @@
 
                         <p> Барча хизматлар </p></router-link>
 
+                    <div class="main-wrapper" style="justify-content: center!important; ">
+                        <div class="container-fluid">
+
+
+                            <div class="row pb-8" style="margin: 24px!important; justify-content: center;">
 
 
 
-                    <div class="slider_inner">
+                                <div class="card">
+                                    <div class="content">
+                                        <div class="img"><img src="/img/service/man.svg"></div>
+                                        <div class="cardContent">
+                                            <h3>Жисмоний шахслар учун</h3>
+                                        </div>
+                                    </div>
+                                    <ul class="sci">
+                                        <li style="text-align: center;">
+                                            <a href="#">Жисмоний шахслар учун керакли хизматлар ва маълумотларни
+                                                билиб олинг</a>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                                <div class="card">
+                                    <div class="content">
+                                        <div class="img"><img src="/img/service/tif.svg"></div>
+                                        <div class="cardContent">
+                                            <h3>ТИФ иштирокчилари учун</h3>
+                                        </div>
+                                    </div>
+                                    <ul class="sci">
+                                        <li style="text-align: center;">
+                                            <a href="#">ТИФ иштирокчилари учун керакли хизматлар ва маълумотларни
+                                                билиб олинг</a>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                                <div class="card">
+                                    <div class="content">
+                                        <div class="img"><img src="/img/service/message.svg"></div>
+                                        <div class="cardContent">
+                                            <h3>Мурожаатлар</h3>
+                                        </div>
+                                    </div>
+                                    <ul class="sci">
+                                        <li style="text-align: center;">
+                                            <a href="#">Божхона қўмитасига мурожаатлар юбориш, кўриб чиқилиши тўғрисидаги
+                                                маълумотлар</a>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                                <div class="card">
+                                    <div class="content">
+                                        <div class="img"><img src="/img/service/folder.svg"></div>
+                                        <div class="cardContent">
+                                            <h3>Сўровнома</h3>
+                                        </div>
+                                    </div>
+                                    <ul class="sci">
+                                        <li style="text-align: center;">
+                                            <a href="#">ожхона Қўмитасининг очиқ маълумотларини кўчириб
+                                                олишингиз
+                                                мумкин</a>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                                <div class="card">
+                                    <div class="content">
+                                        <div class="img"><img src="/img/service/way.svg"></div>
+                                        <div class="cardContent">
+                                            <h3>Қизил ва яшил йўлак</h3>
+                                        </div>
+                                    </div>
+                                    <ul class="sci">
+                                        <li style="text-align: center;">
+                                            <a href="#">Божхона постларида қизил ва яшил йўлаклар бўйича маълумотлар</a>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                                <div class="card">
+                                    <div class="content">
+                                        <div class="img"><img src="/img/service/camera.svg"></div>
+                                        <div class="cardContent">
+                                            <h3>Кузатув камералари</h3>
+                                        </div>
+                                    </div>
+                                    <ul class="sci">
+                                        <li style="text-align: center;">
+                                            <a href="#">Божхона қўмитаси кузатув камералари тўғрисидаги маълумотлар</a>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                                <div class="card">
+                                    <div class="content">
+                                        <div class="img"><img src="/img/service/corruption.svg"></div>
+                                        <div class="cardContent">
+                                            <h3>Коррупцияга қарши курашиш</h3>
+                                        </div>
+                                    </div>
+                                    <ul class="sci">
+                                        <li style="text-align: center;">
+                                            <a href="#">Божхона Қўмитасининг коррупцияга қарши курашиш борасидаги ишлари</a>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                                <div class="card">
+                                    <div class="content">
+                                        <div class="img"><img src="/img/service/artif.svg"></div>
+                                        <div class="cardContent">
+                                            <h3>Интеллектуал мулк </h3>
+                                        </div>
+                                    </div>
+                                    <ul class="sci">
+                                        <li style="text-align: center;">
+                                            <a href="#">Интеллектуал мулк объектлари божхона реестри</a>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                                <div class="card">
+                                    <div class="content">
+                                        <div class="img"><img src="/img/service/barcode.svg"></div>
+                                        <div class="cardContent">
+                                            <h3>ТИФ номенклатураси</h3>
+                                        </div>
+                                    </div>
+                                    <ul class="sci">
+                                        <li style="text-align: center;">
+                                            <a href="#">Интеллектуал мулк объектлари божхона реестри</a>
+                                        </li>
+
+                                    </ul>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+                    </div>
+
+
+                    <div class="slider_inner" id="slid">
 
                         <div data-thumb="/img/custom/slider-9.png" data-src="/img/custom/077.png">
                             <div class="container">
@@ -211,7 +355,7 @@
                 <!--==========End Main Slider area==========-->
                 <component is="script" src="js/theme.js"></component>
             </div>
-            <div class="section ">
+            <div class="section " id="fart" style="display: none">
                 <div class="row"><h3 class="text-center section_title">БЎЛИМЛАР</h3></div>
                 <div class="container-fluid">
 
