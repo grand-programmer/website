@@ -1,17 +1,19 @@
 <template>
-    <div>
+    <div class="one-page">
         <v-overlay
             :opacity="1"
             color="#fff"
-            :value="overlay"
+            :value="show" z-index="5000"
         >
             <v-progress-circular indeterminate size="200" color="#39ae69">
                 <img src="/img/gtk_image.png" height="160" width="160"/>
             </v-progress-circular>
         </v-overlay>
-        <loading-bar></loading-bar>
-        <full-page :options="options" ref="fullpage" id="fullpage" :skip-init="false">
-            <v-hududiy></v-hududiy>
+
+        <v-header></v-header>
+        <v-hududiy></v-hududiy>
+
+        <router-view>
             <div class="section" id="section0">
 
                 <!--==========Logo area==========-->
@@ -790,295 +792,188 @@
                 </footer>
                 <!--==========End Footer area==========-->
             </div>
+        </router-view>
+        <footer class="footer_area">
+            <div class="footer_widget_area">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="footer_widget_inner">
+                                <div class="f_about_widget">
+                                    <div class="logo"><img src="/img/gtk_image.png" alt="">Ўзбекистон
+                                        Республикаси
+                                        Давлат
+                                        божхона қўмитаси
+                                    </div>
+                                    <p>Сайтдан олинган ҳар қандай
+                                        маълумотлардан фойдаланганда
+                                        Ўзбекистон Республикаси ДБҚ сайтидан
+                                        олинганлиги кўрсатиб ўтилиши шарт.</p>
+                                    <p>
+                                        ЎзМАА Интернет-ОАВ гувоҳномаси № 0902
+                                    </p>
+                                    <p> © 2001-2022 Ўзбекистон Республикаси Давлат божхона қўмитаси.
+                                    </p>
 
-        </full-page>
-        <index_scripts ref="scripts"></index_scripts>
-        <v-mobile></v-mobile>
+                                </div>
+                            </div>
+                        </div>
 
+                        <div class="col-md-5">
+                            <div class="footer_widget_inner">
+                                <div class="f_navigation_widget">
+                                    <ul>
+                                        <li v-for="(link,index) in menu[0]" :key="index">
+                                            <router-link :to="link.url"><i class="fa fa-angle-right"
+                                                                           aria-hidden="true"></i>{{ link.title }}
+                                            </router-link>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="footer_widget_inner">
+                                <div class="f_contact_widget">
+                                    <ul class="contact_lsit">
+                                        <li><a href="#"><i class="fa fa-map-marker" aria-hidden="true"></i>100003,
+                                            Тошкент шаҳри,Ислом Каримов кўчаси 3 уй</a></li>
+                                        <li><a href="#"><i class="fa fa-phone" aria-hidden="true"></i>(+998-78)
+                                            120-76-00</a>
+                                        </li>
+                                        <li><a href="#"><i class="fa fa-envelope" aria-hidden="true"></i>info@customs.uz</a>
+                                        </li>
+                                    </ul>
+                                    <ul class="f_widget_social">
+                                        <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                        <li><a href="#"><i class="fab fa-google-plus-g"></i></a></li>
+                                        <li><a href="#"><i class="fab fa-pinterest-p"></i></a></li>
+                                        <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </footer>
+        <div class="footer_links">
+            <div class="footer_links_arrow"><i class="fas fa-chevron-down"></i></div>
+            <div class="slide_links">
+                <a class="footer_link" href="//huquqiyportal.uz">
+                    <div class="image"></div>
+                    <p>Oʼzbekiston Respublikasi Milliy huquqiy internet portali</p>
+                </a>
+                <a class="footer_link" href="//president.uz">
+                    <div class="image"></div>
+                    <p>O'zbekiston Respublikasi Prezidentining rasmiy veb sayti</p>
+                </a>
+
+                <a class="footer_link" href="//gov.uz">
+                    <div class="image"></div>
+                    <p>Oʼzbekiston Respublikasi Hukumat portali</p>
+                </a>
+
+                <a class="footer_link" href="//prokuratura.uz">
+                    <div class="image"></div>
+                    <p>Oʼzbekiston Respublikasi Bosh prokuraturasi</p>
+                </a>
+                <a class="footer_link" href="//iiv.uz">
+                    <div class="image"></div>
+                    <p>Oʼzbekiston Respublikasi Ichki ishlar vazirligi</p>
+                </a>
+
+                <a class="footer_link" href="//soliq.uz">
+                    <div class="image"></div>
+                    <p>Oʼzbekiston Respublikasi Davlat soliq qo'mitasi</p>
+                </a>
+                <a class="footer_link" href="//my.gov.uz">
+                    <div class="image"></div>
+                    <p>Yagona interaktiv davlat xizmatlari portali</p>
+                </a>
+
+                <a class="footer_link" href="//data.gov.uz">
+                    <div class="image"></div>
+                    <p>Oʼzbekiston Respublikasi Ochiq ma'lumotlar portali</p>
+                </a>
+                <a class="footer_link" href="//pm.gov.uz">
+                    <div class="image"></div>
+                    <p>Oʼzbekiston Respublikasi Prezidenti Virtual qabulxonasi</p>
+                </a>
+
+                <a class="footer_link" href="//uzbi.uz">
+                    <div class="image"></div>
+                    <p>Bojxona instituti</p>
+                </a>
+
+            </div>
+        </div>
 
     </div>
 </template>
-
 <script>
-
-import index_scripts from '../components/homepage/scripts';
-import NewsInHome from './homepage/news';
-import FrontCalendar from './homepage/calendar';
-import loadingBar from "../components/base/loadingbar.vue";
-
+let _loadingInterval = 0;
+import {mapState} from 'vuex';
+import loadingBar from "../../components/base/loadingbar.vue";
 
 export default {
-
-
-    name: "Index-Page",
+    name: 'mobile',
     data() {
         return {
-            stat_type: 1,
-            month: 0,
-            months: [
-                {
-                    text: 'Барчаси',
-                    value: 0
-                }, {
-                    text: 'Январ',
-                    value: 1
-                },
-                {
-                    text: 'Феврал',
-                    value: 2
-                },
-                {
-                    text: 'Март',
-                    value: 3
-                },
-                {
-                    text: 'Апрел',
-                    value: 4
-                },
-                {
-                    text: 'Май',
-                    value: 5
-                },
-                {
-                    text: 'Июн',
-                    value: 6
-                },
-                {
-                    text: 'Июл',
-                    value: 7
-                },
-                {
-                    text: 'Август',
-                    value: 8
-                },
-                {
-                    text: 'Сентябр',
-                    value: 9
-                },
-                {
-                    text: 'Октябр',
-                    value: 10
-                },
-                {
-                    text: 'Ноябр',
-                    value: 11
-                },
-                {
-                    text: 'Декабр',
-                    value: 12
-                }
-            ],
-            year: 2022,
-            firstStart: 1,
-            years: [
-                2018, 2019, 2020, 2021, 2022
-            ],
-            overlay: true,
-            stat: false,
-            options: {
-                lockAnchors: true,
-                anchors: ['0', '1', '2', '3', '4', '5'],
-                sectionsColor: ['#fff', '#faf9f9', '#fff', '#efefef', '#fff', '#fff'],
-                //css3: true,
-                menu: '.logo_area',
-                fixedElements: 'body > .footer_links',
-                lazyLoading: false,
-                navigation: true,
-                slideSelector: '.fslide',
-                sectionSelector: '.section',
-                normalScrollElements: '.select,.v-autocomplete__content, .submenu.dropdown-menu',
-                scrollOverflow: false,
-                scrollOverflowOptions: {
-                    scrollbars: false,
-                    mouseWheel: false,
-                    hideScrollbars: true,
-                    fadeScrollbars: true,
-                    disableMouse: true,
-                },
-                //recordHistory:false,
-
-
-                //events
-                afterLoad: function (origin, destination, direction) {
-                    //fullpage_api.init();
-
-                    skipPages(origin, destination, direction);
-                    $('body').on('click', 'a.logo_link', function () {
-                        fullpage_api.moveTo(1);
-                    })
-                }
-            },
-
+            links: [],
+            show: false
         }
-
-    },
-    mounted() {
-        if (this.year == 2022) this.months.map(function (item) {
-            if (item.value > 2) item.disabled = true;
-            return item;
-        })
-        // hide the overlay when everything has loaded
-        // you could choose some other event, e.g. if you're loading
-        // data asynchronously, you could wait until that process returns
-        setTimeout(() => {
-            this.overlay = false
-        }, 2500);
-        if (this.$route.query.stat == 1)
-            this.stat = true;
-        this.clusteredColumn();
-    },
-    watch: {
-        stat_type: function (v) {
-            if (v == 1) {
-                setTimeout(() => this.$refs.scripts.createRootColumnChart(), 100);
-                setTimeout(() => this.clusteredColumn(true), 100)
-            }
-            if (v == 2) {
-                setTimeout(() => this.$refs.scripts.createRootPieChart(), 100);
-                setTimeout(() => this.pieChart(true), 100)
-            }
-            if (v == 3) {
-                setTimeout(() => this.$refs.scripts.createRootMultipleValue(), 100);
-                setTimeout(() => this.multipleValue(true), 100)
-            }
-        },
-        year: function (v) {
-            if (this.year == (new Date).getYear()) {
-                if (this.month >= (new Date).getMonth()) this.month = 0;
-                this.months.map(function (item) {
-                    if (item.value >= (new Date).getMonth()) item.disabled = true;
-                    return item;
-                })
-            } else this.months.map(function (item) {
-                item.disabled = false;
-                return item;
-            })
-            if (this.stat_type == 1) {
-                this.clusteredColumn(true);
-            }
-            if (this.stat_type == 2) {
-                this.pieChart(true);
-            }
-            if (this.stat_type == 3) {
-                this.multipleValue(true);
-            }
-        },
-        month: function (v, old) {
-
-            if (this.stat_type == 1) {
-                this.clusteredColumn(true);
-            }
-            if (this.stat_type == 2) {
-                this.pieChart(true);
-            }
-            if (this.stat_type == 3) {
-                this.multipleValue(true);
-            }
-        }
-
-    },
-    created() {
-        if (this.$route.query.stat == 1)
-            this.stat = true;
-
-        // this.clusteredColumn();
-    },
-    methods: {
-        clusteredColumn(change = false) {
-
-            this.$refs.scripts.year = this.year;
-            this.$refs.scripts.month = this.month;
-            setTimeout(() => {
-                this.$refs.scripts.clusteredColumn()
-            }, 50);
-        },
-        pieChart(change = false) {
-            if (change) this.$refs.scripts.data = [
-                {
-                    "country": "Қорақалпоғистон Респ.",
-                    "import": 89,
-                    "export": 25
-                }, {
-                    "country": "Хоразм вилояти",
-                    "import": 54,
-                    "export": 39
-                }, {
-                    "country": "Бухоро вилояти",
-                    "import": 57,
-                    "export": 53
-                }, {
-                    "country": "Навоий вилояти",
-                    "import": 50,
-                    "export": 28
-                }, {
-                    "country": "Самарқанд вилояти",
-                    "import": 63,
-                    "export": 75
-                }, {
-                    "country": "Сурхондарё вилояти",
-                    "import": 90,
-                    "export": 57
-                }
-            ];
-            setTimeout(() => {
-                this.$refs.scripts.pieChart()
-            }, 50);
-        },
-        multipleValue(change = false) {
-            setTimeout(() => {
-                this.$refs.scripts.multipleValue()
-            }, 50);
-        }
-
 
     },
     components: {
-        index_scripts,
-        NewsInHome,
-        FrontCalendar,
         loadingBar,
+        MySnack: () => import('../views/dashboard/component/snack'),
+    },
+    methods: {
+        showProgress(show) {
+            this.show = show;
+        },
+        start() {
+            this.showProgress(true);
+            this.percent = 0;
 
-    }
+            _loadingInterval = setInterval(() => {
+                this.percent = this.percent + 1;
+            }, 500)
+        },
+        stop() {
+            clearInterval(_loadingInterval);
+            this.percent = 100;
 
-
-}
-
-function skipPages(origin, destination, direction) {
-    if (destination.index == 1) {
-        $('#fp-nav ul li span').css('background', '#fff');
-    } else $('#fp-nav ul li span').css('background', '#000')
-    if (origin.index === 0 && destination.index === 1 && pageloaded == 0) {
-        fullpage_api.moveTo('2', 2);
-    }
-    if (origin.index === 1 && destination.index === 0 && pageloaded == 1) {
-        fullpage_api.moveTo('1', 1);
-    }
-    if (destination.item.classList.contains('skip')) {
-        if (destination.index === 0 && pageloaded == 0) {
-            pageloaded = 1;
-            fullpage_api.moveTo(destination.index + 1);
+            setTimeout(() => {
+                this.showProgress(false);
+            }, 500);
         }
-    } else {
-        if (destination.index != 0 && pageloaded == 0) {
+    },
 
-            $('.hududiy.section').addClass('skip');
-            $('.hududiy.section').css("display", "none !important;");
-            fullpage_api.silentMoveTo(destination.index - 1);
-            pageloaded = pageloaded + 1;
+    watch: {
+        loading: function (val, oldVal) {
+            if (val) {
+                this.start();
+            } else {
+                this.stop();
+            }
         }
-    }
+    },
+    computed: {
+        ...mapState(['menu', 'loading'])
+    },
 }
-
-
 </script>
-
-
-<style scoped>
-.v-application {
-    font-family: "Montserrat", sans-serif;
+<style>
+html {
+    overflow: visible !important;
 }
 
-h1, h2, h3, h4, h5, h6 {
-    font-family: "Montserrat", sans-serif;
+.v-snack:not(.v-snack--absolute) {
+    top: 100px;
 }
 </style>

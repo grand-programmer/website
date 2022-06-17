@@ -1680,5 +1680,40 @@ a.openMenu1 {
     background: linear-gradient(to bottom right, #E0E0E0 0%, #BDBDBD 100%);
     color: #9e9e9e;
 }
+@media (max-width: 1000px) and ( display-mode: fullscreen) {
+/* every CSS goes here that you want
+to apply or alter in the fullscreen mode*/
+}
+@media (max-width: 1000px) {
+    .last_page_right{
+    display: none!important;
+    }
+    .section .card:nth-child(5){
+        display: none;!important;
+    }
+    .section .card:nth-child(6){
+        display: none;!important;
+    }
+    .section .card:nth-child(7){
+        display: none;!important;
+    }
+    .section .card:nth-child(8){
+        display: none;!important;
+    }
+    .section .card:nth-child(9){
+        display: none;!important;
+    }
+    .section .card:nth-child(10){
+        display: none;!important;
+    }
+    .news-content #yangi:nth-child(5){
+        display: none;!important;
+    }
+    .news-content #yangi:nth-child(6){
+        display: none;!important;
+    }
+
+}
+
 
 
