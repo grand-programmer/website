@@ -12,6 +12,8 @@
         <loading-bar></loading-bar>
         <full-page :options="options" ref="fullpage" id="fullpage" :skip-init="false">
             <v-hududiy></v-hududiy>
+
+
             <div class="section" id="section0">
 
                 <!--==========Logo area==========-->
@@ -376,66 +378,16 @@
 
                 <news-in-home></news-in-home>
             </div>
-            <div v-if="stat" class="section asosiy_korsatkichlari slide-charts">
-                <div class="slider2 ">
 
-                    <div class="chartslider-item11" height="800px">
-                        <div class="first_line">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="col-md-4">
-
-                                        <h2>Статистик маълумотлар</h2>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="chart1">Божхона чегараларидан ўтган автомобиллар сони (Вилоятлар
-                                            бўйича)
-                                        </div>
-                                        <div id="chart1" class="chart-item"></div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="chart2">Божхона чегараларидан ўтган автомобиллар сони (Вилоятлар
-                                            бўйича)
-                                        </div>
-                                        <div id="chart2" class="chart-item"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="second_line">
-                            <!-- <div id="chartslider-item1" class="chart-item"></div>-->
-                            <div class="second_line_title">
-                                <div class="chart12">Жорий йилдаги товар айланмаси</div>
-                                <div class="chart13">Жорий йилдаги экпорт ва импорти тўғрисида</div>
-                            </div>
-                            <div id="chart12" class="chart-item">
-                            </div>
-                            <div id="chart13" class="chart-item"></div>
-
-                        </div>
-                        <div class="third_line">
-                            <div class="third_line_title">
-                                <div class="chart12">Жорий йилдаги экспорти харитада</div>
-                                <div class="chart13">Вилоятлар бўйича жорий йилдаги экпорт ва импорти тўғрисида</div>
-                            </div>
-                            <div id="chart10" class="chart-item"></div>
-                            <div id="chart11" class="chart-item"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div v-else class="section asosiy_korsatkichlari2">
+            <div class="section asosiy_korsatkichlari2">
                 <div class="row content">
                     <div class="col-3">
                         <div class="stat_menu">
                             <h3> Божхона статистикаси</h3>
                             <ul>
-                                <li><a :class="(stat_type==1)?'active':''" href="#" @click="stat_type=1">Ўзбекистон
+                                <li><a class="active" href="#" @click="stat_type=1">Ўзбекистон
                                     Республикаси товарлар импорти ва экспорти ҳудудлар кесимида</a></li>
-                                <li><a :class="(stat_type==2)?'active':''" href="#" @click="stat_type=2">Божхона
-                                    чегараларидан ўтган автомобиллар сони </a></li>
-                                <li><a :class="(stat_type==3)?'active':''" href="#" @click="stat_type=3">Ўзбекистон
-                                    Республикасида кунлик товарлар импорти ва экспорти</a></li>
+
                                 <!--                                <li><a :class="(stat_type==4)?'active':''" href="#" @click="stat_type=4">Ўзбекистон
                                                                     Республикасида товарлар импорти ва экспорти</a></li>
                                                                 <li><a :class="(stat_type==5)?'active':''" href="#" @click="stat_type=5">Ўзбекистон
@@ -447,7 +399,7 @@
                             </a>
                         </div>
                     </div>
-                    <div class="col-9" v-if="stat_type==1">
+                    <div class="col-9" id="reyt">
                         <h3>Ўзбекистон Республикаси товарлар импорти ва экспорти ҳудудлар кесимида</h3>
                         <div id="columnchart1" ref="clusteredColumn" class="chart"></div>
                         <div class="filter row">
@@ -458,57 +410,6 @@
                                     v-model="month"
                                     :items="months"
                                     auto-select-first
-                                ></v-autocomplete>
-                            </v-col>
-                            <v-col cols="3">
-                                <v-autocomplete
-                                    ref="auto1"
-                                    label="Йиллар бўйича"
-                                    v-model="year"
-                                    :items="years"
-                                    hide-selected
-                                    auto-select-first
-                                ></v-autocomplete>
-                            </v-col>
-                        </div>
-
-                    </div>
-                    <div class="col-9" v-if="stat_type==2">
-                        <h3>Ўзбекистон Республикаси кунлик товарлар импорти ва экспорти</h3>
-                        <div id="columnchart2" class="chart"></div>
-                        <div class="filter row">
-                            <v-col cols="3">
-                                <v-autocomplete
-                                    ref="auto"
-                                    label="Ойлар бўйича"
-                                    v-model="month"
-                                    :items="months"
-                                    auto-select-first
-                                ></v-autocomplete>
-                            </v-col>
-                            <v-col cols="3">
-                                <v-autocomplete
-                                    ref="auto1"
-                                    label="Йиллар бўйича"
-                                    v-model="year"
-                                    :items="years"
-                                    hide-selected
-                                    auto-select-first
-                                ></v-autocomplete>
-                            </v-col>
-                        </div>
-
-                    </div>
-                    <div class="col-9" v-if="stat_type==3">
-                        <h3>Ўзбекистон Республикаси кунлик товарлар импорти ва экспорти</h3>
-                        <div id="columnchart3" class="chart"></div>
-                        <div class="filter row">
-                            <v-col cols="3">
-                                <v-autocomplete
-                                    ref="auto"
-                                    label="Ойлар бўйича"
-                                    v-model="month"
-                                    :items="months"
                                 ></v-autocomplete>
                             </v-col>
                             <v-col cols="3">
@@ -705,8 +606,6 @@
 
                     </div>
                 </div>
-
-
                 <!--==========Footer area==========-->
                 <div class="footer_link"></div>
                 <footer class="footer_area">
@@ -776,8 +675,8 @@
                                             <ul class="f_widget_social">
                                                 <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
                                                 <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                                <li><a href="#"><i class="fab fa-telegram-plane"></i></a></li>
                                                 <li><a href="#"><i class="fab fa-google-plus-g"></i></a></li>
-                                                <li><a href="#"><i class="fab fa-pinterest-p"></i></a></li>
                                                 <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
                                             </ul>
                                         </div>
@@ -791,9 +690,10 @@
                 <!--==========End Footer area==========-->
             </div>
 
+
         </full-page>
         <index_scripts ref="scripts"></index_scripts>
-        <v-mobile></v-mobile>
+        <!--     <mobile></mobile>-->
 
 
     </div>
@@ -805,6 +705,7 @@ import index_scripts from '../components/homepage/scripts';
 import NewsInHome from './homepage/news';
 import FrontCalendar from './homepage/calendar';
 import loadingBar from "../components/base/loadingbar.vue";
+import mobile from "./mobile";
 
 
 export default {
@@ -1037,6 +938,7 @@ export default {
         NewsInHome,
         FrontCalendar,
         loadingBar,
+        mobile,
 
     }
 
@@ -1081,4 +983,5 @@ function skipPages(origin, destination, direction) {
 h1, h2, h3, h4, h5, h6 {
     font-family: "Montserrat", sans-serif;
 }
+
 </style>

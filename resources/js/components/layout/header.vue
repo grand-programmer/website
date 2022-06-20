@@ -437,6 +437,7 @@ $(function () {
     }
 
     $("#menu-wrapper").click(function (event) {
+        console.log('sdfsdf')
         event.stopPropagation();
         $("#hamburger-menu").toggleClass("open");
         $("#menu-container .menu-list").toggleClass("active");

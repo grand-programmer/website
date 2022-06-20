@@ -303,9 +303,9 @@
         font-size: 22px;
     }
 
-    .slider_inner {
-        height: 400px !important;
-    }
+    /*.slider_inner {*/
+    /*    height: 400px !important;*/
+    /*}*/
 
     .slider_inner.main_slider_middle .slider_text {
         top: 70px;
@@ -1384,7 +1384,7 @@ a.openMenu1 {
 
 }
 
-.section  .container-fluid .card {
+.section .container-fluid .card {
 
     position: relative;
     width: 330px;
@@ -1431,7 +1431,7 @@ a.openMenu1 {
 
 }
 
-.section  .container-fluid .card .content .cardContent h3 {
+.section .container-fluid .card .content .cardContent h3 {
     color: #000;
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -1441,6 +1441,7 @@ a.openMenu1 {
     margin: 20px 0 10px;
     line-height: 1.1em;
 }
+
 .section .main-wrapper .container-fluid .card .content .cardContent h3 {
     color: #fff;
     text-transform: uppercase;
@@ -1479,10 +1480,12 @@ a.openMenu1 {
     font-size: 14px;
     color: #000;
 }
+
 .section .main-wrapper .container-fluid .card .sci li a {
     font-size: 14px;
     color: #fff;
 }
+
 .section .container-fluid .card:hover .content {
     opacity: 1;
     transform: translateY(-30px);
@@ -1526,11 +1529,12 @@ a.openMenu1 {
 
 
 @media (min-width: 1446px) {
-    #slid .slider_text  {
+    #slid .slider_text {
         display: none !important;
     }
 
 }
+
 .main-wrapper {
     font-size: 13px;
     line-height: normal;
@@ -1541,12 +1545,14 @@ a.openMenu1 {
     position: absolute;
     z-index: 9999999;
 }
+
 @media (max-width: 1445px) {
     .main-wrapper {
         display: none !important;
     }
 
 }
+
 .main-wrapper a {
     padding: 32px;
     display: inline-block;
@@ -1680,38 +1686,64 @@ a.openMenu1 {
     background: linear-gradient(to bottom right, #E0E0E0 0%, #BDBDBD 100%);
     color: #9e9e9e;
 }
+
 @media (max-width: 1000px) and ( display-mode: fullscreen) {
-/* every CSS goes here that you want
-to apply or alter in the fullscreen mode*/
+    /* every CSS goes here that you want
+    to apply or alter in the fullscreen mode*/
 }
+
 @media (max-width: 1000px) {
-    .last_page_right{
-    display: none!important;
+    #reyt {
+        display: none !important;
     }
-    .section .card:nth-child(5){
-        display: none;!important;
+    .reyt {
+        display: none !important;
     }
-    .section .card:nth-child(6){
-        display: none;!important;
+
+    .last_page_right {
+        display: none !important;
     }
-    .section .card:nth-child(7){
-        display: none;!important;
+
+    .section .card:nth-child(5) {
+        display: none;
+    !important;
     }
-    .section .card:nth-child(8){
-        display: none;!important;
+
+    .section .card:nth-child(6) {
+        display: none;
+    !important;
     }
-    .section .card:nth-child(9){
-        display: none;!important;
+
+    .section .card:nth-child(7) {
+        display: none;
+    !important;
     }
-    .section .card:nth-child(10){
-        display: none;!important;
+
+    .section .card:nth-child(8) {
+        display: none;
+    !important;
     }
-    .news-content #yangi:nth-child(5){
-        display: none;!important;
+
+    .section .card:nth-child(9) {
+        display: none;
+    !important;
     }
-    .news-content #yangi:nth-child(6){
-        display: none;!important;
+
+    .section .card:nth-child(10) {
+        display: none;
+    !important;
     }
+
+    .news-content #yangi:nth-child(5) {
+        display: none;
+    !important;
+    }
+
+    .news-content #yangi:nth-child(6) {
+        display: none;
+    !important;
+    }
+
 
 }
 
