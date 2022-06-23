@@ -33,60 +33,79 @@
                                             <div class="dialog_header">
                                                 <img width="40" height="40" src="/img/gtk_image.png">
                                                 <p style="float: left">Божхона органларига <span>мурожаат</span></p>
-                                                <qrcode value="Hello, World!" :options="{ width: 80 }"></qrcode>
+                                                <qrcode :value="baseURL+'/'+appeal.appNum+'/'+appeal.password" :options="{ width: 80 }"></qrcode>
                                             </div>
                                             <div class="dialog_content">
 
                                                 <table>
                                                     <tr>
                                                         <td>Мурожаат тартиб рақами</td>
-                                                        <td>{{ appeal.id }}</td>
+                                                        <td>{{ appeal.appNum }}</td>
                                                     </tr>
-                                                    <tr>
+                                                    <tr v-if="typeof appeal.password !=='undefined'">
                                                         <td>Мурожаат текшириш коди</td>
-                                                        <td>{{ appeal.number }}</td>
+                                                        <td>{{ appeal.password }}</td>
                                                     </tr>
-                                                    <tr>
+                                                    <tr  v-if="typeof appeal.insTime !=='undefined'">
                                                         <td>Мурожаат тушган сана ва вақт</td>
-                                                        <td>{{ appeal.created_at }}</td>
+                                                        <td>{{ appeal.insTime }}</td>
                                                     </tr>
                                                     <!--                                    <tr>
                                                                                             <td>Ижрочига келиб тушган сана ва вақт</td>
                                                                                             <td>2313</td>
                                                                                         </tr>-->
-                                                    <tr>
+                                                    <tr v-if="typeof appeal.lastName !=='undefined' || typeof appeal.surName !=='undefined' || typeof appeal.firstName !=='undefined'">
                                                         <td>Мурожаат муаллифи Ф.И.О</td>
-                                                        <td>{{ appeal.firstname }} {{ appeal.name }} {{ appeal.lastname }}</td>
+                                                        <td>{{ appeal.firstName?appeal.firstName:'' }} {{ appeal.lastName?appeal.lastName:'' }} {{ appeal.surName?appeal.surName:'' }}</td>
                                                     </tr>
-                                                    <tr>
+                                                    <tr v-if="typeof appeal.address !=='undefined'">
                                                         <td>Жисмоний ёки юридик шахснинг манзили</td>
                                                         <td>{{ appeal.address }}</td>
                                                     </tr>
-                                                    <tr>
+                                                    <tr v-if="typeof appeal.birthDate !=='undefined'">
                                                         <td>Туғилган йили</td>
-                                                        <td>{{ appeal.date_birth }}</td>
+                                                        <td>{{ appeal.birthDate }}</td>
                                                     </tr>
-                                                    <tr>
+                                                    <tr v-if="typeof appeal.profession !=='undefined'">
+                                                        <td>Иш жойи</td>
+                                                        <td>{{ appeal.profession }}</td>
+                                                    </tr>
+                                                    <tr v-if="typeof appeal.position !=='undefined' && appeal.position ==='01' && typeof appeal.positionNm !=='undefined'">
                                                         <td>Юридик шахс номи</td>
-                                                        <td>{{ appeal.yur_shaxs }}</td>
+                                                        <td>{{ appeal.positionNm }}</td>
                                                     </tr>
-                                                    <tr>
+                                                    <tr v-if="typeof appeal.phoneNumber !=='undefined'">
                                                         <td>Телефон рақами</td>
-                                                        <td>{{ appeal.phone }}</td>
+                                                        <td>{{ appeal.phoneNumber }}</td>
                                                     </tr>
-                                                    <tr>
+                                                    <tr v-if="typeof appeal.email !=='undefined'">
                                                         <td>Электрон манзили</td>
                                                         <td>{{ appeal.email }}</td>
                                                     </tr>
+
+                                                    <tr  v-if="typeof appeal.fileQuestion !=='undefined' && appeal.fileQuestion !==null && appeal.fileQuestion.data !==null && typeof appeal.fileQuestion.data !=='undefined'">
+                                                        <td>Илова қилинган файл</td>
+                                                        <td><a :href="'data:'+appeal.fileQuestion.file_format +';base64,'+ appeal.fileQuestion.data" :download="appeal.fileQuestion.fileNameEx">Юклаб олиш!</a></td>
+                                                    </tr>
+                                                    <tr v-if="typeof appeal.status !=='undefined' && typeof appeal.statusNm !=='undefined'">
+                                                        <td>Ариза ҳолати</td>
+                                                        <td>{{ appeal.statusNm }}</td>
+                                                    </tr>
+                                                    <tr  v-if="typeof appeal.fileAnswer !=='undefined' && appeal.fileAnswer !==null && appeal.fileAnswer.data !==null && typeof appeal.fileAnswer.data !=='undefined'">
+                                                        <td>Жавоб хати</td>
+                                                        <td><a :href="'data:'+appeal.fileAnswer.file_format +';base64,'+ appeal.fileAnswer.data" :download="appeal.fileAnswer.fileNameEx">Юклаб олиш!</a></td>
+                                                    </tr>
                                                 </table>
-                                                <table>
+                                                <table v-if="typeof appeal.messageBody !=='undefined'">
                                                     <tr>
                                                         <td>
                                                             <p>Мурожаат матни </p>
-                                                            <p>{{ appeal.text }}</p>
+                                                            <p>{{ appeal.messageBody }}</p>
                                                         </td>
                                                     </tr>
                                                 </table>
+
+
 
                                             </div>
                                             <div class="dialog_footer">
@@ -103,7 +122,7 @@
                                     :show-layout="false"
                                     :float-layout="true"
                                     :enable-download="true"
-                                    :preview-modal="true"
+                                    :preview-modal="false"
                                     filename="murojaat"
                                     :pdf-quality="2"
                                     pdf-format="a4"
@@ -121,61 +140,79 @@
                                                     <div class="dialog_header">
                                                         <img width="40" height="40" src="/img/gtk_image.png">
                                                         <p>Божхона органларига <span>мурожаат</span></p>
-                                                        <qrcode value="Hello, World!" :options="{ width: 80 }"></qrcode>
+                                                        <qrcode :value="baseURL+'/'+appeal.appNum+'/'+appeal.password" :options="{ width: 80 }"></qrcode>
                                                     </div>
                                                     <div class="dialog_content">
+
 
                                                         <table>
                                                             <tr>
                                                                 <td>Мурожаат тартиб рақами</td>
-                                                                <td>{{ appeal.id }}</td>
+                                                                <td>{{ appeal.appNum }}</td>
                                                             </tr>
-                                                            <tr>
+                                                            <tr v-if="typeof appeal.password !=='undefined'">
                                                                 <td>Мурожаат текшириш коди</td>
-                                                                <td>{{ appeal.number }}</td>
+                                                                <td>{{ appeal.password }}</td>
                                                             </tr>
-
-                                                            <tr>
+                                                            <tr  v-if="typeof appeal.insTime !=='undefined'">
                                                                 <td>Мурожаат тушган сана ва вақт</td>
-                                                                <td>{{ appeal.created_at }}</td>
+                                                                <td>{{ appeal.insTime }}</td>
                                                             </tr>
                                                             <!--                                    <tr>
                                                                                                     <td>Ижрочига келиб тушган сана ва вақт</td>
                                                                                                     <td>2313</td>
                                                                                                 </tr>-->
-                                                            <tr>
+                                                            <tr v-if="typeof appeal.lastName !=='undefined' || typeof appeal.surName !=='undefined' || typeof appeal.firstName !=='undefined'">
                                                                 <td>Мурожаат муаллифи Ф.И.О</td>
-                                                                <td>{{ appeal.firstname }} {{ appeal.name }} {{ appeal.lastname }}</td>
+                                                                <td>{{ appeal.firstName?appeal.firstName:'' }} {{ appeal.lastName?appeal.lastName:'' }} {{ appeal.surName?appeal.surName:'' }}</td>
                                                             </tr>
-                                                            <tr>
+                                                            <tr v-if="typeof appeal.address !=='undefined'">
                                                                 <td>Жисмоний ёки юридик шахснинг манзили</td>
                                                                 <td>{{ appeal.address }}</td>
                                                             </tr>
-                                                            <tr>
+                                                            <tr v-if="typeof appeal.birthDate !=='undefined'">
                                                                 <td>Туғилган йили</td>
-                                                                <td>{{ appeal.date_birth }}</td>
+                                                                <td>{{ appeal.birthDate }}</td>
                                                             </tr>
-                                                            <tr>
+                                                            <tr v-if="typeof appeal.profession !=='undefined'">
+                                                                <td>Иш жойи</td>
+                                                                <td>{{ appeal.profession }}</td>
+                                                            </tr>
+                                                            <tr v-if="typeof appeal.position !=='undefined' && appeal.position ==='01' && typeof appeal.positionNm !=='undefined'">
                                                                 <td>Юридик шахс номи</td>
-                                                                <td>{{ appeal.yur_shaxs }}</td>
+                                                                <td>{{ appeal.positionNm }}</td>
                                                             </tr>
-                                                            <tr>
+                                                            <tr v-if="typeof appeal.phoneNumber !=='undefined'">
                                                                 <td>Телефон рақами</td>
-                                                                <td>{{ appeal.phone }}</td>
+                                                                <td>{{ appeal.phoneNumber }}</td>
                                                             </tr>
-                                                            <tr>
+                                                            <tr v-if="typeof appeal.email !=='undefined'">
                                                                 <td>Электрон манзили</td>
                                                                 <td>{{ appeal.email }}</td>
                                                             </tr>
+<!--
+                                                            <tr  v-if="typeof appeal.fileQuestion !=='undefined' && appeal.fileQuestion !==null && appeal.fileQuestion.data !==null && typeof appeal.fileQuestion.data !=='undefined'">
+                                                                <td>Илова қилинган файл</td>
+                                                                <td><a :href="'data:'+appeal.fileQuestion.file_format +';base64,'+ appeal.fileQuestion.data" :download="appeal.fileQuestion.fileNameEx">Юклаб олиш!</a></td>
+                                                            </tr>-->
+                                                            <tr v-if="typeof appeal.status !=='undefined' && typeof appeal.statusNm !=='undefined'">
+                                                                <td>Ариза ҳолати</td>
+                                                                <td>{{ appeal.statusNm }}</td>
+                                                            </tr><!--
+                                                            <tr  v-if="typeof appeal.fileAnswer !=='undefined' && appeal.fileAnswer !==null && appeal.fileAnswer.data !==null && typeof appeal.fileAnswer.data !=='undefined'">
+                                                                <td>Жавоб хати</td>
+                                                                <td><a :href="'data:'+appeal.fileAnswer.file_format +';base64,'+ appeal.fileAnswer.data" :download="appeal.fileAnswer.fileNameEx">Юклаб олиш!</a></td>
+                                                            </tr>-->
                                                         </table>
-                                                        <table>
+                                                        <table v-if="typeof appeal.messageBody !=='undefined'">
                                                             <tr>
                                                                 <td>
                                                                     <p>Мурожаат матни </p>
-                                                                    <p>{{ appeal.text }}</p>
+                                                                    <p>{{ appeal.messageBody }}</p>
                                                                 </td>
                                                             </tr>
                                                         </table>
+
 
                                                     </div>
                                                     <!--                    <script type="application/javascript" src='/js/jquery.js'/>
@@ -198,7 +235,7 @@
                                     <div class="form-field">
                                         <label >Текшириш коди</label> <v-text-field name="appeal_code" v-model="submit_appeal.appeal_code">
                                     </v-text-field></div>
-                                    <v-btn color="primary" @click="submit()">
+                                    <v-btn color="primary" @click="submit()" :loading="buttonLoading">
                                         Текшириш
                                     </v-btn>
                                 </form>
@@ -223,13 +260,43 @@
                                         <v-text-field v-model="passport.number"></v-text-field>
                                     </div>
                                     <div class="form-field">
-                                        <label>Туғилган сана</label>
-                                        <v-text-field v-model="passport.data_birth"></v-text-field>
+                                        <label>Туғилган сана</label><!--
+                                        <ValidationProvider name="Туғилган сана" rules="required"
+                                                            v-slot="{ errors }">-->
+                                            <v-menu
+                                                ref="menu1"
+                                                v-model="menu"
+                                                :close-on-content-click="false"
+                                                transition="scale-transition"
+                                                offset-y
+                                                max-width="290px"
+                                                min-width="auto"
+                                            >
+                                                <template v-slot:activator="{ on, attrs }">
+                                                    <v-text-field
+                                                        v-model="passport.date"
+                                                        persistent-hint
+                                                        prepend-icon="mdi-calendar"
+                                                        v-bind="attrs"
+                                                        @blur="date = parseDate(passport.date)"
+                                                        v-on="on"
+                                                    ></v-text-field>
+                                                </template>
+                                                <v-date-picker
+                                                    v-model="date"
+                                                    no-title
+                                                    @input="menu = false"
+                                                ></v-date-picker>
+                                            </v-menu>
+
+<!--
+                                            <span>{{ errors[0] }}</span>
+                                        </ValidationProvider>-->
                                     </div>
                                     <span class="izoh">
                                         <sup>*</sup>Шахсни тасдиқловчи ҳужжат сифатида фуқаролик паспорти, ID-карта ва хорижга чиқиш паспортидан фойдаланиш мумкин
                                     </span>
-                                    <v-btn color="primary" to="/services/appeals/create">
+                                    <v-btn color="primary" :loading="yuborishLoading" @click="createAppeal">
                                         Мурожаат юбориш
                                     </v-btn>
                                 </v-form>
@@ -289,8 +356,10 @@ export default {
     },
     data() {
         return {
-            baseURL: process.env.MIX_BASE_URL + "/services/appeals/",
+            baseURL: window.location.href,
             dialog: false,
+            date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
+            menu: false,
             alert: {
                 value: false,
                 alert_type: 'warning',
@@ -303,6 +372,7 @@ export default {
             passport:{
                 seriya:'',
                 number:'',
+                date:this.formatDate((new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10)),
             },
             appeal_types: [
                 "Ариза",
@@ -341,11 +411,42 @@ export default {
                 text: '',
                 number: '',
             },
+            buttonLoading:false,
+            yuborishLoading:false
         }
     },
     methods: {
         generateReport() {
             this.$refs.html2Pdf.generatePdf()
+        },
+        createAppeal(){
+            this.yuborishLoading=true;
+            this.getPasportData()
+
+
+
+        },
+        async getPasportData(){
+            const _this=this;
+            //let md=md5( this.passport.seriya + this.passport.number + "(:" + this.passport.date)
+            await axios.get('/api/v1/ex_api/getPData',{params: {
+                    pasnum: _this.passport.seriya + _this.passport.number,
+                    //key:md,
+                    pasdata: _this.passport.date,
+                }
+
+            }).then(function (response){
+                _this.yuborishLoading=false;
+                if(typeof response.data.data.birth_date !=='undefined')
+                    _this.$router.push({path:'/services/appeals/create',query:{pasnum:_this.passport.seriya + _this.passport.number,pasdate: _this.passport.date }});
+            })
+            this.yuborishLoading=false;
+        },
+        parseDate(date) {
+            if (!date) return null
+
+            const [ day,month, year] = date.split('.')
+            return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`
         },
         checkRequest() {
             if (this.$route.query.appeal_code && this.$route.query.appeal_id) {
@@ -356,6 +457,7 @@ export default {
             }
         },
         submit: function (event) {
+            this.buttonLoading=true;
             this.checkData({
                 appeal_id: this.$refs.form.appeal_id.value,
                 appeal_code: this.$refs.form.appeal_code.value
@@ -365,18 +467,46 @@ export default {
             this.$refs.form.reset();
         },
         checkData(appeal) {
-            api.checkAppeal({
-                appeal_id: appeal.appeal_id,
-                appeal_code: appeal.appeal_code,
+            const _this=this;
+            axios.post("/api/v1/ex_api/appeal-check", {
+                appNum: appeal.appeal_id,
+                password: appeal.appeal_code,
             }).then((response) => {
-                this.appeal = response.data;
-                this.dialog = true;
+                if(typeof response.data.data.appeal!=='undefined'){
+
+                    _this.buttonLoading=false;
+                    _this.dialog = true;
+
+                    _this.appeal.appNum=appeal.appeal_id;
+                    _this.appeal.password=appeal.appeal_code;
+                    _this.appeal.insTime=(typeof response.data.data.appeal.insTime!='undefined')?response.data.data.appeal.insTime:null;
+                    _this.appeal.firstName=(typeof response.data.data.appeal.firstName!='undefined')?response.data.data.appeal.firstName:null;
+                    _this.appeal.surName=(typeof response.data.data.appeal.surName!='undefined')?response.data.data.appeal.surName:null;
+                    _this.appeal.lastName=(typeof response.data.data.appeal.lastName!='undefined')?response.data.data.appeal.lastName:null;
+                    _this.appeal.address=(typeof response.data.data.appeal.address!='undefined')?response.data.data.appeal.address:null;
+                    _this.appeal.birthDate=(typeof response.data.data.appeal.birthDate!='undefined')?response.data.data.appeal.birthDate:null;
+                    _this.appeal.position=(typeof response.data.data.appeal.position!='undefined')?response.data.data.appeal.position:null;
+                    _this.appeal.positionNm=(typeof response.data.data.appeal.positionNm!='undefined')?response.data.data.appeal.positionNm:null;
+                    _this.appeal.phoneNumber=(typeof response.data.data.appeal.phoneNumber!='undefined')?response.data.data.appeal.phoneNumber:null;
+                    _this.appeal.email=(typeof response.data.data.appeal.email!='undefined')?response.data.data.appeal.email:null;
+                    _this.appeal.profession=(typeof response.data.data.appeal.profession!='undefined')?response.data.data.appeal.profession:null;
+                    _this.appeal.messageBody=(typeof response.data.data.appeal.messageBody!='undefined')?response.data.data.appeal.messageBody:null;
+                    _this.appeal.locationNm=(typeof response.data.data.appeal.locationNm!='undefined')?response.data.data.appeal.locationNm:null;
+                    _this.appeal.status=(typeof response.data.data.appeal.status!='undefined')?response.data.data.appeal.status:null;
+                    _this.appeal.statusNm=(typeof response.data.data.appeal.statusNm!='undefined')?response.data.data.appeal.statusNm:null;
+                    _this.appeal.appealAnswer=(typeof response.data.data.appealAnswer!='undefined')?response.data.data.appealAnswer:null;
+                    _this.appeal.fileAnswer=(typeof response.data.data.fileAnswer!='undefined')?response.data.data.fileAnswer:null;
+                    _this.appeal.fileQuestion=(typeof response.data.data.fileQuestion!='undefined')?response.data.data.fileQuestion:null;
+                }else {
+                    this.$toast.error("Сервердан маълумот олишда хатолик юз берди!")
+                }
             }).catch((error) => {
-                console.log(error);
+                _this.buttonLoading=false;
                 this.dialog = false;
-                this.alert.value = true;
+                this.$toast.error("Маълумот топилмади!");
+/*                this.alert.value = true;
                 this.alert.alert_type = 'error';
-                this.alert.alert_text = "Маълумот топилмади!";
+                this.alert.alert_text = "Маълумот топилмади!";*/
             });
             if (this.$route.query.appeal_id != null) {
                 this.$router.push({query: null});
@@ -387,8 +517,21 @@ export default {
                 }
             }, 4000)
         },
+        formatDate(date) {
+            if (!date) return null
+
+            const [year, month, day] = date.split('-')
+            return `${day}.${month}.${year}`
+        },
     },
+    watch:{
+        date(val) {
+            this.passport.date = this.formatDate(this.date)
+        },
+    },
+
     created() {
+
         this.checkRequest();
     }
 

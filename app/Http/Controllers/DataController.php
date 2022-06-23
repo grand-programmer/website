@@ -18,7 +18,7 @@ class DataController extends Controller
                     Left Join Unit u1 On tnved.unit1=u1.id
                     Left Join Unit u2 On tnved.unit2=u2.id
                     WHERE tnved.FINISHDATE IS NULL and tnved.ID LIKE '" . $data['code'] . "%'");
-            $data = collect($returnData)->transform(function ($item) {
+            $returnData = collect($returnData)->transform(function ($item) {
                 $item->name = str_replace("", "-", $item->name);
                 return $item;
             });

@@ -10,7 +10,7 @@
     >
         <span>{{ title }}</span>
         <input type="hidden" v-model="modelValue"/>
-        <v-autocomplete :items="options" v-model="modelValue" multiple ref="myinputfield"
+        <v-autocomplete :items="options" v-model="modelValue" :multiple="multiple" ref="myinputfield"
                         v-if="edit" v-click-outside="fieldBlur">
         </v-autocomplete>
         <span v-else @click="edit=true">
@@ -34,7 +34,7 @@
         tag="div"
         ref="field1" v-else
     >
-        <span>{{ title}}</span>
+        <span>{{ title }}</span>
         <input type="hidden" v-model="modelValue"/>
         <v-text-field v-model="modelValue" ref="myinputfield"
                       v-click-outside="fieldBlur"
@@ -47,7 +47,7 @@
         <v-text-field v-model="modelValue" ref="myinputfield" v-click-outside="fieldBlur"
                       v-if="edit && type!=='phone'" :type="type">
         </v-text-field>
-        <span @click="valueClick" v-if="!edit">{{ modelValue?modelValue:'-' }}</span>
+        <span @click="valueClick" v-if="!edit">{{ modelValue ? modelValue : '-' }}</span>
         <span class="red--text">{{ errors[0] }}</span>
     </ValidationProvider>
 </template>
@@ -95,6 +95,10 @@ export default {
             type: String,
             default: "text",
         },
+        multiple: {
+            type: Boolean,
+            default: true,
+        },
         fieldType: {
             type: String,
             default: "text",
@@ -116,9 +120,9 @@ export default {
                 this.edit = false;
             } else this.edit = true;
         },
-       async valueClick(){
-            this.edit=true;
-           this.$nextTick(() => this.$refs.myinputfield.focus())
+        async valueClick() {
+            this.edit = true;
+            this.$nextTick(() => this.$refs.myinputfield.focus())
         }
     },
     computed: {
@@ -136,9 +140,13 @@ export default {
             let myapp = this;
             const languageValues = [];
             myapp.options.forEach(function (optionItem) {
-                myapp.modelValue.forEach(function (value) {
-                    if (optionItem.value === value) languageValues.push(optionItem.text);
-                })
+                if (Array.isArray(myapp.modelValue))
+                    myapp.modelValue.forEach(function (value) {
+                        if (optionItem.value === value) languageValues.push(optionItem.text);
+                    })
+                else {
+                    if (optionItem.value === myapp.modelValue) languageValues.push(optionItem.text);
+                }
 
             })
             return languageValues;

@@ -50,17 +50,17 @@
                         >
                             Товар тўғрисида маълумотлар
                         </v-stepper-step>
-<!--
+                        <!--
 
-                        <v-divider></v-divider>
+                                                <v-divider></v-divider>
 
-                        <v-stepper-step
-                            step="4"
-                            @click="goStep(4)"
-                            :complete="isCompleted(4)"
-                        >
-                            Ариза юбориш
-                        </v-stepper-step>-->
+                                                <v-stepper-step
+                                                    step="4"
+                                                    @click="goStep(4)"
+                                                    :complete="isCompleted(4)"
+                                                >
+                                                    Ариза юбориш
+                                                </v-stepper-step>-->
                     </v-stepper-header>
 
                     <v-stepper-items>
@@ -68,7 +68,9 @@
                             <v-card
                                 class="mb-12"
                             >
-                                <div class="row position-absolute yoriqnoma-text"><a href="/storage/files/dastlabki-user.pptx" > Ариза тўлдириш бўйича йўриқмани юклаб олинг!
+                                <div class="row position-absolute yoriqnoma-text"><a
+                                    href="/storage/files/dastlabki-user-qaytarilgan.pptx"> Ариза тўлдириш бўйича
+                                    йўриқмани юклаб олинг!
                                 </a></div>
                                 <ValidationObserver v-slot="{ invalid }" ref="create_customs_person_value">
                                     <v-row>
@@ -91,10 +93,10 @@
                                                                                         >-->
 
 
-                                            <v-btn color="primary" v-if="person.type===1">
+                                            <v-btn color="primary" v-if="person.type==='01'">
                                                 Жисмоний шахс
                                             </v-btn>
-                                            <v-btn color="primary" v-if="person.type===0">
+                                            <v-btn color="primary" v-if="person.type==='02'">
                                                 Юридик шахс
                                             </v-btn>
                                             <!--
@@ -104,7 +106,7 @@
                                         </v-col>
                                     </v-row>
                                     <v-row class="person_data">
-                                        <v-col cols="6" v-if="person.type===1">
+                                        <v-col cols="6" v-if="person.type==='01'">
                                             <ValidationProvider name="ЖШШИР" rules="required|digits:14"
                                                                 v-slot="{ errors }">
                                                 <v-text-field
@@ -130,6 +132,7 @@
                                                     :counter="200"
                                                     label="Ташкилот номи"
                                                     required
+                                                    disabled
                                                     hint="Юридик шахснинг тўлиқ номи"
                                                     persistent-placeholder
                                                 >
@@ -149,7 +152,7 @@
                                                     label="СТИР"
                                                     type="number"
                                                     required
-                                                    :disabled="(person.tin!==null && (person.tin).toString().length===9)"
+                                                    disabled
                                                     hint="Солиқ тўловчининг идентификацион рақами"
                                                     persistent-hint
                                                 >
@@ -179,7 +182,7 @@
 
                                         </v-col>
 
-                                        <v-col cols="6" v-if="person.type==='01'">
+                                        <v-col cols="6" v-if="person.type==='02'">
                                             <ValidationProvider :slim="(person.type!=='01')" v-if="person.type==='02'"
                                                                 name="Лавозими" rules="required"
                                                                 v-slot="{ errors }">
@@ -187,6 +190,7 @@
                                                     v-model="person.position"
                                                     :counter="200"
                                                     required
+                                                    disabled
                                                     hint="Аризачининг ташкилотдаги лавозими"
                                                     persistent-placeholder
                                                 >
@@ -203,7 +207,7 @@
                                                     v-model="person.perAdr"
                                                     :counter="200"
                                                     required
-                                                    :hint="person.type==1?'Аризачининг манзили':'Юридик шахснинг манзили'"
+                                                    :hint="person.type==='01'?'Аризачининг манзили':'Юридик шахснинг манзили'"
                                                     persistent-placeholder
                                                 >
                                                     <template v-slot:label>Манзили <sup>*</sup></template>
@@ -218,7 +222,7 @@
                                                 <v-autocomplete
                                                     v-model="person.region"
 
-                                                    required
+                                                    disabled
                                                     hint="Ҳудудий божхона бошқармаси жойлашган ҳудуд"
                                                     :items="regions"
                                                     persistent-hint
@@ -236,7 +240,7 @@
                                                     v-model="person.phone"
                                                     label="Телефон рақами"
                                                     required
-                                                    v-mask="'+998 ## ### ## ##'"
+                                                    v-mask="'+998 ## ## ## ##'"
                                                     hint="Аризачининг телефон рақами"
                                                     persistent-placeholder
                                                 >
@@ -270,6 +274,14 @@
                                 </ValidationObserver>
                                 <v-row class="row mb-3 position-absolute bottom-0 end-0">
                                     <v-col class="d-flex tab_action_buttons">
+
+                                        <v-btn text style="width: 240px" color="warning"
+                                               @click="dialog.openDialogComment=true"
+                                        >
+                                            <v-icon>mdi-comment-alert</v-icon>
+                                            &nbsp; Инспектор хабари
+                                        </v-btn>
+
                                         <v-btn text
                                                @click="prevStep"
                                         >
@@ -287,10 +299,9 @@
 
                                     </v-col>
                                 </v-row>
-                                <v-row class="bottom-required-info">
-                                    <i style="font-size: 12px;"><sub
-                                    style="font-size: 20px">*</sub> - майдонлари албатта тўлдирилиши шарт!
-                                </i>
+                                <v-row class="bottom-required-info"><i style="font-size: 12px;"><sub
+                                    style="font-size: 20px">*</sub> - майдонлари албатта тўлдирилиши шарт!</i>
+
 
                                 </v-row>
 
@@ -303,9 +314,10 @@
                             <v-card
                                 class="mb-12 "
                             >
-                                <div class="row position-absolute yoriqnoma-text"><a href="/storage/files/dastlabki-user.pptx" > Ариза тўлдириш бўйича йўриқмани юклаб олинг!
+                                <div class="row position-absolute yoriqnoma-text"><a
+                                    href="/storage/files/dastlabki-user-qaytarilgan.pptx"> Ариза тўлдириш бўйича
+                                    йўриқмани юклаб олинг!
                                 </a></div>
-
 
                                 <!--                                    <v-tab-item>-->
                                 <v-card
@@ -332,7 +344,6 @@
                                                             v-bind="attrs"
                                                             v-on="on"
                                                             min-width="100%"
-                                                            max-width="100%"
                                                             class="button-style-1">
                                                                 <span
                                                                     v-if="application.sender.name && application.sender.country>0">{{
@@ -625,7 +636,9 @@
                                                     @click="openTransportturi"
 
                                                 >
-                                                    <span>Товарнинг транспортлардаги ҳаракати: {{ application.inkoterms === '06' || application.inkoterms === '08' ? '' : '*' }}</span>
+                                                    <span>Товарнинг транспортлардаги ҳаракати: {{
+                                                            application.inkoterms === '06' || application.inkoterms === '08' ? '' : '*'
+                                                        }}</span>
                                                     <v-chip-group
                                                         mandatory
                                                         style="height: 50px" class="d-block"
@@ -1045,6 +1058,8 @@
                                                                                 loading
                                                                                 counter="13"
                                                                                 @keyup="myColor(documents[key].id,key)"
+                                                                                @keydown="myColor(documents[key].id,key)"
+                                                                                @change="myColor(documents[key].id,key)"
                                                                                 hint="Ҳужжатнинг е-архив тизимидаги Fayl ID рақами"
                                                                             >
                                                                                 <template v-slot:append>
@@ -1111,6 +1126,13 @@
                                     style="font-size: 20px">*</sub> - майдонлари албатта тўлдирилиши шарт!</i></v-row>
                                 <v-row class="row mb-3 position-absolute bottom-0 end-0">
                                     <v-col class="d-flex tab_action_buttons">
+                                        <v-btn text style="width: 240px" color="warning"
+                                               @click="dialog.openDialogComment=true"
+                                        >
+                                            <v-icon>mdi-comment-alert</v-icon>
+                                            &nbsp; Инспектор хабари
+                                        </v-btn>
+
                                         <v-btn text
                                                @click="prevStep"
                                         >
@@ -1134,9 +1156,7 @@
                         <v-stepper-content step="3">
 
 
-
                             <div class="p-1 d-flex align-items-start">
-
                                 <div class="nav flex-column nav-pills me-3 col-1 product_parts" v-if="1==2"
                                      id="v-pills-tab"
                                      role="tablist"
@@ -1165,7 +1185,6 @@
                                         <v-card
                                             class="mb-12"
                                         >
-
                                             <v-tabs
                                                 v-model="application.tovarlar[key].tab"
                                                 background-color="transparent"
@@ -1209,6 +1228,7 @@
                                                                             name="tftncode"
                                                                             hint="Товарнинг ТИФ ТН коди"
                                                                             persistent-placeholder
+                                                                            disabled
                                                                             hide-no-data
                                                                             :loading="loading.tftncode"
                                                                             :search-input.sync="search_tftn"
@@ -1305,7 +1325,6 @@
                                                                         <span class="red--text">{{ errors[0] }}</span>
                                                                     </ValidationProvider>
                                                                 </v-col>
-
                                                                 <v-col cols="6">
                                                                     <ValidationProvider name="Валюта"
                                                                                         rules="required"
@@ -1343,7 +1362,7 @@
                                                                         >
                                                                             <template v-slot:append>
                                                                                 {{
-                                                                                    (typeof application.tovarlar[key].product.currency != 'undefined' && (typeof getCurrencyByCode(application.tovarlar[key].product.currency)) !== 'undefined' )?getCurrencyByCode(application.tovarlar[key].product.currency).name:""
+                                                                                    (typeof application.tovarlar[key].product.currency != 'undefined' && typeof getCurrencyByCode(application.tovarlar[key].product.currency)!=='undefined' )?getCurrencyByCode(application.tovarlar[key].product.currency).name:""
                                                                                 }}
                                                                             </template>
                                                                         </v-text-field>
@@ -1364,7 +1383,7 @@
                                                                         >
                                                                             <template v-slot:append>
                                                                                 {{
-                                                                                    (typeof application.tovarlar[key].product.currency != 'undefined' && (typeof getCurrencyByCode(application.tovarlar[key].product.currency)) !== 'undefined' )?getCurrencyByCode(application.tovarlar[key].product.currency).name:""
+                                                                                    (typeof application.tovarlar[key].product.currency != 'undefined' && typeof getCurrencyByCode(application.tovarlar[key].product.currency)!=='undefined' )?getCurrencyByCode(application.tovarlar[key].product.currency).name:""
                                                                                 }}
                                                                             </template>
 
@@ -1372,6 +1391,7 @@
                                                                         <span class="red--text">{{ errors[0] }}</span>
                                                                     </ValidationProvider>
                                                                 </v-col>
+
 
 
                                                             </v-row>
@@ -1383,6 +1403,7 @@
                                                         color="basil"
                                                         flat
                                                     >
+
                                                         <ValidationObserver v-slot="{ invalid }"
                                                                             :ref="'create_customs_tovar2_value'+key">
                                                             <v-row>
@@ -1556,7 +1577,8 @@
                                                                     md="4"
                                                                 >
                                                                     <ValidationProvider name="Тижорат хусусияти"
-                                                                                        v-slot="{ errors }" rules="required">
+                                                                                        v-slot="{ errors }"
+                                                                                        rules="required">
                                                                         <v-autocomplete
                                                                             v-model="application.tovarlar[key].product.tijorat_xususiyati"
                                                                             label="Тижорат хусусияти *"
@@ -1584,7 +1606,7 @@
                                                                         <v-text-field
                                                                             label="Техник хусусияти"
                                                                             required
-                                                                            name="texn`ik_xususiyati"
+                                                                            name="texnik_xususiyati"
                                                                             v-model="application.tovarlar[key].product.texnik_xususiyati"
                                                                             persistent-placeholder
                                                                         ></v-text-field>
@@ -1604,8 +1626,8 @@
                                                                         <v-text-field
                                                                             label="Юк жойларининг умумий сони *"
                                                                             required
-                                                                            name="yuk_soni"
                                                                             v-mask="'############'"
+                                                                            name="yuk_soni"
                                                                             v-model="application.tovarlar[key].product.yuk_soni"
                                                                             persistent-placeholder
                                                                         ></v-text-field>
@@ -1637,8 +1659,8 @@
                                                                         <v-text-field
                                                                             label="Ўрамлар сони *"
                                                                             required
-                                                                            name="oram_soni"
                                                                             v-mask="'############'"
+                                                                            name="oram_soni"
                                                                             v-model="application.tovarlar[key].product.oram_soni"
                                                                             persistent-placeholder
                                                                         ></v-text-field>
@@ -2113,9 +2135,16 @@
                                             </v-tabs-items>
 
                                             <v-row class="bottom-required-info"><i style="font-size: 12px;"><sub
-                                                style="font-size: 20px">*</sub> - майдонлари албатта тўлдирилиши шарт!</i></v-row>
+                                                style="font-size: 20px">*</sub> - майдонлари албатта тўлдирилиши
+                                                шарт!</i></v-row>
                                             <v-row class="row mb-3 position-absolute bottom-0 end-0">
                                                 <v-col class="d-flex tab_action_buttons">
+                                                    <v-btn text style="width: 240px" color="warning"
+                                                           @click="dialog.openDialogComment=true"
+                                                    >
+                                                        <v-icon>mdi-comment-alert</v-icon>
+                                                        &nbsp; Инспектор хабари
+                                                    </v-btn>
                                                     <v-btn text
                                                            @click="prevStep"
                                                     >
@@ -2151,148 +2180,31 @@
                             </div>
 
                         </v-stepper-content>
-
-<!--
-                        <v-stepper-content step="4">
-                            <v-card
-                                class="mb-12 tolovlar-tab"
-                            >
-                                <v-row>
-
-                                    <v-col cols="6">
-                                        <v-list>
-                                            <v-list-item class="ariza_nomer"> Ариза рақами: <span>{{
-                                                    commodity.appNum
-                                                }} </span>
-                                            </v-list-item>
-                                            <v-list-item class="arizachi_fio"> Аризачи Ф.И.Ш: <span> {{
-                                                    person.fio
-                                                }}</span>
-                                            </v-list-item>
-                                            <v-list-item> Ишлаб чиқарувчи: <span> Unicon LTD</span></v-list-item>
-                                            <v-list-item> Сотувчи: <span> Prisma LTD </span></v-list-item>
-                                            <v-list-item> Жўнатувчи:<span> Cyan LTD </span></v-list-item>
-                                        </v-list>
-                                    </v-col>
-                                    <v-col cols="6">
-                                        <v-list>
-                                            <v-list-item class="">Божхона қийматини аниқлаш усули:
-                                                <span>{{ commodity.method }} </span>
-                                            </v-list-item>
-                                            <v-list-item class=""> Етказиб бериш шарти:
-                                                <span>{{ inkoterms[yukData.apps.terms] }}</span></v-list-item>
-                                            <v-list-item> Илгари қабул қилинган дастлабки қарор:
-                                                <span> № {{ commodity.hsDecNum }}</span></v-list-item>
-                                            <v-list-item> Қўшимча маълумотлар: <span> {{ commodity.extraInfo }} </span>
-                                            </v-list-item>
-                                        </v-list>
-
-
-                                    </v-col>
-                                    <v-col cols="12" class="tolov_product_table">
-                                        <v-simple-table>
-                                            <template v-slot:default>
-                                                <thead>
-                                                <tr>
-                                                    <th class="text-left">
-                                                        ТИФ ТН код
-                                                    </th>
-                                                    <th class="text-left">
-                                                        Марка
-                                                    </th>
-                                                    <th class="text-left">
-                                                        Модел
-                                                    </th>
-                                                    <th class="text-left">
-                                                        Савдо белгиси
-                                                    </th>
-                                                    <th class="text-left">
-                                                        Нетто оғирлик
-                                                    </th>
-                                                    <th class="text-left">
-                                                        Брутто оғирлик
-                                                    </th>
-                                                    <th class="text-left">
-                                                        Фактура қиймати
-                                                    </th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                <tr
-                                                >
-                                                    <td>{{ commodity.hsCode }}</td>
-                                                    <td>{{ commodity.mark }}</td>
-                                                    <td>{{ commodity.model }}</td>
-                                                    <td>{{ commodity.tradeMark }}</td>
-                                                    <td>{{ commodity.netto }}</td>
-                                                    <td>{{ commodity.brutto }}</td>
-                                                    <td>{{ commodity.price }}</td>
-                                                </tr>
-                                                </tbody>
-                                            </template>
-                                        </v-simple-table>
-
-                                    </v-col>
-
-                                </v-row>
-                                <v-row>
-                                    <v-col class="d-flex justify-content-end summary-div">
-                                        <div>
-                                            Дастлабки қарор қабул қилганлик учун йиғим: 210 000 сўм
-                                            <v-icon small color="primary">mdi-information-outline</v-icon>
-                                        </div>
-                                    </v-col>
-                                </v-row>
-                                <v-list class="payment_systems">
-
-                                    <v-list-item>
-                                        Тўлов тизимлари орқали тўловни амалга оширинг:
-                                    </v-list-item>
-                                    <v-list-item>
-                                        <v-row class="payment_systems_items">
-                                            <v-list class="">
-
-                                                <v-list-item class="payme"></v-list-item>
-                                                <v-list-item class="upay"></v-list-item>
-                                                <v-list-item class="click"></v-list-item>
-                                                <v-list-item class="oz_hisobidan">Божхона органларидаги ҳисоб
-                                                    рақамидан
-                                                </v-list-item>
-
-                                            </v-list>
-                                        </v-row>
-                                    </v-list-item>
-                                </v-list>
-
-                                <v-row class="row mb-3 position-absolute bottom-0 end-0">
-                                    <v-col class="d-flex tab_action_buttons">
-                                        &lt;!&ndash;                                        <v-btn text
-                                                                                       @click="prevStep"
-                                                                                >
-                                                                                    Орқага
-                                                                                </v-btn>&ndash;&gt;
-                                        <router-link to="/applications">
-                                            <v-btn
-                                                color="primary"
-                                                class="ma-2" style="min-width: max-content"
-
-                                            >
-                                                Ариза ҳолатини кўриш
-                                            </v-btn>
-
-                                        </router-link>
-
-
-                                    </v-col>
-                                </v-row>
-                            </v-card>
-
-                        </v-stepper-content>-->
                     </v-stepper-items>
 
                 </v-stepper>
             </v-container>
         </div>
+        <v-dialog v-model="dialog.openDialogComment"
+                  persistent
+                  max-width="600px"
+        >
+            <v-card>
+                <v-card-text v-html="comment"></v-card-text>
+                <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn
+                        color="primary"
+                        text
+                        @click="dialog.openDialogComment = false"
+                    >
+                        Ёпиш
+                    </v-btn>
+
+                </v-card-actions>
+            </v-card>
+
+        </v-dialog>
         <form ref="arxivSubmit" action="https://ed2.customs.uz/E_ARXIV/authentication"
               method="post" target="_blank" class="d-none">
             <input type="hidden" id="SessionID" name="SessionID"><br/>
@@ -2312,6 +2224,7 @@ import {extend, ValidationProvider, ValidationObserver} from 'vee-validate';
 import * as rules from 'vee-validate/dist/rules';
 import messages from '../../../../locales/uz.json';
 import {types} from "../../../../../../public/js/mix/pdfmake";
+import ServicePage from "../index";
 
 
 Object.keys(rules).forEach(rule => {
@@ -2323,6 +2236,1050 @@ Object.keys(rules).forEach(rule => {
 });
 export default {
     name: "Initialdecision",
+    methods: {
+        /*        InputFocus(){
+                    console.log(this.$refs.usultext0.$el);
+                },*/
+        selectTabTovar(id = 0) {
+
+            this.tovarIndex = id;
+        },
+        openTransportturi() {
+            this.$refs["transportharakati"].applyResult({
+                errors: [], // array of string errors
+                valid: true, // boolean state
+                failedRules: {} // should be empty since this is a manual error.
+            })
+            this.transportations = this.application.transportations;
+            this.dialog.transportturi = true;
+        },
+        isValidTransportTuri(index = null) {
+            if (index) {
+                return !(!this.application.transportations[index].country_from || !this.application.transportations[index].country_to || !this.application.transportations[index].price || !this.application.transportations[index].transport_type)
+            } else {
+                var returnTransport = false;
+                if (this.application.transportations.length < 1) {
+                    return false;
+                }
+                this.application.transportations.forEach((transport, k) => {
+
+                    returnTransport = (!transport.country_from || !transport.country_to || !transport.price || !transport.transport_type)
+                    if (returnTransport) {
+                        return true;
+                    }
+                })
+                return !returnTransport;
+            }
+        },
+        isValidDoc(index = null) {
+            if (index) {
+                return !(!this.application.documents[index].id || !this.application.documents[index].type)
+            } else {
+                var returnDoc = false;
+                if (this.application.documents.length < 1) {
+                    return false;
+                }
+                this.application.documents.forEach((document, k) => {
+
+                    returnDoc = (!document.id || !document.type)
+                    if (returnDoc) {
+                        return true;
+                    }
+                })/*
+              console.log(returnTransport)
+              console.log("!returnTransport")
+              console.log(!returnTransport)*/
+                return !returnDoc;
+            }
+        },
+        openDocumentType() {
+            this.$refs["hujjatilova"].applyResult({
+                errors: [], // array of string errors
+                valid: true, // boolean state
+                failedRules: {} // should be empty since this is a manual error.
+            })
+            this.documents = this.application.documents;
+            this.dialog.documenttype = true;
+        },
+        isCompletedStep(step) {
+            return this.completedSteps.includes(step);
+        },
+        async getSessionId() {
+            let returnObject;
+            await axios.get("/api/v1/ex_api/gen_session").then(function (response) {
+                returnObject = response;
+            })
+            return returnObject;
+        },
+        async authorizeToEArxiv() {
+            const _this = this;
+            let result_data = null;
+            result_data = await this.getSessionId()
+            if (result_data && result_data.status === 200) {
+                $("#SessionID").attr('value', result_data.data.data.sesid)
+                $("#serialNumberHex").attr('value', result_data.data.data.serialnumber)
+                //$("#serialNumberHex").attr('value',result_data.data.data.serialnumber)
+                $("#INN").attr('value', result_data.data.data.userinn)
+                $("#PNFL").attr('value', _this.$auth.user().pin)
+
+                $("#username").attr('value', result_data.data.data.name.replaceAll("", "'"))
+                ///*_this.$toast.success(result_data.data.data.name)
+                //console.log(_this.$refs['arxivSubmit'])*/
+                //console.log(_this.$refs['arxivSubmit']);
+                _this.$refs['arxivSubmit'].submit();
+            }
+
+        },
+        AddProduct() {
+            this.tovarlar.push(this.copytovar);
+        },
+        AddDocument() {
+            this.documents.push([
+                {
+                    id: null,
+                    type: null,
+                }
+            ]);
+        },
+        addTransportation() {
+            this.transportations.push({
+                country_from: null,
+                country_to: null,
+                transport_type: null,
+                price: null,
+            })
+        },
+        removeDocument(document) {
+            this.application.documents.splice(document, 1);
+            this.documents.splice(document, 1);
+        },
+        removeTransportation(transportation) {
+            this.transportations.splice(transportation, 1);
+            this.application.transportations.splice(transportation, 1);
+        },
+        RemoveProduct(product) {
+            if (this.tovarlar.length > 1) {
+                this.tovarlar.splice(product, 1);
+                $(".product_parts .nav-link").removeClass(["show active"]);
+                $(".product_parts").closest('div').find('.tab-pane').removeClass(["show", "active"]);
+                $('#v-pills-profile' + (product - 1)).addClass(["show", "active"]);
+                $('[data-id="' + (product - 1) + '"]').addClass(["active"]);
+            }
+
+        },
+        filterObject(objects, element, prop = 'value') {
+            return objects.filter(function (item) {
+
+                if (item && item[prop] === parseInt(element)) {
+                    return item;
+                }
+            })
+            //return (objects.find(object => { object[prop] === parseInt(element)}))
+        },
+        async sendPerson(data = null) {
+            let result = null;
+            try {
+                await axios.post('/api/v1/ex_api/customprice-person', data).then(function (res) {
+                    result = res;
+                })
+                return result;
+            } catch (error) {
+                console.log(error)
+
+            }
+        },
+        async sendYukHujjatlari(data) {
+            let result = null;
+            try {
+                await axios.post('/api/v1/ex_api/customprice-update', data).then(function (res) {
+                    result = res;
+                })
+                return result;
+            } catch (error) {
+                console.log(error)
+
+            }
+
+        },
+        async sendProduct(data) {
+            let result = null;
+            try {
+                await axios.post('/api/v1/ex_api/customprice-product', data).then(function (res) {
+                    result = res;
+                })
+                return result;
+            } catch (error) {
+                console.log(error)
+
+            }
+
+        },
+        async checkFile(file_id) {
+            let response = null;
+            response = await axios.get('/api/v1/ex_api/arxiv?file_id=' + file_id + '&pnfl=' + this.$auth.user().pin);
+            if (response && response.data && response.data.count) {
+                return response.data.data;
+            }
+            return false;
+        },
+
+        async nextStep() {
+            let isValid = false;
+            const _this = this;
+
+            /*            if (this.completedSteps.includes(this.stepper)) {
+                            this.stepper = this.stepper + 1;
+                        } else {*/
+            switch (this.stepper) {
+                case 1:
+                    this.loadingButton.first = true;
+                    //console.log(!this.validateField("create_customs_person_value"))
+                    setTimeout(async () => {
+                        isValid = await this.validateField("create_customs_person_value");
+                        if (isValid === true) {
+                            this.person.lastName = this.$auth.user().mid_name;
+                            this.person.firstName = this.$auth.user().first_name;
+                            this.person.surName = this.$auth.user().sur_name;
+                            this.person.locationId = this.person.region;
+                            this.person.personId = this.person.person_id;
+                            if (this.countries.length < 1) this.getCountries();
+
+                            let resultData = await this.sendPerson(this.person);
+                            this.loadingButton.first = false;
+                            if (resultData.data.success === true) {
+                                //console.log(resultData.data['data']['data']['id'])
+                                _this.stepper = 2;
+                                _this.completedSteps.push(_this.stepper - 1);
+                                _this.$toast.success("Аризачи маълумотлари сақланди!");
+
+                            } else this.$toast.error("Серверда хатолик юз берди. Кейинроқ уриниб кўринг!");
+
+                        }
+                        this.loadingButton.first = false;
+
+
+                    })
+
+
+                    //isValid = true;
+
+                    break;
+
+                case 2:
+                    isValid = false;
+                    this.loadingButton.second = true;
+                    setTimeout(async () => {
+                        if (!this.isValidTransportTuri()) {
+
+                            _this.$refs["transportharakati"].applyResult({
+                                errors: ["Транспорт ҳаракати албатта тўлдирилиши лозим"], // array of string errors
+                                valid: false, // boolean state
+                                failedRules: {} // should be empty since this is a manual error.
+                            })
+                        } else {
+                            _this.$refs["transportharakati"].applyResult({
+                                errors: [], // array of string errors
+                                valid: true, // boolean state
+                                failedRules: {} // should be empty since this is a manual error.
+                            })
+
+                        }
+
+                        if (!this.isValidDoc()) {
+                            _this.$refs["hujjatilova"].applyResult({
+                                errors: ["Илова қилинадиган ҳужжатларни киритинг"], // array of string errors
+                                valid: false, // boolean state
+                                failedRules: {} // should be empty since this is a manual error.
+                            })
+
+                        } else
+                            _this.$refs["hujjatilova"].applyResult({
+                                errors: [], // array of string errors
+                                valid: true, // boolean state
+                                failedRules: {} // should be empty since this is a manual error.
+                            })
+                        isValid = await this.validateField("create_customs_yuk_kuzatuv_value");
+                        if (isValid === true && this.isValidDoc() && this.isValidTransportTuri()) {
+
+                            let myYukData = [];
+                            myYukData['docs'] = [];
+                            _this.application.documents.forEach(function (document) {
+                                myYukData['docs'].push({
+                                    fileId: document.id,
+                                    type: document.type
+                                })
+                            })
+                            myYukData['transports'] = [];
+                            _this.application.transportations.forEach(function (transportation) {
+                                myYukData['transports'].push({
+                                    finishCountry: transportation.country_from,
+                                    endCountry: transportation.country_to,
+                                    tarnsportType: transportation.transport_type,
+                                    transportPrice: transportation.price,
+                                })
+                            })
+
+                            _this.yukData['apps']['personId'] = this.person.person_id;
+                            _this.yukData['apps']['id'] = this.$route.params.id;
+                            _this.yukData['apps']['customerCountry'] = this.application.seller.country;
+                            _this.yukData['apps']['senderCountry'] = this.application.sender.country;
+                            _this.yukData['apps']['senderOrg'] = this.application.sender.name;
+                            _this.yukData['apps']['sellerOrg'] = this.application.seller.name;
+                            _this.yukData['apps']['terms'] = this.application.inkoterms;
+                            _this.yukData['apps']['termsAddr'] = this.application.shipping_address;
+                            _this.yukData['apps']['personFio'] = this.person.fio;
+                            _this.yukData['apps']['orgName'] = this.person.organization_name;
+                            _this.yukData['apps']['personPosition'] = this.person.position;
+                            _this.yukData['apps']['personAddr'] = this.person.perAdr;
+                            _this.yukData['apps']['personTin'] = this.person.tin;
+                            _this.yukData['apps']['personPin'] = this.person.pin;
+                            _this.yukData['apps']['personMail'] = this.person.email;
+                            _this.yukData['apps']['personPhone'] = this.person.phone;
+                            _this.yukData['apps']['locationId'] = this.person.region;
+                            _this.yukData['apps']['transExp'] = null;
+                            _this.yukData['docs'] = myYukData['docs'];
+                            _this.yukData['transports'] = myYukData['transports'];
+
+                            let resultData = await this.sendYukHujjatlari(_this.yukData);
+
+                            if (typeof resultData !== 'undefined' && typeof resultData.data !== 'undefined' && typeof resultData.data.success !== 'undefined' && resultData.data.success === true) {
+                                //console.log(resultData.data['data']['data']['id'])
+                                //this.person.person_id = resultData.data['data']['data']['id'];
+                                this.commodity.appId = resultData.data['data']['data']['id'];
+                                this.commodity.appNum = resultData.data['data']['data']['appNum'];
+                                _this.stepper = 3;
+                                _this.completedSteps.push(_this.stepper - 1);
+                                this.$toast.success("Юк ҳужжатлари тўғрисидаги маълумотлар сақланди!");
+                            } else this.$toast.error("Серверда хатолик юз берди. Кейинроқ уриниб кўринг!");
+                            /*
+                                                        {
+                                                            this.$cookie.delete('yuk');
+                                                            this.$cookie.set('yuk', JSON.stringify(_this.yukData), 1);
+                                                            _this.stepper = 3;
+                                                            _this.completedSteps.push(_this.stepper - 1);
+                                                            this.$toast.success("Юк ҳужжатлари тўғрисидаги маълумотлар сақланди!");
+                                                        }*/
+                        } else {
+
+                            if (!this.isValidTransportTuri())
+                                _this.$refs["transportharakati"].applyResult({
+                                    errors: ["Транспорт ҳаракатини киритинг"], // array of string errors
+                                    valid: false, // boolean state
+                                    failedRules: {} // should be empty since this is a manual error.
+                                })
+                            if (!this.isValidDoc())
+                                _this.$refs["hujjatilova"].applyResult({
+                                    errors: ["Илова қилинадиган ҳужжатларни киритинг"], // array of string errors
+                                    valid: false, // boolean state
+                                    failedRules: {} // should be empty since this is a manual error.
+                                })
+                        }
+                        _this.loadingButton.second = false;
+                    });
+
+
+                    break;
+
+                case 3:
+                    //this.$refs["create_customs_tovar4_value" + this.tovarIndex][0].syncValue()
+
+                    this.loadingButton.third = true;
+                    //setTimeout(async () => {
+                    setTimeout(async () => {
+                        isValid = await this.validateField("create_customs_tovar1_value" + this.tovarIndex)
+
+                        if (isValid !== true) {
+                            //console.log('1111')
+                            // console.log(this.$refs['create_customs_tovar1_value'+this.tovarIndex])
+                            this.application.tovarlar[this.tovarIndex].tab = 0;
+
+                        } else {
+                            //if (!this.$refs['create_customs_tovar2_value']) this.tabs.additional_docs = 1;
+
+                            setTimeout(async () => {
+                                isValid = await this.validateField("create_customs_tovar2_value" + this.tovarIndex);
+                                //isValid = true;
+                                if (!isValid || !this.noRequiredTab) {
+                                    this.application.tovarlar[this.tovarIndex].tab = 1;
+                                    this.noRequiredTab = true;
+                                } else {
+                                    setTimeout(async () => {
+                                        isValid = await this.validateField("create_customs_tovar3_value" + this.tovarIndex);
+                                        //isValid = true;
+                                        if (!isValid) this.application.tovarlar[this.tovarIndex].tab = 2;
+                                        else {
+                                            //console.log("sddf11111")
+                                            setTimeout(async () => {
+                                                //if(_this.application.tovarlar[_this.tovarIndex].product.usul<2)
+                                                isValid = await this.validateField("create_customs_tovar4_value" + this.tovarIndex);
+                                                //isValid = true;
+                                                if (!isValid && (_this.application.tovarlar[_this.tovarIndex].product.usul > 2 || _this.application.tovarlar[_this.tovarIndex].product.usul < 1)) {
+                                                    this.application.tovarlar[this.tovarIndex].tab = 3;
+                                                } else {
+                                                    //console.log(this.$refs["create_customs_tovar4_value" + this.tovarIndex][0].setErrors({'attribute2':['ssdfsf']}))
+                                                    let noValid = [];
+                                                    for (let j = 0; j < _this.application.tovarlar[0].product.usul - 1; j++) {
+
+                                                        _this.application.tovarlar[0].product.usul_panel = j;
+                                                        if (typeof this.$refs["usultext" + this.tovarIndex + '-' + j] === 'undefined') {
+                                                            noValid.push(j)
+                                                            setTimeout(() => {
+                                                                this.$refs["usultext" + this.tovarIndex + '-' + j][0].applyResult({
+                                                                    errors: [j + 1 + " - усулни қўлламаслик сабаби майдони албатта тўлдирилиши лозим"], // array of string errors
+                                                                    valid: false, // boolean state
+                                                                    failedRules: {} // should be empty since this is a manual error.
+                                                                })
+                                                            }, 200)
+                                                            break;
+                                                        }
+
+                                                    }
+                                                    console.log(noValid);
+                                                    if (noValid.length < 1) {
+                                                        this.loadingButton.third = true;
+                                                        this.commodity.appId = _this.$route.params.id;
+                                                        this.commodity.hsCode = _this.application.tovarlar[_this.tovarIndex].product.tftn.id;
+                                                        this.commodity.hsDecDate = _this.application.tovarlar[_this.tovarIndex].product.tftnqaror.date;
+                                                        this.commodity.hsDecNum = _this.application.tovarlar[_this.tovarIndex].product.tftnqaror.name;
+                                                        this.commodity.inDecDate = _this.application.tovarlar[_this.tovarIndex].product.old_decision.date;
+                                                        this.commodity.inDecNum = _this.application.tovarlar[_this.tovarIndex].product.old_decision.number;
+                                                        this.commodity.originCountry = _this.application.tovarlar[_this.tovarIndex].product.manufacturer.country;
+                                                        this.commodity.originOrg = _this.application.tovarlar[_this.tovarIndex].product.manufacturer.name;
+                                                        this.commodity.tradeName = _this.application.tovarlar[_this.tovarIndex].product.trade_name;
+                                                        this.commodity.tradeMark = _this.application.tovarlar[_this.tovarIndex].product.trade_mark;
+                                                        this.commodity.mark = _this.application.tovarlar[_this.tovarIndex].product.mark;
+                                                        this.commodity.model = _this.application.tovarlar[_this.tovarIndex].product.model;
+                                                        this.commodity.article = _this.application.tovarlar[_this.tovarIndex].product.article;
+                                                        this.commodity.sort = _this.application.tovarlar[_this.tovarIndex].product.nav;
+                                                        this.commodity.standarts = _this.application.tovarlar[_this.tovarIndex].product.standart;
+                                                        this.commodity.functions = _this.application.tovarlar[_this.tovarIndex].product.function; /////
+                                                        this.commodity.comProp = _this.application.tovarlar[_this.tovarIndex].product.tijorat_xususiyati;
+                                                        this.commodity.techChar = _this.application.tovarlar[_this.tovarIndex].product.texnik_xususiyati;
+                                                        this.commodity.productGoal = _this.application.tovarlar[_this.tovarIndex].product.maqsad;
+                                                        this.commodity.brutto = _this.application.tovarlar[_this.tovarIndex].product.brutto ? parseFloat(_this.application.tovarlar[_this.tovarIndex].product.brutto).toFixed(3) : null;
+                                                        this.commodity.netto = _this.application.tovarlar[_this.tovarIndex].product.netto ? parseFloat(_this.application.tovarlar[_this.tovarIndex].product.netto).toFixed(3) : null;
+                                                        this.commodity.basicQty = _this.application.tovarlar[_this.tovarIndex].product.weight ? parseFloat(_this.application.tovarlar[_this.tovarIndex].product.weight).toFixed(3) : null;
+                                                        this.commodity.extraUnits = _this.application.tovarlar[_this.tovarIndex].product.unit2;
+                                                        this.commodity.extraQty = _this.application.tovarlar[_this.tovarIndex].product.tftn.size ? parseFloat(_this.application.tovarlar[_this.tovarIndex].product.tftn.size).toFixed(3) : null;
+                                                        this.commodity.price = _this.application.tovarlar[_this.tovarIndex].product.price ? parseFloat(_this.application.tovarlar[_this.tovarIndex].product.price).toFixed(3) : null;
+                                                        this.commodity.customsPrice = _this.application.tovarlar[_this.tovarIndex].product.customsprice ? parseFloat(_this.application.tovarlar[_this.tovarIndex].product.customsprice).toFixed(3) : null;
+                                                        this.commodity.currencyType = _this.application.tovarlar[_this.tovarIndex].product.currency;
+                                                        this.commodity.cargoSpace = _this.application.tovarlar[_this.tovarIndex].product.yuk_soni;
+                                                        this.commodity.packType = _this.application.tovarlar[_this.tovarIndex].product.oram_turi;
+                                                        this.commodity.packQty = _this.application.tovarlar[_this.tovarIndex].product.oram_soni;
+                                                        this.commodity.extraInfo = _this.application.tovarlar[_this.tovarIndex].product.comment;
+                                                        this.commodity.method = "0" + _this.application.tovarlar[_this.tovarIndex].product.usul;
+                                                        this.commodity.methodDescription = _this.application.tovarlar[_this.tovarIndex].product.usul_text.join("~~~~~");
+
+                                                        let resultData = await this.sendProduct(this.commodity);
+                                                        this.loadingButton.third = false;
+                                                        if (typeof resultData !== 'undefined' && typeof resultData.data !== 'undefined' && typeof resultData.data.success !== 'undefined' && resultData.data.success === true) {
+                                                            //console.log(resultData.data['data']['data']['id'])
+                                                            //this.person.person_id = resultData.data['data']['data']['id'];
+                                                            /*_this.stepper = 4;
+                                                            _this.completedSteps.push(this.stepper - 1);*/
+                                                            this.$toast.success("Сизнинг аризангиз омадли тарзда юборилди!");
+                                                            setTimeout(() => {
+                                                                _this.$router.push("/services/decisions/" + _this.commodity.appId)
+
+                                                            }, 1000)
+                                                        } else this.$toast.error("Серверда хатолик юз берди. Кейинроқ уриниб кўринг!");
+
+
+                                                    }
+
+                                                    // this.stepper = 4;
+                                                    //this.completedSteps.push(this.stepper - 1);
+                                                }
+                                            });
+                                        }
+                                    });
+                                }
+                            });
+                        }
+
+                    })
+                    this.loadingButton.third = false;
+                    // },3000);
+                    //isValid = true;
+
+
+                    /*
+
+                                        this.stepper = 4;
+                                        this.completedSteps.push(this.stepper - 1);*/
+                    break;
+                /*
+                                case 4:
+                                    this.stepper = 4;
+                                    this.completedSteps.push(this.stepper - 1);
+                                    break;*/
+
+            }
+
+
+        },
+        prevStep() {
+            switch (this.stepper) {
+                case 1:
+                    this.stepper = 1;
+                    break;
+
+                case 2:
+                    this.stepper = 1;
+                    break;
+
+                case 3:
+                    this.stepper = 2;
+                    break;
+
+                /*                case 4:
+                                    this.stepper = 3;
+                                    break;*/
+
+            }
+        },
+        goStep(step = 1) {
+            this.stepper = step;
+        },
+        isCompleted(step) {
+            if (this.completedSteps.includes(step)) {
+                //console.log(step);
+                return true;
+            } else return false;
+
+        },
+        async validateField(field) {
+            let provider = this.$refs[field];
+            if (Array.isArray(provider)) provider = provider[0];
+            // Validate the field
+            if (provider) return await provider.validate()
+            /*.then(()=>{
+            console.log(provider.errors);
+        });*/
+        },
+        async getCountries() {
+            let root = this
+            await axios.get('/api/v1/data/country?lang=uz').then(function (result) {
+                let countries = [];
+                result.data.forEach(function (item) {
+                    countries.push({
+                        'value': item['CODE'],
+                        'text': item['CODE'] + '-' + item['CD_NM'],
+                        'code': item['CD_ID_L']
+                    })
+                })
+                root.countries = countries;
+            })
+        },
+        async getCurrencies() {
+            let root = this
+            await axios.get('/api/v1/data/currency?lang=uz').then(function (result) {
+                let currencies = [];
+                result.data.forEach(function (item) {
+                    currencies.push({
+                        'value': item['CODE'],
+                        'text': item['CODE'] + ' - ' + item['CD_NM'],
+                        'name': item['CD_NM']
+                    })
+                })
+                root.currencies = currencies;
+            })
+        },
+        getCountryByCode(code) {
+            let returnCountry;
+            this.countries.forEach(function (country) {
+                if (country.value === code) {
+                    returnCountry = country;
+                    return true;
+                }
+
+            })
+            if (returnCountry) {
+                //console.log(returnCountry)
+                return returnCountry;
+            }
+        },
+        getCurrencyByCode(code) {
+            let returnCurrency;
+            this.currencies.forEach(function (currency) {
+                if (currency.value === code) {
+                    returnCurrency = currency;
+                    return true;
+                }
+
+            })
+            if (returnCurrency) {
+                //console.log(returnCountry)
+                return returnCurrency;
+            }
+        },
+        getDocumentTypeByCode(code) {
+            let returnDocument;
+            this.document_types.forEach(function (document) {
+                if (document.value === code) {
+                    returnDocument = document;
+                    return;
+                }
+
+            })
+            return returnDocument;
+        },
+        async getBoshqarmalar() {
+            const _this = this
+            await axios.get('/api/v1/ex_api/boshqarma').then(function (result) {
+
+                result.data.data.forEach(function (item) {
+                    if (!(['1790', '1791', '1701'].includes(item['kod_id'])))
+                        _this.regions.push({
+                            'value': item['kod_id'],
+                            'text': (item['name']).replace("Ўзбекистон Республикаси Давлат божхона қўмитасининг ", "")//(item['name']).substring(("Ўзбекистон Республикаси Давлат божхона қўмитасининг ").length)
+                        })
+                })
+            })
+        },
+        saveTransportTuri() {
+            const _this = this;
+            setTimeout(async () => {
+                let isValid = await this.validateField('create_customs_transport_yunalish');
+//console.log(isValid)
+                if (isValid)
+                    if (typeof this.transportations[this.transportations.length - 1] !== 'undefined' && this.transportations[this.transportations.length - 1].country_to !== "860") {
+                        this.$toast.error('Охирги кирувчи давлат Ўзбекистон бўлиши лозим')
+                    } else {
+                        this.transportations.forEach(function (transportation, key) {
+                            _this.application.transportations[key] = transportation;
+                        })
+                        this.dialog.transportturi = false;
+                    }
+            })
+            //this.transport_type=this.transport_turi_chips
+        },
+        saveDocument() {
+            const _this = this;
+            setTimeout(async () => {
+                /*                let isValid = await this.validateField('create_customs_documents');
+                //console.log(isValid)
+                                if (isValid) {
+
+                                    this.documents.forEach(function (document, key) {
+                                        _this.application.documents[key] = document;
+                                    })*/
+                this.dialog.documenttype = false;
+                // }
+
+            })
+            //this.transport_type=this.transport_turi_chips
+        },
+
+        initialize() {
+
+            this.getAppData();
+            setTimeout(async ()=>{
+                this.setCookieData();
+            },1000)
+            this.getBoshqarmalar();
+            this.getCountries();
+            this.getCurrencies();
+
+
+
+            /*
+                        if (step >= 2) {
+                            this.stepper = 2;
+                            this.completedSteps.push(this.stepper - 1);
+
+                            setTimeout(() => {
+                                this.$toast.success("Фойдаланувчининг маълумотлари сақланди!")
+                            }, 100)
+
+                        }*/
+
+
+        },
+        getAppData() {
+            const _this = this;
+            this.$store.commit('setLoading', true)
+
+            setTimeout(() => {
+
+                axios.get("/api/v1/ex_api/customprice-get", {
+                    params: {
+                        app_id: _this.$route.params.id
+                    }
+                }).then(function (response) {
+                    _this.$store.commit('setLoading', false)
+                    if (typeof response.data.data !== "undefined") {
+                        _this.app = response.data.data;
+                        if (_this.app.general.status !== 125) {
+                            _this.$router.push('/applications');
+                        } else {
+                            if (typeof _this.app.statuses[_this.app.statuses.length - 1].rolback.rollBackComment != 'undefined') {
+                                _this.comment = _this.app.statuses[_this.app.statuses.length - 1].rolback.rollBackComment;
+                                if(typeof _this.app.statuses[_this.app.statuses.length - 1].rolback.rollBackAppList!=='undefined' && Array.isArray(_this.app.statuses[_this.app.statuses.length - 1].rolback.rollBackAppList))
+                                _this.app.statuses[_this.app.statuses.length - 1].rolback.rollBackAppList.forEach(function (rolback) {
+                                    _this.comment = _this.comment + '<br/>' + rolback.rollbackName;
+                                })
+
+                            }
+                        }
+                        _this.setPersonData({
+                            'type': (typeof _this.app.general.personPosition !== 'undefined') ? _this.app.general.personPosition : "01",
+                            'pin': (typeof _this.app.general.personPin !== 'undefined') ? _this.app.general.personPin : null,
+                            'tin': (typeof _this.app.general.personTin !== 'undefined') ? _this.app.general.personTin : null,
+                            'fio': (typeof _this.app.general.personFio !== 'undefined') ? _this.app.general.personFio : null,
+                            'perAdr': (typeof _this.app.general.personAddr !== 'undefined') ? _this.app.general.personAddr : null,
+                            'email': (typeof _this.app.general.personMail !== 'undefined') ? _this.app.general.personMail : null,
+                            'phone': (typeof _this.app.general.personPhone !== 'undefined') ? _this.app.general.personPhone : null,
+                            'region': (typeof _this.app.general.locationId !== 'undefined') ? _this.app.general.locationId : null,
+                            'person_id': (typeof _this.app.general.personId !== 'undefined') ? _this.app.general.personId : null,
+                        })
+
+                        let docs = [];
+                        if(_this.app.docs && Array.isArray(_this.app.docs))
+                        _this.app.docs.forEach(function (doc) {
+                            docs.push({
+                                'fileId': (typeof doc.fileId !== 'undefined') ? doc.fileId : null,
+                                'type': (typeof doc.docTypeName !== 'undefined') ? doc.docTypeName : null,
+                                'valid': true,
+                                'color': 'success',
+                                //'file_num':(typeof doc.id !=='undefined')?doc.id:null,
+                            })
+                        })
+                        let transports = [];
+                        _this.app.transports.forEach(function (transport) {
+                            transports.push({
+                                'finishCountry': (typeof transport.finishCountry !== 'undefined') ? transport.finishCountry : null,
+                                'endCountry': (typeof transport.endCountry !== 'undefined') ? transport.endCountry : null,
+                                'tarnsportType': (typeof transport.tarnsportType !== 'undefined') ? transport.tarnsportType : null,
+                                'transportPrice': (typeof transport.transportPrice !== 'undefined') ? transport.transportPrice : null,
+                            })
+                        })
+
+                        _this.setYukData({
+                            "apps": {
+                                'customerCountry': (typeof _this.app.general.customerCountry !== 'undefined') ? _this.app.general.customerCountry : null,
+                                'senderCountry': (typeof _this.app.general.senderCountry !== 'undefined') ? _this.app.general.senderCountry : null,
+                                'senderOrg': (typeof _this.app.general.senderOrg !== 'undefined') ? _this.app.general.senderOrg : null,
+                                'sellerOrg': (typeof _this.app.general.sellerOrg !== 'undefined') ? _this.app.general.sellerOrg : null,
+                                'terms': (typeof _this.app.general.terms !== 'undefined') ? _this.app.general.terms : null,
+                                'termsAddr': (typeof _this.app.general.termsAddr !== 'undefined') ? _this.app.general.termsAddr : null,
+                                'locationId': (typeof _this.app.general.locationId !== 'undefined') ? _this.app.general.locationId : null,
+                            },
+                            "docs": docs,
+                            "transports": transports
+                        })
+                        if (Array.isArray(_this.app.product)) {
+                            console.log("asdasd")
+                        } else
+                            _this.setProductData([
+                                {
+                                    product: {
+                                        tftn: _this.app.product.hsCode,
+                                        weight: _this.app.product.basicQty,
+                                        size: _this.app.product.extraQty,
+                                        netto: _this.app.product.netto,
+                                        brutto: _this.app.product.brutto,
+                                        price: _this.app.product.price,
+                                        customsprice: _this.app.product.customsPrice,
+                                        currency: _this.app.product.currencyType,
+                                        trade_name: _this.app.product.tradeName,
+                                        trade_mark: _this.app.product.tradeMark,
+                                        mark: _this.app.product.mark,
+                                        model: _this.app.product.model,
+                                        article: _this.app.product.article,
+                                        nav: _this.app.product.sort,
+                                        standart: _this.app.product.standarts,
+                                        color: _this.app.product.color,
+                                        maqsad: _this.app.product.productGoal,
+                                        function: _this.app.product.functions,
+                                        tijorat_xususiyati: _this.app.product.comProp,
+                                        texnik_xususiyati: _this.app.product.techChar,
+                                        yuk_soni: _this.app.product.cargoSpace,
+                                        oram_turi: _this.app.product.packType,
+                                        oram_soni: _this.app.product.packQty,
+                                        manufacturer: {
+                                            name: _this.app.product.originOrg,
+                                            country: _this.app.product.originCountry,
+                                        },
+                                        tftnqaror: {
+                                            date: _this.app.product.hsDecDate,
+                                            number: _this.app.product.hsDecNum
+                                        },
+                                        old_decision: {
+                                            date: _this.app.product.inDecDate,
+                                            number: _this.app.product.inDecNum
+                                        },
+                                        usul: parseInt(_this.app.product.method.replace("0", "")),
+                                        usul_text: (typeof _this.app.product.methodDescription !== 'undefined' && _this.app.product.methodDescription !== null) ? _this.app.product.methodDescription.split("~~~~~") : '',
+                                        comment: _this.app.product.extraInfo
+                                    }
+                                }
+                            ])
+
+                        _this.breadcrumb_items.push({
+                            text: "Дастлабки қарор қайта ариза юбориш - " + _this.app.general.appNum,
+                            to: '/services/decisions/' + _this.app.general.appId,
+                            disabled: true,
+                            exact: true,
+                        })
+
+                    } else {
+                        _this.$toast.error("Маълумот топилмади!")
+                        _this.$router.push("/applications");
+
+                    }
+
+
+                })
+
+
+            })
+
+        },
+        setCookieData() {
+
+
+            /////  Step  1  Fill  Person data
+            let CPerson = null;
+            CPerson = this.$cookie.get('user') ? JSON.parse(this.$cookie.get('user')) : null;
+            if(this.$auth.user() !==null) {
+                CPerson['pin'] = this.$auth.user().pin;
+                CPerson['tin'] = this.$auth.user().tin;
+                CPerson['perAdr'] = this.$auth.user().per_adr;
+                CPerson['email'] = this.$auth.user().email;
+                CPerson['type'] = (this.$auth.user().user_type === "I") ? 1 : 0;
+                CPerson['fio'] = this.$auth.user().sur_name + ' ' + this.$auth.user().first_name + ' ' + this.$auth.user().mid_name;
+            }
+            //this.setPersonData(CPerson)
+            //let CYuk = null;
+            ///CYuk = this.$cookie.get('yuk') ? JSON.parse(this.$cookie.get('yuk')) : null;
+            //if(CYuk) this.setYukData(CYuk);
+
+            /*            let CProduct = null;
+                        CProduct = this.$cookie.get('product') ? JSON.parse(this.$cookie.get('product')) : null;
+                        if(CProduct) this.setProductData(CProduct)*/
+
+            /*
+                        if (!this.person.person_id) {
+                            setTimeout(async () => {
+                            let resultData = await this.sendPerson(CPerson);
+                            if (resultData.data.success === true) {
+                                CPerson.person_id = resultData.data['data']['data']['id']
+                                if (typeof resultData.data['data']['data'] !=='undefined') {
+                                    this.setPersonData(resultData.data['data']['data'] )
+                                }
+                            } else return false; //CStep=null;
+                             })
+
+
+                        }*/
+
+
+            // let FirstStepResult = await this.setPersonData();
+            /*if (FirstStepResult) {
+                const _this = this
+                let CYuk = null;
+                CYuk = this.$cookie.get('yuk') ? JSON.parse(this.$cookie.get('yuk')) : null;
+                //console.log(CPerson)
+                if (CYuk && CYuk['apps'] && typeof CYuk['apps'] !== 'undefined') {
+                    this.setYukData(CYuk);
+                }
+
+                setTimeout(async () => {
+                    let resultData = await this.sendYukHujjatlari(_this.yukData);
+                    if (typeof resultData !== 'undefined' && typeof resultData.data !== 'undefined' && typeof resultData.data.success !== 'undefined' && resultData.data.success === true) {
+                        //console.log(resultData.data['data']['data']['id'])
+                        //this.person.person_id = resultData.data['data']['data']['id'];
+                        this.commodity.appId = resultData.data['data']['data']['id'];
+                        this.commodity.appNum = resultData.data['data']['data']['appNum'];
+                        this.$cookie.delete('yuk');
+                        this.$cookie.set('yuk', JSON.stringify(_this.yukData), 1);
+
+
+                        setTimeout(() => {
+                            this.$toast.success("Юк ҳужжатлари тўғрисидаги маълумотлар сақланди!");
+                        }, 100)
+
+
+                    }
+
+                })
+
+
+            }*/
+
+        },
+        setPersonData(data) {
+
+            //console.log(this.$auth.user())
+            this.person.pin = (typeof data['pin'] !== 'undefined') ? data['pin'] : null; //.pin;
+            //this.person.type=(this.$auth.user().user_type==="I")?1:0;
+            this.person.type = (typeof data['type'] !== 'undefined') ? data['type'] : "01";
+            this.person.tin = (typeof data['tin'] !== 'undefined') ? data['tin'] : null;
+            this.person.fio = (typeof data['fio'] !== 'undefined') ? data['fio'] : null; //this.$auth.user().sur_name + ' ' + this.$auth.user().first_name + ' ' + this.$auth.user().mid_name;
+            this.person.perAdr = (typeof data['perAdr'] !== 'undefined') ? data['perAdr'] : null;
+            this.person.email = (typeof data['email'] !== 'undefined') ? data['email'] : null;
+            let personId = null;
+            const _this = this;
+            this.person.phone = (typeof data['phone'] !== 'undefined') ? data['phone'] : null;
+            this.person.region = (typeof data['region'] !== 'undefined') ? data['region'] : null;
+            this.person.person_id = (typeof data['person_id'] !== 'undefined') ? data['person_id'] : null;
+
+        },
+        setYukData(data) {
+            const _this = this;
+            this.application.seller.country = (typeof data['apps']['customerCountry'] !== undefined) ? data['apps']['customerCountry'] : this.application.seller.country;
+            this.application.sender.country = (typeof data['apps']['senderCountry'] !== undefined) ? data['apps']['senderCountry'] : this.application.sender.country;
+            this.application.sender.name = (typeof data['apps']['senderOrg'] !== undefined) ? data['apps']['senderOrg'] : null;
+            this.application.seller.name = (typeof data['apps']['sellerOrg'] !== undefined) ? data['apps']['sellerOrg'] : null;
+            this.application.inkoterms = (typeof data['apps']['terms'] !== undefined) ? data['apps']['terms'] : null;
+            this.application.shipping_address = (typeof data['apps']['termsAddr'] !== undefined) ? data['apps']['termsAddr'] : null;
+
+            this.person.region = (typeof data['apps']['locationId'] !== undefined) ? data['apps']['locationId'] : this.person.region;
+
+            const docs = (typeof data['docs'] !== undefined) ? data['docs'] : null;
+            if (docs) {
+                docs.forEach(async function (item, key) {
+
+                    _this.application.documents[key] = {
+                        id: docs[key].fileId,
+                        type: docs[key].type,
+                        valid: docs[key].type ? docs[key].type : false,
+                        color: docs[key].type ? docs[key].type : null
+                    }
+                })
+            }
+            const Ctransports = (typeof data['transports'] !== undefined) ? data['transports'] : null;
+            if (typeof Ctransports !== undefined) {
+                Ctransports.forEach(function (item, key) {
+                    //console.log(key)
+                    _this.application.transportations[key] = {
+                        country_from: Ctransports[key].finishCountry,
+                        country_to: Ctransports[key].endCountry,
+                        transport_type: Ctransports[key].tarnsportType,
+                        price: Ctransports[key].transportPrice
+                    }
+                })
+            }
+
+        },
+        setProductData(pData) {
+            const _this = this;
+           // console.log(pData)
+            if (pData && Array.isArray(pData)) {
+                pData.forEach(function (product, key) {
+
+                    product = product['product']
+                    _this.search_tftn = (typeof product['tftn'] !== 'undefined') ? product['tftn'] : null
+                    setTimeout(() => {
+                        _this.application.tovarlar[key].product.tftn = _this.tftncodes[0]
+                    }, 500)
+                    _this.application.tovarlar[key].product.weight = (typeof product['weight'] !== 'undefined') ? product['weight'] : null
+                    _this.application.tovarlar[key].product.size = (typeof product['size'] !== 'undefined') ? product['size'] : null
+                    _this.application.tovarlar[key].product.netto = (typeof product['netto'] !== 'undefined') ? product['netto'] : null
+                    _this.application.tovarlar[key].product.brutto = (typeof product['brutto'] !== 'undefined') ? product['brutto'] : null
+                    _this.application.tovarlar[key].product.price = (typeof product['price'] !== 'undefined') ? product['price'] : null
+                    _this.application.tovarlar[key].product.customsprice = (typeof product['customsprice'] !== 'undefined') ? product['customsprice'] : null
+                    _this.application.tovarlar[key].product.currency = (typeof product['currency'] !== 'undefined') ? product['currency'] : null
+                    _this.application.tovarlar[key].product.trade_name = (typeof product['trade_name'] !== 'undefined') ? product['trade_name'] : null
+                    _this.application.tovarlar[key].product.trade_mark = (typeof product['trade_mark'] !== 'undefined') ? product['trade_mark'] : null
+                    _this.application.tovarlar[key].product.mark = (typeof product['mark'] !== 'undefined') ? product['mark'] : null
+                    _this.application.tovarlar[key].product.model = (typeof product['model'] !== 'undefined') ? product['model'] : null
+                    _this.application.tovarlar[key].product.article = (typeof product['article'] !== 'undefined') ? product['article'] : null
+                    _this.application.tovarlar[key].product.nav = (typeof product['nav'] !== 'undefined') ? product['nav'] : null
+                    _this.application.tovarlar[key].product.standart = (typeof product['standart'] !== 'undefined') ? product['standart'] : null
+                    _this.application.tovarlar[key].product.color = (typeof product['color'] !== 'undefined') ? product['color'] : null
+                    _this.application.tovarlar[key].product.maqsad = (typeof product['maqsad'] !== 'undefined') ? product['maqsad'] : null
+                    _this.application.tovarlar[key].product.function = (typeof product['function'] !== 'undefined') ? product['function'] : null
+                    _this.application.tovarlar[key].product.tijorat_xususiyati = (typeof product['tijorat_xususiyati'] !== 'undefined') ? product['tijorat_xususiyati'] : null
+                    _this.application.tovarlar[key].product.texnik_xususiyati = (typeof product['texnik_xususiyati'] !== 'undefined') ? product['texnik_xususiyati'] : null
+                    _this.application.tovarlar[key].product.yuk_soni = (typeof product['yuk_soni'] !== 'undefined') ? product['yuk_soni'] : null
+                    _this.application.tovarlar[key].product.oram_turi = (typeof product['oram_turi'] !== 'undefined') ? product['oram_turi'] : null
+                    _this.application.tovarlar[key].product.oram_soni = (typeof product['oram_soni'] !== 'undefined') ? product['oram_soni'] : null
+                    _this.application.tovarlar[key].product.usul = (typeof product['usul'] !== 'undefined') ? parseInt(product['usul']) : null
+                    _this.application.tovarlar[key].product.usul_text = (typeof product['usul_text'] !== 'undefined') ? product['usul_text'] : null
+                    _this.application.tovarlar[key].product.comment = (typeof product['comment'] !== 'undefined') ? product['comment'] : null
+                    _this.application.tovarlar[key].product.manufacturer.name = (typeof product['manufacturer'] !== 'undefined' && typeof product['manufacturer']['name'] !== 'undefined') ? product['manufacturer']['name'] : null
+                    _this.application.tovarlar[key].product.manufacturer.country = (typeof product['manufacturer'] !== 'undefined' && typeof product['manufacturer']['country'] !== 'undefined') ? product['manufacturer']['country'] : null
+                    _this.application.tovarlar[key].product.tftnqaror.date = (typeof product['tftnqaror'] !== 'undefined' && typeof product['tftnqaror']['date'] !== 'undefined') ? product['tftnqaror']['date'] : null
+                    _this.application.tovarlar[key].product.tftnqaror.number = (typeof product['tftnqaror'] !== 'undefined' && typeof product['tftnqaror']['number'] !== 'undefined') ? product['tftnqaror']['number'] : null
+                    _this.application.tovarlar[key].product.old_decision.date = (typeof product['old_decision'] !== 'undefined' && typeof product['old_decision']['date'] !== 'undefined') ? product['old_decision']['date'] : null
+                    _this.application.tovarlar[key].product.old_decision.number = (typeof product['old_decision'] !== 'undefined' && typeof product['old_decision']['number'] !== 'undefined') ? product['old_decision']['number'] : null
+                })
+            } else
+                console.log('aaa111')
+        },
+
+
+        async validatePersonData(silent = false) {
+            let isValid = false;
+
+            return await this.$refs['create_customs_person_value'].validate({silent: silent})
+        },
+        Initprogress(val) {
+            if (val)
+                return Math.min(100, val.length * 8)
+            else return 0;
+        },
+        async myColor(val, key) {
+            const _this = this;
+            let fileIsset = false;
+            if (this.application.documents[key] && this.application.documents[key]['id'] === val) this.documents[key].color = 'success';
+            if (val.length === 13) {
+                fileIsset = await this.checkFile(val)
+                if (fileIsset && fileIsset.length > 0) {
+                    if (typeof this.application.documents !== 'undefined' && typeof this.application.documents[key] !== 'undefined') {
+                        this.application.documents[key]['id'] = val;
+                        this.application.documents[key]['type'] = fileIsset[0].cd_id + " - " + fileIsset[0].file_num;
+                        this.documents[key].color = 'success';
+                        this.documents[key].valid = true;
+                    } else {
+
+                        this.application.documents.push({
+                            id: val,
+                            type: fileIsset[0].cd_id + " - № " + fileIsset[0].file_num
+                        });
+                        this.documents[key].color = 'success';
+                        this.documents[key].valid = true;
+
+                    }
+                } else {
+                    this.documents[key].color = 'warning';
+                    this.documents[key].valid = false;
+
+                }
+            } else {
+                //this.application.documents.splice(key, 1);
+                this.documents[key].color = 'warning';
+                this.documents[key].valid = false;
+            }
+            if (val.length < 13) {
+                this.documents[key].color = ['error', 'warning'][Math.floor(this.Initprogress(val) / 50)]
+                this.documents[key].valid = false;
+            }
+        },
+        getTftn(code) {
+            // Lazily load input items
+            fetch("https://new.customs.uz/api/v1/data/tftn?code=" + val)
+                .then((res) => res.json())
+                .then(res => {
+                    res.map(function (item) {
+                        item.name = item.id + " - " + item.name;
+                        return item;
+                    })
+                    this.tftncodes = res;
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+                .finally(() => (
+                    this.loading.tftncode = false
+                ))
+        },
+
+
+    },
     data() {
         return {
             stepper: 1,
@@ -2379,11 +3336,7 @@ export default {
                 {text: '3-усул, Ўxшаш товарга доир битимнинг қиймати бўйича', value: 3},
                 {text: '4-усул, Қийматларни чегириб ташлаш', value: 4},
                 {text: '5-усул, Қийматларни қўшиш', value: 5},
-                {text: '6.1-усул, Захира', value: 6.1},
-                {text: '6.2-усул, Захира', value: 6.2},
-                {text: '6.3-усул, Захира', value: 6.3},
-                {text: '6.4-усул, Захира', value: 6.4},
-                {text: '6.5-усул, Захира', value: 6.5}
+                {text: '6-усул, Захира', value: 6}
             ],
             tftncodes: [],
             breadcrumb_items: [
@@ -2394,15 +3347,9 @@ export default {
                     exact: true,
                 },
                 {
-                    text: 'Хизматлар',
-                    to: '/services',
+                    text: 'Менинг аризаларим',
+                    to: '/applications',
                     disabled: false,
-                    exact: true,
-                },
-                {
-                    text: 'Божхона тўловлари бўйича дастлабки қарор олиш',
-                    to: '/services/decisions',
-                    disabled: true,
                     exact: true,
                 },
             ],
@@ -2481,6 +3428,7 @@ export default {
                         transportturi: false,
                         tiftnqaror: false,
                         ishlabchiqaruvchi: false,
+
                     },
                     menu: {
                         dastlabkiqarorsanasi: null,
@@ -2608,7 +3556,7 @@ export default {
                 {
                     type: null,
                     id: null,
-                    valid:false,
+                    valid: false,
                 }
             ],
             yukData: {
@@ -2767,7 +3715,8 @@ export default {
                 jonatuvchi: false,
                 tovarxus: false,
                 tovarmark: false,
-                transportturi: false
+                transportturi: false,
+                openDialogComment: false,
             },
             loading: {
                 tftncode: false,
@@ -2793,15 +3742,8 @@ export default {
                 third: false,
                 four: false
             },
-            noRequiredTab:false,
-            fields:[
-                {key:'termsAddr',value:'Етказиб бериш манзили'},
-                {key:'senderOrg',value:'Юборувчи ташкилот номи'},
-                {key:'senderCountry',value:'Юборувчи ташкилот давлати'},
-                {key:'sellerOrg',value:'Сотувчи ташкилот номи'},
-                {key:'customerCountry',value:'Сотувчи ташкилот давлати'},
-            ],
-            float:['^[-+][0-9]+\\.[0-9]+[eE][-+]?[0-9]+$']
+            noRequiredTab: false,
+            comment: "",
         }
 
     },
@@ -2810,7 +3752,7 @@ export default {
         search_tftn: {
             handler: function (val) {
 
-                if (val.length > 10) return
+                if (!val || (val && val.length > 10)) return
                 //if (this.tftncodes.length > 0) return
 
                 // Items have already been requested
@@ -2868,924 +3810,33 @@ export default {
         },
 
     },
-    methods: {
-        /*        InputFocus(){
-                    console.log(this.$refs.usultext0.$el);
-                },*/
-        selectTabTovar(id = 0) {
-
-            this.tovarIndex = id;
-        },
-        getField(val){
-            return this.fields.filter((obj)=>{
-                if(obj.key===val) return obj.value
-            })
-        },
-        setYukErrors(errors){
-            const _this=this;
-            if(errors ) {
-                let errorfield = [];
-                Object.keys(errors).forEach(keyItem => {
-                    if (typeof _this.getField(keyItem)[0] !== 'undefined' && typeof _this.getField(keyItem)[0].value !== 'undefined') {
-                        errorfield[_this.getField(keyItem)[0].value] = [errors[keyItem]];
-                    }
-                });
-/*
-
-                errors.forEach(function (keyItem, errorItem) {
-                    console.log(keyItem)
-                    console.log(errorItem)
-                    if (typeof _this.getField(keyItem)[0] !== 'undefined' && typeof _this.getField(keyItem)[0].value !== 'undefined') {
-                        errorfield[_this.getField(keyItem)[0].value] = [errorItem];
-                    }
-                    console.log(errorfield)
-                });*/
-                this.$refs.create_customs_yuk_kuzatuv_value.setErrors(errorfield)
-            }
-        },
-        openTransportturi() {
-            this.$refs["transportharakati"].applyResult({
-                errors: [], // array of string errors
-                valid: true, // boolean state
-                failedRules: {} // should be empty since this is a manual error.
-            })
-            this.transportations = this.application.transportations;
-            this.dialog.transportturi = true;
-        },
-        isValidTransportTuri(index = null) {
-            if (index) {
-                return !(!this.application.transportations[index].country_from || !this.application.transportations[index].country_to || !this.application.transportations[index].price || !this.application.transportations[index].transport_type)
-            } else {
-                var returnTransport = false;
-                if (this.application.transportations.length < 1) {
-                    return false;
-                }
-                this.application.transportations.forEach((transport, k) => {
-
-                    returnTransport = (!transport.country_from || !transport.country_to || !transport.price || !transport.transport_type)
-                    if (returnTransport) {
-                        return true;
-                    }
-                })/*
-              console.log(returnTransport)
-              console.log("!returnTransport")
-              console.log(!returnTransport)*/
-                return !returnTransport;
-            }
-        },
-        isValidDoc(index = null) {
-            if (index) {
-                return !(!this.application.documents[index].id || !this.application.documents[index].type)
-            } else {
-                var returnDoc = false;
-                if (this.application.documents.length < 1) {
-                    return false;
-                }
-                this.application.documents.forEach((document, k) => {
-
-                    returnDoc = (!document.id || !document.type)
-                    if (returnDoc) {
-                        return true;
-                    }
-                })/*
-              console.log(returnTransport)
-              console.log("!returnTransport")
-              console.log(!returnTransport)*/
-                return !returnDoc;
-            }
-        },
-        openDocumentType() {
-            this.$refs["hujjatilova"].applyResult({
-                errors: [], // array of string errors
-                valid: true, // boolean state
-                failedRules: {} // should be empty since this is a manual error.
-            })
-            this.documents = this.application.documents;
-            this.dialog.documenttype = true;
-        },
-        isCompletedStep(step) {
-            return this.completedSteps.includes(step);
-        },
-        async getSessionId() {
-            let returnObject;
-            await axios.get("/api/v1/ex_api/gen_session").then(function (response) {
-                returnObject = response;
-            })
-            return returnObject;
-        },
-        async authorizeToEArxiv() {
-            const _this = this;
-            let result_data = null;
-            result_data = await this.getSessionId()
-            if (result_data && result_data.status === 200) {
-                $("#SessionID").attr('value', result_data.data.data.sesid)
-                $("#serialNumberHex").attr('value', result_data.data.data.serialnumber)
-                //$("#serialNumberHex").attr('value',result_data.data.data.serialnumber)
-                $("#INN").attr('value', result_data.data.data.userinn)
-                $("#PNFL").attr('value', _this.$auth.user().pin)
-
-                $("#username").attr('value', result_data.data.data.name.replaceAll("", "'"))
-                ///*_this.$toast.success(result_data.data.data.name)
-                //console.log(_this.$refs['arxivSubmit'])*/
-                //console.log(_this.$refs['arxivSubmit']);
-                _this.$refs['arxivSubmit'].submit();
-            }
-
-        },
-        AddProduct() {
-            this.tovarlar.push(this.copytovar);
-        },
-        AddDocument() {
-            this.documents.push([
-                {
-                    id: null,
-                    type: null,
-                }
-            ]);
-        },
-        addTransportation() {
-            this.transportations.push({
-                country_from: null,
-                country_to: null,
-                transport_type: null,
-                price: null,
-            })
-        },
-        removeDocument(document) {
-            this.application.documents.splice(document, 1);
-            this.documents.splice(document, 1);
-        },
-        removeTransportation(transportation) {
-            this.transportations.splice(transportation, 1);
-            this.application.transportations.splice(transportation, 1);
-        },
-        RemoveProduct(product) {
-            if (this.tovarlar.length > 1) {
-                this.tovarlar.splice(product, 1);
-                $(".product_parts .nav-link").removeClass(["show active"]);
-                $(".product_parts").closest('div').find('.tab-pane').removeClass(["show", "active"]);
-                $('#v-pills-profile' + (product - 1)).addClass(["show", "active"]);
-                $('[data-id="' + (product - 1) + '"]').addClass(["active"]);
-            }
-
-        },
-        filterObject(objects, element, prop = 'value') {
-            return objects.filter(function (item) {
-
-                if (item && item[prop] === parseInt(element)) {
-                    return item;
-                }
-            })
-            //return (objects.find(object => { object[prop] === parseInt(element)}))
-        },
-        async sendPerson(data = null) {
-            let result = null;
-            try {
-                await axios.post('/api/v1/ex_api/customprice-person', data).then(function (res) {
-                    result = res;
-                })
-                return result;
-            } catch (error) {
-                console.log(error)
-
-            }
-        },
-        async sendYukHujjatlari(data) {
-            let result = null;
-            try {
-                await axios.post('/api/v1/ex_api/customprice-yuk', data).then(function (res) {
-                    result = res;
-                })
-                return result;
-            } catch (error) {
-                return error.response
-
-            }
-
-        },
-        async sendProduct(data) {
-            let result = null;
-            try {
-                await axios.post('/api/v1/ex_api/customprice-product', data).then(function (res) {
-                    result = res;
-                })
-                return result;
-            } catch (error) {
-                console.log(error)
-
-            }
-
-        },
-        async checkFile(file_id) {
-            let response = null;
-            response = await axios.get('/api/v1/ex_api/arxiv?file_id=' + file_id + '&pnfl=' + this.$auth.user().pin);
-            if (response && response.data && response.data.count) {
-                return response.data.data;
-            }
-            return false;
-        },
-
-        async nextStep() {
-            let isValid = false;
-            const _this = this;
-
-            /*            if (this.completedSteps.includes(this.stepper)) {
-                            this.stepper = this.stepper + 1;
-                        } else {*/
-            switch (this.stepper) {
-                case 1:
-                    this.loadingButton.first = true;
-                    //console.log(!this.validateField("create_customs_person_value"))
-                    setTimeout(async () => {
-                        isValid = await this.validateField("create_customs_person_value");
-                        if (isValid === true) {
-                            this.person.lastName = this.$auth.user().mid_name;
-                            this.person.firstName = this.$auth.user().first_name;
-                            this.person.surName = this.$auth.user().sur_name;
-                            this.person.locationId = this.person.region;
-                            if (this.countries.length < 1) this.getCountries();
-
-                            let resultData = await this.sendPerson(this.person);
-                            this.loadingButton.first = false;
-                            if (resultData.data.success === true) {
-                                //console.log(resultData.data['data']['data']['id'])
-                                this.person.person_id = resultData.data['data']['data']['id'];
-                                this.$cookie.delete('user');
-                                this.$cookie.set('user', JSON.stringify(this.person), 1);
-                                _this.stepper = 2;
-                                _this.completedSteps.push(_this.stepper - 1);
-                                _this.$toast.success("Аризачи маълумотлари сақланди!");
-
-                            } else this.$toast.error("Серверда хатолик юз берди. Кейинроқ уриниб кўринг!");
-
-                        }
-                        this.loadingButton.first = false;
-
-
-                    })
-
-
-                    //isValid = true;
-
-                    break;
-
-                case 2:
-                    isValid = false;
-                    this.loadingButton.second = true;
-                    setTimeout(async () => {
-                        if (!this.isValidTransportTuri()) {
-
-                            _this.$refs["transportharakati"].applyResult({
-                                errors: ["Транспорт ҳаракати албатта тўлдирилиши лозим"], // array of string errors
-                                valid: false, // boolean state
-                                failedRules: {} // should be empty since this is a manual error.
-                            })
-                        } else {
-                            _this.$refs["transportharakati"].applyResult({
-                                errors: [], // array of string errors
-                                valid: true, // boolean state
-                                failedRules: {} // should be empty since this is a manual error.
-                            })
-
-                        }
-
-
-                        if (!this.isValidDoc()) {
-                            _this.$refs["hujjatilova"].applyResult({
-                                errors: ["Илова қилинадиган ҳужжатларни киритинг"], // array of string errors
-                                valid: false, // boolean state
-                                failedRules: {} // should be empty since this is a manual error.
-                            })
-
-                        } else
-                            _this.$refs["hujjatilova"].applyResult({
-                                errors: [], // array of string errors
-                                valid: true, // boolean state
-                                failedRules: {} // should be empty since this is a manual error.
-                            })
-                        isValid = await this.validateField("create_customs_yuk_kuzatuv_value");
-                        if (isValid === true && this.isValidDoc() && this.isValidTransportTuri()) {
-
-                            let myYukData = [];
-                            myYukData['docs'] = [];
-                            _this.application.documents.forEach(function (document) {
-                                myYukData['docs'].push({
-                                    fileId: document.id,
-                                    type: document.type
-                                })
-                            })
-                            myYukData['transports'] = [];
-                            _this.application.transportations.forEach(function (transportation) {
-                                myYukData['transports'].push({
-                                    finishCountry: transportation.country_from,
-                                    endCountry: transportation.country_to,
-                                    tarnsportType: transportation.transport_type,
-                                    transportPrice: transportation.price,
-                                })
-                            })
-
-                            _this.yukData['apps']['personId'] = this.person.person_id;
-                            _this.yukData['apps']['customerCountry'] = this.application.seller.country;
-                            _this.yukData['apps']['senderCountry'] = this.application.sender.country;
-                            _this.yukData['apps']['senderOrg'] = this.application.sender.name;
-                            _this.yukData['apps']['sellerOrg'] = this.application.seller.name;
-                            _this.yukData['apps']['terms'] = this.application.inkoterms;
-                            _this.yukData['apps']['termsAddr'] = this.application.shipping_address;
-                            _this.yukData['apps']['personFio'] = this.person.fio;
-                            _this.yukData['apps']['orgName'] = this.person.organization_name;
-                            _this.yukData['apps']['personPosition'] = this.person.position;
-                            _this.yukData['apps']['personAddr'] = this.person.perAdr;
-                            _this.yukData['apps']['personTin'] = this.person.tin;
-                            _this.yukData['apps']['personPin'] = this.person.pin;
-                            _this.yukData['apps']['personMail'] = this.person.email;
-                            _this.yukData['apps']['personPhone'] = this.person.phone;
-                            _this.yukData['apps']['locationId'] = this.person.region;
-                            _this.yukData['apps']['transExp'] = null;
-                            _this.yukData['docs'] = myYukData['docs'];
-                            _this.yukData['transports'] = myYukData['transports'];
-
-                            let resultData = await this.sendYukHujjatlari(_this.yukData);
-
-                            if (typeof resultData !== 'undefined' && typeof resultData.data !== 'undefined' && typeof resultData.data.success !== 'undefined' && resultData.data.success === true) {
-                                //console.log(resultData.data['data']['data']['id'])
-                                //this.person.person_id = resultData.data['data']['data']['id'];
-                                this.commodity.appId = resultData.data['data']['data']['id'];
-                                this.commodity.appNum = resultData.data['data']['data']['appNum'];
-                                this.$cookie.delete('yuk');
-                                this.$cookie.set('yuk', JSON.stringify(_this.yukData), 1);
-                                _this.stepper = 3;
-                                _this.completedSteps.push(_this.stepper - 1);
-                                this.$toast.success("Юк ҳужжатлари тўғрисидаги маълумотлар сақланди!");
-                            }
-                            else {
-                                if(resultData.status===400){
-                                    console.log(resultData.data.data)
-                                    if(typeof resultData.data.data.errorsApps !=='undefined'){
-                                        _this.setYukErrors(resultData.data.data.errorsApps);
-                                    }
-                                    this.$toast.error("Маълумотларингизни текшириб қайтадан юборинг!");
-                                }else
-                                this.$toast.error("Серверда хатолик юз берди. Кейинроқ уриниб кўринг!");
-                            }
-                            /*
-                                                        {
-                                                            this.$cookie.delete('yuk');
-                                                            this.$cookie.set('yuk', JSON.stringify(_this.yukData), 1);
-                                                            _this.stepper = 3;
-                                                            _this.completedSteps.push(_this.stepper - 1);
-                                                            this.$toast.success("Юк ҳужжатлари тўғрисидаги маълумотлар сақланди!");
-                                                        }*/
-                        } else {
-
-                            if (!this.isValidTransportTuri())
-                                _this.$refs["transportharakati"].applyResult({
-                                    errors: ["Транспорт ҳаракатини киритинг"], // array of string errors
-                                    valid: false, // boolean state
-                                    failedRules: {} // should be empty since this is a manual error.
-                                })
-                            if (!this.isValidDoc())
-                                _this.$refs["hujjatilova"].applyResult({
-                                    errors: ["Илова қилинадиган ҳужжатларни киритинг"], // array of string errors
-                                    valid: false, // boolean state
-                                    failedRules: {} // should be empty since this is a manual error.
-                                })
-                        }
-                        _this.loadingButton.second = false;
-                    });
-
-
-                    break;
-
-                case 3:
-                    //this.$refs["create_customs_tovar4_value" + this.tovarIndex][0].syncValue()
-
-                    this.loadingButton.third = true;
-                    //setTimeout(async () => {
-                    setTimeout(async () => {
-                        isValid = await this.validateField("create_customs_tovar1_value" + this.tovarIndex)
-
-                        if (isValid !== true) {
-                            //console.log('1111')
-                            // console.log(this.$refs['create_customs_tovar1_value'+this.tovarIndex])
-                            this.application.tovarlar[this.tovarIndex].tab = 0;
-
-                        } else {
-                            //if (!this.$refs['create_customs_tovar2_value']) this.tabs.additional_docs = 1;
-
-                            setTimeout(async () => {
-                                isValid = await this.validateField("create_customs_tovar2_value" + this.tovarIndex);
-                                //isValid = true;
-                                if (!isValid || !this.noRequiredTab) {
-                                    this.application.tovarlar[this.tovarIndex].tab = 1;
-                                    this.noRequiredTab=true;
-                                }
-                                else {
-                                    setTimeout(async () => {
-                                        isValid = await this.validateField("create_customs_tovar3_value" + this.tovarIndex);
-                                        //isValid = true;
-                                        if (!isValid) this.application.tovarlar[this.tovarIndex].tab = 2;
-                                        else {
-                                            //console.log("sddf11111")
-                                            setTimeout(async () => {
-                                                //if(_this.application.tovarlar[_this.tovarIndex].product.usul<2)
-                                                isValid = await this.validateField("create_customs_tovar4_value" + this.tovarIndex);
-                                                //isValid = true;
-                                                if (!isValid && (_this.application.tovarlar[_this.tovarIndex].product.usul>2 || _this.application.tovarlar[_this.tovarIndex].product.usul<1)) {
-                                                    this.application.tovarlar[this.tovarIndex].tab = 3;
-                                                }
-                                                else {
-                                                    //console.log(this.$refs["create_customs_tovar4_value" + this.tovarIndex][0].setErrors({'attribute2':['ssdfsf']}))
-                                                    let noValid = [];
-                                                    for (let j = 0; j < parseInt(_this.application.tovarlar[0].product.usul) - 1; j++) {
-
-                                                        _this.application.tovarlar[0].product.usul_panel = j;
-                                                        if (typeof this.$refs["usultext" + this.tovarIndex + '-' + j] === 'undefined') {
-                                                            noValid.push(j)
-                                                            setTimeout(() => {
-                                                                this.$refs["usultext" + this.tovarIndex + '-' + j][0].applyResult({
-                                                                    errors: [j + 1 + " - усулни қўлламаслик сабаби майдони албатта тўлдирилиши лозим"], // array of string errors
-                                                                    valid: false, // boolean state
-                                                                    failedRules: {} // should be empty since this is a manual error.
-                                                                })
-                                                            }, 200)
-                                                            break;
-                                                        }
-
-                                                    }
-                                                    console.log(noValid);
-                                                    if (noValid.length < 1) {
-                                                        this.loadingButton.third = true;
-
-                                                        this.commodity.hsCode = _this.application.tovarlar[_this.tovarIndex].product.tftn.id;
-                                                        this.commodity.hsDecDate = _this.application.tovarlar[_this.tovarIndex].product.tftnqaror.date;
-                                                        this.commodity.hsDecNum = _this.application.tovarlar[_this.tovarIndex].product.tftnqaror.name;
-                                                        this.commodity.inDecDate = _this.application.tovarlar[_this.tovarIndex].product.old_decision.date;
-                                                        this.commodity.inDecNum = _this.application.tovarlar[_this.tovarIndex].product.old_decision.number;
-                                                        this.commodity.originCountry = _this.application.tovarlar[_this.tovarIndex].product.manufacturer.country;
-                                                        this.commodity.originOrg = _this.application.tovarlar[_this.tovarIndex].product.manufacturer.name;
-                                                        this.commodity.tradeName = _this.application.tovarlar[_this.tovarIndex].product.trade_name;
-                                                        this.commodity.tradeMark = _this.application.tovarlar[_this.tovarIndex].product.trade_mark;
-                                                        this.commodity.mark = _this.application.tovarlar[_this.tovarIndex].product.mark;
-                                                        this.commodity.model = _this.application.tovarlar[_this.tovarIndex].product.model;
-                                                        this.commodity.article = _this.application.tovarlar[_this.tovarIndex].product.article;
-                                                        this.commodity.sort = _this.application.tovarlar[_this.tovarIndex].product.nav;
-                                                        this.commodity.standarts = _this.application.tovarlar[_this.tovarIndex].product.standart;
-                                                        this.commodity.functions = _this.application.tovarlar[_this.tovarIndex].product.function; /////
-                                                        this.commodity.comProp = _this.application.tovarlar[_this.tovarIndex].product.tijorat_xususiyati;
-                                                        this.commodity.techChar = _this.application.tovarlar[_this.tovarIndex].product.texnik_xususiyati;
-                                                        this.commodity.productGoal = _this.application.tovarlar[_this.tovarIndex].product.maqsad;
-                                                        this.commodity.brutto = _this.application.tovarlar[_this.tovarIndex].product.brutto?parseFloat(_this.application.tovarlar[_this.tovarIndex].product.brutto).toFixed(3):null;
-                                                        this.commodity.netto = _this.application.tovarlar[_this.tovarIndex].product.netto?parseFloat(_this.application.tovarlar[_this.tovarIndex].product.netto).toFixed(3):null;
-                                                        this.commodity.basicQty = _this.application.tovarlar[_this.tovarIndex].product.weight?parseFloat(_this.application.tovarlar[_this.tovarIndex].product.weight).toFixed(3):null;
-                                                        this.commodity.extraUnits = _this.application.tovarlar[_this.tovarIndex].product.unit2;
-                                                        this.commodity.extraQty = _this.application.tovarlar[_this.tovarIndex].product.tftn.size?parseFloat(_this.application.tovarlar[_this.tovarIndex].product.tftn.size).toFixed(3):null;
-                                                        this.commodity.price = _this.application.tovarlar[_this.tovarIndex].product.price?parseFloat(_this.application.tovarlar[_this.tovarIndex].product.price).toFixed(3):null;
-                                                        this.commodity.customsPrice = _this.application.tovarlar[_this.tovarIndex].product.customsprice?parseFloat(_this.application.tovarlar[_this.tovarIndex].product.customsprice).toFixed(3):null;
-                                                        this.commodity.currencyType = _this.application.tovarlar[_this.tovarIndex].product.currency;
-                                                        this.commodity.cargoSpace = _this.application.tovarlar[_this.tovarIndex].product.yuk_soni;
-                                                        this.commodity.packType = _this.application.tovarlar[_this.tovarIndex].product.oram_turi;
-                                                        this.commodity.packQty = _this.application.tovarlar[_this.tovarIndex].product.oram_soni;
-                                                        this.commodity.extraInfo = _this.application.tovarlar[_this.tovarIndex].product.comment;
-                                                        if(_this.application.tovarlar[_this.tovarIndex].product.usul<6)
-                                                        this.commodity.method = "0" + _this.application.tovarlar[_this.tovarIndex].product.usul; else
-                                                        this.commodity.method = _this.application.tovarlar[_this.tovarIndex].product.usul;
-                                                        this.commodity.methodDescription = _this.application.tovarlar[_this.tovarIndex].product.usul_text.join("~~~~~");
-
-                                                        let resultData = await this.sendProduct(this.commodity);
-                                                        this.loadingButton.third = false;
-                                                        if (typeof resultData !== 'undefined' && typeof resultData.data !== 'undefined' && typeof resultData.data.success !== 'undefined' && resultData.data.success === true) {
-                                                            //console.log(resultData.data['data']['data']['id'])
-                                                            //this.person.person_id = resultData.data['data']['data']['id'];
-                                                            /*_this.stepper = 4;
-                                                            _this.completedSteps.push(this.stepper - 1);*/
-                                                            this.$cookie.delete('yuk');
-                                                            this.$cookie.delete('user');
-                                                            this.$toast.success("Сизнинг аризангиз омадли тарзда юборилди!");
-                                                            setTimeout(()=>{
-                                                                _this.$router.push("/services/decisions/"+ _this.commodity.appId)
-
-                                                            },1000)
-                                                        } else this.$toast.error("Серверда хатолик юз берди. Кейинроқ уриниб кўринг!");
-
-
-                                                    }
-
-                                                    // this.stepper = 4;
-                                                    //this.completedSteps.push(this.stepper - 1);
-                                                }
-                                            });
-                                        }
-                                    });
-                                }
-                            });
-                        }
-
-                    })
-                    this.loadingButton.third = false;
-                    // },3000);
-                    //isValid = true;
-
-
-                    /*
-
-                                        this.stepper = 4;
-                                        this.completedSteps.push(this.stepper - 1);*/
-                    break;
-
-                case 4:
-                    this.stepper = 4;
-                    this.completedSteps.push(this.stepper - 1);
-                    break;
-
-            }
-
-
-        },
-        prevStep() {
-            switch (this.stepper) {
-                case 1:
-                    this.stepper = 1;
-                    break;
-
-                case 2:
-                    this.stepper = 1;
-                    break;
-
-                case 3:
-                    this.stepper = 2;
-                    break;
-
-                case 4:
-                    this.stepper = 3;
-                    break;
-
-            }
-        },
-        goStep(step = 1) {
-
-            if ((this.completedSteps.includes(step - 1) || this.completedSteps.includes(step)) && !this.isCompletedStep(3)) {
-                this.stepper = step;
-            }
-        },
-        isCompleted(step) {
-            if (this.completedSteps.includes(step)) {
-                //console.log(step);
-                return true;
-            } else return false;
-
-        },
-        async validateField(field) {
-            let provider = this.$refs[field];
-            if (Array.isArray(provider)) provider = provider[0];
-            // Validate the field
-            if (provider) return await provider.validate()
-            /*.then(()=>{
-            console.log(provider.errors);
-        });*/
-        },
-        async getCountries() {
-            let root = this
-            await axios.get('/api/v1/data/country?lang=uz').then(function (result) {
-                let countries = [];
-                result.data.forEach(function (item) {
-                    countries.push({
-                        'value': item['CODE'],
-                        'text': item['CODE'] + '-' + item['CD_NM'],
-                        'code': item['CD_ID_L']
-                    })
-                })
-                root.countries = countries;
-            })
-        },
-        async getCurrencies() {
-            let root = this
-            await axios.get('/api/v1/data/currency?lang=uz').then(function (result) {
-                let currencies = [];
-                result.data.forEach(function (item) {
-                    currencies.push({
-                        'value': item['CODE'],
-                        'text': item['CODE'] + ' - ' + item['CD_NM']
-                    })
-                })
-                root.currencies = currencies;
-            })
-        },
-        getCountryByCode(code) {
-            let returnCountry;
-            this.countries.forEach(function (country) {
-                if (country.value === code) {
-                    returnCountry = country;
-                    return true;
-                }
-
-            })
-            if (returnCountry) {
-                //console.log(returnCountry)
-                return returnCountry;
-            }
-        },
-        getCurrencyByCode(code) {
-            let returnCurrency;
-            this.currencies.forEach(function (currency) {
-                if (currency.value === code) {
-                    returnCurrency = currency;
-                    return true;
-                }
-
-            })
-            if (returnCurrency) {
-                //console.log(returnCountry)
-                return returnCurrency;
-            }
-        },
-        getDocumentTypeByCode(code) {
-            let returnDocument;
-            this.document_types.forEach(function (document) {
-                if (document.value === code) {
-                    returnDocument = document;
-                    return;
-                }
-
-            })
-            return returnDocument;
-        },
-        async getBoshqarmalar() {
-            const _this = this
-            await axios.get('/api/v1/ex_api/boshqarma').then(function (result) {
-
-                result.data.data.forEach(function (item) {
-                    if (!(['1790', '1791', '1701'].includes(item['kod_id'])))
-                        _this.regions.push({
-                            'value': item['kod_id'],
-                            'text': (item['name']).replace("Ўзбекистон Республикаси Давлат божхона қўмитасининг ", "")//(item['name']).substring(("Ўзбекистон Республикаси Давлат божхона қўмитасининг ").length)
-                        })
-                })
-            })
-        },
-        saveTransportTuri() {
-            const _this = this;
-            setTimeout(async () => {
-                let isValid = await this.validateField('create_customs_transport_yunalish');
-//console.log(isValid)
-                if (isValid)
-                    if (typeof this.transportations[this.transportations.length - 1] !== 'undefined' && this.transportations[this.transportations.length - 1].country_to !== "860") {
-                        this.$toast.error('Охирги кирувчи давлат Ўзбекистон бўлиши лозим')
-                    } else {
-                        this.transportations.forEach(function (transportation, key) {
-                            _this.application.transportations[key] = transportation;
-                        })
-                        this.dialog.transportturi = false;
-                    }
-            })
-            //this.transport_type=this.transport_turi_chips
-        },
-        saveDocument() {
-            const _this = this;
-            setTimeout(async () => {
-                /*                let isValid = await this.validateField('create_customs_documents');
-                //console.log(isValid)
-                                if (isValid) {
-
-                                    this.documents.forEach(function (document, key) {
-                                        _this.application.documents[key] = document;
-                                    })*/
-                this.dialog.documenttype = false;
-                // }
-
-            })
-            //this.transport_type=this.transport_turi_chips
-        },
-
-        initialize() {
-            this.getBoshqarmalar();
-            this.getCountries();
-            this.getCurrencies();
-            this.setCookieData();
-
-
-
-            /*
-                        if (step >= 2) {
-                            this.stepper = 2;
-                            this.completedSteps.push(this.stepper - 1);
-
-                            setTimeout(() => {
-                                this.$toast.success("Фойдаланувчининг маълумотлари сақланди!")
-                            }, 100)
-
-                        }*/
-
-
-        },
-        setCookieData() {
-
-
-            /////  Step  1  Fill  Person data
-            let CPerson = null;
-            CPerson = this.$cookie.get('user') ? JSON.parse(this.$cookie.get('user')) : null;
-            this.setPersonData(CPerson)
-            let CYuk = null;
-            CYuk = this.$cookie.get('yuk') ? JSON.parse(this.$cookie.get('yuk')) : null;
-            if(CYuk) this.setYukData(CYuk);
-
-/*            let CProduct = null;
-            CProduct = this.$cookie.get('product') ? JSON.parse(this.$cookie.get('product')) : null;
-            if(CProduct) this.setProductData(CProduct)*/
-
-/*
-            if (!this.person.person_id) {
-                setTimeout(async () => {
-                let resultData = await this.sendPerson(CPerson);
-                if (resultData.data.success === true) {
-                    CPerson.person_id = resultData.data['data']['data']['id']
-                    if (typeof resultData.data['data']['data'] !=='undefined') {
-                        this.setPersonData(resultData.data['data']['data'] )
-                    }
-                } else return false; //CStep=null;
-                 })
-
-
-            }*/
-
-
-
-
-
-           // let FirstStepResult = await this.setPersonData();
-            /*if (FirstStepResult) {
-                const _this = this
-                let CYuk = null;
-                CYuk = this.$cookie.get('yuk') ? JSON.parse(this.$cookie.get('yuk')) : null;
-                //console.log(CPerson)
-                if (CYuk && CYuk['apps'] && typeof CYuk['apps'] !== 'undefined') {
-                    this.setYukData(CYuk);
-                }
-
-                setTimeout(async () => {
-                    let resultData = await this.sendYukHujjatlari(_this.yukData);
-                    if (typeof resultData !== 'undefined' && typeof resultData.data !== 'undefined' && typeof resultData.data.success !== 'undefined' && resultData.data.success === true) {
-                        //console.log(resultData.data['data']['data']['id'])
-                        //this.person.person_id = resultData.data['data']['data']['id'];
-                        this.commodity.appId = resultData.data['data']['data']['id'];
-                        this.commodity.appNum = resultData.data['data']['data']['appNum'];
-                        this.$cookie.delete('yuk');
-                        this.$cookie.set('yuk', JSON.stringify(_this.yukData), 1);
-
-
-                        setTimeout(() => {
-                            this.$toast.success("Юк ҳужжатлари тўғрисидаги маълумотлар сақланди!");
-                        }, 100)
-
-
-                    }
-
-                })
-
-
-            }*/
-
-        },
-        setPersonData(data) {
-
-            //console.log(this.$auth.user())
-            this.person.pin = this.$auth.user().pin;
-            //this.person.type=(this.$auth.user().user_type==="I")?1:0;
-            this.person.tin = this.$auth.user().tin;
-            this.person.fio = this.$auth.user().sur_name + ' ' + this.$auth.user().first_name + ' ' + this.$auth.user().mid_name;
-            this.person.perAdr = this.$auth.user().per_adr;
-            this.person.email = this.$auth.user().email;
-            let personId = null;
-            const _this = this;
-
-            if(data) {
-                this.person.phone = (typeof data['phone'] !== 'undefined') ? data['phone'] : null;
-                this.person.region = (typeof data['region'] !== 'undefined') ? data['region'] : null;
-                this.person.person_id = (typeof data['person_id'] !== 'undefined') ? data['person_id'] : null;
-            }
-
-        },
-        setYukData(data) {
-            const _this=this;
-            this.application.seller.country = (typeof data['apps']['customerCountry'] !== undefined) ? data['apps']['customerCountry'] : this.application.seller.country;
-            this.application.sender.country = (typeof data['apps']['senderCountry'] !== undefined) ? data['apps']['senderCountry'] : this.application.sender.country;
-            this.application.sender.name = (typeof data['apps']['senderOrg'] !== undefined) ? data['apps']['senderOrg'] : null;
-            this.application.seller.name = (typeof data['apps']['sellerOrg'] !== undefined) ? data['apps']['sellerOrg'] : null;
-            this.application.inkoterms = (typeof data['apps']['terms'] !== undefined) ? data['apps']['terms'] : null;
-            this.application.shipping_address = (typeof data['apps']['termsAddr'] !== undefined) ? data['apps']['termsAddr'] : null;
-
-            this.person.region = (typeof data['apps']['locationId'] !== undefined) ? data['apps']['locationId'] : this.person.region;
-
-            const docs = (typeof data['docs'] !== undefined) ? data['docs'] : null;
-            if (docs) {
-                docs.forEach(async function (item, key) {
-
-                    _this.application.documents[key] = {
-                        id: docs[key].fileId,
-                        type: docs[key].type
-                    }
-                })
-            }
-            const Ctransports = (typeof data['transports'] !== undefined) ? data['transports'] : null;
-            if (typeof Ctransports !== undefined) {
-                Ctransports.forEach(function (item, key) {
-                    //console.log(key)
-                    _this.application.transportations[key] = {
-                        country_from: Ctransports[key].finishCountry,
-                        country_to: Ctransports[key].endCountry,
-                        transport_type: Ctransports[key].tarnsportType,
-                        price: Ctransports[key].transportPrice
-                    }
-                })
-            }
-
-
-            /// go to next step
-//step=3
-
-
-
-
+    mounted() {
+        this.initialize();
     },
-        async validatePersonData(silent=false){
-            let isValid=false;
-
-            return await this.$refs['create_customs_person_value'].validate({silent:silent})
+    computed: {
+        progress(val) {
+            this.Initprogress(val)
         },
-    Initprogress(val) {
-        if (val)
-            return Math.min(100, val.length * 8)
-        else return 0;
-    },
-    async myColor(val, key) {
-        const _this = this;
-        let fileIsset = false;
-        if (this.application.documents[key] && this.application.documents[key]['id'] === val) this.documents[key].color = 'success';
-        if (val.length === 13) {
-            fileIsset = await this.checkFile(val)
-            if (fileIsset && fileIsset.length > 0) {
-                if (typeof this.application.documents !== 'undefined' && typeof this.application.documents[key] !== 'undefined') {
-                    this.application.documents[key]['id'] = val;
-                    this.application.documents[key]['type'] = fileIsset[0].cd_id + " - " + fileIsset[0].file_num;
-                    this.documents[key].color = 'success';
-                    this.documents[key].valid = true;
-                } else {
-
-                    this.application.documents.push({
-                        id: val,
-                        type: fileIsset[0].cd_id + " - " + fileIsset[0].file_num
-                    });
-                    this.documents[key].color = 'success';
-                    this.documents[key].valid = true;
-
-                }
-            }
-            else {
-                this.documents[key].color = 'warning';
-                this.documents[key].valid = false;
-
-            }
-        } else {
-            //this.application.documents.splice(key, 1);
-            this.documents[key].color = 'warning';
-            this.documents[key].valid = false;
+        isvalidTransport() {
+            return !this.isValidTransportTuri()
+        },
+        isvalidDocument() {
+            return !this.isValidDoc()
         }
-        if (val.length < 13) {
-            this.documents[key].color = ['error', 'warning'][Math.floor(this.Initprogress(val) / 50)]
-            this.documents[key].valid = false;
+
+
+    }
+    ,
+    filters: {
+        reverse: function (array) {
+            return array.slice().reverse()
         }
-    },
-
-},
-mounted()
-{
-    this.initialize();
-},
-computed: {
-    progress(val)
-    {
-        this.Initprogress(val)
-    },
-    isvalidTransport()
-    {
-        return !this.isValidTransportTuri()
-    },
-    isvalidDocument()
-    {
-        return !this.isValidDoc()
     }
-
-
-}
-,
-filters: {
-    reverse: function (array) {
-        return array.slice().reverse()
-    }
-}
-,
-components: {
-    ValidationProvider,
+    ,
+    components: {
+        ServicePage,
+        ValidationProvider,
         ValidationObserver,
-}
+    }
 }
 </script>

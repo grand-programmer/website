@@ -11,6 +11,8 @@ import Applications from "./views/frontend/applications";
 import MyApplicationsList from "./views/frontend/applications/list";
 import ServicesAppealsCreate from "./views/frontend/services/appeal/create";
 import ServicesDecisionsCreate from "./views/frontend/services/customs_value/create";
+import ServicesDecisionsEdit from "./views/frontend/services/customs_value/edit";
+import ServicesDecisionsInfo from "./views/frontend/services/customs_value/info";
 import ServiceVacancyList from "./views/frontend/services/vacancy/list";
 import ServiceVacancyShow from "./views/frontend/services/vacancy/show";
 import ServiceVacancyQuestions from "./views/frontend/services/vacancy/questions";
@@ -70,16 +72,43 @@ const routes = [
                                 {
                                     path: "create",
                                     component: ServicesAppealsCreate,
+                                },
+                                {
+                                    path: ":id",
+                                    component: () => import('./views/frontend/services/appeal/info_view'),
+                                },
+                                {
+                                    path: ":id/:key",
+                                    component: () => import('./views/frontend/services/appeal/info_view'),
                                 }
                             ]
                         },
                         {
                             path: "decisions/",
                             component: () => import('./views/frontend/services/customs_value/index'),
+                            meta: {
+                                auth: true,
+                                authRedirect: '/login',
+                                notFoundRedirect: '/403',
+                                forbiddenRedirect: '/403',
+                                routeAuth: '/login'
+                            },
                             children: [
                                 {
                                     path: "",
                                     component: ServicesDecisionsCreate,
+                                },
+                                {
+                                    path: "info",
+                                    component: ServicesDecisionsInfo,
+                                },
+                                {
+                                    path: "edit/:id",
+                                    component: ServicesDecisionsEdit,
+                                },
+                                {
+                                    path: ":id",
+                                    component: ServicesDecisionsInfo,
                                 }
                             ]
                         },
@@ -97,11 +126,6 @@ const routes = [
                                     component: ServiceVacancyCreate,
                                 },
                                 {
-                                    path: ":id/resume",
-                                    component: ServiceVacancyResume,
-
-                                },
-                                {
                                     path: "questions",
                                     component: ServiceVacancyQuestions,
                                 },
@@ -112,6 +136,11 @@ const routes = [
                                 {
                                     path: ":id",
                                     component: ServiceVacancyShow,
+
+                                },
+                                {
+                                    path: ":id/resume",
+                                    component: ServiceVacancyResume,
                                 },
                                 {
                                     path: "*",
@@ -124,6 +153,13 @@ const routes = [
                 {
                     path: 'applications',
                     component: Applications,
+                    meta: {
+                        auth: true,
+                        authRedirect: '/login',
+                        notFoundRedirect: '/403',
+                        forbiddenRedirect: '/403',
+                        routeAuth: '/login'
+                    },
                     children: [
                         {
                             path: '',
@@ -160,6 +196,10 @@ const routes = [
                         {
                             path: 'rahbariyat',
                             component: ()=>import("./views/frontend/pages/rahbariyat")
+                        },
+                        {
+                            path: 'markaziy',
+                            component: ()=>import("./views/frontend/pages/markaziy")
                         },
                         {
                             path: 'boshqarma/:id',
@@ -439,6 +479,78 @@ let adminRoute = {
                         path: 'view/:id',
                         component: () => import('./views/dashboard/events/view'),
 
+                    },
+
+                ]
+
+        },
+        // Votes
+        {
+            name: 'Сўровнома',
+            path: 'votes/',
+            component: {
+                template: '<router-view></router-view>',
+                script: ' export default {}'
+            },
+            children:
+                [
+                    {
+                        name: "Сўровномалар",
+                        path: '',
+                        component: () => import('./views/dashboard/votes/index'),
+
+                    },
+                    {
+                        name: "Сўровнома яратиш",
+                        path: 'create',
+                        component: () => import('./views/dashboard/votes/create'),
+
+                    },
+                    {
+                        name: "Сўровнома тахрирлаш",
+                        path: 'edit/:id',
+                        component: () => import('./views/dashboard/votes/edit'),
+
+                    },
+                    {
+                        name: "Сўровнома",
+                        path: 'view/:id',
+                        component: () => import('./views/dashboard/votes/view'),
+
+                    },
+
+                ]
+
+        },
+        // Faqs
+        {
+            name: 'Кўп бериладиган саволлар',
+            path: 'faqs/',
+            component: {
+                template: '<router-view></router-view>',
+                script: ' export default {}'
+            },
+            children:
+                [
+                    {
+                        name: "Кўп бериладиган савол ва жавоблар",
+                        path: '',
+                        component: () => import('./views/dashboard/faqs/index'),
+                    },
+                    {
+                        name: "Кўп бериладиган савол ва жавоб яратиш",
+                        path: 'create',
+                        component: () => import('./views/dashboard/faqs/create'),
+                    },
+                    {
+                        name: "Кўп бериладиган савол ва жавоб тахрирлаш",
+                        path: 'edit/:id',
+                        component: () => import('./views/dashboard/faqs/edit'),
+                    },
+                    {
+                        name: "Кўп бериладиган савол ва жавоблар",
+                        path: 'view/:id',
+                        component: () => import('./views/dashboard/faqs/view'),
                     },
 
                 ]

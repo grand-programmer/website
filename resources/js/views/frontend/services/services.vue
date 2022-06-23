@@ -66,7 +66,18 @@
                                     <img src="/img/icons/ishga-kirish-uchun-navbat.png"/>
                                 </div>
                                 <div class="portfolio_text">
-                                    <p>Ишга кириш учун электрон навбат</p>
+                                    <p>Божхона органларига ишга жойлашиш</p>
+
+                                </div>
+                            </router-link>
+                        </div>
+                        <div class="col-md-2 portfolio_single p1">
+                            <router-link to="/services/decisions" class="portfolio-card">
+                                <div class="portfolio_image">
+                                    <img src="/img/icons/customs-brokerage.png"/>
+                                </div>
+                                <div class="portfolio_text">
+                                    <p>Божхона тўловлари бўйича дастлабки қарор олиш</p>
 
                                 </div>
                             </router-link>

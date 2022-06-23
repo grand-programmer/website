@@ -55,6 +55,11 @@
                                     <tr>
                                         <td colspan="2" class="header"><p style="">Таълим тўғрисида</p></td>
                                     </tr>
+
+                                    <tr>
+                                        <td >Ўқув юрти номи</td>
+                                        <td >Ўқиган даври</td>
+                                    </tr>
                                     <tr v-for="talim in resume.user_add.malumotlar" v-if="resume.user_add">
                                         <td style="width: 60%; text-align: left">
                                             {{ talim.ooy }}
@@ -65,16 +70,21 @@
                                     <tr v-if="resume.user_add.sertifikatlar">
                                         <td colspan="2" class="header"><p style="">Сертификатлари</p></td>
                                     </tr>
+
+                                    <tr v-if="resume.user_add.sertifikatlar">
+                                        <td > Ўқув маркази</td>
+                                        <td > Тугатган санаси</td>
+                                    </tr>
                                     <tr v-for="sertifikat in resume.user_add.sertifikatlar">
                                         <td style="width: 60%; text-align: left">
                                             {{ sertifikat.oquv_markazi }}
                                         </td>
                                         <td>{{ sertifikat.hujjat_sanasi }}</td>
                                     </tr>
-                                    <tr>
+<!--                                    <tr>-->
 
 
-                                    <tr v-if="resume.user_add.mehnat_faoliyatlar">
+<!--                                    <tr v-if="resume.user_add.mehnat_faoliyatlar">
                                         <td colspan="2" class="header"><p style="">Иш стажи</p></td>
                                     </tr>
                                     <tr v-for="mehnat in resume.user_add.mehnat_faoliyatlar">
@@ -82,7 +92,7 @@
                                             {{ mehnat.tashkilot }}
                                         </td>
                                         <td>{{ mehnat.davr }}</td>
-                                    </tr>
+                                    </tr>-->
                                 </template>
 
                             </table>
@@ -167,6 +177,10 @@
                                             <tr>
                                                 <td colspan="2" class="header"><p style="">Таълим тўғрисида</p></td>
                                             </tr>
+                                            <tr>
+                                                <td >Ўқув юрти номи</td>
+                                                <td >Ўқиган даври</td>
+                                            </tr>
                                             <tr v-for="talim in resume.user_add.malumotlar" v-if="resume.user_add">
                                                 <td style="width: 60%; text-align: left">
                                                     {{ talim.ooy }}
@@ -177,16 +191,21 @@
                                             <tr v-if="resume.user_add.sertifikatlar">
                                                 <td colspan="2" class="header"><p style="">Сертификатлари</p></td>
                                             </tr>
+                                            <tr v-if="resume.user_add.sertifikatlar">
+                                                <td > Ўқув маркази</td>
+                                                <td > Тугатган санаси</td>
+                                            </tr>
+
                                             <tr v-for="sertifikat in resume.user_add.sertifikatlar">
                                                 <td style="width: 60%; text-align: left">
                                                     {{ sertifikat.oquv_markazi }}
                                                 </td>
                                                 <td>{{ sertifikat.hujjat_sanasi }}</td>
                                             </tr>
-                                            <tr>
+<!--                                            <tr>-->
 
 
-                                            <tr v-if="resume.user_add.mehnat_faoliyatlar">
+<!--                                            <tr v-if="resume.user_add.mehnat_faoliyatlar">
                                                 <td colspan="2" class="header"><p style="">Иш стажи</p></td>
                                             </tr>
                                             <tr v-for="mehnat in resume.user_add.mehnat_faoliyatlar">
@@ -194,7 +213,7 @@
                                                     {{ mehnat.tashkilot }}
                                                 </td>
                                                 <td>{{ mehnat.davr }}</td>
-                                            </tr>
+                                            </tr>-->
                                         </template>
 
                                     </table>
@@ -273,7 +292,7 @@
             <v-icon>fa-check</v-icon>
         </span>
             <p>Ариза рақами</p>
-            <p><strong>{{ resume.vacancy ? resume.vacancy.id : '111' }}</strong></p>
+            <p><strong>{{ resume.kod ? resume.kod : '' }}</strong></p>
             <br>
             <p>Аризалар рўйхатига ўтиб <br>аризангиз ҳолатини кўришингиз мумкин!</p>
             <router-link to="/applications" class="fs-3"><p> Аризаларингиз рўйхати</p></router-link>

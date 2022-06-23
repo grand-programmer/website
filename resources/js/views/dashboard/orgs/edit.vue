@@ -113,7 +113,6 @@
                                                         </v-col>
 
                                                         <v-col cols="3">
-                                                            <div class="preview"></div>
                                                             <div class="cropped-image">
                                                                 <div class="profile-icon-wrapper boshliq"
                                                                      v-if="cropImg">
@@ -150,8 +149,7 @@
                                                     Қўшиш
                                                 </v-btn>
                                             </v-col>
-                                            <v-row v-for="(orinbosar,k) in rahbariyat.orinbosar" :key="k"
-                                                   v-if="orinbosar">
+                                            <v-row v-for="(orinbosarItem,k) in orinbosarlar" :key="k">
                                                 <v-col cols="2">
                                                     <my-field
                                                         title="Исми фамилияси исми шарифи"
@@ -190,20 +188,13 @@
                                                         rules="required|min:3"/>
                                                 </v-col>
                                                 <v-col cols="3">
-                                                    <ValidationProvider
-                                                        v-slot="{ errors}"
-                                                        rules="required"
-                                                        name="Расми"
-                                                    >
                                                         <v-file-input label="Расми"
                                                                       v-model="images[k]"
                                                                       name="orinbosar_image[]"
                                                                       accept="image/*"
-                                                                      @change="setImage('orinbosarCropper'+k,images[k])"
+                                                                      @change="setImage(k,images[k])"
                                                         >
                                                         </v-file-input>
-                                                        <span class="red--text">{{ errors[0] }}</span>
-                                                    </ValidationProvider>
 
                                                 </v-col>
                                                 <v-col cols="1">
@@ -218,21 +209,21 @@
                                                         <v-row>
                                                             <v-col cols="3" v-show="images[k]">
                                                                 <vue-cropper
-                                                                    :ref="'orinbosarCropper'+ k"
+                                                                    :ref="'orinbosarCropper'+k"
                                                                     :aspect-ratio="10/11"
                                                                     :scalable="true"
                                                                     :cropBoxResizable="false"
                                                                     :src="'/storage/uploads/boshqarmalar/orinbosar/'+rahbariyat.orinbosar[k].image"
-                                                                    v-show="images[k]"
                                                                     :autoCrop="true"
                                                                     style="max-width:1000px"
+                                                                    v-show="images[k]"
                                                                 />
 
 
                                                             </v-col>
 
-                                                            <v-col cols="2" v-if="images[k]">
-                                                                <v-btn v-if="images[k]"
+                                                            <v-col cols="2" v-show="images[k]">
+                                                                <v-btn v-show="images[k]"
                                                                        @click.prevent="cropImage(k)">Кесиш
                                                                 </v-btn>
                                                             </v-col>
@@ -505,9 +496,9 @@ export default {
                         qabul: "Фуқароларни қабул қилиш ҳар куни 09-00 дан 17-00 гача",
                         telefon: "(78) - 120-76-00"
                     },
-                    orinbosar: [
+                    orinbosarlar: [
                         {
-                            name: "",
+                            name: " ",
                             image: null,
                             lavozimi: "Бошқарма бошлиғи ўринбосари",
                             qabul: "Фуқароларни қабул қилиш ҳар куни 09-00 дан 17-00 гача",
@@ -538,9 +529,10 @@ export default {
             cropImg: null,
             cropImgOrinbosar: [],
             imgSrc: null,
-            imgSrcOrinbosar: null,
+            imgSrcOrinbosar: [],
             rahbariyat_boshliq_image: null,
             images: [],
+            orinbosarlar: [],
 
         }
     ),
@@ -551,16 +543,22 @@ export default {
         },
 
     },
-    created() {
+    mounted() {
         this.initialize();
 
     },
     methods: {
         cropImage(k = null) {
-
+            const croppedimages = this.cropImgOrinbosar;
+            this.cropImgOrinbosar = [];
+            const _this=this;
+            croppedimages.forEach(function (item, k) {
+                _this.cropImgOrinbosar[k] = item;
+            })
             if (k >= 0) {
-                this.cropImgOrinbosar = [];
-                this.cropImgOrinbosar[0] = this.$refs['orinbosarCropper' + k][0].getCroppedCanvas().toDataURL()
+
+                this.cropImgOrinbosar[k] = this.$refs['orinbosarCropper' + k][0].getCroppedCanvas().toDataURL()
+                console.log("sdfsdf");
             } else
                 this.cropImg = this.$refs.cropper.getCroppedCanvas().toDataURL()
         },
@@ -577,8 +575,10 @@ export default {
                     // rebuild cropperjs with the updated source
                     if (k >= 0) {
                         this.$refs['orinbosarCropper' + k][0].replace(event.target.result);
+                        //console.log('asdasd')
                         this.imgSrcOrinbosar[k] = event.target.result;
                     } else {
+                        //console.log(k);
                         this.$refs.cropper.replace(event.target.result);
                         this.imgSrc = event.target.result;
                     }
@@ -597,15 +597,42 @@ export default {
                 _this.posts = _this.organization.posts;
                 _this.manzil = _this.organization.manzil;
                 _this.rahbariyat = _this.organization.rahbariyat;
+                _this.rahbariyat.boshliq = _this.organization.rahbariyat.boshliq;
+                if (typeof (_this.organization.rahbariyat.orinbosar) !== 'undefined')
+                    _this.rahbariyat.orinbosar = _this.orinbosarlar = _this.organization.rahbariyat.orinbosar;
+                else _this.rahbariyat.orinbosar = _this.orinbosarlar = [];
                 _this.cropImg = "/storage/uploads/boshqarmalar/boshliq/" + _this.organization.rahbariyat.boshliq.image;
-                _this.rahbariyat.orinbosar.forEach(function (item, k) {
-                    _this.cropImgOrinbosar[k] = "/storage/uploads/boshqarmalar/orinbosar/" + item.image;
-                })
+                if (typeof (this.rahbariyat.orinbosar) !== 'undefined')
+                    _this.rahbariyat.orinbosar.forEach(function (item, k) {
+                        _this.cropImgOrinbosar[k] = "/storage/uploads/boshqarmalar/orinbosar/" + item.image;
+                        _this.imgSrcOrinbosar[k] = "/storage/uploads/boshqarmalar/orinbosar/" + item.image;
+                    })
+                else {
+                    _this.rahbariyat.orinbosar = _this.orinbosarlar = [];
+
+                    _this.rahbariyat.orinbosar.push({
+                        name: " ",
+                        image: null,
+                        lavozimi: "Бошқарма бошлиғи ўринбосари",
+                        qabul: "Фуқароларни қабул қилиш ҳар куни 09-00 дан 17-00 гача",
+                        telefon: "(78) - 120-76-00"
+                    });
+                    _this.orinbosarlar.push({
+                        name: " ",
+                        image: null,
+                        lavozimi: "Бошқарма бошлиғи ўринбосари",
+                        qabul: "Фуқароларни қабул қилиш ҳар куни 09-00 дан 17-00 гача",
+                        telefon: "(78) - 120-76-00"
+                    });
+                }
+
             }).catch((error) => {
-                this.$toast.error(`Маълумотларни юклашда хатолик содир бўлди!`)
+                this.$toast.error(`Маълумотларни юклашда хатолик содир бўлди!`);
+                console.log(error)
                 this.$router.replace("/admin/orgs").catch(() => {
                 });
             });
+            //this.rahbariyat = _this.rahbariyat;
             //_this.$refs.cropper.replace();
             ///this.$refs.cropper.zoom(15)
 
@@ -642,8 +669,8 @@ export default {
                             if (itemkey === 'image') {
                                 if (_this.imgSrcOrinbosar[valkey]) {
                                     console.log(_this.$refs['orinbosarCropper' + valkey]);
-                                    _this.$refs['orinbosarCropper' + valkey].getCroppedCanvas().toBlob((blob1) => {
-                                        form.append('rahbariyat[orinbosar][${valkey}][${itemkey}]', blob1);
+                                    _this.$refs['orinbosarCropper' + valkey][0].getCroppedCanvas().toBlob((blob1) => {
+                                        form.append(`rahbariyat[orinbosar][${valkey}][${itemkey}]`, blob1);
                                     })
                                 } else
                                     form.append(`rahbariyat[orinbosar][${valkey}][${itemkey}]`, item);
@@ -668,8 +695,16 @@ export default {
                     // this.editedItem.sort_number=parseInt(this.editedItem.sort_number);
                     Object.entries(this.rahbariyat.orinbosar).forEach(([valkey, v]) => {
                         Object.entries(v).forEach(([itemkey, item]) => {
-                            if (itemkey === 'image') form.append(`rahbariyat[orinbosar][${valkey}][${itemkey}]`, item); else
-                                form.append(`rahbariy   at[orinbosar][${valkey}][${itemkey}]`, `${item}`)
+                            if (itemkey === 'image') {
+                                if (_this.imgSrcOrinbosar[valkey]) {
+                                    console.log(_this.$refs['orinbosarCropper' + valkey]);
+                                    _this.$refs['orinbosarCropper' + valkey][0].getCroppedCanvas().toBlob((blob1) => {
+                                        form.append(`rahbariyat[orinbosar][${valkey}][${itemkey}]`, blob1);
+                                    })
+                                } else
+                                    form.append(`rahbariyat[orinbosar][${valkey}][${itemkey}]`, item);
+                            } else
+                                form.append(`rahbariyat[orinbosar][${valkey}][${itemkey}]`, `${item}`)
                         });
                     });
                     Object.entries(this.posts).forEach(([valkey, v]) => {
@@ -699,13 +734,16 @@ export default {
             this.posts.push({title: null, manzili: null, telefon: null, description: null})
         },
         AddOrinbosar() {
+
+            if (!this.rahbariyat.orinbosar) this.rahbariyat.orinbosar = [];
             this.rahbariyat.orinbosar.push({
                 name: "",
                 image: null,
                 lavozimi: "Бошқарма бошлиғи ўринбосари",
                 qabul: "Фуқароларни қабул қилиш ҳар куни 09-00 дан 17-00 гача",
                 telefon: "(78) - 120-76-00"
-            })
+            });
+            //  this.images.push(null)
         },
 
     },
