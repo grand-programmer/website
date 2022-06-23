@@ -768,9 +768,6 @@ section.content_block .tab-content > .tab-pane {
   justify-content: center;
   display: flex;
 }
-#section2 .bolimlar .container-fluid .row:nth-child(3) .bolim.col-md-3 {
-  width: calc(20% - 50px) !important;
-}
 #section2 .bolimlar .container-fluid .bolim.col-md-3 {
   width: 18%;
   flex: 0 0 18%;
@@ -1240,9 +1237,6 @@ a.read_more {
 
 .f_navigation_widget ul {
   /*  margin-top: 68px;*/
-}
-.f_navigation_widget ul li {
-  width: 30%;
 }
 
 .footer_links {
@@ -4257,4 +4251,19 @@ html body .Vue-Toastification__container.top-right {
   background-position: center;
   fill: #fff;
   background-size: 100%;
+}
+
+@media (min-width: 950px) {
+  #section2 .bolimlar .container-fluid .bolim.col-md-3 {
+    width: 25% !important;
+    background-color: #fff;
+    margin: 1%;
+    text-align: center;
+    font-size: 14px;
+    padding: 40px 0;
+    border: 1px solid #00000021;
+    transition: 0.4s ease-in-out;
+    cursor: pointer;
+    color: #000;
+  }
 }

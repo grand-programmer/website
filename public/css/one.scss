@@ -79,7 +79,7 @@
 
     a {
         color: #000 !important;
-        padding: 0!important;
+        padding: 0 !important;
         font-family: Montserrat, serif;
 
     }
@@ -849,13 +849,14 @@ section.content_block .tab-content > .tab-pane {
     margin: -55px auto;
     margin-bottom: 20px;
 }
+
 .section_title {
     padding-bottom: 8px;
     color: #2f4c3b;
     text-transform: uppercase;
     border-bottom: 3px solid #26a55b;
     width: 50%;
-padding-top: 80px;
+    padding-top: 80px;
     margin-bottom: 20px;
     margin-left: auto;
     margin-right: auto;
@@ -875,11 +876,11 @@ padding-top: 80px;
                 justify-content: center;
                 display: flex;
 
-                &:nth-child(3) {
-                    .bolim.col-md-3 {
-                        width: calc(20% - 50px) !important;
-                    }
-                }
+                //&:nth-child(3) {
+                //    .bolim.col-md-3 {
+                //        width: calc(20% - 50px) !important;
+                //    }
+                //}
             }
 
             .bolim.col-md-3 {
@@ -1416,9 +1417,9 @@ a.read_more {
 
 .f_navigation_widget ul {
     /*  margin-top: 68px;*/
-    li {
-        width: 30%;
-    }
+    //li {
+    //    width: 30%;
+    //}
 }
 
 .footer_links {
@@ -3389,8 +3390,8 @@ a.read_more {
                     background-position: center;
                     fill: #fff;
                     background-image: url(/images/rahbariyat/rais.jpg);
-/*                    background-size: 273%;
-                    background-position-x: 56%;*/
+                    /*                    background-size: 273%;
+                                        background-position-x: 56%;*/
                 }
             }
 
@@ -4997,6 +4998,7 @@ html body .Vue-Toastification__container.top-right {
             fill: #fff;
         }
     }
+
     &.orinbosar {
         display: flex;
         align-items: center;
@@ -5019,5 +5021,22 @@ html body .Vue-Toastification__container.top-right {
             fill: #fff;
             background-size: 100%;
         }
+    }
+}
+
+@media (min-width: 950px) {
+    #section2 .bolimlar .container-fluid .bolim.col-md-3 {
+        width: 25% !important;
+
+        background-color: #fff;
+
+        margin: 1%;
+        text-align: center;
+        font-size: 14px;
+        padding: 40px 0;
+        border: 1px solid #00000021;
+        transition: 0.4s ease-in-out;
+        cursor: pointer;
+        color: #000;
     }
 }
