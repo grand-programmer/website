@@ -304,7 +304,6 @@ section.content_block #myTab {
   justify-content: space-around;
 }
 section.content_block #myTab li a {
-
   padding: 7px 240px;
   color: #fff;
 }
@@ -342,9 +341,7 @@ section.content_block #myTabContent thead {
 #vacancyTab li a {
   color: #fff;
   font-size: 18px;
-
   padding: 0px 25px;
-
   min-height: 35px;
   display: flex;
   align-items: center;

@@ -47,8 +47,7 @@ input[type=number] {
 @font-face {
   font-family: "bauhaus93";
   src: url(/fonts/bauhaus93.eot?1bb8075ef0197936434234e6ee9c18a2);
-  src: url(/fonts/bauhaus93.woff?954164e88b41e33b608b7b97e8098326) format("woff"), url(/fonts/bauhaus93.ttf?6d785e39c9cd2bb2f181f041ed3c747d) format("truetype"), url(/fonts/bauhaus93.svg?9892d4919a083f890ab7a8a93d802b92) format("svg");
-
+  src: url(/fonts/bauhaus93.woff?954164e88b41e33b608b7b97e8098326) format("woff"), url(/fonts/bauhaus93.ttf?6d785e39c9cd2bb2f181f041ed3c747d) format("truetype"), url(/fonts/bauhaus93.svg?5c6a8b8f3d45a160c51fcb7195274cf5) format("svg");
 }
 .menu_slider {
   position: absolute;
@@ -79,7 +78,6 @@ input[type=number] {
 
 .navbar-nav li:hover .menu_slider {
   width: calc(100% - 10px);
-
 }
 
 .navbar-nav li:hover .dropdown-menu.show a {
@@ -95,7 +93,6 @@ input[type=number] {
 .navbar-nav li .dropdown-menu li a {
   color: #000 !important;
   padding: 0 !important;
-
   font-family: Montserrat, serif;
 }
 
@@ -116,7 +113,7 @@ ul.nav.navbar-nav li ul.dropdown-menu {
   position: fixed;
   display: block;
   width: 100%;
-  height: 60px;
+  height: 71px;
   z-index: 10000;
   background-color: #fff;
   box-shadow: 0 0 7px 0 #ccc;
@@ -386,7 +383,6 @@ ul#pills-tab {
 .portfolio_single.p1 .portfolio-card .portfolio_image img {
   width: 100%;
 }
-
 .portfolio_single.p1 .portfolio-card .portfolio_text {
   display: flex;
   font-size: 14px;
@@ -765,7 +761,6 @@ section.content_block .tab-content > .tab-pane {
   margin-bottom: 20px;
 }
 
-
 .section_title {
   padding-bottom: 8px;
   color: #2f4c3b;
@@ -776,6 +771,7 @@ section.content_block .tab-content > .tab-pane {
   margin-bottom: 20px;
   margin-left: auto;
   margin-right: auto;
+  margin-top: 30px;
 }
 
 #section2 .bolimlar {
@@ -791,11 +787,6 @@ section.content_block .tab-content > .tab-pane {
   justify-content: center;
   display: flex;
 }
-
-#section2 .bolimlar .container-fluid .row:nth-child(3) .bolim.col-md-3 {
-  width: calc(20% - 50px) !important;
-}
-
 #section2 .bolimlar .container-fluid .bolim.col-md-3 {
   width: 18%;
   flex: 0 0 18%;
@@ -1267,10 +1258,6 @@ a.read_more {
   /*  margin-top: 68px;*/
 }
 
-.f_navigation_widget ul li {
-  width: 30%;
-
-
 .footer_links {
   position: fixed;
   z-index: 1000;
@@ -1608,7 +1595,6 @@ ul.nav.navbar-nav li ul.dropdown-menu {
 }
 ul.nav.navbar-nav li ul.dropdown-menu.submenu {
   max-height: 70vh;
-
   overflow-y: auto;
 }
 
@@ -1706,7 +1692,6 @@ ul.nav.navbar-nav li ul.dropdown-menu.submenu {
   font-size: 16px;
   font-weight: 500;
   max-width: calc(100% - 65px);
-
 }
 
 .calendar_content-item span {
@@ -1907,7 +1892,7 @@ a.read_more {
   min-height: 50px;
   box-shadow: inset 0 0 24px 15px #ccc6;
   width: 100%;
-  margin-top: 60px;
+  margin-top: 71px;
   position: relative;
   z-index: 3;
 }
@@ -1926,13 +1911,11 @@ a.read_more {
 
 .print_dialog.container {
   position: relative;
-
-  padding-bottom: 0;
+  /*    padding-bottom: 100px;*/
   background-color: #fff;
+  padding-bottom: 0;
 }
 .print_dialog.container > div {
-  height: 750px;
-
   width: 100%;
   position: relative;
 }
@@ -1970,12 +1953,10 @@ a.read_more {
 .print_dialog.container > div .dialog_content {
   position: relative;
   z-index: 5;
-
   height: 70vh;
   overflow-y: auto;
   padding-bottom: 100px;
   margin-top: 20px;
-
 }
 .print_dialog.container > div .dialog_content table:first-child {
   border: 1px solid #ccc;
@@ -2047,7 +2028,6 @@ a.read_more {
   background-image: url(/img/icons/dialog_background.png);
   height: 500px;
   background-repeat: no-repeat;
-
   background-size: contain;
   position: absolute;
   width: 500px;
@@ -2194,9 +2174,7 @@ a.read_more {
   height: 500px;
   background-size: contain;
   position: absolute;
-
   background-repeat: no-repeat;
-
   width: 500px;
   right: 35px;
   bottom: 85px;
@@ -2233,9 +2211,7 @@ a.read_more {
   min-height: 800px;
   background-color: #fff;
   padding: 20px;
-
   height: 100%;
-
 }
 .page-content .container {
   position: relative;
@@ -3183,6 +3159,7 @@ a.read_more {
 .my-card .my-card-header > p {
   padding-bottom: 10px;
   border-bottom: 1px solid #ccc;
+  /*min-height: 110px;*/
 }
 .my-card .my-card-header p:nth-of-type(1) {
   /* width: min-content; */
@@ -3328,13 +3305,9 @@ a.read_more {
   border: 3px solid #39ae69;
   color: #39ae69;
   padding: 15px;
-
-  font-size: 20px;
   font-weight: 600;
   border-radius: 5px;
   position: relative;
-  top: 160px;
-
 }
 .asosiy_korsatkichlari2 .row.content .stat_menu .all_stats svg {
   width: 20px;
@@ -3814,7 +3787,6 @@ a.read_more {
   box-shadow: none;
   background: none;
 }
-
 .section.customs-value-section .container.container--fluid .v-stepper .yoriqnoma-text {
   right: 32px;
   top: 15px;
@@ -4026,7 +3998,6 @@ a.read_more {
   font-size: 18px;
 }
 
-
 .scroll_card {
   display: flex !important;
   flex-direction: column;
@@ -4143,7 +4114,6 @@ a.read_more {
   color: #39ae69 !important;
   font-weight: bold !important;
   border: 1px solid #39ae69 !important;
-
   max-width: 100%;
 }
 .button-style-1 .v-btn__content {
@@ -4152,7 +4122,6 @@ a.read_more {
 .button-style-1 .v-btn__content span {
   text-overflow: ellipsis;
   overflow: hidden;
-
 }
 
 .errors_under_button {
@@ -4160,7 +4129,6 @@ a.read_more {
   width: 100%;
   display: flex;
   flex-direction: column;
-
   top: 75px;
 }
 
@@ -4171,7 +4139,6 @@ label sup {
 
 .bottom-required-info {
   color: var(--mycolor);
-
 }
 
 .btn:hover {
@@ -4200,11 +4167,9 @@ label sup {
   text-align: center;
   line-height: 30px;
 }
-
 .mening_arizalarim tr {
   cursor: pointer;
 }
-
 
 .mening_profilim {
   min-height: 60vh;
@@ -4304,7 +4269,6 @@ html body .Vue-Toastification__container.top-right {
 }
 .boshqarma-page .orinbosarlar .orinbosar .orinbosar-header .profile-icon-wrapper {
   height: 116px;
-
   /*
                   .profile-icon {
                       background-size: 230%;
@@ -4317,7 +4281,6 @@ html body .Vue-Toastification__container.top-right {
 .boshqarma-page .rais .wrapper .col-2 .profile-icon-wrapper .profile-icon {
   /*            background-size: 154%;
               background-position-x: 71%;*/
-
   height: 248px;
 }
 
@@ -4377,7 +4340,6 @@ html body .Vue-Toastification__container.top-right {
   background-size: 100%;
 }
 
-
 @media (min-width: 950px) {
   #section2 .bolimlar .container-fluid .bolim.col-md-3 {
     width: 25% !important;
@@ -4391,8 +4353,7 @@ html body .Vue-Toastification__container.top-right {
     cursor: pointer;
     color: #000;
   }
-  }
-
+}
 .page-content div.row .fixed-color-tabs.v-tabs {
   padding: 35px 0;
 }
@@ -4423,5 +4384,4 @@ html body .Vue-Toastification__container.top-right {
 
 #accordionExamplemarkaziy .my-card .my-card-header .profile-icon-wrapper {
   padding: 0;
-
 }

@@ -112,7 +112,7 @@
                                                 color="primary"
                                             >
                                                 <!--                                            <v-img :src="'/public/images/users/'+ $auth.user().id +'.jpg'"></v-img>-->
-                                                <v-icon>mdi-account</v-icon>
+                                                <v-icon size="x-large" color="#fff">mdi-account</v-icon>
 
                                             </v-btn>
                                             <p style="    width: min-content; font-size: 12px; text-align: center; margin: 0 10px; font-weight: 600;">
