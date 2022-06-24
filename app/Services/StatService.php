@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\StatData;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class StatService
@@ -256,5 +257,28 @@ class StatService
         }
     }
 
+    public function getFileFromEArxiv($file_id, $pnfl=null)
+    {
+        $whereUser="";
+        if($pnfl) $whereUser=" and f.user_id='" . $pnfl."'";
+        $query = "  select
+                f.file_id,
+                f.docname,
+                f.doc_type,
+                ft.file_num,
+                ft.file_data,
+                d.cd_id
+                from
+                    e_arxiv.freedoc f
+     join file_type as ft on ft.file_id=f.file_id join
+    e_arxiv.docs_type d
+on
+    d.code=f.doc_type and d.lnga_tpcd='UZ'
+                where
+                 f.file_id='" . $file_id . "' and
+                      f.isdeleted=0 ".$whereUser;
+        return DB::connection('db2_odbcEA')->select($query);
+
+    }
 
 }

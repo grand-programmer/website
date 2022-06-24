@@ -1,7 +1,20 @@
 :root {
     --mycolor: #39ae69;
 }
+.primary-color{
+    color:var(--mycolor);
+};
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+}
 /*  One css */
 
 /*@font-face {
@@ -398,6 +411,10 @@ ul#pills-tab {
             display: flex;
             align-items: center;
             justify-content: center;
+
+            img {
+                width: 100%;
+            }
 
         }
 
@@ -1881,6 +1898,7 @@ ul.nav.navbar-nav li ul.dropdown-menu {
             margin-left: 15px;
             font-size: 16px;
             font-weight: 500;
+            max-width:calc(100% - 65px);
         }
     }
 }
@@ -2148,11 +2166,11 @@ a.read_more {
 
 .print_dialog.container {
     position: relative;
-    padding-bottom: 0;
+/*    padding-bottom: 100px;*/
     background-color: #fff;
+    padding-bottom: 0;
 
     > div {
-        height: 750px;
         width: 100%;
         position: relative;
 
@@ -2195,6 +2213,10 @@ a.read_more {
         .dialog_content {
             position: relative;
             z-index: 5;
+            height: 70vh;
+            overflow-y: auto;
+            padding-bottom: 100px;
+            margin-top: 20px;
 
             table {
                 &:first-child {
@@ -2288,6 +2310,7 @@ a.read_more {
     .background {
         background-image: url(/img/icons/dialog_background.png);
         height: 500px;
+        background-repeat: no-repeat;
         background-size: contain;
         position: absolute;
         width: 500px;
@@ -2475,6 +2498,7 @@ a.read_more {
         height: 500px;
         background-size: contain;
         position: absolute;
+        background-repeat: no-repeat;
         width: 500px;
         right: 35px;
         bottom: 85px;
@@ -2518,6 +2542,7 @@ a.read_more {
     min-height: 800px;
     background-color: #fff;
     padding: 20px;
+    height: 100%;
 
     .container {
         position: relative;
@@ -3635,7 +3660,7 @@ a.read_more {
 
         .profile-icon-wrapper {
             padding: 14px;
-            width: 90px;
+            width: 94px;
             height: 90px;
             display: flex;
             align-items: center;
@@ -3649,6 +3674,7 @@ a.read_more {
             padding-bottom: 10px;
 
             border-bottom: 1px solid #ccc;
+            /*min-height: 110px;*/
         }
 
         p {
@@ -4383,6 +4409,24 @@ a.read_more {
             box-shadow: none;
             background: none;
 
+            .yoriqnoma-text{
+                right: 32px;
+                top: 15px;
+                /* background-color: #39ae69; */
+                padding: 0 !important;
+                /* border-radius: 10px; */
+                color: #39ae69;
+                font-size: 16px;
+                border-bottom: 1px dashed;
+                width: max-content;
+                margin: 0;
+                a{
+                    font-weight: bold;
+                    padding: 0;
+                }
+            }
+
+
             .v-stepper__header {
                 background: none;
                 box-shadow: none;
@@ -4393,6 +4437,7 @@ a.read_more {
             }
 
             .v-stepper__wrapper {
+
                 .v-card {
                     /*min-height: 50vh;*/
                     box-shadow: 0 0 20px 0px #ccc;
@@ -4634,7 +4679,29 @@ a.read_more {
         font-size: 18px;
         //transform: translateY(-20px);
     }
+
+
 }
+
+.scroll_card {
+
+    display: flex !important;
+    flex-direction: column;
+    max-height: 500px;
+    .v-card__title{
+        background-color: var(--mycolor);
+    }
+
+
+    .v-card__text {
+        flex-grow: 1;
+        overflow: auto;
+    }
+    .row{
+        transition: all 1s;
+    }
+}
+
 
 .append-slot {
     margin-top: 7px;
@@ -4768,6 +4835,13 @@ a.read_more {
     color: #39ae69 !important;
     font-weight: bold !important;
     border: 1px solid #39ae69 !important;
+    max-width: 100%;
+    .v-btn__content{
+        max-width: 100%;
+        span{
+            text-overflow: ellipsis; overflow: hidden;
+        }
+    }
 }
 
 .errors_under_button {
@@ -4775,6 +4849,14 @@ a.read_more {
     width: 100%;
     display: flex;
     flex-direction: column;
+    top:75px;
+}
+label sup{
+    top: 0;
+    font-size: 100%;
+}
+.bottom-required-info{
+    color: var(--mycolor);
 }
 
 .btn {
@@ -4811,6 +4893,9 @@ a.read_more {
             text-align: center;
             line-height: 30px;
         }
+    }
+    tr{
+        cursor:pointer;
     }
 }
 
@@ -4939,21 +5024,25 @@ html body .Vue-Toastification__container.top-right {
         .orinbosar-header {
             .profile-icon-wrapper {
                 height: 116px;
-
+/*
                 .profile-icon {
                     background-size: 230%;
                     background-position: 60% 27%;
-                }
+                }*/
             }
         }
     }
 
-    .rais .wrapper .col-2 .profile-icon-wrapper {
-        //height: 116px;
-        .profile-icon {
-            background-size: 154%;
-            background-position-x: 71%;
-            height: 248px;
+    .rais {
+        padding: 60px 0 !important;
+
+        .wrapper .col-2 .profile-icon-wrapper {
+            //height: 116px;
+            .profile-icon {
+                /*            background-size: 154%;
+                            background-position-x: 71%;*/
+                height: 248px;
+            }
         }
     }
 
@@ -5024,6 +5113,7 @@ html body .Vue-Toastification__container.top-right {
     }
 }
 
+
 @media (min-width: 950px) {
     #section2 .bolimlar .container-fluid .bolim.col-md-3 {
         width: 25% !important;
@@ -5038,5 +5128,47 @@ html body .Vue-Toastification__container.top-right {
         transition: 0.4s ease-in-out;
         cursor: pointer;
         color: #000;
+  }}
+.page-content div.row .fixed-color-tabs {
+    &.v-tabs {
+        padding: 35px 0;
+
+        .v-tab {
+            &:not(.v-tab--active) {
+                color: var(--mycolor);
+                border: 1px dashed var(--mycolor);
+            }
+
+            &.v-tab--active {
+                background-color: var(--mycolor);
+                color: #fff;
+            }
+        }
+
+        > .v-tabs-bar {
+            background-color: transparent;
+        }
+
+    }
+    &.theme--light.v-tabs-items{
+        padding: 0;
+        .v-expansion-panel-header{
+            background-color: #dee8e2;
+        }
+
+    }
+}
+.checkbox_agree{
+    .label-roziman{
+        color: var(--mycolor);
+    }
+    .v-icon.v-icon{
+        font-size: 35px;
+    }
+}
+#accordionExamplemarkaziy{
+    .my-card .my-card-header .profile-icon-wrapper{
+        padding: 0;
+
     }
 }

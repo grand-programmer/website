@@ -16,7 +16,10 @@
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.3",
         "tymon/jwt-auth": "dev-develop",
-        "unisharp/laravel-filemanager": "^2.2"
+        "unisharp/laravel-filemanager": "^2.2",
+        "cooperl/laravel-db2": "^8.0",
+      "ext-pdo": "*"
+
     },
     "require-dev": {
         "facade/ignition": "^2.5",

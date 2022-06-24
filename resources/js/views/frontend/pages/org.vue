@@ -51,11 +51,11 @@
                             </div>
                         </div>
                     </v-col>
-                    <div class="col-12 orinbosarlar" style="/* margin: 20px auto;">
+                    <div class="col-12 orinbosarlar " style="/* margin: 20px auto;">
                         <div class="row">
                             <h3 style="text-align: center;">&nbsp;</h3>
                         </div>
-                        <div class="row">
+                        <div class="row justify-content-center">
                             <div class="orinbosar col-3" v-for="orinbosar in organization.rahbariyat.orinbosar">
                                 <div class="row">
                                     <div class="col-12">

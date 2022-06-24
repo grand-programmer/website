@@ -40,7 +40,7 @@
 
                                 <div class="d-flex justify-content-center mt-3">
 
-                                    <v-btn v-if="options.isLoggingIn" type="submit"
+                                    <v-btn @click="login" v-if="options.isLoggingIn" type="submit"
                                            class="d-flex justify-content-center" style="margin:0 auto">
                                         Кириш
                                     </v-btn>
@@ -54,7 +54,7 @@
                                         </svg>
                                     </div>
                                 </div>
-                                <v-btn v-if="!(options.isLoggingIn)" type="submit" class="d-flex justify-content-center"
+                                <v-btn @click="login" v-if="!(options.isLoggingIn)" type="submit" class="d-flex justify-content-center"
                                        style="margin:0 auto">
                                     Рўйҳатдан ўтиш
                                 </v-btn>
@@ -63,7 +63,7 @@
                     </v-card>
                     <div v-if="options.isLoggingIn">
                         <!--                        Рўйхатдан ўтмаганмисиз?-->
-                        <v-list-item color="primary" @click="options.isLoggingIn = false" style="margin: 0 auto">
+                        <v-list-item color="primary" @click="options.isLoggingIn = false; " style="margin: 0 auto">
                             Рўйҳатдан ўтмоқчимисиз ?
                         </v-list-item>
                     </div>
@@ -128,6 +128,8 @@ export default {
             // get the redirect object
             // var redirect = this.$auth.redirect()
             var _this = this;
+           this.$toast.warning("Email ва парол орқали авторизациядан ўтиш вақтинча ишламаяпти! Шу сабабли ONE ID тизимидан авторизациядан ўтишингизни сўраймиз!" );
+           return ;
             this.$store.commit('setLoading', true)
 
 
@@ -165,6 +167,9 @@ export default {
         },
         register() {
             var _this = this
+            this.$toast.warning("Рўйхатдан ўтиш устида ишлар олиб борилмоқда! Шу сабабли ONE ID тизимидан авторизациядан ўтишингизни сўраймиз!" );
+
+            return;
             this.$auth.register({
                 data: {
                     name: _this.name,
