@@ -6,6 +6,9 @@
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
+        "ext-pdo": "*",
+        "cooperl/laravel-db2": "^8.0",
+        "doctrine/dbal": "^3.3",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.54",
@@ -13,9 +16,13 @@
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.3",
         "tymon/jwt-auth": "dev-develop",
+<<<<<<< HEAD
+        "unisharp/laravel-filemanager": "^2.2"
+=======
         "unisharp/laravel-filemanager": "^2.2",
         "cooperl/laravel-db2": "^8.0",
       "ext-pdo": "*"
+>>>>>>> b63e71efe77c4697608cdaa5240aa0f03b6b0cb4
     },
     "require-dev": {
         "facade/ignition": "^2.5",

@@ -131,6 +131,18 @@ export default {
 
             },
             {
+                title: 'Сўровномалар',
+                icon: 'mdi-animation',
+                to: '/admin/votes',
+
+            },
+            {
+                title: 'Савол ва жавоблар',
+                icon: 'mdi-calendar-question',
+                to: '/admin/faqs',
+
+            },
+            {
                 title: 'Рахбарият',
                 icon: 'mdi-account',
                 to: '/admin/rahbariyat',
@@ -146,7 +158,7 @@ export default {
                 to: '/admin/orgs',
 
             },
-            {
+            /*{
                 icon: 'mdi-account',
                 title: 'user',
                 to: '/admin/pages/user',
@@ -171,7 +183,7 @@ export default {
                 title: 'notifications',
                 icon: 'mdi-bell',
                 to: '/admin/components/notifications',
-            },
+            },*/
         ],
     }),
 

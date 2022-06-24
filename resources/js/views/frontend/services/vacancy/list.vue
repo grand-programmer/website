@@ -58,7 +58,7 @@
                                             <div class="v-card-item" data-aos="flip-up">
                                                 <h3>
                                                     {{ vacancy.seven }}
-                                                    <div class="d-inline-block float-end" v-if="vacancy.applied">
+                                                    <div class="d-inline-block float-end" v-if="vacancy.applied && 1===2">
 
                                                     <v-tooltip nudge-left="0" left>
                                                         <template v-slot:activator="{ on, attrs }">
@@ -140,7 +140,7 @@
                                                               fill="#3165CB"></path>
                                                     </svg>
                                                     <span>{{
-                                                            regions.filter(item => item.kod_id == vacancy.b_id)[0]['address']
+                                                            typeof regions.filter(item => item.kod_id === vacancy.b_id)[0]['address']!=='undefined' ?regions.filter(item => item.kod_id === vacancy.b_id)[0]['address']:''
                                                         }} </span>
                                                 </p>
                                                 <p class="vac-card__payment">
@@ -248,7 +248,7 @@
                             <v-row>
                                 <v-container>
                                     <v-list class="vacancy-sidebar">
-                                        <p>Божхона органларига хизмат ўташ бўйича </p>
+                                        <p>Божхона органларида хизмат ўташ бўйича </p>
                                         <v-list-item to="/services/vacancy/questions">
 
                                             <div>
@@ -258,7 +258,7 @@
                                         <v-list-item to="/services/vacancy/documents">
                                             <div>
                                                 <v-icon>mdi-file-document-multiple-outline</v-icon>
-                                                <span>Меёрий-ҳуқуқий ҳужжатлар </span>
+                                                <span>Меъёрий-ҳуқуқий ҳужжатлар </span>
                                             </div>
                                         </v-list-item>
 
@@ -337,7 +337,7 @@ export default {
                     }, 800)
 
                     _app.vacancies = _app.filteredVacancies = response.data.data;
-                }
+                }else _app.loading = false;
             });
 
             /*} else {
@@ -352,8 +352,12 @@ export default {
         async getRegions() {
             const _app = this;
             await axios.get("/api/v1/ex_api/boshqarma").then(function (response) {
-                if (response.data.success === true) {
-                    _app.regions = _app.regions = response.data.data;
+                if (response.status === 200) {
+                    _app.regions = response.data.data;
+                    _app.regions=_app.regions.map(function (item){
+                        item.name=item.name.replace("Ўзбекистон Республикаси Давлат божхона қўмитасининг ","")
+                        return item;
+                    })
                 }
             });
         }

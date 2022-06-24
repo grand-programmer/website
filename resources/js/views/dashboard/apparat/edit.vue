@@ -269,7 +269,7 @@ export default {
                 form.append('email', _this.organization.email);
                 form.append('rahbariyat', _this.organization.rahbariyat);
                 form.append('_method', 'PUT');
-                if (this.cropImg) this.$refs.cropper.getCroppedCanvas().toBlob((blob) => {
+                if (this.cropImg && this.$refs.cropper.getCroppedCanvas()) this.$refs.cropper.getCroppedCanvas().toBlob((blob) => {
 
                     form.append('image', blob);
 

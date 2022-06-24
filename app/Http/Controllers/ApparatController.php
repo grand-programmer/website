@@ -16,10 +16,12 @@ class ApparatController extends Controller
      */
     public function index(Request $request)
     {
-        $data = $request->only('rahbar');
+        $data = $request->only('rahbar','markaziy');
         if (isset($data['rahbar']))
-        return response()->json(['success' => true, 'data' => ApparatResource::collection(Apparat::where(['rahbariyat' => 0])->get())], 200);
-        return response()->json(['success' => true, 'data' => ApparatResource::collection(Apparat::where('rahbariyat','<>', 0)->get())], 200);
+        return response()->json(['success' => true, 'data' => ApparatResource::collection(Apparat::where(['rahbariyat' => 0])->orderby('sort','asc')->get())], 200);
+        if (isset($data['markaziy']))
+        return response()->json(['success' => true, 'data' => ApparatResource::collection(Apparat::orderby('sort','asc')->orderby('lavozimi','asc')->get())->groupBy('rahbariyat')], 200);
+        return response()->json(['success' => true, 'data' => ApparatResource::collection(Apparat::where('rahbariyat','<>', 0)->orderby('sort','asc')->get())], 200);
     }
 
     /**
@@ -56,6 +58,7 @@ class ApparatController extends Controller
                 'org_name',
                 'image',
                 'rahbar',
+                'sort',
             );
             $validator = Validator::make($data, [
                 'fio' => 'required|min:3',
@@ -65,6 +68,7 @@ class ApparatController extends Controller
                 'email' => 'required_without:rahbar',
                 'org_name' => 'required_without:rahbar',
                 'image' => 'required',
+                'sort' => 'numeric',
                 'rahbariyat' => 'required_without:rahbar',
             ]);
 
@@ -115,6 +119,7 @@ class ApparatController extends Controller
                 'image',
                 'rahbariyat',
                 'rahbar',
+                'sort',
             );
             $validator = Validator::make($data, [
                 'fio' => 'required|min:3',
@@ -124,6 +129,7 @@ class ApparatController extends Controller
                 'email' => 'required_without:rahbar',
                 'org_name' => 'required_without:rahbar',
                 'image' => 'required',
+                'sort' => 'numeric',
                 'rahbariyat' => 'required_without:rahbar',
             ]);
 

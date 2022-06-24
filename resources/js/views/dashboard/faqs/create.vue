@@ -1,0 +1,204 @@
+<template>
+    <v-container
+        class="page-main"
+        fluid
+        tag="section"
+    >
+        <v-row justify="center">
+            <div class="dashboardbreadcrumb">
+                <v-container>
+                    <v-breadcrumbs :items="breadcrumb_items">
+                        <template v-slot:divider>
+                            <v-icon>mdi-chevron-right</v-icon>
+                        </template>
+                    </v-breadcrumbs>
+                </v-container>
+            </div>
+            <v-col
+                cols="12"
+                md="12"
+            >
+                <v-flex xs12 sm12 md12 lg12>
+                    <v-card>
+                        <ValidationObserver v-slot="{ invalid }">
+                            <v-form ref="pageForm">
+
+                                <v-card-text>
+                                    <v-container>
+                                        <v-row class="align-items-end">
+                                            <v-col cols="12" sm="12" md="12">
+                                                <ValidationProvider name="Савол" rules="required|min:3"
+                                                                    v-slot="{ errors }">
+                                                    <v-text-field label="Савол"
+                                                                  v-model="editedItem.question"
+                                                                  name="title"></v-text-field>
+                                                    <span class="error--text">{{ errors[0] }}</span>
+                                                </ValidationProvider>
+
+                                            </v-col>
+                                            <v-col cols="8" sm="8" md="8">
+                                                <ValidationProvider name="Жавоб" rules="required|min:3"
+                                                                    v-slot="{ errors }">
+                                                    <v-textarea label="Жавоб"
+                                                                  v-model="editedItem.answer"
+                                                                  name="title"></v-textarea>
+                                                    <span class="error--text">{{ errors[0] }}</span>
+                                                </ValidationProvider>
+
+                                            </v-col>
+                                            <v-col cols="2" sm="2" md="2">
+
+                                                <v-text-field label="Даражаси"
+                                                              v-model="editedItem.sort"
+                                                              name="title"></v-text-field>
+
+                                            </v-col>
+                                            <v-col cols="2" sm="2" md="2">
+
+                                                <v-switch v-model="editedItem.active"
+                                                          name="title">
+                                                    <template v-slot:label>
+                                                        {{editedItem.active===true?'Актив':'Актив эмас'}}
+
+                                                    </template>
+                                                </v-switch>
+
+                                            </v-col>
+
+
+                                        </v-row>
+                                    </v-container>
+                                </v-card-text>
+
+                                <v-card-actions>
+                                    <v-spacer></v-spacer>
+                                    <v-btn color="blue darken-1" text @click="close">Ёпиш</v-btn>
+                                    <v-btn color="blue darken-1" text @click="save">Сақлаш</v-btn>
+                                </v-card-actions>
+                            </v-form>
+                        </ValidationObserver>
+                    </v-card>
+                </v-flex>
+            </v-col>
+        </v-row>
+    </v-container>
+</template>
+
+<script>
+import api from "./../../../src/services/apiService";
+import {extend, ValidationProvider, ValidationObserver} from 'vee-validate';
+import * as rules from 'vee-validate/dist/rules';
+import messages from '../../../locales/uz.json';
+import Editor from '@tinymce/tinymce-vue';
+
+Object.keys(rules).forEach(rule => {
+    extend(rule, {
+        ...rules[rule], // copies rule configuration
+        message: messages.messages[rule] // assign message
+
+    });
+});
+
+export default {
+    name: "EventCreate",
+    data() {
+        return {
+            breadcrumb_items:
+                [
+                    {text: 'Админ панел', to: '/admin', exact: true},
+                    {text: 'Савол ва жавоблар', to: '/admin/faqs', exact: true},
+                    {text: 'Савол ва жавоб яратиш', to: '#', exact: true, disabled: true},
+                ],
+            events: [],
+            editedIndex: -1,
+            editedItem: {
+                id: null,
+                title: '',
+
+            },
+            pages: [],
+            menu: false,
+            modal: false,
+            menu2: false,
+
+
+        }
+    },
+    computed: {
+        formTitle() {
+            return 'Янги';
+        },
+        computedDateFormatted() {
+            return this.formatDate(this.date)
+        },
+
+    },
+    created() {
+        this.initialize();
+    },
+
+    watch: {
+        date(val) {
+            this.editedItem.date = this.formatDate(this.date)
+        },
+    },
+    methods: {
+        initialize() {
+            api.readEvents().then((response) => {
+                this.editedItem = response.data;
+            }).catch((error) => {
+                this.$toast.error(`Ходисаларни олишда муаммо бор!`)
+
+                console.log(error)
+            });
+        },
+
+        close() {
+            this.$router.replace("/admin/faqs").catch(() => {
+            });
+        },
+
+        async save() {
+            if (this.editedIndex > -1) {
+                Object.assign(this.events[this.editedIndex], this.editedItem)
+            } else {
+                const isValid = await this.$refs.pageForm.validate();
+                if (isValid) {
+                    // this.editedItem.sort_number=parseInt(this.editedItem.sort_number);
+                    api.addFaq(this.editedItem).then((response) => {
+                        this.$toast.success(`Маълумотларни омадли тарзда юкланди!`)
+                        this.close()
+                    }).catch((error) => {
+                        this.$toast.error(`Маълумотларни юклашда хатолик содир бўлди!`)
+                        console.log(error)
+                    })
+                }
+            }
+
+        },
+        formatDate(date) {
+            if (!date) return null
+
+            const [year, month, day] = date.split('-')
+            return `${day}-${month}-${year}`
+        },
+        parseDate(date) {
+            if (!date) return null
+
+            const [day, month, year] = date.split('.')
+            return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`
+        },
+
+    },
+
+    components: {
+        ValidationProvider,
+        ValidationObserver,
+    },
+}
+</script>
+<style>
+.page-main .v-data-table button.new_item {
+    margin-top: -77px;
+}
+</style>
