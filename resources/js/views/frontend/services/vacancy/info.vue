@@ -327,7 +327,7 @@ export default {
                     printable: 'printMe1',
                     maxWidth: 1000,
                     type: 'html',
-                    css: ['/css/bootstrap5.1.min.css', '/css/mix/one.css'],
+                    css: ['/css/bootstrap.min.css', '/css/mix/one.css'],
                     style: ["*"],
                     scanStyles: true,
                     targetStyles: ["*"], //accepts all the styles
