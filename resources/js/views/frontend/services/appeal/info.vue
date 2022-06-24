@@ -383,7 +383,7 @@ export default {
             print({
                 printable:'printMe1',
                 type: 'html',
-                css:['/css/bootstrap5.1.min.css','/css/one.css'],
+                css:['/css/bootstrap.min.css','/css/one.css'],
                 scanStyles:false,
                 documentTitle:'.',
                 header:' '
