@@ -60,7 +60,7 @@
                             <div class="slider_text absolute_right">
                                 <h3 class="fadeInLeft animated">E-ARHIV</h3>
                                 <h4 class="fadeInLeft animated">Божхона ахборот тизими</h4>
-                                <p class="fadeInUp animated">Божхона ахборот тизмиларига =ужжатларингизни
+                                <p class="fadeInUp animated">Божхона ахборот тизмиларига ҳужжатларингизни
                                     жойланг</p>
                                 <a class="s_readmore_btn fadeInUp animated" target="_blank"
                                    href="https://ed2.customs.uz/E_ARXIV/authentication">Хизматдан фойдаланиш</a>
@@ -210,7 +210,64 @@
 
 
                 <div class="row pb-8" style="margin: 24px!important; justify-content: center;">
-
+                    <div class="container-m">
+                        <a class="card1" href="#">
+                            <h3>Жисмоний шахслар учун</h3>
+                            <div class="go-corner" href="#">
+                                <div class="go-arrow">
+                                    →
+                                </div>
+                            </div>
+                        </a>
+                        <a class="card1" href="#">
+                            <h3>ТИФ иштирокчилари учун</h3>
+                            <div class="go-corner" href="#">
+                                <div class="go-arrow">
+                                    →
+                                </div>
+                            </div>
+                        </a>
+                        <a class="card1" href="#">
+                            <h3>Мурожаатлар</h3>
+                            <div class="go-corner" href="#">
+                                <div class="go-arrow">
+                                    →
+                                </div>
+                            </div>
+                        </a>
+                        <a class="card1" href="#">
+                            <h3>Сўровнома</h3>
+                            <div class="go-corner" href="#">
+                                <div class="go-arrow">
+                                    →
+                                </div>
+                            </div>
+                        </a>
+                        <a class="card1" href="#">
+                            <h3>Тўловлар ва вақт</h3>
+                            <div class="go-corner" href="#">
+                                <div class="go-arrow">
+                                    →
+                                </div>
+                            </div>
+                        </a>
+                        <a class="card1" href="#">
+                            <h3>Тадбиркорлар учун зарур маълумотлар</h3>
+                            <div class="go-corner" href="#">
+                                <div class="go-arrow">
+                                    →
+                                </div>
+                            </div>
+                        </a>
+                        <a class="card1" href="#">
+                            <h3>Коррупция тўғрисида хабар</h3>
+                            <div class="go-corner" href="#">
+                                <div class="go-arrow">
+                                    →
+                                </div>
+                            </div>
+                        </a>
+                    </div>
 
                     <div class="card">
                         <div class="bolim_image"><img src="/img/service/user-icon.png"></div>

@@ -406,7 +406,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 $(document).click(function(e)
 {
-    let container = $(".header-lang");
+    let container = $(".language-dropdown");
 
     // if the target of the click isn't the container nor a descendant of the container
     if (!container.is(e.target) && container.has(e.target).length === 0)
@@ -426,7 +426,6 @@ $(function () {
     }
 
     $("#menu-wrapper").click(function (event) {
-        console.log('sdfsdf')
         event.stopPropagation();
         $("#hamburger-menu").toggleClass("open");
         $("#menu-container .menu-list").toggleClass("active");
@@ -460,6 +459,7 @@ $(function () {
 
 
 $(document).on("click", ".lang-flag", function () {
+    console.log('1111111')
     $(".language-dropdown").toggleClass("open");
 });
 

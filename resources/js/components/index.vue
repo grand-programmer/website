@@ -218,66 +218,6 @@
 
 
                     <div class="row pb-8" style="margin: 24px!important; justify-content: center;" >
-                        <div class="container-m">
-                            <a class="card1" href="#">
-                                <h3>Жисмоний шахслар учун</h3>
-                                <div class="go-corner" href="#">
-                                    <div class="go-arrow">
-                                        →
-                                    </div>
-                                </div>
-                            </a>
-                            <a class="card1" href="#">
-                                <h3>ТИФ иштирокчилари учун</h3>
-                                <div class="go-corner" href="#">
-                                    <div class="go-arrow">
-                                        →
-                                    </div>
-                                </div>
-                            </a>
-                            <a class="card1" href="#">
-                                <h3>Мурожаатлар</h3>
-                                <div class="go-corner" href="#">
-                                    <div class="go-arrow">
-                                        →
-                                    </div>
-                                </div>
-                            </a>
-                            <a class="card1" href="#">
-                                <h3>Сўровнома</h3>
-                                <div class="go-corner" href="#">
-                                    <div class="go-arrow">
-                                        →
-                                    </div>
-                                </div>
-                            </a>
-                            <a class="card1" href="#">
-                                <h3>Тўловлар ва вақт</h3>
-                                <div class="go-corner" href="#">
-                                    <div class="go-arrow">
-                                        →
-                                    </div>
-                                </div>
-                            </a>
-                            <a class="card1" href="#">
-                                <h3>Тадбиркорлар учун зарур маълумотлар</h3>
-                                <div class="go-corner" href="#">
-                                    <div class="go-arrow">
-                                        →
-                                    </div>
-                                </div>
-                            </a>
-                            <a class="card1" href="#">
-                                <h3>Коррупция тўғрисида хабар</h3>
-                                <div class="go-corner" href="#">
-                                    <div class="go-arrow">
-                                        →
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-
-
                         <router-link to="/page/zhismoniy-shahslar-tomonidan-avtotransport-vositalarni-olib-otish-tartibi" class="card">
                             <div class="bolim_image"><img src="/img/service/user-icon.png"></div>
                             <div class="bolim_title">Жисмоний шахслар учун</div>
