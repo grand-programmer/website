@@ -1,0 +1,15 @@
+.vacancy-card{
+    padding: 20px 50px;
+    .v-card-item{
+        padding-bottom: 20px;
+        border-bottom: 1px solid #ededed;
+        .vac-card__unit{
+            margin-top: 10px;
+            color: #39ae69;
+        }
+        p{
+            line-height: 20px;
+            padding: 5px 0;
+        }
+    }
+}

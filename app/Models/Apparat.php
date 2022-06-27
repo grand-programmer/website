@@ -20,5 +20,6 @@ class Apparat extends Model
         'rahbariyat',
         'org_name',
         'image',
+        'sort',
     ];
 }

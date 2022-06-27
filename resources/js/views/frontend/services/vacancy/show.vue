@@ -15,12 +15,8 @@
                     <div class="single-vacancy">
                         <div class="container">
                             <div class="single-vacancy__main">
-                                <div class="d-flex flex-col gap-2 single-vacancy__main-left"><h2
-                                    class="single-vacancy__main-title">
-                                    {{ vacancy.seven ? vacancy.seven : '' }}
-                                </h2>
-
-                                    <div class="d-flex align-items-center gap-3"><i class="inline-block">
+                                <div class="d-flex flex-col gap-2 single-vacancy__main-left">
+                                    <div class="d-flex align-items-center gap-3"> <i class="inline-block">
                                         <svg width="25" height="25" viewBox="0 0 18 18" fill="none"
                                              xmlns="http://www.w3.org/2000/svg">
                                             <path fill-rule="evenodd" clip-rule="evenodd"
@@ -37,13 +33,21 @@
                                                   fill="#fff"></path>
                                         </svg>
                                     </i>
-                                        <h2 class="single-vacancy__main-wage">
-                                            {{ vacancy.boshqarma_name }}
-                                        </h2></div>
+                                    <h2
+                                    class="single-vacancy__main-title">
+                                        {{ vacancy.boshqarma_name }}{{ vacancy.guruh? ', '+vacancy.guruh:'' }}{{ (vacancy.lavozim)?', '+vacancy.lavozim:'' }}
+                                </h2>
+                                        </div>
+
+
+                                        <h2 class="single-vacancy__main-wage" style="margin-left: 40px">
+                                            {{ vacancy.seven ? vacancy.seven : '' }}
+
+                                        </h2>
                                 </div>
                                 <div class="not-print d-flex flex-col single-vacancy__main-right gap-2">
 
-                                    <v-tooltip nudge-left="0" bottom v-if="vacancy.applied">
+                                    <v-tooltip nudge-left="0" bottom v-if="vacancy.applied ">
                                         <template v-slot:activator="{ on, attrs }">
                                             <v-fab-transition>
                                                 <v-btn
@@ -152,13 +156,13 @@
 
                             <ul class="nav nav-tabs" id="vacancyTab" role="tablist">
                                 <li class="nav-item" @click="showTab=1">
-                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#education"
+                                    <a class="nav-link " :class="showTab===1?'active':''" id="home-tab" data-toggle="tab" href="#education"
                                        role="tab"
                                        aria-controls="home" aria-selected="false">Эълон ҳақида
                                     </a>
                                 </li>
-                                <li class="nav-item" @click="showTab=2">
-                                    <a class="nav-link" id="cert-tab" data-toggle="tab" href="#cert" role="tab"
+                                <li class="nav-item" @click="showTab=2" >
+                                    <a class="nav-link" id="cert-tab" :class="showTab===2?'active':''" data-toggle="tab" href="#cert" role="tab"
                                        aria-controls="profile" aria-selected="false">Аризангиз ҳолати
                                     </a>
                                 </li>
@@ -292,7 +296,7 @@
                                 fill="#39ae69"></path>
                         </svg></i></span>
                                     <p>{{ vacancy.viewed }}</p></div>
-                                <span class="d-flex align-items-center gap-8px cursor-pointer"><i
+<!--                                <span class="d-flex align-items-center gap-8px cursor-pointer"><i
                                     class="inline-block">
                                     <svg width="24" height="24"
                                          viewBox="0 0 24 24" fill="none"
@@ -308,7 +312,7 @@
                               fill="#39ae69"></path>
                       </svg></i>
       Чоп этиш
-    </span></div>
+    </span>--></div>
                         </div>
                         <div class="vacancy-timeline" v-else>
                             <v-btn class="ariza-button"  color="primary"
@@ -317,7 +321,7 @@
                                      large
                                      outlined
                                      raised
-                            ><h3>Ариза рақами 747231</h3></v-btn>
+                            ><h3>Ариза рақами {{ nomzod.kod ? nomzod.kod : '' }}</h3></v-btn>
                             <v-timeline
                                 dense
                                 clipped
@@ -326,21 +330,23 @@
 
                                 <v-timeline-item
                                     class="mb-4"
-                                    color="primary"
+                                    :color="status.applied?'primary':'grey'"
                                     icon-color="primary"
                                     small
+                                    :key="key"
+                                    v-for="(status,key) in statuses"
                                 >
-                                    <v-row justify="space-between">
+                                    <v-row justify="space-between" v-if="status">
                                         <v-col cols="10">
-                                            <h4 class="active"> Жўнатилган</h4>
-                                            <p> 16:59, 21 апр 2022</p>
-                                            <p>Сизнинг аризангиз кўриб чиқиш учун юборилди.</p>
+                                            <h4 :class="status.applied?'active':''"> {{ status.bosqich_nomi }}</h4>
+                                            <p> {{ status.created_at?status.created_at:'' }}</p>
+                                            <p>{{status.comment}}</p>
 
 
                                         </v-col>
                                     </v-row>
                                 </v-timeline-item>
-
+<!--
                                 <v-timeline-item
                                     class="mb-4"
                                     color="primary"
@@ -461,7 +467,7 @@
                                             </p>
                                         </v-col>
                                     </v-row>
-                                </v-timeline-item>
+                                </v-timeline-item>-->
 
                             </v-timeline>
                         </div>
@@ -504,6 +510,8 @@ export default {
                 },
             ],
             vacancy: null,
+            statuses:null,
+            nomzod:null,
             showTab: 1,
             boshqarma: null
         }
@@ -515,11 +523,15 @@ export default {
             await axios.get("/api/v1/ex_api/vacancy-show?vacancy=" + this.$route.params.id).then(function (response) {
                 if (response.status === 200) {
                     _app.vacancy = response.data.data.vakant;
+                    _app.statuses = response.data.data.status;
+                    _app.nomzod = (typeof response.data.data.nomzodlar[0]!=='undefined')?response.data.data.nomzodlar[0]:null;
+                    if(typeof _app.$route.query.status!=='undefined') _app.showTab=2;
                 }
                 /*if (response.data.success === true) {
                     _app.vacancies=_app.filteredVacancies=response.data.data;
                 }*/
             });
+
             if (this.vacancy && this.vacancy.b_id > 0)
                 await axios.get("/api/v1/ex_api/boshqarma-show?boshqarma=" + this.vacancy.b_id).then(function (response) {
                     if (response.status === 200) {
@@ -534,9 +546,9 @@ export default {
 
             const _this = this;
             setTimeout(() => {
-                if (_this.$auth.user() != null) _this.$router.push('/services/vacancy/' + _this.vacancy.id + '/resume'); else {
+                if (_this.$auth.user() != null) _this.$router.push('/services/vacancy/'+ _this.vacancy.id +'/resume'); else {
                     _this.$toast.warning('Хизматдан фойдаланиш учун авторизациядан ўтишингиз лозим');
-                    _this.$router.push('/login?request=/services/vacancy/' + _this.vacancy.id + '/resume');
+                    _this.$router.push('/login?request=/services/vacancy/resume');
                 }
             }, 500)
 

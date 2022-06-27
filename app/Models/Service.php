@@ -21,5 +21,7 @@ class Service extends Model
         'type',
         'app_id',
         'status',
+        'user_id',
+        'app_num',
     ];
 }

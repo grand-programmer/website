@@ -37,6 +37,8 @@ import VueMask from 'v-mask'
 
 Vue.use(VueMask);
 
+///^[-+][0-9]+\.[0-9]+[eE][-+]?[0-9]+$
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -129,7 +131,8 @@ Vue.use(auth, {
 });
 
 import './src/http-common'
-
+import FlagIcon from 'vue-flag-icon'
+Vue.use(FlagIcon);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -236,6 +239,11 @@ const app = new Vue({
     vuetify,
     store,
     i18n,
+/*    filters: {
+        reverse(documents) {
+            return documents.slice().reverse()
+        }
+    },*/
 }).$mount('#app');
 
 router.beforeEach((to, from, next) => {

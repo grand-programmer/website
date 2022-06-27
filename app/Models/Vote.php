@@ -12,7 +12,9 @@ class Vote extends Model
     protected $table = 'votes';
     protected $fillable = [
         'question',
-        'answers'
+        'answers',
+        'sort',
+        'active'
     ];
 /*    public function resolveRouteBinding($value,$field=NULL)
     {

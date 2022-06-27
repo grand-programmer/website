@@ -3,6 +3,21 @@
   --mycolor: #39ae69;
 }
 
+.primary-color {
+  color: var(--mycolor);
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
 /*  One css */
 /*@font-face {
     font-family: 'Bauhaus 93';
@@ -32,7 +47,7 @@
 @font-face {
   font-family: "bauhaus93";
   src: url(/fonts/bauhaus93.eot?1bb8075ef0197936434234e6ee9c18a2);
-  src: url(/fonts/bauhaus93.woff?954164e88b41e33b608b7b97e8098326) format("woff"), url(/fonts/bauhaus93.ttf?6d785e39c9cd2bb2f181f041ed3c747d) format("truetype"), url(/fonts/bauhaus93.svg?9892d4919a083f890ab7a8a93d802b92) format("svg");
+  src: url(/fonts/bauhaus93.woff?954164e88b41e33b608b7b97e8098326) format("woff"), url(/fonts/bauhaus93.ttf?6d785e39c9cd2bb2f181f041ed3c747d) format("truetype"), url(/fonts/bauhaus93.svg?5c6a8b8f3d45a160c51fcb7195274cf5) format("svg");
 }
 .menu_slider {
   position: absolute;
@@ -98,7 +113,7 @@ ul.nav.navbar-nav li ul.dropdown-menu {
   position: fixed;
   display: block;
   width: 100%;
-  height: 60px;
+  height: 71px;
   z-index: 10000;
   background-color: #fff;
   box-shadow: 0 0 7px 0 #ccc;
@@ -364,6 +379,9 @@ ul#pills-tab {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.portfolio_single.p1 .portfolio-card .portfolio_image img {
+  width: 100%;
 }
 .portfolio_single.p1 .portfolio-card .portfolio_text {
   display: flex;
@@ -753,6 +771,7 @@ section.content_block .tab-content > .tab-pane {
   margin-bottom: 20px;
   margin-left: auto;
   margin-right: auto;
+  margin-top: 30px;
 }
 
 #section2 .bolimlar {
@@ -956,6 +975,33 @@ body .main_menu_area .navbar.navbar-default .navbar-collapse .nav.navbar-nav li 
   color: #fff;
   margin: 0;
 }
+.all_news.service {
+  top: 50%;
+  bottom: auto;
+  right: -315px;
+  width: 370px;
+  position: fixed;
+  border-radius: 100px;
+  border: 5px solid #fff;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-right: 0;
+  background-color: #fff;
+  height: 55px;
+}
+.all_news.service p {
+  color: var(--mycolor);
+  font-weight: bold;
+}
+.all_news.service:hover {
+  right: 0;
+}
+.all_news.service img {
+  width: 43px;
+  position: absolute;
+  left: 0px;
+  fill: #fff;
+}
 
 #carouselExampleDark {
   box-shadow: 0 0 13px 0px #ccc;
@@ -1144,8 +1190,13 @@ a.read_more {
 .contact_faq .chose_inner_area .panel-group .panel-default .panel-heading .panel-title {
   border-bottom: 1px solid #39ae69;
 }
+.contact_faq .chose_inner_area .panel-group .panel-default .panel-heading .panel-title a {
+  line-height: 20px;
+}
 .contact_faq .chose_inner_area .panel-group .panel-default .panel-heading .panel-title a span {
   background: #39ae69;
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
 
 .blog_comment_from .comm_tittle {
@@ -1573,6 +1624,16 @@ body .logo_area {
 ul.nav.navbar-nav li ul.dropdown-menu {
   position: absolute;
   transition: unset;
+  max-height: 500px;
+  overflow-y: auto;
+  overflow-x: visible;
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
+ul.nav.navbar-nav li ul.dropdown-menu::-webkit-scrollbar {
+  display: none;
 }
 ul.nav.navbar-nav li ul.dropdown-menu.submenu {
   max-height: 70vh;
@@ -1672,6 +1733,7 @@ ul.nav.navbar-nav li ul.dropdown-menu.submenu {
   margin-left: 15px;
   font-size: 16px;
   font-weight: 500;
+  max-width: calc(100% - 65px);
 }
 
 .calendar_content-item span {
@@ -1872,7 +1934,7 @@ a.read_more {
   min-height: 50px;
   box-shadow: inset 0 0 24px 15px #ccc6;
   width: 100%;
-  margin-top: 60px;
+  margin-top: 71px;
   position: relative;
   z-index: 3;
 }
@@ -1891,11 +1953,11 @@ a.read_more {
 
 .print_dialog.container {
   position: relative;
-  padding-bottom: 0;
+  /*    padding-bottom: 100px;*/
   background-color: #fff;
+  padding-bottom: 0;
 }
 .print_dialog.container > div {
-  height: 750px;
   width: 100%;
   position: relative;
 }
@@ -1933,6 +1995,10 @@ a.read_more {
 .print_dialog.container > div .dialog_content {
   position: relative;
   z-index: 5;
+  height: 70vh;
+  overflow-y: auto;
+  padding-bottom: 100px;
+  margin-top: 20px;
 }
 .print_dialog.container > div .dialog_content table:first-child {
   border: 1px solid #ccc;
@@ -2003,6 +2069,7 @@ a.read_more {
 .print_dialog.container .background {
   background-image: url(/img/icons/dialog_background.png);
   height: 500px;
+  background-repeat: no-repeat;
   background-size: contain;
   position: absolute;
   width: 500px;
@@ -2149,6 +2216,7 @@ a.read_more {
   height: 500px;
   background-size: contain;
   position: absolute;
+  background-repeat: no-repeat;
   width: 500px;
   right: 35px;
   bottom: 85px;
@@ -2185,6 +2253,7 @@ a.read_more {
   min-height: 800px;
   background-color: #fff;
   padding: 20px;
+  height: 100%;
 }
 .page-content .container {
   position: relative;
@@ -3120,7 +3189,7 @@ a.read_more {
 }
 .my-card .my-card-header .profile-icon-wrapper {
   padding: 14px;
-  width: 90px;
+  width: 94px;
   height: 90px;
   display: flex;
   align-items: center;
@@ -3132,6 +3201,7 @@ a.read_more {
 .my-card .my-card-header > p {
   padding-bottom: 10px;
   border-bottom: 1px solid #ccc;
+  /*min-height: 110px;*/
 }
 .my-card .my-card-header p:nth-of-type(1) {
   /* width: min-content; */
@@ -3231,7 +3301,7 @@ a.read_more {
 
 .one-page .footer_area {
   display: inline-flex;
-  z-index: 25;
+  z-index: 1;
   position: relative;
   background-color: #f3f3f3;
   width: 100%;
@@ -3747,6 +3817,8 @@ a.read_more {
   min-height: initial;
   height: initial !important;
   margin-bottom: -28px;
+  overflow: hidden;
+  position: relative;
   /*    .page-content{
           background-color:var(--mycolor);
       }*/
@@ -3758,6 +3830,24 @@ a.read_more {
 .section.customs-value-section .container.container--fluid .v-stepper {
   box-shadow: none;
   background: none;
+}
+.section.customs-value-section .container.container--fluid .v-stepper .yoriqnoma-text {
+  right: 32px;
+  top: 15px;
+  /* background-color: #39ae69; */
+  padding: 0 !important;
+  /* border-radius: 10px; */
+  color: #39ae69;
+  font-size: 16px;
+  border-bottom: 1px dashed;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  margin: 0;
+}
+.section.customs-value-section .container.container--fluid .v-stepper .yoriqnoma-text a {
+  font-weight: bold;
+  padding: 0;
 }
 .section.customs-value-section .container.container--fluid .v-stepper .v-stepper__header {
   background: none;
@@ -3952,6 +4042,22 @@ a.read_more {
   font-size: 18px;
 }
 
+.scroll_card {
+  display: flex !important;
+  flex-direction: column;
+  max-height: 500px;
+}
+.scroll_card .v-card__title {
+  background-color: var(--mycolor);
+}
+.scroll_card .v-card__text {
+  flex-grow: 1;
+  overflow: auto;
+}
+.scroll_card .row {
+  transition: all 1s;
+}
+
 .append-slot {
   margin-top: 7px;
   font-size: 20px;
@@ -4052,6 +4158,14 @@ a.read_more {
   color: #39ae69 !important;
   font-weight: bold !important;
   border: 1px solid #39ae69 !important;
+  max-width: 100%;
+}
+.button-style-1 .v-btn__content {
+  max-width: 100%;
+}
+.button-style-1 .v-btn__content span {
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .errors_under_button {
@@ -4059,6 +4173,16 @@ a.read_more {
   width: 100%;
   display: flex;
   flex-direction: column;
+  top: 75px;
+}
+
+label sup {
+  top: 0;
+  font-size: 100%;
+}
+
+.bottom-required-info {
+  color: var(--mycolor);
 }
 
 .btn:hover {
@@ -4086,6 +4210,9 @@ a.read_more {
 .mening_arizalarim .user_info p {
   text-align: center;
   line-height: 30px;
+}
+.mening_arizalarim tr {
+  cursor: pointer;
 }
 
 .mening_profilim {
@@ -4186,14 +4313,18 @@ html body .Vue-Toastification__container.top-right {
 }
 .boshqarma-page .orinbosarlar .orinbosar .orinbosar-header .profile-icon-wrapper {
   height: 116px;
+  /*
+                  .profile-icon {
+                      background-size: 230%;
+                      background-position: 60% 27%;
+                  }*/
 }
-.boshqarma-page .orinbosarlar .orinbosar .orinbosar-header .profile-icon-wrapper .profile-icon {
-  background-size: 230%;
-  background-position: 60% 27%;
+.boshqarma-page .rais {
+  padding: 60px 0 !important;
 }
 .boshqarma-page .rais .wrapper .col-2 .profile-icon-wrapper .profile-icon {
-  background-size: 154%;
-  background-position-x: 71%;
+  /*            background-size: 154%;
+              background-position-x: 71%;*/
   height: 248px;
 }
 
@@ -4266,4 +4397,35 @@ html body .Vue-Toastification__container.top-right {
     cursor: pointer;
     color: #000;
   }
+}
+.page-content div.row .fixed-color-tabs.v-tabs {
+  padding: 35px 0;
+}
+.page-content div.row .fixed-color-tabs.v-tabs .v-tab:not(.v-tab--active) {
+  color: var(--mycolor);
+  border: 1px dashed var(--mycolor);
+}
+.page-content div.row .fixed-color-tabs.v-tabs .v-tab.v-tab--active {
+  background-color: var(--mycolor);
+  color: #fff;
+}
+.page-content div.row .fixed-color-tabs.v-tabs > .v-tabs-bar {
+  background-color: transparent;
+}
+.page-content div.row .fixed-color-tabs.theme--light.v-tabs-items {
+  padding: 0;
+}
+.page-content div.row .fixed-color-tabs.theme--light.v-tabs-items .v-expansion-panel-header {
+  background-color: #dee8e2;
+}
+
+.checkbox_agree .label-roziman {
+  color: var(--mycolor);
+}
+.checkbox_agree .v-icon.v-icon {
+  font-size: 35px;
+}
+
+#accordionExamplemarkaziy .my-card .my-card-header .profile-icon-wrapper {
+  padding: 0;
 }

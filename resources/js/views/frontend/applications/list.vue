@@ -17,20 +17,20 @@
                         class="mx-auto mt-9"
 
                     >
-                        <v-navigation-drawer permanent class="accent-4 w-100" >
+                        <v-navigation-drawer permanent class="accent-4 w-100">
                             <v-list>
-<!--                                <v-list-item>
-                                    <v-list-item-avatar>
-                                        <v-img :src="'/public/images/users/'+ $auth.user().id +'.jpg'"></v-img>
-                                    </v-list-item-avatar>
-                                </v-list-item>-->
+                                <!--                                <v-list-item>
+                                                                    <v-list-item-avatar>
+                                                                        <v-img :src="'/public/images/users/'+ $auth.user().id +'.jpg'"></v-img>
+                                                                    </v-list-item-avatar>
+                                                                </v-list-item>-->
 
-                                <v-list-item link >
+                                <v-list-item link>
                                     <v-list-item-content>
                                         <v-list-item-title class="text-h6">
-                                            {{$auth.user().first_name}} {{$auth.user().sur_name}}
+                                            {{ $auth.user().first_name }} {{ $auth.user().sur_name }}
                                         </v-list-item-title>
-                                        <v-list-item-subtitle>{{$auth.user().email}}</v-list-item-subtitle>
+                                        <v-list-item-subtitle>{{ $auth.user().email }}</v-list-item-subtitle>
                                     </v-list-item-content>
 
                                     <v-list-item-action>
@@ -65,19 +65,19 @@
                         </v-navigation-drawer>
                     </v-card>
 
-<!--                    <v-card class="p-3" elevation="1">
-                        <div class="d-flex align-items-center justify-space-between user_info">
-                            <img  :src="'/public/images/users/'+ $auth.user().id +'.jpg'" alt="Фойдаланувчи сурати">
-                            <p>
-                                {{$auth.user().first_name}} {{$auth.user().sur_name}} {{$auth.user().mid_name}}
-                            </p>
+                    <!--                    <v-card class="p-3" elevation="1">
+                                            <div class="d-flex align-items-center justify-space-between user_info">
+                                                <img  :src="'/public/images/users/'+ $auth.user().id +'.jpg'" alt="Фойдаланувчи сурати">
+                                                <p>
+                                                    {{$auth.user().first_name}} {{$auth.user().sur_name}} {{$auth.user().mid_name}}
+                                                </p>
 
-                        </div>
-                        <v-row>
+                                            </div>
+                                            <v-row>
 
-                        </v-row>
+                                            </v-row>
 
-                    </v-card>-->
+                                        </v-card>-->
                 </v-col>
                 <v-col cols="9">
                     <v-card class="mt-9 p-3" elevation="1">
@@ -89,6 +89,7 @@
                                     <v-row class=" mt-3">
                                         <v-col cols="2">
                                             <v-text-field
+                                                v-model="search_ariza_raqami"
                                                 label="Ариза рақами"
                                             ></v-text-field>
                                         </v-col>
@@ -103,10 +104,11 @@
                                             >
                                                 <template v-slot:activator="{ on, attrs }">
                                                     <v-text-field
-                                                        v-model="filter.date_sanadan"
+                                                        v-model="filter_date_sanadan"
                                                         label="Санадан"
                                                         prepend-icon="mdi-calendar"
                                                         readonly
+                                                        clearable
                                                         v-bind="attrs"
                                                         v-on="on"
                                                     ></v-text-field>
@@ -114,7 +116,7 @@
                                                 <v-date-picker
                                                     class="m-0"
                                                     :active-picker.sync="activePickerDan"
-                                                    v-model="filter.date_sanadan"
+                                                    v-model="filter_date_sanadan"
                                                     :max="(new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10)"
                                                     min="1950-01-01"
                                                     @change="save_sanadan"
@@ -132,31 +134,33 @@
                                             >
                                                 <template v-slot:activator="{ on, attrs }">
                                                     <v-text-field
-                                                        v-model="filter.date_sanagacha"
+                                                        v-model="filter_date_sanagacha"
                                                         label="Санагача"
                                                         prepend-icon="mdi-calendar"
                                                         readonly
+                                                        clearable
                                                         v-bind="attrs"
                                                         v-on="on"
                                                     ></v-text-field>
                                                 </template>
+<!--                                                :max="(new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10)"-->
                                                 <v-date-picker
                                                     class="m-0"
                                                     :active-picker.sync="activePickerGacha"
-                                                    v-model="filter.date_sanagacha"
-                                                    :max="(new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10)"
+                                                    v-model="filter_date_sanagacha"
                                                     min="1950-01-01"
                                                     @change="save_sanagacha"
                                                 ></v-date-picker>
                                             </v-menu>
                                         </v-col>
-                                        <v-col cols="3">
+                                        <v-col cols="4">
                                             <v-autocomplete
-                                                v-model="filter.type"
+                                                v-model="filter_type"
                                                 :items="types"
                                                 label="Ариза тури"
+                                                clearable
                                             ></v-autocomplete>
-                                        </v-col>
+                                        </v-col><!--
                                         <v-col cols="1" class="d-flex justify-content-center">
                                             <v-btn
                                                 fab
@@ -167,7 +171,7 @@
                                             >
                                                 <v-icon dark>mdi-magnify</v-icon>
                                             </v-btn>
-                                        </v-col>
+                                        </v-col>-->
                                     </v-row>
                                 </div>
 
@@ -180,17 +184,19 @@
                             <v-col cols="12">
                                 <v-data-table
                                     :headers="headers"
-                                    :items="apps"
+                                    :items="filter_apps"
                                     :items-per-page="5"
+                                    @click:row="gotoApp"
+                                    :loading="loadingApps"
                                 >
                                     <template v-slot:item.status="{ item }">
-                                        <v-chip
-                                            :color="getColor(item.status)"
+<!--                                        <v-chip
+                                            :color="getColor(item.status,item.type)"
                                             dark
 
-                                        >
-                                            {{ item.status }}
-                                        </v-chip>
+                                        >-->
+                                            {{ item.statusNm }}
+<!--                                        </v-chip>-->
                                     </template>
 
 
@@ -247,74 +253,70 @@ export default {
                 date_sanagacha: null,
                 type: null
             },
+            filter_type: null,
+            filter_date_sanadan: null,
+            filter_date_sanagacha: null,
+            search_ariza_raqami: null,
             headers: [
                 {
                     text: 'Ариза рақами',
                     align: 'start',
                     sortable: true,
-                    value: 'app_id',
+                    value: 'app_num',
                 },
                 {text: 'Берилган сана', value: 'created_at'},
-                {text: 'Хизмат номи',value: 'type'},
+                {text: 'Хизмат номи', value: 'type_name'},
                 {text: 'Ҳолати', align: 'center', value: 'status'},
             ],
-            apps: [
+            apps: [/*
                 {
                     app_id: 123,
                     created_at: "11-04-2021",
                     type: 'Ишга кириш учун ариза юбориш',
                     status: 'Тайёрланди',
-                },
-                {
-                    app_id: 15651,
-                    created_at: "25-03-2022",
-                    type: 'Божхона қиймати дастлабки қарорни олиш',
-                    status: 'Янги',
-                },
-                {
-                    app_id: 16516,
-                    created_at: "01-03-2022",
-                    type: 'Божхона органларига мурожаат юбориш',
-                    status: 'Жараёнда',
-                },
-                {
-                    app_id: 15651,
-                    created_at: "25-03-2022",
-                    type: 'Божхона қиймати дастлабки қарорни олиш',
-                    status: 'Янги',
-                },
-                {
-                    app_id: 16516,
-                    created_at: "01-03-2022",
-                    type: 'Божхона органларига мурожаат юбориш',
-                    status: 'Жараёнда',
-                },
-                {
-                    app_id: 15651,
-                    created_at: "25-03-2022",
-                    type: 'Божхона қиймати дастлабки қарорни олиш',
-                    status: 'Янги',
-                },
-                {
-                    app_id: 16516,
-                    created_at: "01-03-2022",
-                    type: 'Божхона органларига мурожаат юбориш',
-                    status: 'Жараёнда',
-                }
+                },*/
             ],
+            filter_apps: [],
             selectedItem: 0,
             items: [
-                { text: 'Профил', icon: 'mdi-account',link:'/profile' },
-                { text: 'Менинг аризаларим', icon: 'mdi-history', link:'/applications'},
-                { text: 'Хизматлар', icon: 'mdi-star', link:'/services'},
+                {text: 'Профил', icon: 'mdi-account', link: '/profile'},
+                {text: 'Менинг аризаларим', icon: 'mdi-history', link: '/applications'},
+                {text: 'Хизматлар', icon: 'mdi-star', link: '/services'},
             ],
+            statuses: [
+                {text: "Янги", value: 0},
+                {text: "Жараёнда", value: 1},
+                {text: "Жавоб берилган", value: 2},
+            ],
+            appLinks: [
+                "/services/vacancy/",
+                "/services/decisions/",
+                "/services/appeals/",
+            ],
+            loadingApps:true,
 
         }
     },
     mounted() {
-        if(!this.$auth.check()) this.$router.push('/login')
+        if (!this.$auth.check()) this.$router.push('/login');
+        this.loadingApps=true;
+        this.getServices()
+
+
     },
     watch: {
+        filter_date_sanadan(val) {
+            this.filterServices(val, 'dan');
+        },
+        filter_date_sanagacha(val) {
+            this.filterServices(val, 'gacha');
+        },
+        filter_type(val) {
+            this.filterServices(val, 'type');
+        },
+        search_ariza_raqami(val) {
+            this.filterServices(val)
+        },
         menu_sanadan(val) {
             val && setTimeout(() => (this.activePickerDan = 'YEAR'))
         },
@@ -323,9 +325,80 @@ export default {
         },
     },
     methods: {
-        getColor (status) {
-            if (status =='Жараёнда') return 'orange'
-            else if (status =='Янги') return 'green'
+        gotoApp(value) {
+            this.$router.push(value.link)
+        },
+        filterServices(val = null, type = 'raqam') {
+            switch (type) {
+                case 'dan' :
+                    if (val &&  val.length > 0) {
+                        this.filter_apps = this.apps.filter(obj => {
+                            let objdate = (new Date(obj.created_at)).getTime();
+                            let parts = val.split("-");
+                            let valdate = (new Date(parts[2]+'-' + parts[0]+'-'+parts[1])).getTime();
+                            return (valdate <= objdate)
+                            //return obj.app_num === val
+                        })
+                    } else this.filter_apps = this.apps;
+                    break;
+                case 'gacha' :
+                    if (val && val.length > 0) {
+                        this.filter_apps = this.apps.filter(obj => {
+                            let objdate = (new Date(obj.created_at));
+
+                            let parts = val.split("-");
+                            let valdate = (new Date(parts[2]+'-' + parts[0]+'-'+parts[1]));
+                            console.log(valdate)
+                            console.log(objdate)
+                            return (valdate >= objdate)
+                            //return obj.app_num === val
+                        })
+                    } else this.filter_apps = this.apps;
+                    break;
+                case 'type' :
+
+                    if ( val!==null && val >= 0) {
+                        this.filter_apps = this.apps.filter(obj => {
+                            return (val===obj.type)
+                        })
+                    } else this.filter_apps = this.apps;
+                    break;
+                default://'raqam' :
+                    this.filter_apps = this.apps.filter(obj => {
+                        return ((obj.app_num).indexOf(val) >= 0)
+                        //return obj.app_num === val
+                    })
+                    break;
+            }
+
+        },
+        getServices() {
+            const _this = this;
+            axios.get('/api/v1/auth/services').then(function (response) {
+                _this.loadingApps=false;
+                if (typeof response.status === 200 || response.data.status === 'success')
+                    _this.apps = [];
+                response.data.services.forEach((app_item) => {
+                    app_item.created_at = (new Date(app_item.created_at)).toLocaleDateString()
+                    app_item.type_name = _this.types.filter(obj => {
+                        return obj.value === app_item.type
+                    })[0].text
+                    _this.apps.push(app_item)
+                })
+                _this.filter_apps = _this.apps;
+            })
+        },
+        getColor(status, type = null) {
+            ///Dastlabki qaror
+            if (type === 1) {
+                if (status === 100) return 'green'
+                if (status == 110 || status == 115 || status == 130 || status == 135 || status == 140 || status == 145 || status == 155 || status == 160 || status == 160) return 'orange'; else return 'black'
+
+            }
+
+
+            if (status == 'Жараёнда') return 'orange'
+            else if (status == 'Янги') return 'green'
             else return 'black'
         },
         save_sanadan(date) {
@@ -338,3 +411,8 @@ export default {
 
 }
 </script>
+<style>
+.mening_arizalarim .v-chip__content {
+    font-size: 15px;
+    font-weight: 600;}
+</style>

@@ -101,13 +101,13 @@ class AuthController extends Controller
                         'scope' => 'customs_uz',
                     ]);
 
-
             if (!(DB::table('users')->where(['pin' => (int)$responseUser->json()['pin'], 'type' => 2])->exists())) {
                 if (DB::table('users')->where(
                     ['email' => $responseUser->json()['email'],
                         'pin' => $responseUser->json()['pin'],
 
                     ])->exists()) {
+
 
                     //$user=User::where(['email'=>$responseUser->json()['email']])->first();
                     $d = $responseUser->json();
@@ -145,10 +145,29 @@ class AuthController extends Controller
                     })->reject(function ($name) {
                         return empty($name);
                     });
-
                     $user = User::where(['email' => $responseUser->json()['email']])->firstOrFail();
                     $user->update($data->all());
                     $user->save();
+                    $png_url = $user->id . ".jpg";
+                    $path = public_path() . '/images/users/' . $png_url;
+                    if (!file_exists($path)) {
+
+                        try {
+                            $userPhoto = Http::acceptJson()->connectTimeout(15)->withBody(json_encode([
+                                "pinfl" => (string)$user->pin,
+                                "doc_give_date" => $user->_pport_issue_date,
+                            ]), 'application/json')
+                                ->post('http://192.168.214.124:9090/GetMIP2/rest/service_MIP2/getMipFoto',
+                                );
+                            //dd($userPhoto->json());
+                            $userPhoto = $userPhoto->json();
+                            $png_url = $user->id . ".jpg";
+                            $path = public_path() . '/images/users/' . $png_url;
+                            if (strlen($userPhoto['foto']) > 0)
+                                Image::make(base64_decode($userPhoto['foto']))->save($path);
+                        } catch (\Exception $e) {
+                        }
+                    }
 
                 } else {
                     $userData = $responseUser->json();
@@ -163,11 +182,11 @@ class AuthController extends Controller
                     ]), 'application/json')
                         ->post('http://192.168.214.124:9090/GetMIP2/rest/service_MIP2/getMipFoto',
                         );
-                    //dd($userPhoto->json());
+
                     $userPhoto = $userPhoto->json();
                     $png_url = $user->id . ".jpg";
                     $path = public_path() . '/images/users/' . $png_url;
-                    if(strlen($userPhoto['foto'])>0)
+                    if (strlen($userPhoto['foto']) > 0)
                         Image::make(base64_decode($userPhoto['foto']))->save($path);
 
                 }
@@ -175,8 +194,6 @@ class AuthController extends Controller
                                    "pinfl" => (string)$user->pin,
                                    "doc_give_date" => $user->_pport_issue_date,
                                ]));*/
-
-
 
 
             }

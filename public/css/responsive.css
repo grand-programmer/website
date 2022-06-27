@@ -395,7 +395,7 @@
     align-items: flex-start;
     -webkit-box-pack: justify;
     -ms-flex-pack: justify;
-    justify-content: space-between;
+    justify-content: center;
 }
 
 .header-logo {
@@ -497,12 +497,13 @@
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center;
-    margin-left: 15px;
+/*    margin-left: 15px;*/
 }
 
 .header-item a i {
     font-size: 25px;
     color: #249b73;
+    margin-right: 10px;
 }
 
 .header-item a.active {
@@ -1390,8 +1391,8 @@ a.openMenu1 {
 }
 
 .section .container-fluid .card {
-    width: 18%;
-    flex: 0 0 18%;
+    width: 100%;
+    flex: 0 0 20vw;
     background-color: #fff;
 
     margin: 1%;

@@ -79,6 +79,13 @@
                                                     rules="required"/>
                                             </v-col>
                                             <v-col cols="4">
+                                                <my-field
+                                                    title="Тартиби"
+                                                    v-model="organization.sort"
+                                                    name="sort"
+                                                    rules="required"/>
+                                            </v-col>
+                                            <v-col cols="4">
                                                 <ValidationProvider
                                                     v-slot="{ errors}"
                                                     name="Расми"

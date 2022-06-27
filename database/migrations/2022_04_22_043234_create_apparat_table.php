@@ -24,6 +24,7 @@ class CreateApparatTable extends Migration
             $table->integer('rahbariyat')->default(0);
             $table->string('org_name')->nullable();
             $table->string('image')->nullable();
+            $table->integer('sort')->nullable();
             $table->timestamps();
         });
     }

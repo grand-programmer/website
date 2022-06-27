@@ -78,6 +78,14 @@
                                                     name="add_phone"
                                                     rules="required"/>
                                             </v-col>
+
+                                            <v-col cols="4">
+                                                <my-field
+                                                    title="Тартиби"
+                                                    v-model="organization.sort"
+                                                    name="sort"
+                                                    rules="required"/>
+                                            </v-col>
                                             <v-col cols="4">
                                                 <ValidationProvider
                                                     v-slot="{ errors}"
@@ -225,7 +233,7 @@ export default {
             const _this = this;
             await api.readApparat(this.$route.params.id).then((response) => {
                 _this.organization = response.data.data;
-                _this.cropImg="/storage/uploads/markaziy/"+ _this.organization.rahbariyat.image;
+                _this.cropImg="/storage/uploads/markaziy/"+ _this.organization.image;
             }).catch((error) => {
                 this.$toast.error(`Маълумотларни юклашда хатолик содир бўлди!`)
                 this.$router.replace("/admin/rahbariyat").catch(() => {
@@ -246,6 +254,7 @@ export default {
                 form.append('lavozimi', _this.organization.lavozimi);
                 form.append('qabul', _this.organization.qabul);
                 form.append('phone', _this.organization.phone);
+                form.append('sort', _this.organization.sort);
                 //form.append('add_phone', _this.organization.add_phone);
                 //form.append('email', _this.organization.email);
                 form.append('rahbar', 0);

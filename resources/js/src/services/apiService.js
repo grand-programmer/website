@@ -130,6 +130,47 @@ const apiClient = {
         return await axios.delete(apiUrl + "events/" + id);
     },
     //////////////////////// My Events End /////////////////////////////
+    //////////////////////// My Votes Begin/////////////////////////////
+    async readVotes() {
+        return await axios.get(apiUrl + "votes");
+    },
+    async readVotesForFront() {
+        return await axios.get(apiUrl + "front/votes");
+    },
+    async addVote(requestData) {
+        return await axios.post(apiUrl + "votes", requestData);
+    },
+    async updateVote(id, requestData) {
+        return await axios.put(apiUrl + "votes/" + id, requestData);
+    },
+    async readVote(id) {
+        return await axios.get(apiUrl + "votes/" + id);
+    },
+    async deleteVote(id) {
+        return await axios.delete(apiUrl + "votes/" + id);
+    },
+    //////////////////////// My Votes End /////////////////////////////
+
+    //////////////////////// My Faqs Begin/////////////////////////////
+    async readFaqs() {
+        return await axios.get(apiUrl + "faqs");
+    },
+    async readFaqsForFront() {
+        return await axios.get(apiUrl + "front/faqs");
+    },
+    async addFaq(requestData) {
+        return await axios.post(apiUrl + "faqs", requestData);
+    },
+    async updateFaq(id, requestData) {
+        return await axios.put(apiUrl + "faqs/" + id, requestData);
+    },
+    async readFaq(id) {
+        return await axios.get(apiUrl + "faqs/" + id);
+    },
+    async deleteFaq(id) {
+        return await axios.delete(apiUrl + "faqs/" + id);
+    },
+    //////////////////////// My Faqs End /////////////////////////////
     //////////////////////// My Organizations Begin/////////////////////////////
     async readOrgs(requestData) {
         let str = "";
@@ -171,6 +212,11 @@ const apiClient = {
     },
     //////////////////////// My boshqarma End /////////////////////////////
 // ////////////////////// My rahbariyat Begin/////////////////////////////
+    async readMarkaziy() {
+        let str = "?markaziy=0";
+
+        return await axios.get(apiUrl + "apparat" + str);
+    },
     async readRahbariyats() {
         let str = "?rahbar=0";
 

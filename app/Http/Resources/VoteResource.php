@@ -22,6 +22,8 @@ class VoteResource extends JsonResource
             "id"=>$this->id,
             "question"=>$this->question,
             "answers"=>$answers->all(),
+            "sort"=>$this->sort,
+            "active"=>$this->active,
             "total"=>$total,
         ];
     }

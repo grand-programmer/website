@@ -155,6 +155,12 @@ export default {
         loadingBar,
         MySnack: () => import('../../views/dashboard/component/snack'),
     },
+    created() {
+        this.$store.commit('setLoading', true);
+        setTimeout(()=>{
+            this.$store.commit('setLoading', false);
+        },500)
+    },
     methods: {
         showProgress(show) {
             this.show = show;

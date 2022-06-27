@@ -115,14 +115,10 @@
                                         </p>
                                     </div>
                                     <!--                                <div class="col-md-5">
-
-
                                                                         <img src="/storage/territorial-organs/0.jpg" class="card-img" alt="...">
-
-
                                                                     </div>-->
                                 </div>
-                                <ul class="list-unstyled">
+                                <ul class="list-unstyled text-left">
                                     <li>
                                         <i class="icon icon-location-pin"></i> Тошкент шаҳар, И.Каримов кўчаси
                                         3-уй
@@ -151,10 +147,10 @@
                                     </li>
                                 </ul>
 
-                                <a class="read-more ff-clearsans_bold" href="#">
+<!--                                <a class="read-more ff-clearsans_bold" href="#">
                                     Саҳифага ўтиш
                                     <i class="fa fa-chevron-right ml-2"></i>
-                                </a>
+                                </a>-->
 
 
 
@@ -171,14 +167,10 @@
                                         </p>
                                     </div>
                                     <!--                                <div class="col-md-5">
-
-
                                                                         <img src="/storage/territorial-organs/3.jpg" class="card-img" alt="...">
-
-
                                                                     </div>-->
                                 </div>
-                                <ul class="list-unstyled">
+                                <ul class="list-unstyled text-left">
                                     <li>
                                         <i class="icon icon-location-pin"></i> Андижон шахар, А.Юлдашев кўчаси 48-уй
                                     </li>
@@ -225,14 +217,10 @@
                                         </p>
                                     </div>
                                     <!--                             <div class="col-md-5">
-
-
                                                                      <img src="/storage/territorial-organs/6.jpg" class="card-img" alt="...">
-
-
                                                                  </div>-->
                                 </div>
-                                <ul class="list-unstyled">
+                                <ul class="list-unstyled text-left">
                                     <li>
                                         <i class="icon icon-location-pin"></i> Бухоро шаҳри, Б. Нақшбанд кўчаси  352 - уй
                                     </li>
@@ -281,14 +269,10 @@
                                         </p>
                                     </div>
                                     <!--                              <div class="col-md-5">
-
-
                                                                       <img src="/storage/territorial-organs/8.jpg" class="card-img" alt="...">
-
-
                                                                   </div>-->
                                 </div>
-                                <ul class="list-unstyled">
+                                <ul class="list-unstyled text-left">
                                     <li>
                                         <i class="icon icon-location-pin"></i> Жиззах вилояти, Жиззах шаҳри, Тошкент кўчаси, 5-уй
                                     </li>
@@ -337,14 +321,10 @@
                                         </p>
                                     </div>
                                     <!--                                <div class="col-md-5">
-
-
                                                                         <img src="/storage/territorial-organs/10.jpg" class="card-img" alt="...">
-
-
                                                                     </div>-->
                                 </div>
-                                <ul class="list-unstyled">
+                                <ul class="list-unstyled text-left">
                                     <li>
                                         <i class="icon icon-location-pin"></i> Қарши шаҳри А.Навоий шоҳ кўчаси 3-А уй
                                     </li>
@@ -393,14 +373,10 @@
                                         </p>
                                     </div>
                                     <!--                                <div class="col-md-5">
-
-
                                                                         <img src="/storage/territorial-organs/12.jpg" class="card-img" alt="...">
-
-
                                                                     </div>-->
                                 </div>
-                                <ul class="list-unstyled">
+                                <ul class="list-unstyled text-left">
                                     <li>
                                         <i class="icon icon-location-pin"></i> Навоий шаҳри Ғалаба шоҳ кўчаси 176а-уй
                                     </li>
@@ -446,14 +422,10 @@
                                         </p>
                                     </div>
                                     <!--                                <div class="col-md-5">
-
-
                                                                         <img src="/storage/territorial-organs/14.jpg" class="card-img" alt="...">
-
-
                                                                     </div>-->
                                 </div>
-                                <ul class="list-unstyled">
+                                <ul class="list-unstyled text-left">
                                     <li>
                                         <i class="icon icon-location-pin"></i>Наманган шаҳри, Ирригатор кўчаси, 2-а уй
                                     </li>
@@ -502,14 +474,10 @@
                                         </p>
                                     </div>
                                     <!--                                <div class="col-md-5">
-
-
                                                                         <img src="/storage/territorial-organs/18.jpg" class="card-img" alt="...">
-
-
                                                                     </div>-->
                                 </div>
-                                <ul class="list-unstyled">
+                                <ul class="list-unstyled text-left">
                                     <li>
                                         <i class="icon icon-location-pin"></i> Самарқанд шаҳри Бўстонсарой кўчаси 85А-уй
                                     </li>
@@ -557,14 +525,10 @@
                                         </p>
                                     </div>
                                     <!--                                <div class="col-md-5">
-
-
                                                                         <img src="/storage/territorial-organs/22.jpg" class="card-img" alt="...">
-
-
                                                                     </div>-->
                                 </div>
-                                <ul class="list-unstyled">
+                                <ul class="list-unstyled text-left">
                                     <li>
                                         <i class="icon icon-location-pin"></i> Термиз шаҳри Ислом Каримов кўчаси, 286-уй
                                     </li>
@@ -613,14 +577,10 @@
                                         </p>
                                     </div>
                                     <!--                                <div class="col-md-5">
-
-
                                                                         <img src="/storage/territorial-organs/24.jpg" class="card-img" alt="...">
-
-
                                                                     </div>-->
                                 </div>
-                                <ul class="list-unstyled">
+                                <ul class="list-unstyled text-left">
                                     <li>
                                         <i class="icon icon-location-pin"></i> Гулистон шаҳар, Сайхун кўчаси 22-уй
                                     </li>
@@ -669,14 +629,10 @@
                                         </p>
                                     </div>
                                     <!--                                <div class="col-md-5">
-
-
                                                                         <img src="/storage/territorial-organs/0.jpg')}}" class="card-img" alt="...">
-
-
                                                                     </div>-->
                                 </div>
-                                <ul class="list-unstyled">
+                                <ul class="list-unstyled text-left">
                                     <li>
                                         <i class="icon icon-location-pin"></i> Тошкент шаҳри, Бунёдкор шоҳ кўчаси, 35-уй
                                     </li>
@@ -725,14 +681,10 @@
                                         </p>
                                     </div>
                                     <!--<div class="col-md-5">
-
-
                                         <img src="/storage/territorial-organs/27.jpg')}}" class="card-img" alt="...">
-
-
                                     </div>-->
                                 </div>
-                                <ul class="list-unstyled">
+                                <ul class="list-unstyled text-left">
                                     <li>
                                         <i class="icon icon-location-pin"></i> Tошкент вилояти, Нурафшон шаҳри, Тошкент йўли кўчаси, 63-уй
                                     </li>
@@ -781,14 +733,10 @@
                                         </p>
                                     </div>
                                     <!--                                <div class="col-md-5">
-
-
                                                                         <img src="/storage/territorial-organs/30.jpg')}}" class="card-img" alt="...">
-
-
                                                                     </div>-->
                                 </div>
-                                <ul class="list-unstyled">
+                                <ul class="list-unstyled text-left">
                                     <li>
                                         <i class="icon icon-location-pin"></i> Фарғона шаҳар, ал-Фарғоний кўчаси, 52а-уй
                                     </li>
@@ -837,14 +785,10 @@
                                         </p>
                                     </div>
                                     <!--                              <div class="col-md-5">
-
-
                                                                       <img src="/storage/territorial-organs/33.jpg')}}" class="card-img" alt="...">
-
-
                                                                   </div>-->
                                 </div>
-                                <ul class="list-unstyled">
+                                <ul class="list-unstyled text-left">
                                     <li>
                                         <i class="icon icon-location-pin"></i> Хоразм вилояти Урганч шаҳар Ж.Мангуберди кўчаси 95-уй
                                     </li>
@@ -893,14 +837,10 @@
                                         </p>
                                     </div>
                                     <!--                                <div class="col-md-5">
-
-
                                                                         <img src="/storage/territorial-organs/35.jpg')}}" class="card-img" alt="...">
-
-
                                                                     </div>-->
                                 </div>
-                                <ul class="list-unstyled">
+                                <ul class="list-unstyled text-left">
                                     <li>
                                         <i class="icon icon-location-pin"></i> Нукус шаҳри Т.Қайыпбергенов кўчаси, 57-уй
                                     </li>
@@ -908,7 +848,7 @@
                                         <i class="icon icon-phone"></i> (0-361) 224-90-86
                                         <span class="badge ff-clearsans_bold text-uppercase">
                                             ишонч телефони</span> <br> (0-361) 224-97-00
-                                        </li>
+                                    </li>
                                     <li>
                                         <i class="icon icon-clock"></i>
                                         Иш вақти
@@ -948,6 +888,7 @@
         name:"Hududiy",
         methods:{
             goHudud(hudud){
+                console.log('asdasd')
                 $(".hududiy_boshqarmalar a").click();
                 this.$router.push('/page/boshqarma/'+hudud);
             }

@@ -25,6 +25,7 @@ Route::group(['prefix' => 'v1'], function(){
         Route::post('login', 'App\Http\Controllers\AuthController@login');
         Route::group(['middleware' => 'auth:api'], function(){
             Route::get('user', 'App\Http\Controllers\AuthController@user');
+            Route::get('services', 'App\Http\Controllers\UserController@getServices');
             Route::post('logout', 'App\Http\Controllers\AuthController@logout');
             Route::get('refresh', 'App\Http\Controllers\AuthController@refresh');
         });
@@ -53,6 +54,9 @@ Route::group(['prefix' => 'v1'], function(){
     Route::resource('/events','App\Http\Controllers\EventController');
     Route::resource('/organizations','App\Http\Controllers\OrganizationController');
     Route::resource('/apparat','App\Http\Controllers\ApparatController');
+    Route::resource('/faqs','App\Http\Controllers\FaqController');
+    Route::get('/front/faqs','App\Http\Controllers\FaqController@getForFront');
+    Route::get('/votes/front','App\Http\Controllers\VoteController@indexFront');
     Route::resource('/votes','App\Http\Controllers\VoteController');
     Route::put('/votescount/{vote}','App\Http\Controllers\VoteController@updateCount');
 

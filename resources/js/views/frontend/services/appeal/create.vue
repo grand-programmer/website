@@ -210,7 +210,7 @@
                                                 </template>
                                             </v-checkbox>
                                             <v-dialog
-                                                v-model="dialog"
+                                                v-model="dialog1"
                                                 @click:outside="agreement=false"
                                                 width="600px"
                                             >
@@ -267,29 +267,6 @@
                                                         praesent semper suscipit lobortis nam. Justo malesuada cursus ac
                                                         nunc litora nunc. Tellus ac, in lobortis nunc, montes lectus
                                                         purus fermentum.
-                                                        vulputate ultrices pellentesque vel id fermentum morbi. Tortor
-                                                        et. Adipiscing augue lorem cum non lacus, rutrum sodales laoreet
-                                                        duis tortor, modi placerat facilisis et malesuada eros ipsum,
-                                                        vehicula tempus. Ac vivamus amet non aliquam venenatis lectus,
-                                                        sociosqu adipiscing consequat nec arcu odio. Blandit orci nec
-                                                        nec, posuere in pretium, enim ut, consectetuer nullam urna,
-                                                        risus vel. Nullam odio vehicula massa sed, etiam sociis mauris,
-                                                        lacus ullamcorper, libero imperdiet non sodales placerat justo
-                                                        vehicula. Nec morbi imperdiet. Fermentum sem libero iaculis
-                                                        bibendum et eros, eget maecenas non nunc, ad pellentesque. Ut
-                                                        nec diam elementum interdum. Elementum vitae tellus lacus vitae,
-                                                        ipsum phasellus, corporis vehicula in ac sed massa vivamus,
-                                                        rutrum elit, ultricies metus volutpat.
-                                                        Semper wisi et, sollicitudin nunc vestibulum, cursus accumsan
-                                                        nunc pede tempus mi ipsum, ligula sed. Non condimentum ac dolor
-                                                        sit. Mollis eu aliquam, vel mattis mollis massa ut dolor ante,
-                                                        tempus lacinia arcu. Urna vestibulum lorem, nulla fermentum,
-                                                        iaculis ut congue ac vivamus. Nam libero orci, pulvinar nulla,
-                                                        enim pellentesque consectetuer leo, feugiat rhoncus rhoncus vel.
-                                                        Magna sociosqu donec, dictum cursus ullamcorper viverra.
-                                                        Ultricies quis orci lorem, suspendisse ut vestibulum integer,
-                                                        purus sed lorem pulvinar habitasse turpis.
-                                                        +
                                                     </v-card-text>
                                                     <v-card-actions>
                                                         <v-spacer></v-spacer>
@@ -310,13 +287,14 @@
                                                     </v-card-actions>
                                                 </v-card>
                                             </v-dialog>
+
                                         </div>
                                     </v-col>
                                     <v-col cols="6">
                                         <div class="buttons">
                                             <v-btn type="button" class="primary orange" to="/services/appeals">Ортга
                                             </v-btn>
-                                            <v-btn class="primary" type="submit">Жўнатиш</v-btn>
+                                            <v-btn class="primary" :loading="jonatishLoading" type="submit">Жўнатиш</v-btn>
                                         </div>
                                     </v-col>
                                 </div>
@@ -353,7 +331,9 @@ export default {
     name: 'ServiceAppeals',
     data() {
         return {
+            baseURL: window.location.href,
             dialog: false,
+            dialog1: false,
             agreement: false,
             appeal_send: false,
             yur_shaxs: false,
@@ -416,6 +396,7 @@ export default {
                 retry: false,
                 work: '',
                 yur_shaxs: '',
+                personPin:'',
                 email: '',
                 phone: '',
                 text: '',
@@ -425,7 +406,13 @@ export default {
             },
             date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
             menu: false,
+            regions:[],
+            jonatishLoading:false,
         }
+    },
+    created(){
+        this.getPasportData()
+        this.getBoshqarmalar()
     },
     computed: {
         computedDateFormatted() {
@@ -444,38 +431,104 @@ export default {
         Info
     },
     methods: {
+        async getPasportData(){
+            const _this=this;
+            //let md=md5( this.passport.seriya + this.passport.number + "(:" + this.passport.date)
+            await axios.get('/api/v1/ex_api/getPData',{params: {
+                    pasnum: _this.$route.query.pasnum,
+                    //key:md,
+                    pasdata: _this.$route.query.pasdate,
+                }
+
+            }).then(function (response){
+                if(typeof response.data.data.birth_date ==='undefined') {
+                    _this.$toast.error("Маълумотлар мос келмади!")
+                    _this.$router.push('/services/appeals/');
+                }
+                else{
+                    _this.appeal.date_birth=_this.formatDate(response.data.data.birth_date)
+                    _this.appeal.personPin=response.data.data.pinpp
+                    _this.appeal.name=response.data.data.namelatin
+                    _this.appeal.surname=response.data.data.patronymlatin
+                    _this.appeal.lastname=response.data.data.surnamelatin
+
+                }
+            })
+        },
+        async getBoshqarmalar() {
+            const _this = this
+            await axios.get('/api/v1/ex_api/boshqarma').then(function (result) {
+                _this.adresatlar=[];
+                result.data.data.forEach(function (item) {
+                    if (!(['1790', '1791', '1701'].includes(item['kod_id'])))
+                        _this.adresatlar.push({
+                            'value': item['kod_id'],
+                            'text': (item['name']).replace("Ўзбекистон Республикаси Давлат божхона қўмитасининг ", "")//(item['name']).substring(("Ўзбекистон Республикаси Давлат божхона қўмитасининг ").length)
+                        })
+                })
+            })
+        },
         //create appeal
         async create_appeal() {
+            const _this=this;
+            this.jonatishLoading=true;
             const isValid = await this.$refs.create_apple.validate();
-            if (isValid && this.appeal.file !=null && this.appeal.file.size > 5 * 1024 * 1024)
-                this.alert = {
+            if (isValid && this.appeal.file !=null && this.appeal.file.size > 5 * 1024 * 1024) {
+                _this.$toast.error("Юкланган файл ҳажми 5мбдан ошмаслиги керак!");
+                this.jonatishLoading = false;
+            }
+/*                this.alert = {
                     value: true,
                     alert_type: "error",
                     alert_text: "Юкланган файл ҳажми 5мбдан ошмаслиги керак!"
-                }
-            if (isValid && !this.agreement)
-                this.alert = {
+                }*/
+            if (isValid && !this.agreement) {
+                _this.$toast.error("Фойдаланиш қоидаларига розилик билдиришингиз лозим!");
+                this.jonatishLoading = false;
+            }
+
+                /*this.alert = {
                     value: true,
                     alert_type: "error",
                     alert_text: "Фойдаланиш қоидаларига розилик билдиришингиз лозим!"
-                }
+                }*/
             if (isValid && this.agreement) {
-                const $appeal = this.appeal;
-                var data=new FormData();
+                const appeal = this.appeal;
+                const data=new FormData();
+                data.append("firstName",this.appeal.name);
+                data.append("surName",this.appeal.surname);
+                data.append("lastName",this.appeal.lastname);
+                data.append("address",this.appeal.address);
+                data.append("birthDate",this.appeal.date_birth.split('.').reverse().join('-'));
+                data.append("phoneNumber",this.appeal.phone);
+                data.append("locationId",this.appeal.state);
+                data.append("email",this.appeal.email);
+                data.append("profession",this.appeal.work);
+                data.append("position",this.yur_shaxs);
+                data.append("appealType",this.appeal.retry);
+                data.append("messageBody",this.appeal.text);
+                if(this.appeal.file) data.append("multipartFile",this.appeal.file);
+                data.append("positionNm",this.appeal.yur_shaxs);
+                data.append("personPin",this.appeal.personPin);
+
+
+                /*
                 for (var key in this.appeal) {
                         data.append(key, this.appeal[key]);
-                }
+                }*/
                 //data.append("_method", "put");
+// .post('/api/v1/appeal', data, {
 
                 axios
-                    .post('/api/v1/appeal', data, {
+                    .post('/api/v1/ex_api/appeal', data, {
                         headers: {
-                            'Content-Type': 'multipart/form-data'
+                            //'Content-Type': 'multipart/form-data'
                         }
                     })
                     .then((resp) => {
-                        if (resp.status == 200) {
+                        if (resp.status === 200) {
                             //reset form
+                            _this.jonatishLoading=false;
                             this.appeal = {
                                 surname: '',
                                 name: '',
@@ -497,37 +550,60 @@ export default {
                                                                     value: false,
                                                                 }*/
                                 this.appeal_send = true;
-                                this.sended_appeal = $appeal;
-                                this.sended_appeal.id = resp.data.number;
-                                this.sended_appeal.number = resp.data.code;
-                                this.sended_appeal.created_at = resp.data.created_at;
+                                //this.sended_appeal = appeal;
+                                this.sended_appeal.appNum = resp.data.number;
+                                this.sended_appeal.code = resp.data.code;
+                                if(typeof resp.data.appeal.appeal!='undefined' && resp.data.appeal.appeal!==null)
+                                this.sended_appeal.appNum = (typeof resp.data.appeal.appeal.appNum !='undefined')?resp.data.appeal.appeal.appNum:null;
+
+                                this.sended_appeal.lastName = (typeof resp.data.appeal.appeal.lastName !='undefined')?resp.data.appeal.appeal.lastName:null;
+                                this.sended_appeal.firstName = (typeof resp.data.appeal.appeal.firstName !='undefined')?resp.data.appeal.appeal.firstName:null;
+                                this.sended_appeal.surName = (typeof resp.data.appeal.appeal.surName !='undefined')?resp.data.appeal.appeal.surName:null;
+                                this.sended_appeal.address = (typeof resp.data.appeal.appeal.address !='undefined')?resp.data.appeal.appeal.address:null;
+                                this.sended_appeal.birthDate = (typeof resp.data.appeal.appeal.birthDate !='undefined')?resp.data.appeal.appeal.birthDate:null;
+                                this.sended_appeal.profession = (typeof resp.data.appeal.appeal.profession !='undefined')?resp.data.appeal.appeal.profession:null;
+                                this.sended_appeal.position = (typeof resp.data.appeal.appeal.position !='undefined')?resp.data.appeal.appeal.position:null;
+                                this.sended_appeal.positionNm = (typeof resp.data.appeal.appeal.positionNm !='undefined')?resp.data.appeal.appeal.positionNm:null;
+                                this.sended_appeal.phoneNumber = (typeof resp.data.appeal.appeal.phoneNumber !='undefined')?resp.data.appeal.appeal.phoneNumber:null;
+                                this.sended_appeal.email = (typeof resp.data.appeal.appeal.email !='undefined')?resp.data.appeal.appeal.email:null;
+                                this.sended_appeal.fileQuestion = (typeof resp.data.appeal.appeal.fileQuestion !='undefined')?resp.data.appeal.appeal.fileQuestion:null;
+                                this.sended_appeal.status = (typeof resp.data.appeal.appeal.status !='undefined')?resp.data.appeal.appeal.status:null;
+                                this.sended_appeal.statusNm = (typeof resp.data.appeal.appeal.statusNm !='undefined')?resp.data.appeal.appeal.statusNm:null;
+                                this.sended_appeal.messageBody = (typeof resp.data.appeal.appeal.messageBody !='undefined')?resp.data.appeal.appeal.messageBody:null;
+                                //this.sended_appeal.created_at = resp.data.created_at;
                                 //this.$router.push({path: '/services/appeals?appeal_id=' + resp.data.number + '&appeal_code=' + resp.data.code})
                             }, 1000)
 
 
                         } else {
-                            this.alert = {
+                            this.jonatishLoading=false;
+                            this.$toast.error("Маълумотларни юборишда хатолик юз берди!");
+                            /*this.alert = {
                                 value: true,
                                 alert_type: "error",
                                 alert_text: "Маълумотларни юборишда хатолик юз берди!",
-                            }
+                            }*/
                         }
 
                     })
                     .catch((e) => {
-                        this.alert = {
+                        this.jonatishLoading=false;
+                        _this.$toast.error(Object.values(e.response.data.error)[0])
+                        /*this.alert = {
                             value: true,
                             alert_type: "error",
                             alert_text: Object.values(e.response.data.error),
                             multiple: true
-                        }
+                        }*/
                     })
                 setTimeout(() => {
                     this.alert = {
                         value: false,
                     }
                 }, 4000)
-            }
+            } else
+            this.jonatishLoading = false;
+
         },
         formatDate(date) {
             if (!date) return null

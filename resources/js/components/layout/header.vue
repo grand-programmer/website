@@ -112,7 +112,7 @@
                                                 color="primary"
                                             >
                                                 <!--                                            <v-img :src="'/public/images/users/'+ $auth.user().id +'.jpg'"></v-img>-->
-                                                <v-icon>mdi-account</v-icon>
+                                                <v-icon size="x-large" color="#fff">mdi-account</v-icon>
 
                                             </v-btn>
                                             <p style="    width: min-content; font-size: 12px; text-align: center; margin: 0 10px; font-weight: 600;">
@@ -143,7 +143,7 @@
                                 <span id="lang_selected" title="Tilni tanlang">ЎЗБ</span>
 
                                 <div id="lang_selector" class="language-dropdown">
-                                    <label for="toggle" class="lang-flag lang-en"
+                                    <label class="lang-flag lang-en"
                                            title="Tilni tanlang">
                                         <span class="flag"></span>
                                     </label>
@@ -179,7 +179,7 @@
                             <!-- menu-wrapper -->
                             <ul class="menu-list accordion " style="margin-top: 25px">
 
-                                <li id="main-menu" class="toggle accordion-toggle"
+                                <li id="main-menu11" class="toggle accordion-toggle"
                                     :class="($route.params.id==link.id) ? 'active' : '' "
                                     v-for="(link,index) in links" :key="index">
                                     <router-link class="nav-link dropdown-toggle" data-bs-toggle="dropdown"
@@ -225,7 +225,6 @@
                                     </ul>
 
 
-
                                 </li>
 
 
@@ -233,68 +232,67 @@
     margin-left: auto;
     margin-right: auto;">
 
-                                        <div class="hududiy_boshqarmalar">
+                                    <div class="hududiy_boshqarmalar">
 
-                                            <a href=".hududiy.section" data-toggle="collapse" role="button"
-                                               aria-expanded="false" class="d-inline">
-                                                <i class="fas fa-map-marker-alt mr-1 "></i>
-                                                <span class="tort">Ҳудудий бошқармалар</span>
-                                            </a>
-                                            <!--                                <ul class="dropdown-menu">
-                                                                                <li><a href="contact.html">Contact</a></li>
-                                                                                <li><a href="contact-2.html">Contact - 02</a></li>
-                                                                            </ul>-->
-                                        </div>
-                                        <!--Kabinetga kirish-->
-                                        <div class="d-flex">
-                                            <v-menu offset-y left v-if="$auth.check()">
-                                                <template v-slot:activator="{ on, attrs }">
-                                                    <div
-                                                        v-bind="attrs"
-                                                        v-on="on"
-                                                        class="d-flex align-items-center"
+                                        <a href=".hududiy.section" data-toggle="collapse" role="button"
+                                           aria-expanded="false" class="d-inline">
+                                            <i class="fas fa-map-marker-alt mr-1 "></i>
+                                            <span class="tort">Ҳудудий бошқармалар</span>
+                                        </a>
+                                        <!--                                <ul class="dropdown-menu">
+                                                                            <li><a href="contact.html">Contact</a></li>
+                                                                            <li><a href="contact-2.html">Contact - 02</a></li>
+                                                                        </ul>-->
+                                    </div>
+                                    <!--Kabinetga kirish-->
+                                    <div class="d-flex">
+                                        <v-menu offset-y left v-if="$auth.check()">
+                                            <template v-slot:activator="{ on, attrs }">
+                                                <div
+                                                    v-bind="attrs"
+                                                    v-on="on"
+                                                    class="d-flex align-items-center"
+                                                >
+                                                    <v-btn
+                                                        class="mr-1"
+                                                        elevation="0"
+                                                        x-small
+                                                        fab
+                                                        color="primary"
                                                     >
-                                                        <v-btn
-                                                            class="mr-1"
-                                                            elevation="0"
-                                                            x-small
-                                                            fab
-                                                            color="primary"
-                                                        >
-                                                            <!--                                            <v-img :src="'/public/images/users/'+ $auth.user().id +'.jpg'"></v-img>-->
-                                                            <v-icon>mdi-account</v-icon>
+                                                        <!--                                            <v-img :src="'/public/images/users/'+ $auth.user().id +'.jpg'"></v-img>-->
+                                                        <v-icon>mdi-account</v-icon>
 
-                                                        </v-btn>
-                                                        <p style="    width: min-content; font-size: 12px; text-align: center; margin: 0 10px; font-weight: 600;">
-                                                            {{ $auth.user().first_name }} {{ $auth.user().sur_name }}</p>
-                                                    </div>
-                                                </template>
-                                                <v-list><!--
+                                                    </v-btn>
+                                                    <p style="    width: min-content; font-size: 12px; text-align: center; margin: 0 10px; font-weight: 600;">
+                                                        {{ $auth.user().first_name }} {{ $auth.user().sur_name }}</p>
+                                                </div>
+                                            </template>
+                                            <v-list><!--
                                     <v-list-item to="/services">Менинг аризаларим</v-list-item>-->
-                                                    <v-list-item to="/profile">Менинг профилим</v-list-item>
-                                                    <v-list-item to="/applications">Менинг аризаларим</v-list-item>
-                                                    <!--                      <v-list-item> <v-list-item-title>Settings</v-list-item-title></v-list-item>-->
-                                                    <v-list-item @click.prevent="$auth.logout({
+                                                <v-list-item to="/profile">Менинг профилим</v-list-item>
+                                                <v-list-item to="/applications">Менинг аризаларим</v-list-item>
+                                                <!--                      <v-list-item> <v-list-item-title>Settings</v-list-item-title></v-list-item>-->
+                                                <v-list-item @click.prevent="$auth.logout({
                         makeRequest: true,
                         redirect: {name: 'login'},
                     })" href="#">Чиқиш
-                                                    </v-list-item>
-                                                </v-list>
-                                            </v-menu>
-                                            <router-link v-if="!$auth.check()" to="/login"><i
-                                                class="fas fa-sign-in-alt"></i>
-                                            </router-link>
-                                        </div>
-                                        <!--end kabinet area-->
+                                                </v-list-item>
+                                            </v-list>
+                                        </v-menu>
+                                        <router-link v-if="!$auth.check()" to="/login"><i
+                                            class="fas fa-sign-in-alt"></i>
+                                        </router-link>
+                                    </div>
+                                    <!--end kabinet area-->
 
 
                                     <!--Language area-->
                                     <div class="mm-lang">
 
 
-
-                                        <div id="lang_selector" class="language-dropdown">
-                                            <label for="toggle" class="lang-flag lang-en"
+                                        <div id="lang_selector1" class="language-dropdown">
+                                            <label class="lang-flag lang-en"
                                                    title="Tilni tanlang">
                                                 <span class="flag"></span>
                                             </label>
@@ -406,26 +404,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // language
 
-$(document).ready(function () {
-    $(".lang-flag").click(function () {
-        $(".language-dropdown").toggleClass("open");
-    });
-    $("ul.lang-list li").click(function () {
-        $("ul.lang-list li").removeClass("selected");
-        $(this).addClass("selected");
-        if ($(this).hasClass('lang-en')) {
-            $(".language-dropdown").find(".lang-flag").addClass("lang-en").removeClass("lang-es").removeClass("lang-pt");
-            $("#lang_selected").html("<span>ЎЗБ</span>")
-        } else if ($(this).hasClass('lang-pt')) {
-            $(".language-dropdown").find(".lang-flag").addClass("lang-pt").removeClass("lang-es").removeClass("lang-en");
-            $("#lang_selected").html("<span>РУС</span>")
-        } else {
-            $(".language-dropdown").find(".lang-flag").addClass("lang-es").removeClass("lang-en").removeClass("lang-pt");
-            $("#lang_selected").html("<span>ENG</span>")
-        }
+$(document).click(function(e)
+{
+    let container = $(".header-lang");
+
+    // if the target of the click isn't the container nor a descendant of the container
+    if (!container.is(e.target) && container.has(e.target).length === 0)
+    {
         $(".language-dropdown").removeClass("open");
-    });
-})
+    }
+});
+
 //end language
 $(function () {
     function slideMenu() {
@@ -465,7 +454,31 @@ $(function () {
                 .find(".menu-link")
                 .removeClass("active");
         });
+
+
 }); // jQuery load
+
+
+$(document).on("click", ".lang-flag", function () {
+    $(".language-dropdown").toggleClass("open");
+});
+
+
+$(document).on("click", "ul.lang-list li", function () {
+    $("ul.lang-list li").removeClass("selected");
+    $(this).addClass("selected");
+    if ($(this).hasClass('lang-en')) {
+        $(".language-dropdown").find(".lang-flag").addClass("lang-en").removeClass("lang-es").removeClass("lang-pt");
+        $("#lang_selected").html("<span>ЎЗБ</span>")
+    } else if ($(this).hasClass('lang-pt')) {
+        $(".language-dropdown").find(".lang-flag").addClass("lang-pt").removeClass("lang-es").removeClass("lang-en");
+        $("#lang_selected").html("<span>РУС</span>")
+    } else {
+        $(".language-dropdown").find(".lang-flag").addClass("lang-es").removeClass("lang-en").removeClass("lang-pt");
+        $("#lang_selected").html("<span>ENG</span>")
+    }
+    $(".language-dropdown").removeClass("open");
+});
 
 </script>
 <style>
@@ -655,11 +668,20 @@ $(function () {
     display: none !important;
 }
 
+#menu-container .menu-list.accordion {
+    display: none;
+}
+
 
 @media (max-width: 1480px) {
     #menu-wrapper {
         display: block !important;
     }
+
+    #menu-container .menu-list.accordion {
+        display: block !important;
+    }
+
 }
 
 @media (max-width: 576px) {
@@ -672,8 +694,6 @@ $(function () {
     .menu-list {
         margin-top: 5px !important;
     }
-
-
 
 
 }

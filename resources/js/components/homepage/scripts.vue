@@ -830,6 +830,7 @@ export default {
 
         },
         createRootPieChart() {
+            console.log('sad')
             this.route.dispose()
             this.route = am5.Root.new('columnchart2');
             this.route._logo = false;
@@ -979,7 +980,7 @@ export default {
 
 
         },
-        pieChart() {
+       async pieChart() {
             let root = this.route
 // Set themes
 // https://www.amcharts.com/docs/v5/concepts/themes/
@@ -1024,11 +1025,30 @@ export default {
 
 // Set data
 // https://www.amcharts.com/docs/v5/charts/percent-charts/pie-chart/#Setting_data
+
+/*
+            await am5.net.load("api/v1/stat?name=avto&month="+this.month+"&year="+this.year).then(function (result) {
+                // This gets executed when data finishes loading
+                // ... do something
+                const m = am5.JSONParser.parse(result.response);
+                //const m = JSON.parse(result.response);
+                //data = m.data;
+                data=JSON.parse(JSON.stringify(m.data));
+                //data.sort((a, b) => (a.import < b.import) ? 1 : -1)
+                xAxis.data.setAll(data);
+
+            }).catch(function (result) {
+                // This gets executed if there was an error loading URL
+                // ... handle error
+                console.log("Error loading " + result);
+            });
+*/
+
+
             series.data.setAll([
-                {value: 10, category: "One"},
-                {value: 9, category: "Two"},
-                {value: 6, category: "Three"},
-                {value: 5, category: "Four"},
+                {value: 10, category: "Енгил"},
+                {value: 9, category: "Оғир"},
+                {value: 6, category: "Автобус"},
 
             ]);
 

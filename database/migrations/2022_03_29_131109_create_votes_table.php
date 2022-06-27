@@ -17,6 +17,8 @@ class CreateVotesTable extends Migration
             $table->id();
             $table->string('question');
             $table->longText('answers');
+            $table->integer('active')->default(0);
+            $table->integer('sort')->default(0);
             $table->timestamps();
         });
     }
