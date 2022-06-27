@@ -278,6 +278,7 @@
         line-height: 30px;
         padding-bottom: 30px;
         padding-top: 35px;
+
     }
 
     .chose_inner_area .panel-group .panel-default .panel-heading .panel-title a span {
@@ -300,6 +301,7 @@
     }
 
     .slider_inner .slider_text h3 {
+
         font-size: 22px;
     }
 
@@ -307,10 +309,12 @@
     /*    height: 400px !important;*/
     /*}*/
     .slider_inner.main_slider_middle .slider_text {
+        padding-left: 10px;
         top: 70px;
     }
 
     .slider_inner .slider_text {
+        padding-left: 10px;
         top: 70px;
     }
 
@@ -1630,19 +1634,7 @@ a.openMenu1 {
     }
 }
 
-@media (max-width: 590px) {
-    .section .container-fluid .card {
-        width: 100%;
-        flex: 0 0 100%;
 
-    }
-    .f_navigation_widget ul li {
-      width: auto;
-        padding-right: 5px;
-        float: left;
-        overflow: hidden;
-    }
-}
 
 @media (max-width: 1000px) {
     .all_news {
@@ -1661,40 +1653,40 @@ a.openMenu1 {
         display: none !important;
     }
 
-    .section .card:nth-child(4) {
-        display: none;
-    !important;
-    }
+    /*.section .card:nth-child(4) {*/
+    /*    display: none;*/
+    /*!important;*/
+    /*}*/
 
-    .section .card:nth-child(5) {
-        display: none;
-    !important;
-    }
+    /*.section .card:nth-child(5) {*/
+    /*    display: none;*/
+    /*!important;*/
+    /*}*/
 
-    .section .card:nth-child(6) {
-        display: none;
-    !important;
-    }
+    /*.section .card:nth-child(6) {*/
+    /*    display: none;*/
+    /*!important;*/
+    /*}*/
 
-    .section .card:nth-child(7) {
-        display: none;
-    !important;
-    }
+    /*.section .card:nth-child(7) {*/
+    /*    display: none;*/
+    /*!important;*/
+    /*}*/
 
-    .section .card:nth-child(8) {
-        display: none;
-    !important;
-    }
+    /*.section .card:nth-child(8) {*/
+    /*    display: none;*/
+    /*!important;*/
+    /*}*/
 
-    .section .card:nth-child(9) {
-        display: none;
-    !important;
-    }
+    /*.section .card:nth-child(9) {*/
+    /*    display: none;*/
+    /*!important;*/
+    /*}*/
 
-    .section .card:nth-child(10) {
-        display: none;
-    !important;
-    }
+    /*.section .card:nth-child(10) {*/
+    /*    display: none;*/
+    /*!important;*/
+    /*}*/
 
     .news-content #yangi:nth-child(5) {
         display: none;
@@ -1707,7 +1699,119 @@ a.openMenu1 {
     }
 
 }
+/** mobil bo'limlar***/
+
+* {
+    transition: all 0.3s ease-out;
+}
 
 
 
+.container-m {
+    width: 100%;
+    height: 100%;
+    display: none;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.container-m h3 {
+    text-align: center;
+    color: #262626;
+    font-size: 17px;
+    line-height: 24px;
+    font-weight: 550;
+    margin-bottom: 4px;
+}
+
+.container-m p {
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 20px;
+    color: #666666;
+}
+.container-m p.small {
+    font-size: 14px;
+}
+
+.go-corner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    overflow: hidden;
+    top: 0;
+    right: 0;
+    background-color: #26a65b;
+    border-radius: 0 4px 0 32px;
+}
+
+.go-arrow {
+    margin-top: -4px;
+    margin-right: -4px;
+    color: white;
+    font-family: courier, sans;
+}
+
+.card1 {
+    display: block;
+    position: relative;
+    width: 262px;
+    background-color: #f2f8f9;
+    border-radius: 4px;
+    padding: 16px 20px;
+    margin: 3px;
+    text-decoration: none;
+    z-index: 0;
+    overflow: hidden;
+}
+.card1:before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: -16px;
+    right: -16px;
+    background: #26a65b;
+    height: 32px;
+    width: 32px;
+    border-radius: 32px;
+    transform: scale(1);
+    transform-origin: 50% 50%;
+    transition: transform 0.25s ease-out;
+}
+.card1:hover:before {
+    transform: scale(21);
+}
+
+.card1:hover p {
+    transition: all 0.3s ease-out;
+    color: rgba(255, 255, 255, 0.8);
+}
+.card1:hover h3 {
+    transition: all 0.3s ease-out;
+    color: #ffffff;
+}
+
+@media (max-width: 590px) {
+    .container-m{
+        display: flex;!important;
+    }
+    .section .card{
+        display: none!important;
+    }
+    .section .container-fluid .card {
+        width: 100%;
+        flex: 0 0 100%;
+
+    }
+    .f_navigation_widget ul li {
+        width: auto;
+        padding-right: 5px;
+        float: left;
+        overflow: hidden;
+    }
+}
 

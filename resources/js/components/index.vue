@@ -211,12 +211,71 @@
                 <!--==========End Main Slider area==========-->
                 <component is="script" src="js/theme.js"></component>
             </div>
-            <div class="section ">
+            <div class="section">
                 <div class="row"><h3 class="text-center section_title">БЎЛИМЛАР</h3></div>
                 <div class="container-fluid">
 
 
-                    <div class="row pb-8" style="margin: 0 24px!important; justify-content: center;">
+
+                    <div class="row pb-8" style="margin: 24px!important; justify-content: center;" >
+                        <div class="container-m">
+                            <a class="card1" href="#">
+                                <h3>Жисмоний шахслар учун</h3>
+                                <div class="go-corner" href="#">
+                                    <div class="go-arrow">
+                                        →
+                                    </div>
+                                </div>
+                            </a>
+                            <a class="card1" href="#">
+                                <h3>ТИФ иштирокчилари учун</h3>
+                                <div class="go-corner" href="#">
+                                    <div class="go-arrow">
+                                        →
+                                    </div>
+                                </div>
+                            </a>
+                            <a class="card1" href="#">
+                                <h3>Мурожаатлар</h3>
+                                <div class="go-corner" href="#">
+                                    <div class="go-arrow">
+                                        →
+                                    </div>
+                                </div>
+                            </a>
+                            <a class="card1" href="#">
+                                <h3>Сўровнома</h3>
+                                <div class="go-corner" href="#">
+                                    <div class="go-arrow">
+                                        →
+                                    </div>
+                                </div>
+                            </a>
+                            <a class="card1" href="#">
+                                <h3>Тўловлар ва вақт</h3>
+                                <div class="go-corner" href="#">
+                                    <div class="go-arrow">
+                                        →
+                                    </div>
+                                </div>
+                            </a>
+                            <a class="card1" href="#">
+                                <h3>Тадбиркорлар учун зарур маълумотлар</h3>
+                                <div class="go-corner" href="#">
+                                    <div class="go-arrow">
+                                        →
+                                    </div>
+                                </div>
+                            </a>
+                            <a class="card1" href="#">
+                                <h3>Коррупция тўғрисида хабар</h3>
+                                <div class="go-corner" href="#">
+                                    <div class="go-arrow">
+                                        →
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
 
 
                         <router-link to="/page/zhismoniy-shahslar-tomonidan-avtotransport-vositalarni-olib-otish-tartibi" class="card">
@@ -303,8 +362,12 @@
                 </div>
 
 
+
+
+                </div>
+
                 <!--==========End Portfolio area==========-->
-            </div>
+
             <div class="section yangiliklar" id="section3">
 
                 <news-in-home></news-in-home>
