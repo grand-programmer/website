@@ -499,6 +499,7 @@
 .header-item a i {
     font-size: 25px;
     color: #249b73;
+    margin-right: 10px;
 }
 
 .header-item a.active {
@@ -1387,7 +1388,7 @@ a.openMenu1 {
 
 .section .container-fluid .card {
     width: 100%;
-    flex: 0 0 18%;
+    flex: 0 0 20vw;
     background-color: #fff;
 
     margin: 1%;

@@ -1838,6 +1838,29 @@
                                                                                     v-else>ТИФ ТН коди бўйича берилган қарор</span>
 
                                                                             </v-btn>
+                                                                            <div class="errors_under_button">
+                                                                                <ValidationProvider
+                                                                                    name="ТИФ ТН коди бўйича берилган қарор рақами"
+                                                                                    v-slot="{ errors }">
+                                                                                    <input type="hidden"
+                                                                                           name="application_tftn_qaror_number"
+                                                                                           :value="application.tovarlar[key].product.tftnqaror.number">
+                                                                                    <span class="red--text">{{
+                                                                                            errors[0]
+                                                                                        }}</span>
+                                                                                </ValidationProvider>
+                                                                                <ValidationProvider
+                                                                                    name="ТИФ ТН коди бўйича берилган қарор санаси"
+                                                                                    v-slot="{ errors }">
+                                                                                    <input type="hidden"
+                                                                                           name="application_tftn_qaror_sanasi"
+                                                                                           :value="application.tovarlar[key].product.tftnqaror.date">
+                                                                                    <span
+                                                                                        v-if="application.tovarlar[key].product.tftnqaror.number">{{
+                                                                                            errors[0]
+                                                                                        }}</span>
+                                                                                </ValidationProvider>
+                                                                            </div>
 
                                                                         </v-col>
                                                                     </template>
@@ -1958,6 +1981,29 @@
                                                                                     v-else>Илгари қабул қилинган дастлабки қарор</span>
 
                                                                             </v-btn>
+                                                                            <div class="errors_under_button">
+                                                                                <ValidationProvider
+                                                                                    name="Илгари қабул қилинган дастлабки қарор рақами"
+                                                                                    v-slot="{ errors }">
+                                                                                    <input type="hidden"
+                                                                                           name="application_tftn_qaror_number"
+                                                                                           :value="application.tovarlar[key].product.old_decision.number">
+                                                                                    <span class="red--text">{{
+                                                                                            errors[0]
+                                                                                        }}</span>
+                                                                                </ValidationProvider>
+                                                                                <ValidationProvider
+                                                                                    name="Илгари қабул қилинган дастлабки қарор санаси"
+                                                                                    v-slot="{ errors }">
+                                                                                    <input type="hidden"
+                                                                                           name="application_tftn_qaror_sanasi"
+                                                                                           :value="application.tovarlar[key].product.old_decision.date">
+                                                                                    <span
+                                                                                        v-if="application.tovarlar[key].product.old_decision.number">{{
+                                                                                            errors[0]
+                                                                                        }}</span>
+                                                                                </ValidationProvider>
+                                                                            </div>
 
                                                                         </v-col>
                                                                     </template>
@@ -2096,12 +2142,12 @@
                                                                             </v-expansion-panel-header>
                                                                             <v-expansion-panel-content>
                                                                                 <ValidationProvider :vid="'attribute'+i"
-                                                                                                    :name="item+' - усулни қўлламаслик сабаби'"
+                                                                                                    :name="item + ' - усулни қўлламаслик сабаби'"
                                                                                                     rules="required"
                                                                                                     v-slot="{ errors }"
-                                                                                                    :ref="'usultext' + key +'-'+ i">
+                                                                                                    :ref="'usultext' + key + '-' + i">
                                                                                     <v-text-field
-                                                                                        :name="'product_usul'+i"
+                                                                                        :name="'1product_usul'+i"
                                                                                         class="product_usul"
                                                                                         v-model="application.tovarlar[key].product.usul_text[i]"
                                                                                         filled
@@ -2116,17 +2162,23 @@
                                                                 </v-col>
                                                                 <v-col cols="12">
 
-                                                                    <v-textarea
-                                                                        label="Қўшича маълумотлар ва изоҳлар"
-                                                                        rows="4"
-                                                                        filled
-                                                                        no-resize
-                                                                        v-model="application.tovarlar[key].product.comment"
+                                                                    <ValidationProvider
+                                                                        name="Қўшича маълумотлар ва изоҳлар"
+                                                                        v-slot="{ errors }">
+                                                                        <v-textarea
+                                                                            label="Қўшича маълумотлар ва изоҳлар"
+                                                                            rows="4"
+                                                                            filled
+                                                                            no-resize
+                                                                            v-model="application.tovarlar[key].product.comment"
 
-                                                                    >
+                                                                        >
 
-                                                                    </v-textarea>
-
+                                                                        </v-textarea>
+                                                                        <span class="red--text">{{
+                                                                                errors[0]
+                                                                            }}</span>
+                                                                    </ValidationProvider>
                                                                 </v-col>
                                                             </v-row>
                                                         </ValidationObserver>
@@ -2217,6 +2269,14 @@
             <!--            <input type="hidden" id="FOLDER_ID" name="FOLDER_ID" value="0058338434">-->
 
         </form>
+        <a class="all_news service" target="_blank" href="https://t.me/dastlabkiqaror">
+            <img src="/public/images/telegram.png">
+
+
+            <p> Саволларингизни йўлланг
+                <br>
+                @dastlabkiqaror
+            </p></a>
     </div>
 </template>
 <script>
@@ -2244,6 +2304,84 @@ export default {
 
             this.tovarIndex = id;
         },
+        getField(val) {
+            return this.fields.filter((obj) => {
+                if (obj.key === val) return obj.value
+            })
+        },
+        setYukErrors(errors) {
+            const _this = this;
+            if (errors) {
+                let errorfield = [];
+                Object.keys(errors).forEach(keyItem => {
+                    if (typeof _this.getField(keyItem)[0] !== 'undefined' && typeof _this.getField(keyItem)[0].value !== 'undefined') {
+                        errorfield[_this.getField(keyItem)[0].value] = [errors[keyItem]];
+                    }
+                });
+                /*
+
+                                errors.forEach(function (keyItem, errorItem) {
+                                    console.log(keyItem)
+                                    console.log(errorItem)
+                                    if (typeof _this.getField(keyItem)[0] !== 'undefined' && typeof _this.getField(keyItem)[0].value !== 'undefined') {
+                                        errorfield[_this.getField(keyItem)[0].value] = [errorItem];
+                                    }
+                                    console.log(errorfield)
+                                });*/
+                this.$refs.create_customs_yuk_kuzatuv_value.setErrors(errorfield)
+            }
+        },
+        setProductErrors(errors) {
+            const _this = this;
+            if (errors) {
+                let errorfield = [];
+                let tab = 4;
+                Object.keys(errors).forEach(keyItem => {
+                    if (typeof _this.getField(keyItem)[0] !== 'undefined' && typeof _this.getField(keyItem)[0].value !== 'undefined') {
+                        errorfield[_this.getField(keyItem)[0].value] = [errors[keyItem]];
+                        if (typeof _this.getField(keyItem)[0].tab != 'undefined' && _this.getField(keyItem)[0].tab < tab) {
+                            tab = _this.getField(keyItem)[0].tab;
+                        }
+                    }
+                });
+
+                if (tab === 1) {
+                    _this.application.tovarlar[_this.tovarIndex].tab = 0;
+
+                }
+                else if(tab === 2)
+                {
+                    _this.application.tovarlar[_this.tovarIndex].tab = 1;
+
+                }
+                else if(tab === 3)
+                {
+                    _this.application.tovarlar[_this.tovarIndex].tab = 2;
+                }
+                else if(tab === 4)
+                {
+                    _this.application.tovarlar[_this.tovarIndex].tab = 3;
+                }
+
+                _this.$refs.create_customs_tovar1_value0[0].setErrors(errorfield)
+                _this.$refs.create_customs_tovar2_value0[0].setErrors(errorfield)
+                _this.$refs.create_customs_tovar3_value0[0].setErrors(errorfield)
+                _this.$refs.create_customs_tovar4_value0[0].setErrors(errorfield)
+
+                /*
+
+                                errors.forEach(function (keyItem, errorItem) {
+                                    console.log(keyItem)
+                                    console.log(errorItem)
+                                    if (typeof _this.getField(keyItem)[0] !== 'undefined' && typeof _this.getField(keyItem)[0].value !== 'undefined') {
+                                        errorfield[_this.getField(keyItem)[0].value] = [errorItem];
+                                    }
+                                    console.log(errorfield)
+                                });*/
+
+            }
+        },
+
         openTransportturi() {
             this.$refs["transportharakati"].applyResult({
                 errors: [], // array of string errors
@@ -2384,7 +2522,7 @@ export default {
                 })
                 return result;
             } catch (error) {
-                console.log(error)
+                return error.response
 
             }
         },
@@ -2396,7 +2534,7 @@ export default {
                 })
                 return result;
             } catch (error) {
-                console.log(error)
+                return error.response
 
             }
 
@@ -2409,7 +2547,7 @@ export default {
                 })
                 return result;
             } catch (error) {
-                console.log(error)
+                return error.response
 
             }
 
@@ -2550,7 +2688,16 @@ export default {
                                 _this.stepper = 3;
                                 _this.completedSteps.push(_this.stepper - 1);
                                 this.$toast.success("Юк ҳужжатлари тўғрисидаги маълумотлар сақланди!");
-                            } else this.$toast.error("Серверда хатолик юз берди. Кейинроқ уриниб кўринг!");
+                            } else {
+                                if (resultData.status === 400) {
+
+                                    if (typeof resultData.data.data.errorsApps !== 'undefined') {
+                                        _this.setYukErrors(resultData.data.data.errorsApps);
+                                    }
+                                    this.$toast.error("Маълумотларингизни текшириб қайтадан юборинг!");
+                                } else
+                                    this.$toast.error("Серверда хатолик юз берди. Кейинроқ уриниб кўринг!");
+                            }
                             /*
                                                         {
                                                             this.$cookie.delete('yuk');
@@ -2618,14 +2765,15 @@ export default {
                                                 } else {
                                                     //console.log(this.$refs["create_customs_tovar4_value" + this.tovarIndex][0].setErrors({'attribute2':['ssdfsf']}))
                                                     let noValid = [];
-                                                    for (let j = 0; j < _this.application.tovarlar[0].product.usul - 1; j++) {
+                                                    for (let j = 0; j < parseInt(_this.application.tovarlar[0].product.usul) - 1; j++) {
 
                                                         _this.application.tovarlar[0].product.usul_panel = j;
                                                         if (typeof this.$refs["usultext" + this.tovarIndex + '-' + j] === 'undefined') {
                                                             noValid.push(j)
+
                                                             setTimeout(() => {
                                                                 this.$refs["usultext" + this.tovarIndex + '-' + j][0].applyResult({
-                                                                    errors: [j + 1 + " - усулни қўлламаслик сабаби майдони албатта тўлдирилиши лозим"], // array of string errors
+                                                                    errors: [j + 1 + " - усулни қўлламаслик сабаби майдони албатта тўлдирилиши лозим1"], // array of string errors
                                                                     valid: false, // boolean state
                                                                     failedRules: {} // should be empty since this is a manual error.
                                                                 })
@@ -2634,7 +2782,6 @@ export default {
                                                         }
 
                                                     }
-                                                    console.log(noValid);
                                                     if (noValid.length < 1) {
                                                         this.loadingButton.third = true;
                                                         this.commodity.appId = _this.$route.params.id;
@@ -2668,8 +2815,10 @@ export default {
                                                         this.commodity.packType = _this.application.tovarlar[_this.tovarIndex].product.oram_turi;
                                                         this.commodity.packQty = _this.application.tovarlar[_this.tovarIndex].product.oram_soni;
                                                         this.commodity.extraInfo = _this.application.tovarlar[_this.tovarIndex].product.comment;
-                                                        this.commodity.method = "0" + _this.application.tovarlar[_this.tovarIndex].product.usul;
-                                                        this.commodity.methodDescription = _this.application.tovarlar[_this.tovarIndex].product.usul_text.join("~~~~~");
+                                                        if (_this.application.tovarlar[_this.tovarIndex].product.usul < 6)
+                                                            this.commodity.method = "0" + _this.application.tovarlar[_this.tovarIndex].product.usul; else
+                                                            this.commodity.method = _this.application.tovarlar[_this.tovarIndex].product.usul;
+                                                        this.commodity.methodDescription =(_this.application.tovarlar[_this.tovarIndex].product.usul_text)? _this.application.tovarlar[_this.tovarIndex].product.usul_text.join("~~~~~"):"";
 
                                                         let resultData = await this.sendProduct(this.commodity);
                                                         this.loadingButton.third = false;
@@ -2683,7 +2832,16 @@ export default {
                                                                 _this.$router.push("/services/decisions/" + _this.commodity.appId)
 
                                                             }, 1000)
-                                                        } else this.$toast.error("Серверда хатолик юз берди. Кейинроқ уриниб кўринг!");
+                                                        } else {
+                                                            if (resultData.status === 400) {
+
+                                                                if (typeof resultData.data.data !== 'undefined') {
+                                                                    _this.setProductErrors(resultData.data.data);
+                                                                }
+                                                                this.$toast.error("Маълумотларингизни текшириб қайтадан юборинг!");
+                                                            } else
+                                                                this.$toast.error("Серверда хатолик юз берди. Кейинроқ уриниб кўринг!");
+                                                        }
 
 
                                                     }
@@ -2970,7 +3128,7 @@ export default {
                             "transports": transports
                         })
                         if (Array.isArray(_this.app.product)) {
-                            console.log("asdasd")
+                           /// console.log("asdasd")
                         } else
                             _this.setProductData([
                                 {
@@ -3010,8 +3168,8 @@ export default {
                                             date: _this.app.product.inDecDate,
                                             number: _this.app.product.inDecNum
                                         },
-                                        usul: parseInt(_this.app.product.method.replace("0", "")),
-                                        usul_text: (typeof _this.app.product.methodDescription !== 'undefined' && _this.app.product.methodDescription !== null) ? _this.app.product.methodDescription.split("~~~~~") : '',
+                                        usul: _this.app.product.method.replace("0", ""),
+                                        usul_text: (typeof _this.app.product.methodDescription !== 'undefined' && _this.app.product.methodDescription !== null) ? _this.app.product.methodDescription.split("~~~~~") : [],
                                         comment: _this.app.product.extraInfo
                                     }
                                 }
@@ -3197,7 +3355,7 @@ export default {
                     _this.application.tovarlar[key].product.yuk_soni = (typeof product['yuk_soni'] !== 'undefined') ? product['yuk_soni'] : null
                     _this.application.tovarlar[key].product.oram_turi = (typeof product['oram_turi'] !== 'undefined') ? product['oram_turi'] : null
                     _this.application.tovarlar[key].product.oram_soni = (typeof product['oram_soni'] !== 'undefined') ? product['oram_soni'] : null
-                    _this.application.tovarlar[key].product.usul = (typeof product['usul'] !== 'undefined') ? parseInt(product['usul']) : null
+                    _this.application.tovarlar[key].product.usul = (typeof product['usul'] !== 'undefined') ? parseFloat(product['usul']) : null
                     _this.application.tovarlar[key].product.usul_text = (typeof product['usul_text'] !== 'undefined') ? product['usul_text'] : null
                     _this.application.tovarlar[key].product.comment = (typeof product['comment'] !== 'undefined') ? product['comment'] : null
                     _this.application.tovarlar[key].product.manufacturer.name = (typeof product['manufacturer'] !== 'undefined' && typeof product['manufacturer']['name'] !== 'undefined') ? product['manufacturer']['name'] : null
@@ -3282,6 +3440,7 @@ export default {
     },
     data() {
         return {
+
             stepper: 1,
             search_country: null,
             search_currency: null,
@@ -3336,7 +3495,11 @@ export default {
                 {text: '3-усул, Ўxшаш товарга доир битимнинг қиймати бўйича', value: 3},
                 {text: '4-усул, Қийматларни чегириб ташлаш', value: 4},
                 {text: '5-усул, Қийматларни қўшиш', value: 5},
-                {text: '6-усул, Захира', value: 6}
+                {text: '6.1-усул, Захира', value: 6.1},
+                {text: '6.2-усул, Захира', value: 6.2},
+                {text: '6.3-усул, Захира', value: 6.3},
+                {text: '6.4-усул, Захира', value: 6.4},
+                {text: '6.5-усул, Захира', value: 6.5}
             ],
             tftncodes: [],
             breadcrumb_items: [
@@ -3742,6 +3905,31 @@ export default {
                 third: false,
                 four: false
             },
+            fields: [
+                {key: 'termsAddr', value: 'Етказиб бериш манзили'},
+                {key: 'senderOrg', value: 'Юборувчи ташкилот номи'},
+                {key: 'senderCountry', value: 'Юборувчи ташкилот давлати'},
+                {key: 'sellerOrg', value: 'Сотувчи ташкилот номи'},
+                {key: 'customerCountry', value: 'Сотувчи ташкилот давлати'},
+                {key: 'originOrg', value: 'Ишлаб чиқарувчи ташкилот номи ', tab: 3},
+                {key: 'article', value: 'Артикул', tab: 2},
+                {key: 'basicQty', value: 'Асосий ўлчов бирлигидаги миқдори', tab: 1},
+                {key: 'brutto', value: 'Брутто оғирлиги', tab: 1},
+                {key: 'customsPrice', value: 'Божхона қиймати', tab: 1},
+                {key: 'extraInfo', value: 'Қўшича маълумотлар ва изоҳлар', tab: 4},
+                {key: 'functions', value: 'Вазифаси', tab: 2},
+                {key: 'mark', value: 'Марка', tab: 2},
+                {key: 'model', value: 'Модели', tab: 2},
+                {key: 'netto', value: 'Нетто оғирлиги', tab: 1},
+                {key: 'price', value: 'Товарнинг шартномадаги қиймати', tab: 1},
+                {key: 'productGoal', value: 'Фойдаланиш мақсади', tab: 2},
+                {key: 'sort', value: 'Нав', tab: 2},
+                {key: 'tradeMark', value: 'Савдо белгиси', tab: 2},
+                {key: 'tradeName', value: 'Тижорат номи', tab: 2},
+                {key: 'inDecNum', value: 'Илгари қабул қилинган дастлабки қарор рақами', tab: 3},
+                {key: 'techChar', value: 'ТИФ ТН коди бўйича берилган қарор рақами', tab: 3},
+            ],
+            float: ['^[-+][0-9]+\\.[0-9]+[eE][-+]?[0-9]+$'],
             noRequiredTab: false,
             comment: "",
         }

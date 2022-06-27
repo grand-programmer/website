@@ -115,11 +115,7 @@
                                         </p>
                                     </div>
                                     <!--                                <div class="col-md-5">
-
-
                                                                         <img src="/storage/territorial-organs/0.jpg" class="card-img" alt="...">
-
-
                                                                     </div>-->
                                 </div>
                                 <ul class="list-unstyled text-left">
@@ -151,10 +147,10 @@
                                     </li>
                                 </ul>
 
-                                <a class="read-more ff-clearsans_bold" href="#">
+<!--                                <a class="read-more ff-clearsans_bold" href="#">
                                     Саҳифага ўтиш
                                     <i class="fa fa-chevron-right ml-2"></i>
-                                </a>
+                                </a>-->
 
 
 
@@ -171,11 +167,7 @@
                                         </p>
                                     </div>
                                     <!--                                <div class="col-md-5">
-
-
                                                                         <img src="/storage/territorial-organs/3.jpg" class="card-img" alt="...">
-
-
                                                                     </div>-->
                                 </div>
                                 <ul class="list-unstyled text-left">
@@ -225,11 +217,7 @@
                                         </p>
                                     </div>
                                     <!--                             <div class="col-md-5">
-
-
                                                                      <img src="/storage/territorial-organs/6.jpg" class="card-img" alt="...">
-
-
                                                                  </div>-->
                                 </div>
                                 <ul class="list-unstyled text-left">
@@ -281,11 +269,7 @@
                                         </p>
                                     </div>
                                     <!--                              <div class="col-md-5">
-
-
                                                                       <img src="/storage/territorial-organs/8.jpg" class="card-img" alt="...">
-
-
                                                                   </div>-->
                                 </div>
                                 <ul class="list-unstyled text-left">
@@ -337,11 +321,7 @@
                                         </p>
                                     </div>
                                     <!--                                <div class="col-md-5">
-
-
                                                                         <img src="/storage/territorial-organs/10.jpg" class="card-img" alt="...">
-
-
                                                                     </div>-->
                                 </div>
                                 <ul class="list-unstyled text-left">
@@ -393,11 +373,7 @@
                                         </p>
                                     </div>
                                     <!--                                <div class="col-md-5">
-
-
                                                                         <img src="/storage/territorial-organs/12.jpg" class="card-img" alt="...">
-
-
                                                                     </div>-->
                                 </div>
                                 <ul class="list-unstyled text-left">
@@ -446,11 +422,7 @@
                                         </p>
                                     </div>
                                     <!--                                <div class="col-md-5">
-
-
                                                                         <img src="/storage/territorial-organs/14.jpg" class="card-img" alt="...">
-
-
                                                                     </div>-->
                                 </div>
                                 <ul class="list-unstyled text-left">
@@ -502,11 +474,7 @@
                                         </p>
                                     </div>
                                     <!--                                <div class="col-md-5">
-
-
                                                                         <img src="/storage/territorial-organs/18.jpg" class="card-img" alt="...">
-
-
                                                                     </div>-->
                                 </div>
                                 <ul class="list-unstyled text-left">
@@ -557,11 +525,7 @@
                                         </p>
                                     </div>
                                     <!--                                <div class="col-md-5">
-
-
                                                                         <img src="/storage/territorial-organs/22.jpg" class="card-img" alt="...">
-
-
                                                                     </div>-->
                                 </div>
                                 <ul class="list-unstyled text-left">
@@ -613,11 +577,7 @@
                                         </p>
                                     </div>
                                     <!--                                <div class="col-md-5">
-
-
                                                                         <img src="/storage/territorial-organs/24.jpg" class="card-img" alt="...">
-
-
                                                                     </div>-->
                                 </div>
                                 <ul class="list-unstyled text-left">
@@ -669,11 +629,7 @@
                                         </p>
                                     </div>
                                     <!--                                <div class="col-md-5">
-
-
                                                                         <img src="/storage/territorial-organs/0.jpg')}}" class="card-img" alt="...">
-
-
                                                                     </div>-->
                                 </div>
                                 <ul class="list-unstyled text-left">
@@ -725,11 +681,7 @@
                                         </p>
                                     </div>
                                     <!--<div class="col-md-5">
-
-
                                         <img src="/storage/territorial-organs/27.jpg')}}" class="card-img" alt="...">
-
-
                                     </div>-->
                                 </div>
                                 <ul class="list-unstyled text-left">
@@ -781,11 +733,7 @@
                                         </p>
                                     </div>
                                     <!--                                <div class="col-md-5">
-
-
                                                                         <img src="/storage/territorial-organs/30.jpg')}}" class="card-img" alt="...">
-
-
                                                                     </div>-->
                                 </div>
                                 <ul class="list-unstyled text-left">
@@ -837,11 +785,7 @@
                                         </p>
                                     </div>
                                     <!--                              <div class="col-md-5">
-
-
                                                                       <img src="/storage/territorial-organs/33.jpg')}}" class="card-img" alt="...">
-
-
                                                                   </div>-->
                                 </div>
                                 <ul class="list-unstyled text-left">
@@ -893,11 +837,7 @@
                                         </p>
                                     </div>
                                     <!--                                <div class="col-md-5">
-
-
                                                                         <img src="/storage/territorial-organs/35.jpg')}}" class="card-img" alt="...">
-
-
                                                                     </div>-->
                                 </div>
                                 <ul class="list-unstyled text-left">
@@ -908,7 +848,7 @@
                                         <i class="icon icon-phone"></i> (0-361) 224-90-86
                                         <span class="badge ff-clearsans_bold text-uppercase">
                                             ишонч телефони</span> <br> (0-361) 224-97-00
-                                        </li>
+                                    </li>
                                     <li>
                                         <i class="icon icon-clock"></i>
                                         Иш вақти
@@ -948,6 +888,7 @@
         name:"Hududiy",
         methods:{
             goHudud(hudud){
+                console.log('asdasd')
                 $(".hududiy_boshqarmalar a").click();
                 this.$router.push('/page/boshqarma/'+hudud);
             }

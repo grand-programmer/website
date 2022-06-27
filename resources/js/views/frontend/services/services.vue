@@ -570,14 +570,14 @@
                     <div class="background"></div>
                     <div class="tab-container">
                         <div class="foydali-resurslar row">
-                            <a class="foydali-resurs col-4" href="#">
+                            <a class="foydali-resurs col-4" target="_blank" href="https://data.gov.uz/uzbKr/data/610258012a2e256d868e82dd">
                                 <div class="foydali-resurs-image" style="background-image: url(/img/icons/ombor.png)">
                                 </div>
                                 <div class="foydali-resurs-text">Божхона омборлари реестри
 
                                 </div>
                             </a>
-                            <a class="foydali-resurs col-4" href="#">
+                            <a class="foydali-resurs col-4" target="_blank" href="http://imo.customs.uz/IMO_REESTR/">
                                 <div class="foydali-resurs-image"
                                      style="background-image: url(/img/icons/intellektual-mulk.png)">
                                 </div>
@@ -585,7 +585,7 @@
 
                                 </div>
                             </a>
-                            <a class="foydali-resurs col-4" href="#">
+                            <a class="foydali-resurs col-4" target="_blank" href="http://ed1.customs.uz/selhoz/">
                                 <div class="foydali-resurs-image"
                                      style="background-image: url(/img/icons/meva-sabzavot.png)">
                                 </div>
@@ -593,14 +593,14 @@
 
                                 </div>
                             </a>
-                            <a class="foydali-resurs col-4" href="#">
+                            <a class="foydali-resurs col-4" target="_blank" href="http://ed1.customs.uz/REESTR_GTK/">
                                 <div class="foydali-resurs-image" style="background-image: url(/img/icons/nohalol.png)">
                                 </div>
                                 <div class="foydali-resurs-text">ноҳалол экспортчилар реестри
 
                                 </div>
                             </a>
-                            <a class="foydali-resurs col-4" href="#">
+                            <a class="foydali-resurs col-4" target="_blank" href="http://service.customs.uz/autogtd_report/index.jsp?pc=9">
                                 <div class="foydali-resurs-image"
                                      style="background-image: url(/img/icons/import-qiymati.png)">
                                 </div>

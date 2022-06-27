@@ -56,6 +56,7 @@ Route::group(['prefix' => 'v1'], function(){
     Route::resource('/apparat','App\Http\Controllers\ApparatController');
     Route::resource('/faqs','App\Http\Controllers\FaqController');
     Route::get('/front/faqs','App\Http\Controllers\FaqController@getForFront');
+    Route::get('/votes/front','App\Http\Controllers\VoteController@indexFront');
     Route::resource('/votes','App\Http\Controllers\VoteController');
     Route::put('/votescount/{vote}','App\Http\Controllers\VoteController@updateCount');
 

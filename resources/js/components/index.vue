@@ -51,7 +51,7 @@
                             <div class="container">
                                 <div class="slider_text absolute_right">
                                     <h3 class="fadeInLeft animated">Шаффофлик замирида <br> иқтисодий хавфсизлик</h3>
-                                    <!-- <p class="fadeInUp animated">Божхона ахборот тизмиларига =ужжатларингизни жойланг</p>
+                                    <!-- <p class="fadeInUp animated">Божхона ахборот тизмиларига ҳужжатларингизни жойланг</p>
                                     <a class="s_readmore_btn fadeInUp animated" target="_blank"
                                        href="https://ed2.customs.uz/E_ARXIV/authentication">Хизматдан фойдаланиш</a>-->
                                     <!--<a class="s_contact_btn fadeInUp animated" href="#">Contact Us</a>-->
@@ -70,7 +70,7 @@
                                     <p class="fadeInUp animated">Божхона ахборот тизмиларига =ужжатларингизни
                                         жойланг</p>
                                     <a class="s_readmore_btn fadeInUp animated" target="_blank"
-                                       href="https://ed2.customs.uz/E_ARXIV/authentication">Хизматдан фойдаланиш</a>
+                                       href="https://ed2.customs.uz">Хизматдан фойдаланиш</a>
                                     <!--<a class="s_contact_btn fadeInUp animated" href="#">Contact Us</a>-->
                                 </div>
                                 <div class="slider_image slider-2">
@@ -137,8 +137,8 @@
                                     <h4 class="fadeInLeft animated">Божхона ахборот тизими</h4>
                                     <p class="fadeInUp animated">Божхона хизмати органларидаги вакансиялар рўйхатини
                                         билиб олинг ҳамда ишга кириш учун онлайн ариза юборинг</p>
-                                    <a class="s_readmore_btn fadeInUp animated" to="/services/vacancy"
-                                       target="_blank">Хизматдан фойдаланиш</a>
+                                    <router-link class="s_readmore_btn fadeInUp animated" to="/services/vacancy"
+                                       target="_blank">Хизматдан фойдаланиш</router-link>
                                     <!--<a class="s_contact_btn fadeInUp animated" href="#">Contact Us</a>-->
                                 </div>
                                 <div class="slider_image slider-2">
@@ -219,15 +219,15 @@
                     <div class="row pb-8" style="margin: 0 24px!important; justify-content: center;">
 
 
-                        <div class="card">
+                        <router-link to="/page/zhismoniy-shahslar-tomonidan-avtotransport-vositalarni-olib-otish-tartibi" class="card">
                             <div class="bolim_image"><img src="/img/service/user-icon.png"></div>
                             <div class="bolim_title">Жисмоний шахслар учун</div>
                             <div class="bolim_description">Жисмоний шахслар учун керакли хизматлар ва маълумотларни
                                 билиб
                                 олинг
                             </div>
-                        </div>
-                        <div class="card">
+                        </router-link>
+                        <router-link to="/page/yuridik-shahslar-tomonidan-avtotransport-vositalarni-olib-kirish-tartibi" class="card">
                             <div class="bolim_image">
                                 <svg height="496pt" viewBox="0 0 496 496" width="496pt"
                                      xmlns="http://www.w3.org/2000/svg">
@@ -240,22 +240,22 @@
                                 билиб
                                 олинг
                             </div>
-                        </div>
-                        <div class="card">
+                        </router-link>
+                        <router-link to="/services/appeals" class="card">
                             <div class="bolim_image"><img src="/img/service/opendata.png"></div>
                             <div class="bolim_title">Мурожаатлар</div>
                             <div class="bolim_description">
                                 Божхона қўмитасига мурожаатлар юбориш, кўриб чиқилиши тўғрисидаги маълумотлар
                             </div>
-                        </div>
-                        <div class="card">
-                            <div class="bolim_image"><img src="/img/service/opendata.png"></div>
+                        </router-link>
+                        <router-link to="/page/votes" class="card">
+                            <div class="bolim_image"><img src="/img/icons/2279036.png"></div>
                             <div class="bolim_title">Сўровнома</div>
                             <div class="bolim_description">Божхона Қўмитасининг очиқ маълумотларини кўчириб
                                 олишингиз
                                 мумкин
                             </div>
-                        </div>
+                        </router-link><!--
                         <div class="card">
                             <div class="bolim_image"><img src="/img/service/opendata.png"></div>
                             <div class="bolim_title">Қизил ва яшил йўлак</div>
@@ -278,19 +278,25 @@
                             <div class="bolim_description">Божхона Қўмитасининг коррупцияга қарши курашиш борасидаги
                                 ишлари
                             </div>
-                        </div>
-                        <div class="card">
-                            <div class="bolim_image"><img src="/img/service/opendata.png"></div>
-                            <div class="bolim_title">Интеллектуал мулк объектлари</div>
-                            <div class="bolim_description">Интеллектуал мулк объектлари божхона реестри</div>
+                        </div>-->
+                        <a href="http://tarif.customs.uz/" target="_blank" class="card">
+                            <div class="bolim_image"><img src="/img/icons/payment-date.png"></div>
+                            <div class="bolim_title">Тўловлар ва вақт</div>
+                            <div class="bolim_description">Товарлар учун дастлабки ҳисоб – китоблар асосида, сарфланадиган харажат ва вақт</div>
 
-                        </div>
-                        <div class="card">
-                            <div class="bolim_image"><img src="/img/service/opendata.png"></div>
-                            <div class="bolim_title">ТИФ номенклатураси</div>
-                            <div class="bolim_description">Интеллектуал мулк объектлари божхона реестри</div>
+                        </a>
+                        <a href="http://service.customs.uz/autogtd_report/index.jsp?pc=7#"  target="_blank" class="card">
+                            <div class="bolim_image"><img src="/img/icons/business-grow.png" style="margin-top: -25px; margin-bottom: -25px; width: 200px"></div>
+                            <div class="bolim_title">Тадбиркорлар учун зарур маълумотлар</div>
+                            <div class="bolim_description">Тадбиркорларнинг экспорт ва импорт маълумотлари </div>
 
-                        </div>
+                        </a>
+                        <a href="https://axborot.customs.uz/Xabar/"  target="_blank" class="card">
+                            <div class="bolim_image"><img src="/img/icons/stop-corruption.png"></div>
+                            <div class="bolim_title">Коррупция тўғрисида хабар</div>
+                            <div class="bolim_description">Коррупция тўғрисида ариза юборинг</div>
+
+                        </a>
                     </div>
 
 
@@ -307,10 +313,10 @@
             <div class="section asosiy_korsatkichlari2">
                 <div class="row content">
                     <div class="col-3">
-                        <div class="stat_menu">
+                        <div class="stat_menu" style="min-height:80vh">
                             <h3> Божхона статистикаси</h3>
-                            <ul>
-                                <li><a class="active" href="#" @click="stat_type=1">Ўзбекистон
+                            <ul class="mb-15">
+                                <li><a :class="stat_type==1?'active':''" href="#" @click="stat_type=1">Ўзбекистон
                                     Республикаси товарлар импорти ва экспорти ҳудудлар кесимида</a></li>
                                 <li><a :class="(stat_type==2)?'active':''" href="#" @click="stat_type=2">Божхона
                                     чегараларидан ўтган автомобиллар сони </a></li>
@@ -323,13 +329,13 @@
                                                                 <li><a :class="(stat_type==5)?'active':''" href="#" @click="stat_type=5">Ўзбекистон
                                                                     Республикасида товарлар импорти ва экспорти</a></li>-->
                             </ul>
-                            <a class="all_stats" href="https://charts.customs.uz" target="_blank">
+                            <a class="all_stats" href="https://charts.customs.uz" target="_blank" style="position: absolute; bottom: 100px">
                                 Барча статистика <i class="fa fa-arrow-right"></i>
 
                             </a>
                         </div>
                     </div>
-                    <div class="col-9" id="reyt">
+                    <div class="col-9" id="reyt" v-if="stat_type==1">
                         <h3>Ўзбекистон Республикаси товарлар импорти ва экспорти ҳудудлар кесимида</h3>
                         <div id="columnchart1" ref="clusteredColumn" class="chart"></div>
                         <div class="filter row">
@@ -356,7 +362,7 @@
 
                     </div>
                     <div class="col-9" v-if="stat_type==2">
-                        <h3>Ўзбекистон Республикаси кунлик товарлар импорти ва экспорти</h3>
+                        <h3>Ўзбекистон Республикаси чегарасидан ўтаётган автомобилларнинг сони </h3>
                         <div id="columnchart2" class="chart"></div>
                         <div class="filter row">
                             <v-col cols="3">

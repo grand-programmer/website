@@ -975,6 +975,33 @@ body .main_menu_area .navbar.navbar-default .navbar-collapse .nav.navbar-nav li 
   color: #fff;
   margin: 0;
 }
+.all_news.service {
+  top: 50%;
+  bottom: auto;
+  right: -315px;
+  width: 370px;
+  position: fixed;
+  border-radius: 100px;
+  border: 5px solid #fff;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-right: 0;
+  background-color: #fff;
+  height: 55px;
+}
+.all_news.service p {
+  color: var(--mycolor);
+  font-weight: bold;
+}
+.all_news.service:hover {
+  right: 0;
+}
+.all_news.service img {
+  width: 43px;
+  position: absolute;
+  left: 0px;
+  fill: #fff;
+}
 
 #carouselExampleDark {
   box-shadow: 0 0 13px 0px #ccc;
@@ -1163,8 +1190,13 @@ a.read_more {
 .contact_faq .chose_inner_area .panel-group .panel-default .panel-heading .panel-title {
   border-bottom: 1px solid #39ae69;
 }
+.contact_faq .chose_inner_area .panel-group .panel-default .panel-heading .panel-title a {
+  line-height: 20px;
+}
 .contact_faq .chose_inner_area .panel-group .panel-default .panel-heading .panel-title a span {
   background: #39ae69;
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
 
 .blog_comment_from .comm_tittle {
@@ -1592,6 +1624,16 @@ body .logo_area {
 ul.nav.navbar-nav li ul.dropdown-menu {
   position: absolute;
   transition: unset;
+  max-height: 500px;
+  overflow-y: auto;
+  overflow-x: visible;
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
+ul.nav.navbar-nav li ul.dropdown-menu::-webkit-scrollbar {
+  display: none;
 }
 ul.nav.navbar-nav li ul.dropdown-menu.submenu {
   max-height: 70vh;
@@ -3259,7 +3301,7 @@ a.read_more {
 
 .one-page .footer_area {
   display: inline-flex;
-  z-index: 25;
+  z-index: 1;
   position: relative;
   background-color: #f3f3f3;
   width: 100%;
@@ -3775,6 +3817,8 @@ a.read_more {
   min-height: initial;
   height: initial !important;
   margin-bottom: -28px;
+  overflow: hidden;
+  position: relative;
   /*    .page-content{
           background-color:var(--mycolor);
       }*/

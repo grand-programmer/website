@@ -41,6 +41,7 @@ export default {
     },
     mounted() {
         this.initialize();
+        this.activeMonth=(new Date()).getMonth()+1;
     },
     methods: {
        async initialize() {

@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Request as Input;
+use Illuminate\Support\Str;
 
 class VoteController extends Controller
 {
@@ -18,7 +19,16 @@ class VoteController extends Controller
      */
     public function index()
     {
-        return response()->json(['success' => true, 'data' => VoteResource::collection(Vote::all())], 200);
+        return response()->json(['success' => true, 'data' => VoteResource::collection(Vote::orderBy('sort')->get())], 200);
+    }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function indexFront()
+    {
+        return response()->json(['success' => true, 'data' => VoteResource::collection(Vote::where('active',true)->orderBy('sort')->get())], 200);
     }
 
     /**
@@ -44,11 +54,14 @@ class VoteController extends Controller
             $data = $request->only(
                 'question',
                 'answers',
+                'sort',
+                'active',
             );
             $validator = Validator::make($data, [
                 'question' => 'required|min:3|max:255',
-                'answers.*.title' => 'required_with:answers.*.value',
-                'answers.*.value' => 'required_with:answers.*.title'
+                'sort' => 'numeric',
+                'answers.*.text' => 'required_with:answers.*.text',
+                //'answers.*.value' => 'required_with:answers.*.title'
             ]);
 
             if ($validator->fails()) {
@@ -56,7 +69,13 @@ class VoteController extends Controller
                     'success' => false,
                     'error' => $validator->errors()], 401);
             }
-            $data['answers'] = json_encode($data['answers']);
+            $answers=collect($data['answers'])->transform(function($answer){
+                    $answer['count']=0;
+                    $answer['value']=Str::slug($answer['text']);
+
+                return $answer;
+            })->values()->all();
+            $data['answers'] = json_encode($answers);
             $vote = Vote::create($data);
             $vote->save();
             return response()->json([
@@ -78,18 +97,33 @@ class VoteController extends Controller
             $data = $request->only(
                 'question',
                 'answers',
+                'sort',
+                'active',
             );
             $validator = Validator::make($data, [
                 'question' => 'required|min:3|max:255',
-                'answers.*.title' => 'required_with:answers.*.value',
-                'answers.*.value' => 'required_with:answers.*.title,answers.*.count',
-                'answers.*.count' => 'required_with:answers.*.title,answers.*.value'
+                'sort' => 'numeric',
+                'answers.*.text' => 'required',
+               //'answers.*.value' => 'required_with:answers.*.text,answers.*.count',
+                //'answers.*.count' => 'required_with:answers.*.text,answers.*.value'
             ]);
 
             if ($validator->fails()) {
                 return response()->json(['error' => $validator->errors()], 401);
             }
-            $data['answers'] = json_encode($data['answers']);
+
+            $answers=collect($data['answers'])->transform(function($answer) use ($vote){
+                if( isset($answer['value']) and in_array($answer['value'],array_column(json_decode($vote->answers),'value'))){
+                    $oldAnswerIndex=array_search('value',array_column(json_decode($vote->answers),'value'));
+
+                    $answer['count']=isset(json_decode($vote->answers)[$oldAnswerIndex]->count)?json_decode($vote->answers)[$oldAnswerIndex]->count:0;
+                }else {
+                    $answer['count']=0;
+                    $answer['value']=Str::slug($answer['text']);
+                }
+                return $answer;
+            })->values()->all();;
+            $data['answers'] = json_encode($answers);
             $vote->update($data);
             //$appeal->number = Str::random(10);
             $vote->save();
@@ -114,7 +148,7 @@ class VoteController extends Controller
                 'answer',
             );
             $validator = Validator::make($data, [
-                'answer' => 'required|numeric'
+                'answer' => 'required'
             ]);
 
 
