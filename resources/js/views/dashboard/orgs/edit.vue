@@ -723,8 +723,11 @@ export default {
             }
         },
         deleteOrganization(key) {
-            if (key > 0)
-                this.sections.splice(key, 1);
+            //console.log(key)
+            if (key >= 0) {
+
+                this.posts.splice(key, 1);
+            }
         },
         removeOrinbosar(key) {
             if (key > 0)

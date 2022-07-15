@@ -511,3 +511,7 @@ section.content_block .profile-action-buttons a.btn.disabled {
 .vacancy-timeline .v-timeline-item__body h4.active {
   font-weight: bolder;
 }
+
+#printMe1 .dialog_content {
+  overflow: initial !important;
+}

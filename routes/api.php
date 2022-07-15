@@ -67,6 +67,7 @@ Route::group(['prefix' => 'v1'], function(){
     });*/
 
     Route::get('/data/tftn','App\Http\Controllers\DataController@getTftn');
+    Route::get('/data/inn','App\Http\Controllers\DataController@getInn');
     Route::get('/data/currency','App\Http\Controllers\DataController@getCurrency');
     Route::get('/data/country','App\Http\Controllers\DataController@getCountry');
 });

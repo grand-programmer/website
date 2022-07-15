@@ -23,7 +23,5 @@ export default new Vuetify({
     icons: {
         iconfont: 'mdi', // default - only for display purposes
     },
-    lang: {
-        t: (key, ...params) => i18n.t(key, params),
-    },
+    t: (key, ...params) => i18n.t(key, params),
 })

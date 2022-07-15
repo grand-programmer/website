@@ -13,6 +13,12 @@ import ServicesAppealsCreate from "./views/frontend/services/appeal/create";
 import ServicesDecisionsCreate from "./views/frontend/services/customs_value/create";
 import ServicesDecisionsEdit from "./views/frontend/services/customs_value/edit";
 import ServicesDecisionsInfo from "./views/frontend/services/customs_value/info";
+import ServicesIntellectualCreate from "./views/frontend/services/intellectual/create";
+import ServicesIntellectualEdit from "./views/frontend/services/intellectual/edit";
+import ServicesIntellectualInfo from "./views/frontend/services/intellectual/info";
+import ServicesTftnCreate from "./views/frontend/services/tftn/create";
+import ServicesTftnEdit from "./views/frontend/services/tftn/edit";
+import ServicesTftnInfo from "./views/frontend/services/tftn/info";
 import ServiceVacancyList from "./views/frontend/services/vacancy/list";
 import ServiceVacancyShow from "./views/frontend/services/vacancy/show";
 import ServiceVacancyQuestions from "./views/frontend/services/vacancy/questions";
@@ -109,6 +115,64 @@ const routes = [
                                 {
                                     path: ":id",
                                     component: ServicesDecisionsInfo,
+                                }
+                            ]
+                        },
+                        {
+                            path: "intellectual/",
+                            component: () => import('./views/frontend/services/intellectual/index'),
+                            meta: {
+                                auth: true,
+                                authRedirect: '/login',
+                                notFoundRedirect: '/403',
+                                forbiddenRedirect: '/403',
+                                routeAuth: '/login'
+                            },
+                            children: [
+                                {
+                                    path: "",
+                                    component: ServicesIntellectualCreate,
+                                },
+                                {
+                                    path: "info",
+                                    component: ServicesIntellectualInfo,
+                                },
+                                {
+                                    path: "edit/:id",
+                                    component: ServicesIntellectualEdit,
+                                },
+                                {
+                                    path: ":id",
+                                    component: ServicesIntellectualInfo,
+                                }
+                            ]
+                        },
+                        {
+                            path: "tftn/",
+                            component: () => import('./views/frontend/services/tftn/index'),
+                            meta: {
+                                auth: true,
+                                authRedirect: '/login',
+                                notFoundRedirect: '/403',
+                                forbiddenRedirect: '/403',
+                                routeAuth: '/login'
+                            },
+                            children: [
+                                {
+                                    path: "",
+                                    component: ServicesTftnCreate,
+                                },
+                                {
+                                    path: "info",
+                                    component: ServicesTftnInfo,
+                                },
+                                {
+                                    path: "edit/:id",
+                                    component: ServicesTftnEdit,
+                                },
+                                {
+                                    path: ":id",
+                                    component: ServicesTftnInfo,
                                 }
                             ]
                         },

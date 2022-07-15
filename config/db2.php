@@ -169,6 +169,13 @@ $databaseconfigEA['database']='B2035C4W';
 $databaseconfigEA['username']='trarxiv';
 $databaseconfigEA['password']='trarxiv';
 
+$databaseconfigINN=$databaseconfig;
+$databaseconfigINN['host']='192.168.212.99';
+$databaseconfigINN['schema']='GNK_NEW';
+$databaseconfigINN['database']='B2035C4W';
+$databaseconfigINN['username']='trarxiv';
+$databaseconfigINN['password']='trarxiv';
+
 $databaseconfig221=$databaseconfig;
 $databaseconfig221['host']='192.168.212.221';
 $databaseconfig221['schema']='CONTROL';
@@ -189,6 +196,7 @@ return [
 
         'db2_odbc' => $databaseconfig,
         'db2_odbcEA' => $databaseconfigEA,
+        'db2_odbcInn' => $databaseconfigINN,
         'db2_odbc221' => $databaseconfig221,
 
     ],

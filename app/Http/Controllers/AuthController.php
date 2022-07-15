@@ -90,6 +90,7 @@ class AuthController extends Controller
                   "access_token" => "1821276c-6555-4e57-9286-ccadf6f3818a"
              *
              */
+
             $responseUser = Http::asForm()->acceptJson()
                 ->post('https://sso.egov.uz/sso/oauth/Authorization.do',
                     [
@@ -101,102 +102,107 @@ class AuthController extends Controller
                         'scope' => 'customs_uz',
                     ]);
 
-            if (!(DB::table('users')->where(['pin' => (int)$responseUser->json()['pin'], 'type' => 2])->exists())) {
-                if (DB::table('users')->where(
-                    ['email' => $responseUser->json()['email'],
-                        'pin' => $responseUser->json()['pin'],
+            if($responseUser->status()!==200 or !isset($responseUser->json()['user_type'])) return response()->json(['error' => 'login_error'], 401);
+            //dd($responseUser->json());
+            $type = (isset($responseUser->json()['legal_info']) && !empty($responseUser->json()['legal_info'])) ? 2 : 1;
+            if (DB::table('users')->where(
+                ['email' => $responseUser->json()['email'],
+                    'pin' => $responseUser->json()['pin'],
+                    'type'=>$type
 
-                    ])->exists()) {
+                ])->exists()) {
 
 
-                    //$user=User::where(['email'=>$responseUser->json()['email']])->first();
-                    $d = $responseUser->json();
-                    $data = collect($d)->transform(function ($item, $key) {
-                        $array = [
-                            "first_name",
-                            "sur_name",
-                            "mid_name",
-                            "birth_date",
-                            "ctzn",
-                            "per_adr",
-                            "tin",
-                            "gd",
-                            "natn",
-                            "_pport_issue_date",
-                            "_pport_expr_date",
-                            "pport_no",
-                            "pin",
-                            "birth_place",
-                            "valid",
-                            "user_type",
-                            "ret_cd",
-                            "legal_info",
 
-                        ];
-                        if ($key == "pin" or $key == "tin") {
-                            $item = (int)$item;
-                        }
-                        if (in_array($key, $array)) {
-                            return $item;
-                        } else {
-                            // dd($key. "sdf");
-                            return null;
-                        }
-                    })->reject(function ($name) {
-                        return empty($name);
-                    });
-                    $user = User::where(['email' => $responseUser->json()['email']])->firstOrFail();
-                    $user->update($data->all());
-                    $user->save();
-                    $png_url = $user->id . ".jpg";
-                    $path = public_path() . '/images/users/' . $png_url;
-                    if (!file_exists($path)) {
+                //$user=User::where(['email'=>$responseUser->json()['email']])->first();
+                $d = $responseUser->json();
 
-                        try {
-                            $userPhoto = Http::acceptJson()->connectTimeout(15)->withBody(json_encode([
-                                "pinfl" => (string)$user->pin,
-                                "doc_give_date" => $user->_pport_issue_date,
-                            ]), 'application/json')
-                                ->post('http://192.168.214.124:9090/GetMIP2/rest/service_MIP2/getMipFoto',
-                                );
-                            //dd($userPhoto->json());
-                            $userPhoto = $userPhoto->json();
-                            $png_url = $user->id . ".jpg";
-                            $path = public_path() . '/images/users/' . $png_url;
-                            if (strlen($userPhoto['foto']) > 0)
-                                Image::make(base64_decode($userPhoto['foto']))->save($path);
-                        } catch (\Exception $e) {
-                        }
+                $data = collect($d)->transform(function ($item, $key) {
+                    $array = [
+                        "first_name",
+                        "sur_name",
+                        "mid_name",
+                        "birth_date",
+                        "ctzn",
+                        "per_adr",
+                        "tin",
+                        "gd",
+                        "natn",
+                        "_pport_issue_date",
+                        "_pport_expr_date",
+                        "pport_no",
+                        "pin",
+                        "birth_place",
+                        "valid",
+                        "user_type",
+                        "ret_cd",
+                        "legal_info",
+
+                    ];
+                    if ($key == "pin" or $key == "tin") {
+                        $item = (int)$item;
                     }
+                    if (in_array($key, $array)) {
+                        return $item;
+                    } else {
+                        // dd($key. "sdf");
+                        return null;
+                    }
+                })->reject(function ($name) {
+                    return empty($name);
+                });
+                $user = User::where(['email' => $responseUser->json()['email']])->firstOrFail();
+                $user->update(array_merge($data->all(),['type'=>$type]));
+                $user->save();
+                $png_url = $user->id . ".jpg";
+                $path = public_path() . '/images/users/' . $png_url;
+                if (!file_exists($path)) {
 
-                } else {
-                    $userData = $responseUser->json();
-
-                    if (User::where(['email' => $responseUser->json()['email']])->exists()) $userData['email'] = "";
-                    $user = User::create(array_merge($userData, ['type' => 2, 'password' => 'password']));
-                    $user->save();
-
-                    $userPhoto = Http::acceptJson()->withBody(json_encode([
-                        "pinfl" => (string)$user->pin,
-                        "doc_give_date" => $user->_pport_issue_date,
-                    ]), 'application/json')
-                        ->post('http://192.168.214.124:9090/GetMIP2/rest/service_MIP2/getMipFoto',
-                        );
-
-                    $userPhoto = $userPhoto->json();
-                    $png_url = $user->id . ".jpg";
-                    $path = public_path() . '/images/users/' . $png_url;
-                    if (strlen($userPhoto['foto']) > 0)
-                        Image::make(base64_decode($userPhoto['foto']))->save($path);
-
+                    try {
+                        $userPhoto = Http::acceptJson()->connectTimeout(15)->withBody(json_encode([
+                            "pinfl" => (string)$user->pin,
+                            "doc_give_date" => $user->_pport_issue_date,
+                        ]), 'application/json')
+                            ->post('http://192.168.214.124:9090/GetMIP2/rest/service_MIP2/getMipFoto',
+                            );
+                        //dd($userPhoto->json());
+                        $userPhoto = $userPhoto->json();
+                        $png_url = $user->id . ".jpg";
+                        $path = public_path() . '/images/users/' . $png_url;
+                        if (strlen($userPhoto['foto']) > 0)
+                            Image::make(base64_decode($userPhoto['foto']))->save($path);
+                    } catch (\Exception $e) {
+                    }
                 }
-                /*               dd(json_encode([
-                                   "pinfl" => (string)$user->pin,
-                                   "doc_give_date" => $user->_pport_issue_date,
-                               ]));*/
 
+            } else {
+                $userData = $responseUser->json();
+                //dd(array_merge($userData, ['type' => $type, 'password' => 'password!!!$$$']));
+                if (isset($userData['legal_info'])) $userData['legal_info']=json_encode($userData['legal_info']);
+                if (User::where(['email' => $responseUser->json()['email']])->exists()) $userData['email'] = "";
+                $user = User::create(array_merge($userData, ['type' => $type, 'password' => 'password!!!$$$']));
+                $user->save();
+
+                $userPhoto = Http::acceptJson()->withBody(json_encode([
+                    "pinfl" => (string)$user->pin,
+                    "doc_give_date" => $user->_pport_issue_date,
+                ]), 'application/json')
+                    ->post('http://192.168.214.124:9090/GetMIP2/rest/service_MIP2/getMipFoto',
+                    );
+
+                $userPhoto = $userPhoto->json();
+                $png_url = $user->id . ".jpg";
+                $path = public_path() . '/images/users/' . $png_url;
+                if (strlen($userPhoto['foto']) > 0)
+                    Image::make(base64_decode($userPhoto['foto']))->save($path);
 
             }
+            /*               dd(json_encode([
+                               "pinfl" => (string)$user->pin,
+                               "doc_give_date" => $user->_pport_issue_date,
+                           ]));*/
+
+
             $token = $this->guard()->tokenById($user->id);
             return response()->json(['status' => 'success'], 200)
                 ->header('Authorization', $token);

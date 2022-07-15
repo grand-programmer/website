@@ -83,6 +83,16 @@
                             </router-link>
                         </div>
                         <div class="col-md-2 portfolio_single p1">
+                            <router-link to="/services/tftn" class="portfolio-card">
+                                <div class="portfolio_image">
+                                    <img src="/img/icons/customs-clearance-icon.png"/>
+                                </div>
+                                <div class="portfolio_text">
+                                    <p>ТИФ ТН кодини аниқлаш юзасидан ариза бериш</p>
+                                </div>
+                            </router-link>
+                        </div>
+                        <div class="col-md-2 portfolio_single p1">
                             <a target="_blank" href="//my.gov.uz/uz/service/209" class="portfolio-card">
                                 <div class="portfolio_image">
                                     <img src="/img/icons/elektron-deklaratsiyalash.png"/>

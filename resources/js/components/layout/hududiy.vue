@@ -689,9 +689,9 @@
                                         <i class="icon icon-location-pin"></i> Tошкент вилояти, Нурафшон шаҳри, Тошкент йўли кўчаси, 63-уй
                                     </li>
                                     <li>
-                                        <i class="icon icon-phone"></i> 71-120-86-10
+                                        <i class="icon icon-phone"></i> 70-202-86-00
                                         <span class="badge ff-clearsans_bold text-uppercase">
-                                            ишонч телефони</span> <br> 71-202-86-10
+                                            ишонч телефони</span> <br> 70-202-86-10
                                         <span class="badge ff-clearsans_bold text-uppercase">
                                             Факс </span>
                                     </li>

@@ -162,6 +162,7 @@
                                             </ValidationProvider>
 
                                         </v-col>
+
                                         <v-col cols="6">
                                             <ValidationProvider name="Фамилияси исми шарифи" rules="required"
                                                                 v-slot="{ errors }">
@@ -180,6 +181,7 @@
                                             </ValidationProvider>
 
                                         </v-col>
+
 
                                         <v-col cols="6" v-if="person.type==='01'">
                                             <ValidationProvider :slim="(person.type!=='01')" v-if="person.type==='02'"
@@ -266,6 +268,7 @@
                                             </ValidationProvider>
 
                                         </v-col>
+
 
                                     </v-row>
 
@@ -592,7 +595,30 @@
 
 
                                             <v-col cols="12"></v-col>
-                                            <v-col cols="6">
+                                            <v-col cols="5">
+                                                <ValidationProvider name="Импортчи/юкни қабул қилувчи СТИРи" rules="required"
+                                                                    v-slot="{ errors }">
+                                                    <v-autocomplete
+                                                        v-model="application.importInn"
+                                                        label="Импортчи/юкни қабул қилувчи СТИРи"
+                                                        required
+                                                        hint="Импортчи/юкни қабул қилувчи СТИРи"
+                                                        persistent-hint
+                                                        :items="importInns"
+                                                        item-text="shortname"
+                                                        item-value="tin"
+                                                        name="importInn"
+                                                        hide-no-data
+                                                        :loading="loading.importInn"
+                                                        :search-input.sync="search_inn"
+                                                        return-object
+                                                    >
+                                                    </v-autocomplete>
+                                                    <span class="red--text">{{ errors[0] }}</span>
+                                                </ValidationProvider>
+
+                                            </v-col>
+                                            <v-col cols="3">
                                                 <ValidationProvider name="Етказиб бериш шарти"
                                                                     v-slot="{ errors }" rules="required">
                                                     <v-autocomplete
@@ -607,7 +633,8 @@
                                                     <span class="red--text">{{ errors[0] }}</span>
                                                 </ValidationProvider>
                                             </v-col>
-                                            <v-col cols="6">
+
+                                            <v-col cols="4">
                                                 <ValidationProvider name="Етказиб бериш манзили"
                                                                     rules="required"
                                                                     v-slot="{ errors }">
@@ -1399,13 +1426,14 @@
                                                                     md="4"
                                                                 >
                                                                     <ValidationProvider name="Тижорат номи"
-                                                                                        v-slot="{ errors }">
+                                                                                        v-slot="{ errors }" rules="required">
                                                                         <v-text-field
                                                                             label="Тижорат номи"
                                                                             required
                                                                             name="trade_name"
                                                                             v-model="application.tovarlar[key].product.trade_name"
                                                                             persistent-placeholder
+                                                                            hint="Масалан, автомобил"
                                                                         ></v-text-field>
                                                                         <span class="red--text">{{ errors[0] }}</span>
                                                                     </ValidationProvider>
@@ -2403,6 +2431,7 @@ export default {
             search_country: null,
             search_currency: null,
             search_tftn: null,
+            search_inn: null,
             countries: [],
             transport_type: null,
             regions: [],
@@ -2460,6 +2489,7 @@ export default {
                 {text: '6.5-усул, Захира', value: 6.5}
             ],
             tftncodes: [],
+            importInns: [],
             breadcrumb_items: [
                 {
                     text: 'Асосий саҳифа',
@@ -2845,6 +2875,7 @@ export default {
             },
             loading: {
                 tftncode: false,
+                importInn: false,
                 country_transport_type_from: false
             },
             transport_turi_chips: [
@@ -2924,6 +2955,36 @@ export default {
                     })
                     .finally(() => (
                         this.loading.tftncode = false
+                    ))
+            },
+            deep: true
+        },
+        search_inn: {
+            handler: function (val) {
+
+                if (val.length!==9) return
+                //if (this.tftncodes.length > 0) return
+
+                // Items have already been requested
+                //if (this.loading.tftncode) return
+
+                this.loading.importInn = true
+
+                // Lazily load input items
+                fetch("https://new.customs.uz/api/v1/data/inn?code=" + val)
+                    .then((res) => res.json())
+                    .then(res => {
+                        res.map(function (item) {
+                            item.shortname = item.tin + " - " + item.shortname;
+                            return item;
+                        })
+                        this.importInns = res;
+                    })
+                    .catch(err => {
+                        //console.log(err)
+                    })
+                    .finally(() => (
+                        this.loading.importInn = false
                     ))
             },
             deep: true
@@ -3166,6 +3227,7 @@ export default {
                 $(".product_parts .nav-link").removeClass(["show active"]);
                 $(".product_parts").closest('div').find('.tab-pane').removeClass(["show", "active"]);
                 $('#v-pills-profile' + (product - 1)).addClass(["show", "active"]);
+                $('#v-pills-profile' + product).remove();
                 $('[data-id="' + (product - 1) + '"]').addClass(["active"]);
             }
 
@@ -3342,6 +3404,15 @@ export default {
                             _this.yukData['apps']['personMail'] = this.person.email;
                             _this.yukData['apps']['personPhone'] = this.person.phone;
                             _this.yukData['apps']['locationId'] = this.person.region;
+                            if(typeof this.application.importInn.tin !=='undefined' && typeof this.application.importInn.name !=='undefined'){
+                                _this.yukData['apps']['importerTin'] = this.application.importInn.tin;
+                                _this.yukData['apps']['importerNm'] = this.application.importInn.name;
+                                /*let importer=this.importInns.filter((importInn)=>{
+                                    if(this.application.importInn.tin===importInn.tin) return importInn;
+                                });
+                                _this.yukData['apps']['importerNm'] =( typeof importer!='undefined' && typeof importer[0]!='undefined' && typeof importer[0].tin!='undefined')?importer[0].name:"";*/
+                            }
+
                             _this.yukData['apps']['transExp'] = null;
                             _this.yukData['docs'] = myYukData['docs'];
                             _this.yukData['transports'] = myYukData['transports'];
@@ -3801,6 +3872,14 @@ export default {
             this.person.fio = this.$auth.user().sur_name + ' ' + this.$auth.user().first_name + ' ' + this.$auth.user().mid_name;
             this.person.perAdr = this.$auth.user().per_adr;
             this.person.email = this.$auth.user().email;
+            this.person.type = (this.$auth.user().type===1)?1:0;
+            if(this.person.type===0 ) {
+                let legal_info =JSON.parse(this.$auth.user().legal_info)
+                //console.log(legal_info[0].le_name)
+                if (typeof legal_info[0] !== 'undefined' && typeof legal_info[0].le_name !== 'undefined' ) {
+                    this.person.organization_name = legal_info[0].le_name
+                }else this.person.organization_name ="";
+            }
             let personId = null;
             const _this = this;
 

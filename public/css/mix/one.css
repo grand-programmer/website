@@ -88,12 +88,16 @@ input[type=number] {
   padding-left: 24px !important;
   border-bottom: 1px solid #dfdfdf;
   padding-top: 10px !important;
+  padding-right: 10px !important;
   padding-bottom: 10px !important;
 }
 .navbar-nav li .dropdown-menu li a {
   color: #000 !important;
   padding: 0 !important;
   font-family: Montserrat, serif;
+}
+.navbar-nav li .dropdown-menu li a:hover, .navbar-nav li .dropdown-menu li a:focus {
+  background: transparent;
 }
 
 .nav-item.dropdown:hover > ul.dropdown-menu {
@@ -1624,9 +1628,9 @@ body .logo_area {
 ul.nav.navbar-nav li ul.dropdown-menu {
   position: absolute;
   transition: unset;
-  max-height: 500px;
-  overflow-y: auto;
-  overflow-x: visible;
+  /*    max-height: 500px;
+      overflow-y: auto;
+      overflow-x: visible;*/
   -ms-overflow-style: none;
   /* IE and Edge */
   scrollbar-width: none;
@@ -4428,4 +4432,53 @@ html body .Vue-Toastification__container.top-right {
 
 #accordionExamplemarkaziy .my-card .my-card-header .profile-icon-wrapper {
   padding: 0;
+}
+
+.list-enter-active.active {
+  -webkit-animation-name: rightToLeft;
+          animation-name: rightToLeft;
+  -webkit-animation-duration: 0.5s;
+          animation-duration: 0.5s;
+  position: relative;
+}
+
+.list-move {
+  display: none;
+}
+
+@-webkit-keyframes rightToLeft {
+  0% {
+    right: -30px;
+    opacity: 0;
+  }
+  10% {
+    right: -30px;
+    opacity: 1;
+    display: block;
+  }
+  100% {
+    right: 0;
+    display: block;
+    opacity: 1;
+  }
+}
+
+@keyframes rightToLeft {
+  0% {
+    right: -30px;
+    opacity: 0;
+  }
+  10% {
+    right: -30px;
+    opacity: 1;
+    display: block;
+  }
+  100% {
+    right: 0;
+    display: block;
+    opacity: 1;
+  }
+}
+.nav-link:focus, .nav-link:hover {
+  color: var(--mycolor);
 }

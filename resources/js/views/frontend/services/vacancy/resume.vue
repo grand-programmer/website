@@ -2253,7 +2253,7 @@ export default {
             await axios.get("/api/v1/ex_api/vacancy-show?vacancy=" + this.$route.params.id).then(function (response) {
                 if (response.status === 200) {
                     _app.vacancy = response.data.data.vakant;
-                    if(_app.vacancy.applied===true) _app.$router.push('/services/vacancy/'+_app.vacancy.id);
+                    //if(_app.vacancy.applied===true) _app.$router.push('/services/vacancy/'+_app.vacancy.id);
                     _app.breadcrumb_items.push(
                         {
                             text: _app.vacancy.seven,

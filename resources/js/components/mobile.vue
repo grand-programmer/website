@@ -796,7 +796,69 @@ export default {
         return {
             stat: true,
             links: [],
-            show: false
+            show: false,
+            stat_type: 1,
+            month: 0,
+            months: [
+                {
+                    text: 'Барчаси',
+                    value: 0
+                }, {
+                    text: 'Январ',
+                    value: 1
+                },
+                {
+                    text: 'Феврал',
+                    value: 2
+                },
+                {
+                    text: 'Март',
+                    value: 3
+                },
+                {
+                    text: 'Апрел',
+                    value: 4
+                },
+                {
+                    text: 'Май',
+                    value: 5
+                },
+                {
+                    text: 'Июн',
+                    value: 6
+                },
+                {
+                    text: 'Июл',
+                    value: 7
+                },
+                {
+                    text: 'Август',
+                    value: 8
+                },
+                {
+                    text: 'Сентябр',
+                    value: 9
+                },
+                {
+                    text: 'Октябр',
+                    value: 10
+                },
+                {
+                    text: 'Ноябр',
+                    value: 11
+                },
+                {
+                    text: 'Декабр',
+                    value: 12
+                }
+            ],
+            year: 2022,
+            firstStart: 1,
+            years: [
+                2018, 2019, 2020, 2021, 2022
+            ],
+            overlay: true,
+            faqs: [],
         }
 
     },
