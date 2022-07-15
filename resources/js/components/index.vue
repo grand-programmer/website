@@ -138,7 +138,8 @@
                                     <p class="fadeInUp animated">Божхона хизмати органларидаги вакансиялар рўйхатини
                                         билиб олинг ҳамда ишга кириш учун онлайн ариза юборинг</p>
                                     <router-link class="s_readmore_btn fadeInUp animated" to="/services/vacancy"
-                                       target="_blank">Хизматдан фойдаланиш</router-link>
+                                                 target="_blank">Хизматдан фойдаланиш
+                                    </router-link>
                                     <!--<a class="s_contact_btn fadeInUp animated" href="#">Contact Us</a>-->
                                 </div>
                                 <div class="slider_image slider-2">
@@ -216,9 +217,10 @@
                 <div class="container-fluid">
 
 
-
-                    <div class="row pb-8" style="margin: 24px!important; justify-content: center;" >
-                        <router-link to="/page/zhismoniy-shahslar-tomonidan-avtotransport-vositalarni-olib-otish-tartibi" class="card">
+                    <div class="row pb-8" style="margin: 24px!important; justify-content: center;">
+                        <router-link
+                            to="/page/zhismoniy-shahslar-tomonidan-avtotransport-vositalarni-olib-otish-tartibi"
+                            class="card">
                             <div class="bolim_image"><img src="/img/service/user-icon.png"></div>
                             <div class="bolim_title">Жисмоний шахслар учун</div>
                             <div class="bolim_description">Жисмоний шахслар учун керакли хизматлар ва маълумотларни
@@ -226,7 +228,8 @@
                                 олинг
                             </div>
                         </router-link>
-                        <router-link to="/page/yuridik-shahslar-tomonidan-avtotransport-vositalarni-olib-kirish-tartibi" class="card">
+                        <router-link to="/page/yuridik-shahslar-tomonidan-avtotransport-vositalarni-olib-kirish-tartibi"
+                                     class="card">
                             <div class="bolim_image">
                                 <svg height="496pt" viewBox="0 0 496 496" width="496pt"
                                      xmlns="http://www.w3.org/2000/svg">
@@ -281,16 +284,20 @@
                         <a href="http://tarif.customs.uz/" target="_blank" class="card">
                             <div class="bolim_image"><img src="/img/icons/payment-date.png"></div>
                             <div class="bolim_title">Тўловлар ва вақт</div>
-                            <div class="bolim_description">Товарлар учун дастлабки ҳисоб – китоблар асосида, сарфланадиган харажат ва вақт</div>
+                            <div class="bolim_description">Товарлар учун дастлабки ҳисоб – китоблар асосида,
+                                сарфланадиган харажат ва вақт
+                            </div>
 
                         </a>
-                        <a href="http://service.customs.uz/autogtd_report/index.jsp?pc=7#"  target="_blank" class="card">
-                            <div class="bolim_image"><img src="/img/icons/business-grow.png" style="margin-top: -25px; margin-bottom: -25px; width: 200px"></div>
+                        <a href="http://service.customs.uz/autogtd_report/index.jsp?pc=7#" target="_blank" class="card">
+                            <div class="bolim_image"><img src="/img/icons/business-grow.png"
+                                                          style="margin-top: -25px; margin-bottom: -25px; width: 200px">
+                            </div>
                             <div class="bolim_title">Тадбиркорлар учун зарур маълумотлар</div>
-                            <div class="bolim_description">Тадбиркорларнинг экспорт ва импорт маълумотлари </div>
+                            <div class="bolim_description">Тадбиркорларнинг экспорт ва импорт маълумотлари</div>
 
                         </a>
-                        <a href="https://axborot.customs.uz/Xabar/"  target="_blank" class="card">
+                        <a href="https://axborot.customs.uz/Xabar/" target="_blank" class="card">
                             <div class="bolim_image"><img src="/img/icons/stop-corruption.png"></div>
                             <div class="bolim_title">Коррупция тўғрисида хабар</div>
                             <div class="bolim_description">Коррупция тўғрисида ариза юборинг</div>
@@ -302,11 +309,9 @@
                 </div>
 
 
+            </div>
 
-
-                </div>
-
-                <!--==========End Portfolio area==========-->
+            <!--==========End Portfolio area==========-->
 
             <div class="section yangiliklar" id="section3">
 
@@ -332,10 +337,12 @@
                                                                 <li><a :class="(stat_type==5)?'active':''" href="#" @click="stat_type=5">Ўзбекистон
                                                                     Республикасида товарлар импорти ва экспорти</a></li>-->
                             </ul>
-                            <a class="all_stats" href="https://charts.customs.uz" target="_blank" style="position: absolute; bottom: 100px">
+                            <a class="all_stats" href="https://charts.customs.uz" target="_blank"
+                               style="position: absolute; ">
                                 Барча статистика <i class="fa fa-arrow-right"></i>
 
                             </a>
+
                         </div>
                     </div>
                     <div class="col-9" id="reyt" v-if="stat_type==1">
@@ -436,7 +443,9 @@
                                             <h4 class="panel-title">
                                                 <a role="button" data-bs-toggle="collapse" data-bs-parent="#accordion"
                                                    :href="'#chose'+fkey" aria-expanded="true"
-                                                   aria-controls="chose3">{{ typeof faq.question !== 'undefined' ? faq.question : '' }}<span>
+                                                   aria-controls="chose3">{{
+                                                        typeof faq.question !== 'undefined' ? faq.question : ''
+                                                    }}<span>
                                                     <i class="fa fa-plus" aria-hidden="false"></i>
                                                     <i class="fa fa-minus" aria-hidden="true"></i>
                                                 </span>

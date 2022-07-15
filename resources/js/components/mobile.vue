@@ -649,10 +649,12 @@
                         <div class="col-md-4">
                             <div class="footer_widget_inner">
                                 <div class="f_about_widget">
-                                    <div class="logo"><img src="/img/gtk_image.png" alt="">Ўзбекистон
-                                        Республикаси
-                                        Давлат
-                                        божхона қўмитаси
+                                    <div class="logo"><img src="/img/gtk_image.png" alt="">
+                                        <div class="logo_title">Ўзбекистон
+                                            Республикаси
+                                            Давлат
+                                            божхона қўмитаси
+                                        </div>
                                     </div>
 
                                     <div class="f_navigation_widget">

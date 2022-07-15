@@ -47,7 +47,7 @@ input[type=number] {
 @font-face {
   font-family: "bauhaus93";
   src: url(/fonts/bauhaus93.eot?1bb8075ef0197936434234e6ee9c18a2);
-  src: url(/fonts/bauhaus93.woff?954164e88b41e33b608b7b97e8098326) format("woff"), url(/fonts/bauhaus93.ttf?6d785e39c9cd2bb2f181f041ed3c747d) format("truetype"), url(/fonts/bauhaus93.svg?5c6a8b8f3d45a160c51fcb7195274cf5) format("svg");
+  src: url(/fonts/bauhaus93.woff?954164e88b41e33b608b7b97e8098326) format("woff"), url(/fonts/bauhaus93.ttf?6d785e39c9cd2bb2f181f041ed3c747d) format("truetype"), url(/fonts/bauhaus93.svg?9892d4919a083f890ab7a8a93d802b92) format("svg");
 }
 .menu_slider {
   position: absolute;
@@ -1268,6 +1268,8 @@ a.read_more {
 }
 
 .logo {
+  line-height: 0px;
+  text-align: center;
   font-size: 15px;
   font-weight: 500;
   font-family: Montserrat;

@@ -38,7 +38,8 @@
 
                                         <ul class="dropdown-menu "
                                             v-if="(link.children && link.children[0])">
-                                            <li v-for="(sublink,index) in link.children" :key="index" v-if="sublink && index<10">
+                                            <li v-for="(sublink,index) in link.children" :key="index"
+                                                v-if="sublink && index<10">
                                                 <router-link :to="sublink.url" class="dropdown-item"> {{
                                                         sublink.title
                                                     }}
@@ -89,7 +90,7 @@
                                     <a href=".hududiy.section" data-toggle="collapse" role="button"
                                        aria-expanded="false" class="d-inline">
                                         <i class="fas fa-map-marker-alt mr-1 "></i>
-                                        <span class="tort">Ҳудудий бошқармалар</span>
+                                        <span class="tort">{{ $t("Ҳудудий бошқармалар") }}</span>
                                     </a>
                                     <!--                                <ul class="dropdown-menu">
                                                                         <li><a href="contact.html">Contact</a></li>
@@ -121,56 +122,58 @@
                                     </template>
                                     <v-list><!--
                                     <v-list-item to="/services">Менинг аризаларим</v-list-item>-->
-                                        <v-list-item to="/profile">Менинг профилим</v-list-item>
-                                        <v-list-item to="/applications">Менинг аризаларим</v-list-item>
+                                        <v-list-item to="/profile">{{ $t("Менинг профилим") }}</v-list-item>
+                                        <v-list-item to="/applications">{{ $t("Менинг аризаларим") }}</v-list-item>
                                         <!--                      <v-list-item> <v-list-item-title>Settings</v-list-item-title></v-list-item>-->
                                         <v-list-item @click.prevent="$auth.logout({
                         makeRequest: true,
                         redirect: {name: 'login'},
-                    })" href="#">Чиқиш
+                    })" href="#">{{ $t("Чиқиш") }}
                                         </v-list-item>
                                     </v-list>
                                 </v-menu>
                                 <router-link v-if="!$auth.check()" to="/login"><i
-                                    class="fas fa-sign-in-alt"></i><span class="tort">Кабинетга кириш</span>
+                                    class="fas fa-sign-in-alt"></i><span class="tort">{{
+                                        $t("Кабинетга кириш")
+                                    }}  </span>
                                 </router-link>
                                 <!--end kabinet area-->
 
                             </div>
                             <!--Language area-->
-                                <language-dropdown class="header-lang"/>
+                            <language-dropdown class="header-lang"/>
 
-<!--                            <div class="header-lang">
+                            <!--                            <div class="header-lang">
 
-                                <span id="lang_selected" title="Tilni tanlang">ЎЗБ</span>
+                                                            <span id="lang_selected" title="Tilni tanlang">ЎЗБ</span>
 
-                                <div id="lang_selector" class="language-dropdown" :class="languageMenuOpen?'open':''" >
-                                    <label class="lang-flag lang-en" @click="languageMenuOpen=!languageMenuOpen"
-                                           title="Tilni tanlang">
-                                        <span class="flag"></span>
-                                    </label>
-                                    <ul class="lang-list">
-                                        <li class="lang lang-en selected" title="ЎЗБ" @click="selectMenu">
-                                            <span class="flag"></span>
-                                        </li>
-                                        <li class="lang lang-pt" title="РУС" @click="selectMenu">
-                                            <span class="flag"></span>
-                                        </li>
-                                        <li class="lang lang-es" title="ENG" @click="selectMenu">
-                                            <span class="flag"></span>
-                                        </li>
-                                    </ul>
+                                                            <div id="lang_selector" class="language-dropdown" :class="languageMenuOpen?'open':''" >
+                                                                <label class="lang-flag lang-en" @click="languageMenuOpen=!languageMenuOpen"
+                                                                       title="Tilni tanlang">
+                                                                    <span class="flag"></span>
+                                                                </label>
+                                                                <ul class="lang-list">
+                                                                    <li class="lang lang-en selected" title="ЎЗБ" @click="selectMenu">
+                                                                        <span class="flag"></span>
+                                                                    </li>
+                                                                    <li class="lang lang-pt" title="РУС" @click="selectMenu">
+                                                                        <span class="flag"></span>
+                                                                    </li>
+                                                                    <li class="lang lang-es" title="ENG" @click="selectMenu">
+                                                                        <span class="flag"></span>
+                                                                    </li>
+                                                                </ul>
 
-                                </div>
+                                                            </div>
 
 
-                            </div>-->
+                                                        </div>-->
 
                             <!--End language area-->
 
                         </div>
                         <div class="menu-container">
-                            <div  class="menu-wrapper">
+                            <div class="menu-wrapper">
                                 <div class="hamburger-menu">
                                     <span></span>
                                     <span></span>
@@ -239,7 +242,7 @@
                                         <a href=".hududiy.section" data-toggle="collapse" role="button"
                                            aria-expanded="false" class="d-inline">
                                             <i class="fas fa-map-marker-alt mr-1 "></i>
-                                            <span class="tort">Ҳудудий бошқармалар</span>
+                                            <span class="tort">{{ $t("Ҳудудий бошқармалар") }}</span>
                                         </a>
                                         <!--                                <ul class="dropdown-menu">
                                                                             <li><a href="contact.html">Contact</a></li>
@@ -272,13 +275,14 @@
                                             </template>
                                             <v-list><!--
                                     <v-list-item to="/services">Менинг аризаларим</v-list-item>-->
-                                                <v-list-item to="/profile">Менинг профилим</v-list-item>
-                                                <v-list-item to="/applications">Менинг аризаларим</v-list-item>
+                                                <v-list-item to="/profile">{{ $t("Менинг профилим") }}</v-list-item>
+                                                <v-list-item to="/applications">{{ $t("Менинг аризаларим") }}
+                                                </v-list-item>
                                                 <!--                      <v-list-item> <v-list-item-title>Settings</v-list-item-title></v-list-item>-->
                                                 <v-list-item @click.prevent="$auth.logout({
                         makeRequest: true,
                         redirect: {name: 'login'},
-                    })" href="#">Чиқиш
+                    })" href="#">{{ $t("Чиқиш") }}
                                                 </v-list-item>
                                             </v-list>
                                         </v-menu>
@@ -291,31 +295,31 @@
 
                                     <!--Language area-->
 
-                                    <language-dropdown class="mm-lang" />
-<!--                                    <div class="mm-lang">
+                                    <language-dropdown class="mm-lang"/>
+                                    <!--                                    <div class="mm-lang">
 
 
-                                        <div id="lang_selector1" class="language-dropdown" :class="footerlanguageMenuOpen?'open':''" >
-                                            <label class="lang-flag lang-en" @click="footerlanguageMenuOpen=!footerlanguageMenuOpen"
-                                                   title="Tilni tanlang">
-                                                <span class="flag"></span>
-                                            </label>
-                                            <ul class="lang-list">
-                                                <li class="lang lang-en selected" title="ЎЗБ">
-                                                    <span class="flag"></span>
-                                                </li>
-                                                <li class="lang lang-pt" title="РУС">
-                                                    <span class="flag"></span>
-                                                </li>
-                                                <li class="lang lang-es" title="ENG">
-                                                    <span class="flag"></span>
-                                                </li>
-                                            </ul>
+                                                                            <div id="lang_selector1" class="language-dropdown" :class="footerlanguageMenuOpen?'open':''" >
+                                                                                <label class="lang-flag lang-en" @click="footerlanguageMenuOpen=!footerlanguageMenuOpen"
+                                                                                       title="Tilni tanlang">
+                                                                                    <span class="flag"></span>
+                                                                                </label>
+                                                                                <ul class="lang-list">
+                                                                                    <li class="lang lang-en selected" title="ЎЗБ">
+                                                                                        <span class="flag"></span>
+                                                                                    </li>
+                                                                                    <li class="lang lang-pt" title="РУС">
+                                                                                        <span class="flag"></span>
+                                                                                    </li>
+                                                                                    <li class="lang lang-es" title="ENG">
+                                                                                        <span class="flag"></span>
+                                                                                    </li>
+                                                                                </ul>
 
-                                        </div>
+                                                                            </div>
 
 
-                                    </div>-->
+                                                                        </div>-->
 
                                     <!--End language area-->
 
@@ -336,11 +340,11 @@
 
         <!--                =====   =====End Menu area==========-->
 
-<!--        <component is="script">
-            $(document).ready(function () {
-            $("select").msDropdown({roundedBorder: false});
-            });
-        </component>-->
+        <!--        <component is="script">
+                    $(document).ready(function () {
+                    $("select").msDropdown({roundedBorder: false});
+                    });
+                </component>-->
 
 
     </div>
@@ -411,13 +415,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // language
 
-$(document).click(function(e)
-{
+$(document).click(function (e) {
     let container = $(".language-dropdown");
 
     // if the target of the click isn't the container nor a descendant of the container
-    if (!container.is(e.target) && container.has(e.target).length === 0)
-    {
+    if (!container.is(e.target) && container.has(e.target).length === 0) {
         $(".language-dropdown").removeClass("open");
     }
 });
@@ -432,7 +434,7 @@ $(function () {
         );
     }
 
-    $("body").on("click",".menu-wrapper .hamburger-menu",function (event) {
+    $("body").on("click", ".menu-wrapper .hamburger-menu", function (event) {
         event.stopPropagation();
         $(".hamburger-menu").toggleClass("open");
         $(".menu-container .menu-list").toggleClass("active");
