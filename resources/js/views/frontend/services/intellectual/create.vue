@@ -407,6 +407,7 @@
                                                             color="primary"
                                                             rounded
                                                             dark
+                                                            @click="dialog.ishlabchiqaruvchi=true"
                                                         >
                                                             <v-icon large class="mr-2 " style="font-size: 15px">mdi-plus</v-icon>
 
@@ -415,130 +416,103 @@
 
                                                     </v-col>
                                                     <v-dialog
-                                                        v-model="dialog.tiftnqaror"
-                                                        max-width="600px"
+                                                        v-model="dialog.ishlabchiqaruvchi"
+                                                        max-width="900px"
 
                                                     >
-                                                        <template v-slot:activator="{ on, attrs }">
-                                                            <v-col cols="4"
-                                                                   class="position-relative d-flex justify-content-end"
-                                                                   style="flex-direction: column">
-                                                                <label
-                                                                    v-if="application.tovarlar[key].product.tftnqaror.number && application.tovarlar[key].product.tftnqaror.date">ТИФ
-                                                                    ТН коди бўйича берилган дастлабки
-                                                                    қарор</label>
-                                                                <v-btn
-                                                                    v-bind="attrs"
-                                                                    v-on="on"
-                                                                    min-width="100%"
-                                                                    class="button-style-1"
-                                                                >
-                                                                 <span
-                                                                     v-if="application.tovarlar[key].product.tftnqaror.number && application.tovarlar[key].product.tftnqaror.date">{{
-                                                                         application.tovarlar[key].product.tftnqaror.number
-                                                                     }} ({{
-                                                                         application.tovarlar[key].product.tftnqaror.date
-                                                                     }})</span>
-                                                                    <span
-                                                                        v-else>ТИФ ТН коди бўйича берилган қарор</span>
 
-                                                                </v-btn>
-
-
-                                                                <div class="errors_under_button">
-                                                                    <ValidationProvider
-                                                                        name="ТИФ ТН коди бўйича берилган қарор рақами"
-                                                                        v-slot="{ errors }">
-                                                                        <input type="hidden"
-                                                                               name="application_tftn_qaror_number"
-                                                                               :value="application.tovarlar[key].product.tftnqaror.number">
-                                                                        <span class="red--text">{{
-                                                                                errors[0]
-                                                                            }}</span>
-                                                                    </ValidationProvider>
-                                                                    <ValidationProvider
-                                                                        name="ТИФ ТН коди бўйича берилган қарор санаси"
-
-                                                                        v-slot="{ errors }">
-                                                                        <input type="hidden"
-                                                                               name="application_tftn_qaror_sanasi"
-                                                                               :value="application.tovarlar[key].product.tftnqaror.date">
-                                                                        <span
-                                                                            v-if="application.tovarlar[key].product.tftnqaror.number">{{
-                                                                                errors[0]
-                                                                            }}</span>
-                                                                    </ValidationProvider>
-                                                                </div>
-
-                                                            </v-col>
-                                                        </template>
 
                                                         <v-card>
                                                             <v-card-title>
                                                             <span
-                                                                class="text-h5">ТИФ ТН коди бўйича берилган қарор</span>
+                                                                class="text-h5">Ишлаб чиқарувчи тўғрисида маълумотлар</span>
                                                             </v-card-title>
                                                             <v-card-text>
-                                                                <v-container>
+                                                                <v-container class="w-100 m-0 p-4">
                                                                     <v-row>
-
-                                                                        <v-col cols="6">
-                                                                            <v-text-field
-                                                                                v-model="application.tovarlar[key].product.tftnqaror.number"
-                                                                                label="ТИФ ТН код бўйича қарор рақами"
-                                                                                required
-                                                                                persistent-placeholder
-                                                                            ></v-text-field>
-                                                                        </v-col>
-                                                                        <v-col cols="6">
-                                                                            <v-menu
-                                                                                ref="menu_tiftnqarorsanasi"
-                                                                                v-model="application.tovarlar[key].menu.tftnqarorsanasi"
-                                                                                :close-on-content-click="false"
-                                                                                :return-value.sync="application.tovarlar[key].product.tftnqaror.date"
-                                                                                transition="scale-transition"
-                                                                                offset-y
-                                                                                min-width="auto"
-                                                                            >
-                                                                                <template
-                                                                                    v-slot:activator="{ on, attrs }">
-                                                                                    <v-text-field
-                                                                                        v-model="application.tovarlar[key].product.tftnqaror.date"
-                                                                                        label="ТИФ ТН код бўйича қарор санаси"
-                                                                                        prepend-icon="mdi-calendar"
-                                                                                        readonly
-                                                                                        persistent-placeholder
-                                                                                        v-bind="attrs"
-                                                                                        v-on="on"
-                                                                                    ></v-text-field>
-                                                                                </template>
-                                                                                <v-date-picker
-                                                                                    v-model="application.tovarlar[key].product.tftnqaror.date"
-                                                                                    no-title
-                                                                                    scrollable
-                                                                                    locale="ru-ru"
+                                                                        <v-col cols="4">
+                                                                            <ValidationProvider name="Ишлаб чиқарувчининг номи"
+                                                                                                rules="required"
+                                                                                                v-slot="{ errors }">
+                                                                                <v-text-field
+                                                                                    label="Ишлаб чиқарувчининг номи *"
+                                                                                    required
+                                                                                    hint="Ишлаб чиқарувчининг номи"
+                                                                                    persistent-placeholder
+                                                                                    v-model="application.ishchiq_nomi"
                                                                                 >
-                                                                                    <v-spacer></v-spacer>
-                                                                                    <v-btn
-                                                                                        text
-                                                                                        color="primary"
-                                                                                        @click="application.tovarlar[key].menu.tftnqarorsanasi = false"
-                                                                                    >
-                                                                                        Бекор қилиш
-                                                                                    </v-btn>
-                                                                                    <v-btn
-                                                                                        text
-                                                                                        color="primary"
-                                                                                        @click="$refs.menu_tiftnqarorsanasi[0].save(application.tovarlar[key].product.tftnqaror.date)"
-                                                                                    >
-                                                                                        Сақлаш
-                                                                                    </v-btn>
-                                                                                </v-date-picker>
-                                                                            </v-menu>
-                                                                        </v-col>
 
+                                                                                </v-text-field>
+                                                                                <span class="red--text">{{ errors[0] }}</span>
+                                                                            </ValidationProvider>
+                                                                        </v-col>
+                                                                        <v-col cols="4">
+                                                                            <ValidationProvider name="Ишлаб чиқарувчининг манзили"
+                                                                                                rules="required"
+                                                                                                v-slot="{ errors }">
+                                                                                <v-text-field
+                                                                                    label="Ишлаб чиқарувчининг манзили *"
+                                                                                    required
+                                                                                    hint="Ишлаб чиқарувчининг манзили"
+                                                                                    persistent-placeholder
+                                                                                    v-model="application.ishchiq_manzili"
+                                                                                >
+
+                                                                                </v-text-field>
+                                                                                <span class="red--text">{{ errors[0] }}</span>
+                                                                            </ValidationProvider>
+                                                                        </v-col>
+                                                                        <v-col cols="4">
+                                                                            <ValidationProvider
+                                                                                name="Ишлаб чиқарувчи яшаётган давлат"
+                                                                                rules="required"
+                                                                                v-slot="{ errors }">
+                                                                                <v-text-field
+                                                                                    :label="$t('Ишлаб чиқарувчи яшаётган давлат') + '*'"
+                                                                                    required
+                                                                                    hint="Ишлаб чиқарувчи яшаётган давлат"
+                                                                                    persistent-placeholder
+                                                                                    v-model="application.ishchiq_davlat"
+                                                                                >
+
+                                                                                </v-text-field>
+                                                                                <span class="red--text">{{ errors[0] }}</span>
+                                                                            </ValidationProvider>
+                                                                        </v-col>
+                                                                        <v-col cols="4">
+                                                                            <ValidationProvider
+                                                                                name="Ишлаб чиқарувчининг телефон рақами"
+                                                                                rules="required"
+                                                                                v-slot="{ errors }">
+                                                                                <v-text-field
+                                                                                    label="Ишлаб чиқарувчининг телефон рақами *"
+                                                                                    required
+                                                                                    hint="Ишлаб чиқарувчининг телефон рақами"
+                                                                                    persistent-placeholder
+                                                                                    v-model="application.ishchiq_phone"
+                                                                                >
+                                                                                </v-text-field>
+                                                                                <span class="red--text">{{ errors[0] }}</span>
+                                                                            </ValidationProvider>
+                                                                        </v-col>
+                                                                        <v-col cols="4">
+                                                                            <ValidationProvider name="Ишлаб чиқарувчининг эмаили"
+                                                                                                rules="required"
+                                                                                                v-slot="{ errors }">
+                                                                                <v-text-field
+                                                                                    label="Ишлаб чиқарувчининг эмаили *"
+                                                                                    required
+                                                                                    hint="Ишлаб чиқарувчининг эмаили"
+                                                                                    persistent-placeholder
+                                                                                    v-model="application.ishchiq_mail"
+                                                                                >
+                                                                                </v-text-field>
+                                                                                <span class="red--text">{{ errors[0] }}</span>
+                                                                            </ValidationProvider>
+                                                                        </v-col>
 
                                                                     </v-row>
+
                                                                 </v-container>
                                                                 <small>* майдонлар тўлдирилиши шарт</small>
                                                             </v-card-text>
@@ -554,13 +528,14 @@
                                                                 <v-btn
                                                                     color="blue darken-1"
                                                                     text
-                                                                    @click="dialog.tiftnqaror = false"
+                                                                    @click="dialog.ishlabchiqaruvchi = false"
                                                                 >
                                                                     Сақлаш
                                                                 </v-btn>
                                                             </v-card-actions>
                                                         </v-card>
                                                     </v-dialog>
+
 
                                                     <v-chip-group
                                                         column
@@ -599,7 +574,7 @@
                                                                                                                 >
 
                                                                                                                 </v-text-field>
-                                                                                                                <span class="red&#45;&#45;text">{{ errors[0] }}</span>
+                                                                                                                <span class="red--text">{{ errors[0] }}</span>
                                                                                                             </ValidationProvider>
                                                                                                         </v-col>
                                                                                                         <v-col cols="4">
@@ -615,7 +590,7 @@
                                                                                                                 >
 
                                                                                                                 </v-text-field>
-                                                                                                                <span class="red&#45;&#45;text">{{ errors[0] }}</span>
+                                                                                                                <span class="red--text">{{ errors[0] }}</span>
                                                                                                             </ValidationProvider>
                                                                                                         </v-col>
                                                                                                         <v-col cols="4">
@@ -632,7 +607,7 @@
                                                                                                                 >
 
                                                                                                                 </v-text-field>
-                                                                                                                <span class="red&#45;&#45;text">{{ errors[0] }}</span>
+                                                                                                                <span class="red--text">{{ errors[0] }}</span>
                                                                                                             </ValidationProvider>
                                                                                                         </v-col>
                                                                                                         <v-col cols="4">
@@ -648,7 +623,7 @@
                                                                                                                     v-model="application.ishchiq_phone"
                                                                                                                 >
                                                                                                                 </v-text-field>
-                                                                                                                <span class="red&#45;&#45;text">{{ errors[0] }}</span>
+                                                                                                                <span class="red--text">{{ errors[0] }}</span>
                                                                                                             </ValidationProvider>
                                                                                                         </v-col>
                                                                                                         <v-col cols="4">
@@ -663,7 +638,7 @@
                                                                                                                     v-model="application.ishchiq_mail"
                                                                                                                 >
                                                                                                                 </v-text-field>
-                                                                                                                <span class="red&#45;&#45;text">{{ errors[0] }}</span>
+                                                                                                                <span class="red--text">{{ errors[0] }}</span>
                                                                                                             </ValidationProvider>
                                                                                                         </v-col>
 
@@ -693,7 +668,7 @@
                                                                                                     return-object
                                                                                                 >
                                                                                                 </v-autocomplete>
-                                                                                                <span class="red&#45;&#45;text">{{ errors[0] }}</span>
+                                                                                                <span class="red--text">{{ errors[0] }}</span>
                                                                                             </ValidationProvider>
 
                                                                                         </v-col>-->
