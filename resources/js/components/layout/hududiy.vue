@@ -455,10 +455,10 @@
                                 <div class="row no-gutters">
                                     <div class="col-md-7">
                                         <h4 class="card-title ff-clearsans_bold" style="margin-bottom: 12px;">
-                                             {{ $t("Тушлик") }}Самарқанд вилояти
+                                             {{ $t("Самарқанд вилояти") }}
                                         </h4>
                                         <p class="card-subtitle">
-                                             {{ $t("Тушлик") }}Давлат божхона бошқармаси
+                                             {{ $t("Давлат божхона бошқармаси") }}
                                         </p>
                                     </div>
                                     <!--                                <div class="col-md-5">
@@ -467,14 +467,14 @@
                                 </div>
                                 <ul class="list-unstyled text-left">
                                     <li>
-                                        <i class="icon icon-location-pin"></i>  {{ $t("Тушлик") }}Самарқанд шаҳри Бўстонсарой кўчаси 85А-уй
+                                        <i class="icon icon-location-pin"></i>  {{ $t("Самарқанд шаҳри Бўстонсарой кўчаси 85А-уй") }}
                                     </li>
                                     <li>
                                         <i class="icon icon-phone"></i> (66)-233-63-00
                                         <span class="badge ff-clearsans_bold text-uppercase">
-                                             {{ $t("Тушлик") }}ишонч телефони</span> <br> (66)-233-11-55
+                                             {{ $t("ишонч телефони") }}</span> <br> (66)-233-11-55
                                         <span class="badge ff-clearsans_bold text-uppercase">
-                                             {{ $t("Тушлик") }}Факс </span>
+                                             {{ $t("Факс") }} </span>
                                     </li>
                                     <li>
                                         <i class="icon icon-clock"></i>
@@ -493,7 +493,7 @@
 
 
                                 <a class="read-more ff-clearsans_bold" @click="goHudud(15)">
-                                     {{ $t("Тушлик") }}Саҳифага ўтиш
+                                    {{ $t("Саҳифага ўтиш") }}
                                     <i class="fa fa-chevron-right ml-2"></i>
                                 </a>
 
@@ -504,10 +504,10 @@
                                 <div class="row no-gutters">
                                     <div class="col-md-7">
                                         <h4 class="card-title ff-clearsans_bold" style="margin-bottom: 12px;">
-                                             {{ $t("Тушлик") }}Сурхондарё вилояти
+                                             {{ $t("Сурхондарё вилояти") }}
                                         </h4>
                                         <p class="card-subtitle">
-                                             {{ $t("Тушлик") }}Давлат божхона бошқармаси
+                                             {{ $t("Давлат божхона бошқармаси") }}
                                         </p>
                                     </div>
                                     <!--                                <div class="col-md-5">
@@ -516,14 +516,14 @@
                                 </div>
                                 <ul class="list-unstyled text-left">
                                     <li>
-                                        <i class="icon icon-location-pin"></i>  {{ $t("Тушлик") }}Термиз шаҳри Ислом Каримов кўчаси, 286-уй
+                                        <i class="icon icon-location-pin"></i>  {{ $t("Термиз шаҳри Ислом Каримов кўчаси, 286-уй") }}
                                     </li>
                                     <li>
                                         <i class="icon icon-phone"></i> 76-225-24-51
                                         <span class="badge ff-clearsans_bold text-uppercase">
-                                             {{ $t("Тушлик") }}ишонч телефони</span> <br> 76-225-26-05
+                                             {{ $t("ишонч телефони") }}</span> <br> 76-225-26-05
                                         <span class="badge ff-clearsans_bold text-uppercase">
-                                             {{ $t("Тушлик") }}Факс </span>
+                                             {{ $t("Факс") }} </span>
                                     </li>
                                     <li>
                                         <i class="icon icon-clock"></i>
@@ -542,7 +542,7 @@
 
 
                                 <a class="read-more ff-clearsans_bold" @click="goHudud(13)">
-                                     {{ $t("Тушлик") }}Саҳифага ўтиш
+                                    {{ $t("Саҳифага ўтиш") }}
                                     <i class="fa fa-chevron-right ml-2"></i>
                                 </a>
 
@@ -553,10 +553,10 @@
                                 <div class="row no-gutters">
                                     <div class="col-md-7">
                                         <h4 class="card-title ff-clearsans_bold" style="margin-bottom: 12px;">
-                                             {{ $t("Тушлик") }}Сирдарё вилояти
+                                             {{ $t("Сирдарё вилояти") }}
                                         </h4>
                                         <p class="card-subtitle">
-                                             {{ $t("Тушлик") }}Давлат божхона бошқармаси
+                                             {{ $t("Давлат божхона бошқармаси") }}
                                         </p>
                                     </div>
                                     <!--                                <div class="col-md-5">
@@ -565,14 +565,14 @@
                                 </div>
                                 <ul class="list-unstyled text-left">
                                     <li>
-                                        <i class="icon icon-location-pin"></i>  {{ $t("Тушлик") }}Гулистон шаҳар, Сайхун кўчаси 22-уй
+                                        <i class="icon icon-location-pin"></i>  {{ $t("Гулистон шаҳар, Сайхун кўчаси 22-уй") }}
                                     </li>
                                     <li>
                                         <i class="icon icon-phone"></i> 67-227-89-08
                                         <span class="badge ff-clearsans_bold text-uppercase">
-                                             {{ $t("Тушлик") }}ишонч телефони</span> <br> 67-227-89-45
+                                             {{ $t("ишонч телефони") }}</span> <br> 67-227-89-45
                                         <span class="badge ff-clearsans_bold text-uppercase">
-                                             {{ $t("Тушлик") }}Факс </span>
+                                             {{ $t("Факс") }} </span>
                                     </li>
                                     <li>
                                         <i class="icon icon-clock"></i>
@@ -591,7 +591,7 @@
 
 
                                 <a class="read-more ff-clearsans_bold" @click="goHudud(5)">
-                                     {{ $t("Тушлик") }}Саҳифага ўтиш
+                                    {{ $t("Саҳифага ўтиш") }}
                                     <i class="fa fa-chevron-right ml-2"></i>
                                 </a>
 
@@ -602,10 +602,10 @@
                                 <div class="row no-gutters">
                                     <div class="col-md-7">
                                         <h4 class="card-title ff-clearsans_bold" style="margin-bottom: 12px;">
-                                             {{ $t("Тушлик") }}Тошкент шаҳар
+                                             {{ $t("Тошкент шаҳар") }}
                                         </h4>
                                         <p class="card-subtitle">
-                                             {{ $t("Тушлик") }}Давлат божхона бошқармаси
+                                             {{ $t("Давлат божхона бошқармаси") }}
                                         </p>
                                     </div>
                                     <!--                                <div class="col-md-5">
@@ -614,14 +614,14 @@
                                 </div>
                                 <ul class="list-unstyled text-left">
                                     <li>
-                                        <i class="icon icon-location-pin"></i>  {{ $t("Тушлик") }}Тошкент шаҳри, Бунёдкор шоҳ кўчаси, 35-уй
+                                        <i class="icon icon-location-pin"></i>  {{ $t("Тошкент шаҳри, Бунёдкор шоҳ кўчаси, 35-уй") }}
                                     </li>
                                     <li>
                                         <i class="icon icon-phone"></i> 71 207-09-39
                                         <span class="badge ff-clearsans_bold text-uppercase">
-                                             {{ $t("Тушлик") }}ишонч телефони</span> <br> 71 207-09-39
+                                             {{ $t("ишонч телефони") }}</span> <br> 71 207-09-39
                                         <span class="badge ff-clearsans_bold text-uppercase">
-                                             {{ $t("Тушлик") }}Факс </span>
+                                             {{ $t("Факс") }} </span>
                                     </li>
                                     <li>
                                         <i class="icon icon-clock"></i>
@@ -640,7 +640,7 @@
 
 
                                 <a class="read-more ff-clearsans_bold" @click="goHudud(9)">
-                                     {{ $t("Тушлик") }}Саҳифага ўтиш
+                                    {{ $t("Саҳифага ўтиш") }}
                                     <i class="fa fa-chevron-right ml-2"></i>
                                 </a>
 
@@ -651,10 +651,10 @@
                                 <div class="row no-gutters">
                                     <div class="col-md-7">
                                         <h4 class="card-title ff-clearsans_bold" style="margin-bottom: 12px;">
-                                             {{ $t("Тушлик") }}Тошкент вилояти
+                                             {{ $t("Тошкент вилояти") }}
                                         </h4>
                                         <p class="card-subtitle">
-                                            {{ $t("Тушлик") }} Давлат божхона бошқармаси
+                                            {{ $t("Давлат божхона бошқармаси") }}
                                         </p>
                                     </div>
                                     <!--<div class="col-md-5">
@@ -663,15 +663,14 @@
                                 </div>
                                 <ul class="list-unstyled text-left">
                                     <li>
-                                        <i class="icon icon-location-pin"></i> {{ $t("Тушлик") }} Tошкент вилояти, Нурафшон шаҳри, Тошкент
-                                        йўли кўчаси, 63-уй
+                                        <i class="icon icon-location-pin"></i> {{ $t("Tошкент вилояти, Нурафшон шаҳри, Тошкент йўли кўчаси, 63-уй") }}
                                     </li>
                                     <li>
                                         <i class="icon icon-phone"></i> 70-202-86-00
                                         <span class="badge ff-clearsans_bold text-uppercase">
-                                             {{ $t("Тушлик") }}ишонч телефони</span> <br> 70-202-86-10
+                                             {{ $t("ишонч телефони") }}</span> <br> 70-202-86-10
                                         <span class="badge ff-clearsans_bold text-uppercase">
-                                             {{ $t("Тушлик") }}Факс </span>
+                                             {{ $t("Факс") }} </span>
                                     </li>
                                     <li>
                                         <i class="icon icon-clock"></i>
@@ -690,7 +689,7 @@
 
 
                                 <a class="read-more ff-clearsans_bold" @click="goHudud(11)">
-                                    {{ $t("Тушлик") }} Саҳифага ўтиш
+                                    {{ $t("Саҳифага ўтиш") }}
                                     <i class="fa fa-chevron-right ml-2"></i>
                                 </a>
 
@@ -701,10 +700,10 @@
                                 <div class="row no-gutters">
                                     <div class="col-md-7">
                                         <h4 class="card-title ff-clearsans_bold" style="margin-bottom: 12px;">
-                                             {{ $t("Тушлик") }}Фарғона вилояти
+                                             {{ $t("Фарғона вилояти") }}
                                         </h4>
                                         <p class="card-subtitle">
-                                             {{ $t("Тушлик") }}Давлат божхона бошқармаси
+                                             {{ $t("Давлат божхона бошқармаси") }}
                                         </p>
                                     </div>
                                     <!--                                <div class="col-md-5">
@@ -713,14 +712,14 @@
                                 </div>
                                 <ul class="list-unstyled text-left">
                                     <li>
-                                        <i class="icon icon-location-pin"></i>  {{ $t("Тушлик") }}Фарғона шаҳар, ал-Фарғоний кўчаси, 52а-уй
+                                        <i class="icon icon-location-pin"></i>  {{ $t("Фарғона шаҳар, ал-Фарғоний кўчаси, 52а-уй") }}
                                     </li>
                                     <li>
                                         <i class="icon icon-phone"></i> (73) 249-07-00
                                         <span class="badge ff-clearsans_bold text-uppercase">
-                                             {{ $t("Тушлик") }}ишонч телефони</span> <br> (73) 244-67-32
+                                             {{ $t("ишонч телефони") }}</span> <br> (73) 244-67-32
                                         <span class="badge ff-clearsans_bold text-uppercase">
-                                             {{ $t("Тушлик") }}Факс </span>
+                                             {{ $t("Факс") }} </span>
                                     </li>
                                     <li>
                                         <i class="icon icon-clock"></i>
@@ -739,7 +738,7 @@
 
 
                                 <a class="read-more ff-clearsans_bold" @click="goHudud(8)">
-                                     {{ $t("Тушлик") }}Саҳифага ўтиш
+                                    {{ $t("Саҳифага ўтиш") }}
                                     <i class="fa fa-chevron-right ml-2"></i>
                                 </a>
 
@@ -750,10 +749,10 @@
                                 <div class="row no-gutters">
                                     <div class="col-md-7">
                                         <h4 class="card-title ff-clearsans_bold" style="margin-bottom: 12px;">
-                                             {{ $t("Тушлик") }}Хоразм вилояти
+                                             {{ $t("Хоразм вилояти") }}
                                         </h4>
                                         <p class="card-subtitle">
-                                            {{ $t("Тушлик") }} Давлат божхона бошқармаси
+                                            {{ $t("Давлат божхона бошқармаси") }}
                                         </p>
                                     </div>
                                     <!--                              <div class="col-md-5">
@@ -762,15 +761,14 @@
                                 </div>
                                 <ul class="list-unstyled text-left">
                                     <li>
-                                        <i class="icon icon-location-pin"></i>  {{ $t("Тушлик") }}Хоразм вилояти Урганч шаҳар Ж.Мангуберди
-                                        кўчаси 95-уй
+                                        <i class="icon icon-location-pin"></i>  {{ $t("Хоразм вилояти Урганч шаҳар Ж.Мангуберди кўчаси 95-уй") }}
                                     </li>
                                     <li>
                                         <i class="icon icon-phone"></i> 62 224-59-20
                                         <span class="badge ff-clearsans_bold text-uppercase">
-                                             {{ $t("Тушлик") }}ишонч телефони</span> <br> 62 224-59-22
+                                             {{ $t("ишонч телефони") }}</span> <br> 62 224-59-22
                                         <span class="badge ff-clearsans_bold text-uppercase">
-                                             {{ $t("Тушлик") }}Факс </span>
+                                             {{ $t("Факс") }} </span>
                                     </li>
                                     <li>
                                         <i class="icon icon-clock"></i>
@@ -789,7 +787,7 @@
 
 
                                 <a class="read-more ff-clearsans_bold" @click="goHudud(7)">
-                                     {{ $t("Тушлик") }}Саҳифага ўтиш
+                                     {{ $t("Саҳифага ўтиш") }}
                                     <i class="fa fa-chevron-right ml-2"></i>
                                 </a>
 
@@ -800,10 +798,10 @@
                                 <div class="row no-gutters">
                                     <div class="col-md-7">
                                         <h4 class="card-title ff-clearsans_bold" style="margin-bottom: 12px;">
-                                            {{ $t("Тушлик") }} Қорақалпоғистон Республикаси
+                                            {{ $t("Қорақалпоғистон Республикаси") }}
                                         </h4>
                                         <p class="card-subtitle">
-                                           {{ $t("Тушлик") }}  Давлат божхона бошқармаси
+                                           {{ $t("Давлат божхона бошқармаси") }}
                                         </p>
                                     </div>
                                     <!--                                <div class="col-md-5">
@@ -812,12 +810,12 @@
                                 </div>
                                 <ul class="list-unstyled text-left">
                                     <li>
-                                        <i class="icon icon-location-pin"></i>  {{ $t("Тушлик") }}Нукус шаҳри Т.Қайыпбергенов кўчаси, 57-уй
+                                        <i class="icon icon-location-pin"></i>  {{ $t("Нукус шаҳри Т.Қайыпбергенов кўчаси, 57-уй") }}
                                     </li>
                                     <li>
                                         <i class="icon icon-phone"></i> (0-361) 224-90-86
                                         <span class="badge ff-clearsans_bold text-uppercase">
-                                            {{ $t("Тушлик") }} ишонч телефони</span> <br> (0-361) 224-97-00
+                                            {{ $t("ишонч телефони") }} </span> <br> (0-361) 224-97-00
                                     </li>
                                     <li>
                                         <i class="icon icon-clock"></i>
@@ -836,7 +834,7 @@
 
 
                                 <a class="read-more ff-clearsans_bold" @click="goHudud(2)">
-                                     {{ $t("Тушлик") }}Саҳифага ўтиш
+                                     {{ $t("Саҳифага ўтиш") }}
                                     <i class="fa fa-chevron-right ml-2"></i>
                                 </a>
                             </div>
