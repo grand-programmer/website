@@ -43,9 +43,16 @@
     "Оав учун": "Оав учун",
     "Боғланиш": "Боғланиш",
     "Тошкент шаҳри,Ислом Каримов кўчаси 3 уй": "Тошкент шаҳри,Ислом Каримов кўчаси 3 уй",
-
-
-
+    "Oʼzbekiston Respublikasi Milliy huquqiy internet portali": "Oʼzbekiston Respublikasi Milliy huquqiy internet portali",
+    "O'zbekiston Respublikasi Prezidentining rasmiy veb sayti": "O'zbekiston Respublikasi Prezidentining rasmiy veb sayti",
+    "Oʼzbekiston Respublikasi Hukumat portali": "Oʼzbekiston Respublikasi Hukumat portali",
+    "Oʼzbekiston Respublikasi Bosh prokuraturasi": "Oʼzbekiston Respublikasi Bosh prokuraturasi",
+    "Oʼzbekiston Respublikasi Ichki ishlar vazirligi": "Oʼzbekiston Respublikasi Ichki ishlar vazirligi",
+    "Oʼzbekiston Respublikasi Davlat soliq qo'mitasi": "Oʼzbekiston Respublikasi Davlat soliq qo'mitasi",
+    "Yagona interaktiv davlat xizmatlari portali": "Yagona interaktiv davlat xizmatlari portali",
+    "Oʼzbekiston Respublikasi Ochiq ma'lumotlar portali": "Oʼzbekiston Respublikasi Ochiq ma'lumotlar portali",
+    "Oʼzbekiston Respublikasi Prezidenti Virtual qabulxonasi": "Oʼzbekiston Respublikasi Prezidenti Virtual qabulxonasi",
+    "Bojxona instituti": "Bojxona instituti",
 
     "endpage": "components/index.vue",
     "beginpage": "components/layout/header.vue",

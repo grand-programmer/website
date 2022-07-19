@@ -35,7 +35,7 @@
 </svg>
 
 
-                    <p> Барча хизматлар </p></router-link>
+                    <p> {{ $t("Барча хизматлар") }}</p></router-link>
 
 
                 <div class="slider_inner">
@@ -43,8 +43,9 @@
                     <div data-thumb="/img/custom/slider-9.png" data-src="/img/custom/077.png">
                         <div class="container">
                             <div class="slider_text absolute_right">
-                                <h3 class="fadeInLeft animated">Шаффофлик замирида <br> иқтисодий хавфсизлик</h3>
-                                <!-- <p class="fadeInUp animated">Божхона ахборот тизмиларига =ужжатларингизни жойланг</p>
+                                <h3 class="fadeInLeft animated">
+                                    {{ $t("Шаффофлик замирида иқтисодий хавфсизлик") }}</h3>
+                                <!-- <p class="fadeInUp animated">Божхона ахборот тизмиларига ҳужжатларингизни жойланг</p>
                                 <a class="s_readmore_btn fadeInUp animated" target="_blank"
                                    href="https://ed2.customs.uz/E_ARXIV/authentication">Хизматдан фойдаланиш</a>-->
                                 <!--<a class="s_contact_btn fadeInUp animated" href="#">Contact Us</a>-->
@@ -59,11 +60,11 @@
                         <div class="container">
                             <div class="slider_text absolute_right">
                                 <h3 class="fadeInLeft animated">E-ARHIV</h3>
-                                <h4 class="fadeInLeft animated">Божхона ахборот тизими</h4>
-                                <p class="fadeInUp animated">Божхона ахборот тизмиларига ҳужжатларингизни
-                                    жойланг</p>
+                                <h4 class="fadeInLeft animated">{{ $t("Божхона ахборот тизими") }}</h4>
+                                <p class="fadeInUp animated">
+                                    {{ $t("Божхона ахборот тизмиларига ҳужжатларингизни жойланг") }}</p>
                                 <a class="s_readmore_btn fadeInUp animated" target="_blank"
-                                   href="https://ed2.customs.uz/E_ARXIV/authentication">Хизматдан фойдаланиш</a>
+                                   href="https://ed2.customs.uz">{{ $t("Хизматдан фойдаланиш") }}</a>
                                 <!--<a class="s_contact_btn fadeInUp animated" href="#">Contact Us</a>-->
                             </div>
                             <div class="slider_image slider-2">
@@ -74,11 +75,12 @@
                     <div data-thumb="/img/custom/slider-9.png" data-src="/img/custom/transit.jpg">
                         <div class="container">
                             <div class="slider_text absolute_right">
-                                <h3 class="fadeInLeft animated">Э-транзит</h3>
-                                <h4 class="fadeInLeft animated">Божхона ахборот тизими</h4>
-                                <p class="fadeInUp animated">Чегарадан юкларни электрон декларация қилинг</p>
+                                <h3 class="fadeInLeft animated">E-TRANZIT</h3>
+                                <h4 class="fadeInLeft animated">{{ $t("Божхона ахборот тизими") }}</h4>
+                                <p class="fadeInUp animated">
+                                    {{ $t("Чегарадан юкларни электрон декларация қилинг") }}</p>
                                 <a class="s_readmore_btn fadeInUp animated" target="_blank"
-                                   href="http://cargo.customs.uz">Хизматдан фойдаланиш</a>
+                                   href="http://cargo.customs.uz">{{ $t("Хизматдан фойдаланиш") }}</a>
                                 <!--<a class="s_contact_btn fadeInUp animated" href="#">Contact Us</a>-->
                             </div>
                             <div class="slider_image slider-2">
@@ -91,11 +93,11 @@
                     <div data-thumb="/img/custom/slider-5.jpg" data-src="/img/custom/slider-5.jpg">
                         <div class="container">
                             <div class="slider_text absolute_right">
-                                <h3 class="fadeInLeft animated">Интеграциялашган таъриф</h3>
-                                <h4 class="fadeInLeft animated">Божхона ахборот тизими</h4>
-                                <p class="fadeInUp animated">Божхона тўловлари ҳисобини олинг</p>
+                                <h3 class="fadeInLeft animated">{{ $t("Интеграциялашган таъриф") }}</h3>
+                                <h4 class="fadeInLeft animated">{{ $t("Божхона ахборот тизими") }}</h4>
+                                <p class="fadeInUp animated">{{ $t("Божхона тўловлари ҳисобини олинг") }}</p>
                                 <a class="s_readmore_btn fadeInUp animated" href="http://tarif.customs.uz"
-                                   target="_blank">Хизматдан фойдаланиш</a>
+                                   target="_blank">{{ $t("Хизматдан фойдаланиш") }}</a>
                                 <!--<a class="s_contact_btn fadeInUp animated" href="#">Contact Us</a>-->
                             </div>
                             <div class="slider_image slider-2">
@@ -108,13 +110,14 @@
                     <div data-thumb="/img/main-slider/slide3.jpg" data-src="/img/main-slider/slide3.jpg">
                         <div class="container">
                             <div class="slider_text absolute_right">
-                                <h3 class="fadeInLeft animated">Ягона дарча</h3>
-                                <h4 class="fadeInLeft animated">Божхона ахборот тизими</h4>
-                                <p class="fadeInUp animated">Чегарадан товарлар олиб ўтишда сертификат ва
-                                    рухсатномаларни
-                                    ушбу ахборот тизими ёрдамида олинг.</p>
+                                <h3 class="fadeInLeft animated">{{ $t("Ягона дарча") }}</h3>
+                                <h4 class="fadeInLeft animated">{{ $t("Божхона ахборот тизими") }}</h4>
+                                <p class="fadeInUp animated">
+                                    {{
+                                        $t("Чегарадан товарлар олиб ўтишда сертификат ва рухсатномаларни ушбу ахборот тизими ёрдамида олинг.")
+                                    }}</p>
                                 <a class="s_readmore_btn fadeInUp animated" href="http://singlewindow.uz"
-                                   target="_blank">Хизматдан фойдаланиш</a>
+                                   target="_blank">{{ $t("Хизматдан фойдаланиш") }}</a>
                                 <!--<a class="s_contact_btn fadeInUp animated" href="#">Contact Us</a>-->
                             </div>
                             <div class="slider_image slider-2">
@@ -126,12 +129,14 @@
                     <div data-thumb="/img/main-slider/slide4.jpg" data-src="/img/main-slider/slide4.jpg">
                         <div class="container">
                             <div class="slider_text absolute_left">
-                                <h3 class="fadeInLeft animated">Ишга кириш учун онлайн ариза бериш</h3>
-                                <h4 class="fadeInLeft animated">Божхона ахборот тизими</h4>
-                                <p class="fadeInUp animated">Божхона хизмати органларидаги вакансиялар рўйхатини
-                                    билиб олинг ҳамда ишга кириш учун онлайн ариза юборинг</p>
-                                <a class="s_readmore_btn fadeInUp animated" to="/services/vacancy"
-                                   target="_blank">Хизматдан фойдаланиш</a>
+                                <h3 class="fadeInLeft animated">{{ $t("Ишга кириш учун онлайн ариза бериш") }}</h3>
+                                <h4 class="fadeInLeft animated">{{ $t("Божхона ахборот тизими") }}</h4>
+                                <p class="fadeInUp animated">{{
+                                        $t("Божхона хизмати органларидаги вакансиялар рўйхатини билиб олинг ҳамда ишга кириш учун онлайн ариза юборинг")
+                                    }}</p>
+                                <router-link class="s_readmore_btn fadeInUp animated" to="/services/vacancy"
+                                             target="_blank">{{ $t("Хизматдан фойдаланиш") }}
+                                </router-link>
                                 <!--<a class="s_contact_btn fadeInUp animated" href="#">Contact Us</a>-->
                             </div>
                             <div class="slider_image slider-2">
@@ -357,15 +362,18 @@
         <div class="section asosiy_korsatkichlari2">
             <div class="row content">
                 <div class="col-3">
-                    <div class="stat_menu">
-                        <h3> Божхона статистикаси</h3>
-                        <ul>
-                            <li><a class="active" href="#" @click="stat_type=1">Ўзбекистон
-                                Республикаси товарлар импорти ва экспорти ҳудудлар кесимида</a></li>
-                            <li><a :class="(stat_type==2)?'active':''" href="#" @click="stat_type=2">Божхона
-                                чегараларидан ўтган автомобиллар сони </a></li>
-                            <li><a :class="(stat_type==3)?'active':''" href="#" @click="stat_type=3">Ўзбекистон
-                                Республикасида кунлик товарлар импорти ва экспорти</a></li>
+                    <div class="stat_menu" style="min-height:80vh">
+                        <h3> {{ $t("Божхона статистикаси") }}</h3>
+                        <ul class="mb-15">
+                            <li><a :class="stat_type==1?'active':''" href="#"
+                                   @click="stat_type=1">{{ $t("Ўзбекистон Республикаси товарлар импорти ва экспорти ҳудудлар кесимида") }}</a>
+                            </li>
+                            <li><a :class="(stat_type==2)?'active':''" href="#"
+                                   @click="stat_type=2">{{ $t("Божхона чегараларидан ўтган автомобиллар сони") }} </a>
+                            </li>
+                            <li><a :class="(stat_type==3)?'active':''" href="#"
+                                   @click="stat_type=3">{{ $t("Ўзбекистон Республикасида кунлик товарлар импорти ва экспорти") }}</a>
+                            </li>
 
 
                             <!--                                <li><a :class="(stat_type==4)?'active':''" href="#" @click="stat_type=4">Ўзбекистон
@@ -373,14 +381,16 @@
                                                             <li><a :class="(stat_type==5)?'active':''" href="#" @click="stat_type=5">Ўзбекистон
                                                                 Республикасида товарлар импорти ва экспорти</a></li>-->
                         </ul>
-                        <a class="all_stats" href="https://charts.customs.uz" target="_blank">
-                            Барча статистика <i class="fa fa-arrow-right"></i>
+                        <a class="all_stats" href="https://charts.customs.uz" target="_blank"
+                           style="position: absolute; ">
+                            {{ $t("Барча статистика") }} <i class="fa fa-arrow-right"></i>
 
                         </a>
+
                     </div>
                 </div>
-                <div class="col-9" id="reyt">
-                    <h3>Ўзбекистон Республикаси товарлар импорти ва экспорти ҳудудлар кесимида</h3>
+                <div class="col-9" id="reyt" v-if="stat_type==1">
+                    <h3>{{ $t("Ўзбекистон Республикаси товарлар импорти ва экспорти ҳудудлар кесимида") }}</h3>
                     <div id="columnchart1" ref="clusteredColumn" class="chart"></div>
                     <div class="filter row">
                         <v-col cols="3">
@@ -406,7 +416,7 @@
 
                 </div>
                 <div class="col-9" v-if="stat_type==2">
-                    <h3>Ўзбекистон Республикаси кунлик товарлар импорти ва экспорти</h3>
+                    <h3>{{ $t("Ўзбекистон Республикаси чегарасидан ўтаётган автомобилларнинг сони") }} </h3>
                     <div id="columnchart2" class="chart"></div>
                     <div class="filter row">
                         <v-col cols="3">
@@ -432,7 +442,7 @@
 
                 </div>
                 <div class="col-9" v-if="stat_type==3">
-                    <h3>Ўзбекистон Республикаси кунлик товарлар импорти ва экспорти</h3>
+                    <h3>{{ $t("Ўзбекистон Республикаси кунлик товарлар импорти ва экспорти") }}</h3>
                     <div id="columnchart3" class="chart"></div>
                     <div class="filter row">
                         <v-col cols="3">
@@ -468,168 +478,164 @@
                     <div class="col-md-6">
                         <div class="chose_inner_area">
                             <div class="section_tittle">
-                                <h2>Кўп бериладиган саволлар</h2>
+                                <h2>{{ $t("Кўп бериладиган саволлар") }}</h2>
                             </div>
                             <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="false">
 
-                                <div class="panel panel-default">
+                                <div class="panel panel-default" v-if="fkey<5" v-for="(faq,fkey) in faqs"
+                                     :key="fkey">
                                     <div class="panel-heading" role="tab" id="headingThree">
                                         <h4 class="panel-title">
                                             <a role="button" data-bs-toggle="collapse" data-bs-parent="#accordion"
-                                               href="#chose3" aria-expanded="true" aria-controls="chose3">
-                                                Тариф преференциялари қайси қонун ҳужжатларига мувофиқ қай тартибда
-                                                қўлланилади?
-                                                <span>
+                                               :href="'#chose'+fkey" aria-expanded="true"
+                                               aria-controls="chose3">{{
+                                                    typeof faq.question !== 'undefined' ? faq.question : ''
+                                                }}<span>
                                                     <i class="fa fa-plus" aria-hidden="false"></i>
                                                     <i class="fa fa-minus" aria-hidden="true"></i>
                                                 </span>
                                             </a>
                                         </h4>
                                     </div>
-                                    <div id="chose3" class="panel-collapse collapse  in show" role="tabpanel"
+                                    <div :id="'chose'+fkey" class="panel-collapse collapse "
+                                         :class="fkey===0?' in show':''" role="tabpanel"
                                          aria-labelledby="headingThree">
                                         <div class="panel-body">
-                                            Ўзбекистон Республикаси Божхона кодексининг 300-моддасига мувофиқ
-                                            тартибга
-                                            солиниб, тариф преференсиялари божхона божларини тўлашдан озод етиш,
-                                            божхона
-                                            божлари ставкаларини камайтириш ёки муайян давлатларда ишлаб чиқарилган
-                                            товарларни божхона ҳудудига преференсиал олиб кириш ёки ушбу ҳудуддан
-                                            преференсиал олиб чиқишда квоталар белгилаш тарзида берилади.
+                                            {{ typeof faq.answer !== 'undefined' ? faq.answer : '' }}
                                         </div>
                                     </div>
                                 </div>
-                                <div class="panel panel-default">
-                                    <div class="panel-heading" role="tab" id="headingOne">
-                                        <h4 class="panel-title">
-                                            <a role="button" class="collapsed" data-bs-toggle="collapse"
-                                               data-bs-parent="#accordion" href="#chose1"
-                                               aria-expanded="false" aria-controls="chose1">
-                                                Қандай қилиб ҳудудий божхона бошқармалари билан солиштирма
-                                                далолатнома
-                                                тузиш мумкин?
-                                                <span>
-                                                    <i class="fa fa-plus" aria-hidden="true"></i>
-                                                    <i class="fa fa-minus" aria-hidden="true"></i>
-                                                </span>
-                                            </a>
-                                        </h4>
-                                    </div>
-                                    <div id="chose1" class="panel-collapse collapse" role="tabpanel"
-                                         aria-labelledby="headingOne">
-                                        <div class="panel-body">
-                                            Давлат божхона қўмитасининг расмий веб сайти “Електрон хизматлар”
-                                            рукнида
-                                            “Тадбиркорнинг шахсий кабинети” (http://ed1.customs.uz/PersonCabinet)
-                                            орқали
-                                            олиш мумкин.
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="panel panel-default">
-                                    <div class="panel-heading" role="tab" id="headingTwo">
-                                        <h4 class="panel-title">
-                                            <a class="collapsed" role="button" data-bs-toggle="collapse"
-                                               data-bs-parent="#accordion"
-                                               href="#chose2" aria-expanded="false" aria-controls="chose2">
+                                <!--                                    <div class="panel panel-default">
+                                                                        <div class="panel-heading" role="tab" id="headingOne">
+                                                                            <h4 class="panel-title">
+                                                                                <a role="button" class="collapsed" data-bs-toggle="collapse"
+                                                                                   data-bs-parent="#accordion" href="#chose1"
+                                                                                   aria-expanded="false" aria-controls="chose1">
+                                                                                    Қандай қилиб ҳудудий божхона бошқармалари билан солиштирма
+                                                                                    далолатнома
+                                                                                    тузиш мумкин?
+                                                                                    <span>
+                                                                                    <i class="fa fa-plus" aria-hidden="true"></i>
+                                                                                    <i class="fa fa-minus" aria-hidden="true"></i>
+                                                                                </span>
+                                                                                </a>
+                                                                            </h4>
+                                                                        </div>
+                                                                        <div id="chose1" class="panel-collapse collapse" role="tabpanel"
+                                                                             aria-labelledby="headingOne">
+                                                                            <div class="panel-body">
+                                                                                Давлат божхона қўмитасининг расмий веб сайти “Електрон хизматлар”
+                                                                                рукнида
+                                                                                “Тадбиркорнинг шахсий кабинети” (http://ed1.customs.uz/PersonCabinet)
+                                                                                орқали
+                                                                                олиш мумкин.
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="panel panel-default">
+                                                                        <div class="panel-heading" role="tab" id="headingTwo">
+                                                                            <h4 class="panel-title">
+                                                                                <a class="collapsed" role="button" data-bs-toggle="collapse"
+                                                                                   data-bs-parent="#accordion"
+                                                                                   href="#chose2" aria-expanded="false" aria-controls="chose2">
 
-                                                Божхона тўловларини бўлиб-бўлиб ёки кечиктириб тўлаш тўғрисида
-                                                маълумот
-                                                берсангиз?
-                                                <span>
-                                                    <i class="fa fa-plus" aria-hidden="true"></i>
-                                                    <i class="fa fa-minus" aria-hidden="true"></i>
-                                                </span>
-                                            </a>
-                                        </h4>
-                                    </div>
-                                    <div id="chose2" class="panel-collapse collapse" role="tabpanel"
-                                         aria-labelledby="headingTwo">
-                                        <div class="panel-body">
-                                            Божхона кодексининг 329, 330, 331-моддаларига мувофиқ божхона
-                                            тўловларини
-                                            кечиктириб ёки бўлиб-бўлиб тўлаш божхона декларацияси қабул қилинган
-                                            кундан
-                                            еътиборан олтмиш календар кундан ошмаслиги лозим. Божхона тўловларини
-                                            кечиктириб ёки бўлиб-бўлиб тўлаш имконияти Ўзбекистон Республикаси
-                                            Президентининг ёхуд Ўзбекистон Республикаси Вазирлар Маҳкамасининг
-                                            қарорига
-                                            биноан узоқроқ муддатларга ва божхона тўловлари тўланиши таъминланмаган
-                                            ҳолда берилиши мумкин.
+                                                                                    Божхона тўловларини бўлиб-бўлиб ёки кечиктириб тўлаш тўғрисида
+                                                                                    маълумот
+                                                                                    берсангиз?
+                                                                                    <span>
+                                                                                    <i class="fa fa-plus" aria-hidden="true"></i>
+                                                                                    <i class="fa fa-minus" aria-hidden="true"></i>
+                                                                                </span>
+                                                                                </a>
+                                                                            </h4>
+                                                                        </div>
+                                                                        <div id="chose2" class="panel-collapse collapse" role="tabpanel"
+                                                                             aria-labelledby="headingTwo">
+                                                                            <div class="panel-body">
+                                                                                Божхона кодексининг 329, 330, 331-моддаларига мувофиқ божхона
+                                                                                тўловларини
+                                                                                кечиктириб ёки бўлиб-бўлиб тўлаш божхона декларацияси қабул қилинган
+                                                                                кундан
+                                                                                еътиборан олтмиш календар кундан ошмаслиги лозим. Божхона тўловларини
+                                                                                кечиктириб ёки бўлиб-бўлиб тўлаш имконияти Ўзбекистон Республикаси
+                                                                                Президентининг ёхуд Ўзбекистон Республикаси Вазирлар Маҳкамасининг
+                                                                                қарорига
+                                                                                биноан узоқроқ муддатларга ва божхона тўловлари тўланиши таъминланмаган
+                                                                                ҳолда берилиши мумкин.
 
-                                            Божхона тўловларини кечиктириб ёки бўлиб-бўлиб тўлаш имкониятини олиш
-                                            учун
-                                            тўловчи божхона органига божхона тўловлари суммаларини тўлаш бўйича ёзма
-                                            мажбуриятни ўз ичига олган аризани ва жхона тўловлари тўланиши
-                                            таъминланганлигини тасдиқловчи ҳужжатни тақдим етади.
+                                                                                Божхона тўловларини кечиктириб ёки бўлиб-бўлиб тўлаш имкониятини олиш
+                                                                                учун
+                                                                                тўловчи божхона органига божхона тўловлари суммаларини тўлаш бўйича ёзма
+                                                                                мажбуриятни ўз ичига олган аризани ва жхона тўловлари тўланиши
+                                                                                таъминланганлигини тасдиқловчи ҳужжатни тақдим етади.
 
-                                            Божхона тўловлари тўланишини таъминлаш тўловчининг танловига кўра
-                                            исталган –
-                                            пул маблағларини божхона органининг шахсий ғазна ҳисобварағига киритиш,
-                                            товарларни гаровга қўйиш, банк кафолатини тақдим етиш, божхона
-                                            тўловларини
-                                            тўлаш мажбуриятини суғурталаш ёки кафиллик орқали амалга оширилади.
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="panel panel-default">
-                                    <div class="panel-heading" role="tab" id="headingFive">
-                                        <h4 class="panel-title">
-                                            <a class="collapsed" role="button" data-bs-toggle="collapse"
-                                               data-bs-parent="#accordion"
-                                               href="#chose5" aria-expanded="false" aria-controls="chose5">
-                                                Енг кўп қулайлик бериш режимини белгиланган давлатлар ҳамда тариф
-                                                ставкалари қандай?
-                                                <span><i class="fa fa-plus" aria-hidden="true"></i>
-                                                    <i class="fa fa-minus" aria-hidden="true"></i>
-                                                </span>
-                                            </a>
-                                        </h4>
-                                    </div>
-                                    <div id="chose5" class="panel-collapse collapse" role="tabpanel"
-                                         aria-labelledby="headingFive">
-                                        <div class="panel-body">
-                                            Ўзбекистон Республикаси билан енг кўп қулайлик бериш режимини
-                                            белгиланган
-                                            давлатлар (рўйхат рақами 3267, 30.06.2020й.) сони 47 та бўлиб,
-                                            Ўзбекистон
-                                            Республикаси савдо-иқтисодий муносабатларда енг кўп қулайлик бериш
-                                            режимини
-                                            қўллаётган мамлакатларда ишлаб чиқарилган товарларга нисбатан, товарни
-                                            жўнатувчи ва експорт қилувчи мамлакатдан қатъи назар бож тарифи билан
-                                            белгиланган ставкалар (бир баровар) миқдоридаги божхона божлари
-                                            қўлланилади.
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="panel panel-default">
-                                    <div class="panel-heading" role="tab" id="headingSix">
-                                        <h4 class="panel-title">
-                                            <a class="collapsed" role="button" data-bs-toggle="collapse"
-                                               data-bs-parent="#accordion"
-                                               href="#chose6" aria-expanded="false" aria-controls="chose6">
-                                                Товарни муайян мамлактда ишлаб чиқарилганлигини тасдиқловчи ҳужжат
-                                                нима
-                                                ва унинг турлари?
-                                                <span><i class="fa fa-plus" aria-hidden="true"></i>
-                                                    <i class="fa fa-minus" aria-hidden="true"></i>
-                                                </span>
-                                            </a>
-                                        </h4>
-                                    </div>
-                                    <div id="chose6" class="panel-collapse collapse" role="tabpanel"
-                                         aria-labelledby="headingFive">
-                                        <div class="panel-body">
-                                            Божхона кодекси 363-моддасида, товарнинг муайян мамлакатда ишлаб
-                                            чиқарилганлиги, експорт ёки реекспорт қилувчи мамлакатда белгиланган
-                                            тартиб
-                                            ва шаклга мувофиқ ваколатли орган томонидан берилган, шу жумладан
-                                            електрон
-                                            шаклда берилган товарнинг келиб чиқиши тўғрисидаги сертификат билан
-                                            тасдиқланади.
-                                        </div>
-                                    </div>
-                                </div>
+                                                                                Божхона тўловлари тўланишини таъминлаш тўловчининг танловига кўра
+                                                                                исталган –
+                                                                                пул маблағларини божхона органининг шахсий ғазна ҳисобварағига киритиш,
+                                                                                товарларни гаровга қўйиш, банк кафолатини тақдим етиш, божхона
+                                                                                тўловларини
+                                                                                тўлаш мажбуриятини суғурталаш ёки кафиллик орқали амалга оширилади.
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="panel panel-default">
+                                                                        <div class="panel-heading" role="tab" id="headingFive">
+                                                                            <h4 class="panel-title">
+                                                                                <a class="collapsed" role="button" data-bs-toggle="collapse"
+                                                                                   data-bs-parent="#accordion"
+                                                                                   href="#chose5" aria-expanded="false" aria-controls="chose5">
+                                                                                    Енг кўп қулайлик бериш режимини белгиланган давлатлар ҳамда тариф
+                                                                                    ставкалари қандай?
+                                                                                    <span><i class="fa fa-plus" aria-hidden="true"></i>
+                                                                                    <i class="fa fa-minus" aria-hidden="true"></i>
+                                                                                </span>
+                                                                                </a>
+                                                                            </h4>
+                                                                        </div>
+                                                                        <div id="chose5" class="panel-collapse collapse" role="tabpanel"
+                                                                             aria-labelledby="headingFive">
+                                                                            <div class="panel-body">
+                                                                                Ўзбекистон Республикаси билан енг кўп қулайлик бериш режимини
+                                                                                белгиланган
+                                                                                давлатлар (рўйхат рақами 3267, 30.06.2020й.) сони 47 та бўлиб,
+                                                                                Ўзбекистон
+                                                                                Республикаси савдо-иқтисодий муносабатларда енг кўп қулайлик бериш
+                                                                                режимини
+                                                                                қўллаётган мамлакатларда ишлаб чиқарилган товарларга нисбатан, товарни
+                                                                                жўнатувчи ва експорт қилувчи мамлакатдан қатъи назар бож тарифи билан
+                                                                                белгиланган ставкалар (бир баровар) миқдоридаги божхона божлари
+                                                                                қўлланилади.
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="panel panel-default">
+                                                                        <div class="panel-heading" role="tab" id="headingSix">
+                                                                            <h4 class="panel-title">
+                                                                                <a class="collapsed" role="button" data-bs-toggle="collapse"
+                                                                                   data-bs-parent="#accordion"
+                                                                                   href="#chose6" aria-expanded="false" aria-controls="chose6">
+                                                                                    Товарни муайян мамлактда ишлаб чиқарилганлигини тасдиқловчи ҳужжат
+                                                                                    нима
+                                                                                    ва унинг турлари?
+                                                                                    <span><i class="fa fa-plus" aria-hidden="true"></i>
+                                                                                    <i class="fa fa-minus" aria-hidden="true"></i>
+                                                                                </span>
+                                                                                </a>
+                                                                            </h4>
+                                                                        </div>
+                                                                        <div id="chose6" class="panel-collapse collapse" role="tabpanel"
+                                                                             aria-labelledby="headingFive">
+                                                                            <div class="panel-body">
+                                                                                Божхона кодекси 363-моддасида, товарнинг муайян мамлакатда ишлаб
+                                                                                чиқарилганлиги, експорт ёки реекспорт қилувчи мамлакатда белгиланган
+                                                                                тартиб
+                                                                                ва шаклга мувофиқ ваколатли орган томонидан берилган, шу жумладан
+                                                                                електрон
+                                                                                шаклда берилган товарнинг келиб чиқиши тўғрисидаги сертификат билан
+                                                                                тасдиқланади.
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>-->
                             </div>
 
                         </div>
@@ -649,55 +655,46 @@
                         <div class="col-md-4">
                             <div class="footer_widget_inner">
                                 <div class="f_about_widget">
-                                    <div class="logo"><img src="/img/gtk_image.png" alt="">
-                                        <div class="logo_title">Ўзбекистон
-                                            Республикаси
-                                            Давлат
-                                            божхона қўмитаси
-                                        </div>
+                                    <div class="logo"><img src="/img/gtk_image.png"
+                                                           alt="">{{ $t("Ўзбекистон Республикаси Давлат божхона қўмитаси") }}
                                     </div>
+                                    <p>{{ $t("Сайтдан олинган ҳар қандай маълумотлардан фойдаланганда Ўзбекистон Республикаси ДБҚ сайтидан олинганлиги кўрсатиб ўтилиши шарт.") }}</p>
+                                    <p>
+                                        {{ $t("ЎзМАА Интернет-ОАВ гувоҳномаси № 0902") }}
+                                    </p>
+                                    <p> © 2001-2021 {{ $t("Ўзбекистон Республикаси Давлат божхона қўмитаси") }}
+                                    </p>
 
-                                    <div class="f_navigation_widget">
-
-                                        <ul>
-                                            <li><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>Қўмита
-                                                ҳақида</a>
-                                            </li>
-                                            <li><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>Фаолият</a>
-                                            </li>
-                                            <li><a href="#"><i class="fa fa-angle-right"
-                                                               aria-hidden="true"></i>Ҳужжатлар</a></li>
-                                            <li><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>Очиқ
-                                                қўмита</a>
-                                            </li>
-                                            <li><a href="https://charts.customs.uz"><i class="fa fa-angle-right"
-                                                                                       aria-hidden="true"></i>Статистика</a>
-                                            </li>
-                                            <li><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>Оав учун</a>
-                                            </li>
-                                            <li><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>Боғланиш</a>
-                                            </li>
-                                        </ul>
-                                    </div>
                                 </div>
-
-
                             </div>
                         </div>
 
                         <div class="col-md-5">
                             <div class="footer_widget_inner">
-                                <div class="f_about_widget">
-                                    <p>Сайтдан олинган ҳар қандай
-                                        маълумотлардан фойдаланганда
-                                        Ўзбекистон Республикаси ДБҚ сайтидан
-                                        олинганлиги кўрсатиб ўтилиши шарт.</p>
-                                    <p>
-                                        ЎзМАА Интернет-ОАВ гувоҳномаси № 0902
-                                    </p>
-                                    <p> © 2001-2022 Ўзбекистон Республикаси Давлат божхона қўмитаси.
-                                    </p>
-
+                                <div class="f_navigation_widget">
+                                    <ul>
+                                        <li><a href="#"><i class="fa fa-angle-right"
+                                                           aria-hidden="true"></i>{{ $t("Қўмита ҳақида") }}</a>
+                                        </li>
+                                        <li><a href="#"><i class="fa fa-angle-right"
+                                                           aria-hidden="true"></i>{{ $t("Фаолият") }}</a>
+                                        </li>
+                                        <li><a href="#"><i class="fa fa-angle-right"
+                                                           aria-hidden="true"></i>{{ $t("Ҳужжатлар") }}</a>
+                                        </li>
+                                        <li><a href="#"><i class="fa fa-angle-right"
+                                                           aria-hidden="true"></i>{{ $t("Очиқ қўмита") }}</a>
+                                        </li>
+                                        <li><a href="https://charts.customs.uz"><i class="fa fa-angle-right"
+                                                                                   aria-hidden="true"></i>{{ $t("Статистика") }}</a>
+                                        </li>
+                                        <li><a href="#"><i class="fa fa-angle-right"
+                                                           aria-hidden="true"></i>{{ $t("Оав учун") }}</a>
+                                        </li>
+                                        <li><a href="#"><i class="fa fa-angle-right"
+                                                           aria-hidden="true"></i>{{ $t("Боғланиш") }}</a>
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
@@ -706,7 +703,8 @@
                                 <div class="f_contact_widget">
                                     <ul class="contact_lsit">
                                         <li><a href="#"><i class="fa fa-map-marker" aria-hidden="true"></i>100003,
-                                            Тошкент шаҳри,Ислом Каримов кўчаси 3 уй</a></li>
+                                            {{ $t("Тошкент шаҳри,Ислом Каримов кўчаси 3 уй") }}</a>
+                                        </li>
                                         <li><a href="#"><i class="fa fa-phone" aria-hidden="true"></i>(+998-78)
                                             120-76-00</a>
                                         </li>
@@ -716,8 +714,8 @@
                                     <ul class="f_widget_social">
                                         <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
                                         <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                        <li><a href="#"><i class="fab fa-telegram-plane"></i></a></li>
                                         <li><a href="#"><i class="fab fa-google-plus-g"></i></a></li>
-                                        <li><a href="#"><i class="fab fa-pinterest-p"></i></a></li>
                                         <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
                                     </ul>
                                 </div>
@@ -733,48 +731,48 @@
             <div class="slide_links">
                 <a class="footer_link" href="//huquqiyportal.uz">
                     <div class="image"></div>
-                    <p>Oʼzbekiston Respublikasi Milliy huquqiy internet portali</p>
+                    <p>{{$t("Oʼzbekiston Respublikasi Milliy huquqiy internet portali")}}</p>
                 </a>
                 <a class="footer_link" href="//president.uz">
                     <div class="image"></div>
-                    <p>O'zbekiston Respublikasi Prezidentining rasmiy veb sayti</p>
+                    <p>{{$t("O'zbekiston Respublikasi Prezidentining rasmiy veb sayti")}}</p>
                 </a>
 
                 <a class="footer_link" href="//gov.uz">
                     <div class="image"></div>
-                    <p>Oʼzbekiston Respublikasi Hukumat portali</p>
+                    <p>{{$t("Oʼzbekiston Respublikasi Hukumat portali")}}</p>
                 </a>
 
                 <a class="footer_link" href="//prokuratura.uz">
                     <div class="image"></div>
-                    <p>Oʼzbekiston Respublikasi Bosh prokuraturasi</p>
+                    <p>{{$t("Oʼzbekiston Respublikasi Bosh prokuraturasi")}}</p>
                 </a>
                 <a class="footer_link" href="//iiv.uz">
                     <div class="image"></div>
-                    <p>Oʼzbekiston Respublikasi Ichki ishlar vazirligi</p>
+                    <p>{{$t("Oʼzbekiston Respublikasi Ichki ishlar vazirligi")}}</p>
                 </a>
 
                 <a class="footer_link" href="//soliq.uz">
                     <div class="image"></div>
-                    <p>Oʼzbekiston Respublikasi Davlat soliq qo'mitasi</p>
+                    <p>{{$t("Oʼzbekiston Respublikasi Davlat soliq qo'mitasi")}}</p>
                 </a>
                 <a class="footer_link" href="//my.gov.uz">
                     <div class="image"></div>
-                    <p>Yagona interaktiv davlat xizmatlari portali</p>
+                    <p>{{$t("Yagona interaktiv davlat xizmatlari portali")}}</p>
                 </a>
 
                 <a class="footer_link" href="//data.gov.uz">
                     <div class="image"></div>
-                    <p>Oʼzbekiston Respublikasi Ochiq ma'lumotlar portali</p>
+                    <p>{{$t("Oʼzbekiston Respublikasi Ochiq ma'lumotlar portali")}}</p>
                 </a>
                 <a class="footer_link" href="//pm.gov.uz">
                     <div class="image"></div>
-                    <p>Oʼzbekiston Respublikasi Prezidenti Virtual qabulxonasi</p>
+                    <p>{{$t("Oʼzbekiston Respublikasi Prezidenti Virtual qabulxonasi")}}</p>
                 </a>
 
                 <a class="footer_link" href="//uzbi.uz">
                     <div class="image"></div>
-                    <p>Bojxona instituti</p>
+                    <p>{{$t("Bojxona instituti")}}</p>
                 </a>
 
             </div>
