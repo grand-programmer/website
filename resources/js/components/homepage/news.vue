@@ -15,10 +15,10 @@
 </svg>
 
 
-            <p> Барча янгиликлар </p></router-link>
+            <p> {{$t("Барча янгиликлар")}} </p></router-link>
         <div class="container">
             <div class="news-head">
-                <div class="news-title">Янгиликлар</div>
+                <div class="news-title">{{$t("Янгиликлар")}}</div>
                 <!--                <ul>
                                     <li  v-for="(categoryItem,key) in categories">
                                         <a :href="'category/' + categoryItem.slug">{{categoryItem.title}}</a>

@@ -104,5 +104,13 @@
     "Сурхондарё вилояти": "Сурхондарё вилояти",
     "Самарқанд шаҳри Бўстонсарой кўчаси 85А-уй": "Самарқанд шаҳри Бўстонсарой кўчаси 85А-уй",
     "Самарқанд вилояти": "Самарқанд вилояти",
-    "endpage": "components/layout/hududiy.vue"
+    "endpage": "components/layout/hududiy.vue",
+    "beginpage": "components/homepage/calendar.vue",
+    "Божхонага доир муҳим саналар": "Божхонага доир муҳим саналар",
+    "endpage": "components/homepage/calendar.vue",
+    "beginpage": "components/homepage/news.vue",
+    "Барча янгиликлар": "Барча янгиликлар",
+    "Янгиликлар": "Янгиликлар",
+    "Қўмита янгиликлари": "Қўмита янгиликлари",
+    "endpage": "components/homepage/news.vue"
 }

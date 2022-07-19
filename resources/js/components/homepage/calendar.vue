@@ -2,7 +2,7 @@
     <div class="col-md-6 last_page_right">
 
         <div class="section_tittle">
-            <h2>Божхонага доир муҳим саналар</h2>
+            <h2>{{$t("Божхонага доир муҳим саналар")}}</h2>
         </div>
         <div class="calendar_wrapper" v-if="months">
             <div class="top-months">
