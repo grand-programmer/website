@@ -163,10 +163,10 @@
                                 <div class="row no-gutters">
                                     <div class="col-md-7">
                                         <h4 class="card-title ff-clearsans_bold" style="margin-bottom: 12px;">
-                                            {{$t("Андижон вилояти")}}
+                                            {{ $t("Андижон вилояти") }}
                                         </h4>
                                         <p class="card-subtitle">
-                                            {{$t("Давлат божхона бошқармаси")}}
+                                            {{ $t("Давлат божхона бошқармаси") }}
                                         </p>
                                     </div>
                                     <!--                                <div class="col-md-5">
@@ -175,24 +175,23 @@
                                 </div>
                                 <ul class="list-unstyled text-left">
                                     <li>
-                                        <i class="icon icon-location-pin"></i>     {{$t("Андижон шахар, А.Юлдашев кўчаси 48-уй")}}
+                                        <i class="icon icon-location-pin"></i>
+                                        {{ $t("Андижон шахар, А.Юлдашев кўчаси 48-уй") }}
                                     </li>
                                     <li>
                                         <i class="icon icon-phone"></i> (74) 224-76-00
                                         <span class="badge ff-clearsans_bold text-uppercase">
-                                            ишонч телефони</span> <br> (74) 224-76-00
+                                            {{ $t("ишонч телефони") }}</span> <br> (74) 224-76-00
                                     </li>
                                     <li>
                                         <i class="icon icon-clock"></i>
-                                        Иш вақти
+                                        {{ $t("Иш вақти") }}
                                         : 9:00 - 18:00
                                         <br>
-                                        Тушлик
+                                        {{ $t("Тушлик") }}
                                         :
                                         13:00 - 14:00 <br>
-                                        Дам олиш куни:
-                                        Шанба,
-                                        Якшанба
+                                        {{ $t("Дам олиш куни: Шанба, Якшанба") }}
                                     </li>
                                     <li>
                                         <i class="icon icon-envelope-open"></i>andijan@customs.uz
@@ -201,7 +200,7 @@
 
 
                                 <a class="read-more ff-clearsans_bold" @click="goHudud(3)">
-                                    Саҳифага ўтиш
+                                    {{ $t("Саҳифага ўтиш") }}
                                     <i class="fa fa-chevron-right ml-2"></i>
                                 </a>
 
@@ -212,10 +211,10 @@
                                 <div class="row no-gutters">
                                     <div class="col-md-7">
                                         <h4 class="card-title ff-clearsans_bold" style="margin-bottom: 12px;">
-                                            Бухоро вилояти
+                                            {{ $t("Бухоро вилояти") }}
                                         </h4>
                                         <p class="card-subtitle">
-                                            Давлат божхона бошқармаси
+                                            {{ $t("Давлат божхона бошқармаси") }}
                                         </p>
                                     </div>
                                     <!--                             <div class="col-md-5">
@@ -224,26 +223,25 @@
                                 </div>
                                 <ul class="list-unstyled text-left">
                                     <li>
-                                        <i class="icon icon-location-pin"></i> Бухоро шаҳри, Б. Нақшбанд кўчаси 352 - уй
+                                        <i class="icon icon-location-pin"></i>
+                                        {{ $t("Бухоро шаҳри, Б. Нақшбанд кўчаси 352 - уй") }}
                                     </li>
                                     <li>
                                         <i class="icon icon-phone"></i> (0-365) 221-61-00
                                         <span class="badge ff-clearsans_bold text-uppercase">
-                                            ишонч телефони</span> <br> (0-365) 221-67-00
+                                             {{ $t("ишонч телефони") }}</span> <br> (0-365) 221-67-00
                                         <span class="badge ff-clearsans_bold text-uppercase">
-                                            Факс </span>
+                                             {{ $t("Факс") }} </span>
                                     </li>
                                     <li>
                                         <i class="icon icon-clock"></i>
-                                        Иш вақти
+                                        {{ $t("Иш вақти") }}
                                         : 9:00 - 18:00
                                         <br>
-                                        Тушлик
+                                        {{ $t("Тушлик") }}
                                         :
                                         13:00 - 14:00 <br>
-                                        Дам олиш куни:
-                                        Шанба,
-                                        Якшанба
+                                        {{ $t("Дам олиш куни: Шанба, Якшанба") }}
                                     </li>
                                     <li>
                                         <i class="icon icon-envelope-open"></i>buxoro@customs.uz
@@ -252,7 +250,7 @@
 
 
                                 <a class="read-more ff-clearsans_bold" @click="goHudud(12)">
-                                    Саҳифага ўтиш
+                                    {{ $t("Саҳифага ўтиш") }}
                                     <i class="fa fa-chevron-right ml-2"></i>
                                 </a>
 
@@ -263,10 +261,10 @@
                                 <div class="row no-gutters">
                                     <div class="col-md-7">
                                         <h4 class="card-title ff-clearsans_bold" style="margin-bottom: 12px;">
-                                            Жиззах вилояти
+                                            {{ $t("Жиззах вилояти") }}
                                         </h4>
                                         <p class="card-subtitle">
-                                            Давлат божхона бошқармаси
+                                            {{ $t("Давлат божхона бошқармаси") }}
                                         </p>
                                     </div>
                                     <!--                              <div class="col-md-5">
@@ -275,27 +273,24 @@
                                 </div>
                                 <ul class="list-unstyled text-left">
                                     <li>
-                                        <i class="icon icon-location-pin"></i> Жиззах вилояти, Жиззах шаҳри, Тошкент
-                                        кўчаси, 5-уй
+                                        <i class="icon icon-location-pin"></i>{{ $t("Жиззах вилояти, Жиззах шаҳри, Тошкенткўчаси, 5-уй") }}
                                     </li>
                                     <li>
                                         <i class="icon icon-phone"></i> (0-372) 223-31-63
                                         <span class="badge ff-clearsans_bold text-uppercase">
-                                            ишонч телефони</span> <br> (0-372) 223-26-90
+                                           {{ $t("ишонч телефони") }} </span> <br> (0-372) 223-26-90
                                         <span class="badge ff-clearsans_bold text-uppercase">
-                                            Факс </span>
+                                          {{ $t("Факс") }} </span>
                                     </li>
                                     <li>
                                         <i class="icon icon-clock"></i>
-                                        Иш вақти
+                                        {{ $t("Иш вақти") }}
                                         : 9:00 - 18:00
                                         <br>
-                                        Тушлик
+                                        {{ $t("Тушлик") }}
                                         :
                                         13:00 - 14:00 <br>
-                                        Дам олиш куни:
-                                        Шанба,
-                                        Якшанба
+                                        {{ $t("Дам олиш куни: Шанба, Якшанба") }}
                                     </li>
                                     <li>
                                         <i class="icon icon-envelope-open"></i>jizzax@customs.uz
@@ -304,7 +299,7 @@
 
 
                                 <a class="read-more ff-clearsans_bold" @click="goHudud(10)">
-                                    Саҳифага ўтиш
+                                    {{ $t("Саҳифага ўтиш") }}
                                     <i class="fa fa-chevron-right ml-2"></i>
                                 </a>
 
@@ -315,10 +310,10 @@
                                 <div class="row no-gutters">
                                     <div class="col-md-7">
                                         <h4 class="card-title ff-clearsans_bold" style="margin-bottom: 12px;">
-                                            Қашқадарё вилояти
+                                            {{ $t("Қашқадарё вилояти") }}
                                         </h4>
                                         <p class="card-subtitle">
-                                            Давлат божхона бошқармаси
+                                            {{ $t("Давлат божхона бошқармаси") }}
                                         </p>
                                     </div>
                                     <!--                                <div class="col-md-5">
@@ -327,26 +322,24 @@
                                 </div>
                                 <ul class="list-unstyled text-left">
                                     <li>
-                                        <i class="icon icon-location-pin"></i> Қарши шаҳри А.Навоий шоҳ кўчаси 3-А уй
+                                        <i class="icon icon-location-pin"></i> {{ $t("Қарши шаҳри А.Навоий шоҳ кўчаси 3-А уй") }}
                                     </li>
                                     <li>
                                         <i class="icon icon-phone"></i> 75-221-04-80
                                         <span class="badge ff-clearsans_bold text-uppercase">
-                                            ишонч телефони</span> <br> 75-221-04-80
+                                           {{ $t("ишонч телефони") }} </span> <br> 75-221-04-80
                                         <span class="badge ff-clearsans_bold text-uppercase">
-                                            Факс </span>
+                                            {{ $t("Факс") }} </span>
                                     </li>
                                     <li>
                                         <i class="icon icon-clock"></i>
-                                        Иш вақти
+                                        {{ $t("Иш вақти") }}
                                         : 9:00 - 18:00
                                         <br>
-                                        Тушлик
+                                        {{ $t("Тушлик") }}
                                         :
                                         13:00 - 14:00 <br>
-                                        Дам олиш куни:
-                                        Шанба,
-                                        Якшанба
+                                        {{ $t("Дам олиш куни: Шанба, Якшанба") }}
                                     </li>
                                     <li>
                                         <i class="icon icon-envelope-open"></i>qashqadaryo@customs.uz
@@ -355,7 +348,7 @@
 
 
                                 <a class="read-more ff-clearsans_bold" @click="goHudud(4)">
-                                    Саҳифага ўтиш
+                                    {{ $t("Саҳифага ўтиш") }}
                                     <i class="fa fa-chevron-right ml-2"></i>
                                 </a>
 
@@ -366,10 +359,10 @@
                                 <div class="row no-gutters">
                                     <div class="col-md-7">
                                         <h4 class="card-title ff-clearsans_bold" style="margin-bottom: 12px;">
-                                            Навоий вилояти
+                                            {{ $t("Навоий вилояти") }}
                                         </h4>
                                         <p class="card-subtitle">
-                                            Давлат божхона бошқармаси
+                                            {{ $t("Давлат божхона бошқармаси") }}
                                         </p>
                                     </div>
                                     <!--                                <div class="col-md-5">
@@ -378,24 +371,22 @@
                                 </div>
                                 <ul class="list-unstyled text-left">
                                     <li>
-                                        <i class="icon icon-location-pin"></i> Навоий шаҳри Ғалаба шоҳ кўчаси 176а-уй
+                                        <i class="icon icon-location-pin"></i> {{ $t("Навоий шаҳри Ғалаба шоҳ кўчаси 176а-уй") }}
                                     </li>
                                     <li>
                                         <i class="icon icon-phone"></i> (436) 223-08-65
                                         <span class="badge ff-clearsans_bold text-uppercase">
-                                            ишонч телефони</span> <br> (436) 222-02-40
+                                           {{ $t("ишонч телефони") }} </span> <br> (436) 222-02-40
                                     </li>
                                     <li>
                                         <i class="icon icon-clock"></i>
-                                        Иш вақти
+                                        {{ $t("Иш вақти") }}
                                         : 9:00 - 18:00
                                         <br>
-                                        Тушлик
+                                        {{ $t("Тушлик") }}
                                         :
                                         13:00 - 14:00 <br>
-                                        Дам олиш куни:
-                                        Шанба,
-                                        Якшанба
+                                        {{ $t("Дам олиш куни: Шанба, Якшанба") }}
                                     </li>
                                     <li>
                                         <i class="icon icon-envelope-open"></i>navoi@customs.uz
@@ -404,7 +395,7 @@
 
 
                                 <a class="read-more ff-clearsans_bold" @click="goHudud(14)">
-                                    Саҳифага ўтиш
+                                    {{ $t("Саҳифага ўтиш") }}
                                     <i class="fa fa-chevron-right ml-2"></i>
                                 </a>
 
@@ -415,10 +406,10 @@
                                 <div class="row no-gutters">
                                     <div class="col-md-7">
                                         <h4 class="card-title ff-clearsans_bold" style="margin-bottom: 12px;">
-                                            Наманган вилояти
+                                            {{ $t("Наманган вилояти") }}
                                         </h4>
                                         <p class="card-subtitle">
-                                            Давлат божхона бошқармаси
+                                            {{ $t("Давлат божхона бошқармаси") }}
                                         </p>
                                     </div>
                                     <!--                                <div class="col-md-5">
@@ -427,26 +418,24 @@
                                 </div>
                                 <ul class="list-unstyled text-left">
                                     <li>
-                                        <i class="icon icon-location-pin"></i>Наманган шаҳри, Ирригатор кўчаси, 2-а уй
+                                        <i class="icon icon-location-pin"></i>{{ $t("Наманган шаҳри, Ирригатор кўчаси, 2-а уй") }}
                                     </li>
                                     <li>
                                         <i class="icon icon-phone"></i> (0-369) 234-33-01
                                         <span class="badge ff-clearsans_bold text-uppercase">
-                                            ишонч телефони</span> <br> (0-369) 226-76-00
+                                           {{ $t("ишонч телефони") }} </span> <br> (0-369) 226-76-00
                                         <span class="badge ff-clearsans_bold text-uppercase">
-                                            Факс </span>
+                                            {{ $t("Факс") }} </span>
                                     </li>
                                     <li>
                                         <i class="icon icon-clock"></i>
-                                        Иш вақти
+                                        {{ $t("Иш вақти") }}
                                         : 9:00 - 18:00
                                         <br>
-                                        Тушлик
+                                        {{ $t("Тушлик") }}
                                         :
                                         13:00 - 14:00 <br>
-                                        Дам олиш куни:
-                                        Шанба,
-                                        Якшанба
+                                        {{ $t("Дам олиш куни: Шанба, Якшанба") }}
                                     </li>
                                     <li>
                                         <i class="icon icon-envelope-open"></i>namangan@customs.uz
@@ -455,7 +444,7 @@
 
 
                                 <a class="read-more ff-clearsans_bold" @click="goHudud(6)">
-                                    Саҳифага ўтиш
+                                    {{ $t("Саҳифага ўтиш") }}
                                     <i class="fa fa-chevron-right ml-2"></i>
                                 </a>
 
@@ -466,10 +455,10 @@
                                 <div class="row no-gutters">
                                     <div class="col-md-7">
                                         <h4 class="card-title ff-clearsans_bold" style="margin-bottom: 12px;">
-                                            Самарқанд вилояти
+                                             {{ $t("Тушлик") }}Самарқанд вилояти
                                         </h4>
                                         <p class="card-subtitle">
-                                            Давлат божхона бошқармаси
+                                             {{ $t("Тушлик") }}Давлат божхона бошқармаси
                                         </p>
                                     </div>
                                     <!--                                <div class="col-md-5">
@@ -478,26 +467,24 @@
                                 </div>
                                 <ul class="list-unstyled text-left">
                                     <li>
-                                        <i class="icon icon-location-pin"></i> Самарқанд шаҳри Бўстонсарой кўчаси 85А-уй
+                                        <i class="icon icon-location-pin"></i>  {{ $t("Тушлик") }}Самарқанд шаҳри Бўстонсарой кўчаси 85А-уй
                                     </li>
                                     <li>
                                         <i class="icon icon-phone"></i> (66)-233-63-00
                                         <span class="badge ff-clearsans_bold text-uppercase">
-                                            ишонч телефони</span> <br> (66)-233-11-55
+                                             {{ $t("Тушлик") }}ишонч телефони</span> <br> (66)-233-11-55
                                         <span class="badge ff-clearsans_bold text-uppercase">
-                                            Факс </span>
+                                             {{ $t("Тушлик") }}Факс </span>
                                     </li>
                                     <li>
                                         <i class="icon icon-clock"></i>
-                                        Иш вақти
+                                        {{ $t("Иш вақти") }}
                                         : 9:00 - 18:00
                                         <br>
-                                        Тушлик
+                                        {{ $t("Тушлик") }}
                                         :
                                         13:00 - 14:00 <br>
-                                        Дам олиш куни:
-                                        Шанба,
-                                        Якшанба
+                                        {{ $t("Дам олиш куни: Шанба, Якшанба") }}
                                     </li>
                                     <li>
                                         <i class="icon icon-envelope-open"></i>samarqand@customs.uz
@@ -506,7 +493,7 @@
 
 
                                 <a class="read-more ff-clearsans_bold" @click="goHudud(15)">
-                                    Саҳифага ўтиш
+                                     {{ $t("Тушлик") }}Саҳифага ўтиш
                                     <i class="fa fa-chevron-right ml-2"></i>
                                 </a>
 
@@ -517,10 +504,10 @@
                                 <div class="row no-gutters">
                                     <div class="col-md-7">
                                         <h4 class="card-title ff-clearsans_bold" style="margin-bottom: 12px;">
-                                            Сурхондарё вилояти
+                                             {{ $t("Тушлик") }}Сурхондарё вилояти
                                         </h4>
                                         <p class="card-subtitle">
-                                            Давлат божхона бошқармаси
+                                             {{ $t("Тушлик") }}Давлат божхона бошқармаси
                                         </p>
                                     </div>
                                     <!--                                <div class="col-md-5">
@@ -529,26 +516,24 @@
                                 </div>
                                 <ul class="list-unstyled text-left">
                                     <li>
-                                        <i class="icon icon-location-pin"></i> Термиз шаҳри Ислом Каримов кўчаси, 286-уй
+                                        <i class="icon icon-location-pin"></i>  {{ $t("Тушлик") }}Термиз шаҳри Ислом Каримов кўчаси, 286-уй
                                     </li>
                                     <li>
                                         <i class="icon icon-phone"></i> 76-225-24-51
                                         <span class="badge ff-clearsans_bold text-uppercase">
-                                            ишонч телефони</span> <br> 76-225-26-05
+                                             {{ $t("Тушлик") }}ишонч телефони</span> <br> 76-225-26-05
                                         <span class="badge ff-clearsans_bold text-uppercase">
-                                            Факс </span>
+                                             {{ $t("Тушлик") }}Факс </span>
                                     </li>
                                     <li>
                                         <i class="icon icon-clock"></i>
-                                        Иш вақти
+                                        {{ $t("Иш вақти") }}
                                         : 9:00 - 18:00
                                         <br>
-                                        Тушлик
+                                        {{ $t("Тушлик") }}
                                         :
                                         13:00 - 14:00 <br>
-                                        Дам олиш куни:
-                                        Шанба,
-                                        Якшанба
+                                        {{ $t("Дам олиш куни: Шанба, Якшанба") }}
                                     </li>
                                     <li>
                                         <i class="icon icon-envelope-open"></i>termiz@customs.uz
@@ -557,7 +542,7 @@
 
 
                                 <a class="read-more ff-clearsans_bold" @click="goHudud(13)">
-                                    Саҳифага ўтиш
+                                     {{ $t("Тушлик") }}Саҳифага ўтиш
                                     <i class="fa fa-chevron-right ml-2"></i>
                                 </a>
 
@@ -568,10 +553,10 @@
                                 <div class="row no-gutters">
                                     <div class="col-md-7">
                                         <h4 class="card-title ff-clearsans_bold" style="margin-bottom: 12px;">
-                                            Сирдарё вилояти
+                                             {{ $t("Тушлик") }}Сирдарё вилояти
                                         </h4>
                                         <p class="card-subtitle">
-                                            Давлат божхона бошқармаси
+                                             {{ $t("Тушлик") }}Давлат божхона бошқармаси
                                         </p>
                                     </div>
                                     <!--                                <div class="col-md-5">
@@ -580,26 +565,24 @@
                                 </div>
                                 <ul class="list-unstyled text-left">
                                     <li>
-                                        <i class="icon icon-location-pin"></i> Гулистон шаҳар, Сайхун кўчаси 22-уй
+                                        <i class="icon icon-location-pin"></i>  {{ $t("Тушлик") }}Гулистон шаҳар, Сайхун кўчаси 22-уй
                                     </li>
                                     <li>
                                         <i class="icon icon-phone"></i> 67-227-89-08
                                         <span class="badge ff-clearsans_bold text-uppercase">
-                                            ишонч телефони</span> <br> 67-227-89-45
+                                             {{ $t("Тушлик") }}ишонч телефони</span> <br> 67-227-89-45
                                         <span class="badge ff-clearsans_bold text-uppercase">
-                                            Факс </span>
+                                             {{ $t("Тушлик") }}Факс </span>
                                     </li>
                                     <li>
                                         <i class="icon icon-clock"></i>
-                                        Иш вақти
+                                        {{ $t("Иш вақти") }}
                                         : 9:00 - 18:00
                                         <br>
-                                        Тушлик
+                                        {{ $t("Тушлик") }}
                                         :
                                         13:00 - 14:00 <br>
-                                        Дам олиш куни:
-                                        Шанба,
-                                        Якшанба
+                                        {{ $t("Дам олиш куни: Шанба, Якшанба") }}
                                     </li>
                                     <li>
                                         <i class="icon icon-envelope-open"></i>sirdaryo@customs.uz
@@ -608,7 +591,7 @@
 
 
                                 <a class="read-more ff-clearsans_bold" @click="goHudud(5)">
-                                    Саҳифага ўтиш
+                                     {{ $t("Тушлик") }}Саҳифага ўтиш
                                     <i class="fa fa-chevron-right ml-2"></i>
                                 </a>
 
@@ -619,10 +602,10 @@
                                 <div class="row no-gutters">
                                     <div class="col-md-7">
                                         <h4 class="card-title ff-clearsans_bold" style="margin-bottom: 12px;">
-                                            Тошкент шаҳар
+                                             {{ $t("Тушлик") }}Тошкент шаҳар
                                         </h4>
                                         <p class="card-subtitle">
-                                            Давлат божхона бошқармаси
+                                             {{ $t("Тушлик") }}Давлат божхона бошқармаси
                                         </p>
                                     </div>
                                     <!--                                <div class="col-md-5">
@@ -631,26 +614,24 @@
                                 </div>
                                 <ul class="list-unstyled text-left">
                                     <li>
-                                        <i class="icon icon-location-pin"></i> Тошкент шаҳри, Бунёдкор шоҳ кўчаси, 35-уй
+                                        <i class="icon icon-location-pin"></i>  {{ $t("Тушлик") }}Тошкент шаҳри, Бунёдкор шоҳ кўчаси, 35-уй
                                     </li>
                                     <li>
                                         <i class="icon icon-phone"></i> 71 207-09-39
                                         <span class="badge ff-clearsans_bold text-uppercase">
-                                            ишонч телефони</span> <br> 71 207-09-39
+                                             {{ $t("Тушлик") }}ишонч телефони</span> <br> 71 207-09-39
                                         <span class="badge ff-clearsans_bold text-uppercase">
-                                            Факс </span>
+                                             {{ $t("Тушлик") }}Факс </span>
                                     </li>
                                     <li>
                                         <i class="icon icon-clock"></i>
-                                        Иш вақти
+                                        {{ $t("Иш вақти") }}
                                         : 9:00 - 18:00
                                         <br>
-                                        Тушлик
+                                        {{ $t("Тушлик") }}
                                         :
                                         13:00 - 14:00 <br>
-                                        Дам олиш куни:
-                                        Шанба,
-                                        Якшанба
+                                        {{ $t("Дам олиш куни: Шанба, Якшанба") }}
                                     </li>
                                     <li>
                                         <i class="icon icon-envelope-open"></i>toshkent@customs.uz
@@ -659,7 +640,7 @@
 
 
                                 <a class="read-more ff-clearsans_bold" @click="goHudud(9)">
-                                    Саҳифага ўтиш
+                                     {{ $t("Тушлик") }}Саҳифага ўтиш
                                     <i class="fa fa-chevron-right ml-2"></i>
                                 </a>
 
@@ -670,10 +651,10 @@
                                 <div class="row no-gutters">
                                     <div class="col-md-7">
                                         <h4 class="card-title ff-clearsans_bold" style="margin-bottom: 12px;">
-                                            Тошкент вилояти
+                                             {{ $t("Тушлик") }}Тошкент вилояти
                                         </h4>
                                         <p class="card-subtitle">
-                                            Давлат божхона бошқармаси
+                                            {{ $t("Тушлик") }} Давлат божхона бошқармаси
                                         </p>
                                     </div>
                                     <!--<div class="col-md-5">
@@ -682,27 +663,25 @@
                                 </div>
                                 <ul class="list-unstyled text-left">
                                     <li>
-                                        <i class="icon icon-location-pin"></i> Tошкент вилояти, Нурафшон шаҳри, Тошкент
+                                        <i class="icon icon-location-pin"></i> {{ $t("Тушлик") }} Tошкент вилояти, Нурафшон шаҳри, Тошкент
                                         йўли кўчаси, 63-уй
                                     </li>
                                     <li>
                                         <i class="icon icon-phone"></i> 70-202-86-00
                                         <span class="badge ff-clearsans_bold text-uppercase">
-                                            ишонч телефони</span> <br> 70-202-86-10
+                                             {{ $t("Тушлик") }}ишонч телефони</span> <br> 70-202-86-10
                                         <span class="badge ff-clearsans_bold text-uppercase">
-                                            Факс </span>
+                                             {{ $t("Тушлик") }}Факс </span>
                                     </li>
                                     <li>
                                         <i class="icon icon-clock"></i>
-                                        Иш вақти
+                                        {{ $t("Иш вақти") }}
                                         : 9:00 - 18:00
                                         <br>
-                                        Тушлик
+                                        {{ $t("Тушлик") }}
                                         :
                                         13:00 - 14:00 <br>
-                                        Дам олиш куни:
-                                        Шанба,
-                                        Якшанба
+                                        {{ $t("Дам олиш куни: Шанба, Якшанба") }}
                                     </li>
                                     <li>
                                         <i class="icon icon-envelope-open"></i>toshkent_vil@customs.uz
@@ -711,7 +690,7 @@
 
 
                                 <a class="read-more ff-clearsans_bold" @click="goHudud(11)">
-                                    Саҳифага ўтиш
+                                    {{ $t("Тушлик") }} Саҳифага ўтиш
                                     <i class="fa fa-chevron-right ml-2"></i>
                                 </a>
 
@@ -722,10 +701,10 @@
                                 <div class="row no-gutters">
                                     <div class="col-md-7">
                                         <h4 class="card-title ff-clearsans_bold" style="margin-bottom: 12px;">
-                                            Фарғона вилояти
+                                             {{ $t("Тушлик") }}Фарғона вилояти
                                         </h4>
                                         <p class="card-subtitle">
-                                            Давлат божхона бошқармаси
+                                             {{ $t("Тушлик") }}Давлат божхона бошқармаси
                                         </p>
                                     </div>
                                     <!--                                <div class="col-md-5">
@@ -734,26 +713,24 @@
                                 </div>
                                 <ul class="list-unstyled text-left">
                                     <li>
-                                        <i class="icon icon-location-pin"></i> Фарғона шаҳар, ал-Фарғоний кўчаси, 52а-уй
+                                        <i class="icon icon-location-pin"></i>  {{ $t("Тушлик") }}Фарғона шаҳар, ал-Фарғоний кўчаси, 52а-уй
                                     </li>
                                     <li>
                                         <i class="icon icon-phone"></i> (73) 249-07-00
                                         <span class="badge ff-clearsans_bold text-uppercase">
-                                            ишонч телефони</span> <br> (73) 244-67-32
+                                             {{ $t("Тушлик") }}ишонч телефони</span> <br> (73) 244-67-32
                                         <span class="badge ff-clearsans_bold text-uppercase">
-                                            Факс </span>
+                                             {{ $t("Тушлик") }}Факс </span>
                                     </li>
                                     <li>
                                         <i class="icon icon-clock"></i>
-                                        Иш вақти
+                                        {{ $t("Иш вақти") }}
                                         : 9:00 - 18:00
                                         <br>
-                                        Тушлик
+                                        {{ $t("Тушлик") }}
                                         :
                                         13:00 - 14:00 <br>
-                                        Дам олиш куни:
-                                        Шанба,
-                                        Якшанба
+                                        {{ $t("Дам олиш куни: Шанба, Якшанба") }}
                                     </li>
                                     <li>
                                         <i class="icon icon-envelope-open"></i>fargona@customs.uz
@@ -762,7 +739,7 @@
 
 
                                 <a class="read-more ff-clearsans_bold" @click="goHudud(8)">
-                                    Саҳифага ўтиш
+                                     {{ $t("Тушлик") }}Саҳифага ўтиш
                                     <i class="fa fa-chevron-right ml-2"></i>
                                 </a>
 
@@ -773,10 +750,10 @@
                                 <div class="row no-gutters">
                                     <div class="col-md-7">
                                         <h4 class="card-title ff-clearsans_bold" style="margin-bottom: 12px;">
-                                            Хоразм вилояти
+                                             {{ $t("Тушлик") }}Хоразм вилояти
                                         </h4>
                                         <p class="card-subtitle">
-                                            Давлат божхона бошқармаси
+                                            {{ $t("Тушлик") }} Давлат божхона бошқармаси
                                         </p>
                                     </div>
                                     <!--                              <div class="col-md-5">
@@ -785,27 +762,25 @@
                                 </div>
                                 <ul class="list-unstyled text-left">
                                     <li>
-                                        <i class="icon icon-location-pin"></i> Хоразм вилояти Урганч шаҳар Ж.Мангуберди
+                                        <i class="icon icon-location-pin"></i>  {{ $t("Тушлик") }}Хоразм вилояти Урганч шаҳар Ж.Мангуберди
                                         кўчаси 95-уй
                                     </li>
                                     <li>
                                         <i class="icon icon-phone"></i> 62 224-59-20
                                         <span class="badge ff-clearsans_bold text-uppercase">
-                                            ишонч телефони</span> <br> 62 224-59-22
+                                             {{ $t("Тушлик") }}ишонч телефони</span> <br> 62 224-59-22
                                         <span class="badge ff-clearsans_bold text-uppercase">
-                                            Факс </span>
+                                             {{ $t("Тушлик") }}Факс </span>
                                     </li>
                                     <li>
                                         <i class="icon icon-clock"></i>
-                                        Иш вақти
+                                        {{ $t("Иш вақти") }}
                                         : 9:00 - 18:00
                                         <br>
-                                        Тушлик
+                                        {{ $t("Тушлик") }}
                                         :
                                         13:00 - 14:00 <br>
-                                        Дам олиш куни:
-                                        Шанба,
-                                        Якшанба
+                                        {{ $t("Дам олиш куни: Шанба, Якшанба") }}
                                     </li>
                                     <li>
                                         <i class="icon icon-envelope-open"></i>xorazm@customs.uz
@@ -814,7 +789,7 @@
 
 
                                 <a class="read-more ff-clearsans_bold" @click="goHudud(7)">
-                                    Саҳифага ўтиш
+                                     {{ $t("Тушлик") }}Саҳифага ўтиш
                                     <i class="fa fa-chevron-right ml-2"></i>
                                 </a>
 
@@ -825,10 +800,10 @@
                                 <div class="row no-gutters">
                                     <div class="col-md-7">
                                         <h4 class="card-title ff-clearsans_bold" style="margin-bottom: 12px;">
-                                            Қорақалпоғистон Республикаси
+                                            {{ $t("Тушлик") }} Қорақалпоғистон Республикаси
                                         </h4>
                                         <p class="card-subtitle">
-                                            Давлат божхона бошқармаси
+                                           {{ $t("Тушлик") }}  Давлат божхона бошқармаси
                                         </p>
                                     </div>
                                     <!--                                <div class="col-md-5">
@@ -837,24 +812,22 @@
                                 </div>
                                 <ul class="list-unstyled text-left">
                                     <li>
-                                        <i class="icon icon-location-pin"></i> Нукус шаҳри Т.Қайыпбергенов кўчаси, 57-уй
+                                        <i class="icon icon-location-pin"></i>  {{ $t("Тушлик") }}Нукус шаҳри Т.Қайыпбергенов кўчаси, 57-уй
                                     </li>
                                     <li>
                                         <i class="icon icon-phone"></i> (0-361) 224-90-86
                                         <span class="badge ff-clearsans_bold text-uppercase">
-                                            ишонч телефони</span> <br> (0-361) 224-97-00
+                                            {{ $t("Тушлик") }} ишонч телефони</span> <br> (0-361) 224-97-00
                                     </li>
                                     <li>
                                         <i class="icon icon-clock"></i>
-                                        Иш вақти
+                                        {{ $t("Иш вақти") }}
                                         : 9:00 - 18:00
                                         <br>
-                                        Тушлик
+                                        {{ $t("Тушлик") }}
                                         :
                                         13:00 - 14:00 <br>
-                                        Дам олиш куни:
-                                        Шанба,
-                                        Якшанба
+                                        {{ $t("Дам олиш куни: Шанба, Якшанба") }}
                                     </li>
                                     <li>
                                         <i class="icon icon-envelope-open"></i>nukus@customs.uz
@@ -863,7 +836,7 @@
 
 
                                 <a class="read-more ff-clearsans_bold" @click="goHudud(2)">
-                                    Саҳифага ўтиш
+                                     {{ $t("Тушлик") }}Саҳифага ўтиш
                                     <i class="fa fa-chevron-right ml-2"></i>
                                 </a>
                             </div>
