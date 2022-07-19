@@ -1057,6 +1057,7 @@ audio, canvas, img, svg, video {
   position: absolute;
   top: 260px;
   color: #fff;
+  width: 35%;
 }
 
 .slider_inner .slider_text h3 {

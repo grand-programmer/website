@@ -42,7 +42,7 @@
 </svg>
 
 
-                        <p> Барча хизматлар </p></router-link>
+                        <p> {{$t("Барча хизматлар")}}</p></router-link>
 
 
                     <div class="slider_inner">
@@ -50,7 +50,7 @@
                         <div data-thumb="/img/custom/slider-9.png" data-src="/img/custom/077.png">
                             <div class="container">
                                 <div class="slider_text absolute_right">
-                                    <h3 class="fadeInLeft animated">Шаффофлик замирида <br> иқтисодий хавфсизлик</h3>
+                                    <h3 class="fadeInLeft animated">Шаффофлик замирида иқтисодий хавфсизлик</h3>
                                     <!-- <p class="fadeInUp animated">Божхона ахборот тизмиларига ҳужжатларингизни жойланг</p>
                                     <a class="s_readmore_btn fadeInUp animated" target="_blank"
                                        href="https://ed2.customs.uz/E_ARXIV/authentication">Хизматдан фойдаланиш</a>-->
