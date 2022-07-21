@@ -992,8 +992,11 @@ export default {
             if (this.application.tovarlar.length > 1) {
 
                 setTimeout(() => {
-                    if (typeof selected[0] !== 'undefined')
-                        this.application.tovarlar.splice(selected[0], 1);
+                    if (typeof selected[0] !== 'undefined') {
+                        k = this.application.tovarlar.indexOf(selected[0])
+                        if(k!==-1)
+                            this.application.tovarlar.splice(k, 1);
+                    }
                     if (typeof this.application.tovarlar[k - 1] !== 'undefined' && typeof this.application.tovarlar[k - 1].id !== 'undefined') {
                         _this.tovarIndex = this.application.tovarlar[k - 1].id;
                     } else {
@@ -1296,7 +1299,7 @@ export default {
                                 personTin: _this.person.tin,
                                 personPin: _this.person.pin,
                                 personMail: _this.person.email,
-                                personPhone: (_this.person.phone).replaceAll(" ", "").replaceAll("+", ""),
+                                personPhone: (_this.person.phone)?(_this.person.phone).replaceAll(" ", "").replaceAll("+", ""):"",
                                 locationId: 1735, ///_this.person.region ,
                                 postId: 3500,  ///_this.person.postId ,
                             }

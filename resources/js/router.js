@@ -208,7 +208,7 @@ const routes = [
                                 },
                                 {
                                     path: "*",
-                                    redirect:"/services/vacancy"
+                                    redirect: "/services/vacancy"
                                 }
                             ]
                         },
@@ -232,7 +232,19 @@ const routes = [
                     ]
 
                 },
+                {
+                    path: "registries/",
+                    component: {
+                        template: '<router-view></router-view>',
+                        script: ' export default {}'
+                    },
+                    children: [{
+                        path:"decisions",
+                        component:()=>import("./views/frontend/registries/customvalue")
 
+                    }]
+
+                },
                 {
                     path: 'category/:slug',
                     component: () => import('./views/frontend/news/category')
@@ -255,19 +267,19 @@ const routes = [
                     children: [
                         {
                             path: 'votes/',
-                            component: ()=>import("./views/frontend/pages/votes")
+                            component: () => import("./views/frontend/pages/votes")
                         },
                         {
                             path: 'rahbariyat',
-                            component: ()=>import("./views/frontend/pages/rahbariyat")
+                            component: () => import("./views/frontend/pages/rahbariyat")
                         },
                         {
                             path: 'markaziy',
-                            component: ()=>import("./views/frontend/pages/markaziy")
+                            component: () => import("./views/frontend/pages/markaziy")
                         },
                         {
                             path: 'boshqarma/:id',
-                            component: ()=>import("./views/frontend/pages/org")
+                            component: () => import("./views/frontend/pages/org")
                         },
 
                         {
@@ -359,7 +371,7 @@ const routes = [
                     name: 'MyProfile',
                     path: '/profile',
                     component: () => import('./views/pages/Profile'),
-                    children:[
+                    children: [
                         {
                             name: 'Profilea',
                             path: '/profile/:slug',
@@ -400,7 +412,7 @@ let adminRoute = {
     component: () => import('./views/dashboard/Index'),
     meta: {
         //auth:true
-        auth: {roles: 2, redirect: {name: 'login',query:{request:'/admin'}}, forbiddenRedirect: '/403'}
+        auth: {roles: 2, redirect: {name: 'login', query: {request: '/admin'}}, forbiddenRedirect: '/403'}
     },
     children: [
         // Dashboard
@@ -692,7 +704,7 @@ let adminRoute = {
 
                 ]
 
-        },{
+        }, {
             name: 'Раҳбарият',
             path: 'rahbariyat/',
             component: {

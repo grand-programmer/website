@@ -397,7 +397,7 @@
                                                             <span class="red--text">{{ errors[0] }}</span>
                                                         </ValidationProvider>
                                                     </v-col>
-                                                    <v-col cols="6 d-flex align-items-center" >
+                                                    <v-col cols="6 d-flex align-items-center">
                                                         <h5 class=" pb-2">
                                                             Ишлаб чиқарувчи
                                                         </h5>
@@ -407,9 +407,11 @@
                                                             color="primary"
                                                             rounded
                                                             dark
-                                                            @click="dialog.ishlabchiqaruvchi=true"
+                                                            @click="openIshChiq"
                                                         >
-                                                            <v-icon large class="mr-2 " style="font-size: 15px">mdi-plus</v-icon>
+                                                            <v-icon large class="mr-2 " style="font-size: 15px">
+                                                                mdi-plus
+                                                            </v-icon>
 
                                                             Қўшиш
                                                         </v-btn>
@@ -429,37 +431,46 @@
                                                             </v-card-title>
                                                             <v-card-text>
                                                                 <v-container class="w-100 m-0 p-4">
-                                                                    <v-row>
+
+                                                                    <ValidationObserver v-slot="{ invalid }"
+                                                                                        ref="ishlabchiqarilgan"
+                                                                                        tag="div" class="row">
                                                                         <v-col cols="4">
-                                                                            <ValidationProvider name="Ишлаб чиқарувчининг номи"
-                                                                                                rules="required"
-                                                                                                v-slot="{ errors }">
+                                                                            <ValidationProvider
+                                                                                name="Ишлаб чиқарувчининг номи"
+                                                                                rules="required"
+                                                                                v-slot="{ errors }">
                                                                                 <v-text-field
                                                                                     label="Ишлаб чиқарувчининг номи *"
                                                                                     required
                                                                                     hint="Ишлаб чиқарувчининг номи"
                                                                                     persistent-placeholder
-                                                                                    v-model="application.ishchiq_nomi"
+                                                                                    v-model="ishchiq.nomi"
                                                                                 >
 
                                                                                 </v-text-field>
-                                                                                <span class="red--text">{{ errors[0] }}</span>
+                                                                                <span class="red--text">{{
+                                                                                        errors[0]
+                                                                                    }}</span>
                                                                             </ValidationProvider>
                                                                         </v-col>
                                                                         <v-col cols="4">
-                                                                            <ValidationProvider name="Ишлаб чиқарувчининг манзили"
-                                                                                                rules="required"
-                                                                                                v-slot="{ errors }">
+                                                                            <ValidationProvider
+                                                                                name="Ишлаб чиқарувчининг манзили"
+                                                                                rules="required"
+                                                                                v-slot="{ errors }">
                                                                                 <v-text-field
                                                                                     label="Ишлаб чиқарувчининг манзили *"
                                                                                     required
                                                                                     hint="Ишлаб чиқарувчининг манзили"
                                                                                     persistent-placeholder
-                                                                                    v-model="application.ishchiq_manzili"
+                                                                                    v-model="ishchiq.manzili"
                                                                                 >
 
                                                                                 </v-text-field>
-                                                                                <span class="red--text">{{ errors[0] }}</span>
+                                                                                <span class="red--text">{{
+                                                                                        errors[0]
+                                                                                    }}</span>
                                                                             </ValidationProvider>
                                                                         </v-col>
                                                                         <v-col cols="4">
@@ -472,11 +483,13 @@
                                                                                     required
                                                                                     hint="Ишлаб чиқарувчи яшаётган давлат"
                                                                                     persistent-placeholder
-                                                                                    v-model="application.ishchiq_davlat"
+                                                                                    v-model="ishchiq.davlat"
                                                                                 >
 
                                                                                 </v-text-field>
-                                                                                <span class="red--text">{{ errors[0] }}</span>
+                                                                                <span class="red--text">{{
+                                                                                        errors[0]
+                                                                                    }}</span>
                                                                             </ValidationProvider>
                                                                         </v-col>
                                                                         <v-col cols="4">
@@ -489,29 +502,33 @@
                                                                                     required
                                                                                     hint="Ишлаб чиқарувчининг телефон рақами"
                                                                                     persistent-placeholder
-                                                                                    v-model="application.ishchiq_phone"
+                                                                                    v-model="ishchiq.phone"
                                                                                 >
                                                                                 </v-text-field>
-                                                                                <span class="red--text">{{ errors[0] }}</span>
+                                                                                <span class="red--text">{{
+                                                                                        errors[0]
+                                                                                    }}</span>
                                                                             </ValidationProvider>
                                                                         </v-col>
                                                                         <v-col cols="4">
-                                                                            <ValidationProvider name="Ишлаб чиқарувчининг эмаили"
-                                                                                                rules="required"
-                                                                                                v-slot="{ errors }">
+                                                                            <ValidationProvider
+                                                                                name="Ишлаб чиқарувчининг эмаили"
+                                                                                rules="required"
+                                                                                v-slot="{ errors }">
                                                                                 <v-text-field
                                                                                     label="Ишлаб чиқарувчининг эмаили *"
                                                                                     required
                                                                                     hint="Ишлаб чиқарувчининг эмаили"
                                                                                     persistent-placeholder
-                                                                                    v-model="application.ishchiq_mail"
+                                                                                    v-model="ishchiq.mail"
                                                                                 >
                                                                                 </v-text-field>
-                                                                                <span class="red--text">{{ errors[0] }}</span>
+                                                                                <span class="red--text">{{
+                                                                                        errors[0]
+                                                                                    }}</span>
                                                                             </ValidationProvider>
                                                                         </v-col>
-
-                                                                    </v-row>
+                                                                    </ValidationObserver>
 
                                                                 </v-container>
                                                                 <small>* майдонлар тўлдирилиши шарт</small>
@@ -530,6 +547,13 @@
                                                                     text
                                                                     @click="dialog.ishlabchiqaruvchi = false"
                                                                 >
+                                                                    Бекор қилиш
+                                                                </v-btn>
+                                                                <v-btn
+                                                                    color="blue darken-1"
+                                                                    text
+                                                                    @click="saveIshChiq"
+                                                                >
                                                                     Сақлаш
                                                                 </v-btn>
                                                             </v-card-actions>
@@ -543,13 +567,16 @@
 
 
                                                         <v-chip
-                                                            v-for="tag in tags"
-                                                            :key="tag"
+                                                            v-for="(ishchiqItem,key) in application.ishchiq"
+                                                            :key="key"
                                                             class="ma-2"
                                                             close
+                                                            v-if="ishchiqItem.nomi"
+                                                            @click="openIshChiq(key)"
+                                                            @click:close="application.ishchiq.splice(key,1)"
                                                         >
 
-                                                            {{ tag }}
+                                                            <span style="font-size: 18px">{{ ishchiqItem.nomi }}</span>
                                                         </v-chip>
                                                     </v-chip-group>
 
@@ -570,7 +597,7 @@
                                                                                                                     required
                                                                                                                     hint="Ишлаб чиқарувчининг номи"
                                                                                                                     persistent-placeholder
-                                                                                                                    v-model="application.ishchiq_nomi"
+                                                                                                                    v-model="ishchiq.nomi"
                                                                                                                 >
 
                                                                                                                 </v-text-field>
@@ -586,7 +613,7 @@
                                                                                                                     required
                                                                                                                     hint="Ишлаб чиқарувчининг манзили"
                                                                                                                     persistent-placeholder
-                                                                                                                    v-model="application.ishchiq_manzili"
+                                                                                                                    v-model="ishchiq.manzili"
                                                                                                                 >
 
                                                                                                                 </v-text-field>
@@ -603,7 +630,7 @@
                                                                                                                     required
                                                                                                                     hint="Ишлаб чиқарувчи яшаётган давлат"
                                                                                                                     persistent-placeholder
-                                                                                                                    v-model="application.ishchiq_davlat"
+                                                                                                                    v-model="ishchiq.davlat"
                                                                                                                 >
 
                                                                                                                 </v-text-field>
@@ -620,7 +647,7 @@
                                                                                                                     required
                                                                                                                     hint="Ишлаб чиқарувчининг телефон рақами"
                                                                                                                     persistent-placeholder
-                                                                                                                    v-model="application.ishchiq_phone"
+                                                                                                                    v-model="ishchiq.phone"
                                                                                                                 >
                                                                                                                 </v-text-field>
                                                                                                                 <span class="red--text">{{ errors[0] }}</span>
@@ -635,7 +662,7 @@
                                                                                                                     required
                                                                                                                     hint="Ишлаб чиқарувчининг эмаили"
                                                                                                                     persistent-placeholder
-                                                                                                                    v-model="application.ishchiq_mail"
+                                                                                                                    v-model="ishchiq.mail"
                                                                                                                 >
                                                                                                                 </v-text-field>
                                                                                                                 <span class="red--text">{{ errors[0] }}</span>
@@ -797,11 +824,30 @@
                                                                         persistent-placeholder
                                                                         hide-no-data
                                                                         chips
+                                                                        clearable
+                                                                        hide-details
+                                                                        hide-selected
                                                                         multiple
                                                                         :loading="loading.tftncode"
-                                                                        :search-input.sync="search_tftn"
                                                                         return-object
-                                                                    ></v-autocomplete>
+                                                                        class="pt-0"
+                                                                        :search-input.sync="application.tovarlar[key].search_tftn"
+                                                                    >
+                                                                        <template v-slot:selection="data" >
+                                                                            <v-chip
+                                                                                :data="data"
+                                                                                v-bind="data.attrs"
+                                                                                :input-value="data.selected"
+                                                                                close
+                                                                                @click="data.select"
+                                                                                @click:close="remove(data.item)"
+                                                                            >
+                                                                                {{ data.item.id }}
+                                                                            </v-chip>
+                                                                        </template>
+
+
+                                                                    </v-autocomplete>
                                                                     <span class="red--text">{{ errors[0] }}</span>
                                                                 </ValidationProvider>
                                                             </v-col>
@@ -824,8 +870,8 @@
                                                             </v-col>
                                                             <v-col cols="3">
                                                                 <v-menu
-                                                                    ref="menu_guvohnoma_ga"
-                                                                    v-model="menu.guvohnoma_ga"
+                                                                    :ref="'menu_guvohnoma_ga'+key"
+                                                                    v-model="application.tovarlar[key].menu.guvohnoma_ga"
                                                                     :close-on-content-click="false"
                                                                     :return-value.sync="application.tovarlar[key].guvohnoma_ga"
                                                                     transition="scale-transition"
@@ -856,14 +902,14 @@
                                                                         <v-btn
                                                                             text
                                                                             color="primary"
-                                                                            @click="menu.guvohnoma_ga = false"
+                                                                            @click="application.tovarlar[key].menu.guvohnoma_ga = false"
                                                                         >
                                                                             Бекор қилиш
                                                                         </v-btn>
                                                                         <v-btn
                                                                             text
                                                                             color="primary"
-                                                                            @click="$refs.menu_guvohnoma_ga[0].save(application.tovarlar[key].guvohnoma_ga)"
+                                                                            @click="$refs['menu_guvohnoma_ga'+key][0].save(application.tovarlar[key].guvohnoma_ga);  application.tovarlar[key].guvohnoma_sana=formatDateRange(application.tovarlar[key].datepicker)"
                                                                         >
                                                                             Сақлаш
                                                                         </v-btn>
@@ -873,10 +919,10 @@
                                                             </v-col>
                                                             <v-col cols="3">
                                                                 <v-menu
-                                                                    ref="menu_reestr_muddat"
-                                                                    v-model="menu.reestr_muddat"
+                                                                    :ref="'menu_reestr_muddat'+key"
+                                                                    v-model="application.tovarlar[key].menu.reestr_muddat"
                                                                     :close-on-content-click="false"
-                                                                    :return-value.sync="application.tovarlar[key].reestr_muddat"
+                                                                    :return-value.sync="application.tovarlar[key].r_muddat"
                                                                     transition="scale-transition"
                                                                     offset-y
                                                                     min-width="auto"
@@ -905,14 +951,14 @@
                                                                         <v-btn
                                                                             text
                                                                             color="primary"
-                                                                            @click="menu.reestr_muddat = false"
+                                                                            @click="application.tovarlar[key].menu.reestr_muddat = false"
                                                                         >
                                                                             Бекор қилиш
                                                                         </v-btn>
                                                                         <v-btn
                                                                             text
                                                                             color="primary"
-                                                                            @click="$refs.menu_reestr_muddat[0].save(application.tovarlar[key].guvohnoma_ga)"
+                                                                            @click="$refs['menu_reestr_muddat'+key][0].save(application.tovarlar[key].reestr_muddat); application.tovarlar[key].reestr_muddat=formatDateRange(application.tovarlar[key].datepickerreestr)"
                                                                         >
                                                                             Сақлаш
                                                                         </v-btn>
@@ -929,7 +975,7 @@
                                                                     <span>Илова қилинадиган ҳужжатлар: *</span>
                                                                     <v-chip-group
                                                                         mandatory
-                                                                        style="height: 50px" class="d-block"
+                                                                        style="height: 42px" class="d-block"
 
                                                                     >
                                                                         <v-chip
@@ -1342,26 +1388,44 @@ export default {
                 },
             ],
             tovarIndex: 0,
+            ishchiq: {
+                nomi: "",
+                manzili: "",
+                davlat: "",
+                phone: "",
+                mail: "",
+            },
+            NullIshChiq: {
+                nomi: "",
+                manzili: "",
+                davlat: "",
+                phone: "",
+                mail: "",
+            },
             application: {
                 huquq_egasi_nomi: null,
                 huquq_egasi_manzili: null,
                 huquq_egasi_davlat: null,
                 huquq_egasi_phone: null,
                 huquq_egasi_mail: null,
-                ishchiq_nomi: null,
-                ishchiq_manzili: null,
-                ishchiq_davlat: null,
-                ishchiq_phone: null,
-                ishchiq_mail: null,
+                ishchiq: [],
                 tovarlar: [
                     {
                         id: 0,
                         tab: 0,
-                        documents: [], tftn: null,
+                        documents: [],
+                        tftn: [],
                         datepicker: null,
                         datepickerreestr: null,
                         reestr_muddat: null,
+                        r_muddat: null,
                         guvohnoma_sana: null,
+                        menu: {
+                            guvohnoma_ga: false,
+                            guvohnoma_cha: false,
+                            reestr_muddat: false
+                        },
+                        search_tftn: ""
 
                     },
 
@@ -1395,6 +1459,13 @@ export default {
                 comment: null,
                 basicQty: null,
                 extraUnits: null,
+                tftn: [],
+                menu: {
+                    guvohnoma_ga: false,
+                    guvohnoma_cha: false,
+                    reestr_muddat: false
+                },
+                search_tftn:"",
             },
             commodity: [],
             app: {
@@ -1404,8 +1475,9 @@ export default {
             },
             dialog: {
                 documenttype: false,
-                ishlabchiqaruvchi:false,
+                ishlabchiqaruvchi: false,
             },
+            boolDialogIshChiqNew: -1,
             date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
             modal: false,
             completedSteps: [],
@@ -1563,6 +1635,7 @@ export default {
             })
             copytovar['id'] = max + 1;
             this.application.tovarlar.push(copytovar);
+            this.createWatcher(copytovar['id'])
         },
         RemoveProduct(product) {
             const _this = this;
@@ -1576,8 +1649,13 @@ export default {
             if (this.application.tovarlar.length > 1) {
 
                 setTimeout(() => {
-                    if (typeof selected[0] !== 'undefined')
-                        this.application.tovarlar.splice(selected[0], 1);
+                    if (typeof selected[0] !== 'undefined') {
+                        k = this.application.tovarlar.indexOf(selected[0])
+                        if (k !== -1) {
+                            this.application.tovarlar.splice(k, 1);
+                            this.removeWatcher(selected[0].id)
+                        }
+                    }
                     if (typeof this.application.tovarlar[k - 1] !== 'undefined' && typeof this.application.tovarlar[k - 1].id !== 'undefined') {
                         _this.tovarIndex = this.application.tovarlar[k - 1].id;
                     } else {
@@ -1948,10 +2026,59 @@ export default {
 
             })
         },
+        openIshChiq(id = null) {
+            if (id === null || typeof id === 'object') {
+                if (this.boolDialogIshChiqNew !== -1) {
+                    this.ishchiq = JSON.parse(JSON.stringify(this.NullIshChiq))
+                }
+                this.boolDialogIshChiqNew = -1;
+            } else {
+                if (this.boolDialogIshChiqNew !== id) {
+                    this.ishchiq = JSON.parse(JSON.stringify(this.application.ishchiq[id]))
+                }
+                this.boolDialogIshChiqNew = id;
+            }
+            this.dialog.ishlabchiqaruvchi = true;
+            setTimeout(() => {
+                if (typeof this.$refs['ishlabchiqarilgan'] !== 'undefined')
+                    this.$refs['ishlabchiqarilgan'].reset()
+
+            });
+        },
+        saveIshChiq(id = null) {
+            const _this = this;
+            let isValid = true;
+            if (id === null || typeof id === 'object') {
+                setTimeout(async () => {
+                    isValid = await this.validateField("ishlabchiqarilgan");
+                    if (isValid) {
+                        if (_this.boolDialogIshChiqNew >= 0) {
+                            if (typeof this.application.ishchiq[_this.boolDialogIshChiqNew] !== 'undefined')
+                                this.application.ishchiq[_this.boolDialogIshChiqNew] = _this.ishchiq;
+                        } else {
+                            this.application.ishchiq.push(_this.ishchiq);
+                            _this.ishchiq = JSON.parse(JSON.stringify(this.NullIshChiq))
+                        }
+                        if (typeof this.$refs['ishlabchiqarilgan'] !== 'undefined')
+                            this.$refs['ishlabchiqarilgan'].reset()
+
+                        this.dialog.ishlabchiqaruvchi = false;
+
+                    }
+                })
+
+            } else {
+                console.log(id)
+
+            }
+
+
+        },
 
         initialize() {
             this.getBoshqarmalar();
             this.setCookieData();
+            this.createWatcher(0);  /// listener for product[0]
         },
         setCookieData() {
             /////  Step  1  Fill  Person data
@@ -2034,13 +2161,78 @@ export default {
                 this.documents[key].valid = false;
             }
         },
+        remove(item) {
+            const index = this.application.tovarlar[this.tovarIndex].tftn.indexOf(item)
+            if (index >= 0) this.application.tovarlar[this.tovarIndex].tftn.splice(index, 1)
+        },
+        formatDateRange(dates) {
+            if (dates.length > 1) {
+                if (dates[1] < dates[0]) {
+                    const date = dates[1];
+                    dates[1] = dates[0];
+                    dates[0] = date;
+                }
+            }
+            return dates.join(' -- ')
+        },
+        createWatcher(key) {
+            const _this=this
+            this.$watch('application.tovarlar.' + key + '.search_tftn', (val) => {
+               // console.log(val)
+                if (val === null || (val && val.length > 10)) return
+                //if (this.tftncodes.length > 0) return
+
+                // Items have already been requested
+                //if (this.loading.tftncode) return
+
+                this.loading.tftncode = true
+
+                // Lazily load input items
+                fetch("https://new.customs.uz/api/v1/data/tftn?code=" + val)
+                    .then((res) => res.json())
+                    .then(res => {
+                        res.map(function (item) {
+                            item.name = item.id + " - " + item.name;
+                            return item;
+                        })
+                        //_this.tftncodes = _this.tftncodes.concat(res);
+                        _this.tftncodes = _this.tftncodes.concat(res.filter((item) => _this.tftncodes.indexOf(item) < 0));
+/*                        let selected=this.filterObject(this.application.tovarlar,key,'id');
+                        let selectedIndex=this.application.tovarlar.indexOf(selected);
+                        if (selectedIndex!==-1 && this.application.tovarlar[selectedIndex].tftn.length > 0 )
+                            this.application.tovarlar.forEach((item) => {
+                                item.tftn.forEach((tftn)=>{
+                                    _this.tftncodes.push(tftn)
+                                })
+
+                            })*/
+                        //this.tftncodes.push(this.application.tovarlar[this.tovarIndex].tftn)
+                    })
+                    .catch(err => {
+                        //console.log(err)
+                    })
+                    .finally(() => (
+                        this.loading.tftncode = false
+                    ))
+
+            })
+
+        },
+
+
+        removeWatcher(key) {
+            let unwatch = this.$watch('application.tovarlar.' + key + '.search_tftn');
+            unwatch();
+
+        }
 
     },
     watch: {
-        search_tftn: {
+        /*search_tftn: {
             handler: function (val) {
 
-                if (val.length > 10) return
+
+                if (val===null || (val && val.length > 10)) return
                 //if (this.tftncodes.length > 0) return
 
                 // Items have already been requested
@@ -2057,6 +2249,11 @@ export default {
                             return item;
                         })
                         this.tftncodes = res;
+                        if(this.application.tovarlar[this.tovarIndex].tftn.length>0)
+                        this.application.tovarlar[this.tovarIndex].tftn.forEach((item)=>{
+                            this.tftncodes.push(item)
+                        })
+                            //this.tftncodes.push(this.application.tovarlar[this.tovarIndex].tftn)
                     })
                     .catch(err => {
                         //console.log(err)
@@ -2065,10 +2262,8 @@ export default {
                         this.loading.tftncode = false
                     ))
             },
-            deep: true
-        },
-
-
+            deep: false
+        },*/
     },
 
     mounted() {
