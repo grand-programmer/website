@@ -247,6 +247,10 @@ export default {
                     text: "Божхона органларига мурожаат юбориш",
                     value: 2
                 },
+                {
+                    text: "Тфтн кодни аниқлаш юзасидан ариза бериш",
+                    value: 3
+                },
             ],
             filter: {
                 date_sanadan: null,

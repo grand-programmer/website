@@ -1,5 +1,5 @@
 {
-  "avatar": "Vuetify MD",
+  "avatar": "Vuetify MD UZ",
   "buttons": "Buttons",
   "calendar": "Calendar",
   "charts": "Charts",
@@ -42,6 +42,7 @@
   "vforms": "Validation Forms",
   "widgets": "Widgets",
   "wizard": "Wizard",
+    "Website Views": "Website Views uz",
     "messages": {
         "alpha": " {_field_} майдони фақат харфлардан иборат бўлиши лозим",
         "alpha_num": "{_field_} майдони фақат харфлар ва сонлардан иборат бўлиши лозим",

@@ -123,6 +123,8 @@ export default {
         headers: [
             {text: 'ID', sortable: true, value: 'id', align: 'start'},
             {text: 'Сарлавха', sortable: true, value: 'question', align: 'start',width:'30%'},
+            {text: 'Сортировка', value: 'sort',sortable:true, align: 'start'},
+            {text: 'Актив', value: 'active',sortable:true, align: 'start'},
             {text: 'Овоз берганлар сони', value: 'total', align: 'start'},
             {text: 'Амаллар', value: 'actions', sortable: false, align: 'center'}
         ],
@@ -166,7 +168,7 @@ export default {
         },
 
         deleteItemConfirm() {
-            api.deleteEvent(this.editedItem.id).then(response => {
+            api.deleteVote(this.editedItem.id).then(response => {
                 if (response.status === 200) {
                     this.initialize();
                     this.dialogDelete = false

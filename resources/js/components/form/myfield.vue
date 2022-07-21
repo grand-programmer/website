@@ -114,6 +114,9 @@ export default {
             return {on: ["search:blur", "input"]};
         },
     },
+    mounted(){
+        this.value=this.modelValue
+    },
     computed: {
         modelValue: {
             get() {

@@ -18,10 +18,13 @@
                 cols="12"
                 md="12"
             >
+                <v-row>
+                    <h3>Таҳрирлаш</h3>
+                </v-row>
                 <v-flex xs12 sm12 md12 lg12>
                     <v-card>
                         <ValidationObserver v-slot="{ invalid }">
-                            <v-form ref="eventForm">
+                            <v-form ref="voteForm">
 
                                 <v-card-text>
                                     <v-container>
@@ -30,48 +33,50 @@
                                                 <ValidationProvider name="Сарлавха" rules="required|min:3"
                                                                     v-slot="{ errors }">
                                                     <v-text-field label="Сарлавха"
-                                                                  v-model="event.title"
+                                                                  v-model="vote.question"
                                                                   name="title"></v-text-field>
                                                     <span class="error--text">{{ errors[0] }}</span>
                                                 </ValidationProvider>
 
                                             </v-col>
-                                            <v-col cols="6" sm="6" md="6">
-                                                <!--                                                <label>Сўровнома санаси</label>-->
-                                                <ValidationProvider name="Ҳодиса санаси" rules="required"
-                                                                    v-slot="{ errors }">
-                                                    <v-menu
-                                                        ref="menu"
-                                                        v-model="menu2"
-                                                        :close-on-content-click="false"
-                                                        transition="scale-transition"
-                                                        offset-y
-                                                        max-width="290px"
-                                                        min-width="auto"
-                                                    >
-                                                        <template v-slot:activator="{ on, attrs }">
-                                                            <v-text-field
-                                                                v-model="event.date"
-                                                                persistent-hint
-                                                                prepend-icon="mdi-calendar"
-                                                                v-bind="attrs"
-                                                                @blur="date = parseDate(event.date)"
-                                                                v-on="on"
-                                                                name="date"
-                                                                label="Ҳодиса санаси"
-                                                            ></v-text-field>
-                                                        </template>
-                                                        <v-date-picker
-                                                            v-model="date"
-                                                            no-title
-                                                            @input="menu = false"
-                                                        ></v-date-picker>
-                                                    </v-menu>
+                                            <v-col cols="3" sm="3" md="3">
+                                                <v-text-field type="number" label="тартиб рақами"
+                                                              v-model="vote.sort"
+                                                              name="title"></v-text-field>
 
-
-                                                    <span>{{ errors[0] }}</span>
-                                                </ValidationProvider>
                                             </v-col>
+                                            <v-col cols="3" sm="3" md="3">
+                                                <v-switch label="Активлиги"   v-model="vote.active"></v-switch>
+                                            </v-col>
+                                            <v-row class="mb-5">
+                                                <v-col cols="1">
+
+                                                    <v-btn color="primary" @click="vote.answers.push({text:''})">
+                                                        <v-icon class="mr-2">mdi-plus-box-multiple</v-icon>
+
+                                                        Савол қўшиш
+                                                    </v-btn>
+                                                </v-col>
+                                            </v-row>
+                                            <v-row  v-if="vote.answers.length>0" :key="anKey" v-for="(answer,anKey) in vote.answers">
+                                                <v-col cols="10">
+                                                    <ValidationProvider :name="'Савол ' + (anKey+1)" rules="required"
+                                                                        v-slot="{ errors }">
+                                                        <v-text-field :label="'Савол ' + (anKey+1) "
+                                                                      v-model="vote.answers[anKey].text"
+                                                                      :name="'answer'+anKey"></v-text-field>
+                                                        <span class="error--text">{{ errors[0] }}</span>
+                                                    </ValidationProvider>
+                                                </v-col>
+                                                <v-col cols="2">
+                                                    <v-btn
+                                                        color="red"
+
+                                                    ><v-icon @click="vote.answers.splice(anKey,1)">mdi-close</v-icon> Ўчириш</v-btn>
+                                                </v-col>
+
+                                            </v-row>
+
 
                                         </v-row>
                                     </v-container>
@@ -107,21 +112,17 @@ Object.keys(rules).forEach(rule => {
 });
 
 export default {
-    name: "EventUpdate",
+    name: "VoteUpdate",
     data: () => ({
             content: '<h1>Initial Content</h1>',
 
             breadcrumb_items:
                 [
                     {text: 'Админ панел', to: '/admin', exact: true},
-                    {text: 'Ҳодисалар', to: '/admin/votes', exact: true},
-                    {text: 'Ҳодисани тахрирлаш', to: '#', exact: true, disabled: true},
+                    {text: 'Сўровномалар', to: '/admin/votes', exact: true},
+                    {text: 'Сўровномани тахрирлаш', to: '#', exact: true, disabled: true},
                 ],
-            event: [],
-            menu2:'',
-            menu:'',
-            date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
-            menus: [],
+            vote: [],
             pages: [],
         }
     ),
@@ -137,7 +138,7 @@ export default {
     },
     watch: {
         date(val) {
-            this.event.date = this.formatDate(this.date)
+            this.vote.date = this.formatDate(this.date)
         },
     },
     created() {
@@ -145,10 +146,8 @@ export default {
     },
     methods: {
         initialize() {
-            api.readEvent(this.$route.params.id).then((response) => {
-                this.event = response.data.data;
-                this.date=this.event.date;
-                this.event.date=this.formatDate(this.event.date);
+            api.readVote(this.$route.params.id).then((response) => {
+                this.vote = response.data.data;
 
             }).catch((error) => {
                 this.$toast.error(`Маълумотларни юклашда хатолик содир бўлди!`)
@@ -161,11 +160,11 @@ export default {
         },
 
         async save() {
-            const isValid = await this.$refs.eventForm.validate();
-            console.log(this.event.date)
+            const isValid = await this.$refs.voteForm.validate();
+            console.log(this.vote.date)
 
             if (isValid) {
-                api.updateEvent(this.event.id, this.event).then((response) => {
+                api.updateVote(this.vote.id, this.vote).then((response) => {
                     this.$toast.success(`Маълумотларни омадли тарзда юкланди!`)
                 }).catch((error) => {
                     this.$toast.error(`Маълумотларни юклашда хатолик содир бўлди!`)

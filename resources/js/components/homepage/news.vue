@@ -15,29 +15,30 @@
 </svg>
 
 
-            <p> Барча янгиликлар </p></router-link>
+            <p> {{$t("Барча янгиликлар")}} </p></router-link>
         <div class="container">
             <div class="news-head">
-                <div class="news-title">Янгиликлар</div>
-<!--                <ul>
-                    <li  v-for="(categoryItem,key) in categories">
-                        <a :href="'category/' + categoryItem.slug">{{categoryItem.title}}</a>
-                    </li>
-                </ul>-->
-<!--                <router-link to="category/gender-tenglik" class="news-link">Барча янгиликлар</router-link>-->
+                <div class="news-title">{{$t("Янгиликлар")}}</div>
+                <!--                <ul>
+                                    <li  v-for="(categoryItem,key) in categories">
+                                        <a :href="'category/' + categoryItem.slug">{{categoryItem.title}}</a>
+                                    </li>
+                                </ul>-->
+                <!--                <router-link to="category/gender-tenglik" class="news-link">Барча янгиликлар</router-link>-->
             </div>
-<!--            <div class="news-cats">
-                <ul >
-                    <li v-for="(category,catkey) in categories" > <router-link :to="`category/`+category.slug">{{
-                            category.title
-                        }}{{ (catkey < categories) ? ',' : '' }}
-                    </router-link> </li>
-                </ul>
-            </div>-->
+            <!--            <div class="news-cats">
+                            <ul >
+                                <li v-for="(category,catkey) in categories" > <router-link :to="`category/`+category.slug">{{
+                                        category.title
+                                    }}{{ (catkey < categories) ? ',' : '' }}
+                                </router-link> </li>
+                            </ul>
+                        </div>-->
+
             <div class="news-content">
                 <div class="row">
-                    <div class="col-lg-4 col-md-6 col-sm-6" v-for="(newsItem,key) in news">
-                        <router-link :to="`news/`+newsItem.slug" class="news-item" >
+                    <div class="col-lg-4 col-md-6 col-sm-6" v-for="(newsItem,key) in news" id="yangi">
+                        <router-link :to="`news/`+newsItem.slug" class="news-item">
                             <div class="news-box">
                                 <div class="box-img">
                                     <img
@@ -52,34 +53,25 @@
                                                 {{ newsItem.created_at.split(' ')[0] }}
                                             </div>
                                         </div>
-<!--                                        <div class="box-eye">
-                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                                 xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M14.1213 14.1213C14.6839 13.5587 15 12.7956 15 12C15 11.2044 14.6839 10.4413 14.1213 9.87868C13.5587 9.31607 12.7956 9 12 9C11.2044 9 10.4413 9.31607 9.87868 9.87868C9.31607 10.4413 9 11.2044 9 12C9 12.7956 9.31607 13.5587 9.87868 14.1213C10.4413 14.6839 11.2044 15 12 15C12.7956 15 13.5587 14.6839 14.1213 14.1213Z"
-                                                    stroke="white" stroke-width="2" stroke-linecap="round"
-                                                    stroke-linejoin="round"></path>
-                                                <path
-                                                    d="M2.45801 12C3.73201 7.943 7.52301 5 12 5C16.478 5 20.268 7.943 21.542 12C20.268 16.057 16.478 19 12 19C7.52301 19 3.73201 16.057 2.45801 12Z"
-                                                    stroke="white" stroke-width="2" stroke-linecap="round"
-                                                    stroke-linejoin="round"></path>
-                                            </svg>
-                                            31
-                                        </div>-->
+
                                     </div>
                                     <ul class="news-item-cats">
-                                        <li  v-for="(categoryItem,key) in newsItem.categories">
-                                            <a :href="'category/' + categoryItem.slug">{{categoryItem.title}}</a>
+                                        <li v-for="(categoryItem,key) in newsItem.categories">
+                                            <a :href="'category/' + categoryItem.slug">{{ categoryItem.title }}</a>
                                         </li>
                                     </ul>
-                                    <div class="box-text">{{newsItem.title}}</div>
+                                    <div class="box-text">{{ newsItem.title }}</div>
                                 </div>
                             </div>
-                        </router-link></div>
+                        </router-link>
+                    </div>
                 </div>
             </div>
+
         </div>
     </div>
+
+
 </template>
 <script>
 import api from "./../../src/services/apiService";

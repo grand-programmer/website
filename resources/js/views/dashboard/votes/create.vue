@@ -40,6 +40,15 @@
                                                 </ValidationProvider>
 
                                             </v-col>
+                                            <v-col cols="3" sm="3" md="3">
+                                                    <v-text-field type="number" label="тартиб рақами"
+                                                                  v-model="editedItem.sort"
+                                                                  name="title"></v-text-field>
+
+                                            </v-col>
+                                            <v-col cols="3" sm="3" md="3">
+                                                    <v-switch label="Активлиги"   v-model="editedItem.active"></v-switch>
+                                            </v-col>
                                             <v-row class="mb-5">
                                                 <v-col cols="1">
 
@@ -50,24 +59,24 @@
                                                     </v-btn>
                                                 </v-col>
                                             </v-row>
-<v-row  v-if="editedItem.answers.length>0" :key="anKey" v-for="(answer,anKey) in editedItem.answers">
-    <v-col cols="10">
-        <ValidationProvider :name="'Савол ' + (anKey+1)" rules="required"
-                            v-slot="{ errors }">
-            <v-text-field :label="'Савол ' + (anKey+1) "
-                          v-model="editedItem.answers[anKey].text"
-                          :name="'answer'+anKey"></v-text-field>
-            <span class="error--text">{{ errors[0] }}</span>
-        </ValidationProvider>
-    </v-col>
-    <v-col cols="2">
-        <v-btn
-           color="red"
+                                            <v-row  v-if="editedItem.answers.length>0" :key="anKey" v-for="(answer,anKey) in editedItem.answers">
+                                                <v-col cols="10">
+                                                    <ValidationProvider :name="'Савол ' + (anKey+1)" rules="required"
+                                                                        v-slot="{ errors }">
+                                                        <v-text-field :label="'Савол ' + (anKey+1) "
+                                                                      v-model="editedItem.answers[anKey].text"
+                                                                      :name="'answer'+anKey"></v-text-field>
+                                                        <span class="error--text">{{ errors[0] }}</span>
+                                                    </ValidationProvider>
+                                                </v-col>
+                                                <v-col cols="2">
+                                                    <v-btn
+                                                       color="red"
 
-        ><v-icon @click="editedItem.answers.splice(anKey,1)">mdi-close</v-icon> Ўчириш</v-btn>
-    </v-col>
+                                                    ><v-icon @click="editedItem.answers.splice(anKey,1)">mdi-close</v-icon> Ўчириш</v-btn>
+                                                </v-col>
 
-</v-row>
+                                            </v-row>
 
 
                                         </v-row>
@@ -118,14 +127,15 @@ export default {
             editedItem: {
                 id: null,
                 question: '',
-                answers:[]
+                answers:[],
+                sort:100
 
             },
             pages: [],
             menu: false,
             modal: false,
             menu2: false,
-            date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
+           // date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
 
         }
     },
@@ -133,29 +143,29 @@ export default {
         formTitle() {
             return 'Янги';
         },
-        computedDateFormatted() {
+/*        computedDateFormatted() {
             return this.formatDate(this.date)
-        },
+        },*/
 
     },
     created() {
        // this.initialize();
     },
 
-    watch: {
+/*    watch: {
         date(val) {
             this.editedItem.date = this.formatDate(this.date)
         },
-    },
+    },*/
     methods: {
         initialize() {
-            api.readVotes().then((response) => {
+/*            api.readVotes().then((response) => {
                 this.editedItem = response.data;
             }).catch((error) => {
                 this.$toast.error(`Сўровномаларни олишда муаммо бор!`)
 
                 console.log(error)
-            });
+            });*/
         },
 
         close() {

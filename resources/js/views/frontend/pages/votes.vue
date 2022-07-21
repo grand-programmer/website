@@ -20,7 +20,7 @@
                                             dense
                                         >
                                             <v-radio v-for="(answerItem,key) in voteItem.answers"
-                                                     :label="answerItem.title"
+                                                     :label="answerItem.text"
                                                      :value="answerItem.value"
                                                      :key="key"
                                             ></v-radio>
@@ -34,7 +34,7 @@
                                                 class="ma-2"
                                                 color="primary"
                                                 small
-                                                @click="displayResults.push(votes[key].id)"
+                                                @click="getResult(votes[key].id)"
                                             >
                                                 Натижалар
                                             </v-btn>
@@ -44,7 +44,7 @@
                                         <template v-for="(resultItem,rkey) in votes[key].answers">
                                             <div class="my-5"
                                                  :data="(votes[key].answers[rkey]['count'] / votes[key].total * 100)">
-                                                <p>{{ votes[key].answers[rkey].title }}
+                                                <p>{{ votes[key].answers[rkey].text }}
                                                     <v-btn x-small color="#4e4646">
                                                         {{ resultItem.count ? resultItem.count : 0 }}
                                                     </v-btn>
@@ -105,19 +105,32 @@ export default {
             ]
         }
     },
+
     methods: {
+        getResult(id){
+            //if(this.displayResults.contain(id))
+            //this.displayResults.push(id)
+        },
+        initialize(){
+            let votes=this.$cookie.get('votes') ? JSON.parse(this.$cookie.get('votes')) : null;
+            if(votes) {
+                this.displayResults = votes;
+            }
+        },
         getQuestions() {
             const _app = this;
-            axios.get("/api/v1/votes").then(function (response) {
+            axios.get("/api/v1/votes/front").then(function (response) {
                 _app.votes = response.data.data;
             });
         },
         answer(key, answer) {
+            if(!answer) return;
             const _app = this;
             axios.post("/api/v1/votescount/" + key, {answer: answer, _method: 'put'}).then(function (response) {
                 if (response.data.success === true) {
                     _app.getQuestions();
                     _app.displayResults.push(key);
+                    _app.$cookie.set('votes', JSON.stringify(_app.displayResults), 1);
                 }
             });
 
@@ -125,7 +138,12 @@ export default {
         }
     },
     created() {
-        this.getQuestions()
+        this.$store.commit('setLoading', true)
+        setTimeout(()=>{
+            this.initialize()
+            this.getQuestions()
+        },1000)
+        this.$store.commit('setLoading', false)
     }
 }
 </script>
