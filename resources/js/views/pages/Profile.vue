@@ -292,7 +292,7 @@ export default {
                     _this.has_error = true
                     _this.error = res.error
                 },
-                redirect: (this.$route.params.slug==='admin')?'/admin':'/profile',
+                redirect: (this.$route.params.slug==='admin')?'/admin/':'/profile',
                 //rememberMe: true,
                 fetchUser: true
             }).then((res) => {

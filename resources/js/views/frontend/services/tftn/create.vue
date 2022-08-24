@@ -717,7 +717,7 @@
 <script>
 import {extend, ValidationProvider, ValidationObserver} from 'vee-validate';
 import * as rules from 'vee-validate/dist/rules';
-import messages from '../../../../locales/uz.json';
+import messages from '../../../../locales/oz.json';
 import {types} from "../../../../../../public/js/mix/pdfmake";
 
 
@@ -729,7 +729,7 @@ Object.keys(rules).forEach(rule => {
     });
 });
 export default {
-    name: "Initialdecision",
+    name: "InitialTftn",
     data() {
         return {
             stepper: 1,
@@ -807,6 +807,7 @@ export default {
                 position: "01",
                 phone: null,
                 email: null,
+                region:null,
             },
             doc: {
                 type: null,
@@ -1551,18 +1552,20 @@ export default {
 
     },
     watch: {
-        "person.region": {
+        'person.region': {
             handler(value) {
-                if (typeof value !== 'undefined' && value.length > 3) {
+                console.log(value)
+                if (typeof value !== 'undefined' && value && value.length > 3) {
                     const region = value.substr(2, 2);
-                    setTimeout(async () => {
-                        await this.getPosts(region)
-                    })
+                    //setTimeout(async () => {
+                        this.getPosts(region)
+                   // })
                 }
 
             },
             immediate: true,
-            deep:true
+            deep:true,
+            sync:true
         },
 
 

@@ -1624,7 +1624,7 @@
 import {mapState} from 'vuex';
 import {extend, ValidationProvider, ValidationObserver} from 'vee-validate';
 import * as rules from 'vee-validate/dist/rules';
-import messages from '../../../../locales/uz.json';
+import messages from '../../../../locales/oz.json';
 import MyField from '../../../../components/form/myfield.vue';
 import {useToast} from "vue-toastification";
 import Editablefield from "../../../../components/form/editablefield";

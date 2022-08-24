@@ -61,7 +61,7 @@ class ApiController extends Controller
 
                 try {
                     $response = $myrequest
-                        ->timeout(5)
+                        ->timeout(10)
                         ->get('http://192.168.214.135:9090/CUSTOMSPRICE/api/custom/locations');
                     if ($response->status() == 200) {
                         $dataLocations = json_decode($response->body());
@@ -79,7 +79,8 @@ class ApiController extends Controller
                             });
                             return response()->json(['data' => $locations->all()]);
                         }
-                    } else return response()->json(['error' => 'Malumot topilmadi']);
+                    } else //return response()->json(['error' => 'Malumot topilmadi'],);
+                        return response()->json(['data' => DB::connection('db2_odbc221')->select("Select id as kod_id, name_uzb as name From Location")]);
 
                 } catch (\Exception $e) {
 
@@ -183,7 +184,8 @@ class ApiController extends Controller
                     'body' => json_encode($request->all())
                 ]);
                 if ($response->status() === 200) {
-                    if ($appId = json_decode($response->body())->data->appId) ;
+                    return response()->json(['data'=>json_decode($response->body())],$response->status() );
+                    //if ($appId = json_decode($response->body())->data->appId) ;
                     //dd($request->appNum);
                     /* $service = Service::create([
                          'type' => 1,
@@ -253,20 +255,21 @@ class ApiController extends Controller
                         //$returnData['rollbackApp'] = isset($statusdata["rollbackApp"]) ? $statusdata["rollbackApp"] : null;
                         if (isset($returnData['statuses'])) {
                             $returnData['statuses'] = collect($returnData['statuses'])->transform(function ($status) {
-                                if ((int)$status['status'] === 125) {
-                                    $response5 = Http::contentType("application/json")->get('http://192.168.214.135:9090/CUSTOMSPRICE/api/tutorials/historyrollback', [
-                                        "appId" => $status['appId'],
-                                        "size" => 100,
-                                        "page" => 0,
-                                        "statusHId" => $status['id'],
-                                    ]);
-                                    if ($response5->status() == 200) {
-                                        $status['rolback'] = $response5->json();
-                                    }
+                                //if ((int)$status['status'] === 125) {
+                                $response5 = Http::contentType("application/json")->get('http://192.168.214.135:9090/CUSTOMSPRICE/api/tutorials/historyrollback', [
+                                    "appId" => $status['appId'],
+                                    "size" => 100,
+                                    "page" => 0,
+                                    "statusHId" => $status['id'],
+                                ]);
+                                if ($response5->status() == 200) {
+                                    $status['rolback'] = $response5->json();
                                 }
+                                //}
                                 return $status;
                             });
                         }
+                        /// dd($returnData['statuses']);
                     }
 
                     return response()->json(["data" => $returnData]);
@@ -278,6 +281,7 @@ class ApiController extends Controller
                 $person_pnfl = isset($appData['pnfl']) ? $appData['pnfl'] : null;
                 $response = Http::contentType("application/json")->get('http://192.168.214.135:9090/CUSTOMSPRICE/api/tutorials/published', [
                     "personPin" => $person_pnfl,
+                    "size"=>200,
                 ]);
                 if ($response->status() == 200) {
                     $dataApps = json_decode($response->body());
@@ -285,10 +289,17 @@ class ApiController extends Controller
                 }
                 break;
             case "customprice-registries":
-                $appData = $request->only(['hsCode', 'page', 'size', 'inDecNum', 'StartDate', 'EndDate', 'appNum', 'tradeName', 'terms', 'method']);
-
-                //$appData['terms'] = isset($appData['terms'])?(float)($appData['terms']):null;
+                $appData = $request->only(['hsCode', 'page', 'size', 'inDecNum', 'datepicker', 'appNum', 'tradeName', 'terms', 'method']);
+                foreach ($appData as $mk => $mdata) {
+                    $appData[$mk] = $mdata === null ? "" : $mdata;
+                }
+                //dd($appData);
+            //'StartDate', 'EndDate',
+            if(isset($appData['datepicker']) && isset($appData['datepicker'][0])) $appData['StartDate']=$appData['datepicker'][0];
+            if(isset($appData['datepicker']) && isset($appData['datepicker'][1])) $appData['EndDate']=$appData['datepicker'][1];
+                $appData['page'] = isset($appData['page'])?$appData['page']-1:0;
                 //$appData = isset($appData['pnfl']) ? $appData['pnfl'] : null;
+                ///dd($appData);
                 $response = Http::contentType("application/json")->get('http://192.168.214.135:9090/CUSTOMSPRICE/api/custom/reestor', $appData);
                 if ($response->status() == 200) {
                     //$dataApps = json_decode($response->body());
@@ -316,7 +327,7 @@ class ApiController extends Controller
                     });
                     return response()->json($stats);
                 }
-                return response()->json(['status'=>$response->status(),'data'=>$response->body()]); ;
+                return response()->json(['status' => $response->status(), 'data' => $response->body()]);;
 
                 break;
             case "posts":
@@ -410,12 +421,12 @@ class ApiController extends Controller
                     $response->attach('multipartFile', file_get_contents($image), $image->getClientOriginalName());
                 }
                 $response = $response
-                    ->post('http://192.168.224.18:9090/appealrestapi/upload', $data);
+                    ->post('http://192.168.214.152:7070/DECAPP/s06appealrestapi/upload', $data);
                 if ($response->status() === 200) {
                     $appeal = $response->json('data');
 
                     $response1 = Http::asMultipart()->acceptJson();
-                    $response1 = $response1->get('http://192.168.224.18:9090/appealrestapianswer/getResult', [
+                    $response1 = $response1->get('http://192.168.214.152:7070/DECAPP/s06appealrestapianswer/getResult', [
                         'password' => isset($appeal['password']) ? $appeal['password'] : null,
                         'appNum' => isset($appeal['AppNum']) ? $appeal['AppNum'] : null
                     ]);
@@ -442,7 +453,7 @@ class ApiController extends Controller
                     //unset($data['password']);
                 }
                 $response = Http::asMultipart()->acceptJson()
-                    ->get('http://192.168.224.18:9090/appealrestapianswer/getResult', $data);
+                    ->get('http://192.168.214.152:7070/DECAPP/s06appealrestapianswer/getResult', $data);
                 if ($response->status() == 200) {
                     return response()->json([
                         'data' => $response->json(),

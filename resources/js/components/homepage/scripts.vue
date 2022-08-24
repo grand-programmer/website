@@ -2,6 +2,7 @@
 
 </template>
 <script>
+//import * as anychartBase from "public/js/anychart-base.min.js";
 var ie_data = {
     'UZ-AN': [
         {
@@ -666,6 +667,7 @@ var ie_data = {
 };
 import * as am4core from "@amcharts/amcharts4/core";
 import * as am4charts from "@amcharts/amcharts4/charts";
+import ApexCharts from 'apexcharts';
 
 
 import * as am4maps from "@amcharts/amcharts4/maps";
@@ -698,9 +700,10 @@ export default {
     name: 'IndexScripts',
     data() {
         return {
-            month:0,
-            year:2022,
-
+            month: 0,
+            year: 2022,
+            rejim:1,
+            //mychartdata:[],
 
 
             importExportData: [
@@ -762,27 +765,20 @@ export default {
                     "export": 102
                 },],
             route: null,
+            route2: null,
             //routeColumnChart: null
         }
     },
     mounted() {
-        this.createRootColumnChart();
-       // slide1(true);
-        //slide2(true);
-        //slide3(true);
-       // slide4(true);
-        //slide5(true);
-        //slide6(true);
-        // slide7();
-        //slide8();
-        //slide9();
-        // slide10();
-        // slide11();
-        // slide12();
-        // slide13();
 
+        //this.createRootColumnChart5();
+        //this.columnChart5();*/
     },
     methods: {
+        dispose() {
+            if (this.route !== null)
+                this.route.dispose()
+        },
         createRootColumnChart() {
             var importExportData = [];
             let importExport = [];
@@ -830,15 +826,28 @@ export default {
 
         },
         createRootPieChart() {
-            console.log('sad')
-            this.route.dispose()
+            //console.log('sad')
+            if (this.route != null) this.route.dispose()
             this.route = am5.Root.new('columnchart2');
             this.route._logo = false;
         },
         createRootMultipleValue() {
-            this.route.dispose()
+/*            if (this.route != null) this.route.dispose()
             this.route = am5.Root.new('columnchart3');
+            this.route._logo = false;*/
+        },
+        createRootColumnChart4() {
+            if (this.route !== null)
+                this.route.dispose()
+            this.route = am5.Root.new('columnchart4');
             this.route._logo = false;
+        },
+
+        createRootColumnChart4_1() {
+            if (this.route2 !== null)
+                this.route2.dispose()
+            this.route2 = am5.Root.new('columnchart4-1');
+            this.route2._logo = false;
         },
         async clusteredColumn() {
             //clusteredColumn('columnchart1', this.importExportData);
@@ -899,13 +908,13 @@ export default {
             //label.rotation = -90;
             //xAxis.renderer.labels.template.rotation = 360;
             let importExport = [];
-            await am5.net.load("api/v1/stat?name=hududimex&month="+this.month+"&year="+this.year).then(function (result) {
+            await am5.net.load("/api/v1/stat?name=hududimex&month=" + this.month + "&year=" + this.year).then(function (result) {
                 // This gets executed when data finishes loading
                 // ... do something
                 const m = am5.JSONParser.parse(result.response);
-               //const m = JSON.parse(result.response);
-               //data = m.data;
-                data=JSON.parse(JSON.stringify(m.data));
+                //const m = JSON.parse(result.response);
+                //data = m.data;
+                data = JSON.parse(JSON.stringify(m.data));
                 data.sort((a, b) => (a.import < b.import) ? 1 : -1)
                 xAxis.data.setAll(data);
 
@@ -914,13 +923,13 @@ export default {
                 // ... handle error
                 console.log("Error loading " + result);
             });
-           /* axios
-                .get('api/v1/stat?name=hududimex&year=2022')
-                .then(response => (data = response))
-            const finalData = JSON.parse(JSON.stringify(data));
+            /* axios
+                 .get('api/v1/stat?name=hududimex&year=2022')
+                 .then(response => (data = response))
+             const finalData = JSON.parse(JSON.stringify(data));
 
 
-            console.log(JSON.parse(JSON.stringify(data)));*/
+             console.log(JSON.parse(JSON.stringify(data)));*/
             //xAxis.data.setAll(finalData );
             /// xAxis.data.setAll(data);
 
@@ -980,7 +989,7 @@ export default {
 
 
         },
-       async pieChart() {
+        async pieChart() {
             let root = this.route
 // Set themes
 // https://www.amcharts.com/docs/v5/concepts/themes/
@@ -1026,23 +1035,23 @@ export default {
 // Set data
 // https://www.amcharts.com/docs/v5/charts/percent-charts/pie-chart/#Setting_data
 
-/*
-            await am5.net.load("api/v1/stat?name=avto&month="+this.month+"&year="+this.year).then(function (result) {
-                // This gets executed when data finishes loading
-                // ... do something
-                const m = am5.JSONParser.parse(result.response);
-                //const m = JSON.parse(result.response);
-                //data = m.data;
-                data=JSON.parse(JSON.stringify(m.data));
-                //data.sort((a, b) => (a.import < b.import) ? 1 : -1)
-                xAxis.data.setAll(data);
+            /*
+                        await am5.net.load("/api/v1/stat?name=avto&month="+this.month+"&year="+this.year).then(function (result) {
+                            // This gets executed when data finishes loading
+                            // ... do something
+                            const m = am5.JSONParser.parse(result.response);
+                            //const m = JSON.parse(result.response);
+                            //data = m.data;
+                            data=JSON.parse(JSON.stringify(m.data));
+                            //data.sort((a, b) => (a.import < b.import) ? 1 : -1)
+                            xAxis.data.setAll(data);
 
-            }).catch(function (result) {
-                // This gets executed if there was an error loading URL
-                // ... handle error
-                console.log("Error loading " + result);
-            });
-*/
+                        }).catch(function (result) {
+                            // This gets executed if there was an error loading URL
+                            // ... handle error
+                            console.log("Error loading " + result);
+                        });
+            */
 
 
             series.data.setAll([
@@ -1054,7 +1063,7 @@ export default {
 
             series.appear(1000, 100);
         },
-        multipleValue() {
+        async multipleValue() {
             let root = this.route
 
 
@@ -1064,17 +1073,20 @@ export default {
                 am5themes_Animated.new(root)
             ]);
             root.container.children.clear();
+            //   root.dateFormatter.set("dateFormat", "MM");
+
 // Create chart
 // https://www.amcharts.com/docs/v5/charts/xy-chart/
             let chart = root.container.children.push(
                 am5xy.XYChart.new(root, {
-                    focusable: true,
+                    // focusable: true,
                     panX: true,
                     panY: true,
                     wheelX: false,
                     wheelY: false,
                     paddingTop: 50,
-                    layout: root.verticalLayout
+                    paddingBottom: 100,
+                    // layout: root.verticalLayout
                 })
             );
 
@@ -1086,38 +1098,43 @@ export default {
 // https://www.amcharts.com/docs/v5/charts/xy-chart/axes/
             let xAxis = chart.xAxes.push(
                 am5xy.DateAxis.new(root, {
-                    maxDeviation: 0.1,
-                    groupData: false,
-                    baseInterval: {
-                        timeUnit: "day",
-                        count: 1
-                    },
+                    markUnitChange: true,
+                    //categoryXField:"m",
+/*                    gridIntervals: [
+                        {timeUnit: "month", count: 1}
+                    ],*/
+
+                    baseInterval: {timeUnit: "month", count: 1},
+
                     renderer: am5xy.AxisRendererX.new(root, {}),
                     tooltip: am5.Tooltip.new(root, {})
                 })
             );
+            //xAxis.get("dateFormats")["month"] = "M";
+
             var legend = chart.children.push(
                 am5.Legend.new(root, {
                     //centerX: am5.p50,
                     x: 0,
                     y: am5.percent(95),
-                    height: 50,
-                    nameField: "categoryX"
+                    height: 100,
+                    paddingTop: 100,
+                    nameField: "valueX"
 
                 })
             );
 
-            /*// Make series change state when legend item is hovered
-                        legend.itemContainers.template.states.create("hover", {});
+            // Make series change state when legend item is hovered
+            legend.itemContainers.template.states.create("hover", {});
 
-                        legend.itemContainers.template.events.on("pointerover", function(e) {
-                            e.target.dataItem.dataContext.hover();
-                        });
-                        legend.itemContainers.template.events.on("pointerout", function(e) {
-                            e.target.dataItem.dataContext.unhover();
-                        });*/
+            legend.itemContainers.template.events.on("pointerover", function (e) {
+                e.target.dataItem.dataContext.hover();
+            });
+            legend.itemContainers.template.events.on("pointerout", function (e) {
+                e.target.dataItem.dataContext.unhover();
+            });
 
-            function createAxisAndSeries(startValue, opposite, bullet, fieldName) {
+            function createAxisAndSeries(opposite, bullet, fieldName, data) {
                 let yRenderer = am5xy.AxisRendererY.new(root, {
                     opposite: opposite
                 });
@@ -1128,7 +1145,6 @@ export default {
                     })
                 );
 
-
                 if (chart.yAxes.indexOf(yAxis) > 0) {
                     yAxis.set("syncWithAxis", chart.yAxes.getIndex(0));
                 }
@@ -1137,33 +1153,73 @@ export default {
                 // https://www.amcharts.com/docs/v5/charts/xy-chart/series/
                 let series = chart.series.push(
                     am5xy.LineSeries.new(root, {
+                        calculateAggregates: true,
                         xAxis: xAxis,
                         name: fieldName,
                         yAxis: yAxis,
-                        valueYField: "value",
-                        valueXField: "date",
+                        valueYField: fieldName,
+                        //categoryXField: "m",
+                        valueXField: "m",
                         tooltip: am5.Tooltip.new(root, {
                             pointerOrientation: "horizontal",
                             labelText: "{valueY}"
                         })
                     })
                 );
+                series.data.processor = am5.DataProcessor.new(root, {
+                    dateFormat: "M",
+                    dateFields: ["m"]
+                });
 
+                if(fieldName==='column1')
+                series.bullets.push(function () {
+                    return am5.Bullet.new(root, {
+                        sprite: am5.Label.new(root, {
+                            //centerY: am5.percent(0),
+                            text: "{valueY} млн. $",
+                            populateText: true,
+                            centerX: am5.percent(80),
+                            centerY: am5.percent(100),
+                            //centerX: 0
+                        })
+                    });
+                }); else
+                    series.bullets.push(function () {
+                        return am5.Bullet.new(root, {
+
+                            sprite: am5.Label.new(root, {
+                                centerY: 0,
+                                text: "{valueY} млн. $",
+                                populateText: true,
+                                centerX: 0
+                            })
+                        });
+                    });
 
                 series.bullets.push(function () {
                     return am5.Bullet.new(root, {
                         sprite: am5.Circle.new(root, {
-                            strokeWidth: 3,
+                            strokeWidth: 10,
                             stroke: series.get("stroke"),
                             radius: 5,
                             fill: root.interfaceColors.get("background")
                         })
+
                     });
                 });
 
-                //series.fills.template.setAll({ fillOpacity: 0.2, visible: true });
-                series.strokes.template.setAll({strokeWidth: 1});
 
+
+                yAxis.set("tooltip", am5.Tooltip.new(root, {
+                    themeTags: ["axis"]
+                }));
+
+
+
+
+                //series.fills.template.setAll({ fillOpacity: 0.2, visible: true });
+                series.strokes.template.setAll({strokeWidth: 10});
+                ///series.get("tooltip").label.set("text", "{valueX}: {valueY}")
                 yRenderer.grid.template.set("strokeOpacity", 0.05);
                 yRenderer.labels.template.set("fill", series.get("fill"));
                 yRenderer.setAll({
@@ -1174,59 +1230,609 @@ export default {
 
                 // Set up data processor to parse string dates
                 // https://www.amcharts.com/docs/v5/concepts/data/#Pre_processing_data
-                series.data.processor = am5.DataProcessor.new(root, {
-                    dateFormat: "yyyy-MM-dd",
-                    dateFields: ["date"]
-                });
 
-                series.data.setAll(generateChartData(startValue));
+
+                series.data.setAll(data);
+
+
+
+                //series.data.setAll(generateChartData(startValue));
                 legend.data.push(series);
             }
+            xAxis.set("tooltip", am5.Tooltip.new(root, {
+                themeTags: ["axis"]
+            }));
+
+/*
+            chart.set("cursor", am5xy.XYCursor.new(root, {
+                behavior: "zoomXY",
+                xAxis: xAxis
+            }));
+
+            xAxis.set("tooltip", am5.Tooltip.new(root, {
+                themeTags: ["axis"]
+            }));*/
 
 // Add cursor
 // https://www.amcharts.com/docs/v5/charts/xy-chart/cursor/
-            let cursor = chart.set("cursor", am5xy.XYCursor.new(root, {
-                xAxis: xAxis,
-                behavior: "none"
-            }));
-            cursor.lineY.set("visible", false);
+                        let cursor = chart.set("cursor", am5xy.XYCursor.new(root, {
+                            xAxis: xAxis,
+                            behavior: "none"
+                        }));
+                        cursor.lineY.set("visible", false);
 
 // add scrollbar
             /*            chart.set("scrollbarX", am5.Scrollbar.new(root, {
                             orientation: "horizontal"
                         }));*/
+            await am5.net.load("/api/v1/stat?name=oyimex&rejim=ЭК").then(function (result) {
+                // This gets executed when data finishes loading
+                // ... do something
+                const m = am5.JSONParser.parse(result.response);
+                //const m = JSON.parse(result.response);
+                //data = m.data;
+                ///console.log(m.data)
+                const data = JSON.parse(JSON.stringify(m.data));
+                //data.sort((a, b) => (a.val < b.val) ? -1 : 1)
+                createAxisAndSeries(false, "triangle", "column1", data);
+                createAxisAndSeries(true, "rectangle", "column2", data);
+                xAxis.data.setAll(data);
 
-            createAxisAndSeries(100, false, "triangle", "Import");
-            createAxisAndSeries(1000, true, "rectangle", "Export");
+            }).catch(function (result) {
+                // This gets executed if there was an error loading URL
+                // ... handle error
+                console.log("Error loading " + result);
+            });
+
+
+
+
+
             //createAxisAndSeries(8000, true);
 
 // Make stuff animate on load
 // https://www.amcharts.com/docs/v5/concepts/animations/
             chart.appear(600, 100);
 
-// Generates random data, quite different range
-            function generateChartData(value) {
-                let data = [];
-                let firstDate = new Date();
-                firstDate.setDate(firstDate.getDate() - 100);
-                firstDate.setHours(0, 0, 0, 0);
 
-                for (var i = 0; i < 100; i++) {
-                    let newDate = new Date(firstDate);
-                    newDate.setDate(newDate.getDate() + i);
+        },
+        async columnChart4() {
+            let root = this.route;
+            root.setThemes([
+                am5themes_Animated.new(root)
+            ]);
+            root.container.children.clear();
 
-                    value += Math.round(
-                        ((Math.random() < 0.5 ? 1 : -1) * Math.random() * value) / 20
-                    );
+            let chart = root.container.children.push(
+                am5xy.XYChart.new(root, {
+                    panX: false,
+                    panY: false,
+                    wheelX: "none",
+                    wheelY: "none",
+                    layout: root.verticalLayout,
+                })
+            );
 
-                    data.push({
-                        date: newDate,
-                        value: value
-                    });
-                }
-                return data;
+            let yRenderer = am5xy.AxisRendererY.new(root, {minGridDistance: 10});
+
+            let yAxis = chart.yAxes.push(
+                am5xy.CategoryAxis.new(root, {
+                    maxDeviation: 0,
+                    categoryField: "country",
+                    renderer: yRenderer
+                })
+            );
+            yAxis.get("renderer").grid.template.setAll({visible: false});
+
+            let xAxis = chart.xAxes.push(
+                am5xy.ValueAxis.new(root, {
+                    maxDeviation: 0,
+                    min: 0,
+                    renderer: am5xy.AxisRendererX.new(root, {})
+                })
+            );
+            xAxis.get("renderer").grid.template.setAll({visible: false});
+            xAxis.get("renderer").labels.template.setup = function (target) {
+                //target.set("fill", "#ab0c0c");
+                target.set("visible", false);
+            }
+// Create series
+// https://www.amcharts.com/docs/v5/charts/xy-chart/series/
+            let series = chart.series.push(
+                am5xy.ColumnSeries.new(root, {
+                    name: "Series 1",
+                    xAxis: xAxis,
+                    yAxis: yAxis,
+                    valueXField: "val",
+                    sequencedInterpolation: true,
+                    categoryYField: "country"
+                })
+            );
+
+            series.bullets.push(function () {
+                return am5.Bullet.new(root, {
+                    locationX: 1,
+                    locationY: 0.5,
+                    sprite: am5.Label.new(root, {
+                        centerY: am5.p50,
+                        text: "{valueX} млн. $",
+                        populateText: true,
+                        centerX: 0
+                    })
+                });
+            });
+            let columnTemplate = series.columns.template;
+
+            columnTemplate.setAll({
+                draggable: false,
+                cursorOverStyle: "pointer",
+                //tooltipText: "drag to rearrange",
+                cornerRadiusBR: 10,
+                cornerRadiusTR: 10
+            });
+            columnTemplate.adapters.add("fill", (fill, target) => {
+                return "#39ae69";
+            });
+
+            columnTemplate.adapters.add("stroke", (stroke, target) => {
+                return chart.get("colors").getIndex(3);
+            });
+
+            /*           columnTemplate.events.on("dragstop", () => {
+                           sortCategoryAxis();
+                       });*/
+
+
+// Set data
+            let data;
+
+            await am5.net.load("/api/v1/stat?name=davlatimex&rejim=" + this.rejim + "&month=" + this.month + "&year=" + this.year).then(function (result) {
+                // This gets executed when data finishes loading
+                // ... do something
+                const m = am5.JSONParser.parse(result.response);
+                //const m = JSON.parse(result.response);
+                //data = m.data;
+                ///console.log(m.data)
+                data = JSON.parse(JSON.stringify(m.data));
+                data.sort((a, b) => (a.val < b.val) ? -1 : 1)
+                yAxis.data.setAll(data);
+                series.data.setAll(data);
+
+            }).catch(function (result) {
+                // This gets executed if there was an error loading URL
+                // ... handle error
+                console.log("Error loading " + result);
+            });
+            /*
+
+                        yAxis.data.setAll(data);
+                        series.data.setAll(data);*/
+
+
+// Make stuff animate on load
+// https://www.amcharts.com/docs/v5/concepts/animations/
+            series.appear(800);
+            chart.appear(800, 100);
+
+
+        },
+        async columnChart4_1() {
+            let root = this.route2;
+            const _this = this;
+            root.setThemes([
+                am5themes_Animated.new(root)
+            ]);
+            root.container.children.clear();
+            let chart = root.container.children.push(
+                am5xy.XYChart.new(root, {
+                    panX: false,
+                    panY: false,
+                    //wheelX: "panX",
+                    //wheelY: "zoomX",
+                    arrangeTooltips: false
+                })
+            );
+
+// Use only absolute numbers
+            chart.getNumberFormatter().set("numberFormat", "#.#s");
+
+// Add legend
+// https://www.amcharts.com/docs/v5/charts/xy-chart/legend-xy-series/
+            /*            let legend = chart.children.push(
+                            am5.Legend.new(root, {
+                                centerX: am5.p50,
+                                x: am5.p50
+                            })
+                        );*/
+
+// Data
+            let data;
+
+
+// Create axes
+// https://www.amcharts.com/docs/v5/charts/xy-chart/axes/
+            let yAxis = chart.yAxes.push(
+                am5xy.CategoryAxis.new(root, {
+                    categoryField: "country",
+                    renderer: am5xy.AxisRendererY.new(root, {
+                        inversed: false,
+                        cellStartLocation: 0.1,
+                        cellEndLocation: 0.9,
+
+                    })
+                })
+            );
+            yAxis.get("renderer").grid.template.setAll({visible: false});
+
+            yAxis.get("renderer").labels.template.setup = function (target) {
+                //target.set("fill", "#ab0c0c");
+                target.set("visible", false);
+            }
+            //yAxis.data.setAll(data);
+            let xAxis = chart.xAxes.push(
+                am5xy.ValueAxis.new(root, {
+                    renderer: am5xy.AxisRendererX.new(root, {})
+                })
+            );
+
+            xAxis.get("renderer").grid.template.set("visible", false)
+            //xAxis.get("renderer").grid.template.set("minGridDistance",200)
+
+            /*xAxis.get("renderer").grid.template.setAll({
+                visible: true,
+                //fill:"#a81515",
+                //stroke:"#a81515",
+                //width:am5.percent(10),
+                //location:1
+            });*/
+            xAxis.get("renderer").labels.template.setup = function (target) {
+                //target.set("fill", "#b00c0c");
+                target.set("visible", false);
+                //target.set("fill", "red");
             }
 
+// Add series
+// https://www.amcharts.com/docs/v5/charts/xy-chart/series/
+            async function createSeries(field, labelCenterX, pointerOrientation, rangeValue) {
+                let series = chart.series.push(
+                    am5xy.ColumnSeries.new(root, {
+                        xAxis: xAxis,
+                        yAxis: yAxis,
+                        valueXField: field,
+                        categoryYField: "country",
+                        sequencedInterpolation: true,
+                        clustered: false,
+                        maskBullets: false,
+                        tooltip: am5.Tooltip.new(root, {
+                            pointerOrientation: pointerOrientation,
+                            labelText: "{categoryY}: {valueX}"
+                        })
+                    })
+                );
+
+                series.columns.template.setAll({
+                    height: am5.p100,
+                    cornerRadiusBR: 10,
+                    cornerRadiusTR: 10
+                });
+
+                series.columns.template.adapters.add("fill", function (fill, target) {
+                    if (target.dataItem.get("valueX") < 0) {
+                        return "#9ccbaf";
+                    } else {
+                        return "#39ae69";
+                    }
+                });
+                /*
+                series.columns.template.adapter.add("fill", function(fill, target) {
+                    if (target.dataItem && (target.dataItem.valueY < 0)) {
+                        return am4core.color("#a55");
+                    }
+                    else {
+                        return fill;
+                    }
+                });*/
+
+
+                //series.columns.template.
+                /*
+                                series.bullets.push(function() {
+                                    return am5.Bullet.new(root, {
+                                        locationX: 1,
+                                        locationY: 0.5,
+                                        sprite: am5.Circle.new(root, {
+                                            radius: 15,
+                                            centerY: am5.p50,
+                                            centerX: labelCenterX,
+                                            fill: am5.Color.lighten(series.get("fill"), 0.7)
+                                        })
+                                    });
+                                });
+                */
+
+
+                series.bullets.push(function (root, columnSeries, item) {
+                    if (item.dataContext.diff < 0)
+                        return am5.Bullet.new(root, {
+                            locationX: 1,
+                            locationY: 0.5,
+                            sprite: am5.Label.new(root, {
+                                centerY: am5.p50,
+                                text: "-{valueX}%",
+                                populateText: true,
+                                centerX: 60,
+                                dx: -0
+                            })
+                        });
+                    else return am5.Bullet.new(root, {
+                        locationX: 1,
+                        locationY: 0.5,
+                        sprite: am5.Label.new(root, {
+                            centerY: am5.p50,
+                            text: "{valueX}%",
+                            populateText: true,
+                            //centerX: labelCenterX,
+                        })
+                    });
+                });
+
+
+                await am5.net.load("/api/v1/stat?name=davlatimex&rejim=" + _this.rejim + "&month=" + _this.month + "&year=" + _this.year).then(function (result) {
+                    // This gets executed when data finishes loading
+                    // ... do something
+                    const m = am5.JSONParser.parse(result.response);
+                    //const m = JSON.parse(result.response);
+                    //data = m.data;
+                    //console.log(m.data)
+                    data = JSON.parse(JSON.stringify(m.data));
+                    data.sort((a, b) => (a.val < b.val) ? -1 : 1)
+                    yAxis.data.setAll(data);
+                    series.data.setAll(data);
+
+                }).catch(function (result) {
+                    // This gets executed if there was an error loading URL
+                    // ... handle error
+                    console.log("Error loading " + result);
+                });
+
+                ///series.data.setAll(data);
+                series.appear();
+
+                /*                let rangeDataItem = xAxis.makeDataItem({
+                                    value: rangeValue
+                                });*/
+                /*                xAxis.createAxisRange(rangeDataItem);
+                                rangeDataItem.get("grid").setAll({
+                                    strokeOpacity: 1,
+                                    stroke: series.get("stroke")
+                                });*/
+
+                /* let label = rangeDataItem.get("label");
+                 label.setAll({
+                     text: field.toUpperCase(),
+                     fontSize: "1.1em",
+                     fill: series.get("stroke"),
+                     paddingTop: 10,
+                     isMeasured: false,
+                     centerX: labelCenterX
+                 });
+                 label.adapters.add("dy", function() {
+                     return -chart.plotContainer.height();
+                 });*/
+
+                return series;
+            }
+
+            createSeries("diff", 0, "right", -3);
+            //createSeries("right", 0, "left", 4);
+
+
+// Add cursor
+// https://www.amcharts.com/docs/v5/charts/xy-chart/cursor/
+
+// Make stuff animate on load
+// https://www.amcharts.com/docs/v5/concepts/animations/
+            chart.appear(1000, 100);
+
+
+        },
+        async columnChart5() {
+            let root = this.route;
+            root.setThemes([
+                am5themes_Animated.new(root)
+            ]);
+            root.container.children.clear();
+
+            // Create chart
+// https://www.amcharts.com/docs/v5/charts/xy-chart/
+            var chart = root.container.children.push(am5xy.XYChart.new(root, {
+                panX: false,
+                panY: false,
+                //wheelX: "panX",
+                //wheelY: "zoomX",
+                layout: root.verticalLayout
+            }));
+
+
+// Add legend
+// https://www.amcharts.com/docs/v5/charts/xy-chart/legend-xy-series/
+            legend = chart.children.push(am5.Legend.new(root, {
+                centerX: am5.p50,
+                x: am5.p50
+            }))
+
+
+// Data
+            let data = [{
+                product: "2017",
+                oldyear: 23.5,
+                currentyear: 18.1,
+                icon: "https://assets.codepen.io/t-160/icon_social_twitter.svg",
+                diff: 18
+            }, {
+                product: "2018",
+                oldyear: 26.2,
+                currentyear: 22.8,
+                icon: "https://assets.codepen.io/t-160/icon_social_twitter.svg",
+                diff: -23
+            }, {
+                product: "2019",
+                oldyear: 30.1,
+                currentyear: 23.9,
+                icon: "https://assets.codepen.io/t-160/icon_social_twitter.svg",
+                diff: 25
+            }, {
+                product: "2020",
+                oldyear: 29.5,
+                currentyear: 25.1,
+                icon: "https://assets.codepen.io/t-160/icon_social_twitter.svg",
+                diff: 6
+            }, {
+                product: "2021",
+                oldyear: 24.6,
+                currentyear: 25,
+                icon: "https://assets.codepen.io/t-160/icon_social_twitter.svg",
+                diff: -12
+            }];
+
+
+// Create axes
+// https://www.amcharts.com/docs/v5/charts/xy-chart/axes/
+            const yAxis = chart.yAxes.push(am5xy.CategoryAxis.new(root, {
+                categoryField: "product",
+                renderer: am5xy.AxisRendererY.new(root, {
+                    inversed: true,
+                    cellStartLocation: 0.1,
+                    cellEndLocation: 0.9,
+                    paddingRight: 100
+                }),
+
+                bullet: function (root, axis, dataItem) {
+                    let bullet = am5xy.AxisBullet.new(root, {
+                        location: 0,
+                        paddingRight: 20,
+                        y: 1000,
+                        width: 100,
+                        sprite: am5.Picture.new(root, {
+                            width: 24,
+                            height: 24,
+                            centerY: am5.p100,
+                            centerX: am5.p100,
+                            src: dataItem.dataContext.icon
+                        })
+                    });
+                    return bullet
+                }
+            }));
+
+            yAxis.get("renderer").labels.template.setAll({
+                paddingRight: 100,
+            });
+
+
+            /*            yAxis.get("renderer").labels.template.adapters.add("html", function(html, target) {
+                            return "sdfsf";
+                        });*/
+            /*
+                        yAxis.get("renderer").labels.template.setup = function (target) {
+                            //target.set("fill", "#b00c0c");
+                            target.set("label","<div>sada</div>")
+                            //target.set("fill", "red");
+                        }
+            */
+
+
+            yAxis.data.setAll(data);
+
+
+            let xAxis = chart.xAxes.push(am5xy.ValueAxis.new(root, {
+                renderer: am5xy.AxisRendererX.new(root, {}),
+                min: 0
+            }));
+
+
+// Add series
+// https://www.amcharts.com/docs/v5/charts/xy-chart/series/
+            function createSeries(field, name) {
+                let series = chart.series.push(am5xy.ColumnSeries.new(root, {
+                    name: name,
+                    xAxis: xAxis,
+                    yAxis: yAxis,
+                    valueXField: field,
+                    valueYField: "diff",
+                    categoryYField: "product",
+                    sequencedInterpolation: true,
+                    tooltip: am5.Tooltip.new(root, {
+                        pointerOrientation: "horizontal",
+                        labelText: "[bold]{name}[/]\n{categoryY}: {valueX}"
+                    })
+                }));
+
+                series.columns.template.setAll({
+                    height: am5.percent(80),
+                    width: am5.p50,
+                });
+
+
+                series.bullets.push(function () {
+                    return am5.Bullet.new(root, {
+                        locationX: 1,
+                        locationY: 0.5,
+                        sprite: am5.Label.new(root, {
+                            centerY: am5.p50,
+                            text: "{valueX}",
+                            populateText: true
+                        })
+                    });
+                });
+
+
+                series.bullets.push(function () {
+                    return am5.Bullet.new(root, {
+                        locationX: 1,
+                        locationY: 0.5,
+                        sprite: am5.Label.new(root, {
+                            centerX: am5.p100,
+                            centerY: am5.p50,
+                            text: "{name}",
+                            fill: am5.color(0xffffff),
+                            populateText: true
+                        })
+                    });
+                });
+
+                series.data.setAll(data);
+                series.appear();
+
+                return series;
+            }
+
+            createSeries("oldyear", "import");
+            createSeries("currentyear", "export");
+
+
+// Add legend
+// https://www.amcharts.com/docs/v5/charts/xy-chart/legend-xy-series/
+            let legend = chart.children.push(am5.Legend.new(root, {
+                centerX: am5.p50,
+                x: am5.p50
+            }));
+
+            legend.data.setAll(chart.series.values);
+
+
+// Add cursor
+// https://www.amcharts.com/docs/v5/charts/xy-chart/cursor/
+            /* var cursor = chart.set("cursor", am5xy.XYCursor.new(root, {
+                 behavior: "zoomY"
+             }));
+             cursor.lineY.set("forceHidden", true);
+             cursor.lineX.set("forceHidden", true);*/
+
+
+// Make stuff animate on load
+// https://www.amcharts.com/docs/v5/concepts/animations/
+            chart.appear(1000, 100);
 
         }
     }
@@ -3104,23 +3710,6 @@ function clusteredColumn(chartId, data = null) {
 
 }
 
-$(document).ready(function () {
-
-    var height = $("#carouselExampleDark").outerHeight();
-    var width = $("#carouselExampleDark").outerWidth() / 2;
-    $(".carousel-item img").css("min-height", height + "px");
-    $(".carousel-item img").css("max-width", width + "px");
-
-
-    jQuery('.slider2').slick({
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        infinite: true,
-        autoplay: false,
-        autoplaySpeed: 4000,
-    });
-
-});
 
 </script>
 

@@ -86,10 +86,10 @@
 </template>
 
 <script>
-import api from "./../../../src/services/apiService";
+import api from "./../../../src/services/adminApi";
 import {extend, ValidationProvider, ValidationObserver} from 'vee-validate';
 import * as rules from 'vee-validate/dist/rules';
-import messages from '../../../locales/uz.json';
+import messages from '../../../locales/oz.json';
 import Editor from '@tinymce/tinymce-vue';
 
 Object.keys(rules).forEach(rule => {

@@ -20,6 +20,13 @@
                 cols="12"
                 md="12"
             >
+                <v-col class="m-4 " cols="12" >
+                    <v-btn v-for="language in languages" @click="lang=language.value"
+                           :color="lang===language.value?'primary':''" :key="language.value">{{ language.text }}
+                    </v-btn>
+                </v-col>
+
+
                 <v-flex xs12 sm12 md12 lg12>
                     <v-card class="m-4">
 
@@ -31,11 +38,22 @@
                                         <v-row>
                                             <v-col cols="6" sm="6" md="6">
                                                 <v-row>
-                                                    <v-col cols="12" sm="12" md="12">
+                                                    <v-col cols="12" sm="12" md="12" v-show="lang==='uz'">
                                                         <ValidationProvider name="Сарлавха" rules="required|min:3"
                                                                             v-slot="{ errors }">
-                                                            <v-text-field label="Сарлавха"
+                                                            <v-text-field :label="'Сарлавха - '+ getLang()['text']"
                                                                           v-model="editedItem.title"
+                                                                          name="title"></v-text-field>
+                                                            <span class="error--text">{{ errors[0] }}</span>
+                                                        </ValidationProvider>
+
+                                                    </v-col>
+                                                    <v-col cols="12" sm="12" md="12"  :key="'title'+langKey"
+                                                           v-for="(langItem,langKey) in langtext" v-show="lang===langKey" >
+                                                        <ValidationProvider name="Сарлавха" rules="required|min:3"
+                                                                            v-slot="{ errors }">
+                                                            <v-text-field :label="'Сарлавха - '+ getLang()['text']"
+                                                                          v-model="langtext[lang].title"
                                                                           name="title"></v-text-field>
                                                             <span class="error--text">{{ errors[0] }}</span>
                                                         </ValidationProvider>
@@ -64,13 +82,17 @@
                                                     </v-col>
                                                 </v-row>
                                                 <v-row>
-                                                    <v-col>
+                                                    <v-col cols="6">
                                                         <v-switch
                                                             v-model="editedItem.home"
                                                             inset
                                                             name="home"
                                                             :label="editedItem.home ? `Бош сахифада чиқарилсин` : `Бош сахифада чиқарилмасин`">
                                                         </v-switch>
+                                                    </v-col>
+
+                                                    <v-col cols="6">
+                                                        <v-autocomplete clearable persistent-hint label="Бошқармани белгиланг" :items="boshqarmalar" item-text="title" item-value="id" v-model="editedItem.boshqarma"></v-autocomplete>
                                                     </v-col>
                                                 </v-row>
                                                 <v-row>
@@ -102,10 +124,10 @@
                                                 </div>
                                             </v-col>
 
-                                            <v-col cols="12" sm="12" md="12">
+                                            <v-col cols="12" sm="12" md="12" v-show="lang==='uz'">
                                                 <ValidationProvider name="Қисқача мазмуни" rules="required|min:3"
                                                                     v-slot="{ errors }">
-                                                    <label>Қисқача</label>
+                                                    <label>Қисқача - {{ languages[0]['text'] }}</label>
                                                     <editor ref="tinymce_editor"
                                                             api-key="08ldvnqyts0iiyqna15dlike72o7nw96ue2f7j0og0ydd4f7"
                                                             v-model="editedItem.short"
@@ -135,13 +157,81 @@
                                                     <span class="error--text">{{ errors[0] }}</span>
                                                 </ValidationProvider>
                                             </v-col>
-                                            <v-col cols="12" sm="12" md="12">
+                                            <v-col cols="12" sm="12" md="12" :key="langKey"
+                                                   v-for="(langItem,langKey) in langtext" v-show="lang===langKey">
+                                                <ValidationProvider name="Қисқача мазмуни"
+                                                                    v-slot="{ errors }">
+                                                    <label>Қисқача - {{ getLang(langKey)['text'] }}</label>
+                                                    <editor ref="tinymce_editor"
+                                                            api-key="08ldvnqyts0iiyqna15dlike72o7nw96ue2f7j0og0ydd4f7"
+                                                            v-model="langtext[langKey].short"
+                                                            :init="{
+                                                                selector: 'textarea',
+                                                                height: 500,
+                                                                plugins: 'print preview paste importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists wordcount imagetools textpattern noneditable help charmap quickbars emoticons',
+                                                                imagetools_cors_hosts: ['picsum.photos'],
+                                                                menubar: 'file edit view insert format tools table help',
+                                                                toolbar: 'undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media template link anchor codesample | ltr rtl',
+                                                                toolbar_sticky: true,
+                                                                autosave_ask_before_unload: true,
+                                                                autosave_interval: '30s',
+                                                                autosave_prefix: '{path}{query}-{id}-',
+                                                                autosave_restore_when_empty: false,
+                                                                autosave_retention: '2m',
+                                                                image_advtab: true,
+                                                                importcss_append: true,
+                                                                image_caption: true,
+                                                                quickbars_selection_toolbar: 'bold italic | quicklink h2 h3 blockquote quickimage quicktable',
+                                                                noneditable_noneditable_class: 'mceNonEditable',
+                                                                toolbar_mode: 'sliding',
+                                                                contextmenu: 'link image imagetools table',
+                                                                content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }',
+                                                                file_browser_callback:file_browser_callback,
+                                                            }"/>
+                                                    <span class="error--text">{{ errors[0] }}</span>
+                                                </ValidationProvider>
+                                            </v-col>
+                                            <v-col cols="12" sm="12" md="12" v-show="lang==='uz'">
                                                 <ValidationProvider name="Сахифа тексти" rules="required|min:3"
                                                                     v-slot="{ errors }">
-                                                    <label>Тўлиқ тексти</label>
+                                                    <label>Тўлиқ тексти - {{ languages[0]['text'] }}</label>
                                                     <editor ref="tinymce_editor"
                                                             api-key="08ldvnqyts0iiyqna15dlike72o7nw96ue2f7j0og0ydd4f7"
                                                             v-model="editedItem.description"
+                                                            :init="{
+                                                                selector: 'textarea',
+                                                                height: 500,
+                                                                plugins: 'print preview paste importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists wordcount imagetools textpattern noneditable help charmap quickbars emoticons',
+                                                                imagetools_cors_hosts: ['picsum.photos'],
+                                                                menubar: 'file edit view insert format tools table help',
+                                                                toolbar: 'undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media template link anchor codesample | ltr rtl',
+                                                                toolbar_sticky: true,
+                                                                autosave_ask_before_unload: true,
+                                                                autosave_interval: '30s',
+                                                                autosave_prefix: '{path}{query}-{id}-',
+                                                                autosave_restore_when_empty: false,
+                                                                autosave_retention: '2m',
+                                                                image_advtab: true,
+                                                                importcss_append: true,
+                                                                image_caption: true,
+                                                                quickbars_selection_toolbar: 'bold italic | quicklink h2 h3 blockquote quickimage quicktable',
+                                                                noneditable_noneditable_class: 'mceNonEditable',
+                                                                toolbar_mode: 'sliding',
+                                                                contextmenu: 'link image imagetools table',
+                                                                content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }',
+                                                                file_browser_callback:file_browser_callback,
+                                                            }"/>
+                                                    <span class="error--text">{{ errors[0] }}</span>
+                                                </ValidationProvider>
+                                            </v-col>
+                                            <v-col cols="12" sm="12" md="12" :key="'description' + langKey"
+                                                   v-for="(langItem,langKey) in langtext" v-show="lang===langKey">
+                                                <ValidationProvider name="Сахифа тексти"
+                                                                    v-slot="{ errors }">
+                                                    <label>Тўлиқ тексти - {{ getLang(langKey)['text'] }}</label>
+                                                    <editor ref="tinymce_editor"
+                                                            api-key="08ldvnqyts0iiyqna15dlike72o7nw96ue2f7j0og0ydd4f7"
+                                                            v-model="langtext[langKey].description"
                                                             :init="{
                                                                 selector: 'textarea',
                                                                 height: 500,
@@ -188,10 +278,10 @@
 </template>
 
 <script>
-import api from "./../../../src/services/apiService";
+import api from "./../../../src/services/adminApi";
 import {extend, ValidationProvider, ValidationObserver} from 'vee-validate';
 import * as rules from 'vee-validate/dist/rules';
-import messages from '../../../locales/uz.json';
+import messages from '../../../locales/oz.json';
 import Editor from '@tinymce/tinymce-vue';
 
 Object.keys(rules).forEach(rule => {
@@ -205,6 +295,30 @@ Object.keys(rules).forEach(rule => {
 export default {
     name: "NewsCreate",
     data: () => ({
+            lang: 'uz',
+            langtext: {
+                oz: {
+                    title: null,
+                    short: "",
+                    description: null,
+                },
+                ru: {
+                    title: null,
+                    short: "",
+                    description: null,
+                },
+                en: {
+                    title: null,
+                    short: "",
+                    description: null,
+                }
+            },
+            languages: [
+                {text: 'Ўзбекча', value: 'uz'},
+                {text: 'Русча', value: 'ru'},
+                {text: 'Инглизча', value: 'en'},
+                {text: 'Ozbekcha', value: 'oz'}
+            ],
             preview: '',
             allnews: [],
             categories: [],
@@ -223,6 +337,7 @@ export default {
                     {text: 'Янгиликлар', to: '/admin/news', exact: true},
                     {text: 'Янгилик яратиш', to: '/admin/news/create', exact: true},
                 ],
+            boshqarmalar:[],//[{value:"1700",text:"'Тошкент-АЭРО' ИБК"},{value:"1703",text:"Андижон вилояти божхона бошқармаси"},{value:"1706",text:"Бухоро вилояти божхона бошқармаси"},{value:"1708",text:"Жиззах вилояти божхона бошқармаси"},{value:"1710",text:"Қашқадарё вилояти божхона бошқармаси"},{value:"1712",text:"Навоий вилояти божхона бошқармаси"},{value:"1714",text:"Наманган вилояти божхона бошқармаси"},{value:"1718",text:"Самарқанд вилояти божхона бошқармаси"},{value:"1722",text:"Сурхондарё вилояти божхона бошқармаси"},{value:"1724",text:"Сирдарё вилояти божхона бошқармаси"},{value:"1726",text:"Тошкент шахар божхона бошқармаси"},{value:"1727",text:"Тошкент вилояти божхона бошқармаси"},{value:"1730",text:"Фарғона вилояти божхона бошқармаси"},{value:"1733",text:"Хоразм вилояти божхона бошқармаси"},{value:"1735",text:"Қорақалпоғистон Республикаси божхона бошқармаси"}]
         }
     ),
 
@@ -237,7 +352,25 @@ export default {
     },
 
     methods: {
+
+        getLang(code = null) {
+            if (code) {
+                let language = this.languages.filter((language) => {
+                    if (language.value === code) return language;
+                })
+                if (language) return language[0]
+                return null;
+
+            } else {
+                let language = this.languages.filter((language) => {
+                    if (language.value === this.lang) return language;
+                })
+                if (language) return language[0]
+                return null;
+            }
+        },
         initialize() {
+            const _this=this;
             api.readCategoriesForSelect().then((response) => {
                 this.categories = response.data;
             }).catch((error) => {
@@ -245,6 +378,11 @@ export default {
                 this.$toast.error('Категорияларни олишда хатолик юз берди!');
 
             });
+            api.readOrgs().then((response) => {
+                _this.boshqarmalar = response.data.data;
+            }).catch((error) => {
+                console.log(error)
+            })
 
         },
         previewImage: function (input) {
@@ -280,6 +418,7 @@ export default {
                         else
                             data.append(key, this.editedItem[key]);
                     }
+                    data.append("translates", JSON.stringify(this.langtext));
                     api.addNews(data).then((response) => {
                         this.$toast.success(`Маълумотларни омадли тарзда юкланди!`);
                         this.close();

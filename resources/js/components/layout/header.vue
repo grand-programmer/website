@@ -366,7 +366,7 @@ export default {
     methods: {
         initialize() {
             api.readMenusFront().then((response) => {
-                this.links = response.data;
+                this.links = response.data.data;
                 this.$store.dispatch('SET_MENU', this.links);
             }).catch((error) => {
                 console.log(error)

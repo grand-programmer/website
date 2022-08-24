@@ -18,6 +18,9 @@
                 cols="12"
                 md="12"
             >
+                <v-btn v-for="language in languages" @click="lang=language.value"
+                       :color="lang===language.value?'primary':''" :key="language.value">{{ language.text }}
+                </v-btn>
                 <v-flex xs12 sm12 md12 lg12>
                     <v-card>
                         <ValidationObserver v-slot="{ invalid }">
@@ -26,11 +29,22 @@
                                 <v-card-text>
                                     <v-container>
                                         <v-row>
-                                            <v-col cols="12" sm="12" md="12">
+                                            <v-col cols="12" sm="12" md="12" v-show="lang==='uz'">
                                                 <ValidationProvider name="Сарлавха" rules="required|min:3"
                                                                     v-slot="{ errors }">
                                                     <v-text-field label="Сарлавха"
                                                                   v-model="menu.title"
+                                                                  name="title"></v-text-field>
+                                                    <span class="error--text">{{ errors[0] }}</span>
+                                                </ValidationProvider>
+
+                                            </v-col>
+                                            <v-col cols="12" sm="12" md="12" :key="'title'+langKey"
+                                                            v-for="(langItem,langKey) in langtext" v-show="lang===langKey"  >
+                                                <ValidationProvider name="Сарлавха"
+                                                                    v-slot="{ errors }">
+                                                    <v-text-field :label="'Сарлавха - '+ getLang()['text']"
+                                                                  v-model="langtext[lang].title"
                                                                   name="title"></v-text-field>
                                                     <span class="error--text">{{ errors[0] }}</span>
                                                 </ValidationProvider>
@@ -125,10 +139,10 @@
 </template>
 
 <script>
-import api from "./../../../src/services/apiService";
+import api from "./../../../src/services/adminApi";
 import {extend, ValidationProvider, ValidationObserver} from 'vee-validate';
 import * as rules from 'vee-validate/dist/rules';
-import messages from '../../../locales/uz.json';
+import messages from '../../../locales/oz.json';
 import Editor from '@tinymce/tinymce-vue';
 
 Object.keys(rules).forEach(rule => {
@@ -151,6 +165,26 @@ export default {
                     {text: 'Менюни тахрирлаш', to: '#', exact: true, disabled: true},
                 ],
             menu: [],
+            lang: 'uz',
+            langtext: {
+                oz: {
+                    title: null,
+                },
+                ru: {
+                    title: null,
+                },
+                en: {
+                    title: null,
+                }
+
+
+            },
+            languages: [
+                {text: 'Ўзбекча', value: 'uz'},
+                {text: 'Русча', value: 'ru'},
+                {text: 'Инглизча', value: 'en'},
+                {text: 'Ozbekcha', value: 'oz'}
+            ],
             menus: [],
             pages: [],
             menuTypes: [
@@ -172,9 +206,33 @@ export default {
         this.initialize();
     },
     methods: {
+        getLang(code = null) {
+            if (code) {
+                let language = this.languages.filter((language) => {
+                    if (language.value === code) return language;
+                })
+                if (language) return language[0]
+                return null;
+
+            } else {
+                let language = this.languages.filter((language) => {
+                    if (language.value === this.lang) return language;
+                })
+                if (language) return language[0]
+                return null;
+            }
+        },
         initialize() {
+            const _this = this;
             api.readOneMenu(this.$route.params.id).then((response) => {
                 this.menu = response.data.data;
+
+                if (typeof _this.menu.translates !== 'undefined' && _this.menu.translates && _this.menu.translates.length>0 ) {
+                    _this.menu.translates.map(function(translate){
+                        _this.langtext[translate.language]=translate;
+                    })
+                }
+
             }).catch((error) => {
                 this.$toast.error(`Маълумотларни юклашда хатолик содир бўлди!`)
                 this.$router.replace("/admin/menu").catch(()=>{});
@@ -199,6 +257,7 @@ export default {
             const isValid = await this.$refs.menuForm.validate();
             if (isValid) {
                 this.menu.sort_number=parseInt(this.menu.sort_number);
+                this.menu.translates=this.langtext;
                 api.updateMenu(this.menu.id, this.menu).then((response) => {
                     this.$toast.success(`Маълумотларни омадли тарзда юкланди!`)
                 }).catch((error) => {

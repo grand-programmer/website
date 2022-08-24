@@ -11,25 +11,30 @@ use App\Http\Resources\NewsResource;
 
 class NewsController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $news=News::with('categories')->orderby('created_at','desc')->limit(6)->get()->transform(function($item){
+        $page=1;
+        $requestData = $request->only(['boshqarma', 'page']);
+        $news = News::with('categories');
+        if (isset($requestData['boshqarma'])) $news = $news->where('boshqarma', $requestData['boshqarma']);
+        if (isset($requestData['page'])) $page = $requestData['page'];
+        return NewsResource::collection($news->orderby('created_at', 'desc')->paginate(6, ['*'], 'page', $page));
+        /*->transform(function ($item) {
             return [
-                'id'=>$item->id,
-                'title'=>$item->title,
-                'categories'=>$item->categories,/*function() use ($item){
+                'id' => $item->id,
+                'title' => $item->title,
+                'categories' => $item->categories,/*function() use ($item){
                     return  [
                       $item->
                     ];
                 },*/
-                //'description'=>$item->description,
-                'image'=>$item->image,
-                'short'=>$item->short,
-                'slug'=>$item->slug,
-                'created_at'=>date("d.m.Y H:i",strtotime($item->created_at)),
-            ];
-        });
-        return $news;
+        //'description'=>$item->description,
+        /*'image' => $item->image,
+        'short' => $item->short,
+        'slug' => $item->slug,
+        'created_at' => date("d.m.Y", strtotime($item->created_at)),
+    ];
+});*/
     }
 
     /**
@@ -48,6 +53,7 @@ class NewsController extends Controller
                 'categories',
                 'image',
                 'home',
+                'boshqarma'
             );
 
             $validator = Validator::make($data, [
@@ -84,16 +90,20 @@ class NewsController extends Controller
      * Display the specified resource.
      *
      * @param \App\Models\News $news
-     * @return \Illuminate\Http\JsonResponse
+     * @return NewsResource
      */
     public function show(News $news)
     {
-        $categories = [];
-        if ($news->categories->isNotEmpty())
-            $categories = $news->categories->transform(function ($item) {
-                return $item->id;
-            })->toArray();
-        return response()->json(array_merge($news->with('categories')->where('id',$news->id)->get()[0]->toArray(), ['cats' => $categories]), 200);
+        /*        $categories = [];
+                if ($news->categories->isNotEmpty())
+                    $categories = $news->categories->transform(function ($item) {
+                        return $item->id;
+                    })->toArray();*/
+        $news->viewed = $news->viewed + 1;
+        $news->save();
+        return NewsResource::make($news->with('categories')->where('id', $news->id)->get()[0]);
+        //die();
+        //return response()->json(array_merge((NewsResource::collection($news->with('categories')->where('id', $news->id)->get()[0])), ['cats' => $categories]), 200);
     }
 
     /**
@@ -114,6 +124,7 @@ class NewsController extends Controller
                 'parent',
                 'cats',
                 'image',
+                'boshqarma'
             );
             $validator = Validator::make($data, [
                 'title' => 'required|min:3|max:255',
@@ -159,9 +170,40 @@ class NewsController extends Controller
     public function destroy(News $news)
     {
         $news->categories()->detach();
-        Storage::delete("public/uploads/".$news->image);
+        Storage::delete("public/uploads/" . $news->image);
         $news->delete();
         return response()->json([
             'success'], 200);
+    }
+
+    public function like(News $news, Request $request)
+    {
+
+        $appData = $request->only('like', 'discount');
+        if (isset($appData['like'])) {
+
+
+            $liked = json_decode($news->liked, true);
+            if ($appData['like'] === 1) {
+
+                if (isset($liked['like'])) $liked['like'] = $liked['like'] + 1; else $liked['like'] = 1;
+                if (isset($appData['discount'])) $liked['dislike'] = isset($liked['dislike']) ? $liked['dislike'] - 1 : 0;
+            }
+            if ($appData['like'] === 0) {
+                if (isset($liked['dislike'])) $liked['dislike'] = $liked['dislike'] + 1; else $liked['dislike'] = 1;
+                if (isset($appData['discount'])) $liked['like'] = isset($liked['like']) ? $liked['like'] - 1 : 0;
+            }
+            if (isset($liked['like']) && $liked['like'] < 0) $liked['like'] = 0;
+            if (isset($liked['dislike']) && $liked['dislike'] < 0) $liked['dislike'] = 0;
+            $news->liked = json_encode($liked);
+            $news->save();
+            return response()->json([
+                'success' => true], 200);
+
+        }
+
+
+        return response()->json([
+            'error' => 'Give your vote'], 200);
     }
 }

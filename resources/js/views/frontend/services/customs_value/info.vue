@@ -402,9 +402,15 @@
                                             <v-col cols="10">
                                                 <h4 class="active"> {{ appstatus.statusComment }}</h4>
                                                 <p> {{ new Date(appstatus.insTime).toLocaleString() }}</p>
-                                                <p style="margin: 10px 20px; line-height: 20px; color: orange" v-if="appstatus.status==='125' && app.general.status===125" >
-                                                    <template v-if="typeof appstatus.rolback.rollBackComment !='undefined'">{{ appstatus.rolback.rollBackComment }}</template>
-                                                    <template  v-if ="typeof appstatus.rolback.rollBackAppList[rkey] !='undefined' && typeof appstatus.rolback.rollBackAppList[rkey]!='undefined'" v-for="(rolback,rkey) in appstatus.rolback.rollBackAppList"><br> {{ rolback.rollbackName }} </template>
+<!--                                                <p style="margin: 10px 20px; line-height: 20px; color: orange" v-if="(appstatus.status==='125' && app.general.status===125) || appstatus.status==='120' || appstatus.status==='125'" >
+                                                    <template v-if="typeof appstatus.rolback !='undefined' && typeof appstatus.rolback.rollBackComment !='undefined'">{{ appstatus.rolback.rollBackComment }}</template>
+                                                    <template  v-if ="typeof appstatus.rolback !='undefined' && typeof appstatus.rolback.rollBackAppList !='undefined' && typeof appstatus.rolback.rollBackAppList[rkey]!='undefined'" >
+                                                    <template v-for="(rolback,rkey) in appstatus.rolback.rollBackAppList"><br> {{ rolback.rollbackName }} </template>
+                                                    </template>
+                                                </p>
+                                                -->
+                                                <p v-if="appstatus.comment!==null" style="color: orange;border: 1px dashed;padding: 25px 16px;margin: 10px 0px;line-height: 0;border-radius: 5px;" >
+                                                    <template v-if="appstatus.comment!==null"><br> {{ appstatus.comment}} </template>
 
                                                 </p>
                                                 <span style="color: #39ae69; margin-top: 10px; display: block">
@@ -486,13 +492,17 @@
                                                         </v-card>
                                                         </v-dialog>
                                                 </p>
-                                                <p v-if="appstatus.status==='175'">
+                                                <p v-if="appstatus.status==='195'">
                                                     Сизнинг аризангиз бўйича дастлабки қарор бериш бекор қилинди. Ариза бўйича хулосани <a
                                                     @click="downloadPdf"> юлаб олинг!</a>
                                                 </p>
-                                                <template v-if="typeof appstatus.comment !=='undefined' && appstatus.comment.length>0 && appstatus.comment!==null" >
-                                                    <p></p>
-                                                </template>
+                                                <p v-if=" ['110'].includes(appstatus.status)" style="font-size: 23px; margin-top: 10px" >
+                                                    <a :href="'https://d-qaror.customs.uz/decisionPdfDownloadRollback?stId=' + appstatus.id" target="_blank">Аризани юклаб олинг!</a>
+                                                </p>
+
+                                                <p v-if=" ['125','120'].includes(appstatus.status)" style="font-size: 23px;margin-top: 10px " >
+                                                    <a class="v-btn btn" :href="'https://d-qaror.customs.uz/decisionPdfDownloadRollback?stId=' + appstatus.id" target="_blank">Ариза ҳолати бўйича хабарномани юклаб олинг!</a>
+                                                </p>
 
                                                 </span>
                                             </v-col>

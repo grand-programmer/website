@@ -32,10 +32,10 @@ export default {
     data(){
       return{
           languageMenuOpen:false,
-          language:'uz',
+          language:localStorage.getItem('language') || 'uz',
           languages:[
-              {code:'uzk',title:'ЎЗБ'},
-              {code:'uz',title:'UZB'},
+              {code:'uz',title:'ЎЗБ'},
+              {code:'oz',title:'UZB'},
               {code:'ru',title:'РУС'},
               {code:'en',title:'ENG'},
           ],
@@ -58,6 +58,29 @@ export default {
             this.language=el;
             this.languageMenuOpen=false
             this.$i18n.locale=el;
+            localStorage.setItem('language',el)
+            if(typeof this.$route.params.locale !=='undefined')
+            {
+                let path=(this.$route.fullPath).replace(this.$route.params.locale,el);
+                //if(path.includes("/",path.length))
+                  ///  path=path.substring(0,path.length-1)
+                window.location.href=path;
+                /*this.$router.push({
+                    path,
+                    query:this.$route.query,
+                    redirect:true
+                });*/
+            }
+            else {
+                window.location.href=this.$route.fullPath;
+/*                this.$router.push({
+                    path: this.$route.path,
+                    query: this.$route.query,
+                    redirect: true
+                });*/
+            }
+
+            console.log(this.$route)
             //console.log(this.$i18n.locale)
             //$(el).closest('.language-dropdown').toggleClass("open");
         }

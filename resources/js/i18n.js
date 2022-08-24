@@ -17,13 +17,13 @@ const messages = {
     $vuetify: ru,
       ...require('./locales/ru/word.json'),
   },
-  uz: {
-      ...require('./locales/uz.json'),
-      ...require('./locales/uz/word.json'),
+  oz: {
+      ...require('./locales/oz.json'),
+      ...require('./locales/oz/word.json'),
   },
-  uzk: {
-    ...require('./locales/uzk.json'),
-    ...require('./locales/uzk/word.json'),
+  uz: {
+    ...require('./locales/uz.json'),
+    ...require('./locales/uz/word.json'),
   },
 }
 function loadLocaleMessages () {
@@ -42,8 +42,8 @@ function loadLocaleMessages () {
 }
 //console.log(loadLocaleMessages())
 export default new VueI18n({
-  locale: process.env.VUE_APP_I18N_LOCALE || 'uzk',
-  fallbackLocale: process.env.VUE_APP_I18N_FALLBACK_LOCALE || 'uzk',
+  locale: localStorage.getItem('language') || 'uz',
+  fallbackLocale: process.env.VUE_APP_I18N_FALLBACK_LOCALE || 'uz',
     messages: messages,
     silentTranslationWarn:true,
 })

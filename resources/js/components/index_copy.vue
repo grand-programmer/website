@@ -201,7 +201,7 @@
                     </div>
                 </div>
                 <!--==========End Main Slider area==========-->
-                <component is="script" src="js/theme.js"></component>
+                <component is="script" src="/js/theme.js"></component>
             </div>
             <div class="section " id="section2">
                 <!--==========Portfolio area==========-->

@@ -35,6 +35,9 @@ class DataController extends Controller
 
         }
         if (isset($data['page'])) {
+            if($data['page']== -1 ) {
+                return response()->json($returnData->all());
+            }
             return response()->json($returnData->take((int)$data['page']));
         }
         return response()->json($returnData->take(10));
@@ -46,12 +49,14 @@ class DataController extends Controller
         $returnData =[];
         if (isset($data['code'])) {
             $returnData = DB::connection('db2_odbcInn')->select(
-                "select tin,name,shortname from INN_ASOS WHERE tin = '" . $data['code'] . "'");
+                "select tin,name,shortname,registrationdate,registrationnumber from INN_ASOS WHERE tin = '" . $data['code'] . "'");
             $returnData = collect($returnData)->transform(function ($item) {
                 $item->name = str_replace("", "-", $item->name);
                 return $item;
             })->all();
         }
+
+
         return response()->json($returnData);
     }
 

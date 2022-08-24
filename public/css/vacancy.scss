@@ -574,9 +574,12 @@ section.content_block .profile-action-buttons {
 }
 
 .red--text{
-
+position: absolute;
     font-size: 12px;
-    display: block;
+    display: contents;
+}
+.errors_under_button span{
+    margin-top: -10px;
 }
 section.content_block .profile-action-buttons a.btn.disabled{
     background-color:#ccc;

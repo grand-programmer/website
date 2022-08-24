@@ -43,6 +43,7 @@
                                      :style="`background-image: url(/storage/uploads/`+ newsItem.image + `)`">
                                 </div>
                             </div>
+
                             <div class="col-md-4">
                                 <div class="company_content">
                                     <ul class="cats" v-for="(category,catkey) in newsItem.categories">

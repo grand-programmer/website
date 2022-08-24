@@ -130,29 +130,23 @@
                                 v-for="(item,itemKey) in items"
                                 :key="itemKey"
                             >
-                                <td v-for="header in headers">
+                                <td v-for="header in headers" @click="openDialog(itemKey)">
                                     <template v-if="header.value==='inDecNum'">
                                         <template v-if="(new Date(item.inDecEndDate)) < (new Date())">
-                                            <span style="display: block;
-                                                    height: 10px;
-                                                    width: 10px;
+                                            <span style="border-radius: 5px;color: #fff; padding: 5px;
                                                     background-color: red;
-                                                    border-radius: 100%;
-                                                    float: left;
-                                                    margin-right: 10px;
-                                                    margin-top: 7px;"></span>
+                                                    "></span>
                                             {{ item.inDecNum }}
                                         </template>
                                         <template v-else>
-                                            <span style="display: block;
-                                                    height: 10px;
-                                                    width: 10px;
-                                                    background-color: green;
-                                                    border-radius: 100%;
-                                                    float: left;
-                                                    margin-right: 10px;
-                                                    margin-top: 7px;"></span>
-                                            {{ item.inDecNum }}
+                                            <span style="
+                                                        background-color: green;
+    border-radius: 5px;
+    color: #fff;
+    padding: 5px;">
+                                                {{ item.inDecNum }}
+                                            </span>
+
 
                                         </template>
 
@@ -169,6 +163,32 @@
                 </v-row>
             </v-container>
         </div>
+        <v-dialog v-model="mydialog" v-show="typeof decisions[selectedItem] !=='undefined'" max-width="600">
+            <v-card elevation="2" >
+                <v-toolbar
+                    color="primary" style="font-size: 20px; color: #fff;">Дастлабки қарор № {{ typeof decisions[selectedItem] !=='undefined' ? decisions[selectedItem].inDecNum:'' }}</v-toolbar>
+                <v-card-text>
+                    <v-row>
+                        <v-col cols="6"><span class="fw-bold w-100 d-block">Ариза рақами:</span> {{ typeof decisions[selectedItem] !=='undefined'?decisions[selectedItem].appNum:''  }}</v-col>
+                        <v-col cols="6"><span class="fw-bold w-100 d-block">Ариза санаси:</span> {{ typeof decisions[selectedItem] !=='undefined'?decisions[selectedItem].appDate:''  }}</v-col>
+                        <v-col cols="6"><span class="fw-bold w-100 d-block">ТИФ ТН коди :</span> {{ typeof decisions[selectedItem] !=='undefined'?decisions[selectedItem].hsCode:''  }} - {{ typeof decisions[selectedItem] !=='undefined'?decisions[selectedItem].hsName:''  }}</v-col>
+                        <v-col cols="6"><span class="fw-bold w-100 d-block">Аризачи фамилияси, исми, шарифи :</span> {{ typeof decisions[selectedItem] !=='undefined'?decisions[selectedItem].personFio:''  }}</v-col>
+                        <v-col cols="6"><span class="fw-bold w-100 d-block">Товарни етказиб бериш усули :</span> {{ typeof decisions[selectedItem] !=='undefined'?decisions[selectedItem].termsNm:''  }}</v-col>
+                        <v-col cols="6" v-show="typeof decisions[selectedItem] !=='undefined' && decisions[selectedItem]['tradeName'] "><span class="fw-bold w-100 d-block">Товар тижорат номи:</span> {{ typeof decisions[selectedItem] !=='undefined'?decisions[selectedItem].tradeName:''  }}</v-col>
+                        <v-col cols="6"><span class="fw-bold w-100 d-block">Божхона қийматини аниқлаш усули:</span> {{ typeof decisions[selectedItem] !=='undefined'?decisions[selectedItem].methodNm:''  }}</v-col>
+                        <v-col cols="6"><span class="fw-bold w-100 d-block">Кўриб чиққан бошқарма:</span> {{ typeof decisions[selectedItem] !=='undefined'?decisions[selectedItem].inDecLocationNm:''  }}</v-col>
+                        <v-col cols="6"><span class="fw-bold w-100 d-block">Қарор кабул қилинган сана:</span> {{ typeof decisions[selectedItem] !=='undefined'?decisions[selectedItem].inDecDate:''  }}</v-col>
+                        <v-col cols="6"><span class="fw-bold w-100 d-block">Қарор амал қилиш муддати:</span> {{ typeof decisions[selectedItem] !=='undefined'?decisions[selectedItem].inDecEndDate:''  }}</v-col>
+                    </v-row>
+                </v-card-text>
+                <v-card-actions class="d-flex justify-content-end">
+                    <v-btn color="primary" @click="mydialog=false">Ёпиш</v-btn>
+                </v-card-actions>
+
+
+
+            </v-card>
+        </v-dialog>
     </div>
 </template>
 
@@ -197,12 +217,14 @@ export default {
                     exact: true,
                 },
             ],
+            mydialog:false,
+            selectedItem:0,
             hfilters: {
-                terms: null,
-                method: null,
-                hsCode: null,
-                tradeName: null,
-                inDecNum: null,
+                terms: '',
+                method: '',
+                hsCode: '',
+                tradeName: '',
+                inDecNum: '',
                 datepicker:[],
                 page:1,
                 size:10,
@@ -297,7 +319,7 @@ export default {
     watch: {
         options: {
             handler() {
-                console.log()
+                console.log(this.hfilters.page)
                 this.hfilters.page=this.options.page;
                 this.hfilters.size=this.options.itemsPerPage;
                 this.getDataFromApi()
@@ -313,6 +335,16 @@ export default {
         },
     },
     methods: {
+        openDialog(item){
+            if(typeof this.decisions[item]!=='undefined' && typeof this.decisions[item]['appNum']!=='undefined'){
+                this.selectedItem=item;
+                this.mydialog=true;
+
+            }
+            else {
+                this.$toast.error("Хатолик юз берди!")
+            }
+        },
         formatDateRange(dates) {
             if (dates.length > 1) {
                 if (dates[1] < dates[0]) {

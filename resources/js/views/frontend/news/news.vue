@@ -9,7 +9,7 @@
                 </v-breadcrumbs>
             </v-container>
         </div>
-        <v-container>
+        <v-container class="news-container">
             <v-row>
 
                 <v-col :cols="9">
@@ -17,7 +17,76 @@
                         <div class="widget_tittle"><h3>{{ news.title }}</h3></div>
                         <v-row style="height:40px; width: 100%"></v-row>
                         <v-row>
+                            <div class="d-flex justify-content-between align-items-center" style="margin-top: -40px">
+
+                                <!--                                    <template v-slot:activator>-->
+                                <div class="d-flex align-items-center justify-content-center mr-2">
+
+                                    <span class="primary-color cursor-pointer mr-1 "
+                                          style="font-size: 18px">Улашинг</span>
+                                    <v-icon color="primary" class="mr-1 " v-model="fab">
+                                        mdi-share-variant
+                                    </v-icon>
+                                    <!--                                    </template>-->
+
+                                    <a :href="'https://www.facebook.com/sharer/sharer.php?u='+currentUrl"
+                                       class="text-decoration-none mx-1">
+                                        <v-icon color="#1b74e4" style="font-size: 28px">mdi-facebook</v-icon>
+                                    </a>
+                                    <a :href="'https://t.me/share/url?url='+ currentUrl"
+                                       class="text-decoration-none d-block mx-1" style="width: 25px;height: 25px;">
+                                        <img src="/public/img/icons/telegram_icon.png" class="w-100">
+                                    </a>
+                                </div>
+                                <!--
+                                                                </v-speed-dial>-->
+                                <p class="ml-2">
+                                    <v-icon color="primary">mdi-calendar</v-icon>
+                                    {{ news.created_at }}
+                                </p>
+                            </div>
                             <div v-html="news.description"></div>
+                            <div class="news-content-footer d-flex justify-content-end align-items-center">
+
+                                <!--                                    <template v-slot:activator>-->
+                                <!--<div class="d-flex align-items-center justify-content-center mr-2">
+
+                                                                        <span class="primary-color cursor-pointer mr-1 " style="font-size: 18px">Улашинг</span>
+                                    <v-icon color="primary" class="mr-1 " v-model="fab">
+                                        mdi-share-variant
+                                    </v-icon>
+                                &lt;!&ndash;                                    </template>&ndash;&gt;
+
+                                                                    <a :href="'https://www.facebook.com/sharer/sharer.php?u='+currentUrl" class="text-decoration-none mx-1">
+                                                                        <v-icon color="#1b74e4" style="font-size: 28px">mdi-facebook</v-icon>
+                                                                    </a>
+                                                                    <a :href="'https://t.me/share/url?url='+ currentUrl" class="text-decoration-none d-block mx-1" style="width: 25px;height: 25px;" >
+                                                                        <img src="/public/img/icons/telegram_icon.png" class="w-100">
+                                                                    </a>
+                                </div>-->
+                                <!--
+                                                                </v-speed-dial>-->
+
+                                <div class="d-flex justify-content-center align-items-center">
+                                    <a class="text-decoration-none mx-2" @click="vote(1)">
+                                        <v-icon color="primary">mdi-thumb-up</v-icon>
+                                        {{ news.like }}
+                                    </a>
+                                    <a class="text-decoration-none mx-2" @click="vote(0)">
+                                        <v-icon color="primary">mdi-thumb-down</v-icon>
+                                        {{ news.dislike }}
+                                    </a>
+                                </div>
+                                <p class="mx-2">
+                                    Кўрилди
+                                    <v-icon color="primary">mdi-eye-outline</v-icon>
+                                    {{ news.viewed }}
+                                </p>
+                                <!--                                <p class="ml-2">
+                                                                    <v-icon color="primary">mdi-calendar</v-icon>
+                                                                    {{ news.created_at }}
+                                                                </p>-->
+                            </div>
 
                         </v-row>
                     </div>
@@ -42,9 +111,11 @@
 </template>
 <script>
 import api from "./../../../src/services/apiService";
+import ListItem from "../../../js/views/dashboard/component/ListItem";
 
 export default {
     name: 'News',
+    components: {ListItem},
     data: () => ({
         breadcrumb_items: [
             {
@@ -68,7 +139,12 @@ export default {
         ],
         /*id:this.$route.params.id,*/
         news: {},
-        related_news: {}
+        // currentUrl:"",
+        fab: true,
+        related_news: {},
+        likes:[],
+        dislikes:[],
+        mdata:null,
     }),
     watch: {
         $route(to, from) {
@@ -78,41 +154,132 @@ export default {
     async created() {
         this.initialize();
     },
+    computed: {
+        currentUrl() {
+            if ((window.location.href).indexOf(this.$route.fullPath) !== -1)
+                return (window.location.href).substr(0, (window.location.href).indexOf(this.$route.fullPath)) + this.$route.fullPath
+            return window.location.href;
+        }
+    },
     methods: {
         close() {
             this.$router.replace('/');
         },
         initialize() {
-            api.readOneNews(this.$route.params.slug).then((response) => {
-                this.news = response.data;
-                let dateParts = this.news.created_at.split("T");
-                if ((new Date(this.news.created_at)).getDate() === (new Date).getDate())
-                    this.news.created_at = dateParts[1].substring(0, 5);
-                else this.news.created_at = dateParts[0];
+            setTimeout(async ()=>{
+                await api.readOneNews(this.$route.params.slug).then((response) => {
+
+                    this.news = response.data.data;
+                    /*let dateParts = this.news.created_at.split("T");
+                    if ((new Date(this.news.created_at)).getDate() === (new Date).getDate())
+                        this.news.created_at = dateParts[1].substring(0, 5);
+                    else this.news.created_at = dateParts[0];*/
 
 
-                this.breadcrumb_items[1].text = this.news.categories[0].title;
-                this.breadcrumb_items[1].to = "/category/" + this.news.categories[0].slug;
-                this.breadcrumb_items[2].text = this.news.title;
-            }).catch((error) => {
-                this.$toast.error(`Маълумотларни юклашда хатолик содир бўлди!`)
-                /*this.$router.replace("/").catch(() => {
-                });*/
-            });
-
-
-            api.readNews().then((response) => {
-                this.related_news = response.data.map(function (i) {
-                    let dateParts = i.created_at.split("T");
-                    if ((new Date(i.created_at)).getDate() === (new Date).getDate())
-                        i.created_at = dateParts[1].substring(0, 5);
-                    else i.created_at = dateParts[0];
-                    return i;
+                    this.breadcrumb_items[1].text = this.news.categories[0].title;
+                    this.breadcrumb_items[1].to = "/category/" + this.news.categories[0].slug;
+                    this.breadcrumb_items[2].text = this.news.title;
+                }).catch((error) => {
+                    console.log(error)
+                    this.$toast.error(`Маълумотларни юклашда хатолик содир бўлди!`)
+                    /*this.$router.replace("/").catch(() => {
+                    });*/
                 });
-            }).catch((error) => {
-                this.$toast.error(`Маълумотларни юклашда хатолик содир бўлди!`)
+
+                await api.readNews().then((response) => {
+                    this.related_news = response.data.data.map(function (i) {
+                        let dateParts = i.created_at.split("T");
+                        if ((new Date(i.created_at)).getDate() === (new Date).getDate())
+                            i.created_at = dateParts[1].substring(0, 5);
+                        else i.created_at = dateParts[0];
+                        return i;
+                    });
+                }).catch((error) => {
+                    console.log(error)
+                    this.$toast.error(`Маълумотларни юклашда хатолик содир бўлди!`)
+                })
+
             })
+
+
+
+
         },
+        vote(vote){
+            const _this=this;
+            _this.likes=this.$cookie.get('likes') ? JSON.parse(this.$cookie.get('likes')) : null;
+            _this.dislikes=this.$cookie.get('dislikes') ? JSON.parse(this.$cookie.get('dislikes')) : null;
+
+/*            let likes=this.$cookie.get('likes') ? JSON.parse(this.$cookie.get('likes')) : null;
+            if(likes!==null && likes.include(this.news.id)) {
+
+            }else*/
+            let discount=false;
+            if(vote===1){
+                if(_this.likes!==null && _this.likes.includes(_this.news.id)){
+                    this.$toast.warning('Сиз аллақачон овоз бергансиз!')
+                    return ;
+
+                }else {
+                    if(_this.dislikes!==null && _this.dislikes.includes(_this.news.id))
+                        discount=true;
+
+                    if(_this.likes) {
+                        this.$cookie.set('likes', JSON.stringify(_this.likes.concat([_this.news.id])))
+                    }
+                    else
+                    this.$cookie.set('likes', JSON.stringify([_this.news.id]))
+                }
+
+
+            }
+            if(vote===0){
+                if(_this.dislikes!==null && _this.dislikes.includes(_this.news.id)){
+                    this.$toast.warning('Сиз аллақачон овоз бергансиз!')
+                    return ;
+
+                }else {
+                    if(_this.likes!==null && _this.likes.includes(_this.news.id))
+                        discount=true;
+                    if(_this.dislikes) {
+                        this.$cookie.set('dislikes', JSON.stringify(_this.dislikes.concat([_this.news.id])))
+                    }
+                    else
+                        this.$cookie.set('dislikes', JSON.stringify([_this.news.id]))
+                }
+
+            }
+            _this.mdata={
+                like:vote,
+            }
+            if(discount) _this.mdata['discount']=1;
+            setTimeout(async ()=>{
+                await axios.post('/api/v1/news/' + _this.news.id + '/vote',_this.mdata).then(()=>{
+                    if(vote===1) {
+                        _this.news.like = _this.news.like + 1;
+                        if(discount) {
+                            _this.news.dislike = _this.news.dislike - 1;
+                            if(_this.dislikes?.indexOf(_this.news.id)!==-1) {
+                                _this.dislikes = _this.dislikes.splice(_this.news.id, 1)
+                                this.$cookie.set('dislikes', JSON.stringify(_this.dislikes))
+                            }
+                        }
+
+                    }
+                    if(vote===0) {
+                        _this.news.dislike = _this.news.dislike + 1;
+                        if(discount) {
+                            _this.news.like = _this.news.like - 1;
+                            if(_this.likes?.indexOf(_this.news.id)!==-1) {
+                                _this.likes = _this.likes.splice(_this.news.id, 1)
+                                this.$cookie.set('likes', JSON.stringify(_this.likes))
+                            }
+                        }
+                    }
+                })
+            })
+
+        }
     }
 
 }
@@ -201,6 +368,11 @@ export default {
 
 .single_blog_content img {
     max-width: 100%;
+
+}
+
+.news-content-footer {
+
 
 }
 </style>

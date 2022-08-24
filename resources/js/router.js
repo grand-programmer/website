@@ -27,278 +27,202 @@ import ServiceVacancyCreate from "./views/frontend/services/vacancy/create";
 import ServiceVacancyResume from "./views/frontend/services/vacancy/resume";
 import ServicesAppeals from "./views/frontend/services/appeal/main";
 import ServicesPage from "./views/frontend/services/services";
-
-const routes = [
+import i18n from './i18n';
+import {Trans} from './plugins/Translation'
+const routes=[]
+const allRoutes={
+    path: '*', redirect() {
+        return '/uz';
+    }
+}
+const userRoutes =
     {
-        path: '/map',
-        component: () => import('./views/map/map'),
-        meta: {
-            //auth:true  komponentni qayerga ulagansiz deyapman
-            auth: undefined
+        path: '/:locale?',
+        component: {
+            template: "<router-view></router-view>"
         },
-    },
-    {
+        beforeEnter: Trans.routeMiddleware,/*(to, from, next) => {
+        const locale = to.params.locale;
+        const supported_locales = "en,ru,uz,oz".split(',')
 
-        path: '',
-        component: Index,
-        meta: {
-            auth: undefined,
+        if (!supported_locales.includes(locale)) return next('uz');
+
+        if (i18n.locale !== locale) {
+            i18n.locale = locale;
+        }
+        return next();
+    }*/
+        children: [{
+
+            path: '', component: Index, meta: {
+                auth: undefined,
+            }, children: [{
+                path: "/", component: HomePage,
+            },],
         },
-        children:
-            [
-                {
-                    path: "/",
-                    component: HomePage,
-                },
-            ],
-    },
-    {
+            {
 
-        path: '/',
-        component: OnePage,
-        children:
-            [
-                {
-                    path: "services/",
-                    component: Services,
-                    children: [
-                        {
-                            path: "",
-                            component: ServicesPage,
+                path: '/', component: OnePage, children: [{
+                    path: "services/", component: Services, children: [{
+                        path: "", component: ServicesPage,
+                    }, {
+                        path: "appeals/",
+                        component: () => import('./views/frontend/services/appeal/index'),
+                        children: [{
+                            path: "", component: ServicesAppeals, query: {appeal_code: ''}
+                        }, {
+                            path: "create", component: ServicesAppealsCreate,
+                        }, {
+                            path: ":id", component: () => import('./views/frontend/services/appeal/info_view'),
+                        }, {
+                            path: ":id/:key", component: () => import('./views/frontend/services/appeal/info_view'),
+                        }]
+                    }, {
+                        path: "decisions/",
+                        component: () => import('./views/frontend/services/customs_value/index'),
+                        meta: {
+                            auth: true,
+                            authRedirect: '/login',
+                            notFoundRedirect: '/403',
+                            forbiddenRedirect: '/403',
+                            routeAuth: '/login'
                         },
-                        {
-                            path: "appeals/",
-                            component: () => import('./views/frontend/services/appeal/index'),
-                            children: [
-                                {
-                                    path: "",
-                                    component: ServicesAppeals,
-                                    query: {appeal_code: ''}
-                                },
-                                {
-                                    path: "create",
-                                    component: ServicesAppealsCreate,
-                                },
-                                {
-                                    path: ":id",
-                                    component: () => import('./views/frontend/services/appeal/info_view'),
-                                },
-                                {
-                                    path: ":id/:key",
-                                    component: () => import('./views/frontend/services/appeal/info_view'),
-                                }
-                            ]
+                        children: [{
+                            path: "", component: ServicesDecisionsCreate,
+                        }, {
+                            path: "info", component: ServicesDecisionsInfo,
+                        }, {
+                            path: "edit/:id", component: ServicesDecisionsEdit,
+                        }, {
+                            path: ":id", component: ServicesDecisionsInfo,
+                        }]
+                    }, {
+                        path: "intellectual/",
+                        component: () => import('./views/frontend/services/intellectual/index'),
+                        meta: {
+                            auth: true,
+                            authRedirect: '/login',
+                            notFoundRedirect: '/403',
+                            forbiddenRedirect: '/403',
+                            routeAuth: '/login'
                         },
-                        {
-                            path: "decisions/",
-                            component: () => import('./views/frontend/services/customs_value/index'),
-                            meta: {
-                                auth: true,
-                                authRedirect: '/login',
-                                notFoundRedirect: '/403',
-                                forbiddenRedirect: '/403',
-                                routeAuth: '/login'
-                            },
-                            children: [
-                                {
-                                    path: "",
-                                    component: ServicesDecisionsCreate,
-                                },
-                                {
-                                    path: "info",
-                                    component: ServicesDecisionsInfo,
-                                },
-                                {
-                                    path: "edit/:id",
-                                    component: ServicesDecisionsEdit,
-                                },
-                                {
-                                    path: ":id",
-                                    component: ServicesDecisionsInfo,
-                                }
-                            ]
+                        children: [{
+                            path: "", component: ServicesIntellectualCreate,
+                        }, {
+                            path: "info", component: ServicesIntellectualInfo,
+                        }, {
+                            path: "edit/:id", component: ServicesIntellectualEdit,
+                        }, {
+                            path: ":id", component: ServicesIntellectualInfo,
+                        }]
+                    }, {
+                        path: "recycle/", component: () => import('./views/frontend/services/recycle/index'), meta: {
+                            auth: true,
+                            authRedirect: '/login',
+                            notFoundRedirect: '/403',
+                            forbiddenRedirect: '/403',
+                            routeAuth: '/login'
+                        }, children: [{
+                            path: "", component: () => import('./views/frontend/services/recycle/create'),
+                        }, {
+                            path: "info", component: () => import('./views/frontend/services/recycle/info'),
+                        }, {
+                            path: "edit/:id", component: () => import('./views/frontend/services/recycle/edit'),
+                        }, {
+                            path: ":id", component: () => import('./views/frontend/services/recycle/info'),
+                        }]
+                    }, {
+                        path: "tftn/", component: () => import('./views/frontend/services/tftn/index'), meta: {
+                            auth: true,
+                            authRedirect: '/login',
+                            notFoundRedirect: '/403',
+                            forbiddenRedirect: '/403',
+                            routeAuth: '/login'
+                        }, children: [{
+                            path: "", component: ServicesTftnCreate,
+                        }, {
+                            path: "info", component: ServicesTftnInfo,
+                        }, {
+                            path: "edit/:id", component: ServicesTftnEdit,
+                        }, {
+                            path: ":id", component: ServicesTftnInfo,
+                        }]
+                    }, {
+                        path: "vacancy/",
+                        component: () => import('./views/frontend/services/vacancy/index'),
+                        children: [{
+                            path: "", component: ServiceVacancyList,
                         },
-                        {
-                            path: "intellectual/",
-                            component: () => import('./views/frontend/services/intellectual/index'),
-                            meta: {
-                                auth: true,
-                                authRedirect: '/login',
-                                notFoundRedirect: '/403',
-                                forbiddenRedirect: '/403',
-                                routeAuth: '/login'
-                            },
-                            children: [
-                                {
-                                    path: "",
-                                    component: ServicesIntellectualCreate,
-                                },
-                                {
-                                    path: "info",
-                                    component: ServicesIntellectualInfo,
-                                },
-                                {
-                                    path: "edit/:id",
-                                    component: ServicesIntellectualEdit,
-                                },
-                                {
-                                    path: ":id",
-                                    component: ServicesIntellectualInfo,
-                                }
-                            ]
-                        },
-                        {
-                            path: "tftn/",
-                            component: () => import('./views/frontend/services/tftn/index'),
-                            meta: {
-                                auth: true,
-                                authRedirect: '/login',
-                                notFoundRedirect: '/403',
-                                forbiddenRedirect: '/403',
-                                routeAuth: '/login'
-                            },
-                            children: [
-                                {
-                                    path: "",
-                                    component: ServicesTftnCreate,
-                                },
-                                {
-                                    path: "info",
-                                    component: ServicesTftnInfo,
-                                },
-                                {
-                                    path: "edit/:id",
-                                    component: ServicesTftnEdit,
-                                },
-                                {
-                                    path: ":id",
-                                    component: ServicesTftnInfo,
-                                }
-                            ]
-                        },
-                        {
-                            path: "vacancy/",
-                            component: () => import('./views/frontend/services/vacancy/index'),
-                            children: [
-                                {
-                                    path: "",
-                                    component: ServiceVacancyList,
-                                },
 
-                                {
-                                    path: "create",
-                                    component: ServiceVacancyCreate,
-                                },
-                                {
-                                    path: "questions",
-                                    component: ServiceVacancyQuestions,
-                                },
-                                {
-                                    path: "documents",
-                                    component: ServiceVacancyDocuments,
-                                },
-                                {
-                                    path: ":id",
-                                    component: ServiceVacancyShow,
+                            {
+                                path: "create", component: ServiceVacancyCreate,
+                            }, {
+                                path: "questions", component: ServiceVacancyQuestions,
+                            }, {
+                                path: "documents", component: ServiceVacancyDocuments,
+                            }, {
+                                path: ":id", component: ServiceVacancyShow,
 
-                                },
-                                {
-                                    path: ":id/resume",
-                                    component: ServiceVacancyResume,
-                                },
-                                {
-                                    path: "*",
-                                    redirect: "/services/vacancy"
-                                }
-                            ]
-                        },
-                    ]
-                },
-                {
-                    path: 'applications',
-                    component: Applications,
-                    meta: {
+                            }, {
+                                path: ":id/resume", component: ServiceVacancyResume,
+                            }, {
+                                path: "*", redirect: "/services/vacancy"
+                            }]
+                    },]
+                }, {
+                    path: 'applications', component: Applications, meta: {
                         auth: true,
                         authRedirect: '/login',
                         notFoundRedirect: '/403',
                         forbiddenRedirect: '/403',
                         routeAuth: '/login'
-                    },
-                    children: [
-                        {
-                            path: '',
-                            component: MyApplicationsList
-                        }
-                    ]
+                    }, children: [{
+                        path: '', component: MyApplicationsList
+                    }]
 
-                },
-                {
-                    path: "registries/",
-                    component: {
-                        template: '<router-view></router-view>',
-                        script: ' export default {}'
-                    },
-                    children: [{
-                        path:"decisions",
-                        component:()=>import("./views/frontend/registries/customvalue")
+                }, {
+                    path: "registries/", component: {
+                        template: '<router-view></router-view>', script: ' export default {}'
+                    }, children: [{
+                        path: "decisions", component: () => import("./views/frontend/registries/customvalue")
 
                     }]
 
+                }, {
+                    path: 'category/:slug', component: () => import('./views/frontend/news/category')
+                }, {
+                    path: 'news', component: () => import('./views/frontend/news/index')
+                }, {
+                    path: 'news/:slug', component: () => import('./views/frontend/news/news')
                 },
-                {
-                    path: 'category/:slug',
-                    component: () => import('./views/frontend/news/category')
-                },
-                {
-                    path: 'news',
-                    component: () => import('./views/frontend/news/index')
-                },
-                {
-                    path: 'news/:slug',
-                    component: () => import('./views/frontend/news/news')
-                },
-                {
-                    path: 'page/',
-                    component: {
-                        template: '<router-view></router-view>',
-                        script: ' export default {}'
+                    {
+                    path: 'page/', component: {
+                        template: '<router-view></router-view>', script: ' export default {}'
 
+                    }, children: [{
+                        path: 'votes/', component: () => import("./views/frontend/pages/votes")
+                    }, {
+                        path: 'rahbariyat', component: () => import("./views/frontend/pages/rahbariyat")
+                    }, {
+                        path: 'markaziy', component: () => import("./views/frontend/pages/markaziy")
+                    }, {
+                        path: 'jismoniy', component: () => import("./views/frontend/pages/jismoniy")
+                    }, {
+                        path: 'boshqarma/:id', component: () => import("./views/frontend/pages/org")
                     },
-                    children: [
-                        {
-                            path: 'votes/',
-                            component: () => import("./views/frontend/pages/votes")
-                        },
-                        {
-                            path: 'rahbariyat',
-                            component: () => import("./views/frontend/pages/rahbariyat")
-                        },
-                        {
-                            path: 'markaziy',
-                            component: () => import("./views/frontend/pages/markaziy")
-                        },
-                        {
-                            path: 'boshqarma/:id',
-                            component: () => import("./views/frontend/pages/org")
-                        },
 
                         {
-                            path: ':id',
-                            component: () => import('./views/frontend/pages/index'),
+                            path: ':id', component: () => import('./views/frontend/pages/index'),
 
-                        }
-                    ]
-                },
-                {
+                        }]
+                }, {
                     name: 'login',
-                    path: '/login',
-                    //beforeEnter () { window.location.replace('https://sso.egov.uz/sso/oauth/Authorization.do?response_type=one_code&client_id=customs_uz&redirect_uri=https://new.customs.uz/profile&scope=customs_uz&state=testState') },
-                    component: () => import('./views/pages/Login'),
-                    /*                    redirect: href => {
-                                            // the function receives the target route as the argument
-                                            // we return a redirect path/location here.
-                                            return 'https://sso.egov.uz/sso/oauth/Authorization.do?response_type=one_code&client_id=customs_uz&redirect_uri=https://new.customs.uz/services/vacancy/resume&scope=customs_uz&state=testState'
-                                        },*/
+                    path: 'login', //beforeEnter () { window.location.replace('https://sso.egov.uz/sso/oauth/Authorization.do?response_type=one_code&client_id=customs_uz&redirect_uri=https://new.customs.uz/profile&scope=customs_uz&state=testState') },
+                    component: () => import('./views/pages/Login'), /*                    redirect: href => {
+                                                // the function receives the target route as the argument
+                                                // we return a redirect path/location here.
+                                                return 'https://sso.egov.uz/sso/oauth/Authorization.do?response_type=one_code&client_id=customs_uz&redirect_uri=https://new.customs.uz/services/vacancy/resume&scope=customs_uz&state=testState'
+                                            },*/
 
                     meta: {
                         auth: false,
@@ -307,14 +231,10 @@ const routes = [
                         forbiddenRedirect: '/403',
                         routeAuth: '/403'
                     }
-                },
-                {
-                    name: 'social-login',
-                    path: '/social-login',
-                    beforeEnter() {
+                }, {
+                    name: 'social-login', path: '/social-login', beforeEnter() {
                         //window.location.replace('https://sso.egov.uz/sso/oauth/Authorization.do?response_type=one_code&client_id=customs_uz&redirect_uri=https://new.customs.uz/profile&scope=customs_uz&state=testState')
-                    },
-                    //component: () => import('./views/pages/SocialLogin'),
+                    }, //component: () => import('./views/pages/SocialLogin'),
                     /*                    redirect: href => {
                                             // the function receives the target route as the argument
                                             // we return a redirect path/location here.
@@ -324,17 +244,14 @@ const routes = [
                     meta: {
                         auth: undefined,
                     }
-                },
-                {
+                }, {
                     name: 'logout',
-                    path: '/logout',
-                    //beforeEnter () { window.location.replace('https://sso.egov.uz/sso/oauth/Authorization.do?response_type=one_code&client_id=customs_uz&redirect_uri=https://new.customs.uz/profile&scope=customs_uz&state=testState') },
-                    component: () => import('./views/pages/Login'),
-                    /*                    redirect: href => {
-                                            // the function receives the target route as the argument
-                                            // we return a redirect path/location here.
-                                            return 'https://sso.egov.uz/sso/oauth/Authorization.do?response_type=one_code&client_id=customs_uz&redirect_uri=https://new.customs.uz/services/vacancy/resume&scope=customs_uz&state=testState'
-                                        },*/
+                    path: 'logout', //beforeEnter () { window.location.replace('https://sso.egov.uz/sso/oauth/Authorization.do?response_type=one_code&client_id=customs_uz&redirect_uri=https://new.customs.uz/profile&scope=customs_uz&state=testState') },
+                    component: () => import('./views/pages/Login'), /*                    redirect: href => {
+                                                // the function receives the target route as the argument
+                                                // we return a redirect path/location here.
+                                                return 'https://sso.egov.uz/sso/oauth/Authorization.do?response_type=one_code&client_id=customs_uz&redirect_uri=https://new.customs.uz/services/vacancy/resume&scope=customs_uz&state=testState'
+                                            },*/
 
                     meta: {
                         auth: true,
@@ -343,460 +260,284 @@ const routes = [
                         forbiddenRedirect: '/403',
                         routeAuth: '/403'
                     }
-                },
-                /*                {
-                                    name: 'logout',
-                                    path: '/logout',
-                                    beforeEnter () { this.$auth.logout({
-                                        makeRequest: true,
-                                        redirect: {name: 'login'},
-                                    }) },
-                                    //component: () => import('./views/pages/Login'),
-                /!*                    redirect: href => {
-                                        // the function receives the target route as the argument
-                                        // we return a redirect path/location here.
-                                        return 'https://sso.egov.uz/sso/oauth/Authorization.do?response_type=one_code&client_id=customs_uz&redirect_uri=https://new.customs.uz/services/vacancy/resume&scope=customs_uz&state=testState'
-                                    },*!/
+                }, /*                {
+                                        name: 'logout',
+                                        path: '/logout',
+                                        beforeEnter () { this.$auth.logout({
+                                            makeRequest: true,
+                                            redirect: {name: 'login'},
+                                        }) },
+                                        //component: () => import('./views/pages/Login'),
+                    /!*                    redirect: href => {
+                                            // the function receives the target route as the argument
+                                            // we return a redirect path/location here.
+                                            return 'https://sso.egov.uz/sso/oauth/Authorization.do?response_type=one_code&client_id=customs_uz&redirect_uri=https://new.customs.uz/services/vacancy/resume&scope=customs_uz&state=testState'
+                                        },*!/
 
-                                    meta: {
-                                        auth: true,
-                                        authRedirect: '/403',
-                                        notFoundRedirect: '/403',
-                                        forbiddenRedirect: '/403',
-                                        routeAuth: '/403'
-                                    }
-                                },*/
-
-                {
-                    name: 'MyProfile',
-                    path: '/profile',
-                    component: () => import('./views/pages/Profile'),
-                    children: [
-                        {
-                            name: 'Profilea',
-                            path: '/profile/:slug',
-                            component: () => import('./views/pages/Profile'),
-                        }
-                    ]
-                    /*                    meta: {
+                                        meta: {
                                             auth: true,
+                                            authRedirect: '/403',
+                                            notFoundRedirect: '/403',
+                                            forbiddenRedirect: '/403',
+                                            routeAuth: '/403'
+                                        }
+                                    },*/
 
-                                        }*/
-                },
-                {
-                    name: '403',
-                    path: '/403',
-                    component: () => import('./views/pages/403'),
-                    meta: {
-                        auth: undefined,
+                    {
+                        name: 'MyProfile',
+                        path: 'profile',
+                        component: () => import('./views/pages/Profile'),
+                        children: [{
+                            name: 'Profilea', path: '/:slug', component: () => import('./views/pages/Profile'),
+                        }]
+                        /*                    meta: {
+                                                auth: true,
 
-                    }
-                }, {
-                name: '404',
-                path: '/404',
-                component: () => import('./views/pages/404'),
-                meta: {
-                    auth: undefined,
+                                            }*/
+                    }, {
+                        name: '403', path: '/403', component: () => import('./views/pages/403'), meta: {
+                            auth: undefined,
 
-                }
+                        }
+                    }, {
+                        name: '404', path: '/404', component: () => import('./views/pages/404'), meta: {
+                            auth: undefined,
+
+                        }
+                    }, {
+                        name: 'test', path: '/test1', component: () => import('./views/frontend/test'), meta: {
+                            auth: undefined,
+
+                        }
+                    },
+
+
+                ],
             },
 
+        ]
+    };
 
-            ],
-    },
-
-
-];
 let adminRoute = {
-    path: '/admin/',
-    component: () => import('./views/dashboard/Index'),
-    meta: {
+    path: '/admin/', component: () => import('./views/dashboard/Index'), meta: {
         //auth:true
         auth: {roles: 2, redirect: {name: 'login', query: {request: '/admin'}}, forbiddenRedirect: '/403'}
-    },
-    children: [
-        // Dashboard
+    }, children: [// Dashboard
         {
-            name: 'Dashboard',
-            path: '',
-            component: () => import('./views/dashboard/Dashboard'),
-        },
-        // services
+            name: 'Dashboard', path: '', component: () => import('./views/dashboard/Dashboard'),
+        }, // services
         {
-            name: 'Мурожаатлар',
-            path: 'services/appeals',
-            component: () => import('./views/dashboard/services/Appeal'),
-        },
-        // Pages
+            name: 'Мурожаатлар', path: 'services/appeals', component: () => import('./views/dashboard/services/Appeal'),
+        }, // Pages
         {
-            name: 'Сахифалар',
-            path: 'pages/',
-            component: {
-                template: '<router-view></router-view>',
-                script: ' export default {}'
+            name: 'Сахифалар', path: 'pages/', component: {
+                template: '<router-view></router-view>', script: ' export default {}'
+            }, children: [{
+                name: "Сахифалар", path: '', component: () => import('./views/dashboard/pages/index'),
+
+            }, {
+                name: "Сахифа яратиш", path: 'create', component: () => import('./views/dashboard/pages/create'),
+
+            }, {
+                name: "Сахифани тахрирлаш", path: 'edit/:id', component: () => import('./views/dashboard/pages/edit'),
+
+            }]
+
+        }, // News
+        {
+            name: 'Янгиликлар', path: 'news/', component: {
+                template: '<router-view></router-view>', script: ' export default {}'
+            }, children: [{
+                name: "Янгиликлар", path: '', component: () => import('./views/dashboard/news/index'),
+
+            }, {
+                name: "Янгилик яратиш", path: 'create', component: () => import('./views/dashboard/news/create'),
+
+            }, {
+                name: "Янгиликни тахрирлаш", path: 'edit/:id', component: () => import('./views/dashboard/news/edit'),
+
             },
-            children:
-                [
-                    {
-                        name: "Сахифалар",
-                        path: '',
-                        component: () => import('./views/dashboard/pages/index'),
 
-                    },
-                    {
-                        name: "Сахифа яратиш",
-                        path: 'create',
-                        component: () => import('./views/dashboard/pages/create'),
+            ]
 
-                    },
-                    {
-                        name: "Сахифани тахрирлаш",
-                        path: 'edit/:id',
-                        component: () => import('./views/dashboard/pages/edit'),
-
-                    }
-                ]
-
-        },
-        // News
+        }, // Categories
         {
-            name: 'Янгиликлар',
-            path: 'news/',
-            component: {
-                template: '<router-view></router-view>',
-                script: ' export default {}'
+            name: 'Категориялар', path: 'categories/', component: {
+                template: '<router-view></router-view>', script: ' export default {}'
+            }, children: [{
+                name: "Категориялар", path: '', component: () => import('./views/dashboard/news/categories/index'),
+
+            }, {
+                name: "Категория яратиш",
+                path: 'create',
+                component: () => import('./views/dashboard/news/categories/create'),
+
+            }, {
+                name: "Категорияни тахрирлаш",
+                path: 'edit/:id',
+                component: () => import('./views/dashboard/news/categories/edit'),
+
             },
-            children:
-                [
-                    {
-                        name: "Янгиликлар",
-                        path: '',
-                        component: () => import('./views/dashboard/news/index'),
 
-                    },
-                    {
-                        name: "Янгилик яратиш",
-                        path: 'create',
-                        component: () => import('./views/dashboard/news/create'),
+            ]
 
-                    },
-                    {
-                        name: "Янгиликни тахрирлаш",
-                        path: 'edit/:id',
-                        component: () => import('./views/dashboard/news/edit'),
-
-                    },
-
-                ]
-
-        },
-        // Categories
+        }, // Events
         {
-            name: 'Категориялар',
-            path: 'categories/',
-            component: {
-                template: '<router-view></router-view>',
-                script: ' export default {}'
+            name: 'Ходисалар', path: 'events/', component: {
+                template: '<router-view></router-view>', script: ' export default {}'
+            }, children: [{
+                name: "Ходисалар", path: '', component: () => import('./views/dashboard/events/index'),
+
+            }, {
+                name: "Ходиса яратиш", path: 'create', component: () => import('./views/dashboard/events/create'),
+
+            }, {
+                name: "Ходиса тахрирлаш", path: 'edit/:id', component: () => import('./views/dashboard/events/edit'),
+
+            }, {
+                name: "Ходисалар", path: 'view/:id', component: () => import('./views/dashboard/events/view'),
+
             },
-            children:
-                [
-                    {
-                        name: "Категориялар",
-                        path: '',
-                        component: () => import('./views/dashboard/news/categories/index'),
 
-                    },
-                    {
-                        name: "Категория яратиш",
-                        path: 'create',
-                        component: () => import('./views/dashboard/news/categories/create'),
+            ]
 
-                    },
-                    {
-                        name: "Категорияни тахрирлаш",
-                        path: 'edit/:id',
-                        component: () => import('./views/dashboard/news/categories/edit'),
-
-                    },
-
-                ]
-
-        },
-        // Events
+        }, // Votes
         {
-            name: 'Ходисалар',
-            path: 'events/',
-            component: {
-                template: '<router-view></router-view>',
-                script: ' export default {}'
+            name: 'Сўровнома', path: 'votes/', component: {
+                template: '<router-view></router-view>', script: ' export default {}'
+            }, children: [{
+                name: "Сўровномалар", path: '', component: () => import('./views/dashboard/votes/index'),
+
+            }, {
+                name: "Сўровнома яратиш", path: 'create', component: () => import('./views/dashboard/votes/create'),
+
+            }, {
+                name: "Сўровнома тахрирлаш", path: 'edit/:id', component: () => import('./views/dashboard/votes/edit'),
+
+            }, {
+                name: "Сўровнома", path: 'view/:id', component: () => import('./views/dashboard/votes/view'),
+
             },
-            children:
-                [
-                    {
-                        name: "Ходисалар",
-                        path: '',
-                        component: () => import('./views/dashboard/events/index'),
 
-                    },
-                    {
-                        name: "Ходиса яратиш",
-                        path: 'create',
-                        component: () => import('./views/dashboard/events/create'),
+            ]
 
-                    },
-                    {
-                        name: "Ходиса тахрирлаш",
-                        path: 'edit/:id',
-                        component: () => import('./views/dashboard/events/edit'),
-
-                    },
-                    {
-                        name: "Ходисалар",
-                        path: 'view/:id',
-                        component: () => import('./views/dashboard/events/view'),
-
-                    },
-
-                ]
-
-        },
-        // Votes
+        }, // Faqs
         {
-            name: 'Сўровнома',
-            path: 'votes/',
-            component: {
-                template: '<router-view></router-view>',
-                script: ' export default {}'
+            name: 'Кўп бериладиган саволлар', path: 'faqs/', component: {
+                template: '<router-view></router-view>', script: ' export default {}'
+            }, children: [{
+                name: "Кўп бериладиган савол ва жавоблар",
+                path: '',
+                component: () => import('./views/dashboard/faqs/index'),
+            }, {
+                name: "Кўп бериладиган савол ва жавоб яратиш",
+                path: 'create',
+                component: () => import('./views/dashboard/faqs/create'),
+            }, {
+                name: "Кўп бериладиган савол ва жавоб тахрирлаш",
+                path: 'edit/:id',
+                component: () => import('./views/dashboard/faqs/edit'),
+            }, {
+                name: "Кўп бериладиган савол ва жавоблар",
+                path: 'view/:id',
+                component: () => import('./views/dashboard/faqs/view'),
             },
-            children:
-                [
-                    {
-                        name: "Сўровномалар",
-                        path: '',
-                        component: () => import('./views/dashboard/votes/index'),
 
-                    },
-                    {
-                        name: "Сўровнома яратиш",
-                        path: 'create',
-                        component: () => import('./views/dashboard/votes/create'),
+            ]
 
-                    },
-                    {
-                        name: "Сўровнома тахрирлаш",
-                        path: 'edit/:id',
-                        component: () => import('./views/dashboard/votes/edit'),
-
-                    },
-                    {
-                        name: "Сўровнома",
-                        path: 'view/:id',
-                        component: () => import('./views/dashboard/votes/view'),
-
-                    },
-
-                ]
-
-        },
-        // Faqs
+        }, // Organizations
         {
-            name: 'Кўп бериладиган саволлар',
-            path: 'faqs/',
-            component: {
-                template: '<router-view></router-view>',
-                script: ' export default {}'
+            name: 'Organisations', path: 'orgs/', component: {
+                template: '<router-view></router-view>', script: ' export default {}'
+            }, children: [{
+                name: "Бошқармалар", path: '', component: () => import('./views/dashboard/orgs/index'),
+
+            }, {
+                name: "Бошқарма яратиш", path: 'create', component: () => import('./views/dashboard/orgs/create'),
+
+            }, {
+                name: "Бошқармани тахрирлаш", path: 'edit/:id', component: () => import('./views/dashboard/orgs/edit'),
+
+            }, {
+                name: "Бошқарма", path: 'view/:id', component: () => import('./views/dashboard/orgs/view'),
             },
-            children:
-                [
-                    {
-                        name: "Кўп бериладиган савол ва жавоблар",
-                        path: '',
-                        component: () => import('./views/dashboard/faqs/index'),
-                    },
-                    {
-                        name: "Кўп бериладиган савол ва жавоб яратиш",
-                        path: 'create',
-                        component: () => import('./views/dashboard/faqs/create'),
-                    },
-                    {
-                        name: "Кўп бериладиган савол ва жавоб тахрирлаш",
-                        path: 'edit/:id',
-                        component: () => import('./views/dashboard/faqs/edit'),
-                    },
-                    {
-                        name: "Кўп бериладиган савол ва жавоблар",
-                        path: 'view/:id',
-                        component: () => import('./views/dashboard/faqs/view'),
-                    },
 
-                ]
-
-        },
-        // Organizations
-        {
-            name: 'Organisations',
-            path: 'orgs/',
-            component: {
-                template: '<router-view></router-view>',
-                script: ' export default {}'
-            },
-            children:
-                [
-                    {
-                        name: "Бошқармалар",
-                        path: '',
-                        component: () => import('./views/dashboard/orgs/index'),
-
-                    },
-                    {
-                        name: "Бошқарма яратиш",
-                        path: 'create',
-                        component: () => import('./views/dashboard/orgs/create'),
-
-                    },
-                    {
-                        name: "Бошқармани тахрирлаш",
-                        path: 'edit/:id',
-                        component: () => import('./views/dashboard/orgs/edit'),
-
-                    },
-                    {
-                        name: "Бошқарма",
-                        path: 'view/:id',
-                        component: () => import('./views/dashboard/orgs/view'),
-                    },
-
-                ]
+            ]
 
         },        // Organizations
         {
-            name: 'Марказий аппарат',
-            path: 'apparat/',
-            component: {
-                template: '<router-view></router-view>',
-                script: ' export default {}'
+            name: 'Марказий аппарат', path: 'apparat/', component: {
+                template: '<router-view></router-view>', script: ' export default {}'
+            }, children: [{
+                name: "Бошқармалар", path: '', component: () => import('./views/dashboard/apparat/index'),
+
+            }, {
+                name: "Бошқарма яратиш", path: 'create', component: () => import('./views/dashboard/apparat/create'),
+
+            }, {
+                name: "Бошқармани тахрирлаш",
+                path: 'edit/:id',
+                component: () => import('./views/dashboard/apparat/edit'),
+
+            }, {
+                name: "Бошқарма", path: 'view/:id', component: () => import('./views/dashboard/apparat/view'),
             },
-            children:
-                [
-                    {
-                        name: "Бошқармалар",
-                        path: '',
-                        component: () => import('./views/dashboard/apparat/index'),
 
-                    },
-                    {
-                        name: "Бошқарма яратиш",
-                        path: 'create',
-                        component: () => import('./views/dashboard/apparat/create'),
-
-                    },
-                    {
-                        name: "Бошқармани тахрирлаш",
-                        path: 'edit/:id',
-                        component: () => import('./views/dashboard/apparat/edit'),
-
-                    },
-                    {
-                        name: "Бошқарма",
-                        path: 'view/:id',
-                        component: () => import('./views/dashboard/apparat/view'),
-                    },
-
-                ]
+            ]
 
         }, {
-            name: 'Раҳбарият',
-            path: 'rahbariyat/',
-            component: {
-                template: '<router-view></router-view>',
-                script: ' export default {}'
+            name: 'Раҳбарият', path: 'rahbariyat/', component: {
+                template: '<router-view></router-view>', script: ' export default {}'
+            }, children: [{
+                name: "Рахбарият", path: '', component: () => import('./views/dashboard/rahbariyat/index'),
+
+            }, {
+                name: "Рахбарият яратиш",
+                path: 'create',
+                component: () => import('./views/dashboard/rahbariyat/create'),
+
+            }, {
+                name: "Тахрирлаш", path: 'edit/:id', component: () => import('./views/dashboard/rahbariyat/edit'),
+
+            }, {
+                name: "Рахбарият", path: 'view/:id', component: () => import('./views/dashboard/rahbariyat/view'),
             },
-            children:
-                [
-                    {
-                        name: "Рахбарият",
-                        path: '',
-                        component: () => import('./views/dashboard/rahbariyat/index'),
 
-                    },
-                    {
-                        name: "Рахбарият яратиш",
-                        path: 'create',
-                        component: () => import('./views/dashboard/rahbariyat/create'),
+            ]
 
-                    },
-                    {
-                        name: "Тахрирлаш",
-                        path: 'edit/:id',
-                        component: () => import('./views/dashboard/rahbariyat/edit'),
-
-                    },
-                    {
-                        name: "Рахбарият",
-                        path: 'view/:id',
-                        component: () => import('./views/dashboard/rahbariyat/view'),
-                    },
-
-                ]
-
-        },
-        // Menus
+        }, // Menus
         {
-            name: 'Менюлар',
-            path: 'menu/',
-            component: {
-                template: '<router-view></router-view>',
-                script: ' export default {}'
+            name: 'Менюлар', path: 'menu/', component: {
+                template: '<router-view></router-view>', script: ' export default {}'
+            }, children: [{
+                name: "Менюлар", path: '', component: () => import('./views/dashboard/menus/index'),
+
+            }, {
+                name: "Меню яратиш", path: 'create', component: () => import('./views/dashboard/menus/create'),
+
+            }, {
+                name: "Менюни тахрирлаш", path: 'edit/:id', component: () => import('./views/dashboard/menus/edit'),
+
+            }, {
+                name: "Подменюлар", path: 'view/:id', component: () => import('./views/dashboard/menus/view'),
+
             },
-            children:
-                [
-                    {
-                        name: "Менюлар",
-                        path: '',
-                        component: () => import('./views/dashboard/menus/index'),
 
-                    },
-                    {
-                        name: "Меню яратиш",
-                        path: 'create',
-                        component: () => import('./views/dashboard/menus/create'),
+            ]
 
-                    },
-                    {
-                        name: "Менюни тахрирлаш",
-                        path: 'edit/:id',
-                        component: () => import('./views/dashboard/menus/edit'),
-
-                    },
-                    {
-                        name: "Подменюлар",
-                        path: 'view/:id',
-                        component: () => import('./views/dashboard/menus/view'),
-
-                    },
-
-                ]
-
-        },
-        {
+        }, {
             name: 'Notifications',
             path: 'components/notifications',
             component: () => import('./views/dashboard/component/Notifications'),
         },
-
-        {
-            path: '*',
-            redirect: '/'
-        }
     ]
 };
-if (location.host == '192.168.214.88') routes.push(adminRoute);
+if (location.host === '192.168.214.88') routes.push(adminRoute);
+routes.push(userRoutes);
+routes.push(allRoutes);
 //console.log(location.host);
 export default new vueRouter({
-    mode: 'history',
-    base: process.env.BASE_URL,
-    routes: routes,
-    scrollBehavior() {
+    mode: 'history', base: process.env.BASE_URL, routes: routes, scrollBehavior() {
         return {x: 0, y: 0}
     }
 

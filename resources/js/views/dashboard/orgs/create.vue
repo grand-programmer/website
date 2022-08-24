@@ -78,19 +78,56 @@
                                                     rules="required|min:3" />
                                             </v-col>
                                             <v-col cols="2">
-                                                <ValidationProvider
-                                                    v-slot="{ errors}"
-                                                    rules="required"
-                                                    name="Бошқарма бошлиғи расми"
-                                                >
                                                 <v-file-input label="Бошқарма бошлиғи расми"
-                                                              v-model="rahbariyat.boshliq.image"
+                                                              v-model="rahbariyat_boshliq_image"
                                                               name="boshliq_image"
+                                                              accept="image/*"
+                                                              @change="setImage('cropper',rahbariyat_boshliq_image)"
                                                 >
                                                 </v-file-input>
-                                                    <span class="red--text">{{ errors[0] }}</span>
-                                                </ValidationProvider>
                                             </v-col>
+
+                                            <section class="preview-area">
+                                                <v-container>
+                                                    <v-row>
+                                                        <v-col cols="3" v-show="rahbariyat_boshliq_image">
+                                                            <vue-cropper
+                                                                ref="cropper"
+                                                                :aspect-ratio="10/11"
+                                                                :scalable="true"
+                                                                :cropBoxResizable="false"
+                                                                :src="'/storage/uploads/boshqarmalar/boshliq/' + rahbariyat.boshliq.image"
+                                                                v-show="rahbariyat_boshliq_image"
+                                                                :autoCrop="true"
+                                                                style="max-width:1000px"
+                                                            />
+
+
+                                                        </v-col>
+
+                                                        <v-col cols="2" v-if="rahbariyat_boshliq_image">
+                                                            <v-btn v-if="rahbariyat_boshliq_image"
+                                                                   @click.prevent="cropImage">Кесиш
+                                                            </v-btn>
+                                                        </v-col>
+
+                                                        <v-col cols="3">
+                                                            <div class="cropped-image">
+                                                                <div class="profile-icon-wrapper boshliq"
+                                                                     v-if="cropImg">
+                                                                    <div class="profile-icon"
+                                                                         :style="'background-image: url('+cropImg+')'">
+
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </v-col>
+                                                    </v-row>
+                                                </v-container>
+
+
+                                            </section>
                                             <v-col cols="12"><hr/></v-col>
                                             <h4 style="color:#39ae69; font-weight: bold">Ўринбосарлар </h4>
                                             <br/>
@@ -139,19 +176,15 @@
                                                         name="boshliq_telefon[]"
                                                         rules="required|min:3" />
                                                 </v-col>
-                                                <v-col cols="2">
-                                                    <ValidationProvider
-                                                        v-slot="{ errors}"
-                                                        rules="required"
-                                                        name="Расми"
+
+                                                <v-col cols="3">
+                                                    <v-file-input label="Расми"
+                                                                  v-model="images[k]"
+                                                                  name="orinbosar_image[]"
+                                                                  accept="image/*"
+                                                                  @change="setImage(k,images[k])"
                                                     >
-                                                        <v-file-input label="Расми"
-                                                                      v-model="rahbariyat.orinbosarlar[k].image"
-                                                                      name="orinbosar_image[]"
-                                                        >
-                                                        </v-file-input>
-                                                        <span class="red--text">{{ errors[0] }}</span>
-                                                    </ValidationProvider>
+                                                    </v-file-input>
 
                                                 </v-col>
                                                 <v-col cols="1">
@@ -160,7 +193,52 @@
                                                         <v-icon>mdi-close</v-icon>
                                                     </v-btn>
                                                 </v-col>
+                                                <section class="preview-area">
+                                                    <v-container>
+                                                        <v-row>
+                                                            <v-col cols="3" v-show="images[k]">
+                                                                <vue-cropper
+                                                                    :ref="'orinbosarCropper'+k"
+                                                                    :aspect-ratio="10/11"
+                                                                    :scalable="true"
+                                                                    :cropBoxResizable="false"
+                                                                    :src="'/storage/uploads/boshqarmalar/orinbosar/'+rahbariyat.orinbosarlar[k].image"
+                                                                    :autoCrop="true"
+                                                                    style="max-width:1000px"
+                                                                    v-show="images[k]"
+                                                                />
+
+
+                                                            </v-col>
+
+                                                            <v-col cols="2" v-show="images[k]">
+                                                                <v-btn v-show="images[k]"
+                                                                       @click.prevent="cropImage(k)">Кесиш
+                                                                </v-btn>
+                                                            </v-col>
+
+                                                            <v-col cols="3">
+                                                                <div class="preview"></div>
+                                                                <div class="cropped-image">
+                                                                    <div class="profile-icon-wrapper orinbosar"
+                                                                         v-if="cropImgOrinbosar[k]">
+                                                                        <div class="profile-icon"
+                                                                             :style="'background-image: url('+ cropImgOrinbosar[k] + ')'">
+
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </v-col>
+                                                        </v-row>
+                                                    </v-container>
+
+
+                                                </section>
+
+
                                             </v-row>
+
 
                                             <v-col cols="12"><hr/></v-col>
                                             <v-row>
@@ -349,10 +427,10 @@
 </template>
 
 <script>
-import api from "./../../../src/services/apiService";
+import api from "./../../../src/services/adminApi";
 import {extend, ValidationProvider, ValidationObserver} from 'vee-validate';
 import * as rules from 'vee-validate/dist/rules';
-import messages from '../../../locales/uz.json';
+import messages from '../../../locales/oz.json';
 import Editor from '@tinymce/tinymce-vue';
 import MyField from '../../../components/form/myfield';
 Object.keys(rules).forEach(rule => {
@@ -362,6 +440,8 @@ Object.keys(rules).forEach(rule => {
 
     });
 });
+import VueCropper from 'vue-cropperjs';
+import 'cropperjs/dist/cropper.css';
 
 export default {
     name: "OrgCreate",
@@ -416,6 +496,13 @@ export default {
             ],
             panel: [],
             title: null,
+            cropImg: null,
+            cropImgOrinbosar: [],
+            imgSrc: null,
+            imgSrcOrinbosar: [],
+            rahbariyat_boshliq_image: null,
+            images: [],
+            orinbosarlar: [],
 
         }
     },
@@ -438,6 +525,49 @@ export default {
                 },*/
     },
     methods: {
+
+        cropImage(k = null) {
+            const croppedimages = this.cropImgOrinbosar;
+            this.cropImgOrinbosar = [];
+            const _this=this;
+            croppedimages.forEach(function (item, k) {
+                _this.cropImgOrinbosar[k] = item;
+            })
+            if (k >= 0) {
+
+                this.cropImgOrinbosar[k] = this.$refs['orinbosarCropper' + k][0].getCroppedCanvas().toDataURL()
+                console.log("sdfsdf");
+            } else
+                this.cropImg = this.$refs.cropper.getCroppedCanvas().toDataURL()
+        },
+        setImage(k = null, e) {
+            const file = e;
+            if (file.type.indexOf('image/') === -1) {
+                alert('Please select an image file');
+                return;
+            }
+            if (typeof FileReader === 'function') {
+                const reader = new FileReader();
+                reader.onload = (event) => {
+
+                    // rebuild cropperjs with the updated source
+                    if (k >= 0) {
+                        this.$refs['orinbosarCropper' + k][0].replace(event.target.result);
+                        //console.log('asdasd')
+                        this.imgSrcOrinbosar[k] = event.target.result;
+                    } else {
+                        //console.log(k);
+                        this.$refs.cropper.replace(event.target.result);
+                        this.imgSrc = event.target.result;
+                    }
+
+                };
+                reader.readAsDataURL(file);
+            } else {
+                alert('Sorry, FileReader API not supported');
+            }
+        },
+
         initialize() {
             /*            api.readorgs().then((response) => {
                             this.editedItem = response.data;
@@ -457,6 +587,7 @@ export default {
         },
 
         async save() {
+            const _this=this;
 
             const isValid = await this.$refs.pageForm.validate();
 
@@ -477,6 +608,47 @@ export default {
                 form.append('rahbariyat[boshliq][qabul]', this.rahbariyat.boshliq.qabul);
                 form.append('rahbariyat[boshliq][telefon]', this.rahbariyat.boshliq.telefon);
                 // this.editedItem.sort_number=parseInt(this.editedItem.sort_number);
+                if (_this.imgSrc) this.$refs.cropper.getCroppedCanvas().toBlob((blob) => {
+                    form.append('rahbariyat[boshliq][image]', blob);
+                    if(this.rahbariyat.orinbosarlar)
+                    Object.entries(this.rahbariyat.orinbosarlar).forEach(([valkey, v]) => {
+                        Object.entries(v).forEach(([itemkey, item]) => {
+                            if (itemkey === 'image') {
+                                if (_this.imgSrcOrinbosar[valkey]) {
+                                    console.log(_this.$refs['orinbosarCropper' + valkey]);
+                                    _this.$refs['orinbosarCropper' + valkey][0].getCroppedCanvas().toBlob((blob1) => {
+                                        form.append(`rahbariyat[orinbosar][${valkey}][${itemkey}]`, blob1);
+                                    })
+                                } else
+                                    form.append(`rahbariyat[orinbosar][${valkey}][${itemkey}]`, item);
+                            } else
+                                form.append(`rahbariyat[orinbosar][${valkey}][${itemkey}]`, `${item}`)
+                        });
+                    });
+                    if(this.posts)
+                        Object.entries(this.posts).forEach(([valkey, v]) => {
+                            Object.entries(v).forEach(([itemkey, item]) => {
+                                form.append(`posts[${valkey}][${itemkey}]`, `${item}`)
+                            });
+                        });
+                    setTimeout(() => {
+                        api.addOrg(form).then((response) => {
+                            this.$toast.success(`Маълумотларни омадли тарзда юкланди!`)
+                            this.close()
+                        }).catch((error) => {
+                            this.$toast.error(`Маълумотларни юклашда хатолик содир бўлди!`)
+                            console.log(error)
+                        })
+                    }, 200)
+                })
+                else
+                this.$toast.error(`Бошлиқ расми тўлдирилмади!`);
+
+
+
+/*
+
+
                 Object.entries(this.rahbariyat.orinbosarlar).forEach(([valkey, v]) => {
                     Object.entries(v).forEach(([itemkey, item]) => {
                         if(itemkey==='image') form.append(`rahbariyat[orinbosar][${valkey}][${itemkey}]`, item); else
@@ -488,16 +660,12 @@ export default {
                         form.append(`posts[${valkey}][${itemkey}]`, `${item}`)
                     });
                 });
+*/
 
-                api.addOrg(form).then((response) => {
-                    this.$toast.success(`Маълумотларни омадли тарзда юкланди!`)
-                    this.close()
-                }).catch((error) => {
-                    this.$toast.error(`Маълумотларни юклашда хатолик содир бўлди!`)
-                    console.log(error)
-                })
+
             } else {
                 const _this = this;
+                if(this.posts)
                 this.posts.forEach(function (item, key) {
 
                     console.log(item)
@@ -520,7 +688,7 @@ export default {
             })
         },
         deleteOrganization(key) {
-            if (key > 0)
+            if (key >= 0)
                 this.posts.splice(key, 1);
         },
         removeOrinbosar(key) {
@@ -535,7 +703,7 @@ export default {
         ValidationProvider,
         ValidationObserver,
         //Editor,
-        MyField
+        MyField,VueCropper
     },
 }
 </script>

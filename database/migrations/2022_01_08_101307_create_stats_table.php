@@ -13,9 +13,12 @@ class CreateStatsTable extends Migration
      */
     public function up()
     {
-        Schema::create('stats', function (Blueprint $table) {
+        Schema::connection('db2_odbc_stat')->create('website', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->integer('month')->default(0);
+            $table->integer('year')->default(2022);
+            $table->integer('rejim')->default(0);  // 0- Им, 1-Эк, 3- All
             $table->text('data');
             $table->timestamps();
         });
@@ -28,6 +31,7 @@ class CreateStatsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('stats');
+        if (Schema::connection('db2_odbc_stat')->hasTable('website'))
+            Schema::connection('db2_odbc_stat')->drop('website');
     }
 }

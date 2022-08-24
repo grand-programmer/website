@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 use App\AppealController;
 use App\AuthController;
@@ -19,55 +20,84 @@ use Illuminate\Support\Facades\Schema;
 */
 
 
-Route::group(['prefix' => 'v1'], function(){
-    Route::prefix('auth')->group(function () {
-        Route::post('register', 'App\Http\Controllers\AuthController@register');
-        Route::post('login', 'App\Http\Controllers\AuthController@login');
-        Route::group(['middleware' => 'auth:api'], function(){
-            Route::get('user', 'App\Http\Controllers\AuthController@user');
-            Route::get('services', 'App\Http\Controllers\UserController@getServices');
-            Route::post('logout', 'App\Http\Controllers\AuthController@logout');
-            Route::get('refresh', 'App\Http\Controllers\AuthController@refresh');
+//Route::group(['prefix' => '{lang?}'], function ($lang) {
+//    App::setLocale($lang||'uz');
+    Route::group(['prefix' => 'v1','middleware' => 'locale'], function () {
+
+        Route::prefix('auth')->group(function () {
+            Route::post('register', 'App\Http\Controllers\AuthController@register');
+            Route::post('login', 'App\Http\Controllers\AuthController@login');
+            Route::group(['middleware' => 'auth:api'], function () {
+                Route::get('user', 'App\Http\Controllers\AuthController@user');
+                Route::get('services', 'App\Http\Controllers\UserController@getServices');
+                Route::post('logout', 'App\Http\Controllers\AuthController@logout');
+                Route::get('refresh', 'App\Http\Controllers\AuthController@refresh');
+            });
+
+        });
+        /*    Route::get('test',function(){
+
+            });*/
+        Route::any('ex_api/{action}', 'App\Http\Controllers\ApiController@index');
+        Route::group(['middleware' => 'auth:api'], function () {
+            Route::get('users', 'App\Http\Controllers\UserController@index')->middleware('isAdmin');
+            Route::get('users/{id}', 'App\Http\Controllers\UserController@show')->middleware('isAdminOrSelf');
         });
 
+
+        /**
+         *
+         * Admin routes
+         *
+         */
+        Route::group(['prefix' => 'admin', 'middleware' => 'role:admin'], function () {  //role:editor,approver
+            Route::resource('/news', 'App\Http\Controllers\Admin\AdminNewsController', ['as' => 'admin']);
+            Route::get('/categories/select', 'App\Http\Controllers\CategoryController@getForSelect');
+            Route::resource('/categories', 'App\Http\Controllers\Admin\AdminCategoryController', ['as' => 'admin']);
+            Route::resource('/page', 'App\Http\Controllers\Admin\AdminPageController', ['as' => 'admin']);
+            Route::resource('/events', 'App\Http\Controllers\EventController', ['as' => 'admin']);
+            Route::resource('/organizations', 'App\Http\Controllers\OrganizationController', ['as' => 'admin']);
+            Route::resource('/apparat', 'App\Http\Controllers\ApparatController', ['as' => 'admin']);
+            Route::resource('/faqs', 'App\Http\Controllers\FaqController', ['as' => 'admin']);
+            Route::get('/menu/select', 'App\Http\Controllers\MenuController@getForSelect', ['as' => 'admin']);
+            Route::get('/menu/front', 'App\Http\Controllers\MenuController@getForFront', ['as' => 'admin']);
+            Route::resource('/menu', 'App\Http\Controllers\Admin\AdminMenuController', ['as' => 'admin']);
+        });
+
+
+        Route::get('/stat', 'App\Http\Controllers\StatController@index');
+        Route::post('/appeal/checkAppeal', 'App\Http\Controllers\AppealController@check');
+        Route::resource('/appeal', 'App\Http\Controllers\AppealController');
+        Route::post('/page/related/{page}', 'App\Http\Controllers\PageController@related');
+        Route::resource('/page', 'App\Http\Controllers\PageController');
+        Route::get('/menu/select', 'App\Http\Controllers\MenuController@getForSelect');
+        Route::get('/menu/front', 'App\Http\Controllers\MenuController@getForFront');
+        Route::resource('/menu', 'App\Http\Controllers\MenuController');
+
+        Route::post('/news/{news}/vote', 'App\Http\Controllers\NewsController@like');
+        Route::resource('/news', 'App\Http\Controllers\NewsController');
+
+
+        Route::resource('/categories', 'App\Http\Controllers\CategoryController');
+        Route::get('/front/events', 'App\Http\Controllers\EventController@getForFront');
+        Route::resource('/events', 'App\Http\Controllers\EventController');
+        Route::resource('/organizations', 'App\Http\Controllers\OrganizationController');
+        Route::resource('/apparat', 'App\Http\Controllers\ApparatController');
+        Route::resource('/faqs', 'App\Http\Controllers\FaqController');
+        Route::get('/front/faqs', 'App\Http\Controllers\FaqController@getForFront');
+        Route::get('/votes/front', 'App\Http\Controllers\VoteController@indexFront');
+        Route::resource('/votes', 'App\Http\Controllers\VoteController');
+        Route::put('/votescount/{vote}', 'App\Http\Controllers\VoteController@updateCount');
+
+
+        /*    Route::get('/test',function(){
+                $columns = Schema::getColumnListing('appeals'); // users table
+                dd($columns);
+            });*/
+
+        Route::get('/data/tftn', 'App\Http\Controllers\DataController@getTftn');
+        Route::get('/data/inn', 'App\Http\Controllers\DataController@getInn');
+        Route::get('/data/currency', 'App\Http\Controllers\DataController@getCurrency');
+        Route::get('/data/country', 'App\Http\Controllers\DataController@getCountry');
     });
-/*    Route::get('test',function(){
-
-    });*/
-    Route::any('ex_api/{action}','App\Http\Controllers\ApiController@index');
-    Route::group(['middleware' => 'auth:api'], function(){
-        Route::get('users', 'App\Http\Controllers\UserController@index')->middleware('isAdmin');
-        Route::get('users/{id}', 'App\Http\Controllers\UserController@show')->middleware('isAdminOrSelf');
-    });
-    Route::get('/stat','App\Http\Controllers\StatController@index');
-    Route::post('/appeal/checkAppeal','App\Http\Controllers\AppealController@check');
-    Route::resource('/appeal','App\Http\Controllers\AppealController');
-    Route::post('/page/related/{page}','App\Http\Controllers\PageController@related');
-    Route::resource('/page','App\Http\Controllers\PageController');
-    Route::get('/menu/select','App\Http\Controllers\MenuController@getForSelect');
-    Route::get('/menu/front','App\Http\Controllers\MenuController@getForFront');
-    Route::resource('/menu','App\Http\Controllers\MenuController');
-    Route::resource('/news','App\Http\Controllers\NewsController');
-    Route::get('/categories/select','App\Http\Controllers\CategoryController@getForSelect');
-    Route::resource('/categories','App\Http\Controllers\CategoryController');
-    Route::get('/front/events','App\Http\Controllers\EventController@getForFront');
-    Route::resource('/events','App\Http\Controllers\EventController');
-    Route::resource('/organizations','App\Http\Controllers\OrganizationController');
-    Route::resource('/apparat','App\Http\Controllers\ApparatController');
-    Route::resource('/faqs','App\Http\Controllers\FaqController');
-    Route::get('/front/faqs','App\Http\Controllers\FaqController@getForFront');
-    Route::get('/votes/front','App\Http\Controllers\VoteController@indexFront');
-    Route::resource('/votes','App\Http\Controllers\VoteController');
-    Route::put('/votescount/{vote}','App\Http\Controllers\VoteController@updateCount');
-
-
-/*    Route::get('/test',function(){
-        $columns = Schema::getColumnListing('appeals'); // users table
-        dd($columns);
-    });*/
-
-    Route::get('/data/tftn','App\Http\Controllers\DataController@getTftn');
-    Route::get('/data/inn','App\Http\Controllers\DataController@getInn');
-    Route::get('/data/currency','App\Http\Controllers\DataController@getCurrency');
-    Route::get('/data/country','App\Http\Controllers\DataController@getCountry');
-});
+//});

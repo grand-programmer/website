@@ -876,7 +876,20 @@
                         </div>
                     </div>
                 </div>
+                <div class="others">
+                    <a href="/page/boshqarma/16">
+                        Миллий кинология маркази
+                    </a>
+                    <a href="/page/boshqarma/17">
+                        "Тошкент АЭРО" ихтисослаштирилган божхона комплекси
+                    </a>
+                    <a href="/page/boshqarma/18">
+                        Марказий божхона лабораторияси
+                    </a>
+
+                </div>
             </div>
+
         </div>
 
     </div>
@@ -888,7 +901,7 @@
         name:"Hududiy",
         methods:{
             goHudud(hudud){
-                console.log('asdasd')
+                //console.log('asdasd')
                 $(".hududiy_boshqarmalar a").click();
                 this.$router.push('/page/boshqarma/'+hudud);
             }
@@ -898,3 +911,16 @@
 
 
 </script>
+<style>
+    .others{
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        bottom: 60px;
+        left: 0;
+    }
+    .others a{
+        font-size: 25px;
+        line-height:40px;
+    }
+</style>

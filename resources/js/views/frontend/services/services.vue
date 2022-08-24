@@ -31,24 +31,24 @@
             <div class="container">
                 <ul class="nav nav-pills mb-3 portfolio_menu" id="pills-tab" role="tablist">
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill"
+                        <button class="nav-link "  @click="nav_link=1" :class="nav_link===1?'active':''" id="pills-home-tab" data-bs-toggle="pill"
                                 data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home"
                                 aria-selected="true">Интерактив хизматлар
                         </button>
                     </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill"
+                    <li class="nav-item"  role="presentation">
+                        <button class="nav-link" @click="nav_link=2" :class="nav_link===2?'active':''" id="pills-profile-tab" data-bs-toggle="pill"
                                 data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile"
                                 aria-selected="false">Очиқ маълумотлар
                         </button>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill"
+                        <button class="nav-link" @click="nav_link=3" :class="nav_link===3?'active':''" id="pills-contact-tab" data-bs-toggle="pill"
                                 data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact"
                                 aria-selected="false">Фойдали ресурслар
                         </button>
                     </li>
-                    <li class="nav-item" role="presentation">
+                    <li class="nav-item" @click="nav_link=4" :class="nav_link===4?'active':''" role="presentation">
                         <button class="nav-link" id="mobil-ilovalar-tab" data-bs-toggle="pill"
                                 data-bs-target="#mobil-ilovalar" type="button" role="tab" aria-controls="mobil-ilovalar"
                                 aria-selected="false">Мобил иловалар
@@ -57,7 +57,7 @@
                 </ul>
             </div>
             <div class="tab-content" id="pills-tabContent">
-                <div class="tab-pane active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                <div class="tab-pane" :class="nav_link===1?'active':''" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
                     <div class="portfolio-background1"></div>
                     <div class="tab-container">
                         <div class="col-md-2 portfolio_single p1">
@@ -78,6 +78,28 @@
                                 </div>
                                 <div class="portfolio_text">
                                     <p>Божхона тўловлари бўйича дастлабки қарор олиш</p>
+
+                                </div>
+                            </router-link>
+                        </div>
+                        <div class="col-md-2 portfolio_single p1">
+                            <router-link to="/services/intellectual" class="portfolio-card">
+                                <div class="portfolio_image">
+                                    <img src="/img/icons/patent.png"/>
+                                </div>
+                                <div class="portfolio_text">
+                                    <p>Интеллектуал мулк объектлари божхона реестрига киритиш учун ариза юбориш</p>
+
+                                </div>
+                            </router-link>
+                        </div>
+                        <div class="col-md-2 portfolio_single p1">
+                            <router-link to="/services/recycle" class="portfolio-card">
+                                <div class="portfolio_image">
+                                    <img src="/img/icons/recycle.png"/>
+                                </div>
+                                <div class="portfolio_text">
+                                    <p>Товарни божхона ҳудудида қайта ишлаш учун рухсатнома олиш</p>
 
                                 </div>
                             </router-link>
@@ -350,7 +372,7 @@
                     </div>
 
                 </div>
-                <div class="tab-pane" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                <div class="tab-pane" :class="nav_link===2?'active':''" id="pills-profile"  role="tabpanel" aria-labelledby="pills-profile-tab">
                     <div class="background"></div>
                     <div class="tab-container">
                         <div class="opendata-container">
@@ -576,11 +598,17 @@
                         </div>
                     </div>
                 </div>
-                <div class="tab-pane" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+                <div class="tab-pane" :class="nav_link===3?'active':''" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
                     <div class="background"></div>
                     <div class="tab-container">
                         <div class="foydali-resurslar row">
-                            <a class="foydali-resurs col-4" target="_blank" href="https://data.gov.uz/uzbKr/data/610258012a2e256d868e82dd">
+                            <router-link class="foydali-resurs col-4" to="/registries/decisions">
+                                <div class="foydali-resurs-image" style="background-image: url(/img/icons/patent-white.png); background-size: 40%">
+                                </div>
+                                <div class="foydali-resurs-text">Божхона тўловлари бўйича дастлабки қарорлар реестри
+
+                                </div>
+                            </router-link><a class="foydali-resurs col-4" target="_blank" href="https://data.gov.uz/uzbKr/data/610258012a2e256d868e82dd">
                                 <div class="foydali-resurs-image" style="background-image: url(/img/icons/ombor.png)">
                                 </div>
                                 <div class="foydali-resurs-text">Божхона омборлари реестри
@@ -622,7 +650,7 @@
 
                     </div>
                 </div>
-                <div class="tab-pane" id="mobil-ilovalar" role="tabpanel" aria-labelledby="mobil-ilovalar-tab">
+                <div class="tab-pane" :class="nav_link===4?'active':''" id="mobil-ilovalar" role="tabpanel" aria-labelledby="mobil-ilovalar-tab">
                     <div class="background"></div>
                     <div class="tab-container">
                         <div class="mobil-ilovalar row">
@@ -735,8 +763,19 @@ export default {
                     exact: true,
                 },
             ],
+            nav_link:1,
         }
     },
+    created() {
+        this.initialize();
+    },
+    methods:{
+        initialize(){
+            if(this.$route.query.page){
+                this.nav_link=parseInt(this.$route.query.page);
+            }
+        }
+    }
 
 }
 </script>

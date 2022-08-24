@@ -1,6 +1,8 @@
 :root {
     --mycolor: #39ae69;
 }
+$first-color:#39ae69;
+$second-color: #00B065;
 
 .primary-color {
     color: var(--mycolor);
@@ -877,15 +879,15 @@ section.content_block .tab-content > .tab-pane {
 
 .section_title {
     padding-bottom: 8px;
-    color: #2f4c3b;
+    color: var(--mycolor);
     text-transform: uppercase;
-    border-bottom: 3px solid #26a55b;
     width: 50%;
     padding-top: 80px;
     margin-bottom: 20px;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 30px;
+    margin-top: 45px;
+    font-weight: 600;
 }
 
 #section2 {
@@ -3315,6 +3317,11 @@ a.read_more {
     .widget_tittle {
         border-bottom: 2px solid #39ae69;
 
+        height: 92px;
+        display: flex;
+        align-items: center;
+        padding-bottom: 10px;
+
         h3 {
             padding-bottom: unset;
         }
@@ -3414,11 +3421,16 @@ a.read_more {
 }
 
 .profile-icon {
-    width: 100px;
+    min-width: 95px;
     height: 100px;
+    min-height: 90px;
+    max-height: 105px;
+    max-width: 102px;
     background-image: url(../img/icons/business-man.png);
-    background-size: 100%;
+    background-size: cover;
+    background-position: top;
     display: block;
+    cursor:pointer;
 }
 
 .rais {
@@ -3462,13 +3474,19 @@ a.read_more {
 
 
                 .profile-icon {
+                    min-width: 254px;
+
+                    min-height: 254px;
+                    max-height: 256px;
+                    max-width: 256px;
+
                     width: 255px;
                     height: 255px;
                     /*                    background-image: url(/images/business-man.png?f38965d…);
                                         background-size: 84%;*/
                     display: block;
                     border-radius: 100%;
-                    background-position: center;
+                    background-position: top;
                     fill: #fff;
                     background-image: url(/images/rahbariyat/rais.jpg);
                     /*                    background-size: 273%;
@@ -3945,7 +3963,7 @@ a.read_more {
             }
 
             #columnchart3 {
-                min-height: 58vh;
+                min-height: 65vh;
                 margin-bottom: 0;
             }
 
@@ -4233,6 +4251,7 @@ a.read_more {
                     justify-content: space-between;
                     padding: 0;
                     height: 5.5rem;
+                    cursor: pointer;
 
                     a {
                         color: #044a20 !important;
@@ -4284,6 +4303,27 @@ a.read_more {
                 font-size: 34px;
                 line-height: 41px;
                 color: #39ae69;
+            }
+            .all-news_link{
+                color: #39ae69;
+                /* text-decoration: underline; */
+                font-size: 20px;
+                font-weight: bold;
+                svg {
+                    fill:var(--mycolor);
+                    width: 25px;
+                    margin-left: 10px;
+                    path:nth-of-type(2){
+                        fill:var(--mycolor);
+                    }
+                    transition: 0.5s ease;
+                }
+                &:hover{
+                    svg{
+                        transform: translateX(10px);
+                        transition: 0.5s ease;
+                    }
+                }
             }
 
             .news-link {
@@ -5282,4 +5322,58 @@ html body .Vue-Toastification__container.top-right {
 }
 .nav-link:focus, .nav-link:hover{
     color: var(--mycolor);
+}
+.cursor-pointer{
+    cursor:pointer;
+}
+
+.services-opens{
+    position: absolute;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 74px;
+    z-index: 10;
+    background-image: linear-gradient(180deg, #005e2778, transparent);
+    height: 62px;
+    > div{
+        display: flex;
+        width: 70vw;
+        margin: 0 auto;
+        justify-content: space-around;
+        > a{
+            background-color: #ccc;
+            padding: 10px;
+
+        }
+    }
+}
+.v-dialog.my_dialog{
+    width: initial;
+    position: relative;
+    /* max-width: 70vw; */
+    /* min-width: 40vw; */
+    /* max-height: 50vh
+vh
+; */
+    overflow: initial;
+    img{
+        width: 100%;
+        max-width: 72vw;
+        min-width: 40vw;
+        max-height: 75vh;
+        height: 100%;
+    }
+    button.v-btn--icon.v-size--default{
+        position: absolute;
+        top: -24px;
+        right: -60px;
+        i.v-icon{
+            font-size: 45px;
+            &:hover{
+                color: #0a0a0a;
+            }
+        }
+    }
 }

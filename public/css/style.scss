@@ -37,7 +37,22 @@ Table of Content:
 /*----------------------------------------------------*/
 /*font Variables*/
 /*Color Variables*/
-@import 'https://fonts.googleapis.com/css?family=Lato:300,400,700,900|Poppins:300,400,500,600,700';
+@import 'fonts.css';
+
+/* montserrat-regular - latin_cyrillic-ext_cyrillic */
+@font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    src: url('./fonts/montserrat/montserrat-v25-latin_cyrillic-ext_cyrillic-regular.eot'); /* IE9 Compat Modes */
+    src: local(''),
+    url('./fonts/montserrat/montserrat-v25-latin_cyrillic-ext_cyrillic-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('./fonts/montserrat/montserrat-v25-latin_cyrillic-ext_cyrillic-regular.woff2') format('woff2'), /* Super Modern Browsers */
+    url('./fonts/montserrat/montserrat-v25-latin_cyrillic-ext_cyrillic-regular.woff') format('woff'), /* Modern Browsers */
+    url('./fonts/montserrat/montserrat-v25-latin_cyrillic-ext_cyrillic-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+    url('./fonts/montserrat/montserrat-v25-latin_cyrillic-ext_cyrillic-regular.svg#Montserrat') format('svg'); /* Legacy iOS */
+}
+
 
 @font-face {
     font-family: "heavy";

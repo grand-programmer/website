@@ -85,9 +85,9 @@ export default {
         close() {
             this.$router.replace('/');
         },
-        initialize() {
-            api.readCategory(this.$route.params.slug, true).then((response) => {
-                this.category = response.data;
+        async initialize() {
+            await api.readCategory(this.$route.params.slug, true).then((response) => {
+                this.category = response.data.data;
             this.category.news.map(function (i) {
                     let dateParts = i.created_at.split("T");
                     if ((new Date(i.created_at)).getDate() === (new Date).getDate())
@@ -97,14 +97,15 @@ export default {
                 });
                 this.breadcrumb_items[1].text = this.category.title;
             }).catch((error) => {
-                this.$toast.error(`Маълумотларни юклашда хатолик содир бўлди!`)
+                console.log(error)
+                this.$toast.error(`Маълумотларни юклашда хатолик содир бўлди!aa`)
                 this.$router.replace("/").catch(() => {
                 });
             });
 
 
-            api.readNews().then((response) => {
-                this.related_news = response.data.map(function (i) {
+           await api.readNews().then((response) => {
+                this.related_news = response.data.data.map(function (i) {
                     let dateParts = i.created_at.split("T");
                     if ((new Date(i.created_at)).getDate() === (new Date).getDate())
                         i.created_at = dateParts[1].substring(0, 5);
@@ -112,7 +113,7 @@ export default {
                     return i;
                 });
             }).catch((error) => {
-                this.$toast.error(`Маълумотларни юклашда хатолик содир бўлди!`)
+                this.$toast.error(`Маълумотларни юклашда хатолик содир бўлди!11`)
             })
         },
     }

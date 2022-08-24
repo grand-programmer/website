@@ -96,7 +96,7 @@ class UserController extends Controller
         try {
             $response = Http::asMultipart();
             $response = $response
-                ->get('http://192.168.224.18:9090/appealrestapianswer/getResult', ['personPin' => Auth::guard('api')->user()->pin])->throw(function ($response, $e) {
+                ->get('http://192.168.214.152:7070/DECAPP/s06appealrestapianswer/getResult', ['personPin' => Auth::guard('api')->user()->pin])->throw(function ($response, $e) {
                     //
                 });
             if ($response->status() == 200) {
@@ -127,7 +127,7 @@ class UserController extends Controller
 
         };
         /// Tftn qaror
-        try {
+        /*try {
             $response = Http::asMultipart();
             $response = $response
                 ->get('http://192.168.214.115:9080/labTifTn/api/tutorials/published', ['personPin' => Auth::guard('api')->user()->pin])->throw(function ($response, $e) {
@@ -159,7 +159,7 @@ class UserController extends Controller
             } else return response()->json(['error' => 'Сервер билан уланишда муаммо бор!', 'status' => false]);
         } catch (\Exception $e) {
 
-        };
+        };*/
 
         //  $user=User::with('services')->find($user_id);
 

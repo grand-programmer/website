@@ -5,6 +5,7 @@ use App\Models\Page;
 use App\Models\Menu;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\DB;
 
 class PageResource extends JsonResource
 {
@@ -16,13 +17,14 @@ class PageResource extends JsonResource
      */
     public function toArray($request)
     {
+        $translates = DB::table('page_translates')->where(["page_id" => $this->id, "language" => app()->getLocale()])->get();
         return [
             'id'=>$this->id,
             'parent'=>$this->parent,
             'publish'=>$this->publish,
-            'title'=>$this->title,
+            'title'=>isset($translates[0]) ? $translates[0]->title : $this->title,
             'slug'=>$this->slug,
-            'description'=>$this->description,
+            'description'=>isset($translates[0]) ? $translates[0]->description : $this->description,
             'menu'=>($menu=Menu::where([
                     'relation_id'=>$this->id,
                     'parent'=>$this->menu,

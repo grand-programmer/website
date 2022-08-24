@@ -71,4 +71,5 @@
         "size": "The {_field_} field size must be less than {size}KB",
         "double": "The {_field_} field must be a valid decimal"
     }
+
 }

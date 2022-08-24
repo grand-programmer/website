@@ -353,7 +353,7 @@
                     </div>
                 </div>
                 <!--==========End Main Slider area==========-->
-                <component is="script" src="js/theme.js"></component>
+                <component is="script" src="/js/theme.js"></component>
             </div>
             <div class="section " id="fart" style="display: none">
                 <div class="row"><h3 class="text-center section_title">БЎЛИМЛАР</h3></div>

@@ -1,24 +1,38 @@
+import i18n from "../../i18n";
+
 var apiUrl = "/api/v1/";
+
 const multipartformdata = {
     headers: {
-        'content-type': 'multipart/form-data'
+        'content-type': 'multipart/form-data',
+        'X-Localization':i18n.locale
     }
 }
+let localization={
+    headers: {
+        'X-Localization':i18n.locale
+    }
+}
+let localizationHeader= {
+        'X-Localization':i18n.locale
+}
+
 const apiClient = {
     async addAppeals(requestData) {
+        requestData.push(localization);
         return await axios.get(apiUrl + "appeal", requestData);
     },
     async readAppeals() {
-        return await axios.get(apiUrl + "appeal");
+        return await axios.get(apiUrl + "appeal",localization);
     },
     async checkAppeal(requestData) {
-        return await axios.post(apiUrl + "appeal/checkAppeal", requestData);
+        return await axios.post(apiUrl + "appeal/checkAppeal", requestData,localization);
     },
     async deleteAppeal(appealId) {
         return await axios.delete(apiUrl + "appeal/" + appealId);
     },
     async readPages() {
-        return await axios.get(apiUrl + "page");
+        return await axios.get(apiUrl + "page",localization);
     },
     async addPage(requestData) {
         return await axios.post(apiUrl + "page", requestData);
@@ -27,20 +41,20 @@ const apiClient = {
         return await axios.put(apiUrl + "page/" + id, requestData);
     },
     async readPage(id) {
-        return await axios.get(apiUrl + "page/" + id);
+        return await axios.get(apiUrl + "page/" + id,localization);
     },
     async readRelated(id) {
-        return await axios.post(apiUrl + "page/related/" + id);
+        return await axios.post(apiUrl + "page/related/" + id,null,localization);
     },
     async deletePage(id) {
         return await axios.delete(apiUrl + "page/" + id);
     },
     //////////////////////// News Begin/////////////////////////////
-    async readNews() {
-        return await axios.get(apiUrl + "news");
+    async readNews(requestData) {
+        return await axios.get(apiUrl + "news", {params: requestData,headers:localizationHeader});
     },
     async readRelatedNews() {
-        return await axios.get(apiUrl + "news/related");
+        return await axios.get(apiUrl + "news/related",localization);
     },
     async addNews(requestData) {
         return await axios.post(apiUrl + "news", requestData, multipartformdata);
@@ -49,7 +63,8 @@ const apiClient = {
         return await axios.post(apiUrl + "news/" + id, requestData, multipartformdata);
     },
     async readOneNews(slug) {
-        return await axios.get(apiUrl + "news/" + slug);
+        console.log(i18n.locale)
+        return await axios.get(apiUrl + "news/" + slug, localization);
     },
     async deleteNews(id) {
         return await axios.delete(apiUrl + "news/" + id);
@@ -59,14 +74,14 @@ const apiClient = {
     //////////////////////// Menus Begin/////////////////////////////
 
     async readMenusForSelect(idMenu = 0) {
-        return await axios.get(apiUrl + "menu/select");
+        return await axios.get(apiUrl + "menu/select",localization);
     },
     async readMenusFront() {
-        return await axios.get(apiUrl + "menu/front");
+        return await axios.get(apiUrl + "menu/front",localization);
     },
     async readMenus(parent = null) {
-        if (parent == null) return await axios.get(apiUrl + "menu");
-        else return await axios.get(apiUrl + "menu?parent=" + parent);
+        if (parent == null) return await axios.get(apiUrl + "menu",localization);
+        else return await axios.get(apiUrl + "menu?parent=" + parent,localization);
     },
 
     async addMenu(requestData) {
@@ -76,7 +91,7 @@ const apiClient = {
         return await axios.put(apiUrl + "menu/" + id, requestData);
     },
     async readOneMenu(id) {
-        return await axios.get(apiUrl + "menu/" + id);
+        return await axios.get(apiUrl + "menu/" + id,localization);
     },
     async deleteMenu(id) {
         return await axios.delete(apiUrl + "menu/" + id);
@@ -86,12 +101,12 @@ const apiClient = {
     //////////////////////// Categories Begin/////////////////////////////
     async readCategories(limit = 0) {
         if (limit > 0)
-            return await axios.get(apiUrl + "categories?limit=" + limit);
+            return await axios.get(apiUrl + "categories?limit=" + limit,localization);
         else
-            return await axios.get(apiUrl + "categories");
+            return await axios.get(apiUrl + "categories",localization);
     },
     async readCategoriesForSelect() {
-        return await axios.get(apiUrl + "categories/select");
+        return await axios.get(apiUrl + "categories/select",localization);
     },
     async addCategory(requestData) {
         return await axios.post(apiUrl + "categories", requestData);
@@ -101,9 +116,9 @@ const apiClient = {
     },
     async readCategory(slug, withNews = false) {
         if (withNews)
-            return await axios.get(apiUrl + "categories/" + slug + "?withnews=1",);
+            return await axios.get(apiUrl + "categories/" + slug + "?withnews=1",localization);
         else
-            return await axios.get(apiUrl + "categories/" + slug);
+            return await axios.get(apiUrl + "categories/" + slug,localization);
     },
     async deleteCategory(id) {
         return await axios.delete(apiUrl + "categories/" + id);
@@ -112,10 +127,10 @@ const apiClient = {
 
     //////////////////////// My Events Begin/////////////////////////////
     async readEvents() {
-        return await axios.get(apiUrl + "events");
+        return await axios.get(apiUrl + "events",localization);
     },
     async readEventsForFront() {
-        return await axios.get(apiUrl + "front/events");
+        return await axios.get(apiUrl + "front/events",localization);
     },
     async addEvent(requestData) {
         return await axios.post(apiUrl + "events", requestData);
@@ -124,7 +139,7 @@ const apiClient = {
         return await axios.put(apiUrl + "events/" + id, requestData);
     },
     async readEvent(id) {
-        return await axios.get(apiUrl + "events/" + id);
+        return await axios.get(apiUrl + "events/" + id,localization);
     },
     async deleteEvent(id) {
         return await axios.delete(apiUrl + "events/" + id);
@@ -132,10 +147,10 @@ const apiClient = {
     //////////////////////// My Events End /////////////////////////////
     //////////////////////// My Votes Begin/////////////////////////////
     async readVotes() {
-        return await axios.get(apiUrl + "votes");
+        return await axios.get(apiUrl + "votes",localization);
     },
     async readVotesForFront() {
-        return await axios.get(apiUrl + "front/votes");
+        return await axios.get(apiUrl + "front/votes",localization);
     },
     async addVote(requestData) {
         return await axios.post(apiUrl + "votes", requestData);
@@ -144,7 +159,7 @@ const apiClient = {
         return await axios.put(apiUrl + "votes/" + id, requestData);
     },
     async readVote(id) {
-        return await axios.get(apiUrl + "votes/" + id);
+        return await axios.get(apiUrl + "votes/" + id,localization);
     },
     async deleteVote(id) {
         return await axios.delete(apiUrl + "votes/" + id);
@@ -153,10 +168,10 @@ const apiClient = {
 
     //////////////////////// My Faqs Begin/////////////////////////////
     async readFaqs() {
-        return await axios.get(apiUrl + "faqs");
+        return await axios.get(apiUrl + "faqs",localization);
     },
     async readFaqsForFront() {
-        return await axios.get(apiUrl + "front/faqs");
+        return await axios.get(apiUrl + "front/faqs",localization);
     },
     async addFaq(requestData) {
         return await axios.post(apiUrl + "faqs", requestData);
@@ -165,7 +180,7 @@ const apiClient = {
         return await axios.put(apiUrl + "faqs/" + id, requestData);
     },
     async readFaq(id) {
-        return await axios.get(apiUrl + "faqs/" + id);
+        return await axios.get(apiUrl + "faqs/" + id,localization);
     },
     async deleteFaq(id) {
         return await axios.delete(apiUrl + "faqs/" + id);
@@ -176,7 +191,7 @@ const apiClient = {
         let str = "";
         if (requestData)
             str = "?" + Object.entries(requestData).map(([key, val]) => `${key}=${val}`).join('&');
-        return await axios.get(apiUrl + "organizations" + str);
+        return await axios.get(apiUrl + "organizations" + str,localization);
     },
     async addOrg(requestData) {
         return await axios.post(apiUrl + "organizations", requestData);
@@ -185,7 +200,7 @@ const apiClient = {
         return await axios.post(apiUrl + "organizations/" + id, requestData);
     },
     async readOrg(id) {
-        return await axios.get(apiUrl + "organizations/" + id);
+        return await axios.get(apiUrl + "organizations/" + id,localization);
     },
     async deleteOrg(id) {
         return await axios.delete(apiUrl + "organizations/" + id);
@@ -196,7 +211,7 @@ const apiClient = {
         let str = "";
         if (requestData)
             str = "?" + Object.entries(requestData).map(([key, val]) => `${key}=${val}`).join('&');
-        return await axios.get(apiUrl + "apparat" + str);
+        return await axios.get(apiUrl + "apparat" + str,localization);
     },
     async addApparat(requestData) {
         return await axios.post(apiUrl + "apparat", requestData);
@@ -205,7 +220,7 @@ const apiClient = {
         return await axios.post(apiUrl + "apparat/" + id, requestData);
     },
     async readApparat(id) {
-        return await axios.get(apiUrl + "apparat/" + id);
+        return await axios.get(apiUrl + "apparat/" + id,localization);
     },
     async deleteApparat(id) {
         return await axios.delete(apiUrl + "apparat/" + id);
@@ -215,12 +230,12 @@ const apiClient = {
     async readMarkaziy() {
         let str = "?markaziy=0";
 
-        return await axios.get(apiUrl + "apparat" + str);
+        return await axios.get(apiUrl + "apparat" + str,localization);
     },
     async readRahbariyats() {
         let str = "?rahbar=0";
 
-        return await axios.get(apiUrl + "apparat" + str);
+        return await axios.get(apiUrl + "apparat" + str,localization);
     },
     async addRahbariyat(requestData) {
         return await axios.post(apiUrl + "apparat", requestData);
@@ -230,7 +245,7 @@ const apiClient = {
     },
     async readRahbariyat(id) {
 
-        return await axios.get(apiUrl + "apparat/" + id+"?rahbar=0");
+        return await axios.get(apiUrl + "apparat/" + id+"?rahbar=0",localization);
     },
     async deleteRahbariyat(id) {
         return await axios.delete(apiUrl + "apparat/" + id);

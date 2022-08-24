@@ -36,7 +36,8 @@
                                         </div>
                                         <div class="text-row">
                                             <div class="far fa-user">&nbsp;</div>
-                                            <p>{{organization.rahbariyat.boshliq.lavozimi}}</p>
+                                            <p v-if="organization.id!==16">{{organization.rahbariyat.boshliq.lavozimi}}</p>
+                                            <p v-else>Директор</p>
                                         </div>
                                         <div class="text-row">
                                             <div class="far fa-clock">&nbsp;</div>
@@ -85,90 +86,6 @@
                                     </div>
                                 </div>
                             </div>
-<!--                            <div class="orinbosar col-3">
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div>
-                                            <div class="orinbosar-header">
-                                                <div class="profile-icon-wrapper">
-                                                    <div class="profile-icon">&nbsp;</div>
-                                                </div>
-                                                <p>САЛИЕВ МУТАЛИБДЖАН ОБИДЖОНОВИЧ</p>
-                                            </div>
-                                            <div class="orinbosar-info">
-                                                <div class="text-row">
-                                                    <div class="far fa-user">&nbsp;</div>
-                                                    <p>Давлат божхона қўмитаси раиси ўринбосари</p>
-                                                </div>
-                                                <div class="text-row">
-                                                    <div class="far fa-clock">&nbsp;</div>
-                                                    <p>Фуқароларни қабул қилиш ҳар куни 09-00 дан 17-00 гача</p>
-                                                </div>
-                                                <div class="text-row">
-                                                    <div class="fas fa-phone-alt">&nbsp;</div>
-                                                    <p>(78) - 120-76-00</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="orinbosar col-3">
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div>
-                                            <div class="orinbosar-header">
-                                                <div class="profile-icon-wrapper">
-                                                    <div class="profile-icon">&nbsp;</div>
-                                                </div>
-                                                <p>КОДИРОВ УТКИРЖОН ГАЙРАТОВИЧ</p>
-                                            </div>
-                                            <div class="orinbosar-info">
-                                                <div class="text-row">
-                                                    <div class="far fa-user">&nbsp;</div>
-                                                    <p>Давлат божхона қўмитаси раиси ўринбосари</p>
-                                                </div>
-                                                <div class="text-row">
-                                                    <div class="far fa-clock">&nbsp;</div>
-                                                    <p>Фуқароларни қабул қилиш ҳар куни 09-00 дан 17-00 гача</p>
-                                                </div>
-                                                <div class="text-row">
-                                                    <div class="fas fa-phone-alt">&nbsp;</div>
-                                                    <p>(78) - 120-76-00</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="orinbosar col-3">
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div>
-                                            <div class="orinbosar-header">
-                                                <div class="profile-icon-wrapper">
-                                                    <div class="profile-icon">&nbsp;</div>
-                                                </div>
-                                                <p>МУСАМУХАМЕДОВ НОДИР КАМАЛИТДИНОВИЧ</p>
-                                            </div>
-                                            <div class="orinbosar-info">
-                                                <div class="text-row">
-                                                    <div class="far fa-user">&nbsp;</div>
-                                                    <p>Давлат божхона қўмитаси раиси ўринбосари</p>
-                                                </div>
-                                                <div class="text-row">
-                                                    <div class="far fa-clock">&nbsp;</div>
-                                                    <p>Фуқароларни қабул қилиш ҳар куни 09-00 дан 17-00 гача</p>
-                                                </div>
-                                                <div class="text-row">
-                                                    <div class="fas fa-phone-alt">&nbsp;</div>
-                                                    <p>(78) - 120-76-00</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>-->
                         </div>
                     </div>
                 </v-card>
@@ -242,19 +159,6 @@
 
                                 </v-row>
                                 <v-row v-html="organization.manzil.map" style="height: 150px" class="yandex-map">
-
-<!--                                    <div style="position:relative;overflow:hidden;">
-                                        <a href="https://yandex.com/maps/10335/tashkent/?utm_medium=mapframe&utm_source=maps"
-                                           style="color:#eee;font-size:12px;position:absolute;top:0px;">Ташкент</a><a
-                                        href="https://yandex.com/maps/profile?ll=69.251162%2C41.311011&utm_medium=mapframe&utm_source=maps&z=16"
-                                        style="color:#eee;font-size:12px;position:absolute;top:14px;">Яндекс Карты —
-                                        транспорт,
-                                        навигация, поиск мест</a>
-                                        <iframe src="https://yandex.com/map-widget/v1/-/CCUFALF3TD" width="560"
-                                                height="200"
-                                                frameborder="1" allowfullscreen="true"
-                                                style="position:relative;"></iframe>
-                                    </div>-->
                                 </v-row>
                             </v-col>
 
@@ -262,7 +166,7 @@
                     </v-card-text>
 
                 </v-card>
-                <v-card>
+                <v-card v-if="organization.posts>0">
                     <v-card-title>
                         <v-col cols="12" class="boshqarma-section-title">
                             <h3> Божхона постлари</h3>
@@ -284,6 +188,33 @@
                         :search="search"
                         class="boshqarma-postlar"
                     ></v-data-table>
+                </v-card>
+                <v-card v-if="news.length>0">
+                    <v-card-title>
+                        <v-col cols="12" class="boshqarma-section-title">
+                            <h3> Бошқармага оид янгиликлар</h3>
+                        </v-col>
+                    </v-card-title>
+                    <v-card-text>
+                        <div class="single_blog_content">
+                            <v-row><v-col></v-col>
+
+                            </v-row>
+                            <v-row>
+                                <v-col cols="4" class="news-item" v-for="(news,index) in news" :key="news.slug+index">
+                                    <div class="news-item-content">
+                                        <router-link class="news__img" :to="`/news/` + news.slug "><img
+                                            :src="`/storage/uploads/`+news.image" class="w-100" style="height: 250px"></router-link>
+                                        <div class="news-meta"><span>{{ news.created_at }}</span></div>
+                                        <router-link class="news__title" :to="`/news/` + news.slug ">{{ news.title }}
+                                        </router-link>
+                                    </div>
+                                </v-col>
+
+                            </v-row>
+                        </div>
+
+                    </v-card-text>
                 </v-card>
             </v-row>
         </v-container>
@@ -315,6 +246,7 @@ export default {
         organization: {},
         relates: {},
         search: '',
+        news:[],
         headers: [
             {
                 text: 'Пост номи',
@@ -348,16 +280,30 @@ export default {
             //this.$router.replace('/');
         },
         initialize() {
+            const _this=this;
             api.readOrg(this.$route.params.id).then((response) => {
                 this.organization = response.data.data;
                 //if(!this.organization.id) this.$router.replace('/404')
                 this.breadcrumb_items[1].text = this.organization.title;
+
+                api.readNews({boshqarma:this.organization.id}).then((response) => {
+                    _this.news = response.data;
+                    //if(!this.organization.id) this.$router.replace('/404')
+                }).catch((error) => {
+                    //this.$router.replace('/404')
+
+                    /*this.$router.replace("/").catch(() => {
+                    });*/
+                })
+
             }).catch((error) => {
                 this.$router.replace('/404')
                 this.$toast.error(`Маълумотларни юклашда хатолик содир бўлди!`)
                 /*this.$router.replace("/").catch(() => {
                 });*/
             })
+
+
 
 
         },

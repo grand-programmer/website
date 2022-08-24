@@ -67,7 +67,7 @@
                                 </v-icon>
                                      Тахрирлаш
                                 </v-btn>
-<!--                                <v-btn @click="deleteItem(item.id)" color="secondary" small>
+                                <v-btn class="d-none" @click="deleteItem(item.id)" color="secondary" small>
                                 <v-icon
                                     small
 
@@ -75,7 +75,7 @@
                                     mdi-delete
                                 </v-icon>
                                     Ўчириш
-                                </v-btn>-->
+                                </v-btn>
                             </template>
                             <template v-slot:no-data><br>
                                 <h3>Маълумотлар топилмади</h3><br>
@@ -103,10 +103,10 @@
 </template>
 
 <script>
-import api from "./../../../src/services/apiService";
+import api from "./../../../src/services/adminApi";
 import {extend, ValidationProvider, ValidationObserver} from 'vee-validate';
 import * as rules from 'vee-validate/dist/rules';
-import messages from '../../../locales/uz.json';
+import messages from '../../../locales/oz.json';
 
 Object.keys(rules).forEach(rule => {
     extend(rule, {

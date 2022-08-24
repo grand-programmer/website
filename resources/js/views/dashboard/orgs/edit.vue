@@ -188,13 +188,13 @@
                                                         rules="required|min:3"/>
                                                 </v-col>
                                                 <v-col cols="3">
-                                                        <v-file-input label="Расми"
-                                                                      v-model="images[k]"
-                                                                      name="orinbosar_image[]"
-                                                                      accept="image/*"
-                                                                      @change="setImage(k,images[k])"
-                                                        >
-                                                        </v-file-input>
+                                                    <v-file-input label="Расми"
+                                                                  v-model="images[k]"
+                                                                  name="orinbosar_image[]"
+                                                                  accept="image/*"
+                                                                  @change="setImage(k,images[k])"
+                                                    >
+                                                    </v-file-input>
 
                                                 </v-col>
                                                 <v-col cols="1">
@@ -455,10 +455,10 @@
 </template>
 
 <script>
-import api from "./../../../src/services/apiService";
+import api from "./../../../src/services/adminApi";
 import {extend, ValidationProvider, ValidationObserver} from 'vee-validate';
 import * as rules from 'vee-validate/dist/rules';
-import messages from '../../../locales/uz.json';
+import messages from '../../../locales/oz.json';
 //import Editor from '@tinymce/tinymce-vue';
 import MyField from '../../../components/form/myfield';
 
@@ -551,7 +551,7 @@ export default {
         cropImage(k = null) {
             const croppedimages = this.cropImgOrinbosar;
             this.cropImgOrinbosar = [];
-            const _this=this;
+            const _this = this;
             croppedimages.forEach(function (item, k) {
                 _this.cropImgOrinbosar[k] = item;
             })
@@ -669,20 +669,22 @@ export default {
                             if (itemkey === 'image') {
                                 if (_this.imgSrcOrinbosar[valkey]) {
                                     console.log(_this.$refs['orinbosarCropper' + valkey]);
-                                    _this.$refs['orinbosarCropper' + valkey][0].getCroppedCanvas().toBlob((blob1) => {
-                                        form.append(`rahbariyat[orinbosar][${valkey}][${itemkey}]`, blob1);
-                                    })
+                                    if (_this.$refs['orinbosarCropper' + valkey][0].getCroppedCanvas() !== null)
+                                        _this.$refs['orinbosarCropper' + valkey][0].getCroppedCanvas().toBlob((blob1) => {
+                                            form.append(`rahbariyat[orinbosar][${valkey}][${itemkey}]`, blob1);
+                                        })
                                 } else
                                     form.append(`rahbariyat[orinbosar][${valkey}][${itemkey}]`, item);
                             } else
                                 form.append(`rahbariyat[orinbosar][${valkey}][${itemkey}]`, `${item}`)
                         });
                     });
-                    Object.entries(this.posts).forEach(([valkey, v]) => {
-                        Object.entries(v).forEach(([itemkey, item]) => {
-                            form.append(`posts[${valkey}][${itemkey}]`, `${item}`)
+                    if (this.posts)
+                        Object.entries(this.posts).forEach(([valkey, v]) => {
+                            Object.entries(v).forEach(([itemkey, item]) => {
+                                form.append(`posts[${valkey}][${itemkey}]`, `${item}`)
+                            });
                         });
-                    });
                     setTimeout(() => {
                         api.updateOrg(_this.organization.id, form).then((response) => {
                             _this.$toast.success(`Маълумотларни омадли тарзда юкланди!`)
@@ -692,26 +694,29 @@ export default {
                     }, 200)
                 })
                 else {
+
                     // this.editedItem.sort_number=parseInt(this.editedItem.sort_number);
                     Object.entries(this.rahbariyat.orinbosar).forEach(([valkey, v]) => {
                         Object.entries(v).forEach(([itemkey, item]) => {
                             if (itemkey === 'image') {
                                 if (_this.imgSrcOrinbosar[valkey]) {
                                     console.log(_this.$refs['orinbosarCropper' + valkey]);
-                                    _this.$refs['orinbosarCropper' + valkey][0].getCroppedCanvas().toBlob((blob1) => {
-                                        form.append(`rahbariyat[orinbosar][${valkey}][${itemkey}]`, blob1);
-                                    })
+                                    if (_this.$refs['orinbosarCropper' + valkey][0].getCroppedCanvas())
+                                        _this.$refs['orinbosarCropper' + valkey][0].getCroppedCanvas().toBlob((blob1) => {
+                                            form.append(`rahbariyat[orinbosar][${valkey}][${itemkey}]`, blob1);
+                                        })
                                 } else
                                     form.append(`rahbariyat[orinbosar][${valkey}][${itemkey}]`, item);
                             } else
                                 form.append(`rahbariyat[orinbosar][${valkey}][${itemkey}]`, `${item}`)
                         });
                     });
-                    Object.entries(this.posts).forEach(([valkey, v]) => {
-                        Object.entries(v).forEach(([itemkey, item]) => {
-                            form.append(`posts[${valkey}][${itemkey}]`, `${item}`)
+                    if (this.posts)
+                        Object.entries(this.posts).forEach(([valkey, v]) => {
+                            Object.entries(v).forEach(([itemkey, item]) => {
+                                form.append(`posts[${valkey}][${itemkey}]`, `${item}`)
+                            });
                         });
-                    });
                     setTimeout(() => {
                         api.updateOrg(_this.organization.id, form).then((response) => {
                             _this.$toast.success(`Маълумотларни омадли тарзда юкланди!`)
@@ -725,7 +730,6 @@ export default {
         deleteOrganization(key) {
             //console.log(key)
             if (key >= 0) {
-
                 this.posts.splice(key, 1);
             }
         },
@@ -734,6 +738,7 @@ export default {
                 this.rahbariyat.orinbosar.splice(key, 1);
         },
         addPost() {
+            if(this.posts===null) this.posts=[];
             this.posts.push({title: null, manzili: null, telefon: null, description: null})
         },
         AddOrinbosar() {

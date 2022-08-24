@@ -21,6 +21,9 @@ class CreateNewsTable extends Migration
             $table->longText('short')->nullable();
             $table->string('image')->nullable();
             $table->boolean('home')->default(true);
+            $table->integer('created_by')->nullable();
+            $table->integer('boshqarma')->nullable();
+
             $table->timestamps();
         });
     }
