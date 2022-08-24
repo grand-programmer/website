@@ -1273,6 +1273,8 @@ a.read_more {
   font-family: Montserrat;
   margin-bottom: 20px;
   margin-top: -13px;
+  display: flex;
+  align-items: center;
 }
 
 .sitemap {

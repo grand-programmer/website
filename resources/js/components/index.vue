@@ -44,13 +44,13 @@
 
 
                         <p> Барча хизматлар </p></router-link>
-                    <div  class="services-opens">
-<!--                        <div>
-                        <a>Интерактив хизматлар</a>
-                        <a>Очиқ маълумотлар</a>
-                        <a>Фойдали ресурслар</a>
-                        <a>Мобил иловалар</a>
-                        </div>-->
+                    <div class="services-opens">
+                        <!--                        <div>
+                                                <a>Интерактив хизматлар</a>
+                                                <a>Очиқ маълумотлар</a>
+                                                <a>Фойдали ресурслар</a>
+                                                <a>Мобил иловалар</a>
+                                                </div>-->
                     </div>
 
 
@@ -59,7 +59,8 @@
                         <div data-thumb="/img/custom/slider-9.png" data-src="/img/custom/077.png">
                             <div class="container">
                                 <div class="slider_text absolute_right">
-                                    <h3 class="fadeInLeft animated">Шаффофлик замирида <br> иқтисодий хавфсизлик</h3>
+                                    <h3 class="fadeInLeft animated" style="max-width: 63%; margin-left: auto;">
+                                        {{ $t("Шаффофлик замирида иқтисодий хавфсизлик") }}</h3>
                                     <!-- <p class="fadeInUp animated">Божхона ахборот тизмиларига ҳужжатларингизни жойланг</p>
                                     <a class="s_readmore_btn fadeInUp animated" target="_blank"
                                        href="https://ed2.customs.uz/E_ARXIV/authentication">Хизматдан фойдаланиш</a>-->
@@ -75,11 +76,11 @@
                             <div class="container">
                                 <div class="slider_text absolute_right">
                                     <h3 class="fadeInLeft animated">E-ARHIV</h3>
-                                    <h4 class="fadeInLeft animated">Божхона ахборот тизими</h4>
-                                    <p class="fadeInUp animated">Божхона ахборот тизмиларига =ужжатларингизни
-                                        жойланг</p>
+                                    <h4 class="fadeInLeft animated">{{ $t("Божхона ахборот тизими") }}</h4>
+                                    <p class="fadeInUp animated">
+                                        {{ $t("Божхона ахборот тизмиларига ҳужжатларингизни жойланг") }}</p>
                                     <a class="s_readmore_btn fadeInUp animated" target="_blank"
-                                       href="https://ed2.customs.uz">Хизматдан фойдаланиш</a>
+                                       href="https://ed2.customs.uz">{{ $t("Хизматдан фойдаланиш") }}</a>
                                     <!--<a class="s_contact_btn fadeInUp animated" href="#">Contact Us</a>-->
                                 </div>
                                 <div class="slider_image slider-2">
@@ -91,10 +92,11 @@
                             <div class="container">
                                 <div class="slider_text absolute_right">
                                     <h3 class="fadeInLeft animated">E-TRANZIT</h3>
-                                    <h4 class="fadeInLeft animated">Божхона ахборот тизими</h4>
-                                    <p class="fadeInUp animated">Чегарадан юкларни электрон декларация қилинг</p>
+                                    <h4 class="fadeInLeft animated">{{ $t("Божхона ахборот тизими") }}</h4>
+                                    <p class="fadeInUp animated">
+                                        {{ $t("Чегарадан юкларни электрон декларация қилинг") }}</p>
                                     <a class="s_readmore_btn fadeInUp animated" target="_blank"
-                                       href="http://cargo.customs.uz">Хизматдан фойдаланиш</a>
+                                       href="http://cargo.customs.uz">{{ $t("Хизматдан фойдаланиш") }}</a>
                                     <!--<a class="s_contact_btn fadeInUp animated" href="#">Contact Us</a>-->
                                 </div>
                                 <div class="slider_image slider-2">
@@ -107,11 +109,11 @@
                         <div data-thumb="/img/custom/slider-5.jpg" data-src="/img/custom/slider-5.jpg">
                             <div class="container">
                                 <div class="slider_text absolute_right">
-                                    <h3 class="fadeInLeft animated">Интеграциялашган таъриф</h3>
-                                    <h4 class="fadeInLeft animated">Божхона ахборот тизими</h4>
-                                    <p class="fadeInUp animated">Божхона тўловлари ҳисобини олинг</p>
+                                    <h3 class="fadeInLeft animated">{{ $t("Интеграциялашган таъриф") }}</h3>
+                                    <h4 class="fadeInLeft animated">{{ $t("Божхона ахборот тизими") }}</h4>
+                                    <p class="fadeInUp animated">{{ $t("Божхона тўловлари ҳисобини олинг") }}</p>
                                     <a class="s_readmore_btn fadeInUp animated" href="http://tarif.customs.uz"
-                                       target="_blank">Хизматдан фойдаланиш</a>
+                                       target="_blank">{{ $t("Хизматдан фойдаланиш") }}</a>
                                     <!--<a class="s_contact_btn fadeInUp animated" href="#">Contact Us</a>-->
                                 </div>
                                 <div class="slider_image slider-2">
@@ -124,13 +126,14 @@
                         <div data-thumb="/img/main-slider/slide3.jpg" data-src="/img/main-slider/slide3.jpg">
                             <div class="container">
                                 <div class="slider_text absolute_right">
-                                    <h3 class="fadeInLeft animated">Ягона дарча</h3>
-                                    <h4 class="fadeInLeft animated">Божхона ахборот тизими</h4>
-                                    <p class="fadeInUp animated">Чегарадан товарлар олиб ўтишда сертификат ва
-                                        рухсатномаларни
-                                        ушбу ахборот тизими ёрдамида олинг.</p>
+                                    <h3 class="fadeInLeft animated">{{ $t("Ягона дарча") }}</h3>
+                                    <h4 class="fadeInLeft animated">{{ $t("Божхона ахборот тизими") }}</h4>
+                                    <p class="fadeInUp animated">
+                                        {{
+                                            $t("Чегарадан товарлар олиб ўтишда сертификат ва рухсатномаларни ушбу ахборот тизими ёрдамида олинг.")
+                                        }}</p>
                                     <a class="s_readmore_btn fadeInUp animated" href="http://singlewindow.uz"
-                                       target="_blank">Хизматдан фойдаланиш</a>
+                                       target="_blank">{{ $t("Хизматдан фойдаланиш") }}</a>
                                     <!--<a class="s_contact_btn fadeInUp animated" href="#">Contact Us</a>-->
                                 </div>
                                 <div class="slider_image slider-2">
@@ -144,10 +147,12 @@
                                 <div class="slider_text absolute_left">
                                     <h3 class="fadeInLeft animated">{{ $t("Ишга кириш учун онлайн ариза бериш") }}</h3>
                                     <h4 class="fadeInLeft animated">{{ $t("Божхона ахборот тизими") }}</h4>
-                                    <p class="fadeInUp animated">Божхона хизмати органларидаги вакансиялар рўйхатини
-                                        билиб олинг ҳамда ишга кириш учун онлайн ариза юборинг</p>
+                                    <p class="fadeInUp animated">{{
+                                            $t("Божхона хизмати органларидаги вакансиялар рўйхатини билиб олинг ҳамда ишга кириш учун онлайн ариза юборинг")
+                                        }}</p>
                                     <router-link class="s_readmore_btn fadeInUp animated" to="/services/vacancy"
-                                       target="_blank">Хизматдан фойдаланиш</router-link>
+                                                 target="_blank">{{ $t("Хизматдан фойдаланиш") }}
+                                    </router-link>
                                     <!--<a class="s_contact_btn fadeInUp animated" href="#">Contact Us</a>-->
                                 </div>
                                 <div class="slider_image slider-2">
@@ -165,15 +170,12 @@
                                                             &lt;!&ndash;<a class="s_contact_btn fadeInUp animated" href="#">Contact Us</a>&ndash;&gt;
                                                         </div>
                                                         <div class="slider_image slider-2">
-
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div data-thumb="/img/custom/slide-6.jpg" data-src="/img/custom/slider-6.jpg">
                                                     <div class="container">
-
                                                         <div class="slider_image">
-
                                                         </div>
                                                         <div class="slider_text absolute_right text-center">
                                                             <h3 class="fadeInLeft animated">Экспорт ва импорт</h3>
@@ -186,7 +188,6 @@
                                                         </div>
                                                     </div>
                                                 </div>
-
                                                 <div data-thumb="/img/custom/dron.jpg" data-src="/img/custom/dron.jpg">
                                                     <div class="container">
                                                         <div class="slider_text">
@@ -221,43 +222,43 @@
                 <component is="script" src="/js/theme.js"></component>
             </div>
             <div class="section">
-                <div class="row"><h3 class="text-center section_title">Асосий маълумотлар</h3></div>
+                <div class="row"><h3 class="text-center section_title">{{ $t("Асосий маълумотлар") }}</h3></div>
                 <div class="container-fluid">
 
 
-
-                    <div class="row pb-8" style="margin: 24px!important; justify-content: center; row-gap: 35px;" >
+                    <div class="row pb-8" style="margin: 24px!important; justify-content: center; row-gap: 35px;">
                         <router-link to="/page/jismoniy" class="card">
                             <div class="bolim_image"><img src="/img/service/user-icon.png"/></div>
-                            <div class="bolim_title">Жисмоний шахслар учун</div>
-                            <div class="bolim_description">Жисмоний шахслар учун керакли хизматлар ва маълумотларни
-                                билиб
-                                олинг
+                            <div class="bolim_title">{{ $t("Жисмоний шахслар учун") }}</div>
+                            <div class="bolim_description">{{
+                                    $t("Жисмоний шахслар учун керакли хизматлар ва маълумотларни билиб олинг")
+                                }}
                             </div>
                         </router-link>
-                        <router-link to="/page/yuridik-shahslar-tomonidan-avtotransport-vositalarni-olib-kirish-tartibi" class="card">
+                        <router-link to="/page/yuridik-shahslar-tomonidan-avtotransport-vositalarni-olib-kirish-tartibi"
+                                     class="card">
                             <div class="bolim_image">
                                 <img src="/img/service/mask-group.png"/>
                             </div>
-                            <div class="bolim_title">ТИФ иштирокчилари учун</div>
-                            <div class="bolim_description">ТИФ иштирокчилари учун керакли хизматлар ва маълумотларни
-                                билиб
-                                олинг
+                            <div class="bolim_title">{{ $t("ТИФ иштирокчилари учун") }}</div>
+                            <div class="bolim_description">
+                                {{ $t("ТИФ иштирокчилари учун керакли хизматлар ва маълумотларни билиб олинг") }}
                             </div>
                         </router-link>
                         <router-link to="/services/appeals" class="card">
                             <div class="bolim_image"><img src="/img/service/appeal.png"/></div>
-                            <div class="bolim_title">Мурожаатлар</div>
+                            <div class="bolim_title">{{ $t("Мурожаатлар") }}</div>
                             <div class="bolim_description">
-                                Божхона қўмитасига мурожаатлар юбориш, кўриб чиқилиши тўғрисидаги маълумотлар
+                                {{
+                                    $t("Божхона қўмитасига мурожаатлар юбориш, кўриб чиқилиши тўғрисидаги маълумотлар")
+                                }}
                             </div>
                         </router-link>
                         <router-link to="/page/votes" class="card">
                             <div class="bolim_image"><img src="/img/service/sorovnoma.png"/></div>
-                            <div class="bolim_title">Сўровнома</div>
-                            <div class="bolim_description">Божхона Қўмитасининг очиқ маълумотларини кўчириб
-                                олишингиз
-                                мумкин
+                            <div class="bolim_title">{{ $t("Сўровнома") }}</div>
+                            <div class="bolim_description">
+                                {{ $t("Божхона Қўмитасининг очиқ маълумотларини кўчириб олишингиз мумкин") }}
                             </div>
                         </router-link><!--
                         <div class="card">
@@ -285,26 +286,31 @@
                         </div>-->
                         <a href="http://tarif.customs.uz/" target="_blank" class="card">
                             <div class="bolim_image"><img src="/img/service/time.png"/></div>
-                            <div class="bolim_title">Тўловлар ва вақт</div>
-                            <div class="bolim_description">Товарлар учун дастлабки ҳисоб – китоблар асосида, сарфланадиган харажат ва вақт</div>
+                            <div class="bolim_title">{{ $t("Тўловлар ва вақт") }}</div>
+                            <div class="bolim_description">
+                                {{ $t("Товарлар учун дастлабки ҳисоб – китоблар асосида, сарфланадиган харажат ва вақт") }}
+                            </div>
 
                         </a>
-                        <a href="http://service.customs.uz/autogtd_report/index.jsp?pc=7#"  target="_blank" class="card">
+                        <a href="http://service.customs.uz/autogtd_report/index.jsp?pc=7#" target="_blank" class="card">
                             <div class="bolim_image"><img src="/img/service/yuridik.png"/></div>
-                            <div class="bolim_title">Юридик шахслар учун</div>
-                            <div class="bolim_description">Тадбиркорларнинг экспорт ва импорт маълумотлари </div>
+                            <div class="bolim_title">{{ $t("Юридик шахслар учун") }}</div>
+                            <div class="bolim_description">{{
+                                    $t("Тадбиркорларнинг экспорт ва импорт маълумотлари")
+                                }}
+                            </div>
 
                         </a>
-                        <a href="https://axborot.customs.uz/Xabar/"  target="_blank" class="card">
+                        <a href="https://axborot.customs.uz/Xabar/" target="_blank" class="card">
                             <div class="bolim_image"><img src="/img/service/corruption.png"/></div>
-                            <div class="bolim_title">Коррупция тўғрисида хабар</div>
-                            <div class="bolim_description">Коррупция тўғрисида ариза юборинг</div>
+                            <div class="bolim_title">{{ $t("Коррупция тўғрисида хабар") }}</div>
+                            <div class="bolim_description">{{ $t("Коррупция тўғрисида ариза юборинг") }}</div>
 
                         </a>
-                        <a href="https://axborot.customs.uz/Xabar/"  target="_blank" class="card">
+                        <a href="https://axborot.customs.uz/Xabar/" target="_blank" class="card">
                             <div class="bolim_image"><img src="/img/service/monitor.png"/></div>
-                            <div class="bolim_title">Мониторинг</div>
-                            <div class="bolim_description">Товар ва транспорт воситаларини чиқиш вақтини тадқиқот ва мониторинг қилиш</div>
+                            <div class="bolim_title">{{ $t("Мониторинг") }}</div>
+                            <div class="bolim_description">{{ $t("Товар ва транспорт воситаларини чиқиш вақтини тадқиқот ва мониторинг қилиш")}}</div>
 
                         </a>
                     </div>
@@ -313,11 +319,9 @@
                 </div>
 
 
+            </div>
 
-
-                </div>
-
-                <!--==========End Portfolio area==========-->
+            <!--==========End Portfolio area==========-->
 
             <div class="section yangiliklar" id="section3">
 
@@ -325,7 +329,7 @@
             </div>
 
             <div class="section asosiy_korsatkichlari2">
-<stat></stat>
+                <stat></stat>
 
             </div>
 
@@ -336,7 +340,7 @@
                         <div class="col-md-6">
                             <div class="chose_inner_area">
                                 <div class="section_tittle">
-                                    <h2>Кўп бериладиган саволлар</h2>
+                                    <h2>{{ $t("Кўп бериладиган саволлар") }}</h2>
                                 </div>
                                 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="false">
 
@@ -346,7 +350,9 @@
                                             <h4 class="panel-title">
                                                 <a role="button" data-bs-toggle="collapse" data-bs-parent="#accordion"
                                                    :href="'#chose'+fkey" aria-expanded="true"
-                                                   aria-controls="chose3">{{ typeof faq.question !== 'undefined' ? faq.question : '' }}<span>
+                                                   aria-controls="chose3">{{
+                                                        typeof faq.question !== 'undefined' ? faq.question : ''
+                                                    }}<span>
                                                     <i class="fa fa-plus" aria-hidden="false"></i>
                                                     <i class="fa fa-minus" aria-hidden="true"></i>
                                                 </span>
@@ -394,7 +400,6 @@
                                                                                     <a class="collapsed" role="button" data-bs-toggle="collapse"
                                                                                        data-bs-parent="#accordion"
                                                                                        href="#chose2" aria-expanded="false" aria-controls="chose2">
-
                                                                                         Божхона тўловларини бўлиб-бўлиб ёки кечиктириб тўлаш тўғрисида
                                                                                         маълумот
                                                                                         берсангиз?
@@ -418,13 +423,11 @@
                                                                                     қарорига
                                                                                     биноан узоқроқ муддатларга ва божхона тўловлари тўланиши таъминланмаган
                                                                                     ҳолда берилиши мумкин.
-
                                                                                     Божхона тўловларини кечиктириб ёки бўлиб-бўлиб тўлаш имкониятини олиш
                                                                                     учун
                                                                                     тўловчи божхона органига божхона тўловлари суммаларини тўлаш бўйича ёзма
                                                                                     мажбуриятни ўз ичига олган аризани ва жхона тўловлари тўланиши
                                                                                     таъминланганлигини тасдиқловчи ҳужжатни тақдим етади.
-
                                                                                     Божхона тўловлари тўланишини таъминлаш тўловчининг танловига кўра
                                                                                     исталган –
                                                                                     пул маблағларини божхона органининг шахсий ғазна ҳисобварағига киритиш,

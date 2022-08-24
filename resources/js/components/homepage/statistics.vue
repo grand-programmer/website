@@ -2,16 +2,19 @@
     <div class="row content">
         <div class="col-3">
             <div class="stat_menu" style="min-height:80vh">
-                <h3> Божхона статистикаси</h3>
+                <h3> {{ $t("Божхона статистикаси") }}</h3>
                 <ul class="mb-15">
                     <li><a :class="stat_type==5?'active':''" href="#" @click="stat_type=5">
-                        Товар ва маҳсулотлар {{ getRejimByCode(rejim.tovarimex).text }}и</a></li>
+                        {{ $t("Товар ва маҳсулотлар "+ getRejimByCode(rejim.tovarimex).text + "и") }}</a></li>
                     <li><a :class="stat_type==4?'active':''" href="#" @click="stat_type=4">
-                        Ўзбекистон Республикасига {{ getRejimByCode(rejim.davlatimex).text }} товарлари давлатлар кесимида</a></li>
+                        {{
+                            ("Ўзбекистон Республикасига "+ getRejimByCode(rejim.davlatimex).text + " товарлари давлатлар кесимида")
+                        }}</a></li>
 
 
-                    <li><a :class="(stat_type==3)?'active':''" href="#" @click="stat_type=3">Ўзбекистон Республикасидан
-                        товарлар {{ getRejimByCode(rejim.oyimex).text }}и ойлар кесимида </a></li>
+                    <li><a :class="(stat_type==3)?'active':''" href="#" @click="stat_type=3">
+                        {{
+                            $t("Ўзбекистон Республикасидан товарлар " + getRejimByCode(rejim.oyimex).text + "и ойлар кесимида")}}</a></li>
                     <!--                    <li><a :class="(stat_type===6)?'active':''" href="#" @click="stat_type=6">Ҳудудий корхоналар томонидан импорт қилинган товарлар</a></li>-->
 
 
@@ -22,19 +25,19 @@
                 </ul>
                 <a class="all_stats d-none" href="https://charts.customs.uz" target="_blank"
                    style="position: absolute; bottom: 100px">
-                    Барча статистика <i class="fa fa-arrow-right"></i>
+                    {{ $t("Барча статистика") }} <i class="fa fa-arrow-right"></i>
 
                 </a>
             </div>
         </div>
         <div class="col-9" id="reyt" v-if="stat_type==1">
-            <h3>Ўзбекистон Республикаси товарлар импорти ва экспорти ҳудудлар кесимида</h3>
+            <h3>{{ $t("Ўзбекистон Республикаси товарлар импорти ва экспорти ҳудудлар кесимида") }}</h3>
             <div id="columnchart1" ref="clusteredColumn" class="chart"></div>
             <div class="filter row">
                 <v-col cols="3">
                     <v-autocomplete
                         ref="auto"
-                        label="Ойлар бўйича"
+                        :label="$t('Ойлар бўйича')"
                         v-model="month"
                         :items="months"
                         auto-select-first
@@ -43,7 +46,7 @@
                 <v-col cols="3">
                     <v-autocomplete
                         ref="auto1"
-                        label="Йиллар бўйича"
+                        :label="$t('Йиллар бўйича')"
                         v-model="year"
                         :items="years"
                         hide-selected
@@ -54,13 +57,13 @@
 
         </div>
         <div class="col-9" v-if="stat_type==2">
-            <h3>Ўзбекистон Республикаси чегарасидан ўтаётган автомобилларнинг сони </h3>
+            <h3>{{ $t("Ўзбекистон Республикаси чегарасидан ўтаётган автомобилларнинг сони") }} </h3>
             <div id="columnchart2" class="chart"></div>
             <div class="filter row">
                 <v-col cols="3">
                     <v-autocomplete
                         ref="auto"
-                        label="Ойлар бўйича"
+                        :label="$t('Ойлар бўйича')"
                         v-model="month"
                         :items="months"
                         auto-select-first
@@ -69,7 +72,7 @@
                 <v-col cols="3">
                     <v-autocomplete
                         ref="auto1"
-                        label="Йиллар бўйича"
+                        :label="$t('Йиллар бўйича')"
                         v-model="year"
                         :items="years"
                         hide-selected
@@ -80,7 +83,7 @@
 
         </div>
         <div class="col-9" v-if="stat_type==3">
-            <h3>Ўзбекистон Республикасидан товарлар {{ getRejimByCode(rejim.oyimex).text }}и ойлар кесимида</h3>
+            <h3>{{ $t("Ўзбекистон Республикасидан товарлар " + getRejimByCode(rejim.oyimex).text + "и ойлар кесимида") }}</h3>
             <div id="columnchart3" class="chart" v-show="apexchartshow">
 
                 <apexchart2 :mydata="apexchartdata"></apexchart2>
@@ -90,7 +93,7 @@
                                 <v-col cols="3">
                                     <v-autocomplete
                                         ref="auto"
-                                        label="Ойлар бўйича"
+                                        :label="$t('Ойлар бўйича')"
                                         v-model="month"
                                         :items="months"
                                     ></v-autocomplete>
@@ -101,8 +104,8 @@
                         ref="oyimex0"
                         v-model="rejim.oyimex"
                         :items="[
-                                {text:'Импорт',value:1},
-                                {text:'Экспорт',value:2}
+                                {text:$t('Импорт'),value:1},
+                                {text:$t('Экспорт'),value:2}
                             ]"
                     ></v-autocomplete>
                 </v-col>
@@ -110,7 +113,7 @@
 <!--                <v-col cols="3">
                     <v-autocomplete
                         ref="oyimex1"
-                        label="Йиллар бўйича"
+                        :label="$t('Йиллар бўйича')"
                         v-model="year"
                         :items="years"
                         hide-selected
@@ -121,7 +124,7 @@
 
         </div>
         <div class="col-9" v-if="stat_type==4">
-            <h3>Ўзбекистон Республикасига {{ getRejimByCode(rejim.davlatimex).text }} товарлари давлатлар кесимида</h3>
+            <h3>{{ $t("Ўзбекистон Республикасига " + getRejimByCode(rejim.davlatimex).text + " товарлари давлатлар кесимида") }}</h3>
             <div id="columnchart4" style="min-height: 65vh; float: left; width: 70%" class="chart mb-10"></div>
             <div id="columnchart4-1" v-if="stat_type===4" style="min-height: 65vh; width: 30%; float: right;"
                  class="chart mb-10"></div>
@@ -131,15 +134,15 @@
                         ref="davimex0"
                         v-model="rejim.davlatimex"
                         :items="[
-                                {text:'Импорт',value:1},
-                                {text:'Экспорт',value:2}
+                                {text:$t('Импорт'),value:1},
+                                {text:$t('Экспорт'),value:2}
                             ]"
                     ></v-autocomplete>
                 </v-col>
                 <v-col cols="3">
                     <v-autocomplete
                         ref="davimex1"
-                        label="Ойлар бўйича"
+                        :label="$t('Ойлар бўйича')"
                         v-model="month"
                         :items="months"
                     ></v-autocomplete>
@@ -147,7 +150,7 @@
 <!--                <v-col cols="3">
                     <v-autocomplete
                         ref="davimex2"
-                        label="Йиллар бўйича"
+                        :label="$t('Йиллар бўйича')"
                         v-model="year"
                         :items="years"
                         hide-selected
@@ -158,7 +161,7 @@
 
         </div>
         <div class="col-9" v-if="stat_type==5">
-            <h3>Ўзбекистон Республикасидан товарлар {{ getRejimByCode(rejim.tovarimex).text }}и</h3>
+            <h3>{{ $t("Ўзбекистон Республикасидан товарлар " + getRejimByCode(rejim.tovarimex).text + "и") }}</h3>
             <div id="columnchart5" style="min-height: 65vh;" class="chart mb-10">
 
                 <mychart :items="mychartdata">
@@ -174,15 +177,15 @@
                         ref="tovimex0"
                         v-model="rejim.tovarimex"
                         :items="[
-                                {text:'Импорт',value:1},
-                                {text:'Экспорт',value:2}
+                                {text:$t('Импорт'),value:1},
+                                {text:$t('Экспорт'),value:2}
                             ]"
                     ></v-autocomplete>
                 </v-col>
                 <v-col cols="3">
                     <v-autocomplete
                         ref="tovimex1"
-                        label="Ойлар бўйича"
+                        :label="$t('Ойлар бўйича')"
                         v-model="month"
                         :items="months"
                     ></v-autocomplete>
@@ -190,7 +193,7 @@
 <!--                <v-col cols="3">
                     <v-autocomplete
                         ref="tovimex2"
-                        label="Йиллар бўйича"
+                        :label="$t('Йиллар бўйича')"
                         v-model="year"
                         :items="years"
                         hide-selected
@@ -201,7 +204,7 @@
 
         </div>
         <div class="col-9" v-if="stat_type==6">
-            <h3>Ҳудудий корхоналар томонидан импорт қилинган товарлар</h3>
+            <h3>{{ $t("Ҳудудий корхоналар томонидан импорт қилинган товарлар") }}</h3>
             <div id="columnchart6" style="min-height: 65vh;" class="chart">
 
                 <mychart2>
@@ -216,15 +219,15 @@
                         ref="auto"
                         v-model="rejim"
                         :items="[
-                                {text:'Импорт',value:1},
-                                {text:'Экспорт',value:2}
+                                {text:$t('Импорт'),value:1},
+                                {text:$t('Экспорт'),value:2}
                             ]"
                     ></v-autocomplete>
                 </v-col>
                 <v-col cols="3">
                     <v-autocomplete
                         ref="auto"
-                        label="Ойлар бўйича"
+                        :label="$t('Ойлар бўйича')"
                         v-model="month"
                         :items="months"
                     ></v-autocomplete>
@@ -232,7 +235,7 @@
                 <v-col cols="3">
                     <v-autocomplete
                         ref="auto1"
-                        label="Йиллар бўйича"
+                        :label="$t('Йиллар бўйича')"
                         v-model="year"
                         :items="years"
                         hide-selected
@@ -266,54 +269,54 @@ export default {
             months:[],
             mymonths: [
                 {
-                    text: 'Барчаси',
+                    text: this.$t('Барчаси'),
                     value: 0
                 }, {
-                    text: 'Январ',
+                    text: this.$t('Январ'),
                     value: 1
                 },
                 {
-                    text: 'Феврал',
+                    text: this.$t('Феврал'),
                     value: 2
                 },
                 {
-                    text: 'Март',
+                    text: this.$t('Март'),
                     value: 3
                 },
                 {
-                    text: 'Апрел',
+                    text: this.$t('Апрел'),
                     value: 4
                 },
                 {
-                    text: 'Май',
+                    text: this.$t('Май'),
                     value: 5
                 },
                 {
-                    text: 'Июн',
+                    text: this.$t('Июн'),
                     value: 6
                 },
                 {
-                    text: 'Июл',
+                    text: this.$t('Июл'),
                     value: 7
                 },
                 {
-                    text: 'Август',
+                    text: this.$t('Август'),
                     value: 8
                 },
                 {
-                    text: 'Сентябр',
+                    text: this.$t('Сентябр'),
                     value: 9
                 },
                 {
-                    text: 'Октябр',
+                    text: this.$t('Октябр'),
                     value: 10
                 },
                 {
-                    text: 'Ноябр',
+                    text: this.$t('Ноябр'),
                     value: 11
                 },
                 {
-                    text: 'Декабр',
+                    text: this.$t('Декабр'),
                     value: 12
                 }
             ],

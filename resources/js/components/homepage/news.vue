@@ -15,11 +15,11 @@
 </svg>
 
 
-            <p> Барча янгиликлар </p></router-link>
+            <p> {{ $t("Барча янгиликлар") }} </p></router-link>
         <div class="container">
             <div class="news-head">
-                <div class="news-title">Янгиликлар</div>
-                <router-link to="/news"  class="all-news_link"> Барча янгиликлар
+                <div class="news-title">{{ $t("Янгиликлар") }}</div>
+                <router-link to="/news"  class="all-news_link"> {{ $t("Барча янгиликлар") }}
                     <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
                                                                  xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                                                                  viewBox="0 0 490.667 490.667" style="enable-background:new 0 0 490.667 490.667;"
@@ -118,12 +118,12 @@ export default {
                     return i;
                 });
             }).catch((error) => {
-                this.$toast.error(`Маълумотларни олишда хатолик содир бўлди!`)
+                this.$toast.error(this.$t("Маълумотларни олишда хатолик содир бўлди!"))
             })
             api.readCategories(8).then((response) => {
                 this.categories = response.data;
             }).catch((error) => {
-                this.$toast.error(`Маълумотларни юклашда хатолик содир бўлди!`)
+                this.$toast.error(this.$t("Маълумотларни юклашда хатолик содир бўлди!"))
             })
 
         }

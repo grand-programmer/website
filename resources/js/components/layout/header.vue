@@ -89,7 +89,7 @@
                                     <a href=".hududiy.section" data-toggle="collapse" role="button"
                                        aria-expanded="false" class="d-inline">
                                         <i class="fas fa-map-marker-alt mr-1 "></i>
-                                        <span class="tort">Ҳудудий бошқармалар</span>
+                                        <span class="tort">{{ $t("Ҳудудий бошқармалар") }}</span>
                                     </a>
                                     <!--                                <ul class="dropdown-menu">
                                                                         <li><a href="contact.html">Contact</a></li>
@@ -127,12 +127,12 @@
                                         <v-list-item @click.prevent="$auth.logout({
                         makeRequest: true,
                         redirect: {name: 'login'},
-                    })" href="#">Чиқиш
+                    })" href="#">{{ $t("Чиқиш") }}
                                         </v-list-item>
                                     </v-list>
                                 </v-menu>
                                 <router-link v-if="!$auth.check()" to="/login"><i
-                                    class="fas fa-sign-in-alt"></i><span class="tort">Кабинетга кириш</span>
+                                    class="fas fa-sign-in-alt"></i><span class="tort"> {{ $t("Кабинетга кириш") }}</span>
                                 </router-link>
                                 <!--end kabinet area-->
 
@@ -239,7 +239,7 @@
                                         <a href=".hududiy.section" data-toggle="collapse" role="button"
                                            aria-expanded="false" class="d-inline">
                                             <i class="fas fa-map-marker-alt mr-1 "></i>
-                                            <span class="tort">Ҳудудий бошқармалар</span>
+                                            <span class="tort">{{ $t("Ҳудудий бошқармалар") }}</span>
                                         </a>
                                         <!--                                <ul class="dropdown-menu">
                                                                             <li><a href="contact.html">Contact</a></li>
@@ -272,13 +272,14 @@
                                             </template>
                                             <v-list><!--
                                     <v-list-item to="/services">Менинг аризаларим</v-list-item>-->
-                                                <v-list-item to="/profile">Менинг профилим</v-list-item>
-                                                <v-list-item to="/applications">Менинг аризаларим</v-list-item>
+                                                <v-list-item to="/profile">{{ $t("Менинг профилим") }}</v-list-item>
+                                                <v-list-item to="/applications">{{ $t("Менинг аризаларим") }}
+                                                </v-list-item>
                                                 <!--                      <v-list-item> <v-list-item-title>Settings</v-list-item-title></v-list-item>-->
                                                 <v-list-item @click.prevent="$auth.logout({
                         makeRequest: true,
                         redirect: {name: 'login'},
-                    })" href="#">Чиқиш
+                    })" href="#">{{ $t("Чиқиш") }}
                                                 </v-list-item>
                                             </v-list>
                                         </v-menu>
