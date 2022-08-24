@@ -14,12 +14,13 @@ class StatController extends Controller
     {
         $data = $request->only(['name', 'month', 'year', 'online']);
 
-        $apiCodes = array("hududimex", "avto", "kunimex");
-        if (isset($data['name']) and in_array($data['name'], $apiCodes)) $apiCode = $data['name']; else $apiCode = "hududimex";
+        $apiCodes = array( "davlatimex", "tovarimex","oyimex"); //"hududimex", "avto", "kunimex",
+        if (isset($data['name']) and in_array($data['name'], $apiCodes)) $apiCode = $data['name']; else $apiCode = "davlatimex";
 
-        $params = $request->only(['year', 'month']);
+        $params = $request->only(['year', 'month','rejim']);
         $month = 0;
         $year = 0;
+        $rejim=0;
 
         if (isset($params['year'])) {
             $year = $params['year'];
@@ -28,11 +29,15 @@ class StatController extends Controller
         if (isset($params['month'])) {
             $month = $params['month'];
         }
-        $statService = new StatService();
+        if (isset($params['rejim'])) {
+            $rejim = $params['rejim'];
+        }
 
-        $statService->fromRepl = !isset($data['online']);
+        $statService = new StatService();
+        $statService->fromRepl =!isset($data['online']);
         $function = $statService->nameFunctions[$apiCode];
-        return response()->json(['data' => $statService->$function($year, $month)]);
+        return response()->json(['data' => $statService->$function($year, $month,$rejim)]);
 
     }
+
 }

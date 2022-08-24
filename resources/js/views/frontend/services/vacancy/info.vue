@@ -57,7 +57,7 @@
                                     </tr>
 
                                     <tr>
-                                        <td >Ўқув юрти номи</td>
+                                        <td style="text-align: left">Ўқув юрти номи</td>
                                         <td >Ўқиган даври</td>
                                     </tr>
                                     <tr v-for="talim in resume.user_add.malumotlar" v-if="resume.user_add">
@@ -72,7 +72,7 @@
                                     </tr>
 
                                     <tr v-if="resume.user_add.sertifikatlar">
-                                        <td > Ўқув маркази</td>
+                                        <td style="text-align: left"> Ўқув маркази</td>
                                         <td > Тугатган санаси</td>
                                     </tr>
                                     <tr v-for="sertifikat in resume.user_add.sertifikatlar">

@@ -96,7 +96,7 @@ class UserController extends Controller
         try {
             $response = Http::asMultipart();
             $response = $response
-                ->get('http://192.168.224.18:9090/appealrestapianswer/getResult', ['personPin' => Auth::guard('api')->user()->pin])->throw(function ($response, $e) {
+                ->get('http://192.168.214.152:7070/DECAPP/s06appealrestapianswer/getResult', ['personPin' => Auth::guard('api')->user()->pin])->throw(function ($response, $e) {
                     //
                 });
             if ($response->status() == 200) {
@@ -126,6 +126,40 @@ class UserController extends Controller
         } catch (\Exception $e) {
 
         };
+        /// Tftn qaror
+        /*try {
+            $response = Http::asMultipart();
+            $response = $response
+                ->get('http://192.168.214.115:9080/labTifTn/api/tutorials/published', ['personPin' => Auth::guard('api')->user()->pin])->throw(function ($response, $e) {
+                    //
+                });
+            if ($response->status() == 200) {
+                $appealdata = $response->json();
+
+                if (is_array($appealdata) and isset($appealdata['appsList']) and isset($appealdata['appsList'][0]) and is_array($appealdata['appsList'][0])) {
+                    collect($appealdata['appsList'])->transform(function ($appeal) use ($user_id) {
+
+                        global $services;
+                        $services[] = [
+                            "app_id" => $appeal['id'],
+                            "app_num" => $appeal['appNum'],
+                            "created_at" => isset($appeal['insTime']) ? $appeal['insTime'] : null,
+                            "status" => $appeal['status'],
+                            "statusNm" => $appeal['statusNm'],
+                            "type" => 3,
+                            "link" => "/services/tftn/" . $appeal['id'],
+                            "user_id" => $user_id,
+                        ];
+
+                    });
+
+
+                }
+
+            } else return response()->json(['error' => 'Сервер билан уланишда муаммо бор!', 'status' => false]);
+        } catch (\Exception $e) {
+
+        };*/
 
         //  $user=User::with('services')->find($user_id);
 

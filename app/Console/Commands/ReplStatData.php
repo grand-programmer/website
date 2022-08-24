@@ -38,7 +38,9 @@ class ReplStatData extends Command
      */
     public function handle()
     {
-        (new StatService())->parse();
+        $statServise=new StatService();
+        $statServise->fromRepl=false;
+        $statServise->parse();
         $this->info('The command was successful!');
         return "sdf";
     }

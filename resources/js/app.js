@@ -132,6 +132,7 @@ Vue.use(auth, {
 
 import './src/http-common'
 import FlagIcon from 'vue-flag-icon'
+
 Vue.use(FlagIcon);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -239,21 +240,64 @@ const app = new Vue({
     vuetify,
     store,
     i18n,
-/*    filters: {
-        reverse(documents) {
-            return documents.slice().reverse()
-        }
-    },*/
+    /*    filters: {
+            reverse(documents) {
+                return documents.slice().reverse()
+            }
+        },*/
 }).$mount('#app');
 
 router.beforeEach((to, from, next) => {
+    i18n.locale = localStorage.getItem('language') || 'uz'
+
+
     app.$store.commit('setLoading', true)
-
-
+///console.log("----+ " + i18n.locale)
+    //if(to.params.locale ==='undefined'
     // Simulate request
+
+    if (to.params.locale === 'admin') {
+        console.log('locale' + to.params.locale)
+        //return next();
+    }
+
+///console.log(to)
     setTimeout(() => {
-        next();
-    }, 1000)
+
+        //console.log('333333')
+        if (typeof to.params.locale === 'undefined') {
+            i18n.locale = localStorage.getItem('language') || 'uz'
+            if (to.path.includes("/admin/")) {
+                next();
+            } else {
+                console.log('2222')
+                next({
+                    path: "/" + i18n.locale + to.path,
+                    params: {locale: i18n.locale},
+                    query: to.query,
+                    replace: true
+                });
+            }
+        } else {
+            // console.log('asd')
+            if (("uz,ru,en,oz,admin".split(",")).includes(to.params.locale))
+                next();
+            else {
+                if (to.params.locale === 'admin') {
+                    console.log('asd')
+                    next();
+                }
+                //   console.log('55555')
+                i18n.locale = localStorage.getItem('language') || 'uz';
+                next({
+                    path: "/" + i18n.locale + to.path,
+                    params: {locale: i18n.locale},
+                    query: to.query,
+                    replace: true
+                });
+            }
+        }
+    }, 200)
 
 });
 

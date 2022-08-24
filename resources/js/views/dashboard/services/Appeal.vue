@@ -160,7 +160,7 @@
 </template>
 
 <script>
-import api from "./../../../src/services/apiService";
+import api from "./../../../src/services/adminApi";
 
 export default {
 

@@ -17,7 +17,9 @@ class News extends Model
         'description',
         'slug',
         'home',
-        'image'
+        'image',
+        'created_by',
+        'boshqarma'
     ];
 
     public static function boot()
@@ -28,10 +30,12 @@ class News extends Model
             $model->slug = $model->createSlug($model->title);// Str::slug($model->title);
         });
     }
-    private function createSlug($title){
+
+    private function createSlug($title)
+    {
         if (static::whereSlug($slug = MainHelper::slug($title))->exists()) {
             $max = static::whereTitle($title)->latest('id')->skip(1)->value('slug');
-if($max==null) return $slug;
+            if ($max == null) return $slug;
             if (is_numeric($max[-1])) {
                 return preg_replace_callback('/(\d+)$/', function ($mathces) {
                     return $mathces[1] + 1;
@@ -43,11 +47,13 @@ if($max==null) return $slug;
 
         return $slug;
     }
+
     public function categories()
     {
-        return $this->belongsToMany('App\Models\Category','news_categories');
+        return $this->belongsToMany('App\Models\Category', 'news_categories');
     }
-    public function resolveRouteBinding($value,$field=NULL)
+
+    public function resolveRouteBinding($value, $field = NULL)
     {
         return $this->where('id', $value)->orWhere('slug', $value)->first();
     }

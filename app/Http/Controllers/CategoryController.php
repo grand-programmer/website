@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\CategoryResource;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -12,15 +13,15 @@ class CategoryController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
     public function index(Request $request)
     {
         $data = $request->only('limit');
         if (isset($data['limit']))
-            return Category::with('children')->limit((int)$data['limit'])->get()->toJson();
+            return CategoryResource::collection(Category::with('children')->limit((int)$data['limit'])->get());
         else
-            return Category::with('children')->get()->toJson();
+            return CategoryResource::collection(Category::with('children')->get());
     }
 
     /**
@@ -30,7 +31,7 @@ class CategoryController extends Controller
      */
     public function getForSelect(): \Illuminate\Http\JsonResponse
     {
-        return new JsonResponse(Category::all()->transform(function ($item, $key) {
+        return new JsonResponse(CategoryResource::collection(Category::all())->transform(function ($item, $key) {
             return [
                 'text' => $item['title'],
                 'value' => $item['id'],
@@ -72,17 +73,17 @@ class CategoryController extends Controller
      * Display the specified resource.
      *
      * @param \App\Models\Category $category
-     * @return \Illuminate\Http\JsonResponse
+     * @return CategoryResource
      */
     public function show(Category $category, Request $request)
     {
         $data = $request->only('withnews');
         if (isset($data['withnews']))
-            return response()->json($category->with(['news' => function ($query) {
+            return CategoryResource::make($category->with(['news' => function ($query) {
                 $query->orderby('created_at', 'desc');
-            }])->where('id', $category->id)->get()[0], 200);
+            }])->where('id', $category->id)->get()[0]);
         else
-            return response()->json($category, 200);
+            return CategoryResource::make($category);
 
     }
 

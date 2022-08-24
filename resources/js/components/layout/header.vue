@@ -9,7 +9,7 @@
                         <div class="header-logo">
                             <router-link to="/" class="header-logo">
                                 <img src="/img/gtk_image.png" alt="">
-                                <span>Ўзбекистон Республикаси <br> Давлат божхона қўмитаси</span>
+                                <span>{{ $t("Ўзбекистон Республикаси Давлат божхона қўмитаси") }}  </span>
 
                             </router-link>
 
@@ -38,7 +38,7 @@
 
                                         <ul class="dropdown-menu "
                                             v-if="(link.children && link.children[0])">
-                                            <li v-for="(sublink,index) in link.children" :key="index" v-if="sublink ">
+                                            <li v-for="(sublink,index) in link.children" :key="index" v-if="sublink && index<10">
                                                 <router-link :to="sublink.url" class="dropdown-item"> {{
                                                         sublink.title
                                                     }}
@@ -138,23 +138,25 @@
 
                             </div>
                             <!--Language area-->
-                            <div class="header-lang">
+                                <language-dropdown class="header-lang"/>
+
+<!--                            <div class="header-lang">
 
                                 <span id="lang_selected" title="Tilni tanlang">ЎЗБ</span>
 
-                                <div id="lang_selector" class="language-dropdown">
-                                    <label class="lang-flag lang-en"
+                                <div id="lang_selector" class="language-dropdown" :class="languageMenuOpen?'open':''" >
+                                    <label class="lang-flag lang-en" @click="languageMenuOpen=!languageMenuOpen"
                                            title="Tilni tanlang">
                                         <span class="flag"></span>
                                     </label>
                                     <ul class="lang-list">
-                                        <li class="lang lang-en selected" title="ЎЗБ">
+                                        <li class="lang lang-en selected" title="ЎЗБ" @click="selectMenu">
                                             <span class="flag"></span>
                                         </li>
-                                        <li class="lang lang-pt" title="РУС">
+                                        <li class="lang lang-pt" title="РУС" @click="selectMenu">
                                             <span class="flag"></span>
                                         </li>
-                                        <li class="lang lang-es" title="ENG">
+                                        <li class="lang lang-es" title="ENG" @click="selectMenu">
                                             <span class="flag"></span>
                                         </li>
                                     </ul>
@@ -162,14 +164,14 @@
                                 </div>
 
 
-                            </div>
+                            </div>-->
 
                             <!--End language area-->
 
                         </div>
-                        <div id="menu-container">
-                            <div id="menu-wrapper">
-                                <div id="hamburger-menu">
+                        <div class="menu-container">
+                            <div  class="menu-wrapper">
+                                <div class="hamburger-menu">
                                     <span></span>
                                     <span></span>
                                     <span></span>
@@ -288,11 +290,13 @@
 
 
                                     <!--Language area-->
-                                    <div class="mm-lang">
+
+                                    <language-dropdown class="mm-lang" />
+<!--                                    <div class="mm-lang">
 
 
-                                        <div id="lang_selector1" class="language-dropdown">
-                                            <label class="lang-flag lang-en"
+                                        <div id="lang_selector1" class="language-dropdown" :class="footerlanguageMenuOpen?'open':''" >
+                                            <label class="lang-flag lang-en" @click="footerlanguageMenuOpen=!footerlanguageMenuOpen"
                                                    title="Tilni tanlang">
                                                 <span class="flag"></span>
                                             </label>
@@ -311,7 +315,7 @@
                                         </div>
 
 
-                                    </div>
+                                    </div>-->
 
                                     <!--End language area-->
 
@@ -332,11 +336,11 @@
 
         <!--                =====   =====End Menu area==========-->
 
-        <component is="script">
+<!--        <component is="script">
             $(document).ready(function () {
             $("select").msDropdown({roundedBorder: false});
             });
-        </component>
+        </component>-->
 
 
     </div>
@@ -345,12 +349,14 @@
 </template>
 <script>
 import api from "./../../src/services/apiService";
+import LanguageDropdown from "../custom/language-selector";
 
 export default {
     name: "Header",
+    components: {LanguageDropdown},
     data() {
         return {
-            links: []
+            links: [],
         }
 
     },
@@ -360,12 +366,13 @@ export default {
     methods: {
         initialize() {
             api.readMenusFront().then((response) => {
-                this.links = response.data;
+                this.links = response.data.data;
                 this.$store.dispatch('SET_MENU', this.links);
             }).catch((error) => {
                 console.log(error)
             })
         },
+
     }
 };
 document.addEventListener("DOMContentLoaded", function () {
@@ -406,7 +413,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 $(document).click(function(e)
 {
-    let container = $(".header-lang");
+    let container = $(".language-dropdown");
 
     // if the target of the click isn't the container nor a descendant of the container
     if (!container.is(e.target) && container.has(e.target).length === 0)
@@ -418,18 +425,17 @@ $(document).click(function(e)
 //end language
 $(function () {
     function slideMenu() {
-        var activeState = $("#menu-container .menu-list").hasClass("active");
-        $("#menu-container .menu-list").animate(
+        var activeState = $(".menu-container .menu-list").hasClass("active");
+        $(".menu-container .menu-list").animate(
             {left: activeState ? "0%" : "-100%"},
             400
         );
     }
 
-    $("#menu-wrapper").click(function (event) {
-        console.log('sdfsdf')
+    $("body").on("click",".menu-wrapper .hamburger-menu",function (event) {
         event.stopPropagation();
-        $("#hamburger-menu").toggleClass("open");
-        $("#menu-container .menu-list").toggleClass("active");
+        $(".hamburger-menu").toggleClass("open");
+        $(".menu-container .menu-list").toggleClass("active");
         slideMenu();
 
         $("body").toggleClass("overflow-hidden");
@@ -459,11 +465,11 @@ $(function () {
 }); // jQuery load
 
 
-$(document).on("click", ".lang-flag", function () {
-    $(".language-dropdown").toggleClass("open");
-});
+/*$(document).on("click", ".lang-flag", function () {
+    //$(".language-dropdown").toggleClass("open");
+});*/
 
-
+/*
 $(document).on("click", "ul.lang-list li", function () {
     $("ul.lang-list li").removeClass("selected");
     $(this).addClass("selected");
@@ -478,7 +484,7 @@ $(document).on("click", "ul.lang-list li", function () {
         $("#lang_selected").html("<span>ENG</span>")
     }
     $(".language-dropdown").removeClass("open");
-});
+});*/
 
 </script>
 <style>
@@ -530,21 +536,21 @@ $(document).on("click", "ul.lang-list li", function () {
 
 
 /*mobile*/
-#menu-wrapper {
+.menu-wrapper {
     overflow: hidden;
     max-width: 100%;
     cursor: pointer;
 }
 
 
-#menu-wrapper #hamburger-menu {
+.menu-wrapper .hamburger-menu {
     position: relative;
     width: 25px;
     height: 20px;
     margin-top: 19px;
 }
 
-#menu-wrapper #hamburger-menu span {
+.menu-wrapper .hamburger-menu span {
     opacity: 1;
     left: 0;
     display: block;
@@ -558,38 +564,38 @@ $(document).on("click", "ul.lang-list li", function () {
     transition: .4s ease-in-out;
 }
 
-#menu-wrapper #hamburger-menu span:nth-child(1) {
+.menu-wrapper .hamburger-menu span:nth-child(1) {
     top: 0;
 }
 
-#menu-wrapper #hamburger-menu span:nth-child(2) {
+.menu-wrapper .hamburger-menu span:nth-child(2) {
     top: 9px;
 }
 
-#menu-wrapper #hamburger-menu span:nth-child(3) {
+.menu-wrapper .hamburger-menu span:nth-child(3) {
     top: 18px;
 }
 
-#menu-wrapper #hamburger-menu.open span:nth-child(1) {
+.menu-wrapper .hamburger-menu.open span:nth-child(1) {
     transform: translateY(9px) rotate(135deg);
 }
 
-#menu-wrapper #hamburger-menu.open span:nth-child(2) {
+.menu-wrapper .hamburger-menu.open span:nth-child(2) {
     opacity: 0;
     transform: translateX(-60px);
 }
 
-#menu-wrapper #hamburger-menu.open span:nth-child(3) {
+.menu-wrapper .hamburger-menu.open span:nth-child(3) {
     transform: translateY(-9px) rotate(-135deg);
 }
 
-/*#menu-container .menu-list .menu-submenu {*/
+/*.menu-container .menu-list .menu-submenu {*/
 /*    white-space: unset;*/
 /*    padding: 20px !important;*/
 /*    left: 10%;*/
 /*}*/
 
-#menu-container .menu-list {
+.menu-container .menu-list {
     padding-left: 0;
     display: block;
     position: absolute;
@@ -604,7 +610,7 @@ $(document).on("click", "ul.lang-list li", function () {
     left: -100%;
 }
 
-#menu-container .menu-list li.accordion-toggle, #menu-container .menu-list .menu-login {
+.menu-container .menu-list li.accordion-toggle, .menu-container .menu-list .menu-login {
     font-size: 16px;
     text-align: center;
     padding: 20px;
@@ -612,7 +618,7 @@ $(document).on("click", "ul.lang-list li", function () {
     border-top: 1px solid #dbdcd2;
 }
 
-#menu-container .menu-list li:first-of-type {
+.menu-container .menu-list li:first-of-type {
     border-top: 0;
 }
 
@@ -664,28 +670,28 @@ $(document).on("click", "ul.lang-list li", function () {
     opacity: 0;
 }
 
-#menu-wrapper {
+.menu-wrapper {
     display: none !important;
 }
 
-#menu-container .menu-list.accordion {
+.menu-container .menu-list.accordion {
     display: none;
 }
 
 
 @media (max-width: 1480px) {
-    #menu-wrapper {
+    .menu-wrapper {
         display: block !important;
     }
 
-    #menu-container .menu-list.accordion {
+    .menu-container .menu-list.accordion {
         display: block !important;
     }
 
 }
 
 @media (max-width: 576px) {
-    #menu-wrapper #hamburger-menu {
+    .menu-wrapper .hamburger-menu {
         position: absolute;
         margin-top: -38px;
         left: 83%;

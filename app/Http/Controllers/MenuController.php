@@ -45,11 +45,11 @@ class MenuController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
     public function getForFront(Request $request)
     {
-        return Menu::with('children')->where('parent', 0)->where('status', 1)->orderby('sort_number', 'asc')->get()->transform(function ($item) {
+        return MenuResource::collection(Menu::with('children')->where('parent', 0)->where('status', 1)->orderby('sort_number', 'asc')->get()->transform(function ($item) {
             if ($item->children) {
                 foreach ($item->children as $child) {
                     if ($child->type == 1 ) {
@@ -89,7 +89,7 @@ class MenuController extends Controller
             if ($item->type == 1) $item->url = '/page/' . Page::find($item->relation_id)->slug;
             return $item;
 
-        })->whereNotNull()->toJson();
+        })->whereNotNull());
 
 
     }

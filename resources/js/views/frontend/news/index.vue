@@ -14,19 +14,24 @@
 
                 <v-col :cols="9">
                     <div class="single_blog_content">
-                        <div class="widget_tittle"><h3>Янгиликлар</h3></div>
+                        <div class="widget_tittle" style="height: 75px"><h3>Янгиликлар</h3></div>
                         <v-row style="height:40px; width: 100%"></v-row>
                         <v-row>
                             <v-col cols="4" class="news-item" v-for="(news,index) in news" :key="news.slug+index">
                                 <div class="news-item-content">
-                                    <router-link class="news__img" :to="`/news/` + news.slug "><img
-                                        :src="`/storage/uploads/`+news.image"></router-link>
+                                    <div class="news__img"><img
+                                        :src="`/storage/uploads/`+news.image"></div>
                                     <div class="news-meta"><span>{{ news.created_at }}</span></div>
                                     <router-link class="news__title" :to="`/news/` + news.slug ">{{ news.title }}
                                     </router-link>
                                 </div>
                             </v-col>
 
+                        </v-row>
+                        <v-row class="justify-content-center mb-4" v-show="pageMeta.current_page!==pageMeta.last_page">
+                            <v-btn text color="primary" :loading="buttonLoading" style="width:max-content "
+                                   @click="getAnotherNews()"> Яна кўриш
+                            </v-btn>
                         </v-row>
                     </div>
                 </v-col>
@@ -73,6 +78,12 @@ export default {
         category: {},
         related_news: {},
         news: {},
+        buttonLoading: false,
+        currentPage: 1,
+        pageMeta: {
+            current_page:1,
+            last_page:2,
+        },
     }),
     watch: {
         $route(to, from) {
@@ -83,12 +94,32 @@ export default {
         this.initialize();
     },
     methods: {
+        async getAnotherNews() {
+            this.buttonLoading=true;
+            await api.readNews({page: (this.currentPage + 1)}).then((response) => {
+                this.pageMeta = response.data.meta;
+                this.news = this.news.concat(response.data.data.map(function (i) {
+                    let dateParts = i.created_at.split("T");
+                    if ((new Date(i.created_at)).getDate() === (new Date).getDate())
+                        i.created_at = dateParts[1].substring(0, 5);
+                    else i.created_at = dateParts[0];
+                    return i;
+                }));
+                this.buttonLoading=false;
+            }).catch((error) => {
+                console.log(error)
+                this.$toast.error(`Маълумотларни юклашда хатолик содир бўлди111!`)
+                this.buttonLoading=false;
+            })
+            this.currentPage = this.currentPage + 1;
+        },
         close() {
             this.$router.replace('/');
         },
-        initialize() {
-            api.readNews().then((response) => {
-                this.related_news=this.news = response.data.map(function (i) {
+        async initialize() {
+            await api.readNews().then((response) => {
+                this.pageMeta = response.data.meta;
+                this.related_news = this.news = response.data.data.map(function (i) {
                     let dateParts = i.created_at.split("T");
                     if ((new Date(i.created_at)).getDate() === (new Date).getDate())
                         i.created_at = dateParts[1].substring(0, 5);
@@ -96,21 +127,24 @@ export default {
                     return i;
                 });
             }).catch((error) => {
-                this.$toast.error(`Маълумотларни юклашда хатолик содир бўлди!`)
+                console.log(error)
+                this.$toast.error(`Маълумотларни юклашда хатолик содир бўлди111!`)
             })
 
 
-            api.readNews().then((response) => {
-                this.related_news = response.data.map(function (i) {
-                    let dateParts = i.created_at.split("T");
-                    if ((new Date(i.created_at)).getDate() === (new Date).getDate())
-                        i.created_at = dateParts[1].substring(0, 5);
-                    else i.created_at = dateParts[0];
-                    return i;
-                });
-            }).catch((error) => {
-                this.$toast.error(`Маълумотларни юклашда хатолик содир бўлди!`)
-            })
+            /*            api.readNews().then((response) => {
+                            console.log()
+                            this.related_news = response.data.data.map(function (i) {
+                                let dateParts = i.created_at.split("T");
+                                if ((new Date(i.created_at)).getDate() === (new Date).getDate())
+                                    i.created_at = dateParts[1].substring(0, 5);
+                                else i.created_at = dateParts[0];
+                                return i;
+                            });
+                        }).catch((error) => {
+                            console.log(error)
+                            this.$toast.error(`Маълумотларни юклашда хатолик содир бўлди!`)
+                        })*/
         },
     }
 
@@ -146,6 +180,7 @@ export default {
 
 .news-item {
     margin-bottom: 20px;
+    cursor:pointer;
 }
 
 .news-lenta {
@@ -169,6 +204,7 @@ export default {
 .news-meta > span {
     color: #8F8F8F;
     font-weight: 300;
+    margin-left: 5px;
 }
 
 .news-lenta__title {

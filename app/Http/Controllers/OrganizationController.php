@@ -42,7 +42,7 @@ class OrganizationController extends Controller
                 'title' => 'required|min:3|max:255',
                 'manzil' => 'array|required',
                 'rahbariyat' => 'array|required',
-                'posts' => 'array|required',
+                'posts' => 'array',
             ]);
 
             if ($validator->fails()) {
@@ -85,7 +85,7 @@ class OrganizationController extends Controller
 
 
             $mdata['rahbariyat'] = json_encode($data['rahbariyat']);
-            $mdata['postlar'] = json_encode($data['posts']);
+            if(isset($data['posts'])) $mdata['postlar'] = json_encode($data['posts']);
             $org = Organization::create($mdata);
             $org->save();
             return response()->json($org, 200);
@@ -118,7 +118,7 @@ class OrganizationController extends Controller
                 'title' => 'required|min:3|max:255',
                 'manzil' => 'array|required',
                 'rahbariyat' => 'array|required',
-                'posts' => 'array|required',
+                'posts' => 'array',
             ]);
 
             if ($validator->fails()) {
@@ -159,7 +159,7 @@ class OrganizationController extends Controller
             $organization->title = $data['title'];
             $organization->manzil = json_encode($data['manzil']);
             $organization->rahbariyat = json_encode($data['rahbariyat']);
-            $organization->postlar = json_encode($data['posts']);
+            if(isset($data['posts'])) $organization->postlar = json_encode($data['posts']);
             //$appeal->number = Str::random(10);
             $organization->save();
             return response()->json($organization, 200);

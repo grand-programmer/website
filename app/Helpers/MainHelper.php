@@ -6,7 +6,8 @@ namespace App\Helpers;
 
 class MainHelper
 {
-    public static function slug($str, $options = array()) {
+    public static function slug($str, $options = array())
+    {
         // Make sure string is in UTF-8 and strip invalid UTF-8 characters
         $str = mb_convert_encoding((string)$str, 'UTF-8', mb_list_encodings());
 
@@ -56,12 +57,12 @@ class MainHelper
             // Russian
             'А' => 'A', 'Б' => 'B', 'В' => 'V', 'Г' => 'G', 'Ғ' => 'G', 'Д' => 'D', 'Е' => 'E', 'Ё' => 'Yo', 'Ж' => 'Zh',
             'З' => 'Z', 'И' => 'I', 'Й' => 'J', 'К' => 'K', 'Қ' => 'Q', 'Л' => 'L', 'М' => 'M', 'Н' => 'N', 'О' => 'O',
-            'П' => 'P', 'Р' => 'R', 'С' => 'S', 'Т' => 'T', 'У' => 'U', 'Ф' => 'F', 'Х' => 'H','Ҳ' => 'H', 'Ц' => 'C',
+            'П' => 'P', 'Р' => 'R', 'С' => 'S', 'Т' => 'T', 'У' => 'U', 'Ф' => 'F', 'Х' => 'H', 'Ҳ' => 'H', 'Ц' => 'C',
             'Ч' => 'Ch', 'Ш' => 'Sh', 'Щ' => 'Sh', 'Ъ' => '', 'Ы' => 'Y', 'Ь' => '', 'Э' => 'E', 'Ю' => 'Yu',
             'Я' => 'Ya',
-            'а' => 'a', 'б' => 'b', 'в' => 'v', 'г' => 'g',  'ғ' => 'g', 'д' => 'd', 'е' => 'e', 'ё' => 'yo', 'ж' => 'zh',
+            'а' => 'a', 'б' => 'b', 'в' => 'v', 'г' => 'g', 'ғ' => 'g', 'д' => 'd', 'е' => 'e', 'ё' => 'yo', 'ж' => 'zh',
             'з' => 'z', 'и' => 'i', 'й' => 'y', 'к' => 'k', 'қ' => 'q', 'л' => 'l', 'м' => 'm', 'н' => 'n', 'о' => 'o',
-            'п' => 'p', 'р' => 'r', 'с' => 's', 'т' => 't', 'у' => 'u', 'ў' => 'o', 'ф' => 'f', 'х' => 'h','ҳ' => 'h', 'ц' => 'c',
+            'п' => 'p', 'р' => 'r', 'с' => 's', 'т' => 't', 'у' => 'u', 'ў' => 'o', 'ф' => 'f', 'х' => 'h', 'ҳ' => 'h', 'ц' => 'c',
             'ч' => 'ch', 'ш' => 'sh', 'щ' => 'sh', 'ъ' => '', 'ы' => 'y', 'ь' => '', 'э' => 'e', 'ю' => 'yu',
             'я' => 'ya',
 
@@ -110,6 +111,7 @@ class MainHelper
 
         return $options['lowercase'] ? mb_strtolower($str, 'UTF-8') : $str;
     }
+
     public static function menuTypes(): array
     {
         return [
@@ -117,5 +119,95 @@ class MainHelper
             1 => 'Сахифа',
             //2 => 'Сахифа',
         ];
+    }
+
+    public static function cyr2lat($str)
+    {
+        $chars = [
+            'Yu' => 'Ю',
+            'Ya' => 'Я',
+            'Yo' => 'Ё',
+            'Ye' => 'Е',
+            'Ch' => 'Ч',
+            'Sh' => 'Ш',
+            'A' => 'А',
+            'B' => 'Б',
+            'V' => 'В',
+            "G'" => 'Ғ',
+            'G' => 'Г',
+            'D' => 'Д',
+            'E'=> 'Е',
+            'J' => 'Ж',
+            'Z' => 'З',
+            'I' => 'И',
+            'Y' => 'Й',
+            'K' => 'К',
+            'Q' => 'Қ',
+            'L' => 'Л',
+            'M' => 'М',
+            'N' => 'Н',
+            "O'" => 'Ў',
+            'O' => 'О',
+            'P' => 'П',
+            'R' => 'Р',
+            'S' => 'С',
+            'T' => 'Т',
+            'U' => 'У',
+            'F' => 'Ф',
+            'X' => 'Х',
+            'H' => 'Ҳ',
+            //'C'=> 'Ц',
+
+            /// 'E'=> 'Э',
+            'ch' => 'ч',
+            'sh' => 'ш',
+            'ye'=>'e',
+            'yu' => 'ю',
+            'ya' => 'я',
+            'yo' => 'ё',
+            'a' => 'а',
+            'b' => 'б',
+            'v' => 'в',
+            "g'" => 'ғ',
+            'g' => 'г',
+            'd' => 'д',
+            'e' => 'е',
+            'j' => 'ж',
+            'z' => 'з',
+            'i' => 'и',
+            'y' => 'й',
+            'k' => 'к',
+            'q' => 'қ',
+            'l' => 'л',
+            'm' => 'м',
+            'n' => 'н',
+            "o'" => 'ў',
+            'o' => 'о',
+            'p' => 'п',
+            'r' => 'р',
+            's' => 'с',
+            't' => 'т',
+            'u' => 'у',
+            'f' => 'ф',
+            'x' => 'х',
+            'h' => 'ҳ',
+
+            //'e' => 'э',
+
+        ];
+        $str=str_replace("e","1e",$str);
+        $str=str_replace("E","1E",$str);
+if(str_contains($str, 'e')) {
+    foreach($chars as $chark=>$char) {
+        $str = str_replace($chark."1e", $chark."е", $str);
+        $str = str_replace($chark."1E", $chark."Е", $str);
+    }
+}
+        $str=str_replace("1e","э",$str);
+        $str=str_replace("1E","Э",$str);
+        $str=str_replace("ts","ц",$str);
+        $str=str_replace("Ts","Ц",$str);
+        return str_replace(array_keys($chars), $chars, $str);
+
     }
 }

@@ -89,11 +89,11 @@ export default {
                 title: 'Менюлар',
                 to: '/admin/menu',
             },
-            {
+/*            {
                 icon: 'mdi-animation',
                 title: 'Мурожаатлар',
                 to: '/admin/services/appeals',
-            },
+            },*/
             {
                 icon: 'mdi-clipboard',
                 title: 'Сахифалар',

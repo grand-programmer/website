@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class StatData extends Model
 {
-    protected $table = 'stats';
+    protected $table = 'website';
     use HasFactory;
+    protected $connection = 'db2_odbc_stat';
 }

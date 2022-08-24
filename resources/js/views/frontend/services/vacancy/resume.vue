@@ -1624,7 +1624,7 @@
 import {mapState} from 'vuex';
 import {extend, ValidationProvider, ValidationObserver} from 'vee-validate';
 import * as rules from 'vee-validate/dist/rules';
-import messages from '../../../../locales/uz.json';
+import messages from '../../../../locales/oz.json';
 import MyField from '../../../../components/form/myfield.vue';
 import {useToast} from "vue-toastification";
 import Editablefield from "../../../../components/form/editablefield";
@@ -2253,7 +2253,7 @@ export default {
             await axios.get("/api/v1/ex_api/vacancy-show?vacancy=" + this.$route.params.id).then(function (response) {
                 if (response.status === 200) {
                     _app.vacancy = response.data.data.vakant;
-                    if(_app.vacancy.applied===true) _app.$router.push('/services/vacancy/'+_app.vacancy.id);
+                    //if(_app.vacancy.applied===true) _app.$router.push('/services/vacancy/'+_app.vacancy.id);
                     _app.breadcrumb_items.push(
                         {
                             text: _app.vacancy.seven,

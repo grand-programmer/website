@@ -35,19 +35,19 @@ class ApiController extends Controller
                     $response = $myrequest
                         ->get('http://192.168.214.159/vacancy/public/api/vakant_nomer/' . $vacancy . '?pnfl=' . Auth::guard('api')->user()->pin); else
                     $response = $myrequest->get('http://192.168.214.159/vacancy/public/api/vakant_nomer/' . $vacancy);
-                        if($response->status()===200){
-                            $data=$response->json();
-                            if(Auth::guard('api')->user()) {
+                if ($response->status() === 200) {
+                    $data = $response->json();
+                    if (Auth::guard('api')->user()) {
 
-                                $response1 = $myrequest->get('http://192.168.214.159/vacancy/public/api/nomzodtotal/' . Auth::guard('api')->user()->pin);
-                                if ($response1->status() == 200) {
-                                    $data = array_merge($response->json(), $response1->json());
-                                }
-                            }
-                            return response()->json([
-                                'success' => $response->status() === 200 ? true : false,
-                                'data' => $data], $response->status());
+                        $response1 = $myrequest->get('http://192.168.214.159/vacancy/public/api/nomzodtotal/' . Auth::guard('api')->user()->pin);
+                        if ($response1->status() == 200) {
+                            $data = array_merge($response->json(), $response1->json());
                         }
+                    }
+                    return response()->json([
+                        'success' => $response->status() === 200 ? true : false,
+                        'data' => $data], $response->status());
+                }
                 break;
             case "boshqarma-show":
                 if (!($boshqarma = (int)$request->get('boshqarma')))
@@ -58,13 +58,11 @@ class ApiController extends Controller
                     ->get('http://192.168.214.159/vacancy/public/api/hudud/' . $boshqarma);
                 break;
             case "boshqarma":
-                //return response()->json(['data'=>DB::connection('db2_odbc221')->select("Select id as kod_id, name_uzb,adress as name From Location")]);
-                /*$response = $myrequest
-                    ->get('http://192.168.214.159/vacancy/public/api/hudud');*/
+
                 try {
                     $response = $myrequest
-                        ->timeout(15)
-                        ->get('http://192.168.214.135:8080/CUSTOMSPRICE/api/custom/locations');
+                        ->timeout(10)
+                        ->get('http://192.168.214.135:9090/CUSTOMSPRICE/api/custom/locations');
                     if ($response->status() == 200) {
                         $dataLocations = json_decode($response->body());
                         //dd($dataLocations->locations);
@@ -81,10 +79,17 @@ class ApiController extends Controller
                             });
                             return response()->json(['data' => $locations->all()]);
                         }
-                    } else return response()->json(['error' => 'Malumot topilmadi']);
+                    } else //return response()->json(['error' => 'Malumot topilmadi'],);
+                        return response()->json(['data' => DB::connection('db2_odbc221')->select("Select id as kod_id, name_uzb as name From Location")]);
 
-                }catch(\Exception $e){
-                    return response()->json(['error' => 'Malumot topilmadi']);
+                } catch (\Exception $e) {
+
+                    return response()->json(['data' => DB::connection('db2_odbc221')->select("Select id as kod_id, name_uzb as name From Location")]);
+                    /*$response = $myrequest
+                        ->get('http://192.168.214.159/vacancy/public/api/hudud');*/
+
+
+                    ///return response()->json(['error' => 'Malumot topilmadi']);
                 }
                 break;
             case "resume":
@@ -100,6 +105,49 @@ class ApiController extends Controller
                                 $service->save();*/
 
                 break;
+            //////tftn
+            case "tftn-person":
+                $this->middleware('auth:api');
+                $user = Auth::guard('api')->user();
+                if (!$user) return response()->json([
+                    'success' => false,
+                    'data' => 'Foydalanuvchi avtorizatsiyadan otishi talab etiladi'], 401);
+                $response = Http::contentType("application/json")->send('POST', 'http://192.168.214.115:9080/labTifTn/personsrestapi', [
+                    'body' => json_encode($request->all())
+                ]);
+                break;
+            case "tftn-product":
+                $response = Http::contentType("application/json")->send('POST', 'http://192.168.214.115:9080/labTifTn/appsrestapi', [
+                    'body' => json_encode($request->all())
+                ]);
+                break;
+            case "tftn-get":
+                $appData = $request->only(['app_id', 'person_id', 'page', 'size']);
+                if (isset($appData['app_id'])) {
+                    $app_id = isset($appData['app_id']) ? $appData['app_id'] : null;
+                    $response = Http::contentType("application/json")->get('http://192.168.214.115:9080/labTifTn/api/tutorials/commoditys', [
+                        "appId" => $app_id,
+                    ]);
+                } elseif (isset($appData['person_id'])) {
+                    $person_id = isset($appData['person_id']) ? $appData['person_id'] : null;
+                    $page = $appData['page'] ?? 0;
+                    $size = $appData['size'] ?? 50;
+                    $response = Http::contentType("application/json")->get('http://192.168.224.18:9080/api/tutorials/published', [
+                        "personPin" => $person_id,
+                        "page" => $page,
+                        "size" => $size,
+                    ]);
+
+
+                } else {
+                    return response()->json(["error" => "Хато маълумот юборилди!", "status" => false], 200);
+                }
+                if ($response->status() == 200) {
+                    return response()->json(["data" => $response->json()]);
+                } else return response()->json(["error" => "Серверда хатолик юз берди!", "status" => false], 200);
+                break;
+            //////tftn end
+            /// customsprice begin
             case "customprice-person":
                 $this->middleware('auth:api');
                 $user = Auth::guard('api')->user();
@@ -107,7 +155,7 @@ class ApiController extends Controller
                     'success' => false,
                     'data' => 'Foydalanuvchi avtorizatsiyadan otishi talab etiladi'], 401);
 
-                $response = Http::contentType("application/json")->send('POST', 'http://192.168.214.135:8080/CUSTOMSPRICE/personsrestapi', [
+                $response = Http::contentType("application/json")->send('POST', 'http://192.168.214.135:9090/CUSTOMSPRICE/personsrestapi', [
                     'body' => json_encode($request->all())
                 ]);
                 $this->middleware('auth:api');
@@ -116,27 +164,28 @@ class ApiController extends Controller
                     'success' => false,
                     'data' => 'Foydalanuvchi avtorizatsiyadan otishi talab etiladi'], 401);
 
-                $response = Http::contentType("application/json")->send('POST', 'http://192.168.214.135:8080/CUSTOMSPRICE/personsrestapi', [
+                $response = Http::contentType("application/json")->send('POST', 'http://192.168.214.135:9090/CUSTOMSPRICE/personsrestapi', [
                     'body' => json_encode($request->all())
                 ]);
 
                 break;
             case "customprice-update":
-                $response = Http::contentType("application/json")->send('POST', 'http://192.168.214.135:8080/CUSTOMSPRICE/appsrestapi/updateappsrestapi', [
+                $response = Http::contentType("application/json")->send('POST', 'http://192.168.214.135:9090/CUSTOMSPRICE/appsrestapi/updateappsrestapi', [
                     'body' => json_encode($request->all())
                 ]);
                 break;
             case "customprice-yuk":
-                $response = Http::contentType("application/json")->send('POST', 'http://192.168.214.135:8080/CUSTOMSPRICE/appsrestapi', [
+                $response = Http::contentType("application/json")->send('POST', 'http://192.168.214.135:9090/CUSTOMSPRICE/appsrestapi', [
                     'body' => json_encode($request->all())
                 ]);
                 break;
             case "customprice-product":
-                $response = Http::contentType("application/json")->send('POST', 'http://192.168.214.135:8080/CUSTOMSPRICE/commodityrestapi', [
+                $response = Http::contentType("application/json")->send('POST', 'http://192.168.214.135:9090/CUSTOMSPRICE/commodityrestapi', [
                     'body' => json_encode($request->all())
                 ]);
                 if ($response->status() === 200) {
-                    if ($appId = json_decode($response->body())->data->appId) ;
+                    return response()->json(['data'=>json_decode($response->body())],$response->status() );
+                    //if ($appId = json_decode($response->body())->data->appId) ;
                     //dd($request->appNum);
                     /* $service = Service::create([
                          'type' => 1,
@@ -152,9 +201,9 @@ class ApiController extends Controller
             case "customprice-get":
                 $appData = $request->only('app_id');
                 $app_id = isset($appData['app_id']) ? $appData['app_id'] : null;
-                $response = Http::contentType("application/json")->get('http://192.168.214.135:8080/CUSTOMSPRICE/api/tutorials/commoditys', [
+                $response = Http::contentType("application/json")->get('http://192.168.214.135:9090/CUSTOMSPRICE/api/tutorials/commoditys', [
                     "page" => 0,
-                    "size" => 100,
+                    "size" => 1000,
                     "appId" => $app_id,
                 ]);
                 if ($response->status() == 200) {
@@ -163,7 +212,7 @@ class ApiController extends Controller
                         'general' => isset($mydata['apps']) ? $mydata['apps'] : null,
                         'product' => isset($mydata['commodityList'][0]) ? $mydata['commodityList'][0] : null,
                     ];
-                    $response2 = Http::contentType("application/json")->get('http://192.168.214.135:8080/CUSTOMSPRICE/api/tutorials/transporttype', [
+                    $response2 = Http::contentType("application/json")->get('http://192.168.214.135:9090/CUSTOMSPRICE/api/tutorials/transporttype', [
                         "page" => 0,
                         "size" => 100,
                         "appId" => $app_id,
@@ -172,7 +221,7 @@ class ApiController extends Controller
                         $transportdata = $response2->json();
                         $returnData['transports'] = isset($transportdata["transportTypeList"]) ? $transportdata["transportTypeList"] : null;
                     }
-                    $response3 = Http::contentType("application/json")->get('http://192.168.214.135:8080/CUSTOMSPRICE/api/tutorials/earxivdocs', [
+                    $response3 = Http::contentType("application/json")->get('http://192.168.214.135:9090/CUSTOMSPRICE/api/tutorials/earxivdocs', [
                         "page" => 0,
                         "size" => 100,
                         "appId" => $app_id,
@@ -194,7 +243,7 @@ class ApiController extends Controller
 
                         //
                     }
-                    $response4 = Http::contentType("application/json")->get('http://192.168.214.135:8080/CUSTOMSPRICE/api/tutorials/historystatus', [
+                    $response4 = Http::contentType("application/json")->get('http://192.168.214.135:9090/CUSTOMSPRICE/api/tutorials/historystatus', [
                         "page" => 0,
                         "size" => 100,
                         "appId" => $app_id,
@@ -204,22 +253,23 @@ class ApiController extends Controller
 
                         $returnData['statuses'] = isset($statusdata["statusAppHistoryList"]) ? $statusdata["statusAppHistoryList"] : null;
                         //$returnData['rollbackApp'] = isset($statusdata["rollbackApp"]) ? $statusdata["rollbackApp"] : null;
-                        if(isset($returnData['statuses'])){
-                            $returnData['statuses']=collect($returnData['statuses'])->transform(function($status){
-                                if((int)$status['status']===125) {
-                                    $response5 = Http::contentType("application/json")->get('http://192.168.214.135:8080/CUSTOMSPRICE/api/tutorials/historyrollback', [
-                                        "appId" => $status['appId'],
-                                        "size" => 100,
-                                        "page" => 0,
-                                        "statusHId" => $status['id'],
-                                    ]);
-                                    if ($response5->status() == 200) {
-                                        $status['rolback'] = $response5->json();
-                                    }
+                        if (isset($returnData['statuses'])) {
+                            $returnData['statuses'] = collect($returnData['statuses'])->transform(function ($status) {
+                                //if ((int)$status['status'] === 125) {
+                                $response5 = Http::contentType("application/json")->get('http://192.168.214.135:9090/CUSTOMSPRICE/api/tutorials/historyrollback', [
+                                    "appId" => $status['appId'],
+                                    "size" => 100,
+                                    "page" => 0,
+                                    "statusHId" => $status['id'],
+                                ]);
+                                if ($response5->status() == 200) {
+                                    $status['rolback'] = $response5->json();
                                 }
+                                //}
                                 return $status;
                             });
                         }
+                        /// dd($returnData['statuses']);
                     }
 
                     return response()->json(["data" => $returnData]);
@@ -229,15 +279,70 @@ class ApiController extends Controller
             case "customprice-apps":
                 $appData = $request->only('pnfl');
                 $person_pnfl = isset($appData['pnfl']) ? $appData['pnfl'] : null;
-                $response = Http::contentType("application/json")->get('http://192.168.214.135:8080/CUSTOMSPRICE/api/tutorials/published', [
+                $response = Http::contentType("application/json")->get('http://192.168.214.135:9090/CUSTOMSPRICE/api/tutorials/published', [
                     "personPin" => $person_pnfl,
+                    "size"=>200,
                 ]);
                 if ($response->status() == 200) {
                     $dataApps = json_decode($response->body());
                     return isset($dataApps->appsList) ? $dataApps->appsList : [];
                 }
                 break;
+            case "customprice-registries":
+                $appData = $request->only(['hsCode', 'page', 'size', 'inDecNum', 'datepicker', 'appNum', 'tradeName', 'terms', 'method']);
+                foreach ($appData as $mk => $mdata) {
+                    $appData[$mk] = $mdata === null ? "" : $mdata;
+                }
+                //dd($appData);
+            //'StartDate', 'EndDate',
+            if(isset($appData['datepicker']) && isset($appData['datepicker'][0])) $appData['StartDate']=$appData['datepicker'][0];
+            if(isset($appData['datepicker']) && isset($appData['datepicker'][1])) $appData['EndDate']=$appData['datepicker'][1];
+                $appData['page'] = isset($appData['page'])?$appData['page']-1:0;
+                //$appData = isset($appData['pnfl']) ? $appData['pnfl'] : null;
+                ///dd($appData);
+                $response = Http::contentType("application/json")->get('http://192.168.214.135:9090/CUSTOMSPRICE/api/custom/reestor', $appData);
+                if ($response->status() == 200) {
+                    //$dataApps = json_decode($response->body());
+                    //return $response->json();
+                    $stats = $response->json();
+                    if (count($stats['inDecReestr']) > 0) $stats['inDecReestr'] = collect($stats['inDecReestr'])->transform(function ($decision) {
+                        return [
+                            "appNum" => $decision[0],
+                            "appDate" => $decision[1],
+                            "personFio" => $decision[2],
+                            "terms" => $decision[3],
+                            "termsNm" => $decision[4],
+                            "hsCode" => $decision[5],
+                            "hsName" => $decision[6],
+                            "tradeName" => $decision[7],
+                            "method" => str_replace(0, "", $decision[8]) . " - усул",
+                            "inDecNum" => $decision[9],
+                            "inDecDate" => $decision[10],
+                            "inDecEndDate" => $decision[11],
+                            "inDecLocationNm" => $decision[12],
+                            "methodNm" => $decision[13],
+                            "statusNm" => $decision[14],
+                            "commentEnded" => $decision[15],
+                        ];
+                    });
+                    return response()->json($stats);
+                }
+                return response()->json(['status' => $response->status(), 'data' => $response->body()]);;
 
+                break;
+            case "posts":
+                $appData = $request->only('code');
+                $code = isset($appData['code']) ? $appData['code'] : "";
+                $response = Http::contentType("application/json")->get('http://192.168.214.115:9080/labTifTn/api/custom/postsWith', [
+                    "code" => $code,
+                ]);
+                if ($response->status() == 200) {
+                    return $response->json();
+                } else return response()->json(['error' => 'Маълумот топилмади']);
+                break;
+
+                break;
+/////customsprice end
             case "test":
 
 
@@ -299,14 +404,14 @@ class ApiController extends Controller
                 }
                 break;
             case "appeal":
-                $data=$request->all();
+                $data = $request->all();
                 //$data['positionNm']='asdasd ';
-            if(!isset($data['positionNm'])) $data['positionNm']=" ----- ";
-                $data['phoneNumber']=str_replace('-',"",$data['phoneNumber']);
-                $data['phoneNumber']=str_replace(' ',"",$data['phoneNumber']);
-                $data['phoneNumber']="+998".$data['phoneNumber'];
-                $data['appealType']=$data['appealType']?1:0;
-                $data['position']=$data['appealType']?'02':'01';
+                if (!isset($data['positionNm'])) $data['positionNm'] = " ----- ";
+                $data['phoneNumber'] = str_replace('-', "", $data['phoneNumber']);
+                $data['phoneNumber'] = str_replace(' ', "", $data['phoneNumber']);
+                $data['phoneNumber'] = "+998" . $data['phoneNumber'];
+                $data['appealType'] = $data['appealType'] ? 1 : 0;
+                $data['position'] = $data['appealType'] ? '02' : '01';
                 unset($data['multipartFile']);
                 $response = Http::asMultipart();
                 // check file is present and has no problem uploading it
@@ -316,48 +421,46 @@ class ApiController extends Controller
                     $response->attach('multipartFile', file_get_contents($image), $image->getClientOriginalName());
                 }
                 $response = $response
-                    ->post('http://192.168.224.18:9090/appealrestapi/upload',$data);
-                if($response->status()===200) {
-                    $appeal=$response->json('data');
+                    ->post('http://192.168.214.152:7070/DECAPP/s06appealrestapi/upload', $data);
+                if ($response->status() === 200) {
+                    $appeal = $response->json('data');
 
                     $response1 = Http::asMultipart()->acceptJson();
-                        $response1=$response1->get('http://192.168.224.18:9090/appealrestapianswer/getResult',[
-                            'password'=>isset($appeal['password'])?$appeal['password']:null,
-                            'appNum'=>isset($appeal['AppNum'])?$appeal['AppNum']:null
-                        ]);
+                    $response1 = $response1->get('http://192.168.214.152:7070/DECAPP/s06appealrestapianswer/getResult', [
+                        'password' => isset($appeal['password']) ? $appeal['password'] : null,
+                        'appNum' => isset($appeal['AppNum']) ? $appeal['AppNum'] : null
+                    ]);
 
 
-                    if($response1->status()===200){
+                    if ($response1->status() === 200) {
                         return response()->json([
-                            'number' => isset($appeal['AppNum'])?$appeal['AppNum']:null,
-                            'code' => isset($appeal['password'])?$appeal['password']:null,
-                            'appeal'=>$response1->json()
+                            'number' => isset($appeal['AppNum']) ? $appeal['AppNum'] : null,
+                            'code' => isset($appeal['password']) ? $appeal['password'] : null,
+                            'appeal' => $response1->json()
                             //'created_at' => date('d-m-Y H:i:s', strtotime($appeal->created_at)),
                         ], 200);
-                    }else
-                    return response()->json([
-                        'number' => isset($appeal['AppNum'])?$appeal['AppNum']:null,
-                        'code' => isset($appeal['password'])?$appeal['password']:null,
-                        //'created_at' => date('d-m-Y H:i:s', strtotime($appeal->created_at)),
-                    ], 200);
-                }
-                else return response()->json(['error'=>'Сервер билан уланишда муаммо бор!','status'=>false]);
+                    } else
+                        return response()->json([
+                            'number' => isset($appeal['AppNum']) ? $appeal['AppNum'] : null,
+                            'code' => isset($appeal['password']) ? $appeal['password'] : null,
+                            //'created_at' => date('d-m-Y H:i:s', strtotime($appeal->created_at)),
+                        ], 200);
+                } else return response()->json(['error' => 'Сервер билан уланишда муаммо бор!', 'status' => false]);
             case "appeal-check":
-                $data=$request->only('appNum','password');
+                $data = $request->only('appNum', 'password');
                 if (Auth::guard('api')->user()) {
                     $data['personPin'] = Auth::guard('api')->user()['pin'];
                     //unset($data['password']);
                 }
                 $response = Http::asMultipart()->acceptJson()
-                    ->get('http://192.168.224.18:9090/appealrestapianswer/getResult',$data);
-                if($response->status()==200) {
+                    ->get('http://192.168.214.152:7070/DECAPP/s06appealrestapianswer/getResult', $data);
+                if ($response->status() == 200) {
                     return response()->json([
-                        'data'=>$response->json(),
-                        'success'=>$response->status()?true:false
+                        'data' => $response->json(),
+                        'success' => $response->status() ? true : false
                         //'created_at' => date('d-m-Y H:i:s', strtotime($appeal->created_at)),
                     ], 200);
-                }
-                else return response()->json(['error'=>'Сервер билан уланишда муаммо бор!','status'=>false]);
+                } else return response()->json(['error' => 'Сервер билан уланишда муаммо бор!', 'status' => false]);
             case 'gen_session':
                 //return (strin g) Str::uuid();
                 if (!Auth::guard('api')->user()) return response()->json(['Not authorized'], 401);

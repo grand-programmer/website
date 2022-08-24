@@ -54,7 +54,7 @@
                     </template>
 
                     <h4 class="card-title font-weight-light mt-2 ml-2">
-                        Website Views
+                        {{ $t('Website Views') }}
                     </h4>
 
                     <p class="d-inline-flex font-weight-light ml-2 mt-1">

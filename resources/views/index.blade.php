@@ -31,9 +31,10 @@
     <link href="{{asset('/css/responsive.css')}}" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('css/owl-carousel/owl.carousel.css')}}">
     <link rel="stylesheet" href="{{asset('css/owl-carousel/owl.theme.default.css')}}">
-    <link crossorigin="anonymous" rel="stylesheet" id="gillion-fonts-css"
+<!--    <script src="public/js/anychart/anychart-base.min.js"></script>-->
+<!--    <link crossorigin="anonymous" rel="stylesheet" id="gillion-fonts-css"
           href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,regular,italic,600,600italic,700,700italic,800,800italic%7CMontserrat:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic&amp;subset=latin"
-          type="text/css" media="all">
+          type="text/css" media="all">-->
 
 </head>
 <body>
@@ -70,6 +71,7 @@
 <script src="/vendors/isotop/isotope.pkgd.min.js"></script>
 <script src="/js/slick.min.js"></script>
 <script src="/js/script.js"></script>
+
 
 
 </body>

@@ -34,7 +34,7 @@ class PageController extends Controller
                         if ($item['type'] == 1 ) {
                             if($page = Page::find($item->relation_id))
                             $item['url'] = "/page/" . $page->slug;
-                            else $item['url'] = "/page/" . $item['url'];
+                            else $item['url'] = "/page1/" . $item['url'];
                         }
                         if ($item['url'] == '#' and !(count($item->children) > 0)) return false;
                         return $item;

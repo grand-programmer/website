@@ -60,7 +60,7 @@
                             <div class="slider_text absolute_right">
                                 <h3 class="fadeInLeft animated">E-ARHIV</h3>
                                 <h4 class="fadeInLeft animated">Божхона ахборот тизими</h4>
-                                <p class="fadeInUp animated">Божхона ахборот тизмиларига =ужжатларингизни
+                                <p class="fadeInUp animated">Божхона ахборот тизмиларига ҳужжатларингизни
                                     жойланг</p>
                                 <a class="s_readmore_btn fadeInUp animated" target="_blank"
                                    href="https://ed2.customs.uz/E_ARXIV/authentication">Хизматдан фойдаланиш</a>
@@ -202,7 +202,7 @@
                 </div>
             </div>
             <!--==========End Main Slider area==========-->
-            <component is="script" src="js/theme.js"></component>
+            <component is="script" src="/js/theme.js"></component>
         </div>
         <div class="section ">
             <div class="row"><h3 class="text-center section_title">БЎЛИМЛАР</h3></div>
@@ -210,7 +210,64 @@
 
 
                 <div class="row pb-8" style="margin: 24px!important; justify-content: center;">
-
+                    <div class="container-m">
+                        <a class="card1" href="#">
+                            <h3>Жисмоний шахслар учун</h3>
+                            <div class="go-corner" href="#">
+                                <div class="go-arrow">
+                                    →
+                                </div>
+                            </div>
+                        </a>
+                        <a class="card1" href="#">
+                            <h3>ТИФ иштирокчилари учун</h3>
+                            <div class="go-corner" href="#">
+                                <div class="go-arrow">
+                                    →
+                                </div>
+                            </div>
+                        </a>
+                        <a class="card1" href="#">
+                            <h3>Мурожаатлар</h3>
+                            <div class="go-corner" href="#">
+                                <div class="go-arrow">
+                                    →
+                                </div>
+                            </div>
+                        </a>
+                        <a class="card1" href="#">
+                            <h3>Сўровнома</h3>
+                            <div class="go-corner" href="#">
+                                <div class="go-arrow">
+                                    →
+                                </div>
+                            </div>
+                        </a>
+                        <a class="card1" href="#">
+                            <h3>Тўловлар ва вақт</h3>
+                            <div class="go-corner" href="#">
+                                <div class="go-arrow">
+                                    →
+                                </div>
+                            </div>
+                        </a>
+                        <a class="card1" href="#">
+                            <h3>Тадбиркорлар учун зарур маълумотлар</h3>
+                            <div class="go-corner" href="#">
+                                <div class="go-arrow">
+                                    →
+                                </div>
+                            </div>
+                        </a>
+                        <a class="card1" href="#">
+                            <h3>Коррупция тўғрисида хабар</h3>
+                            <div class="go-corner" href="#">
+                                <div class="go-arrow">
+                                    →
+                                </div>
+                            </div>
+                        </a>
+                    </div>
 
                     <div class="card">
                         <div class="bolim_image"><img src="/img/service/user-icon.png"></div>
@@ -739,7 +796,69 @@ export default {
         return {
             stat: true,
             links: [],
-            show: false
+            show: false,
+            stat_type: 1,
+            month: 0,
+            months: [
+                {
+                    text: 'Барчаси',
+                    value: 0
+                }, {
+                    text: 'Январ',
+                    value: 1
+                },
+                {
+                    text: 'Феврал',
+                    value: 2
+                },
+                {
+                    text: 'Март',
+                    value: 3
+                },
+                {
+                    text: 'Апрел',
+                    value: 4
+                },
+                {
+                    text: 'Май',
+                    value: 5
+                },
+                {
+                    text: 'Июн',
+                    value: 6
+                },
+                {
+                    text: 'Июл',
+                    value: 7
+                },
+                {
+                    text: 'Август',
+                    value: 8
+                },
+                {
+                    text: 'Сентябр',
+                    value: 9
+                },
+                {
+                    text: 'Октябр',
+                    value: 10
+                },
+                {
+                    text: 'Ноябр',
+                    value: 11
+                },
+                {
+                    text: 'Декабр',
+                    value: 12
+                }
+            ],
+            year: 2022,
+            firstStart: 1,
+            years: [
+                2018, 2019, 2020, 2021, 2022
+            ],
+            overlay: true,
+            faqs: [],
         }
 
     },

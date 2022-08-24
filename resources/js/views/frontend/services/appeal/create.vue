@@ -316,7 +316,7 @@ import Info from './info';
 
 import {extend, ValidationProvider, ValidationObserver} from 'vee-validate';
 import * as rules from 'vee-validate/dist/rules';
-import messages from '../../../../locales/uz.json';
+import messages from '../../../../locales/oz.json';
 import api from "../../../../src/services/apiService";
 
 Object.keys(rules).forEach(rule => {
@@ -442,7 +442,7 @@ export default {
 
             }).then(function (response){
                 if(typeof response.data.data.birth_date ==='undefined') {
-                    _this.$toast.error("Маълумотлар мос келмади!")
+                    _this.$toast.error("Маълумотлар мос келмади1!")
                     _this.$router.push('/services/appeals/');
                 }
                 else{
