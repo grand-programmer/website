@@ -93,7 +93,7 @@
                 </v-col>
                 <v-col cols="3">
                     <div class="left_sidebar_widget">
-                        <div class="widget_tittle"><h3>Сўнги янгиликлар</h3></div>
+                        <div class="widget_tittle"><h3>{{ $t("Сўнги янгиликлар") }}</h3></div>
                         <div class="single_layout-right">
                             <router-link class="news-lenta" :to="/news/+related_item.slug"
                                          v-for="(related_item,index) in related_news" :key="related_item.slug + index">
@@ -112,6 +112,7 @@
 <script>
 import api from "./../../../src/services/apiService";
 import ListItem from "../../../js/views/dashboard/component/ListItem";
+import i18n from "../../../i18n";
 
 export default {
     name: 'News',
@@ -119,7 +120,7 @@ export default {
     data: () => ({
         breadcrumb_items: [
             {
-                text: 'Асосий саҳифа',
+                text: i18n.t('Асосий саҳифа'),
                 to: '/',
                 disabled: false,
                 exact: true,
@@ -181,7 +182,7 @@ export default {
                     this.breadcrumb_items[2].text = this.news.title;
                 }).catch((error) => {
                     console.log(error)
-                    this.$toast.error(`Маълумотларни юклашда хатолик содир бўлди!`)
+                    this.$toast.error(i18n.t(`Маълумотларни юклашда хатолик содир бўлди!`))
                     /*this.$router.replace("/").catch(() => {
                     });*/
                 });
@@ -196,7 +197,7 @@ export default {
                     });
                 }).catch((error) => {
                     console.log(error)
-                    this.$toast.error(`Маълумотларни юклашда хатолик содир бўлди!`)
+                    this.$toast.error(i18n.t(`Маълумотларни юклашда хатолик содир бўлди!`))
                 })
 
             })
@@ -217,7 +218,7 @@ export default {
             let discount=false;
             if(vote===1){
                 if(_this.likes!==null && _this.likes.includes(_this.news.id)){
-                    this.$toast.warning('Сиз аллақачон овоз бергансиз!')
+                    this.$toast.warning(i18n.t('Сиз аллақачон овоз бергансиз') + '!')
                     return ;
 
                 }else {
@@ -235,7 +236,7 @@ export default {
             }
             if(vote===0){
                 if(_this.dislikes!==null && _this.dislikes.includes(_this.news.id)){
-                    this.$toast.warning('Сиз аллақачон овоз бергансиз!')
+                    this.$toast.warning(i18n.t('Сиз аллақачон овоз бергансиз') + '!')
                     return ;
 
                 }else {
@@ -284,7 +285,7 @@ export default {
 
 }
 </script>
-<style>
+<style >
 .news__img {
     position: relative;
     width: 100%;
@@ -352,6 +353,11 @@ export default {
 .widget_tittle {
     padding-bottom: 35px;
     border-bottom: 2px solid #39ae69;
+}
+.widget_tittle h3{
+    color: #39ae69;
+    font-weight: bold;
+    font-size: 25px;
 }
 
 .left_sidebar_widget {

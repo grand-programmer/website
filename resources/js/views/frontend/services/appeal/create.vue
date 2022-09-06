@@ -318,6 +318,7 @@ import {extend, ValidationProvider, ValidationObserver} from 'vee-validate';
 import * as rules from 'vee-validate/dist/rules';
 import messages from '../../../../locales/oz.json';
 import api from "../../../../src/services/apiService";
+import i18n from "../../../../i18n";
 
 Object.keys(rules).forEach(rule => {
     extend(rule, {
@@ -349,7 +350,7 @@ export default {
             },
             breadcrumb_items: [
                 {
-                    text: 'Асосий саҳифа',
+                    text: i18n.t('Асосий саҳифа'),
                     to: '/',
                     disabled: false,
                     exact: true,
@@ -588,7 +589,15 @@ export default {
                     })
                     .catch((e) => {
                         this.jonatishLoading=false;
-                        _this.$toast.error(Object.values(e.response.data.error)[0])
+
+                        for (const [key, value] of Object.entries(e.response.data.error.errors))
+                        {
+                            _this.$toast.error(key + " - " + value);
+
+                        }
+
+
+                        //_this.$toast.error(Object.values(e.response.data.error)[0])
                         /*this.alert = {
                             value: true,
                             alert_type: "error",

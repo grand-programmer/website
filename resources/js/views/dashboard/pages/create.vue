@@ -773,7 +773,7 @@ export default {
 
                 this.pages = response.data;
             }).catch((error) => {
-                this.$toast.error(`Маълумотларни юклашда хатолик содир бўлди!`)
+                this.$toast.error(i18n.t(`Маълумотларни юклашда хатолик содир бўлди!`))
                 console.log(error)
             })
             api.readMenusFront().then((response) => {
@@ -796,7 +796,7 @@ export default {
                 console.log(this.menus)
 
             }).catch((error) => {
-                this.$toast.error(`Маълумотларни юклашда хатолик содир бўлди!`)
+                this.$toast.error(i18n.t(`Маълумотларни юклашда хатолик содир бўлди!`))
                 console.log(error)
             })
         },/*
@@ -833,7 +833,7 @@ export default {
                         this.$toast.success(`Маълумотларни омадли тарзда юкланди!`)
                         this.close()
                     }).catch((error) => {
-                        this.$toast.error(`Маълумотларни юклашда хатолик содир бўлди!`)
+                        this.$toast.error(i18n.t(`Маълумотларни юклашда хатолик содир бўлди!`))
                         console.log(error)
                     })
                 }

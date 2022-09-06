@@ -41,13 +41,14 @@
 </template>
 <script>
 import api from "./../../../src/services/apiService";
+import i18n from "../../../i18n";
 
 export default {
     name: 'Page',
     data: () => ({
         breadcrumb_items: [
             {
-                text: 'Асосий саҳифа',
+                text: i18n.t('Асосий саҳифа'),
                 to: '/',
                 disabled: false,
                 exact: true,
@@ -85,14 +86,14 @@ export default {
                 if(!this.page.id) this.$router.replace('/404')
                this.breadcrumb_items[1].text=this.page.title;
             }).catch((error) => {
-                this.$toast.error(`Маълумотларни юклашда хатолик содир бўлди!`)
+                this.$toast.error(i18n.t(`Маълумотларни юклашда хатолик содир бўлди!`))
                 this.$router.replace("/").catch(() => {
                 });
             })
             api.readRelated(this.$route.params.id).then((response) => {
                 this.relates = response.data;
             }).catch((error) => {
-                this.$toast.error(`Маълумотларни юклашда хатолик содир бўлди!`)
+                this.$toast.error(i18n.t(`Маълумотларни юклашда хатолик содир бўлди!`))
                 this.$router.replace("/").catch(() => {
                 });
             })

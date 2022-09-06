@@ -9,6 +9,7 @@ use http\Env\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Mockery\Exception;
 use Ramsey\Collection\Collection;
@@ -93,17 +94,13 @@ class ApiController extends Controller
                 }
                 break;
             case "resume":
+                $this->middleware('auth:api');
+                $user = Auth::guard('api')->user();
+                if (!$user) return response()->json([
+                    'success' => false,
+                    'data' => 'Foydalanuvchi avtorizatsiyadan otishi talab etiladi'], 401);
                 $response = $myrequest
                     ->post('http://192.168.214.159/vacancy/public/api/vacancynomzod', array_merge($request->all(), ['pasport' => Auth::guard('api')->user()['pport_no']]));
-//dd($response);
-
-                /*                $service=Service::create([
-                                    'type'=>1,
-                                    'app_id'=>$appId,
-                                    'status'=>0
-                                ]);
-                                $service->save();*/
-
                 break;
             //////tftn
             case "tftn-person":
@@ -117,6 +114,11 @@ class ApiController extends Controller
                 ]);
                 break;
             case "tftn-product":
+                $this->middleware('auth:api');
+                $user = Auth::guard('api')->user();
+                if (!$user) return response()->json([
+                    'success' => false,
+                    'data' => 'Foydalanuvchi avtorizatsiyadan otishi talab etiladi'], 401);
                 $response = Http::contentType("application/json")->send('POST', 'http://192.168.214.115:9080/labTifTn/appsrestapi', [
                     'body' => json_encode($request->all())
                 ]);
@@ -170,21 +172,36 @@ class ApiController extends Controller
 
                 break;
             case "customprice-update":
+                $this->middleware('auth:api');
+                $user = Auth::guard('api')->user();
+                if (!$user) return response()->json([
+                    'success' => false,
+                    'data' => 'Foydalanuvchi avtorizatsiyadan otishi talab etiladi'], 401);
                 $response = Http::contentType("application/json")->send('POST', 'http://192.168.214.135:9090/CUSTOMSPRICE/appsrestapi/updateappsrestapi', [
                     'body' => json_encode($request->all())
                 ]);
                 break;
             case "customprice-yuk":
+                $this->middleware('auth:api');
+                $user = Auth::guard('api')->user();
+                if (!$user) return response()->json([
+                    'success' => false,
+                    'data' => 'Foydalanuvchi avtorizatsiyadan otishi talab etiladi'], 401);
                 $response = Http::contentType("application/json")->send('POST', 'http://192.168.214.135:9090/CUSTOMSPRICE/appsrestapi', [
                     'body' => json_encode($request->all())
                 ]);
                 break;
             case "customprice-product":
+                $this->middleware('auth:api');
+                $user = Auth::guard('api')->user();
+                if (!$user) return response()->json([
+                    'success' => false,
+                    'data' => 'Foydalanuvchi avtorizatsiyadan otishi talab etiladi'], 401);
                 $response = Http::contentType("application/json")->send('POST', 'http://192.168.214.135:9090/CUSTOMSPRICE/commodityrestapi', [
                     'body' => json_encode($request->all())
                 ]);
                 if ($response->status() === 200) {
-                    return response()->json(['data'=>json_decode($response->body())],$response->status() );
+                    return response()->json(['data' => json_decode($response->body())], $response->status());
                     //if ($appId = json_decode($response->body())->data->appId) ;
                     //dd($request->appNum);
                     /* $service = Service::create([
@@ -199,6 +216,7 @@ class ApiController extends Controller
                 }
                 break;
             case "customprice-get":
+
                 $appData = $request->only('app_id');
                 $app_id = isset($appData['app_id']) ? $appData['app_id'] : null;
                 $response = Http::contentType("application/json")->get('http://192.168.214.135:9090/CUSTOMSPRICE/api/tutorials/commoditys', [
@@ -277,11 +295,12 @@ class ApiController extends Controller
                 } else return response()->json(["error" => "Серверда хатолик юз берди!", "status" => false], 200);
                 break;
             case "customprice-apps":
+
                 $appData = $request->only('pnfl');
                 $person_pnfl = isset($appData['pnfl']) ? $appData['pnfl'] : null;
                 $response = Http::contentType("application/json")->get('http://192.168.214.135:9090/CUSTOMSPRICE/api/tutorials/published', [
                     "personPin" => $person_pnfl,
-                    "size"=>200,
+                    "size" => 200,
                 ]);
                 if ($response->status() == 200) {
                     $dataApps = json_decode($response->body());
@@ -294,10 +313,10 @@ class ApiController extends Controller
                     $appData[$mk] = $mdata === null ? "" : $mdata;
                 }
                 //dd($appData);
-            //'StartDate', 'EndDate',
-            if(isset($appData['datepicker']) && isset($appData['datepicker'][0])) $appData['StartDate']=$appData['datepicker'][0];
-            if(isset($appData['datepicker']) && isset($appData['datepicker'][1])) $appData['EndDate']=$appData['datepicker'][1];
-                $appData['page'] = isset($appData['page'])?$appData['page']-1:0;
+                //'StartDate', 'EndDate',
+                if (isset($appData['datepicker']) && isset($appData['datepicker'][0])) $appData['StartDate'] = $appData['datepicker'][0];
+                if (isset($appData['datepicker']) && isset($appData['datepicker'][1])) $appData['EndDate'] = $appData['datepicker'][1];
+                $appData['page'] = isset($appData['page']) ? $appData['page'] - 1 : 0;
                 //$appData = isset($appData['pnfl']) ? $appData['pnfl'] : null;
                 ///dd($appData);
                 $response = Http::contentType("application/json")->get('http://192.168.214.135:9090/CUSTOMSPRICE/api/custom/reestor', $appData);
@@ -400,11 +419,28 @@ class ApiController extends Controller
                     $simpleXml = simplexml_load_string($response->body());
                     $json = json_encode($simpleXml); // convert the XML string to JSON
                     $array = json_decode($json); // convert the XML string to JSON
-                    return response()->json(['data' => $array]);
+                    $myPasportData = [];
+                    $myPasportData['birth_date'] = $array->birth_date;
+                    $myPasportData['namelatin'] = $array->namelatin;
+                    $myPasportData['surnamelatin'] = $array->surnamelatin;
+                    $myPasportData['patronymlatin'] = $array->patronymlatin;
+                    $myPasportData['pinpp'] = $array->pinpp;
+                    return response()->json(['data' => $myPasportData]);
                 }
                 break;
             case "appeal":
                 $data = $request->all();
+                $validator = Validator::make($data, [
+                    'phoneNumber' => 'required',
+                ]);
+                if ($request->method() !== 'POST') {
+                    // dd($request->method());
+                    return response()->json(['error' => 'This request method not supported'], 400);
+                };
+
+                if ($validator->fails()) {
+                    return response()->json(['error' => $validator->errors()], 401);
+                }
                 //$data['positionNm']='asdasd ';
                 if (!isset($data['positionNm'])) $data['positionNm'] = " ----- ";
                 $data['phoneNumber'] = str_replace('-', "", $data['phoneNumber']);
@@ -445,7 +481,7 @@ class ApiController extends Controller
                             'code' => isset($appeal['password']) ? $appeal['password'] : null,
                             //'created_at' => date('d-m-Y H:i:s', strtotime($appeal->created_at)),
                         ], 200);
-                } else return response()->json(['error' => 'Сервер билан уланишда муаммо бор!', 'status' => false]);
+                } else return response()->json(['error' => $response->json(), 'status' => $response->status()], 400);
             case "appeal-check":
                 $data = $request->only('appNum', 'password');
                 if (Auth::guard('api')->user()) {
@@ -490,6 +526,17 @@ class ApiController extends Controller
                     'count' => count((new StatService())->getFileFromEArxiv($data['file_id'], $data['pnfl'])) > 0,
                     'data' => (new StatService())->getFileFromEArxiv($data['file_id'], $data['pnfl']),
                 ], 200);
+            case 'ser_registr':
+                $appData = $request->only(['hsCode', 'page', 'size', 'inDecNum', 'datepicker', 'appNum', 'tradeName', 'terms', 'method']);
+                foreach ($appData as $mk => $mdata) {
+                    $appData[$mk] = $mdata === null ? "" : $mdata;
+                }
+
+                $query = " select ID, REGION, POST, NUM_Z, DATE_Z, TIP_Z, OKPO, INN, NAIM, ADRES, TEL, PASN, PS, INSTIME, NUM_ENT, DATE_ENT, USER_ENT, ENT_TIME,
+                            NUM_EXT, DATE_EXT, SROK, STATUS, FABULA, USER_EXT, NACH_EXT, TEL_EXT, TIME_EXT, END_EXT, G7A, G7B, G7C, N_BLANK, SEND1, SEND2, ID_ENT, ID_EXT
+                             from elzvk.zvk_main z where status in (2,3) ORDER BY instime desc FETCH FIRST 10 ROWS ONLY ";
+                $result=DB::connection("databaseconfig2_10")->select($query);
+                return response()->json(['status' => 'success', 'data' => $result]);
 
             default:
                 if (Auth::guard('api')->user())

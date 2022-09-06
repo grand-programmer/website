@@ -255,14 +255,14 @@ export default {
                     api.addRahbariyat(form).then((response) => {
                         _this.$toast.success(`Маълумотларни омадли тарзда юкланди!`)
                     }).catch((error) => {
-                        _this.$toast.error(`Маълумотларни юклашда хатолик содир бўлди!`)
+                        _this.$toast.error(i18n.t(`Маълумотларни юклашда хатолик содир бўлди!`))
                     })
                 }); else {
                     form.append('image',this.organization.image);
                     api.addRahbariyat(form).then((response) => {
                         _this.$toast.success(`Маълумотларни омадли тарзда юкланди!`)
                     }).catch((error) => {
-                        _this.$toast.error(`Маълумотларни юклашда хатолик содир бўлди!`)
+                        _this.$toast.error(i18n.t(`Маълумотларни юклашда хатолик содир бўлди!`))
                     })
                 }
                 /*const form = new FormData();
@@ -282,7 +282,7 @@ export default {
                     //this.$router.push('/admin/rahbariyat')
                     this.close()
                 }).catch((error) => {
-                    this.$toast.error(`Маълумотларни юклашда хатолик содир бўлди!`)
+                    this.$toast.error(i18n.t(`Маълумотларни юклашда хатолик содир бўлди!`))
                     console.log(error)
                 })*/
             }
@@ -327,5 +327,18 @@ export default {
 <style>
 .page-main .v-data-table button.new_item {
     margin-top: -77px;
+}
+.cropped-image .profile-icon-wrapper.boshliq{
+    display: flex;
+    align-items: center;
+    border-radius: 100%;
+    max-width: 112px;
+    width: initial;
+    height: initial;
+    max-height: 260px;
+    background-color: #39ae69;
+    justify-content: center;
+    padding: 4px 1px;
+    margin-right: 100px;
 }
 </style>

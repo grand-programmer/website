@@ -46,7 +46,7 @@ class OrganizationController extends Controller
             ]);
 
             if ($validator->fails()) {
-                return response()->json(['error' => $validator->errors()], 401);
+                return response()->json(['error' => $validator->errors()], 400);
             }
 
 
@@ -122,7 +122,7 @@ class OrganizationController extends Controller
             ]);
 
             if ($validator->fails()) {
-                return response()->json(['error' => $validator->errors()], 401);
+                return response()->json(['error' => $validator->errors()], 400);
             }
 
 
@@ -162,6 +162,7 @@ class OrganizationController extends Controller
             if(isset($data['posts'])) $organization->postlar = json_encode($data['posts']);
             //$appeal->number = Str::random(10);
             $organization->save();
+
             return response()->json($organization, 200);
         }
     }

@@ -32,6 +32,7 @@ use Illuminate\Support\Facades\Schema;
                 Route::get('services', 'App\Http\Controllers\UserController@getServices');
                 Route::post('logout', 'App\Http\Controllers\AuthController@logout');
                 Route::get('refresh', 'App\Http\Controllers\AuthController@refresh');
+
             });
 
         });
@@ -40,6 +41,7 @@ use Illuminate\Support\Facades\Schema;
             });*/
         Route::any('ex_api/{action}', 'App\Http\Controllers\ApiController@index');
         Route::group(['middleware' => 'auth:api'], function () {
+            Route::get('get_image', 'App\Http\Controllers\UserController@showImage');
             Route::get('users', 'App\Http\Controllers\UserController@index')->middleware('isAdmin');
             Route::get('users/{id}', 'App\Http\Controllers\UserController@show')->middleware('isAdminOrSelf');
         });
@@ -55,19 +57,21 @@ use Illuminate\Support\Facades\Schema;
             Route::get('/categories/select', 'App\Http\Controllers\CategoryController@getForSelect');
             Route::resource('/categories', 'App\Http\Controllers\Admin\AdminCategoryController', ['as' => 'admin']);
             Route::resource('/page', 'App\Http\Controllers\Admin\AdminPageController', ['as' => 'admin']);
-            Route::resource('/events', 'App\Http\Controllers\EventController', ['as' => 'admin']);
-            Route::resource('/organizations', 'App\Http\Controllers\OrganizationController', ['as' => 'admin']);
-            Route::resource('/apparat', 'App\Http\Controllers\ApparatController', ['as' => 'admin']);
-            Route::resource('/faqs', 'App\Http\Controllers\FaqController', ['as' => 'admin']);
+            Route::resource('/events', 'App\Http\Controllers\Admin\AdminEventController', ['as' => 'admin']);
+            Route::resource('/organizations', 'App\Http\Controllers\Admin\AdminOrganizationController', ['as' => 'admin']);
+            Route::resource('/apparat', 'App\Http\Controllers\Admin\AdminApparatController', ['as' => 'admin']);
+            Route::resource('/faqs', 'App\Http\Controllers\Admin\AdminFaqController', ['as' => 'admin']);
             Route::get('/menu/select', 'App\Http\Controllers\MenuController@getForSelect', ['as' => 'admin']);
             Route::get('/menu/front', 'App\Http\Controllers\MenuController@getForFront', ['as' => 'admin']);
+            Route::resource('/votes', 'App\Http\Controllers\Admin\AdminVoteController',['as'=>'admin']);
             Route::resource('/menu', 'App\Http\Controllers\Admin\AdminMenuController', ['as' => 'admin']);
+            Route::resource('/appeal', 'App\Http\Controllers\Admin\Admin\AppealController', ['as' => 'admin']);
         });
 
 
         Route::get('/stat', 'App\Http\Controllers\StatController@index');
         Route::post('/appeal/checkAppeal', 'App\Http\Controllers\AppealController@check');
-        Route::resource('/appeal', 'App\Http\Controllers\AppealController');
+        //Route::resource('/appeal', 'App\Http\Controllers\AppealController');
         Route::post('/page/related/{page}', 'App\Http\Controllers\PageController@related');
         Route::resource('/page', 'App\Http\Controllers\PageController');
         Route::get('/menu/select', 'App\Http\Controllers\MenuController@getForSelect');

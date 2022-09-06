@@ -21,8 +21,13 @@
             >
                 <v-container>
                     <v-row>
-                        <h3>{{ organization.title }}</h3>
+                        <h3>{{ typeof organization.title['text'] !=='undefined'?organization.title['text']:organization.title }}</h3>
                     </v-row>
+                    <v-col cols="12" class="d-block mt-3">
+                        <v-btn v-for="language in languages" @click="lang=language.value"
+                               :color="lang===language.value?'primary':''" :key="language.value">{{ language.text }}
+                        </v-btn>
+                    </v-col>
                 </v-container>
                 <v-flex xs12 sm12 md12 lg12>
                     <v-card>
@@ -34,14 +39,20 @@
                                     <v-container>
 
                                         <v-row>
-                                            <v-col cols="6" sm="6" md="6">
+                                            <v-col cols="6" sm="6" md="6" v-show="lang==='uz'">
                                                 <my-field
                                                     title="Бошқарма номи"
                                                     v-model="organization.title"
                                                     edit="true"
                                                     name="org_title"
                                                     rules="required|min:3"/>
-
+                                            </v-col>
+                                            <v-col cols="6" sm="6" md="6" :key="'orgr' + langKey"
+                                                   v-for="(langItem,langKey) in langtext" v-show="lang===langKey">
+                                                <my-field
+                                                    :title="'Бошқарма номи ' + getLang()['text']"
+                                                    v-model="langtext[langKey].title"
+                                                    edit="true"/>
                                             </v-col>
                                             <!--                                            <v-col cols="6" sm="6" md="6">
                                                                                             <v-switch v-model="organization.status"  :label="organization.status==1?'Фойдаланувчига кўрсатмаслик учун босинг!':'Фойдаланувчига кўрсатиш учун босинг!'" ></v-switch>
@@ -62,7 +73,7 @@
 
 
                                             </v-col>
-                                            <v-col cols="3">
+                                            <v-col cols="3" v-show="lang==='uz'">
                                                 <my-field
                                                     title="Бошқарма бошлиғи қабул кунлари"
                                                     v-model="rahbariyat.boshliq.qabul"
@@ -70,6 +81,16 @@
                                                     name="boshliq_qabul"
                                                     rules="required|min:3"/>
                                             </v-col>
+
+
+                                            <v-col cols="3" :key="'qabul' + langKey"
+                                                   v-for="(langItem,langKey) in langtext" v-show="lang===langKey">
+                                                <my-field
+                                                    :title="'Бошқарма бошлиғи қабул кунлари ' + getLang()['text']"
+                                                    v-model="rahbariyat_boshliq_translates[langKey].qabul"
+                                                    edit="true"/>
+                                            </v-col>
+
                                             <v-col cols="3">
                                                 <my-field
                                                     title="Бошқарма бошлиғи телефон рақамлари"
@@ -160,23 +181,37 @@
 
 
                                                 </v-col>
-                                                <v-col cols="2">
+                                                <v-col cols="2" v-show="lang==='uz'">
                                                     <my-field
                                                         title="Лавозими"
                                                         v-model="rahbariyat.orinbosar[k].lavozimi"
                                                         edit="true"
                                                         name="orinbosar_lavozimi[]"
                                                         rules="required|min:3"/>
-
-
                                                 </v-col>
-                                                <v-col cols="2">
+
+                                                <v-col cols="2" :key="'lavozimi' + langKey"
+                                                       v-for="(langItem,langKey) in langtext" v-show="lang===langKey">
+                                                    <my-field
+                                                        :title="'Лавозими ' + getLang()['text']"
+                                                        v-model="rahbariyat_orinbosar_translates[k][langKey].lavozimi"/>
+                                                </v-col>
+
+                                                <v-col cols="2"  v-show="lang==='uz'">
                                                     <my-field
                                                         title="Қабул кунлари"
                                                         v-model="rahbariyat.orinbosar[k].qabul"
                                                         edit="true"
                                                         name="orinbosar_qabul[]"
                                                         rules="required|min:3"/>
+
+                                                </v-col>
+
+                                                <v-col cols="2"  :key="'title' + langKey"
+                                                       v-for="(langItem,langKey) in langtext" v-show="lang===langKey">
+                                                    <my-field
+                                                        :title="'Қабул кунлари ' + getLang()['text']"
+                                                        v-model="rahbariyat_orinbosar_translates[k][langKey].qabul"/>
 
                                                 </v-col>
                                                 <v-col cols="2">
@@ -270,7 +305,7 @@
                                             </v-row>
 
                                             <v-row>
-                                                <v-col cols="3">
+                                                <v-col cols="3" v-show="lang==='uz'">
                                                     <my-field
                                                         title="Манзил"
                                                         v-model="manzil.manzil"
@@ -278,7 +313,14 @@
                                                         name="boshqarma_manzil"
                                                         rules="required"/>
                                                 </v-col>
-                                                <v-col cols="3">
+                                                <v-col cols="3" :key="'manzil' + langKey"
+                                                       v-for="(langItem,langKey) in langtext" v-show="lang===langKey">
+                                                    <my-field
+                                                        :title="'Манзил ' + getLang(langKey).text"
+                                                        v-model="manzil_translates[langKey].manzil"
+                                                        />
+                                                </v-col>
+                                                <v-col cols="3" >
                                                     <my-field
                                                         title="Автобуслар"
                                                         v-model="manzil.avtobus"
@@ -286,13 +328,21 @@
                                                         name="boshqarma_avtobus"
                                                         rules="required"/>
                                                 </v-col>
-                                                <v-col cols="3">
+
+                                                <v-col cols="3" v-show="lang==='uz'">
                                                     <my-field
                                                         title="Йўналишдаги такси"
                                                         v-model="manzil.ytaksi"
                                                         edit="true"
                                                         name="boshqarma_ytaksi"
                                                         rules="required"/>
+                                                </v-col>
+                                                <v-col cols="3"  :key="'ytaksi' + langKey"
+                                                       v-for="(langItem,langKey) in langtext" v-show="lang===langKey">
+                                                    <my-field
+                                                        :title="'Йўналишдаги такси ' + getLang(langKey).text"
+                                                        v-model="manzil_translates[langKey].ytaksi"
+                                                    />
                                                 </v-col>
                                                 <v-col cols="3">
                                                     <my-field
@@ -377,7 +427,7 @@
                                                         </v-expansion-panel-header>
                                                         <v-expansion-panel-content eager>
                                                             <v-row>
-                                                                <v-col cols="6">
+                                                                <v-col cols="6" v-show="lang==='uz'">
                                                                     <ValidationProvider name="Пост номи"
                                                                                         rules="required"
                                                                                         v-slot="{ errors }">
@@ -389,8 +439,18 @@
 
                                                                     </ValidationProvider>
                                                                 </v-col>
+                                                                <v-col cols="6" :key="'post_title' + langKey"
+                                                                       v-for="(langItem,langKey) in langtext" v-show="lang===langKey">
 
-                                                                <v-col cols="6">
+
+                                                                        <v-text-field :label="'Пост номи ' + getLang(langKey).text"
+                                                                                      v-model="post_translates[i][langKey].title"
+                                                                                      ></v-text-field>
+
+                                                                </v-col>
+
+
+                                                                <v-col cols="6" v-show="lang==='uz'">
                                                                     <ValidationProvider name="Пост манзили"
                                                                                         rules="required"
                                                                                         v-slot="{ errors }">
@@ -401,6 +461,13 @@
                                                                         <span class="error--text">{{ errors[0] }}</span>
 
                                                                     </ValidationProvider>
+                                                                </v-col>
+                                                                <v-col cols="6" :key="'post_mazili' + langKey"
+                                                                       v-for="(langItem,langKey) in langtext" v-show="lang===langKey">
+                                                                    <v-text-field :label="'Пост манзили ' + getLang(langKey).text"
+                                                                                  v-model="post_translates[i][langKey].manzil"
+                                                                                  ></v-text-field>
+
                                                                 </v-col>
                                                                 <v-col cols="6">
                                                                     <ValidationProvider name="Пост телефони"
@@ -414,7 +481,7 @@
 
                                                                     </ValidationProvider>
                                                                 </v-col>
-                                                                <v-col cols="6">
+                                                                <v-col cols="6" v-show="lang==='uz'">
                                                                     <ValidationProvider
                                                                         name="Пост ҳақида қисқача маълумот"
                                                                         rules="required"
@@ -424,6 +491,15 @@
                                                                                     rows="1"></v-textarea>
                                                                         <span class="error--text">{{ errors[0] }}</span>
                                                                     </ValidationProvider>
+                                                                </v-col>
+
+
+                                                                <v-col cols="6" :key="'post_description' + langKey"
+                                                                       v-for="(langItem,langKey) in langtext" v-show="lang===langKey">
+                                                                    <v-text-field :label="'Пост ҳақида қисқача маълумот ' + getLang(langKey).text"
+                                                                                  v-model="post_translates[i][langKey].description"
+                                                                    ></v-text-field>
+
                                                                 </v-col>
                                                             </v-row>
                                                             <v-btn color="red" @click="deleteOrganization(i)"
@@ -494,7 +570,8 @@ export default {
                         image: null,
                         lavozimi: "Бошқарма бошлиғи",
                         qabul: "Фуқароларни қабул қилиш ҳар куни 09-00 дан 17-00 гача",
-                        telefon: "(78) - 120-76-00"
+                        telefon: "(78) - 120-76-00",
+
                     },
                     orinbosarlar: [
                         {
@@ -502,7 +579,8 @@ export default {
                             image: null,
                             lavozimi: "Бошқарма бошлиғи ўринбосари",
                             qabul: "Фуқароларни қабул қилиш ҳар куни 09-00 дан 17-00 гача",
-                            telefon: "(78) - 120-76-00"
+                            telefon: "(78) - 120-76-00",
+
                         }
                     ]
                 },
@@ -514,7 +592,21 @@ export default {
                 faks: "",
                 email: "",
                 map: "",
-                image: null
+                image: null,
+                translates: {
+                    oz: {
+                        manzil: null,
+                        ytaksi: null,
+                    },
+                    ru: {
+                        manzil: null,
+                        ytaksi: null,
+                    },
+                    en: {
+                        manzil: null,
+                        ytaksi: null,
+                    }
+                }
             },
             posts: [
                 {
@@ -522,10 +614,101 @@ export default {
                     description: '',
                     manzili: '',
                     telefon: '',
+                    translates: {
+                        oz: {
+                            title: null,
+                            description: null,
+                            manzili: null,
+                        },
+                        ru: {
+                            title: null,
+                            description: null,
+                            manzili: null,
+                        },
+                        en: {
+                            title: null,
+                            description: null,
+                            manzili: null,
+                        }
+                    }
                 }
             ],
             panel: [],
             title: null,
+            rahbariyat_boshliq_translates: {
+                oz: {
+                    qabul: null,
+                },
+                ru: {
+                    qabul: null,
+                },
+                en: {
+                    qabul: null,
+                }
+            },
+            rahbariyat_orinbosar_translates: [{
+                oz: {
+                    lavozimi: null,
+                    qabul: null,
+                },
+                ru: {
+                    lavozimi: null,
+                    qabul: null,
+                },
+                en: {
+                    lavozimi: null,
+                    qabul: null,
+                }
+            }],
+            manzil_translates: {
+                oz: {
+                    manzil: null,
+                    ytaksi: null,
+                },
+                ru: {
+                    manzil: null,
+                    ytaksi: null,
+                },
+                en: {
+                    manzil: null,
+                    ytaksi: null,
+                }
+            },
+            post_translates:[{
+                oz: {
+                    title: null,
+                    manzil: null,
+                    description: null,
+                },
+                ru: {
+                    title: null,
+                    manzil: null,
+                    description: null,
+                },
+                en: {
+                    title: null,
+                    manzil: null,
+                    description: null,
+                }
+            }],
+            lang: 'uz',
+            langtext: {
+                oz: {
+                    title: null,
+                },
+                ru: {
+                    title: null,
+                },
+                en: {
+                    title: null,
+                }
+            },
+            languages: [
+                {text: 'Ўзбекча', value: 'uz'},
+                {text: 'Русча', value: 'ru'},
+                {text: 'Инглизча', value: 'en'},
+                {text: 'Ozbekcha', value: 'oz'}
+            ],
             cropImg: null,
             cropImgOrinbosar: [],
             imgSrc: null,
@@ -548,6 +731,22 @@ export default {
 
     },
     methods: {
+        getLang(code = null) {
+            if (code) {
+                let language = this.languages.filter((language) => {
+                    if (language.value === code) return language;
+                })
+                if (language) return language[0]
+                return null;
+
+            } else {
+                let language = this.languages.filter((language) => {
+                    if (language.value === this.lang) return language;
+                })
+                if (language) return language[0]
+                return null;
+            }
+        },
         cropImage(k = null) {
             const croppedimages = this.cropImgOrinbosar;
             this.cropImgOrinbosar = [];
@@ -594,18 +793,37 @@ export default {
             const _this = this;
             api.readOrg(this.$route.params.id).then((response) => {
                 _this.organization = response.data.data;
+
                 _this.posts = _this.organization.posts;
                 _this.manzil = _this.organization.manzil;
                 _this.rahbariyat = _this.organization.rahbariyat;
                 _this.rahbariyat.boshliq = _this.organization.rahbariyat.boshliq;
-                if (typeof (_this.organization.rahbariyat.orinbosar) !== 'undefined')
+                console.log(_this.rahbariyat)
+                const title=JSON.parse(_this.organization.title)
+
+                if (typeof (title.translates) !== 'undefined') {
+                    this.langtext = JSON.parse(title.translates)
+                    this.organization.title=JSON.parse(JSON.stringify(title.text))
+                }
+                if (typeof (_this.organization.rahbariyat.boshliq.translates) !== 'undefined') {
+                    this.rahbariyat_boshliq_translates=JSON.parse(_this.organization.rahbariyat.boshliq.translates)
+                }
+
+
+
+                if (typeof (_this.organization.rahbariyat.orinbosar) !== 'undefined') {
                     _this.rahbariyat.orinbosar = _this.orinbosarlar = _this.organization.rahbariyat.orinbosar;
+                }
                 else _this.rahbariyat.orinbosar = _this.orinbosarlar = [];
                 _this.cropImg = "/storage/uploads/boshqarmalar/boshliq/" + _this.organization.rahbariyat.boshliq.image;
                 if (typeof (this.rahbariyat.orinbosar) !== 'undefined')
                     _this.rahbariyat.orinbosar.forEach(function (item, k) {
                         _this.cropImgOrinbosar[k] = "/storage/uploads/boshqarmalar/orinbosar/" + item.image;
-                        _this.imgSrcOrinbosar[k] = "/storage/uploads/boshqarmalar/orinbosar/" + item.image;
+                        //_this.imgSrcOrinbosar[k] = "/storage/uploads/boshqarmalar/orinbosar/" + item.image;
+
+                        if(typeof _this.rahbariyat.orinbosar[k]['translates'] !=='undefined')
+                        _this.rahbariyat_orinbosar_translates[k]=JSON.parse(_this.rahbariyat.orinbosar[k]['translates']);
+                        else _this.rahbariyat_orinbosar_translates[k]=JSON.parse(JSON.stringify(_this.rahbariyat_orinbosar_translates[0]));
                     })
                 else {
                     _this.rahbariyat.orinbosar = _this.orinbosarlar = [];
@@ -615,7 +833,8 @@ export default {
                         image: null,
                         lavozimi: "Бошқарма бошлиғи ўринбосари",
                         qabul: "Фуқароларни қабул қилиш ҳар куни 09-00 дан 17-00 гача",
-                        telefon: "(78) - 120-76-00"
+                        telefon: "(78) - 120-76-00",
+                        translates:_this.rahbariyat_orinbosar_translates[0]
                     });
                     _this.orinbosarlar.push({
                         name: " ",
@@ -626,8 +845,15 @@ export default {
                     });
                 }
 
+                _this.posts.forEach(function (item, k) {
+                    if(typeof item.translates !=='undefined')
+                    _this.post_translates[k]=JSON.parse(item.translates); else
+                    _this.post_translates[k]=JSON.parse(JSON.stringify(_this.post_translates[0]))
+                })
+
+
             }).catch((error) => {
-                this.$toast.error(`Маълумотларни юклашда хатолик содир бўлди!`);
+                this.$toast.error(i18n.t(`Маълумотларни юклашда хатолик содир бўлди!`)) ;
                 console.log(error)
                 this.$router.replace("/admin/orgs").catch(() => {
                 });
@@ -645,9 +871,9 @@ export default {
             const isValid = await this.$refs.organizationForm.validate();
             if (isValid) {
                 const form = new FormData();
-
                 form.append('_method', 'PUT');
-                form.append('title', this.organization.title);
+                form.append('title[text]', this.organization.title);
+                form.append('title[translates]', JSON.stringify(_this.langtext));
                 form.append('manzil[manzil]', this.manzil.manzil);
                 form.append('manzil[avtobus]', this.manzil.avtobus);
                 form.append('manzil[ytaksi]', this.manzil.ytaksi);
@@ -656,17 +882,26 @@ export default {
                 form.append('manzil[email]', this.manzil.email);
                 form.append('manzil[map]', this.manzil.map);
                 form.append('manzil[image]', this.manzil.image);
+                form.append('manzil[translates]', JSON.stringify(_this.manzil_translates));
                 form.append('rahbariyat[boshliq][name]', this.rahbariyat.boshliq.name);
                 form.append('rahbariyat[boshliq][image]', this.rahbariyat.boshliq.image);
                 form.append('rahbariyat[boshliq][lavozimi]', this.rahbariyat.boshliq.lavozimi);
                 form.append('rahbariyat[boshliq][qabul]', this.rahbariyat.boshliq.qabul);
                 form.append('rahbariyat[boshliq][telefon]', this.rahbariyat.boshliq.telefon);
+                form.append('rahbariyat[boshliq][translates]', JSON.stringify(this.rahbariyat_boshliq_translates));
 
                 if (_this.imgSrc) this.$refs.cropper.getCroppedCanvas().toBlob((blob) => {
                     form.append('rahbariyat[boshliq][image]', blob);
+                });
+
+                    if(_this.imgSrcOrinbosar){
+                        console.log('111')
                     Object.entries(this.rahbariyat.orinbosar).forEach(([valkey, v]) => {
+                        _this.rahbariyat.orinbosar[valkey]['translates']=JSON.stringify(_this.rahbariyat_orinbosar_translates[valkey])
+                        if(typeof v.image ==='undefined') this.rahbariyat.orinbosar[valkey]['image']=null;
                         Object.entries(v).forEach(([itemkey, item]) => {
                             if (itemkey === 'image') {
+                                console.log('asdasd')
                                 if (_this.imgSrcOrinbosar[valkey]) {
                                     console.log(_this.$refs['orinbosarCropper' + valkey]);
                                     if (_this.$refs['orinbosarCropper' + valkey][0].getCroppedCanvas() !== null)
@@ -677,42 +912,58 @@ export default {
                                     form.append(`rahbariyat[orinbosar][${valkey}][${itemkey}]`, item);
                             } else
                                 form.append(`rahbariyat[orinbosar][${valkey}][${itemkey}]`, `${item}`)
+
+
                         });
+
+                        ///form.append(`rahbariyat[orinbosar][${valkey}][translates]`, JSON.stringify(_this.rahbariyat_orinbosar_translates[valkey]))
+
                     });
-                    if (this.posts)
+
+
+                    if (this.posts) {
+
                         Object.entries(this.posts).forEach(([valkey, v]) => {
+                            this.posts[valkey]['translates']=JSON.stringify(_this.post_translates[valkey]);
                             Object.entries(v).forEach(([itemkey, item]) => {
                                 form.append(`posts[${valkey}][${itemkey}]`, `${item}`)
                             });
+                            //form.append(`posts[${valkey}][translates]`, JSON.stringify(_this.post_translates[valkey]))
                         });
+                    }
                     setTimeout(() => {
                         api.updateOrg(_this.organization.id, form).then((response) => {
                             _this.$toast.success(`Маълумотларни омадли тарзда юкланди!`)
                         }).catch((error) => {
-                            _this.$toast.error(`Маълумотларни юклашда хатолик содир бўлди!`)
+                            _this.$toast.error(i18n.t(`Маълумотларни юклашда хатолик содир бўлди!`))
                         })
                     }, 200)
-                })
+                }
                 else {
 
                     // this.editedItem.sort_number=parseInt(this.editedItem.sort_number);
                     Object.entries(this.rahbariyat.orinbosar).forEach(([valkey, v]) => {
+                        _this.rahbariyat.orinbosar[valkey]['translates']=JSON.stringify(_this.rahbariyat_orinbosar_translates[valkey])
                         Object.entries(v).forEach(([itemkey, item]) => {
                             if (itemkey === 'image') {
-                                if (_this.imgSrcOrinbosar[valkey]) {
+                              /*  if (_this.imgSrcOrinbosar[valkey]) {
                                     console.log(_this.$refs['orinbosarCropper' + valkey]);
                                     if (_this.$refs['orinbosarCropper' + valkey][0].getCroppedCanvas())
                                         _this.$refs['orinbosarCropper' + valkey][0].getCroppedCanvas().toBlob((blob1) => {
                                             form.append(`rahbariyat[orinbosar][${valkey}][${itemkey}]`, blob1);
                                         })
-                                } else
+                                } else*/
                                     form.append(`rahbariyat[orinbosar][${valkey}][${itemkey}]`, item);
                             } else
                                 form.append(`rahbariyat[orinbosar][${valkey}][${itemkey}]`, `${item}`)
                         });
+
+                        //form.append(`rahbariyat[orinbosar][${valkey}][translates]`, JSON.stringify(_this.rahbariyat_orinbosar_translates[valkey]))
                     });
                     if (this.posts)
                         Object.entries(this.posts).forEach(([valkey, v]) => {
+                            this.posts[valkey]['translates']=JSON.stringify(_this.post_translates[valkey]);
+
                             Object.entries(v).forEach(([itemkey, item]) => {
                                 form.append(`posts[${valkey}][${itemkey}]`, `${item}`)
                             });
@@ -721,10 +972,15 @@ export default {
                         api.updateOrg(_this.organization.id, form).then((response) => {
                             _this.$toast.success(`Маълумотларни омадли тарзда юкланди!`)
                         }).catch((error) => {
-                            _this.$toast.error(`Маълумотларни юклашда хатолик содир бўлди!`)
+                            _this.$toast.error(i18n.t(`Маълумотларни юклашда хатолик содир бўлди!`))
                         })
                     }, 200)
                 }
+/*                Object.entries(_this.rahbariyat.orinbosar).forEach(([valkey, v]) => {
+                    console.log(valkey)
+
+
+                })*/
             }
         },
         deleteOrganization(key) {
@@ -738,7 +994,7 @@ export default {
                 this.rahbariyat.orinbosar.splice(key, 1);
         },
         addPost() {
-            if(this.posts===null) this.posts=[];
+            if (this.posts === null) this.posts = [];
             this.posts.push({title: null, manzili: null, telefon: null, description: null})
         },
         AddOrinbosar() {
@@ -765,5 +1021,15 @@ export default {
 <style>
 .menu-main .v-data-table button.new_item {
     margin-top: -77px;
+}
+
+.cropped-image .profile-icon-wrapper.boshliq {
+    width: 110px;
+    height: 110px;
+}
+
+.cropped-image .profile-icon-wrapper.boshliq .profile-icon {
+    width: 232px;
+    height: 255px;
 }
 </style>

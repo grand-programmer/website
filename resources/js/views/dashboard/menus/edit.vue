@@ -234,7 +234,7 @@ export default {
                 }
 
             }).catch((error) => {
-                this.$toast.error(`Маълумотларни юклашда хатолик содир бўлди!`)
+                this.$toast.error(i18n.t(`Маълумотларни юклашда хатолик содир бўлди!`))
                 this.$router.replace("/admin/menu").catch(()=>{});
             });
             api.readPages().then((response) => {
@@ -245,7 +245,7 @@ export default {
             api.readMenusForSelect().then((response) => {
                 this.menus= response.data;
             }).catch((error) => {
-                this.$toast.error(`Маълумотларни юклашда хатолик содир бўлди!`)
+                this.$toast.error(i18n.t(`Маълумотларни юклашда хатолик содир бўлди!`))
                 this.$router.replace("/admin/menu").catch(()=>{});
             })
         },
@@ -261,7 +261,7 @@ export default {
                 api.updateMenu(this.menu.id, this.menu).then((response) => {
                     this.$toast.success(`Маълумотларни омадли тарзда юкланди!`)
                 }).catch((error) => {
-                    this.$toast.error(`Маълумотларни юклашда хатолик содир бўлди!`)
+                    this.$toast.error(i18n.t(`Маълумотларни юклашда хатолик содир бўлди!`))
                 })
             }
         },

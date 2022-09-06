@@ -25,7 +25,7 @@ class NewsResource extends JsonResource
         return [
             'id' => $this->id,
             'title' => isset($translates[0]) ? $translates[0]->title : $this->title,
-            'categories' => $this->categories,
+            'categories' => CategoryResource::collection($this->categories),
             'description' => isset($translates[0]) ? $translates[0]->description : $this->description,
             'image' => $this->image,
             'short' => isset($translates[0]) ? $translates[0]->short : $this->short,

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\MenuResource;
 use App\Models\Page;
 use App\Models\Menu;
 use Exception;
@@ -26,9 +27,9 @@ class PageController extends Controller
         ])->first();
         if(!$menu) return response()->json([],200);
         if ($menu->parent > 0) {
-            return Menu::where('parent', $menu->parent)->with('children')
+            return MenuResource::collection(Menu::where('parent', $menu->parent)->with('children')
                 //->where('id','<>',$menu->id)
-                ->get()->transform(function ($item) {
+                ->get())->transform(function ($item) {
                     if(Menu::find($item->parent)->parent !== 0) {
 
                         if ($item['type'] == 1 ) {

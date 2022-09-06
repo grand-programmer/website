@@ -193,13 +193,15 @@
 </template>
 
 <script>
+import i18n from "../../../i18n";
+
 export default {
     name: "customvalue",
     data() {
         return {
             breadcrumb_items: [
                 {
-                    text: 'Асосий саҳифа',
+                    text: i18n.t('Асосий саҳифа'),
                     to: '/',
                     disabled: false,
                     exact: true,

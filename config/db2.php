@@ -200,6 +200,13 @@ $databaseconfig228['database']='S0601A6T';
 $databaseconfig228['username']='Kamol';
 $databaseconfig228['password']='55788204';
 
+$databaseconfig2_10=$databaseconfig;
+$databaseconfig2_10['host']='192.168.2.10';
+$databaseconfig2_10['schema']='ELZVK';
+$databaseconfig2_10['database']='S2135C3W';
+$databaseconfig2_10['username']='kamol';
+$databaseconfig2_10['password']='q55788204';
+
 return [
 
     'connections' => [
@@ -209,6 +216,7 @@ return [
         'db2_odbcInn' => $databaseconfigINN,
         'db2_odbc221' => $databaseconfig221,
         'db2_odbc_stat' => $databaseconfigSTAT,
+        'databaseconfig2_10' => $databaseconfig2_10,
 
     ],
 

@@ -292,7 +292,9 @@ class AdminMenuController extends ParentController
      */
     public function destroy(Menu $menu)
     {
+        $menu_id=$menu->id;
         $menu->delete();
+        $deleted = DB::table('menu_translates')->where(["menu_id" => $menu_id])->delete();
         return response()->json([
             'success'], 200);
     }

@@ -262,14 +262,14 @@ export default {
                     api.addApparat(form).then((response) => {
                         _this.$toast.success(`Маълумотларни омадли тарзда юкланди!`)
                     }).catch((error) => {
-                        _this.$toast.error(`Маълумотларни юклашда хатолик содир бўлди!`)
+                        _this.$toast.error(i18n.t(`Маълумотларни юклашда хатолик содир бўлди!`))
                     })
                 }); else {
                     form.append('image',this.organization.image);
                     api.addApparat(form).then((response) => {
                         _this.$toast.success(`Маълумотларни омадли тарзда юкланди!`)
                     }).catch((error) => {
-                        _this.$toast.error(`Маълумотларни юклашда хатолик содир бўлди!`)
+                        _this.$toast.error(i18n.t(`Маълумотларни юклашда хатолик содир бўлди!`))
                     })
                 }
                 /*const form = new FormData();
@@ -289,7 +289,7 @@ export default {
                     //this.$router.push('/admin/apparat')
                     this.close()
                 }).catch((error) => {
-                    this.$toast.error(`Маълумотларни юклашда хатолик содир бўлди!`)
+                    this.$toast.error(i18n.t(`Маълумотларни юклашда хатолик содир бўлди!`))
                     console.log(error)
                 })*/
             }

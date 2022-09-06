@@ -776,7 +776,7 @@ export default {
                     this.page.menu=null;
                 }
             }).catch((error) => {
-                this.$toast.error(`Маълумотларни юклашда хатолик содир бўлди!`)
+                this.$toast.error(i18n.t(`Маълумотларни юклашда хатолик содир бўлди!`))
                 this.$router.replace("/admin/pages").catch(() => {
                 });
             })
@@ -803,7 +803,7 @@ export default {
                 console.log(this.menus)
 
             }).catch((error) => {
-                this.$toast.error(`Маълумотларни юклашда хатолик содир бўлди!`)
+                this.$toast.error(i18n.t(`Маълумотларни юклашда хатолик содир бўлди!`))
                 console.log(error)
             })
         },
@@ -820,7 +820,7 @@ export default {
                 api.updatePage(this.page.id, this.page).then((response) => {
                     this.$toast.success(`Маълумотларни омадли тарзда юкланди!`)
                 }).catch((error) => {
-                    this.$toast.error(`Маълумотларни юклашда хатолик содир бўлди!`)
+                    this.$toast.error(i18n.t(`Маълумотларни юклашда хатолик содир бўлди!`))
 
                 })
             }

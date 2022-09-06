@@ -32,7 +32,7 @@
                 </v-col>
                 <v-col cols="3">
                     <div class="left_sidebar_widget">
-                        <div class="widget_tittle"><h3>Сўнги янгиликлар</h3></div>
+                        <div class="widget_tittle"><h3>{{ $t("Сўнги янгиликлар") }}</h3></div>
                         <div class="single_layout-right">
                             <router-link class="news-lenta" :to="/news/+related_item.slug"
                                          v-for="(related_item,index) in related_news" :key="related_item.slug + index">
@@ -50,13 +50,14 @@
 </template>
 <script>
 import api from "./../../../src/services/apiService";
+import i18n from "../../../i18n";
 
 export default {
     name: 'Category',
     data: () => ({
         breadcrumb_items: [
             {
-                text: 'Асосий саҳифа',
+                text: i18n.t('Асосий саҳифа'),
                 to: '/',
                 disabled: false,
                 exact: true,
@@ -98,7 +99,7 @@ export default {
                 this.breadcrumb_items[1].text = this.category.title;
             }).catch((error) => {
                 console.log(error)
-                this.$toast.error(`Маълумотларни юклашда хатолик содир бўлди!aa`)
+                this.$toast.error(i18n.t(`Маълумотларни юклашда хатолик содир бўлди!`))
                 this.$router.replace("/").catch(() => {
                 });
             });
@@ -113,7 +114,7 @@ export default {
                     return i;
                 });
             }).catch((error) => {
-                this.$toast.error(`Маълумотларни юклашда хатолик содир бўлди!11`)
+               this.$toast.error(i18n.t(`Маълумотларни юклашда хатолик содир бўлди!`))
             })
         },
     }

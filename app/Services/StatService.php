@@ -389,7 +389,7 @@ class StatService
         if ($month != 0) {
             $params['month'] = $month;
         }
-
+        //$this->fromRepl=false;
         if ($this->fromRepl) {
             $statData = StatData::where([
                 'name' => 'tovarimex',

@@ -1,7 +1,7 @@
 <template>
     <div class="hududiy section skip collapse">
         <div id="sharedMap">
-            <div class="container-fluid">
+            <div class="container-fluid" v-click-outside="hideHududiy">
                 <div class="row">
                     <div class="col-8">
                         <div class="map_overlay"></div>
@@ -132,13 +132,13 @@
                                     </li>
                                     <li>
                                         <i class="icon icon-clock"></i>
-                                        {{ $t(" Иш вақти") }}
+                                        {{ $t("Иш вақти") }}
                                         : 9:00 - 18:00
                                         <br>
-                                        {{ $t(" Тушлик") }}
+                                        {{ $t("Тушлик") }}
                                         :
                                         13:00 - 14:00 <br>
-                                        {{ $t("Дам олиш куни:Шанба, Якшанба") }}
+                                        {{ $t("Дам олиш куни: Шанба, Якшанба") }}
                                     </li>
                                     <li>
                                         <i class="icon icon-envelope-open"></i>org@customs.uz
@@ -838,13 +838,13 @@
                 </div>
                 <div class="others">
                     <a href="/page/boshqarma/16">
-                        Миллий кинология маркази
+                        {{ $t("Миллий кинология маркази") }}
                     </a>
                     <a href="/page/boshqarma/17">
-                        `Тошкент АЭРО` ихтисослаштирилган божхона комплекси
+                        {{ ("`Тошкент-АЭРО` ихтисослаштирилган божхона комплекси") }}
                     </a>
                     <a href="/page/boshqarma/18">
-                        Марказий божхона лабораторияси
+                        {{ $t("Марказий божхона лабораторияси") }}
                     </a>
 
                 </div>
@@ -864,6 +864,10 @@
                 //console.log('asdasd')
                 $(".hududiy_boshqarmalar a").click();
                 this.$router.push('/page/boshqarma/'+hudud);
+            },
+            hideHududiy(){
+                //console.log('asdasd')
+                $('.hududiy.section').addClass('skip').removeClass("show").css("display", "none !important;");
             }
         }
 

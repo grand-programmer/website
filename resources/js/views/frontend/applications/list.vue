@@ -81,7 +81,7 @@
                 </v-col>
                 <v-col cols="9">
                     <v-card class="mt-9 p-3" elevation="1">
-                        <h3 class="my-5">Менинг аризаларим</h3>
+                        <h3 class="my-5">{{ $t("Менинг аризаларим") }}</h3>
 
                         <v-row>
                             <v-col cols="12">
@@ -90,7 +90,7 @@
                                         <v-col cols="2">
                                             <v-text-field
                                                 v-model="search_ariza_raqami"
-                                                label="Ариза рақами"
+                                                :label="$t('Ариза рақами')"
                                             ></v-text-field>
                                         </v-col>
                                         <v-col cols="3">
@@ -105,7 +105,7 @@
                                                 <template v-slot:activator="{ on, attrs }">
                                                     <v-text-field
                                                         v-model="filter_date_sanadan"
-                                                        label="Санадан"
+                                                        :label="$t('Санадан')"
                                                         prepend-icon="mdi-calendar"
                                                         readonly
                                                         clearable
@@ -135,7 +135,7 @@
                                                 <template v-slot:activator="{ on, attrs }">
                                                     <v-text-field
                                                         v-model="filter_date_sanagacha"
-                                                        label="Санагача"
+                                                        :label="$t('Санагача')"
                                                         prepend-icon="mdi-calendar"
                                                         readonly
                                                         clearable
@@ -157,7 +157,7 @@
                                             <v-autocomplete
                                                 v-model="filter_type"
                                                 :items="types"
-                                                label="Ариза тури"
+                                                :label="$t('Ариза тури')"
                                                 clearable
                                             ></v-autocomplete>
                                         </v-col><!--
@@ -212,19 +212,23 @@
     </div>
 </template>
 <script>
+
+
+import i18n from "../../../i18n";
+
 export default {
     name: 'MyApplicationsList',
     data() {
         return {
             breadcrumb_items: [
                 {
-                    text: 'Асосий саҳифа',
+                    text: i18n.t('Асосий саҳифа'),
                     to: '/',
                     disabled: false,
                     exact: true,
                 },
                 {
-                    text: 'Менинг аризаларим',
+                    text: i18n.t('Менинг аризаларим'),
                     to: '/applications',
                     disabled: true,
                     exact: true,
@@ -236,19 +240,19 @@ export default {
             activePickerGacha: null,
             types: [
                 {
-                    text: "Ишга кириш учун ариза юбориш",
+                    text: i18n.t("Ишга кириш учун ариза юбориш"),
                     value: 0
                 },
                 {
-                    text: "Божхона қиймати дастлабки қарорни олиш",
+                    text: i18n.t("Божхона қиймати дастлабки қарорни олиш"),
                     value: 1
                 },
                 {
-                    text: "Божхона органларига мурожаат юбориш",
+                    text: i18n.t("Божхона органларига мурожаат юбориш"),
                     value: 2
                 },
                 {
-                    text: "Тфтн кодни аниқлаш юзасидан ариза бериш",
+                    text: i18n.t("Тфтн кодни аниқлаш юзасидан ариза бериш"),
                     value: 3
                 },
             ],
@@ -263,14 +267,14 @@ export default {
             search_ariza_raqami: null,
             headers: [
                 {
-                    text: 'Ариза рақами',
+                    text: i18n.t('Ариза рақами'),
                     align: 'start',
                     sortable: true,
                     value: 'app_num',
                 },
-                {text: 'Берилган сана', value: 'created_at'},
-                {text: 'Хизмат номи', value: 'type_name'},
-                {text: 'Ҳолати', align: 'center', value: 'status'},
+                {text: i18n.t('Берилган сана'), value: 'created_at'},
+                {text: i18n.t('Хизмат номи'), value: 'type_name'},
+                {text: i18n.t('Ҳолати'), align: 'center', value: 'status'},
             ],
             apps: [/*
                 {
@@ -283,14 +287,14 @@ export default {
             filter_apps: [],
             selectedItem: 0,
             items: [
-                {text: 'Профил', icon: 'mdi-account', link: '/profile'},
-                {text: 'Менинг аризаларим', icon: 'mdi-history', link: '/applications'},
-                {text: 'Хизматлар', icon: 'mdi-star', link: '/services'},
+                {text: i18n.t('Профил'), icon: 'mdi-account', link: '/profile'},
+                {text: i18n.t('Менинг аризаларим'), icon: 'mdi-history', link: '/applications'},
+                {text: i18n.t('Хизматлар'), icon: 'mdi-star', link: '/services'},
             ],
             statuses: [
-                {text: "Янги", value: 0},
-                {text: "Жараёнда", value: 1},
-                {text: "Жавоб берилган", value: 2},
+                {text: i18n.t("Янги"), value: 0},
+                {text: i18n.t("Жараёнда"), value: 1},
+                {text: i18n.t("Жавоб берилган"), value: 2},
             ],
             appLinks: [
                 "/services/vacancy/",

@@ -22,6 +22,14 @@
                     <v-row>
                         <h3>Бошқармани таҳрирлаш</h3>
                     </v-row>
+                    <v-col cols="12" class="d-block mt-3">
+                        <v-btn v-for="language in languages" @click="lang=language.value"
+                               :color="lang===language.value?'primary':''" :key="language.value">{{ language.text }}
+                        </v-btn>
+
+
+
+                    </v-col>
                 </v-container>
                 <v-flex xs12 sm12 md12 lg12>
                     <v-card>
@@ -32,12 +40,20 @@
                                 <v-card-text>
                                     <v-container>
                                         <v-row>
-                                            <v-col cols="4">
+                                            <v-col cols="4" v-show="lang==='uz'">
                                                 <my-field
                                                     title="Бошқарма номи"
                                                     v-model="organization.org_name"
                                                     name="org_title"
                                                     rules="required|min:3"/>
+
+                                            </v-col>
+                                            <v-col cols="4" :key="'title' + langKey"
+                                                   v-for="(langItem,langKey) in langtext" v-show="lang===langKey">
+                                                <my-field
+                                                    :title="'Бошқарма номи - ' + getLang()['text']"
+                                                    v-model="langtext[langKey].org_name"
+                                                    name="org_title"/>
 
                                             </v-col>
                                             <v-col cols="4">
@@ -193,6 +209,25 @@ export default {
 
             },
             organization_image: null,
+            lang: 'uz',
+            langtext: {
+                oz: {
+                    org_name: null,
+                },
+                ru: {
+                    org_name: null,
+                },
+                en: {
+                    org_name: null,
+                }
+            },
+            languages: [
+                {text: 'Ўзбекча', value: 'uz'},
+                {text: 'Русча', value: 'ru'},
+                {text: 'Инглизча', value: 'en'},
+                {text: 'Ozbekcha', value: 'oz'}
+            ],
+
             cropImg: null,
             imgSrc: null,
             title: null,
@@ -210,6 +245,22 @@ export default {
         this.initialize();
     },
     methods: {
+        getLang(code = null) {
+            if (code) {
+                let language = this.languages.filter((language) => {
+                    if (language.value === code) return language;
+                })
+                if (language) return language[0]
+                return null;
+
+            } else {
+                let language = this.languages.filter((language) => {
+                    if (language.value === this.lang) return language;
+                })
+                if (language) return language[0]
+                return null;
+            }
+        },
         cropImage() {
             this.cropImg = this.$refs.cropper.getCroppedCanvas().toDataURL()
         },
@@ -238,16 +289,24 @@ export default {
             const _this = this;
             await api.readApparat(this.$route.params.id).then((response) => {
                 _this.organization = response.data.data;
+
+                if (typeof _this.organization.translates !== 'undefined' && _this.organization.translates ) {
+                    for (const [key, translate] of Object.entries(_this.organization.translates)){
+                        //_this.vote.translates.each(function(translate,key){
+                        _this.langtext[key]=translate;
+                    }
+                }
+
                 _this.cropImg = "/storage/uploads/markaziy/" + _this.organization.image;
             }).catch((error) => {
-                this.$toast.error(`Маълумотларни юклашда хатолик содир бўлди!`)
+                this.$toast.error(i18n.t(`Маълумотларни юклашда хатолик содир бўлди!`))
                 this.$router.replace("/admin/apparat").catch(() => {
                 });
             });
             await api.readRahbariyats().then((response) => {
                 _this.rahbariyat = response.data.data;
             }).catch((error) => {
-                this.$toast.error(`Маълумотларни юклашда хатолик содир бўлди!`)
+                this.$toast.error(i18n.t(`Маълумотларни юклашда хатолик содир бўлди!`))
 
             });
 
@@ -269,6 +328,7 @@ export default {
                 form.append('email', _this.organization.email);
                 form.append('rahbariyat', _this.organization.rahbariyat);
                 form.append('_method', 'PUT');
+                form.append('translates', JSON.stringify(_this.langtext));
                 if (this.cropImg && this.$refs.cropper.getCroppedCanvas()) this.$refs.cropper.getCroppedCanvas().toBlob((blob) => {
 
                     form.append('image', blob);
@@ -276,7 +336,7 @@ export default {
                     api.updateApparat(_this.organization.id, form).then((response) => {
                         _this.$toast.success(`Маълумотларни омадли тарзда юкланди!`)
                     }).catch((error) => {
-                        _this.$toast.error(`Маълумотларни юклашда хатолик содир бўлди!`)
+                        _this.$toast.error(i18n.t(`Маълумотларни юклашда хатолик содир бўлди!`))
                     })
                 }); else {
                     form.append('image', _this.organization.image);
@@ -284,7 +344,7 @@ export default {
                     api.updateApparat(_this.organization.id, form).then((response) => {
                         _this.$toast.success(`Маълумотларни омадли тарзда юкланди!`)
                     }).catch((error) => {
-                        _this.$toast.error(`Маълумотларни юклашда хатолик содир бўлди!`)
+                        _this.$toast.error(i18n.t(`Маълумотларни юклашда хатолик содир бўлди!`))
                     })
                 }
 

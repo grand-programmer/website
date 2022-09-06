@@ -567,7 +567,7 @@ export default {
         return {
             breadcrumb_items: [
                 {
-                    text: 'Асосий саҳифа',
+                    text: i18n.t('Асосий саҳифа'),
                     to: '/',
                     disabled: false,
                     exact: true,

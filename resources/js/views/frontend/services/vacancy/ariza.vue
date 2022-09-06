@@ -50,12 +50,13 @@ import {mapState} from 'vuex';
 import Qrcode from '@chenfengyuan/vue-qrcode';
 import VueHtml2pdf from 'vue-html2pdf';
 import html2pdf from 'html2pdf.js'
+import i18n from "../../../../i18n";
 export default {
     data() {
         return {
             breadcrumb_items: [
                 {
-                    text: 'Асосий саҳифа',
+                    text: i18n.t('Асосий саҳифа'),
                     to: '/',
                     disabled: false,
                     exact: true,

@@ -52,6 +52,10 @@ class News extends Model
     {
         return $this->belongsToMany('App\Models\Category', 'news_categories');
     }
+    public function translates()
+    {
+        return $this->hasMany('App\Models\NewsTranslates');
+    }
 
     public function resolveRouteBinding($value, $field = NULL)
     {

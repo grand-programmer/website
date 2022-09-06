@@ -22,6 +22,12 @@
                     <v-row>
                         <h3>Таҳрирлаш</h3>
                     </v-row>
+                    <v-col cols="12" class="d-block mt-3">
+                        <v-btn v-for="language in languages" @click="lang=language.value"
+                               :color="lang===language.value?'primary':''" :key="language.value">{{ language.text }}
+                        </v-btn>
+                    </v-col>
+
                 </v-container>
                 <v-flex xs12 sm12 md12 lg12>
                     <v-card>
@@ -71,12 +77,18 @@
                                                     name="phone"
                                                     rules="required|min:3"/>
                                             </v-col>
-                                            <v-col cols="4">
+                                            <v-col cols="4"  v-show="lang==='uz'">
                                                 <my-field
                                                     title="Қабул вақти"
                                                     v-model="organization.qabul"
                                                     name="add_phone"
                                                     rules="required"/>
+                                            </v-col>
+                                            <v-col cols="4" :key="'title' + langKey"
+                                                   v-for="(langItem,langKey) in langtext" v-show="lang===langKey">
+                                                <my-field
+                                                    :title="'Қабул вақти ' +  getLang()['text']"
+                                                    v-model="langtext[langKey].qabul"/>
                                             </v-col>
 
                                             <v-col cols="4">
@@ -189,6 +201,24 @@ export default {
                 title: "",
 
             },
+            lang: 'uz',
+            langtext: {
+                oz: {
+                    qabul: null,
+                },
+                ru: {
+                    qabul: null,
+                },
+                en: {
+                    qabul: null,
+                }
+            },
+            languages: [
+                {text: 'Ўзбекча', value: 'uz'},
+                {text: 'Русча', value: 'ru'},
+                {text: 'Инглизча', value: 'en'},
+                {text: 'Ozbekcha', value: 'oz'}
+            ],
             organization_image:null,
             cropImg:null,
             imgSrc:null,
@@ -206,6 +236,22 @@ export default {
         this.initialize();
     },
     methods: {
+        getLang(code = null) {
+            if (code) {
+                let language = this.languages.filter((language) => {
+                    if (language.value === code) return language;
+                })
+                if (language) return language[0]
+                return null;
+
+            } else {
+                let language = this.languages.filter((language) => {
+                    if (language.value === this.lang) return language;
+                })
+                if (language) return language[0]
+                return null;
+            }
+        },
         cropImage() {
             this.cropImg = this.$refs.cropper.getCroppedCanvas().toDataURL()
         },
@@ -233,9 +279,15 @@ export default {
             const _this = this;
             await api.readApparat(this.$route.params.id).then((response) => {
                 _this.organization = response.data.data;
+                if (typeof _this.organization.translates !== 'undefined' && _this.organization.translates ) {
+                    for (const [key, translate] of Object.entries(_this.organization.translates)){
+                        //_this.vote.translates.each(function(translate,key){
+                        _this.langtext[key]=translate;
+                    }
+                }
                 _this.cropImg="/storage/uploads/markaziy/"+ _this.organization.image;
             }).catch((error) => {
-                this.$toast.error(`Маълумотларни юклашда хатолик содир бўлди!`)
+                this.$toast.error(i18n.t(`Маълумотларни юклашда хатолик содир бўлди!`))
                 this.$router.replace("/admin/rahbariyat").catch(() => {
                 });
             });
@@ -258,6 +310,7 @@ export default {
                 //form.append('add_phone', _this.organization.add_phone);
                 //form.append('email', _this.organization.email);
                 form.append('rahbar', 0);
+                form.append('translates', JSON.stringify(_this.langtext));
 
                 form.append('_method', 'PUT');
                 if(_this.imgSrc)   this.$refs.cropper.getCroppedCanvas().toBlob((blob) => {
@@ -265,7 +318,7 @@ export default {
                     api.updateRahbariyat(_this.organization.id, form).then((response) => {
                         _this.$toast.success(`Маълумотларни омадли тарзда юкланди!`)
                     }).catch((error) => {
-                        _this.$toast.error(`Маълумотларни юклашда хатолик содир бўлди!`)
+                        _this.$toast.error(i18n.t(`Маълумотларни юклашда хатолик содир бўлди!`))
                     })
                 });
                 else {
@@ -273,7 +326,7 @@ export default {
                     api.updateRahbariyat(_this.organization.id, form).then((response) => {
                         _this.$toast.success(`Маълумотларни омадли тарзда юкланди!`)
                     }).catch((error) => {
-                        _this.$toast.error(`Маълумотларни юклашда хатолик содир бўлди!`)
+                        _this.$toast.error(i18n.t(`Маълумотларни юклашда хатолик содир бўлди!`))
                     })
                 }
 
@@ -293,5 +346,18 @@ export default {
 <style>
 .menu-main .v-data-table button.new_item {
     margin-top: -77px;
+}
+.cropped-image .profile-icon-wrapper.boshliq{
+    display: flex;
+    align-items: center;
+    border-radius: 100%;
+    max-width: 112px;
+    width: initial;
+    height: initial;
+    max-height: 260px;
+    background-color: #39ae69;
+    justify-content: center;
+    padding: 4px 1px;
+    margin-right: 100px;
 }
 </style>

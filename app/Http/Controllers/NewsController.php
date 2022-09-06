@@ -15,7 +15,9 @@ class NewsController extends Controller
     {
         $page=1;
         $requestData = $request->only(['boshqarma', 'page']);
-        $news = News::with('categories');
+        $news = News::with(['categories','translates']);
+        if(app()->getLocale()!=='uz') $news=$news->whereRelation('translates','language','=',app()->getLocale());
+
         if (isset($requestData['boshqarma'])) $news = $news->where('boshqarma', $requestData['boshqarma']);
         if (isset($requestData['page'])) $page = $requestData['page'];
         return NewsResource::collection($news->orderby('created_at', 'desc')->paginate(6, ['*'], 'page', $page));

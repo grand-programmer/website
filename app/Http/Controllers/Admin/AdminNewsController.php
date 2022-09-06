@@ -148,6 +148,9 @@ class AdminNewsController extends ParentController
                 if ($data['home'] == "true") $data['home'] = true;
                 else $data['home'] = false;
             }
+            if (isset($data['boshqarma']) and !((int)$data['boshqarma']>0)) {
+                unset($data['boshqarma']);
+            }
 
 
             $news->update($data);

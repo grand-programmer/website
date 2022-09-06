@@ -7,6 +7,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -79,10 +81,10 @@ class UserController extends Controller
                         "app_id" => $vi['nomzodlar'][0]['id'],
                         "app_num" => $vi['nomzodlar'][0]['kod'],
                         "created_at" => isset($vi['nomzodlar'][0]['created_at']) ? $vi['nomzodlar'][0]['created_at'] : null,
-                        "status" => ($vi['status'][count($vi['status']) - 1]['applied'] !== null  ) ? 'Тайёр' : 'Жараёнда',
+                        "status" => ($vi['status'][count($vi['status']) - 1]['applied'] !== null) ? 'Тайёр' : 'Жараёнда',
                         "statusNm" => ($vi['status'][count($vi['status']) - 1]['applied'] !== null) ? 'Тайёр' : 'Жараёнда',
                         "type" => 0,
-                        "link" => "/services/vacancy/" . $vi['nomzodlar'][0]['vakant_id'].'?status=show',
+                        "link" => "/services/vacancy/" . $vi['nomzodlar'][0]['vakant_id'] . '?status=show',
                         "user_id" => $user_id,
                     ];
 
@@ -182,4 +184,18 @@ class UserController extends Controller
         ]);
     }
 
+    public function showImage(): \Illuminate\Http\Response
+    {
+        if (Auth::guard('api')->user()) {
+            $name = "/public/users/" . Auth::guard('api')->user()->id . ".jpg";
+            if (!Storage::exists($name)) {
+                return Response::make('File no found.', 404);
+            }
+            $file = Storage::get($name);
+            $type = Storage::mimeType($name);
+            return Response::make($file, 200)->header("Content-Type", $type);
+        }
+        return Response::make('You need authorizate!', 401);
+
+    }
 }

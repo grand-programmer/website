@@ -35,8 +35,9 @@ class MenuResource extends JsonResource
             'status'=>$this->status,
             'title'=>isset($translates[0]) ? $translates[0]->title : $this->title,
             'type'=>$this->type,
+            'relation_id'=>$this->relation_id,
             'url'=>$url,
-            'children'=>($this->children)??$this->children,
+            'children'=>($this->children)??MenuResource::collection($this->children)->toArray($request),
         ];
     }
 }

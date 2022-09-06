@@ -3,6 +3,8 @@
 </template>
 <script>
 //import * as anychartBase from "public/js/anychart-base.min.js";
+import i18n from "../../i18n";
+
 var ie_data = {
     'UZ-AN': [
         {
@@ -1386,7 +1388,10 @@ export default {
 // Set data
             let data;
 
-            await am5.net.load("/api/v1/stat?name=davlatimex&rejim=" + this.rejim + "&month=" + this.month + "&year=" + this.year).then(function (result) {
+            await am5.net.load("/api/v1/stat?name=davlatimex&rejim=" + this.rejim + "&month=" + this.month + "&year=" + this.year + "&lang=" + i18n.locale,null,{
+                requestHeaders: {
+                    "X-Localization":i18n.locale
+                }}).then(function (result) {
                 // This gets executed when data finishes loading
                 // ... do something
                 const m = am5.JSONParser.parse(result.response);
@@ -1577,7 +1582,11 @@ export default {
                 });
 
 
-                await am5.net.load("/api/v1/stat?name=davlatimex&rejim=" + _this.rejim + "&month=" + _this.month + "&year=" + _this.year).then(function (result) {
+                await am5.net.load("/api/v1/stat?name=davlatimex&rejim=" + _this.rejim + "&month=" + _this.month + "&year=" + _this.year + "&lang=" + i18n.locale,null,{
+                    requestHeaders: {
+                        'X-Localization':i18n.locale
+                    }
+                }).then(function (result) {
                     // This gets executed when data finishes loading
                     // ... do something
                     const m = am5.JSONParser.parse(result.response);

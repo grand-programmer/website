@@ -18,6 +18,9 @@
                 cols="12"
                 md="12"
             >
+                <v-btn v-for="language in languages" @click="lang=language.value"
+                       :color="lang===language.value?'primary':''" :key="language.value">{{ language.text }}
+                </v-btn>
                 <v-flex xs12 sm12 md12 lg12>
                     <v-card>
                         <ValidationObserver v-slot="{ invalid }">
@@ -26,11 +29,22 @@
                                 <v-card-text>
                                     <v-container>
                                         <v-row>
-                                            <v-col cols="6" sm="6" md="6">
+                                            <v-col cols="6" sm="6" md="6" v-show="lang==='uz'">
                                                 <ValidationProvider name="Сарлавха" rules="required|min:3"
                                                                     v-slot="{ errors }">
                                                     <v-text-field label="Сарлавха"
                                                                   v-model="editedItem.title"
+                                                                  name="title"></v-text-field>
+                                                    <span class="error--text">{{ errors[0] }}</span>
+                                                </ValidationProvider>
+
+                                            </v-col>
+                                            <v-col cols="6" sm="6" md="6" :key="'title'+langKey"
+                                                   v-for="(langItem,langKey) in langtext" v-show="lang===langKey"  >
+                                                <ValidationProvider name="Сарлавха"
+                                                                    v-slot="{ errors }">
+                                                    <v-text-field :label="'Сарлавха - '+ getLang()['text']"
+                                                                  v-model="langtext[lang].title"
                                                                   name="title"></v-text-field>
                                                     <span class="error--text">{{ errors[0] }}</span>
                                                 </ValidationProvider>
@@ -117,6 +131,26 @@ export default {
                     {text: 'Ходиса яратиш', to: '#', exact: true, disabled: true},
                 ],
             events: [],
+            lang: 'uz',
+            langtext: {
+                oz: {
+                    title: null,
+                },
+                ru: {
+                    title: null,
+                },
+                en: {
+                    title: null,
+                }
+
+
+            },
+            languages: [
+                {text: 'Ўзбекча', value: 'uz'},
+                {text: 'Русча', value: 'ru'},
+                {text: 'Инглизча', value: 'en'},
+                {text: 'Ozbekcha', value: 'oz'}
+            ],
             editedIndex: -1,
             editedItem: {
                 id: null,
@@ -150,6 +184,22 @@ export default {
         },
     },
     methods: {
+        getLang(code = null) {
+            if (code) {
+                let language = this.languages.filter((language) => {
+                    if (language.value === code) return language;
+                })
+                if (language) return language[0]
+                return null;
+
+            } else {
+                let language = this.languages.filter((language) => {
+                    if (language.value === this.lang) return language;
+                })
+                if (language) return language[0]
+                return null;
+            }
+        },
         initialize() {
             api.readEvents().then((response) => {
                 this.editedItem = response.data;
@@ -171,12 +221,13 @@ export default {
             } else {
                 const isValid = await this.$refs.pageForm.validate();
                 if (isValid) {
+                    this.editedItem.translates=this.langtext;
                     // this.editedItem.sort_number=parseInt(this.editedItem.sort_number);
                     api.addEvent(this.editedItem).then((response) => {
                         this.$toast.success(`Маълумотларни омадли тарзда юкланди!`)
                         this.close()
                     }).catch((error) => {
-                        this.$toast.error(`Маълумотларни юклашда хатолик содир бўлди!`)
+                        this.$toast.error(i18n.t(`Маълумотларни юклашда хатолик содир бўлди!`))
                         console.log(error)
                     })
                 }

@@ -220,7 +220,7 @@ export default {
                     })
                 }
             }).catch((error) => {
-                this.$toast.error(`Маълумотларни юклашда хатолик содир бўлди!`)
+                this.$toast.error(i18n.t(`Маълумотларни юклашда хатолик содир бўлди!`))
                 this.$router.replace("/admin/categories").catch(() => {
                 });
 
@@ -239,7 +239,7 @@ export default {
                     console.log(response)
                 }).catch((error) => {
                     console.log(error)
-                    this.$toast.error(`Маълумотларни юклашда хатолик содир бўлди!`)
+                    this.$toast.error(i18n.t(`Маълумотларни юклашда хатолик содир бўлди!`))
                 })
             }
 

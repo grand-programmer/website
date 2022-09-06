@@ -428,7 +428,7 @@ export default {
             api.readCategoriesForSelect().then((response) => {
                 this.categories = response.data;
             }).catch((error) => {
-                this.$toast.error(`Маълумотларни юклашда хатолик содир бўлди!`)
+                this.$toast.error(i18n.t(`Маълумотларни юклашда хатолик содир бўлди!`))
                 console.log(error);
             })
 
@@ -493,7 +493,7 @@ export default {
                 api.updateNews(this.news.id, data).then((response) => {
                     this.$toast.success(`Маълумотларни омадли тарзда юкланди!`)
                 }).catch((error) => {
-                    this.$toast.error(`Маълумотларни юклашда хатолик содир бўлди!`)
+                    this.$toast.error(i18n.t(`Маълумотларни юклашда хатолик содир бўлди!`))
                     console.log(error)
                 })
             }

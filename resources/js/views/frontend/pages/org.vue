@@ -11,7 +11,7 @@
         </div>
         <v-container v-if="organization" class="boshqarma-page">
             <v-row>
-                <v-card>
+                <v-card v-if="typeof organization.rahbariyat !=='undefined' ">
                     <v-card-title>
                         <v-col cols="12" class="boshqarma-section-title">
                             <h3>
@@ -19,13 +19,13 @@
                             </h3>
                         </v-col>
                     </v-card-title>
-                    <v-col cols="12" class="rais">
+                    <v-col cols="12" class="rais" >
                         <div class="wrapper">
                             <div class="row">
                                 <div class="col-2">
                                     <div class="profile-icon-wrapper">
                                         <div class="profile-icon"
-                                             :style="'background-image: url(/storage/uploads/boshqarmalar/boshliq/'+organization.rahbariyat.boshliq.image + ');'">
+                                             :style="'background-image: url(/storage/uploads/boshqarmalar/boshliq/'+ organization.rahbariyat.boshliq.image + ');'">
                                         </div>
                                     </div>
                                 </div>
@@ -37,7 +37,7 @@
                                         <div class="text-row">
                                             <div class="far fa-user">&nbsp;</div>
                                             <p v-if="organization.id!==16">{{organization.rahbariyat.boshliq.lavozimi}}</p>
-                                            <p v-else>Директор</p>
+                                            <p v-else>{{ $t("Директор") }}</p>
                                         </div>
                                         <div class="text-row">
                                             <div class="far fa-clock">&nbsp;</div>
@@ -89,11 +89,11 @@
                         </div>
                     </div>
                 </v-card>
-                <v-card>
+                <v-card v-if="typeof organization.manzil !=='undefined'">
                     <v-card-title>
                         <v-col cols="12" class="boshqarma-section-title">
                             <h3>
-                                Манзил
+                                {{ $t("Манзил") }}
                             </h3>
                         </v-col>
                     </v-card-title>
@@ -111,28 +111,28 @@
                                         <tr>
                                             <td class="th ">
                                                 <v-icon color="primary">mdi-map-marker</v-icon>
-                                                Manzil:
+                                                {{ $t("Манзил") }}:
                                             </td>
                                             <td><p><span>{{ organization.manzil.manzil }}</span><br></p></td>
                                         </tr>
                                         <tr>
                                             <td class="th">
                                                 <v-icon color="primary">mdi-navigation</v-icon>
-                                                Avtobuslar:
+                                                {{ $t("Автобуслар") }}:
                                             </td>
                                             <td>{{organization.manzil.avtobus}}</td>
                                         </tr>
                                         <tr>
                                             <td class="th">
                                                 <v-icon color="primary">mdi-navigation</v-icon>
-                                                Yunalishdagi taksi:
+                                                {{ $t("Йўналишдаги такси") }}:
                                             </td>
                                             <td>{{organization.manzil.ytaksi}}</td>
                                         </tr>
                                         <tr>
                                             <td class="th">
                                                 <v-icon color="primary">mdi-phone</v-icon>
-                                                Telefon:
+                                                {{ $t("Телефон") }}:
                                             </td>
                                             <td><span
                                                 style="font-size: 12pt; line-height: 107%; font-family: 'Times New Roman', 'serif'; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;">{{organization.manzil.telefon}}</span><br>
@@ -141,7 +141,7 @@
                                         <tr>
                                             <td class="th">
                                                 <v-icon color="primary">mdi-phone</v-icon>
-                                                Faks:
+                                                {{ $t("Факс") }}:
                                             </td>
                                             <td><span
                                                 style="font-size: 12pt; line-height: 107%; font-family: 'Times New Roman', 'serif'; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;">{{organization.manzil.faks}}</span><br>
@@ -166,7 +166,7 @@
                     </v-card-text>
 
                 </v-card>
-                <v-card v-if="organization.posts>0">
+                <v-card v-if="typeof organization.posts !=='undefined' && organization.posts.length > 0">
                     <v-card-title>
                         <v-col cols="12" class="boshqarma-section-title">
                             <h3> Божхона постлари</h3>
@@ -218,19 +218,18 @@
                 </v-card>
             </v-row>
         </v-container>
-
-
     </div>
 </template>
 <script>
 import api from "./../../../src/services/apiService";
+import i18n from "../../../i18n";
 
 export default {
     name: 'SingleOrganization',
     data: () => ({
         breadcrumb_items: [
             {
-                text: 'Асосий саҳифа',
+                text: i18n.t('Асосий саҳифа'),
                 to: '/',
                 disabled: false,
                 exact: true,
@@ -249,15 +248,15 @@ export default {
         news:[],
         headers: [
             {
-                text: 'Пост номи',
+                text: i18n.t('Пост номи'),
                 align: 'start',
                 sortable: true,
                 value: 'title',
                 width:300
             },
-            {text: 'Пост ҳақида қисқача маълумот', value: 'description'},
-            {text: 'Манзили', value: 'manzili'},
-            {text: 'Боғланиш учун телефонлар', value: 'telefon',width:180},
+            {text: i18n.t('Пост ҳақида қисқача маълумот'), value: 'description'},
+            {text: i18n.t('Манзили'), value: 'manzili'},
+            {text: i18n.t('Боғланиш учун телефонлар'), value: 'telefon',width:180},
         ],
         posts: [
 
@@ -298,7 +297,7 @@ export default {
 
             }).catch((error) => {
                 this.$router.replace('/404')
-                this.$toast.error(`Маълумотларни юклашда хатолик содир бўлди!`)
+                this.$toast.error(i18n.t(`Маълумотларни юклашда хатолик содир бўлди!`))
                 /*this.$router.replace("/").catch(() => {
                 });*/
             })

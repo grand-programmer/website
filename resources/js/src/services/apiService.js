@@ -150,7 +150,7 @@ const apiClient = {
         return await axios.get(apiUrl + "votes",localization);
     },
     async readVotesForFront() {
-        return await axios.get(apiUrl + "front/votes",localization);
+        return await axios.get(apiUrl + "votes/front",localization);
     },
     async addVote(requestData) {
         return await axios.post(apiUrl + "votes", requestData);

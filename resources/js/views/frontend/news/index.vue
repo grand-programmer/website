@@ -14,7 +14,7 @@
 
                 <v-col :cols="9">
                     <div class="single_blog_content">
-                        <div class="widget_tittle" style="height: 75px"><h3>Янгиликлар</h3></div>
+                        <div class="widget_tittle" style="height: 75px"><h3>{{ $t("Янгиликлар") }}</h3></div>
                         <v-row style="height:40px; width: 100%"></v-row>
                         <v-row>
                             <v-col cols="4" class="news-item" v-for="(news,index) in news" :key="news.slug+index">
@@ -30,14 +30,14 @@
                         </v-row>
                         <v-row class="justify-content-center mb-4" v-show="pageMeta.current_page!==pageMeta.last_page">
                             <v-btn text color="primary" :loading="buttonLoading" style="width:max-content "
-                                   @click="getAnotherNews()"> Яна кўриш
+                                   @click="getAnotherNews()"> {{ $t("Яна кўриш") }}
                             </v-btn>
                         </v-row>
                     </div>
                 </v-col>
                 <v-col cols="3">
                     <div class="left_sidebar_widget">
-                        <div class="widget_tittle"><h3>Кўп марта кўрилганлар</h3></div>
+                        <div class="widget_tittle"><h3>{{ $t("Кўп марта кўрилганлар") }}</h3></div>
                         <div class="single_layout-right">
                             <router-link class="news-lenta" :to="/news/+related_item.slug"
                                          v-for="(related_item,index) in related_news" :key="related_item.slug + index">
@@ -55,13 +55,14 @@
 </template>
 <script>
 import api from "./../../../src/services/apiService";
+import i18n from "../../../i18n";
 
 export default {
     name: 'Category',
     data: () => ({
         breadcrumb_items: [
             {
-                text: 'Асосий саҳифа',
+                text: i18n.t('Асосий саҳифа'),
                 to: '/',
                 disabled: false,
                 exact: true,
@@ -108,7 +109,7 @@ export default {
                 this.buttonLoading=false;
             }).catch((error) => {
                 console.log(error)
-                this.$toast.error(`Маълумотларни юклашда хатолик содир бўлди111!`)
+                this.$toast.error(i18n.t(`Маълумотларни юклашда хатолик содир бўлди!`))
                 this.buttonLoading=false;
             })
             this.currentPage = this.currentPage + 1;
@@ -128,7 +129,7 @@ export default {
                 });
             }).catch((error) => {
                 console.log(error)
-                this.$toast.error(`Маълумотларни юклашда хатолик содир бўлди111!`)
+                this.$toast.error(i18n.t(`Маълумотларни юклашда хатолик содир бўлди!`))
             })
 
 
@@ -143,7 +144,7 @@ export default {
                             });
                         }).catch((error) => {
                             console.log(error)
-                            this.$toast.error(`Маълумотларни юклашда хатолик содир бўлди!`)
+                            this.$toast.error(i18n.t(`Маълумотларни юклашда хатолик содир бўлди!`))
                         })*/
         },
     }
@@ -217,6 +218,11 @@ export default {
     transition: .2s ease;
 }
 
+.v-application .single_blog_content .widget_tittle h3{
+    color: #39ae69;
+    font-weight: bold;
+    font-size: 25px;
+}
 .widget_tittle {
     padding-bottom: 35px;
     border-bottom: 2px solid #39ae69;

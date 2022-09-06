@@ -18,6 +18,10 @@
                 cols="12"
                 md="12"
             >
+                <v-btn v-for="language in languages" @click="lang=language.value"
+                       :color="lang===language.value?'primary':''" :key="language.value">{{ language.text }}
+                </v-btn>
+
                 <v-flex xs12 sm12 md12 lg12>
                     <v-card>
                         <ValidationObserver v-slot="{ invalid }">
@@ -26,7 +30,7 @@
                                 <v-card-text>
                                     <v-container>
                                         <v-row>
-                                            <v-col cols="6" sm="6" md="6">
+                                            <v-col cols="6" sm="6" md="6" v-show="lang==='uz'">
                                                 <ValidationProvider name="Сарлавха" rules="required|min:3"
                                                                     v-slot="{ errors }">
                                                     <v-text-field label="Сарлавха"
@@ -34,10 +38,20 @@
                                                                   name="title"></v-text-field>
                                                     <span class="error--text">{{ errors[0] }}</span>
                                                 </ValidationProvider>
-
                                             </v-col>
+
+                                            <v-col cols="6" sm="6" md="6" :key="'title'+langKey"
+                                                   v-for="(langItem,langKey) in langtext" v-show="lang===langKey"  >
+                                                <ValidationProvider name="Сарлавха"
+                                                                    v-slot="{ errors }">
+                                                    <v-text-field :label="'Сарлавха - '+ getLang()['text']"
+                                                                  v-model="langtext[lang].title"
+                                                                  name="title"></v-text-field>
+                                                    <span class="error--text">{{ errors[0] }}</span>
+                                                </ValidationProvider>
+                                            </v-col>
+
                                             <v-col cols="6" sm="6" md="6">
-                                                <!--                                                <label>Ходиса санаси</label>-->
                                                 <ValidationProvider name="Ҳодиса санаси" rules="required"
                                                                     v-slot="{ errors }">
                                                     <v-menu
@@ -67,8 +81,6 @@
                                                             @input="menu = false"
                                                         ></v-date-picker>
                                                     </v-menu>
-
-
                                                     <span>{{ errors[0] }}</span>
                                                 </ValidationProvider>
                                             </v-col>
@@ -95,7 +107,7 @@
 import api from "./../../../src/services/adminApi";
 import {extend, ValidationProvider, ValidationObserver} from 'vee-validate';
 import * as rules from 'vee-validate/dist/rules';
-import messages from '../../../locales/oz.json';
+import messages from '../../../locales/uz.json';
 import Editor from '@tinymce/tinymce-vue';
 
 Object.keys(rules).forEach(rule => {
@@ -118,6 +130,26 @@ export default {
                     {text: 'Ҳодисани тахрирлаш', to: '#', exact: true, disabled: true},
                 ],
             event: [],
+            lang: 'uz',
+            langtext: {
+                oz: {
+                    title: null,
+                },
+                ru: {
+                    title: null,
+                },
+                en: {
+                    title: null,
+                }
+
+
+            },
+            languages: [
+                {text: 'Ўзбекча', value: 'uz'},
+                {text: 'Русча', value: 'ru'},
+                {text: 'Инглизча', value: 'en'},
+                {text: 'Ozbekcha', value: 'oz'}
+            ],
             menu2:'',
             menu:'',
             date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
@@ -144,14 +176,36 @@ export default {
         this.initialize();
     },
     methods: {
+        getLang(code = null) {
+            if (code) {
+                let language = this.languages.filter((language) => {
+                    if (language.value === code) return language;
+                })
+                if (language) return language[0]
+                return null;
+
+            } else {
+                let language = this.languages.filter((language) => {
+                    if (language.value === this.lang) return language;
+                })
+                if (language) return language[0]
+                return null;
+            }
+        },
         initialize() {
+            const _this=this;
             api.readEvent(this.$route.params.id).then((response) => {
                 this.event = response.data.data;
+                if (typeof _this.event.translates !== 'undefined' && _this.event.translates && _this.event.translates.length>0 ) {
+                    _this.event.translates.map(function(translate){
+                        _this.langtext[translate.language]=translate;
+                    })
+                }
                 this.date=this.event.date;
                 this.event.date=this.formatDate(this.event.date);
 
             }).catch((error) => {
-                this.$toast.error(`Маълумотларни юклашда хатолик содир бўлди!`)
+                this.$toast.error(i18n.t(`Маълумотларни юклашда хатолик содир бўлди!`))
                 this.$router.replace("/admin/events").catch(()=>{});
             });
 
@@ -163,12 +217,12 @@ export default {
         async save() {
             const isValid = await this.$refs.eventForm.validate();
             console.log(this.event.date)
-
+            this.event.translates=this.langtext;
             if (isValid) {
                 api.updateEvent(this.event.id, this.event).then((response) => {
                     this.$toast.success(`Маълумотларни омадли тарзда юкланди!`)
                 }).catch((error) => {
-                    this.$toast.error(`Маълумотларни юклашда хатолик содир бўлди!`)
+                    this.$toast.error(i18n.t(`Маълумотларни юклашда хатолик содир бўлди!`))
                 })
             }
         },

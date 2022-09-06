@@ -1629,6 +1629,7 @@ import MyField from '../../../../components/form/myfield.vue';
 import {useToast} from "vue-toastification";
 import Editablefield from "../../../../components/form/editablefield";
 import Info from './info';
+import i18n from "../../../../i18n";
 
 Object.keys(rules).forEach(rule => {
     extend(rule, {
@@ -1644,7 +1645,7 @@ export default {
         return {
             breadcrumb_items: [
                 {
-                    text: 'Асосий саҳифа',
+                    text: i18n.t('Асосий саҳифа'),
                     to: '/',
                     disabled: false,
                     exact: true,

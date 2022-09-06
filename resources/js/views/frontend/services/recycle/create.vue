@@ -1349,6 +1349,7 @@ import {extend, ValidationProvider, ValidationObserver} from 'vee-validate';
 import * as rules from 'vee-validate/dist/rules';
 import messages from '../../../../locales/oz.json';
 import {types} from "../../../../../../public/js/mix/pdfmake";
+import i18n from "../../../../i18n";
 
 
 Object.keys(rules).forEach(rule => {
@@ -1369,7 +1370,7 @@ export default {
 
             breadcrumb_items: [
                 {
-                    text: 'Асосий саҳифа',
+                    text: i18n.t('Асосий саҳифа'),
                     to: '/',
                     disabled: false,
                     exact: true,

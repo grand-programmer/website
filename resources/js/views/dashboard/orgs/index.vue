@@ -40,6 +40,10 @@
                             'items-per-page-text':'Сахифадаги элементлар сони'
                             }"
                         >
+                            <template v-slot:item.title="{ item }">
+
+                                {{ typeof item.title['text'] !=='undefined'?item.title['text']:item.title }}
+                            </template>
 
                             <template v-slot:top="{ item }">
                                 <v-dialog v-model="dialogDelete" max-width="500px">

@@ -128,7 +128,7 @@ export default {
             api.readCategory(this.$route.params.id).then((response) => {
                 this.category = response.data;
             }).catch((error) => {
-                this.$toast.error(`Маълумотларни юклашда хатолик содир бўлди!`)
+                this.$toast.error(i18n.t(`Маълумотларни юклашда хатолик содир бўлди!`))
                 this.$router.replace("/admin/categories").catch(() => {
                 });
 
@@ -145,7 +145,7 @@ export default {
                     this.$toast.success(`Маълумотларни омадли тарзда юкланди!`);
                 }).catch((error) => {
                     console.log(error)
-                    this.$toast.error(`Маълумотларни юклашда хатолик содир бўлди!`)
+                    this.$toast.error(i18n.t(`Маълумотларни юклашда хатолик содир бўлди!`))
                 })
             }
 

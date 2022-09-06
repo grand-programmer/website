@@ -255,6 +255,7 @@ import Qrcode from '@chenfengyuan/vue-qrcode';
 import VueHtml2pdf from 'vue-html2pdf';
 import api from "../../../../src/services/apiService";
 import Helper from "./help";
+import i18n from "../../../../i18n";
 
 export default {
     name: 'ServiceAppeals',
@@ -282,7 +283,7 @@ export default {
             ],
             breadcrumb_items: [
                 {
-                    text: 'Асосий саҳифа',
+                    text: i18n.t('Асосий саҳифа'),
                     to: '/',
                     disabled: false,
                     exact: true,

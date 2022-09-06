@@ -21,5 +21,6 @@ class Apparat extends Model
         'org_name',
         'image',
         'sort',
+        'translates'
     ];
 }

@@ -166,6 +166,7 @@ import Radio3 from '../../../../components/form/radio3';
 import {extend, ValidationProvider, ValidationObserver} from 'vee-validate';
 import * as rules from 'vee-validate/dist/rules';
 import messages from '../../../../locales/oz.json';
+import i18n from "../../../../i18n";
 
 Object.keys(rules).forEach(rule => {
     extend(rule, {
@@ -186,7 +187,7 @@ export default {
             },
             breadcrumb_items: [
                 {
-                    text: 'Асосий саҳифа',
+                    text: i18n.t('Асосий саҳифа'),
                     to: '/',
                     disabled:false,
                     exact: true,

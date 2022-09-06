@@ -5,16 +5,17 @@
                 <h3> {{ $t("Божхона статистикаси") }}</h3>
                 <ul class="mb-15">
                     <li><a :class="stat_type==5?'active':''" href="#" @click="stat_type=5">
-                        {{ $t("Товар ва маҳсулотлар "+ getRejimByCode(rejim.tovarimex).text + "и") }}</a></li>
+                        {{ $t("Товар ва маҳсулотлар " + getRejimByCode(rejim.tovarimex).text + "и") }}</a></li>
                     <li><a :class="stat_type==4?'active':''" href="#" @click="stat_type=4">
                         {{
-                            ("Ўзбекистон Республикасига "+ getRejimByCode(rejim.davlatimex).text + " товарлари давлатлар кесимида")
+                            $t("Ўзбекистон Республикасига " + getRejimByCode(rejim.davlatimex).text + " товарлари давлатлар кесимида")
                         }}</a></li>
 
 
                     <li><a :class="(stat_type==3)?'active':''" href="#" @click="stat_type=3">
                         {{
-                            $t("Ўзбекистон Республикасидан товарлар " + getRejimByCode(rejim.oyimex).text + "и ойлар кесимида")}}</a></li>
+                            $t("Ўзбекистон Республикасидан товарлар " + getRejimByCode(rejim.oyimex).text + "и ойлар кесимида")
+                        }}</a></li>
                     <!--                    <li><a :class="(stat_type===6)?'active':''" href="#" @click="stat_type=6">Ҳудудий корхоналар томонидан импорт қилинган товарлар</a></li>-->
 
 
@@ -83,7 +84,9 @@
 
         </div>
         <div class="col-9" v-if="stat_type==3">
-            <h3>{{ $t("Ўзбекистон Республикасидан товарлар " + getRejimByCode(rejim.oyimex).text + "и ойлар кесимида") }}</h3>
+            <h3>{{
+                    $t("Ўзбекистон Республикасидан товарлар " + getRejimByCode(rejim.oyimex).text + "и ойлар кесимида")
+                }}</h3>
             <div id="columnchart3" class="chart" v-show="apexchartshow">
 
                 <apexchart2 :mydata="apexchartdata"></apexchart2>
@@ -110,21 +113,23 @@
                     ></v-autocomplete>
                 </v-col>
 
-<!--                <v-col cols="3">
-                    <v-autocomplete
-                        ref="oyimex1"
-                        :label="$t('Йиллар бўйича')"
-                        v-model="year"
-                        :items="years"
-                        hide-selected
-                        auto-select-first
-                    ></v-autocomplete>
-                </v-col>-->
+                <!--                <v-col cols="3">
+                                    <v-autocomplete
+                                        ref="oyimex1"
+                                        :label="$t('Йиллар бўйича')"
+                                        v-model="year"
+                                        :items="years"
+                                        hide-selected
+                                        auto-select-first
+                                    ></v-autocomplete>
+                                </v-col>-->
             </div>
 
         </div>
         <div class="col-9" v-if="stat_type==4">
-            <h3>{{ $t("Ўзбекистон Республикасига " + getRejimByCode(rejim.davlatimex).text + " товарлари давлатлар кесимида") }}</h3>
+            <h3>{{
+                    $t("Ўзбекистон Республикасига " + getRejimByCode(rejim.davlatimex).text + " товарлари давлатлар кесимида")
+                }}</h3>
             <div id="columnchart4" style="min-height: 65vh; float: left; width: 70%" class="chart mb-10"></div>
             <div id="columnchart4-1" v-if="stat_type===4" style="min-height: 65vh; width: 30%; float: right;"
                  class="chart mb-10"></div>
@@ -147,21 +152,21 @@
                         :items="months"
                     ></v-autocomplete>
                 </v-col>
-<!--                <v-col cols="3">
-                    <v-autocomplete
-                        ref="davimex2"
-                        :label="$t('Йиллар бўйича')"
-                        v-model="year"
-                        :items="years"
-                        hide-selected
-                        auto-select-first
-                    ></v-autocomplete>
-                </v-col>-->
+                <!--                <v-col cols="3">
+                                    <v-autocomplete
+                                        ref="davimex2"
+                                        :label="$t('Йиллар бўйича')"
+                                        v-model="year"
+                                        :items="years"
+                                        hide-selected
+                                        auto-select-first
+                                    ></v-autocomplete>
+                                </v-col>-->
             </div>
 
         </div>
         <div class="col-9" v-if="stat_type==5">
-            <h3>{{ $t("Ўзбекистон Республикасидан товарлар " + getRejimByCode(rejim.tovarimex).text + "и") }}</h3>
+            <h3>{{ $t("Товар ва маҳсулотлар " + getRejimByCode(rejim.tovarimex).text + "и") }}</h3>
             <div id="columnchart5" style="min-height: 65vh;" class="chart mb-10">
 
                 <mychart :items="mychartdata">
@@ -190,16 +195,16 @@
                         :items="months"
                     ></v-autocomplete>
                 </v-col>
-<!--                <v-col cols="3">
-                    <v-autocomplete
-                        ref="tovimex2"
-                        :label="$t('Йиллар бўйича')"
-                        v-model="year"
-                        :items="years"
-                        hide-selected
-                        auto-select-first
-                    ></v-autocomplete>
-                </v-col>-->
+                <!--                <v-col cols="3">
+                                    <v-autocomplete
+                                        ref="tovimex2"
+                                        :label="$t('Йиллар бўйича')"
+                                        v-model="year"
+                                        :items="years"
+                                        hide-selected
+                                        auto-select-first
+                                    ></v-autocomplete>
+                                </v-col>-->
             </div>
 
         </div>
@@ -254,6 +259,7 @@
 import mychart from '../custom/mychart1.vue'
 import mychart2 from '../custom/mychart2.vue'
 import apexchart2 from '../custom/apexchart2.vue'
+import i18n from "../../i18n";
 
 
 export default {
@@ -261,12 +267,12 @@ export default {
         return {
             stat_type: 5,
             rejim: {
-                oyimex:1,
-                davlatimex:1,
-                tovarimex:1,
+                oyimex: 1,
+                davlatimex: 1,
+                tovarimex: 1,
             },
             month: 0,
-            months:[],
+            months: [],
             mymonths: [
                 {
                     text: this.$t('Барчаси'),
@@ -373,9 +379,9 @@ export default {
                 this.columnChart5();
             }
             if (this.stat_type === 4) {
-                this.$refs.scripts.month=this.month;
-                this.$refs.scripts.year=this.year;
-                this.$refs.scripts.rejim=this.rejim;
+                this.$refs.scripts.month = this.month;
+                this.$refs.scripts.year = this.year;
+                this.$refs.scripts.rejim = this.rejim;
                 setTimeout(() => this.$refs.scripts.createRootColumnChart4(), 100);
                 setTimeout(() => this.columnChart4(true), 100)
                 setTimeout(() => this.$refs.scripts.createRootColumnChart4_1(), 100);
@@ -391,9 +397,9 @@ export default {
                 this.columnChart5();
             }
             if (this.stat_type === 4) {
-                this.$refs.scripts.month=this.month;
-                this.$refs.scripts.year=this.year;
-                this.$refs.scripts.rejim=this.rejim;
+                this.$refs.scripts.month = this.month;
+                this.$refs.scripts.year = this.year;
+                this.$refs.scripts.rejim = this.rejim;
                 setTimeout(() => this.$refs.scripts.createRootColumnChart4(), 100);
                 setTimeout(() => this.columnChart4(true), 100)
                 setTimeout(() => this.$refs.scripts.createRootColumnChart4_1(), 100);
@@ -403,19 +409,19 @@ export default {
                 this.multipleValue(true);
             }
         },
-        'rejim.tovarimex'(val){
+        'rejim.tovarimex'(val) {
             this.columnChart5();
         },
-        'rejim.davlatimex'(val){
-            this.$refs.scripts.month=this.month;
-            this.$refs.scripts.year=this.year;
-            this.$refs.scripts.rejim=val;
+        'rejim.davlatimex'(val) {
+            this.$refs.scripts.month = this.month;
+            this.$refs.scripts.year = this.year;
+            this.$refs.scripts.rejim = val;
             setTimeout(() => this.$refs.scripts.createRootColumnChart4(), 100);
             setTimeout(() => this.columnChart4(true), 100)
             setTimeout(() => this.$refs.scripts.createRootColumnChart4_1(), 100);
             setTimeout(() => this.columnChart4_1(true), 100)
         },
-        'rejim.oyimex'(val){
+        'rejim.oyimex'(val) {
             setTimeout(() => this.multipleValue(true), 100)
         }
     },
@@ -476,9 +482,13 @@ export default {
         multipleValue(change = false) {
             const _this = this
             setTimeout(async () => {
-                await axios.get('/api/v1/stat?name=oyimex&rejim='+_this.rejim.oyimex + '&month=' + _this.month + '&year=' + _this.year).then(function (res) {
+                await axios.get('/api/v1/stat?name=oyimex&rejim=' + _this.rejim.oyimex + '&month=' + _this.month + '&year=' + _this.year,{
+                    headers: {
+                        'X-Localization':i18n.locale
+                    }
+                }).then(function (res) {
 
-                   // console.log(res.data);
+                    // console.log(res.data);
 
 
                     if (typeof res.data.data != 'undefined') {
@@ -493,8 +503,8 @@ export default {
                         ];
 
                         _this.apexchartdata.series = series;
-                        _this.apexchartdata= {
-                            series:series,
+                        _this.apexchartdata = {
+                            series: series,
                             month
                         };
                         //console.log(_this.apexchartdata)
@@ -526,7 +536,12 @@ export default {
         },
         async columnChart5() {
             const _this = this;
-            await axios.get("/api/v1/stat?name=tovarimex&month=" + this.month + "&year=" + this.year + "&rejim=" + this.rejim.tovarimex).then(function (res) {
+            await axios.get("/api/v1/stat?name=tovarimex&month=" + this.month + "&year=" + this.year + "&rejim=" + this.rejim.tovarimex,
+                {
+                    headers: {
+                        'X-Localization': i18n.locale
+                    }
+                }).then(function (res) {
                 //console.log(res.data)
                 _this.mychartdata = res.data.data
             })
@@ -534,26 +549,26 @@ export default {
             //this.$refs.scripts.columnChart5()
 
         },
-        getRejimByCode(code){
-            if(code===1) return {
-                text:"импорт",
-                value:1
+        getRejimByCode(code) {
+            if (code === 1) return {
+                text: "импорт",
+                value: 1
             }
             else return {
-                text:"экспорт",
-                value:2
+                text: "экспорт",
+                value: 2
             }
             return null;
         }
     },
     created() {
-const _this=this
-        this.mymonths.map(function (item,key) {
+        const _this = this
+        this.mymonths.map(function (item, key) {
             //console.log(key)
             if (item.value <= parseInt((new Date).getMonth()))
-            _this.months.push(item);
+                _this.months.push(item);
 
-                //return item; else if(_this.mymonths.indexOf(key)) _this.months.splice(key,1)
+            //return item; else if(_this.mymonths.indexOf(key)) _this.months.splice(key,1)
         })
 
         this.columnChart5();

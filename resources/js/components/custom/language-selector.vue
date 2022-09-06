@@ -1,16 +1,16 @@
 <template>
     <div>
 
-        <span id="lang_selected" title="Tilni tanlang">{{ getLanguage(language).title }}</span>
+        <span id="lang_selected"  class="d-none" title="Tilni tanlang">{{ getLanguage(language).title }}</span>
 
         <div id="lang_selector" class="language-dropdown" :class="languageMenuOpen?'open':''" >
-            <label class="lang-flag" :class="'lang-'+ language" @click="languageMenuOpen=!languageMenuOpen"
+            <label class="lang-flag d-flex align-items-center fw-normal m-0"  @click="languageMenuOpen=!languageMenuOpen"
                    title="Tilni tanlang">
-                <span class="flag"></span>
+                <span class="flag1111">{{ getLanguage(language).title }}</span>
             </label>
             <ul class="lang-list">
                 <li class="lang" :class="lang.code===language?'lang-'+lang.code+' selected':'lang-'+lang.code" :title="lang.title" @click="selectMenu(lang.code)" v-for="lang in languages">
-                    <span class="flag"></span>
+                    <span class="flag111">{{ lang.title }}</span>
                 </li>
             </ul>
 
@@ -57,7 +57,7 @@ export default {
         selectMenu(el=null){
             this.language=el;
             this.languageMenuOpen=false
-            this.$i18n.locale=el;
+            //this.$i18n.locale=el;
             localStorage.setItem('language',el)
             if(typeof this.$route.params.locale !=='undefined')
             {
@@ -88,3 +88,12 @@ export default {
 }
 
 </script>
+<style>
+.language-dropdown label {
+    border: 1px solid var(--mycolor);
+    justify-content: center;
+}
+.language-dropdown ul.lang-list li{
+    padding: 4px 6px;
+}
+</style>

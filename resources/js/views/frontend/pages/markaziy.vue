@@ -14,7 +14,7 @@
                 <div class="col col-12">
                     <div class="single_blog_content">
                         <div class="widget_tittle">
-                            <h3>Давлат божхона қўмитаси Марказий аппарати тузилмаси</h3>
+                            <h3 class="w-100">{{ $t("Давлат божхона қўмитаси Марказий аппарати тузилмаси") }}</h3>
                         </div>
                         <div>
                             <div class="container-fluid">
@@ -26,12 +26,18 @@
 
                                                  :key="'aa'+1+key" v-for="(rahbar,key) in rahbariyat"
                                                  @click="leftbarClick(rahbar.id,key)"
-                                            ><p>Давлат божхона қўмитаси <template
-                                                v-if="rahbar.lavozimi==='1'">раиси</template>  <template
+                                            ><p>
+                                                <template v-if="rahbar.lavozimi==='1'">{{ $t("Давлат божхона қўмитаси раиси") }}</template>
+                                                <template v-else-if="rahbar.lavozimi==='2'">{{$t("Давлат божхона қўмитаси раисининг биринчи ўринбосари")}}</template>
+                                                <template v-else>{{ $t("Давлат божхона қўмитаси раисининг ўринбосари") }}</template>
+
+
+<!--                                                v-if="rahbar.lavozimi==='1'">раиси</template>  <template
                                                 v-else-if="rahbar.lavozimi==='2'">раисининг 1-ўринбосари </template>  <template
-                                                v-else> раисининг ўринбосари</template></p>
+                                                v-else> раисининг ўринбосари</template>-->
+                                            </p>
                                                 <p class="fw-bold">{{ rahbar.fio ? rahbar.fio : '' }}</p>
-                                                <p>мутасаддилигидаги таркибидаги тузилмалар</p>
+                                                <p>{{ $t("мутасаддилигидаги таркибий тузилмалар") }}</p>
                                             </div>
 
 
@@ -66,13 +72,13 @@
                                                                         <div class="text-row">
                                                                             <div class="far fa-user">&nbsp;</div>
                                                                             <div class="column-text">
-                                                                                <p>Бошқарма бошлиғи</p>
+                                                                                <p>{{ $t("Бошқарма бошлиғи") }}</p>
                                                                             </div>
                                                                         </div>
                                                                         <div class="text-row">
                                                                             <div class="fas fa-phone-alt">&nbsp;</div>
                                                                             <div class="column-text">
-                                                                                <p>Хизмат телефони</p>
+                                                                                <p>{{ $t("Хизмат телефони") }}</p>
                                                                                 <strong>{{ boshqarma.phone }}</strong>
                                                                             </div>
                                                                         </div>
@@ -83,7 +89,7 @@
                                                                         <div class="text-row">
                                                                             <div class="fas fa-phone-alt">&nbsp;</div>
                                                                             <div class="column-text">
-                                                                                <p>Ҳодимлар:</p>
+                                                                                <p>{{ $t("Ҳодимлар") }}:</p>
                                                                                 <strong>{{
                                                                                         boshqarma.add_phone
                                                                                     }}</strong>
@@ -1104,6 +1110,7 @@
 <script>
 
 import api from "./../../../src/services/apiService";
+import i18n from "../../../i18n";
 
 export default {
     name: "rahbariyat",
@@ -1111,13 +1118,13 @@ export default {
         return {
             breadcrumb_items: [
                 {
-                    text: 'Асосий саҳифа',
+                    text: i18n.t('Асосий саҳифа'),
                     to: '/',
                     disabled: false,
                     exact: true,
                 },
                 {
-                    text: 'Давлат божхона қўмитаси марказий аппарати',
+                    text: i18n.t('Давлат божхона қўмитаси марказий аппарати'),
                     to: '/page/rahbariyat',
                     disabled: true,
                     exact: true,
@@ -1153,7 +1160,7 @@ export default {
                     else _this.orinbosarlar.push(v);*/
                 })
             }).catch((error) => {
-                this.$toast.error(`Маълумотларни юклашда хатолик содир бўлди!`)
+                this.$toast.error(i18n.t(`Маълумотларни юклашда хатолик содир бўлди!`))
                 //this.$router.replace("/").catch(() => {
                 //});
             });

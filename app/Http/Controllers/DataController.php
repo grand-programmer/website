@@ -10,7 +10,7 @@ class DataController extends Controller
 {
     public function getTftn(Request $request)
     {
-        $data = $request->only('code', 'page');
+        $data = $request->only('code', 'page','name');
 
         if (isset($data['code'])) {
             $returnData = DB::connection('db2_odbc')->select(
@@ -23,16 +23,30 @@ class DataController extends Controller
                 return $item;
             });
         } else {
-            $returnData = DB::connection('db2_odbc')->select(
-                "select tnved.*, u1.shortname as u1,u2.shortname as u2 from TNVED2 tnved
+
+            if (isset($data['name'])) {
+                $returnData = DB::connection('db2_odbc')->select(
+                    "select tnved.*, u1.shortname as u1,u2.shortname as u2 from TNVED2 tnved
+                    Left Join Unit u1 On tnved.unit1=u1.id
+                    Left Join Unit u2 On tnved.unit2=u2.id
+                    WHERE tnved.FINISHDATE IS NULL and tnved.name LIKE '" . $data['name'] . "%'");
+                $returnData = collect($returnData)->transform(function ($item) {
+                    $item->name = str_replace("", "-", $item->name);
+                    return $item;
+                });
+            } else {
+
+
+                $returnData = DB::connection('db2_odbc')->select(
+                    "select tnved.*, u1.shortname as u1,u2.shortname as u2 from TNVED2 tnved
                     Left Join Unit u1 On tnved.unit1=u1.id
                     Left Join Unit u2 On tnved.unit2=u2.id
                     WHERE tnved.FINISHDATE IS NULL");
-            $returnData = collect($returnData)->transform(function ($item) {
-                $item->name = str_replace("", "-", $item->name);
-                return $item;
-            });
-
+                $returnData = collect($returnData)->transform(function ($item) {
+                    $item->name = str_replace("", "-", $item->name);
+                    return $item;
+                });
+            }
         }
         if (isset($data['page'])) {
             if($data['page']== -1 ) {

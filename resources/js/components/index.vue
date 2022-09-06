@@ -43,7 +43,7 @@
 </svg>
 
 
-                        <p> Барча хизматлар </p></router-link>
+                        <p> {{ $t("Барча хизматлар") }} </p></router-link>
                     <div class="services-opens">
                         <!--                        <div>
                                                 <a>Интерактив хизматлар</a>
@@ -56,7 +56,7 @@
 
                     <div class="slider_inner">
 
-                        <div data-thumb="/img/custom/slider-9.png" data-src="/img/custom/077.png">
+                        <div data-thumb="/img/custom/slider-9.png" data-src="/img/custom/077.jpg">
                             <div class="container">
                                 <div class="slider_text absolute_right">
                                     <h3 class="fadeInLeft animated" style="max-width: 63%; margin-left: auto;">
@@ -307,7 +307,7 @@
                             <div class="bolim_description">{{ $t("Коррупция тўғрисида ариза юборинг") }}</div>
 
                         </a>
-                        <a href="https://axborot.customs.uz/Xabar/" target="_blank" class="card">
+                        <a href="http://time.customs.uz/" target="_blank" class="card">
                             <div class="bolim_image"><img src="/img/service/monitor.png"/></div>
                             <div class="bolim_title">{{ $t("Мониторинг") }}</div>
                             <div class="bolim_description">{{ $t("Товар ва транспорт воситаларини чиқиш вақтини тадқиқот ва мониторинг қилиш")}}</div>
@@ -367,134 +367,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <!--                                    <div class="panel panel-default">
-                                                                            <div class="panel-heading" role="tab" id="headingOne">
-                                                                                <h4 class="panel-title">
-                                                                                    <a role="button" class="collapsed" data-bs-toggle="collapse"
-                                                                                       data-bs-parent="#accordion" href="#chose1"
-                                                                                       aria-expanded="false" aria-controls="chose1">
-                                                                                        Қандай қилиб ҳудудий божхона бошқармалари билан солиштирма
-                                                                                        далолатнома
-                                                                                        тузиш мумкин?
-                                                                                        <span>
-                                                                                        <i class="fa fa-plus" aria-hidden="true"></i>
-                                                                                        <i class="fa fa-minus" aria-hidden="true"></i>
-                                                                                    </span>
-                                                                                    </a>
-                                                                                </h4>
-                                                                            </div>
-                                                                            <div id="chose1" class="panel-collapse collapse" role="tabpanel"
-                                                                                 aria-labelledby="headingOne">
-                                                                                <div class="panel-body">
-                                                                                    Давлат божхона қўмитасининг расмий веб сайти “Електрон хизматлар”
-                                                                                    рукнида
-                                                                                    “Тадбиркорнинг шахсий кабинети” (http://ed1.customs.uz/PersonCabinet)
-                                                                                    орқали
-                                                                                    олиш мумкин.
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="panel panel-default">
-                                                                            <div class="panel-heading" role="tab" id="headingTwo">
-                                                                                <h4 class="panel-title">
-                                                                                    <a class="collapsed" role="button" data-bs-toggle="collapse"
-                                                                                       data-bs-parent="#accordion"
-                                                                                       href="#chose2" aria-expanded="false" aria-controls="chose2">
-                                                                                        Божхона тўловларини бўлиб-бўлиб ёки кечиктириб тўлаш тўғрисида
-                                                                                        маълумот
-                                                                                        берсангиз?
-                                                                                        <span>
-                                                                                        <i class="fa fa-plus" aria-hidden="true"></i>
-                                                                                        <i class="fa fa-minus" aria-hidden="true"></i>
-                                                                                    </span>
-                                                                                    </a>
-                                                                                </h4>
-                                                                            </div>
-                                                                            <div id="chose2" class="panel-collapse collapse" role="tabpanel"
-                                                                                 aria-labelledby="headingTwo">
-                                                                                <div class="panel-body">
-                                                                                    Божхона кодексининг 329, 330, 331-моддаларига мувофиқ божхона
-                                                                                    тўловларини
-                                                                                    кечиктириб ёки бўлиб-бўлиб тўлаш божхона декларацияси қабул қилинган
-                                                                                    кундан
-                                                                                    еътиборан олтмиш календар кундан ошмаслиги лозим. Божхона тўловларини
-                                                                                    кечиктириб ёки бўлиб-бўлиб тўлаш имконияти Ўзбекистон Республикаси
-                                                                                    Президентининг ёхуд Ўзбекистон Республикаси Вазирлар Маҳкамасининг
-                                                                                    қарорига
-                                                                                    биноан узоқроқ муддатларга ва божхона тўловлари тўланиши таъминланмаган
-                                                                                    ҳолда берилиши мумкин.
-                                                                                    Божхона тўловларини кечиктириб ёки бўлиб-бўлиб тўлаш имкониятини олиш
-                                                                                    учун
-                                                                                    тўловчи божхона органига божхона тўловлари суммаларини тўлаш бўйича ёзма
-                                                                                    мажбуриятни ўз ичига олган аризани ва жхона тўловлари тўланиши
-                                                                                    таъминланганлигини тасдиқловчи ҳужжатни тақдим етади.
-                                                                                    Божхона тўловлари тўланишини таъминлаш тўловчининг танловига кўра
-                                                                                    исталган –
-                                                                                    пул маблағларини божхона органининг шахсий ғазна ҳисобварағига киритиш,
-                                                                                    товарларни гаровга қўйиш, банк кафолатини тақдим етиш, божхона
-                                                                                    тўловларини
-                                                                                    тўлаш мажбуриятини суғурталаш ёки кафиллик орқали амалга оширилади.
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="panel panel-default">
-                                                                            <div class="panel-heading" role="tab" id="headingFive">
-                                                                                <h4 class="panel-title">
-                                                                                    <a class="collapsed" role="button" data-bs-toggle="collapse"
-                                                                                       data-bs-parent="#accordion"
-                                                                                       href="#chose5" aria-expanded="false" aria-controls="chose5">
-                                                                                        Енг кўп қулайлик бериш режимини белгиланган давлатлар ҳамда тариф
-                                                                                        ставкалари қандай?
-                                                                                        <span><i class="fa fa-plus" aria-hidden="true"></i>
-                                                                                        <i class="fa fa-minus" aria-hidden="true"></i>
-                                                                                    </span>
-                                                                                    </a>
-                                                                                </h4>
-                                                                            </div>
-                                                                            <div id="chose5" class="panel-collapse collapse" role="tabpanel"
-                                                                                 aria-labelledby="headingFive">
-                                                                                <div class="panel-body">
-                                                                                    Ўзбекистон Республикаси билан енг кўп қулайлик бериш режимини
-                                                                                    белгиланган
-                                                                                    давлатлар (рўйхат рақами 3267, 30.06.2020й.) сони 47 та бўлиб,
-                                                                                    Ўзбекистон
-                                                                                    Республикаси савдо-иқтисодий муносабатларда енг кўп қулайлик бериш
-                                                                                    режимини
-                                                                                    қўллаётган мамлакатларда ишлаб чиқарилган товарларга нисбатан, товарни
-                                                                                    жўнатувчи ва експорт қилувчи мамлакатдан қатъи назар бож тарифи билан
-                                                                                    белгиланган ставкалар (бир баровар) миқдоридаги божхона божлари
-                                                                                    қўлланилади.
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="panel panel-default">
-                                                                            <div class="panel-heading" role="tab" id="headingSix">
-                                                                                <h4 class="panel-title">
-                                                                                    <a class="collapsed" role="button" data-bs-toggle="collapse"
-                                                                                       data-bs-parent="#accordion"
-                                                                                       href="#chose6" aria-expanded="false" aria-controls="chose6">
-                                                                                        Товарни муайян мамлактда ишлаб чиқарилганлигини тасдиқловчи ҳужжат
-                                                                                        нима
-                                                                                        ва унинг турлари?
-                                                                                        <span><i class="fa fa-plus" aria-hidden="true"></i>
-                                                                                        <i class="fa fa-minus" aria-hidden="true"></i>
-                                                                                    </span>
-                                                                                    </a>
-                                                                                </h4>
-                                                                            </div>
-                                                                            <div id="chose6" class="panel-collapse collapse" role="tabpanel"
-                                                                                 aria-labelledby="headingFive">
-                                                                                <div class="panel-body">
-                                                                                    Божхона кодекси 363-моддасида, товарнинг муайян мамлакатда ишлаб
-                                                                                    чиқарилганлиги, експорт ёки реекспорт қилувчи мамлакатда белгиланган
-                                                                                    тартиб
-                                                                                    ва шаклга мувофиқ ваколатли орган томонидан берилган, шу жумладан
-                                                                                    електрон
-                                                                                    шаклда берилган товарнинг келиб чиқиши тўғрисидаги сертификат билан
-                                                                                    тасдиқланади.
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>-->
+
                                 </div>
 
                             </div>

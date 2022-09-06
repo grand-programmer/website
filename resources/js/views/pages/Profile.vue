@@ -87,12 +87,13 @@
                                 <v-col cols="12">
                                     <v-row class="align-items-start">
                                         <v-col cols="2">
-                                            <img class="w-100" :src="'/public/images/users/'+ $auth.user().id +'.jpg'"/>
+                                            <img class="w-100" :src="user_image"/>
                                         </v-col>
                                         <v-col cols="10" class="profile-item border-0 mt-5">
 
 
-                                            <h4>{{ $auth.user().first_name}} {{ $auth.user().sur_name}} {{ $auth.user().mid_name}}</h4>
+                                            <h4>{{ $auth.user().first_name }} {{ $auth.user().sur_name }}
+                                                {{ $auth.user().mid_name }}</h4>
                                             <span>{{ $auth.user().pin }}</span>
                                         </v-col>
                                     </v-row>
@@ -235,13 +236,15 @@
     </div>
 </template>
 <script>
+import i18n from "../../i18n";
+
 export default {
     name: "MyProfile",
     data() {
         return {
             breadcrumb_items: [
                 {
-                    text: 'Асосий саҳифа',
+                    text: i18n.t('Асосий саҳифа'),
                     to: '/',
                     disabled: false,
                     exact: true,
@@ -254,6 +257,7 @@ export default {
                 },
             ],
             selectedItem: 0,
+            user_image:null,
             items: [
                 {text: 'Профил', icon: 'mdi-account', link: '/profile'},
                 {text: 'Менинг аризаларим', icon: 'mdi-history', link: '/applications'},
@@ -263,14 +267,16 @@ export default {
         }
     },
     created() {
+        this.getImage();
         if (this.$route.query.code) {
-
             this.auth();
+
 
         } else if (!this.$auth.check()) {
             this.$router.push('/login')
         }
     },
+
     methods: {
         auth() {
             var redirect = this.$auth.redirect()
@@ -292,7 +298,7 @@ export default {
                     _this.has_error = true
                     _this.error = res.error
                 },
-                redirect: (this.$route.params.slug==='admin')?'/admin/':'/profile',
+                redirect: (this.$route.params.slug === 'admin') ? '/admin/' : '/profile',
                 //rememberMe: true,
                 fetchUser: true
             }).then((res) => {
@@ -304,9 +310,30 @@ export default {
                 _this.error = 'login_error'
             })
 
+        },
+        getImage() {
+            const _this=this;
+            let returnValue;
+            setTimeout(async () => {
+                await this.axios.get("/api/v1/get_image",{responseType: 'arraybuffer'}).then(res => {
+/*                    let reader = new FileReader();
+                    reader.readAsDataURL(res.data);
+                    reader.onload = () => {
+                        _this.user_image = reader.result;
+                    }*/
+                    let bytes = new Uint8Array(res.data);
+                    let binary = bytes.reduce((data, b) => data += String.fromCharCode(b), '');
+                    _this.user_image = "data:image/jpeg;base64," + btoa(binary);
+
+                }).catch(() => {
+                    alert("Unable to load raw attachment from this task and ID");
+                });
+
+            });
         }
 
     }
+
 }
 </script>
 

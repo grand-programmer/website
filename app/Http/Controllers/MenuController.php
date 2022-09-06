@@ -8,6 +8,7 @@ use App\Models\Menu;
 use App\Models\CustomMenuLink;
 use App\Models\Page;
 use App\Http\Resources\MenuResource;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class MenuController extends Controller
@@ -19,9 +20,9 @@ class MenuController extends Controller
      */
     public function index(Request $request)
     {
-        $data=$request->only('parent');
-        if(isset($data['parent']))
-        return MenuResource::collection(Menu::where('parent',$data['parent'])->get());
+        $data = $request->only('parent');
+        if (isset($data['parent']))
+            return MenuResource::collection(Menu::where('parent', $data['parent'])->get());
 
         return MenuResource::collection(Menu::all());
     }
@@ -49,48 +50,38 @@ class MenuController extends Controller
      */
     public function getForFront(Request $request)
     {
-        return MenuResource::collection(Menu::with('children')->where('parent', 0)->where('status', 1)->orderby('sort_number', 'asc')->get()->transform(function ($item) {
-            if ($item->children) {
-                foreach ($item->children as $child) {
-                    if ($child->type == 1 ) {
-                        if(Page::find($child->relation_id))
-                        $child->url = '/page/' . Page::find($child->relation_id)->slug;
-                        else
-                            $child->url = '/page/' .$child->url;
-                    };
-                    if ($child->children) {
-                        foreach ($child->children as $subchild) {
-                            if ($subchild->type == 1 ) {
-                                if(Page::find($subchild->relation_id))
-                                    $subchild->url = '/page/' . Page::find($subchild->relation_id)->slug;
-                                else
-                                    $subchild->url = '/page/' .$subchild->url;
-                            };
-                            if ($subchild->children) {
-                                foreach ($subchild->children as $sch) {
-                                    if ($sch->type == 1) {
-                                        if(Page::find($sch->relation_id))
-                                            $sch->url = '/page/' . Page::find($sch->relation_id)->slug;
-                                        else
-                                            $sch->url = '/page/' .$sch->url;
-
-
-                                    };
-
-                                }
-                            }
-
-                        }
-                    }
-
-                }
-            }
+        return MenuResource::collection(Menu::with('children')->where('parent', 0)->where('status', 1)->orderby('sort_number', 'asc')->get()->transform(function ($item) use ($request) {
+            $this->setUrlChildren($item,$request);
 
             if ($item->type == 1) $item->url = '/page/' . Page::find($item->relation_id)->slug;
             return $item;
 
         })->whereNotNull());
 
+
+    }
+
+    public function setUrlChildren($item,$request)
+    {
+
+        if ($item['children']) {
+            //$collection=MenuResource::collection($item->children)->toArray($request);
+            foreach ($item['children'] as  $childkey=> $child) {
+                $child= MenuResource::make($child)->toArray($request);
+
+                // $translates = DB::table('menu_translates')->where(["menu_id" => $child->id, "language" => app()->getLocale()])->get();
+
+                if ($child['type'] === 1) {
+                    if (Page::find($child['relation_id']))
+                        $child['url'] = '/page/' . Page::find($child['relation_id'])->slug;
+                    else
+                        $child['url'] = '/page/' . $child['url'];
+                };
+                $this->setUrlChildren($child,$request);
+                $item['children'][$childkey]=$child;
+            }
+        }
+        return $item;
 
     }
 
@@ -235,20 +226,19 @@ class MenuController extends Controller
                         'status' => $data['status'],
                         'sort_number' => $data['sort_number'],
                     ];
-                    if($customMenu=CustomMenuLink::where(['url'=>$data['url']])->first())
-                    {
+                    if ($customMenu = CustomMenuLink::where(['url' => $data['url']])->first()) {
                         $customMenu->update($custom_menu_link);
-                    }else {
-                    $customMenu = CustomMenuLink::create($custom_menu_link);
-                    $menuData = [
-                        'type' => $data['type'],
-                        'url' => $data['url'],
-                        'title' => $data['title'],
-                        'status' => $data['status'],
-                        'sort_number' => $data['sort_number'],
-                        'parent' => $data['parent'],
-                        'relation_id' => $customMenu->id,
-                    ];
+                    } else {
+                        $customMenu = CustomMenuLink::create($custom_menu_link);
+                        $menuData = [
+                            'type' => $data['type'],
+                            'url' => $data['url'],
+                            'title' => $data['title'],
+                            'status' => $data['status'],
+                            'sort_number' => $data['sort_number'],
+                            'parent' => $data['parent'],
+                            'relation_id' => $customMenu->id,
+                        ];
                         $menu->update($menuData);
                     }
                 }
@@ -258,9 +248,6 @@ class MenuController extends Controller
             } catch (Exception $e) {
                 return response()->json(['error' => $e->getMessage()], 401);
             }
-
-
-
 
 
             try {

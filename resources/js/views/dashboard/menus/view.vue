@@ -205,7 +205,7 @@ console.log(index)
                     })
                 }
             }).catch((error) => {
-                this.$toast.error(`Маълумотларни юклашда хатолик содир бўлди!`)
+                this.$toast.error(i18n.t(`Маълумотларни юклашда хатолик содир бўлди!`))
                 this.$router.replace("/admin/menu").catch(() => {
                 });
             });

@@ -3,8 +3,8 @@
         <v-container>
             <v-row>
                 <v-col cols="12">
-                    <h3 class="votes-title">Сўровнома</h3>
-                    <p class="my-5 font-italic ">Божхона соҳасига оид сўровномаларда иштирок этинг</p>
+                    <h3 class="votes-title">{{ $t("Сўровнома") }}</h3>
+                    <p class="my-5 font-italic ">{{ $t("Божхона соҳасига оид сўровномаларда иштирок этинг") }}</p>
                 </v-col>
                 <v-col cols="9">
                     <v-row>
@@ -28,7 +28,7 @@
                                         <div class="text-center flex-direction-nav d-flex">
                                             <v-btn class="ma-2" color="primary" small
                                                    @click="answer(votes[key].id,votes[key].selected)">
-                                                Жавоб бериш
+                                                {{ $t("Жавоб бериш") }}
                                             </v-btn>
                                             <v-btn
                                                 class="ma-2"
@@ -36,7 +36,7 @@
                                                 small
                                                 @click="getResult(votes[key].id)"
                                             >
-                                                Натижалар
+                                                {{ $t("Натижалар") }}
                                             </v-btn>
                                         </div>
                                     </template>
@@ -66,7 +66,7 @@
                                         </template>
 
                                         <p style="border-top: 1px solid #cccccc4d; padding-top: 15px; margin-top: 25px;">
-                                            Барчаси
+                                            {{ $t("Барчаси") }}
                                             <v-btn x-small color="#4e4646">{{ votes[key].total }}</v-btn>
                                         </p>
                                     </template>
@@ -91,6 +91,8 @@
     </section>
 </template>
 <script>
+import api from "../../../src/services/apiService";
+
 export default {
     name: 'Votes',
     data() {
@@ -119,7 +121,7 @@ export default {
         },
         getQuestions() {
             const _app = this;
-            axios.get("/api/v1/votes/front").then(function (response) {
+            api.readVotesForFront().then(function (response) {
                 _app.votes = response.data.data;
             });
         },

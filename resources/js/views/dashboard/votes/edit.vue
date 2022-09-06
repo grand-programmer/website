@@ -18,9 +18,19 @@
                 cols="12"
                 md="12"
             >
+
                 <v-row>
                     <h3>Таҳрирлаш</h3>
                 </v-row>
+                <v-col cols="12" class="d-block mt-3">
+                    <v-btn v-for="language in languages" @click="lang=language.value"
+                           :color="lang===language.value?'primary':''" :key="language.value">{{ language.text }}
+                    </v-btn>
+
+
+
+                </v-col>
+
                 <v-flex xs12 sm12 md12 lg12>
                     <v-card>
                         <ValidationObserver v-slot="{ invalid }">
@@ -29,11 +39,22 @@
                                 <v-card-text>
                                     <v-container>
                                         <v-row>
-                                            <v-col cols="6" sm="6" md="6">
-                                                <ValidationProvider name="Сарлавха" rules="required|min:3"
+                                            <v-col cols="6" sm="6" md="6" v-show="lang==='uz'">
+                                                <ValidationProvider name="Сарлавха"   rules="required|min:3"
                                                                     v-slot="{ errors }">
                                                     <v-text-field label="Сарлавха"
                                                                   v-model="vote.question"
+                                                                  name="title"></v-text-field>
+                                                    <span class="error--text">{{ errors[0] }}</span>
+                                                </ValidationProvider>
+
+                                            </v-col>
+                                            <v-col cols="6" sm="6" md="6" :key="'title' + langKey"
+                                                   v-for="(langItem,langKey) in langtext" v-show="lang===langKey" >
+                                                <ValidationProvider name="Сарлавха"
+                                                                    v-slot="{ errors }">
+                                                    <v-text-field :label="'Сарлавха - ' + getLang()['text']"
+                                                                  v-model="langtext[langKey].question"
                                                                   name="title"></v-text-field>
                                                     <span class="error--text">{{ errors[0] }}</span>
                                                 </ValidationProvider>
@@ -54,16 +75,26 @@
                                                     <v-btn color="primary" @click="vote.answers.push({text:''})">
                                                         <v-icon class="mr-2">mdi-plus-box-multiple</v-icon>
 
-                                                        Савол қўшиш
+                                                        Жавоб қўшиш
                                                     </v-btn>
                                                 </v-col>
                                             </v-row>
                                             <v-row  v-if="vote.answers.length>0" :key="anKey" v-for="(answer,anKey) in vote.answers">
-                                                <v-col cols="10">
-                                                    <ValidationProvider :name="'Савол ' + (anKey+1)" rules="required"
+                                                <v-col cols="10" v-show="lang==='uz'" >
+                                                    <ValidationProvider :name="'Жавоб ' + (anKey+1)" rules="required"
                                                                         v-slot="{ errors }">
-                                                        <v-text-field :label="'Савол ' + (anKey+1) "
+                                                        <v-text-field :label="'Жавоб ' + (anKey+1) "
                                                                       v-model="vote.answers[anKey].text"
+                                                                      :name="'answer'+anKey"></v-text-field>
+                                                        <span class="error--text">{{ errors[0] }}</span>
+                                                    </ValidationProvider>
+                                                </v-col>
+                                                <v-col cols="10" :key="'answer'+ langKey + anKey"
+                                                       v-for="(langItem,langKey) in langtext" v-show="lang===langKey">
+                                                    <ValidationProvider :name="'Жавоб ' + (anKey+1)"
+                                                                        v-slot="{ errors }">
+                                                        <v-text-field :label="'Жавоб ' + getLang()['text'] + ' - ' + (anKey+1) "
+                                                                      v-model="langtext[langKey].answers[anKey]"
                                                                       :name="'answer'+anKey"></v-text-field>
                                                         <span class="error--text">{{ errors[0] }}</span>
                                                     </ValidationProvider>
@@ -72,7 +103,7 @@
                                                     <v-btn
                                                         color="red"
 
-                                                    ><v-icon @click="vote.answers.splice(anKey,1)">mdi-close</v-icon> Ўчириш</v-btn>
+                                                    ><v-icon @click="vote.answers.splice(anKey,1); langtext[lang].answers.splice(anKey,1); ">mdi-close</v-icon> Ўчириш</v-btn>
                                                 </v-col>
 
                                             </v-row>
@@ -123,6 +154,29 @@ export default {
                     {text: 'Сўровномани тахрирлаш', to: '#', exact: true, disabled: true},
                 ],
             vote: [],
+            lang: 'uz',
+            langtext: {
+                oz: {
+                    answers: [],
+                    question: null,
+                },
+                ru: {
+                    answers: [],
+                    question: null,
+                },
+                en: {
+                    answers: [],
+                    question: null,
+                }
+
+
+            },
+            languages: [
+                {text: 'Ўзбекча', value: 'uz'},
+                {text: 'Русча', value: 'ru'},
+                {text: 'Инглизча', value: 'en'},
+                {text: 'Ozbekcha', value: 'oz'}
+            ],
             pages: [],
         }
     ),
@@ -145,12 +199,35 @@ export default {
         this.initialize();
     },
     methods: {
+        getLang(code = null) {
+            if (code) {
+                let language = this.languages.filter((language) => {
+                    if (language.value === code) return language;
+                })
+                if (language) return language[0]
+                return null;
+
+            } else {
+                let language = this.languages.filter((language) => {
+                    if (language.value === this.lang) return language;
+                })
+                if (language) return language[0]
+                return null;
+            }
+        },
         initialize() {
+            const _this=this;
             api.readVote(this.$route.params.id).then((response) => {
                 this.vote = response.data.data;
-
+                if (typeof _this.vote.translates !== 'undefined' && _this.vote.translates ) {
+                    for (const [key, translate] of Object.entries(_this.vote.translates)){
+                    //_this.vote.translates.each(function(translate,key){
+                        _this.langtext[key]=translate;
+                    }
+                }
             }).catch((error) => {
-                this.$toast.error(`Маълумотларни юклашда хатолик содир бўлди!`)
+                console.log(error)
+                this.$toast.error(`Маълумотларни юклашда хатолик содир бўлди!11`)
                 this.$router.replace("/admin/votes").catch(()=>{});
             });
 
@@ -164,10 +241,11 @@ export default {
             console.log(this.vote.date)
 
             if (isValid) {
+                this.vote.translates=this.langtext;
                 api.updateVote(this.vote.id, this.vote).then((response) => {
                     this.$toast.success(`Маълумотларни омадли тарзда юкланди!`)
                 }).catch((error) => {
-                    this.$toast.error(`Маълумотларни юклашда хатолик содир бўлди!`)
+                    this.$toast.error(i18n.t(`Маълумотларни юклашда хатолик содир бўлди!`))
                 })
             }
         },

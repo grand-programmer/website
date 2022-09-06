@@ -14,7 +14,7 @@
                 <!---->
                 <div class="col col-12">
                     <div class="single_blog_content">
-                        <div class="widget_tittle"><h3>Давлат божхона қўмитаси Раҳбарияти</h3></div>
+                        <div class="widget_tittle"><h3>{{ $t("Давлат божхона қўмитаси Раҳбарияти") }}</h3></div>
                         <div>
 
 
@@ -40,7 +40,7 @@
                                                         </div>
                                                         <div class="text-row">
                                                             <div class="far fa-user">&nbsp;</div>
-                                                            <p>Давлат божхона қўмитаси раиси</p>
+                                                            <p>{{ $t("Давлат божхона қўмитаси раиси") }}</p>
                                                         </div>
                                                         <div class="text-row">
                                                             <div class="far fa-clock">&nbsp;</div>
@@ -77,8 +77,8 @@
                                                             <div class="orinbosar-info">
                                                                 <div class="text-row">
                                                                     <div class="far fa-user">&nbsp;</div>
-                                                                    <p>Давлат божхона қўмитаси раиси биринчи
-                                                                        ўринбосари</p>
+                                                                    <p>{{
+                                                                            $t("Давлат божхона қўмитаси раисининг биринчи ўринбосари")}}</p>
                                                                 </div>
                                                                 <div class="text-row">
                                                                     <div class="far fa-clock">&nbsp;</div>
@@ -110,7 +110,7 @@
                                                             <div class="orinbosar-info">
                                                                 <div class="text-row">
                                                                     <div class="far fa-user">&nbsp;</div>
-                                                                    <p>Давлат божхона қўмитаси раиси ўринбосари</p>
+                                                                    <p>{{$t("Давлат божхона қўмитаси раисининг ўринбосари")}}</p>
                                                                 </div>
                                                                 <div class="text-row">
                                                                     <div class="far fa-clock">&nbsp;</div>
@@ -205,6 +205,7 @@
 <script>
 
 import api from "./../../../src/services/apiService";
+import i18n from "../../../i18n";
 
 export default {
     name: "rahbariyat",
@@ -212,13 +213,13 @@ export default {
         return {
             breadcrumb_items: [
                 {
-                    text: 'Асосий саҳифа',
+                    text: i18n.t('Асосий саҳифа'),
                     to: '/',
                     disabled: false,
                     exact: true,
                 },
                 {
-                    text: 'Давлат божхона қўмитаси раҳбарияти',
+                    text: i18n.t('Давлат божхона қўмитаси раҳбарияти'),
                     to: '/page/rahbariyat',
                     disabled: true,
                     exact: true,
@@ -244,7 +245,7 @@ export default {
                     else _this.orinbosarlar.push(v);
                 })
             }).catch((error) => {
-                this.$toast.error(`Маълумотларни юклашда хатолик содир бўлди!`)
+                this.$toast.error(i18n.t(`Маълумотларни юклашда хатолик содир бўлди!`))
                 this.$router.replace("/").catch(() => {
                 });
             });

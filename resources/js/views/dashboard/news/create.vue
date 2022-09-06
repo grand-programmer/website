@@ -424,7 +424,7 @@ export default {
                         this.close();
 
                     }).catch((error) => {
-                        this.$toast.error(`Маълумотларни юклашда хатолик содир бўлди!`)
+                        this.$toast.error(i18n.t(`Маълумотларни юклашда хатолик содир бўлди!`))
                         console.log(error)
                     })
                 }

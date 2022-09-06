@@ -1,6 +1,6 @@
 <template>
     <div class="section">
-        <div class="row"><h3 class="text-center section_title mb-0">Жисмоний шахслар учун</h3></div>
+        <div class="row"><h3 class="text-center section_title mb-0">{{ $t("Жисмоний шахслар учун") }}</h3></div>
         <div class="container-fluid">
             <div class="row pb-8" style="margin: 24px!important; justify-content: center; " >
 
@@ -10,8 +10,8 @@
                     <div class="jismoniy-card-image"><img src="/img/icons/cardsindirectory.png"/></div>
                     </div>
                     <div class="jismoniy-card-buttons">
-                        <v-btn :to="item.url"><v-icon>mdi-book</v-icon> <span>Онлайн ўқиш</span> </v-btn>
-                        <v-btn><v-icon>mdi-download</v-icon> <span>Юклаб олиш</span> </v-btn>
+                        <v-btn :to="item.url"><v-icon>mdi-book</v-icon> <span>{{ $t("Онлайн ўқиш") }}</span> </v-btn>
+                        <v-btn><v-icon>mdi-download</v-icon> <span>{{ $t("Юклаб олиш") }}</span> </v-btn>
                     </div>
                     <div class="jismoniy-card-backgrounds">
                         <div class="position-relative">
