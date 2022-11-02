@@ -28,6 +28,11 @@
                             </v-col>
 
                         </v-row>
+                        <v-row class="justify-content-center mb-4" v-show="category.news && category.news.length/currentPage === 6">
+                            <v-btn text color="primary" :loading="buttonLoading" style="width:max-content "
+                                   @click="getAnotherNews()"> {{ $t("Яна кўриш") }}
+                            </v-btn>
+                        </v-row>
                     </div>
                 </v-col>
                 <v-col cols="3">
@@ -63,6 +68,12 @@ export default {
                 exact: true,
             },
             {
+                text: i18n.t('Янгиликлар'),
+                to: '/news/',
+                disabled: false,
+                exact: true,
+            },
+            {
                 text: '',
                 to: '/category/',
                 disabled: true,
@@ -72,6 +83,12 @@ export default {
         /*id:this.$route.params.id,*/
         categories: {},
         category: {},
+        buttonLoading: false,
+        currentPage: 1,
+        pageMeta: {
+            current_page:1,
+            last_page:2,
+        },
         related_news: {}
     }),
     watch: {
@@ -87,16 +104,17 @@ export default {
             this.$router.replace('/');
         },
         async initialize() {
-            await api.readCategory(this.$route.params.slug, true).then((response) => {
+            await api.readCategory(this.$route.params.slug, true,null).then((response) => {
                 this.category = response.data.data;
-            this.category.news.map(function (i) {
+                //this.category.news = response.data.data.news.data;
+                this.category.news.map(function (i) {
                     let dateParts = i.created_at.split("T");
                     if ((new Date(i.created_at)).getDate() === (new Date).getDate())
                         i.created_at = dateParts[1].substring(0, 5);
                     else i.created_at = dateParts[0];
                     return i;
                 });
-                this.breadcrumb_items[1].text = this.category.title;
+                this.breadcrumb_items[this.breadcrumb_items.length - 1].text = this.category.title;
             }).catch((error) => {
                 console.log(error)
                 this.$toast.error(i18n.t(`Маълумотларни юклашда хатолик содир бўлди!`))
@@ -116,6 +134,25 @@ export default {
             }).catch((error) => {
                this.$toast.error(i18n.t(`Маълумотларни юклашда хатолик содир бўлди!`))
             })
+        },
+        async getAnotherNews() {
+            this.buttonLoading=true;
+            await api.readCategory(this.$route.params.slug, true,this.currentPage + 1)
+                .then((response) => {
+                    this.category.news = this.category.news.concat(response.data.data.news.map(function (i) {
+                    let dateParts = i.created_at.split("T");
+                    if ((new Date(i.created_at)).getDate() === (new Date).getDate())
+                        i.created_at = dateParts[1].substring(0, 5);
+                    else i.created_at = dateParts[0];
+                    return i;
+                }));
+                this.buttonLoading=false;
+            }).catch((error) => {
+                console.log(error)
+                this.$toast.error(i18n.t(`Маълумотларни юклашда хатолик содир бўлди!`))
+                this.buttonLoading=false;
+            })
+            this.currentPage = this.currentPage + 1;
         },
     }
 

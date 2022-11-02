@@ -103,13 +103,13 @@ class AuthController extends Controller
                     ]);
 
             if($responseUser->status()!==200 or !isset($responseUser->json()['user_type'])) return response()->json(['error' => 'login_error'], 401);
+
             //dd($responseUser->json());
             $type = (isset($responseUser->json()['legal_info']) && !empty($responseUser->json()['legal_info'])) ? 2 : 1;
             if (DB::table('users')->where(
-                ['email' => $responseUser->json()['email'],
-                    'pin' => $responseUser->json()['pin'],
+                [
+                    'pin' => (int)$responseUser->json()['pin'],
                     'type'=>$type
-
                 ])->exists()) {
 
 
@@ -151,11 +151,14 @@ class AuthController extends Controller
                 })->reject(function ($name) {
                     return empty($name);
                 });
-                $user = User::where(['email' => $responseUser->json()['email']])->firstOrFail();
+                $user = User::where([
+                    'pin' => (int)$responseUser->json()['pin'],
+                    'type'=>$type])->firstOrFail();
+
                 $user->update(array_merge($data->all(),['type'=>$type]));
                 $user->save();
                 $png_url = $user->id . ".jpg";
-                $path = public_path() . '/images/users/' . $png_url;
+                $path = public_path('storage/users/' . $png_url) ;
                 if (!file_exists($path)) {
 
                     try {
@@ -168,7 +171,7 @@ class AuthController extends Controller
                         //dd($userPhoto->json());
                         $userPhoto = $userPhoto->json();
                         $png_url = $user->id . ".jpg";
-                        $path = public_path() . '/images/users/' . $png_url;
+                        $path = public_path('storage/users/' . $png_url) ;
                         if (strlen($userPhoto['foto']) > 0)
                             Image::make(base64_decode($userPhoto['foto']))->save($path);
                     } catch (\Exception $e) {
@@ -192,7 +195,7 @@ class AuthController extends Controller
 
                 $userPhoto = $userPhoto->json();
                 $png_url = $user->id . ".jpg";
-                $path = public_path() . '/images/users/' . $png_url;
+                $path = public_path('storage/users/' . $png_url) ;
                 if (strlen($userPhoto['foto']) > 0)
                     Image::make(base64_decode($userPhoto['foto']))->save($path);
 

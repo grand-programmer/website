@@ -1,15 +1,25 @@
 <template>
-    <div class="section asosiy_korsatkichlari2">
-        <stat></stat>
+    <div class="container-fluid contact_faq">
+        <div class="row">
+            <div class="col-md-6">
+                <homefaq/>
+            </div>
+            <div class="col-md-6">
+                <homefaq2/>
+            </div>
+        </div>
 
     </div>
 </template>
 
 <script>
-import stat from '../../components/homepage/statistics';
+
 export default {
     name: "test.vue",
-    components: {stat},
+    components: {
+        'homefaq': () => import('../../components/homepage/faq'),
+        'homefaq2': () => import('../../components/homepage/faq2')
+    },
 }
 </script>
 

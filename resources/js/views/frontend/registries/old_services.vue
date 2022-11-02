@@ -13,7 +13,7 @@
             <v-container>
                 <v-row>
                     <h3 class="primary-color m-2 text-center mb-10 fw-bold">{{
-                            $t("Божхона тўловлари бўйича дастлабки қарорлар реестри")
+                            $t("Давлат хизматлари бўйича мурожаатлар реестри")
                         }}</h3>
                 </v-row>
                 <v-row>
@@ -22,7 +22,6 @@
                         :headers="headers"
                         :items="decisions"
                         fixed-header
-                        height="50vh"
                         width="50vw"
                         calculate-widths
                         :options.sync="options"
@@ -45,65 +44,20 @@
                                     style="position: sticky; top: 50px; background-color:#fff;"
 
                                 >
-                                    <template v-if="header.value==='termsNm'">
-                                        <v-autocomplete filled dense hide-details :items="inkoterms" clearable
-                                                        color="primary" v-model="hfilters.terms"></v-autocomplete>
-                                    </template>
-                                    <template v-else-if="header.value==='method'">
-                                        <v-autocomplete filled dense hide-details :items="usullar" clearable
-                                                        color="primary" v-model="hfilters.method"></v-autocomplete>
-                                    </template>
-                                    <template v-else-if="header.value==='inDecDate'">
-                                        <v-menu
-                                            ref="menu_decdate"
-                                            v-model="menu_dec_date"
-                                            :close-on-content-click="false"
-                                            :return-value.sync="v_dec_date"
-                                            transition="scale-transition"
-                                            offset-y
-                                            min-width="auto"
-                                        >
-                                            <template
-                                                v-slot:activator="{ on, attrs }">
-                                                <v-text-field color="primary" class="p-2"
-                                                              v-model="dec_date"
-                                                              prepend-inner-icon="mdi-calendar"
-                                                              readonly
-                                                              filled dense hide-details
-                                                              v-bind="attrs"
-                                                              v-on="on"
-                                                              clearable
-                                                ></v-text-field>
-                                            </template>
-                                            <v-date-picker
-                                                v-model="hfilters.datepicker"
-                                                no-title
-                                                range
-                                                scrollable
-                                                locale="ru-ru"
+                                    <template v-if="header.value==='user_ext' || header.value==='instime' || header.value==='fabula'">
 
-                                            >
-                                                <v-spacer></v-spacer>
-                                                <v-btn
-                                                    text
-                                                    color="primary"
-                                                    @click="menu_dec_date = false"
-                                                >
-                                                    Бекор қилиш
-                                                </v-btn>
-                                                <v-btn
-                                                    text
-                                                    color="primary"
-                                                    @click="$refs['menu_decdate'][0].save(v_dec_date);  dec_date=formatDateRange(hfilters.datepicker)"
-                                                >
-                                                    Сақлаш
-                                                </v-btn>
-                                            </v-date-picker>
-                                        </v-menu>
+                                    </template>
+                                    <template v-else-if="header.value==='tip_z'">
+                                        <v-autocomplete dense hide-details :items="services" clearable
+                                                        color="primary" v-model="hfilters.tip_z"></v-autocomplete>
+                                    </template>
+                                    <template v-else-if="header.value==='status'">
+                                        <v-autocomplete dense hide-details :items="statuses" clearable
+                                                        color="primary" v-model="hfilters.status"></v-autocomplete>
                                     </template>
                                     <template v-else>
                                         <v-text-field color="primary" :name="header.value"
-                                                      v-model="hfilters[header.value]" clearable filled dense
+                                                      v-model="hfilters[header.value]" clearable dense
                                                       hide-details
                                                       class="m-2"></v-text-field>
                                     </template>
@@ -131,7 +85,7 @@
                                 v-for="(item,itemKey) in items"
                                 :key="itemKey"
                             >
-                                <td v-for="header in headers" @click="openDialog(itemKey)">
+                                <td v-for="header in headers">
                                     <template v-if="header.value==='inDecNum'">
                                         <template v-if="(new Date(item.inDecEndDate)) < (new Date())">
                                             <span style="border-radius: 5px;color: #fff; padding: 5px;
@@ -152,6 +106,9 @@
                                         </template>
 
                                     </template>
+                                    <template v-else-if="header.value==='tip_z'">{{getItemByValue(services,item[header.value]).text}}</template>
+                                    <template v-else-if="header.value==='status'">{{getItemByValue(statuses,item[header.value]).text}}</template>
+                                    <template v-else-if="header.value==='fabula'"><textarea cols="40" rows="4" :value='(item[header.value]).replaceAll("","").replaceAll("","")'></textarea></template>
                                     <template v-else>{{ item[header.value] }}</template>
                                 </td>
                             </tr>
@@ -223,15 +180,28 @@ export default {
             mydialog:false,
             selectedItem:0,
             hfilters: {
-                terms: '',
                 method: '',
                 hsCode: '',
-                tradeName: '',
-                inDecNum: '',
                 datepicker:[],
                 page:1,
+                tip_z:null,
                 size:10,
             },
+            services:[
+                {text:'Юкларни халқаро йўлларда ташиш китобчасидан фойдаланиш учун рухсатнома  (реестр рақами 0372)', value:'L'},
+                {text:'Божхона омборини таъсис этиш учун лицензия (реестр рақами 0373)', value:'C'},
+                {text:'Божхона режимида омборхона "Эркин омборхона" таъсис этиш учун лицензия (реестр рақами 0374)', value:'E'},
+                {text:'Бож олинмайдиган савдо фаолияти учун лицензия (реестр рақами 0375)', value:'G'},
+            ],
+            statuses:[
+                {text:'Янги', value:0},
+                {text:'Жараёнда', value:1},
+                {text:'Рухсат берилган', value:2},
+                {text:'Рухсат берилмаган', value:3},
+                {text:'Бекор қилинган', value:4},
+                {text:'Тўлов жараёнида', value:6},
+                {text:'Лицензия бериш', value:7},
+            ],
             totalDesserts: 0,
             totalDecisions: 0,
             desserts: [],
@@ -265,52 +235,21 @@ export default {
                 "statusNm",
                 "commentEnded",
             ],
-            inkoterms: [
-                {text: 'EXW', value: '01'},
-                {text: 'FCA', value: '02'},
-                {text: 'FAS', value: '03'},
-                {text: 'FOB', value: '04'},
-                {text: 'CFR', value: '05'},
-                {text: 'CIF', value: '06'},
-                {text: 'CPT', value: '07'},
-                {text: 'CIP', value: '08'},
-                {text: 'DAF', value: '09'},
-                {text: 'DES', value: '10'},
-                {text: 'DEQ', value: '11'},
-                {text: 'DDU', value: '12'},
-                {text: 'DDP', value: '13'},
-                {text: 'DAР', value: '14'},
-                {text: 'DAT', value: '15'},
-                {text: '---', value: '16'},
-            ],
-            usullar: [
-                {text: '1-усул', value: "01"},
-                {text: '2-усул', value: "02"},
-                {text: '3-усул', value: "03"},
-                {text: '4-усул', value: "04"},
-                {text: '5-усул', value: "05"},
-                {text: '6.1-усул', value: "6.1"},
-                {text: '6.2-усул', value: "6.2"},
-                {text: '6.3-усул', value: "6.3"},
-                {text: '6.4-усул', value: "6.4"},
-                {text: '6.5-усул', value: "6.5"}
-            ],
 
             headers: [
                 {
-                    text: 'Ариза рақами',
+                    text: i18n.t('Ариза рақами'),
                     align: 'start',
                     sortable: false,
-                    value: "appNum",
+                    value: "num_z",
+                    width: '100px'
                 },
-                {text: 'Етказиб бериш шарти', value: "termsNm", sortable: false, width: '150px'},
-                {text: 'ТИФ ТН коди', value: "hsCode", sortable: false},
-                {text: 'Товарнинг номи', value: "tradeName", sortable: false, width: "250px"},
-                {text: 'Қарор рақами', value: "inDecNum", sortable: false},
-                {text: 'Қарор қабул қилинган сана', value: "inDecDate", width: "250px", sortable: false},
-                {
-                    text: 'Аниқлаш усули', value: "method", align: 'center', sortable: false, width: '120px'
-                },
+                {text: 'Давлат хизмати тури', value: "tip_z", sortable: false, width: '300px'},
+                {text: 'Ҳолати', value: "status", sortable: false, width: '200px'},
+                {text: 'Мурожаат қабул қилинган вақти', value: "instime", sortable: false, width: '150px'},
+                {text: 'Ижрочи', value: "user_ext", sortable: false, width: '150px'},
+                {text: 'Натижаси', value: "fabula", sortable: false, width: '300px'},
+
             ],
             dec_date: "",
             menu_dec_date: false,
@@ -319,6 +258,8 @@ export default {
             v_dec_date: []
         }
     },
+
+
     watch: {
         options: {
             handler() {
@@ -376,71 +317,38 @@ export default {
         },
         getDataFromApi() {
             this.loading = true;
-
             this.getReestr();
             this.loading = false
-
-            /*this.fakeApiCall().then(data => {
-                this.desserts = data.items
-                this.totalDesserts = data.total
-                this.loading = false
-            })*/
         },
         getReestr() {
             const _this = this;
             setTimeout(async () => {
 
-                await axios.post('/api/v1/ex_api/customprice-registries',_this.hfilters).then(function (res) {
-                    _this.decisions = res.data.inDecReestr;
-                    _this.totalDecisions = res.data.totalItems;
+                await axios.post('/api/v1/ex_api/services-registries',_this.hfilters).then(function (res) {
+                    _this.decisions = res.data.data;
+                     if(typeof res.data.data[0] !=='undefined') _this.totalDecisions =parseInt(res.data.data[0].mycount); else _this.totalDecisions =0;
 
                 })
             })
 
 
         },
-
-
-        /**
-         * In a real application this would be a call to fetch() or axios.get()
-         */
-        fakeApiCall() {
-            console.log(this.options);
-            return new Promise((resolve, reject) => {
-                const {sortBy, sortDesc, page, itemsPerPage} = this.options
-
-                let items = []; //this.getDesserts()
-                const total = items.length
-
-                if (sortBy.length === 1 && sortDesc.length === 1) {
-                    items = items.sort((a, b) => {
-                        const sortA = a[sortBy[0]]
-                        const sortB = b[sortBy[0]]
-
-                        if (sortDesc[0]) {
-                            if (sortA < sortB) return 1
-                            if (sortA > sortB) return -1
-                            return 0
-                        } else {
-                            if (sortA < sortB) return -1
-                            if (sortA > sortB) return 1
-                            return 0
-                        }
-                    })
+        getItemByValue(items,value) {
+            let returnValue;
+            items.forEach(function (service) {
+                if (service.value == value) {
+                    returnValue = service;
+                    return true;
                 }
 
-                if (itemsPerPage > 0) {
-                    items = items.slice((page - 1) * itemsPerPage, page * itemsPerPage)
-                }
-
-                setTimeout(() => {
-                    resolve({
-                        items,
-                        total,
-                    })
-                }, 1000)
             })
+            if (returnValue) {
+                //console.log(returnCountry)
+                return returnValue;
+            }
         },
+
+
     },
 }
 </script>
@@ -453,6 +361,7 @@ export default {
 .v-data-table .v-data-table-header th span {
     color: var(--mycolor);
     font-weight: bold;
+    font-size: 15px;
 }
 
 </style>

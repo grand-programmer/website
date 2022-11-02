@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\NewsTranslates;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -38,6 +39,30 @@ class NewsController extends Controller
     ];
 });*/
     }
+    /**
+     * Search news in storage.
+     *
+     * @param \Illuminate\Http\Request $request
+     */
+    public function search(Request $request){
+        $data = $request->only(
+            'text',
+        );
+        if(isset($data['text'])){
+            if(app()->getLocale()!=='uz') {
+                $news=News::whereHas('translates',function($q) use($data){
+                    $q->where('language',app()->getLocale())->where('title','like', "%".$data['text']."%")->orWhere('description','like', "%".$data['text']."%");
+                })->limit(5)->get();
+                //$newsTranslates = NewsTranslates::where('title',$data['text'])->orWhere('description',$data['text'])->limit(5);
+                //>whereRelation('translates', 'language', '=', app()->getLocale());
+            } else {
+                $news = News::where('title','like', "%".$data['text']."%")->orWhere('description','like', "%".$data['text']."%")->limit(5)->get();
+            }
+            return response()->json($news);
+        }
+        return response()->json([]);
+
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -45,7 +70,7 @@ class NewsController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function store(Request $request)
+   /* public function store(Request $request)
     {
         if ($request->isMethod('post')) {
             $data = $request->only(
@@ -86,7 +111,7 @@ class NewsController extends Controller
                 $news->categories()->sync($data['categories']);
             return response()->json($news, 200);
         }
-    }
+    }*/
 
     /**
      * Display the specified resource.
@@ -103,7 +128,7 @@ class NewsController extends Controller
                     })->toArray();*/
         $news->viewed = $news->viewed + 1;
         $news->save();
-        return NewsResource::make($news->with('categories')->where('id', $news->id)->get()[0]);
+        return NewsResource::make(News::with('categories')->where('id', $news->id)->get()[0]);
         //die();
         //return response()->json(array_merge((NewsResource::collection($news->with('categories')->where('id', $news->id)->get()[0])), ['cats' => $categories]), 200);
     }
@@ -115,7 +140,7 @@ class NewsController extends Controller
      * @param \App\Models\News $news
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update(Request $request, News $news): \Illuminate\Http\JsonResponse
+    /*public function update(Request $request, News $news): \Illuminate\Http\JsonResponse
     {
         if ($request->isMethod('put')) {
             $data = $request->only(
@@ -126,7 +151,7 @@ class NewsController extends Controller
                 'parent',
                 'cats',
                 'image',
-                'boshqarma'
+                'boshqarma',
             );
             $validator = Validator::make($data, [
                 'title' => 'required|min:3|max:255',
@@ -145,6 +170,7 @@ class NewsController extends Controller
                 if ($data['home'] == "true") $data['home'] = true;
                 else $data['home'] = false;
             }
+            //dd($news->created_at);
             $news->update($data);
 
             if ($request->file()) {
@@ -161,7 +187,7 @@ class NewsController extends Controller
         }
         return response()->json('error', 401);
 
-    }
+    }*/
 
     /**
      * Remove the specified resource from storage.
@@ -169,14 +195,14 @@ class NewsController extends Controller
      * @param \App\Models\News $news
      * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy(News $news)
+/*    public function destroy(News $news)
     {
         $news->categories()->detach();
         Storage::delete("public/uploads/" . $news->image);
         $news->delete();
         return response()->json([
             'success'], 200);
-    }
+    }*/
 
     public function like(News $news, Request $request)
     {

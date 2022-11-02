@@ -42,6 +42,7 @@
                                                 <router-link :to="sublink.url" class="dropdown-item"> {{
                                                         sublink.title
                                                     }}
+                                                    <span  v-if="(sublink.children && sublink.children[0])"><v-icon>mdi-chevron-down</v-icon></span>
                                                 </router-link>
                                                 <ul class="submenu dropdown-menu"
                                                     v-if="(sublink.children && sublink.children[0])">

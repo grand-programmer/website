@@ -20,7 +20,7 @@ class AdminNewsController extends ParentController
         $news = News::with('categories');
         if (isset($requestData['boshqarma'])) $news = $news->where('boshqarma', $requestData['boshqarma']);
 
-        return $news->orderby('created_at', 'desc')->limit(6)->get()->transform(function ($item) {
+        return $news->orderby('created_at', 'desc')->get()->transform(function ($item) {
             return [
                 'id' => $item->id,
                 'title' => $item->title,
@@ -128,7 +128,8 @@ class AdminNewsController extends ParentController
                 'cats',
                 'image',
                 'boshqarma',
-                'translates'
+                'translates',
+                'created_at'
 
             );
             $validator = Validator::make($data, [

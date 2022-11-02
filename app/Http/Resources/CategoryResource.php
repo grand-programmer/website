@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\News;
 use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\App;
@@ -31,7 +32,12 @@ class CategoryResource extends JsonResource
             'children' => $this->children,
             'created_at' => $this->created_at->format('d-m-Y'),
         ];
-        if (isset($data['withnews']))$categoryArray['news']=NewsResource::collection($this->news);
+        if(isset($data['withnews'])){
+            $news=$this->news;
+            if(app()->getLocale()!=='uz') $news=News::whereIn('id',$this->news->pluck('id'))->whereRelation('translates','language','=',app()->getLocale())->get();
+            $categoryArray['news']= NewsResource::collection($news)->toArray($request);
+        }
+
         return $categoryArray;
     }
 }

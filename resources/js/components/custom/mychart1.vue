@@ -9,7 +9,7 @@
             <div class="chart_item_icon d-none" >
                 <v-icon class="chart_item_icon">mdi-car-multiple</v-icon>
             </div>
-            <div class="chart_item_pname">{{ item[item_title] }}</div>
+            <div class="chart_item_pname">{{ $t(item[item_title]) }}</div>
             <div class="chart_item_diff">
                 <div class="chart_item_diff_values">
                     <div class="chart_item_diff_value"

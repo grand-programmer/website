@@ -26,6 +26,7 @@
     <link href="{{secure_asset('/css/fullpage.css')}}" rel="stylesheet">
     <link href="{{secure_asset('/css/all.css')}}" rel="stylesheet">
     <link href="{{asset('/css/mix/one.css')}}" rel="stylesheet" type="text/css" charset="utf-8">
+    <link href="{{asset('/css/mix/app.css')}}" rel="stylesheet" type="text/css" charset="utf-8">
     <link href="{{asset('/css/slick.css')}}" rel="stylesheet">
     <link href="{{asset('/css/slick-theme.css')}}" rel="stylesheet">
     <link href="{{asset('/css/responsive.css')}}" rel="stylesheet">
@@ -73,6 +74,84 @@
 <script src="/js/script.js"></script>
 
 
+<!-- START WWW.UZ TOP-RATING -->
+<SCRIPT language="javascript" type="text/javascript">
+    <!--
+    document.addEventListener("DOMContentLoaded", () => {
+        top_js = "1.0";
+        top_r = "id=46694&r=" + escape(document.referrer) + "&pg=" + escape(window.location.href);
+        document.cookie = "smart_top=1; path=/";
+        top_r += "&c=" + (document.cookie ? "Y" : "N")
+    })
+    //-->
+</SCRIPT>
+<SCRIPT language="javascript1.1" type="text/javascript">
+    <!--
+    document.addEventListener("DOMContentLoaded", () => {
+        top_js = "1.1";
+        top_r += "&j=" + (navigator.javaEnabled() ? "Y" : "N")
+    })//-->
+</SCRIPT>
+<SCRIPT language="javascript1.2" type="text/javascript">
+    <!--
+    document.addEventListener("DOMContentLoaded", () => {
+        top_js = "1.2";
+        top_r += "&wh=" + screen.width + 'x' + screen.height + "&px=" +
+            (((navigator.appName.substring(0, 3) == "Mic")) ? screen.colorDepth : screen.pixelDepth)
+    })
+    //-->
+</SCRIPT>
+<SCRIPT language="javascript1.3" type="text/javascript">
+    <!--
+    top_js="1.3";
+    //-->
+</SCRIPT>
+<SCRIPT language="JavaScript" type="text/javascript">
+    <!--
+    document.addEventListener("DOMContentLoaded", () => {
+
+        // console.log(document.getElementsByClassName('mycounter1')[0])
+        top_rat="&col=133E43&t=ffffff&p=86C439";top_r+="&js="+top_js+"";
+
+        if(typeof document.getElementsByClassName('mycounter1')[0] !=='undefined')
+        document.getElementsByClassName('mycounter1')[0].innerHTML ='<a href="http://www.uz/ru/res/visitor/index?id=46694" target=_top>' +
+            '<img src="http://cnt0.www.uz/counter/collect?'+top_r+top_rat+'" width=88 height=31 border=0 alt="Топ рейтинг www.uz"/></a>'
+    });
+    //-->
+
+
+</SCRIPT>
+<NOSCRIPT >
+    <A href="http://www.uz/ru/res/visitor/index?id=46694" target="_top" class="mycounter" >
+        <IMG height=31 src="http://cnt0.www.uz/counter/collect?id=46694&pg=http%3A//uzinfocom.uz&&col=133E43&amp;t=ffffff&amp;p=86C439" width=88 border=0 alt="Топ рейтинг www.uz"/></A>
+</NOSCRIPT>
+<!-- FINISH WWW.UZ TOP-RATING -->
+
+
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript" >
+    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+    (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+    ym(90773745, "init", {
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true
+    });
+    document.addEventListener("DOMContentLoaded", () => {
+        setTimeout(()=>{
+            if(typeof document.getElementsByClassName('mycounter1')[0] !=='undefined')
+                document.getElementsByClassName('mycounter1')[0].innerHTML =document.getElementsByClassName('mycounter1')[0].innerHTML + '<div><img src="https://mc.yandex.ru/watch/90773745" style="position:absolute; left:-9999px;" alt="" /></div>'
+        },500)
+
+    })
+</script>
+
+<noscript><div><img src="https://mc.yandex.ru/watch/90773745" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
 
 </body>
 </html>

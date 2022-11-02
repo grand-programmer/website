@@ -40,8 +40,10 @@ use Illuminate\Support\Facades\Schema;
 
             });*/
         Route::any('ex_api/{action}', 'App\Http\Controllers\ApiController@index');
+        Route::get('get_image', 'App\Http\Controllers\UserController@showImage');
+
         Route::group(['middleware' => 'auth:api'], function () {
-            Route::get('get_image', 'App\Http\Controllers\UserController@showImage');
+
             Route::get('users', 'App\Http\Controllers\UserController@index')->middleware('isAdmin');
             Route::get('users/{id}', 'App\Http\Controllers\UserController@show')->middleware('isAdminOrSelf');
         });
@@ -54,7 +56,7 @@ use Illuminate\Support\Facades\Schema;
          */
         Route::group(['prefix' => 'admin', 'middleware' => 'role:admin'], function () {  //role:editor,approver
             Route::resource('/news', 'App\Http\Controllers\Admin\AdminNewsController', ['as' => 'admin']);
-            Route::get('/categories/select', 'App\Http\Controllers\CategoryController@getForSelect');
+            Route::get('/categories/select', 'App\Http\Controllers\Admin\AdminCategoryController@getForSelect');
             Route::resource('/categories', 'App\Http\Controllers\Admin\AdminCategoryController', ['as' => 'admin']);
             Route::resource('/page', 'App\Http\Controllers\Admin\AdminPageController', ['as' => 'admin']);
             Route::resource('/events', 'App\Http\Controllers\Admin\AdminEventController', ['as' => 'admin']);
@@ -65,10 +67,10 @@ use Illuminate\Support\Facades\Schema;
             Route::get('/menu/front', 'App\Http\Controllers\MenuController@getForFront', ['as' => 'admin']);
             Route::resource('/votes', 'App\Http\Controllers\Admin\AdminVoteController',['as'=>'admin']);
             Route::resource('/menu', 'App\Http\Controllers\Admin\AdminMenuController', ['as' => 'admin']);
-            Route::resource('/appeal', 'App\Http\Controllers\Admin\Admin\AppealController', ['as' => 'admin']);
+            Route::resource('/appeal', 'App\Http\Controllers\Admin\AdminAppealController', ['as' => 'admin']);
         });
 
-
+        Route::get('/categories/select', 'App\Http\Controllers\CategoryController@getForSelect');
         Route::get('/stat', 'App\Http\Controllers\StatController@index');
         Route::post('/appeal/checkAppeal', 'App\Http\Controllers\AppealController@check');
         //Route::resource('/appeal', 'App\Http\Controllers\AppealController');
@@ -79,6 +81,7 @@ use Illuminate\Support\Facades\Schema;
         Route::resource('/menu', 'App\Http\Controllers\MenuController');
 
         Route::post('/news/{news}/vote', 'App\Http\Controllers\NewsController@like');
+        Route::post('/news/search', 'App\Http\Controllers\NewsController@search');
         Route::resource('/news', 'App\Http\Controllers\NewsController');
 
 
@@ -103,5 +106,7 @@ use Illuminate\Support\Facades\Schema;
         Route::get('/data/inn', 'App\Http\Controllers\DataController@getInn');
         Route::get('/data/currency', 'App\Http\Controllers\DataController@getCurrency');
         Route::get('/data/country', 'App\Http\Controllers\DataController@getCountry');
+        Route::get('/data/mfo', 'App\Http\Controllers\DataController@getMFO');
+        Route::get('/data/contract', 'App\Http\Controllers\DataController@getEisvoContract');
     });
 //});

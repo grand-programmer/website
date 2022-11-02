@@ -246,11 +246,11 @@ Vue.use(VueAuth, auth)
     },
 });*/
 
-import clickOutside from './plugins/vue-directive-clickOutside';
+///import clickOutside from './plugins/vue-directive-clickOutside';
 
 Vue.config.productionTip = false
 
-Vue.directive('click-outside', clickOutside);
+ //Vue.directive('click-outside', clickOutside);
 
 
 
@@ -291,7 +291,7 @@ router.beforeEach((to, from, next) => {
             if (to.path.includes("/admin/")) {
                 next();
             } else {
-                console.log('2222')
+               // console.log('2222')
                 next({
                     path: "/" + i18n.locale + to.path,
                     params: {locale: i18n.locale},
@@ -305,7 +305,7 @@ router.beforeEach((to, from, next) => {
                 next();
             else {
                 if (to.params.locale === 'admin') {
-                    console.log('asd')
+                   // console.log('asd')
                     next();
                 }
                 //   console.log('55555')

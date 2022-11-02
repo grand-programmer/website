@@ -16,115 +16,115 @@
             <v-container v-else>
                 <section class="content_block" v-if="this.$auth.user()" :set="user =this.$auth.user()">
 
-                        <section class="content_block">
-                            <div class="pull-right profile-action-buttons">
+                    <section class="content_block">
+                        <div class="pull-right profile-action-buttons">
 
-                                <!--                                <v-btn type="button" @click="clickEdit" class="btn btn-success" :title="editButton">
-                                                                    <i class="fa fa-user-edit"></i> {{ editButton }}
-                                                                </v-btn>-->
-                                <!--
-                                                            <button type="button" class="btn btn-primary btn-print" title="Чоп этиш">
+                            <!--                                <v-btn type="button" @click="clickEdit" class="btn btn-success" :title="editButton">
+                                                                <i class="fa fa-user-edit"></i> {{ editButton }}
+                                                            </v-btn>-->
+                            <!--
+                                                        <button type="button" class="btn btn-primary btn-print" title="Чоп этиш">
 
-                                                                <i class="fa fa-print"></i>
-                                                            </button>
-                                                            <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton"
-                                                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                                                                    title="Юклаб олиш">
-                                                                <i class="fa fa-download"></i>
-                                                            </button>-->
-                                <!--                                <a @click="sendResume" class="btn btn-info" :class="edit?'disabled':''"
-                                                                   title="Резюме юбориш">
-                                                                    <i class="fa fa-upload mr-2"></i>Резюмени юбориш
-                                                                </a>-->
-                                <v-btn class="btn btn-info" :loading="resumeLoading"
+                                                            <i class="fa fa-print"></i>
+                                                        </button>
+                                                        <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton"
+                                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                                                title="Юклаб олиш">
+                                                            <i class="fa fa-download"></i>
+                                                        </button>-->
+                            <!--                                <a @click="sendResume" class="btn btn-info" :class="edit?'disabled':''"
+                                                               title="Резюме юбориш">
+                                                                <i class="fa fa-upload mr-2"></i>Резюмени юбориш
+                                                            </a>-->
+                            <v-btn class="btn btn-info" :loading="resumeLoading"
                                    title="Резюме юбориш" @click="sendResume">
-                                    <i class="fa fa-upload mr-2"></i>Резюмени юбориш
-                                </v-btn>
-                                <v-dialog
-                                    v-model="dialogTilxat"
-                                    width="800"
-                                    style="font-size: 16px;"
-                                >
-                                    <v-card>
-                                        <v-card-title class="primary p-2" dark style="color: #fff; font-size: 20px">
-                                            "Божхона хизмати органларида хизматни ўташ тўғрисидаги" Низом талаблари
-                                        </v-card-title>
-                                        <v-card-text>
-                                            <p style="
+                                <i class="fa fa-upload mr-2"></i>Резюмени юбориш
+                            </v-btn>
+                            <v-dialog
+                                v-model="dialogTilxat"
+                                width="800"
+                                style="font-size: 16px;"
+                            >
+                                <v-card>
+                                    <v-card-title class="primary p-2" dark style="color: #fff; font-size: 20px">
+                                        "Божхона хизмати органларида хизматни ўташ тўғрисидаги" Низом талаблари
+                                    </v-card-title>
+                                    <v-card-text>
+                                        <p style="
                                                 line-height: 1.5;
                                                 text-align: center;
                                             font-size: 16px;
                                             ">
-                                                Ўзбекистон Республикасининг “Давлат божхона хизмати тўғрисида”ги
-                                                Қонунига мувофиқ, белгиланган тартибда муомалага лаёқатсиз ёки муомала
-                                                лаёқати чекланган деб топилган, хизматни ўташга тўсқинлик қиладиган
-                                                касаллиги ёки жисмоний нуқсонлари бўлган, бошқа давлат органларидан
-                                                салбий сабабларга кўра бўшатилган, шунингдек содир этган жинояти учун
-                                                илгари ҳукм қилинганлар, қўлланилган жазо туридан, судланганлик ҳолати
-                                                тугатилганлигидан ёки олиб ташланганлигидан ва ўзига нисбатан амнистия
-                                                акти ёки афв этиш қўлланилганлигидан қатъи назар ёхуд ярашув муносабати
-                                                билан жиноий жавобгарликдан озод қилинган фуқаролар хизматга қабул
-                                                қилиниши мумкин эмас.
-                                                Ўзбекистон Республикаси давлат божхона хизмати органларида хизматни ўташ
-                                                тўғрисидаги Низомда белгиланган талабларга мос келмаган, ҳужжатларни
-                                                белгиланган муддатда тақдим этмаган, саралаш босқичларидан ўта олмаган
-                                                ёки ўзи ва яқин қариндошлари тўғрисида била туриб нотўғри маълумотлар
-                                                берган номзодни хизматга қабул қилиш рад этилиши тўғрисида
-                                                ОГОҲЛАНТИРИЛДИМ.
+                                            Ўзбекистон Республикасининг “Давлат божхона хизмати тўғрисида”ги
+                                            Қонунига мувофиқ, белгиланган тартибда муомалага лаёқатсиз ёки муомала
+                                            лаёқати чекланган деб топилган, хизматни ўташга тўсқинлик қиладиган
+                                            касаллиги ёки жисмоний нуқсонлари бўлган, бошқа давлат органларидан
+                                            салбий сабабларга кўра бўшатилган, шунингдек содир этган жинояти учун
+                                            илгари ҳукм қилинганлар, қўлланилган жазо туридан, судланганлик ҳолати
+                                            тугатилганлигидан ёки олиб ташланганлигидан ва ўзига нисбатан амнистия
+                                            акти ёки афв этиш қўлланилганлигидан қатъи назар ёхуд ярашув муносабати
+                                            билан жиноий жавобгарликдан озод қилинган фуқаролар хизматга қабул
+                                            қилиниши мумкин эмас.
+                                            Ўзбекистон Республикаси давлат божхона хизмати органларида хизматни ўташ
+                                            тўғрисидаги Низомда белгиланган талабларга мос келмаган, ҳужжатларни
+                                            белгиланган муддатда тақдим этмаган, саралаш босқичларидан ўта олмаган
+                                            ёки ўзи ва яқин қариндошлари тўғрисида била туриб нотўғри маълумотлар
+                                            берган номзодни хизматга қабул қилиш рад этилиши тўғрисида
+                                            ОГОҲЛАНТИРИЛДИМ.
 
-                                            </p>
-                                        </v-card-text>
+                                        </p>
+                                    </v-card-text>
 
-                                        <v-divider></v-divider>
+                                    <v-divider></v-divider>
 
-                                        <v-card-actions>
-                                            <v-spacer></v-spacer>
-                                            <v-btn
-                                                color="primary"
-                                                text
-                                                @click="dialogTilxat = false"
-                                            >
-                                                Ёпиш
-                                            </v-btn>
-                                            <v-btn
-                                                color="primary"
-                                                @click="clickedAccept"
-                                                text
-                                            >
-                                                Розиман
-                                            </v-btn>
-                                        </v-card-actions>
+                                    <v-card-actions>
+                                        <v-spacer></v-spacer>
+                                        <v-btn
+                                            color="primary"
+                                            text
+                                            @click="dialogTilxat = false"
+                                        >
+                                            Ёпиш
+                                        </v-btn>
+                                        <v-btn
+                                            color="primary"
+                                            @click="clickedAccept"
+                                            text
+                                        >
+                                            Розиман
+                                        </v-btn>
+                                    </v-card-actions>
 
-                                    </v-card>
+                                </v-card>
 
-                                </v-dialog>
-                                <!--                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" x-placement="bottom-start"
-                                                                 style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(999px, 38px, 0px);">
-                                                                <a class="dropdown-item" href="/users/profiles/surat9/download/pdf">PDF шаклида</a>
-                                                                <a class="dropdown-item" href="/users/profiles/surat9/download/docx">Word шаклида</a>
-                                                                <a class="dropdown-item "
-                                                                   href="https://oldvacancy.argos.uz/media/resume/Dars_jadvali.docx">Номзоднинг шахсий
-                                                                    резюмеси</a>
-                                                            </div>
-                                                            <button type="button" id="reminder-modal-btn" class="btn btn-danger" title="Эслатма">
-                                                                <i class="fa fa-bell"></i>
-                                                            </button>-->
+                            </v-dialog>
+                            <!--                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" x-placement="bottom-start"
+                                                             style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(999px, 38px, 0px);">
+                                                            <a class="dropdown-item" href="/users/profiles/surat9/download/pdf">PDF шаклида</a>
+                                                            <a class="dropdown-item" href="/users/profiles/surat9/download/docx">Word шаклида</a>
+                                                            <a class="dropdown-item "
+                                                               href="https://oldvacancy.argos.uz/media/resume/Dars_jadvali.docx">Номзоднинг шахсий
+                                                                резюмеси</a>
+                                                        </div>
+                                                        <button type="button" id="reminder-modal-btn" class="btn btn-danger" title="Эслатма">
+                                                            <i class="fa fa-bell"></i>
+                                                        </button>-->
 
+                        </div>
+                        <div class="no_name_class">
+                            <div class="inner_user_img">
+                                <img :src="user_image" alt="Фойдаланувчи сурати">
                             </div>
-                            <div class="no_name_class">
-                                <div class="inner_user_img">
-                                    <img :src="'/public/images/users/'+ user.id +'.jpg'" alt="Фойдаланувчи сурати">
-                                </div>
-                                <div class="no_name_class2">
+                            <div class="no_name_class2">
                                 <span class="info_full_name">{{
                                         user.sur_name
                                     }} {{ user.first_name }} {{ user.mid_name }}</span>
-                                    <span class="ident_number">ЖШШИР: {{ user.pin }}</span>
+                                <span class="ident_number">ЖШШИР: {{ user.pin }}</span>
 
-                                </div>
                             </div>
-                            <div class="user_info_list">
-                                <ValidationObserver v-slot="{ invalid }" ref="vacancy_application">
+                        </div>
+                        <div class="user_info_list">
+                            <ValidationObserver v-slot="{ invalid }" ref="vacancy_application">
                                 <v-row>
                                     <v-col cols="4">
                                         <div class="user_info_item">
@@ -154,6 +154,8 @@
                                         <editablefield title="Яшаш жойи"
                                                        v-model="user.per_adr"
                                                        rules="required"
+                                                       editable
+                                                       :placeholder="user.per_adr"
                                                        class="user_info_item"
                                         />
                                     </v-col>
@@ -275,24 +277,24 @@
 
                                     <!--                                    </v-col>-->
                                 </v-row>
-                                </ValidationObserver>
+                            </ValidationObserver>
 
-                            </div>
+                        </div>
 
-                            <div class="clearfix"></div>
-                            <div class="tab_panel">
-                                <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                    <li class="nav-item">
-                                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#education"
-                                           role="tab"
-                                           aria-controls="home" aria-selected="false">Таълим
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" id="cert-tab" data-toggle="tab" href="#cert" role="tab"
-                                           aria-controls="profile" aria-selected="false">Сертификатлар
-                                        </a>
-                                    </li><!--
+                        <div class="clearfix"></div>
+                        <div class="tab_panel">
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#education"
+                                       role="tab"
+                                       aria-controls="home" aria-selected="false">Таълим
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="cert-tab" data-toggle="tab" href="#cert" role="tab"
+                                       aria-controls="profile" aria-selected="false">Сертификатлар
+                                    </a>
+                                </li><!--
                                     <li class="nav-item">
                                         <a class="nav-link" id="profile-tab" data-toggle="tab" href="#career" role="tab"
                                            aria-controls="profile" aria-selected="false">Мехнат фаолияти
@@ -303,188 +305,188 @@
                                        role="tab" aria-controls="message" aria-selected="true">Қариндошлар
                                     </a>
                                 </li>-->
-                                </ul>
-                                <div class="tab-content" id="myTabContent">
-                                    <div class="tab-pane fade  active show" id="education" role="tabpanel"
-                                         aria-labelledby="home-tab">
-                                        <div class="training_courses_first">
-                                            <h3 class="profile-print-tab-title">Таълим</h3>
-                                            <div class="training_courses_table rm_last_col">
-                                                <div class="table-responsive">
-                                                    <v-simple-table class="table d-print-table ">
-                                                        <thead>
-                                                        <tr>
-                                                            <th class="text-white" scope="col">Мамлакат</th>
-                                                            <th class="text-white" scope="col">Тугатган ўқув муассасаси
-                                                                номи
+                            </ul>
+                            <div class="tab-content" id="myTabContent">
+                                <div class="tab-pane fade  active show" id="education" role="tabpanel"
+                                     aria-labelledby="home-tab">
+                                    <div class="training_courses_first">
+                                        <h3 class="profile-print-tab-title">Таълим</h3>
+                                        <div class="training_courses_table rm_last_col">
+                                            <div class="table-responsive">
+                                                <v-simple-table class="table d-print-table ">
+                                                    <thead>
+                                                    <tr>
+                                                        <th class="text-white" scope="col">Мамлакат</th>
+                                                        <th class="text-white" scope="col">Тугатган ўқув муассасаси
+                                                            номи
+                                                        </th>
+                                                        <th class="text-white" scope="col">Мутахассислик номи</th>
+                                                        <th class="text-white" scope="col">Диплом рақами</th>
+                                                        <th class="text-white" scope="col">Давр</th>
+                                                        <th class="text-white" scope="col">Таълим даражаси</th>
+                                                        <th class="text-white " style="width: 100px;" scope="col">
+                                                            Амаллар
+                                                        </th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <template
+                                                        v-for="(user_malumot,key) in user_add.malumotlar">
+                                                        <tr :key="key">
+                                                            <th scope="col">
+                                                                {{ user_malumot.mamlakat }}
+
                                                             </th>
-                                                            <th class="text-white" scope="col">Мутахассислик номи</th>
-                                                            <th class="text-white" scope="col">Диплом рақами</th>
-                                                            <th class="text-white" scope="col">Давр</th>
-                                                            <th class="text-white" scope="col">Таълим даражаси</th>
-                                                            <th class="text-white " style="width: 100px;" scope="col">
-                                                                Амаллар
+                                                            <th scope="col">{{ user_malumot.ooy }}</th>
+                                                            <th scope="col">{{ user_malumot.mutaxassislik }}</th>
+                                                            <th scope="col">{{ user_malumot.hujjatsanasi }}</th>
+                                                            <th scope="col">{{ user_malumot.davr }}</th>
+                                                            <th scope="col">{{ user_malumot.talim_darajasi }}</th>
+                                                            <th scope="col" style="width: 150px;">
+
+                                                                <v-btn fab x-small color="primary"
+                                                                       @click="openEditDialog(key)">
+                                                                    <v-icon>mdi-pencil</v-icon>
+                                                                </v-btn>
+                                                                <v-btn
+                                                                    color="red"
+                                                                    fab
+                                                                    x-small
+                                                                    @click="openRemoveDialog(key)"
+
+                                                                >
+                                                                    <v-icon>mdi-delete</v-icon>
+                                                                </v-btn>
+
+
+                                                                <!--                                                                <v-btn color="danger" fab x-small >
+                                                                                                                                    <v-icon>mdi-delete</v-icon>
+                                                                                                                                </v-btn>-->
                                                             </th>
                                                         </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                        <template
-                                                            v-for="(user_malumot,key) in user_add.malumotlar">
-                                                            <tr :key="key">
-                                                                <th scope="col">
-                                                                    {{ user_malumot.mamlakat }}
-
-                                                                </th>
-                                                                <th scope="col">{{ user_malumot.ooy }}</th>
-                                                                <th scope="col">{{ user_malumot.mutaxassislik }}</th>
-                                                                <th scope="col">{{ user_malumot.hujjatsanasi }}</th>
-                                                                <th scope="col">{{ user_malumot.davr }}</th>
-                                                                <th scope="col">{{ user_malumot.talim_darajasi }}</th>
-                                                                <th scope="col" style="width: 150px;">
-
-                                                                    <v-btn fab x-small color="primary"
-                                                                           @click="openEditDialog(key)">
-                                                                        <v-icon>mdi-pencil</v-icon>
-                                                                    </v-btn>
-                                                                    <v-btn
-                                                                        color="red"
-                                                                        fab
-                                                                        x-small
-                                                                        @click="openRemoveDialog(key)"
-
-                                                                    >
-                                                                        <v-icon>mdi-delete</v-icon>
-                                                                    </v-btn>
-
-
-                                                                    <!--                                                                <v-btn color="danger" fab x-small >
-                                                                                                                                        <v-icon>mdi-delete</v-icon>
-                                                                                                                                    </v-btn>-->
-                                                                </th>
-                                                            </tr>
-                                                        </template>
-                                                        <template v-if="user_add.malumotlar.length<1">
-                                                            <tr>
-                                                                <td colspan="8" align="center">Маълумот топилмади!</td>
-                                                            </tr>
-                                                        </template>
-                                                        </tbody>
-                                                    </v-simple-table>
-                                                    <v-dialog
-                                                        v-model="button.malumot"
-                                                        persistent
-                                                        max-width="600px"
-                                                    >
-                                                        <validation-observer ref="malumotForm" v-slot="{ invalid }">
-                                                            <v-card ref="malumotForm">
-                                                                <v-card-title>
+                                                    </template>
+                                                    <template v-if="user_add.malumotlar.length<1">
+                                                        <tr>
+                                                            <td colspan="8" align="center">Маълумот топилмади!</td>
+                                                        </tr>
+                                                    </template>
+                                                    </tbody>
+                                                </v-simple-table>
+                                                <v-dialog
+                                                    v-model="button.malumot"
+                                                    persistent
+                                                    max-width="600px"
+                                                >
+                                                    <validation-observer ref="malumotForm" v-slot="{ invalid }">
+                                                        <v-card ref="malumotForm">
+                                                            <v-card-title>
                                                             <span
                                                                 class="text-h5">Таълим тўғрисида</span>
-                                                                </v-card-title>
-                                                                <v-card-text>
-                                                                    <v-container>
-                                                                        <v-row>
-                                                                            <v-col
-                                                                                cols="6"
+                                                            </v-card-title>
+                                                            <v-card-text>
+                                                                <v-container>
+                                                                    <v-row>
+                                                                        <v-col
+                                                                            cols="6"
+                                                                        >
+                                                                            <ValidationProvider
+                                                                                v-slot="{ errors}"
+                                                                                name="Мамлакат"
+                                                                                rules="required"
                                                                             >
-                                                                                <ValidationProvider
-                                                                                    v-slot="{ errors}"
-                                                                                    name="Мамлакат"
-                                                                                    rules="required"
+                                                                                <v-text-field
+                                                                                    label="Мамлакат"
+                                                                                    required
+                                                                                    v-model="editMalumot.mamlakat"
+                                                                                    name="country"
                                                                                 >
-                                                                                    <v-text-field
-                                                                                        label="Мамлакат"
-                                                                                        required
-                                                                                        v-model="editMalumot.mamlakat"
-                                                                                        name="country"
-                                                                                    >
 
-                                                                                    </v-text-field>
-                                                                                    <span class="error--text">{{
-                                                                                            errors[0]
-                                                                                        }}</span>
-                                                                                </ValidationProvider>
-                                                                            </v-col>
-                                                                            <v-col
-                                                                                cols="6"
+                                                                                </v-text-field>
+                                                                                <span class="error--text">{{
+                                                                                        errors[0]
+                                                                                    }}</span>
+                                                                            </ValidationProvider>
+                                                                        </v-col>
+                                                                        <v-col
+                                                                            cols="6"
+                                                                        >
+                                                                            <ValidationProvider
+                                                                                v-slot="{ errors}"
+                                                                                name="Ўқув муассасаси"
+                                                                                rules="required"
                                                                             >
-                                                                                <ValidationProvider
-                                                                                    v-slot="{ errors}"
-                                                                                    name="Ўқув муассасаси"
-                                                                                    rules="required"
-                                                                                >
-                                                                                    <v-text-field
-                                                                                        label="Ўқув муассасаси"
-                                                                                        required
-                                                                                        v-model="editMalumot.ooy"
-                                                                                    ></v-text-field>
-                                                                                    <span class="error--text">{{
-                                                                                            errors[0]
-                                                                                        }}</span>
-                                                                                </ValidationProvider>
-                                                                            </v-col>
-                                                                            <v-col
-                                                                                cols="6"
+                                                                                <v-text-field
+                                                                                    label="Ўқув муассасаси"
+                                                                                    required
+                                                                                    v-model="editMalumot.ooy"
+                                                                                ></v-text-field>
+                                                                                <span class="error--text">{{
+                                                                                        errors[0]
+                                                                                    }}</span>
+                                                                            </ValidationProvider>
+                                                                        </v-col>
+                                                                        <v-col
+                                                                            cols="6"
+                                                                        >
+                                                                            <ValidationProvider
+                                                                                v-slot="{ errors}"
+                                                                                name="Ўқиган йўналиш"
+                                                                                rules="required"
                                                                             >
-                                                                                <ValidationProvider
-                                                                                    v-slot="{ errors}"
-                                                                                    name="Ўқиган йўналиш"
-                                                                                    rules="required"
-                                                                                >
-                                                                                    <v-text-field
-                                                                                        label="Ўқиган йўналиш"
-                                                                                        required
-                                                                                        v-model="editMalumot.mutaxassislik"
-                                                                                    ></v-text-field>
-                                                                                    <span class="error--text">{{
-                                                                                            errors[0]
-                                                                                        }}</span>
-                                                                                </ValidationProvider>
-                                                                            </v-col>
-                                                                            <v-col cols="6">
-                                                                                <ValidationProvider
-                                                                                    v-slot="{ errors}"
-                                                                                    name="Диплом рақами"
-                                                                                    rules="required"
-                                                                                >
-                                                                                    <v-text-field
-                                                                                        label="Диплом рақами"
-                                                                                        required
-                                                                                        v-model="editMalumot.hujjatsanasi"
-                                                                                    ></v-text-field>
+                                                                                <v-text-field
+                                                                                    label="Ўқиган йўналиш"
+                                                                                    required
+                                                                                    v-model="editMalumot.mutaxassislik"
+                                                                                ></v-text-field>
+                                                                                <span class="error--text">{{
+                                                                                        errors[0]
+                                                                                    }}</span>
+                                                                            </ValidationProvider>
+                                                                        </v-col>
+                                                                        <v-col cols="6">
+                                                                            <ValidationProvider
+                                                                                v-slot="{ errors}"
+                                                                                name="Диплом рақами"
+                                                                                rules="required"
+                                                                            >
+                                                                                <v-text-field
+                                                                                    label="Диплом рақами"
+                                                                                    required
+                                                                                    v-model="editMalumot.hujjatsanasi"
+                                                                                ></v-text-field>
 
-                                                                                    <span class="error--text">{{
-                                                                                            errors[0]
-                                                                                        }}</span>
-                                                                                </ValidationProvider>
-                                                                            </v-col>
-                                                                            <v-col cols="6">
-                                                                                <ValidationProvider
-                                                                                    v-slot="{ errors}"
-                                                                                    name="Давр"
-                                                                                    rules="required"
-                                                                                >
-                                                                                    <v-text-field
-                                                                                        label="Давр"
-                                                                                        required
-                                                                                        v-model="editMalumot.davr"
-                                                                                    ></v-text-field>
-                                                                                    <span class="error--text">{{
-                                                                                            errors[0]
-                                                                                        }}</span>
-                                                                                </ValidationProvider>
+                                                                                <span class="error--text">{{
+                                                                                        errors[0]
+                                                                                    }}</span>
+                                                                            </ValidationProvider>
+                                                                        </v-col>
+                                                                        <v-col cols="6">
+                                                                            <ValidationProvider
+                                                                                v-slot="{ errors}"
+                                                                                name="Давр"
+                                                                                rules="required"
+                                                                            >
+                                                                                <v-text-field
+                                                                                    label="Давр"
+                                                                                    required
+                                                                                    v-model="editMalumot.davr"
+                                                                                ></v-text-field>
+                                                                                <span class="error--text">{{
+                                                                                        errors[0]
+                                                                                    }}</span>
+                                                                            </ValidationProvider>
 
-                                                                            </v-col>
-                                                                            <v-col cols="6">
-                                                                                <ValidationProvider
-                                                                                    v-slot="{ errors}"
-                                                                                    name="Таълим даражаси"
-                                                                                    rules="required"
-                                                                                >
-                                                                                    <v-autocomplete
-                                                                                        label="Таълим даражаси"
-                                                                                        required
-                                                                                        :items="[
+                                                                        </v-col>
+                                                                        <v-col cols="6">
+                                                                            <ValidationProvider
+                                                                                v-slot="{ errors}"
+                                                                                name="Таълим даражаси"
+                                                                                rules="required"
+                                                                            >
+                                                                                <v-autocomplete
+                                                                                    label="Таълим даражаси"
+                                                                                    required
+                                                                                    :items="[
                                                                                 {value:'maktab', text:'Мактаб'},
                                                                                 {value:'kollej', text:'Коллеж'},
                                                                                 {value:'tehnikum', text:'Техникум'},
@@ -492,191 +494,191 @@
                                                                                 {value:'bakalavr', text:'Бакалавр'},
                                                                                 {value:'magistr', text:'Магистр'},
                                                                                 ]"
-                                                                                        v-model="editMalumot.talim_darajasi"
-                                                                                    ></v-autocomplete>
-                                                                                    <span class="error--text">{{
-                                                                                            errors[0]
-                                                                                        }}</span>
-                                                                                </ValidationProvider>
-                                                                            </v-col>
-                                                                        </v-row>
-                                                                    </v-container>
-                                                                    <!--                                                            <small>*indicates required field</small>-->
-                                                                </v-card-text>
-                                                                <v-card-actions>
-                                                                    <v-spacer></v-spacer>
-                                                                    <v-btn
-                                                                        color="blue darken-1"
-                                                                        text
-                                                                        @click="button.malumot = false"
-                                                                    >
-                                                                        Ёпиш
-                                                                    </v-btn>
-                                                                    <v-btn
-                                                                        color="blue darken-1"
-                                                                        text
-                                                                        @click="Save(editIndex)"
-                                                                    >
-                                                                        Сақлаш
-                                                                    </v-btn>
-                                                                </v-card-actions>
-                                                            </v-card>
-                                                        </validation-observer>
-                                                    </v-dialog>
-                                                    <v-dialog v-model="button.remove" width="500">
-
-
-                                                        <v-card>
-                                                            <v-card-title
-                                                                class="headline grey lighten-2"
-                                                                primary-title
-                                                            >Тасдиқлаш
-                                                            </v-card-title>
-
-                                                            <v-card-text>
-                                                                Ҳақиқатдан ҳам ўчирмоқчимисиз?
+                                                                                    v-model="editMalumot.talim_darajasi"
+                                                                                ></v-autocomplete>
+                                                                                <span class="error--text">{{
+                                                                                        errors[0]
+                                                                                    }}</span>
+                                                                            </ValidationProvider>
+                                                                        </v-col>
+                                                                    </v-row>
+                                                                </v-container>
+                                                                <!--                                                            <small>*indicates required field</small>-->
                                                             </v-card-text>
-
-                                                            <v-divider></v-divider>
-
                                                             <v-card-actions>
                                                                 <v-spacer></v-spacer>
                                                                 <v-btn
-                                                                    color="primary"
+                                                                    color="blue darken-1"
                                                                     text
-                                                                    @click="deleteItem(editIndex)"
+                                                                    @click="button.malumot = false"
                                                                 >
-                                                                    Тасдиқлайман
+                                                                    Ёпиш
+                                                                </v-btn>
+                                                                <v-btn
+                                                                    color="blue darken-1"
+                                                                    text
+                                                                    @click="Save(editIndex)"
+                                                                >
+                                                                    Сақлаш
                                                                 </v-btn>
                                                             </v-card-actions>
                                                         </v-card>
-                                                    </v-dialog>
-                                                    <v-btn
-                                                        color="primary"
-                                                        @click="openAddDialog('malumot')"
+                                                    </validation-observer>
+                                                </v-dialog>
+                                                <v-dialog v-model="button.remove" width="500">
 
-                                                    >
-                                                        Қўшиш
-                                                    </v-btn>
-                                                    <v-dialog
-                                                        v-model="button.newMalumot"
-                                                        persistent
-                                                        max-width="600px"
-                                                    >
 
-                                                        <ValidationObserver ref="newMalumotForm" v-slot="{ invalid }">
-                                                            <v-card>
-                                                                <v-card-title>
+                                                    <v-card>
+                                                        <v-card-title
+                                                            class="headline grey lighten-2"
+                                                            primary-title
+                                                        >Тасдиқлаш
+                                                        </v-card-title>
+
+                                                        <v-card-text>
+                                                            Ҳақиқатдан ҳам ўчирмоқчимисиз?
+                                                        </v-card-text>
+
+                                                        <v-divider></v-divider>
+
+                                                        <v-card-actions>
+                                                            <v-spacer></v-spacer>
+                                                            <v-btn
+                                                                color="primary"
+                                                                text
+                                                                @click="deleteItem(editIndex)"
+                                                            >
+                                                                Тасдиқлайман
+                                                            </v-btn>
+                                                        </v-card-actions>
+                                                    </v-card>
+                                                </v-dialog>
+                                                <v-btn
+                                                    color="primary"
+                                                    @click="openAddDialog('malumot')"
+
+                                                >
+                                                    Қўшиш
+                                                </v-btn>
+                                                <v-dialog
+                                                    v-model="button.newMalumot"
+                                                    persistent
+                                                    max-width="600px"
+                                                >
+
+                                                    <ValidationObserver ref="newMalumotForm" v-slot="{ invalid }">
+                                                        <v-card>
+                                                            <v-card-title>
                                                             <span
                                                                 class="text-h5">Маълумоти тўғрисида</span>
-                                                                </v-card-title>
-                                                                <v-card-text>
-                                                                    <v-container>
-                                                                        <v-row>
-                                                                            <v-col
-                                                                                cols="6"
+                                                            </v-card-title>
+                                                            <v-card-text>
+                                                                <v-container>
+                                                                    <v-row>
+                                                                        <v-col
+                                                                            cols="6"
+                                                                        >
+                                                                            <ValidationProvider
+                                                                                v-slot="{ errors}"
+                                                                                name="Мамлакат"
+                                                                                rules="required"
                                                                             >
-                                                                                <ValidationProvider
-                                                                                    v-slot="{ errors}"
-                                                                                    name="Мамлакат"
-                                                                                    rules="required"
+                                                                                <v-text-field
+                                                                                    label="Мамлакат"
+                                                                                    required
+                                                                                    v-model="newMalumot.mamlakat"
+                                                                                    name="country"
                                                                                 >
-                                                                                    <v-text-field
-                                                                                        label="Мамлакат"
-                                                                                        required
-                                                                                        v-model="newMalumot.mamlakat"
-                                                                                        name="country"
-                                                                                    >
 
-                                                                                    </v-text-field>
-                                                                                    <span class="error--text">{{
-                                                                                            errors[0]
-                                                                                        }}</span>
-                                                                                </ValidationProvider>
-                                                                            </v-col>
-                                                                            <v-col
-                                                                                cols="6"
+                                                                                </v-text-field>
+                                                                                <span class="error--text">{{
+                                                                                        errors[0]
+                                                                                    }}</span>
+                                                                            </ValidationProvider>
+                                                                        </v-col>
+                                                                        <v-col
+                                                                            cols="6"
+                                                                        >
+                                                                            <ValidationProvider
+                                                                                v-slot="{ errors}"
+                                                                                name="Ўқув муассасаси"
+                                                                                rules="required"
                                                                             >
-                                                                                <ValidationProvider
-                                                                                    v-slot="{ errors}"
-                                                                                    name="Ўқув муассасаси"
-                                                                                    rules="required"
-                                                                                >
-                                                                                    <v-text-field
-                                                                                        label="Тугатган ўқув муассасаси"
-                                                                                        required
-                                                                                        name="newMalumotooy"
-                                                                                        v-model="newMalumot.ooy"
-                                                                                    ></v-text-field>
-                                                                                    <span class="error--text">{{
-                                                                                            errors[0]
-                                                                                        }}</span>
-                                                                                </ValidationProvider>
-                                                                            </v-col>
-                                                                            <v-col
-                                                                                cols="6"
+                                                                                <v-text-field
+                                                                                    label="Тугатган ўқув муассасаси"
+                                                                                    required
+                                                                                    name="newMalumotooy"
+                                                                                    v-model="newMalumot.ooy"
+                                                                                ></v-text-field>
+                                                                                <span class="error--text">{{
+                                                                                        errors[0]
+                                                                                    }}</span>
+                                                                            </ValidationProvider>
+                                                                        </v-col>
+                                                                        <v-col
+                                                                            cols="6"
+                                                                        >
+                                                                            <ValidationProvider
+                                                                                v-slot="{ errors}"
+                                                                                name="Ўқиган йўналиш"
+                                                                                rules="required"
                                                                             >
-                                                                                <ValidationProvider
-                                                                                    v-slot="{ errors}"
-                                                                                    name="Ўқиган йўналиш"
-                                                                                    rules="required"
-                                                                                >
-                                                                                    <v-text-field
-                                                                                        label="Ўқиган йўналиши"
-                                                                                        required
-                                                                                        name="newMalumotmut"
-                                                                                        v-model="newMalumot.mutaxassislik"
-                                                                                    ></v-text-field>
-                                                                                    <span class="error--text">{{
-                                                                                            errors[0]
-                                                                                        }}</span>
-                                                                                </ValidationProvider>
-                                                                            </v-col>
-                                                                            <v-col cols="6">
-                                                                                <ValidationProvider
-                                                                                    v-slot="{ errors}"
-                                                                                    name="Диплом рақами"
-                                                                                    rules="required"
-                                                                                >
-                                                                                    <v-text-field
-                                                                                        label="Диплом рақами"
-                                                                                        required
-                                                                                        name="newMalumothujjatsanasi"
-                                                                                        v-model="newMalumot.hujjatsanasi"
-                                                                                    ></v-text-field>
-                                                                                    <span class="error--text">{{
-                                                                                            errors[0]
-                                                                                        }}</span>
-                                                                                </ValidationProvider>
-                                                                            </v-col>
-                                                                            <v-col cols="6">
-                                                                                <ValidationProvider
-                                                                                    v-slot="{ errors}"
-                                                                                    name="Давр"
-                                                                                    rules="required"
-                                                                                >
-                                                                                    <v-text-field
-                                                                                        label="Ўқиган даври"
-                                                                                        required
-                                                                                        name="newMalumotdavr"
-                                                                                        v-model="newMalumot.davr"
-                                                                                    ></v-text-field>
-                                                                                    <span class="error--text">{{
-                                                                                            errors[0]
-                                                                                        }}</span>
-                                                                                </ValidationProvider>
-                                                                            </v-col>
-                                                                            <v-col cols="6">
-                                                                                <ValidationProvider
-                                                                                    v-slot="{ errors}"
-                                                                                    name="Таълим даражаси"
-                                                                                    rules="required"
-                                                                                >
-                                                                                    <v-autocomplete
-                                                                                        label="Таълим даражаси"
-                                                                                        required
-                                                                                        name="newMalumottalim_darajasi"
-                                                                                        :items="[
+                                                                                <v-text-field
+                                                                                    label="Ўқиган йўналиши"
+                                                                                    required
+                                                                                    name="newMalumotmut"
+                                                                                    v-model="newMalumot.mutaxassislik"
+                                                                                ></v-text-field>
+                                                                                <span class="error--text">{{
+                                                                                        errors[0]
+                                                                                    }}</span>
+                                                                            </ValidationProvider>
+                                                                        </v-col>
+                                                                        <v-col cols="6">
+                                                                            <ValidationProvider
+                                                                                v-slot="{ errors}"
+                                                                                name="Диплом рақами"
+                                                                                rules="required"
+                                                                            >
+                                                                                <v-text-field
+                                                                                    label="Диплом рақами"
+                                                                                    required
+                                                                                    name="newMalumothujjatsanasi"
+                                                                                    v-model="newMalumot.hujjatsanasi"
+                                                                                ></v-text-field>
+                                                                                <span class="error--text">{{
+                                                                                        errors[0]
+                                                                                    }}</span>
+                                                                            </ValidationProvider>
+                                                                        </v-col>
+                                                                        <v-col cols="6">
+                                                                            <ValidationProvider
+                                                                                v-slot="{ errors}"
+                                                                                name="Давр"
+                                                                                rules="required"
+                                                                            >
+                                                                                <v-text-field
+                                                                                    label="Ўқиган даври"
+                                                                                    required
+                                                                                    name="newMalumotdavr"
+                                                                                    v-model="newMalumot.davr"
+                                                                                ></v-text-field>
+                                                                                <span class="error--text">{{
+                                                                                        errors[0]
+                                                                                    }}</span>
+                                                                            </ValidationProvider>
+                                                                        </v-col>
+                                                                        <v-col cols="6">
+                                                                            <ValidationProvider
+                                                                                v-slot="{ errors}"
+                                                                                name="Таълим даражаси"
+                                                                                rules="required"
+                                                                            >
+                                                                                <v-autocomplete
+                                                                                    label="Таълим даражаси"
+                                                                                    required
+                                                                                    name="newMalumottalim_darajasi"
+                                                                                    :items="[
                                                                                 {value:'maktab', text:'Мактаб'},
                                                                                 {value:'kollej', text:'Коллеж'},
                                                                                 {value:'tehnikum', text:'Техникум'},
@@ -684,682 +686,405 @@
                                                                                 {value:'bakalavr', text:'Бакалавр'},
                                                                                 {value:'magistr', text:'Магистр'},
                                                                                 ]"
-                                                                                        v-model="newMalumot.talim_darajasi"
-                                                                                    ></v-autocomplete>
-                                                                                    <span class="error--text">{{
-                                                                                            errors[0]
-                                                                                        }}</span>
-                                                                                </ValidationProvider>
-                                                                            </v-col>
+                                                                                    v-model="newMalumot.talim_darajasi"
+                                                                                ></v-autocomplete>
+                                                                                <span class="error--text">{{
+                                                                                        errors[0]
+                                                                                    }}</span>
+                                                                            </ValidationProvider>
+                                                                        </v-col>
 
-                                                                        </v-row>
-                                                                    </v-container>
-                                                                    <!--                                                            <small>*indicates required field</small>-->
-                                                                </v-card-text>
-                                                                <v-card-actions>
-                                                                    <v-spacer></v-spacer>
-                                                                    <v-btn
-                                                                        color="blue darken-1"
-                                                                        text
-                                                                        @click="button.newMalumot = false"
-                                                                    >
-                                                                        Бекор қилиш
-                                                                    </v-btn>
-                                                                    <v-btn
-                                                                        color="blue darken-1"
-                                                                        text
-                                                                        @click="newSave()"
-                                                                    >
-                                                                        Сақлаш
-                                                                    </v-btn>
-                                                                </v-card-actions>
-                                                            </v-card>
-                                                        </ValidationObserver>
-                                                    </v-dialog>
-                                                </div>
+                                                                    </v-row>
+                                                                </v-container>
+                                                                <!--                                                            <small>*indicates required field</small>-->
+                                                            </v-card-text>
+                                                            <v-card-actions>
+                                                                <v-spacer></v-spacer>
+                                                                <v-btn
+                                                                    color="blue darken-1"
+                                                                    text
+                                                                    @click="button.newMalumot = false"
+                                                                >
+                                                                    Бекор қилиш
+                                                                </v-btn>
+                                                                <v-btn
+                                                                    color="blue darken-1"
+                                                                    text
+                                                                    @click="newSave()"
+                                                                >
+                                                                    Сақлаш
+                                                                </v-btn>
+                                                            </v-card-actions>
+                                                        </v-card>
+                                                    </ValidationObserver>
+                                                </v-dialog>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="tab-pane fade" id="cert" role="tabpanel" aria-labelledby="cert-tab">
-                                        <div class="training_courses_first">
-                                            <h3 class="profile-print-tab-title">Сертификатлар</h3>
-                                            <div class="training_courses_table">
-                                                <div class="table-responsive">
-                                                    <v-simple-table class="table d-print-table">
+                                </div>
+                                <div class="tab-pane fade" id="cert" role="tabpanel" aria-labelledby="cert-tab">
+                                    <div class="training_courses_first">
+                                        <h3 class="profile-print-tab-title">Сертификатлар</h3>
+                                        <div class="training_courses_table">
+                                            <div class="table-responsive">
+                                                <v-simple-table class="table d-print-table">
 
-                                                        <thead>
-                                                        <tr>
-                                                            <th scope="col" class="text-white">Ўқув маркази</th>
-                                                            <th scope="col" class="text-white">Курс номи</th>
-                                                            <th scope="col" class="text-white">Ҳужжат берилган сана</th>
-                                                            <!--
-                                                                                                                        <th scope="col" class="text-white">Ҳужжат</th>
-                                                            -->
-                                                            <th scope="col" class="text-white">Амал</th>
+                                                    <thead>
+                                                    <tr>
+                                                        <th scope="col" class="text-white">Ўқув маркази</th>
+                                                        <th scope="col" class="text-white">Курс номи</th>
+                                                        <th scope="col" class="text-white">Ҳужжат берилган сана</th>
+                                                        <!--
+                                                                                                                    <th scope="col" class="text-white">Ҳужжат</th>
+                                                        -->
+                                                        <th scope="col" class="text-white">Амал</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <template
+                                                        v-for="(user_sertifikat,key) in user_add.sertifikatlar">
+                                                        <tr :key="key">
+                                                            <th scope="col">{{ user_sertifikat.oquv_markazi }}</th>
+                                                            <th scope="col">{{ user_sertifikat.kurs_nomi }}</th>
+                                                            <th scope="col">{{ user_sertifikat.hujjat_sanasi }}</th>
+                                                            <!--                                                                <th scope="col">{{ user_sertifikat.hujjat }}</th>-->
+                                                            <th scope="col" style="width: 150px;">
+
+                                                                <v-btn fab x-small color="primary"
+                                                                       @click="openEditDialog(key,'sertifikat')">
+                                                                    <v-icon>mdi-pencil</v-icon>
+                                                                </v-btn>
+                                                                <v-btn
+                                                                    color="red"
+                                                                    fab
+                                                                    x-small
+                                                                    @click="button.removeSertifikat=true"
+
+                                                                >
+                                                                    <v-icon>mdi-delete</v-icon>
+                                                                </v-btn>
+
+
+                                                                <!--                                                                <v-btn color="danger" fab x-small >
+                                                                                                                                    <v-icon>mdi-delete</v-icon>
+                                                                                                                                </v-btn>-->
+                                                            </th>
                                                         </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                        <template
-                                                            v-for="(user_sertifikat,key) in user_add.sertifikatlar">
-                                                            <tr :key="key">
-                                                                <th scope="col">{{ user_sertifikat.oquv_markazi }}</th>
-                                                                <th scope="col">{{ user_sertifikat.kurs_nomi }}</th>
-                                                                <th scope="col">{{ user_sertifikat.hujjat_sanasi }}</th>
-                                                                <!--                                                                <th scope="col">{{ user_sertifikat.hujjat }}</th>-->
-                                                                <th scope="col" style="width: 150px;">
+                                                    </template>
+                                                    <template v-if="user_add.sertifikatlar.length<1">
+                                                        <tr>
+                                                            <td colspan="8" align="center">Маълумот топилмади!</td>
+                                                        </tr>
+                                                    </template>
+                                                    </tbody>
 
-                                                                    <v-btn fab x-small color="primary"
-                                                                           @click="openEditDialog(key,'sertifikat')">
-                                                                        <v-icon>mdi-pencil</v-icon>
-                                                                    </v-btn>
-                                                                    <v-btn
-                                                                        color="red"
-                                                                        fab
-                                                                        x-small
-                                                                        @click="button.removeSertifikat=true"
-
-                                                                    >
-                                                                        <v-icon>mdi-delete</v-icon>
-                                                                    </v-btn>
-
-
-                                                                    <!--                                                                <v-btn color="danger" fab x-small >
-                                                                                                                                        <v-icon>mdi-delete</v-icon>
-                                                                                                                                    </v-btn>-->
-                                                                </th>
-                                                            </tr>
-                                                        </template>
-                                                        <template v-if="user_add.sertifikatlar.length<1">
-                                                            <tr>
-                                                                <td colspan="8" align="center">Маълумот топилмади!</td>
-                                                            </tr>
-                                                        </template>
-                                                        </tbody>
-
-                                                    </v-simple-table>
-                                                    <v-dialog
-                                                        v-model="button.sertifikat"
-                                                        persistent
-                                                        max-width="600px"
-                                                    >
-                                                        <validation-observer ref="sertificateForm" v-slot="{ invalid }">
-                                                            <v-input hidden v-model="editIndex"></v-input>
-                                                            <v-card>
-                                                                <v-card-title>
+                                                </v-simple-table>
+                                                <v-dialog
+                                                    v-model="button.sertifikat"
+                                                    persistent
+                                                    max-width="600px"
+                                                >
+                                                    <validation-observer ref="sertificateForm" v-slot="{ invalid }">
+                                                        <v-input hidden v-model="editIndex"></v-input>
+                                                        <v-card>
+                                                            <v-card-title>
                                                             <span
                                                                 class="text-h5">Сертификатлари тўғрисида</span>
-                                                                </v-card-title>
-                                                                <v-card-text>
-                                                                    <v-container>
-                                                                        <v-row>
-                                                                            <v-col
-                                                                                cols="6"
-                                                                            >
-                                                                                <ValidationProvider
-                                                                                    v-slot="{ errors}"
-                                                                                    name="Тамомлаган ўқув маркази"
-                                                                                    rules="required"
-                                                                                >
-                                                                                    <v-text-field
-                                                                                        label="Тамомлаган ўқув маркази"
-                                                                                        required
-                                                                                        name="oquv_markazi"
-                                                                                        v-model="editMalumot.oquv_markazi"
-                                                                                    ></v-text-field>
-                                                                                    <span class="error--text">{{
-                                                                                            errors[0]
-                                                                                        }}</span>
-                                                                                </ValidationProvider>
-                                                                            </v-col>
-                                                                            <v-col
-                                                                                cols="6"
-                                                                            >
-                                                                                <ValidationProvider
-                                                                                    v-slot="{ errors}"
-                                                                                    name="Курс номи"
-                                                                                    rules="required"
-                                                                                >
-                                                                                    <v-text-field
-                                                                                        label="Курс номи"
-                                                                                        required
-                                                                                        v-model="editMalumot.kurs_nomi"
-                                                                                    ></v-text-field>
-                                                                                    <span class="error--text">{{
-                                                                                            errors[0]
-                                                                                        }}</span>
-                                                                                </ValidationProvider>
-                                                                            </v-col>
-                                                                            <v-col
-                                                                                cols="6"
-                                                                            >
-                                                                                <ValidationProvider
-                                                                                    v-slot="{ errors}"
-                                                                                    name="Диплом берилган сана"
-                                                                                    rules="required"
-                                                                                >
-                                                                                    <v-text-field
-                                                                                        label="Диплом берилган сана"
-                                                                                        required
-                                                                                        v-model="editMalumot.hujjat_sanasi"
-                                                                                    ></v-text-field>
-                                                                                    <span class="error--text">{{
-                                                                                            errors[0]
-                                                                                        }}</span>
-                                                                                </ValidationProvider>
-                                                                            </v-col>
-                                                                            <v-col cols="6">
-                                                                                <ValidationProvider
-                                                                                    v-slot="{ errors}"
-                                                                                    name="Ҳужжат"
-                                                                                    rules="required"
-                                                                                >
-                                                                                    <v-file-input
-                                                                                        label="Хужжат"
-                                                                                        required
-                                                                                        v-model="editMalumot.hujjat"
-                                                                                    ></v-file-input>
-                                                                                    <span class="error--text">{{
-                                                                                            errors[0]
-                                                                                        }}</span>
-                                                                                </ValidationProvider>
-                                                                            </v-col>
-
-
-                                                                        </v-row>
-                                                                    </v-container>
-                                                                    <!--                                                            <small>*indicates required field</small>-->
-                                                                </v-card-text>
-                                                                <v-card-actions>
-                                                                    <v-spacer></v-spacer>
-                                                                    <v-btn
-                                                                        color="blue darken-1"
-                                                                        text
-                                                                        @click="button.sertifikat = false"
-                                                                    >
-                                                                        Бекор қилиш
-                                                                    </v-btn>
-                                                                    <v-btn
-                                                                        color="blue darken-1"
-                                                                        text
-                                                                        @click="Save(editIndex,'sertifikat')"
-                                                                    >
-                                                                        Сақлаш
-                                                                    </v-btn>
-                                                                </v-card-actions>
-                                                            </v-card>
-                                                        </validation-observer>
-                                                    </v-dialog>
-                                                    <v-dialog v-model="button.removeSertifikat" width="500">
-
-
-                                                        <v-card>
-                                                            <v-card-title
-                                                                class="headline grey lighten-2"
-                                                                primary-title
-                                                            >Тасдиқлаш
                                                             </v-card-title>
-
                                                             <v-card-text>
-                                                                Ҳақиқатдан ҳам ўчирмоқчимисиз?
+                                                                <v-container>
+                                                                    <v-row>
+                                                                        <v-col
+                                                                            cols="6"
+                                                                        >
+                                                                            <ValidationProvider
+                                                                                v-slot="{ errors}"
+                                                                                name="Тамомлаган ўқув маркази"
+                                                                                rules="required"
+                                                                            >
+                                                                                <v-text-field
+                                                                                    label="Тамомлаган ўқув маркази"
+                                                                                    required
+                                                                                    name="oquv_markazi"
+                                                                                    v-model="editMalumot.oquv_markazi"
+                                                                                ></v-text-field>
+                                                                                <span class="error--text">{{
+                                                                                        errors[0]
+                                                                                    }}</span>
+                                                                            </ValidationProvider>
+                                                                        </v-col>
+                                                                        <v-col
+                                                                            cols="6"
+                                                                        >
+                                                                            <ValidationProvider
+                                                                                v-slot="{ errors}"
+                                                                                name="Курс номи"
+                                                                                rules="required"
+                                                                            >
+                                                                                <v-text-field
+                                                                                    label="Курс номи"
+                                                                                    required
+                                                                                    v-model="editMalumot.kurs_nomi"
+                                                                                ></v-text-field>
+                                                                                <span class="error--text">{{
+                                                                                        errors[0]
+                                                                                    }}</span>
+                                                                            </ValidationProvider>
+                                                                        </v-col>
+                                                                        <v-col
+                                                                            cols="6"
+                                                                        >
+                                                                            <ValidationProvider
+                                                                                v-slot="{ errors}"
+                                                                                name="Диплом берилган сана"
+                                                                                rules="required"
+                                                                            >
+                                                                                <v-text-field
+                                                                                    label="Диплом берилган сана"
+                                                                                    required
+                                                                                    v-model="editMalumot.hujjat_sanasi"
+                                                                                ></v-text-field>
+                                                                                <span class="error--text">{{
+                                                                                        errors[0]
+                                                                                    }}</span>
+                                                                            </ValidationProvider>
+                                                                        </v-col>
+                                                                        <v-col cols="6">
+                                                                            <ValidationProvider
+                                                                                v-slot="{ errors}"
+                                                                                name="Ҳужжат"
+                                                                                rules="required"
+                                                                            >
+                                                                                <v-file-input
+                                                                                    label="Хужжат"
+                                                                                    required
+                                                                                    v-model="editMalumot.hujjat"
+                                                                                ></v-file-input>
+                                                                                <span class="error--text">{{
+                                                                                        errors[0]
+                                                                                    }}</span>
+                                                                            </ValidationProvider>
+                                                                        </v-col>
+
+
+                                                                    </v-row>
+                                                                </v-container>
+                                                                <!--                                                            <small>*indicates required field</small>-->
                                                             </v-card-text>
-
-                                                            <v-divider></v-divider>
-
                                                             <v-card-actions>
                                                                 <v-spacer></v-spacer>
                                                                 <v-btn
-                                                                    color="primary"
+                                                                    color="blue darken-1"
                                                                     text
-                                                                    @click="deleteItem(editIndex,'sertifikat')"
+                                                                    @click="button.sertifikat = false"
                                                                 >
-                                                                    Тасдиқлайман
+                                                                    Бекор қилиш
+                                                                </v-btn>
+                                                                <v-btn
+                                                                    color="blue darken-1"
+                                                                    text
+                                                                    @click="Save(editIndex,'sertifikat')"
+                                                                >
+                                                                    Сақлаш
                                                                 </v-btn>
                                                             </v-card-actions>
                                                         </v-card>
-                                                    </v-dialog>
-                                                    <v-btn
-                                                        color="primary"
-                                                        @click="openAddDialog('sertifikat')"
+                                                    </validation-observer>
+                                                </v-dialog>
+                                                <v-dialog v-model="button.removeSertifikat" width="500">
 
 
-                                                    >
-                                                        Қўшиш
-                                                    </v-btn>
-                                                    <v-dialog
-                                                        v-model="button.newSertifikat"
-                                                        persistent
-                                                        max-width="600px"
+                                                    <v-card>
+                                                        <v-card-title
+                                                            class="headline grey lighten-2"
+                                                            primary-title
+                                                        >Тасдиқлаш
+                                                        </v-card-title>
 
-                                                    >
-                                                        <validation-observer ref="newSertificateForm"
-                                                                             v-slot="{ invalid }">
-                                                            <v-card>
-                                                                <v-card-title>
+                                                        <v-card-text>
+                                                            Ҳақиқатдан ҳам ўчирмоқчимисиз?
+                                                        </v-card-text>
+
+                                                        <v-divider></v-divider>
+
+                                                        <v-card-actions>
+                                                            <v-spacer></v-spacer>
+                                                            <v-btn
+                                                                color="primary"
+                                                                text
+                                                                @click="deleteItem(editIndex,'sertifikat')"
+                                                            >
+                                                                Тасдиқлайман
+                                                            </v-btn>
+                                                        </v-card-actions>
+                                                    </v-card>
+                                                </v-dialog>
+                                                <v-btn
+                                                    color="primary"
+                                                    @click="openAddDialog('sertifikat')"
+
+
+                                                >
+                                                    Қўшиш
+                                                </v-btn>
+                                                <v-dialog
+                                                    v-model="button.newSertifikat"
+                                                    persistent
+                                                    max-width="600px"
+
+                                                >
+                                                    <validation-observer ref="newSertificateForm"
+                                                                         v-slot="{ invalid }">
+                                                        <v-card>
+                                                            <v-card-title>
                                                             <span
                                                                 class="text-h5">Маълумоти тўғрисида</span>
-                                                                </v-card-title>
-                                                                <v-card-text>
-                                                                    <v-container>
-                                                                        <v-row>
-                                                                            <v-col
-                                                                                cols="6"
+                                                            </v-card-title>
+                                                            <v-card-text>
+                                                                <v-container>
+                                                                    <v-row>
+                                                                        <v-col
+                                                                            cols="6"
+                                                                        >
+                                                                            <ValidationProvider
+                                                                                v-slot="{ errors}"
+                                                                                name="Тамомлаган ўқув маркази"
+                                                                                rules="required"
                                                                             >
-                                                                                <ValidationProvider
-                                                                                    v-slot="{ errors}"
-                                                                                    name="Тамомлаган ўқув маркази"
-                                                                                    rules="required"
-                                                                                >
-                                                                                    <v-text-field
-                                                                                        label="Тамомлаган ўқув маркази"
-                                                                                        required
-                                                                                        v-model="newMalumot.oquv_markazi"
-                                                                                    ></v-text-field>
-                                                                                    <span class="error--text">{{
-                                                                                            errors[0]
-                                                                                        }}</span>
-                                                                                </ValidationProvider>
-                                                                            </v-col>
-                                                                            <v-col
-                                                                                cols="6"
+                                                                                <v-text-field
+                                                                                    label="Тамомлаган ўқув маркази"
+                                                                                    required
+                                                                                    v-model="newMalumot.oquv_markazi"
+                                                                                ></v-text-field>
+                                                                                <span class="error--text">{{
+                                                                                        errors[0]
+                                                                                    }}</span>
+                                                                            </ValidationProvider>
+                                                                        </v-col>
+                                                                        <v-col
+                                                                            cols="6"
+                                                                        >
+                                                                            <ValidationProvider
+                                                                                v-slot="{ errors}"
+                                                                                name="Курс номи"
+                                                                                rules="required"
                                                                             >
-                                                                                <ValidationProvider
-                                                                                    v-slot="{ errors}"
-                                                                                    name="Курс номи"
-                                                                                    rules="required"
-                                                                                >
-                                                                                    <v-text-field
-                                                                                        label="Курс номи"
-                                                                                        required
-                                                                                        v-model="newMalumot.kurs_nomi"
-                                                                                    ></v-text-field>
-                                                                                    <span class="error--text">{{
-                                                                                            errors[0]
-                                                                                        }}</span>
-                                                                                </ValidationProvider>
-                                                                            </v-col>
-                                                                            <!--                                                                        <v-col
-                                                                                                                                                        cols="6"
-                                                                                                                                                    >
-                                                                                                                                                        <v-text-field
-                                                                                                                                                            label="Мутахассислик"
-                                                                                                                                                            required
-                                                                                                                                                            v-model="newMalumot.mutaxassislik"
-                                                                                                                                                        ></v-text-field>
-                                                                                                                                                    </v-col>-->
-                                                                            <v-col cols="6">
-                                                                                <ValidationProvider
-                                                                                    v-slot="{ errors}"
-                                                                                    name="Диплом берилган сана"
-                                                                                    rules="required"
-                                                                                >
-                                                                                    <v-text-field
-                                                                                        label="Диплом берилган сана"
-                                                                                        required
-                                                                                        v-model="newMalumot.hujjat_sanasi"
-                                                                                    ></v-text-field>
-                                                                                    <span class="error--text">{{
-                                                                                            errors[0]
-                                                                                        }}</span>
-                                                                                </ValidationProvider>
-                                                                            </v-col>
-                                                                            <v-col cols="6">
-                                                                                <ValidationProvider
-                                                                                    v-slot="{ errors}"
-                                                                                    name="Ҳужжат"
-                                                                                    rules="required"
-                                                                                >
-                                                                                    <v-file-input
-                                                                                        label="Ҳужжат"
-                                                                                        required
-                                                                                        v-model="newMalumot.hujjat"
-                                                                                    ></v-file-input>
-                                                                                    <span class="error--text">{{
-                                                                                            errors[0]
-                                                                                        }}</span>
-                                                                                </ValidationProvider>
-                                                                            </v-col>
+                                                                                <v-text-field
+                                                                                    label="Курс номи"
+                                                                                    required
+                                                                                    v-model="newMalumot.kurs_nomi"
+                                                                                ></v-text-field>
+                                                                                <span class="error--text">{{
+                                                                                        errors[0]
+                                                                                    }}</span>
+                                                                            </ValidationProvider>
+                                                                        </v-col>
+                                                                        <!--                                                                        <v-col
+                                                                                                                                                    cols="6"
+                                                                                                                                                >
+                                                                                                                                                    <v-text-field
+                                                                                                                                                        label="Мутахассислик"
+                                                                                                                                                        required
+                                                                                                                                                        v-model="newMalumot.mutaxassislik"
+                                                                                                                                                    ></v-text-field>
+                                                                                                                                                </v-col>-->
+                                                                        <v-col cols="6">
+                                                                            <ValidationProvider
+                                                                                v-slot="{ errors}"
+                                                                                name="Диплом берилган сана"
+                                                                                rules="required"
+                                                                            >
+                                                                                <v-text-field
+                                                                                    label="Диплом берилган сана"
+                                                                                    required
+                                                                                    v-model="newMalumot.hujjat_sanasi"
+                                                                                ></v-text-field>
+                                                                                <span class="error--text">{{
+                                                                                        errors[0]
+                                                                                    }}</span>
+                                                                            </ValidationProvider>
+                                                                        </v-col>
+                                                                        <v-col cols="6">
+                                                                            <ValidationProvider
+                                                                                v-slot="{ errors}"
+                                                                                name="Ҳужжат"
+                                                                                rules="required"
+                                                                            >
+                                                                                <v-file-input
+                                                                                    label="Ҳужжат"
+                                                                                    required
+                                                                                    v-model="newMalumot.hujjat"
+                                                                                ></v-file-input>
+                                                                                <span class="error--text">{{
+                                                                                        errors[0]
+                                                                                    }}</span>
+                                                                            </ValidationProvider>
+                                                                        </v-col>
 
 
-                                                                        </v-row>
-                                                                    </v-container>
-                                                                    <!--                                                            <small>*indicates required field</small>-->
-                                                                </v-card-text>
-                                                                <v-card-actions>
-                                                                    <v-spacer></v-spacer>
-                                                                    <v-btn
-                                                                        color="blue darken-1"
-                                                                        text
-                                                                        @click="button.newSertifikat = false"
-                                                                    >
-                                                                        Бекор қилиш
-                                                                    </v-btn>
-                                                                    <v-btn
-                                                                        color="blue darken-1"
-                                                                        text
-                                                                        @click="newSave('sertifikat')"
-                                                                    >
-                                                                        Сақлаш
-                                                                    </v-btn>
-                                                                </v-card-actions>
-                                                            </v-card>
-                                                        </validation-observer>
-                                                    </v-dialog>
-                                                </div>
+                                                                    </v-row>
+                                                                </v-container>
+                                                                <!--                                                            <small>*indicates required field</small>-->
+                                                            </v-card-text>
+                                                            <v-card-actions>
+                                                                <v-spacer></v-spacer>
+                                                                <v-btn
+                                                                    color="blue darken-1"
+                                                                    text
+                                                                    @click="button.newSertifikat = false"
+                                                                >
+                                                                    Бекор қилиш
+                                                                </v-btn>
+                                                                <v-btn
+                                                                    color="blue darken-1"
+                                                                    text
+                                                                    @click="newSave('sertifikat')"
+                                                                >
+                                                                    Сақлаш
+                                                                </v-btn>
+                                                            </v-card-actions>
+                                                        </v-card>
+                                                    </validation-observer>
+                                                </v-dialog>
                                             </div>
                                         </div>
                                     </div>
-                                    <!--                                    <div class="tab-pane fade" id="career" role="tabpanel"
-                                                                             aria-labelledby="profile-tab">
-                                                                            <div class="training_courses_first">
-                                                                                <h3 class="profile-print-tab-title">МЕХНАТ ФАОЛИЯТИ</h3>
-                                                                                <div class="training_courses_table">
-                                                                                    <div class="table-responsive">
-
-
-                                                                                        <v-simple-table class="table d-print-table">
-                                                                                            <thead>
-                                                                                            <tr>
-                                                                                                <th scope="col" class="text-white">Давр</th>
-                                                                                                <th scope="col" class="text-white">Ташкилот</th>
-                                                                                                <th scope="col" class="text-white">Ташкилот манзили</th>
-                                                                                                <th scope="col" class="text-white">Амал</th>
-                                                                                            </tr>
-                                                                                            </thead>
-                                                                                            <tbody>
-                                                                                            <template
-                                                                                                v-for="(user_mehnat,key) in user_add.mehnat_faoliyatlar">
-                                                                                                <tr :key="key">
-                                                                                                    <th scope="col">{{ user_mehnat.davr }}</th>
-                                                                                                    <th scope="col">{{ user_mehnat.tashkilot }}</th>
-                                                                                                    <th scope="col">{{ user_mehnat.tashkilot_adress }}</th>
-                                                                                                    <th scope="col" style="width: 150px;">
-
-                                                                                                        <v-btn fab x-small color="primary"
-                                                                                                               @click="openEditDialog(key,'mehnat')">
-                                                                                                            <v-icon>mdi-pencil</v-icon>
-                                                                                                        </v-btn>
-                                                                                                        <v-btn
-                                                                                                            color="red"
-                                                                                                            fab
-                                                                                                            x-small
-                                                                                                            @click="button.removeMehnat=true"
-                                                                                                        >
-                                                                                                            <v-icon>mdi-delete</v-icon>
-                                                                                                        </v-btn>
-
-
-                                                                                                        &lt;!&ndash;                                                                <v-btn color="danger" fab x-small >
-                                                                                                                                                                            <v-icon>mdi-delete</v-icon>
-                                                                                                                                                                        </v-btn>&ndash;&gt;
-                                                                                                    </th>
-                                                                                                </tr>
-                                                                                            </template>
-                                                                                            <template v-if="user_add.mehnat_faoliyatlar.length<1">
-                                                                                                <tr>
-                                                                                                    <td colspan="4" align="center">Маълумот топилмади!</td>
-                                                                                                </tr>
-                                                                                            </template>
-                                                                                            </tbody>
-                                                                                        </v-simple-table>
-                                                                                        <v-dialog
-                                                                                            v-model="button.mehnat"
-                                                                                            persistent
-                                                                                            max-width="600px"
-                                                                                        >
-
-                                                                                            <v-input hidden v-model="editIndex"></v-input>
-                                                                                            <validation-observer ref="mehnatForm"  v-slot="{ invalid }">
-                                                                                                <v-card>
-                                                                                                    <v-card-title>
-                                                                                                <span
-                                                                                                    class="text-h5">Мехнат фаолияти тўғрисида</span>
-                                                                                                    </v-card-title>
-                                                                                                    <v-card-text>
-                                                                                                        <v-container>
-                                                                                                            <v-row>
-                                                                                                                <v-col
-                                                                                                                    cols="6"
-                                                                                                                >
-                                                                                                                    <ValidationProvider
-                                                                                                                        v-slot="{ errors}"
-                                                                                                                        name="Ишлаган даври"
-                                                                                                                        rules="required"
-                                                                                                                    >
-                                                                                                                        <v-text-field
-                                                                                                                            label="Ишлаган даври"
-                                                                                                                            required
-                                                                                                                            name="editMalumotdavr"
-                                                                                                                            v-model="editMalumot.davr"
-                                                                                                                        ></v-text-field>
-                                                                                                                        <span class="error&#45;&#45;text">{{
-                                                                                                                                errors[0]
-                                                                                                                            }}</span>
-                                                                                                                    </ValidationProvider>
-                                                                                                                </v-col>
-                                                                                                                <v-col
-                                                                                                                    cols="6"
-                                                                                                                >
-                                                                                                                    <ValidationProvider
-                                                                                                                        v-slot="{ errors}"
-                                                                                                                        name="Ташкилот номи"
-                                                                                                                        rules="required"
-                                                                                                                    >
-                                                                                                                        <v-text-field
-                                                                                                                            label="Ташкилот номи"
-                                                                                                                            required
-                                                                                                                            v-model="editMalumot.tashkilot"
-                                                                                                                        ></v-text-field>
-                                                                                                                        <span class="error&#45;&#45;text">{{
-                                                                                                                                errors[0]
-                                                                                                                            }}</span>
-                                                                                                                    </ValidationProvider>
-                                                                                                                </v-col>
-                                                                                                                <v-col
-                                                                                                                    cols="6"
-                                                                                                                >
-                                                                                                                    <ValidationProvider
-                                                                                                                        v-slot="{ errors}"
-                                                                                                                        name="Ташкилот манзили"
-                                                                                                                        rules="required"
-                                                                                                                    >
-                                                                                                                        <v-text-field
-                                                                                                                            label="Ташкилот манзили"
-                                                                                                                            required
-                                                                                                                            v-model="editMalumot.tashkilot_adress"
-                                                                                                                        ></v-text-field>
-                                                                                                                        <span class="error&#45;&#45;text">{{
-                                                                                                                                errors[0]
-                                                                                                                            }}</span>
-                                                                                                                    </ValidationProvider>
-                                                                                                                </v-col>
-
-                                                                                                            </v-row>
-                                                                                                        </v-container>
-                                                                                                        &lt;!&ndash;                                                            <small>*indicates required field</small>&ndash;&gt;
-                                                                                                    </v-card-text>
-                                                                                                    <v-card-actions>
-                                                                                                        <v-spacer></v-spacer>
-                                                                                                        <v-btn
-                                                                                                            color="blue darken-1"
-                                                                                                            text
-                                                                                                            @click="button.mehnat = false"
-                                                                                                        >
-                                                                                                            Бекор қилиш
-                                                                                                        </v-btn>
-                                                                                                        <v-btn
-                                                                                                            color="blue darken-1"
-                                                                                                            text
-                                                                                                            @click="Save(editIndex,'mehnat')"
-                                                                                                        >
-                                                                                                            Сақлаш
-                                                                                                        </v-btn>
-                                                                                                    </v-card-actions>
-                                                                                                </v-card>
-                                                                                            </validation-observer>
-                                                                                        </v-dialog>
-                                                                                        <v-dialog v-model="button.removeMehnat" width="500">
-
-
-                                                                                            <v-card>
-                                                                                                <v-card-title
-                                                                                                    class="headline grey lighten-2"
-                                                                                                    primary-title
-                                                                                                >Тасдиқлаш
-                                                                                                </v-card-title>
-
-                                                                                                <v-card-text>
-                                                                                                    Ҳақиқатдан ҳам ўчирмоқчимисиз?
-                                                                                                </v-card-text>
-
-                                                                                                <v-divider></v-divider>
-
-                                                                                                <v-card-actions>
-                                                                                                    <v-spacer></v-spacer>
-                                                                                                    <v-btn
-                                                                                                        color="primary"
-                                                                                                        text
-                                                                                                        @click="deleteItem(editIndex,'mehnat')"
-                                                                                                    >
-                                                                                                        Тасдиқлайман
-                                                                                                    </v-btn>
-                                                                                                </v-card-actions>
-                                                                                            </v-card>
-                                                                                        </v-dialog>
-                                                                                        <v-btn
-                                                                                            color="primary"
-                                                                                            @click="openAddDialog('mehnat')"
-                                                                                        >
-                                                                                            Қўшиш
-                                                                                        </v-btn>
-                                    &lt;!&ndash;                                                    <v-dialog
-                                                                                            v-model="button.newMehnat"
-                                                                                            persistent
-                                                                                            max-width="600px"
-                                                                                        >
-                                                                                            <validation-observer ref="newMehnatForm"  v-slot="{ invalid }">
-                                                                                                <v-card>
-                                                                                                    <v-card-title>
-                                                                                                <span
-                                                                                                    class="text-h5">Меҳнат фаолияти тўғрисида</span>
-                                                                                                    </v-card-title>
-                                                                                                    <v-card-text>
-                                                                                                        <v-container>
-                                                                                                            <v-row>
-                                                                                                                <v-col
-                                                                                                                    cols="6"
-                                                                                                                >
-                                                                                                                    <ValidationProvider
-                                                                                                                        v-slot="{ errors}"
-                                                                                                                        name="Ишлаган даври"
-                                                                                                                        rules="required"
-                                                                                                                    >
-                                                                                                                        <v-text-field
-                                                                                                                            label="Ишлаган даври"
-                                                                                                                            required
-                                                                                                                            name="newMalumotishlagandavr"
-                                                                                                                            v-model="newMalumot.davr"
-                                                                                                                        ></v-text-field>
-                                                                                                                        <span class="error&#45;&#45;text">{{
-                                                                                                                                errors[0]
-                                                                                                                            }}</span>
-                                                                                                                    </ValidationProvider>
-                                                                                                                </v-col>
-                                                                                                                <v-col
-                                                                                                                    cols="6"
-                                                                                                                >
-                                                                                                                    <v-text-field
-                                                                                                                        label="Ташкилот"
-                                                                                                                        required
-                                                                                                                        v-model="newMalumot.tashkilot"
-                                                                                                                    ></v-text-field>
-                                                                                                                </v-col>
-                                                                                                                <v-col
-                                                                                                                    cols="6"
-                                                                                                                >
-                                                                                                                    <ValidationProvider
-                                                                                                                        v-slot="{ errors}"
-                                                                                                                        name="Ташкилот манзили"
-                                                                                                                        rules="required"
-                                                                                                                    >
-                                                                                                                        <v-text-field
-                                                                                                                            label="Ташкилот манзили"
-                                                                                                                            required
-                                                                                                                            v-model="newMalumot.tashkilot_adress"
-                                                                                                                        ></v-text-field>
-                                                                                                                        <span class="error&#45;&#45;text">{{
-                                                                                                                                errors[0]
-                                                                                                                            }}</span>
-                                                                                                                    </ValidationProvider>
-                                                                                                                </v-col>
-                                                                                                            </v-row>
-                                                                                                        </v-container>
-                                                                                                        &lt;!&ndash;                                                            <small>*indicates required field</small>&ndash;&gt;
-                                                                                                    </v-card-text>
-                                                                                                    <v-card-actions>
-                                                                                                        <v-spacer></v-spacer>
-                                                                                                        <v-btn
-                                                                                                            color="blue darken-1"
-                                                                                                            text
-                                                                                                            @click="button.newMehnat = false"
-                                                                                                        >
-                                                                                                            Бекор қилиш
-                                                                                                        </v-btn>
-                                                                                                        <v-btn
-                                                                                                            color="blue darken-1"
-                                                                                                            text
-                                                                                                            @click="newSave('mehnat')"
-                                                                                                        >
-                                                                                                            Сақлаш
-                                                                                                        </v-btn>
-                                                                                                    </v-card-actions>
-                                                                                                </v-card>
-                                                                                            </validation-observer>
-                                                                                        </v-dialog>&ndash;&gt;
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>-->
-                                    <!--                                <div class="tab-pane fade" id="family" role="tabpanel"
-                                                                         aria-labelledby="message-tab">
+                                </div>
+                                <!--                                    <div class="tab-pane fade" id="career" role="tabpanel"
+                                                                         aria-labelledby="profile-tab">
                                                                         <div class="training_courses_first">
-                                                                            <h3 class="profile-print-tab-title">ҚАРИНДОШЛАР</h3>
-                                                                            <div class="training_courses_table rm_last_col">
+                                                                            <h3 class="profile-print-tab-title">МЕХНАТ ФАОЛИЯТИ</h3>
+                                                                            <div class="training_courses_table">
                                                                                 <div class="table-responsive">
+
+
                                                                                     <v-simple-table class="table d-print-table">
                                                                                         <thead>
                                                                                         <tr>
-                                                                                            <th scope="col" class="text-white">Қариндошлиги</th>
-                                                                                            <th scope="col" class="text-white">Фамилияси, исми, шарифи</th>
-                                                                                            <th scope="col" class="text-white">Туғилган йили</th>
-                                                                                            <th scope="col" class="text-white">Туғилган жойи</th>
-                                                                                            <th scope="col" class="text-white">Иш жойи ва лавозими</th>
-                                                                                            <th scope="col" class="text-white">Яшаш манзили</th>
-
+                                                                                            <th scope="col" class="text-white">Давр</th>
+                                                                                            <th scope="col" class="text-white">Ташкилот</th>
+                                                                                            <th scope="col" class="text-white">Ташкилот манзили</th>
                                                                                             <th scope="col" class="text-white">Амал</th>
-
                                                                                         </tr>
                                                                                         </thead>
                                                                                         <tbody>
                                                                                         <template
-                                                                                            v-for="(user_qarindosh,key) in user_add.qarindoshlar">
+                                                                                            v-for="(user_mehnat,key) in user_add.mehnat_faoliyatlar">
                                                                                             <tr :key="key">
-                                                                                                <th scope="col">{{ user_qarindosh.qarindoshligi }}</th>
-                                                                                                <th scope="col">{{ user_qarindosh.fio }}</th>
-                                                                                                <th scope="col">{{ user_qarindosh.tug_yili }}</th>
-                                                                                                <th scope="col">{{ user_qarindosh.tug_joyi }}</th>
-                                                                                                <th scope="col">{{ user_qarindosh.ish }}</th>
-                                                                                                <th scope="col">{{ user_qarindosh.yashash_manzili }}</th>
+                                                                                                <th scope="col">{{ user_mehnat.davr }}</th>
+                                                                                                <th scope="col">{{ user_mehnat.tashkilot }}</th>
+                                                                                                <th scope="col">{{ user_mehnat.tashkilot_adress }}</th>
                                                                                                 <th scope="col" style="width: 150px;">
 
                                                                                                     <v-btn fab x-small color="primary"
-                                                                                                           @click="openEditDialog(key,'qarindosh')">
+                                                                                                           @click="openEditDialog(key,'mehnat')">
                                                                                                         <v-icon>mdi-pencil</v-icon>
                                                                                                     </v-btn>
                                                                                                     <v-btn
                                                                                                         color="red"
                                                                                                         fab
                                                                                                         x-small
-                                                                                                        @click="button.removeQarindosh=true"
+                                                                                                        @click="button.removeMehnat=true"
                                                                                                     >
                                                                                                         <v-icon>mdi-delete</v-icon>
                                                                                                     </v-btn>
@@ -1371,108 +1096,110 @@
                                                                                                 </th>
                                                                                             </tr>
                                                                                         </template>
-                                                                                        <template v-if="user_add.qarindoshlar.length<1">
+                                                                                        <template v-if="user_add.mehnat_faoliyatlar.length<1">
                                                                                             <tr>
-                                                                                                <td colspan="8" align="center">Маълумот топилмади!</td>
+                                                                                                <td colspan="4" align="center">Маълумот топилмади!</td>
                                                                                             </tr>
                                                                                         </template>
                                                                                         </tbody>
                                                                                     </v-simple-table>
                                                                                     <v-dialog
-                                                                                        v-model="button.qarindosh"
+                                                                                        v-model="button.mehnat"
                                                                                         persistent
                                                                                         max-width="600px"
                                                                                     >
+
                                                                                         <v-input hidden v-model="editIndex"></v-input>
-                                                                                        <v-card>
-                                                                                            <v-card-title>
-                                                                                                <span
-                                                                                                    class="text-h5">Қариндошлари тўғрисида</span>
-                                                                                            </v-card-title>
-                                                                                            <v-card-text>
-                                                                                                <v-container>
-                                                                                                    <v-row>
-                                                                                                        <v-col
-                                                                                                            cols="6"
-                                                                                                        >
-                                    &lt;!&ndash;                                                                        <v-text-field
-                                                                                                                label="Қариндошлиги"
-                                                                                                                required
-
-                                                                                                            ></v-text-field>&ndash;&gt;
-                                                                                                            <v-autocomplete
-                                                                                                            required
-                                                                                                            label="Қариндошлиги"
-                                                                                                            v-model="editMalumot.qarindoshligi"
-                                                                                                            :items="qarindoshligi"
+                                                                                        <validation-observer ref="mehnatForm"  v-slot="{ invalid }">
+                                                                                            <v-card>
+                                                                                                <v-card-title>
+                                                                                            <span
+                                                                                                class="text-h5">Мехнат фаолияти тўғрисида</span>
+                                                                                                </v-card-title>
+                                                                                                <v-card-text>
+                                                                                                    <v-container>
+                                                                                                        <v-row>
+                                                                                                            <v-col
+                                                                                                                cols="6"
                                                                                                             >
-                                                                                                            </v-autocomplete>
-                                                                                                        </v-col>
-                                                                                                        <v-col
-                                                                                                            cols="6"
-                                                                                                        >
-                                                                                                            <v-text-field
-                                                                                                                label="Фамилияси, исми, шарифи"
-                                                                                                                required
-                                                                                                                v-model="editMalumot.fio"
-                                                                                                            ></v-text-field>
-                                                                                                        </v-col>
-                                                                                                        <v-col
-                                                                                                            cols="6"
-                                                                                                        >
-                                                                                                            <v-text-field
-                                                                                                                label="Туғилган йили"
-                                                                                                                required
-                                                                                                                v-model="editMalumot.tug_yili"
-                                                                                                            ></v-text-field>
-                                                                                                        </v-col>
-                                                                                                        <v-col cols="6">
-                                                                                                            <v-text-field
-                                                                                                                label="Туғилган жойи"
-                                                                                                                required
-                                                                                                                v-model="editMalumot.tug_joyi"
-                                                                                                            ></v-text-field>
-                                                                                                        </v-col>
-                                                                                                        <v-col cols="6">
-                                                                                                            <v-text-field
-                                                                                                                label="Иш жойи ва лавозими"
-                                                                                                                required
-                                                                                                                v-model="editMalumot.ish"
-                                                                                                            ></v-text-field>
-                                                                                                        </v-col>
-                                                                                                        <v-col cols="6">
-                                                                                                            <v-text-field
-                                                                                                                label="Яшаш манзили"
-                                                                                                                required
-                                                                                                                v-model="editMalumot.yashash_manzili"
-                                                                                                            ></v-text-field>
-                                                                                                        </v-col>
+                                                                                                                <ValidationProvider
+                                                                                                                    v-slot="{ errors}"
+                                                                                                                    name="Ишлаган даври"
+                                                                                                                    rules="required"
+                                                                                                                >
+                                                                                                                    <v-text-field
+                                                                                                                        label="Ишлаган даври"
+                                                                                                                        required
+                                                                                                                        name="editMalumotdavr"
+                                                                                                                        v-model="editMalumot.davr"
+                                                                                                                    ></v-text-field>
+                                                                                                                    <span class="error&#45;&#45;text">{{
+                                                                                                                            errors[0]
+                                                                                                                        }}</span>
+                                                                                                                </ValidationProvider>
+                                                                                                            </v-col>
+                                                                                                            <v-col
+                                                                                                                cols="6"
+                                                                                                            >
+                                                                                                                <ValidationProvider
+                                                                                                                    v-slot="{ errors}"
+                                                                                                                    name="Ташкилот номи"
+                                                                                                                    rules="required"
+                                                                                                                >
+                                                                                                                    <v-text-field
+                                                                                                                        label="Ташкилот номи"
+                                                                                                                        required
+                                                                                                                        v-model="editMalumot.tashkilot"
+                                                                                                                    ></v-text-field>
+                                                                                                                    <span class="error&#45;&#45;text">{{
+                                                                                                                            errors[0]
+                                                                                                                        }}</span>
+                                                                                                                </ValidationProvider>
+                                                                                                            </v-col>
+                                                                                                            <v-col
+                                                                                                                cols="6"
+                                                                                                            >
+                                                                                                                <ValidationProvider
+                                                                                                                    v-slot="{ errors}"
+                                                                                                                    name="Ташкилот манзили"
+                                                                                                                    rules="required"
+                                                                                                                >
+                                                                                                                    <v-text-field
+                                                                                                                        label="Ташкилот манзили"
+                                                                                                                        required
+                                                                                                                        v-model="editMalumot.tashkilot_adress"
+                                                                                                                    ></v-text-field>
+                                                                                                                    <span class="error&#45;&#45;text">{{
+                                                                                                                            errors[0]
+                                                                                                                        }}</span>
+                                                                                                                </ValidationProvider>
+                                                                                                            </v-col>
 
-
-                                                                                                    </v-row>
-                                                                                                </v-container>
-                                                                                                &lt;!&ndash;                                                            <small>*indicates required field</small>&ndash;&gt;
-                                                                                            </v-card-text>
-                                                                                            <v-card-actions>
-                                                                                                <v-spacer></v-spacer>
-                                                                                                <v-btn
-                                                                                                    color="blue darken-1"
-                                                                                                    text
-                                                                                                    @click="button.qarindosh = false"
-                                                                                                >
-                                                                                                    Бекор қилиш
-                                                                                                </v-btn>
-                                                                                                <v-btn
-                                                                                                    color="blue darken-1"
-                                                                                                    text
-                                                                                                    @click="Save(editIndex,'qarindosh')"
-                                                                                                >
-                                                                                                    Сақлаш
-                                                                                                </v-btn>
-                                                                                            </v-card-actions>
-                                                                                        </v-card>
+                                                                                                        </v-row>
+                                                                                                    </v-container>
+                                                                                                    &lt;!&ndash;                                                            <small>*indicates required field</small>&ndash;&gt;
+                                                                                                </v-card-text>
+                                                                                                <v-card-actions>
+                                                                                                    <v-spacer></v-spacer>
+                                                                                                    <v-btn
+                                                                                                        color="blue darken-1"
+                                                                                                        text
+                                                                                                        @click="button.mehnat = false"
+                                                                                                    >
+                                                                                                        Бекор қилиш
+                                                                                                    </v-btn>
+                                                                                                    <v-btn
+                                                                                                        color="blue darken-1"
+                                                                                                        text
+                                                                                                        @click="Save(editIndex,'mehnat')"
+                                                                                                    >
+                                                                                                        Сақлаш
+                                                                                                    </v-btn>
+                                                                                                </v-card-actions>
+                                                                                            </v-card>
+                                                                                        </validation-observer>
                                                                                     </v-dialog>
-                                                                                    <v-dialog v-model="button.removeQarindosh" width="500">
+                                                                                    <v-dialog v-model="button.removeMehnat" width="500">
 
 
                                                                                         <v-card>
@@ -1493,124 +1220,399 @@
                                                                                                 <v-btn
                                                                                                     color="primary"
                                                                                                     text
-                                                                                                    @click="deleteItem(editIndex,'qarindosh')"
+                                                                                                    @click="deleteItem(editIndex,'mehnat')"
                                                                                                 >
                                                                                                     Тасдиқлайман
                                                                                                 </v-btn>
                                                                                             </v-card-actions>
                                                                                         </v-card>
                                                                                     </v-dialog>
-                                                                                    <v-dialog
-                                                                                        v-model="button.newQarindosh"
+                                                                                    <v-btn
+                                                                                        color="primary"
+                                                                                        @click="openAddDialog('mehnat')"
+                                                                                    >
+                                                                                        Қўшиш
+                                                                                    </v-btn>
+                                &lt;!&ndash;                                                    <v-dialog
+                                                                                        v-model="button.newMehnat"
                                                                                         persistent
                                                                                         max-width="600px"
                                                                                     >
-                                                                                        <template v-slot:activator="{ on, attrs }">
-                                                                                            <v-btn
-                                                                                                color="primary"
-                                                                                                v-bind="attrs"
-                                                                                                v-on="on"
-
-                                                                                            >
-                                                                                                Қўшиш
-                                                                                            </v-btn>
-                                                                                        </template>
-                                                                                        <v-card>
-                                                                                            <v-card-title>
-                                                                                                <span
-                                                                                                    class="text-h5">Қариндошлари тўғрисида</span>
-                                                                                            </v-card-title>
-                                                                                            <v-card-text>
-                                                                                                <v-container>
-                                                                                                    <v-row>
-                                                                                                        <v-col
-                                                                                                            cols="6"
-                                                                                                        >
-                                    &lt;!&ndash;                                                                        <v-text-field
-                                                                                                                label="Қариндошлиги"
-                                                                                                                required
-                                                                                                                v-model="newMalumot.qarindoshligi"
-                                                                                                            ></v-text-field>&ndash;&gt;
-                                                                                                            <v-autocomplete
-                                                                                                                required
-                                                                                                                label="Қариндошлиги"
-                                                                                                                v-model="newMalumot.qarindoshligi"
-                                                                                                                :items="qarindoshligi"
+                                                                                        <validation-observer ref="newMehnatForm"  v-slot="{ invalid }">
+                                                                                            <v-card>
+                                                                                                <v-card-title>
+                                                                                            <span
+                                                                                                class="text-h5">Меҳнат фаолияти тўғрисида</span>
+                                                                                                </v-card-title>
+                                                                                                <v-card-text>
+                                                                                                    <v-container>
+                                                                                                        <v-row>
+                                                                                                            <v-col
+                                                                                                                cols="6"
                                                                                                             >
-                                                                                                            </v-autocomplete>
-                                                                                                        </v-col>
-                                                                                                        <v-col
-                                                                                                            cols="6"
-                                                                                                        >
-                                                                                                            <v-text-field
-                                                                                                                label="Фамилияси, исми, шарифи"
-                                                                                                                required
-                                                                                                                v-model="newMalumot.fio"
-                                                                                                            ></v-text-field>
-                                                                                                        </v-col>
-                                                                                                        <v-col
-                                                                                                            cols="6"
-                                                                                                        >
-                                                                                                            <v-text-field
-                                                                                                                label="Туғилган йили"
-                                                                                                                required
-                                                                                                                v-model="newMalumot.tug_yili"
-                                                                                                            ></v-text-field>
-                                                                                                        </v-col>
-                                                                                                        <v-col cols="6">
-                                                                                                            <v-text-field
-                                                                                                                label="Туғилган жойи"
-                                                                                                                required
-                                                                                                                v-model="newMalumot.tug_joyi"
-                                                                                                            ></v-text-field>
-                                                                                                        </v-col>
-                                                                                                        <v-col cols="6">
-                                                                                                            <v-text-field
-                                                                                                                label="Иш жойи ва лавозими"
-                                                                                                                required
-                                                                                                                v-model="newMalumot.ish"
-                                                                                                            ></v-text-field>
-                                                                                                        </v-col>
-                                                                                                        <v-col cols="6">
-                                                                                                            <v-text-field
-                                                                                                                label="Яшаш манзили"
-                                                                                                                required
-                                                                                                                v-model="newMalumot.yashash_manzili"
-                                                                                                            ></v-text-field>
-                                                                                                        </v-col>
-
-
-                                                                                                    </v-row>
-                                                                                                </v-container>
-                                                                                                &lt;!&ndash;                                                            <small>*indicates required field</small>&ndash;&gt;
-                                                                                            </v-card-text>
-                                                                                            <v-card-actions>
-                                                                                                <v-spacer></v-spacer>
-                                                                                                <v-btn
-                                                                                                    color="blue darken-1"
-                                                                                                    text
-                                                                                                    @click="button.newQarindosh = false"
-                                                                                                >
-                                                                                                    Бекор қилиш
-                                                                                                </v-btn>
-                                                                                                <v-btn
-                                                                                                    color="blue darken-1"
-                                                                                                    text
-                                                                                                    @click="newSave('qarindosh')"
-                                                                                                >
-                                                                                                    Сақлаш
-                                                                                                </v-btn>
-                                                                                            </v-card-actions>
-                                                                                        </v-card>
-                                                                                    </v-dialog>
-
+                                                                                                                <ValidationProvider
+                                                                                                                    v-slot="{ errors}"
+                                                                                                                    name="Ишлаган даври"
+                                                                                                                    rules="required"
+                                                                                                                >
+                                                                                                                    <v-text-field
+                                                                                                                        label="Ишлаган даври"
+                                                                                                                        required
+                                                                                                                        name="newMalumotishlagandavr"
+                                                                                                                        v-model="newMalumot.davr"
+                                                                                                                    ></v-text-field>
+                                                                                                                    <span class="error&#45;&#45;text">{{
+                                                                                                                            errors[0]
+                                                                                                                        }}</span>
+                                                                                                                </ValidationProvider>
+                                                                                                            </v-col>
+                                                                                                            <v-col
+                                                                                                                cols="6"
+                                                                                                            >
+                                                                                                                <v-text-field
+                                                                                                                    label="Ташкилот"
+                                                                                                                    required
+                                                                                                                    v-model="newMalumot.tashkilot"
+                                                                                                                ></v-text-field>
+                                                                                                            </v-col>
+                                                                                                            <v-col
+                                                                                                                cols="6"
+                                                                                                            >
+                                                                                                                <ValidationProvider
+                                                                                                                    v-slot="{ errors}"
+                                                                                                                    name="Ташкилот манзили"
+                                                                                                                    rules="required"
+                                                                                                                >
+                                                                                                                    <v-text-field
+                                                                                                                        label="Ташкилот манзили"
+                                                                                                                        required
+                                                                                                                        v-model="newMalumot.tashkilot_adress"
+                                                                                                                    ></v-text-field>
+                                                                                                                    <span class="error&#45;&#45;text">{{
+                                                                                                                            errors[0]
+                                                                                                                        }}</span>
+                                                                                                                </ValidationProvider>
+                                                                                                            </v-col>
+                                                                                                        </v-row>
+                                                                                                    </v-container>
+                                                                                                    &lt;!&ndash;                                                            <small>*indicates required field</small>&ndash;&gt;
+                                                                                                </v-card-text>
+                                                                                                <v-card-actions>
+                                                                                                    <v-spacer></v-spacer>
+                                                                                                    <v-btn
+                                                                                                        color="blue darken-1"
+                                                                                                        text
+                                                                                                        @click="button.newMehnat = false"
+                                                                                                    >
+                                                                                                        Бекор қилиш
+                                                                                                    </v-btn>
+                                                                                                    <v-btn
+                                                                                                        color="blue darken-1"
+                                                                                                        text
+                                                                                                        @click="newSave('mehnat')"
+                                                                                                    >
+                                                                                                        Сақлаш
+                                                                                                    </v-btn>
+                                                                                                </v-card-actions>
+                                                                                            </v-card>
+                                                                                        </validation-observer>
+                                                                                    </v-dialog>&ndash;&gt;
                                                                                 </div>
                                                                             </div>
                                                                         </div>
                                                                     </div>-->
-                                </div>
+                                <!--                                <div class="tab-pane fade" id="family" role="tabpanel"
+                                                                     aria-labelledby="message-tab">
+                                                                    <div class="training_courses_first">
+                                                                        <h3 class="profile-print-tab-title">ҚАРИНДОШЛАР</h3>
+                                                                        <div class="training_courses_table rm_last_col">
+                                                                            <div class="table-responsive">
+                                                                                <v-simple-table class="table d-print-table">
+                                                                                    <thead>
+                                                                                    <tr>
+                                                                                        <th scope="col" class="text-white">Қариндошлиги</th>
+                                                                                        <th scope="col" class="text-white">Фамилияси, исми, шарифи</th>
+                                                                                        <th scope="col" class="text-white">Туғилган йили</th>
+                                                                                        <th scope="col" class="text-white">Туғилган жойи</th>
+                                                                                        <th scope="col" class="text-white">Иш жойи ва лавозими</th>
+                                                                                        <th scope="col" class="text-white">Яшаш манзили</th>
+
+                                                                                        <th scope="col" class="text-white">Амал</th>
+
+                                                                                    </tr>
+                                                                                    </thead>
+                                                                                    <tbody>
+                                                                                    <template
+                                                                                        v-for="(user_qarindosh,key) in user_add.qarindoshlar">
+                                                                                        <tr :key="key">
+                                                                                            <th scope="col">{{ user_qarindosh.qarindoshligi }}</th>
+                                                                                            <th scope="col">{{ user_qarindosh.fio }}</th>
+                                                                                            <th scope="col">{{ user_qarindosh.tug_yili }}</th>
+                                                                                            <th scope="col">{{ user_qarindosh.tug_joyi }}</th>
+                                                                                            <th scope="col">{{ user_qarindosh.ish }}</th>
+                                                                                            <th scope="col">{{ user_qarindosh.yashash_manzili }}</th>
+                                                                                            <th scope="col" style="width: 150px;">
+
+                                                                                                <v-btn fab x-small color="primary"
+                                                                                                       @click="openEditDialog(key,'qarindosh')">
+                                                                                                    <v-icon>mdi-pencil</v-icon>
+                                                                                                </v-btn>
+                                                                                                <v-btn
+                                                                                                    color="red"
+                                                                                                    fab
+                                                                                                    x-small
+                                                                                                    @click="button.removeQarindosh=true"
+                                                                                                >
+                                                                                                    <v-icon>mdi-delete</v-icon>
+                                                                                                </v-btn>
+
+
+                                                                                                &lt;!&ndash;                                                                <v-btn color="danger" fab x-small >
+                                                                                                                                                                    <v-icon>mdi-delete</v-icon>
+                                                                                                                                                                </v-btn>&ndash;&gt;
+                                                                                            </th>
+                                                                                        </tr>
+                                                                                    </template>
+                                                                                    <template v-if="user_add.qarindoshlar.length<1">
+                                                                                        <tr>
+                                                                                            <td colspan="8" align="center">Маълумот топилмади!</td>
+                                                                                        </tr>
+                                                                                    </template>
+                                                                                    </tbody>
+                                                                                </v-simple-table>
+                                                                                <v-dialog
+                                                                                    v-model="button.qarindosh"
+                                                                                    persistent
+                                                                                    max-width="600px"
+                                                                                >
+                                                                                    <v-input hidden v-model="editIndex"></v-input>
+                                                                                    <v-card>
+                                                                                        <v-card-title>
+                                                                                            <span
+                                                                                                class="text-h5">Қариндошлари тўғрисида</span>
+                                                                                        </v-card-title>
+                                                                                        <v-card-text>
+                                                                                            <v-container>
+                                                                                                <v-row>
+                                                                                                    <v-col
+                                                                                                        cols="6"
+                                                                                                    >
+                                &lt;!&ndash;                                                                        <v-text-field
+                                                                                                            label="Қариндошлиги"
+                                                                                                            required
+
+                                                                                                        ></v-text-field>&ndash;&gt;
+                                                                                                        <v-autocomplete
+                                                                                                        required
+                                                                                                        label="Қариндошлиги"
+                                                                                                        v-model="editMalumot.qarindoshligi"
+                                                                                                        :items="qarindoshligi"
+                                                                                                        >
+                                                                                                        </v-autocomplete>
+                                                                                                    </v-col>
+                                                                                                    <v-col
+                                                                                                        cols="6"
+                                                                                                    >
+                                                                                                        <v-text-field
+                                                                                                            label="Фамилияси, исми, шарифи"
+                                                                                                            required
+                                                                                                            v-model="editMalumot.fio"
+                                                                                                        ></v-text-field>
+                                                                                                    </v-col>
+                                                                                                    <v-col
+                                                                                                        cols="6"
+                                                                                                    >
+                                                                                                        <v-text-field
+                                                                                                            label="Туғилган йили"
+                                                                                                            required
+                                                                                                            v-model="editMalumot.tug_yili"
+                                                                                                        ></v-text-field>
+                                                                                                    </v-col>
+                                                                                                    <v-col cols="6">
+                                                                                                        <v-text-field
+                                                                                                            label="Туғилган жойи"
+                                                                                                            required
+                                                                                                            v-model="editMalumot.tug_joyi"
+                                                                                                        ></v-text-field>
+                                                                                                    </v-col>
+                                                                                                    <v-col cols="6">
+                                                                                                        <v-text-field
+                                                                                                            label="Иш жойи ва лавозими"
+                                                                                                            required
+                                                                                                            v-model="editMalumot.ish"
+                                                                                                        ></v-text-field>
+                                                                                                    </v-col>
+                                                                                                    <v-col cols="6">
+                                                                                                        <v-text-field
+                                                                                                            label="Яшаш манзили"
+                                                                                                            required
+                                                                                                            v-model="editMalumot.yashash_manzili"
+                                                                                                        ></v-text-field>
+                                                                                                    </v-col>
+
+
+                                                                                                </v-row>
+                                                                                            </v-container>
+                                                                                            &lt;!&ndash;                                                            <small>*indicates required field</small>&ndash;&gt;
+                                                                                        </v-card-text>
+                                                                                        <v-card-actions>
+                                                                                            <v-spacer></v-spacer>
+                                                                                            <v-btn
+                                                                                                color="blue darken-1"
+                                                                                                text
+                                                                                                @click="button.qarindosh = false"
+                                                                                            >
+                                                                                                Бекор қилиш
+                                                                                            </v-btn>
+                                                                                            <v-btn
+                                                                                                color="blue darken-1"
+                                                                                                text
+                                                                                                @click="Save(editIndex,'qarindosh')"
+                                                                                            >
+                                                                                                Сақлаш
+                                                                                            </v-btn>
+                                                                                        </v-card-actions>
+                                                                                    </v-card>
+                                                                                </v-dialog>
+                                                                                <v-dialog v-model="button.removeQarindosh" width="500">
+
+
+                                                                                    <v-card>
+                                                                                        <v-card-title
+                                                                                            class="headline grey lighten-2"
+                                                                                            primary-title
+                                                                                        >Тасдиқлаш
+                                                                                        </v-card-title>
+
+                                                                                        <v-card-text>
+                                                                                            Ҳақиқатдан ҳам ўчирмоқчимисиз?
+                                                                                        </v-card-text>
+
+                                                                                        <v-divider></v-divider>
+
+                                                                                        <v-card-actions>
+                                                                                            <v-spacer></v-spacer>
+                                                                                            <v-btn
+                                                                                                color="primary"
+                                                                                                text
+                                                                                                @click="deleteItem(editIndex,'qarindosh')"
+                                                                                            >
+                                                                                                Тасдиқлайман
+                                                                                            </v-btn>
+                                                                                        </v-card-actions>
+                                                                                    </v-card>
+                                                                                </v-dialog>
+                                                                                <v-dialog
+                                                                                    v-model="button.newQarindosh"
+                                                                                    persistent
+                                                                                    max-width="600px"
+                                                                                >
+                                                                                    <template v-slot:activator="{ on, attrs }">
+                                                                                        <v-btn
+                                                                                            color="primary"
+                                                                                            v-bind="attrs"
+                                                                                            v-on="on"
+
+                                                                                        >
+                                                                                            Қўшиш
+                                                                                        </v-btn>
+                                                                                    </template>
+                                                                                    <v-card>
+                                                                                        <v-card-title>
+                                                                                            <span
+                                                                                                class="text-h5">Қариндошлари тўғрисида</span>
+                                                                                        </v-card-title>
+                                                                                        <v-card-text>
+                                                                                            <v-container>
+                                                                                                <v-row>
+                                                                                                    <v-col
+                                                                                                        cols="6"
+                                                                                                    >
+                                &lt;!&ndash;                                                                        <v-text-field
+                                                                                                            label="Қариндошлиги"
+                                                                                                            required
+                                                                                                            v-model="newMalumot.qarindoshligi"
+                                                                                                        ></v-text-field>&ndash;&gt;
+                                                                                                        <v-autocomplete
+                                                                                                            required
+                                                                                                            label="Қариндошлиги"
+                                                                                                            v-model="newMalumot.qarindoshligi"
+                                                                                                            :items="qarindoshligi"
+                                                                                                        >
+                                                                                                        </v-autocomplete>
+                                                                                                    </v-col>
+                                                                                                    <v-col
+                                                                                                        cols="6"
+                                                                                                    >
+                                                                                                        <v-text-field
+                                                                                                            label="Фамилияси, исми, шарифи"
+                                                                                                            required
+                                                                                                            v-model="newMalumot.fio"
+                                                                                                        ></v-text-field>
+                                                                                                    </v-col>
+                                                                                                    <v-col
+                                                                                                        cols="6"
+                                                                                                    >
+                                                                                                        <v-text-field
+                                                                                                            label="Туғилган йили"
+                                                                                                            required
+                                                                                                            v-model="newMalumot.tug_yili"
+                                                                                                        ></v-text-field>
+                                                                                                    </v-col>
+                                                                                                    <v-col cols="6">
+                                                                                                        <v-text-field
+                                                                                                            label="Туғилган жойи"
+                                                                                                            required
+                                                                                                            v-model="newMalumot.tug_joyi"
+                                                                                                        ></v-text-field>
+                                                                                                    </v-col>
+                                                                                                    <v-col cols="6">
+                                                                                                        <v-text-field
+                                                                                                            label="Иш жойи ва лавозими"
+                                                                                                            required
+                                                                                                            v-model="newMalumot.ish"
+                                                                                                        ></v-text-field>
+                                                                                                    </v-col>
+                                                                                                    <v-col cols="6">
+                                                                                                        <v-text-field
+                                                                                                            label="Яшаш манзили"
+                                                                                                            required
+                                                                                                            v-model="newMalumot.yashash_manzili"
+                                                                                                        ></v-text-field>
+                                                                                                    </v-col>
+
+
+                                                                                                </v-row>
+                                                                                            </v-container>
+                                                                                            &lt;!&ndash;                                                            <small>*indicates required field</small>&ndash;&gt;
+                                                                                        </v-card-text>
+                                                                                        <v-card-actions>
+                                                                                            <v-spacer></v-spacer>
+                                                                                            <v-btn
+                                                                                                color="blue darken-1"
+                                                                                                text
+                                                                                                @click="button.newQarindosh = false"
+                                                                                            >
+                                                                                                Бекор қилиш
+                                                                                            </v-btn>
+                                                                                            <v-btn
+                                                                                                color="blue darken-1"
+                                                                                                text
+                                                                                                @click="newSave('qarindosh')"
+                                                                                            >
+                                                                                                Сақлаш
+                                                                                            </v-btn>
+                                                                                        </v-card-actions>
+                                                                                    </v-card>
+                                                                                </v-dialog>
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>-->
                             </div>
-                        </section>
+                        </div>
+                    </section>
 
 
                 </section>
@@ -1753,7 +1755,8 @@ export default {
             countries: [],
             vacancy: null,
             vacancy_send: false,
-            resumeLoading:false,
+            resumeLoading: false,
+            user_image: "",
             //vacancy_resume:[],
             vacancy_resume: {
                 id: 1111,
@@ -1763,7 +1766,7 @@ export default {
         }
     },
     mounted() {
-        this.user = this.$auth.user();
+        // this.user = this.$auth.user();
 
         this.getCountries();
     },
@@ -1790,17 +1793,26 @@ export default {
          }
      },*/
     async created() {
-        this.getBoshqarmalar()
-        this.getVacancy()
 
-        this.user = this.$auth.user();
         if (this.$route.query.code) {
             this.auth();
+            //console.log(this.$route.query.code)
+
         } else {
-            if (this.user == null) {
+           if (!this.user) {
                 this.$router.push('/login')
             }
         }
+
+        this.getBoshqarmalar()
+
+        this.user = this.$auth.user();
+
+        setTimeout(()=> {
+            this.getImage()
+            this.getVacancy();
+        },300)
+
 
         //await this.getVacancy()
     },
@@ -2021,37 +2033,60 @@ export default {
             // Validate the field
             if (provider) return await provider.reset();
         },
-        clickedAccept(){
-            this.AcceptToOferta=true;
-            this.dialogTilxat=false;
+        clickedAccept() {
+
+                this.AcceptToOferta = true;
+            this.dialogTilxat = false;
             this.sendResume();
+        },
+        getAge(dateString) {
+            var today = new Date();
+            var birthDate = new Date(dateString);
+            var age = today.getFullYear() - birthDate.getFullYear();
+            var m = today.getMonth() - birthDate.getMonth();
+            if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+                age--;
+            }
+            return age;
         },
         sendResume() {
 
 
-            this.resumeLoading=true;
-            setTimeout(async ()=>
-            {
+            this.resumeLoading = true;
+
+            // 30812852720071 Abbos aka 2288
+            if ( !(this.$auth.user().pin===30812852720071 || this.$auth.user().pin===32604853150058 ) && this.getAge(this.$auth.user().birth_date) > 30) {
+                this.resumeLoading = false;
+                this.$toast.error("Сизнинг ёшингиз божхона органларига ишга кириш бўйича ёш чегараси меъзонига тўғри келмайди! ");
+                return;
+            }
+            if(this.vacancy.applied){
+                this.resumeLoading = false;
+                this.$toast.error("Сиз олдин ариза юборгансиз! ");
+                return ;
+            }
+            setTimeout(async () => {
                 let isValid = true;
                 isValid = await this.validateField("vacancy_application");
 
-            if (!isValid) {
-                this.edit = true;
-                this.$toast.error(`Юборилаётган маълумотларда хатоликларни тўғрилаб кейин жўнатинг!`)
-                return ;
-            }
-            //if (this.validateField("vacancy_application"))
-/*                console.log(this.$refs['newMalumotForm'])
-                console.log(this.$refs['MalumotForm'])
-                let isValid1 = await this.validateField("newMalumotForm");
-                let isValid2 = await this.validateField("MalumotForm");*/
-                if (this.user_add.malumotlar.length < 1 ) {
+                if (!isValid) {
+                    this.resumeLoading = false;
+                    this.edit = true;
+                    this.$toast.error(`Юборилаётган маълумотларда хатоликларни тўғрилаб кейин жўнатинг!`)
+                    return;
+                }
+                //if (this.validateField("vacancy_application"))
+                /*                console.log(this.$refs['newMalumotForm'])
+                                console.log(this.$refs['MalumotForm'])
+                                let isValid1 = await this.validateField("newMalumotForm");
+                                let isValid2 = await this.validateField("MalumotForm");*/
+                if (this.user_add.malumotlar.length < 1) {
                     this.$toast.error(`Таълим тўғрисидаги маълумотлар киритилмади!`)
-                    return ;
+                    return;
                 }
                 if (!this.AcceptToOferta) {
                     this.dialogTilxat = true;
-                    return ;
+                    return;
                 }
                 const _app = this;
                 _app.vacancy_resume['user'] = this.user;
@@ -2060,6 +2095,7 @@ export default {
                 const form = new FormData();
                 form.append('pnfl', this.user.pin);
                 form.append('vakant_id', this.$route.params.id);
+                form.append('tuman', this.user.birth_place);
                 form.append('name', this.user.first_name + ' ' + this.user.sur_name + ' ' + this.user.mid_name);
                 form.append('tug_sana', this.user.birth_date);
                 form.append('telefon', this.user.phone);
@@ -2163,6 +2199,7 @@ export default {
                                 })
                             } else console.log(response.data)
                         }
+                        this.resumeLoading = false;
                     }).catch(async (error) => {
                         console.log(error)
                         if (error.response.data.data.success === true || error.response.data.data.succes === true) {
@@ -2180,10 +2217,11 @@ export default {
                                 })
                             } else console.log(error.response.data)
                         }
+                        this.resumeLoading = false;
                     });
                 });
             })
-            this.resumeLoading=false;
+            //this.resumeLoading=false;
 
             /*
                         this.$router.push({
@@ -2271,6 +2309,28 @@ export default {
                 }
 
             })
+        },
+        getImage() {
+            const _this = this;
+            let returnValue;
+            if (this.$auth.user) {
+                setTimeout(async () => {
+                    await this.axios.get("/api/v1/get_image", {responseType: 'arraybuffer'}).then(res => {
+                        /*                    let reader = new FileReader();
+                    reader.readAsDataURL(res.data);
+                    reader.onload = () => {
+                        _this.user_image = reader.result;
+                    }*/
+                        let bytes = new Uint8Array(res.data);
+                        let binary = bytes.reduce((data, b) => data += String.fromCharCode(b), '');
+                        _this.user_image = "data:image/jpeg;base64," + btoa(binary);
+
+                    }).catch(() => {
+                        // alert("Unable to load raw attachment from this task and ID");
+                    });
+
+                }, 1000);
+            }
         }
     },
     components: {

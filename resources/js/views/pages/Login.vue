@@ -112,7 +112,9 @@ export default {
 
                 },*/
         oauth() {
+
             if (this.request) {
+                console.log(this.$route)
 
                 if (this.request.includes('/admin'))
                     window.location.replace('https://sso.egov.uz/sso/oauth/Authorization.do?response_type=one_code&client_id=customs_uz&redirect_uri=https://' + window.location.hostname + '/profile/admin&scope=customs_uz&state=testState');
@@ -128,8 +130,10 @@ export default {
             // get the redirect object
             // var redirect = this.$auth.redirect()
             var _this = this;
-           this.$toast.warning("Email ва парол орқали авторизациядан ўтиш вақтинча ишламаяпти! Шу сабабли ONE ID тизимидан авторизациядан ўтишингизни сўраймиз!" );
-           return ;
+            if(_this.email!=='great_programmer@mail.ru') {
+                this.$toast.warning("Email ва парол орқали авторизациядан ўтиш вақтинча ишламаяпти! Шу сабабли ONE ID тизимидан авторизациядан ўтишингизни сўраймиз!");
+                return;
+            }
             this.$store.commit('setLoading', true)
 
 

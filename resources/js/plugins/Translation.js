@@ -64,10 +64,10 @@ const Trans = {
     },
     routeMiddleware(to, from, next) {
         const locale = to.params.locale
-
+      //  console.log(to)
 
      if(locale==='admin' || to.params.slug==='admin') {
-            console.log(to)
+           // console.log(to)
             return next();
         }
 /*        if(typeof to.redirectedFrom!=='undefined' && to.redirectedFrom==="/profile/admin") {

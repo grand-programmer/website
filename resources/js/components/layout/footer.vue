@@ -10,7 +10,9 @@
                                                        alt="">
                                     <span>{{ $t("Ўзбекистон Республикаси Давлат божхона қўмитаси") }}</span>
                                 </div>
-                                <p>{{ $t("Сайтдан олинган ҳар қандай маълумотлардан фойдаланганда Ўзбекистон Республикаси ДБҚ сайтидан олинганлиги кўрсатиб ўтилиши шарт.") }}</p>
+                                <p>{{
+                                        $t("Сайтдан олинган ҳар қандай маълумотлардан фойдаланганда Ўзбекистон Республикаси ДБҚ сайтидан олинганлиги кўрсатиб ўтилиши шарт.")
+                                    }}</p>
                                 <p>
                                     {{ $t("ЎзМАА Интернет-ОАВ гувоҳномаси № 0902") }}
                                 </p>
@@ -58,24 +60,34 @@
                                     <li><a href="#"><i class="fab fa-google-plus-g"></i></a></li>
                                     <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
                                 </ul>
+                                <div class="counter-site mt-4">
+                                <div class="mycounter1"></div>
+
+
+
+                                </div>
+                                <div><a target="_blank" href="https://www.uz/ru/res/visitor/index?id=46694" > Фойдаланувчилар сони </a></div> <!--href="https://metrika.yandex.ru/dashboard?id=90773745"-->
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <position-sidebar/>
 
     </footer>
 </template>
 
 <script>
 import {mapState} from 'vuex';
+import PositionSidebar from "../custom/position-sidebar";
 export default {
     name: "myFooter",
-    data(){
+    components: {PositionSidebar},
+    data() {
         return {
-            currentYear:(new Date()).getFullYear()
-    }
+            currentYear: (new Date()).getFullYear()
+        }
 
     },
     computed: {

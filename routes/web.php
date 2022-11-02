@@ -25,6 +25,8 @@ DELETE n1 FROM currencies n1, currencies n2 WHERE n1.id > n2.id AND n1.code = n2
 "
 );
 
+
+
     dd("safdf");
     //and trim(d.g1a)||d.g1b in ('".$ek."10')
     $users = DB::connection('db2_odbc')->select("select g1a,cr.NAME,sum(c.G46) sumg46,sum(c.G38) sumg38

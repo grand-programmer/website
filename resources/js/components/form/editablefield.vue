@@ -11,6 +11,7 @@
         <span>{{ title }}</span>
         <input type="hidden" v-model="modelValue"/>
         <v-autocomplete :items="options" v-model="modelValue" :multiple="multiple" ref="myinputfield"
+                        v-bind="$attrs"
                         v-if="edit" v-click-outside="fieldBlur">
         </v-autocomplete>
         <span v-else @click="edit=true">
@@ -36,9 +37,11 @@
     >
         <span>{{ title }}</span>
         <input type="hidden" v-model="modelValue"/>
+        <span class="d-none" v-show="editable"></span>
         <v-text-field v-model="modelValue" ref="myinputfield"
                       v-click-outside="fieldBlur"
                       return-masked-value
+                      v-bind="$attrs"
                       v-mask="'## ###-##-##'"
                       placeholder="78 123-45-67"
                       prefix="+998"
@@ -109,6 +112,9 @@ export default {
         }
 
     },
+    mounted() {
+        if(typeof this.$attrs.editable !=='undefined') this.edit=true;
+    },
     methods: {
         custom() {
             return {on: ["search:blur", "input"]};
@@ -135,20 +141,26 @@ export default {
                 this.$emit("change", newModelValue);
             },
         },
+        editable:function(){
+            //if(typeof this.$attrs.editable !=='undefined') this.edit=true;
+            return this.$attrs.editable;
+        },
         myOptionValues: function () {
             if (!this.modelValue || this.modelValue.count < 1) return null;
             let myapp = this;
             const languageValues = [];
-            myapp.options.forEach(function (optionItem) {
-                if (Array.isArray(myapp.modelValue))
-                    myapp.modelValue.forEach(function (value) {
-                        if (optionItem.value === value) languageValues.push(optionItem.text);
-                    })
-                else {
-                    if (optionItem.value === myapp.modelValue) languageValues.push(optionItem.text);
-                }
+            if(typeof myapp.options !=='undefined' && myapp.options ) {
+                myapp.options.forEach(function (optionItem) {
+                    if (Array.isArray(myapp.modelValue))
+                        myapp.modelValue.forEach(function (value) {
+                            if (optionItem.value === value) languageValues.push(optionItem.text);
+                        })
+                    else {
+                        if (optionItem.value === myapp.modelValue) languageValues.push(optionItem.text);
+                    }
 
-            })
+                })
+            }
             return languageValues;
         },
     },

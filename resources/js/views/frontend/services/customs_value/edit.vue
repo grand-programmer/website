@@ -3204,7 +3204,7 @@ export default {
                             if (typeof resultData !== 'undefined' && typeof resultData.data !== 'undefined' && typeof resultData.data.success !== 'undefined' && resultData.data.success === true) {
                                 //console.log(resultData.data['data']['data']['id'])
                                 //this.person.person_id = resultData.data['data']['data']['id'];
-                                this.commodity.appId = resultData.data['data']['data']['id'];
+                                this.commodity.appId = resultData.data['data']['data'][0]['id'];
                                 this.commodity.appNum = resultData.data['data']['data']['appNum'];
                                 _this.stepper = 3;
                                 _this.completedSteps.push(_this.stepper - 1);
@@ -3305,7 +3305,7 @@ export default {
                                                     }
                                                     if (noValid.length < 1) {
                                                         this.loadingButton.third = true;
-                                                        this.commodity.appId = _this.$route.params.id;
+                                                        //this.commodity.appId = this.commodity.appId;
                                                         this.commodity.hsCode = _this.application.tovarlar[_this.tovarIndex].product.tftn.id;
                                                         this.commodity.hsDecDate = _this.application.tovarlar[_this.tovarIndex].product.tftnqaror.date;
                                                         this.commodity.hsDecNum = _this.application.tovarlar[_this.tovarIndex].product.tftnqaror.name;

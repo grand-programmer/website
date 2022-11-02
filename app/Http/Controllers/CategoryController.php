@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\CategoryResource;
+use App\Http\Resources\NewsResource;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Category;
 
@@ -32,9 +34,12 @@ class CategoryController extends Controller
     public function getForSelect(): \Illuminate\Http\JsonResponse
     {
         return new JsonResponse(CategoryResource::collection(Category::all())->transform(function ($item, $key) {
+            $translates = DB::table('category_translates')->where(["category_id" => $item['id'], "language" => app()->getLocale()])->get();
+
             return [
-                'text' => $item['title'],
+                'text' => isset($translates[0]) ? $translates[0]->title :$item['title'] ,
                 'value' => $item['id'],
+                'slug' => $item['slug'],
             ];
         }), 200);
     }
@@ -77,13 +82,15 @@ class CategoryController extends Controller
      */
     public function show(Category $category, Request $request)
     {
-        $data = $request->only('withnews');
-        if (isset($data['withnews']))
-            return CategoryResource::make($category->with(['news' => function ($query) {
-                $query->orderby('created_at', 'desc');
-            }])->where('id', $category->id)->get()[0]);
-        else
-            return CategoryResource::make($category);
+        $data = $request->only('withnews','page');
+        $page=1;
+        if (isset($data['page'])) $page = (int)$data['page'];
+        if (isset($data['withnews'])) {
+            $category = Category::with(['news' => function ($query) use ($page) {
+                $query->orderby('created_at', 'desc')->skip(($page - 1) * 6 )->limit(6);
+            }])->where('id', $category->id)->get()[0];
+        }
+        return CategoryResource::make($category);
 
     }
 

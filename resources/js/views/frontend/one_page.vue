@@ -16,6 +16,7 @@
         <router-view>
 
         </router-view>
+
         <my-footer/>
         <div class="footer_links">
             <div class="footer_links_arrow"><i class="fas fa-chevron-down"></i></div>
@@ -77,6 +78,7 @@ import myFooter from "../../components/layout/footer";
 let _loadingInterval = 0;
 import {mapState} from 'vuex';
 import loadingBar from "../../components/base/loadingbar.vue";
+import PositionSidebar from "../../components/custom/position-sidebar";
 
 export default {
     name: 'Onepage',
@@ -88,6 +90,7 @@ export default {
 
     },
     components: {
+        PositionSidebar,
         loadingBar,
         myFooter,
         MySnack: () => import('../../views/dashboard/component/snack'),

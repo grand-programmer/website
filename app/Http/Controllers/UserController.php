@@ -44,7 +44,7 @@ class UserController extends Controller
         /// Dastlabki qaror
         //dd(["personPin" => Auth::guard('api')->user()->pin]);
         try {
-            $response = Http::withoutVerifying()->get(env('MIX_BASE_URL') . '/api/v1/ex_api/customprice-apps', ["pnfl" => Auth::guard('api')->user()->pin]);
+            $response = Http::withoutVerifying()->timeout(10)->get(env('MIX_BASE_URL') . '/api/v1/ex_api/customprice-apps', ["pnfl" => Auth::guard('api')->user()->pin]);
             if ($response->status() == 200) {
 
                 $dq = $response->json();
@@ -70,7 +70,7 @@ class UserController extends Controller
         /// Ishga joylashish
         //dd(["personPin" => Auth::guard('api')->user()->pin]);
         try {
-            $response1 = Http::asForm()->acceptJson()
+            $response1 = Http::asForm()->acceptJson()->timeout(10)
                 ->get('http://192.168.214.159/vacancy/public/api/nomzodtotal/' . Auth::guard('api')->user()->pin);
             if ($response1->status() == 200) {
 
@@ -97,10 +97,11 @@ class UserController extends Controller
         /// Appeal murojaat
         try {
             $response = Http::asMultipart();
-            $response = $response
+            $response = $response->timeout(10)
                 ->get('http://192.168.214.152:7070/DECAPP/s06appealrestapianswer/getResult', ['personPin' => Auth::guard('api')->user()->pin])->throw(function ($response, $e) {
                     //
                 });
+
             if ($response->status() == 200) {
                 $appealdata = $response->json();
 
@@ -124,7 +125,112 @@ class UserController extends Controller
 
                 }
 
-            } else return response()->json(['error' => 'Сервер билан уланишда муаммо бор!', 'status' => false]);
+            } //else return response()->json(['error' => 'Сервер билан уланишда муаммо бор!', 'status' => false]);
+        } catch (\Exception $e) {
+
+        };
+        /// Intellektual
+        try {
+            $response = Http::contentType("application/json")->timeout(10)->get('http://192.168.214.152:7070/DECAPP/s01apiresponse/getresult', [
+                "personPin" => Auth::guard('api')->user()->pin,
+            ])->throw(function ($response, $e) {
+                //
+            });
+            if ($response->status() == 200) {
+                $responseData = $response->json();
+
+                if (is_array($responseData) and isset($responseData['data']) and isset($responseData['data'][0]) and is_array($responseData['data'][0])) {
+                    collect($responseData['data'])->transform(function ($data) use ($user_id) {
+
+                        global $services;
+                        $services[] = [
+                            "app_id" => $data['id'],
+                            "app_num" => $data['appNum'],
+                            "created_at" => isset($data['insTime']) ? $data['insTime'] : null,
+                            "status" => $data['status'],
+                            "statusNm" => $data['statusNm'],
+                            "type" => 4,
+                            "link" => "/services/intellectual/" . $data['id'],
+                            "user_id" => $user_id,
+                        ];
+
+                    });
+
+
+                }
+
+            } //else return response()->json(['error' => 'Сервер билан уланишда муаммо бор!', 'status' => false]);
+
+        } catch (\Exception $e) {
+
+        };
+        /// Recycle
+        try {
+            $response = Http::contentType("application/json")->timeout(10)->get('http://192.168.214.152:7070/DECAPP/s03apiresponse/getresult', [
+                "personPin" => Auth::guard('api')->user()->pin,
+            ])->throw(function ($response, $e) {
+                //
+            });
+            if ($response->status() == 200) {
+                $responseData = $response->json();
+
+                if (is_array($responseData) and isset($responseData['data']) and isset($responseData['data'][0]) and is_array($responseData['data'][0])) {
+                    collect($responseData['data'])->transform(function ($data) use ($user_id) {
+
+                        global $services;
+                        $services[] = [
+                            "app_id" => $data['id'],
+                            "app_num" => $data['appNum'],
+                            "created_at" => isset($data['insTime']) ? $data['insTime'] : null,
+                            "status" => $data['status'],
+                            "statusNm" => $data['statusNm'],
+                            "type" => 6,
+                            "link" => "/services/recycle/" . $data['id'],
+                            "user_id" => $user_id,
+                        ];
+
+                    });
+
+
+                }
+
+            } //else return response()->json(['error' => 'Сервер билан уланишда муаммо бор!', 'status' => false]);
+
+        } catch (\Exception $e) {
+
+        };
+        /// Refund
+        try {
+            $response = Http::contentType("application/json")->timeout(10)->get('http://192.168.214.152:7070/DECAPP/s04apiresponse/getresult', [
+                "personPin" => Auth::guard('api')->user()->pin,
+            ])->throw(function ($response, $e) {
+                //
+            });
+            if ($response->status() == 200) {
+                $responseData = $response->json();
+
+                if (is_array($responseData) and isset($responseData['data']) and isset($responseData['data'][0]) and is_array($responseData['data'][0])) {
+                    collect($responseData['data'])->transform(function ($data) use ($user_id) {
+
+                        global $services;
+                        $services[] = [
+                            "app_id" => $data['id'],
+                            "app_num" => $data['appNum'],
+                            "created_at" => isset($data['insTime']) ? $data['insTime'] : null,
+                            "status" => $data['status'],
+                            "statusNm" => $data['statusNm'],
+                            "type" => 5,
+                            "link" => "/services/refund/" . $data['id'],
+                            "user_id" => $user_id,
+                        ];
+
+                    });
+
+
+                }
+
+            } //else return response()->json(['error' => 'Сервер билан уланишда муаммо бор!', 'status' => false]);
+
         } catch (\Exception $e) {
 
         };
@@ -184,8 +290,9 @@ class UserController extends Controller
         ]);
     }
 
-    public function showImage(): \Illuminate\Http\Response
+    public function showImage(Request $request): \Illuminate\Http\Response
     {
+
         if (Auth::guard('api')->user()) {
             $name = "/public/users/" . Auth::guard('api')->user()->id . ".jpg";
             if (!Storage::exists($name)) {
@@ -194,6 +301,20 @@ class UserController extends Controller
             $file = Storage::get($name);
             $type = Storage::mimeType($name);
             return Response::make($file, 200)->header("Content-Type", $type);
+        }
+        $pinData = $request->only('pnfl');
+        if (isset($pinData) and !empty($pinData)) {
+            $user = User::where(['pin' => $pinData['pnfl']])->first();
+            if(!$user) return Response::make('User not found', 404);
+            $name = "/public/users/" . $user->id . ".jpg";
+            if (!Storage::exists($name)) {
+                return Response::make('File no found.', 404);
+            }
+            $file = Storage::get($name);
+            $type = Storage::mimeType($name);
+            return Response::make($file, 200)->header("Content-Type", $type);
+
+
         }
         return Response::make('You need authorizate!', 401);
 

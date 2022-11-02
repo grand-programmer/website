@@ -82,7 +82,7 @@
                                                                                 </div>-->
                                     </div>
                                     <ul class="news-item-cats">
-                                        <li v-for="(categoryItem,key) in newsItem.categories">
+                                        <li v-for="(categoryItem,key) in newsItem.categories" v-if="key===0">
                                             <a :href="'category/' + categoryItem.slug">{{ categoryItem.title }}</a>
                                         </li>
                                     </ul>

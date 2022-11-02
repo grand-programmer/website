@@ -218,14 +218,13 @@
                             </div>
                             <div class="vacancy-description__item"><h2>Малакавий
                                 талаблар</h2>
-                                <p>
-                                    {{ vacancy.talablar }}
-
-                                </p></div>
+                                <p v-html="vacancy.talablar">
+                                </p>
+                            </div>
                             <div class="vacancy-description__item"><h2>Лавозимий
                                 мажбуриятлари</h2>
                                 <ul>
-                                    <li><span>·</span> {{ vacancy.majbur }}
+                                    <li v-html="vacancy.majbur">
                                     </li>
                                 </ul>
                             </div>
@@ -550,7 +549,7 @@ export default {
             setTimeout(() => {
                 if (_this.$auth.user() != null) _this.$router.push('/services/vacancy/'+ _this.vacancy.id +'/resume'); else {
                     _this.$toast.warning('Хизматдан фойдаланиш учун авторизациядан ўтишингиз лозим');
-                    _this.$router.push('/login?request=/services/vacancy/resume');
+                    _this.$router.push('/login?request=/services/vacancy/'+ _this.vacancy.id +'/resume');
                 }
             }, 500)
 

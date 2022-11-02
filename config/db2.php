@@ -195,10 +195,10 @@ $databaseconfig221['password']='55788204';
 
 $databaseconfig228=$databaseconfig;
 $databaseconfig228['host']='192.168.212.228';
-$databaseconfig228['schema']='CONTROL';
+$databaseconfig228['schema']='epigued';
 $databaseconfig228['database']='S0601A6T';
-$databaseconfig228['username']='Kamol';
-$databaseconfig228['password']='55788204';
+$databaseconfig228['username']='Surat';
+$databaseconfig228['password']='As123456';
 
 $databaseconfig2_10=$databaseconfig;
 $databaseconfig2_10['host']='192.168.2.10';
@@ -206,6 +206,8 @@ $databaseconfig2_10['schema']='ELZVK';
 $databaseconfig2_10['database']='S2135C3W';
 $databaseconfig2_10['username']='kamol';
 $databaseconfig2_10['password']='q55788204';
+$databaseconfig2_10_EISVO=$databaseconfig2_10;
+$databaseconfig2_10_EISVO['schema']='YEISVO';
 
 return [
 
@@ -214,9 +216,11 @@ return [
         'db2_odbc' => $databaseconfig,
         'db2_odbcEA' => $databaseconfigEA,
         'db2_odbcInn' => $databaseconfigINN,
+        'databaseconfig212_228' => $databaseconfig228,
         'db2_odbc221' => $databaseconfig221,
         'db2_odbc_stat' => $databaseconfigSTAT,
         'databaseconfig2_10' => $databaseconfig2_10,
+        'databaseconfig2_10_EISVO' => $databaseconfig2_10_EISVO,
 
     ],
 

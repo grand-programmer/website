@@ -751,7 +751,6 @@ section.content_block .tab-content > .tab-pane {
     }
 
     .foydali-resurslar.row {
-        max-width: 900px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -759,10 +758,10 @@ section.content_block .tab-content > .tab-pane {
         align-self: center;
         margin: 0 auto;
 
-        .foydali-resurs.col-4 {
+        .foydali-resurs{
             min-height: 300px;
             margin: 15px 20px;
-            max-width: calc(33.3% - 40px);
+            max-width: calc(25% - 40px);
             background-color: #ccc;
             border-radius: 15px;
             position: relative;
@@ -797,19 +796,19 @@ section.content_block .tab-content > .tab-pane {
                 font-size: 20px;
             }
 
-            &:nth-of-type(1), &:nth-of-type(5) {
+            &:nth-of-type(4n+1) {
                 background-color: #63ce8e;
             }
 
-            &:nth-of-type(2) {
+            &:nth-of-type(4n+2) {
                 background-color: #5985cd;
             }
 
-            &:nth-of-type(3) {
+            &:nth-of-type(4n+3) {
                 background-color: #f8bd27;
             }
 
-            &:nth-of-type(4) {
+            &:nth-of-type(4n+4) {
                 background-color: #ce483d;
             }
         }
@@ -1042,6 +1041,10 @@ section.content_block .tab-content > .tab-pane {
 
 .news {
     margin-top: 140px;
+
+}
+.categories-chip .v-chip__content{
+    font-size: 15px;
 
 }
 
@@ -1377,7 +1380,7 @@ a.read_more {
             border-bottom: 1px solid #39ae69;
 
             a {
-                line-height: 20px;
+              /*  line-height: 20px;*/
 
                 span {
                     background: #39ae69;
@@ -1403,7 +1406,7 @@ a.read_more {
 
 .chose_inner_area {
     padding-top: 65px;
-    height: 580px;
+    /*height: 580px;*/
 
     .chose_inner_area .section_tittle {
         padding-bottom: 25px;
@@ -3560,6 +3563,7 @@ a.read_more {
             border: 1px solid #ccc;
             border-bottom: 9px solid #bb9d31;
             background-color: #fff;
+            height: 100%;
         }
 
         .profile-icon {
@@ -3851,7 +3855,7 @@ a.read_more {
     opacity: 0.025;
     background-repeat: repeat-y;
 }
-
+/*
 .col-12.rais::after {
     content: "";
     background-image: url(/img/icons/services-background2.png);
@@ -3865,7 +3869,7 @@ a.read_more {
     filter: grayscale(100%);
     z-index: -1;
     opacity: 0.5;
-}
+}*/
 
 .one-page {
     .footer_area {
@@ -4375,10 +4379,10 @@ a.read_more {
 
                         img {
                             transition: .9s;
-                            width: 100%;
-                            height: 100%;
-                            -o-object-fit: cover;
-                            object-fit: cover;
+                            min-width: 100%;
+                            max-height: 100%;
+                            /*-o-object-fit: cover;
+                            object-fit: cover;*/
                         }
                     }
 
@@ -5363,7 +5367,7 @@ vh
     img{
         width: 100%;
         max-width: 72vw;
-        min-width: 40vw;
+       /* min-width: 40vw;*/
         max-height: 75vh;
         height: 100%;
     }
@@ -5379,3 +5383,75 @@ vh
         }
     }
 }
+
+.position-sidebar{
+    position: fixed;
+    top: 30%;
+    left: 0;
+    width: 45px;
+    height: 100px;
+    background-color: #43454f;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: end;
+    z-index: 10000;
+
+    .sidebar-items{
+        display: flex;
+        justify-content: center;
+        /* margin: 10px; */
+        color: #fff;
+        border-top-right-radius: 10px;
+        border-bottom-right-radius: 10px;
+        margin-top: 2px;
+        padding: 5px;
+        cursor: pointer;
+        position: relative;
+        .v-icon{
+            padding: 5px 0;
+            color: #fff;
+            margin-right:10px;
+        }
+        &:hover{
+            background-color: var(--mycolor) !important;
+            .phone-number{
+                margin-left:0px;
+                transition: ease 0.5s;
+            }
+        }
+        .phone-number{
+            width: 150px;
+            margin-left: -150px;
+            transition: ease 0.5s;
+            color: #fff;
+            display: flex;
+            margin-right: 10px;
+            justify-content: end;
+            align-items: center;
+            font-size: 25px;
+            font-weight: bold;
+        }
+        &::after{
+            content: "";
+            width: 87%;
+            margin-bottom: -1px;
+            height: 1px;
+            background-color: #39ae69;
+            display: block;
+            position: absolute;
+            bottom: 0;
+            opacity: 0.6;
+            left: 0;
+        }
+        &:last-child:after{
+            content: none;
+            display: none;
+
+        }
+    }
+}
+
+

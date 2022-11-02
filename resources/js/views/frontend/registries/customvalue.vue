@@ -135,8 +135,9 @@
                                         <template v-if="(new Date(item.inDecEndDate)) < (new Date())">
                                             <span style="border-radius: 5px;color: #fff; padding: 5px;
                                                     background-color: red;
-                                                    "></span>
-                                            {{ item.inDecNum }}
+                                                    ">{{ item.inDecNum }}
+                                            </span>
+
                                         </template>
                                         <template v-else>
                                             <span style="

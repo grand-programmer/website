@@ -49,17 +49,7 @@
                         >
                             Интеллектуал мулк объектлари тўғрисидаги маълумотлар
                         </v-stepper-step>
-                        <!--
 
-                                                <v-divider></v-divider>
-
-                                                <v-stepper-step
-                                                    step="4"
-                                                    @click="goStep(4)"
-                                                    :complete="isCompleted(4)"
-                                                >
-                                                    Ариза юбориш
-                                                </v-stepper-step>-->
                     </v-stepper-header>
 
                     <v-stepper-items>
@@ -68,41 +58,11 @@
                                 class="mb-12"
                             >
                                 <div class="row position-absolute yoriqnoma-text"><a
-                                    href="/storage/files/dastlabki-user.pptx"> Ариза тўлдириш бўйича йўриқмани юклаб
+                                    href="/storage/files/Intellektual-user.pptx"> Ариза тўлдириш бўйича йўриқмани юклаб
                                     олинг!
                                 </a></div>
                                 <ValidationObserver v-slot="{ invalid }" ref="stepValidation1">
                                     <v-row>
-
-                                        <!--                                        <v-col cols="3" class="d-flex align-items-center jis_yur">
-                                                                                    &lt;!&ndash;                                        <div class="form-field d-flex align-items-center jis_yur">
-                                                                                                                                <label :class="person.type==0?'primary':''">Юридик шахс</label>
-
-                                                                                                                                <v-switch v-model="person.type"></v-switch>
-                                                                                                                                <label :class="person.type==1?'primary':''">Жисмоний шахс</label>
-
-                                                                                                                            </div>&ndash;&gt;
-
-                                                                                    &lt;!&ndash;                                            <v-btn-toggle
-                                                                                                                                    v-model="person.type"
-
-                                                                                                                                    tile
-                                                                                                                                    group
-                                                                                                                                    mandatory
-                                                                                                                                >&ndash;&gt;
-
-
-                                                                                    <v-btn :color="app_type==='ariza'?'primary':''" @click="app_type='ariza'" >
-                                                                                        Реестрга киритиш
-                                                                                    </v-btn>
-                                                                                    <v-btn :color="app_type==='xabar'?'primary':''" @click="app_type='xabar'">
-                                                                                        Мулк ҳуқуқи бузилганлиги тўғрисида хабар бериш
-                                                                                    </v-btn>
-                                                                                    &lt;!&ndash;
-
-                                                                                                                                </v-btn-toggle>&ndash;&gt;
-
-                                                                                </v-col>-->
                                     </v-row>
                                     <v-row class="person_data mt-10">
                                         <v-col cols="6" v-if="person.type===1">
@@ -222,7 +182,7 @@
                                                     v-model="person.phone"
                                                     label="Телефон рақами"
                                                     required
-                                                    v-mask="'+998 ## ### ## ##'"
+                                                    v-mask="'+### ## ### ## ##'"
                                                     hint="Аризачининг телефон рақами"
                                                     persistent-placeholder
                                                 >
@@ -291,12 +251,11 @@
                                 class="mb-12 "
                             >
                                 <div class="row position-absolute yoriqnoma-text"><a
-                                    href="/storage/files/dastlabki-user.pptx"> Ариза тўлдириш бўйича йўриқмани юклаб
+                                    href="/storage/files/Intellektual-user.pptx"> Ариза тўлдириш бўйича йўриқмани юклаб
                                     олинг!
                                 </a></div>
 
 
-                                <!--                                    <v-tab-item>-->
                                 <v-card
                                     color="basil"
                                     flat
@@ -306,401 +265,85 @@
                                                         ref="stepValidation2">
                                         <v-row class="align-end">
 
-
-                                            <!--                                            <v-tabs
-                                                                                            color="deep-purple accent-4"
-                                                                                            left
-                                                                                        >
-                                                                                            <v-tab>Ҳуқуқ эгаси</v-tab>
-                                                                                            <v-tab>Ишлаб чиқарувчи</v-tab>-->
-
-                                            <!--                                                <v-tab-item>-->
-                                            <v-container class="w-100 m-0 p-4">
+                                            <v-container fluid class="w-100 m-0 p-4">
                                                 <v-row>
-                                                    <v-col cols="4">
-                                                        <ValidationProvider name="Ҳуқуқ эгасининг номи"
-                                                                            rules="required"
-                                                                            v-slot="{ errors }">
-                                                            <v-text-field
-                                                                label="Ҳуқуқ эгасининг номи *"
-                                                                required
-                                                                hint="Ҳуқуқ эгасининг номи"
+                                                    <v-col cols="12" class="row"
+                                                           style="margin: 0 0 40px 0; border: 1px dashed #39ae69;">
+                                                        <v-col cols="4">
+                                                            <text-field
+                                                                rules="required"
                                                                 persistent-placeholder
                                                                 v-model="application.huquq_egasi_nomi"
-                                                            >
+                                                                title="Ҳуқуқ эгасининг номи"/>
+                                                        </v-col>
 
-                                                            </v-text-field>
-                                                            <span class="red--text">{{ errors[0] }}</span>
-                                                        </ValidationProvider>
-                                                    </v-col>
-                                                    <v-col cols="4">
-                                                        <ValidationProvider name="Ҳуқуқ эгасининг манзили"
-                                                                            rules="required"
-                                                                            v-slot="{ errors }">
-                                                            <v-text-field
-                                                                label="Ҳуқуқ эгасининг манзили *"
-                                                                required
-                                                                hint="Ҳуқуқ эгасининг манзили"
-                                                                persistent-placeholder
+                                                        <v-col cols="4">
+                                                            <text-field
+                                                                title="Ҳуқуқ эгасининг манзили"
+                                                                rules="required"
                                                                 v-model="application.huquq_egasi_manzili"
-                                                            >
-
-                                                            </v-text-field>
-                                                            <span class="red--text">{{ errors[0] }}</span>
-                                                        </ValidationProvider>
-                                                    </v-col>
-                                                    <v-col cols="4">
-                                                        <ValidationProvider name="Ҳуқуқ эгаси яшаётган давлат"
-                                                                            rules="required"
-                                                                            v-slot="{ errors }">
-                                                            <v-text-field
-                                                                label="Ҳуқуқ эгаси яшаётган давлат *"
-                                                                required
-                                                                hint="Ҳуқуқ эгаси яшаётган давлат"
-                                                                persistent-placeholder
+                                                                persistent-placeholder>
+                                                            </text-field>
+                                                        </v-col>
+                                                        <v-col cols="4">
+                                                            <autocomplete-field
+                                                                title="Ҳуқуқ эгаси яшаётган давлат"
+                                                                rules="required"
                                                                 v-model="application.huquq_egasi_davlat"
+                                                                persistent-placeholder
+                                                                :options="countries"
+                                                                name="1111"
+                                                                countryfield
+                                                                clearable
                                                             >
 
-                                                            </v-text-field>
-                                                            <span class="red--text">{{ errors[0] }}</span>
-                                                        </ValidationProvider>
-                                                    </v-col>
-                                                    <v-col cols="4">
-                                                        <ValidationProvider
-                                                            name="Ҳуқуқ эгасининг телефон рақами"
-                                                            rules="required"
-                                                            v-slot="{ errors }">
-                                                            <v-text-field
-                                                                label="Ҳуқуқ эгасининг телефон рақами *"
-                                                                required
-                                                                hint="Ҳуқуқ эгасининг телефон рақами"
-                                                                persistent-placeholder
+                                                            </autocomplete-field>
+                                                        </v-col>
+                                                        <v-col cols="4">
+                                                            <text-field
+                                                                title="Ҳуқуқ эгасининг телефон рақами"
+                                                                rules="required"
                                                                 v-model="application.huquq_egasi_phone"
-                                                            >
-                                                            </v-text-field>
-                                                            <span class="red--text">{{ errors[0] }}</span>
-                                                        </ValidationProvider>
-                                                    </v-col>
+                                                                v-mask="'+### ## ### ## ##'"
+                                                                persistent-placeholder>
+                                                            </text-field>
 
-                                                    <v-col cols="4">
-                                                        <ValidationProvider name="Ҳуқуқ эгасининг эмаили"
-                                                                            rules="required"
-                                                                            v-slot="{ errors }">
-                                                            <v-text-field
-                                                                label="Ҳуқуқ эгасининг эмаили *"
-                                                                required
-                                                                hint="Ҳуқуқ эгасининг эмаили"
-                                                                persistent-placeholder
+                                                        </v-col>
+                                                        <v-col cols="4">
+                                                            <text-field
+                                                                title="Ҳуқуқ эгасининг эмаил манзили"
+                                                                rules="required|email"
+                                                                type="email"
                                                                 v-model="application.huquq_egasi_mail"
-                                                            >
-                                                            </v-text-field>
-                                                            <span class="red--text">{{ errors[0] }}</span>
-                                                        </ValidationProvider>
+                                                                persistent-placeholder>
+                                                            </text-field>
+                                                        </v-col>
+                                                        <dialog-chips
+                                                            @errors-changed="setIshChiqTotalError($event)"
+                                                            v-model="application.ishchiq"
+                                                            :error="ishchiqErrors"
+                                                            :total_error="ishchiqTotalErrors"></dialog-chips>
+
+
+                                                        <v-col cols="3">
+                                                            <text-field
+                                                                v-model="application.ishonchnoma_sana"
+                                                                title="Ишончнома амал қилиш муддати"
+                                                                hint="М: 2020-01-01--2023-01-01"
+                                                                persistent-placeholder
+                                                                append-icon="mdi-calendar"
+                                                                v-mask="'####-##-##--####-##-##'"
+                                                            />
+
+                                                        </v-col>
+                                                        <v-col cols="5">
+                                                            <e-arxiv-file v-model="application.ishonchnoma_file"
+                                                                          norequired label="Ишончнома сканери"/>
+                                                        </v-col>
                                                     </v-col>
-                                                    <v-col cols="6 d-flex align-items-center">
-                                                        <h5 class=" pb-2">
-                                                            Ишлаб чиқарувчи
-                                                        </h5>
-
-                                                        <v-btn
-                                                            class="ml-5"
-                                                            color="primary"
-                                                            rounded
-                                                            dark
-                                                            @click="openIshChiq"
-                                                        >
-                                                            <v-icon large class="mr-2 " style="font-size: 15px">
-                                                                mdi-plus
-                                                            </v-icon>
-
-                                                            Қўшиш
-                                                        </v-btn>
-
-                                                    </v-col>
-                                                    <v-dialog
-                                                        v-model="dialog.ishlabchiqaruvchi"
-                                                        max-width="900px"
-
-                                                    >
-
-
-                                                        <v-card>
-                                                            <v-card-title>
-                                                            <span
-                                                                class="text-h5">Ишлаб чиқарувчи тўғрисида маълумотлар</span>
-                                                            </v-card-title>
-                                                            <v-card-text>
-                                                                <v-container class="w-100 m-0 p-4">
-
-                                                                    <ValidationObserver v-slot="{ invalid }"
-                                                                                        ref="ishlabchiqarilgan"
-                                                                                        tag="div" class="row">
-                                                                        <v-col cols="4">
-                                                                            <ValidationProvider
-                                                                                name="Ишлаб чиқарувчининг номи"
-                                                                                rules="required"
-                                                                                v-slot="{ errors }">
-                                                                                <v-text-field
-                                                                                    label="Ишлаб чиқарувчининг номи *"
-                                                                                    required
-                                                                                    hint="Ишлаб чиқарувчининг номи"
-                                                                                    persistent-placeholder
-                                                                                    v-model="ishchiq.nomi"
-                                                                                >
-
-                                                                                </v-text-field>
-                                                                                <span class="red--text">{{
-                                                                                        errors[0]
-                                                                                    }}</span>
-                                                                            </ValidationProvider>
-                                                                        </v-col>
-                                                                        <v-col cols="4">
-                                                                            <ValidationProvider
-                                                                                name="Ишлаб чиқарувчининг манзили"
-                                                                                rules="required"
-                                                                                v-slot="{ errors }">
-                                                                                <v-text-field
-                                                                                    label="Ишлаб чиқарувчининг манзили *"
-                                                                                    required
-                                                                                    hint="Ишлаб чиқарувчининг манзили"
-                                                                                    persistent-placeholder
-                                                                                    v-model="ishchiq.manzili"
-                                                                                >
-
-                                                                                </v-text-field>
-                                                                                <span class="red--text">{{
-                                                                                        errors[0]
-                                                                                    }}</span>
-                                                                            </ValidationProvider>
-                                                                        </v-col>
-                                                                        <v-col cols="4">
-                                                                            <ValidationProvider
-                                                                                name="Ишлаб чиқарувчи яшаётган давлат"
-                                                                                rules="required"
-                                                                                v-slot="{ errors }">
-                                                                                <v-text-field
-                                                                                    :label="$t('Ишлаб чиқарувчи яшаётган давлат') + '*'"
-                                                                                    required
-                                                                                    hint="Ишлаб чиқарувчи яшаётган давлат"
-                                                                                    persistent-placeholder
-                                                                                    v-model="ishchiq.davlat"
-                                                                                >
-
-                                                                                </v-text-field>
-                                                                                <span class="red--text">{{
-                                                                                        errors[0]
-                                                                                    }}</span>
-                                                                            </ValidationProvider>
-                                                                        </v-col>
-                                                                        <v-col cols="4">
-                                                                            <ValidationProvider
-                                                                                name="Ишлаб чиқарувчининг телефон рақами"
-                                                                                rules="required"
-                                                                                v-slot="{ errors }">
-                                                                                <v-text-field
-                                                                                    label="Ишлаб чиқарувчининг телефон рақами *"
-                                                                                    required
-                                                                                    hint="Ишлаб чиқарувчининг телефон рақами"
-                                                                                    persistent-placeholder
-                                                                                    v-model="ishchiq.phone"
-                                                                                >
-                                                                                </v-text-field>
-                                                                                <span class="red--text">{{
-                                                                                        errors[0]
-                                                                                    }}</span>
-                                                                            </ValidationProvider>
-                                                                        </v-col>
-                                                                        <v-col cols="4">
-                                                                            <ValidationProvider
-                                                                                name="Ишлаб чиқарувчининг эмаили"
-                                                                                rules="required"
-                                                                                v-slot="{ errors }">
-                                                                                <v-text-field
-                                                                                    label="Ишлаб чиқарувчининг эмаили *"
-                                                                                    required
-                                                                                    hint="Ишлаб чиқарувчининг эмаили"
-                                                                                    persistent-placeholder
-                                                                                    v-model="ishchiq.mail"
-                                                                                >
-                                                                                </v-text-field>
-                                                                                <span class="red--text">{{
-                                                                                        errors[0]
-                                                                                    }}</span>
-                                                                            </ValidationProvider>
-                                                                        </v-col>
-                                                                    </ValidationObserver>
-
-                                                                </v-container>
-                                                                <small>* майдонлар тўлдирилиши шарт</small>
-                                                            </v-card-text>
-                                                            <v-card-actions>
-                                                                <v-spacer></v-spacer>
-                                                                <!--                                                                            <v-btn
-                                                                                                                                                color="blue darken-1"
-                                                                                                                                                text
-                                                                                                                                                @click="dialog.tiftnqaror = false"
-                                                                                                                                            >
-                                                                                                                                                Ёпиш
-                                                                                                                                            </v-btn>-->
-                                                                <v-btn
-                                                                    color="blue darken-1"
-                                                                    text
-                                                                    @click="dialog.ishlabchiqaruvchi = false"
-                                                                >
-                                                                    Бекор қилиш
-                                                                </v-btn>
-                                                                <v-btn
-                                                                    color="blue darken-1"
-                                                                    text
-                                                                    @click="saveIshChiq"
-                                                                >
-                                                                    Сақлаш
-                                                                </v-btn>
-                                                            </v-card-actions>
-                                                        </v-card>
-                                                    </v-dialog>
-
-
-                                                    <v-chip-group
-                                                        column
-                                                    >
-
-
-                                                        <v-chip
-                                                            v-for="(ishchiqItem,key) in application.ishchiq"
-                                                            :key="key"
-                                                            class="ma-2"
-                                                            close
-                                                            v-if="ishchiqItem.nomi"
-                                                            @click="openIshChiq(key)"
-                                                            @click:close="application.ishchiq.splice(key,1)"
-                                                        >
-
-                                                            <span style="font-size: 18px">{{ ishchiqItem.nomi }}</span>
-                                                        </v-chip>
-                                                    </v-chip-group>
-
 
                                                 </v-row>
                                             </v-container>
-
-                                            <!--                                                </v-tab-item>-->
-                                            <!--                                                <v-tab-item>
-                                                                                                <v-container class="w-100 m-0 p-4">
-                                                                                                    <v-row>
-                                                                                                        <v-col cols="4">
-                                                                                                            <ValidationProvider name="Ишлаб чиқарувчининг номи"
-                                                                                                                                rules="required"
-                                                                                                                                v-slot="{ errors }">
-                                                                                                                <v-text-field
-                                                                                                                    label="Ишлаб чиқарувчининг номи *"
-                                                                                                                    required
-                                                                                                                    hint="Ишлаб чиқарувчининг номи"
-                                                                                                                    persistent-placeholder
-                                                                                                                    v-model="ishchiq.nomi"
-                                                                                                                >
-
-                                                                                                                </v-text-field>
-                                                                                                                <span class="red--text">{{ errors[0] }}</span>
-                                                                                                            </ValidationProvider>
-                                                                                                        </v-col>
-                                                                                                        <v-col cols="4">
-                                                                                                            <ValidationProvider name="Ишлаб чиқарувчининг манзили"
-                                                                                                                                rules="required"
-                                                                                                                                v-slot="{ errors }">
-                                                                                                                <v-text-field
-                                                                                                                    label="Ишлаб чиқарувчининг манзили *"
-                                                                                                                    required
-                                                                                                                    hint="Ишлаб чиқарувчининг манзили"
-                                                                                                                    persistent-placeholder
-                                                                                                                    v-model="ishchiq.manzili"
-                                                                                                                >
-
-                                                                                                                </v-text-field>
-                                                                                                                <span class="red--text">{{ errors[0] }}</span>
-                                                                                                            </ValidationProvider>
-                                                                                                        </v-col>
-                                                                                                        <v-col cols="4">
-                                                                                                            <ValidationProvider
-                                                                                                                name="Ишлаб чиқарувчи яшаётган давлат"
-                                                                                                                rules="required"
-                                                                                                                v-slot="{ errors }">
-                                                                                                                <v-text-field
-                                                                                                                    label="Ишлаб чиқарувчи яшаётган давлат *"
-                                                                                                                    required
-                                                                                                                    hint="Ишлаб чиқарувчи яшаётган давлат"
-                                                                                                                    persistent-placeholder
-                                                                                                                    v-model="ishchiq.davlat"
-                                                                                                                >
-
-                                                                                                                </v-text-field>
-                                                                                                                <span class="red--text">{{ errors[0] }}</span>
-                                                                                                            </ValidationProvider>
-                                                                                                        </v-col>
-                                                                                                        <v-col cols="4">
-                                                                                                            <ValidationProvider
-                                                                                                                name="Ишлаб чиқарувчининг телефон рақами"
-                                                                                                                rules="required"
-                                                                                                                v-slot="{ errors }">
-                                                                                                                <v-text-field
-                                                                                                                    label="Ишлаб чиқарувчининг телефон рақами *"
-                                                                                                                    required
-                                                                                                                    hint="Ишлаб чиқарувчининг телефон рақами"
-                                                                                                                    persistent-placeholder
-                                                                                                                    v-model="ishchiq.phone"
-                                                                                                                >
-                                                                                                                </v-text-field>
-                                                                                                                <span class="red--text">{{ errors[0] }}</span>
-                                                                                                            </ValidationProvider>
-                                                                                                        </v-col>
-                                                                                                        <v-col cols="4">
-                                                                                                            <ValidationProvider name="Ишлаб чиқарувчининг эмаили"
-                                                                                                                                rules="required"
-                                                                                                                                v-slot="{ errors }">
-                                                                                                                <v-text-field
-                                                                                                                    label="Ишлаб чиқарувчининг эмаили *"
-                                                                                                                    required
-                                                                                                                    hint="Ишлаб чиқарувчининг эмаили"
-                                                                                                                    persistent-placeholder
-                                                                                                                    v-model="ishchiq.mail"
-                                                                                                                >
-                                                                                                                </v-text-field>
-                                                                                                                <span class="red--text">{{ errors[0] }}</span>
-                                                                                                            </ValidationProvider>
-                                                                                                        </v-col>
-
-                                                                                                    </v-row>
-
-                                                                                                </v-container>
-                                                                                            </v-tab-item>-->
-                                            <!--                                            </v-tabs>-->
-
-
-                                            <!--                                            <v-col cols="5">
-                                                                                            <ValidationProvider name="Импортчи/юкни қабул қилувчи СТИРи" rules="required"
-                                                                                                                v-slot="{ errors }">
-                                                                                                <v-autocomplete
-                                                                                                    v-model="application.importInn"
-                                                                                                    label="Импортчи/юкни қабул қилувчи СТИРи"
-                                                                                                    required
-                                                                                                    hint="Импортчи/юкни қабул қилувчи СТИРи"
-                                                                                                    persistent-hint
-                                                                                                    :items="importInns"
-                                                                                                    item-text="shortname"
-                                                                                                    item-value="tin"
-                                                                                                    name="importInn"
-                                                                                                    hide-no-data
-                                                                                                    :loading="loading.importInn"
-                                                                                                    :search-input.sync="search_inn"
-                                                                                                    return-object
-                                                                                                >
-                                                                                                </v-autocomplete>
-                                                                                                <span class="red--text">{{ errors[0] }}</span>
-                                                                                            </ValidationProvider>
-
-                                                                                        </v-col>-->
-
-
                                         </v-row>
 
                                     </ValidationObserver>
@@ -773,7 +416,7 @@
                                                        flat
                                                 >
                                                     <ValidationObserver v-slot="{ invalid }"
-                                                                        :ref="'stepValidation2Product'+tovar.id">
+                                                                        :ref="'stepValidation2Product'+ key">
                                                         <v-row>
                                                             <v-col cols="6">
                                                                 <ValidationProvider
@@ -787,23 +430,6 @@
                                                                         hint="Интеллектуал мулк объекти тавсифи"
                                                                         v-model="application.tovarlar[key].nomlanishi"
                                                                     >
-                                                                    </v-text-field>
-                                                                    <span class="red--text">{{ errors[0] }}</span>
-                                                                </ValidationProvider>
-                                                            </v-col>
-                                                            <v-col cols="6">
-                                                                <ValidationProvider
-                                                                    name="Интеллектуал мулк объекти ТХХК таснифи"
-                                                                    rules="required"
-                                                                    v-slot="{ errors }">
-                                                                    <v-text-field
-                                                                        label="Интеллектуал мулк объекти ТХХК таснифи *"
-                                                                        persistent-placeholder
-                                                                        name="tasnifi"
-                                                                        hint="Товарнинг ва хизматларнинг халқаро классификатори"
-                                                                        v-model="application.tovarlar[key].tasnifi"
-                                                                    >
-
                                                                     </v-text-field>
                                                                     <span class="red--text">{{ errors[0] }}</span>
                                                                 </ValidationProvider>
@@ -833,7 +459,7 @@
                                                                         class="pt-0"
                                                                         :search-input.sync="application.tovarlar[key].search_tftn"
                                                                     >
-                                                                        <template v-slot:selection="data" >
+                                                                        <template v-slot:selection="data">
                                                                             <v-chip
                                                                                 :data="data"
                                                                                 v-bind="data.attrs"
@@ -841,8 +467,11 @@
                                                                                 close
                                                                                 @click="data.select"
                                                                                 @click:close="remove(data.item)"
+
                                                                             >
-                                                                                {{ data.item.id }}
+                                                                                <span style="font-size: 14px"> {{
+                                                                                        data.item.id
+                                                                                    }}</span>
                                                                             </v-chip>
                                                                         </template>
 
@@ -851,298 +480,345 @@
                                                                     <span class="red--text">{{ errors[0] }}</span>
                                                                 </ValidationProvider>
                                                             </v-col>
-                                                            <v-col cols="3">
+                                                            <v-col cols="12">
+
                                                                 <ValidationProvider
-                                                                    name="Гувоҳномаси рақами"
+                                                                    name="Интеллектуал мулк объекти ТХХК таснифи"
                                                                     rules="required"
                                                                     v-slot="{ errors }">
-                                                                    <v-text-field
-                                                                        label="Гувоҳнома рақамини киритинг *"
+                                                                    <v-autocomplete
+                                                                        v-model="application.tovarlar[key].tasnifi"
+                                                                        label="Интеллектуал мулк объекти ТХХК таснифи *"
+                                                                        :items="klassifikatorlar"
+                                                                        item-text="label"
+                                                                        name="klassifikator"
+                                                                        hint="Товарнинг ва хизматларнинг халқаро классификатори"
                                                                         persistent-placeholder
-                                                                        name="guvohnoma_raqami"
-                                                                        hint="Ҳуқуқий ҳимояга олганлик гувоҳномаси"
-                                                                        v-model="application.tovarlar[key].guvohnoma_raqami"
+                                                                        hide-no-data
+                                                                        chips
+                                                                        clearable
+                                                                        hide-details
+                                                                        multiple
+                                                                        class="pt-0"
                                                                     >
+                                                                        <template v-slot:selection="data">
+                                                                            <v-chip
+                                                                                :data="data"
+                                                                                v-bind="data.attrs"
+                                                                                :input-value="data.selected"
+                                                                                close
+                                                                                @click="data.select"
+                                                                                @click:close="remove(data.item)"
 
-                                                                    </v-text-field>
+                                                                            >
+                                                                                <span style="font-size: 14px">{{
+                                                                                        data.item.value
+                                                                                    }}</span>
+                                                                            </v-chip>
+                                                                        </template>
+
+
+                                                                    </v-autocomplete>
                                                                     <span class="red--text">{{ errors[0] }}</span>
                                                                 </ValidationProvider>
+
                                                             </v-col>
+
                                                             <v-col cols="3">
-                                                                <v-menu
-                                                                    :ref="'menu_guvohnoma_ga'+key"
-                                                                    v-model="application.tovarlar[key].menu.guvohnoma_ga"
-                                                                    :close-on-content-click="false"
-                                                                    :return-value.sync="application.tovarlar[key].guvohnoma_ga"
-                                                                    transition="scale-transition"
-                                                                    offset-y
-                                                                    min-width="auto"
+                                                                <text-field
+                                                                    title="Гувоҳнома рақами"
+                                                                    hint="Ҳуқуқий ҳимояга олганлик гувоҳномаси"
+                                                                    persistent-placeholder
+                                                                    v-model="application.tovarlar[key].guvohnoma_raqami"
+                                                                    rules="required"
                                                                 >
-                                                                    <template
-                                                                        v-slot:activator="{ on, attrs }">
-                                                                        <v-text-field
-                                                                            v-model="application.tovarlar[key].guvohnoma_sana"
-                                                                            label="Гувоҳнома муддати"
-                                                                            prepend-icon="mdi-calendar"
-                                                                            readonly
-                                                                            hint="Гувоҳнома амал қилиш муддати"
-                                                                            persistent-placeholder
-                                                                            v-bind="attrs"
-                                                                            v-on="on"
-                                                                        ></v-text-field>
-                                                                    </template>
-                                                                    <v-date-picker
-                                                                        v-model="application.tovarlar[key].datepicker"
-                                                                        no-title
-                                                                        range
-                                                                        scrollable
-                                                                        locale="ru-ru"
-                                                                    >
-                                                                        <v-spacer></v-spacer>
-                                                                        <v-btn
-                                                                            text
-                                                                            color="primary"
-                                                                            @click="application.tovarlar[key].menu.guvohnoma_ga = false"
-                                                                        >
-                                                                            Бекор қилиш
-                                                                        </v-btn>
-                                                                        <v-btn
-                                                                            text
-                                                                            color="primary"
-                                                                            @click="$refs['menu_guvohnoma_ga'+key][0].save(application.tovarlar[key].guvohnoma_ga);  application.tovarlar[key].guvohnoma_sana=formatDateRange(application.tovarlar[key].datepicker)"
-                                                                        >
-                                                                            Сақлаш
-                                                                        </v-btn>
-                                                                    </v-date-picker>
-                                                                </v-menu>
+
+                                                                </text-field>
 
                                                             </v-col>
                                                             <v-col cols="3">
-                                                                <v-menu
-                                                                    :ref="'menu_reestr_muddat'+key"
-                                                                    v-model="application.tovarlar[key].menu.reestr_muddat"
-                                                                    :close-on-content-click="false"
-                                                                    :return-value.sync="application.tovarlar[key].r_muddat"
-                                                                    transition="scale-transition"
-                                                                    offset-y
-                                                                    min-width="auto"
-                                                                >
-                                                                    <template
-                                                                        v-slot:activator="{ on, attrs }">
-                                                                        <v-text-field
-                                                                            v-model="application.tovarlar[key].reestr_muddat"
-                                                                            label="Реестр муддати"
-                                                                            prepend-icon="mdi-calendar"
-                                                                            readonly
-                                                                            hint="Сўралаётган реестр вақт оралиғи"
-                                                                            persistent-placeholder
-                                                                            v-bind="attrs"
-                                                                            v-on="on"
-                                                                        ></v-text-field>
-                                                                    </template>
-                                                                    <v-date-picker
-                                                                        v-model="application.tovarlar[key].datepickerreestr"
-                                                                        no-title
-                                                                        range
-                                                                        scrollable
-                                                                        locale="ru-ru"
-                                                                    >
-                                                                        <v-spacer></v-spacer>
-                                                                        <v-btn
-                                                                            text
-                                                                            color="primary"
-                                                                            @click="application.tovarlar[key].menu.reestr_muddat = false"
-                                                                        >
-                                                                            Бекор қилиш
-                                                                        </v-btn>
-                                                                        <v-btn
-                                                                            text
-                                                                            color="primary"
-                                                                            @click="$refs['menu_reestr_muddat'+key][0].save(application.tovarlar[key].reestr_muddat); application.tovarlar[key].reestr_muddat=formatDateRange(application.tovarlar[key].datepickerreestr)"
-                                                                        >
-                                                                            Сақлаш
-                                                                        </v-btn>
-                                                                    </v-date-picker>
-                                                                </v-menu>
+                                                                <text-field
+                                                                    v-model="application.tovarlar[key].guvohnoma_sana"
+                                                                    title="Гувоҳнома муддати"
+                                                                    append-icon="mdi-calendar"
+                                                                    hint="М: 2020-01-01--2023-01-01"
+                                                                    rules="required"
+                                                                    persistent-placeholder
+                                                                    v-mask="'####-##-##--####-##-##'"
+                                                                ></text-field>
+                                                                <!--                                                                <v-menu
+                                                                                                                                    :ref="'menu_guvohnoma_ga'+key"
+                                                                                                                                    v-model="application.tovarlar[key].menu.guvohnoma_ga"
+                                                                                                                                    :close-on-content-click="false"
+                                                                                                                                    :return-value.sync="application.tovarlar[key].guvohnoma_ga"
+                                                                                                                                    transition="scale-transition"
+                                                                                                                                    offset-y
+                                                                                                                                    min-width="auto"
+                                                                                                                                >
+                                                                                                                                    <template
+                                                                                                                                        v-slot:activator="{ on, attrs }">
+
+                                                                                                                                    </template>
+                                                                                                                                    <v-date-picker
+                                                                                                                                        v-model="application.tovarlar[key].datepicker"
+                                                                                                                                        no-title
+                                                                                                                                        range
+                                                                                                                                        scrollable
+                                                                                                                                        locale="ru-ru"
+                                                                                                                                    >
+                                                                                                                                        <v-spacer></v-spacer>
+                                                                                                                                        <v-btn
+                                                                                                                                            text
+                                                                                                                                            color="primary"
+                                                                                                                                            @click="application.tovarlar[key].menu.guvohnoma_ga = false"
+                                                                                                                                        >
+                                                                                                                                            Бекор қилиш
+                                                                                                                                        </v-btn>
+                                                                                                                                        <v-btn
+                                                                                                                                            text
+                                                                                                                                            color="primary"
+                                                                                                                                            @click="$refs['menu_guvohnoma_ga'+key][0].save(application.tovarlar[key].guvohnoma_ga);  application.tovarlar[key].guvohnoma_sana=formatDateRange(application.tovarlar[key].datepicker)"
+                                                                                                                                        >
+                                                                                                                                            Сақлаш
+                                                                                                                                        </v-btn>
+                                                                                                                                    </v-date-picker>
+                                                                                                                                </v-menu>-->
+
+                                                            </v-col>
+                                                            <v-col cols="3">
+                                                                <text-field
+                                                                    v-model="application.tovarlar[key].reestr_muddat"
+                                                                    title="Реестр муддати"
+                                                                    append-icon="mdi-calendar"
+                                                                    hint="М: 2020-01-01--2023-01-01"
+                                                                    rules="required"
+                                                                    persistent-placeholder
+                                                                    v-mask="'####-##-##--####-##-##'"
+                                                                ></text-field>
+                                                                <!--                                                                <v-menu
+                                                                                                                                    :ref="'menu_reestr_muddat'+key"
+                                                                                                                                    v-model="application.tovarlar[key].menu.reestr_muddat"
+                                                                                                                                    :close-on-content-click="false"
+                                                                                                                                    :return-value.sync="application.tovarlar[key].r_muddat"
+                                                                                                                                    transition="scale-transition"
+                                                                                                                                    offset-y
+                                                                                                                                    min-width="auto"
+                                                                                                                                >
+                                                                                                                                    <template
+                                                                                                                                        v-slot:activator="{ on, attrs }">
+                                                                                                                                        <v-text-field
+                                                                                                                                            v-model="application.tovarlar[key].reestr_muddat"
+                                                                                                                                            label="Реестр муддати"
+                                                                                                                                            prepend-icon="mdi-calendar"
+                                                                                                                                            readonly
+                                                                                                                                            hint="Сўралаётган реестр вақт оралиғи"
+                                                                                                                                            persistent-placeholder
+                                                                                                                                            v-bind="attrs"
+                                                                                                                                            v-on="on"
+                                                                                                                                        ></v-text-field>
+                                                                                                                                    </template>
+                                                                                                                                    <v-date-picker
+                                                                                                                                        v-model="application.tovarlar[key].datepickerreestr"
+                                                                                                                                        no-title
+                                                                                                                                        range
+                                                                                                                                        scrollable
+                                                                                                                                        locale="ru-ru"
+                                                                                                                                    >
+                                                                                                                                        <v-spacer></v-spacer>
+                                                                                                                                        <v-btn
+                                                                                                                                            text
+                                                                                                                                            color="primary"
+                                                                                                                                            @click="application.tovarlar[key].menu.reestr_muddat = false"
+                                                                                                                                        >
+                                                                                                                                            Бекор қилиш
+                                                                                                                                        </v-btn>
+                                                                                                                                        <v-btn
+                                                                                                                                            text
+                                                                                                                                            color="primary"
+                                                                                                                                            @click="$refs['menu_reestr_muddat'+key][0].save(application.tovarlar[key].reestr_muddat); application.tovarlar[key].reestr_muddat=formatDateRange(application.tovarlar[key].datepickerreestr)"
+                                                                                                                                        >
+                                                                                                                                            Сақлаш
+                                                                                                                                        </v-btn>
+                                                                                                                                    </v-date-picker>
+                                                                                                                                </v-menu>-->
 
                                                             </v-col>
 
                                                             <v-col cols="9" class="position-relative">
-                                                                <div
-                                                                    class="border-bottom-dashed chips-dialog"
-                                                                    @click="openDocumentType"
-                                                                >
-                                                                    <span>Илова қилинадиган ҳужжатлар: *</span>
-                                                                    <v-chip-group
-                                                                        mandatory
-                                                                        style="height: 42px" class="d-block"
-
-                                                                    >
-                                                                        <v-chip
-                                                                            v-for="(doc,key) in application.documents"
-                                                                            :key="key"
-                                                                            v-if="doc.id && doc.type && doc.id.length>0"
-                                                                            @click:close="removeDocument(key)"
-                                                                        >
-                                                                            <template slot="default">
-                                                                                <!-- HTML that describe how select should render items when the select is open -->
-                                                                                <!--                                                                                {{ data.item.value }} - -->
-                                                                                <span class="v-chip__content"
-                                                                                      style="font-size: 15px">
-                                                                        {{ doc.type }}
-                                                                            </span>
-                                                                            </template>
-                                                                        </v-chip>
-                                                                    </v-chip-group>
-                                                                </div>
-
-                                                                <v-input
-                                                                    :messages="['Мулк гувоҳномаси, мулк расми, ва бошқалар']"
-                                                                />
-                                                                <ValidationProvider
-                                                                    :ref="'hujjatilova' + application.tovarlar[key].id"
-                                                                    name="Илова қилинадиган ҳужжатлар"
-                                                                    v-show="isvalidDocument"
-                                                                    v-slot="{ errors }">
-                                                        <span class="error--text">
-                                                       {{
-                                                                errors[0]
-                                                            }}
-                                                              </span>
-                                                                </ValidationProvider>
+                                                                <e-arxiv-file
+                                                                    v-model="application.tovarlar[key].documents"
+                                                                    multiple
+                                                                    :errors="ilova_error[key]"
+                                                                    hint="Мулк гувоҳномаси, мулк расми, ва бошқалар"/>
                                                                 <!--
-                                                                        <v-input
-                                                                            :messages="['Транспорт тури маълумотлари тўлдирилиши шарт! ']"
-                                                                        />-->
+                                                                                                                                <div
+                                                                                                                                    class="border-bottom-dashed chips-dialog"
+                                                                                                                                    @click="openDocumentType"
+                                                                                                                                >
+                                                                                                                                    <span>Илова қилинадиган ҳужжатлар: *</span>
+                                                                                                                                    <v-chip-group
+                                                                                                                                        mandatory
+                                                                                                                                        style="height: 42px" class="d-block"
+
+                                                                                                                                    >
+                                                                                                                                        <v-chip
+                                                                                                                                            v-for="(doc,key) in application.documents"
+                                                                                                                                            :key="key"
+                                                                                                                                            v-if="doc.id && doc.type && doc.id.length>0"
+                                                                                                                                            @click:close="removeDocument(key)"
+                                                                                                                                        >
+                                                                                                                                            <template slot="default">
+                                                                                                                                                <span class="v-chip__content"
+                                                                                                                                                      style="font-size: 15px">
+                                                                                                                                        {{ doc.type }}
+                                                                                                                                            </span>
+                                                                                                                                            </template>
+                                                                                                                                        </v-chip>
+                                                                                                                                    </v-chip-group>
+                                                                                                                                </div>
+
+                                                                                                                                <v-input
+                                                                                                                                    :messages="['Мулк гувоҳномаси, мулк расми, ва бошқалар']"
+                                                                                                                                />
+                                                                                                                                <ValidationProvider
+                                                                                                                                    :ref="'hujjatilova' + application.tovarlar[key].id"
+                                                                                                                                    name="Илова қилинадиган ҳужжатлар"
+                                                                                                                                    v-show="isvalidDocument"
+                                                                                                                                    v-slot="{ errors }">
+                                                                                                                        <span class="error&#45;&#45;text">
+                                                                                                                       {{
+                                                                                                                                errors[0]
+                                                                                                                            }}
+                                                                                                                              </span>
+                                                                                                                                </ValidationProvider>
+
+                                                                -->
 
                                                             </v-col>
-                                                            <v-dialog
-                                                                v-model="dialog.documenttype"
-                                                                max-width="700px"
+                                                            <!--                                                            <v-dialog
+                                                                                                                            v-model="dialog.documenttype"
+                                                                                                                            max-width="700px"
 
-                                                            >
+                                                                                                                        >
 
-                                                                <v-card class="scroll_card" light>
-                                                                    <v-card-title class=" px-4 py-4">
-                                                            <span
-                                                                class="text-h5 white--text">Илова қилинадиган ҳужжатлар </span>
-                                                                    </v-card-title>
-                                                                    <v-card-text>
-                                                                        <v-container>
-                                                                            <v-row>
+                                                                                                                            <v-card class="scroll_card" light>
+                                                                                                                                <v-card-title class=" px-4 py-4">
+                                                                                                                        <span
+                                                                                                                            class="text-h5 white&#45;&#45;text">Илова қилинадиган ҳужжатлар </span>
+                                                                                                                                </v-card-title>
+                                                                                                                                <v-card-text>
+                                                                                                                                    <v-container>
+                                                                                                                                        <v-row>
 
-                                                                                <v-col cols="12">
-                                                                                    <v-fab-transition>
+                                                                                                                                            <v-col cols="12">
+                                                                                                                                                <v-fab-transition>
 
-                                                                                        <v-btn
-                                                                                            color="primary"
-                                                                                            dark
-                                                                                            center
-                                                                                            large
-                                                                                            class="float-end"
-                                                                                            @click="AddDocument"
-                                                                                            style="height:35px;"
-                                                                                        >
+                                                                                                                                                    <v-btn
+                                                                                                                                                        color="primary"
+                                                                                                                                                        dark
+                                                                                                                                                        center
+                                                                                                                                                        large
+                                                                                                                                                        class="float-end"
+                                                                                                                                                        @click="AddDocument"
+                                                                                                                                                        style="height:35px;"
+                                                                                                                                                    >
 
-                                                                                            <v-icon>mdi-plus
-                                                                                            </v-icon>
-                                                                                            Файл Қўшиш
+                                                                                                                                                        <v-icon>mdi-plus
+                                                                                                                                                        </v-icon>
+                                                                                                                                                        Файл Қўшиш
 
-                                                                                        </v-btn>
-                                                                                    </v-fab-transition>
-                                                                                    <a class="float-left"
-                                                                                       style="border: 2px dashed;  width:50%; border-radius: 15px; padding: 10px 20px 5px;"
-                                                                                       @click="authorizeToEArxiv">Э-архив
-                                                                                        тизимига
-                                                                                        ўтиш </a>
+                                                                                                                                                    </v-btn>
+                                                                                                                                                </v-fab-transition>
+                                                                                                                                                <a class="float-left"
+                                                                                                                                                   style="border: 2px dashed;  width:50%; border-radius: 15px; padding: 10px 20px 5px;"
+                                                                                                                                                   @click="authorizeToEArxiv">Э-архив
+                                                                                                                                                    тизимига
+                                                                                                                                                    ўтиш </a>
 
-                                                                                </v-col><!--
-                                                                    <v-col cols="12">
+                                                                                                                                            </v-col>
+                                                                                                                                        </v-row>
+                                                                                                                                    </v-container>
+                                                                                                                                    <v-container>
+                                                                                                                                        <ValidationObserver v-slot="{ invalid }"
+                                                                                                                                                            :ref="'create_customs_documents' + tovar.id"
+                                                                                                                                                            style="display: flex; flex-direction: column-reverse"
+                                                                                                                                        >
+                                                                                                                                            <v-row
+                                                                                                                                                v-for="(doc,key) in documents"
+                                                                                                                                                :key="key">
 
-                                                                    </v-col>-->
-                                                                            </v-row>
-                                                                        </v-container>
-                                                                        <v-container>
-                                                                            <ValidationObserver v-slot="{ invalid }"
-                                                                                                :ref="'create_customs_documents' + tovar.id"
-                                                                                                style="display: flex; flex-direction: column-reverse"
-                                                                            >
-                                                                                <v-row
-                                                                                    v-for="(doc,key) in documents"
-                                                                                    :key="key">
+                                                                                                                                                <v-col cols="12">
+                                                                                                                                                    <ValidationProvider
+                                                                                                                                                        name="ID рақами"
+                                                                                                                                                        rules="required"
+                                                                                                                                                        v-slot="{ errors }">
+                                                                                                                                                        <v-text-field
+                                                                                                                                                            v-model="documents[key].id"
+                                                                                                                                                            label="ID рақами"
+                                                                                                                                                            persistent-hint
+                                                                                                                                                            loading
+                                                                                                                                                            counter="13"
+                                                                                                                                                            @keyup="myColor(documents[key].id,key)"
+                                                                                                                                                            hint="Ҳужжатнинг е-архив тизимидаги Fayl ID рақами"
+                                                                                                                                                        >
+                                                                                                                                                            <template v-slot:append>
+                                                                                                                                                                <v-icon
+                                                                                                                                                                    color="primary"
+                                                                                                                                                                    v-if="documents[key].valid">
+                                                                                                                                                                    mdi-check
+                                                                                                                                                                </v-icon>
+                                                                                                                                                                <v-icon color="red"
+                                                                                                                                                                        v-else>
+                                                                                                                                                                    mdi-close
+                                                                                                                                                                </v-icon>
+                                                                                                                                                            </template>
+                                                                                                                                                            <template
+                                                                                                                                                                v-slot:append-outer>
+                                                                                                                                                                <v-btn
+                                                                                                                                                                    color="danger"
+                                                                                                                                                                    dark
+                                                                                                                                                                    center
+                                                                                                                                                                    x-small
+                                                                                                                                                                    fab>
+                                                                                                                                                                    <v-icon
+                                                                                                                                                                        @click="removeDocument(key)">
+                                                                                                                                                                        mdi-minus
+                                                                                                                                                                    </v-icon>
+                                                                                                                                                                </v-btn>
+                                                                                                                                                            </template>
+                                                                                                                                                            <template
+                                                                                                                                                                v-slot:progress>
+                                                                                                                                                                <v-progress-linear
+                                                                                                                                                                    :value="Initprogress(documents[key].id)"
+                                                                                                                                                                    :color="documents[key].color"
+                                                                                                                                                                    absolute
+                                                                                                                                                                    height="3"
+                                                                                                                                                                ></v-progress-linear>
+                                                                                                                                                            </template>
+                                                                                                                                                        </v-text-field>
+                                                                                                                                                        <span class="red&#45;&#45;text">{{
+                                                                                                                                                                errors[0]
+                                                                                                                                                            }}</span>
+                                                                                                                                                    </ValidationProvider>
+                                                                                                                                                </v-col>
+                                                                                                                                            </v-row>
+                                                                                                                                        </ValidationObserver>
+                                                                                                                                    </v-container>
+                                                                                                                                    <small>* майдонлар тўлдирилиши шарт</small>
+                                                                                                                                </v-card-text>
+                                                                                                                                <v-card-actions>
+                                                                                                                                    <v-spacer></v-spacer>
+                                                                                                                                    <v-btn
+                                                                                                                                        color="blue darken-1"
+                                                                                                                                        text
+                                                                                                                                        @click="dialog.documenttype = false"
+                                                                                                                                    >
+                                                                                                                                        Ёпиш
+                                                                                                                                    </v-btn>
 
-                                                                                    <v-col cols="12">
-                                                                                        <ValidationProvider
-                                                                                            name="ID рақами"
-                                                                                            rules="required"
-                                                                                            v-slot="{ errors }">
-                                                                                            <v-text-field
-                                                                                                v-model="documents[key].id"
-                                                                                                label="ID рақами"
-                                                                                                persistent-hint
-                                                                                                loading
-                                                                                                counter="13"
-                                                                                                @keyup="myColor(documents[key].id,key)"
-                                                                                                hint="Ҳужжатнинг е-архив тизимидаги Fayl ID рақами"
-                                                                                            >
-                                                                                                <template v-slot:append>
-                                                                                                    <v-icon
-                                                                                                        color="primary"
-                                                                                                        v-if="documents[key].valid">
-                                                                                                        mdi-check
-                                                                                                    </v-icon>
-                                                                                                    <v-icon color="red"
-                                                                                                            v-else>
-                                                                                                        mdi-close
-                                                                                                    </v-icon>
-                                                                                                </template>
-                                                                                                <template
-                                                                                                    v-slot:append-outer>
-                                                                                                    <v-btn
-                                                                                                        color="danger"
-                                                                                                        dark
-                                                                                                        center
-                                                                                                        x-small
-                                                                                                        fab>
-                                                                                                        <v-icon
-                                                                                                            @click="removeDocument(key)">
-                                                                                                            mdi-minus
-                                                                                                        </v-icon>
-                                                                                                    </v-btn>
-                                                                                                </template>
-                                                                                                <template
-                                                                                                    v-slot:progress>
-                                                                                                    <v-progress-linear
-                                                                                                        :value="Initprogress(documents[key].id)"
-                                                                                                        :color="documents[key].color"
-                                                                                                        absolute
-                                                                                                        height="3"
-                                                                                                    ></v-progress-linear>
-                                                                                                </template>
-                                                                                            </v-text-field>
-                                                                                            <span class="red--text">{{
-                                                                                                    errors[0]
-                                                                                                }}</span>
-                                                                                        </ValidationProvider>
-                                                                                    </v-col>
-                                                                                </v-row>
-                                                                            </ValidationObserver>
-                                                                        </v-container>
-                                                                        <small>* майдонлар тўлдирилиши шарт</small>
-                                                                    </v-card-text>
-                                                                    <v-card-actions>
-                                                                        <v-spacer></v-spacer>
-                                                                        <v-btn
-                                                                            color="blue darken-1"
-                                                                            text
-                                                                            @click="dialog.documenttype = false"
-                                                                        >
-                                                                            Ёпиш
-                                                                        </v-btn>
-
-                                                                    </v-card-actions>
-                                                                </v-card>
-                                                            </v-dialog>
+                                                                                                                                </v-card-actions>
+                                                                                                                            </v-card>
+                                                                                                                        </v-dialog>-->
                                                         </v-row>
                                                     </ValidationObserver>
                                                 </v-row>
@@ -1181,175 +857,33 @@
 
                         </v-stepper-content>
 
-                        <!--
-                                                <v-stepper-content step="4">
-                                                    <v-card
-                                                        class="mb-12 tolovlar-tab"
-                                                    >
-                                                        <v-row>
-
-                                                            <v-col cols="6">
-                                                                <v-list>
-                                                                    <v-list-item class="ariza_nomer"> Ариза рақами: <span>{{
-                                                                            commodity.appNum
-                                                                        }} </span>
-                                                                    </v-list-item>
-                                                                    <v-list-item class="arizachi_fio"> Аризачи Ф.И.Ш: <span> {{
-                                                                            person.fio
-                                                                        }}</span>
-                                                                    </v-list-item>
-                                                                    <v-list-item> Ишлаб чиқарувчи: <span> Unicon LTD</span></v-list-item>
-                                                                    <v-list-item> Сотувчи: <span> Prisma LTD </span></v-list-item>
-                                                                    <v-list-item> Жўнатувчи:<span> Cyan LTD </span></v-list-item>
-                                                                </v-list>
-                                                            </v-col>
-                                                            <v-col cols="6">
-                                                                <v-list>
-                                                                    <v-list-item class="">Божхона қийматини аниқлаш усули:
-                                                                        <span>{{ commodity.method }} </span>
-                                                                    </v-list-item>
-                                                                    <v-list-item class=""> Етказиб бериш шарти:
-                                                                        <span>{{ inkoterms[yukData.apps.terms] }}</span></v-list-item>
-                                                                    <v-list-item> Илгари қабул қилинган дастлабки қарор:
-                                                                        <span> № {{ commodity.hsDecNum }}</span></v-list-item>
-                                                                    <v-list-item> Қўшимча маълумотлар: <span> {{ commodity.extraInfo }} </span>
-                                                                    </v-list-item>
-                                                                </v-list>
-
-
-                                                            </v-col>
-                                                            <v-col cols="12" class="tolov_product_table">
-                                                                <v-simple-table>
-                                                                    <template v-slot:default>
-                                                                        <thead>
-                                                                        <tr>
-                                                                            <th class="text-left">
-                                                                                ТИФ ТН код
-                                                                            </th>
-                                                                            <th class="text-left">
-                                                                                Марка
-                                                                            </th>
-                                                                            <th class="text-left">
-                                                                                Модел
-                                                                            </th>
-                                                                            <th class="text-left">
-                                                                                Савдо белгиси
-                                                                            </th>
-                                                                            <th class="text-left">
-                                                                                Нетто оғирлик
-                                                                            </th>
-                                                                            <th class="text-left">
-                                                                                Брутто оғирлик
-                                                                            </th>
-                                                                            <th class="text-left">
-                                                                                Фактура қиймати
-                                                                            </th>
-                                                                        </tr>
-                                                                        </thead>
-                                                                        <tbody>
-                                                                        <tr
-                                                                        >
-                                                                            <td>{{ commodity.hsCode }}</td>
-                                                                            <td>{{ commodity.mark }}</td>
-                                                                            <td>{{ commodity.model }}</td>
-                                                                            <td>{{ commodity.tradeMark }}</td>
-                                                                            <td>{{ commodity.netto }}</td>
-                                                                            <td>{{ commodity.brutto }}</td>
-                                                                            <td>{{ commodity.price }}</td>
-                                                                        </tr>
-                                                                        </tbody>
-                                                                    </template>
-                                                                </v-simple-table>
-
-                                                            </v-col>
-
-                                                        </v-row>
-                                                        <v-row>
-                                                            <v-col class="d-flex justify-content-end summary-div">
-                                                                <div>
-                                                                    Дастлабки қарор қабул қилганлик учун йиғим: 210 000 сўм
-                                                                    <v-icon small color="primary">mdi-information-outline</v-icon>
-                                                                </div>
-                                                            </v-col>
-                                                        </v-row>
-                                                        <v-list class="payment_systems">
-
-                                                            <v-list-item>
-                                                                Тўлов тизимлари орқали тўловни амалга оширинг:
-                                                            </v-list-item>
-                                                            <v-list-item>
-                                                                <v-row class="payment_systems_items">
-                                                                    <v-list class="">
-
-                                                                        <v-list-item class="payme"></v-list-item>
-                                                                        <v-list-item class="upay"></v-list-item>
-                                                                        <v-list-item class="click"></v-list-item>
-                                                                        <v-list-item class="oz_hisobidan">Божхона органларидаги ҳисоб
-                                                                            рақамидан
-                                                                        </v-list-item>
-
-                                                                    </v-list>
-                                                                </v-row>
-                                                            </v-list-item>
-                                                        </v-list>
-
-                                                        <v-row class="row mb-3 position-absolute bottom-0 end-0">
-                                                            <v-col class="d-flex tab_action_buttons">
-                                                                &lt;!&ndash;                                        <v-btn text
-                                                                                                               @click="prevStep"
-                                                                                                        >
-                                                                                                            Орқага
-                                                                                                        </v-btn>&ndash;&gt;
-                                                                <router-link to="/applications">
-                                                                    <v-btn
-                                                                        color="primary"
-                                                                        class="ma-2" style="min-width: max-content"
-
-                                                                    >
-                                                                        Ариза ҳолатини кўриш
-                                                                    </v-btn>
-
-                                                                </router-link>
-
-
-                                                            </v-col>
-                                                        </v-row>
-                                                    </v-card>
-
-                                                </v-stepper-content>-->
                     </v-stepper-items>
 
                 </v-stepper>
             </v-container>
         </div>
-        <form ref="arxivSubmit" action="https://ed2.customs.uz/E_ARXIV/authentication"
-              method="post" target="_blank" class="d-none">
-            <input type="hidden" id="SessionID" name="SessionID"><br/>
-            <input type="hidden" id="serialNumberHex" name="serialNumberHex" value="778ccc63"><br/>
-            <input type="hidden" id="INN" name="INN" value="511420390"/><br/>
-            <input type="hidden" id="YUR_INN" name="YUR_INN"/><br/>
-            <input type="hidden" id="PNFL" name="PNFL" value="30603901000109"><br/>
-            <input type="hidden" id="username" name="username" value="МУРАДОВ ФАРРУХ ШАКИРОВИЧ"/><br/>
-            <input type="hidden" id="ETR" name="ETR" value="ETR"><br/>
-            <!--            <input type="hidden" id="FOLDER_ID" name="FOLDER_ID" value="0058338434">-->
 
-        </form>
-        <a class="all_news service" target="_blank" href="https://t.me/dastlabkiqaror">
+        <a class="all_news service" target="_blank" href="https://t.me/IMO_bojxona">
             <img src="/public/images/telegram.png">
 
 
             <p> Саволларингизни йўлланг
                 <br>
-                @dastlabkiqaror
+                @IMO_bojxona
             </p></a>
     </div>
 </template>
 <script>
 import {extend, ValidationProvider, ValidationObserver} from 'vee-validate';
+import Myfield from "../../../../components/form/myfield";
 import * as rules from 'vee-validate/dist/rules';
 import messages from '../../../../locales/oz.json';
 import {types} from "../../../../../../public/js/mix/pdfmake";
 import i18n from "../../../../i18n";
+import TextField from "../../../../components/form/textfield";
+import AutocompleteField from "../../../../components/form/autocomplete";
+import EArxivFile from "../../../../components/form/e-arxiv-file";
+import DialogChips from "../../../../components/form/dialog-chips";
 
 
 Object.keys(rules).forEach(rule => {
@@ -1367,6 +901,7 @@ export default {
             index: [],
             regions: [],
             posts: [],
+            countries: [],
 
             breadcrumb_items: [
                 {
@@ -1389,45 +924,27 @@ export default {
                 },
             ],
             tovarIndex: 0,
-            ishchiq: {
-                nomi: "",
-                manzili: "",
-                davlat: "",
-                phone: "",
-                mail: "",
-            },
-            NullIshChiq: {
-                nomi: "",
-                manzili: "",
-                davlat: "",
-                phone: "",
-                mail: "",
-            },
+
             application: {
+                id: null,
                 huquq_egasi_nomi: null,
                 huquq_egasi_manzili: null,
                 huquq_egasi_davlat: null,
                 huquq_egasi_phone: null,
                 huquq_egasi_mail: null,
+                ishonchnoma_sana: null,
                 ishchiq: [],
+                documents: [],
+                ishonchnoma_file: [{}],
                 tovarlar: [
                     {
                         id: 0,
                         tab: 0,
-                        documents: [],
+                        documents: [{}],
                         tftn: [],
-                        datepicker: null,
-                        datepickerreestr: null,
                         reestr_muddat: null,
-                        r_muddat: null,
                         guvohnoma_sana: null,
-                        menu: {
-                            guvohnoma_ga: false,
-                            guvohnoma_cha: false,
-                            reestr_muddat: false
-                        },
                         search_tftn: ""
-
                     },
 
 
@@ -1435,6 +952,21 @@ export default {
 
 
             },
+            huquq_egasi: {
+                ipHolder: "",
+                ipHoldersAddr: "",
+                ipHolderCountry: "",
+                ipHolderTelNumber: "",
+                ipHolderMail: "",
+                dateStart: "",
+                dateEnd: "",
+                fileId: "",
+                personId: null,
+                personPin: null,
+            },
+            s01AppsManufacturerInfos: [],
+
+            ishonchnoma_datepicker: null,
             documents: [],
             person: {
                 type: 1, /// 1- fiz 0- yur
@@ -1453,7 +985,7 @@ export default {
             copytovar: {
                 id: 0,
                 tab: 0,
-                documents: [],
+                documents: [{}],
                 tradeName: null,
                 tradeMark: null,
                 model: null,
@@ -1466,19 +998,14 @@ export default {
                     guvohnoma_cha: false,
                     reestr_muddat: false
                 },
-                search_tftn:"",
+                search_tftn: "",
             },
             commodity: [],
-            app: {
-                apps: [],
-                docs: [],
-                commodities: [],
-            },
+            app: [],
             dialog: {
                 documenttype: false,
                 ishlabchiqaruvchi: false,
             },
-            boolDialogIshChiqNew: -1,
             date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
             modal: false,
             completedSteps: [],
@@ -1492,36 +1019,233 @@ export default {
             loading: {tftncode: false},
             tftncodes: [],
             search_tftn: null,
+            search: null,
             postloading: false,
             noRequiredTab: false,
             menu: {
                 guvohnoma_ga: false,
                 guvohnoma_cha: false,
-                reestr_muddat: false
+                reestr_muddat: false,
+                ishonchnoma: false
             },
-
+            errors: [],
+            totalerrors: "",
             fields: [
-                {key: 'tradeName', value: 'Товарнинг тижорат номи'},
-                {key: 'tradeMark', value: 'Товар маркаси'},
-                {key: 'model', value: 'Товар модели', tab: 1},
-                {key: 'basicQty', value: 'Намуналар сони', tab: 1},
-                {key: 'extraUnits', value: 'Ўлчов бирлиги'},
-                {key: 'comment', value: 'Қўшича маълумотлар ва изоҳлар'},
+                {key: 'ipHolder', value: 'Ҳуқуқ эгасининг номи'},
+                {key: 'ipHoldersAddr', value: 'Ҳуқуқ эгасининг манзили'},
+                {key: 'ipHolderCountry', value: 'Ҳуқуқ эгаси яшаётган давлат'},
+                {key: 'ipHolderTelNumber', value: 'Ҳуқуқ эгасининг телефон рақами'},
+                {key: 'ipHolderMail', value: 'Ҳуқуқ эгасининг эмаил манзили'},
+                {key: 'fileId', value: 'Ишончнома сканери'},
+                {key: 'personId', value: 'personId'},
+                {key: 'personPin', value: 'personPin'},
+                {key: 'dateStart', value: 'Ишончнома амал қилиш муддати'},
+                {key: 'dateEnd', value: 'Ишончнома амал қилиш муддати'},
+                {key: 'manufacturer', value: 'Ишлаб чиқарувчининг номи'},
+                {key: 'manufacturerTelNum', value: 'Ишлаб чиқарувчининг телефон рақами'},
+                {key: 'manufacturerAddr', value: 'Ишлаб чиқарувчининг манзили'},
+                {key: 'manufacturerMAil', value: 'Ишлаб чиқарувчининг email манзили'},
+                {key: 'ipDescription', value: 'Интеллектуал мулк объекти номланиши'},
+                {key: 'ipPassEndDate', value: 'Гувоҳнома муддати'},
+                {key: 'ipPassStartDate', value: 'Гувоҳнома муддати'},
+                {key: 'ipPassNum', value: 'Гувоҳнома рақами'},
+                {key: 'ipRegistrStartDate', value: 'Реестр муддати'},
+                {key: 'ipRegistrEndDate', value: 'Реестр муддати'},
+                {key: 'hsCode', value: 'ТИФ ТН код'},
+                {key: 'mktu', value: 'Интеллектуал мулк объекти ТХХК таснифи'},
+                {key: 'docs', value: 'Интеллектуал мулк объекти ТХХК таснифи'},
             ],
+            klassifikatorlar: [
+                {
+                    value: '01',
+                    label: '01-Саноат, илмий, фотография, қишлоқ хўжалиги, боғдорчилик ва ўрмон хўжалигида фойдаланиш учун мўлжалланган кимёвий маҳсулотлар; хом синтетик қатронлар, хом пластик материаллар; ўғитлар; ёнғинни ўчириш учун композициялар; металларни қотиш ва элимлаш учун препаратлар; озиқ-овқат маҳсулотларини сақлаш учун препаратлар; танинлар; саноат мақсадлари учун ёпиштирувчи моддалар',
+                    text: 'Саноат, илмий, фотография, қишлоқ хўжалиги, боғдорчилик ва ўрмон хўжалигида фойдаланиш учун мўлжалланган кимёвий маҳсулотлар; хом синтетик қатронлар, хом пластик материаллар; ўғитлар; ёнғинни ўчириш учун композициялар; металларни қотиш ва элимлаш учун препаратлар; озиқ-овқат маҳсулотларини сақлаш учун препаратлар; танинлар; саноат мақсадлари учун ёпиштирувчи моддалар'
+                },
+                {
+                    value: '02',
+                    label: '02-Бўёқлар, қуритиш мойлари, лаклар; металларни коррозиядан ва ёғочни йўқ қилишдан ҳимоя қилувчи ҳимоя воситалари; бўёқлар; мордантлар; хом табиий қатронлар; бадиий ва безак мақсадларида ва бадиий босма учун ишлатиладиган қатлам ва кукунли металлар',
+                    text: 'Бўёқлар, қуритиш мойлари, лаклар; металларни коррозиядан ва ёғочни йўқ қилишдан ҳимоя қилувчи ҳимоя воситалари; бўёқлар; мордантлар; хом табиий қатронлар; бадиий ва безак мақсадларида ва бадиий босма учун ишлатиладиган қатлам ва кукунли металлар'
+                },
+                {
+                    value: '03',
+                    label: '03-Оқартирувчи препаратлар ва бошқа кир ювиш воситалари; тозалаш, парлатиш, ёғсизлантириш ва абразив ишлов бериш учун препаратлар; доривор бўлмаган совунлар; парфюмерия, эфир мойлари, косметика, соч лосьонлари, тиш кукунлари ва пасталари, доривор бўлмаган',
+                    text: 'Оқартирувчи препаратлар ва бошқа кир ювиш воситалари; тозалаш, парлатиш, ёғсизлантириш ва абразив ишлов бериш учун препаратлар; доривор бўлмаган совунлар; парфюмерия, эфир мойлари, косметика, соч лосьонлари, тиш кукунлари ва пасталари, доривор бўлмаган'
+                },
+                {
+                    value: '04',
+                    label: '04-Техник мойлар ва мойлаш материаллари; мойлаш материаллари; чангни ютиш, намлаш ва боғлаш учун формулалар; ёқилғи (шу жумладан автобензинлар) ва ёритиш материаллари; ёруғлик учун фитил ва шамлар',
+                    text: 'Техник мойлар ва мойлаш материаллари; мойлаш материаллари; чангни ютиш, намлаш ва боғлаш учун формулалар; ёқилғи (шу жумладан автобензинлар) ва ёритиш материаллари; ёруғлик учун фитил ва шамлар'
+                },
+                {
+                    value: '05',
+                    label: '05-Фармацевтика маҳсулотлари, тиббий ва ветеринария препаратлари; тиббий мақсадлар учун гигиеник маҳсулотлар; тиббий ёки ветеринария учун мўлжалланган парҳез овқатлар ва моддалар, болалар овқатлари; одамлар ва ҳайвонлар учун озиқ-овқат қўшимчалари; гипслар, қопламалар; тишларни пломбалаш ва тиш гипсларини тайёрлаш учун материаллар; дезинфекциялаш воситалари; зарарли ҳайвонларни йўқ қилиш учун препаратлар; фунгицидлар, гербицидлар',
+                    text: 'Фармацевтика маҳсулотлари, тиббий ва ветеринария препаратлари; тиббий мақсадлар учун гигиеник маҳсулотлар; тиббий ёки ветеринария учун мўлжалланган парҳез овқатлар ва моддалар, болалар овқатлари; одамлар ва ҳайвонлар учун озиқ-овқат қўшимчалари; гипслар, қопламалар; тишларни пломбалаш ва тиш гипсларини тайёрлаш учун материаллар; дезинфекциялаш воситалари; зарарли ҳайвонларни йўқ қилиш учун препаратлар; фунгицидлар, гербицидлар'
+                },
+                {
+                    value: '06',
+                    label: '06-Оддий металлар ва уларнинг қотишмалари, рудалари; металл қурилиш материаллари; мобил металл конструкциялар ва конструкциялар; металл кабеллар ва симлар, электр бўлмаган; кичик металл ва аппарат маҳсулотлари; сақлаш ва ташиш учун металл идишлар; сейфлар',
+                    text: 'Оддий металлар ва уларнинг қотишмалари, рудалари; металл қурилиш материаллари; мобил металл конструкциялар ва конструкциялар; металл кабеллар ва симлар, электр бўлмаган; кичик металл ва аппарат маҳсулотлари; сақлаш ва ташиш учун металл идишлар; сейфлар'
+                },
+                {
+                    value: '07',
+                    label: '07-Машиналар ва машиналар; двигателлар (қуруқликдаги транспорт воситаларидан ташқари); уланишлар ва узатиш элементлари (ердаги транспорт воситалари учун мўлжалланганлардан ташқари); қўлда бошқариладиган асбоблардан ташқари қишлоқ хўжалиги асбоблари; инкубаторлар; савдо автоматлари',
+                    text: 'Машиналар ва машиналар; двигателлар (қуруқликдаги транспорт воситаларидан ташқари); уланишлар ва узатиш элементлари (ердаги транспорт воситалари учун мўлжалланганлардан ташқари); қўлда бошқариладиган асбоблардан ташқари қишлоқ хўжалиги асбоблари; инкубаторлар; савдо автоматлари'
+                },
+                {
+                    value: '08',
+                    label: '08-Қўл асбоблари ва асбоблари; вилкалар пичоқлари, вилкалар ва қошиқлар; темир қўллар; устара',
+                    text: 'Қўл асбоблари ва асбоблари; вилкалар пичоқлари, вилкалар ва қошиқлар; темир қўллар; устара'
+                },
+                {
+                    value: '09',
+                    label: '09-Илмий, денгиз, геодезия, фотография, кино, оптик асбоблар ва тортиш, ўлчаш, сигнализация, назорат қилиш (текшириш), қутқариш ва ўқитиш учун асбоблар; электр энергиясини узатиш, тақсимлаш, ўзгартириш, тўплаш, тартибга солиш ёки назорат қилиш учун асбоблар ва асбоблар; товуш ёки тасвирларни ёзиш, узатиш, қайта ишлаб чиқариш учун ускуналар; магнит сақлаш воситалари, овоз ёзиш дисклари; CД, ДВД ва бошқа рақамли ташувчилар; олдиндан тўлов билан қурилмалар учун механизмлар; касса аппаратлари, ҳисоблаш машиналари, ахборотни қайта ишлаш ускуналари ва компьютерлар; дастурий таъминот; ёнғинга қарши ускуналар',
+                    text: 'Илмий, денгиз, геодезия, фотография, кино, оптик асбоблар ва тортиш, ўлчаш, сигнализация, назорат қилиш (текшириш), қутқариш ва ўқитиш учун асбоблар; электр энергиясини узатиш, тақсимлаш, ўзгартириш, тўплаш, тартибга солиш ёки назорат қилиш учун асбоблар ва асбоблар; товуш ёки тасвирларни ёзиш, узатиш, қайта ишлаб чиқариш учун ускуналар; магнит сақлаш воситалари, овоз ёзиш дисклари; CД, ДВД ва бошқа рақамли ташувчилар; олдиндан тўлов билан қурилмалар учун механизмлар; касса аппаратлари, ҳисоблаш машиналари, ахборотни қайта ишлаш ускуналари ва компьютерлар; дастурий таъминот; ёнғинга қарши ускуналар'
+                },
+                {
+                    value: '10',
+                    label: '10-Жарроҳлик, тиббий, стоматология ва ветеринария асбоблари ва асбоблари; оёқ-қўл протезлари, кўз ва тиш протезлари; ортопедик маҳсулотлар; тикув учун материаллар; ногиронлар учун мўлжалланган терапевтик ва ёрдамчи ускуналар; массаж учун асбоблар; чақалоқлар учун асбоблар, ускуналар ва маҳсулотлар;',
+                    text: 'Жарроҳлик, тиббий, стоматология ва ветеринария асбоблари ва асбоблари; оёқ-қўл протезлари, кўз ва тиш протезлари; ортопедик маҳсулотлар; тикув учун материаллар; ногиронлар учун мўлжалланган терапевтик ва ёрдамчи ускуналар; массаж учун асбоблар; чақалоқлар учун асбоблар, ускуналар ва маҳсулотлар;'
+                },
+                {
+                    value: '11',
+                    label: '11-Озиқ-овқат маҳсулотларини ёритиш, иситиш, буг ʼ ишлаб чиқариш, иссиқлик билан ишлов бериш, совутиш, қуритиш, шамоллатиш, сув тақсимлаш ва санитария учун асбоблар.',
+                    text: 'Озиқ-овқат маҳсулотларини ёритиш, иситиш, буг ʼ ишлаб чиқариш, иссиқлик билан ишлов бериш, совутиш, қуритиш, шамоллатиш, сув тақсимлаш ва санитария учун асбоблар.'
+                },
+                {
+                    value: '12',
+                    label: '12-Транспорт воситаси; қуруқликда, сувда ва ҳавода ҳаракатланадиган транспорт воситалари"',
+                    text: 'Транспорт воситаси; қуруқликда, сувда ва ҳавода ҳаракатланадиган транспорт воситалари"'
+                },
+                {
+                    value: '13',
+                    label: '13-Ўқотар қуроллар; ўқ-дорилар ва снарядлар; портловчи моддалар; оташинлар',
+                    text: 'Ўқотар қуроллар; ўқ-дорилар ва снарядлар; портловчи моддалар; оташинлар'
+                },
+                {
+                    value: '14',
+                    label: '14-Қимматбаҳо металлар ва уларнинг қотишмалари; заргарлик буюмлари, бижутерия, қимматбаҳо ва ярим қимматбаҳо тошлар; соатлар ва хронометрик қурилмалар',
+                    text: 'Қимматбаҳо металлар ва уларнинг қотишмалари; заргарлик буюмлари, бижутерия, қимматбаҳо ва ярим қимматбаҳо тошлар; соатлар ва хронометрик қурилмалар'
+                },
+                {value: '15', label: '15-Мусиқий асбоблар', text: 'Мусиқий асбоблар'},
+                {
+                    value: '16',
+                    label: '16-Қоғоз, картон; босма маҳсулотлар; боғловчи материаллар; фотосуратлар; канселярия буюмлари, офис анжомлари, мебелдан ташқари; иш юритиш ва маиший мақсадлар учун ёпиштирувчи моддалар; рассомлар учун материаллар ва чизиш учун материаллар; чўткалар; ўқув материаллари ва кўргазмали қуроллар; қадоқлаш ва қадоқлаш учун чойшаблар, кино ва полиетилен пакетлар; шрифтлар, типографик клишелар',
+                    text: 'Қоғоз, картон; босма маҳсулотлар; боғловчи материаллар; фотосуратлар; канселярия буюмлари, офис анжомлари, мебелдан ташқари; иш юритиш ва маиший мақсадлар учун ёпиштирувчи моддалар; рассомлар учун материаллар ва чизиш учун материаллар; чўткалар; ўқув материаллари ва кўргазмали қуроллар; қадоқлаш ва қадоқлаш учун чойшаблар, кино ва полиетилен пакетлар; шрифтлар, типографик клишелар'
+                },
+                {
+                    value: '17',
+                    label: '17-Каучук, каучук, гуттаперча, асбест, слюда қисман ишланган ва ушбу материалларнинг ўрнини босувчи моддалар; қисман қайта ишланган пластмасса ва каучук; қуйиш, муҳрлаш ва изоляциялаш учун материаллар; мослашувчан қувурлар металл бўлмаган',
+                    text: 'Каучук, каучук, гуттаперча, асбест, слюда қисман ишланган ва ушбу материалларнинг ўрнини босувчи моддалар; қисман қайта ишланган пластмасса ва каучук; қуйиш, муҳрлаш ва изоляциялаш учун материаллар; мослашувчан қувурлар металл бўлмаган'
+                },
+                {
+                    value: '18',
+                    label: '18-Чарм ва тақлид тери; ҳайвонларнинг терилари; саёҳат сандиқлари, чамадонлар; ёмғир ва қуёшдан соябонлар; қамишлар; қамчи, қамчи, от жабдуқлари ва эгар; ёқалар, тасмалар ва ҳайвонлар учун кийим',
+                    text: 'Чарм ва тақлид тери; ҳайвонларнинг терилари; саёҳат сандиқлари, чамадонлар; ёмғир ва қуёшдан соябонлар; қамишлар; қамчи, қамчи, от жабдуқлари ва эгар; ёқалар, тасмалар ва ҳайвонлар учун кийим'
+                },
+                {
+                    value: '19',
+                    label: '19-Нометалл қурилиш материаллари; қурилиш учун мўлжалланган металл бўлмаган қаттиқ қувурлар; асфальт, қатронлар ва битум; металл бўлмаган мобил тузилмалар ва иншоотлар; металл бўлмаган ёдгорликлар.',
+                    text: 'Нометалл қурилиш материаллари; қурилиш учун мўлжалланган металл бўлмаган қаттиқ қувурлар; асфальт, қатронлар ва битум; металл бўлмаган мобил тузилмалар ва иншоотлар; металл бўлмаган ёдгорликлар.'
+                },
+                {
+                    value: '20',
+                    label: '20-Мебель, шиша (ойна), расм рамкалари; сақлаш ёки ташиш контейнерлари, металл бўлмаган; шох, суяк, фил суяги, марварид, ишланган ёки қисман ишланган; чиғаноқлар; меэрсчаум; амбер.',
+                    text: 'Мебель, шиша (ойна), расм рамкалари; сақлаш ёки ташиш контейнерлари, металл бўлмаган; шох, суяк, фил суяги, марварид, ишланган ёки қисман ишланган; чиғаноқлар; меэрсчаум; амбер.'
+                },
+                {
+                    value: '21',
+                    label: '21-Уй ва ошхона анжомлари ва идиш-товоқлар; тароқ ва губкалар; чўткалар, чўткалар бундан мустасно; чўтка маҳсулотлари учун материаллар; тозалаш ва тозалаш учун материал; ишлов берилмаган ёки қисман қайта ишланган шиша, қурилиш ойнасидан ташқари; шиша идишлар, чинни ва сопол идишлар',
+                    text: 'Уй ва ошхона анжомлари ва идиш-товоқлар; тароқ ва губкалар; чўткалар, чўткалар бундан мустасно; чўтка маҳсулотлари учун материаллар; тозалаш ва тозалаш учун материал; ишлов берилмаган ёки қисман қайта ишланган шиша, қурилиш ойнасидан ташқари; шиша идишлар, чинни ва сопол идишлар'
+                },
+                {
+                    value: '22',
+                    label: '22-Арқонлар, арқонлар, иплар; тармоқлар; чодирлар, шийпонлар; тўқимачилик ёки синтетик  материаллардан тайёрланган тентлар; сузиб юриш; юкларни қадоқланмаган ҳолда ташиш ва сақлаш учун сумкалар; қоғоз, картон, каучук ва пластмассадан ташқари пломба материаллари; тўқимачилик толали хом ашё ва уларнинг ўрнини босувчи материаллардан',
+                    text: 'Арқонлар, арқонлар, иплар; тармоқлар; чодирлар, шийпонлар; тўқимачилик ёки синтетик  материаллардан тайёрланган тентлар; сузиб юриш; юкларни қадоқланмаган ҳолда ташиш ва сақлаш учун сумкалар; қоғоз, картон, каучук ва пластмассадан ташқари пломба материаллари; тўқимачилик толали хом ашё ва уларнинг ўрнини босувчи материаллардан'
+                },
+                {value: '23', label: '23-Тўқимачилик иплари ва ипи', text: 'Тўқимачилик иплари ва ипи'},
+                {
+                    value: '24',
+                    label: '24-Тўқимачилик ва унинг ўрнини босувчи маҳсулотлар; маиший фойдаланиш учун чойшаблар; тўқимачилик ва пластмасса материаллардан тайёрланган пардалар;',
+                    text: 'Тўқимачилик ва унинг ўрнини босувчи маҳсулотлар; маиший фойдаланиш учун чойшаблар; тўқимачилик ва пластмасса материаллардан тайёрланган пардалар;'
+                },
+
+                {value: '25', label: '25-Кийим, пойабзал, бош кийимлар.', text: 'Кийим, пойабзал, бош кийимлар.'},
+                {
+                    value: '26',
+                    label: '26-Дантел ва кашталар, ортиқча оро бермай ва ленталар; тугмалар, тугмалар, илгаклар ва блоклар, игналар ва игналар; сунъий гуллар; соч безаклари; сунъий сочлар',
+                    text: 'Дантел ва кашталар, ортиқча оро бермай ва ленталар; тугмалар, тугмалар, илгаклар ва блоклар, игналар ва игналар; сунъий гуллар; соч безаклари; сунъий сочлар'
+                },
+                {
+                    value: '27',
+                    label: '27-Гиламлар,гиламларчалар, линолеум ва бошқа пол қопламалари; девор қоғози ва қоплама материаллари (тўқимачилик бўлмаган).',
+                    text: 'Гиламлар,гиламларчалар, линолеум ва бошқа пол қопламалари; девор қоғози ва қоплама материаллари (тўқимачилик бўлмаган).'
+                },
+                {
+                    value: '28',
+                    label: '28-Ўйинлар, ўйинчоқлар; видео ўйинлар учун қурилмалар; гимнастика ва спорт буюмлари; Рождество безаклари',
+                    text: 'Ўйинлар, ўйинчоқлар; видео ўйинлар учун қурилмалар; гимнастика ва спорт буюмлари; Рождество безаклари'
+                },
+                {
+                    value: '29',
+                    label: '29-Гўшт, балиқ, парранда ва ов; гўшт экстракти; консерваланган, қуритилган ва иссиқлик билан ишлов берилган сабзавотлар ва мевалар; желе, мураббо, компотлар; тухум; сут ва сут маҳсулотлари; истеъмол қилинадиган ёғлар ва ёғлар.',
+                    text: 'Гўшт, балиқ, парранда ва ов; гўшт экстракти; консерваланган, қуритилган ва иссиқлик билан ишлов берилган сабзавотлар ва мевалар; желе, мураббо, компотлар; тухум; сут ва сут маҳсулотлари; истеъмол қилинадиган ёғлар ва ёғлар.'
+                },
+                {
+                    value: '30',
+                    label: '30-Қаҳва, чой, какао ва кофе ўрнини босувчи маҳсулотлар; гуруч; тапиока (маниока) ва саго; ун ва дон маҳсулотлари;нон маҳсулотлари, қандолат маҳсулотлари; музқаймоқ; шакар, асал, мелас сиропи; хамиртуруш, пишириш кукунлари; туз; хантал; сирка, зираворлар; зираворлар; совутиш учун муз',
+                    text: 'Қаҳва, чой, какао ва кофе ўрнини босувчи маҳсулотлар; гуруч; тапиока (маниока) ва саго; ун ва дон маҳсулотлари;нон маҳсулотлари, қандолат маҳсулотлари; музқаймоқ; шакар, асал, мелас сиропи; хамиртуруш, пишириш кукунлари; туз; хантал; сирка, зираворлар; зираворлар; совутиш учун муз'
+                },
+                {
+                    value: '31',
+                    label: '31-Қишлоқ, сув хўжалиги, боғдорчилик ва ўрмон хўжалиги маҳсулотлари, қайта ишланмаган ва қайта ишланмаган; қайта ишланган ёки қайта ишланмаган дон ва уруғлар; янги мевалар, сабзавотлар ва хушбўй ўтлар; тирик ўсимликлар ва гуллар; лампочкалар, кўчатлар ва уруғлар; тирик ҳайвонлар; ҳайвонлар учун озуқа ва ичимликлар; солод.',
+                    text: 'Қишлоқ, сув хўжалиги, боғдорчилик ва ўрмон хўжалиги маҳсулотлари, қайта ишланмаган ва қайта ишланмаган; қайта ишланган ёки қайта ишланмаган дон ва уруғлар; янги мевалар, сабзавотлар ва хушбўй ўтлар; тирик ўсимликлар ва гуллар; лампочкалар, кўчатлар ва уруғлар; тирик ҳайвонлар; ҳайвонлар учун озуқа ва ичимликлар; солод.'
+                },
+                {
+                    value: '32',
+                    label: '32-Пиво; минерал ва газланган сувлар ва бошқа алкоголсиз ичимликлар; мевали ичимликлар ва мева шарбатлари; сироплар ва бошқа ичимликлар препаратлари',
+                    text: 'Пиво; минерал ва газланган сувлар ва бошқа алкоголсиз ичимликлар; мевали ичимликлар ва мева шарбатлари; сироплар ва бошқа ичимликлар препаратлари'
+                },
+                {
+                    value: '33',
+                    label: '33-Спиртли ичимликлар (пиводан ташқари).',
+                    text: 'Спиртли ичимликлар (пиводан ташқари).'
+                },
+                {
+                    value: '34',
+                    label: '34-Табак; Чекиш учун аксессуарлар; Гугурт',
+                    text: 'Табак; Чекиш учун аксессуарлар; Гугурт'
+                },
+            ],
+            ilova_error: [],
+
             float: ['^[-+][0-9]+\\.[0-9]+[eE][-+]?[0-9]+$']
         }
 
     },
     methods: {
-
+        async getCountries() {
+            let root = this
+            await axios.get('/api/v1/data/country?lang=uz').then(function (result) {
+                let countries = [];
+                result.data.forEach(function (item) {
+                    countries.push({
+                        'value': item['CODE'],
+                        'text': item['CODE'] + '-' + item['CD_NM'],
+                        'code': item['CD_ID_L']
+                    })
+                })
+                root.countries = countries;
+            })
+        },
         getField(val) {
             return this.fields.filter((obj) => {
                 if (obj.key === val) return obj.value
             })
         },
-        setProductErrors(errors) {
+        setProductErrors(tovar_id, errors) {
             const _this = this;
             if (errors) {
+                //console.log(errors)
                 let errorfield = [];
 
                 Object.keys(errors).forEach(keyItem => {
@@ -1529,92 +1253,65 @@ export default {
                         errorfield[_this.getField(keyItem)[0].value] = [errors[keyItem]];
                     }
                 });
+/*                console.log('errorfield')
+                console.log(tovar_id)
+                console.log(errorfield)*/
+                ///this.application.tovarlar.forEach((tovar) => {
 
-                this.application.tovarlar.forEach((tovar) => {
+                _this.$refs['stepValidation2Product' + tovar_id][0].setErrors(errorfield)
 
-                    _this.$refs['stepValidation2Product' + tovar.id][0].setErrors(errorfield)
-
-                })
+                /// })
 
             }
         },
+        setHuquqEgasiErrors(errors) {
+            const _this = this;
+            if (errors) {
 
-        isValidDoc(index = null) {
-            if (index) {
-                return !(!this.application.documents[index].id || !this.application.documents[index].type)
-            } else {
-                var returnDoc = false;
-                if (typeof this.application.documents !== 'undefined' && !this.application.documents.length) {
-                    return false;
-                }
-                if (typeof this.application.documents !== 'undefined')
-                    this.application.documents.forEach((document, k) => {
+                console.log(errors);
+                let errorfield = [];
 
-                        returnDoc = (!document.id || !document.type)
-                        if (returnDoc) {
-                            return true;
+                Object.keys(errors).forEach(keyItem => {
+                    if (typeof _this.getField(keyItem)[0] !== 'undefined' && typeof _this.getField(keyItem)[0].value !== 'undefined') {
+                        errorfield[_this.getField(keyItem)[0].value] = [errors[keyItem]];
+                    }
+                });
+                ///console.log(_this.$refs['stepValidation2'])
+                _this.$refs['stepValidation2'].setErrors(errorfield)
+            }
+        },
+        setIshChiqTotalError(error) {
+            this.totalerrors = error;
+        },
+        setIshlabChiqaruvchiErrors(errors) {
+            const _this = this;
+            if (errors) {
+                let errorfield = [];
+                _this.errors = [];
+                Object.keys(errors).forEach(keyError => {
+                    _this.errors[keyError] = [];
+                    Object.keys(errors[keyError]).forEach(keyItem => {
+                        if (typeof _this.getField(keyItem)[0] !== 'undefined' && typeof _this.getField(keyItem)[0].value !== 'undefined') {
+
+                            //let mykey={};
+                            //mykey[_this.getField(keyItem)[0].value]=errors[keyError][keyItem];
+                            //_this.errors[keyError].push(mykey)
+                            _this.errors[keyError][_this.getField(keyItem)[0].value] = errors[keyError][keyItem];
+
                         }
-                    })
-                return !returnDoc;
+                    });
+                });
+                _this.errors.splice(0, 1)
+                // console.log('asdasd')
+                // console.log(_this.$refs['ishlabchiqarilgan'])
+                //_this.$refs['ishlabchiqarilgan'].setErrors(errorfield)
+                ///console.log(_this.errors);
+                //_this.errors=errorfield;
             }
         },
-        openDocumentType() {
-            //console.log(this.$refs["hujjatilova" + this.tovarIndex]);
-            this.$refs["hujjatilova" + this.tovarIndex][0].applyResult({
-                errors: [], // array of string errors
-                valid: true, // boolean state
-                failedRules: {} // should be empty since this is a manual error.
-            })
-            this.documents = [];
-            //let object = this.filterObject(this.application.tovarlar, this.tovarIndex, 'id')
-            //if (object)
-            {
-                this.documents = this.application.documents;
-            }
-            this.dialog.documenttype = true;
-        },
+
         isCompletedStep(step) {
             return this.completedSteps.includes(step);
-        },
-        async getSessionId() {
-            let returnObject;
-            await axios.get("/api/v1/ex_api/gen_session").then(function (response) {
-                returnObject = response;
-            })
-            return returnObject;
-        },
-        async authorizeToEArxiv() {
-            const _this = this;
-            let result_data = null;
-            result_data = await this.getSessionId()
-            if (result_data && result_data.status === 200) {
-                $("#SessionID").attr('value', result_data.data.data.sesid)
-                $("#serialNumberHex").attr('value', result_data.data.data.serialnumber)
-                //$("#serialNumberHex").attr('value',result_data.data.data.serialnumber)
-                $("#INN").attr('value', result_data.data.data.userinn)
-                $("#PNFL").attr('value', _this.$auth.user().pin)
-
-                $("#username").attr('value', result_data.data.data.name.replaceAll("", "'"))
-                ///*_this.$toast.success(result_data.data.data.name)
-                //console.log(_this.$refs['arxivSubmit'])*/
-                //console.log(_this.$refs['arxivSubmit']);
-                _this.$refs['arxivSubmit'].submit();
-            }
-
-        },
-        AddDocument() {
-            //console.log(this.documents)
-            this.documents.push(
-                {
-                    id: null,
-                    type: null,
-                }
-            );
-        },
-
-        removeDocument(document) {
-            this.application.documents.splice(document, 1);
-            this.documents.splice(document, 1);
         },
 
         selectTabTovar(id = 0) {
@@ -1680,9 +1377,21 @@ export default {
             //return (objects.find(object => { object[prop] === parseInt(element)}))
         },
         async sendPerson(data = null) {
+
+            data['personType'] = data.type === 1 ? 0 : 1;
+            data['legalName'] = data.organization_name;
+            //delete data.type;
+            //delete data.region;
+            //delete data.position;
+            //delete data.fio;
+            //delete data.locationId;
+            delete data.organization_name;
+
+            data['phone'] = data.phone.replaceAll(" ", "");
+            data['phone'] = data.phone.replaceAll("+", "");
             let result = null;
             try {
-                await axios.post('/api/v1/ex_api/tftn-person', data).then(function (res) {
+                await axios.post('/api/v1/ex_api/intellektual-person', data).then(function (res) {
                     result = res;
                 })
                 return result;
@@ -1691,10 +1400,90 @@ export default {
 
             }
         },
+        async SendHuquqEgasi(data = null) {
+            const _this = this;
+            let result = null;
+            try {
+                await axios.post('/api/v1/ex_api/intellektual-huquq', data).then(function (res) {
+                    _this.setIshlabChiqaruvchiErrors([]);
+                    result = res;
+                }).catch((error) => {
+                    //console.log(error.response.data.data)
+                    if (typeof error.response.data !== 'undefined' && typeof error.response.data.data !== 'undefined') {
+                        let errorString = '';
+                        if (typeof error.response.data.data.errorsApps !== 'undefined') {
+                            _this.setHuquqEgasiErrors(error.response.data.data.errorsApps);
+                            errorString = 'Ҳуқуқ эгаси тўғрисидаги маълумотлардаги хатоликларни тўғрилаб қайтадан юборинг!'
+                        }
+                        if (typeof error.response.data.data.errorsCommodity !== 'undefined') {
+                            if (errorString.length > 0) {
+                                errorString = 'Ҳуқуқ эгаси ва ишлаб чиқарувчи тўғрисидаги маълумотлардаги хатоликларни тўғрилаб қайтадан юборинг!'
+                            } else {
+                                errorString = 'ишлаб чиқарувчи тўғрисидаги маълумотлардаги хатоликларни тўғрилаб қайтадан юборинг!'
+                            }
+                            //_this.errors=error.response.data.data.errorsCommodity;
+                            _this.setIshlabChiqaruvchiErrors(error.response.data.data.errorsCommodity);
+                        }
+
+                        /*if (typeof error.response.data.data.errorsCommodity !== 'undefined')
+                        {
+                            let $html=""
+                            if(typeof error.response.data.data.errorsCommodity ==='object') {
+                                let size = Object.keys(error.response.data.data.errorsCommodity).length;
+                                if (size > 0) {
+                                    Object.entries(error.response.data.data.errorsCommodity).forEach(([key, value]) => {
+                                        let $htmlElement = "";
+                                        if (Object.keys(value).length > 0) {
+                                            console.log(value)
+                                            Object.entries(value).forEach(([ekey, evalue]) => {
+                                                $htmlElement = $htmlElement + key + " - ишлаб чиқарувчи " + _this.getField(ekey) + "майдони - " + evalue + "\n";
+                                            })
+                                        }
+                                        $html = $html + $htmlElement;
+                                    });
+                                }
+                                _this.$toast.error("Ишлаб чиқарувчи майдонларида:\n" +
+                                    $html
+                                )
+                            } else if(typeof error.response.data.data.errorsCommodity ==='string'){
+                                _this.$toast.error(error.response.data.data.errorsCommodity)
+                            }
+
+                        } */
+                        if (typeof error.response.data.data.errorInManufacturer !== 'undefined') {
+
+                            if (errorString.length > 0) {
+                                errorString = 'Ҳуқуқ эгаси ва ишлаб чиқарувчи тўғрисидаги маълумотлардаги хатоликларни тўғрилаб қайтадан юборинг!'
+                            } else {
+                                errorString = 'ишлаб чиқарувчи тўғрисидаги маълумотлардаги хатоликларни тўғрилаб қайтадан юборинг!'
+                            }
+
+                            _this.totalerrors = error.response.data.data.errorInManufacturer;
+                            /*_this.$refs["ishlab_chiqaruvchi_umumiy"].applyResult({
+                                errors: [error.response.data.data.errorInManufacturer], // array of string errors
+                                valid: false, // boolean state
+                                failedRules: {} // should be empty since this is a manual error.
+                            })*/
+
+                            // _this.$toast.error(error.response.data.data.errorInManufacturer)
+                        }
+                        _this.$toast.error(errorString);
+
+                    } else {
+                        _this.$toast.error("Серверда хатолик юз берди! Бироздан ҳаракат қилиб кўринг!");
+                        return error.response;
+                    }
+                })
+
+            } catch (error) {
+                return error;
+            }
+            return result;
+        },
         async sendProduct(data) {
             let result = null;
             try {
-                await axios.post('/api/v1/ex_api/tftn-product', data).then(function (res) {
+                await axios.post('/api/v1/ex_api/intellektual-product', data).then(function (res) {
                     result = res;
                 })
                 return result;
@@ -1703,14 +1492,6 @@ export default {
 
             }
 
-        },
-        async checkFile(file_id) {
-            let response = null;
-            response = await axios.get('/api/v1/ex_api/arxiv?file_id=' + file_id + '&pnfl=' + this.$auth.user().pin);
-            if (response && response.data && response.data.count) {
-                return response.data.data;
-            }
-            return false;
         },
 
         async nextStep() {
@@ -1731,43 +1512,9 @@ export default {
                             this.person.firstName = this.$auth.user().first_name;
                             this.person.surName = this.$auth.user().sur_name;
                             this.person.locationId = this.person.region;
-                            /*let resultData = await this.sendPerson(this.person);
+                            let resultData = await this.sendPerson(JSON.parse(JSON.stringify(this.person)));
                             this.loadingButton.first = false;
-                            if (resultData.data.success === true) {
-                                //console.log(resultData.data['data']['data']['id'])
-                                this.person.person_id = resultData.data['data']['data']['id'];
-                                this.$cookie.delete('user');
-                                this.$cookie.set('user', JSON.stringify(this.person), 1);
-                                _this.stepper = 2;
-                                _this.completedSteps.push(_this.stepper - 1);
-                                _this.$toast.success("Аризачи маълумотлари сақланди!");
-
-                            } else this.$toast.error("Серверда хатолик юз берди. Кейинроқ уриниб кўринг!");*/
-
-                        }
-                        _this.stepper = 2;
-                        _this.completedSteps.push(_this.stepper - 1);
-                        _this.$toast.success("Аризачи маълумотлари сақланди!");
-                        this.loadingButton.first = false;
-                    })
-                    //isValid = true;
-
-                    break;
-
-
-                case 2:
-                    this.loadingButton.second = true;
-                    //console.log(!this.validateField("create_customs_person_value"))
-                    setTimeout(async () => {
-                        isValid = await this.validateField("stepValidation2");
-                        if (isValid === true) {
-                            this.person.lastName = this.$auth.user().mid_name;
-                            this.person.firstName = this.$auth.user().first_name;
-                            this.person.surName = this.$auth.user().sur_name;
-                            this.person.locationId = this.person.region;
-                            let resultData = await this.sendPerson(this.person);
-                            this.loadingButton.first = false;
-                            if (resultData.data.success === true) {
+                            if (typeof resultData !== 'undefined' && typeof resultData.data !== 'undefined' && resultData.data.success === true) {
                                 //console.log(resultData.data['data']['data']['id'])
                                 this.person.person_id = resultData.data['data']['data']['id'];
                                 this.$cookie.delete('user');
@@ -1779,11 +1526,108 @@ export default {
                             } else this.$toast.error("Серверда хатолик юз берди. Кейинроқ уриниб кўринг!");
 
                         }
-                        _this.stepper = 3;
-                        _this.completedSteps.push(_this.stepper - 1);
-                        _this.$toast.success("Аризачи маълумотлари сақланди!");
+                        /*                        _this.stepper = 2;
+                                                _this.completedSteps.push(_this.stepper - 1);
+                                                _this.$toast.success("Аризачи маълумотлари сақланди!");*/
+                        this.loadingButton.first = false;
+                    })
+                    //isValid = true;
+
+                    break;
+
+
+                case 2:
+                    this.loadingButton.second = true;
+                    //console.log(_this.$refs["stepValidation2"])
+
+                    setTimeout(async () => {
+
+                        isValid = true;// await this.validateField("stepValidation2");
+                        if (isValid === true) {
+                            _this.huquq_egasi.ipHolder = _this.application.huquq_egasi_nomi;
+                            _this.huquq_egasi.ipHoldersAddr = _this.application.huquq_egasi_manzili;
+                            _this.huquq_egasi.ipHolderCountry = _this.application.huquq_egasi_davlat;
+                            _this.huquq_egasi.ipHolderTelNumber = (_this.issetVar('application.huquq_egasi_phone')) ? JSON.parse(JSON.stringify(_this.application.huquq_egasi_phone)) : '';
+                            _this.huquq_egasi.ipHolderMail = _this.application.huquq_egasi_mail;
+                            _this.huquq_egasi.ipHolderTelNumber = _this.huquq_egasi.ipHolderTelNumber.replaceAll(" ", "").replaceAll("+", "");
+
+                            //if()
+                            if (_this.issetVar("application.ishonchnoma_file.[0].id")) {
+                                _this.huquq_egasi.fileId = _this.application.ishonchnoma_file[0].id;
+                            }
+                            if (_this.issetVar("application.ishonchnoma_sana") && _this.application.ishonchnoma_sana !== null && _this.application.ishonchnoma_sana.length === 22) {
+                                // && _this.application.ishonchnoma_sana.length==='22'
+                                const [dateStart, dateEnd] = _this.application.ishonchnoma_sana.split('--');
+                                _this.huquq_egasi.dateStart = dateStart;
+                                _this.huquq_egasi.dateEnd = dateEnd;
+                            }
+                            _this.huquq_egasi.personPin = _this.person.pin;
+                            _this.huquq_egasi.personId = _this.person.person_id;
+
+                            _this.s01AppsManufacturerInfos = [];
+                            /*                            _this.s01AppsManufacturerInfos.push({
+                                                            manufacturer: 'dsfsf',
+                                                            manufacturerTelNum: 'asdasdad',
+                                                            manufacturerAddr: 'sdfsdf',
+                                                            manufacturerMAil: null,
+                                                        });*/
+                            _this.application.ishchiq.forEach((ishchiqItem) => {
+                                //let telnum = ishchiqItem.phone;
+                                //telnum=telnum.replaceAll(" ", "");
+                                _this.s01AppsManufacturerInfos.push({
+                                    manufacturer: ishchiqItem.nomi,
+                                    manufacturerTelNum: ishchiqItem.phone.replaceAll(" ", ""),
+                                    manufacturerAddr: ishchiqItem.manzili,
+                                    manufacturerMAil: ishchiqItem.mail,
+                                });
+                            })
+
+                            _this.$cookie.delete('huquqegasi');
+                            _this.$cookie.set('huquqegasi', JSON.stringify({
+                                huquq_egasi: _this.huquq_egasi,
+                                ishchiq: _this.s01AppsManufacturerInfos
+                            }), 1);
+
+                            let resultData = await this.SendHuquqEgasi({
+                                s01Apps: this.huquq_egasi,
+                                s01AppsManufacturerInfos: _this.s01AppsManufacturerInfos
+                            });
+                            this.loadingButton.first = false;
+                            _this.resetVar(_this.huquq_egasi);
+                            _this.resetVar(_this.s01AppsManufacturerInfos);
+
+                            if (typeof resultData !== 'undefined' && resultData && typeof resultData.data !== 'undefined' && resultData.data.success === true) {
+
+
+                                //console.log(resultData.data['data']['data']['id'])
+                                this.application.id = resultData.data['data']['data']['id'];
+                                this.$cookie.delete('user');
+                                this.$cookie.set('user', JSON.stringify(this.person), 1);
+                                _this.stepper = 3;
+                                _this.completedSteps.push(_this.stepper - 1);
+                                _this.$toast.success("Ҳуқуқ эгаси ва ишлаб чиқарувчи маълумотлари сақланди!");
+
+                            } else {
+                                // console.log(resultData)
+
+                                //_this.setHuquqEgasiErrors(errors);
+                                //this.$toast.error("Серверда хатолик юз берди. Кейинроқ уриниб кўринг!");
+                            }
+
+                        }
+                        /*                        _this.stepper = 3;
+                                                _this.completedSteps.push(_this.stepper - 1);
+                                                _this.$toast.success("Аризачи маълумотлари сақланди!");*/
                         this.loadingButton.second = false;
                     })
+
+
+                    /*                    _this.stepper = 3;
+                                        _this.completedSteps.push(_this.stepper - 1);
+                                        _this.$toast.success("Аризачи маълумотлари сақланди!");*/
+                    //this.loadingButton.second = false;
+
+
                     //isValid = true;
                     break;
                 case 3:
@@ -1802,20 +1646,8 @@ export default {
                                 if (_this.index.indexOf(tovar.id) !== -1)
                                     _this.index.push(tovar.id);
                                 count++;
-                                isValid = await this.validateField("stepValidation2Product" + tovar.id)
-                                if (!this.isValidDoc()) {
-                                    _this.$refs["hujjatilova" + tovar.id][0].applyResult({
-                                        errors: ["Илова қилинадиган ҳужжатларни киритинг"], // array of string errors
-                                        valid: false, // boolean state
-                                        failedRules: {} // should be empty since this is a manual error.
-                                    })
+                                isValid = true; // await this.validateField("stepValidation2Product" + tovar.id)
 
-                                } else
-                                    _this.$refs["hujjatilova" + tovar.id][0].applyResult({
-                                        errors: [], // array of string errors
-                                        valid: true, // boolean state
-                                        failedRules: {} // should be empty since this is a manual error.
-                                    })
 
                                 if (isValid !== true) {
                                     //console.log(this.$refs["stepValidation2Product" + tovar.id])
@@ -1841,88 +1673,87 @@ export default {
                         if (!_this.index.length) {
 
 
-                            //// apps
-
-
-                            _this.app.apps['personId'] = _this.person.person_id;
-                            _this.app.apps['personFio'] = _this.person.fio;
-                            _this.app.apps['personPosition'] = _this.person.position;
-                            _this.app.apps['personAddr'] = _this.person.perAdr;
-                            _this.app.apps['personTin'] = _this.person.tin;
-                            _this.app.apps['personPin'] = _this.person.pin;
-                            _this.app.apps['personMail'] = _this.person.email;
-                            _this.app.apps['personPhone'] = _this.person.phone;
-                            _this.app.apps['locationId'] = _this.person.region;
-                            _this.app.apps['postId'] = _this.person.post;
-
-
-                            _this.app.apps = {
-                                personId: _this.person.person_id,
-                                personFio: _this.person.fio,
-                                personPosition: _this.person.position,
-                                personAddr: _this.person.perAdr,
-                                personTin: _this.person.tin,
-                                personPin: _this.person.pin,
-                                personMail: _this.person.email,
-                                personPhone: (_this.person.phone).replaceAll(" ", "").replaceAll("+", ""),
-                                locationId: 1735, ///_this.person.region ,
-                                postId: 3500,  ///_this.person.postId ,
-                            }
-
-
-                            _this.app.docs = [];
-
-                            /////// documents
-                            if (typeof this.application.documents[0] !== 'undefined' && typeof this.application.documents !== 'undefined') {
-                                this.application.documents.forEach((tov_doc, doc_key) => {
-                                    _this.app.docs.push({
-                                        fileId: tov_doc.id,
-                                        type: tov_doc.type,
-                                    })
-                                })
-                            }
-
-
-                            _this.app.commodities = [];
-
-
+                            _this.app = [];
                             _this.application.tovarlar.forEach(function (tovar) {
 
 
-                                /////commodities
                                 _this.commodity = [];
+                                tovar.tftn.forEach(function (tftn) {
+                                    _this.commodity.push(tftn.id)
+                                });
+                                _this.documents = [];
+                                tovar.documents.forEach(function (document) {
+                                    _this.documents.push({fileId: document.id})
+                                });
 
-                                _this.app.commodities.push({
-                                    tradeName: typeof tovar.tijorat_nomi !== 'undefined' ? tovar.tijorat_nomi : null,
-                                    tradeMark: typeof tovar.mark !== 'undefined' ? tovar.mark : null,
-                                    model: typeof tovar.model !== 'undefined' ? tovar.model : null,
-                                    comment: typeof tovar.comment !== 'undefined' ? tovar.comment : null,
-                                    basicQty: typeof tovar.namunasoni !== 'undefined' ? tovar.namunasoni : null,
-                                    extraUnits: typeof tovar.olchovbirligi !== 'undefined' ? tovar.olchovbirligi : null,
+                                let guvohnoma = null;
+                                let registr = null;
+                                if (typeof tovar.guvohnoma_sana !== 'undefined' && tovar.guvohnoma_sana) guvohnoma = tovar.guvohnoma_sana.split("--");
+                                if (typeof tovar.reestr_muddat !== 'undefined' && tovar.reestr_muddat) registr = tovar.reestr_muddat.split("--");
+                                _this.app.push({
+                                    commodityBody: {
+                                        appId: _this.application.id,
+                                        ipDescription: typeof tovar.nomlanishi !== 'undefined' ? tovar.nomlanishi : null,
+                                        ipPassNum: typeof tovar.guvohnoma_raqami !== 'undefined' ? tovar.guvohnoma_raqami : null,
+                                        ipPassStartDate: (guvohnoma && typeof guvohnoma[0] !== 'undefined') ? guvohnoma[0] : null,
+                                        ipPassEndDate: (guvohnoma && typeof guvohnoma[1] !== 'undefined') ? guvohnoma[1] : null,
+                                        ipRegistrStartDate: (registr && typeof registr[0] !== 'undefined') ? registr[0] : null,
+                                        ipRegistrEndDate: (registr && typeof registr[1] !== 'undefined') ? registr[1] : null,
+                                    },
+                                    mktu: tovar.tasnifi,
+                                    hsCode: _this.commodity.length > 0 ? _this.commodity : null,
+                                    docs: (_this.documents.length > 0 && typeof _this.documents[0] !=='undefined' && typeof _this.documents[0].fileId !=='undefined') ? _this.documents : null
                                 })
-
+                                /* _this.app.push({
+                                     tradeName: typeof tovar.tijorat_nomi !== 'undefined' ? tovar.tijorat_nomi : null,
+                                     tradeMark: typeof tovar.mark !== 'undefined' ? tovar.mark : null,) ? _this.documents : null
+                                })
+                                /* _this.app.push({
+                                     tradeName: typeof tovar.tijorat_nomi !== 'undefined' ? tovar.tijorat_nomi : null,
+                                     tradeMark: typeof tovar.mark !== 'undefined' ? tovar.mark : null,
+                                     model: typeof tovar.model !== 'undefined' ? tovar.model : null,
+                                     comment: typeof tovar.comment !== 'undefined' ? tovar.comment : null,
+                                     basicQty: typeof tovar.namunasoni !== 'undefined' ? tovar.namunasoni : null,
+                                     extraUnits: typeof tovar.olchovbirligi !== 'undefined' ? tovar.olchovbirligi : null,
+                                 })
+ */
 
                             })
+
                             let resultData = await this.sendProduct(_this.app);
                             if (typeof resultData !== 'undefined' && typeof resultData.data !== 'undefined' && typeof resultData.data.success !== 'undefined' && resultData.data.success === true) {
                                 //console.log(resultData.data['data']['data']['id'])
-                                this.app.app_id = resultData.data['data']['data']['id'];
-                                console.log(resultData.data)
-                                this.$cookie.delete('user');
+                                //this.app.app_id = resultData.data['data']['data']['id'];
+                                //console.log(resultData.data)
+                                ///this.$cookie.delete('user');
+                                //this.$cookie.delete('huquqegasi');
                                 this.$toast.success("Сизнинг аризангиз омадли тарзда юборилди!");
                                 setTimeout(() => {
-                                    _this.$router.push("/services/tftn/" + _this.app.app_id)
+                                    _this.$router.push("/services/intellectual/" + _this.application.id)
 
                                 }, 1000)
                             } else {
                                 if (resultData.status === 400) {
 
-                                    if (typeof resultData.data.data !== 'undefined') {
-                                        _this.setProductErrors(resultData.data.data);
+
+                                    if (typeof resultData.data.data !== 'undefined' && typeof resultData.data.data.errorsCommodity !== 'undefined') {
+
+                                        Object.entries(resultData.data.data.errorsCommodity).forEach(([key, value]) => {
+                                            if (typeof value['commodityBody'] !== 'undefined')
+                                                _this.setProductErrors(key, value['commodityBody']);
+                                            if (typeof value['mktuBody'] !== 'undefined' && typeof value['mktuBody'][0] !== 'undefined')
+                                                _this.setProductErrors(key, {mktu: value['mktuBody'][0]});
+                                            if (typeof value['docsBody'] !== 'undefined' && typeof value['docsBody'][0] !== 'undefined')
+                                                _this.ilova_error[key] = value['docsBody'][0];
+                                            //_this.setProductErrors(key, {docs: value['mktuBody'][0]});
+                                            if (typeof value['hsCodeBody'] !== 'undefined' && typeof value['hsCodeBody'][0] !== 'undefined')
+                                                _this.setProductErrors(key, {hsCode: value['hsCodeBody'][0]});
+                                        })
+                                        //_this.setProductErrors(resultData.data.data.errorsCommodity);
                                     }
                                     this.$toast.error("Маълумотларингизни текшириб қайтадан юборинг!");
                                 } else
-                                    this.$toast.error("Серверда хатолик юз берди. Кейинроқ уриниб кўринг!");
+                                    this.$toast.error("Серверда хатолик юз берди! Маълумотларингизни текшириб қайтадан юборинг!");
                             }
 
 
@@ -2019,65 +1850,11 @@ export default {
             })
             this.postloading = false;
         },
-        saveDocument() {
-            const _this = this;
-            setTimeout(async () => {
 
-                this.dialog.documenttype = false;
-
-            })
-        },
-        openIshChiq(id = null) {
-            if (id === null || typeof id === 'object') {
-                if (this.boolDialogIshChiqNew !== -1) {
-                    this.ishchiq = JSON.parse(JSON.stringify(this.NullIshChiq))
-                }
-                this.boolDialogIshChiqNew = -1;
-            } else {
-                if (this.boolDialogIshChiqNew !== id) {
-                    this.ishchiq = JSON.parse(JSON.stringify(this.application.ishchiq[id]))
-                }
-                this.boolDialogIshChiqNew = id;
-            }
-            this.dialog.ishlabchiqaruvchi = true;
-            setTimeout(() => {
-                if (typeof this.$refs['ishlabchiqarilgan'] !== 'undefined')
-                    this.$refs['ishlabchiqarilgan'].reset()
-
-            });
-        },
-        saveIshChiq(id = null) {
-            const _this = this;
-            let isValid = true;
-            if (id === null || typeof id === 'object') {
-                setTimeout(async () => {
-                    isValid = await this.validateField("ishlabchiqarilgan");
-                    if (isValid) {
-                        if (_this.boolDialogIshChiqNew >= 0) {
-                            if (typeof this.application.ishchiq[_this.boolDialogIshChiqNew] !== 'undefined')
-                                this.application.ishchiq[_this.boolDialogIshChiqNew] = _this.ishchiq;
-                        } else {
-                            this.application.ishchiq.push(_this.ishchiq);
-                            _this.ishchiq = JSON.parse(JSON.stringify(this.NullIshChiq))
-                        }
-                        if (typeof this.$refs['ishlabchiqarilgan'] !== 'undefined')
-                            this.$refs['ishlabchiqarilgan'].reset()
-
-                        this.dialog.ishlabchiqaruvchi = false;
-
-                    }
-                })
-
-            } else {
-                console.log(id)
-
-            }
-
-
-        },
 
         initialize() {
             this.getBoshqarmalar();
+            this.getCountries();
             this.setCookieData();
             this.createWatcher(0);  /// listener for product[0]
         },
@@ -2086,9 +1863,43 @@ export default {
             let CPerson = null;
             CPerson = this.$cookie.get('user') ? JSON.parse(this.$cookie.get('user')) : null;
             this.setPersonData(CPerson)
-            let CYuk = null;
-            CYuk = this.$cookie.get('yuk') ? JSON.parse(this.$cookie.get('yuk')) : null;
-            if (CYuk) this.setYukData(CYuk);
+            let CHuquq = null;
+            CHuquq = this.$cookie.get('huquqegasi') ? JSON.parse(this.$cookie.get('huquqegasi')) : null;
+            if (CHuquq) this.setHuquqData(CHuquq);
+        },
+        setHuquqData(data) {
+            console.log(data)
+            const huquq_egasi = (data && typeof data['huquq_egasi'] !== 'undefined') ? data['huquq_egasi'] : null;
+            const ishchiq = (data && typeof data['ishchiq'] !== 'undefined') ? data['ishchiq'] : [];
+            const _this = this;
+            _this.application.huquq_egasi_nomi = (huquq_egasi && typeof huquq_egasi['ipHolder'] !== 'undefined') ? huquq_egasi['ipHolder'] : null;
+            _this.application.huquq_egasi_manzili = (huquq_egasi && typeof huquq_egasi['ipHoldersAddr'] !== 'undefined') ? huquq_egasi['ipHoldersAddr'] : null;
+            _this.application.huquq_egasi_davlat = (huquq_egasi && typeof huquq_egasi['ipHolderCountry'] !== 'undefined') ? huquq_egasi['ipHolderCountry'] : null;
+            _this.application.huquq_egasi_phone = (huquq_egasi && typeof huquq_egasi['ipHolderTelNumber'] !== 'undefined') ? huquq_egasi['ipHolderTelNumber'] : null;
+            _this.application.huquq_egasi_mail = (huquq_egasi && typeof huquq_egasi['ipHolderMail'] !== 'undefined') ? huquq_egasi['ipHolderMail'] : null;
+            _this.application.ishonchnoma_sana = (huquq_egasi && typeof huquq_egasi['dateEnd'] !== 'undefined' && typeof huquq_egasi['dateStart'] !== 'undefined') ? huquq_egasi['dateStart'] + '--' + huquq_egasi['dateEnd'] : null;
+
+            if (huquq_egasi && typeof huquq_egasi['fileId'] !== 'undefined') {
+                _this.application.ishonchnoma_file = [];
+                _this.application.ishonchnoma_file.push({id: huquq_egasi['fileId']});
+                //console.log(_this.application.ishonchnoma_file)
+            }
+
+
+            if (ishchiq && typeof ishchiq[0] !== 'undefined') {
+                _this.application.ishchiq = [];
+
+                Object.entries(ishchiq).forEach(([key, value]) => {
+                    _this.application.ishchiq.push({
+                        nomi: value['manufacturer'],
+                        manzili: value['manufacturerAddr'],
+                        mail: value['manufacturerMAil'],
+                        phone: value['manufacturerTelNum'],
+                    });
+                })
+            }
+
+
         },
         setPersonData(data) {
 
@@ -2120,48 +1931,7 @@ export default {
 
             return await this.$refs['create_customs_person_value'].validate({silent: silent})
         },
-        Initprogress(val) {
-            if (val)
-                return Math.min(100, val.length * 8)
-            else return 0;
-        },
-        async myColor(val, key) {
-            const _this = this;
-            let fileIsset = false;
-            if (this.application.documents[key] && this.application.documents[key]['id'] === val) this.documents[key].color = 'success';
-            if (typeof val !== 'undefined' && val.length === 13) {
-                fileIsset = await this.checkFile(val)
-                if (fileIsset && fileIsset.length > 0) {
-                    if (typeof this.application.documents !== 'undefined' && typeof this.application.documents[key] !== 'undefined') {
-                        this.application.documents[key]['id'] = val;
-                        this.application.documents[key]['type'] = fileIsset[0].cd_id + " - " + fileIsset[0].file_num;
-                        this.documents[key].color = 'success';
-                        this.documents[key].valid = true;
-                    } else {
 
-                        this.application.documents.push({
-                            id: val,
-                            type: fileIsset[0].cd_id + " - " + fileIsset[0].file_num
-                        });
-                        this.documents[key].color = 'success';
-                        this.documents[key].valid = true;
-
-                    }
-                } else {
-                    this.documents[key].color = 'warning';
-                    this.documents[key].valid = false;
-
-                }
-            } else {
-                //this.application.documents.splice(key, 1);
-                this.documents[key].color = 'warning';
-                this.documents[key].valid = false;
-            }
-            if (val.length < 13) {
-                this.documents[key].color = ['error', 'warning'][Math.floor(this.Initprogress(val) / 50)]
-                this.documents[key].valid = false;
-            }
-        },
         remove(item) {
             const index = this.application.tovarlar[this.tovarIndex].tftn.indexOf(item)
             if (index >= 0) this.application.tovarlar[this.tovarIndex].tftn.splice(index, 1)
@@ -2177,9 +1947,9 @@ export default {
             return dates.join(' -- ')
         },
         createWatcher(key) {
-            const _this=this
+            const _this = this
             this.$watch('application.tovarlar.' + key + '.search_tftn', (val) => {
-               // console.log(val)
+                // console.log(val)
                 if (val === null || (val && val.length > 10)) return
                 //if (this.tftncodes.length > 0) return
 
@@ -2198,15 +1968,15 @@ export default {
                         })
                         //_this.tftncodes = _this.tftncodes.concat(res);
                         _this.tftncodes = _this.tftncodes.concat(res.filter((item) => _this.tftncodes.indexOf(item) < 0));
-/*                        let selected=this.filterObject(this.application.tovarlar,key,'id');
-                        let selectedIndex=this.application.tovarlar.indexOf(selected);
-                        if (selectedIndex!==-1 && this.application.tovarlar[selectedIndex].tftn.length > 0 )
-                            this.application.tovarlar.forEach((item) => {
-                                item.tftn.forEach((tftn)=>{
-                                    _this.tftncodes.push(tftn)
-                                })
+                        /*                        let selected=this.filterObject(this.application.tovarlar,key,'id');
+                                                let selectedIndex=this.application.tovarlar.indexOf(selected);
+                                                if (selectedIndex!==-1 && this.application.tovarlar[selectedIndex].tftn.length > 0 )
+                                                    this.application.tovarlar.forEach((item) => {
+                                                        item.tftn.forEach((tftn)=>{
+                                                            _this.tftncodes.push(tftn)
+                                                        })
 
-                            })*/
+                                                    })*/
                         //this.tftncodes.push(this.application.tovarlar[this.tovarIndex].tftn)
                     })
                     .catch(err => {
@@ -2224,6 +1994,64 @@ export default {
         removeWatcher(key) {
             let unwatch = this.$watch('application.tovarlar.' + key + '.search_tftn');
             unwatch();
+
+        },
+        resetVar(myVar) {
+            const _this = this;
+            if (myVar === null) return null;
+            if (typeof myVar === 'object') {
+                Object.entries(myVar).forEach(([key, value]) => {
+
+                    if (typeof value === 'object') {
+                        if (_this.resetVar(value)) {
+                            myVar[key] = _this.resetVar(value);
+                        }
+                    } else {
+                        if (Array.isArray(value)) {
+                            value.forEach((arrayKey, arrayValue) => {
+                                if (arrayValue) {
+                                    if (_this.resetVar(arrayValue)) {
+                                        myVar[key][arrayKey] = _this.resetVar(arrayValue);
+                                    } else {
+                                        myVar[key][arrayKey] = null;
+                                    }
+                                } else return myVar[key]
+
+                            });
+
+                        } else
+                            myVar[key] = null;
+                    }
+                });
+                return myVar;
+            }
+            return null;
+
+        },
+
+        issetVar(myVarString) {
+            const _this = this;
+            const varToString = varObj => Object.keys(varObj)[0]
+            let myVar = "_this";
+            let returnVar = true;
+            myVarString.split('.').forEach((mVar, key) => {
+                let OldVar = JSON.parse(JSON.stringify(myVar));
+                if (mVar.indexOf('[') !== -1) {
+                    myVar = myVar + mVar;
+                } else {
+                    myVar = myVar + '.' + mVar;
+                }
+                //console.log(eval(OldVar));
+                if (returnVar && (typeof eval(myVar) === 'undefined' || eval(myVar) === null || eval(OldVar) === null)) {
+                    returnVar = false;
+                    return false;
+                }
+                // console.log(myVar)
+
+            })
+            // console.log(returnVar)
+            return returnVar;
+
 
         }
 
@@ -2271,17 +2099,26 @@ export default {
         this.initialize();
     },
     computed: {
-        progress(val) {
-            this.Initprogress(val)
+        ishchiqErrors: {
+            get() {
+                return this.errors
+            },
         },
-        isvalidDocument(tovar_id = null) {
-            //tovar_id = this.tovarIndex;
-            //if (tovar_id === null || isNaN(tovar_id)) tovar_id = this.tovarIndex;
-            return !this.isValidDoc()
+        ishchiqTotalErrors: {
+            get() {
+                return this.totalerrors
+            },
         }
+        /*        progress(val) {
+                    this.Initprogress(val)
+                },
+                isvalidDocument(tovar_id = null) {
+                    //tovar_id = this.tovarIndex;
+                    //if (tovar_id === null || isNaN(tovar_id)) tovar_id = this.tovarIndex;
+                    return !this.isValidDoc()
+                }*/
 
-    }
-    ,
+    },
     filters: {
         reverse: function (array) {
             return array.slice().reverse()
@@ -2289,8 +2126,13 @@ export default {
     }
     ,
     components: {
+        DialogChips,
+        EArxivFile,
+        AutocompleteField,
+        TextField,
         ValidationProvider,
         ValidationObserver,
+        Myfield
     }
 }
 </script>

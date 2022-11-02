@@ -159,6 +159,10 @@
                                                         fill="#5EA963"></path></svg>
                                                     <span>{{ vacancy.vac_soni }} та номзод</span>
                                                 </p>
+                                                <p class="vac-card__payment" v-if="typeof vacancy.shroit !=='undefined' && vacancy.shroit">
+                                                    <img src="/public/img/icons/talab.png" style="max-width:15px; max-height:15px" />
+                                                    <span>{{ vacancy.shroit }}</span>
+                                                </p>
 
 
                                                 <!--                                        <p class="vac-card__location">

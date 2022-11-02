@@ -1,5 +1,6 @@
 <template>
     <div class="section page-container">
+        <div class="background"></div>
         <div class="whitebreadcrumb breadcrumb-site">
             <v-container>
                 <v-breadcrumbs :items="breadcrumb_items">
@@ -10,6 +11,7 @@
             </v-container>
         </div>
         <div class="container">
+
             <div class="row">
                 <!---->
                 <div class="col col-12">

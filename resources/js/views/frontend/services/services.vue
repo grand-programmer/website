@@ -31,19 +31,22 @@
             <div class="container">
                 <ul class="nav nav-pills mb-3 portfolio_menu" id="pills-tab" role="tablist">
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link "  @click="nav_link=1" :class="nav_link===1?'active':''" id="pills-home-tab" data-bs-toggle="pill"
+                        <button class="nav-link " @click="nav_link=1" :class="nav_link===1?'active':''"
+                                id="pills-home-tab" data-bs-toggle="pill"
                                 data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home"
                                 aria-selected="true">{{ $t("Интерактив хизматлар") }}
                         </button>
                     </li>
-                    <li class="nav-item"  role="presentation">
-                        <button class="nav-link" @click="nav_link=2" :class="nav_link===2?'active':''" id="pills-profile-tab" data-bs-toggle="pill"
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" @click="nav_link=2" :class="nav_link===2?'active':''"
+                                id="pills-profile-tab" data-bs-toggle="pill"
                                 data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile"
                                 aria-selected="false">{{ $t("Очиқ маълумотлар") }}
                         </button>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link" @click="nav_link=3" :class="nav_link===3?'active':''" id="pills-contact-tab" data-bs-toggle="pill"
+                        <button class="nav-link" @click="nav_link=3" :class="nav_link===3?'active':''"
+                                id="pills-contact-tab" data-bs-toggle="pill"
                                 data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact"
                                 aria-selected="false">{{ $t("Фойдали ресурслар") }}
                         </button>
@@ -57,7 +60,8 @@
                 </ul>
             </div>
             <div class="tab-content" id="pills-tabContent">
-                <div class="tab-pane" :class="nav_link===1?'active':''" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                <div class="tab-pane" :class="nav_link===1?'active':''" id="pills-home" role="tabpanel"
+                     aria-labelledby="pills-home-tab">
                     <div class="portfolio-background1"></div>
                     <div class="tab-container">
                         <div class="col-md-2 portfolio_single p1">
@@ -71,6 +75,7 @@
                                 </div>
                             </router-link>
                         </div>
+
                         <div class="col-md-2 portfolio_single p1">
                             <router-link to="/services/decisions" class="portfolio-card">
                                 <div class="portfolio_image">
@@ -88,7 +93,22 @@
                                     <img src="/img/icons/patent.png"/>
                                 </div>
                                 <div class="portfolio_text">
-                                    <p>{{ $t("Интеллектуал мулк объектлари божхона реестрига киритиш учун ариза юбориш") }}</p>
+                                    <p>{{
+                                            $t("Интеллектуал мулк объектлари божхона реестрига киритиш учун ариза юбориш")
+                                        }}</p>
+
+                                </div>
+                            </router-link>
+                        </div>
+                        <div class="col-md-2 portfolio_single p1">
+                            <router-link to="/services/refund" class="portfolio-card">
+                                <div class="portfolio_image">
+                                    <img src="/img/icons/refund.png"/>
+                                </div>
+                                <div class="portfolio_text">
+                                    <p>{{
+                                            $t("ТИФ субъектининг божхона органлари ғазна ҳисобварағидаги маблағларини қайтариш")
+                                        }}</p>
 
                                 </div>
                             </router-link>
@@ -113,6 +133,146 @@
                                     <p>{{ $t("ТИФ ТН кодини аниқлаш юзасидан ариза бериш") }}</p>
                                 </div>
                             </router-link>
+                        </div>
+                        <div class="col-md-2 portfolio_single p1">
+                            <a target="_blank" @click="openApp('ombor')"  class="portfolio-card">
+                                <div class="portfolio_image">
+                                    <img src="/img/icons/warehouse.png"/>
+                                </div>
+                                <div class="portfolio_text">
+                                    <p>{{ $t("Юк операциялари") }}</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-md-2 portfolio_single p1">
+                            <a target="_blank" @click="openApp('singlewindow')" class="portfolio-card">
+                                <div class="portfolio_image">
+                                    <img src="/img/icons/singlewindow.png"/>
+                                </div>
+                                <div class="portfolio_text">
+                                    <p>{{ $t("Ягона дарча божхона ахборот тизими") }}</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-md-2 portfolio_single p1">
+                            <a target="_blank" href="https://ed1.customs.uz/Markirovka/" class="portfolio-card">
+                                <div class="portfolio_image">
+                                    <img src="/img/icons/maishiy.png"/>
+                                </div>
+                                <div class="portfolio_text">
+                                    <p>{{ $t("Маиший техникаларнинг импорти қонунийлигини текшириш ") }}</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-md-2 portfolio_single p1">
+                            <a target="_blank" href="http://service.customs.uz/autogtd_report/index.jsp?pc=4#"
+                               class="portfolio-card">
+                                <div class="portfolio_image">
+                                    <img src="/img/icons/meva.png"/>
+                                </div>
+                                <div class="portfolio_text">
+                                    <p>{{ $t("Мева-сабзавот маҳсулотлари экспорти тўғрисида маълумот") }}</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-md-2 portfolio_single p1">
+                            <a target="_blank" href="http://service.customs.uz/autogtd_report/index.jsp?pc=4#"
+                               class="portfolio-card">
+                                <div class="portfolio_image">
+                                    <img src="/img/icons/import_malumot.png"/>
+                                </div>
+                                <div class="portfolio_text">
+                                    <p>{{
+                                            $t("Ўзбекистон Республикасига импорт қилинаётган товарларнинг божхона қиймати тўғрисида маълумот")
+                                        }}</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-md-2 portfolio_single p1">
+                            <a target="_blank" href="https://my.gov.uz/uz/service/555" class="portfolio-card">
+                                <div class="portfolio_image">
+                                    <img src="/img/icons/oversize-load-icon.png"/>
+                                </div>
+                                <div class="portfolio_text">
+                                    <p>{{
+                                            $t("Халқаро йўлларда ташиш (ХЙТ) дафтарчасидан фойдаланиш учун рухсатнома олиш")
+                                        }}</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-md-2 portfolio_single p1">
+                            <a target="_blank" href="https://my.gov.uz/uz/service/222" class="portfolio-card">
+                                <div class="portfolio_image">
+                                    <img src="/img/icons/Enterprise.png"/>
+                                </div>
+                                <div class="portfolio_text">
+                                    <p>{{
+                                            $t("Корхонани хорижий товарлар учун божхона тўловлари бўйича корхоналар маълумотномасига киритиш")
+                                        }}</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-md-2 portfolio_single p1">
+                            <a target="_blank" href="https://my.gov.uz/uz/service/322" class="portfolio-card">
+                                <div class="portfolio_image">
+                                    <img src="/img/icons/warehouse-license.png"/>
+                                </div>
+                                <div class="portfolio_text">
+                                    <p>{{ $t("Божхона омборхонаси фаолиятига янги лицензия олиш") }}</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-md-2 portfolio_single p1">
+                            <a target="_blank" href="https://my.gov.uz/uz/service/326" class="portfolio-card">
+                                <div class="portfolio_image">
+                                    <img src="/img/icons/warehouse-license.png"/>
+                                </div>
+                                <div class="portfolio_text">
+                                    <p>{{ $t("Божхона омборхонаси фаолияти учун лицензияни қайта расмийлаштириш") }}</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-md-2 portfolio_single p1">
+                            <a target="_blank" href="https://my.gov.uz/uz/service/344" class="portfolio-card">
+                                <div class="portfolio_image">
+                                    <img src="/img/icons/warehouse-license.png"/>
+                                </div>
+                                <div class="portfolio_text">
+                                    <p>{{ $t("Бож олинмайдиган савдо дўкони фаолияти учун янги лицензия олиш") }}</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-md-2 portfolio_single p1">
+                            <a target="_blank" href="https://my.gov.uz/uz/service/331" class="portfolio-card">
+                                <div class="portfolio_image">
+                                    <img src="/img/icons/warehouse-license.png"/>
+                                </div>
+                                <div class="portfolio_text">
+                                    <p>{{ $t("Эркин омбор фаолияти учун янги лицензия олиш") }}</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-md-2 portfolio_single p1">
+                            <a target="_blank" href="https://my.gov.uz/uz/service/345" class="portfolio-card">
+                                <div class="portfolio_image">
+                                    <img src="/img/icons/warehouse-license.png"/>
+                                </div>
+                                <div class="portfolio_text">
+                                    <p>{{
+                                            $t("Бож олинмайдиган савдо дўкони фаолияти учун лицензияни қайта расмийлаштириш")
+                                        }}</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-md-2 portfolio_single p1">
+                            <a target="_blank" href="https://my.gov.uz/uz/service/343" class="portfolio-card">
+                                <div class="portfolio_image">
+                                    <img src="/img/icons/warehouse-license.png"/>
+                                </div>
+                                <div class="portfolio_text">
+                                    <p>{{ $t("Эркин омбор фаолияти учун лицензияни қайта расмийлаштириш") }}</p>
+                                </div>
+                            </a>
                         </div>
                         <div class="col-md-2 portfolio_single p1">
                             <a target="_blank" href="//my.gov.uz/uz/service/209" class="portfolio-card">
@@ -162,7 +322,7 @@
                         </div>
 
                         <div class="col-md-2 portfolio_single p1">
-                            <a href="http://cargo.customs.uz/" target="_blank" class="portfolio-card">
+                            <a @click="openApp('cargo')" target="_blank" class="portfolio-card">
                                 <div class="portfolio_image">
                                     <img src="/img/icons/etranzit.png"/>
                                 </div>
@@ -245,7 +405,7 @@
                         </div>
 
                         <div class="col-md-2 portfolio_single p1">
-                            <a href="https://ed1.customs.uz/PersonCabinet/" target="_blank" class="portfolio-card">
+                            <a @click="openApp('cabinet')" target="_blank" class="portfolio-card">
                                 <div class="portfolio_image">
                                     <img src="/img/icons/tadbirkor-shaxsiy-kabineti.png"/>
                                 </div>
@@ -286,7 +446,10 @@
                                     <img src="/img/icons/chet-el-transport.png"/>
                                 </div>
                                 <div class="portfolio_text">
-                                    <p>{{ $t("Чет эл транспорт воситаларини Ўзбекистон Республикасида бўлиш муддатини узайтириш")}}</p>
+                                    <p>
+                                        {{
+                                            $t("Чет эл транспорт воситаларини Ўзбекистон Республикасида бўлиш муддатини узайтириш")
+                                        }}</p>
 
                                 </div>
                             </a>
@@ -335,7 +498,7 @@
                                     <p>E-Arxiv</p>
                                 </div>
                             </a>
-                        </div>
+                        </div><!--
                         <div class="col-md-2 portfolio_single p1">
                             <a href="https://www.customs.uz/uz/lists/view/268" target="_blank" class="portfolio-card">
                                 <div class="portfolio_image">
@@ -346,7 +509,7 @@
 
                                 </div>
                             </a>
-                        </div>
+                        </div>-->
                         <div class="col-md-2 portfolio_single p1">
                             <a href="http://time.customs.uz/" target="_blank" class="portfolio-card">
                                 <div class="portfolio_image">
@@ -371,7 +534,8 @@
                     </div>
 
                 </div>
-                <div class="tab-pane" :class="nav_link===2?'active':''" id="pills-profile"  role="tabpanel" aria-labelledby="pills-profile-tab">
+                <div class="tab-pane" :class="nav_link===2?'active':''" id="pills-profile" role="tabpanel"
+                     aria-labelledby="pills-profile-tab">
                     <div class="background"></div>
                     <div class="tab-container">
                         <div class="opendata-container">
@@ -393,7 +557,8 @@
                                 <div class="portfolio_single p2">
                                     <div class="shadow-right"></div>
                                     <div class="portfolio_content">
-                                        <div class="portfolio_text">{{ $t("Расмийлаштирилган божхона юк декларациялари сони") }}
+                                        <div class="portfolio_text">
+                                            {{ $t("Расмийлаштирилган божхона юк декларациялари сони") }}
                                         </div>
                                         <div class="download_links"><p><a
                                             href="https://data.egov.uz/apiData/MainData/GetByFile?id=610256952a2e256d868e82d3&fileType=2&tableType=2">XML</a><br/><a
@@ -419,7 +584,10 @@
                                 <div class="portfolio_single p2">
                                     <div class="shadow-right"></div>
                                     <div class="portfolio_content">
-                                        <div class="portfolio_text">{{ $t("Ҳудудий божхона бошқармаларнинг ғазна шахсий ҳисоб варағи маълумотлари")}}
+                                        <div class="portfolio_text">
+                                            {{
+                                                $t("Ҳудудий божхона бошқармаларнинг ғазна шахсий ҳисоб варағи маълумотлари")
+                                            }}
                                         </div>
                                         <div class="download_links"><p><a
                                             href="https://data.egov.uz/apiData/MainData/GetByFile?id=610255a12a2e256d868e82cc&fileType=2&tableType=2">XML</a><br/><a
@@ -462,7 +630,8 @@
                                     <div class="portfolio_content">
                                         <div class="portfolio_text">{{
                                                 $t("Божхона имтиёзларини назарда тутувчи норматив ҳужжатлар базаси")
-                                            }}</div>
+                                            }}
+                                        </div>
                                         <div class="download_links"><p><a
                                             href="https://data.egov.uz/apiData/MainData/GetByFile?id=6102560e2a2e256d868e82d0&fileType=2&tableType=2">XML</a><br/><a
                                             href="https://data.egov.uz/apiData/MainData/GetByFile?id=6102560e2a2e256d868e82d0&fileType=1&tableType=2">JSON</a><br/><a
@@ -604,24 +773,39 @@
                         </div>
                     </div>
                 </div>
-                <div class="tab-pane" :class="nav_link===3?'active':''" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+                <div class="tab-pane" :class="nav_link===3?'active':''" id="pills-contact" role="tabpanel"
+                     aria-labelledby="pills-contact-tab">
                     <div class="background"></div>
                     <div class="tab-container">
                         <div class="foydali-resurslar row">
-                            <router-link class="foydali-resurs col-4" to="/registries/decisions">
-                                <div class="foydali-resurs-image" style="background-image: url(/img/icons/patent-white.png); background-size: 40%">
+                            <router-link class="foydali-resurs col-3" to="/registries/services">
+                                <div class="foydali-resurs-image"
+                                     style="background-image: url(/img/icons/gov-services.png); background-size: 40%">
                                 </div>
-                                <div class="foydali-resurs-text">{{ $t("Божхона тўловлари бўйича дастлабки қарорлар реестри") }}
+                                <div class="foydali-resurs-text">{{
+                                        $t("Давлат хизматлари бўйича мурожаатлар реестри")
+                                    }}
 
                                 </div>
-                            </router-link><a class="foydali-resurs col-4" target="_blank" href="https://data.gov.uz/uzbKr/data/610258012a2e256d868e82dd">
+                            </router-link>
+                            <router-link class="foydali-resurs col-3" to="/registries/decisions">
+                                <div class="foydali-resurs-image"
+                                     style="background-image: url(/img/icons/patent-white.png); background-size: 30%">
+                                </div>
+                                <div class="foydali-resurs-text">
+                                    {{ $t("Божхона тўловлари бўйича дастлабки қарорлар реестри") }}
+
+                                </div>
+                            </router-link>
+                            <a class="foydali-resurs col-3" target="_blank"
+                               href="https://data.gov.uz/uzbKr/data/610258012a2e256d868e82dd">
                                 <div class="foydali-resurs-image" style="background-image: url(/img/icons/ombor.png)">
                                 </div>
                                 <div class="foydali-resurs-text">{{ $t("Божхона омборлари реестри") }}
 
                                 </div>
                             </a>
-                            <a class="foydali-resurs col-4" target="_blank" href="http://imo.customs.uz/IMO_REESTR/">
+                            <a class="foydali-resurs col-3" target="_blank" href="http://imo.customs.uz/IMO_REESTR/">
                                 <div class="foydali-resurs-image"
                                      style="background-image: url(/img/icons/intellektual-mulk.png)">
                                 </div>
@@ -629,22 +813,25 @@
 
                                 </div>
                             </a>
-                            <a class="foydali-resurs col-4" target="_blank" href="http://ed1.customs.uz/selhoz/">
+                            <a class="foydali-resurs col-3" target="_blank" href="http://ed1.customs.uz/selhoz/">
                                 <div class="foydali-resurs-image"
                                      style="background-image: url(/img/icons/meva-sabzavot.png)">
                                 </div>
-                                <div class="foydali-resurs-text">{{ $t("Экспорт қилинган мева - сабзавот махсулотлари") }}
+                                <div class="foydali-resurs-text">{{
+                                        $t("Экспорт қилинган мева - сабзавот махсулотлари")
+                                    }}
 
                                 </div>
                             </a>
-                            <a class="foydali-resurs col-4" target="_blank" href="http://ed1.customs.uz/REESTR_GTK/">
+                            <a class="foydali-resurs col-3" target="_blank" href="http://ed1.customs.uz/REESTR_GTK/">
                                 <div class="foydali-resurs-image" style="background-image: url(/img/icons/nohalol.png)">
                                 </div>
                                 <div class="foydali-resurs-text">{{ $t("ноҳалол экспортчилар реестри") }}
 
                                 </div>
                             </a>
-                            <a class="foydali-resurs col-4" target="_blank" href="http://service.customs.uz/autogtd_report/index.jsp?pc=9">
+                            <a class="foydali-resurs col-3" target="_blank"
+                               href="http://service.customs.uz/autogtd_report/index.jsp?pc=9">
                                 <div class="foydali-resurs-image"
                                      style="background-image: url(/img/icons/import-qiymati.png)">
                                 </div>
@@ -656,11 +843,13 @@
 
                     </div>
                 </div>
-                <div class="tab-pane" :class="nav_link===4?'active':''" id="mobil-ilovalar" role="tabpanel" aria-labelledby="mobil-ilovalar-tab">
+                <div class="tab-pane" :class="nav_link===4?'active':''" id="mobil-ilovalar" role="tabpanel"
+                     aria-labelledby="mobil-ilovalar-tab">
                     <div class="background"></div>
                     <div class="tab-container">
                         <div class="mobil-ilovalar row">
-                            <a class="mobil-ilova col-4" href="https://play.google.com/store/apps/details?id=uz.eskishahar.app.aktsverki"
+                            <a class="mobil-ilova col-4"
+                               href="https://play.google.com/store/apps/details?id=uz.eskishahar.app.aktsverki"
                                target="_blank">
                                 <div class="mobil-ilova-image"
                                      style="background-image: url(/img/service/akt-sverki.png)">
@@ -701,6 +890,9 @@
                     </div>
                 </div>
             </div>
+            <form ref="AppForm" id="appForm" method="get" target="_blank" class="d-none">
+                <input type="hidden" name="userInfoTR" v-model="JSON.stringify(appData)"/>
+            </form>
 
         </div>
         <!--==========End Portfolio area==========-->
@@ -775,17 +967,124 @@ export default {
                     exact: true,
                 },
             ],
-            nav_link:1,
+            nav_link: 1,
+            appData: {
+                //issuerName:"CN=OMONOV OTAJON JURAQULOVICH,T=Директор,O=DUK YANGI TEXNOLOGIYALAR ILMIY-AXBOROT MARKAZI,OU=ЭРИ яратиш ва реестрини юритиш,L=100096 Тошкент ш. Чилонзор тум. Муқимий кўч. 166-уй,E=info@yt.uz,C=UZ",
+                issuerName: "CN=OMONOV OTAJON JURAQULOVICH,T=Директор,O=DUK YANGI TEXNOLOGIYALAR ILMIY-AXBOROT MARKAZI,OU=ЭРИ яратиш ва реестрини юритиш,L=100096 Тошкент ш. Чилонзор тум. Муқимий кўч. 166-уй,E=info@yt.uz,C=UZ",
+                success: true,
+                serialNumberHex: "778ba2c3",
+                validFrom: "2021.03.26 09:35:55",
+                //subjectName:"CN=SHAMSIDDINOV XUMOYUN SHAROFIDDIN O\\u2018G\\u2018LI,Name=XUMOYUN,SURNAME=SHAMSIDDINOV,O=Не указано,L=ЯШНАБАДСКИЙ РАЙОН,ST=ГОРОД ТАШКЕНТ,C=UZ,UID=598668804,1.2.860.3.16.1.2=32911930250104,T=(noaniq)",
+                subjectName: "", //"CN=Abdullayev Surat Ilhomboy O\\u2018G\\u2018LI,Name=Surat,SURNAME=Abdullayev,O=Не указано,L=ЯШНАБАДСКИЙ РАЙОН,ST=ГОРОД ТАШКЕНТ,C=UZ,UID=547854884,1.2.860.3.16.1.2=31103927250012,T=(noaniq)",
+                validTo: "2023.03.26 23:59:59"
+            },
         }
     },
     created() {
         this.initialize();
     },
-    methods:{
-        initialize(){
-            if(this.$route.query.page){
-                this.nav_link=parseInt(this.$route.query.page);
+    methods: {
+        initialize() {
+            if (this.$route.query.page) {
+                this.nav_link = parseInt(this.$route.query.page);
             }
+        },
+        async getSessionId(type = null) {
+            let returnObject;
+            if (type === 'cabinet')
+                await axios.post("/api/v1/ex_api/gen_session", {type: 'cabinet'}).then(function (response) {
+                    returnObject = response;
+                }); else
+                await axios.get("/api/v1/ex_api/gen_session").then(function (response) {
+                    returnObject = response;
+                })
+            return returnObject;
+        },
+        async openApp(appName) {
+            $(".personalcabinet").remove()
+            //this.$refs.AppForm.action="http://singlewindow.uz/oauthTR";
+            //console.log(this.$refs.AppForm);
+            const _this = this;
+            if (!_this.$auth.user()) {
+                _this.$toast("Сиз авторизациядан ўтишингиз талаб этилади")
+                _this.$router.push('/login');
+                return;
+            }
+
+            _this.appData.subjectName = "CN=" + encodeURIComponent(_this.$auth.user().sur_name + ' ' + _this.$auth.user().first_name + ' ' + _this.$auth.user().mid_name) + ",Name=" + _this.$auth.user().first_name + ",SURNAME=" + _this.$auth.user().sur_name + ",O=Не указано,L=" + _this.$auth.user().birth_place + ",ST= ,C=UZ,UID=" + _this.$auth.user().tin + ",1.2.860.3.16.1.2=" + _this.$auth.user().pin + ",T=(noaniq)";
+            const formData = new FormData();
+            let  queryStr="";
+            switch (appName) {
+                case 'cargo':
+
+                    formData.append('userInfoTR', JSON.stringify(this.appData));
+                    queryStr = new URLSearchParams(formData).toString();
+                    console.log('http://cargo.customs.uz/oauthTR?' + queryStr)
+                    window.open('http://cargo.customs.uz/oauthTR?' + queryStr);
+                    break;
+                case 'singlewindow':
+                    this.$refs.AppForm.action = "//yagonadarcha.uz/oauthTR";
+                    this.$nextTick(() => {
+                        //console.log($("#appForm").serialize());
+                        this.$refs['AppForm'].submit();
+                    })
+                    break;
+                case 'cabinet':
+
+                    this.$refs.AppForm.action = "//ed1.customs.uz/PersonCabinet/MainMenu";
+                    this.$refs.AppForm.method = "post";
+                    const _this = this;
+                    const appData=JSON.parse(JSON.stringify(_this.appData));
+                    let result_data = null;
+                    this.$store.commit('setLoading', true);
+                    result_data = await this.getSessionId('cabinet');
+                    //this.$refs.AppForm.
+                    this.$store.commit('setLoading', false);
+                    if (result_data && result_data.status === 200) {
+
+                        var s = document.createElement('div'); // is the node
+                        s.classList.add('personalcabinet');
+                        s.innerHTML = '<input type="hidden" name="SessionID" value="' + result_data.data.data.sesid + '"/>'
+                            + '<input type="hidden" name="serialNumberHex" value="' + result_data.data.data.serialnumber + '"/>'
+                            + '<input type="hidden" name="INN" value="' + result_data.data.data.userinn + '"/>'
+                            + '<input type="hidden" name="PNFL" value="' + _this.$auth.user().pin + '"/>'
+                            + '<input type="hidden" name="username" value="' + result_data.data.data.name.replaceAll("", "'") + '"/>'
+                            + '<input type="hidden" name="SHK" value="SHK"/>'
+                            + '<input type="hidden" name="prcod" value="' + result_data.data.data.prcod + '"/>';
+
+
+                        _this.appData = "";
+                        _this.$refs.AppForm.appendChild(s);
+                        //console.log(_this.$refs.AppForm);
+                        /*$("#SessionID").attr('value', result_data.data.data.sesid)
+                        $("#serialNumberHex").attr('value', result_data.data.data.serialnumber)
+                        //$("#serialNumberHex").attr('value',result_data.data.data.serialnumber)
+                        $("#INN").attr('value', result_data.data.data.userinn)
+                        $("#PNFL").attr('value', _this.$auth.user().pin)
+
+                        $("#username").attr('value', result_data.data.data.name.replaceAll("", "'"))
+                        ///!*_this.$toast.success(result_data.data.data.name)
+                        //console.log(_this.$refs['arxivSubmit'])*!/
+                        //console.log(_this.$refs['arxivSubmit']);
+                        _this.$refs['AppForm'].submit();*/
+                    }
+                    this.$nextTick(() => {
+                        //console.log($("#appForm").serialize());
+                        this.$refs['AppForm'].submit();
+                        _this.appData=JSON.parse(JSON.stringify(appData));
+                    })
+                    break;
+                case 'ombor':
+                    console.log(this.appData)
+                    formData.append('userInfoTR', JSON.stringify(this.appData));
+                    let  queryStr = new URLSearchParams(formData).toString();
+                    console.log('http://e-ombor.customs.uz/LinkForAnotherSites?' + queryStr)
+                    window.open('http://e-ombor.customs.uz/LinkForAnotherSites?' + queryStr);
+                    break;
+            }
+            //this.$refs.AppForm.submit();
+
+
         }
     }
 

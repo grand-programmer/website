@@ -62,8 +62,10 @@ class ApiController extends Controller
 
                 try {
                     $response = $myrequest
-                        ->timeout(10)
-                        ->get('http://192.168.214.135:9090/CUSTOMSPRICE/api/custom/locations');
+                        ->get('http://192.168.214.159/vacancy/public/api/hudud');
+                    /*                    $response = $myrequest
+                                            ->timeout(10)
+                                            ->get('http://192.168.214.135:9090/CUSTOMSPRICE/api/custom/locations');*/
                     if ($response->status() == 200) {
                         $dataLocations = json_decode($response->body());
                         //dd($dataLocations->locations);
@@ -86,11 +88,11 @@ class ApiController extends Controller
                 } catch (\Exception $e) {
 
                     return response()->json(['data' => DB::connection('db2_odbc221')->select("Select id as kod_id, name_uzb as name From Location")]);
-                    /*$response = $myrequest
-                        ->get('http://192.168.214.159/vacancy/public/api/hudud');*/
+                    $response = $myrequest
+                        ->get('http://192.168.214.159/vacancy/public/api/hudud');
 
 
-                    ///return response()->json(['error' => 'Malumot topilmadi']);
+                    return response()->json(['error' => 'Malumot topilmadi']);
                 }
                 break;
             case "resume":
@@ -149,6 +151,159 @@ class ApiController extends Controller
                 } else return response()->json(["error" => "Серверда хатолик юз берди!", "status" => false], 200);
                 break;
             //////tftn end
+            //////intellektual
+            case "intellektual-person":
+                $this->middleware('auth:api');
+                $user = Auth::guard('api')->user();
+                if (!$user) return response()->json([
+                    'success' => false,
+                    'data' => 'Foydalanuvchi avtorizatsiyadan otishi talab etiladi'], 401);
+                $response = Http::contentType("application/json")->send('POST', 'http://192.168.214.152:7070/DECAPP/personsrestapi', [
+                    'body' => json_encode($request->all())
+                ]);
+                break;
+            case "intellektual-huquq":
+                $this->middleware('auth:api');
+                $user = Auth::guard('api')->user();
+                if (!$user) return response()->json([
+                    'success' => false,
+                    'data' => 'Foydalanuvchi avtorizatsiyadan otishi talab etiladi'], 401);
+                $response = Http::contentType("application/json")->send('POST', 'http://192.168.214.152:7070/DECAPP/s01appsrestapi/saveapps', [
+                    'body' => json_encode($request->all())
+                ]);
+                break;
+            case "intellektual-product":
+                $this->middleware('auth:api');
+                $user = Auth::guard('api')->user();
+                if (!$user) return response()->json([
+                    'success' => false,
+                    'data' => 'Foydalanuvchi avtorizatsiyadan otishi talab etiladi'], 401);
+                $response = Http::contentType("application/json")->send('POST', 'http://192.168.214.152:7070/DECAPP/s01commodityrestapi/savecommodity', [
+                    'body' => json_encode($request->all())
+                ]);
+                break;
+            case "intellektual-get":
+                $appData = $request->only(['app_id', 'person_id', 'page', 'size']);
+                if (isset($appData['app_id'])) {
+                    $app_id = isset($appData['app_id']) ? $appData['app_id'] : null;
+                    $response = Http::contentType("application/json")->get('http://192.168.214.152:7070/DECAPP/s01apiresponse/getoneapp', [
+                        "appId" => $app_id,
+                    ]);
+                } elseif (isset($appData['person_id'])) {
+                    $person_id = isset($appData['person_id']) ? $appData['person_id'] : null;
+                    $page = $appData['page'] ?? 0;
+                    $size = $appData['size'] ?? 50;
+                    $response = Http::contentType("application/json")->get('http://192.168.214.152:7070/DECAPP/s01apiresponse/getresult', [
+                        "personPin" => $person_id,
+                        "page" => $page,
+                        "size" => $size,
+                    ]);
+
+
+                } else {
+                    return response()->json(["error" => "Хато маълумот юборилди!", "status" => false], 200);
+                }
+                if ($response->status() == 200) {
+                    return response()->json(["data" => $response->json()]);
+                } else return response()->json(["error" => "Серверда хатолик юз берди!", "status" => false], 200);
+                break;
+            //////intellektual end
+
+            //////recycle
+            case "recycle-person":
+                $this->middleware('auth:api');
+                $user = Auth::guard('api')->user();
+                if (!$user) return response()->json([
+                    'success' => false,
+                    'data' => 'Foydalanuvchi avtorizatsiyadan otishi talab etiladi'], 401);
+                $response = Http::contentType("application/json")->send('POST', 'http://192.168.214.152:7070/DECAPP/personsrestapi', [
+                    'body' => json_encode($request->all())
+                ]);
+                break;
+            case "recycle-common":
+                $this->middleware('auth:api');
+                $user = Auth::guard('api')->user();
+                if (!$user) return response()->json([
+                    'success' => false,
+                    'data' => 'Foydalanuvchi avtorizatsiyadan otishi talab etiladi'], 401);
+                $response = Http::contentType("application/json")->send('POST', 'http://192.168.214.152:7070/DECAPP/s03appealrestapi/saveapps', [
+                    'body' => json_encode($request->all())
+                ]);
+                break;
+            case "recycle-product":
+                $this->middleware('auth:api');
+                $user = Auth::guard('api')->user();
+                if (!$user) return response()->json([
+                    'success' => false,
+                    'data' => 'Foydalanuvchi avtorizatsiyadan otishi talab etiladi'], 401);
+                $response = Http::contentType("application/json")->send('POST', 'http://192.168.214.152:7070/DECAPP/s03commodityrestapi/savecommoditys', [
+                    'body' => json_encode($request->all())
+                ]);
+                break;
+            case "recycle-get":
+                $appData = $request->only(['app_id', 'person_id', 'page', 'size']);
+                if (isset($appData['app_id'])) {
+                    $app_id = isset($appData['app_id']) ? $appData['app_id'] : null;
+                    $response = Http::contentType("application/json")->get('http://192.168.214.152:7070/DECAPP/s03apiresponse/getoneapp', [
+                        "appId" => $app_id,
+                    ]);
+                } elseif (isset($appData['person_id'])) {
+                    $person_id = isset($appData['person_id']) ? $appData['person_id'] : null;
+                    $page = $appData['page'] ?? 0;
+                    $size = $appData['size'] ?? 50;
+                    $response = Http::contentType("application/json")->get('http://192.168.214.152:7070/DECAPP/s01apiresponse/getresult', [
+                        "personPin" => $person_id,
+                        "page" => $page,
+                        "size" => $size,
+                    ]);
+
+
+                } else {
+                    return response()->json(["error" => "Хато маълумот юборилди!", "status" => false], 200);
+                }
+                if ($response->status() == 200) {
+                    return response()->json(["data" => $response->json()]);
+                } else return response()->json(["error" => "Серверда хатолик юз берди!", "status" => false], 200);
+                break;
+            //////recycle end
+            /// refund begin
+            ///
+            case "refund":
+                $this->middleware('auth:api');
+                $user = Auth::guard('api')->user();
+                if (!$user) return response()->json([
+                    'success' => false,
+                    'data' => 'Foydalanuvchi avtorizatsiyadan otishi talab etiladi'], 401);
+                $response = Http::contentType("application/json")->send('POST', 'http://192.168.214.152:7070/DECAPP/s04appealrestapi/saveapps', [
+                    'body' => json_encode($request->all())
+                ]);
+                break;
+            case "refund-get":
+                $appData = $request->only(['app_id', 'person_id', 'page', 'size']);
+                if (isset($appData['app_id'])) {
+                    $app_id = isset($appData['app_id']) ? $appData['app_id'] : null;
+                    $response = Http::contentType("application/json")->get('http://192.168.214.152:7070/DECAPP/s04apiresponse/getoneapp', [
+                        "appId" => $app_id,
+                    ]);
+                } elseif (isset($appData['person_id'])) {
+                    $person_id = isset($appData['person_id']) ? $appData['person_id'] : null;
+                    $page = $appData['page'] ?? 0;
+                    $size = $appData['size'] ?? 50;
+                    $response = Http::contentType("application/json")->get('http://192.168.214.152:7070/DECAPP/s04apiresponse/getresult', [
+                        "personPin" => $person_id,
+                        "page" => $page,
+                        "size" => $size,
+                    ]);
+
+
+                } else {
+                    return response()->json(["error" => "Хато маълумот юборилди!", "status" => false], 200);
+                }
+                if ($response->status() == 200) {
+                    return response()->json(["data" => $response->json()]);
+                } else return response()->json(["error" => "Серверда хатолик юз берди!", "status" => false], 200);
+                break;
+            ///
             /// customsprice begin
             case "customprice-person":
                 $this->middleware('auth:api');
@@ -317,6 +472,7 @@ class ApiController extends Controller
                 if (isset($appData['datepicker']) && isset($appData['datepicker'][0])) $appData['StartDate'] = $appData['datepicker'][0];
                 if (isset($appData['datepicker']) && isset($appData['datepicker'][1])) $appData['EndDate'] = $appData['datepicker'][1];
                 $appData['page'] = isset($appData['page']) ? $appData['page'] - 1 : 0;
+                $appData['size'] = (isset($appData['size']) and $appData['size'] === -1) ? 0 : $appData['size'];
                 //$appData = isset($appData['pnfl']) ? $appData['pnfl'] : null;
                 ///dd($appData);
                 $response = Http::contentType("application/json")->get('http://192.168.214.135:9090/CUSTOMSPRICE/api/custom/reestor', $appData);
@@ -347,6 +503,65 @@ class ApiController extends Controller
                     return response()->json($stats);
                 }
                 return response()->json(['status' => $response->status(), 'data' => $response->body()]);;
+
+                break;
+            case "services-registries":
+                $appData = $request->only(['num_z', 'tip_z', 'status', 'datepicker', 'page', 'size']);
+                foreach ($appData as $mk => $mdata) {
+                    $appData[$mk] = $mdata === null ? "" : $mdata;
+                }
+                //dd($appData);
+                //'StartDate', 'EndDate',
+                $whereInstime = "";
+                $whereNumz = "";
+                $whereStatus = "";
+                $whereTipz = "";
+                $wherePage = "";
+
+                if (isset($appData['datepicker']) && isset($appData['datepicker'][0])) $whereInstime = "and date(instime) > " . $appData['datepicker'][0];
+                if (isset($appData['datepicker']) && isset($appData['datepicker'][1])) {
+                    $whereInstime = $whereInstime . " and date(instime) < " . $appData['datepicker'][1];
+                }
+                $appData['page'] = $appData['page'] ?? 1;
+                $appData['size'] = $appData['size'] ?? 10;
+                if ($appData['size'] === -1) $appData['size'] = 1000;
+                $whereNumz = isset($appData['num_z']) ? " and z.num_z like '" . $appData['num_z'] . "%'" : "";
+                $whereStatus = (isset($appData['status']) and $appData['status'] and $appData['status'] >= 0 and $appData['status'] < 8) ? " and z.status =" . $appData['status'] : "";
+                $whereTipz = (isset($appData['tip_z']) and in_array($appData['tip_z'], ['L', 'C', 'E', 'G'])) ? " and z.tip_z ='" . $appData['tip_z'] . "'" : "";
+
+
+                $query = "
+                    select
+                        *
+                    from
+                        (   select
+                                *
+                            from
+                                (   select
+                                        t.*
+                                    from
+                                        (select ( SELECT COUNT(TIP_Z) FROM zvk_main z where tip_z in ('L','C','E','G') and user_ext is not null " . $whereStatus . " " . $whereTipz . " " . $whereNumz . ") as mycount, NUM_Z, TIP_Z, INSTIME, USER_EXT,STATUS, FABULA from elzvk.zvk_main z where tip_z in ('L','C','E','G') and user_ext is not null " . $whereStatus . " " . $whereTipz . " " . $whereNumz . "
+                                            ) t
+                                    order by
+                                        instime desc
+                                    fetch
+                                        first " . $appData['size'] * $appData['page'] . " rows only) i
+                            order by
+                                instime asc
+                            fetch
+                                first " . $appData['size'] . " rows only) ii
+                    order by
+                        instime desc
+
+                ";
+                //dd($query);
+                $data = DB::connection('databaseconfig2_10')->select($query);
+                $data = collect($data)->transform(function ($item) {
+                    $item->fabula = str_replace("", "", $item->fabula);
+                    return $item;
+                });
+
+                return response()->json(['data' => $data]);;
 
                 break;
             case "posts":
@@ -420,6 +635,9 @@ class ApiController extends Controller
                     $json = json_encode($simpleXml); // convert the XML string to JSON
                     $array = json_decode($json); // convert the XML string to JSON
                     $myPasportData = [];
+                    if (!isset($array->birth_date)) {
+                        return response()->json(['error' => 'Маълумотларни текшириб қайтадан киритинг'], 400);
+                    }
                     $myPasportData['birth_date'] = $array->birth_date;
                     $myPasportData['namelatin'] = $array->namelatin;
                     $myPasportData['surnamelatin'] = $array->surnamelatin;
@@ -496,10 +714,41 @@ class ApiController extends Controller
                         'success' => $response->status() ? true : false
                         //'created_at' => date('d-m-Y H:i:s', strtotime($appeal->created_at)),
                     ], 200);
-                } else return response()->json(['error' => 'Сервер билан уланишда муаммо бор!', 'status' => false]);
+                } else return response()->json(['error' => 'Сервер билан уланишда муаммо бор!', 'message' => $response->body(), 'status' => $response->status()]);
             case 'gen_session':
-                //return (strin g) Str::uuid();
                 if (!Auth::guard('api')->user()) return response()->json(['Not authorized'], 401);
+                $data = $request->all();
+                if (isset($data['type']) and $data['type']==='cabinet') {
+                    $prcode = 0;
+
+                    ///inn
+                    $rem = 0;
+                    $num = Auth::guard('api')->user()->tin;
+                    for ($i = 0; $i <= strlen($num); $i++) {
+                        $rem = $num % 10;
+                        $prcode = $prcode + $rem;
+                        $num = $num / 10;
+                    }
+////pnfl
+                    $rem = 0;
+                    $num = Auth::guard('api')->user()->pin;
+                    for ($i = 0; $i <= strlen($num); $i++) {
+                        $rem = $num % 10;
+                        $prcode = $prcode + $rem;
+                        $num = $num / 10;
+                    }
+
+
+                    $query = "Insert into Log  (SESID,USERINN,NAME,IP,SERIALNUMBER,PRCOD,ED) values ('" . Str::uuid() . "','" . Auth::guard('api')->user()->tin . "','" . Auth::guard('api')->user()->sur_name . " " . Auth::guard('api')->user()->first_name . " " . Auth::guard('api')->user()->mid_name . "','" . $request->getClientIp() . "', '" . substr(Str::uuid(), 0, 8) . "'," . $prcode . ",5)";
+                    DB::connection("databaseconfig212_228")->insert($query);
+                    //else return response()->json(['data' => $sessions[0]]);
+                    $sessions = DB::connection("databaseconfig212_228")->select("Select * from Log where USERINN='" . Auth::guard('api')->user()->tin . "' and exit is null and Last > '" . Carbon::now()->subDays(1) . "' order by last desc");
+                    return response()->json(['data' => $sessions[0]]);
+
+
+                }
+                //return (strin g) Str::uuid();
+
                 /*                $sessions = DB::connection("db2_odbcEA")->select("Select * from Log where USERINN='" . Auth::guard('api')->user()->tin . "' and  exit is null and Last > '" . Carbon::now()->subDays(1) . "'");
                                 //if (!$sessions) */
                 $query = "Insert into Log  (SESID,USERINN,NAME,SERIALNUMBER,TYPE) values ('" . Str::uuid() . "','" . Auth::guard('api')->user()->tin . "','" . Auth::guard('api')->user()->sur_name . " " . Auth::guard('api')->user()->first_name . " " . Auth::guard('api')->user()->mid_name . "','" . substr(Str::uuid(), 0, 8) . "',3)";
@@ -535,7 +784,7 @@ class ApiController extends Controller
                 $query = " select ID, REGION, POST, NUM_Z, DATE_Z, TIP_Z, OKPO, INN, NAIM, ADRES, TEL, PASN, PS, INSTIME, NUM_ENT, DATE_ENT, USER_ENT, ENT_TIME,
                             NUM_EXT, DATE_EXT, SROK, STATUS, FABULA, USER_EXT, NACH_EXT, TEL_EXT, TIME_EXT, END_EXT, G7A, G7B, G7C, N_BLANK, SEND1, SEND2, ID_ENT, ID_EXT
                              from elzvk.zvk_main z where status in (2,3) ORDER BY instime desc FETCH FIRST 10 ROWS ONLY ";
-                $result=DB::connection("databaseconfig2_10")->select($query);
+                $result = DB::connection("databaseconfig2_10")->select($query);
                 return response()->json(['status' => 'success', 'data' => $result]);
 
             default:

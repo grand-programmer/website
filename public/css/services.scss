@@ -1,0 +1,36 @@
+
+.page-content .container .product-button-actions{
+    flex: 1 1 auto;
+    overflow-y: scroll;
+    padding-right: 5px;
+    max-height: 420px;
+    padding-top: 0;
+    width: 105%;
+    button{
+        width: 100%;
+
+        .number-of-product{
+            margin-top: 2px;
+        }
+
+    }
+
+}
+#v-pills-tab .create{
+    margin-top: 20px;
+}
+::-webkit-scrollbar {
+    width: 15px;
+}
+::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+::-webkit-scrollbar-thumb {
+    background-color: #d6dee1;
+    border-radius: 20px;
+    border: 3px solid transparent;
+    background-clip: content-box;
+    &:hover {
+        background-color: #a8bbbf;
+    }
+}

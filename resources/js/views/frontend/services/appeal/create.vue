@@ -412,7 +412,22 @@ export default {
         }
     },
     created(){
-        this.getPasportData()
+        if(!this.$auth.user())
+        this.getPasportData();
+        else {
+            //console.log(this.$auth.user().birth_date)
+            const _this=this;
+            if(_this.$route.query.pasnum && _this.$route.query.pasdate){
+                this.getPasportData();
+            }else {
+                //_this.appeal.date_birth=_this.$auth.user().birth_date
+                _this.appeal.personPin = _this.$auth.user().pin
+                _this.appeal.name = _this.$auth.user().first_name
+                _this.appeal.surname = _this.$auth.user().mid_name
+                _this.appeal.lastname = _this.$auth.user().sur_name
+            }
+
+        }
         this.getBoshqarmalar()
     },
     computed: {
@@ -461,7 +476,7 @@ export default {
             await axios.get('/api/v1/ex_api/boshqarma').then(function (result) {
                 _this.adresatlar=[];
                 result.data.data.forEach(function (item) {
-                    if (!(['1790', '1791', '1701'].includes(item['kod_id'])))
+                    if (!(['1790', '1791'].includes(item['kod_id'])))
                         _this.adresatlar.push({
                             'value': item['kod_id'],
                             'text': (item['name']).replace("Ўзбекистон Республикаси Давлат божхона қўмитасининг ", "")//(item['name']).substring(("Ўзбекистон Республикаси Давлат божхона қўмитасининг ").length)

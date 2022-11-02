@@ -111,7 +111,7 @@
 </template>
 <script>
 import api from "./../../../src/services/apiService";
-import ListItem from "../../../js/views/dashboard/component/ListItem";
+import ListItem from "../../../views/dashboard/component/ListItem";
 import i18n from "../../../i18n";
 
 export default {
@@ -122,6 +122,12 @@ export default {
             {
                 text: i18n.t('Асосий саҳифа'),
                 to: '/',
+                disabled: false,
+                exact: true,
+            },
+            {
+                text: i18n.t('Янгиликлар'),
+                to: '/news/',
                 disabled: false,
                 exact: true,
             },
@@ -143,9 +149,9 @@ export default {
         // currentUrl:"",
         fab: true,
         related_news: {},
-        likes:[],
-        dislikes:[],
-        mdata:null,
+        likes: [],
+        dislikes: [],
+        mdata: null,
     }),
     watch: {
         $route(to, from) {
@@ -167,7 +173,7 @@ export default {
             this.$router.replace('/');
         },
         initialize() {
-            setTimeout(async ()=>{
+            setTimeout(async () => {
                 await api.readOneNews(this.$route.params.slug).then((response) => {
 
                     this.news = response.data.data;
@@ -176,10 +182,16 @@ export default {
                         this.news.created_at = dateParts[1].substring(0, 5);
                     else this.news.created_at = dateParts[0];*/
 
+                    if (this.news.categories.length > 0) {
+                        this.breadcrumb_items[2].text = this.news.categories[0].title;
+                        this.breadcrumb_items[2].to = "/category/" + this.news.categories[0].slug;
+                        this.breadcrumb_items[3].text = this.news.title;
+                    } else {
+                        this.breadcrumb_items[2].text = this.news.title;
+                        this.breadcrumb_items[2].disabled = true;
+                        this.breadcrumb_items.splice(3,1)
+                    }
 
-                    this.breadcrumb_items[1].text = this.news.categories[0].title;
-                    this.breadcrumb_items[1].to = "/category/" + this.news.categories[0].slug;
-                    this.breadcrumb_items[2].text = this.news.title;
                 }).catch((error) => {
                     console.log(error)
                     this.$toast.error(i18n.t(`Маълумотларни юклашда хатолик содир бўлди!`))
@@ -203,75 +215,71 @@ export default {
             })
 
 
-
-
         },
-        vote(vote){
-            const _this=this;
-            _this.likes=this.$cookie.get('likes') ? JSON.parse(this.$cookie.get('likes')) : null;
-            _this.dislikes=this.$cookie.get('dislikes') ? JSON.parse(this.$cookie.get('dislikes')) : null;
+        vote(vote) {
+            const _this = this;
+            _this.likes = this.$cookie.get('likes') ? JSON.parse(this.$cookie.get('likes')) : null;
+            _this.dislikes = this.$cookie.get('dislikes') ? JSON.parse(this.$cookie.get('dislikes')) : null;
 
-/*            let likes=this.$cookie.get('likes') ? JSON.parse(this.$cookie.get('likes')) : null;
-            if(likes!==null && likes.include(this.news.id)) {
+            /*            let likes=this.$cookie.get('likes') ? JSON.parse(this.$cookie.get('likes')) : null;
+                        if(likes!==null && likes.include(this.news.id)) {
 
-            }else*/
-            let discount=false;
-            if(vote===1){
-                if(_this.likes!==null && _this.likes.includes(_this.news.id)){
+                        }else*/
+            let discount = false;
+            if (vote === 1) {
+                if (_this.likes !== null && _this.likes.includes(_this.news.id)) {
                     this.$toast.warning(i18n.t('Сиз аллақачон овоз бергансиз') + '!')
-                    return ;
+                    return;
 
-                }else {
-                    if(_this.dislikes!==null && _this.dislikes.includes(_this.news.id))
-                        discount=true;
+                } else {
+                    if (_this.dislikes !== null && _this.dislikes.includes(_this.news.id))
+                        discount = true;
 
-                    if(_this.likes) {
+                    if (_this.likes) {
                         this.$cookie.set('likes', JSON.stringify(_this.likes.concat([_this.news.id])))
-                    }
-                    else
-                    this.$cookie.set('likes', JSON.stringify([_this.news.id]))
+                    } else
+                        this.$cookie.set('likes', JSON.stringify([_this.news.id]))
                 }
 
 
             }
-            if(vote===0){
-                if(_this.dislikes!==null && _this.dislikes.includes(_this.news.id)){
+            if (vote === 0) {
+                if (_this.dislikes !== null && _this.dislikes.includes(_this.news.id)) {
                     this.$toast.warning(i18n.t('Сиз аллақачон овоз бергансиз') + '!')
-                    return ;
+                    return;
 
-                }else {
-                    if(_this.likes!==null && _this.likes.includes(_this.news.id))
-                        discount=true;
-                    if(_this.dislikes) {
+                } else {
+                    if (_this.likes !== null && _this.likes.includes(_this.news.id))
+                        discount = true;
+                    if (_this.dislikes) {
                         this.$cookie.set('dislikes', JSON.stringify(_this.dislikes.concat([_this.news.id])))
-                    }
-                    else
+                    } else
                         this.$cookie.set('dislikes', JSON.stringify([_this.news.id]))
                 }
 
             }
-            _this.mdata={
-                like:vote,
+            _this.mdata = {
+                like: vote,
             }
-            if(discount) _this.mdata['discount']=1;
-            setTimeout(async ()=>{
-                await axios.post('/api/v1/news/' + _this.news.id + '/vote',_this.mdata).then(()=>{
-                    if(vote===1) {
+            if (discount) _this.mdata['discount'] = 1;
+            setTimeout(async () => {
+                await axios.post('/api/v1/news/' + _this.news.id + '/vote', _this.mdata).then(() => {
+                    if (vote === 1) {
                         _this.news.like = _this.news.like + 1;
-                        if(discount) {
+                        if (discount) {
                             _this.news.dislike = _this.news.dislike - 1;
-                            if(_this.dislikes?.indexOf(_this.news.id)!==-1) {
+                            if (_this.dislikes?.indexOf(_this.news.id) !== -1) {
                                 _this.dislikes = _this.dislikes.splice(_this.news.id, 1)
                                 this.$cookie.set('dislikes', JSON.stringify(_this.dislikes))
                             }
                         }
 
                     }
-                    if(vote===0) {
+                    if (vote === 0) {
                         _this.news.dislike = _this.news.dislike + 1;
-                        if(discount) {
+                        if (discount) {
                             _this.news.like = _this.news.like - 1;
-                            if(_this.likes?.indexOf(_this.news.id)!==-1) {
+                            if (_this.likes?.indexOf(_this.news.id) !== -1) {
                                 _this.likes = _this.likes.splice(_this.news.id, 1)
                                 this.$cookie.set('likes', JSON.stringify(_this.likes))
                             }
@@ -285,7 +293,7 @@ export default {
 
 }
 </script>
-<style >
+<style>
 .news__img {
     position: relative;
     width: 100%;
@@ -354,7 +362,8 @@ export default {
     padding-bottom: 35px;
     border-bottom: 2px solid #39ae69;
 }
-.widget_tittle h3{
+
+.widget_tittle h3 {
     color: #39ae69;
     font-weight: bold;
     font-size: 25px;

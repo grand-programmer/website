@@ -119,6 +119,11 @@
                                                     </template>
                                                 </div>
                                             </v-col>
+                                            <v-col cols="2">
+                                                <v-text-field label="Сана"
+                                                              v-model="news.created_at"
+                                                              type="date"></v-text-field>
+                                            </v-col>
                                             <v-col cols="12" sm="12" md="12" v-show="lang==='uz'">
                                                 <ValidationProvider name="Қисқача мазмуни" rules="required|min:3"
                                                                     v-slot="{ errors }">
@@ -368,6 +373,7 @@ export default {
             ],
             preview: '',
             categories: [],
+            created_at:(new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
             breadcrumb_items:
                 [
                     {text: 'Админ панел', to: '/admin', exact: true},
@@ -386,6 +392,15 @@ export default {
         this.initialize();
     },
     methods: {
+        formatDate(date,type=1) {
+            console.log(date)
+            if (!date) return null
+
+            const [year, month, day] = date.split('-')
+            if(type===2) return `${day}-${month}-${year}`;
+            console.log('asd'+date)
+            if(type===1) return `${day}.${month}.${year}`; else return `${year}-${day}-${month}`
+        },
         getLang(code = null) {
             if (code) {
                 let language = this.languages.filter((language) => {
@@ -417,11 +432,15 @@ export default {
                             _this.langtext[translate.language]=translate;
                         })
                     }
+                if (typeof _this.news.created_at !== 'undefined' && _this.news.created_at) {
+                    _this.news.created_at = JSON.parse(JSON.stringify(_this.formatDate(_this.news.created_at,2)));
 
+                }
                 this.preview = "/storage/uploads/" + this.news.image;
                 this.news.image = null;//"/storage/uploads/"+this.news.image;
                 delete this.news.image;//"/storage/uploads/"+this.news.image;
             }).catch((error) => {
+                console.log(error);
                 this.$router.replace("/admin/news").catch(() => {
                 });
             })

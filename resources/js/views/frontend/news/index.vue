@@ -15,7 +15,10 @@
                 <v-col :cols="9">
                     <div class="single_blog_content">
                         <div class="widget_tittle" style="height: 75px"><h3>{{ $t("Янгиликлар") }}</h3></div>
-                        <v-row style="height:40px; width: 100%"></v-row>
+                        <v-row v-if="categories" style="flex-direction: row; justify-content: start" class="mt-5 categories-chip">
+                            <v-hover v-for="(category,key) in categories" :key="'dsf'+key" v-if="category"  v-slot="{ hover }"> <v-chip color="primary" :style="hover?'background-color:#08642e !important;':''" style="width: max-content;" class="text-decoration-none cursor-pointer my-1 mx-1" :to="'/category/' + category.slug" > {{category.text}}</v-chip></v-hover>
+                        </v-row>
+                        <v-row style="height:20px; width: 100%"></v-row>
                         <v-row>
                             <v-col cols="4" class="news-item" v-for="(news,index) in news" :key="news.slug+index">
                                 <div class="news-item-content">
@@ -131,7 +134,12 @@ export default {
                 console.log(error)
                 this.$toast.error(i18n.t(`Маълумотларни юклашда хатолик содир бўлди!`))
             })
-
+            api.readCategoriesForSelect().then((response) => {
+                this.categories = response.data;
+            }).catch((error) => {
+                console.log(error)
+                this.$toast.error(i18n.t(`Маълумотларни юклашда хатолик содир бўлди!`))
+            })
 
             /*            api.readNews().then((response) => {
                             console.log()

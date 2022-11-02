@@ -607,3 +607,18 @@ section.content_block .profile-action-buttons a.btn.disabled{
 #printMe1 .dialog_content{
     overflow: initial !important;
 }
+.answer-content{
+    display: block;
+    padding: 25px;
+    line-height: 32px;
+    font-size: 16px;
+    p{
+        line-height: 32px;
+        font-size: 16px;
+    }
+    td{
+        border: 1px solid #ccc;
+        text-align: center;
+    }
+}
+

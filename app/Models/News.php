@@ -19,6 +19,7 @@ class News extends Model
         'home',
         'image',
         'created_by',
+        'created_at',
         'boshqarma'
     ];
 
@@ -52,6 +53,7 @@ class News extends Model
     {
         return $this->belongsToMany('App\Models\Category', 'news_categories');
     }
+
     public function translates()
     {
         return $this->hasMany('App\Models\NewsTranslates');
@@ -59,6 +61,17 @@ class News extends Model
 
     public function resolveRouteBinding($value, $field = NULL)
     {
-        return $this->where('id', $value)->orWhere('slug', $value)->first();
+
+        if($this->where('slug', $value)->exists()) return $this->where('slug', $value)->first();
+        else {
+            $news=$this->where('id', (int)$value)->first();
+
+            if ($news->id == $value and strlen($value)===strlen((int)$value))
+                return $this->where('id', (int)$value)->first();
+            else return false;
+        }
+        /*if ((int)$value > 0 and strlen($value)<=4) {
+            return $this->where('id', (int)$value)->first();
+        }else return $this->where('slug', $value)->first();*/
     }
 }

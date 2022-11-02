@@ -422,10 +422,13 @@ export default {
         },
         createAppeal(){
             this.yuborishLoading=true;
-            this.getPasportData()
-
-
-
+            if(!this.$auth.user() )
+            this.getPasportData();
+            else {
+                if(this.passport.seriya.length>0 && this.passport.number.length>0 && this.passport.date.length>0)
+                    this.getPasportData(); else
+                this.$router.push({path: '/services/appeals/create'});
+            }
         },
         async getPasportData(){
             const _this=this;
@@ -440,6 +443,10 @@ export default {
                 _this.yuborishLoading=false;
                 if(typeof response.data.data.birth_date !=='undefined')
                     _this.$router.push({path:'/services/appeals/create',query:{pasnum:_this.passport.seriya + _this.passport.number,pasdate: _this.passport.date }});
+                else _this.$toast.error('Маълумотларни текшириб қайтадан киринг')
+            }).catch(()=>{
+                _this.$toast.error('Маълумотларни текшириб қайтадан киринг');
+                this.yuborishLoading=false;
             })
             this.yuborishLoading=false;
         },

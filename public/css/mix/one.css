@@ -657,7 +657,6 @@ section.content_block .tab-content > .tab-pane {
   z-index: 1;
 }
 #pills-contact .foydali-resurslar.row {
-  max-width: 900px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -665,10 +664,10 @@ section.content_block .tab-content > .tab-pane {
   align-self: center;
   margin: 0 auto;
 }
-#pills-contact .foydali-resurslar.row .foydali-resurs.col-4 {
+#pills-contact .foydali-resurslar.row .foydali-resurs {
   min-height: 300px;
   margin: 15px 20px;
-  max-width: calc(33.3% - 40px);
+  max-width: calc(25% - 40px);
   background-color: #ccc;
   border-radius: 15px;
   position: relative;
@@ -676,16 +675,16 @@ section.content_block .tab-content > .tab-pane {
   overflow: hidden;
   transition: 0.5s;
 }
-#pills-contact .foydali-resurslar.row .foydali-resurs.col-4:hover {
+#pills-contact .foydali-resurslar.row .foydali-resurs:hover {
   box-shadow: 0 0 17px -5px #383838;
   transition: 0.5s;
 }
-#pills-contact .foydali-resurslar.row .foydali-resurs.col-4 .foydali-resurs-image {
+#pills-contact .foydali-resurslar.row .foydali-resurs .foydali-resurs-image {
   width: 100%;
   height: 11rem;
   background-position: center;
 }
-#pills-contact .foydali-resurslar.row .foydali-resurs.col-4 .foydali-resurs-text {
+#pills-contact .foydali-resurslar.row .foydali-resurs .foydali-resurs-text {
   display: flex;
   height: 8rem;
   position: absolute;
@@ -700,16 +699,16 @@ section.content_block .tab-content > .tab-pane {
   color: #ffff;
   font-size: 20px;
 }
-#pills-contact .foydali-resurslar.row .foydali-resurs.col-4:nth-of-type(1), #pills-contact .foydali-resurslar.row .foydali-resurs.col-4:nth-of-type(5) {
+#pills-contact .foydali-resurslar.row .foydali-resurs:nth-of-type(4n+1) {
   background-color: #63ce8e;
 }
-#pills-contact .foydali-resurslar.row .foydali-resurs.col-4:nth-of-type(2) {
+#pills-contact .foydali-resurslar.row .foydali-resurs:nth-of-type(4n+2) {
   background-color: #5985cd;
 }
-#pills-contact .foydali-resurslar.row .foydali-resurs.col-4:nth-of-type(3) {
+#pills-contact .foydali-resurslar.row .foydali-resurs:nth-of-type(4n+3) {
   background-color: #f8bd27;
 }
-#pills-contact .foydali-resurslar.row .foydali-resurs.col-4:nth-of-type(4) {
+#pills-contact .foydali-resurslar.row .foydali-resurs:nth-of-type(4n+4) {
   background-color: #ce483d;
 }
 
@@ -903,6 +902,10 @@ section.content_block .tab-content > .tab-pane {
 
 .news {
   margin-top: 140px;
+}
+
+.categories-chip .v-chip__content {
+  font-size: 15px;
 }
 
 .section .container {
@@ -1195,7 +1198,7 @@ a.read_more {
   border-bottom: 1px solid #39ae69;
 }
 .contact_faq .chose_inner_area .panel-group .panel-default .panel-heading .panel-title a {
-  line-height: 20px;
+  /*  line-height: 20px;*/
 }
 .contact_faq .chose_inner_area .panel-group .panel-default .panel-heading .panel-title a span {
   background: #39ae69;
@@ -1217,7 +1220,7 @@ a.read_more {
 
 .chose_inner_area {
   padding-top: 65px;
-  height: 580px;
+  /*height: 580px;*/
 }
 .chose_inner_area .chose_inner_area .section_tittle {
   padding-bottom: 25px;
@@ -3060,6 +3063,7 @@ a.read_more {
   border: 1px solid #ccc;
   border-bottom: 9px solid #bb9d31;
   background-color: #fff;
+  height: 100%;
 }
 .orinbosarlar .orinbosar .profile-icon {
   /* width: 85px; */
@@ -3303,21 +3307,21 @@ a.read_more {
   background-repeat: repeat-y;
 }
 
+/*
 .col-12.rais::after {
-  content: "";
-  background-image: url(/img/icons/services-background2.png);
-  height: 605px;
-  background-size: contain;
-  position: fixed;
-  width: 100%;
-  right: 0;
-  bottom: 0;
-  background-position: right;
-  filter: grayscale(100%);
-  z-index: -1;
-  opacity: 0.5;
-}
-
+    content: "";
+    background-image: url(/img/icons/services-background2.png);
+    height: 605px;
+    background-size: contain;
+    position: fixed;
+    width: 100%;
+    right: 0;
+    bottom: 0;
+    background-position: right;
+    filter: grayscale(100%);
+    z-index: -1;
+    opacity: 0.5;
+}*/
 .one-page .footer_area {
   display: inline-flex;
   z-index: 1;
@@ -3756,10 +3760,10 @@ a.read_more {
 }
 .news.in-style .container .news-content .news-item .news-box .box-img img {
   transition: 0.9s;
-  width: 100%;
-  height: 100%;
-  -o-object-fit: cover;
-  object-fit: cover;
+  min-width: 100%;
+  max-height: 100%;
+  /*-o-object-fit: cover;
+  object-fit: cover;*/
 }
 .news.in-style .container .news-content .news-item .news-box .box-content {
   height: 100%;
@@ -4557,7 +4561,7 @@ html body .Vue-Toastification__container.top-right {
 .v-dialog.my_dialog img {
   width: 100%;
   max-width: 72vw;
-  min-width: 40vw;
+  /* min-width: 40vw;*/
   max-height: 75vh;
   height: 100%;
 }
@@ -4571,4 +4575,72 @@ html body .Vue-Toastification__container.top-right {
 }
 .v-dialog.my_dialog button.v-btn--icon.v-size--default i.v-icon:hover {
   color: #0a0a0a;
+}
+
+.position-sidebar {
+  position: fixed;
+  top: 30%;
+  left: 0;
+  width: 45px;
+  height: 100px;
+  background-color: #43454f;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: end;
+  z-index: 10000;
+}
+.position-sidebar .sidebar-items {
+  display: flex;
+  justify-content: center;
+  /* margin: 10px; */
+  color: #fff;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  margin-top: 2px;
+  padding: 5px;
+  cursor: pointer;
+  position: relative;
+}
+.position-sidebar .sidebar-items .v-icon {
+  padding: 5px 0;
+  color: #fff;
+  margin-right: 10px;
+}
+.position-sidebar .sidebar-items:hover {
+  background-color: var(--mycolor) !important;
+}
+.position-sidebar .sidebar-items:hover .phone-number {
+  margin-left: 0px;
+  transition: ease 0.5s;
+}
+.position-sidebar .sidebar-items .phone-number {
+  width: 150px;
+  margin-left: -150px;
+  transition: ease 0.5s;
+  color: #fff;
+  display: flex;
+  margin-right: 10px;
+  justify-content: end;
+  align-items: center;
+  font-size: 25px;
+  font-weight: bold;
+}
+.position-sidebar .sidebar-items::after {
+  content: "";
+  width: 87%;
+  margin-bottom: -1px;
+  height: 1px;
+  background-color: #39ae69;
+  display: block;
+  position: absolute;
+  bottom: 0;
+  opacity: 0.6;
+  left: 0;
+}
+.position-sidebar .sidebar-items:last-child:after {
+  content: none;
+  display: none;
 }

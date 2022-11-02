@@ -10,6 +10,8 @@ $("body").on("click", ".hududiy_boshqarmalar a", function () {
         }
         $('.hududiy.section').css("display", "table !important");
         $('.hududiy.section').removeClass('skip');
+        window.scrollTo(0, 0);
+
 
         /*else {
 

@@ -59,7 +59,7 @@
                         <div data-thumb="/img/custom/slider-9.png" data-src="/img/custom/077.jpg">
                             <div class="container">
                                 <div class="slider_text absolute_right">
-                                    <h3 class="fadeInLeft animated" style="max-width: 63%; margin-left: auto;">
+                                    <h3 class="fadeInLeft animated" style="max-width: 54%; margin-left: auto;">
                                         {{ $t("Шаффофлик замирида иқтисодий хавфсизлик") }}</h3>
                                     <!-- <p class="fadeInUp animated">Божхона ахборот тизмиларига ҳужжатларингизни жойланг</p>
                                     <a class="s_readmore_btn fadeInUp animated" target="_blank"
@@ -75,7 +75,7 @@
                         <div data-thumb="/img/custom/slider-9.png" data-src="/img/custom/logistics.jpg">
                             <div class="container">
                                 <div class="slider_text absolute_right">
-                                    <h3 class="fadeInLeft animated">E-ARHIV</h3>
+                                    <h3 class="fadeInLeft animated">E-ARXIV</h3>
                                     <h4 class="fadeInLeft animated">{{ $t("Божхона ахборот тизими") }}</h4>
                                     <p class="fadeInUp animated">
                                         {{ $t("Божхона ахборот тизмиларига ҳужжатларингизни жойланг") }}</p>
@@ -145,7 +145,8 @@
                         <div data-thumb="/img/main-slider/slide4.jpg" data-src="/img/main-slider/slide4.jpg">
                             <div class="container">
                                 <div class="slider_text absolute_left">
-                                    <h3 class="fadeInLeft animated">{{ $t("Ишга кириш учун онлайн ариза бериш") }}</h3>
+                                    <h3 class="fadeInLeft animated" style="width: 70%">
+                                        {{ $t("Ишга кириш учун онлайн ариза бериш") }}</h3>
                                     <h4 class="fadeInLeft animated">{{ $t("Божхона ахборот тизими") }}</h4>
                                     <p class="fadeInUp animated">{{
                                             $t("Божхона хизмати органларидаги вакансиялар рўйхатини билиб олинг ҳамда ишга кириш учун онлайн ариза юборинг")
@@ -288,7 +289,9 @@
                             <div class="bolim_image"><img src="/img/service/time.png"/></div>
                             <div class="bolim_title">{{ $t("Тўловлар ва вақт") }}</div>
                             <div class="bolim_description">
-                                {{ $t("Товарлар учун дастлабки ҳисоб – китоблар асосида, сарфланадиган харажат ва вақт") }}
+                                {{
+                                    $t("Товарлар учун дастлабки ҳисоб – китоблар асосида, сарфланадиган харажат ва вақт")
+                                }}
                             </div>
 
                         </a>
@@ -310,7 +313,9 @@
                         <a href="http://time.customs.uz/" target="_blank" class="card">
                             <div class="bolim_image"><img src="/img/service/monitor.png"/></div>
                             <div class="bolim_title">{{ $t("Мониторинг") }}</div>
-                            <div class="bolim_description">{{ $t("Товар ва транспорт воситаларини чиқиш вақтини тадқиқот ва мониторинг қилиш")}}</div>
+                            <div class="bolim_description">
+                                {{ $t("Товар ва транспорт воситаларини чиқиш вақтини тадқиқот ва мониторинг қилиш") }}
+                            </div>
 
                         </a>
                     </div>
@@ -338,39 +343,7 @@
                 <div class="container-fluid contact_faq">
                     <div class="row">
                         <div class="col-md-6">
-                            <div class="chose_inner_area">
-                                <div class="section_tittle">
-                                    <h2>{{ $t("Кўп бериладиган саволлар") }}</h2>
-                                </div>
-                                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="false">
-
-                                    <div class="panel panel-default" v-if="fkey<5" v-for="(faq,fkey) in faqs"
-                                         :key="fkey">
-                                        <div class="panel-heading" role="tab" id="headingThree">
-                                            <h4 class="panel-title">
-                                                <a role="button" data-bs-toggle="collapse" data-bs-parent="#accordion"
-                                                   :href="'#chose'+fkey" aria-expanded="true"
-                                                   aria-controls="chose3">{{
-                                                        typeof faq.question !== 'undefined' ? faq.question : ''
-                                                    }}<span>
-                                                    <i class="fa fa-plus" aria-hidden="false"></i>
-                                                    <i class="fa fa-minus" aria-hidden="true"></i>
-                                                </span>
-                                                </a>
-                                            </h4>
-                                        </div>
-                                        <div :id="'chose'+fkey" class="panel-collapse collapse "
-                                             :class="fkey===0?' in show':''" role="tabpanel"
-                                             aria-labelledby="headingThree">
-                                            <div class="panel-body">
-                                                {{ typeof faq.answer !== 'undefined' ? faq.answer : '' }}
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-
-                            </div>
+                            <homefaq2/>
                         </div>
                         <front-calendar></front-calendar>
 
@@ -400,7 +373,8 @@ import loadingBar from "../components/base/loadingbar.vue";
 import mobile from "./mobile";
 import stat from './homepage/statistics';
 import myFooter from "../components/layout/footer";
-
+import homefaq2 from "./homepage/faq2";
+import PositionSidebar from "./custom/position-sidebar";
 export default {
 
 
@@ -469,14 +443,14 @@ export default {
             ],
             overlay: true,
             stat: false,
-            faqs: [],
+            //faqs: [],
             options: {
                 lockAnchors: true,
                 anchors: ['0', '1', '2', '3', '4', '5'],
                 sectionsColor: ['#fff', '#faf9f9', '#fff', '#efefef', '#fff', '#fff'],
                 //css3: true,
                 menu: '.logo_area',
-                fixedElements: 'body > .footer_links',
+                fixedElements: 'body > .footer_links, .position-sidebar',
                 lazyLoading: false,
                 navigation: true,
                 slideSelector: '.fslide',
@@ -523,7 +497,7 @@ export default {
             this.stat = true;
     },
     created() {
-        this.getFaqs();
+        //this.getFaqs();
         if (this.$route.query.stat == 1)
             this.stat = true;
         this.stat = true;
@@ -564,6 +538,8 @@ export default {
 
     },
     components: {
+        PositionSidebar,
+        homefaq2,
         index_scripts,
         NewsInHome,
         FrontCalendar,

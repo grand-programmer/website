@@ -47,7 +47,7 @@ class Category extends Model
 
     public function news()
     {
-        return $this->belongsToMany('App\Models\News', 'news_categories');
+        return $this->belongsToMany('App\Models\News', 'news_categories')->withPivot('id');
     }
 
 

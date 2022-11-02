@@ -252,8 +252,20 @@ export default {
                     value: 2
                 },
                 {
-                    text: i18n.t("Тфтн кодни аниқлаш юзасидан ариза бериш"),
+                    text: i18n.t("Тфтн кодни аниқлаш юзасидан ариза"),
                     value: 3
+                },
+                {
+                    text: i18n.t("Интеллектуал мулк обьектлари реестрига киритиш"),
+                    value: 4
+                },
+                {
+                    text: i18n.t("Пул маблағларини қайтариш"),
+                    value: 5
+                },
+                {
+                    text: i18n.t("Товарни қайта ишлаш учун рухсатнома"),
+                    value: 6
                 },
             ],
             filter: {
@@ -356,8 +368,8 @@ export default {
 
                             let parts = val.split("-");
                             let valdate = (new Date(parts[2]+'-' + parts[0]+'-'+parts[1]));
-                            console.log(valdate)
-                            console.log(objdate)
+                            //console.log(valdate)
+                            //console.log(objdate)
                             return (valdate >= objdate)
                             //return obj.app_num === val
                         })
@@ -388,9 +400,11 @@ export default {
                     _this.apps = [];
                 response.data.services.forEach((app_item) => {
                     app_item.created_at = (new Date(app_item.created_at)).toLocaleDateString()
+
                     app_item.type_name = _this.types.filter(obj => {
                         return obj.value === app_item.type
-                    })[0].text
+                    }); //[0].text
+                    app_item.type_name=(typeof app_item.type_name !=='undefined' && typeof app_item.type_name[0] !=='undefined')?app_item.type_name[0].text:''
                     _this.apps.push(app_item)
                 })
                 _this.filter_apps = _this.apps;

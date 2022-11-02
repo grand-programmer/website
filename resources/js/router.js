@@ -29,8 +29,9 @@ import ServicesAppeals from "./views/frontend/services/appeal/main";
 import ServicesPage from "./views/frontend/services/services";
 import i18n from './i18n';
 import {Trans} from './plugins/Translation'
-const routes=[]
-const allRoutes={
+
+const routes = []
+const allRoutes = {
     path: '*', redirect() {
         return '/uz';
     }
@@ -106,15 +107,38 @@ const userRoutes =
                             forbiddenRedirect: '/403',
                             routeAuth: '/login'
                         },
-                        children: [{
-                            path: "", component: ServicesIntellectualCreate,
-                        }, {
-                            path: "info", component: ServicesIntellectualInfo,
-                        }, {
-                            path: "edit/:id", component: ServicesIntellectualEdit,
-                        }, {
-                            path: ":id", component: ServicesIntellectualInfo,
-                        }]
+                        children: [
+                            {
+                                path: "", component: ServicesIntellectualCreate,
+                            }, {
+                                path: ":id", component: ServicesIntellectualInfo,
+                            }, {
+                                path: "info", component: ServicesIntellectualInfo,
+                            }/*, {
+                                path: "edit/:id", component: ServicesIntellectualEdit,
+                            }*/
+                        ]
+                    }, {
+                        path: "refund/",
+                        component: () => import('./views/frontend/services/refund/index'),
+                        meta: {
+                            auth: true,
+                            authRedirect: '/login',
+                            notFoundRedirect: '/403',
+                            forbiddenRedirect: '/403',
+                            routeAuth: '/login'
+                        },
+                        children: [
+                            {
+                                path: "", component: () => import('./views/frontend/services/refund/create'),
+                            }, {
+                                path: ":id", component: () => import('./views/frontend/services/refund/info'),
+                            }, /*{
+                                path: "info", component: ServicesIntellectualInfo,
+                            }/*, {
+                                path: "edit/:id", component: ServicesIntellectualEdit,
+                            }*/
+                        ]
                     }, {
                         path: "recycle/", component: () => import('./views/frontend/services/recycle/index'), meta: {
                             auth: true,
@@ -124,10 +148,6 @@ const userRoutes =
                             routeAuth: '/login'
                         }, children: [{
                             path: "", component: () => import('./views/frontend/services/recycle/create'),
-                        }, {
-                            path: "info", component: () => import('./views/frontend/services/recycle/info'),
-                        }, {
-                            path: "edit/:id", component: () => import('./views/frontend/services/recycle/edit'),
                         }, {
                             path: ":id", component: () => import('./views/frontend/services/recycle/info'),
                         }]
@@ -169,98 +189,102 @@ const userRoutes =
                                 path: "*", redirect: "/services/vacancy"
                             }]
                     },]
-                }, {
-                    path: 'applications', component: Applications, meta: {
-                        auth: true,
-                        authRedirect: '/login',
-                        notFoundRedirect: '/403',
-                        forbiddenRedirect: '/403',
-                        routeAuth: '/login'
-                    }, children: [{
-                        path: '', component: MyApplicationsList
-                    }]
-
-                }, {
-                    path: "registries/", component: {
-                        template: '<router-view></router-view>', script: ' export default {}'
-                    }, children: [{
-                        path: "decisions", component: () => import("./views/frontend/registries/customvalue")
-
-                    }]
-
-                }, {
-                    path: 'category/:slug', component: () => import('./views/frontend/news/category')
-                }, {
-                    path: 'news', component: () => import('./views/frontend/news/index')
-                }, {
-                    path: 'news/:slug', component: () => import('./views/frontend/news/news')
                 },
                     {
-                    path: 'page/', component: {
-                        template: '<router-view></router-view>', script: ' export default {}'
-
-                    }, children: [{
-                        path: 'votes/', component: () => import("./views/frontend/pages/votes")
-                    }, {
-                        path: 'rahbariyat', component: () => import("./views/frontend/pages/rahbariyat")
-                    }, {
-                        path: 'markaziy', component: () => import("./views/frontend/pages/markaziy")
-                    }, {
-                        path: 'jismoniy', component: () => import("./views/frontend/pages/jismoniy")
-                    }, {
-                        path: 'boshqarma/:id', component: () => import("./views/frontend/pages/org")
+                        name: '403', path: '403', component: () => import('./views/pages/403')
                     },
-
-                        {
-                            path: ':id', component: () => import('./views/frontend/pages/index'),
-
+                    {
+                        name: '404', path: '404', component: () => import('./views/pages/404')
+                    },
+                    {
+                        name: 'test', path: 'test', component: () => import('./views/frontend/test')
+                    },
+                    {
+                        path: 'applications', component: Applications, meta: {
+                            auth: true,
+                            authRedirect: '/login',
+                            notFoundRedirect: '/403',
+                            forbiddenRedirect: '/403',
+                            routeAuth: '/login'
+                        }, children: [{
+                            path: '', component: MyApplicationsList
                         }]
-                }, {
-                    name: 'login',
-                    path: 'login', //beforeEnter () { window.location.replace('https://sso.egov.uz/sso/oauth/Authorization.do?response_type=one_code&client_id=customs_uz&redirect_uri=https://new.customs.uz/profile&scope=customs_uz&state=testState') },
-                    component: () => import('./views/pages/Login'), /*                    redirect: href => {
+
+                    }, {
+                        path: "registries/", component: {
+                            template: '<router-view></router-view>', script: ' export default {}'
+                        }, children: [
+                            {path: "decisions", component: () => import("./views/frontend/registries/customvalue")},
+                            {path: "services", component: () => import("./views/frontend/registries/old_services")}
+                        ]
+
+                    }, {
+                        path: 'category/:slug', component: () => import('./views/frontend/news/category')
+                    }, {
+                        path: 'news', component: () => import('./views/frontend/news/index')
+                    }, {
+                        path: 'news/:slug', component: () => import('./views/frontend/news/news')
+                    }, {
+                        path: 'page/',
+                        component: {template: '<router-view></router-view>', script: ' export default {}'},
+                        children: [
+                            {path: 'votes/', component: () => import("./views/frontend/pages/votes")},
+                            {path: 'rahbariyat', component: () => import("./views/frontend/pages/rahbariyat")},
+                            {path: 'markaziy', component: () => import("./views/frontend/pages/markaziy")},
+                            {path: 'structure', component: () => import("./views/frontend/pages/structure/markaziy")},
+                            {path: 'jismoniy', component: () => import("./views/frontend/pages/jismoniy")},
+                            {path: 'boshqarma/:id', component: () => import("./views/frontend/pages/org")},
+                            {path: ':id', component: () => import('./views/frontend/pages/index'),}
+                        ]
+                    },
+                    {
+                        name: 'login',
+                        path: 'login', //beforeEnter () { window.location.replace('https://sso.egov.uz/sso/oauth/Authorization.do?response_type=one_code&client_id=customs_uz&redirect_uri=https://new.customs.uz/profile&scope=customs_uz&state=testState') },
+                        component: () => import('./views/pages/Login'), /*                    redirect: href => {
                                                 // the function receives the target route as the argument
                                                 // we return a redirect path/location here.
                                                 return 'https://sso.egov.uz/sso/oauth/Authorization.do?response_type=one_code&client_id=customs_uz&redirect_uri=https://new.customs.uz/services/vacancy/resume&scope=customs_uz&state=testState'
                                             },*/
 
-                    meta: {
-                        auth: false,
-                        authRedirect: '/403',
-                        notFoundRedirect: '/403',
-                        forbiddenRedirect: '/403',
-                        routeAuth: '/403'
-                    }
-                }, {
-                    name: 'social-login', path: '/social-login', beforeEnter() {
-                        //window.location.replace('https://sso.egov.uz/sso/oauth/Authorization.do?response_type=one_code&client_id=customs_uz&redirect_uri=https://new.customs.uz/profile&scope=customs_uz&state=testState')
-                    }, //component: () => import('./views/pages/SocialLogin'),
-                    /*                    redirect: href => {
-                                            // the function receives the target route as the argument
-                                            // we return a redirect path/location here.
-                                            return 'https://sso.egov.uz/sso/oauth/Authorization.do?response_type=one_code&client_id=customs_uz&redirect_uri=https://new.customs.uz/services/vacancy/resume&scope=customs_uz&state=testState'
-                                        },*/
-
-                    meta: {
-                        auth: undefined,
-                    }
-                }, {
-                    name: 'logout',
-                    path: 'logout', //beforeEnter () { window.location.replace('https://sso.egov.uz/sso/oauth/Authorization.do?response_type=one_code&client_id=customs_uz&redirect_uri=https://new.customs.uz/profile&scope=customs_uz&state=testState') },
-                    component: () => import('./views/pages/Login'), /*                    redirect: href => {
+                        meta: {
+                            auth: false,
+                            authRedirect: '/403',
+                            notFoundRedirect: '/403',
+                            forbiddenRedirect: '/403',
+                            routeAuth: '/403'
+                        }
+                    },
+                    {
+                        name: 'social-login', path: '/social-login', beforeEnter() {
+                            //window.location.replace('https://sso.egov.uz/sso/oauth/Authorization.do?response_type=one_code&client_id=customs_uz&redirect_uri=https://new.customs.uz/profile&scope=customs_uz&state=testState')
+                        }, //component: () => import('./views/pages/SocialLogin'),
+                        /*                    redirect: href => {
                                                 // the function receives the target route as the argument
                                                 // we return a redirect path/location here.
                                                 return 'https://sso.egov.uz/sso/oauth/Authorization.do?response_type=one_code&client_id=customs_uz&redirect_uri=https://new.customs.uz/services/vacancy/resume&scope=customs_uz&state=testState'
                                             },*/
 
-                    meta: {
-                        auth: true,
-                        authRedirect: '/403',
-                        notFoundRedirect: '/403',
-                        forbiddenRedirect: '/403',
-                        routeAuth: '/403'
-                    }
-                }, /*                {
+                        meta: {
+                            auth: undefined,
+                        }
+                    },
+                    {
+                        name: 'logout',
+                        path: 'logout', //beforeEnter () { window.location.replace('https://sso.egov.uz/sso/oauth/Authorization.do?response_type=one_code&client_id=customs_uz&redirect_uri=https://new.customs.uz/profile&scope=customs_uz&state=testState') },
+                        component: () => import('./views/pages/Login'), /*                    redirect: href => {
+                                                // the function receives the target route as the argument
+                                                // we return a redirect path/location here.
+                                                return 'https://sso.egov.uz/sso/oauth/Authorization.do?response_type=one_code&client_id=customs_uz&redirect_uri=https://new.customs.uz/services/vacancy/resume&scope=customs_uz&state=testState'
+                                            },*/
+
+                        meta: {
+                            auth: true,
+                            authRedirect: '/403',
+                            notFoundRedirect: '/403',
+                            forbiddenRedirect: '/403',
+                            routeAuth: '/403'
+                        }
+                    }, /*                {
                                         name: 'logout',
                                         path: '/logout',
                                         beforeEnter () { this.$auth.logout({
@@ -294,21 +318,6 @@ const userRoutes =
                                                 auth: true,
 
                                             }*/
-                    }, {
-                        name: '403', path: '/403', component: () => import('./views/pages/403'), meta: {
-                            auth: undefined,
-
-                        }
-                    }, {
-                        name: '404', path: '/404', component: () => import('./views/pages/404'), meta: {
-                            auth: undefined,
-
-                        }
-                    }, {
-                        name: 'test', path: '/test1', component: () => import('./views/frontend/test'), meta: {
-                            auth: undefined,
-
-                        }
                     },
 
 

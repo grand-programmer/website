@@ -267,6 +267,7 @@ export default {
         }
     },
     created() {
+
         this.getImage();
         if (this.$route.query.code) {
             this.auth();
@@ -298,7 +299,7 @@ export default {
                     _this.has_error = true
                     _this.error = res.error
                 },
-                redirect: (this.$route.params.slug === 'admin') ? '/admin/' : '/profile',
+                redirect: (this.$route.params.slug === 'admin') ? '/admin' : '/profile',
                 //rememberMe: true,
                 fetchUser: true
             }).then((res) => {
@@ -314,22 +315,24 @@ export default {
         getImage() {
             const _this=this;
             let returnValue;
-            setTimeout(async () => {
-                await this.axios.get("/api/v1/get_image",{responseType: 'arraybuffer'}).then(res => {
-/*                    let reader = new FileReader();
+            if(this.$auth.user) {
+                setTimeout(async () => {
+                    await this.axios.get("/api/v1/get_image", {responseType: 'arraybuffer'}).then(res => {
+                        /*                    let reader = new FileReader();
                     reader.readAsDataURL(res.data);
                     reader.onload = () => {
                         _this.user_image = reader.result;
                     }*/
-                    let bytes = new Uint8Array(res.data);
-                    let binary = bytes.reduce((data, b) => data += String.fromCharCode(b), '');
-                    _this.user_image = "data:image/jpeg;base64," + btoa(binary);
+                        let bytes = new Uint8Array(res.data);
+                        let binary = bytes.reduce((data, b) => data += String.fromCharCode(b), '');
+                        _this.user_image = "data:image/jpeg;base64," + btoa(binary);
 
-                }).catch(() => {
-                    alert("Unable to load raw attachment from this task and ID");
-                });
+                    }).catch(() => {
+                        // alert("Unable to load raw attachment from this task and ID");
+                    });
 
-            });
+                }, 1000);
+            }
         }
 
     }

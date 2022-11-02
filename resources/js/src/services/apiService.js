@@ -114,11 +114,12 @@ const apiClient = {
     async updateCategory(id, requestData) {
         return await axios.put(apiUrl + "categories/" + id, requestData);
     },
-    async readCategory(slug, withNews = false) {
+    async readCategory(slug, withNews = false,page=1) {
+
         if (withNews)
-            return await axios.get(apiUrl + "categories/" + slug + "?withnews=1",localization);
+            return await axios.get(apiUrl + "categories/" + slug + "?withnews=1&page="+page,localization);
         else
-            return await axios.get(apiUrl + "categories/" + slug,localization);
+            return await axios.get(apiUrl + "categories/" + slug,requestData);
     },
     async deleteCategory(id) {
         return await axios.delete(apiUrl + "categories/" + id);

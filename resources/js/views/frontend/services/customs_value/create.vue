@@ -4563,6 +4563,7 @@ export default {
             CYuk = this.$cookie.get('yuk') ? JSON.parse(this.$cookie.get('yuk')) : null;
             if (CYuk) this.setYukData(CYuk);
 
+
             /*            let CProduct = null;
                         CProduct = this.$cookie.get('product') ? JSON.parse(this.$cookie.get('product')) : null;
                         if(CProduct) this.setProductData(CProduct)*/

@@ -1,0 +1,195 @@
+$tuzilma-card-width: 320px;
+$tuzilma-card-margin: 10px;
+$subtuzilma-card-height: 80px;
+
+.structure-comitete {
+    .widget_tittle{
+        border: none !important;
+        h3{
+            padding: 10px 70px !important;
+            background-color: var(--mycolor);
+            color: #fff;
+        }
+    }
+    .tuzilma-card {
+        width: $tuzilma-card-width;
+        box-shadow: 2px 2px 4px 1px var(--mycolor);
+        padding: 5px 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: $tuzilma-card-margin;
+        border: 1px solid var(--mycolor);
+        color: #000;
+        font-size: 15px;
+        position: relative;
+        text-align: center;
+    }
+
+    .structure-top {
+        display: flex;
+        justify-content: center;
+
+        .tuzilma-card {
+            &:nth-of-type(1) {
+                margin-right: 155px;
+                margin-left: 20%;
+
+                &::before {
+                    content: "";
+                    display: block;
+                    position: absolute;
+                    height: 30px;
+                    background: #249b73;
+                    width: 1px;
+                    top: 137%;
+                }
+
+                &::after {
+                    content: "";
+                    display: block;
+                    border-radius: 34px;
+                    background-color: #249b73;
+                    width: 5px;
+                    height: 5px;
+                    top: 137%;
+                    position: absolute;
+                }
+            }
+
+            &:nth-of-type(2) {
+                &::before {
+                    content: "";
+                    display: block;
+                    width: 165px;
+                    position: absolute;
+                    height: 1px;
+                    background-color: #249b73;
+                    top: 50%;
+                    left: -165px;
+                }
+            }
+        }
+    }
+
+    .substructures {
+        display: flex;
+        margin-top: 47px;
+        justify-content: space-between;
+
+
+        &::before {
+            top: 58px;
+            content: "";
+            display: block;
+            position: absolute;
+            height: 1px;
+            background-color: #249b73;
+            left: calc(100% / 10 - #{$tuzilma-card-margin} + 6px);
+            right: calc(100% / 10 - #{$tuzilma-card-margin} + 6px);
+            /*right: calc(100% - (5 * (#{$tuzilma-card-width} + 2 * #{$tuzilma-card-margin})) + #{$tuzilma-card-width} / 2 );*/
+            margin: 30px auto;
+        }
+
+        .substructure {
+            position: relative;
+
+            &:last-child {
+
+                border: 1px dotted #249b73;
+                display: flex;
+                flex-direction: column;
+                margin-top: 10px;
+                &::before{
+                    top: -26px;
+                }
+                &::after{
+                    top: -10px;
+                }
+
+            }
+
+            &::before {
+                content: "";
+                display: block;
+                width: 1px;
+                height: 20px;
+                position: absolute;
+                background-color: #249b73;
+                left: 50%;
+                top: -15px;
+            }
+
+            &::after {
+                content: "";
+                display: block;
+                width: 5px;
+                height: 5px;
+                position: absolute;
+                background-color: #249b73;
+                top: 0;
+                border-radius: 100%;
+                left: calc(50% - 2px);
+            }
+
+            .sub-tuzilma-card {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-end;
+                margin-top: 30px;
+                position: relative;
+
+                .tuzilma-card {
+                    max-width: 300px;
+                    height: $subtuzilma-card-height;
+
+                    &:nth-of-type(1)::before {
+                        content: "";
+                        display: block;
+                        position: absolute;
+                        height: 25px;
+                        top: -40px;
+                        background-color: #249b73;
+                        left: 125px;
+                        width: 1px;
+                    }
+
+                    &::after {
+                        content: "";
+                        display: block;
+                        position: absolute;
+                        top: 50%;
+                        width: 15px;
+                        height: 1px;
+                        background-color: #249b73;
+                        left: -15px;
+                    }
+                }
+
+                &::before {
+                    content: "";
+                    display: block;
+                    width: 1px;
+                    position: absolute;
+                    background-color: #39ae69;
+                    top: -5px;
+                    bottom: calc(#{$subtuzilma-card-height} / 2 + #{$tuzilma-card-margin});
+                    left: 15px;
+
+                }
+
+                &::after {
+                    content: "";
+                    display: block;
+                    position: absolute;
+                    width: 142px;
+                    height: 1px;
+                    top: -5px;
+                    background-color: #39ae69;
+                    left: 15px;
+                }
+            }
+
+        }
+    }
+}

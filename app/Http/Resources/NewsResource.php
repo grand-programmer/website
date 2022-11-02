@@ -18,14 +18,16 @@ class NewsResource extends JsonResource
     public function toArray($request)
     {
         //dd();
+        $data=$request->only('withnews');
 
         $translates = DB::table('news_translates')->where(["news_id" => $this->id, "language" => app()->getLocale()])->get();
 
         $liked = json_decode($this->liked, true);
+
         return [
             'id' => $this->id,
             'title' => isset($translates[0]) ? $translates[0]->title : $this->title,
-            'categories' => CategoryResource::collection($this->categories),
+            'categories' => (!isset($data['withnews']))?CategoryResource::collection($this->categories):null,
             'description' => isset($translates[0]) ? $translates[0]->description : $this->description,
             'image' => $this->image,
             'short' => isset($translates[0]) ? $translates[0]->short : $this->short,
@@ -36,6 +38,7 @@ class NewsResource extends JsonResource
             'like' => (isset($liked['like'])) ? $liked['like'] : 0,
             'dislike' => (isset($liked['dislike'])) ? $liked['dislike'] : 0,
             'created_at' => $this->created_at->format('d-m-Y'),
+            //'meta'=> $this->meta ?? null
         ];
     }
 }
