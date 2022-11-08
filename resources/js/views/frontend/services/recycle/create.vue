@@ -69,7 +69,7 @@
                                 class="mb-12"
                             >
                                 <div class="row position-absolute yoriqnoma-text"><a
-                                    href="/storage/files/dastlabki-user.pptx"> Ариза тўлдириш бўйича йўриқмани юклаб
+                                    href="/storage/files/Pererabotka.pptx"> Ариза тўлдириш бўйича йўриқмани юклаб
                                     олинг!
                                 </a></div>
                                 <ValidationObserver v-slot="{ invalid }" ref="stepValidation1">
@@ -292,7 +292,7 @@
                                 class="mb-12 "
                             >
                                 <div class="row position-absolute yoriqnoma-text"><a
-                                    href="/storage/files/dastlabki-user.pptx"> Ариза тўлдириш бўйича йўриқмани юклаб
+                                    href="/storage/files/Pererabotka.pptx"> Ариза тўлдириш бўйича йўриқмани юклаб
                                     олинг!
                                 </a></div>
 
@@ -337,6 +337,23 @@
                                                             v-model="application.method"
                                                         ></autocomplete-field>
                                                     </v-col>
+                                                    <v-col cols="4" v-show="application.method === 5" >
+                                                        <ValidationProvider name="Бошқа идентификация усули"
+                                                                            rules="required"
+                                                                            v-slot="{ errors }">
+                                                            <v-text-field
+                                                                label="Идентификация усулини ёзинг"
+                                                                required
+                                                                hint="Рўйхатда йўқ бўлган идентификация усули"
+                                                                persistent-placeholder
+                                                                v-model="application.method2"
+                                                            >
+
+                                                            </v-text-field>
+                                                            <span class="red--text">{{ errors[0] }}</span>
+                                                        </ValidationProvider>
+                                                    </v-col>
+
                                                     <v-col cols="4">
                                                         <autocomplete-field
                                                             :options="regions"
@@ -480,6 +497,7 @@
                                                             multiple
                                                             :errors="application.ilova_error"
                                                             title="Илова қилинадиган файллар"
+                                                            hint="Шартнома, техник иқтисодий асос, чиқиш нормаси, идентификация усули "
                                                         ></e-arxiv-file>
 
                                                     </v-col>
@@ -1123,6 +1141,7 @@ export default {
                 replProductNm: null,
                 muddat: null,
                 method: null,
+                method2: null,
                 documents: [],
                 ilova_error: "",
                 recycle_org: null,
@@ -1640,7 +1659,21 @@ export default {
                             _this.app.common.personId = _this.person.person_id;
                             _this.app.common.locationId = _this.application.region;                   ///Viloyat
                             _this.app.common.repubInOut = _this.application.rejim;                   //100 - Bojxona hududida 200- bosjxona tashqarisida
-                            _this.app.common.methodIden = _this.application.method;                   //
+
+                            if(_this.application.method===5) _this.app.common.methodIden = _this.application.method2;
+                            else {
+                                if(_this.application.method >0 || _this.application.method < 5){
+                                    if (_this.application.rejim === 200)
+                                        _this.app.common.methodIden = _this.methodIdentificationsOut.filter((item)=>{
+                                            if(item.value===_this.application.method) return item;
+                                        })[0].text;
+                                    else
+                                        _this.app.common.methodIden = _this.methodIdentificationsIn.filter((item)=>{
+                                            if(item.value===_this.application.method) return item;
+                                        })[0].text;
+                                }
+
+                            }              //
                             if (_this.application.contract && typeof _this.application.contract !== 'undefined') {
                                 _this.app.common.contractIdenNumber = JSON.parse(JSON.stringify(_this.application.contract));
                             }                   //// KONTTYPE : 11,12,16,17 ACTIVE_PR :0

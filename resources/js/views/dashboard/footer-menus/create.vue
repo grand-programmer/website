@@ -1,6 +1,6 @@
 <template>
     <v-container
-        class="menu-main"
+        class="page-main"
         fluid
         tag="section"
     >
@@ -18,33 +18,19 @@
                 cols="12"
                 md="12"
             >
-                <v-btn v-for="language in languages" @click="lang=language.value"
-                       :color="lang===language.value?'primary':''" :key="language.value">{{ language.text }}
-                </v-btn>
                 <v-flex xs12 sm12 md12 lg12>
                     <v-card>
                         <ValidationObserver v-slot="{ invalid }">
-                            <v-form ref="menuForm">
+                            <v-form ref="pageForm">
 
                                 <v-card-text>
                                     <v-container>
                                         <v-row>
-                                            <v-col cols="12" sm="12" md="12" v-show="lang==='uz'">
+                                            <v-col cols="12" sm="12" md="12">
                                                 <ValidationProvider name="Сарлавха" rules="required|min:3"
                                                                     v-slot="{ errors }">
                                                     <v-text-field label="Сарлавха"
-                                                                  v-model="menu.title"
-                                                                  name="title"></v-text-field>
-                                                    <span class="error--text">{{ errors[0] }}</span>
-                                                </ValidationProvider>
-
-                                            </v-col>
-                                            <v-col cols="12" sm="12" md="12" :key="'title'+langKey"
-                                                   v-for="(langItem,langKey) in langtext" v-show="lang===langKey">
-                                                <ValidationProvider name="Сарлавха"
-                                                                    v-slot="{ errors }">
-                                                    <v-text-field :label="'Сарлавха - '+ getLang()['text']"
-                                                                  v-model="langtext[lang].title"
+                                                                  v-model="editedItem.title"
                                                                   name="title"></v-text-field>
                                                     <span class="error--text">{{ errors[0] }}</span>
                                                 </ValidationProvider>
@@ -53,7 +39,7 @@
                                             <v-col cols="3" sm="3" md="3">
                                                 <v-autocomplete
                                                     label="Ота менюни танлаш"
-                                                    v-model="menu.parent"
+                                                    v-model="editedItem.parent"
                                                     name="parent"
                                                     chips
                                                     clearable
@@ -63,33 +49,33 @@
                                             <v-col cols="3" sm="3" md="3">
                                                 <v-autocomplete
                                                     label="Меню элементи турини белгиланг"
-                                                    v-model="menu.type"
+                                                    v-model="editedItem.type"
                                                     name="type"
                                                     chips
                                                     clearable
                                                     :items="menuTypes"
                                                 ></v-autocomplete>
                                             </v-col>
-                                            <v-col cols="3" sm="3" md="3" v-if="menu.type==0">
+                                            <v-col cols="3" sm="3" md="3" v-if="editedItem.type==0">
                                                 <ValidationProvider name="Урл"
                                                                     v-slot="{ errors }">
                                                     <v-text-field label="Урл"
                                                                   chips
                                                                   style="margin-top: 10px"
                                                                   clearable
-                                                                  v-model="menu.url"
+                                                                  v-model="editedItem.url"
                                                                   name="url"></v-text-field>
                                                     <span class="error--text">{{ errors[0] }}</span>
                                                 </ValidationProvider>
 
                                             </v-col>
-                                            <v-col cols="3" sm="3" md="3" v-if="menu.type==1">
+                                            <v-col cols="3" sm="3" md="3" v-if="editedItem.type==1">
 
                                                 <ValidationProvider name="Сахифа"
                                                                     v-slot="{ errors }">
                                                     <v-autocomplete
                                                         label="Саҳифани белгиланг"
-                                                        v-model="menu.page_id"
+                                                        v-model="editedItem.page_id"
                                                         name="related_id"
                                                         chips
                                                         clearable
@@ -106,40 +92,17 @@
                                                 <ValidationProvider name="Позиция" rules="numeric" v-slot="{ errors }">
                                                     <v-text-field
                                                         name="sort_number"
-                                                        v-model="menu.sort_number"
+                                                        v-model="editedItem.sort_number"
                                                         style="margin-top: 8px"
                                                         label="Позиция"
                                                     ></v-text-field>
                                                     <span class="error--text">{{ errors[0] }}</span>
                                                 </ValidationProvider>
                                             </v-col>
-<!--
-
-                                            <v-col cols="3" sm="3" md="3">
-
-                                                <ValidationProvider name="Менюни позицияси"
-                                                                    v-slot="{ errors }">
-                                                    <v-autocomplete
-                                                        label="Менюни позициясини белгиланг"
-                                                        v-model="menu.layout"
-                                                        name="menu_layout"
-                                                        chips
-                                                        multiple
-                                                        clearable
-                                                        :items="[
-                                                            {text:'Header', value:0},
-                                                            {text:'Footer', value:1}
-                                                            ]"
-                                                    ></v-autocomplete>
-                                                    <span class="error&#45;&#45;text">{{ errors[0] }}</span>
-                                                </ValidationProvider>
-
-                                            </v-col>-->
-
 
                                             <v-col cols="3" sm="3" md="3">
                                                 <v-switch label="Фойдаланувчиларга кўрсатиш"
-                                                          v-model="menu.status"
+                                                          v-model="editedItem.status"
                                                           name="status"></v-switch>
                                             </v-col>
 
@@ -177,38 +140,26 @@ Object.keys(rules).forEach(rule => {
 });
 
 export default {
-    name: "MenuCreate",
+    name: "PageCreate",
     data: () => ({
-            content: '<h1>Initial Content</h1>',
-
             breadcrumb_items:
                 [
                     {text: 'Админ панел', to: '/admin', exact: true},
-                    {text: 'Менюлар', to: '/admin/menu', exact: true},
-                    {text: 'Менюни тахрирлаш', to: '#', exact: true, disabled: true},
+                    {text: 'Сахифалар', to: '/admin/footermenu', exact: true},
+                    {text: 'Сахифа яратиш', to: '#', exact: true, disabled: true},
                 ],
-            menu: [],
-            lang: 'uz',
-            langtext: {
-                oz: {
-                    title: null,
-                },
-                ru: {
-                    title: null,
-                },
-                en: {
-                    title: null,
-                }
-
-
-            },
-            languages: [
-                {text: 'Ўзбекча', value: 'uz'},
-                {text: 'Русча', value: 'ru'},
-                {text: 'Инглизча', value: 'en'},
-                {text: 'Ozbekcha', value: 'oz'}
-            ],
             menus: [],
+            editedIndex: -1,
+            editedItem: {
+                id: null,
+                title: '',
+                type: 0,
+                url: '',
+                status: '',
+                sort_number: '',
+                parent: 0,
+                page_id: '',
+            },
             pages: [],
             menuTypes: [
                 {text: 'Одатий', value: 0},
@@ -216,80 +167,69 @@ export default {
                 //{text: 'Янгилик',value:1},
 
             ],
+            menus_without_self: [],
         }
     ),
 
     computed: {
         formTitle() {
-            return 'Тахрирлаш'
+            return 'Янги';
         },
 
     },
     created() {
         this.initialize();
     },
-    methods: {
-        getLang(code = null) {
-            if (code) {
-                let language = this.languages.filter((language) => {
-                    if (language.value === code) return language;
-                })
-                if (language) return language[0]
-                return null;
-
-            } else {
-                let language = this.languages.filter((language) => {
-                    if (language.value === this.lang) return language;
-                })
-                if (language) return language[0]
-                return null;
-            }
-        },
-        initialize() {
-            const _this = this;
-            api.readOneMenu(this.$route.params.id).then((response) => {
-                this.menu = response.data.data;
-
-                if (typeof _this.menu.translates !== 'undefined' && _this.menu.translates && _this.menu.translates.length > 0) {
-                    _this.menu.translates.map(function (translate) {
-                        _this.langtext[translate.language] = translate;
-                    })
+    watch: {
+        editedItem: {
+            handler(val, oldVal) {
+                if (val.page_id > 0) {
+                    this.editedItem.title = this.pages.find(o => o.id === this.editedItem.page_id)['title'];
                 }
-
+            },
+            deep: true
+        }
+    },
+    methods: {
+        initialize() {
+            api.readFooterMenusForSelect(5).then((response) => {
+                this.menus = response.data;
             }).catch((error) => {
-                this.$toast.error(i18n.t(`Маълумотларни юклашда хатолик содир бўлди!`))
-                this.$router.replace("/admin/menu").catch(() => {
-                });
-            });
+                this.$toast.error(`Менюларни олишда муаммо бор!`)
+
+                console.log(error)
+            })
             api.readPages().then((response) => {
                 this.pages = response.data;
             }).catch((error) => {
-                this.$toast.error(`Сахифларни олишда муааммо бор!`)
-            })
-            api.readMenusForSelect().then((response) => {
-                this.menus = response.data;
-            }).catch((error) => {
-                this.$toast.error(i18n.t(`Маълумотларни юклашда хатолик содир бўлди!`))
-                this.$router.replace("/admin/menu").catch(() => {
-                });
+                this.$toast.error(`Сахифаларни олишда муааммо бор!`);
             })
         },
+
         close() {
-            this.$router.replace('/admin/menu');
+            this.$router.replace("/admin/footermenu").catch(() => {
+            });
         },
 
         async save() {
-            const isValid = await this.$refs.menuForm.validate();
-            if (isValid) {
-                this.menu.sort_number = parseInt(this.menu.sort_number);
-                this.menu.translates = this.langtext;
-                api.updateMenu(this.menu.id, this.menu).then((response) => {
-                    this.$toast.success(`Маълумотларни омадли тарзда юкланди!`)
-                }).catch((error) => {
-                    this.$toast.error(i18n.t(`Маълумотларни юклашда хатолик содир бўлди!`))
-                })
+            if (this.editedIndex > -1) {
+                Object.assign(this.menus[this.editedIndex], this.editedItem)
+            } else {
+                const isValid = await this.$refs.pageForm.validate();
+                if (isValid) {
+                    this.editedItem.sort_number=parseInt(this.editedItem.sort_number);
+                    api.addFooterMenu(this.editedItem).then((response) => {
+                        this.$toast.success(`Маълумотларни омадли тарзда юкланди!`)
+                        this.close()
+                    }).catch((error) => {
+                        this.$toast.error(i18n.t(`Маълумотларни юклашда хатолик содир бўлди!`))
+                        console.log(error)
+                    })
+                }
             }
+
         },
+
     },
     components: {
         ValidationProvider,
@@ -299,7 +239,7 @@ export default {
 }
 </script>
 <style>
-.menu-main .v-data-table button.new_item {
+.page-main .v-data-table button.new_item {
     margin-top: -77px;
 }
 </style>

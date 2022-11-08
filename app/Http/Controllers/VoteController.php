@@ -163,7 +163,7 @@ class VoteController extends Controller
             if ($voteCollection->whereIn('value', $data['answer'])->isEmpty())
                 return response()->json(['succes' => 'false', 'error' => 'Answer not found'], 401);
             $myVote['answers'] = $voteCollection->transform(function ($answer) use ($data) {
-                if ($answer->value === $data['answer']) {
+                if (isset($answer->value) && $answer->value === $data['answer']) {
                     if (isset($answer->count)) $answer->count++; else $answer->count = 1;
                 }
                 return $answer;

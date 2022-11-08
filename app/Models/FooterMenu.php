@@ -4,11 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\CustomMenuLink;
 
-class Menu extends Model
+class FooterMenu extends Model
 {
     use HasFactory;
+    protected $table = 'footer_menu';
     protected $fillable=[
         'type',
         'title',
@@ -22,7 +22,7 @@ class Menu extends Model
     ];
     public function children()
     {
-        return $this->hasMany('App\Models\Menu', 'parent', 'id')->orderBy('sort_number');
+        return $this->hasMany('App\Models\FooterMenu', 'parent', 'id')->orderBy('sort_number');
     }
     public static function boot(){
         parent::boot();

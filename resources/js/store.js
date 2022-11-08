@@ -10,6 +10,8 @@ export default new Vuex.Store({
         drawer: null,
         //snackbars: [],
         menu: [],
+        footermenu: [],
+        viewed: [],
         loading: false
     },
     mutations: {
@@ -25,6 +27,12 @@ export default new Vuex.Store({
         SET_MENU(state, menu) {
             state.menu.push(menu);
         },
+        SET_FOOTER_MENU(state, footermenu) {
+            state.footermenu.push(footermenu);
+        },
+        SET_USER_VIEWED(state, viewed) {
+            state.viewed.push(viewed);
+        },
         setLoading(state, bool) {
             state.loading = bool;
         }
@@ -32,6 +40,12 @@ export default new Vuex.Store({
     getters:{
         getLoading: state => {
             return state.loading;
+        },
+        getFooterMenu: state => {
+            return state.footermenu;
+        },
+        getUserViewed: state => {
+            return state.viewed;
         }
 
     },
@@ -48,6 +62,12 @@ export default new Vuex.Store({
         },*/
         SET_MENU({commit}, menu) {
             commit('SET_MENU', menu);
+        },
+        SET_FOOTER_MENU({commit}, footermenu) {
+            commit('SET_FOOTER_MENU', footermenu);
+        },
+        SET_USER_VIEWED({commit}, viewed) {
+            commit('SET_USER_VIEWED', viewed);
         },
 
     },

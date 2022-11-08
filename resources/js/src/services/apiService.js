@@ -83,19 +83,34 @@ const apiClient = {
         if (parent == null) return await axios.get(apiUrl + "menu",localization);
         else return await axios.get(apiUrl + "menu?parent=" + parent,localization);
     },
+    async readOneMenu(id) {
+        return await axios.get(apiUrl + "menu/" + id,localization);
+    },
+    //////////////////////// Footer Menus Begin/////////////////////////////
 
-    async addMenu(requestData) {
+    async readFooterMenusForSelect(idMenu = 0) {
+        return await axios.get(apiUrl + "footermenu/select",localization);
+    },
+    async readFooterMenusFront() {
+        return await axios.get(apiUrl + "footermenu/front",localization);
+    },
+    async readFooterMenus(parent = null) {
+        if (parent == null) return await axios.get(apiUrl + "footermenu",localization);
+        else return await axios.get(apiUrl + "footermenu?parent=" + parent,localization);
+    },
+    async readFooterOneMenu(id) {
+        return await axios.get(apiUrl + "footermenu/" + id,localization);
+    },
+    /*async addMenu(requestData) {
         return await axios.post(apiUrl + "menu", requestData);
     },
     async updateMenu(id, requestData) {
         return await axios.put(apiUrl + "menu/" + id, requestData);
     },
-    async readOneMenu(id) {
-        return await axios.get(apiUrl + "menu/" + id,localization);
-    },
+
     async deleteMenu(id) {
         return await axios.delete(apiUrl + "menu/" + id);
-    },
+    },*/
     //////////////////////// News End /////////////////////////////
 
     //////////////////////// Categories Begin/////////////////////////////

@@ -81,7 +81,34 @@ const apiClient = {
     async deleteMenu(id) {
         return await axios.delete(apiUrl + "menu/" + id);
     },
-    //////////////////////// News End /////////////////////////////
+    //////////////////////// Menus End /////////////////////////////
+
+    //////////////////////// Footer Menus Begin/////////////////////////////
+
+    async readFooterMenusForSelect(idMenu = 0) {
+        return await axios.get(apiUrl + "footermenu/select");
+    },
+    async readFooterMenusFront() {
+        return await axios.get(apiUrl + "footermenu/front");
+    },
+    async readFooterMenus(parent = null) {
+        if (parent == null) return await axios.get(apiUrl + "footermenu");
+        else return await axios.get(apiUrl + "footermenu?parent=" + parent);
+    },
+
+    async addFooterMenu(requestData) {
+        return await axios.post(apiUrl + "footermenu", requestData);
+    },
+    async updateFooterMenu(id, requestData) {
+        return await axios.put(apiUrl + "footermenu/" + id, requestData);
+    },
+    async readFooterOneMenu(id) {
+        return await axios.get(apiUrl + "footermenu/" + id);
+    },
+    async deleteFooterMenu(id) {
+        return await axios.delete(apiUrl + "footermenu/" + id);
+    },
+    //////////////////////// Footer Menus End /////////////////////////////
 
     //////////////////////// Categories Begin/////////////////////////////
     async readCategories(limit = 0) {

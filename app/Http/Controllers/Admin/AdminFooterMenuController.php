@@ -4,28 +4,29 @@ namespace App\Http\Controllers\Admin;
 
 use Exception;
 use Illuminate\Http\Request;
-use App\Models\Menu;
+use App\Models\FooterMenu as Menu;
 use App\Models\CustomMenuLink;
 use App\Models\Page;
-use App\Http\Resources\Admin\AdminMenuResource;
+use App\Http\Resources\Admin\AdminFooterMenuResource;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller as ParentController;
 
-class AdminMenuController extends ParentController
+class AdminFooterMenuController extends ParentController
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
     public function index(Request $request)
     {
         $data = $request->only('parent');
         if (isset($data['parent']))
-            return AdminMenuResource::collection(Menu::where('parent', $data['parent'])->get());
+            return AdminFooterMenuResource::collection(Menu::where('parent', $data['parent'])->get());
 
-        return AdminMenuResource::collection(Menu::all())->all();
+        return AdminFooterMenuResource::collection(Menu::all())->all();
     }
 
     /**
@@ -134,7 +135,7 @@ class AdminMenuController extends ParentController
             if ($data['parent'] == null) $data['parent'] = 0;
             try {
                 if ($data['type'] == 1) {
-                    $menuData = [
+                    $footermenuData = [
                         'type' => $data['type'],
                         'title' => $data['title'],
                         'status' => $data['status'],
@@ -152,7 +153,7 @@ class AdminMenuController extends ParentController
                     ];
 
                     $customMenu = CustomMenuLink::create($custom_menu_link);
-                    $menuData = [
+                    $footermenuData = [
                         'type' => $data['type'],
                         'url' => $data['url'],
                         'title' => $data['title'],
@@ -161,27 +162,27 @@ class AdminMenuController extends ParentController
                         'parent' => $data['parent'],
                     ];
                 }
-                $menu = Menu::create($menuData);
+                $footermenu = Menu::create($footermenuData);
                 //$appeal->number = Str::random(10);
-                $menu->save();
+                $footermenu->save();
 
-                $data = $this->updateTranslates($data, $menu);
+                $data = $this->updateTranslates($data, $footermenu);
             } catch (Exception $e) {
                 return response()->json(['error' => $e->getMessage()], 400);
             }
-            return new AdminMenuResource($menu);
+            return new AdminFooterMenuResource($footermenu);
         }
     }
 
     /**
      * Display the specified resource.
      *
-     * @param int $id
-     * @return \Illuminate\Http\Response
+     * @param Menu $footermenu
+     * @return Response
      */
-    public function show(Menu $menu)
+    public function show(Menu $footermenu)
     {
-        return new AdminMenuResource($menu);
+        return new AdminFooterMenuResource($footermenu);
     }
 
     /**
@@ -191,7 +192,7 @@ class AdminMenuController extends ParentController
      * @param int $id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update(Request $request, Menu $menu)
+    public function update(Request $request, Menu $footermenu)
     {
         if ($request->isMethod('put')) {
             $data = $request->only(
@@ -223,7 +224,7 @@ class AdminMenuController extends ParentController
             try {
 
                 if ($data['type'] == 1) {
-                    $menuData = [
+                    $footermenuData = [
                         'type' => $data['type'],
                         'title' => $data['title'],
                         'status' => $data['status'],
@@ -231,7 +232,7 @@ class AdminMenuController extends ParentController
                         'parent' => $data['parent'],
                         'relation_id' => $data['page_id'],
                     ];
-                    $menu->update($menuData);
+                    $footermenu->update($footermenuData);
                 }
                 if ($data['type'] == 0) {
                     $custom_menu_link = [
@@ -244,7 +245,7 @@ class AdminMenuController extends ParentController
                         $customMenu->update($custom_menu_link);
                     } else {
                         $customMenu = CustomMenuLink::create($custom_menu_link);
-                        $menuData = [
+                        $footermenuData = [
                             'type' => $data['type'],
                             'url' => $data['url'],
                             'title' => $data['title'],
@@ -253,27 +254,27 @@ class AdminMenuController extends ParentController
                             'parent' => $data['parent'],
                             'relation_id' => $customMenu->id,
                         ];
-                        $menu->update($menuData);
+                        $footermenu->update($footermenuData);
 
-                        $data = $this->updateTranslates($data, $menu);
+                        $data = $this->updateTranslates($data, $footermenu);
 
 
                     }
                 }
 
                 //$appeal->number = Str::random(10);
-                $menu->save();
+                $footermenu->save();
             } catch (Exception $e) {
                 return response()->json(['error' => $e->getMessage()], 400);
             }
 
 
             try {
-                $menu->update($data);
+                $footermenu->update($data);
                 //$appeal->number = Str::random(10);
-                $menu->save();
-                $data = $this->updateTranslates($data, $menu);
-                return response()->json($menu, 200);
+                $footermenu->save();
+                $data = $this->updateTranslates($data, $footermenu);
+                return response()->json($footermenu, 200);
             } catch (Exception $e) {
                 return response()->json(['error' => $e->getMessage()], 400);
             }
@@ -289,21 +290,21 @@ class AdminMenuController extends ParentController
      * @param int $id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy(Menu $menu)
+    public function destroy(Menu $footermenu)
     {
-        $menu_id=$menu->id;
-        $menu->delete();
-        $deleted = DB::table('menu_translates')->where(["menu_id" => $menu_id])->delete();
+        $footermenu_id=$footermenu->id;
+        $footermenu->delete();
+        $deleted = DB::table('footer_menu_translates')->where(["menu_id" => $footermenu_id])->delete();
         return response()->json([
             'success'], 200);
     }
 
     /**
      * @param array $data
-     * @param Menu $menu
+     * @param Menu $footermenu
      * @return array
      */
-    public function updateTranslates(array $data, Menu $menu): array
+    public function updateTranslates(array $data, Menu $footermenu): array
     {
         if (isset($data['translates'])) {
             //$data['translates'] = json_decode($data['translates'], true);
@@ -313,9 +314,9 @@ class AdminMenuController extends ParentController
                 foreach ($data['translates'] as $language => $translate) {
                     if (is_array($translate)) {
                         if (strlen($translate['title']) > 3)
-                            DB::table('menu_translates')
+                            DB::table('footer_menu_translates')
                                 ->updateOrInsert(
-                                    ['language' => $language, 'menu_id' => $menu->id],
+                                    ['language' => $language, 'menu_id' => $footermenu->id],
                                     [
                                         'title' => $translate['title'] ?? "",
                                     ]

@@ -949,11 +949,11 @@ body .main_menu_area .navbar.navbar-default .navbar-collapse .nav.navbar-nav li 
 }
 
 .all_news {
-  width: 300px;
+  width: 600px;
   height: 50px;
   display: flex;
   position: absolute;
-  right: -245px;
+  right: -545px;
   bottom: 10%;
   background: #26a55b;
   color: #fff;
@@ -4628,6 +4628,27 @@ html body .Vue-Toastification__container.top-right {
   font-size: 25px;
   font-weight: bold;
 }
+.position-sidebar .sidebar-items .phone-number div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.position-sidebar .sidebar-items .phone-number div a {
+  font-size: 16px;
+  color: #fff;
+}
+.position-sidebar .sidebar-items .phone-number div a:hover {
+  text-decoration: underline;
+}
+.position-sidebar .sidebar-items .phone-number div span {
+  font-size: 16px;
+}
+.position-sidebar .sidebar-items .phone-number div span:last-child {
+  font-size: 12px;
+}
+.position-sidebar .sidebar-items .phone-number div span:hover {
+  text-decoration: underline;
+}
 .position-sidebar .sidebar-items::after {
   content: "";
   width: 87%;
@@ -4643,4 +4664,29 @@ html body .Vue-Toastification__container.top-right {
 .position-sidebar .sidebar-items:last-child:after {
   content: none;
   display: none;
+}
+
+.users_count {
+  padding-top: 6px !important;
+}
+.users_count h6 {
+  color: var(--mycolor);
+  margin-bottom: 10px;
+}
+.users_count li {
+  color: #38684c;
+  line-height: 25px;
+}
+.users_count td {
+  text-align: left;
+}
+.users_count td:nth-of-type(2n) {
+  text-align: left;
+  padding-left: 10px;
+}
+.users_count tr {
+  cursor: pointer;
+}
+.users_count tr:hover {
+  color: var(--mycolor);
 }

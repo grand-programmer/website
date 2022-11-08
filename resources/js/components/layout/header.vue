@@ -26,7 +26,7 @@
                                     <li class="dropdown nav-item" :class="($route.params.id==link.id) ? 'active' : '' "
                                         v-for="(link,index) in links" :key="index">
 
-                                        <router-link class="nav-link dropdown-toggle" data-bs-toggle="dropdown"
+                                        <router-link class="nav-link"
                                                      :to="link.url"
                                                      v-if="link.children && link.children[0]">
                                             <span class="menu_slider"></span>{{ link.title }}

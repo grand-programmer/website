@@ -65,8 +65,11 @@ use Illuminate\Support\Facades\Schema;
             Route::resource('/faqs', 'App\Http\Controllers\Admin\AdminFaqController', ['as' => 'admin']);
             Route::get('/menu/select', 'App\Http\Controllers\MenuController@getForSelect', ['as' => 'admin']);
             Route::get('/menu/front', 'App\Http\Controllers\MenuController@getForFront', ['as' => 'admin']);
+            Route::get('/footermenu/select', 'App\Http\Controllers\FooterMenuController@getForSelect', ['as' => 'admin']);
+            Route::get('/footermenu/front', 'App\Http\Controllers\FooterMenuController@getForFront', ['as' => 'admin']);
             Route::resource('/votes', 'App\Http\Controllers\Admin\AdminVoteController',['as'=>'admin']);
             Route::resource('/menu', 'App\Http\Controllers\Admin\AdminMenuController', ['as' => 'admin']);
+            Route::resource('/footermenu', 'App\Http\Controllers\Admin\AdminFooterMenuController', ['as' => 'admin']);
             Route::resource('/appeal', 'App\Http\Controllers\Admin\AdminAppealController', ['as' => 'admin']);
         });
 
@@ -79,6 +82,9 @@ use Illuminate\Support\Facades\Schema;
         Route::get('/menu/select', 'App\Http\Controllers\MenuController@getForSelect');
         Route::get('/menu/front', 'App\Http\Controllers\MenuController@getForFront');
         Route::resource('/menu', 'App\Http\Controllers\MenuController');
+        Route::get('/footermenu/select', 'App\Http\Controllers\FooterMenuController@getForSelect');
+        Route::get('/footermenu/front', 'App\Http\Controllers\FooterMenuController@getForFront');
+        Route::resource('/footermenu', 'App\Http\Controllers\FooterMenuController');
 
         Route::post('/news/{news}/vote', 'App\Http\Controllers\NewsController@like');
         Route::post('/news/search', 'App\Http\Controllers\NewsController@search');
@@ -108,5 +114,6 @@ use Illuminate\Support\Facades\Schema;
         Route::get('/data/country', 'App\Http\Controllers\DataController@getCountry');
         Route::get('/data/mfo', 'App\Http\Controllers\DataController@getMFO');
         Route::get('/data/contract', 'App\Http\Controllers\DataController@getEisvoContract');
+        Route::get('/users-viewed', 'App\Http\Controllers\UsersCountController@getCount');
     });
 //});

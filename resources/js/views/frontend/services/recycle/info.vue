@@ -157,7 +157,7 @@
                                                 <tr>
                                                     <td style="font-weight: 550">Идентификация усули</td>
                                                     <td>{{
-                                                            typeof app.methodIden !== 'undefined' ? (app.repubInOut === 100 ? methodIdentificationsIn[app.methodIden - 1].text : methodIdentificationsOut[app.methodIden - 1].text) : null
+                                                            typeof app.methodIden !== 'undefined' ? app.methodIden : null
                                                         }}
                                                     </td>
                                                 </tr>

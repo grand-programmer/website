@@ -1,31 +1,30 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
 use Exception;
 use Illuminate\Http\Request;
-use App\Models\Menu;
+use App\Models\FooterMenu;
 use App\Models\CustomMenuLink;
 use App\Models\Page;
-use App\Http\Resources\Admin\AdminMenuResource;
+use App\Http\Resources\FooterMenuResource;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
-use App\Http\Controllers\Controller as ParentController;
 
-class AdminMenuController extends ParentController
+class FooterMenuController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
     {
         $data = $request->only('parent');
         if (isset($data['parent']))
-            return AdminMenuResource::collection(Menu::where('parent', $data['parent'])->get());
+            return FooterMenuResource::collection(FooterMenu::where('parent', $data['parent'])->get());
 
-        return AdminMenuResource::collection(Menu::all())->all();
+        return FooterMenuResource::collection(FooterMenu::all());
     }
 
     /**
@@ -36,7 +35,7 @@ class AdminMenuController extends ParentController
     public function getForSelect(Request $request)
     {
 
-        return Menu::all()->transform(function ($item, $key) {
+        return FooterMenu::all()->transform(function ($item, $key) {
             return [
                 'text' => $item['title'],
                 'value' => $item['id'],
@@ -47,52 +46,42 @@ class AdminMenuController extends ParentController
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
     public function getForFront(Request $request)
     {
-        return Menu::with('children')->where('parent', 0)->where('status', 1)->orderby('sort_number', 'asc')->get()->transform(function ($item) {
-            if ($item->children) {
-                foreach ($item->children as $child) {
-                    if ($child->type == 1) {
-                        if (Page::find($child->relation_id))
-                            $child->url = '/page/' . Page::find($child->relation_id)->slug;
-                        else
-                            $child->url = '/page/' . $child->url;
-                    };
-                    if ($child->children) {
-                        foreach ($child->children as $subchild) {
-                            if ($subchild->type == 1) {
-                                if (Page::find($subchild->relation_id))
-                                    $subchild->url = '/page/' . Page::find($subchild->relation_id)->slug;
-                                else
-                                    $subchild->url = '/page/' . $subchild->url;
-                            };
-                            if ($subchild->children) {
-                                foreach ($subchild->children as $sch) {
-                                    if ($sch->type == 1) {
-                                        if (Page::find($sch->relation_id))
-                                            $sch->url = '/page/' . Page::find($sch->relation_id)->slug;
-                                        else
-                                            $sch->url = '/page/' . $sch->url;
-
-
-                                    };
-
-                                }
-                            }
-
-                        }
-                    }
-
-                }
-            }
+        return FooterMenuResource::collection(FooterMenu::with('children')->where('parent', 0)->where('status', 1)->orderby('sort_number', 'asc')->get()->transform(function ($item) use ($request) {
+            $this->setUrlChildren($item,$request);
 
             if ($item->type == 1) $item->url = '/page/' . Page::find($item->relation_id)->slug;
             return $item;
 
-        })->whereNotNull()->toJson();
+        })->whereNotNull());
 
+
+    }
+
+    public function setUrlChildren($item,$request)
+    {
+
+        if ($item['children']) {
+            //$collection=FooterMenuResource::collection($item->children)->toArray($request);
+            foreach ($item['children'] as  $childkey=> $child) {
+                $child= FooterMenuResource::make($child)->toArray($request);
+
+                // $translates = DB::table('menu_translates')->where(["menu_id" => $child->id, "language" => app()->getLocale()])->get();
+
+                if ($child['type'] === 1) {
+                    if (Page::find($child['relation_id']))
+                        $child['url'] = '/page/' . Page::find($child['relation_id'])->slug;
+                    else
+                        $child['url'] = '/page/' . $child['url'];
+                };
+                $this->setUrlChildren($child,$request);
+                $item['children'][$childkey]=$child;
+            }
+        }
+        return $item;
 
     }
 
@@ -114,7 +103,6 @@ class AdminMenuController extends ParentController
                 'status',
                 'page_id',
                 'sort_number',
-                'translates',
             );
 
             $validator = Validator::make($data, [
@@ -129,7 +117,7 @@ class AdminMenuController extends ParentController
             ]);
 
             if ($validator->fails()) {
-                return response()->json(['error' => $validator->errors()], 400);
+                return response()->json(['error' => $validator->errors()], 401);
             }
             if ($data['parent'] == null) $data['parent'] = 0;
             try {
@@ -159,17 +147,16 @@ class AdminMenuController extends ParentController
                         'status' => $data['status'],
                         'sort_number' => $data['sort_number'],
                         'parent' => $data['parent'],
+                        'relation_id' => $customMenu->id,
                     ];
                 }
-                $menu = Menu::create($menuData);
+                $menu = FooterMenu::create($menuData);
                 //$appeal->number = Str::random(10);
                 $menu->save();
-
-                $data = $this->updateTranslates($data, $menu);
             } catch (Exception $e) {
-                return response()->json(['error' => $e->getMessage()], 400);
+                return response()->json(['error' => $e->getMessage()], 401);
             }
-            return new AdminMenuResource($menu);
+            return new FooterMenuResource($menu);
         }
     }
 
@@ -181,7 +168,7 @@ class AdminMenuController extends ParentController
      */
     public function show(Menu $menu)
     {
-        return new AdminMenuResource($menu);
+        return new FooterMenuResource($menu);
     }
 
     /**
@@ -202,7 +189,6 @@ class AdminMenuController extends ParentController
                 'status',
                 'page_id',
                 'sort_number',
-                'translates'
             );
 
             $validator = Validator::make($data, [
@@ -217,7 +203,7 @@ class AdminMenuController extends ParentController
             ]);
             if ($data['parent'] == null) $data['parent'] = 0;
             if ($validator->fails()) {
-                return response()->json(['error' => $validator->errors()], 400);
+                return response()->json(['error' => $validator->errors()], 401);
             }
 
             try {
@@ -254,17 +240,13 @@ class AdminMenuController extends ParentController
                             'relation_id' => $customMenu->id,
                         ];
                         $menu->update($menuData);
-
-                        $data = $this->updateTranslates($data, $menu);
-
-
                     }
                 }
 
                 //$appeal->number = Str::random(10);
                 $menu->save();
             } catch (Exception $e) {
-                return response()->json(['error' => $e->getMessage()], 400);
+                return response()->json(['error' => $e->getMessage()], 401);
             }
 
 
@@ -272,15 +254,14 @@ class AdminMenuController extends ParentController
                 $menu->update($data);
                 //$appeal->number = Str::random(10);
                 $menu->save();
-                $data = $this->updateTranslates($data, $menu);
                 return response()->json($menu, 200);
             } catch (Exception $e) {
-                return response()->json(['error' => $e->getMessage()], 400);
+                return response()->json(['error' => $e->getMessage()], 401);
             }
 
 
         }
-        return response()->json('error', 400);
+        return response()->json('error', 401);
     }
 
     /**
@@ -291,39 +272,8 @@ class AdminMenuController extends ParentController
      */
     public function destroy(Menu $menu)
     {
-        $menu_id=$menu->id;
         $menu->delete();
-        $deleted = DB::table('menu_translates')->where(["menu_id" => $menu_id])->delete();
         return response()->json([
             'success'], 200);
-    }
-
-    /**
-     * @param array $data
-     * @param Menu $menu
-     * @return array
-     */
-    public function updateTranslates(array $data, Menu $menu): array
-    {
-        if (isset($data['translates'])) {
-            //$data['translates'] = json_decode($data['translates'], true);
-            //dd($data['translates']);
-            $translates = [];
-            if (is_array($data['translates'])) {
-                foreach ($data['translates'] as $language => $translate) {
-                    if (is_array($translate)) {
-                        if (strlen($translate['title']) > 3)
-                            DB::table('menu_translates')
-                                ->updateOrInsert(
-                                    ['language' => $language, 'menu_id' => $menu->id],
-                                    [
-                                        'title' => $translate['title'] ?? "",
-                                    ]
-                                );
-                    }
-                }
-            }
-        }
-        return $data;
     }
 }

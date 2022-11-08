@@ -89,6 +89,11 @@ export default {
                 title: 'Менюлар',
                 to: '/admin/menu',
             },
+            {
+                icon: 'mdi-animation',
+                title: 'Қуйи қисмдаги менюлар',
+                to: '/admin/footermenu',
+            },
 /*            {
                 icon: 'mdi-animation',
                 title: 'Мурожаатлар',

@@ -747,10 +747,18 @@ class ApiController extends Controller
 
 
                 }
-                //return (strin g) Str::uuid();
+                if (isset($data['type']) and $data['type']==='dep') {
 
-                /*                $sessions = DB::connection("db2_odbcEA")->select("Select * from Log where USERINN='" . Auth::guard('api')->user()->tin . "' and  exit is null and Last > '" . Carbon::now()->subDays(1) . "'");
-                                //if (!$sessions) */
+
+                    $query = "Insert into Logging  (SESID,INN,NAME,IP,SER_NUM) values ('" . Str::uuid() . "','" . Auth::guard('api')->user()->tin . "','" . Auth::guard('api')->user()->sur_name . " " . Auth::guard('api')->user()->first_name . " " . Auth::guard('api')->user()->mid_name . "','" . $request->getClientIp() . "', '" . substr(Str::uuid(), 0, 8) . "')";
+                    DB::connection("databaseconfig212_227")->insert($query);
+                    //else return response()->json(['data' => $sessions[0]]);
+                    $sessions = DB::connection("databaseconfig212_227")->select("Select * from Logging where INN='" . Auth::guard('api')->user()->tin . "' and exit is null and Last > '" . Carbon::now()->subDays(1) . "' order by last desc");
+
+                    return response()->json(['data' => $sessions[0]]);
+
+
+                }
                 $query = "Insert into Log  (SESID,USERINN,NAME,SERIALNUMBER,TYPE) values ('" . Str::uuid() . "','" . Auth::guard('api')->user()->tin . "','" . Auth::guard('api')->user()->sur_name . " " . Auth::guard('api')->user()->first_name . " " . Auth::guard('api')->user()->mid_name . "','" . substr(Str::uuid(), 0, 8) . "',3)";
                 DB::connection("db2_odbcEA")->insert($query);
                 //else return response()->json(['data' => $sessions[0]]);

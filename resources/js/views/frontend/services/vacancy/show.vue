@@ -207,12 +207,15 @@
                                         d="M20 33.9998C20 33.3869 20.3463 32.8266 20.8944 32.5526L23.1056 31.447C23.6686 31.1655 24.3314 31.1655 24.8944 31.447L27.1056 32.5526C27.6537 32.8266 28 33.3869 28 33.9998H20Z"
                                         fill="#CD5446"></path></svg>
                                 </span>
-                                    <div class="d-flex flex-col gap-4px"><p>Қабул
+                                    <div class="d-flex flex-col gap-4px" v-if="kun > 0"><p>Қабул
                                         ёпилишига қолган вақт</p>
                                         <div class="d-flex align-end gap-1"><h2>{{ kun }}
                                             кун</h2> <span style="color: #cd5446"
                                                            class=" text-sm font-semibold">{{ vacancy.isactive }}
           </span></div>
+                                    </div>
+                                    <div class="d-flex flex-col gap-4px" v-else><p>Вакансия қабул қилиш тугатилган</p>
+
                                     </div>
                                 </div>
                             </div>
@@ -560,7 +563,9 @@ export default {
     },
     computed: {
         kun() {
-            return new Date((new Date(this.vacancy.isactive)).getTime() - (new Date()).getTime()).getDate()
+            const diffTime = Math.abs((new Date(this.vacancy.isactive)).getTime() - (new Date()).getTime());
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            return (new Date(this.vacancy.isactive)).getTime() > (new Date()).getTime()?diffDays:0;//new Date((new Date(this.vacancy.isactive)).getTime() - (new Date()).getTime()).getDate()
         }
 
     }

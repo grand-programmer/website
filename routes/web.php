@@ -121,12 +121,10 @@ fetch first 10 rows only");
 });
 //Route::get('/social-login',[App\Http\Controllers\AuthController::class, 'loginWithOneId']);
 //Route::get('/logout',[App\Http\Controllers\AuthController::class, 'logoutForWeb']);
-Route::get('{any}', function () {
+Route::get('{any}', [App\Http\Controllers\HomeController::class, 'index'])->where('any','.*');
+/*Route::get('{any}/', function () {
     return view('index');
-})->where('any','.*');
-Route::get('{any}/', function () {
-    return view('index');
-})->where('any','.*');
+})->where('any','.*');*/
 
 /*Auth::routes();
 

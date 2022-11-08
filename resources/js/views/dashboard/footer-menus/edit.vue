@@ -184,7 +184,7 @@ export default {
             breadcrumb_items:
                 [
                     {text: 'Админ панел', to: '/admin', exact: true},
-                    {text: 'Менюлар', to: '/admin/menu', exact: true},
+                    {text: 'Менюлар', to: '/admin/footermenu', exact: true},
                     {text: 'Менюни тахрирлаш', to: '#', exact: true, disabled: true},
                 ],
             menu: [],
@@ -247,7 +247,7 @@ export default {
         },
         initialize() {
             const _this = this;
-            api.readOneMenu(this.$route.params.id).then((response) => {
+            api.readFooterOneMenu(this.$route.params.id).then((response) => {
                 this.menu = response.data.data;
 
                 if (typeof _this.menu.translates !== 'undefined' && _this.menu.translates && _this.menu.translates.length > 0) {
@@ -258,7 +258,7 @@ export default {
 
             }).catch((error) => {
                 this.$toast.error(i18n.t(`Маълумотларни юклашда хатолик содир бўлди!`))
-                this.$router.replace("/admin/menu").catch(() => {
+                this.$router.replace("/admin/footermenu").catch(() => {
                 });
             });
             api.readPages().then((response) => {
@@ -266,16 +266,16 @@ export default {
             }).catch((error) => {
                 this.$toast.error(`Сахифларни олишда муааммо бор!`)
             })
-            api.readMenusForSelect().then((response) => {
+            api.readFooterMenusForSelect().then((response) => {
                 this.menus = response.data;
             }).catch((error) => {
                 this.$toast.error(i18n.t(`Маълумотларни юклашда хатолик содир бўлди!`))
-                this.$router.replace("/admin/menu").catch(() => {
+                this.$router.replace("/admin/footermenu").catch(() => {
                 });
             })
         },
         close() {
-            this.$router.replace('/admin/menu');
+            this.$router.replace('/admin/footermenu');
         },
 
         async save() {
@@ -283,7 +283,7 @@ export default {
             if (isValid) {
                 this.menu.sort_number = parseInt(this.menu.sort_number);
                 this.menu.translates = this.langtext;
-                api.updateMenu(this.menu.id, this.menu).then((response) => {
+                api.updateFooterMenu(this.menu.id, this.menu).then((response) => {
                     this.$toast.success(`Маълумотларни омадли тарзда юкланди!`)
                 }).catch((error) => {
                     this.$toast.error(i18n.t(`Маълумотларни юклашда хатолик содир бўлди!`))

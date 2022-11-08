@@ -49,10 +49,13 @@
                             <v-row class="vacancy-list">
                                 <v-container>
                                     <v-col cols="12">
-                                        <h3 style="color: #39ae69; font-weight: bold" class="d-flex justify-content-between align-items-center"> Вакант лавозимлар рўйхати <span v-if="!loading" class="float-end" style="font-size: 15px">Жами: {{filteredVacancies.length}}</span></h3>
+                                        <h3 style="color: #39ae69; font-weight: bold" class="d-flex justify-content-between align-items-center"> Вакант лавозимлар рўйхати <span v-if="!loading && filteredVacancies.length>0" class="float-end" style="font-size: 15px">Жами: {{filteredVacancies.length}}</span></h3>
 
                                     </v-col>
                                 </v-container>
+                                <v-col cols="12" class="text-center" v-if="!filteredVacancies.length>0">
+                                    Бўш иш ўринлари топилмади.
+                                </v-col>
                                 <v-col cols="12" :key="key" v-for="(vacancy,key) in filteredVacancies" v-if="!loading"  data-aos="fade-up">
                                         <v-card class="vacancy-card mx-auto m-0">
                                             <div class="v-card-item" data-aos="flip-up">

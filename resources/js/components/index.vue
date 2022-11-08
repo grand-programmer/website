@@ -28,7 +28,7 @@
                 <!--==========Main Slider area==========-->
                 <div class="main_slider_area" style="padding-top: 70px; width: 100%">
 
-                    <router-link class="all_news" to="/services">
+                    <router-link class="all_news" to="/singlewindow">
                         <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
                              xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                              viewBox="0 0 490.667 490.667" style="enable-background:new 0 0 490.667 490.667;"
@@ -43,7 +43,7 @@
 </svg>
 
 
-                        <p> {{ $t("Барча хизматлар") }} </p></router-link>
+                        <p> {{ $t("Божхона органлари ягона дарча хизматлари") }} </p></router-link>
                     <div class="services-opens">
                         <!--                        <div>
                                                 <a>Интерактив хизматлар</a>

@@ -200,6 +200,13 @@ $databaseconfig228['database']='S0601A6T';
 $databaseconfig228['username']='Surat';
 $databaseconfig228['password']='As123456';
 
+$databaseconfig227=$databaseconfig;
+$databaseconfig227['host']='192.168.212.227';
+$databaseconfig227['schema']='TP';
+$databaseconfig227['database']='S2135BFW';
+$databaseconfig227['username']='newsite';
+$databaseconfig227['password']='new$1te';
+
 $databaseconfig2_10=$databaseconfig;
 $databaseconfig2_10['host']='192.168.2.10';
 $databaseconfig2_10['schema']='ELZVK';
@@ -217,6 +224,7 @@ return [
         'db2_odbcEA' => $databaseconfigEA,
         'db2_odbcInn' => $databaseconfigINN,
         'databaseconfig212_228' => $databaseconfig228,
+        'databaseconfig212_227' => $databaseconfig227,
         'db2_odbc221' => $databaseconfig221,
         'db2_odbc_stat' => $databaseconfigSTAT,
         'databaseconfig2_10' => $databaseconfig2_10,

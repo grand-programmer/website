@@ -29,6 +29,7 @@ import ServicesAppeals from "./views/frontend/services/appeal/main";
 import ServicesPage from "./views/frontend/services/services";
 import i18n from './i18n';
 import {Trans} from './plugins/Translation'
+import Yagona_oyna from "./views/frontend/services/yagona_oyna";
 
 const routes = []
 const allRoutes = {
@@ -63,7 +64,136 @@ const userRoutes =
         },
             {
 
-                path: '/', component: OnePage, children: [{
+                path: '/', component: OnePage, children: [
+                    {
+                        path: "singlewindow/", component: Yagona_oyna, children: [{
+                            path: "", component: Yagona_oyna,
+                        }, {
+                            path: "appeals/",
+                            component: () => import('./views/frontend/services/appeal/index'),
+                            children: [{
+                                path: "", component: ServicesAppeals, query: {appeal_code: ''}
+                            }, {
+                                path: "create", component: ServicesAppealsCreate,
+                            }, {
+                                path: ":id", component: () => import('./views/frontend/services/appeal/info_view'),
+                            }, {
+                                path: ":id/:key", component: () => import('./views/frontend/services/appeal/info_view'),
+                            }]
+                        }, {
+                            path: "decisions/",
+                            component: () => import('./views/frontend/services/customs_value/index'),
+                            meta: {
+                                auth: true,
+                                authRedirect: '/login',
+                                notFoundRedirect: '/403',
+                                forbiddenRedirect: '/403',
+                                routeAuth: '/login'
+                            },
+                            children: [{
+                                path: "", component: ServicesDecisionsCreate,
+                            }, {
+                                path: "info", component: ServicesDecisionsInfo,
+                            }, {
+                                path: "edit/:id", component: ServicesDecisionsEdit,
+                            }, {
+                                path: ":id", component: ServicesDecisionsInfo,
+                            }]
+                        }, {
+                            path: "intellectual/",
+                            component: () => import('./views/frontend/services/intellectual/index'),
+                            meta: {
+                                auth: true,
+                                authRedirect: '/login',
+                                notFoundRedirect: '/403',
+                                forbiddenRedirect: '/403',
+                                routeAuth: '/login'
+                            },
+                            children: [
+                                {
+                                    path: "", component: ServicesIntellectualCreate,
+                                }, {
+                                    path: ":id", component: ServicesIntellectualInfo,
+                                }, {
+                                    path: "info", component: ServicesIntellectualInfo,
+                                }/*, {
+                                path: "edit/:id", component: ServicesIntellectualEdit,
+                            }*/
+                            ]
+                        }, {
+                            path: "refund/",
+                            component: () => import('./views/frontend/services/refund/index'),
+                            meta: {
+                                auth: true,
+                                authRedirect: '/login',
+                                notFoundRedirect: '/403',
+                                forbiddenRedirect: '/403',
+                                routeAuth: '/login'
+                            },
+                            children: [
+                                {
+                                    path: "", component: () => import('./views/frontend/services/refund/create'),
+                                }, {
+                                    path: ":id", component: () => import('./views/frontend/services/refund/info'),
+                                }, /*{
+                                path: "info", component: ServicesIntellectualInfo,
+                            }/*, {
+                                path: "edit/:id", component: ServicesIntellectualEdit,
+                            }*/
+                            ]
+                        }, {
+                            path: "recycle/", component: () => import('./views/frontend/services/recycle/index'), meta: {
+                                auth: true,
+                                authRedirect: '/login',
+                                notFoundRedirect: '/403',
+                                forbiddenRedirect: '/403',
+                                routeAuth: '/login'
+                            }, children: [{
+                                path: "", component: () => import('./views/frontend/services/recycle/create'),
+                            }, {
+                                path: ":id", component: () => import('./views/frontend/services/recycle/info'),
+                            }]
+                        }, {
+                            path: "tftn/", component: () => import('./views/frontend/services/tftn/index'), meta: {
+                                auth: true,
+                                authRedirect: '/login',
+                                notFoundRedirect: '/403',
+                                forbiddenRedirect: '/403',
+                                routeAuth: '/login'
+                            }, children: [{
+                                path: "", component: ServicesTftnCreate,
+                            }, {
+                                path: "info", component: ServicesTftnInfo,
+                            }, {
+                                path: "edit/:id", component: ServicesTftnEdit,
+                            }, {
+                                path: ":id", component: ServicesTftnInfo,
+                            }]
+                        }, {
+                            path: "vacancy/",
+                            component: () => import('./views/frontend/services/vacancy/index'),
+                            children: [{
+                                path: "", component: ServiceVacancyList,
+                            },
+
+                                {
+                                    path: "create", component: ServiceVacancyCreate,
+                                }, {
+                                    path: "questions", component: ServiceVacancyQuestions,
+                                }, {
+                                    path: "documents", component: ServiceVacancyDocuments,
+                                }, {
+                                    path: ":id", component: ServiceVacancyShow,
+
+                                }, {
+                                    path: ":id/resume", component: ServiceVacancyResume,
+                                }, {
+                                    path: "*", redirect: "/services/vacancy"
+                                }]
+                        },]
+                    },
+
+                    {
                     path: "services/", component: Services, children: [{
                         path: "", component: ServicesPage,
                     }, {
@@ -529,6 +659,26 @@ let adminRoute = {
 
             }, {
                 name: "Подменюлар", path: 'view/:id', component: () => import('./views/dashboard/menus/view'),
+
+            },
+
+            ]
+
+        },// Footer Menus
+        {
+            name: 'Менюлар', path: 'footermenu/', component: {
+                template: '<router-view></router-view>', script: ' export default {}'
+            }, children: [{
+                name: "Менюлар", path: '', component: () => import('./views/dashboard/footer-menus/index'),
+
+            }, {
+                name: "Меню яратиш", path: 'create', component: () => import('./views/dashboard/footer-menus/create'),
+
+            }, {
+                name: "Менюни тахрирлаш", path: 'edit/:id', component: () => import('./views/dashboard/footer-menus/edit'),
+
+            }, {
+                name: "Подменюлар", path: 'view/:id', component: () => import('./views/dashboard/footer-menus/view'),
 
             },
 
