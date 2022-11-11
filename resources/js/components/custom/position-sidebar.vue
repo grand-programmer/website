@@ -119,6 +119,23 @@
             </div>
             <v-icon size="30" color="#fff" style="transform: rotate(265px)">mdi-phone</v-icon>
         </div>
+        <div class="sidebar-items specific">
+            <div class="specific-fields">
+                <p>{{ $t('Кўриниш') }}</p>
+                <div class="grayscale d-flex">
+
+                        <v-icon dark>
+                            mdi-circle-half-full
+                        </v-icon>
+
+                        <v-icon dark>
+                            mdi-circle-slice-8
+                        </v-icon>
+
+                </div>
+            </div>
+            <v-icon size="30" color="#fff" class="m-0">mdi-eye-outline</v-icon>
+        </div>
 
 
     </div>

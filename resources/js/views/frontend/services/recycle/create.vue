@@ -620,7 +620,7 @@
                                                                         v-model="application.tovarlar[key].status"
                                                                         label="Мақоми *"
                                                                         required
-                                                                        :items="maqomlar"
+                                                                        :items="statusList"
                                                                         hide-selected
                                                                         persistent-placeholder
                                                                         name="maqom"
@@ -931,7 +931,7 @@
                                                     <v-tabs-slider color="primary"></v-tabs-slider>
 
                                                     <v-tab
-                                                        v-for="item in maqomlar"
+                                                        v-for="item in statusList"
                                                         :key="item.value"
                                                         v-if="(getProductsByStatus(item.value)).length>0 "
                                                         :style="'border: 2px solid ' + colors[item.value - 1] + ';'"
@@ -940,7 +940,7 @@
                                                         <span>{{ item.value }}</span>
                                                     </v-tab>
                                                     <v-tab-item
-                                                        v-for="item in maqomlar"
+                                                        v-for="item in statusList"
                                                         :key="item.value"
                                                         v-if="(getProductsByStatus(item.value)).length>0"
 
@@ -1083,8 +1083,8 @@ export default {
                 '#c9b210',
             ],
             maqomlar: [
-                {text: "Олиб кириладиган товарлар", value: 1},
-                {text: "Ўзбекистон товари", value: 2},
+                {text: typeof this.application!=='undefined' && this.application.rejim===200?"Олиб чиқиладиган товарлар":"Олиб кириладиган товарлар", value: 1},
+                {text: typeof this.application!=='undefined' && this.application.rejim===200?"Ишлатиладиган чет эл товари":"Ўзбекистон товари", value: 2},
                 {text: "Қайта ишлаш маҳсулоти", value: 3},
                 {text: "Қайта ишлашда ҳосил бўладиган иккиламчи товар", value: 4},
                 {text: "Чиқиндилар", value: 5},
@@ -2310,6 +2310,15 @@ export default {
         this.initialize();
     },
     computed: {
+        statusList(){
+
+            if(this.application.rejim===200){
+                this.maqomlar[0].text="Олиб чиқиладиган товарлар";
+                this.maqomlar[1].text="Ишлатиладиган чет эл товари";
+            }
+
+          return this.maqomlar;
+        },
         progress(val) {
             this.Initprogress(val)
         },

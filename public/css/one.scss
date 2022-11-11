@@ -5388,8 +5388,8 @@ vh
     position: fixed;
     top: 30%;
     left: 0;
-    width: 45px;
-    height: 100px;
+    width: 45px;/*
+    height: 100px;*/
     background-color: #43454f;
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
@@ -5455,6 +5455,25 @@ vh
                 }
             }
         }
+        &.specific{
+            &:hover{
+                width: 200px;
+                margin-right: -153px;
+                background-color: #39ae69;
+                justify-content: end;
+                transition: ease 0.3s;
+            }
+            .specific-fields{
+                position: absolute;
+                width: 150px;
+                right: 45px;
+                display: flex;
+                flex-direction: column;
+                .grayscale{
+
+                }
+            }
+        }
         &::after{
             content: "";
             width: 87%;
@@ -5472,6 +5491,13 @@ vh
             display: none;
 
         }
+
+
+
+
+
+
+
     }
 }
 

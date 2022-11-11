@@ -348,6 +348,20 @@ export default {
                     _app.vacancies = _app.filteredVacancies = response.data.data;
                 }else _app.loading = false;
             });
+            /*_app.vacancies.push({
+                seven:"Toshkent Aero",
+                boshqarma_name:"Boshqarma nomi",
+                applied:true,
+                guruh:"ATB boshqarma",
+                lavozim:"Katta inspektor",
+                b_id:"1703",
+                vac_soni:10,
+                shroit:"Talablar ",
+                raqam:10,
+                isactive:true,
+                viewed:1,
+                id:100000
+            })*/
 
             /*} else {
                 await axios.get("/api/v1/ex_api/vakantlar").then(function (response) {

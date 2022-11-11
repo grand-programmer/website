@@ -368,8 +368,8 @@
                                                     :href="'https://qaror.customs.uz/s03decisionPdfDownloadAppeal?stId=' + appstatus.id">
                                                     Ариза шаклини юклаб олинг! </a></p>
                                                 <p v-if="appstatus.status==='600'" style="font-size: 15px"><a
-                                                    :href="'https://d-qaror.customs.uz/s03decisionPdfDownloadAppeal?stId=' + appstatus.id">
-                                                    Реестрга киритилганлиги тўғрисида қарорни юклаб олинг! </a></p>
+                                                    :href="'https://qaror.customs.uz/s03decisionPdfDownloadAppeal?stId=' + appstatus.id">
+                                                    Рухсатномани юклаб олинг! </a></p>
                                                 <p v-if="appstatus.status==='201' && appstatus.comment.length>0" style="font-size: 15px; font-style: italic">
                                                     {{ appstatus.comment }}
                                                 </p>

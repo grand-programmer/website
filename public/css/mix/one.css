@@ -4582,7 +4582,8 @@ html body .Vue-Toastification__container.top-right {
   top: 30%;
   left: 0;
   width: 45px;
-  height: 100px;
+  /*
+  height: 100px;*/
   background-color: #43454f;
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
@@ -4648,6 +4649,20 @@ html body .Vue-Toastification__container.top-right {
 }
 .position-sidebar .sidebar-items .phone-number div span:hover {
   text-decoration: underline;
+}
+.position-sidebar .sidebar-items.specific:hover {
+  width: 200px;
+  margin-right: -153px;
+  background-color: #39ae69;
+  justify-content: end;
+  transition: ease 0.3s;
+}
+.position-sidebar .sidebar-items.specific .specific-fields {
+  position: absolute;
+  width: 150px;
+  right: 45px;
+  display: flex;
+  flex-direction: column;
 }
 .position-sidebar .sidebar-items::after {
   content: "";
