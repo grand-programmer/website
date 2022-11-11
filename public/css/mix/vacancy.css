@@ -386,7 +386,6 @@ section.content_block .profile-action-buttons a.btn-info:hover {
   padding: 16px 20px;
   color: #39ae69;
   border-radius: 7px;
-  width: 50%;
   line-height: 39px;
   text-transform: uppercase;
   font-weight: 600;
@@ -435,8 +434,8 @@ section.content_block .profile-action-buttons a.btn-info:hover {
   margin-left: 25px;
 }
 .section.nomzod-section .vacancy-wrapper .vacancy-sidebar .v-list-item > div > span {
-  margin-left: 50px;
-  font-size: 25px;
+  margin-left: 27px;
+  font-size: 22px;
   color: #39ae69;
   font-weight: bold;
 }
