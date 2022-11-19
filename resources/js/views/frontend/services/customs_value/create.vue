@@ -64,34 +64,18 @@
                     </v-stepper-header>
 
                     <v-stepper-items>
-                        <v-stepper-content step="1">
+                        <v-stepper-content step="1" style="padding: 0">
                             <v-card
                                 class="mb-12"
                             >
                                 <div class="row position-absolute yoriqnoma-text"><a
-                                    href="/storage/files/dastlabki-user.pptx"> Ариза тўлдириш бўйича йўриқмани юклаб
+                                    href="/storage/files/dastlabki-user.pptx"> Ариза тўлдириш бўйича <br> йўриқмани юклаб
                                     олинг!
                                 </a></div>
                                 <ValidationObserver v-slot="{ invalid }" ref="create_customs_person_value">
-                                    <v-row>
+                                    <v-row style="margin: 0!important;">
 
                                         <v-col cols="3" class="d-flex align-items-center jis_yur">
-                                            <!--                                        <div class="form-field d-flex align-items-center jis_yur">
-                                                                                        <label :class="person.type==0?'primary':''">Юридик шахс</label>
-
-                                                                                        <v-switch v-model="person.type"></v-switch>
-                                                                                        <label :class="person.type==1?'primary':''">Жисмоний шахс</label>
-
-                                                                                    </div>-->
-
-                                            <!--                                            <v-btn-toggle
-                                                                                            v-model="person.type"
-
-                                                                                            tile
-                                                                                            group
-                                                                                            mandatory
-                                                                                        >-->
-
 
                                             <v-btn color="primary" v-if="person.type===1">
                                                 Жисмоний шахс
@@ -99,14 +83,12 @@
                                             <v-btn color="primary" v-if="person.type===0">
                                                 Юридик шахс
                                             </v-btn>
-                                            <!--
 
-                                                                                        </v-btn-toggle>-->
 
                                         </v-col>
                                     </v-row>
                                     <v-row class="person_data">
-                                        <v-col cols="6" v-if="person.type===1">
+                                        <v-col lg="6" md="6" sm="12" cols="12" v-if="person.type===1">
                                             <ValidationProvider name="ЖШШИР" rules="required|digits:14"
                                                                 v-slot="{ errors }">
                                                 <v-text-field
@@ -124,7 +106,7 @@
                                                 <span class="red--text">{{ errors[0] }}</span>
                                             </ValidationProvider>
                                         </v-col>
-                                        <v-col cols="6" v-else>
+                                        <v-col lg="6" md="6" sm="12" cols="12" v-else>
                                             <ValidationProvider name="Ташкилот номи" rules="required"
                                                                 v-slot="{ errors }">
                                                 <v-text-field
@@ -142,7 +124,7 @@
                                             </ValidationProvider>
 
                                         </v-col>
-                                        <v-col cols="6">
+                                        <v-col lg="6" md="6" sm="12" cols="12">
                                             <ValidationProvider name="СТИР" rules="required"
                                                                 v-slot="{ errors }">
                                                 <v-text-field
@@ -163,7 +145,7 @@
 
                                         </v-col>
 
-                                        <v-col cols="6">
+                                        <v-col lg="6" md="6" sm="12" cols="12">
                                             <ValidationProvider name="Фамилияси исми шарифи" rules="required"
                                                                 v-slot="{ errors }">
                                                 <v-text-field
@@ -182,25 +164,25 @@
 
                                         </v-col>
 
-<!--
-                                        <v-col cols="6" v-if="person.type==='01'">
-                                            <ValidationProvider :slim="(person.type!=='01')" v-if="person.type==='02'"
-                                                                name="Лавозими" rules="required"
-                                                                v-slot="{ errors }">
-                                                <v-text-field
-                                                    v-model="person.position"
-                                                    :counter="200"
-                                                    required
-                                                    hint="Аризачининг ташкилотдаги лавозими"
-                                                    persistent-placeholder
-                                                >
-                                                    <template v-slot:label>Лавозими <sup>*</sup></template>
-                                                </v-text-field>
-                                                <span class="red&#45;&#45;text">{{ errors[0] }}</span>
-                                            </ValidationProvider>
+                                        <!--
+                                                                                <v-col cols="6" v-if="person.type==='01'">
+                                                                                    <ValidationProvider :slim="(person.type!=='01')" v-if="person.type==='02'"
+                                                                                                        name="Лавозими" rules="required"
+                                                                                                        v-slot="{ errors }">
+                                                                                        <v-text-field
+                                                                                            v-model="person.position"
+                                                                                            :counter="200"
+                                                                                            required
+                                                                                            hint="Аризачининг ташкилотдаги лавозими"
+                                                                                            persistent-placeholder
+                                                                                        >
+                                                                                            <template v-slot:label>Лавозими <sup>*</sup></template>
+                                                                                        </v-text-field>
+                                                                                        <span class="red&#45;&#45;text">{{ errors[0] }}</span>
+                                                                                    </ValidationProvider>
 
-                                        </v-col>-->
-                                        <v-col cols="6">
+                                                                                </v-col>-->
+                                        <v-col lg="6" md="6" sm="12" cols="12">
                                             <ValidationProvider name="Манзили" rules="required"
                                                                 v-slot="{ errors }">
                                                 <v-text-field
@@ -216,7 +198,7 @@
                                             </ValidationProvider>
 
                                         </v-col>
-                                        <v-col cols="6">
+                                        <v-col lg="6" md="6" sm="12" cols="12">
                                             <ValidationProvider name="Ҳудуд" rules="required"
                                                                 v-slot="{ errors }">
                                                 <v-autocomplete
@@ -233,7 +215,7 @@
                                             </ValidationProvider>
 
                                         </v-col>
-                                        <v-col cols="6">
+                                        <v-col lg="6" md="6" sm="12" cols="12">
                                             <ValidationProvider name="Телефон рақами" rules="required"
                                                                 v-slot="{ errors }">
                                                 <v-text-field
@@ -250,7 +232,7 @@
                                             </ValidationProvider>
 
                                         </v-col>
-                                        <v-col cols="6">
+                                        <v-col lg="6" md="6" sm="12" cols="12">
                                             <ValidationProvider name="Электрон почта" rules="required|email"
                                                                 v-slot="{ errors }">
                                                 <v-text-field
@@ -275,7 +257,7 @@
                                 </ValidationObserver>
                                 <v-row class="row mb-3 position-absolute bottom-0 end-0">
                                     <v-col class="d-flex tab_action_buttons">
-                                        <v-btn text
+                                        <v-btn  text
                                                @click="prevStep"
                                         >
                                             Орқага
@@ -283,7 +265,7 @@
                                         <v-btn
                                             color="primary"
                                             @click="nextStep"
-                                            size="large"
+                                            size=""
                                             :loading="loadingButton.first"
                                         >
                                             Давом этиш
@@ -600,19 +582,19 @@
 
                                             >
                                                 <template v-slot:activator="{ on, attrs }">
-                                                <v-col cols="4" class="position-relative">
-                                                    <label
-                                                        v-if="(application.importer.type===2 && application.importer.inn) || (application.importer.type===1 && application.importer.passport && application.importer.date)">Импортчи/юкни
-                                                        қабул қилувчи
-                                                        <sup>*</sup></label>
-                                                    <v-btn
-                                                        v-bind="attrs"
-                                                        v-on="on"
+                                                    <v-col cols="4" class="position-relative">
+                                                        <label
+                                                            v-if="(application.importer.type===2 && application.importer.inn) || (application.importer.type===1 && application.importer.passport && application.importer.date)">Импортчи/юкни
+                                                            қабул қилувчи
+                                                            <sup>*</sup></label>
+                                                        <v-btn
+                                                            v-bind="attrs"
+                                                            v-on="on"
 
-                                                        min-width="100%"
-                                                        class="button-style-1"
+                                                            min-width="100%"
+                                                            class="button-style-1"
 
-                                                    >
+                                                        >
                                                                 <span
                                                                     v-if="isValidImporterA && ((application.importer.type===2 && application.importer.inn) || ((application.importer.type===1 && application.importer.passport && application.importer.date) || !importerIsset ))">
                                                                     <template
@@ -624,16 +606,17 @@
                                                                         {{ application.importer.name }}
                                                                     </template>
                                                                 </span>
-                                                        <span v-else>Импортчи/юкни қабул қилувчи</span>
-                                                    </v-btn>
-                                                    <div class="errors_under_button">
-                                                        <ValidationProvider name="Импортчи маълумотлари" ref="importchi_malumotlari"
-                                                                            v-slot="{ errors }">
-                                                            <span class="red--text">{{ errors[0] }}</span>
-                                                        </ValidationProvider>
+                                                            <span v-else>Импортчи/юкни қабул қилувчи</span>
+                                                        </v-btn>
+                                                        <div class="errors_under_button">
+                                                            <ValidationProvider name="Импортчи маълумотлари"
+                                                                                ref="importchi_malumotlari"
+                                                                                v-slot="{ errors }">
+                                                                <span class="red--text">{{ errors[0] }}</span>
+                                                            </ValidationProvider>
 
-                                                    </div>
-                                                </v-col>
+                                                        </div>
+                                                    </v-col>
                                                 </template>
 
 
@@ -868,10 +851,11 @@
                                                                         </v-col>
                                                                         <v-col cols="6">
 
-                                                                            <ValidationProvider name="Ваколатини тасдиқловчи ҳужжат санаси"
-                                                                                                rules="required"
-                                                                                                ref="importer-doc-date"
-                                                                                                v-slot="{ errors }">
+                                                                            <ValidationProvider
+                                                                                name="Ваколатини тасдиқловчи ҳужжат санаси"
+                                                                                rules="required"
+                                                                                ref="importer-doc-date"
+                                                                                v-slot="{ errors }">
                                                                                 <v-menu
                                                                                     ref="menu-importer-doc-date"
                                                                                     v-model="menu.importerhdate"
@@ -906,8 +890,6 @@
                                                                                         errors[0]
                                                                                     }}</span>
                                                                             </ValidationProvider>
-
-
 
 
                                                                         </v-col>
@@ -2736,6 +2718,7 @@
                 @dastlabkiqaror
             </p></a>
     </div>
+
 </template>
 <script>
 import {extend, ValidationProvider, ValidationObserver} from 'vee-validate';
@@ -3077,12 +3060,12 @@ export default {
                     passport: null,
                     date: null,
                     inn: null,
-                    docnum:null,
-                    docdate:null,
+                    docnum: null,
+                    docdate: null,
                     name: '',
                 },
                 inkoterms: null,
-                importerhdate:(new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
+                importerhdate: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
                 shipping_address: "",
                 sender: {
                     name: "",
@@ -3501,7 +3484,7 @@ export default {
             this.application.importer.date = this.formatDate(this.application.date)
         },
         'application.importerhdate'(val) {
-            this.application.importer.docdate = this.formatDate(this.application.importerhdate,2)
+            this.application.importer.docdate = this.formatDate(this.application.importerhdate, 2)
         },
         search_tftn: {
             handler: function (val) {
@@ -3599,9 +3582,9 @@ export default {
             const _this = this;
             _this.loading.importer = true;
             if (!_this.importerIsset) {
-                _this.application.importer.name=_this.person.fio;
-                _this.application.importer.type=1;
-                _this.isValidImporterA=true;
+                _this.application.importer.name = _this.person.fio;
+                _this.application.importer.type = 1;
+                _this.isValidImporterA = true;
                 _this.dialog.importqiluvchi = false;
                 this.$refs["importchi_malumotlari"].applyResult({
                     errors: [], // array of string errors
@@ -3628,7 +3611,7 @@ export default {
                             _this.loading.importer = false;
                             _this.dialog.importqiluvchi = false;
                             if (response.status === 200) {
-                                _this.application.importer.pdata=response.data.data;
+                                _this.application.importer.pdata = response.data.data;
                                 _this.application.importer.name = response.data.data.namelatin + ' ' + response.data.data.engsurname + ' ' + response.data.data.patronymlatin;
                             }
                         })
@@ -3699,11 +3682,11 @@ export default {
                 return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`
             else return null;
         },
-        formatDate(date,type=1) {
+        formatDate(date, type = 1) {
             if (!date) return null
 
             const [year, month, day] = date.split('-')
-            if(type===1) return `${day}.${month}.${year}`; else return `${year}-${day}-${month}`
+            if (type === 1) return `${day}.${month}.${year}`; else return `${year}-${day}-${month}`
         },
         /*        InputFocus(){
                     console.log(this.$refs.usultext0.$el);
@@ -3947,7 +3930,7 @@ export default {
         async sendProduct(data) {
             let result = null;
             try {
-                await axios.post('/api/v1/ex_api/customprice-product', {commodity:[data]}).then(function (res) {
+                await axios.post('/api/v1/ex_api/customprice-product', {commodity: [data]}).then(function (res) {
                     result = res;
                 })
                 return result;
@@ -4013,8 +3996,7 @@ export default {
                 case 2:
                     isValid = false;
                     this.loadingButton.second = true;
-                    if( !(_this.isValidImporterA)) {
-
+                    if (!(_this.isValidImporterA)) {
 
 
                     }
@@ -4038,7 +4020,6 @@ export default {
                         }
 
 
-
                         if (!this.isValidDoc()) {
                             _this.$refs["hujjatilova"].applyResult({
                                 errors: ["Илова қилинадиган ҳужжатларни киритинг"], // array of string errors
@@ -4053,12 +4034,12 @@ export default {
                                 failedRules: {} // should be empty since this is a manual error.
                             })
                         isValid = await this.validateField("create_customs_yuk_kuzatuv_value");
-                        if(!this.isValidImporterA)
+                        if (!this.isValidImporterA)
                             _this.$refs["importchi_malumotlari"].applyResult({
-                            errors: ["Импортчи маълумотлари тўлдирилиши шарт"], // array of string errors
-                            valid: false, // boolean state
-                            failedRules: {} // should be empty since this is a manual error.
-                        })
+                                errors: ["Импортчи маълумотлари тўлдирилиши шарт"], // array of string errors
+                                valid: false, // boolean state
+                                failedRules: {} // should be empty since this is a manual error.
+                            })
                         if (isValid === true && this.isValidImporter() && this.isValidDoc() && this.isValidTransportTuri()) {
 
                             let myYukData = [];
@@ -4086,23 +4067,22 @@ export default {
                             _this.yukData['apps']['sellerOrg'] = this.application.seller.name;
                             _this.yukData['apps']['terms'] = this.application.inkoterms;
                             _this.yukData['apps']['termsAddr'] = this.application.shipping_address;
-                            if(_this.importerIsset){
+                            if (_this.importerIsset) {
                                 if (_this.isValidImporterA) {
-                                    if(_this.application.importer.type===1)
-                                    {
-                                        _this.yukData['apps']["authorizedPerson"]="1"
-                                        _this.yukData['apps']["authorizedPersonPin"]=(typeof _this.application.importer.pdata !=='undefined' && _this.application.importer.pdata && typeof _this.application.importer.pdata.pinpp!=='undefined' && _this.application.importer.pdata.pinpp)?_this.application.importer.pdata.pinpp:"";
-                                        _this.yukData['apps']["authorizedPersonDocDate"]=(typeof _this.application.importer.pdata !=='undefined' && _this.application.importer.pdata && typeof _this.application.importer.pdata.birth_date!=='undefined' && _this.application.importer.pdata.birth_date)?_this.application.importer.pdata.birth_date:"";
-                                        _this.yukData['apps']["authorizedPersonDocNum"]=(typeof _this.application.importer.pdata !=='undefined' && _this.application.importer.pdata && typeof _this.application.importer.pdata.document!=='undefined' && _this.application.importer.pdata.document)?_this.application.importer.pdata.document:"";
-                                        _this.yukData['apps']["stateNumber"]=_this.application.importer.docnum;
-                                        _this.yukData['apps']["stateNumberDate"]=_this.application.importer.docdate;
+                                    if (_this.application.importer.type === 1) {
+                                        _this.yukData['apps']["authorizedPerson"] = "1"
+                                        _this.yukData['apps']["authorizedPersonPin"] = (typeof _this.application.importer.pdata !== 'undefined' && _this.application.importer.pdata && typeof _this.application.importer.pdata.pinpp !== 'undefined' && _this.application.importer.pdata.pinpp) ? _this.application.importer.pdata.pinpp : "";
+                                        _this.yukData['apps']["authorizedPersonDocDate"] = (typeof _this.application.importer.pdata !== 'undefined' && _this.application.importer.pdata && typeof _this.application.importer.pdata.birth_date !== 'undefined' && _this.application.importer.pdata.birth_date) ? _this.application.importer.pdata.birth_date : "";
+                                        _this.yukData['apps']["authorizedPersonDocNum"] = (typeof _this.application.importer.pdata !== 'undefined' && _this.application.importer.pdata && typeof _this.application.importer.pdata.document !== 'undefined' && _this.application.importer.pdata.document) ? _this.application.importer.pdata.document : "";
+                                        _this.yukData['apps']["stateNumber"] = _this.application.importer.docnum;
+                                        _this.yukData['apps']["stateNumberDate"] = _this.application.importer.docdate;
                                         _this.yukData['apps']['importerNm'] = _this.application.importer.name;
                                         _this.yukData['apps']['importerTin'] = _this.yukData['apps']["authorizedPersonPin"];
                                         _this.yukData['apps']['personAddr'] = _this.application.importer.manzil;
                                         _this.yukData['apps']['personMail'] = _this.application.importer.email;
                                         _this.yukData['apps']['personPhone'] = _this.application.importer.phone;
                                         _this.yukData['apps']['personPosition'] = "02";
-                                    }else {
+                                    } else {
                                         _this.yukData['apps']['importerNm'] = _this.application.importer.inn.name;
                                         //_this.yukData['apps']['orgName'] = _this.application.importer.inn.name;
                                         _this.yukData['apps']['personPosition'] = "01";
@@ -4111,8 +4091,8 @@ export default {
                                         _this.yukData['apps']['importerTin'] = _this.application.importer.inn.tin;
                                         _this.yukData['apps']['personMail'] = _this.application.importer.email;
                                         _this.yukData['apps']['personPhone'] = _this.application.importer.phone;
-                                        _this.yukData['apps']["stateNumber"]=_this.application.importer.docnum;
-                                        _this.yukData['apps']["stateNumberDate"]=_this.application.importer.docdate;
+                                        _this.yukData['apps']["stateNumber"] = _this.application.importer.docnum;
+                                        _this.yukData['apps']["stateNumberDate"] = _this.application.importer.docdate;
 
                                         delete _this.yukData['apps']["authorizedPerson"];
                                         delete _this.yukData['apps']["authorizedPersonPin"];
@@ -4137,7 +4117,7 @@ export default {
                                 }
 
 
-                            }else {
+                            } else {
                                 _this.yukData['apps']['orgName'] = this.person.organization_name;
                                 _this.yukData['apps']['personPosition'] = this.person.position;
                                 _this.yukData['apps']['personAddr'] = this.person.perAdr;
@@ -4634,7 +4614,7 @@ export default {
                 if (typeof legal_info[0] !== 'undefined' && typeof legal_info[0].le_name !== 'undefined') {
                     this.person.organization_name = legal_info[0].le_name
                 } else this.person.organization_name = "";
-                this.person.position="02";
+                this.person.position = "02";
             }
             let personId = null;
             const _this = this;
