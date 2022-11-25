@@ -26,6 +26,7 @@ class ApiController extends Controller
         $data = $request->all();
 
         $myrequest = Http::asForm()->acceptJson();
+        //$vacancy_pin=(int)$request->get('vacancy_pin');
         switch ($action) {
             case "vacancy-show":
                 if (!($vacancy = (int)$request->get('vacancy')))
@@ -34,8 +35,16 @@ class ApiController extends Controller
                         'message' => 'Вакансия коди киритилмади'], 401);
                 if (Auth::guard('api')->user())
                     $response = $myrequest
-                        ->get('http://192.168.214.159/vacancy/public/api/vakant_nomer/' . $vacancy . '?pnfl=' . Auth::guard('api')->user()->pin); else
-                    $response = $myrequest->get('http://192.168.214.159/vacancy/public/api/vakant_nomer/' . $vacancy);
+                        ->get('http://192.168.214.159/vacancy/public/api/vakant_nomer/' . $vacancy . '?pnfl=' . Auth::guard('api')->user()->pin); else {
+
+                    if ($vacancy_pin = (int)$request->get('vacancy_pin'))
+                        $response = $myrequest
+                            ->get('http://192.168.214.159/vacancy/public/api/vakant_nomer/' . $vacancy . '?pnfl=' . $vacancy_pin);
+                    else
+                        $response = $myrequest->get('http://192.168.214.159/vacancy/public/api/vakant_nomer/' . $vacancy);
+                }
+
+
                 if ($response->status() === 200) {
                     $data = $response->json();
                     if (Auth::guard('api')->user()) {
@@ -96,6 +105,12 @@ class ApiController extends Controller
                 }
                 break;
             case "resume":
+                $myKeyData=$request->only('my_app_key');
+                if(isset($myKeyData['my_app_key'])){
+                    $response = $myrequest
+                        ->post('http://192.168.214.159/vacancy/public/api/vacancynomzod', $request->all());
+                    break;
+                }
                 $this->middleware('auth:api');
                 $user = Auth::guard('api')->user();
                 if (!$user) return response()->json([
@@ -111,7 +126,7 @@ class ApiController extends Controller
                 if (!$user) return response()->json([
                     'success' => false,
                     'data' => 'Foydalanuvchi avtorizatsiyadan otishi talab etiladi'], 401);
-                $response = Http::contentType("application/json")->send('POST', 'http://192.168.214.115:9080/labTifTn/personsrestapi', [
+                $response = Http::contentType("application/json")->send('POST', 'http://192.168.214.152:7070/DECAPP/s05appealrestapi/saveapps', [
                     'body' => json_encode($request->all())
                 ]);
                 break;
@@ -121,7 +136,7 @@ class ApiController extends Controller
                 if (!$user) return response()->json([
                     'success' => false,
                     'data' => 'Foydalanuvchi avtorizatsiyadan otishi talab etiladi'], 401);
-                $response = Http::contentType("application/json")->send('POST', 'http://192.168.214.115:9080/labTifTn/appsrestapi', [
+                $response = Http::contentType("application/json")->send('POST', 'http://192.168.214.152:7070/DECAPP/s05appealrestapi/savecommodity', [
                     'body' => json_encode($request->all())
                 ]);
                 break;
@@ -129,14 +144,14 @@ class ApiController extends Controller
                 $appData = $request->only(['app_id', 'person_id', 'page', 'size']);
                 if (isset($appData['app_id'])) {
                     $app_id = isset($appData['app_id']) ? $appData['app_id'] : null;
-                    $response = Http::contentType("application/json")->get('http://192.168.214.115:9080/labTifTn/api/tutorials/commoditys', [
+                    $response = Http::contentType("application/json")->get('http://192.168.214.152:7070/DECAPP/s05appealrestapi/getoneapp', [
                         "appId" => $app_id,
                     ]);
                 } elseif (isset($appData['person_id'])) {
                     $person_id = isset($appData['person_id']) ? $appData['person_id'] : null;
                     $page = $appData['page'] ?? 0;
                     $size = $appData['size'] ?? 50;
-                    $response = Http::contentType("application/json")->get('http://192.168.224.18:9080/api/tutorials/published', [
+                    $response = Http::contentType("application/json")->get('http://192.168.214.152:7070/DECAPP/s05appealrestapi/getresult', [
                         "personPin" => $person_id,
                         "page" => $page,
                         "size" => $size,
@@ -567,7 +582,7 @@ class ApiController extends Controller
             case "posts":
                 $appData = $request->only('code');
                 $code = isset($appData['code']) ? $appData['code'] : "";
-                $response = Http::contentType("application/json")->get('http://192.168.214.115:9080/labTifTn/api/custom/postsWith', [
+                $response = Http::contentType("application/json")->get('http://192.168.214.152:7070/DECAPP/s05appealrestapi/postsWith', [
                     "code" => $code,
                 ]);
                 if ($response->status() == 200) {
@@ -718,7 +733,7 @@ class ApiController extends Controller
             case 'gen_session':
                 if (!Auth::guard('api')->user()) return response()->json(['Not authorized'], 401);
                 $data = $request->all();
-                if (isset($data['type']) and $data['type']==='cabinet') {
+                if (isset($data['type']) and $data['type'] === 'cabinet') {
                     $prcode = 0;
 
                     ///inn
@@ -747,7 +762,7 @@ class ApiController extends Controller
 
 
                 }
-                if (isset($data['type']) and $data['type']==='dep') {
+                if (isset($data['type']) and $data['type'] === 'dep') {
 
 
                     $query = "Insert into Logging  (SESID,INN,NAME,IP,SER_NUM) values ('" . Str::uuid() . "','" . Auth::guard('api')->user()->tin . "','" . Auth::guard('api')->user()->sur_name . " " . Auth::guard('api')->user()->first_name . " " . Auth::guard('api')->user()->mid_name . "','" . $request->getClientIp() . "', '" . substr(Str::uuid(), 0, 8) . "')";

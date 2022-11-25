@@ -1,5 +1,5 @@
 <template>
-    <div class="position-sidebar">
+    <div class="position-sidebar" >
         <v-dialog v-model="searchDialog1" max-width="800">
             <v-card class="px-4">
                 <v-col cols="12">
@@ -119,23 +119,46 @@
             </div>
             <v-icon size="30" color="#fff" style="transform: rotate(265px)">mdi-phone</v-icon>
         </div>
-        <div class="sidebar-items specific">
+        <v-list v-click-outside="clickOutside" class="sidebar-items specific" :class="specific?'active':''"
+             :style="specific?'margin-right:-153px':'margin-right:154px'">
             <div class="specific-fields">
                 <p>{{ $t('Кўриниш') }}</p>
-                <div class="grayscale d-flex">
+                <div class="grayscale d-flex mt-1">
 
-                        <v-icon dark>
-                            mdi-circle-half-full
-                        </v-icon>
+                    <v-icon dark size="34" class="eye" :class="grayscale?'active':''" @click="selectGrayscale(true)">
+                        mdi-circle-half-full
+                    </v-icon>
 
-                        <v-icon dark>
-                            mdi-circle-slice-8
-                        </v-icon>
+                    <v-icon dark size="34" class="eye" :class="!grayscale?'active':''" color=""
+                            @click="selectGrayscale(false)">
+                        mdi-circle-slice-8
+                    </v-icon>
 
                 </div>
+                <v-spacer></v-spacer>
+                <div class="mt-2">
+                    <p>{{ $t('Шрифт ўлчами') }}</p>
+                    <v-slider
+                        class="cursor-pointer w-75"
+                        hide-details
+                        max="3"
+                        :tick-labels="ticksLabels"
+                        track-color="#fff"
+                        track-fill-color="#fff"
+                        thumb-color="#fff"
+                        min="1"
+                        label=""
+                        v-model="shrift"
+                    ></v-slider>
+                </div>
+                <div class="my-2">
+                    <a class="text-decoration-underline white--text" @click="refreshSpecific">{{ $t('Тозалаш') }}</a>
+                </div>
             </div>
-            <v-icon size="30" color="#fff" class="m-0">mdi-eye-outline</v-icon>
-        </div>
+            <v-icon size="30" color="#fff" @click="clickedSpecific" class="m-0 eye">
+              mdi-eye-outline
+            </v-icon>
+        </v-list>
 
 
     </div>
@@ -148,6 +171,13 @@ export default {
     name: "position-sidebar",
     data() {
         return {
+            ticksLabels:[
+                '-',
+                '0',
+                '+',
+            ],
+            shrift: 2,
+            grayscale: false,
             searchDialog1: false,
             baholashDialog: false,
             searchText: "",
@@ -156,6 +186,8 @@ export default {
             search: null,
             votes: [],
             displayResults: [],
+            specific: false,
+            clickedEye:true,
             colors: [
                 "light-blue",
                 "light-green darken-4",
@@ -166,6 +198,23 @@ export default {
         }
     },
     methods: {
+        refreshSpecific() {
+            this.grayscale = false;
+            this.shrift =2;
+            $("html").removeClass("blackAndWhite")
+            $("html").removeClass("maxSize");
+            $("html").removeClass("minSize");
+
+        },
+        clickedSpecific() {
+            const _this=this;
+            if(_this.specific) {
+                _this.specific = false
+            } else _this.specific = true
+        },
+        clickOutside() {
+            if (this.specific) this.specific = false;
+        },
         getResult(id) {
             //if(this.displayResults.contain(id))
             //this.displayResults.push(id)
@@ -204,15 +253,23 @@ export default {
                 textTwo.indexOf(searchText) > -1
         },
         opensearchDialog1() {
-            console.log('asd');
-            console.log(this.searchDialog1)
+
             this.searchDialog1 = true;
-            console.log(this.searchDialog1)
         },
         openItem(slug) {
             this.searchDialog1 = false;
             this.$router.replace("/news/" + slug)
-        }
+        },
+        selectGrayscale(val) {
+            if (val) {
+                this.grayscale = true;
+                $("html").addClass("blackAndWhite")
+            } else {
+                this.grayscale = false;
+                $("html").removeClass("blackAndWhite")
+            }
+        },
+
 
     },
     watch: {
@@ -226,7 +283,6 @@ export default {
                     this.searchResults = res.data
                 })
                 .catch(err => {
-                    console.log('err')
                     console.log(err)
                 })
                 .finally(() => (this.isLoading = false))
@@ -236,12 +292,43 @@ export default {
             this.initialize()
             this.getQuestions()
 
+        },
+        shrift(val){
+            if(val===1) {
+                $("html").removeClass("maxSize");
+                $("html").addClass("minSize");
+            }
+            if(val===2) {
+                $("html").removeClass("maxSize");
+                $("html").removeClass("minSize");
+            }
+            if(val===3) {
+                $("html").removeClass("minSize");
+                $("html").addClass("maxSize");
+            }
         }
+
 
     }
 }
 </script>
 
-<style scoped>
+<style>
+.specific-fields .v-slider__track-container {
+    cursor: pointer;
+}
+
+.specific-fields .v-slider__thumb-container {
+    cursor: pointer;
+}
+.position-sidebar .v-list.specific{
+    background:none;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+.position-sidebar p, .position-sidebar a{
+    font-size: 16px;
+    color: #000e08;
+}
 
 </style>

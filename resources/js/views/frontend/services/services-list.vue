@@ -5,7 +5,7 @@
                       :img="service.img"
                       :key="service.text"
                       @open="openApp(service)"
-                      :corner_text="(news.includes(service.name))?'Янги':null"
+                      :corner_text="(news.includes(service.name))?'new':null"
         />
         <form ref="AppForm" id="appForm" method="get" target="_blank" class="d-none">
             <input type="hidden" name="userInfoTR" v-model="JSON.stringify(appData)"/>

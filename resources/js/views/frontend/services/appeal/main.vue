@@ -260,10 +260,19 @@
                                         <v-text-field v-model="passport.number"></v-text-field>
                                     </div>
                                     <div class="form-field">
-                                        <label>Туғилган сана</label><!--
+                                        <label>Туғилган сана</label>
+
+
+                                        <!--
                                         <ValidationProvider name="Туғилган сана" rules="required"
                                                             v-slot="{ errors }">-->
-                                            <v-menu
+                                        <v-text-field
+                                            v-model="passport.date"
+                                            persistent-hint
+                                            prepend-icon="mdi-calendar"
+                                            v-mask="'##.##.####'"
+                                        ></v-text-field>
+<!--                                            <v-menu
                                                 ref="menu1"
                                                 v-model="menu"
                                                 :close-on-content-click="false"
@@ -273,21 +282,14 @@
                                                 min-width="auto"
                                             >
                                                 <template v-slot:activator="{ on, attrs }">
-                                                    <v-text-field
-                                                        v-model="passport.date"
-                                                        persistent-hint
-                                                        prepend-icon="mdi-calendar"
-                                                        v-bind="attrs"
-                                                        @blur="date = parseDate(passport.date)"
-                                                        v-on="on"
-                                                    ></v-text-field>
+
                                                 </template>
                                                 <v-date-picker
                                                     v-model="date"
                                                     no-title
                                                     @input="menu = false"
                                                 ></v-date-picker>
-                                            </v-menu>
+                                            </v-menu>-->
 
 <!--
                                             <span>{{ errors[0] }}</span>

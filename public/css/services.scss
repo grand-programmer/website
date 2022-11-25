@@ -44,7 +44,7 @@
 
 .portfolio_single {
     a.portfolio-card {
-        overflow: hidden;
+        /*overflow: hidden;*/
     }
 
     @for $i from 1 through 43 {
@@ -70,7 +70,7 @@
 }
 
 .portfolio_single.new {
-    overflow: hidden;
+    /*overflow: hidden;*/
 
     a.portfolio-card::before {
         content: "Янги";
@@ -86,6 +86,17 @@
 }
 
 .corner-text {
+    ///background-image: url(/images/new.png);
+    background-size: contain;
+    position: absolute;
+    width: 70px;
+    height: 100%;
+    color: #fff;
+    top: -7px;
+    background-position: top left;
+    left: -7px;
+
+    /*    background-image: url("../img/icons/new.png");
     position: absolute;
     background-color: #a74747;
     width: 100%;
@@ -93,5 +104,5 @@
     transform: rotate(45deg);
     color: #fff;
     right: -42%;
-    top: 8px;
+    top: 8px;*/
 }

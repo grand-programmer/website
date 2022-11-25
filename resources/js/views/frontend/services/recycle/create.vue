@@ -444,8 +444,15 @@
                                                                 :loading="loading.recycle_org"
                                                                 :search-input.sync="search_inn"
                                                                 return-object
+                                                                v-if="application.rejim===100"
                                                             >
                                                             </v-autocomplete>
+                                                            <v-text-field v-else
+                                                            v-model="application.recycle_org"
+                                                                          label="Қайта ишловчи ташкилот*"
+                                                                          persistent-placeholder
+                                                            >
+                                                            </v-text-field>
                                                             <span class="red--text">{{ errors[0] }}</span>
                                                         </ValidationProvider>
 
@@ -468,8 +475,17 @@
                                                                 multiple
                                                                 small-chips
                                                                 hide-no-data
+                                                                v-if="application.rejim===100"
                                                             >
                                                             </v-autocomplete>
+                                                            <v-text-field v-else
+                                                                          type="number"
+                                                                          v-mask="'###########################'"
+                                                                          v-model="application.contract"
+                                                                          label="Шартнома идентификация рақами"
+                                                                          persistent-placeholder
+                                                            >
+                                                            </v-text-field>
                                                             <span class="red--text">{{ errors[0] }}</span>
                                                         </ValidationProvider>
 
@@ -651,7 +667,7 @@
                                                                         v-model="application.tovarlar[key].tftn"
                                                                         label="ТИФ ТН кодни киритинг *"
                                                                         required
-                                                                        :items="tftncodes"
+                                                                        :items="application.tovarlar[key].tftncodes"
                                                                         item-text="name"
                                                                         item-value="id"
                                                                         name="tftncode"
@@ -1114,7 +1130,7 @@ export default {
             tovarIndex: 0,
             tab: 0,
             headers: [
-                {text: 'Тфтн', align: 'start', value: 'tftn.id'},
+                {text: 'ТИФ ТН', align: 'start', value: 'tftn.id'},
                 {text: 'Товар номи', align: 'start', value: 'nomlanishi'},
                 {text: 'Товар миқдори', align: 'start', value: 'qiymati'},
             ],
@@ -1143,6 +1159,7 @@ export default {
                 method: null,
                 method2: null,
                 documents: [],
+                contract:null,
                 ilova_error: "",
                 recycle_org: null,
                 subProduct: {
@@ -1153,6 +1170,7 @@ export default {
                     {
                         id: 0,
                         tftn: [],
+                        tftncodes:[],
                         nomlanishi: null,
                         status: null,
                         qiymati: null,
@@ -1300,6 +1318,8 @@ export default {
             ],
             float: ['^[-+][0-9]+\\.[0-9]+[eE][-+]?[0-9]+$'],
             editedSubProducts:[],
+            recycle_org_inn:false,
+
         }
 
     },
@@ -1377,9 +1397,9 @@ export default {
                         errorfield[_this.getField(keyItem)[0].value] = [errors[keyItem]];
                     }
                 });
-                console.log('errorfield')
+/*                console.log('errorfield')
                 console.log(tovar_id)
-                console.log(errorfield)
+                console.log(errorfield)*/
                 ///this.application.tovarlar.forEach((tovar) => {
 
                 _this.$refs['stepValidation2Product' + tovar_id][0].setErrors(errorfield)
@@ -1564,7 +1584,7 @@ export default {
                 })
                 return result;
             } catch (error) {
-                // console.log(error)
+                 console.log(error)
 
             }
         },
@@ -1675,13 +1695,24 @@ export default {
 
                             }              //
                             if (_this.application.contract && typeof _this.application.contract !== 'undefined') {
-                                _this.app.common.contractIdenNumber = JSON.parse(JSON.stringify(_this.application.contract));
+                                if(_this.application.rejim===200) {
+                                    _this.app.common.contractIdenNumber.push(_this.application.contract);
+                                }
+                                else {
+                                    _this.app.common.contractIdenNumber = JSON.parse(JSON.stringify(_this.application.contract));
+                                }
                             }                   //// KONTTYPE : 11,12,16,17 ACTIVE_PR :0
                             _this.app.common.recycleDeadlineDate = _this.application.muddat;                      ///0-24 gacha
                             _this.app.common.recycleCost = _this.application.recycleCost;                      /// Қайта ишлаш оператцияларининг қиймати *
                             _this.app.common.recycleCurrency = _this.application.currency;                      //valyuta
-                            _this.app.common.recycleName = (_this.application.recycle_org && typeof _this.application.recycle_org.name !== 'undefined') ? _this.application.recycle_org.name : null;
-                            _this.app.common.recycleTin = (_this.application.recycle_org && typeof _this.application.recycle_org.tin !== 'undefined') ? _this.application.recycle_org.tin : null;                    /// INN
+                            if(_this.application.rejim===200){
+                                _this.app.common.recycleName=_this.application.recycle_org;
+                                _this.app.common.recycleTin =null;
+                            }
+                            else {
+                                _this.app.common.recycleName = (_this.application.recycle_org && typeof _this.application.recycle_org.name !== 'undefined') ? _this.application.recycle_org.name : null;
+                                _this.app.common.recycleTin = (_this.application.recycle_org && typeof _this.application.recycle_org.tin !== 'undefined') ? _this.application.recycle_org.tin : null;                    /// INN}
+                            }
                             _this.app.common.recycleAddress = _this.application.recycleAddress;
                             _this.app.common.orgPermission = _this.application.orgPermission;
                             _this.app.common.replProductNm = _this.application.replProductNm;
@@ -1776,6 +1807,7 @@ export default {
                                     cmdtNm: typeof tovar.nomlanishi !== 'undefined' ? tovar.nomlanishi : null,
                                     cmdtQty: typeof tovar.size !== 'undefined' ? tovar.size : null,
                                     cmdtNetto: typeof tovar.weight !== 'undefined' ? tovar.weight : null,
+                                    cmdtNettoUnit: typeof tovar.tftn !== 'undefined' && tovar.tftn && typeof tovar.tftn.unit1 !== 'undefined' ? tovar.tftn.unit1 : null,
                                     cmdtUnit: typeof tovar.tftn !== 'undefined' && tovar.tftn && typeof tovar.tftn.unit2 !== 'undefined' ? tovar.tftn.unit2 : null,
                                     cmdtCost: typeof tovar.qiymati !== 'undefined' ? tovar.qiymati : null,
                                     currency: typeof tovar.currency !== 'undefined' ? tovar.currency : null,
@@ -1809,7 +1841,9 @@ export default {
                                             _this.setProductErrors(key, value['commodityBody']);
                                     })
                                     //_this.setProductErrors(resultData.data.data.errorsCommodity);
-                                }
+                                } else if (typeof resultData.data.data !== 'undefined' && typeof resultData.data.data.error !== 'undefined') {
+                                    this.$toast.error(resultData.data.data.error);
+                                } else
                                 this.$toast.error("Маълумотларингизни текшириб қайтадан юборинг!");
                             } else
                                 this.$toast.error("Серверда хатолик юз берди. Кейинроқ уриниб кўринг!");
@@ -2124,7 +2158,7 @@ export default {
                             return item;
                         })
 
-                        _this.tftncodes = res;
+                        _this.application.tovarlar[key].tftncodes=res;
                     })
                     .catch(err => {
                         //console.log(err)

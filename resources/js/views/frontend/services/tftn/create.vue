@@ -46,7 +46,7 @@
                                 class="mb-12"
                             >
                                 <div class="row position-absolute yoriqnoma-text"><a
-                                    href="/storage/files/dastlabki-user.pptx"> Ариза тўлдириш бўйича йўриқмани юклаб
+                                    href="/storage/files/hscode_guide.pptx"> Ариза тўлдириш бўйича йўриқмани юклаб
                                     олинг!
                                 </a></div>
                                 <ValidationObserver v-slot="{ invalid }" ref="stepValidation1">
@@ -216,11 +216,13 @@
                                                     v-model="person.post"
                                                     :loading="postloading"
                                                     required
+                                                    :disabled="postloading"
                                                     hint="Божхона постини танланг"
                                                     :items="posts"
-                                                    persistent-hint
+                                                    persistent-placeholder
                                                 >
-                                                    <template v-slot:label>Божхона постини танланг <sup>*</sup></template>
+                                                    <template v-slot:label>Божхона постини танланг <sup>*</sup>
+                                                    </template>
                                                 </v-autocomplete>
                                                 <span class="red--text">{{ errors[0] }}</span>
                                             </ValidationProvider>
@@ -288,6 +290,9 @@
                                 <v-row class="bottom-required-info">
                                     <i style="font-size: 12px;"><sub
                                         style="font-size: 20px">*</sub> - майдонлари албатта тўлдирилиши шарт!
+                                    </i>
+                                    <i style="font-size: 12px;"><sub
+                                        style="font-size: 20px">**</sub> - майдонлари агар маълумот мавжуд бўлса албатта тўлдирилиши шарт!
                                     </i>
 
                                 </v-row>
@@ -364,7 +369,7 @@
                                                                     rules="required"
                                                                     v-slot="{ errors }">
                                                                     <v-text-field
-                                                                        label="Товар маркаси *"
+                                                                        label="Товар маркаси **"
                                                                         persistent-placeholder
                                                                         name="mark"
                                                                         v-model="application.tovarlar[key].mark"
@@ -380,7 +385,7 @@
                                                                     rules="required"
                                                                     v-slot="{ errors }">
                                                                     <v-text-field
-                                                                        label="Товар модели *"
+                                                                        label="Товар модели **"
                                                                         persistent-placeholder
                                                                         name="model"
                                                                         v-model="application.tovarlar[key].model"
@@ -393,12 +398,12 @@
                                                             <v-col cols="6">
                                                                 <v-row>
                                                                     <v-col cols="4">
-                                                                        <v-switch v-model="issetNamuna"
-                                                                                  :label="issetNamuna?'Намуна мавжуд':'Намуна мавжуд эмас'">
+                                                                        <v-switch v-model="application.tovarlar[key].issetNamuna"
+                                                                                  :label="application.tovarlar[key].issetNamuna?'Намуна мавжуд':'Намуна мавжуд эмас'">
 
                                                                         </v-switch>
                                                                     </v-col>
-                                                                    <v-col cols="4" v-show="issetNamuna">
+                                                                    <v-col cols="4" v-show="application.tovarlar[key].issetNamuna">
                                                                         <ValidationProvider
                                                                             name="Намуналар сони"
                                                                             v-slot="{ errors }">
@@ -417,7 +422,7 @@
                                                                         </ValidationProvider>
 
                                                                     </v-col>
-                                                                    <v-col cols="4" v-show="issetNamuna">
+                                                                    <v-col cols="4" v-show="application.tovarlar[key].issetNamuna">
                                                                         <ValidationProvider
                                                                             name="Ўлчов бирлиги"
                                                                             v-slot="{ errors }">
@@ -434,209 +439,24 @@
 
                                                                     </v-col>
                                                                 </v-row>
-                                                                <!--                                                                    <ValidationProvider
-                                                                                                                                        name="Қўшича маълумотлар ва изоҳлар"
-                                                                                                                                        v-slot="{ errors }">
-                                                                                                                                        <v-textarea
-                                                                                                                                            label="Қўшича маълумотлар ва изоҳлар"
-                                                                                                                                            rows="4"
-                                                                                                                                            filled
-                                                                                                                                            no-resize
-                                                                                                                                            v-model="application.tovarlar[key].comment"
-
-                                                                                                                                        >
-
-                                                                                                                                        </v-textarea>
-                                                                                                                                        <span class="red&#45;&#45;text">{{
-                                                                                                                                                errors[0]
-                                                                                                                                            }}</span>
-                                                                                                                                    </ValidationProvider>-->
                                                             </v-col>
                                                             <v-col cols="6" class="position-relative">
-                                                                <div
-                                                                    class="border-bottom-dashed chips-dialog"
-                                                                    @click="openDocumentType"
-                                                                >
-                                                                    <span>Илова қилинадиган ҳужжатлар: *</span>
-                                                                    <v-chip-group
-                                                                        mandatory
-                                                                        style="height: 50px" class="d-block"
-
-                                                                    >
-                                                                        <v-chip
-                                                                            v-for="(doc,key) in application.documents"
-                                                                            :key="key"
-                                                                            v-if="doc.id && doc.type && doc.id.length>0"
-                                                                            @click:close="removeDocument(key)"
-                                                                        >
-                                                                            <template slot="default">
-                                                                                <!-- HTML that describe how select should render items when the select is open -->
-                                                                                <!--                                                                                {{ data.item.value }} - -->
-                                                                                <span class="v-chip__content"
-                                                                                      style="font-size: 15px">
-                                                                        {{ doc.type }}
-                                                                            </span>
-                                                                            </template>
-                                                                        </v-chip>
-                                                                    </v-chip-group>
-                                                                </div>
-
-                                                                <v-input
-                                                                    :messages="['Юк тўғрисидаги ҳужжатларни илова қилинг']"
+                                                                <e-arxiv-file
+                                                                    multiple
+                                                                    :errors="application.tovarlar[key].ilova_error"
+                                                                    v-model="application.tovarlar[key].docs"
                                                                 />
-                                                                <ValidationProvider
-                                                                    :ref="'hujjatilova' + application.tovarlar[key].id"
-                                                                    name="Илова қилинадиган ҳужжатлар"
-                                                                    v-show="isvalidDocument"
-                                                                    v-slot="{ errors }">
-                                                        <span class="error--text">
-                                                       {{
-                                                                errors[0]
-                                                            }}
-                                                              </span>
-                                                                </ValidationProvider>
-                                                                <!--
-                                                                        <v-input
-                                                                            :messages="['Транспорт тури маълумотлари тўлдирилиши шарт! ']"
-                                                                        />-->
 
                                                             </v-col>
-                                                            <v-dialog
-                                                                v-model="dialog.documenttype"
-                                                                max-width="700px"
-
-                                                            >
-
-                                                                <v-card class="scroll_card" light>
-                                                                    <v-card-title class=" px-4 py-4">
-                                                            <span
-                                                                class="text-h5 white--text">Илова қилинадиган ҳужжатлар </span>
-                                                                    </v-card-title>
-                                                                    <v-card-text>
-                                                                        <v-container>
-                                                                            <v-row>
-
-                                                                                <v-col cols="12">
-                                                                                    <v-fab-transition>
-
-                                                                                        <v-btn
-                                                                                            color="primary"
-                                                                                            dark
-                                                                                            center
-                                                                                            large
-                                                                                            class="float-end"
-                                                                                            @click="AddDocument"
-                                                                                            style="height:35px;"
-                                                                                        >
-
-                                                                                            <v-icon>mdi-plus
-                                                                                            </v-icon>
-                                                                                            Файл Қўшиш
-
-                                                                                        </v-btn>
-                                                                                    </v-fab-transition>
-                                                                                    <a class="float-left"
-                                                                                       style="border: 2px dashed;  width:50%; border-radius: 15px; padding: 10px 20px 5px;"
-                                                                                       @click="authorizeToEArxiv">Э-архив
-                                                                                        тизимига
-                                                                                        ўтиш </a>
-
-                                                                                </v-col><!--
-                                                                    <v-col cols="12">
-
-                                                                    </v-col>-->
-                                                                            </v-row>
-                                                                        </v-container>
-                                                                        <v-container>
-                                                                            <ValidationObserver v-slot="{ invalid }"
-                                                                                                :ref="'create_customs_documents' + tovar.id"
-                                                                                                style="display: flex; flex-direction: column-reverse"
-                                                                            >
-                                                                                <v-row
-                                                                                    v-for="(doc,key) in documents"
-                                                                                    :key="key">
-
-                                                                                    <v-col cols="12">
-                                                                                        <ValidationProvider
-                                                                                            name="ID рақами"
-                                                                                            rules="required"
-                                                                                            v-slot="{ errors }">
-                                                                                            <v-text-field
-                                                                                                v-model="documents[key].id"
-                                                                                                label="ID рақами"
-                                                                                                persistent-hint
-                                                                                                loading
-                                                                                                counter="13"
-                                                                                                @keyup="myColor(documents[key].id,key)"
-                                                                                                hint="Ҳужжатнинг е-архив тизимидаги Fayl ID рақами"
-                                                                                            >
-                                                                                                <template v-slot:append>
-                                                                                                    <v-icon
-                                                                                                        color="primary"
-                                                                                                        v-if="documents[key].valid">
-                                                                                                        mdi-check
-                                                                                                    </v-icon>
-                                                                                                    <v-icon color="red"
-                                                                                                            v-else>
-                                                                                                        mdi-close
-                                                                                                    </v-icon>
-                                                                                                </template>
-                                                                                                <template
-                                                                                                    v-slot:append-outer>
-                                                                                                    <v-btn
-                                                                                                        color="danger"
-                                                                                                        dark
-                                                                                                        center
-                                                                                                        x-small
-                                                                                                        fab>
-                                                                                                        <v-icon
-                                                                                                            @click="removeDocument(key)">
-                                                                                                            mdi-minus
-                                                                                                        </v-icon>
-                                                                                                    </v-btn>
-                                                                                                </template>
-                                                                                                <template
-                                                                                                    v-slot:progress>
-                                                                                                    <v-progress-linear
-                                                                                                        :value="Initprogress(documents[key].id)"
-                                                                                                        :color="documents[key].color"
-                                                                                                        absolute
-                                                                                                        height="3"
-                                                                                                    ></v-progress-linear>
-                                                                                                </template>
-                                                                                            </v-text-field>
-                                                                                            <span class="red--text">{{
-                                                                                                    errors[0]
-                                                                                                }}</span>
-                                                                                        </ValidationProvider>
-                                                                                    </v-col>
-                                                                                </v-row>
-                                                                            </ValidationObserver>
-                                                                        </v-container>
-                                                                        <small>* майдонлар тўлдирилиши шарт</small>
-                                                                    </v-card-text>
-                                                                    <v-card-actions>
-                                                                        <v-spacer></v-spacer>
-                                                                        <v-btn
-                                                                            color="blue darken-1"
-                                                                            text
-                                                                            @click="dialog.documenttype = false"
-                                                                        >
-                                                                            Ёпиш
-                                                                        </v-btn>
-
-                                                                    </v-card-actions>
-                                                                </v-card>
-                                                            </v-dialog>
-
                                                             <v-col cols="6">
                                                                 <ValidationProvider
-                                                                    name="Қўшича маълумотлар ва изоҳлар"
+                                                                    name="Қўшимча маълумотлар ва изоҳлар"
                                                                     v-slot="{ errors }">
                                                                     <v-textarea
-                                                                        label="Қўшича маълумотлар ва изоҳлар"
+                                                                        label="Товарнинг характеристикасини билдирувчи барча маълумотлар"
                                                                         rows="4"
                                                                         filled
+                                                                        hint="Товарнинг характеристикасини билдирувчи барча маълумотларни кўрсатинг"
                                                                         no-resize
                                                                         v-model="application.tovarlar[key].comment"
 
@@ -675,7 +495,21 @@
                                                         Ариза юбориш
                                                     </v-btn>
 
-
+<v-dialog max-width="600" v-model="dialogAgree" >
+    <v-card class="rozilik">
+        <v-card-text>
+            <p >Дастлабки қарор, сиз тақдим қилган маълумот ва материаллар асосида шаклланади. Божхона расмийлаштирув жараёнида товар ва мазкур дастлабки қарор маълумотлари орасида таффавут мавжуд бўлса, дастлабки қарор ушбу товар учун юридик кучга эмас ҳисобланади.</p>
+<p>Ўзбекистон Республикаси Вазирлар Маҳкамасининг 700-сон қарорига мувофиқ товарни таснифланиши бўйича дастлабки қарор қабул қилиниши учун 1 товар номланишига БҲМнинг 75 фоизи миқдорида йиғим белгиланган.</p>
+            <p>Мен, юқорида кўрсатиб ўтилган шартларни қабул қиламан</p>
+        </v-card-text>
+        <v-card-actions class="d-flex justify-content-end">
+            <btn text color="primary" @click="dialogAgree=false" class="mr-4 cursor-pointer">Бекор қилиш</btn>
+            <v-btn color="primary" @click="agreed=true; dialogAgree=false" >
+                Розиман
+            </v-btn>
+        </v-card-actions>
+    </v-card>
+</v-dialog>
                                                 </v-col>
                                             </v-row>
                                         </v-card>
@@ -704,13 +538,13 @@
             <!--            <input type="hidden" id="FOLDER_ID" name="FOLDER_ID" value="0058338434">-->
 
         </form>
-        <a class="all_news service" target="_blank" href="https://t.me/dastlabkiqaror">
+        <a class="all_news service" target="_blank" href="https://t.me/HsCodeDecisions">
             <img src="/public/images/telegram.png">
 
 
             <p> Саволларингизни йўлланг
                 <br>
-                @dastlabkiqaror
+                @HsCodeDecisions
             </p></a>
     </div>
 </template>
@@ -720,6 +554,7 @@ import * as rules from 'vee-validate/dist/rules';
 import messages from '../../../../locales/oz.json';
 import {types} from "../../../../../../public/js/mix/pdfmake";
 import i18n from "../../../../i18n";
+import EArxivFile from "../../../../components/form/e-arxiv-file";
 
 
 Object.keys(rules).forEach(rule => {
@@ -791,6 +626,7 @@ export default {
                     {
                         id: 0,
                         tab: 0,
+                        issetNamuna:false,
                     },
 
                 ],
@@ -802,13 +638,14 @@ export default {
             person: {
                 type: 1, /// 1- fiz 0- yur
                 fio: "",
+                post:null,
                 pin: null,
                 tin: null,
                 organization_name: "Жисмоний шахс",
-                position: "01",
+                position: "0",
                 phone: null,
                 email: null,
-                region:null,
+                region: null,
             },
             doc: {
                 type: null,
@@ -824,15 +661,15 @@ export default {
                 comment: null,
                 basicQty: null,
                 extraUnits: null,
+                issetNamuna:false,
             },
             commodity: [],
+            dialogAgree:false,
             app: {
                 apps: [],
                 docs: [],
                 commodities: [],
-            },
-            dialog: {
-                documenttype: false,
+                id:null,
             },
             date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
             modal: false,
@@ -845,13 +682,15 @@ export default {
             },
             postloading: false,
             noRequiredTab: false,
+            agreed:false,
+
             fields: [
                 {key: 'tradeName', value: 'Товарнинг тижорат номи'},
                 {key: 'tradeMark', value: 'Товар маркаси'},
                 {key: 'model', value: 'Товар модели', tab: 1},
                 {key: 'basicQty', value: 'Намуналар сони', tab: 1},
                 {key: 'extraUnits', value: 'Ўлчов бирлиги'},
-                {key: 'comment', value: 'Қўшича маълумотлар ва изоҳлар'},
+                {key: 'comment', value: 'Қўшимча маълумотлар ва изоҳлар'},
             ],
             float: ['^[-+][0-9]+\\.[0-9]+[eE][-+]?[0-9]+$']
         }
@@ -864,7 +703,8 @@ export default {
                 if (obj.key === val) return obj.value
             })
         },
-        setProductErrors(errors) {
+        setProductErrors(tovar_id,errors) {
+
             const _this = this;
             if (errors) {
                 let errorfield = [];
@@ -875,93 +715,18 @@ export default {
                     }
                 });
 
-                this.application.tovarlar.forEach((tovar) => {
+               // this.application.tovarlar.forEach((tovar) => {
 
-                    _this.$refs['stepValidation2Product' + tovar.id][0].setErrors(errorfield)
+                    _this.$refs['stepValidation2Product' + tovar_id][0].setErrors(errorfield)
 
-                })
+               // })
 
             }
         },
 
-        isValidDoc(index = null) {
-            if (index) {
-                return !(!this.application.documents[index].id || !this.application.documents[index].type)
-            } else {
-                var returnDoc = false;
-                if (typeof this.application.documents !== 'undefined' && !this.application.documents.length) {
-                    return false;
-                }
-                if (typeof this.application.documents !== 'undefined')
-                    this.application.documents.forEach((document, k) => {
-
-                        returnDoc = (!document.id || !document.type)
-                        if (returnDoc) {
-                            return true;
-                        }
-                    })
-                return !returnDoc;
-            }
-        },
-        openDocumentType() {
-            //console.log(this.$refs["hujjatilova" + this.tovarIndex]);
-            this.$refs["hujjatilova" + this.tovarIndex][0].applyResult({
-                errors: [], // array of string errors
-                valid: true, // boolean state
-                failedRules: {} // should be empty since this is a manual error.
-            })
-            this.documents = [];
-            //let object = this.filterObject(this.application.tovarlar, this.tovarIndex, 'id')
-            //if (object)
-            {
-                this.documents = this.application.documents;
-            }
-            this.dialog.documenttype = true;
-        },
         isCompletedStep(step) {
             return this.completedSteps.includes(step);
         },
-        async getSessionId() {
-            let returnObject;
-            await axios.get("/api/v1/ex_api/gen_session").then(function (response) {
-                returnObject = response;
-            })
-            return returnObject;
-        },
-        async authorizeToEArxiv() {
-            const _this = this;
-            let result_data = null;
-            result_data = await this.getSessionId()
-            if (result_data && result_data.status === 200) {
-                $("#SessionID").attr('value', result_data.data.data.sesid)
-                $("#serialNumberHex").attr('value', result_data.data.data.serialnumber)
-                //$("#serialNumberHex").attr('value',result_data.data.data.serialnumber)
-                $("#INN").attr('value', result_data.data.data.userinn)
-                $("#PNFL").attr('value', _this.$auth.user().pin)
-
-                $("#username").attr('value', result_data.data.data.name.replaceAll("", "'"))
-                ///*_this.$toast.success(result_data.data.data.name)
-                //console.log(_this.$refs['arxivSubmit'])*/
-                //console.log(_this.$refs['arxivSubmit']);
-                _this.$refs['arxivSubmit'].submit();
-            }
-
-        },
-        AddDocument() {
-            //console.log(this.documents)
-            this.documents.push(
-                {
-                    id: null,
-                    type: null,
-                }
-            );
-        },
-
-        removeDocument(document) {
-            this.application.documents.splice(document, 1);
-            this.documents.splice(document, 1);
-        },
-
         selectTabTovar(id = 0) {
             if (id === 0) {
                 this.tovarIndex = 0;
@@ -996,7 +761,7 @@ export default {
                 setTimeout(() => {
                     if (typeof selected[0] !== 'undefined') {
                         k = this.application.tovarlar.indexOf(selected[0])
-                        if(k!==-1)
+                        if (k !== -1)
                             this.application.tovarlar.splice(k, 1);
                     }
                     if (typeof this.application.tovarlar[k - 1] !== 'undefined' && typeof this.application.tovarlar[k - 1].id !== 'undefined') {
@@ -1029,7 +794,7 @@ export default {
                 })
                 return result;
             } catch (error) {
-                // console.log(error)
+                return error.response
 
             }
         },
@@ -1045,14 +810,6 @@ export default {
 
             }
 
-        },
-        async checkFile(file_id) {
-            let response = null;
-            response = await axios.get('/api/v1/ex_api/arxiv?file_id=' + file_id + '&pnfl=' + this.$auth.user().pin);
-            if (response && response.data && response.data.count) {
-                return response.data.data;
-            }
-            return false;
         },
 
         async nextStep() {
@@ -1073,319 +830,120 @@ export default {
                             this.person.firstName = this.$auth.user().first_name;
                             this.person.surName = this.$auth.user().sur_name;
                             this.person.locationId = this.person.region;
-                            let resultData = await this.sendPerson(this.person);
+                            let resultData = await this.sendPerson({
+                                firstName: _this.person.firstName,
+                                surName: _this.person.surName,
+                                lastName: _this.person.lastName,
+                                email: _this.person.email,
+                                pin: _this.person.pin,
+                                tin: _this.person.tin,
+                                perAdr: _this.person.perAdr,
+                                phone: _this.person.phone?_this.person.phone.replaceAll("+","").replaceAll(" ",""):null,
+                                personType: _this.person.position,
+                                legalName: _this.person.organization_name,
+                                locationId: _this.person.locationId,
+                                postId: _this.person.post
+                            });
                             this.loadingButton.first = false;
                             if (resultData.data.success === true) {
-                                //console.log(resultData.data['data']['data']['id'])
-                                this.person.person_id = resultData.data['data']['data']['id'];
+                                console.log(resultData.data['data']['data']['id'])
+                                _this.app.id = resultData.data['data']['data']['id'];
                                 this.$cookie.delete('user');
                                 this.$cookie.set('user', JSON.stringify(this.person), 1);
                                 _this.stepper = 2;
                                 _this.completedSteps.push(_this.stepper - 1);
                                 _this.$toast.success("Аризачи маълумотлари сақланди!");
 
-                            } else this.$toast.error("Серверда хатолик юз берди. Кейинроқ уриниб кўринг!");
+                            } else if(typeof resultData.data.data.message !=='undefined') this.$toast.error(resultData.data.data.message);
+                            else this.$toast.error("Серверда хатолик юз берди. Кейинроқ уриниб кўринг!");
 
                         }
                         this.loadingButton.first = false;
                     })
-                    //isValid = true;
 
                     break;
 
 
                 case 2:
 
-                    let count = 0;
-                    //this.$refs["create_customs_tovar4_value" + this.tovarIndex][0].syncValue()
-
+                    if(!_this.agreed) {
+                        _this.dialogAgree = true;
+                        return ;
+                    }
                     this.loadingButton.second = true;
-                    //setTimeout(async () => {
-                    setTimeout(async () => {
-                        _this.index = [];
-                        //console.log(this.application.tovarlar.length)
-                        await Promise.all(
-                            this.application.tovarlar.map(async (tovar) => {
-                                //console.log(tovar)
-                                if (_this.index.indexOf(tovar.id) !== -1)
-                                    _this.index.push(tovar.id);
-                                count++;
-                                isValid = await this.validateField("stepValidation2Product" + tovar.id)
-                                if (!this.isValidDoc()) {
-                                    _this.$refs["hujjatilova" + tovar.id][0].applyResult({
-                                        errors: ["Илова қилинадиган ҳужжатларни киритинг"], // array of string errors
-                                        valid: false, // boolean state
-                                        failedRules: {} // should be empty since this is a manual error.
-                                    })
 
-                                } else
-                                    _this.$refs["hujjatilova" + tovar.id][0].applyResult({
-                                        errors: [], // array of string errors
-                                        valid: true, // boolean state
-                                        failedRules: {} // should be empty since this is a manual error.
-                                    })
+                    setTimeout(async ()=>{
 
-                                if (isValid !== true) {
-                                    //console.log(this.$refs["stepValidation2Product" + tovar.id])
-                                    //console.log('push')
-                                    _this.index.push(tovar.id);
-                                    if (_this.index.indexOf(tovar.id - 1) === -1) {
-                                        _this.tovarIndex = tovar.id
-
-                                    }
-                                    //console.log(_this.index)
-                                    //console.log('push')
-
-                                } else {
-                                    if (_this.index.indexOf(tovar.id) !== -1) _this.index.splice(_this.index.indexOf(tovar.id), 1)
-
-                                }
+                        _this.app.commodities = [];
 
 
-                                /*
-                                                    isValid = await this.validateField("stepValidation2Product" + this.tovarIndex)
+                        _this.application.tovarlar.forEach(function (tovar) {
 
-                                                    if (isValid !== true) {
-                                                        //console.log('1111')
-                                                        // console.log(this.$refs['create_customs_tovar1_value'+this.tovarIndex])
-                                                        this.application.tovarlar[this.tovarIndex].tab = 0;
-
-                                                    } else {
-                                                        //if (!this.$refs['create_customs_tovar2_value']) this.tabs.additional_docs = 1;
-
-                                                        setTimeout(async () => {
-                                                            isValid = await this.validateField("create_customs_tovar2_value" + this.tovarIndex);
-                                                            //isValid = true;
-                                                            console.log(_this.$refs['create_customs_tovar2_value0'])
-                                                            if (!isValid || !this.noRequiredTab) {
-                                                                this.application.tovarlar[this.tovarIndex].tab = 1;
-                                                                this.noRequiredTab = true;
-                                                            } else {
-                                                                setTimeout(async () => {
-                                                                    console.log(_this.$refs['create_customs_tovar3_value0'])
-                                                                    isValid = await this.validateField("create_customs_tovar3_value" + this.tovarIndex);
-                                                                    //isValid = true;
-                                                                    if (!isValid) this.application.tovarlar[this.tovarIndex].tab = 2;
-                                                                    else {
-                                                                        //console.log("sddf11111")
-                                                                        setTimeout(async () => {
-                                                                            //if(_this.application.tovarlar[_this.tovarIndex].product.usul<2)
-                                                                            isValid = await this.validateField("create_customs_tovar4_value" + this.tovarIndex);
-                                                                            console.log(_this.$refs['create_customs_tovar4_value0'])
-                                                                            //isValid = true;
-                                                                            if (!isValid && (_this.application.tovarlar[_this.tovarIndex].product.usul > 2 || _this.application.tovarlar[_this.tovarIndex].product.usul < 1)) {
-                                                                                this.application.tovarlar[this.tovarIndex].tab = 3;
-                                                                            } else {
-                                                                                //console.log(this.$refs["create_customs_tovar4_value" + this.tovarIndex][0].setErrors({'attribute2':['ssdfsf']}))
-                                                                                let noValid = [];
-                                                                                for (let j = 0; j < parseInt(_this.application.tovarlar[0].product.usul) - 1; j++) {
-
-                                                                                    _this.application.tovarlar[0].product.usul_panel = j;
-                                                                                    if (typeof this.$refs["usultext" + this.tovarIndex + '-' + j] === 'undefined') {
-                                                                                        noValid.push(j)
-                                                                                        setTimeout(() => {
-                                                                                            this.$refs["usultext" + this.tovarIndex + '-' + j][0].applyResult({
-                                                                                                errors: [j + 1 + " - усулни қўлламаслик сабаби майдони албатта тўлдирилиши лозим"], // array of string errors
-                                                                                                valid: false, // boolean state
-                                                                                                failedRules: {} // should be empty since this is a manual error.
-                                                                                            })
-                                                                                        }, 200)
-                                                                                        break;
-                                                                                    }
-
-                                                                                }
-                                                                                //console.log(noValid);
-                                                                                if (noValid.length < 1) {
-                                                                                    this.loadingButton.third = true;
-
-                                                                                    this.commodity.hsCode = _this.application.tovarlar[_this.tovarIndex].product.tftn.id;
-                                                                                    this.commodity.hsDecDate = _this.application.tovarlar[_this.tovarIndex].product.tftnqaror.date;
-                                                                                    this.commodity.hsDecNum = _this.application.tovarlar[_this.tovarIndex].product.tftnqaror.name;
-                                                                                    this.commodity.inDecDate = _this.application.tovarlar[_this.tovarIndex].product.old_decision.date;
-                                                                                    this.commodity.inDecNum = _this.application.tovarlar[_this.tovarIndex].product.old_decision.number;
-                                                                                    this.commodity.originCountry = _this.application.tovarlar[_this.tovarIndex].product.manufacturer.country;
-                                                                                    this.commodity.originOrg = _this.application.tovarlar[_this.tovarIndex].product.manufacturer.name;
-                                                                                    this.commodity.tradeName = _this.application.tovarlar[_this.tovarIndex].product.trade_name;
-                                                                                    this.commodity.tradeMark = _this.application.tovarlar[_this.tovarIndex].product.trade_mark;
-                                                                                    this.commodity.mark = _this.application.tovarlar[_this.tovarIndex].product.mark;
-                                                                                    this.commodity.model = _this.application.tovarlar[_this.tovarIndex].product.model;
-                                                                                    this.commodity.article = _this.application.tovarlar[_this.tovarIndex].product.article;
-                                                                                    this.commodity.sort = _this.application.tovarlar[_this.tovarIndex].product.nav;
-                                                                                    this.commodity.standarts = _this.application.tovarlar[_this.tovarIndex].product.standart;
-                                                                                    this.commodity.functions = _this.application.tovarlar[_this.tovarIndex].product.function; /////
-                                                                                    this.commodity.comProp = _this.application.tovarlar[_this.tovarIndex].product.tijorat_xususiyati;
-                                                                                    this.commodity.techChar = _this.application.tovarlar[_this.tovarIndex].product.texnik_xususiyati;
-                                                                                    this.commodity.productGoal = _this.application.tovarlar[_this.tovarIndex].product.maqsad;
-                                                                                    this.commodity.brutto = _this.application.tovarlar[_this.tovarIndex].product.brutto ? parseFloat(_this.application.tovarlar[_this.tovarIndex].product.brutto).toFixed(3) : null;
-                                                                                    this.commodity.netto = _this.application.tovarlar[_this.tovarIndex].product.netto ? parseFloat(_this.application.tovarlar[_this.tovarIndex].product.netto).toFixed(3) : null;
-                                                                                    this.commodity.basicQty = _this.application.tovarlar[_this.tovarIndex].product.weight ? parseFloat(_this.application.tovarlar[_this.tovarIndex].product.weight).toFixed(3) : null;
-                                                                                    this.commodity.extraUnits = _this.application.tovarlar[_this.tovarIndex].product.unit2;
-                                                                                    this.commodity.extraQty = _this.application.tovarlar[_this.tovarIndex].product.tftn.size ? parseFloat(_this.application.tovarlar[_this.tovarIndex].product.tftn.size).toFixed(3) : null;
-                                                                                    this.commodity.price = _this.application.tovarlar[_this.tovarIndex].product.price ? parseFloat(_this.application.tovarlar[_this.tovarIndex].product.price).toFixed(3) : null;
-                                                                                    this.commodity.customsPrice = _this.application.tovarlar[_this.tovarIndex].product.customsprice ? parseFloat(_this.application.tovarlar[_this.tovarIndex].product.customsprice).toFixed(3) : null;
-                                                                                    this.commodity.currencyType = _this.application.tovarlar[_this.tovarIndex].product.currency;
-                                                                                    this.commodity.cargoSpace = _this.application.tovarlar[_this.tovarIndex].product.yuk_soni;
-                                                                                    this.commodity.packType = _this.application.tovarlar[_this.tovarIndex].product.oram_turi;
-                                                                                    this.commodity.packQty = _this.application.tovarlar[_this.tovarIndex].product.oram_soni;
-                                                                                    this.commodity.extraInfo = _this.application.tovarlar[_this.tovarIndex].product.comment;
-                                                                                    if (_this.application.tovarlar[_this.tovarIndex].product.usul < 6)
-                                                                                        this.commodity.method = "0" + _this.application.tovarlar[_this.tovarIndex].product.usul; else
-                                                                                        this.commodity.method = _this.application.tovarlar[_this.tovarIndex].product.usul;
-                                                                                    this.commodity.methodDescription = (_this.application.tovarlar[_this.tovarIndex].product.usul_text) ? _this.application.tovarlar[_this.tovarIndex].product.usul_text.join("~~~~~") : "";
-
-                                                                                    let resultData = await this.sendProduct(this.commodity);
-                                                                                    this.loadingButton.third = false;
-                                                                                    if (typeof resultData !== 'undefined' && typeof resultData.data !== 'undefined' && typeof resultData.data.success !== 'undefined' && resultData.data.success === true) {
-                                                                                        //console.log(resultData.data['data']['data']['id'])
-                                                                                        //this.person.person_id = resultData.data['data']['data']['id'];
-                                                                                        /!*_this.stepper = 4;
-                                                                                        _this.completedSteps.push(this.stepper - 1);*!/
-                                                                                        this.$cookie.delete('yuk');
-                                                                                        this.$cookie.delete('user');
-                                                                                        this.$toast.success("Сизнинг аризангиз омадли тарзда юборилди!");
-                                                                                        setTimeout(() => {
-                                                                                            _this.$router.push("/services/decisions/" + _this.commodity.appId)
-
-                                                                                        }, 1000)
-                                                                                    } else {
-                                                                                        if (resultData.status === 400) {
-
-                                                                                            if (typeof resultData.data.data !== 'undefined') {
-                                                                                                _this.setProductErrors(resultData.data.data);
-                                                                                            }
-                                                                                            this.$toast.error("Маълумотларингизни текшириб қайтадан юборинг!");
-                                                                                        } else
-                                                                                            this.$toast.error("Серверда хатолик юз берди. Кейинроқ уриниб кўринг!");
-                                                                                    }
-
-
-                                                                                }
-
-                                                                                // this.stepper = 4;
-                                                                                //this.completedSteps.push(this.stepper - 1);
-                                                                            }
-                                                                        });
-                                                                    }
-                                                                });
-                                                            }
-                                                        });
-                                                    }*/
-
-                            })
-                        )
-                        //if(count===_this.application.tovarlar.length)
-
-                        if (!_this.index.length) {
-
-
-                            //// apps
-
-
-                            _this.app.apps['personId'] = _this.person.person_id;
-                            _this.app.apps['personFio'] = _this.person.fio;
-                            _this.app.apps['personPosition'] = _this.person.position;
-                            _this.app.apps['personAddr'] = _this.person.perAdr;
-                            _this.app.apps['personTin'] = _this.person.tin;
-                            _this.app.apps['personPin'] = _this.person.pin;
-                            _this.app.apps['personMail'] = _this.person.email;
-                            _this.app.apps['personPhone'] = _this.person.phone;
-                            _this.app.apps['locationId'] = _this.person.region ;
-                            _this.app.apps['postId'] = _this.person.post ;
-
-
-                            _this.app.apps = {
-                                personId: _this.person.person_id,
-                                personFio: _this.person.fio,
-                                personPosition: _this.person.position,
-                                personAddr: _this.person.perAdr,
-                                personTin: _this.person.tin,
-                                personPin: _this.person.pin,
-                                personMail: _this.person.email,
-                                personPhone: (_this.person.phone)?(_this.person.phone).replaceAll(" ", "").replaceAll("+", ""):"",
-                                locationId: 1735, ///_this.person.region ,
-                                postId: 3500,  ///_this.person.postId ,
-                            }
-
-
-                            _this.app.docs = [];
-
-                            /////// documents
-                            if (typeof this.application.documents[0] !== 'undefined' && typeof this.application.documents !== 'undefined') {
-                                this.application.documents.forEach((tov_doc, doc_key) => {
-                                    _this.app.docs.push({
-                                        fileId: tov_doc.id,
-                                        type: tov_doc.type,
-                                    })
+                            _this.documents=[];
+                            if(typeof tovar.docs !== 'undefined'){
+                                tovar.docs.forEach(function(document){
+                                    _this.documents.push({fileId:document.id})
                                 })
                             }
 
-
-                            _this.app.commodities = [];
-
-
-                            _this.application.tovarlar.forEach(function (tovar) {
-
-
-                                /////commodities
-                                _this.commodity = [];
-
-                                _this.app.commodities.push({
+                            _this.app.commodities.push({
+                                commodityDto: {
+                                    appId: _this.app.id,
                                     tradeName: typeof tovar.tijorat_nomi !== 'undefined' ? tovar.tijorat_nomi : null,
                                     tradeMark: typeof tovar.mark !== 'undefined' ? tovar.mark : null,
                                     model: typeof tovar.model !== 'undefined' ? tovar.model : null,
                                     comment: typeof tovar.comment !== 'undefined' ? tovar.comment : null,
-                                    basicQty: typeof tovar.namunasoni !== 'undefined' ? tovar.namunasoni : null,
-                                    extraUnits: typeof tovar.olchovbirligi !== 'undefined' ? tovar.olchovbirligi : null,
-                                })
+                                    basicQty: typeof tovar.namunasoni !== 'undefined' && tovar.issetNamuna ? tovar.namunasoni : null,
+                                    extraUnits: typeof tovar.olchovbirligi !== 'undefined' && tovar.issetNamuna ? tovar.olchovbirligi : null,
 
-
+                                },
+                                earxivDto: JSON.parse(JSON.stringify(_this.documents))
                             })
-                            let resultData = await this.sendProduct(_this.app);
-                            if (typeof resultData !== 'undefined' && typeof resultData.data !== 'undefined' && typeof resultData.data.success !== 'undefined' && resultData.data.success === true) {
-                                //console.log(resultData.data['data']['data']['id'])
-                                this.app.app_id = resultData.data['data']['data']['id'];
-                                console.log(resultData.data)
-                                this.$cookie.delete('user');
-                                this.$toast.success("Сизнинг аризангиз омадли тарзда юборилди!");
-                                setTimeout(() => {
-                                    _this.$router.push("/services/tftn/" + _this.app.app_id)
-
-                                }, 1000)
-                            } else {
-                                if (resultData.status === 400) {
-
-                                    if (typeof resultData.data.data !== 'undefined') {
-                                        _this.setProductErrors(resultData.data.data);
-                                    }
-                                    this.$toast.error("Маълумотларингизни текшириб қайтадан юборинг!");
-                                } else
-                                    this.$toast.error("Серверда хатолик юз берди. Кейинроқ уриниб кўринг!");
-                            }
 
 
-                            // console.log(_this.app)
+                        })
 
 
+
+                        let resultData = await this.sendProduct(_this.app.commodities);
+                        if (typeof resultData !== 'undefined' && typeof resultData.data !== 'undefined' && typeof resultData.data.success !== 'undefined' && resultData.data.success === true) {
+                            //console.log(resultData.data['data']['data']['id'])
+                            //this.app.app_id = resultData.data['data']['data']['id'];
+                            //console.log(resultData.data)
+                            //this.$cookie.delete('user');
+                            this.$toast.success("Сизнинг аризангиз омадли тарзда юборилди!");
+                            setTimeout(() => {
+                                _this.$router.push("/services/tftn/" + _this.app.id)
+
+                            }, 500)
+                        } else {
+                            if (resultData.status === 400) {
+
+                                if (typeof resultData.data.data !== 'undefined' && typeof resultData.data.data.message !== 'undefined') {
+
+                                    Object.entries(resultData.data.data.message).forEach(([key, value]) => {
+                                        if (typeof value['errorCommodity'] !== 'undefined')
+                                            _this.setProductErrors(key, value['errorCommodity']);
+
+                                    })
+                                    //_this.setProductErrors(resultData.data.data.errorsCommodity);
+                                }
+                                this.$toast.error("Маълумотларингизни текшириб қайтадан юборинг!");
+                            } else if(typeof resultData.data.data.message !=='undefined')  this.$toast.error(resultData.data.data.message);
+                            else
+                                this.$toast.error("Серверда хатолик юз берди. Кейинроқ уриниб кўринг!");
                         }
+
+
+
 
                     })
 
 
+
+
                     this.loadingButton.second = false;
 
-                    // },3000);
-                    //isValid = true;
-
-
-                    /*
-
-                                        this.stepper = 4;
-                                        this.completedSteps.push(this.stepper - 1);*/
-                    break;
-
-                case 4:
-                    this.stepper = 4;
-                    this.completedSteps.push(this.stepper - 1);
                     break;
 
             }
@@ -1442,7 +1000,7 @@ export default {
             })
         },
         async getPosts(code) {
-            this.postloading=true;
+            this.postloading = true;
             const _this = this
             this.posts = [];
             await axios.get('/api/v1/ex_api/posts?code=' + code,).then(function (result) {
@@ -1454,15 +1012,7 @@ export default {
                         })
                     })
             })
-            this.postloading=false;
-        },
-        saveDocument() {
-            const _this = this;
-            setTimeout(async () => {
-
-                this.dialog.documenttype = false;
-
-            })
+            this.postloading = false;
         },
 
         initialize() {
@@ -1474,9 +1024,7 @@ export default {
             let CPerson = null;
             CPerson = this.$cookie.get('user') ? JSON.parse(this.$cookie.get('user')) : null;
             this.setPersonData(CPerson)
-            let CYuk = null;
-            CYuk = this.$cookie.get('yuk') ? JSON.parse(this.$cookie.get('yuk')) : null;
-            if (CYuk) this.setYukData(CYuk);
+
         },
         setPersonData(data) {
 
@@ -1503,100 +1051,35 @@ export default {
             }
 
         },
-        async validatePersonData(silent = false) {
-            let isValid = false;
 
-            return await this.$refs['create_customs_person_value'].validate({silent: silent})
-        },
-        Initprogress(val) {
-            if (val)
-                return Math.min(100, val.length * 8)
-            else return 0;
-        },
-        async myColor(val, key) {
-            const _this = this;
-            let fileIsset = false;
-            if (this.application.documents[key] && this.application.documents[key]['id'] === val) this.documents[key].color = 'success';
-            if (typeof val !== 'undefined' && val.length === 13) {
-                fileIsset = await this.checkFile(val)
-                if (fileIsset && fileIsset.length > 0) {
-                    if (typeof this.application.documents !== 'undefined' && typeof this.application.documents[key] !== 'undefined') {
-                        this.application.documents[key]['id'] = val;
-                        this.application.documents[key]['type'] = fileIsset[0].cd_id + " - " + fileIsset[0].file_num;
-                        this.documents[key].color = 'success';
-                        this.documents[key].valid = true;
-                    } else {
-
-                        this.application.documents.push({
-                            id: val,
-                            type: fileIsset[0].cd_id + " - " + fileIsset[0].file_num
-                        });
-                        this.documents[key].color = 'success';
-                        this.documents[key].valid = true;
-
-                    }
-                } else {
-                    this.documents[key].color = 'warning';
-                    this.documents[key].valid = false;
-
-                }
-            } else {
-                //this.application.documents.splice(key, 1);
-                this.documents[key].color = 'warning';
-                this.documents[key].valid = false;
-            }
-            if (val.length < 13) {
-                this.documents[key].color = ['error', 'warning'][Math.floor(this.Initprogress(val) / 50)]
-                this.documents[key].valid = false;
-            }
-        },
 
     },
     watch: {
         'person.region': {
             handler(value) {
-                console.log(value)
+                //console.log(value)
                 if (typeof value !== 'undefined' && value && value.length > 3) {
                     const region = value.substr(2, 2);
                     //setTimeout(async () => {
-                        this.getPosts(region)
-                   // })
+                    this.getPosts(region)
+                    // })
                 }
 
             },
             immediate: true,
-            deep:true,
-            sync:true
+            deep: true,
+            sync: true
         },
 
 
     },
     created() {
 
-/*        this.$watch('person.region', (value) => {
-            console.log(value)
-            if (typeof value !== 'undefined' && value.length > 3) {
-                const region = value.substr(2, 2);
-                setTimeout(async ()=>{
-                    await this.getPosts(region)
-                })
-            }
-        })*/
     },
     mounted() {
         this.initialize();
     },
     computed: {
-        progress(val) {
-            this.Initprogress(val)
-        },
-        isvalidDocument(tovar_id = null) {
-            //tovar_id = this.tovarIndex;
-            //if (tovar_id === null || isNaN(tovar_id)) tovar_id = this.tovarIndex;
-            return !this.isValidDoc()
-        }
-
-
     }
     ,
     filters: {
@@ -1606,8 +1089,16 @@ export default {
     }
     ,
     components: {
+        EArxivFile,
         ValidationProvider,
         ValidationObserver,
     }
 }
 </script>
+<style scoped>
+.rozilik p {
+    font-size: 18px;
+    line-height: 30px;
+    text-align: justify;
+}
+</style>

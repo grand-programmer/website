@@ -8,7 +8,19 @@ $second-color: #00B065;
     color: var(--mycolor);
 }
 
-;
+.blackAndWhite {
+    -webkit-filter: grayscale(100%);
+    -moz-filter: grayscale(100%);
+    -ms-filter: grayscale(100%);
+    -o-filter: grayscale(100%);
+    filter: grayscale(100%);
+}
+.maxSize body{
+    font-size:18px;
+}
+.minSize body{
+    font-size:12px;
+}
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
@@ -5456,19 +5468,51 @@ vh
             }
         }
         &.specific{
-            &:hover{
-                width: 200px;
-                margin-right: -153px;
+            .grayscale .v-icon{
+                margin: 10px 5px;
+                height: 35px;
+                box-shadow: 0 0 2px 2px #0e7438;
+                border-radius: 5px;
+                &:hover{
+                    border-radius: 6px;
+                    background-color: #060606;
+
+                }
+                &.active{
+                    border-radius: 6px;
+                    background-color: #060606;
+                    height: 35px;
+                }
+            }
+
+            justify-content: end;
+            width: 200px;
+            margin-right: 154px;
+            transition: margin 0.9s;
+           /// transition: ease 0.9s;
+            &.active{
                 background-color: #39ae69;
-                justify-content: end;
-                transition: ease 0.3s;
+
+            }
+            &:hover{
+                background-color: #39ae69;
+/*                margin-right: -153px;*/
+                transition: margin 0.9s;
+            }
+            .eye::after{
+                content: none;
+
             }
             .specific-fields{
                 position: absolute;
-                width: 150px;
-                right: 45px;
+                width: 160px;
+                right: 50px;
                 display: flex;
                 flex-direction: column;
+                background-color: #39ae69;
+                padding-left: 25px;
+                padding-top: 15px;
+                border-radius: 5px;
                 .grayscale{
 
                 }

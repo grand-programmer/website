@@ -230,7 +230,7 @@ Table of Content:
   font-weight: 400;
   src: url(/fonts/montserrat-v25-latin_cyrillic-ext_cyrillic-regular.eot?530bb0441d65b67d4a32f0a6f50aa78d);
   /* IE9 Compat Modes */
-  src: local(""), url(/fonts/montserrat-v25-latin_cyrillic-ext_cyrillic-regular.eot?530bb0441d65b67d4a32f0a6f50aa78d) format("embedded-opentype"), url(/fonts/montserrat-v25-latin_cyrillic-ext_cyrillic-regular.woff2?069606765c0268244bb64f0e56cbad2f) format("woff2"), url(/fonts/montserrat-v25-latin_cyrillic-ext_cyrillic-regular.woff?6c3bf9a0af0d39b5e97b82906a544b1a) format("woff"), url(/fonts/montserrat-v25-latin_cyrillic-ext_cyrillic-regular.ttf?60894a6eba63aa52f1a443c15af5ae9e) format("truetype"), url(/fonts/montserrat-v25-latin_cyrillic-ext_cyrillic-regular.svg?802a7ef898f280acd862524fa975a301) format("svg");
+  src: local(""), url(/fonts/montserrat-v25-latin_cyrillic-ext_cyrillic-regular.eot?530bb0441d65b67d4a32f0a6f50aa78d) format("embedded-opentype"), url(/fonts/montserrat-v25-latin_cyrillic-ext_cyrillic-regular.woff2?069606765c0268244bb64f0e56cbad2f) format("woff2"), url(/fonts/montserrat-v25-latin_cyrillic-ext_cyrillic-regular.woff?6c3bf9a0af0d39b5e97b82906a544b1a) format("woff"), url(/fonts/montserrat-v25-latin_cyrillic-ext_cyrillic-regular.ttf?60894a6eba63aa52f1a443c15af5ae9e) format("truetype"), url(/fonts/montserrat-v25-latin_cyrillic-ext_cyrillic-regular.svg?fb712f9dbd935ed0cd7ccbb354390d1a) format("svg");
   /* Legacy iOS */
 }
 @font-face {
@@ -300,27 +300,55 @@ audio, canvas, img, svg, video {
   height: 5px;
   background: #252c35;
   position: absolute;
-  animation: preloader_1 1.5s infinite ease-in-out;
+  -webkit-animation: preloader_1 1.5s infinite ease-in-out;
+          animation: preloader_1 1.5s infinite ease-in-out;
 }
 
 #preloader_1 span:nth-child(2) {
   left: 11px;
-  animation-delay: 0.2s;
+  -webkit-animation-delay: 0.2s;
+          animation-delay: 0.2s;
 }
 
 #preloader_1 span:nth-child(3) {
   left: 22px;
-  animation-delay: 0.4s;
+  -webkit-animation-delay: 0.4s;
+          animation-delay: 0.4s;
 }
 
 #preloader_1 span:nth-child(4) {
   left: 33px;
-  animation-delay: 0.6s;
+  -webkit-animation-delay: 0.6s;
+          animation-delay: 0.6s;
 }
 
 #preloader_1 span:nth-child(5) {
   left: 44px;
-  animation-delay: 0.8s;
+  -webkit-animation-delay: 0.8s;
+          animation-delay: 0.8s;
+}
+
+@-webkit-keyframes preloader_1 {
+  0% {
+    height: 5px;
+    transform: translateY(0px);
+    background: #252c35;
+  }
+  25% {
+    height: 30px;
+    transform: translateY(15px);
+    background: #1c954e;
+  }
+  50% {
+    height: 5px;
+    transform: translateY(0px);
+    background: #252c35;
+  }
+  100% {
+    height: 5px;
+    transform: translateY(0px);
+    background: #252c35;
+  }
 }
 
 @keyframes preloader_1 {

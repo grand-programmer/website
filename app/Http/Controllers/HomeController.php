@@ -26,9 +26,28 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         //return view('index');
+//dd($_SERVER);
+        if (isset($_SERVER['REMOTE_ADDR']))
+            $data['ip'] = $_SERVER['REMOTE_ADDR']; //else $data['ip'] = $_SERVER['HTTP_X_REAL_IP'];
 
-        if (isset($_SERVER['HTTP_X_REAL_IP']))
-            $data['ip'] = $_SERVER['HTTP_X_REAL_IP']; else $data['ip'] = $_SERVER['REMOTE_ADDR'];
+        if(isset($_SERVER['HTTP_X_FORWARDED_FOR'])){
+
+           // if(strpos($_SERVER['HTTP_X_FORWARDED_FOR'],$_SERVER['REMOTE_ADDR'])!==false){
+
+                $forwardeds=explode(",",$_SERVER['HTTP_X_FORWARDED_FOR']);
+
+                if(isset($forwardeds[0])){
+
+                    $data['ip']=$forwardeds[0];
+                }
+
+            //}
+
+
+
+        }
+
+
         $userCounts = UsersCount::whereDate('created_at', Carbon::today())->first();
         if ($userCounts) {
             $ips = json_decode($userCounts->ips, true);

@@ -235,17 +235,17 @@ class UserController extends Controller
 
         };
         /// Tftn qaror
-        /*try {
+        try {
             $response = Http::asMultipart();
-            $response = $response
-                ->get('http://192.168.214.115:9080/labTifTn/api/tutorials/published', ['personPin' => Auth::guard('api')->user()->pin])->throw(function ($response, $e) {
+            $response = $response->timeout(10)
+                ->get('http://192.168.214.152:7070/DECAPP/s05appealrestapi/getresult', ['personPin' => Auth::guard('api')->user()->pin])->throw(function ($response, $e) {
                     //
                 });
             if ($response->status() == 200) {
                 $appealdata = $response->json();
 
-                if (is_array($appealdata) and isset($appealdata['appsList']) and isset($appealdata['appsList'][0]) and is_array($appealdata['appsList'][0])) {
-                    collect($appealdata['appsList'])->transform(function ($appeal) use ($user_id) {
+                if (is_array($appealdata) and isset($appealdata['data']) and isset($appealdata['data'][0]) and is_array($appealdata['data'][0])) {
+                    collect($appealdata['data'])->transform(function ($appeal) use ($user_id) {
 
                         global $services;
                         $services[] = [
@@ -264,10 +264,10 @@ class UserController extends Controller
 
                 }
 
-            } else return response()->json(['error' => 'Сервер билан уланишда муаммо бор!', 'status' => false]);
+            } //else return response()->json(['error' => 'Сервер билан уланишда муаммо бор!', 'status' => false]);
         } catch (\Exception $e) {
 
-        };*/
+        };
 
         //  $user=User::with('services')->find($user_id);
 

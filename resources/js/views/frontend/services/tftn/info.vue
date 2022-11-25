@@ -9,10 +9,10 @@
                 </v-breadcrumbs>
             </v-container>
         </div>
-        <div class="page-content" v-if="app.apps">
+        <div class="page-content" v-if="app">
             <v-container>
                 <v-row>
-                    <h3 class="pb-5"><b>Ариза рақами: </b>{{ app.apps.appNum }}</h3>
+                    <h3 class="pb-5"><b>{{ $t('Ариза рақами') }}: </b>{{ app.appNum }}</h3>
                     <br>
                 </v-row>
                 <v-row>
@@ -46,90 +46,59 @@
 
                                 >
                                     <v-expansion-panel-header class="primary-color">
-                                        Аризачи тўғрисида маълумотлар
+                                        {{ $t('Аризачи тўғрисида маълумотлар') }}
                                     </v-expansion-panel-header>
                                     <v-expansion-panel-content>
-                                        <v-simple-table v-if="app.apps">
+                                        <v-simple-table v-if="app">
                                             <template v-slot:default>
                                                 <thead>
                                                 <tr>
                                                     <th class="text-left" style="font-weight: 550">
-                                                        Ариза рақами
+                                                        {{ $t('Ариза рақами') }}
                                                     </th>
                                                     <th class="text-left" style="font-weight: 550">
                                                         {{
-                                                            typeof app.apps.appNum !== 'undefined' ? app.apps.appNum : ''
+                                                            typeof app.appNum !== 'undefined' ? app.appNum : ''
                                                         }}
                                                     </th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
+
                                                 <tr>
-                                                    <td style="font-weight: 550">ЖШШИР</td>
+                                                    <td style="font-weight: 550">{{ $t('Фамилияси, исми, шарифи') }}</td>
                                                     <td>{{
-                                                            typeof app.apps.personPin !== 'undefined' ? app.apps.personPin : null
+                                                            typeof app.fullName !== 'undefined' ? app.fullName : null
                                                         }}
                                                     </td>
                                                 </tr>
+
                                                 <tr>
-                                                    <td style="font-weight: 550">Фамилияси, исми, шарифи</td>
+                                                    <td style="font-weight: 550">{{ $t('Ариза юборилган ҳудуд') }}</td>
                                                     <td>{{
-                                                            typeof app.apps.personFio !== 'undefined' ? app.apps.personFio : null
+                                                            typeof app.locationNm !== 'undefined' ? app.locationNm : null
+                                                        }} {{
+                                                            typeof app.postNm !== 'undefined' ? app.postNm : null
                                                         }}
                                                     </td>
                                                 </tr>
+
                                                 <tr>
-                                                    <td style="font-weight: 550">СТИР</td>
+                                                    <td style="font-weight: 550">{{ $t('Телефон рақами') }}</td>
                                                     <td>{{
-                                                            typeof app.apps.personTin !== 'undefined' ? app.apps.personTin : null
+                                                            typeof app.phone !== 'undefined' ? app.phone : null
                                                         }}
                                                     </td>
                                                 </tr>
-                                                <tr>
-                                                    <td style="font-weight: 550">Ариза юборилган ҳудуд</td>
-                                                    <td>{{
-                                                            typeof app.apps.locationNm !== 'undefined' ? app.apps.locationNm : null
-                                                        }}
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="font-weight: 550">Манзили</td>
-                                                    <td>{{
-                                                            typeof app.apps.personAddr !== 'undefined' ? app.apps.personAddr : null
-                                                        }}
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="font-weight: 550">Телефон рақами</td>
-                                                    <td>{{
-                                                            typeof app.apps.personPhone !== 'undefined' ? app.apps.personPhone : null
-                                                        }}
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="font-weight: 550">Электрон манзили</td>
-                                                    <td>{{
-                                                            typeof app.apps.personMail !== 'undefined' ? app.apps.personMail : null
-                                                        }}
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="font-weight: 550">Илова қилинган ҳужжатлар</td>
-                                                    <td>
-                                                        <template v-if="typeof app.docs !=='undefined'"
-                                                                  v-for="(doc,docindex) in app.docs">
-                                                            {{ doc.docTypeName }} - {{ doc.docname }}
-                                                            {{ docindex !== 0 ? ',' : '' }}
-                                                        </template>
-                                                    </td>
-                                                </tr>
+
+
                                                 </tbody>
                                             </template>
                                         </v-simple-table>
                                     </v-expansion-panel-content>
                                 </v-expansion-panel>
                                 <!--                tovar-->
-                                <v-expansion-panel v-if="app.commoditys" v-for="(commodity,ckey) in app.commoditys"
+                                <v-expansion-panel v-if="app.s05Commodities" v-for="(commodity,ckey) in app.s05Commodities"
 :key="ckey"
                                 >
                                     <v-expansion-panel-header>
@@ -172,6 +141,19 @@
                                                         </td>
                                                     </tr>
 
+                                                    <tr>
+                                                        <td style="font-weight: 550">Илова қилинган файллар</td>
+                                                        <td>
+                                                            <template v-if="typeof commodity.s05Earxivs !== 'undefined'"
+                                                                      v-for="doc in commodity.s05Earxivs">
+                                                                {{
+                                                                    typeof doc.docNameEx !== 'undefined' ?
+                                                                        doc.docNameEx + " - (" + doc.docTypeName + ")" : null
+                                                                }},
+                                                            </template>
+                                                        </td>
+                                                    </tr>
+
                                                     </tbody>
                                                 </template>
                                             </v-simple-table>
@@ -183,13 +165,13 @@
                         </v-tab-item>
                         <v-tab-item>
                             <v-timeline
-                                v-if="typeof app.historys !=='undefined'"
+                                v-if="typeof app.s05StatusHList !=='undefined'"
                                 dense
                                 clipped
                                 style="margin: 40px"
                             >
 
-                                <template v-for="(appstatus,key) in app.historys">
+                                <template v-for="(appstatus,key) in app.s05StatusHList">
                                     <v-timeline-item
                                         class="mb-4"
                                         color="primary"
@@ -198,27 +180,19 @@
                                     >
                                         <v-row justify="start">
                                             <v-col cols="10">
-                                                <h4 class="active"> {{ appstatus.statusComment }}</h4>
+                                                <h4 class="active"> {{ appstatus.statusNm }}</h4>
                                                 <p> {{ new Date(appstatus.insTime).toLocaleString() }}</p>
 
-            </v-col>
+                                                <p v-if="appstatus.status==='111'" style="font-size: 15px"><a
+                                                    :href="'https://qaror.customs.uz/s05decisionPdfDownloadAppeal/?stId=' + appstatus.id">
+                                                    Қарорни юклаб олинг! </a></p>
+                                                <p v-if="typeof appstatus.userNm!=='undefined' && appstatus.userNm && appstatus.status!=='100'" style="font-size: 15px; margin-top: 10px">
+                                                    Маъсул ҳодим: {{appstatus.userNm}}
+                                                </p>
+                                            </v-col>
             </v-row>
             </v-timeline-item>
-            <v-timeline-item
-                class="mb-4"
-                color="grey"
-                icon-color="primary"
-                small
-                v-if="key === app.historys.length - 1 && (app.historys.status!==170 && app.historys.status!==175 && app.historys.status!==190 && app.historys.status!==195)"
-            >
-                <v-row justify="start">
-                    <v-col cols="10">
-                        <h4> Якуний хулоса </h4>
-                        <p></p>
-                        <p></p>
-                    </v-col>
-                </v-row>
-            </v-timeline-item>
+
 </template>
 
 <!--                                <v-timeline-item
@@ -357,11 +331,11 @@ export default {
                     }
                 }).then(function (response) {
 
-                    if (typeof response.data.data !== "undefined") {
-                        _this.app = response.data.data
+                    if (typeof response.data.data.data !== "undefined") {
+                        _this.app = response.data.data.data
                         _this.breadcrumb_items.push({
-                            text: "Тфтн кодини аниқлаш бўйича ариза -" + _this.app.apps.appNum,
-                            to: '/services/tftn/' + _this.app.apps.id,
+                            text: "ТИФ ТН кодини аниқлаш бўйича ариза -" + _this.app.appNum,
+                            to: '/services/tftn/' + _this.app.id,
                             disabled: true,
                             exact: true,
                         })
@@ -373,7 +347,7 @@ export default {
                     } else {
                         _this.$store.commit('setLoading', false)
                         _this.$toast.error("Маълумот топилмади!")
-                        _this.$router.push("/applications");
+                        //_this.$router.push("/applications");
 
                     }
 

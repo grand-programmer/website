@@ -246,11 +246,12 @@ Vue.use(VueAuth, auth)
     },
 });*/
 
+
+
 ///import clickOutside from './plugins/vue-directive-clickOutside';
 
 Vue.config.productionTip = false
 
- //Vue.directive('click-outside', clickOutside);
 
 
 
