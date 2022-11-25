@@ -217,7 +217,22 @@
     }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 820px) {
+    .section.customs-value-section .container.container--fluid .v-stepper .yoriqnoma-text {
+
+        top: 3px;
+
+        padding: 0 !important;
+
+        color: #39ae69;
+        font-size: 12px;
+        border-bottom: 0 ;
+        width: -moz-max-content;
+       width: max-content;
+        margin: 10px!important;
+        text-align: center!important;
+
+    }
     .logo_area .pull-right.contact_details_area {
         display: none;
     }
@@ -274,6 +289,10 @@
 }
 
 @media (max-width: 480px) {
+    .tab_action_buttons button {
+        width: 118px;
+        margin: 0;
+    }
     .project_quote .left_content h4 {
         line-height: 30px;
         padding-bottom: 30px;
