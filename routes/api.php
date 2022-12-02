@@ -71,6 +71,8 @@ use Illuminate\Support\Facades\Schema;
             Route::resource('/menu', 'App\Http\Controllers\Admin\AdminMenuController', ['as' => 'admin']);
             Route::resource('/footermenu', 'App\Http\Controllers\Admin\AdminFooterMenuController', ['as' => 'admin']);
             Route::resource('/appeal', 'App\Http\Controllers\Admin\AdminAppealController', ['as' => 'admin']);
+            Route::resource('/doccategories', 'App\Http\Controllers\Admin\AdminDocumentCategoryController', ['as' => 'admin']);
+            Route::resource('/documents', 'App\Http\Controllers\Admin\AdminDocumentController', ['as' => 'admin']);
         });
 
         Route::get('/categories/select', 'App\Http\Controllers\CategoryController@getForSelect');

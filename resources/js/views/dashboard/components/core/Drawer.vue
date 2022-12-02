@@ -163,6 +163,17 @@ export default {
                 to: '/admin/orgs',
 
             },
+            {
+                title: 'Ҳужжат категориялари',
+                icon: 'mdi-account',
+                to: '/admin/doccategories',
+            },
+            {
+                title: 'Ҳужжатлар',
+                icon: 'mdi-yurt',
+                to: '/admin/documents',
+
+            },
             /*{
                 icon: 'mdi-account',
                 title: 'user',

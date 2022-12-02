@@ -216,11 +216,47 @@ class UserController extends Controller
                         $services[] = [
                             "app_id" => $data['id'],
                             "app_num" => $data['appNum'],
-                            "created_at" => isset($data['insTime']) ? $data['insTime'] : null,
+                            "created_at" => isset($data['appDate']) ? $data['appDate'] : null,
                             "status" => $data['status'],
                             "statusNm" => $data['statusNm'],
                             "type" => 5,
                             "link" => "/services/refund/" . $data['id'],
+                            "user_id" => $user_id,
+                        ];
+
+                    });
+
+
+                }
+
+            } //else return response()->json(['error' => 'Сервер билан уланишда муаммо бор!', 'status' => false]);
+
+        } catch (\Exception $e) {
+
+        };
+
+        /// Ppay
+        try {
+            $response = Http::contentType("application/json")->timeout(10)->get('http://192.168.214.152:7070/DECAPP/s08appsrestapi/getresult', [
+                "personPin" => Auth::guard('api')->user()->pin,
+            ])->throw(function ($response, $e) {
+                //
+            });
+            if ($response->status() == 200) {
+                $responseData = $response->json();
+
+                if (is_array($responseData) and isset($responseData['data']) and isset($responseData['data'][0]) and is_array($responseData['data'][0])) {
+                    collect($responseData['data'])->transform(function ($data) use ($user_id) {
+
+                        global $services;
+                        $services[] = [
+                            "app_id" => $data['id'],
+                            "app_num" => $data['appNum'],
+                            "created_at" => isset($data['appDate']) ? $data['appDate'] : null,
+                            "status" => $data['status'],
+                            "statusNm" => $data['statusNm'],
+                            "type" => 7,
+                            "link" => "/services/ppay/" . $data['id'],
                             "user_id" => $user_id,
                         ];
 

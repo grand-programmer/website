@@ -102,13 +102,14 @@ class DataController extends Controller
     {
         $data = $request->only(['code','inn']);
         if (isset($data['inn'])) {
+            //dd("select KNTID from contracts where KNTTYPE in (11,12,16,17,'06') and ACTIVE_PR=0 and KNTRINN =" . $data['inn']);
             $returnData = DB::connection('databaseconfig2_10_EISVO')->select(
-                "select KNTID from contracts where KNTTYPE in (11,12,16,17) and ACTIVE_PR=0 and KNTRINN =" . $data['inn']);
+                "select KNTID from contracts where KNTTYPE in (11,12,16,17,6) and ACTIVE_PR=0 and KNTRINN ='" . $data['inn']."'");
             if($returnData) return response()->json(['data'=>$returnData]);
         }
         if (isset($data['code'])) {
             $returnData = DB::connection('databaseconfig2_10_EISVO')->select(
-                "select KNTID from contracts where KNTTYPE in (11,12,16,17) and ACTIVE_PR=0 and KNTID LIKE '" . $data['code'] . "%' fetch first 5 rows only");
+                "select KNTID from contracts where KNTTYPE in (11,12,16,17,6) and ACTIVE_PR=0 and KNTID LIKE '" . $data['code'] . "%' fetch first 5 rows only");
             if($returnData) return response()->json(['data'=>$returnData]);
         }
         return response()->json(['data'=>[]]);

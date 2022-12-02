@@ -35,6 +35,35 @@ const apiClient = {
     async deletePage(id) {
         return await axios.delete(apiUrl + "page/" + id);
     },
+
+    //////////////////////// Categories Begin/////////////////////////////
+    async readCategories(limit = 0) {
+        if (limit > 0)
+            return await axios.get(apiUrl + "categories?limit=" + limit);
+        else
+            return await axios.get(apiUrl + "categories");
+    },
+    async readCategoriesForSelect() {
+        return await axios.get(apiUrl + "categories/select");
+    },
+    async addCategory(requestData) {
+        return await axios.post(apiUrl + "categories", requestData);
+    },
+    async updateCategory(id, requestData) {
+        return await axios.put(apiUrl + "categories/" + id, requestData);
+    },
+    async readCategory(slug, withNews = false) {
+        if (withNews)
+            return await axios.get(apiUrl + "categories/" + slug + "?withnews=1",);
+        else
+            return await axios.get(apiUrl + "categories/" + slug);
+    },
+    async deleteCategory(id) {
+        return await axios.delete(apiUrl + "categories/" + id);
+    },
+    //////////////////////// Categories End /////////////////////////////
+
+
     //////////////////////// News Begin/////////////////////////////
     async readNews(requestData) {
         return await axios.get(apiUrl + "news", {params: requestData});
@@ -110,32 +139,49 @@ const apiClient = {
     },
     //////////////////////// Footer Menus End /////////////////////////////
 
-    //////////////////////// Categories Begin/////////////////////////////
-    async readCategories(limit = 0) {
-        if (limit > 0)
-            return await axios.get(apiUrl + "categories?limit=" + limit);
-        else
-            return await axios.get(apiUrl + "categories");
+
+    //////////////////////// DocumentCategories Begin/////////////////////////////
+    async readDocumentCategories(requestData) {
+            return await axios.get(apiUrl + "doccategories", {params:requestData});
     },
-    async readCategoriesForSelect() {
-        return await axios.get(apiUrl + "categories/select");
+    async readDocumentCategoriesForSelect() {
+        return await axios.get(apiUrl + "doccategories/select");
     },
-    async addCategory(requestData) {
-        return await axios.post(apiUrl + "categories", requestData);
+    async addDocumentCategory(requestData) {
+        return await axios.post(apiUrl + "doccategories", requestData);
     },
-    async updateCategory(id, requestData) {
-        return await axios.put(apiUrl + "categories/" + id, requestData);
+    async updateDocumentCategory(id, requestData) {
+        return await axios.put(apiUrl + "doccategories/" + id, requestData);
     },
-    async readCategory(slug, withNews = false) {
+    async readDocumentCategory(slug, withNews = false) {
         if (withNews)
-            return await axios.get(apiUrl + "categories/" + slug + "?withnews=1",);
+            return await axios.get(apiUrl + "doccategories/" + slug + "?withnews=1",);
         else
-            return await axios.get(apiUrl + "categories/" + slug);
+            return await axios.get(apiUrl + "doccategories/" + slug);
     },
-    async deleteCategory(id) {
-        return await axios.delete(apiUrl + "categories/" + id);
+    async deleteDocumentCategory(id) {
+        return await axios.delete(apiUrl + "doccategories/" + id);
     },
-    //////////////////////// Categories End /////////////////////////////
+    //////////////////////// DocumentCategories End /////////////////////////////
+
+
+    //////////////////////// Document Begin/////////////////////////////
+    async readDocuments(requestData) {
+        return await axios.get(apiUrl + "documents", {params: requestData});
+    },
+    async addDocument(requestData) {
+        return await axios.post(apiUrl + "documents", requestData, multipartformdata);
+    },
+    async updateDocument(id, requestData) {
+        return await axios.put(apiUrl + "documents/" + id, requestData);
+    },
+    async readOneDocument(slug) {
+        return await axios.get(apiUrl + "documents/" + slug);
+    },
+    async deleteDocument(id) {
+        return await axios.delete(apiUrl + "documents/" + id);
+    },
+    //////////////////////// Document End /////////////////////////////
 
     //////////////////////// My Events Begin/////////////////////////////
     async readEvents() {

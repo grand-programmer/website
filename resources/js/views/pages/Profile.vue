@@ -262,6 +262,7 @@ export default {
                 {text: 'Профил', icon: 'mdi-account', link: '/profile'},
                 {text: 'Менинг аризаларим', icon: 'mdi-history', link: '/applications'},
                 {text: 'Хизматлар', icon: 'mdi-star', link: '/services'},
+                {text: 'Реестрлар', icon: 'mdi-book-open-outline', link: '/services?page=3'},
             ],
 
         }

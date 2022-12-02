@@ -14,7 +14,7 @@ const Trans = {
     set currentLocale(locale) {
         i18n.locale = locale
     },
-    getUserSupportedLocale() { 
+    getUserSupportedLocale() {
 
         //i18n.locale = localStorage.getItem('language') || 'uz'
 

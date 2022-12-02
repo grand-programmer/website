@@ -319,6 +319,46 @@ class ApiController extends Controller
                 } else return response()->json(["error" => "Серверда хатолик юз берди!", "status" => false], 200);
                 break;
             ///
+            ///
+            /// ppay begin
+            ///
+            case "ppay":
+                $this->middleware('auth:api');
+                $user = Auth::guard('api')->user();
+                if (!$user) return response()->json([
+                    'success' => false,
+                    'data' => 'Foydalanuvchi avtorizatsiyadan otishi talab etiladi'], 401);
+                $response = Http::contentType("application/json")->send('POST', 'http://192.168.214.152:7070/DECAPP/s08appsrestapi/saveapps', [
+                    'body' => json_encode($request->all())
+                ]);
+                break;
+            case "ppay-get":
+                $appData = $request->only(['app_id', 'person_id', 'page', 'size']);
+                if (isset($appData['app_id'])) {
+                    $app_id = isset($appData['app_id']) ? $appData['app_id'] : null;
+                    $response = Http::contentType("application/json")->get('http://192.168.214.152:7070/DECAPP/s08appsrestapi/getoneapp', [
+                        "appId" => $app_id,
+                    ]);
+                } elseif (isset($appData['person_id'])) {
+                    $person_id = isset($appData['person_id']) ? $appData['person_id'] : null;
+                    $page = $appData['page'] ?? 0;
+                    $size = $appData['size'] ?? 50;
+                    $response = Http::contentType("application/json")->get('http://192.168.214.152:7070/DECAPP/s08appsrestapi/getresult', [
+                        "personPin" => $person_id,
+                        "page" => $page,
+                        "size" => $size,
+                    ]);
+
+
+                } else {
+                    return response()->json(["error" => "Хато маълумот юборилди!", "status" => false], 200);
+                }
+                if ($response->status() == 200) {
+                    return response()->json(["data" => $response->json()]);
+                } else return response()->json(["error" => "Серверда хатолик юз берди!", "status" => false], 200);
+                break;
+            ///
+            ///
             /// customsprice begin
             case "customprice-person":
                 $this->middleware('auth:api');

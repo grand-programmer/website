@@ -388,9 +388,10 @@ export default {
             _this.application['persons']['surName'] = _this.$auth.user().sur_name;
             _this.application['persons']['lastName'] = _this.$auth.user().mid_name;
             _this.application['persons']['email'] = _this.person.email;
-            _this.application['persons']['pin'] = _this.person.pin;
-            _this.application['persons']['tin'] = _this.person.tin;
+            _this.application['persons']['pin'] = _this.$auth.user().pin;
+            _this.application['persons']['tin'] = _this.$auth.user().tin?_this.$auth.user().tin:_this.person.organization_inn;
             _this.application['persons']['perAdr'] = _this.person.perAdr;
+
             if (typeof _this.person.phone !== 'undefined' && _this.person.phone)
                 _this.application['persons']['phone'] = _this.person.phone.replaceAll(" ", "").replaceAll("+", "");
             _this.application['s04AppsDTO']['locationId'] = _this.app.region;

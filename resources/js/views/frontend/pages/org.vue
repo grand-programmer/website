@@ -166,7 +166,7 @@
                     </v-card-text>
 
                 </v-card>
-                <v-card v-if="typeof organization.posts !=='undefined' && organization.posts.length > 0">
+                <v-card v-if="typeof organization.posts !=='undefined' && organization.posts && organization.posts.length > 0">
                     <v-card-title>
                         <v-col cols="12" class="boshqarma-section-title">
                             <h3> Божхона постлари</h3>

@@ -267,6 +267,10 @@ export default {
                     text: i18n.t("Товарни қайта ишлаш учун рухсатнома"),
                     value: 6
                 },
+                {
+                    text: i18n.t("Божхона тўловларини бўлиб бўлиб тўлашга рухсат бериш"),
+                    value: 7
+                },
             ],
             filter: {
                 date_sanadan: null,
@@ -302,6 +306,7 @@ export default {
                 {text: i18n.t('Профил'), icon: 'mdi-account', link: '/profile'},
                 {text: i18n.t('Менинг аризаларим'), icon: 'mdi-history', link: '/applications'},
                 {text: i18n.t('Хизматлар'), icon: 'mdi-star', link: '/services'},
+                {text: i18n.t('Реестрлар'), icon: 'mdi-book-open-outline', link: '/services?page=3'},
             ],
             statuses: [
                 {text: i18n.t("Янги"), value: 0},

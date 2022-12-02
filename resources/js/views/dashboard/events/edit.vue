@@ -41,7 +41,7 @@
                                             </v-col>
 
                                             <v-col cols="6" sm="6" md="6" :key="'title'+langKey"
-                                                   v-for="(langItem,langKey) in langtext" v-show="lang===langKey"  >
+                                                   v-for="(langItem,langKey) in langtext" v-show="lang===langKey" v-if="langtext[lang]"  >
                                                 <ValidationProvider name="Сарлавха"
                                                                     v-slot="{ errors }">
                                                     <v-text-field :label="'Сарлавха - '+ getLang()['text']"
@@ -198,7 +198,7 @@ export default {
                 this.event = response.data.data;
                 if (typeof _this.event.translates !== 'undefined' && _this.event.translates && _this.event.translates.length>0 ) {
                     _this.event.translates.map(function(translate){
-                        _this.langtext[translate.language]=translate;
+                        _this.langtext[translate.language]['title']=translate.title;
                     })
                 }
                 this.date=this.event.date;

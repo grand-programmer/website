@@ -330,5 +330,11 @@ export default {
     font-size: 16px;
     color: #000e08;
 }
-
+.specific-fields  .v-slider__thumb{
+    width: 20px;
+    height: 20px;
+}
+.specific-fields .v-slider__track-container{
+    height:5px;
+}
 </style>

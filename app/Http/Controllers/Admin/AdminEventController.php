@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Resources\Admin\AdminEventResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use App\Models\MyEvent;
 use App\Http\Controllers\Controller as ParentController;
@@ -28,7 +30,7 @@ class AdminEventController extends ParentController
      */
     public function show(MyEvent $event)
     {
-        return response()->json(['status' => true, 'data' => $event], 200);
+        return response()->json(['status' => true, 'data' => AdminEventResource::make($event)], 200);
     }
 
     /**
@@ -43,6 +45,7 @@ class AdminEventController extends ParentController
             $data = $request->only(
                 'title',
                 'date',
+                'translates'
             );
             $validator = Validator::make($data, [
                 'title' => 'required|min:3',
@@ -56,6 +59,7 @@ class AdminEventController extends ParentController
             $myevent = MyEvent::create($data);
             //$appeal->number = Str::random(10);
             $myevent->save();
+            $this->update_translates($data, $myevent);
             return response()->json($myevent, 200);
         }
     }
@@ -74,6 +78,7 @@ class AdminEventController extends ParentController
             $data = $request->only(
                 'title',
                 'date',
+                'translates'
             );
             $validator = Validator::make($data, [
                 'title' => 'required|min:3',
@@ -89,6 +94,7 @@ class AdminEventController extends ParentController
             $event->update($data);
             //$appeal->number = Str::random(10);
             $event->save();
+            $this->update_translates($data, $event);
             return response()->json($event, 200);
         }
         return response()->json('error', 401);
@@ -143,5 +149,33 @@ class AdminEventController extends ParentController
         });
         return response()->json(['data' => $data], 200);
 
+    }
+
+    /**
+     * @param array $data
+     * @param $event
+     * @return void
+     */
+    public function update_translates(array $data, $event)
+    {
+        if (isset($data['translates'])) {
+            //$data['translates'] = json_decode($data['translates'], true);
+            //dd($data['translates']);
+            $translates = [];
+            if (is_array($data['translates'])) {
+                foreach ($data['translates'] as $language => $translate) {
+                    if (is_array($translate)) {
+                        if (strlen($translate['title']) > 3)
+                            DB::table('event_translates')
+                                ->updateOrInsert(
+                                    ['language' => $language, 'event_id' => $event->id],
+                                    [
+                                        'title' => $translate['title'] ?? "",
+                                    ]
+                                );
+                    }
+                }
+            }
+        }
     }
 }

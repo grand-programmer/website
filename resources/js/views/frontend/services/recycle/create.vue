@@ -441,6 +441,7 @@
                                                                 item-value="tin"
                                                                 name="importInn"
                                                                 hide-no-data
+                                                                clearable
                                                                 :loading="loading.recycle_org"
                                                                 :search-input.sync="search_inn"
                                                                 return-object
