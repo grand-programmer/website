@@ -41,6 +41,7 @@ class User extends Authenticatable implements JWTSubject
         "user_type",
         "ret_cd",
         "legal_info",
+        "legal_tin",
         "type",
     ];
 

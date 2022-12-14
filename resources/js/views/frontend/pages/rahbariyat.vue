@@ -228,8 +228,8 @@ export default {
                 },
             ],
             rahbariyat: null,
-            rais: null,
-            birinchi_orinbosar: null,
+            rais: [],
+            birinchi_orinbosar: [],
             dialog_image:false,
             image:null,
             orinbosarlar: []

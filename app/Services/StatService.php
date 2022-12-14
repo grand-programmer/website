@@ -585,7 +585,7 @@ class StatService
     public function getFileFromEArxiv($file_id, $pnfl = null)
     {
         $whereUser = "";
-        if ($pnfl) $whereUser = " and f.user_id='" . $pnfl . "'";
+       // if ($pnfl) $whereUser = " and f.user_id='" . $pnfl . "'";
         $query = "  select
                 f.file_id,
                 f.docname,

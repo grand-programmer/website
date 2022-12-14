@@ -154,6 +154,23 @@ const userRoutes =
                                     path: ":id", component: () => import('./views/frontend/services/ppay/info'),
                                 },
                             ]
+                        },{
+                            path: "stamp/",
+                            component: () => import('./views/frontend/services/stamp/index'),
+                            meta: {
+                                auth: true,
+                                authRedirect: '/login',
+                                notFoundRedirect: '/403',
+                                forbiddenRedirect: '/403',
+                                routeAuth: '/login'
+                            },
+                            children: [
+                                {
+                                    path: "", component: () => import('./views/frontend/services/stamp/create'),
+                                }, {
+                                    path: ":id", component: () => import('./views/frontend/services/stamp/info'),
+                                },
+                            ]
                         }, {
                             path: "recycle/",
                             component: () => import('./views/frontend/services/recycle/index'),
@@ -279,7 +296,7 @@ const userRoutes =
                                     path: "", component: () => import('./views/frontend/services/refund/create'),
                                 }, {
                                     path: ":id", component: () => import('./views/frontend/services/refund/info'),
-                                }, 
+                                },
                             ]
                         },{
                             path: "ppay/",
@@ -296,6 +313,23 @@ const userRoutes =
                                     path: "", component: () => import('./views/frontend/services/ppay/create'),
                                 }, {
                                     path: ":id", component: () => import('./views/frontend/services/ppay/info'),
+                                },
+                            ]
+                        },{
+                            path: "stamp/",
+                            component: () => import('./views/frontend/services/stamp/index'),
+                            meta: {
+                                auth: true,
+                                authRedirect: '/login',
+                                notFoundRedirect: '/403',
+                                forbiddenRedirect: '/403',
+                                routeAuth: '/login'
+                            },
+                            children: [
+                                {
+                                    path: "", component: () => import('./views/frontend/services/stamp/create'),
+                                }, {
+                                    path: ":id", component: () => import('./views/frontend/services/stamp/info'),
                                 },
                             ]
                         }, {
@@ -393,6 +427,7 @@ const userRoutes =
                             {path: 'votes/', component: () => import("./views/frontend/pages/votes")},
                             {path: 'rahbariyat', component: () => import("./views/frontend/pages/rahbariyat")},
                             {path: 'markaziy', component: () => import("./views/frontend/pages/markaziy")},
+                            {path: 'documents', component: () => import("./views/frontend/pages/documents/index")},
                             {path: 'structure', component: () => import("./views/frontend/pages/structure/markaziy")},
                             {path: 'jismoniy', component: () => import("./views/frontend/pages/jismoniy")},
                             {path: 'boshqarma/:id', component: () => import("./views/frontend/pages/org")},
@@ -773,7 +808,10 @@ routes.push(userRoutes);
 routes.push(allRoutes);
 //console.log(location.host);
 export default new vueRouter({
-    mode: 'history', base: process.env.BASE_URL, routes: routes, scrollBehavior() {
+    mode: 'history',
+    base: process.env.BASE_URL,
+    routes: routes,
+    scrollBehavior() {
         return {x: 0, y: 0}
     }
 

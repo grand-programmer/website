@@ -134,7 +134,8 @@ export default {
         headers: [
             {text: 'ID', sortable: true, value: 'id', align: 'start'},
             {text: 'Сарлавҳа', sortable: true, value: 'name', align: 'center', width: '30%'},
-            // {text: 'Урл адреси', sortable: true, value: 'slug', width: '30%'},
+            {text: 'Урл адреси', sortable: true, value: 'url'},
+            {text: 'Ҳужжат санаси', sortable: true, value: 'date'},
             /*{text: 'Категорияси', sortable: true, value: 'categories'},*/
             {text: 'Амаллар', value: 'actions', sortable: false}
         ],

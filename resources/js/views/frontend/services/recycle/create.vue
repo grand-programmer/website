@@ -1325,7 +1325,29 @@ export default {
 
     },
     methods: {
+        showFirstError(error) {
+            let toast;
 
+            function getkeyValue(myObject) {
+                let ob = {
+                    key: null,
+                    value: null,
+                };
+                if (typeof myObject === 'object') {
+                    if (typeof Object.values(myObject)[0] === 'object')
+                        ob = getkeyValue(Object.values(myObject)[0])
+                    else {
+                        ob.value = Object.values(myObject)[0];
+                        ob.key = Object.keys(myObject)[0];
+
+                    }
+                }
+                return ob;
+            }
+
+            toast = getkeyValue(error);
+            this.$toast.error('Майдонларни тўлдиришда хатолик юз берди! \n ' + toast.key + ' - ' + toast.value);
+        },
         async getCurrencies() {
             let root = this
             await axios.get('/api/v1/data/currency?lang=uz').then(function (result) {

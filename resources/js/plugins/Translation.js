@@ -64,7 +64,6 @@ const Trans = {
     },
     routeMiddleware(to, from, next) {
         const locale = to.params.locale
-      //  console.log(to)
 
      if(locale==='admin' || to.params.slug==='admin') {
            // console.log(to)
@@ -80,7 +79,6 @@ const Trans = {
             });
         }*/
         if(typeof to.redirectedFrom!=='undefined' && to.redirectedFrom.includes("public")) {
-
             return next({
                 path:to.redirectedFrom.replace("/public",""),
                 //params: {locale: i18n.locale },

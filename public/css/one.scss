@@ -294,6 +294,9 @@ ul#pills-tab {
 .one-page .section {
     /*    padding-top: 60px;*/
 }
+.one-page .page-content .container{
+    z-index: 1;
+}
 
 .portfolio_area {
     height: 100%;
@@ -3369,13 +3372,13 @@ a.read_more {
     }
 
     &:hover {
-        a {
+        > a {
             color: #39ae69;
         }
     }
 }
 
-.categori_widget ul li.active a {
+.categori_widget ul li.active > a {
     color: #39ae69;
 
     i {

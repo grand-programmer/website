@@ -22,7 +22,7 @@
                     <v-col cols="12" class="rais" >
                         <div class="wrapper">
                             <div class="row">
-                                <div class="col-2">
+                                <div class="col-2" :style="organization.id===20?'background:none; border:none':''" >
                                     <div class="profile-icon-wrapper">
                                         <div class="profile-icon"
                                              :style="'background-image: url(/storage/uploads/boshqarmalar/boshliq/'+ organization.rahbariyat.boshliq.image + ');'">
@@ -36,7 +36,8 @@
                                         </div>
                                         <div class="text-row">
                                             <div class="far fa-user">&nbsp;</div>
-                                            <p v-if="organization.id!==16">{{organization.rahbariyat.boshliq.lavozimi}}</p>
+                                            <p v-if="organization.id===20">{{$t('Институт бошлиғи')}}</p>
+                                            <p v-else-if="organization.id!==16">{{organization.rahbariyat.boshliq.lavozimi}}</p>
                                             <p v-else>{{ $t("Директор") }}</p>
                                         </div>
                                         <div class="text-row">
@@ -57,7 +58,7 @@
                             <h3 style="text-align: center;">&nbsp;</h3>
                         </div>
                         <div class="row justify-content-center">
-                            <div class="orinbosar col-3" v-for="orinbosar in organization.rahbariyat.orinbosar">
+                            <div class="orinbosar col-3" v-for="(orinbosar,keyOrinbosar) in organization.rahbariyat.orinbosar">
                                 <div class="row">
                                     <div class="col-12">
                                         <div>
@@ -71,7 +72,12 @@
                                             <div class="orinbosar-info">
                                                 <div class="text-row">
                                                     <div class="far fa-user">&nbsp;</div>
-                                                    <p>{{orinbosar.lavozimi}}</p>
+                                                    <p v-if="organization.id===20">
+                                                        <template v-if="keyOrinbosar===0">{{$t('Бошлиқнинг ўқув ва илмий ишлар бўйича биринчи ўринбосари')}}</template>
+                                                        <template v-if="keyOrinbosar===1">{{$t('Бошлиқнинг тарбиявий ишлар ва ҳарбий тайёргарлик бўйича ўринбосари')}}</template>
+                                                        <template v-if="keyOrinbosar===2">{{$t('Бошлиқнинг молия-иқтисод ва хўжалик ишлари бўйича ўринбосари')}}</template>
+                                                    </p>
+                                                    <p v-else>{{orinbosar.lavozimi}}</p>
                                                 </div>
                                                 <div class="text-row">
                                                     <div class="far fa-clock">&nbsp;</div>

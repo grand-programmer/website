@@ -53,6 +53,8 @@ class AdminDocumentController extends Controller
             'url' => 'required|min:3',
             'code' => 'required|min:3',
             'date' => 'required|min:3|date',
+            'categories' => 'required',
+            'type' => 'required',
             'translates' => 'required|array',
         ]);
 
@@ -66,6 +68,8 @@ class AdminDocumentController extends Controller
             'url' => $data['url'],
             'code' => $data['code'],
             'date' => $data['date'],
+            'type' => $data['type'],
+            'cat_id' => $data['categories'],
             'lang' => 'uz'
         ]);
         $insertData = [];
@@ -77,6 +81,8 @@ class AdminDocumentController extends Controller
                     'url' => strlen($locale['url']) > 0 ? $locale['url'] : " ",
                     'code' => strlen($locale['code']) > 0 ? $locale['code'] : " ",
                     'date' => $data['date'],
+                    'type' => $data['type'],
+                    'cat_id' => $data['categories'],
                     'lang' => $localKey,
                     'relation_id' => $doc->id
                 ];
@@ -120,6 +126,7 @@ class AdminDocumentController extends Controller
             'url' => 'required',
             'code' => 'required',
             'date' => 'required',
+            'type' => 'required',
             'cat_id' => 'required',
             'translates' => 'required|array',
         ]);
@@ -132,8 +139,14 @@ class AdminDocumentController extends Controller
 
         $doc = $document->update([
             'name' => $data['name'],
+            'url' => $data['url'],
+            'code' => $data['code'],
+            'date' => $data['date'],
+            'type' => $data['type'],
+            'cat_id' => $data['cat_id'],
             'lang' => 'uz'
         ]);
+
         if ($doc) {
             foreach ($data['translates'] as $localKey => $locale) {
                 Document::where([
@@ -143,8 +156,9 @@ class AdminDocumentController extends Controller
                     'name' => strlen($locale['name']) > 0 ? $locale['name'] : "",
                     'url' => strlen($locale['url']) > 0 ? $locale['url'] : "",
                     'code' => strlen($locale['code']) > 0 ? $locale['code'] : "",
-                    'date' => strlen($locale['date']) > 0 ? $locale['date'] : "",
-                    'cat_id' => strlen($locale['cat_id']) > 0 ? $locale['cat_id'] : ""
+                    'date' => $data['date'],
+                    'type' => $data['type'],
+                    'cat_id' => $data['cat_id']
                 ]);
             }
 

@@ -29,6 +29,7 @@ export default {
                 'recycle',
                 'refund',
                 'ppay',
+                'stamp',
                 'tftn',
                 'ombor',
                 'cargo',
@@ -68,7 +69,7 @@ export default {
                 {
                     name: 'ppay',
                     img: '/img/icons/bojxona-tolovlarini-kechiktirib.png',
-                    text: this.$t("ТИФ субъектининг божхона тўловларини кечиктириб ёки бўлиб-бўлиб тўлашга рухсат бериш"),
+                    text: this.$t("Божхона тўловларини кечиктириб ёки бўлиб-бўлиб тўлашга рухсат бериш"),
                     href: '/services/ppay',
                     sort: 4,
                 },
@@ -87,6 +88,13 @@ export default {
                     sort: 6,
                 },
                 {
+                    name: 'stamp',
+                    img: '/img/icons/stamp.png',
+                    text: this.$t("Транспорт воситасига товарларни божхона пломбалари ва муҳрлари остида ташишга рухсат бериш"),
+                    href: '/services/stamp',
+                    sort: 6,
+                },
+                {
                     name: 'ombor',
                     img: '/img/icons/warehouse.png',
                     text: this.$t("Юк операциялари"),
@@ -96,7 +104,7 @@ export default {
                 {
                     name: 'cargo',
                     img: '/img/icons/etranzit.png',
-                    text: 'E-Tranzit',
+                    text: this.$t('E-Tranzit'),
                     href: null,
                     sort: 8,
                 },

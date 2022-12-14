@@ -68,7 +68,7 @@
                                                                             v-slot="{ errors }">
                                                             <v-autocomplete
                                                                 label="Категория"
-                                                                v-model="editedItem.categories"
+                                                                v-model="editedItem.cat_id"
                                                                 :items="categories"
                                                                 auto-select-first
                                                                 item-text="name"
@@ -76,6 +76,27 @@
                                                                 clearable
                                                                 hide-selected
                                                                 no-data-text="Бошқа категориялар топилмади"
+                                                            ></v-autocomplete>
+                                                            <span class="error--text">{{ errors[0] }}</span>
+                                                        </ValidationProvider>
+
+                                                    </v-col>
+                                                    <v-col cols="4" sm="4" md="4">
+                                                        <ValidationProvider name="Ҳужжат тури" rules="required"
+                                                                            v-slot="{ errors }">
+                                                            <v-autocomplete
+                                                                label="Тури"
+                                                                v-model="editedItem.type"
+                                                                :items="[
+                                                                    {text:'ЎЗБЕКИСТОН РЕСПУБЛИКАСИ ҚОНУНИ',value:1},
+                                                                    {text:'ЎЗБЕКИСТОН РЕСПУБЛИКАСИ ПРЕЗИДЕНТИ ФАРМОНИ',value:2},
+                                                                    {text:'ЎЗБЕКИСТОН РЕСПУБЛИКАСИ ПРЕЗИДЕНТИ ҚАРОРИ',value:3},
+                                                                    {text:'ЎЗБЕКИСТОН РЕСПУБЛИКАСИ ВАЗИРЛАР МАҲКАМАСИ ҚАРОРИ',value:4},
+                                                                    {text:'ЎЗБЕКИСТОН РЕСПУБЛИКАСИ АДЛИЯ ВАЗИРЛИГИДА РЎЙХАТДАН ЎТГАН БУЙРУҚ ВА ҚАРОРЛАР',value:5},
+                                                                ]"
+                                                                clearable
+                                                                hide-selected
+                                                                no-data-text="Бошқа турлари топилмади"
                                                             ></v-autocomplete>
                                                             <span class="error--text">{{ errors[0] }}</span>
                                                         </ValidationProvider>
@@ -196,8 +217,8 @@ export default {
             breadcrumb_items:
                 [
                     {text: 'Админ панел', to: '/admin', exact: true},
-                    {text: 'Янгиликлар', to: '/admin/documents', exact: true},
-                    {text: 'Янгилик таҳрирлаш', to: '/admin/documents/edit', exact: true},
+                    {text: 'Ҳужжатлар', to: '/admin/documents', exact: true},
+                    {text: 'Ҳужжатлар таҳрирлаш', to: '/admin/documents/edit', exact: true},
                 ],
             boshqarmalar: [],//[{value:"1700",text:"'Тошкент-АЭРО' ИБК"},{value:"1703",text:"Андижон вилояти божхона бошқармаси"},{value:"1706",text:"Бухоро вилояти божхона бошқармаси"},{value:"1708",text:"Жиззах вилояти божхона бошқармаси"},{value:"1710",text:"Қашқадарё вилояти божхона бошқармаси"},{value:"1712",text:"Навоий вилояти божхона бошқармаси"},{value:"1714",text:"Наманган вилояти божхона бошқармаси"},{value:"1718",text:"Самарқанд вилояти божхона бошқармаси"},{value:"1722",text:"Сурхондарё вилояти божхона бошқармаси"},{value:"1724",text:"Сирдарё вилояти божхона бошқармаси"},{value:"1726",text:"Тошкент шахар божхона бошқармаси"},{value:"1727",text:"Тошкент вилояти божхона бошқармаси"},{value:"1730",text:"Фарғона вилояти божхона бошқармаси"},{value:"1733",text:"Хоразм вилояти божхона бошқармаси"},{value:"1735",text:"Қорақалпоғистон Республикаси божхона бошқармаси"}]
         }
@@ -218,7 +239,7 @@ export default {
             const [year, month, day] = date.split('-')
             if(type===2) return `${day}-${month}-${year}`;
             console.log('asd'+date)
-            if(type===1) return `${day}.${month}.${year}`; else return `${year}-${day}-${month}`
+            if(type===1) return `${day}-${month}-${year}`; else return `${year}-${day}-${month}`
         },
         getLang(code = null) {
             if (code) {
@@ -273,6 +294,7 @@ export default {
 
                 //data.append("translates", JSON.stringify(this.langtext));
                 this.editedItem.translates=this.langtext;
+                if (this.editedItem.date && this.editedItem.date.length > 0) this.editedItem.date = this.formatDate(this.editedItem.date);
                 api.updateDocument(this.editedItem.id,this.editedItem).then((response) => {
                     this.$toast.success(`Маълумотларни омадли тарзда юкланди!`);
                     this.close();
@@ -286,6 +308,7 @@ export default {
                         console.log((Object.values(error.response.data.error))[0][0])
                     }
                 })
+                if (this.editedItem.date && this.editedItem.date.length > 0) this.editedItem.date = this.formatDate(this.editedItem.date,1);
 
             }
 

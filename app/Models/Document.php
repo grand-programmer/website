@@ -10,7 +10,7 @@ class Document extends Model
     use HasFactory;
 
     protected $table="documents";
-    protected $fillable=['name','lang','url','code','date'];
+    protected $fillable=['name','lang','url','code','date','cat_id','type'];
 
     public function translates()
     {

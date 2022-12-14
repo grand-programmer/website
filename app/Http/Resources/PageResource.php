@@ -20,7 +20,11 @@ class PageResource extends JsonResource
         $translates = DB::table('page_translates')->where(["page_id" => $this->id, "language" => app()->getLocale()])->get();
         return [
             'id'=>$this->id,
-            'parent'=>$this->parent,
+            'parent'=>($menu=Menu::where([
+                'relation_id'=>$this->id,
+            ])->first())?(($menu1=Menu::where([
+                'id'=>$menu->parent,
+            ])->first())?$menu1:$menu->parent):-1,
             'publish'=>$this->publish,
             'title'=>isset($translates[0]) ? $translates[0]->title : $this->title,
             'slug'=>$this->slug,

@@ -544,7 +544,7 @@
                     <div class="tab-container">
                         <div class="opendata-container">
                             <div class="opendata">
-                                <div class="portfolio_single p2">
+                                <div class="portfolio_single p2 d-none">
                                     <div class="shadow-right"></div>
                                     <div class="portfolio_content">
                                         <div class="portfolio_text">{{

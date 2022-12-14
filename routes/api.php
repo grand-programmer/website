@@ -83,6 +83,8 @@ use Illuminate\Support\Facades\Schema;
         Route::resource('/page', 'App\Http\Controllers\PageController');
         Route::get('/menu/select', 'App\Http\Controllers\MenuController@getForSelect');
         Route::get('/menu/front', 'App\Http\Controllers\MenuController@getForFront');
+        Route::get('/documents', 'App\Http\Controllers\DocumentController@index');
+        Route::get('/documentcategories', 'App\Http\Controllers\DocumentController@getCategories');
         Route::resource('/menu', 'App\Http\Controllers\MenuController');
         Route::get('/footermenu/select', 'App\Http\Controllers\FooterMenuController@getForSelect');
         Route::get('/footermenu/front', 'App\Http\Controllers\FooterMenuController@getForFront');

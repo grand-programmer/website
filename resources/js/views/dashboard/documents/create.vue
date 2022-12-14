@@ -84,6 +84,28 @@
 
                                                     </v-col>
 
+                                                    <v-col cols="4" sm="4" md="4">
+                                                        <ValidationProvider name="Ҳужжат тури" rules="required"
+                                                                            v-slot="{ errors }">
+                                                            <v-autocomplete
+                                                                label="Тури"
+                                                                v-model="editedItem.type"
+                                                                :items="[
+                                                                    {text:'ЎЗБЕКИСТОН РЕСПУБЛИКАСИ ҚОНУНИ',value:1},
+                                                                    {text:'ЎЗБЕКИСТОН РЕСПУБЛИКАСИ ПРЕЗИДЕНТИ ФАРМОНИ',value:2},
+                                                                    {text:'ЎЗБЕКИСТОН РЕСПУБЛИКАСИ ПРЕЗИДЕНТИ ҚАРОРИ',value:3},
+                                                                    {text:'ЎЗБЕКИСТОН РЕСПУБЛИКАСИ ВАЗИРЛАР МАҲКАМАСИ ҚАРОРИ',value:4},
+                                                                    {text:'ЎЗБЕКИСТОН РЕСПУБЛИКАСИ АДЛИЯ ВАЗИРЛИГИДА РЎЙХАТДАН ЎТГАН БУЙРУҚ ВА ҚАРОРЛАР',value:5},
+                                                                ]"
+                                                                clearable
+                                                                hide-selected
+                                                                no-data-text="Бошқа турлари топилмади"
+                                                            ></v-autocomplete>
+                                                            <span class="error--text">{{ errors[0] }}</span>
+                                                        </ValidationProvider>
+
+                                                    </v-col>
+
                                                     <v-col
                                                         cols="4"
                                                         v-show="lang==='uz'">
@@ -201,6 +223,7 @@ export default {
                 code: null,
                 date: null,
                 cat_id: null,
+                type:null,
             },
             breadcrumb_items:
                 [

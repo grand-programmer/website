@@ -14,13 +14,13 @@
                 <v-row>
                     <v-col cols="12">
                         <h3 align="center" class="lh-sm font-weight-bold primary-color my-5">
-                            ТИФ субъектининг божхона органлари ғазна ҳисобварағидаги маблағларини қайтариш бўйича ариза
+                            Транспорт воситасига товарларни божхона пломбалари ва муҳрлари остида ташишга рухсат бериш
                             <br>
                         </h3>
                     </v-col>
                 </v-row>
                 <v-card
-                    class="mb-12 px-5 py-10 "
+                    class="mb-12 px-5 py-10"
 
                 >
                     <div class="row position-absolute yoriqnoma-text"><a
@@ -31,7 +31,7 @@
                         <v-row>
                         </v-row>
                         <v-row class="person_data mt-10">
-                            <v-col cols="6" v-if="person.type===2">
+                            <v-col cols="4" v-if="person.type===2">
                                 <ValidationProvider name="СТИР"
                                                     v-slot="{ errors }">
 
@@ -49,7 +49,7 @@
                                     <span class="red--text">{{ errors[0] }}</span>
                                 </ValidationProvider>
                             </v-col>
-                            <v-col cols="6" v-else>
+                            <v-col cols="4" v-else>
                                 <ValidationProvider name="ЖШШИР"
                                                     v-slot="{ errors }">
 
@@ -67,24 +67,7 @@
                                     <span class="red--text">{{ errors[0] }}</span>
                                 </ValidationProvider>
                             </v-col>
-                            <v-col cols="6" v-if="!$auth.user().tin || ($auth.user().tin && ($auth.user().tin).length<9)">
-                                <ValidationProvider name="СТИР"
-                                                    v-slot="{ errors }">
-
-                                    <v-text-field
-                                        v-model="person.tin"
-                                        label="СТИР"
-                                        required
-                                        hint="Аризачи СТИРи"
-                                        persistent-hint
-                                        name="personInn"
-                                    >
-                                    </v-text-field>
-
-                                    <span class="red--text">{{ errors[0] }}</span>
-                                </ValidationProvider>
-                            </v-col>
-                            <v-col cols="6">
+                            <v-col cols="4">
                                 <ValidationProvider :name="person.type===2?'Ташкилот номи':'ФИШ'" rules="required"
                                                     v-slot="{ errors }">
                                     <v-text-field
@@ -104,73 +87,8 @@
 
                             </v-col>
 
-                            <v-col cols="6">
-                                <text-field
-                                    v-model="app.bank_number"
-                                    v-mask="'#### #### #### #### ####'"
-                                    title="Банк ҳисоб рақами"
-                                    required
-                                    persistent-placeholder
-                                >
-                                </text-field>
-                            </v-col>
-                            <v-col cols="6">
-                                <ValidationProvider
-                                    name="МФО"
-                                    rules="required"
-                                    v-slot="{ errors }">
-                                    <v-autocomplete
-                                        v-model="app.mfo"
-                                        label="МФО*"
-                                        required
-                                        persistent-placeholder
-                                        :items="mfos"
-                                        item-text="name"
-                                        item-value="code"
-                                        name="importInn"
-                                        hide-no-data
-                                        :loading="loading.mfo"
-                                        :search-input.sync="search_mfo"
-                                        return-object
-                                    >
-                                    </v-autocomplete>
-                                    <span class="red--text">{{
-                                            errors[0]
-                                        }}</span>
-                                </ValidationProvider>
-                            </v-col>
-                            <v-col cols="6">
-                                <text-field
-                                    title="Қайтарилиши лозим бўлган сумма"
-                                    type="number"
-                                    persistent-placeholder
-                                    rules="required"
-                                    v-model="app.money"
-                                />
-                            </v-col>
 
-                            <v-col cols="6">
-                                <ValidationProvider name="Ҳудуд" rules="required"
-                                                    v-slot="{ errors }">
-                                    <v-autocomplete
-                                        v-model="app.region"
-                                        required
-                                        :items="regions"
-                                        persistent-hint
-                                    >
-                                        <template v-slot:label>Ҳудудий божхона бошқармасини танланг <sup>*</sup>
-                                        </template>
-                                    </v-autocomplete>
-                                    <span class="red--text">{{ errors[0] }}</span>
-                                </ValidationProvider>
-
-                            </v-col>
-                            <v-col cols="6">
-                                <e-arxiv-file v-model="app.akt"
-                                              label="Файлни юкланг" norequired/>
-                            </v-col>
-
-                            <v-col cols="6">
+                            <v-col cols="4">
                                 <ValidationProvider name="Телефон рақами" rules="required"
                                                     v-slot="{ errors }">
                                     <v-text-field
@@ -187,7 +105,7 @@
                                 </ValidationProvider>
 
                             </v-col>
-                            <v-col cols="6">
+                            <v-col cols="4">
                                 <ValidationProvider name="Электрон почта" rules="required|email"
                                                     v-slot="{ errors }">
                                     <v-text-field
@@ -205,10 +123,10 @@
                                 </ValidationProvider>
 
                             </v-col>
-                            <v-col cols="6">
+                            <v-col cols="4">
                                 <text-field
                                     v-model="person.perAdr"
-                                    title="Яшаш манзили"
+                                    title="Почта манзили"
                                     rules="required"
                                     hint="Аризачининг яшаш манзили"
                                     persistent-placeholder
@@ -218,10 +136,173 @@
 
                             </v-col>
 
+                            <v-col cols="4">
+                                <ValidationProvider name="Ҳудуд" rules="required"
+                                                    v-slot="{ errors }">
+                                    <v-autocomplete
+                                        v-model="app.region"
+                                        required
+                                        :items="regions"
+                                        persistent-hint
+                                    >
+                                        <template v-slot:label>Ҳудудий божхона бошқармасини танланг <sup>*</sup>
+                                        </template>
+                                    </v-autocomplete>
+                                    <span class="red--text">{{ errors[0] }}</span>
+                                </ValidationProvider>
+
+                            </v-col>
+
+                            <v-col cols="6">
+                                <ValidationProvider name="Пост" rules="required"
+                                                    v-slot="{ errors }">
+                                    <v-autocomplete
+                                        v-model="app.post"
+                                        :loading="postloading"
+                                        required
+                                        :disabled="postloading"
+                                        hint="Божхона постини танланг"
+                                        :items="posts"
+                                        persistent-placeholder
+                                    >
+                                        <template v-slot:label>Божхона постини танланг <sup>*</sup>
+                                        </template>
+                                    </v-autocomplete>
+                                    <span class="red--text">{{ errors[0] }}</span>
+                                </ValidationProvider>
+
+                            </v-col>
 
                         </v-row>
+                        <v-row>
+                            <v-col cols="12">
+                                <v-col cols="2" class="p-0">
+                                    <h5 class="mb-2">Транспорт воситаси тури</h5>
+                                    <v-btn-toggle v-model="app.type">
+                                        <v-btn :color="app.type!==1?'primary':''" class="border-0" small>
+                                            Автотранспорт воситаси
+                                        </v-btn>
+                                        <v-btn :color="app.type===1?'primary':''" class="border-0" small>
+                                            Контейнер
+                                        </v-btn>
+                                    </v-btn-toggle>
+                                </v-col>
+                            </v-col>
+                        </v-row>
+                        <v-row v-if="app.type!==1">
+                            <v-col cols="4">
+                                <ValidationProvider name="Автотранспорт воситаси тури" v-slot="{ errors }">
+                                    <v-autocomplete
+                                        v-model="app.type_avto"
+                                        :items="[
+                                           {text:'Тиркама',value:'Тиркама'},
+                                           {text:'Ярим тиркама',value:'Ярим тиркама'},
+                                           {text:'Юк тортгич',value:'Юк тортгич'},
+                                           {text:'Бошқа',value:'Бошқа'}
+                                       ]"
+                                        label="Автотранспорт воситаси тури*"
+                                        persistent-placeholder
+                                    >
 
+                                    </v-autocomplete>
+                                    <span class="red--text">{{ errors[0] }}</span>
+                                </ValidationProvider>
+                            </v-col>
+                            <v-col cols="4">
+                                <textfield title="Русуми (маркаси)" rules="required" v-model="app.mark"/>
+                            </v-col>
+                            <v-col cols="4">
+                                <textfield
+                                    title="Ишлаб чиқарилган санаси"
+                                    v-mask="'##-##-####'"
+                                    rules="required"
+                                    v-model="app.produced_date"/>
+                            </v-col>
+                            <v-col cols="4">
+                                <textfield
+                                    title="Давлат рақами белгиси"
+                                    rules="required"
+                                    v-model="app.gov_number"/>
+                            </v-col>
+                            <v-col cols="4">
+                                <textfield
+                                    title="Идентификация рақами (VIN)"
+                                    rules="required"
+                                    v-model="app.vin"/>
+                            </v-col>
+                            <v-col cols="4">
+                                <textfield
+                                    title="Гувоҳнома серия рақами"
+                                    hint="Автотранспорт воситаси рўйхатдан ўтказилганлиги тўғрисида гувоҳнома (техпаспорт) серия рақами"
+                                    rules="required"
+                                    v-model="app.texpasport"/>
+                            </v-col>
+
+
+                        </v-row>
+                        <v-row v-if="app.type===1">
+
+                            <v-col cols="4">
+                                <textfield
+                                    title="Контейнер рақами"
+                                    rules="required"
+                                    v-model="app.kon_number"/>
+                            </v-col>
+
+                            <v-col cols="4">
+                                <textfield
+                                    title="Контенер тури"
+                                    rules="required"
+                                    v-model="app.kon_type"/>
+                            </v-col>
+
+                            <v-col cols="4">
+
+
+                                <ValidationProvider name="Тара вазни" rules="required"
+                                                    v-slot="{ errors }">
+                                    <v-text-field
+                                        v-model="app.konWeight"
+                                        persistent-placeholder
+                                    >
+                                        <template v-slot:label>Тара вазни <sup>*</sup>
+                                        </template>
+                                    </v-text-field>
+                                    <span class="red--text">{{ errors[0] }}</span>
+                                </ValidationProvider>
+
+
+                            </v-col>
+
+                            <v-col cols="4">
+                                <textfield
+                                    title="Ташқи ўлчамлари"
+                                    rules="required"
+                                    hint="смда, Мисол: 1289,5*235*239,2"
+                                    v-model="app.kon_size"/>
+                            </v-col>
+                            <v-col cols="4">
+                                <textfield
+                                    title="Конструкциянинг асосий ҳусусиятлари"
+                                    rules="required"
+                                    hint="материал типи, конструкция тури ва бошқа. Мисол: Темирдан ясалган, йиғилмайдиган "
+                                    v-model="app.kon_xususiyat"/>
+                            </v-col>
+
+                        </v-row>
+                        <v-row>
+                            <v-col cols="12">
+                                <e-arxiv-file
+                                    multiple
+                                    v-model="app.files"
+                                    label="Транспорт воситаси расмлари"
+                                    :errors="ilova_error"
+                                    hint="Транспорт воситасининг чап тарафи, Транспорт воситасининг ўнг тарафи, Транспорт воситасининг олди, Транспорт воситасининг орқаси, Пломбалар ва муҳрлар қўйиладиган жой"/>
+                            </v-col>
+                            <v-col cols="12"></v-col>
+                        </v-row>
                     </ValidationObserver>
+
                     <v-row class="row mb-3 position-absolute bottom-0 end-0">
                         <v-col class="d-flex tab_action_buttons">
 
@@ -270,6 +351,7 @@ import TextField from "../../../../components/form/textfield";
 import AutocompleteField from "../../../../components/form/autocomplete";
 import EArxivFile from "../../../../components/form/e-arxiv-file";
 import DialogChips from "../../../../components/form/dialog-chips";
+import Textfield from "../../../../components/form/textfield";
 
 
 Object.keys(rules).forEach(rule => {
@@ -280,7 +362,7 @@ Object.keys(rules).forEach(rule => {
     });
 });
 export default {
-    name: "InitialRefund",
+    name: "InitialStamp",
     data() {
         return {
             breadcrumb_items: [
@@ -297,18 +379,33 @@ export default {
                     exact: true,
                 },
                 {
-                    text: 'Ҳисобварағидаги маблағларини қайтариш',
-                    to: '/services/refund',
+                    text: 'Транспорт воситасига товарларни божхона пломбалари ва муҳрлари остида ташишга рухсат бериш',
+                    to: '/services/stamp',
                     disabled: true,
                     exact: true,
                 },
             ],
 
             app: {
-                bank_number: null,
-                akt: []
+                type: 0,
+                type_avto: null,
+                file_error: "",
+                mark: null,
+                produced_date: null,
+                gov_number: null,
+                vin: null,
+                texpasport: null,
+                region: null,
+                post: null,
+                kon_number: null,
+                kon_type: null,
+                konWeight: null,
+                kon_size: null,
+                kon_xususiyat: null,
+                files: [],
+
+
             },
-            modal: false,
             person: {
                 type: 1, /// 1- fiz 2- yur
                 fio: "",
@@ -316,6 +413,7 @@ export default {
                 tin: null,
                 organization_name: "Жисмоний шахс",
                 organization_inn: null,
+                personType: "01",
                 position: "01",
                 phone: null,
                 email: null,
@@ -333,18 +431,31 @@ export default {
                     perAdr: null,
                     phone: null,
                 },
-                s04AppsDTO: {
+                apps: {
                     locationId: null,
-                    moneyBack: null,
-                    accountNumber: null,
-                    mfo: null,
-                    personPinTin: null,
-                    personName: null,
-                    personAddress: null,
-                    personMail: null,
-                    personPhone: null,
+                    postId: null,
+                    pinTin: null,
+                    appealType: "1",
+                    transportType: "1"
                 },
-                s04EarxivBodyList: [],
+                auto:
+                    {
+                        trailerTypeNm: null,
+                        trailerBrend: null,
+                        productionDate: null,
+                        stateNumber: null,
+                        vinNumber: null,
+                        techPassportNumber: null
+                    },
+                container:
+                    {
+                        containerNumber: null,
+                        containerType: null,
+                        containerVase: null,
+                        containerSize: null,
+                        containerFeature: null,
+                    },
+
             },
             loading: {tin: false, button: false, mfo: false},
             inns: [],
@@ -357,29 +468,56 @@ export default {
                 {key: 'firstName', value: 'ФИШ'},
                 {key: 'surName', value: 'ФИШ'},
                 {key: 'lastName', value: 'ФИШ'},
-                {key: 'email', value: 'Электрон почта манзили'},
+                {key: 'email', value: 'Электрон почта'},
                 {key: 'pin', value: 'ЖШШИР'},
                 {key: 'tin', value: 'СТИР'},
-                {key: 'perAdr', value: 'Яшаш манзили'},
+                {key: 'perAdr', value: 'Почта манзили'},
                 {key: 'phone', value: 'Телефон рақами'},
                 {key: 'locationId', value: 'Ҳудуд'},
-                {key: 'moneyBack', value: 'Қайтарилиши лозим бўлган сумма'},
-                {key: 'accountNumber', value: 'Банк ҳисоб рақами'},
-                {key: 'mfo', value: 'МФО'},
-                {key: 'personPinTin', value: 'ЖШШИР'},
+                {key: 'postId', value: 'Пост'},
+                {key: 'trailerTypeNm', value: 'Автотранспорт воситаси тури'},
+                {key: 'trailerBrend', value: 'Русуми (маркаси)'},
+                {key: 'productionDate', value: 'Ишлаб чиқарилган санаси'},
+                {key: 'stateNumber', value: 'Давлат рақами белгиси'},
+                {key: 'vinNumber', value: 'Идентификация рақами (VIN)'},
+                {key: 'techPassportNumber', value: 'Гувоҳнома серия рақами'},
+                {key: 'containerNumber', value: 'Контейнер рақами'},
+                {key: 'containerType', value: 'Контенер тури'},
+                {key: 'containerVase', value: 'Тара вазни'},
+                {key: 'containerSize', value: 'Ташқи ўлчамлари'},
+                {key: 'containerFeature', value: 'Конструкциянинг асосий ҳусусиятлари'},
+                {
+                    key: 'pinTin',
+                    value: (typeof this.person !== 'undefined' && typeof this.person.type !== 'undefined' && this.person.type === 2) ? 'СТИР' : 'ЖШШИР'
+                },
+
                 {
                     key: 'personName',
                     value: (typeof this.person !== 'undefined' && typeof this.person.type !== 'undefined' && this.person.type === 2) ? 'Ташкилот номи' : 'ФИШ'
                 },
-                {key: 'personAddress', value: 'Яшаш манзили'},
-                {key: 'personMail', value: 'Электрон почта манзили'},
-                {key: 'personPhone', value: 'Телефон рақами'},
             ],
             ilova_error: "",
+            postloading: false,
+            posts: [],
         }
 
     },
     methods: {
+        async getPosts(code) {
+            this.postloading = true;
+            const _this = this
+            this.posts = [];
+            await axios.get('/api/v1/ex_api/postsbyregion?code=' + code,).then(function (result) {
+                if (typeof result.data.posts !== 'undefined')
+                    result.data.posts.forEach(function (item) {
+                        _this.posts.push({
+                            'value': item['code'],
+                            'text': item['cdNm']
+                        })
+                    })
+            })
+            this.postloading = false;
+        },
 
         getField(val) {
             return this.fields.filter((obj) => {
@@ -400,62 +538,58 @@ export default {
         async sendApplication() {
             const _this = this;
             _this.resetVar(_this.application)
-
-
+            _this.ilova_error = "";
             _this.application['persons']['personType'] = (_this.person.type === 1) ? 0 : 1;
             _this.application['persons']['legalName'] = _this.person.organization_name;
             _this.application['persons']['firstName'] = _this.$auth.user().first_name;
             _this.application['persons']['surName'] = _this.$auth.user().sur_name;
             _this.application['persons']['lastName'] = _this.$auth.user().mid_name;
             _this.application['persons']['email'] = _this.person.email;
-            _this.application['persons']['pin'] = _this.$auth.user().pin;
-            _this.application['persons']['tin'] = _this.person.tin ? _this.person.tin : _this.person.organization_inn;
+            _this.application['persons']['pin'] = _this.person.pin;
+            _this.application['persons']['tin'] = _this.$auth.user().tin ? _this.$auth.user().tin : _this.person.organization_inn;
             _this.application['persons']['perAdr'] = _this.person.perAdr;
-
             if (typeof _this.person.phone !== 'undefined' && _this.person.phone)
                 _this.application['persons']['phone'] = _this.person.phone.replaceAll(" ", "").replaceAll("+", "");
-            _this.application['s04AppsDTO']['locationId'] = _this.app.region;
-            if (typeof _this.app.bank_number !== 'undefined' && _this.app.bank_number && _this.app.bank_number.length > 3) {
-                _this.application['s04AppsDTO']['accountNumber'] = _this.app.bank_number.replaceAll(" ", "");
-            }
-            if (typeof _this.app.money !== 'undefined' && _this.app.money && _this.app.money.length > 3) {
-                _this.application['s04AppsDTO']['moneyBack'] = _this.app.money.replaceAll(" ", "");
-            }
-            if (typeof _this.app.mfo !== 'undefined' && typeof _this.app.mfo.cdId !== 'undefined' && _this.app.mfo.cdId && _this.app.mfo.cdId.length > 3) {
-                _this.application['s04AppsDTO']['mfo'] = _this.app.mfo.cdId;
-            }
-            _this.application['s04AppsDTO']['personPinTin'] = _this.person.pin;
-            _this.application['s04AppsDTO']['personName'] = _this.person.fio;
-            _this.application['s04AppsDTO']['personAddress'] = _this.person.perAdr;
-            _this.application['s04AppsDTO']['personMail'] = _this.person.email;
-            _this.application['s04AppsDTO']['personPhone'] = _this.application['persons']['phone'];
-            if (_this.app.akt && _this.app.akt.length > 0) {
-                _this.application['s04EarxivBodyList'] = [];
-                _this.app.akt.forEach((item) => {
-                    if (typeof item.id !== 'undefined' && item.id)
-                        _this.application['s04EarxivBodyList'].push({
-                            fileId: item.id
-                        })
+            _this.application['apps']['locationId'] = _this.app.region;
 
-                })
-            }
-            //_this.application['s04EarxivBodyList']=_this.app.akt;
+            _this.application['apps']['pinTin'] = (_this.person.type === 0) ? _this.person.organization_inn : _this.person.pin;
+            _this.application['apps']['appealType'] = "1";
+            _this.application['apps']['postId'] = _this.app.post;
+            _this.application['apps']['transportType'] = _this.app.type ? '2' : '1';
 
+            _this.application.earxiv = [];
+            _this.application.earxiv = _this.arxivToApi(JSON.parse(JSON.stringify(_this.app.files)));
+            switch (_this.app.type) {
+                case 0:
+                    _this.application.auto.trailerTypeNm = _this.app.type_avto;
+                    _this.application.auto.trailerBrend = _this.app.mark;
+                    _this.application.auto.stateNumber = _this.app.gov_number;
+                    _this.application.auto.vinNumber = _this.app.vin;
+                    _this.application.auto.techPassportNumber = _this.app.texpasport;
+                    _this.application.auto.productionDate = _this.formatDate(_this.app.produced_date);
+                    break;
+
+                case 1:
+                    _this.application.container.containerNumber = _this.app.kon_number;
+                    _this.application.container.containerType = _this.app.kon_type;
+                    _this.application.container.containerVase = _this.app.konWeight;
+                    _this.application.container.containerSize = _this.app.kon_size;
+                    _this.application.container.containerFeature = _this.app.kon_xususiyat;
+                    break;
+            }
 
             let result = null;
             try {
                 let obj = JSON.parse(JSON.stringify(_this.application));
-                await axios.post('/api/v1/ex_api/refund', obj).then(function (resultData) {
+                await axios.post('/api/v1/ex_api/stamp', obj).then(function (resultData) {
                     if (typeof resultData !== 'undefined' && typeof resultData.data !== 'undefined' && typeof resultData.data.success !== 'undefined' && resultData.data.success === true) {
-                        console.log("resultData.data['data']")
-                        console.log(resultData.data.data.data.id)
-                        _this.application.id = resultData.data.data.data.id;
+                        _this.application.id = resultData.data.data.apps.id;
                         //console.log(resultData.data)
                         ///this.$cookie.delete('user');
                         //this.$cookie.delete('huquqegasi');
                         _this.$toast.success("Сизнинг аризангиз омадли тарзда юборилди!");
                         setTimeout(() => {
-                            _this.$router.push("/services/refund/" + _this.application.id)
+                            _this.$router.push("/services/stamp/" + _this.application.id)
 
                         }, 100)
                     }
@@ -463,45 +597,34 @@ export default {
                 _this.loading.button = false;
                 return result;
             } catch (error) {
-                if (typeof error.response !== 'undefined' && typeof error.response.data !== 'undefined' && typeof error.response.data.data !== 'undefined' && typeof error.response.data.data.errors !== 'undefined') {
-                    if (typeof error.response.data.data.errors.appsBody !== 'undefined') {
+                ///console.log(error.response.data.data);
+                if (typeof error.response !== 'undefined' && typeof error.response.data !== 'undefined' && error.response.data.success === false && typeof error.response.data.data !== 'undefined') {
+                    const errors = [];
+                    //console.log(error.response.data.data);
 
+                    for (const [key, item] of Object.entries(error.response.data.data)) {
+                        if (item && typeof item === 'object') {
+                            for (const [valKey, val] of Object.entries(item)) {
+                                errors[valKey] = val;
+                            }
+                        }
 
-                        _this.showFirstError(error.response.data.data.errors);
-                        _this.setApplicationErrors(error.response.data.data.errors.appsBody);
-                        //_this.$toast.error('Майдонларни тўлдиришда хатолик юз берди! Тўғрилаб юборинг!');
-                    } else if (typeof error.response.data.data.errors === 'string') _this.$toast.error(error.response.data.data.errors); else {
-                        _this.showFirstError(error.response.data.data.errors);
+                    }
+
+                    if (typeof error.response.data.data.earxiv !== 'undefined') {
+                        _this.ilova_error = JSON.parse(JSON.stringify(error.response.data.data.earxiv.earxiv));
+                    }
+                    if (errors) {
+                        _this.setApplicationErrors(errors);
+                        _this.$toast.warning('Тўлдирилган майдонлардан бири хато тўлдирилди!');
+                    } else if (typeof error.response.data.data.errors == 'string') _this.$toast.error(error.response.data.data.errors); else {
+                        _this.$toast.error('Серверда хатолик юз берди! Кейинроқ уриниб кўринг');
                     }
                 } else {
-                    _this.$toast.error('Серверда хатолик юз берди! Кейинроқ уриниб кўринг');
-                    console.log(error)
+                    _this.$toast.error('Серверда хатолик юз берди! Кейинроқ уриниб кўринг!');
                 }
 
             }
-        },
-        showFirstError(error) {
-            let toast;
-
-            function getkeyValue(myObject) {
-                let ob = {
-                    key: null,
-                    value: null,
-                };
-                if (typeof myObject === 'object') {
-                    if (typeof Object.values(myObject)[0] === 'object')
-                        ob = getkeyValue(Object.values(myObject)[0])
-                    else {
-                        ob.value = Object.values(myObject)[0];
-                        ob.key = Object.keys(myObject)[0];
-
-                    }
-                }
-                return ob;
-            }
-
-            toast = getkeyValue(error);
-            this.$toast.error('Майдонларни тўлдиришда хатолик юз берди! \n ' + toast.key + ' - ' + toast.value);
         },
         async getBoshqarmalar() {
             const _this = this
@@ -524,10 +647,6 @@ export default {
 
             this.loading.button = true;
             //console.log(!this.validateField("create_customs_person_value"))
-//
-            //  71-231-
-            //  41-86
-            //  41-87
 
             setTimeout(async () => {
                 isValid = true;// await this.validateField("stepValidation1");
@@ -538,6 +657,7 @@ export default {
                     this.person.locationId = this.person.region;
 
                     let resultData = await this.sendApplication();
+
                     this.loading.button = false;
                     /*                    if (typeof resultData !== 'undefined' && typeof resultData.data !== 'undefined' && resultData.data.success === true) {
                                             //console.log(resultData.data['data']['data']['id'])
@@ -560,6 +680,8 @@ export default {
         setApplicationErrors(errors) {
             const _this = this;
             if (errors) {
+
+                // console.log(errors);
                 let errorfield = [];
 
                 Object.keys(errors).forEach(keyItem => {
@@ -628,7 +750,11 @@ export default {
             }
             return dates.join(' -- ')
         },
-
+        formatDate(date) {
+            if (!date) return;
+            const [day, month, year] = date.split("-");
+            return year + "-" + month + "-" + day;
+        },
         resetVar(myVar) {
             const _this = this;
             if (myVar === null) return null;
@@ -661,7 +787,19 @@ export default {
             return null;
 
         },
+        arxivToApi(files) {
+            const returnFiles = [];
+            if (files && files.length > 0) {
+                files.forEach((item) => {
+                    if (typeof item.id !== 'undefined' && item.id)
+                        returnFiles.push({
+                            fileId: item.id
+                        })
 
+                })
+            }
+            return JSON.parse(JSON.stringify(returnFiles));
+        },
         issetVar(myVarString) {
             const _this = this;
             const varToString = varObj => Object.keys(varObj)[0]
@@ -689,57 +827,33 @@ export default {
         }
 
     },
+    computed: {
+        checkbox1() {
+            return false
+        }
+    },
     watch: {
-        search_mfo: {
-            handler: function (val) {
+        'app.region': {
+            handler(value) {
+                //console.log(value)
+                if (typeof value !== 'undefined' && value && value.length > 3) {
+                    const region = value; // .substr(2, 2);
+                    //setTimeout(async () => {
+                    this.getPosts(region)
+                    // })
+                }
 
-
-                if (val === null || (val && val.length > 6)) return
-                //if (this.tftncodes.length > 0) return
-
-                // Items have already been requested
-                //if (this.loading.tftncode) return
-
-                this.loading.mfo = true
-
-                // Lazily load input items
-                fetch("https://new.customs.uz/api/v1/data/mfo?code=" + val)
-                    .then((res) => res.json())
-                    .then(res => {
-                        if (typeof res.data !== 'undefined') {
-                            res.data.map(function (item) {
-                                item.name = item.code + " - " + item.cdNm;
-                                return item;
-                            })
-                            this.mfos = res.data;
-                        }
-
-
-                    })
-                    .catch(err => {
-                        //console.log(err)
-                    })
-                    .finally(() => (
-                        this.loading.mfo = false
-                    ))
             },
-            deep: false
+            immediate: true,
+            deep: true,
+            sync: true
         },
+
+
     },
 
     mounted() {
         this.initialize();
-    },
-    computed: {
-        /*        progress(val) {
-                    this.Initprogress(val)
-                },
-                isvalidDocument(tovar_id = null) {
-                    //tovar_id = this.tovarIndex;
-                    //if (tovar_id === null || isNaN(tovar_id)) tovar_id = this.tovarIndex;
-                    return !this.isValidDoc()
-                }*/
-
     },
     filters: {
         reverse: function (array) {
@@ -748,6 +862,7 @@ export default {
     }
     ,
     components: {
+        Textfield,
         DialogChips,
         EArxivFile,
         AutocompleteField,

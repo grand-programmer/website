@@ -218,12 +218,12 @@
                             </template>
                             <template v-if="app.type===2">
                                 <v-col cols="4">
-                                    <text-field title="Кафил берувчи номи" v-model="app.kafil_nomi"
-                                                hint="СТИР/ЖШШИР"/>
+                                    <text-field title="Кафил - СТИР/ЖШШИР" v-model="app.kafil_nomi"
+                                                />
                                 </v-col>
                                 <v-col cols="4">
-                                    <text-field title="Кафил номи" v-model="app.kafil_tin_pin"
-                                                hint="СТИР/ЖШШИР - Ташкилот номи/Ф.И.Ш"/>
+                                    <text-field title="Кафил - Ташкилот номи/Ф.И.Ш" v-model="app.kafil_tin_pin"
+                                                />
                                 </v-col>
                                 <v-col cols="4">
                                     <text-field title="Кафиллик хати" v-model="app.kafil_xati"/>

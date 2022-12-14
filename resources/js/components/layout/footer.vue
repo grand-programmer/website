@@ -72,15 +72,15 @@
                         </div>
                     </div>
                     <v-col cols="2">
-                       <div class="p-2 users_count"><h6><b>Сайтга кирувчилар:</b></h6>
+                       <div class="p-2 users_count"><h6><b>{{ $t('Сайтга кирувчилар') }}:</b></h6>
                         <ul>
 
                             <table v-if="viewed && typeof viewed[0] !=='undefined'">
-                                <tr><td>04.11.2022дан:</td><td><b>{{ viewed[0].year }}</b></td></tr>
-                                <tr><td>Бугун:</td><td><b>{{ viewed[0].today }}</b></td></tr>
-                                <tr><td>Кеча:</td><td><b>{{ viewed[0].yesterday }}</b></td></tr>
-                                <tr><td>Ҳафта давомидан:</td><td><b>{{ viewed[0].week }}</b></td></tr>
-                                <tr><td>Ой давомидан:</td><td><b>{{ viewed[0].month }}</b></td></tr>
+                                <tr><td>{{ $t('04.11.2022дан',{msg:'04.11.2022'}) }}:</td><td><b>{{ viewed[0].year }}</b></td></tr>
+                                <tr><td>{{ $t('Бугун') }}:</td><td><b>{{ viewed[0].today }}</b></td></tr>
+                                <tr><td>{{ $t('Кеча') }}:</td><td><b>{{ viewed[0].yesterday }}</b></td></tr>
+                                <tr><td>{{ $t('Ҳафта давомида') }}:</td><td><b>{{ viewed[0].week }}</b></td></tr>
+                                <tr><td>{{ $t('Ой давомида') }}:</td><td><b>{{ viewed[0].month }}</b></td></tr>
                             </table>
 
 <!--

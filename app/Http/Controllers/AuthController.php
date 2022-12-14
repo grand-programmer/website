@@ -102,17 +102,28 @@ class AuthController extends Controller
                         'scope' => 'customs_uz',
                     ]);
 
-            if($responseUser->status()!==200 or !isset($responseUser->json()['user_type'])) return response()->json(['error' => 'login_error'], 401);
+            if ($responseUser->status() !== 200 or !isset($responseUser->json()['user_type'])) return response()->json(['error' => 'login_error'], 401);
+            $type = 1;
+            $legal_info = [];
+            global $legals;
+            if (isset($responseUser->json()['legal_info']) && !empty($responseUser->json()['legal_info'])) {
+                $legal_info = $responseUser->json()['legal_info'];
+                collect($legal_info)->transform(function ($item, $key) {
+                    global $legals;
+                    if ($item['is_basic'] === true) {
+                        $legals = $item;
+                        return $item;
+                    }
+                })->all();
+// dd(array_column($legals,'is_basic'));
+                if (isset($legals['le_tin'])) $type = 2;
+            }
 
-            //dd($responseUser->json());
-            $type = (isset($responseUser->json()['legal_info']) && !empty($responseUser->json()['legal_info'])) ? 2 : 1;
             if (DB::table('users')->where(
                 [
                     'pin' => (int)$responseUser->json()['pin'],
-                    'type'=>$type
+                    'type' => $type
                 ])->exists()) {
-
-
 
                 //$user=User::where(['email'=>$responseUser->json()['email']])->first();
                 $d = $responseUser->json();
@@ -151,14 +162,43 @@ class AuthController extends Controller
                 })->reject(function ($name) {
                     return empty($name);
                 });
-                $user = User::where([
-                    'pin' => (int)$responseUser->json()['pin'],
-                    'type'=>$type])->firstOrFail();
 
-                $user->update(array_merge($data->all(),['type'=>$type]));
-                $user->save();
+                if ($type === 1) {
+                    $user = User::where([
+                        'pin' => (int)$responseUser->json()['pin'],
+                        'type' => $type])->firstOrFail();
+                    $user->update(array_merge($data->all(), ['type' => $type]));
+                    $user->save();
+                } else {
+                    $user = User::where([
+                        'pin' => (int)$responseUser->json()['pin'],
+                        'type' => $type,
+                        'legal_tin' => null
+                    ])->first();
+
+                    $user2 = User::where([
+                        'pin' => (int)$responseUser->json()['pin'],
+                        'type' => $type])->where('legal_tin', $legals['le_tin'])->first();
+                    if ($user2) $user = $user2;
+                    if ($user) {
+                        $user->update(array_merge($data->all(), ['type' => $type, 'legal_info'=>json_encode([$legals]),'legal_tin' => $legals['tin']]));
+                        $user->save();
+                    } else {
+                        $userData = $responseUser->json();
+                        //dd(array_merge($userData, ['type' => $type, 'password' => 'password!!!$$$']));
+                        if (isset($userData['legal_info'])) $userData['legal_info'] = json_encode([$legals]);
+                        $user = User::create(array_merge($userData, [
+                            'type' => $type,
+                            'password' => 'password!!!$$$',
+                            'legal_tin' => $legals['le_tin'],
+                            'legal_info' =>  json_encode([$legals])
+                        ]));
+
+                    }
+                }
+
                 $png_url = $user->id . ".jpg";
-                $path = public_path('storage/users/' . $png_url) ;
+                $path = public_path('storage/users/' . $png_url);
                 if (!file_exists($path)) {
 
                     try {
@@ -171,7 +211,7 @@ class AuthController extends Controller
                         //dd($userPhoto->json());
                         $userPhoto = $userPhoto->json();
                         $png_url = $user->id . ".jpg";
-                        $path = public_path('storage/users/' . $png_url) ;
+                        $path = public_path('storage/users/' . $png_url);
                         if (strlen($userPhoto['foto']) > 0)
                             Image::make(base64_decode($userPhoto['foto']))->save($path);
                     } catch (\Exception $e) {
@@ -181,9 +221,19 @@ class AuthController extends Controller
             } else {
                 $userData = $responseUser->json();
                 //dd(array_merge($userData, ['type' => $type, 'password' => 'password!!!$$$']));
-                if (isset($userData['legal_info'])) $userData['legal_info']=json_encode($userData['legal_info']);
+                if (isset($userData['legal_info'])) $userData['legal_info'] =  json_encode([$legals]);
                 if (User::where(['email' => $responseUser->json()['email']])->exists()) $userData['email'] = "";
-                $user = User::create(array_merge($userData, ['type' => $type, 'password' => 'password!!!$$$']));
+
+                if ($type === 1) {
+                    $user = User::create(array_merge($userData, ['type' => $type, 'password' => 'password!!!$$$']));
+                } else {
+                    $user = User::create(array_merge($userData, [
+                        'type' => $type,
+                        'password' => 'password!!!$$$',
+                        'legal_tin' => $legals['le_tin'],
+                        'legal_info' =>  json_encode([$legals])
+                    ]));
+                }
                 $user->save();
 
                 $userPhoto = Http::acceptJson()->withBody(json_encode([
@@ -195,7 +245,7 @@ class AuthController extends Controller
 
                 $userPhoto = $userPhoto->json();
                 $png_url = $user->id . ".jpg";
-                $path = public_path('storage/users/' . $png_url) ;
+                $path = public_path('storage/users/' . $png_url);
                 if (strlen($userPhoto['foto']) > 0)
                     Image::make(base64_decode($userPhoto['foto']))->save($path);
 
@@ -228,6 +278,7 @@ class AuthController extends Controller
     public function user(Request $request)
     {
         $user = User::find(Auth::user()->id);
+        if (strlen($user->legal_tin) === 9) $user->tin = $user->legal_tin;
         return response()->json([
             'status' => 'success',
             'data' => $user

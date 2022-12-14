@@ -64,31 +64,49 @@
                     </v-stepper-header>
 
                     <v-stepper-items>
-                        <v-stepper-content step="1" style="padding: 0">
+                        <v-stepper-content step="1">
                             <v-card
                                 class="mb-12"
                             >
                                 <div class="row position-absolute yoriqnoma-text"><a
-                                    href="/storage/files/dastlabki-user.pptx"> Ариза тўлдириш бўйича <br> йўриқмани юклаб
-                                    олинг!
+                                    href="/storage/files/dastlabki-user-qaytarilgan.pptx"> Ариза тўлдириш бўйича
+                                    йўриқмани юклаб олинг!
                                 </a></div>
                                 <ValidationObserver v-slot="{ invalid }" ref="create_customs_person_value">
-                                    <v-row style="margin: 0!important;">
+                                    <v-row>
 
                                         <v-col cols="3" class="d-flex align-items-center jis_yur">
+                                            <!--                                        <div class="form-field d-flex align-items-center jis_yur">
+                                                                                        <label :class="person.type==0?'primary':''">Юридик шахс</label>
 
-                                            <v-btn color="primary" v-if="person.type===1">
+                                                                                        <v-switch v-model="person.type"></v-switch>
+                                                                                        <label :class="person.type==1?'primary':''">Жисмоний шахс</label>
+
+                                                                                    </div>-->
+
+                                            <!--                                            <v-btn-toggle
+                                                                                            v-model="person.type"
+
+                                                                                            tile
+                                                                                            group
+                                                                                            mandatory
+                                                                                        >-->
+
+
+                                            <v-btn color="primary" v-if="person.type==='01'">
                                                 Жисмоний шахс
                                             </v-btn>
-                                            <v-btn color="primary" v-if="person.type===0">
+                                            <v-btn color="primary" v-if="person.type==='02'">
                                                 Юридик шахс
                                             </v-btn>
+                                            <!--
 
+                                                                                        </v-btn-toggle>-->
 
                                         </v-col>
                                     </v-row>
                                     <v-row class="person_data">
-                                        <v-col lg="6" md="6" sm="12" cols="12" v-if="person.type===1">
+                                        <v-col cols="6" v-if="person.type==='01'">
                                             <ValidationProvider name="ЖШШИР" rules="required|digits:14"
                                                                 v-slot="{ errors }">
                                                 <v-text-field
@@ -106,7 +124,7 @@
                                                 <span class="red--text">{{ errors[0] }}</span>
                                             </ValidationProvider>
                                         </v-col>
-                                        <v-col lg="6" md="6" sm="12" cols="12" v-else>
+                                        <v-col cols="6" v-else>
                                             <ValidationProvider name="Ташкилот номи" rules="required"
                                                                 v-slot="{ errors }">
                                                 <v-text-field
@@ -114,6 +132,7 @@
                                                     :counter="200"
                                                     label="Ташкилот номи"
                                                     required
+                                                    disabled
                                                     hint="Юридик шахснинг тўлиқ номи"
                                                     persistent-placeholder
                                                 >
@@ -124,7 +143,7 @@
                                             </ValidationProvider>
 
                                         </v-col>
-                                        <v-col lg="6" md="6" sm="12" cols="12">
+                                        <v-col cols="6">
                                             <ValidationProvider name="СТИР" rules="required"
                                                                 v-slot="{ errors }">
                                                 <v-text-field
@@ -133,7 +152,7 @@
                                                     label="СТИР"
                                                     type="number"
                                                     required
-                                                    :disabled="(person.tin!==null && (person.tin).toString().length===9)"
+                                                    disabled
                                                     hint="Солиқ тўловчининг идентификацион рақами"
                                                     persistent-hint
                                                 >
@@ -144,8 +163,7 @@
                                             </ValidationProvider>
 
                                         </v-col>
-
-                                        <v-col lg="6" md="6" sm="12" cols="12">
+                                        <v-col cols="6">
                                             <ValidationProvider name="Фамилияси исми шарифи" rules="required"
                                                                 v-slot="{ errors }">
                                                 <v-text-field
@@ -164,32 +182,32 @@
 
                                         </v-col>
 
-                                        <!--
-                                                                                <v-col cols="6" v-if="person.type==='01'">
-                                                                                    <ValidationProvider :slim="(person.type!=='01')" v-if="person.type==='02'"
-                                                                                                        name="Лавозими" rules="required"
-                                                                                                        v-slot="{ errors }">
-                                                                                        <v-text-field
-                                                                                            v-model="person.position"
-                                                                                            :counter="200"
-                                                                                            required
-                                                                                            hint="Аризачининг ташкилотдаги лавозими"
-                                                                                            persistent-placeholder
-                                                                                        >
-                                                                                            <template v-slot:label>Лавозими <sup>*</sup></template>
-                                                                                        </v-text-field>
-                                                                                        <span class="red&#45;&#45;text">{{ errors[0] }}</span>
-                                                                                    </ValidationProvider>
+                                        <v-col cols="6" v-if="person.type==='02'">
+                                            <ValidationProvider :slim="(person.type!=='01')" v-if="person.type==='02'"
+                                                                name="Лавозими" rules="required"
+                                                                v-slot="{ errors }">
+                                                <v-text-field
+                                                    v-model="person.position"
+                                                    :counter="200"
+                                                    required
+                                                    disabled
+                                                    hint="Аризачининг ташкилотдаги лавозими"
+                                                    persistent-placeholder
+                                                >
+                                                    <template v-slot:label>Лавозими <sup>*</sup></template>
+                                                </v-text-field>
+                                                <span class="red--text">{{ errors[0] }}</span>
+                                            </ValidationProvider>
 
-                                                                                </v-col>-->
-                                        <v-col lg="6" md="6" sm="12" cols="12">
+                                        </v-col>
+                                        <v-col cols="6">
                                             <ValidationProvider name="Манзили" rules="required"
                                                                 v-slot="{ errors }">
                                                 <v-text-field
                                                     v-model="person.perAdr"
                                                     :counter="200"
                                                     required
-                                                    :hint="person.type==1?'Аризачининг манзили':'Юридик шахснинг манзили'"
+                                                    :hint="person.type==='01'?'Аризачининг манзили':'Юридик шахснинг манзили'"
                                                     persistent-placeholder
                                                 >
                                                     <template v-slot:label>Манзили <sup>*</sup></template>
@@ -198,13 +216,13 @@
                                             </ValidationProvider>
 
                                         </v-col>
-                                        <v-col lg="6" md="6" sm="12" cols="12">
+                                        <v-col cols="6">
                                             <ValidationProvider name="Ҳудуд" rules="required"
                                                                 v-slot="{ errors }">
                                                 <v-autocomplete
                                                     v-model="person.region"
 
-                                                    required
+                                                    disabled
                                                     hint="Ҳудудий божхона бошқармаси жойлашган ҳудуд"
                                                     :items="regions"
                                                     persistent-hint
@@ -215,7 +233,7 @@
                                             </ValidationProvider>
 
                                         </v-col>
-                                        <v-col lg="6" md="6" sm="12" cols="12">
+                                        <v-col cols="6">
                                             <ValidationProvider name="Телефон рақами" rules="required"
                                                                 v-slot="{ errors }">
                                                 <v-text-field
@@ -232,7 +250,7 @@
                                             </ValidationProvider>
 
                                         </v-col>
-                                        <v-col lg="6" md="6" sm="12" cols="12">
+                                        <v-col cols="6">
                                             <ValidationProvider name="Электрон почта" rules="required|email"
                                                                 v-slot="{ errors }">
                                                 <v-text-field
@@ -251,13 +269,20 @@
 
                                         </v-col>
 
-
                                     </v-row>
 
                                 </ValidationObserver>
                                 <v-row class="row mb-3 position-absolute bottom-0 end-0">
                                     <v-col class="d-flex tab_action_buttons">
-                                        <v-btn  text
+
+                                        <v-btn text style="width: 240px" color="warning"
+                                               @click="dialog.openDialogComment=true"
+                                        >
+                                            <v-icon>mdi-comment-alert</v-icon>
+                                            &nbsp; Инспектор хабари
+                                        </v-btn>
+
+                                        <v-btn text
                                                @click="prevStep"
                                         >
                                             Орқага
@@ -265,7 +290,7 @@
                                         <v-btn
                                             color="primary"
                                             @click="nextStep"
-                                            size=""
+                                            size="large"
                                             :loading="loadingButton.first"
                                         >
                                             Давом этиш
@@ -274,10 +299,9 @@
 
                                     </v-col>
                                 </v-row>
-                                <v-row class="bottom-required-info">
-                                    <i style="font-size: 12px;"><sub
-                                        style="font-size: 20px">*</sub> - майдонлари албатта тўлдирилиши шарт!
-                                    </i>
+                                <v-row class="bottom-required-info"><i style="font-size: 12px;"><sub
+                                    style="font-size: 20px">*</sub> - майдонлари албатта тўлдирилиши шарт!</i>
+
 
                                 </v-row>
 
@@ -291,10 +315,9 @@
                                 class="mb-12 "
                             >
                                 <div class="row position-absolute yoriqnoma-text"><a
-                                    href="/storage/files/dastlabki-user.pptx"> Ариза тўлдириш бўйича йўриқмани юклаб
-                                    олинг!
+                                    href="/storage/files/dastlabki-user-qaytarilgan.pptx"> Ариза тўлдириш бўйича
+                                    йўриқмани юклаб олинг!
                                 </a></div>
-
 
                                 <!--                                    <v-tab-item>-->
                                 <v-card
@@ -312,7 +335,7 @@
 
                                             >
                                                 <template v-slot:activator="{ on, attrs }">
-                                                    <v-col cols="4" class="position-relative">
+                                                    <v-col cols="6" class="position-relative">
                                                         <label
                                                             v-if="application.sender.name && application.sender.country">Юк
                                                             жўнатувчи <sup>*</sup></label>
@@ -321,7 +344,6 @@
                                                             v-bind="attrs"
                                                             v-on="on"
                                                             min-width="100%"
-                                                            max-width="100%"
                                                             class="button-style-1">
                                                                 <span
                                                                     v-if="application.sender.name && application.sender.country>0">{{
@@ -412,9 +434,7 @@
                                                                                 <flag :iso="data.item.code"
                                                                                       style="font-size: 20px"/>
                                                                                 <span
-                                                                                    class="ml-4">{{
-                                                                                        data.item.text
-                                                                                    }}</span>
+                                                                                    class="ml-4">{{ data.item.text }}</span>
 
 
                                                                             </template>
@@ -446,7 +466,7 @@
 
                                             >
                                                 <template v-slot:activator="{ on, attrs }">
-                                                    <v-col cols="4" class="position-relative">
+                                                    <v-col cols="6" class="position-relative">
                                                         <label
                                                             v-if="application.seller.name && application.seller.country">Сотувчи
                                                             <sup>*</sup></label>
@@ -575,359 +595,9 @@
                                                 </v-card>
                                             </v-dialog>
 
-                                            <v-dialog
-                                                v-model="dialog.importqiluvchi"
-                                                scrollable
-                                                max-width="800px"
-
-                                            >
-                                                <template v-slot:activator="{ on, attrs }">
-                                                    <v-col cols="4" class="position-relative">
-                                                        <label
-                                                            v-if="(application.importer.type===2 && application.importer.inn) || (application.importer.type===1 && application.importer.passport && application.importer.date)">Импортчи/юкни
-                                                            қабул қилувчи
-                                                            <sup>*</sup></label>
-                                                        <v-btn
-                                                            v-bind="attrs"
-                                                            v-on="on"
-
-                                                            min-width="100%"
-                                                            class="button-style-1"
-
-                                                        >
-                                                                <span
-                                                                    v-if="isValidImporterA && ((application.importer.type===2 && application.importer.inn) || ((application.importer.type===1 && application.importer.passport && application.importer.date) || !importerIsset ))">
-                                                                    <template
-                                                                        v-if="application.importer.type===2">
-                                                                        {{ application.importer.inn.shortname }}
-                                                                    </template>
-                                                                    <template
-                                                                        v-if="application.importer.type===1">
-                                                                        {{ application.importer.name }}
-                                                                    </template>
-                                                                </span>
-                                                            <span v-else>Импортчи/юкни қабул қилувчи</span>
-                                                        </v-btn>
-                                                        <div class="errors_under_button">
-                                                            <ValidationProvider name="Импортчи маълумотлари"
-                                                                                ref="importchi_malumotlari"
-                                                                                v-slot="{ errors }">
-                                                                <span class="red--text">{{ errors[0] }}</span>
-                                                            </ValidationProvider>
-
-                                                        </div>
-                                                    </v-col>
-                                                </template>
-
-
-                                                <ValidationObserver v-slot="{ invalid }"
-                                                                    ref="create_customs_importer" tag="div"
-                                                                    style="max-height: 500px">
-                                                    <v-card>
-                                                        <v-toolbar
-                                                            color="primary"
-                                                            dark
-                                                        >
-                                                        <span
-                                                            class="text-h5">Импортчи/юкни қабул қилувчи тўғрисида маълумотлар</span>
-                                                        </v-toolbar>
-                                                        <v-card-text>
-                                                            <v-container>
-                                                                <v-row>
-                                                                    <v-col cols="12">
-                                                                        <v-checkbox v-model="importerIsset" success
-                                                                                    class="primary-color shrink mr-5 mt-0">
-                                                                            <template v-slot:label>
-                                                                                <span style="font-size: 20px">Ариза ваколатли шахс томонидан тўлдирилмоқдами?</span>
-                                                                            </template>
-
-                                                                        </v-checkbox>
-                                                                    </v-col>
-
-                                                                    <template v-if="importerIsset">
-                                                                        <v-col cols="6">
-                                                                            <ValidationProvider
-                                                                                name="Электрон почта"
-                                                                                ref="importer-email"
-                                                                                rules="email"
-                                                                                v-slot="{ errors }">
-                                                                                <v-text-field
-                                                                                    v-model="application.importer.email"
-                                                                                    label="Электрон почта"
-                                                                                    required
-                                                                                    hint="Импортчи/юкни қабул қилувчи электрон почтаси"
-                                                                                    persistent-placeholder
-                                                                                    name="importer-email"
-                                                                                >
-                                                                                </v-text-field>
-                                                                                <span
-                                                                                    class="red--text">{{
-                                                                                        errors[0]
-                                                                                    }}</span>
-                                                                            </ValidationProvider>
-
-                                                                        </v-col>
-                                                                        <v-col cols="6">
-                                                                            <ValidationProvider
-                                                                                name="Телефон рақами"
-                                                                                rules="required"
-                                                                                ref="importer phone"
-                                                                                v-slot="{ errors }">
-                                                                                <v-text-field
-                                                                                    v-model="application.importer.phone"
-                                                                                    label="Телефон рақами*"
-                                                                                    required
-                                                                                    v-mask="'+998 ## ### ## ##'"
-                                                                                    hint="Импортчи/юкни қабул қилувчи телефон рақами"
-                                                                                    persistent-placeholder
-                                                                                    name="importer phone"
-                                                                                >
-                                                                                </v-text-field>
-                                                                                <span
-                                                                                    class="red--text">{{
-                                                                                        errors[0]
-                                                                                    }}</span>
-                                                                            </ValidationProvider>
-
-                                                                        </v-col>
-                                                                        <v-col cols="12">
-                                                                            <ValidationProvider
-                                                                                name="Импортчи/юкни"
-                                                                                rules="required"
-                                                                                ref="importermanzil"
-                                                                                v-slot="{ errors }">
-                                                                                <v-text-field
-                                                                                    v-model="application.importer.manzil"
-                                                                                    label="Манзили*"
-                                                                                    required
-                                                                                    hint="Импортчи/юкни қабул қилувчи манзили"
-                                                                                    persistent-placeholder
-                                                                                    name="importermanzil"
-                                                                                >
-                                                                                </v-text-field>
-                                                                                <span class="red--text">{{
-                                                                                        errors[0]
-                                                                                    }}</span>
-                                                                            </ValidationProvider>
-
-                                                                        </v-col>
-                                                                        <v-col cols="12">
-
-                                                                            <div class="d-flex">
-                                                                                <v-btn @click="changeImporterType(2)"
-                                                                                       :color="application.importer.type===2?'primary':'default'">
-                                                                                    Юридик
-                                                                                    шахс
-                                                                                </v-btn>
-                                                                                <v-btn @click="changeImporterType(1)"
-                                                                                       :color="application.importer.type===1?'primary':'default'">
-                                                                                    Жисмоний
-                                                                                    шахс
-                                                                                </v-btn>
-                                                                            </div>
-                                                                        </v-col>
-                                                                        <template v-if="application.importer.type===2">
-                                                                            <v-col cols="12">
-                                                                                <ValidationProvider
-                                                                                    name="Импортчи/юкни қабул қилувчи СТИРи"
-                                                                                    rules="required"
-                                                                                    ref="importerInn"
-                                                                                    v-slot="{ errors }">
-                                                                                    <v-autocomplete
-                                                                                        v-model="application.importer.inn"
-                                                                                        label="Импортчи/юкни қабул қилувчи СТИРи"
-                                                                                        required
-                                                                                        hint="Импортчи/юкни қабул қилувчи СТИРи"
-                                                                                        persistent-placeholder
-                                                                                        :items="importInns"
-                                                                                        item-text="shortname"
-                                                                                        item-value="tin"
-                                                                                        name="importInn"
-                                                                                        hide-no-data
-                                                                                        :loading="loading.importInn"
-                                                                                        :search-input.sync="search_inn"
-                                                                                        return-object
-                                                                                    >
-                                                                                    </v-autocomplete>
-                                                                                    <span class="red--text">{{
-                                                                                            errors[0]
-                                                                                        }}</span>
-                                                                                </ValidationProvider>
-
-                                                                            </v-col>
-                                                                        </template>
-                                                                        <template v-else>
-                                                                            <v-col cols="6">
-                                                                                <ValidationProvider
-                                                                                    name="Паспорт серияси ва рақами"
-                                                                                    rules="required|length:9"
-                                                                                    ref="pasportseriyasi"
-                                                                                    v-slot="{ errors }">
-                                                                                    <v-text-field
-                                                                                        v-model="application.importer.passport"
-                                                                                        label="Паспорт маълумотлари"
-                                                                                        required
-                                                                                        v-mask="'AA#######'"
-                                                                                        hint="Паспорт серияси ва рақами"
-                                                                                        persistent-placeholder
-                                                                                        name="importerJismPasport"
-                                                                                    >
-                                                                                    </v-text-field>
-                                                                                    <span class="red--text">{{
-                                                                                            errors[0]
-                                                                                        }}</span>
-                                                                                </ValidationProvider>
-                                                                            </v-col>
-                                                                            <v-col cols="6">
-                                                                                <ValidationProvider name="Туғилган сана"
-                                                                                                    rules="required"
-                                                                                                    ref="importer_datebirth"
-                                                                                                    v-slot="{ errors }">
-                                                                                    <v-menu
-                                                                                        ref="menu1"
-                                                                                        v-model="menu.importer"
-                                                                                        :close-on-content-click="false"
-                                                                                        transition="scale-transition"
-                                                                                        offset-y
-                                                                                        max-width="290px"
-                                                                                        min-width="auto"
-                                                                                    >
-                                                                                        <template
-                                                                                            v-slot:activator="{ on, attrs }">
-                                                                                            <v-text-field
-                                                                                                v-model="application.importer.date"
-                                                                                                label="Туғилган санаси"
-                                                                                                persistent-placeholder
-                                                                                                prepend-icon="mdi-calendar"
-                                                                                                v-bind="attrs"
-                                                                                                readonly
-                                                                                                @blur="application.date = parseDate(application.importer.date)"
-                                                                                                v-on="on"
-                                                                                            ></v-text-field>
-                                                                                        </template>
-                                                                                        <v-date-picker
-                                                                                            v-model="application.date"
-                                                                                            no-title
-                                                                                            @input="menu.importer = false"
-                                                                                        ></v-date-picker>
-                                                                                    </v-menu>
-
-
-                                                                                    <span class="red--text">{{
-                                                                                            errors[0]
-                                                                                        }}</span>
-                                                                                </ValidationProvider>
-                                                                            </v-col>
-                                                                        </template>
-
-                                                                        <v-col cols="12">
-                                                                            <h6 class="pb-2 primary-color fw-bold">
-                                                                                Ваколатли шахс ваколатини тасдиқловчи
-                                                                                ҳужжат тўғрисидаги маълумотлар</h6>
-                                                                        </v-col>
-
-
-                                                                        <v-col cols="6">
-                                                                            <ValidationProvider
-                                                                                name="Ваколатини тасдиқловчи ҳужжат рақами"
-                                                                                rules="required"
-                                                                                ref="importer-doc-num"
-                                                                                v-slot="{ errors }">
-                                                                                <v-text-field
-                                                                                    v-model="application.importer.docnum"
-                                                                                    label="Ҳужжат рақами*"
-                                                                                    required
-                                                                                    hint="Ваколатли шахсга берилган тасдиқловчи ҳужжат рақами"
-                                                                                    persistent-placeholder
-                                                                                    name="importer-docnum"
-                                                                                >
-                                                                                </v-text-field>
-                                                                                <span
-                                                                                    class="red--text">{{
-                                                                                        errors[0]
-                                                                                    }}</span>
-                                                                            </ValidationProvider>
-
-                                                                        </v-col>
-                                                                        <v-col cols="6">
-
-                                                                            <ValidationProvider
-                                                                                name="Ваколатини тасдиқловчи ҳужжат санаси"
-                                                                                rules="required"
-                                                                                ref="importer-doc-date"
-                                                                                v-slot="{ errors }">
-                                                                                <v-menu
-                                                                                    ref="menu-importer-doc-date"
-                                                                                    v-model="menu.importerhdate"
-                                                                                    :close-on-content-click="false"
-                                                                                    transition="scale-transition"
-                                                                                    offset-y
-                                                                                    max-width="290px"
-                                                                                    min-width="auto"
-                                                                                >
-                                                                                    <template
-                                                                                        v-slot:activator="{ on, attrs }">
-                                                                                        <v-text-field
-                                                                                            v-model="application.importer.docdate"
-                                                                                            label="Ҳужжат санаси*"
-                                                                                            persistent-placeholder
-                                                                                            prepend-icon="mdi-calendar"
-                                                                                            v-bind="attrs"
-                                                                                            readonly
-                                                                                            @blur="application.importerhdate = parseDate(application.importer.docdate)"
-                                                                                            v-on="on"
-                                                                                        ></v-text-field>
-                                                                                    </template>
-                                                                                    <v-date-picker
-                                                                                        v-model="application.importerhdate"
-                                                                                        no-title
-                                                                                        @input="menu.importerhdate = false"
-                                                                                    ></v-date-picker>
-                                                                                </v-menu>
-
-
-                                                                                <span class="red--text">{{
-                                                                                        errors[0]
-                                                                                    }}</span>
-                                                                            </ValidationProvider>
-
-
-                                                                        </v-col>
-
-
-                                                                        <v-col cols="12"></v-col>
-                                                                        <small>* майдонлар тўлдирилиши шарт</small>
-                                                                    </template>
-                                                                </v-row>
-
-                                                            </v-container>
-
-                                                        </v-card-text>
-                                                        <v-card-actions>
-                                                            <v-spacer></v-spacer>
-                                                            <v-btn
-                                                                color="primary"
-                                                                text
-                                                                :loading="loading.importer"
-                                                                @click="saveImportDialog"
-                                                            >
-                                                                Сақлаш
-                                                            </v-btn>
-                                                            <!--                                                            <v-btn
-                                                                                                                            color="blue darken-1"
-                                                                                                                            text
-                                                                                                                            @click="dialog.sotuvchi = false"
-                                                                                                                        >
-                                                                                                                            Сақлаш
-                                                                                                                        </v-btn>-->
-                                                        </v-card-actions>
-                                                    </v-card>
-                                                </ValidationObserver>
-                                            </v-dialog>
-
 
                                             <v-col cols="12"></v-col>
-                                            <v-col cols="3">
+                                            <v-col cols="6">
                                                 <ValidationProvider name="Етказиб бериш шарти"
                                                                     v-slot="{ errors }" rules="required">
                                                     <v-autocomplete
@@ -942,8 +612,7 @@
                                                     <span class="red--text">{{ errors[0] }}</span>
                                                 </ValidationProvider>
                                             </v-col>
-
-                                            <v-col cols="4">
+                                            <v-col cols="6">
                                                 <ValidationProvider name="Етказиб бериш манзили"
                                                                     rules="required"
                                                                     v-slot="{ errors }">
@@ -1389,6 +1058,8 @@
                                                                                 loading
                                                                                 counter="13"
                                                                                 @keyup="myColor(documents[key].id,key)"
+                                                                                @keydown="myColor(documents[key].id,key)"
+                                                                                @change="myColor(documents[key].id,key)"
                                                                                 hint="Ҳужжатнинг е-архив тизимидаги Fayl ID рақами"
                                                                             >
                                                                                 <template v-slot:append>
@@ -1455,6 +1126,13 @@
                                     style="font-size: 20px">*</sub> - майдонлари албатта тўлдирилиши шарт!</i></v-row>
                                 <v-row class="row mb-3 position-absolute bottom-0 end-0">
                                     <v-col class="d-flex tab_action_buttons">
+                                        <v-btn text style="width: 240px" color="warning"
+                                               @click="dialog.openDialogComment=true"
+                                        >
+                                            <v-icon>mdi-comment-alert</v-icon>
+                                            &nbsp; Инспектор хабари
+                                        </v-btn>
+
                                         <v-btn text
                                                @click="prevStep"
                                         >
@@ -1479,7 +1157,6 @@
 
 
                             <div class="p-1 d-flex align-items-start">
-
                                 <div class="nav flex-column nav-pills me-3 col-1 product_parts" v-if="1==2"
                                      id="v-pills-tab"
                                      role="tablist"
@@ -1508,7 +1185,6 @@
                                         <v-card
                                             class="mb-12"
                                         >
-
                                             <v-tabs
                                                 v-model="application.tovarlar[key].tab"
                                                 background-color="transparent"
@@ -1552,6 +1228,7 @@
                                                                             name="tftncode"
                                                                             hint="Товарнинг ТИФ ТН коди"
                                                                             persistent-placeholder
+                                                                            disabled
                                                                             hide-no-data
                                                                             :loading="loading.tftncode"
                                                                             :search-input.sync="search_tftn"
@@ -1648,7 +1325,6 @@
                                                                         <span class="red--text">{{ errors[0] }}</span>
                                                                     </ValidationProvider>
                                                                 </v-col>
-
                                                                 <v-col cols="6">
                                                                     <ValidationProvider name="Валюта"
                                                                                         rules="required"
@@ -1686,7 +1362,7 @@
                                                                         >
                                                                             <template v-slot:append>
                                                                                 {{
-                                                                                    (typeof application.tovarlar[key].product.currency != 'undefined' && (typeof getCurrencyByCode(application.tovarlar[key].product.currency)) !== 'undefined') ? getCurrencyByCode(application.tovarlar[key].product.currency).name : ""
+                                                                                    (typeof application.tovarlar[key].product.currency != 'undefined' && typeof getCurrencyByCode(application.tovarlar[key].product.currency)!=='undefined' )?getCurrencyByCode(application.tovarlar[key].product.currency).name:""
                                                                                 }}
                                                                             </template>
                                                                         </v-text-field>
@@ -1707,7 +1383,7 @@
                                                                         >
                                                                             <template v-slot:append>
                                                                                 {{
-                                                                                    (typeof application.tovarlar[key].product.currency != 'undefined' && typeof getCurrencyByCode(application.tovarlar[key].product.currency) !== 'undefined') ? getCurrencyByCode(application.tovarlar[key].product.currency).name : "вап"
+                                                                                    (typeof application.tovarlar[key].product.currency != 'undefined' && typeof getCurrencyByCode(application.tovarlar[key].product.currency)!=='undefined' )?getCurrencyByCode(application.tovarlar[key].product.currency).name:""
                                                                                 }}
                                                                             </template>
 
@@ -1715,6 +1391,7 @@
                                                                         <span class="red--text">{{ errors[0] }}</span>
                                                                     </ValidationProvider>
                                                                 </v-col>
+
 
 
                                                             </v-row>
@@ -1726,6 +1403,7 @@
                                                         color="basil"
                                                         flat
                                                     >
+
                                                         <ValidationObserver v-slot="{ invalid }"
                                                                             :ref="'create_customs_tovar2_value'+key">
                                                             <v-row>
@@ -1735,15 +1413,13 @@
                                                                     md="4"
                                                                 >
                                                                     <ValidationProvider name="Тижорат номи"
-                                                                                        v-slot="{ errors }"
-                                                                                        rules="required">
+                                                                                        v-slot="{ errors }">
                                                                         <v-text-field
                                                                             label="Тижорат номи"
                                                                             required
                                                                             name="trade_name"
                                                                             v-model="application.tovarlar[key].product.trade_name"
                                                                             persistent-placeholder
-                                                                            hint="Масалан, автомобил"
                                                                         ></v-text-field>
                                                                         <span class="red--text">{{ errors[0] }}</span>
                                                                     </ValidationProvider>
@@ -1930,7 +1606,7 @@
                                                                         <v-text-field
                                                                             label="Техник хусусияти"
                                                                             required
-                                                                            name="texn`ik_xususiyati"
+                                                                            name="texnik_xususiyati"
                                                                             v-model="application.tovarlar[key].product.texnik_xususiyati"
                                                                             persistent-placeholder
                                                                         ></v-text-field>
@@ -1950,8 +1626,8 @@
                                                                         <v-text-field
                                                                             label="Юк жойларининг умумий сони *"
                                                                             required
-                                                                            name="yuk_soni"
                                                                             v-mask="'############'"
+                                                                            name="yuk_soni"
                                                                             v-model="application.tovarlar[key].product.yuk_soni"
                                                                             persistent-placeholder
                                                                         ></v-text-field>
@@ -1983,8 +1659,8 @@
                                                                         <v-text-field
                                                                             label="Ўрамлар сони *"
                                                                             required
-                                                                            name="oram_soni"
                                                                             v-mask="'############'"
+                                                                            name="oram_soni"
                                                                             v-model="application.tovarlar[key].product.oram_soni"
                                                                             persistent-placeholder
                                                                         ></v-text-field>
@@ -2162,8 +1838,6 @@
                                                                                     v-else>ТИФ ТН коди бўйича берилган қарор</span>
 
                                                                             </v-btn>
-
-
                                                                             <div class="errors_under_button">
                                                                                 <ValidationProvider
                                                                                     name="ТИФ ТН коди бўйича берилган қарор рақами"
@@ -2177,7 +1851,6 @@
                                                                                 </ValidationProvider>
                                                                                 <ValidationProvider
                                                                                     name="ТИФ ТН коди бўйича берилган қарор санаси"
-
                                                                                     v-slot="{ errors }">
                                                                                     <input type="hidden"
                                                                                            name="application_tftn_qaror_sanasi"
@@ -2308,7 +1981,6 @@
                                                                                     v-else>Илгари қабул қилинган дастлабки қарор</span>
 
                                                                             </v-btn>
-
                                                                             <div class="errors_under_button">
                                                                                 <ValidationProvider
                                                                                     name="Илгари қабул қилинган дастлабки қарор рақами"
@@ -2322,7 +1994,6 @@
                                                                                 </ValidationProvider>
                                                                                 <ValidationProvider
                                                                                     name="Илгари қабул қилинган дастлабки қарор санаси"
-
                                                                                     v-slot="{ errors }">
                                                                                     <input type="hidden"
                                                                                            name="application_tftn_qaror_sanasi"
@@ -2471,12 +2142,12 @@
                                                                             </v-expansion-panel-header>
                                                                             <v-expansion-panel-content>
                                                                                 <ValidationProvider :vid="'attribute'+i"
-                                                                                                    :name="item+' - усулни қўлламаслик сабаби'"
+                                                                                                    :name="item + ' - усулни қўлламаслик сабаби'"
                                                                                                     rules="required"
                                                                                                     v-slot="{ errors }"
-                                                                                                    :ref="'usultext' + key +'-'+ i">
+                                                                                                    :ref="'usultext' + key + '-' + i">
                                                                                     <v-text-field
-                                                                                        :name="'product_usul'+i"
+                                                                                        :name="'1product_usul'+i"
                                                                                         class="product_usul"
                                                                                         v-model="application.tovarlar[key].product.usul_text[i]"
                                                                                         filled
@@ -2490,6 +2161,7 @@
                                                                     </v-expansion-panels>
                                                                 </v-col>
                                                                 <v-col cols="12">
+
                                                                     <ValidationProvider
                                                                         name="Қўшича маълумотлар ва изоҳлар"
                                                                         v-slot="{ errors }">
@@ -2507,7 +2179,6 @@
                                                                                 errors[0]
                                                                             }}</span>
                                                                     </ValidationProvider>
-
                                                                 </v-col>
                                                             </v-row>
                                                         </ValidationObserver>
@@ -2520,6 +2191,12 @@
                                                 шарт!</i></v-row>
                                             <v-row class="row mb-3 position-absolute bottom-0 end-0">
                                                 <v-col class="d-flex tab_action_buttons">
+                                                    <v-btn text style="width: 240px" color="warning"
+                                                           @click="dialog.openDialogComment=true"
+                                                    >
+                                                        <v-icon>mdi-comment-alert</v-icon>
+                                                        &nbsp; Инспектор хабари
+                                                    </v-btn>
                                                     <v-btn text
                                                            @click="prevStep"
                                                     >
@@ -2555,148 +2232,31 @@
                             </div>
 
                         </v-stepper-content>
-
-                        <!--
-                                                <v-stepper-content step="4">
-                                                    <v-card
-                                                        class="mb-12 tolovlar-tab"
-                                                    >
-                                                        <v-row>
-
-                                                            <v-col cols="6">
-                                                                <v-list>
-                                                                    <v-list-item class="ariza_nomer"> Ариза рақами: <span>{{
-                                                                            commodity.appNum
-                                                                        }} </span>
-                                                                    </v-list-item>
-                                                                    <v-list-item class="arizachi_fio"> Аризачи Ф.И.Ш: <span> {{
-                                                                            person.fio
-                                                                        }}</span>
-                                                                    </v-list-item>
-                                                                    <v-list-item> Ишлаб чиқарувчи: <span> Unicon LTD</span></v-list-item>
-                                                                    <v-list-item> Сотувчи: <span> Prisma LTD </span></v-list-item>
-                                                                    <v-list-item> Жўнатувчи:<span> Cyan LTD </span></v-list-item>
-                                                                </v-list>
-                                                            </v-col>
-                                                            <v-col cols="6">
-                                                                <v-list>
-                                                                    <v-list-item class="">Божхона қийматини аниқлаш усули:
-                                                                        <span>{{ commodity.method }} </span>
-                                                                    </v-list-item>
-                                                                    <v-list-item class=""> Етказиб бериш шарти:
-                                                                        <span>{{ inkoterms[yukData.apps.terms] }}</span></v-list-item>
-                                                                    <v-list-item> Илгари қабул қилинган дастлабки қарор:
-                                                                        <span> № {{ commodity.hsDecNum }}</span></v-list-item>
-                                                                    <v-list-item> Қўшимча маълумотлар: <span> {{ commodity.extraInfo }} </span>
-                                                                    </v-list-item>
-                                                                </v-list>
-
-
-                                                            </v-col>
-                                                            <v-col cols="12" class="tolov_product_table">
-                                                                <v-simple-table>
-                                                                    <template v-slot:default>
-                                                                        <thead>
-                                                                        <tr>
-                                                                            <th class="text-left">
-                                                                                ТИФ ТН код
-                                                                            </th>
-                                                                            <th class="text-left">
-                                                                                Марка
-                                                                            </th>
-                                                                            <th class="text-left">
-                                                                                Модел
-                                                                            </th>
-                                                                            <th class="text-left">
-                                                                                Савдо белгиси
-                                                                            </th>
-                                                                            <th class="text-left">
-                                                                                Нетто оғирлик
-                                                                            </th>
-                                                                            <th class="text-left">
-                                                                                Брутто оғирлик
-                                                                            </th>
-                                                                            <th class="text-left">
-                                                                                Фактура қиймати
-                                                                            </th>
-                                                                        </tr>
-                                                                        </thead>
-                                                                        <tbody>
-                                                                        <tr
-                                                                        >
-                                                                            <td>{{ commodity.hsCode }}</td>
-                                                                            <td>{{ commodity.mark }}</td>
-                                                                            <td>{{ commodity.model }}</td>
-                                                                            <td>{{ commodity.tradeMark }}</td>
-                                                                            <td>{{ commodity.netto }}</td>
-                                                                            <td>{{ commodity.brutto }}</td>
-                                                                            <td>{{ commodity.price }}</td>
-                                                                        </tr>
-                                                                        </tbody>
-                                                                    </template>
-                                                                </v-simple-table>
-
-                                                            </v-col>
-
-                                                        </v-row>
-                                                        <v-row>
-                                                            <v-col class="d-flex justify-content-end summary-div">
-                                                                <div>
-                                                                    Дастлабки қарор қабул қилганлик учун йиғим: 210 000 сўм
-                                                                    <v-icon small color="primary">mdi-information-outline</v-icon>
-                                                                </div>
-                                                            </v-col>
-                                                        </v-row>
-                                                        <v-list class="payment_systems">
-
-                                                            <v-list-item>
-                                                                Тўлов тизимлари орқали тўловни амалга оширинг:
-                                                            </v-list-item>
-                                                            <v-list-item>
-                                                                <v-row class="payment_systems_items">
-                                                                    <v-list class="">
-
-                                                                        <v-list-item class="payme"></v-list-item>
-                                                                        <v-list-item class="upay"></v-list-item>
-                                                                        <v-list-item class="click"></v-list-item>
-                                                                        <v-list-item class="oz_hisobidan">Божхона органларидаги ҳисоб
-                                                                            рақамидан
-                                                                        </v-list-item>
-
-                                                                    </v-list>
-                                                                </v-row>
-                                                            </v-list-item>
-                                                        </v-list>
-
-                                                        <v-row class="row mb-3 position-absolute bottom-0 end-0">
-                                                            <v-col class="d-flex tab_action_buttons">
-                                                                &lt;!&ndash;                                        <v-btn text
-                                                                                                               @click="prevStep"
-                                                                                                        >
-                                                                                                            Орқага
-                                                                                                        </v-btn>&ndash;&gt;
-                                                                <router-link to="/applications">
-                                                                    <v-btn
-                                                                        color="primary"
-                                                                        class="ma-2" style="min-width: max-content"
-
-                                                                    >
-                                                                        Ариза ҳолатини кўриш
-                                                                    </v-btn>
-
-                                                                </router-link>
-
-
-                                                            </v-col>
-                                                        </v-row>
-                                                    </v-card>
-
-                                                </v-stepper-content>-->
                     </v-stepper-items>
 
                 </v-stepper>
             </v-container>
         </div>
+        <v-dialog v-model="dialog.openDialogComment"
+                  persistent
+                  max-width="600px"
+        >
+            <v-card>
+                <v-card-text v-html="comment"></v-card-text>
+                <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn
+                        color="primary"
+                        text
+                        @click="dialog.openDialogComment = false"
+                    >
+                        Ёпиш
+                    </v-btn>
+
+                </v-card-actions>
+            </v-card>
+
+        </v-dialog>
         <form ref="arxivSubmit" action="https://ed2.customs.uz/E_ARXIV/authentication"
               method="post" target="_blank" class="d-none">
             <input type="hidden" id="SessionID" name="SessionID"><br/>
@@ -2718,13 +2278,13 @@
                 @dastlabkiqaror
             </p></a>
     </div>
-
 </template>
 <script>
 import {extend, ValidationProvider, ValidationObserver} from 'vee-validate';
 import * as rules from 'vee-validate/dist/rules';
 import messages from '../../../../locales/oz.json';
 import {types} from "../../../../../../public/js/mix/pdfmake";
+import ServicePage from "../index";
 import i18n from "../../../../i18n";
 
 
@@ -2736,958 +2296,8 @@ Object.keys(rules).forEach(rule => {
     });
 });
 export default {
-    name: "Initialdecision",
-    data() {
-        return {
-            stepper: 1,
-            search_country: null,
-            search_currency: null,
-            search_tftn: null,
-            search_inn: null,
-            countries: [],
-            transport_type: null,
-            regions: [],
-            inkoterms: [
-                {
-                    text: 'EXW',
-                    value: '01'
-                },
-                {
-                    text: 'FCA',
-                    value: '02'
-                },
-                {
-                    text: 'FAS',
-                    value: '03'
-                },
-                {
-                    text: 'FOB',
-                    value: '04'
-                },
-                {
-                    text: 'CFR',
-                    value: '05'
-                },
-                {
-                    text: 'CIF',
-                    value: '06'
-                },
-                {
-                    text: 'CPT',
-                    value: '07'
-                },
-                {
-                    text: 'CIP',
-                    value: '08'
-                },
-                {
-                    text: 'DAF',
-                    value: '09'
-                },
-                {
-                    text: 'DES',
-                    value: '10'
-                },
-                {
-                    text: 'DEQ',
-                    value: '11'
-                },
-                {
-                    text: 'DDU',
-                    value: '12'
-                },
-                {
-                    text: 'DDP',
-                    value: '13'
-                },
-                {
-                    text: 'DAР',
-                    value: '14'
-                },
-                {
-                    text: 'DAT',
-                    value: '15'
-                },
-                {
-                    text: '---',
-                    value: '16'
-                },
-            ],
-            oramlar: [
-                {
-                    value: '000',
-                    text: 'қадоқсиз'
-                },
-                {
-                    value: '001',
-                    text: 'комплект'
-                },
-                {
-                    value: '002',
-                    text: 'ўрам'
-                },
-                {
-                    value: '003',
-                    text: 'ўрама'
-                },
-                {
-                    value: '004',
-                    text: 'бонка'
-                },
-                {
-                    value: '005',
-                    text: 'қадоқ'
-                },
-                {
-                    value: '006',
-                    text: 'тўплам'
-                },
-                {
-                    value: '007',
-                    text: 'бочка'
-                },
-                {
-                    value: '008',
-                    text: 'пакет'
-                },
-                {
-                    value: '009',
-                    text: 'кип'
-                },
-                {
-                    value: '010',
-                    text: 'қоп'
-                },
-                {
-                    value: '011',
-                    text: 'навал'
-                },
-                {
-                    value: '012',
-                    text: 'қоплар'
-                },
-                {
-                    value: '013',
-                    text: 'кип'
-                },
-                {
-                    value: '014',
-                    text: 'бочкалар'
-                },
-                {
-                    value: '015',
-                    text: 'тахтали қути'
-                },
-                {
-                    value: '016',
-                    text: 'пластмассали қути'
-                },
-                {
-                    value: '017',
-                    text: 'тагликлар'
-                },
-                {
-                    value: '018',
-                    text: 'картонли коробкалар'
-                },
-                {
-                    value: '019',
-                    text: 'ўрамлар'
-                },
-                {
-                    value: '020',
-                    text: 'цистерналар'
-                }
-            ],
-            usullar: [
-                {
-                    text: '1-усул, Олиб кириладиган товарга доир битимнинг қиймати бўйича',
-                    value: 1
-                },
-                {
-                    text: '2-усул, Айнан бир xил товарга доир битимнинг қиймати бўйича',
-                    value: 2
-                },
-                {
-                    text: '3-усул, Ўxшаш товарга доир битимнинг қиймати бўйича',
-                    value: 3
-                },
-                {
-                    text: '4-усул, Қийматларни чегириб ташлаш',
-                    value: 4
-                },
-                {
-                    text: '5-усул, Қийматларни қўшиш',
-                    value: 5
-                },
-                {
-                    text: '6.1-усул, Захира',
-                    value: 6.1
-                },
-                {
-                    text: '6.2-усул, Захира',
-                    value: 6.2
-                },
-                {
-                    text: '6.3-усул, Захира',
-                    value: 6.3
-                },
-                {
-                    text: '6.4-усул, Захира',
-                    value: 6.4
-                },
-                {
-                    text: '6.5-усул, Захира',
-                    value: 6.5
-                }
-            ],
-            tftncodes: [],
-            importInns: [],
-            breadcrumb_items: [
-                {
-                    text: i18n.t('Асосий саҳифа'),
-                    to: '/',
-                    disabled: false,
-                    exact: true,
-                },
-                {
-                    text: 'Хизматлар',
-                    to: '/services',
-                    disabled: false,
-                    exact: true,
-                },
-                {
-                    text: 'Божхона тўловлари бўйича дастлабки қарор олиш',
-                    to: '/services/decisions',
-                    disabled: true,
-                    exact: true,
-                },
-            ],
-            document_types: [
-                {
-                    'text': "101 - Лицензия",
-                    'value': 101,
-                },
-                {
-                    'text': "201 - КРГ",
-                    'value': 201,
-                },
-                {
-                    'text': "202 - СМР",
-                    'value': 202,
-                },
-                {
-                    'text': "203 - КНСМ",
-                    'value': 203,
-                },
-                {
-                    'text': "204 - TIR",
-                    'value': 204,
-                },
-                {
-                    'text': "205 - АВИА",
-                    'value': 205,
-                },
-                {
-                    'text': "206 - НКПЧТ",
-                    'value': 206,
-                },
-                {
-                    'text': "207 - СМГС",
-                    'value': 207,
-                },
-                {
-                    'text': "208 - ТТН",
-                    'value': 208,
-                },
-                {
-                    'text': "209 - ПТС",
-                    'value': 209,
-                },
-                {
-                    'text': "220 - ИНВ",
-                    'value': 220,
-                },
-                {
-                    'text': "221 - ИНВПРФ",
-                    'value': 221,
-                },
-                {
-                    'text': "222 - УПЛИСТ",
-                    'value': 222,
-                },
-            ],
-            tovarlar: [
-                {
-                    tab: 0,
-                    product: {
-                        tftn: null,
-                        transport_type: null,
-                        currency: null,
-                        transportations: null,
-                        weight: null,
-                        unit2: null,
-                        u2: null,
-                        size: null,
-                        brutto: null,
-                        netto: null,
-                        price: null,
-                        customsprice: null
-                    },
-                    dialog: {
-                        transportturi: false,
-                        tiftnqaror: false,
-                        ishlabchiqaruvchi: false,
-                    },
-                    menu: {
-                        dastlabkiqarorsanasi: null,
-                        tiftnqaror: null,
-                        tftnqarorsanasi: null
-                    },
-                    transportation: {
-                        country_from: null
-                    },
-
-                },
-
-            ],
-            tovarIndex: 0,
-            application: {
-                date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
-                dastlabkiqarorsanasi: false,
-                importer: {
-                    type: 2,
-                    passport: null,
-                    date: null,
-                    inn: null,
-                    docnum: null,
-                    docdate: null,
-                    name: '',
-                },
-                inkoterms: null,
-                importerhdate: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
-                shipping_address: "",
-                sender: {
-                    name: "",
-                    country: "",
-                },
-                seller: {
-                    name: "",
-                    country: "",
-                },
-                old_decision: {
-                    number: null,
-                    date: "",
-                },
-                transportations: [{
-                    country_from: null,
-                    country_to: null,
-                    transport_type: null,
-                    price: null,
-                }],
-                documents: [],
-                errors: {
-                    transportation_error: "",
-                },
-                tovarlar: [
-                    {
-                        tab: 0,
-                        product: {
-                            tftn: null,
-                            transport_type: null,
-                            currency: null,
-                            transportations: null,
-                            weight: null,
-                            unit2: null,
-                            u2: null,
-                            size: null,
-                            brutto: null,
-                            netto: null,
-                            price: null,
-                            customsprice: null,
-                            trade_name: "",
-                            trade_mark: "",
-                            mark: "",
-                            model: "",
-                            article: "",
-                            nav: "",
-                            standart: "",
-                            color: "",
-                            maqsad: "",
-                            texnik_xususiyati: "",
-                            tijorat_xususiyati: "",
-                            yuk_soni: null,
-                            oram_turi: null,
-                            manufacturer: {
-                                name: "",
-                                country: "",
-                            },
-                            tftnqaror: {
-                                name: "",
-                                date: null,
-                            },
-                            old_decision: {
-                                number: null,
-                                date: null,
-                            },
-                            usul: null,
-                            usul_text: [],
-                            usul_panel: 0,
-                            comment: ""
-
-                        },
-                        dialog: {
-                            transportturi: false,
-                            tiftnqaror: false,
-                            ishlabchiqaruvchi: false,
-                            dastlabkiqaror: false,
-                            importqiluvchi: false,
-                        },
-                        menu: {
-                            dastlabkiqarorsanasi: null,
-                            tiftnqaror: null,
-                            tftnqarorsanasi: null
-                        },
-                        transportation: {
-                            country_from: null
-                        },
-
-                    },
-
-                ],
-
-            },
-            transportations: [{
-                country_from: null,
-                country_to: null,
-                transport_type: null,
-                price: null,
-            }],
-            documents: [{
-                type: null,
-                id: null,
-                valid: false,
-            }],
-            yukData: {
-                apps: {
-                    personId: null,
-                    customerCountry: null,
-                    senderCountry: null,
-                    senderOrg: null,
-                    sellerOrg: null,
-                    terms: null,
-                    termsAddr: null,
-                    personFio: null,
-                    orgName: null,
-                    personPosition: null,
-                    personAddr: null,
-                    personTin: null,
-                    personPin: null,
-                    personMail: null,
-                    personPhone: null,
-                    locationId: null,
-                    transExp: null,
-                },
-                docs: {},
-                transports: {}
-
-            },
-            person: {
-                type: 1, /// 1- fiz 0- yur
-                fio: "",
-                pin: null,
-                tin: null,
-                organization_name: "Жисмоний шахс",
-                position: "01",
-                phone: null,
-                email: null,
-                dqaror: null,
-                tftnqaror: {
-                    number: null,
-                    date: null,
-                }
-
-            },
-            currencies: [{
-                text: "АқШ доллари",
-                value: 840
-            }],
-            transports: [{
-                text: "10 - Денгиз транспорти",
-                value: 10
-            },
-                {
-                    text: "20 - Темир йўл транспорти",
-                    value: 20
-                }, {
-
-                    text: "30 - Автомобиль транспорти",
-                    value: 30
-                },
-                {
-                    text: "40 - Ҳаво транспорти",
-                    value: 40
-                },
-                {
-                    text: "80 - Дарё транспорти",
-                    value: 80
-                }, {
-                    text: "90 - САМОХОД",
-                    value: 90
-                },
-
-            ],
-            items: [{
-                tab: 0,
-                content: 'Умумий маълумотлар'
-            },
-                {
-                    tab: 1,
-                    content: 'Таснифи'
-                },
-                {
-                    tab: 2,
-                    content: 'Хусусиятлари'
-                },
-                {
-                    tab: 3,
-                    content: 'Қўшимча маълумотлар'
-                },
-            ],
-            doc: {
-                type: null,
-                file: null,
-            },
-            tabs: {
-                tovar: 1,
-            },
-
-            copytovar: {
-                tab: 0,
-                product: {
-                    tftn: null,
-                    transport_type: null,
-                    currency: null,
-                    transportations: null
-                },
-                dialog: {
-                    transportturi: false,
-                    dastlabkiqaror: false,
-                    tiftnqaror: false,
-                    jonatuvchi: false,
-                    sotuvchi: false,
-                    ishlabchiqaruvchi: false,
-                },
-                menu: {
-                    dastlabkiqarorsanasi: null,
-                    tiftnqaror: null,
-                    tftnqarorsanasi: null
-                },
-                transportation: {
-                    country_from: null
-                }
-
-            },
-            commodity: {
-                appId: null,
-                appNum: null,
-                hsCode: null,
-                hsDecDate: null,
-                hsDecNum: null,
-                inDecDate: null,
-                inDecNum: null,
-                originCountry: null,
-                originOrg: null,
-                tradeName: null,
-                tradeMark: null,
-                mark: null,
-                model: null,
-                article: null,
-                sort: null,
-                standarts: null,
-                functions: null,
-                comProp: null,
-                techChar: null,
-                productGoal: null,
-                brutto: null,
-                netto: null,
-                basicQty: null,
-                extraUnits: null,
-                extraQty: null,
-                price: null,
-                customsprice: null,
-                currencyType: null,
-                cargoSpace: null,
-                packType: null,
-                packQty: null,
-                extraInfo: null,
-                method: null,
-                methodDescription: null,
-            },
-            tab: 0,
-            dialog: {
-                documenttype: false,
-                dastlabkiqaror: false,
-                tiftnqaror: false,
-                ishlabchiqaruvchi: false,
-                sotuvchi: false,
-                jonatuvchi: false,
-                tovarxus: false,
-                tovarmark: false,
-                transportturi: false
-            },
-            loading: {
-                tftncode: false,
-                importInn: false,
-                country_transport_type_from: false,
-                importer: false,
-            },
-            transport_turi_chips: [
-                '30-Авто',
-                '20-ЖД',
-            ],
-            date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
-            menu: {
-                importer: false,
-                importerhdate: false,
-                valyuta: false,
-                dastlabkiqaror: false,
-                dastlabkiqarorsanasi: false,
-                tftnqarorsanasi: false,
-                hujjatsanasi: false
-            },
-            modal: false,
-            completedSteps: [],
-            loadingButton: {
-                first: false,
-                second: false,
-                third: false,
-                four: false
-            },
-            noRequiredTab: false,
-            fields: [{
-                key: 'termsAddr',
-                value: 'Етказиб бериш манзили'
-            },
-                {
-                    key: 'senderOrg',
-                    value: 'Юборувчи ташкилот номи'
-                },
-                {
-                    key: 'senderCountry',
-                    value: 'Юборувчи ташкилот давлати'
-                },
-                {
-                    key: 'sellerOrg',
-                    value: 'Сотувчи ташкилот номи'
-                },
-                {
-                    key: 'customerCountry',
-                    value: 'Сотувчи ташкилот давлати'
-                },
-                {
-                    key: 'originOrg',
-                    value: 'Ишлаб чиқарувчи ташкилот номи ',
-                    tab: 3
-                },
-                {
-                    key: 'article',
-                    value: 'Артикул',
-                    tab: 2
-                },
-                {
-                    key: 'basicQty',
-                    value: 'Асосий ўлчов бирлигидаги миқдори',
-                    tab: 1
-                },
-                {
-                    key: 'brutto',
-                    value: 'Брутто оғирлиги',
-                    tab: 1
-                },
-                {
-                    key: 'customsPrice',
-                    value: 'Божхона қиймати',
-                    tab: 1
-                },
-                {
-                    key: 'extraInfo',
-                    value: 'Қўшича маълумотлар ва изоҳлар',
-                    tab: 4
-                },
-                {
-                    key: 'functions',
-                    value: 'Вазифаси',
-                    tab: 2
-                },
-                {
-                    key: 'mark',
-                    value: 'Марка',
-                    tab: 2
-                },
-                {
-                    key: 'model',
-                    value: 'Модели',
-                    tab: 2
-                },
-                {
-                    key: 'netto',
-                    value: 'Нетто оғирлиги',
-                    tab: 1
-                },
-                {
-                    key: 'price',
-                    value: 'Товарнинг шартномадаги қиймати',
-                    tab: 1
-                },
-                {
-                    key: 'productGoal',
-                    value: 'Фойдаланиш мақсади',
-                    tab: 2
-                },
-                {
-                    key: 'sort',
-                    value: 'Нав',
-                    tab: 2
-                },
-                {
-                    key: 'tradeMark',
-                    value: 'Савдо белгиси',
-                    tab: 2
-                },
-                {
-                    key: 'tradeName',
-                    value: 'Тижорат номи',
-                    tab: 2
-                },
-                {
-                    key: 'inDecNum',
-                    value: 'Илгари қабул қилинган дастлабки қарор рақами',
-                    tab: 3
-                },
-                {
-                    key: 'techChar',
-                    value: 'ТИФ ТН коди бўйича берилган қарор рақами',
-                    tab: 3
-                },
-            ],
-            float: ['^[-+][0-9]+\\.[0-9]+[eE][-+]?[0-9]+'],
-            importerIsset: false,
-            isValidImporterA: false,
-
-
-        }
-
-    },
-    watch: {
-        'application.date'(val) {
-            this.application.importer.date = this.formatDate(this.application.date)
-        },
-        'application.importerhdate'(val) {
-            this.application.importer.docdate = this.formatDate(this.application.importerhdate, 2)
-        },
-        search_tftn: {
-            handler: function (val) {
-
-                if (val.length > 10) return
-                //if (this.tftncodes.length > 0) return
-
-                // Items have already been requested
-                //if (this.loading.tftncode) return
-
-                this.loading.tftncode = true
-
-                // Lazily load input items
-                fetch("https://new.customs.uz/api/v1/data/tftn?code=" + val)
-                    .then((res) => res.json())
-                    .then(res => {
-                        res.map(function (item) {
-                            item.name = item.id + " - " + item.name;
-                            return item;
-                        })
-                        this.tftncodes = res;
-                    })
-                    .catch(err => {
-                        //console.log(err)
-                    })
-                    .finally(() => (
-                        this.loading.tftncode = false
-                    ))
-            },
-            deep: true
-        },
-        search_inn: {
-            handler: function (val) {
-
-                if (val.length !== 9) return
-                //if (this.tftncodes.length > 0) return
-
-                // Items have already been requested
-                //if (this.loading.tftncode) return
-
-                this.loading.importInn = true
-
-                // Lazily load input items
-                fetch(window.location.origin + "/api/v1/data/inn?code=" + val)
-                    .then((res) => res.json())
-                    .then(res => {
-                        res.map(function (item) {
-                            item.shortname = item.tin + " - " + item.shortname;
-                            return item;
-                        })
-                        this.importInns = res;
-                    })
-                    .catch(err => {
-                        //console.log(err)
-                    })
-                    .finally(() => (
-                        this.loading.importInn = false
-                    ))
-            },
-            deep: true
-        },
-        search_country: function (val) {
-
-            //if (val.length > 10) return
-            if (this.transportation.country_from && this.transportation.country_from.CODE + " - " + this.transportation.country_from.CD_NM == this.search_country) return
-
-            // Items have already been requested
-            //if (this.loading.tftncode) return
-
-            this.loading.country_transport_type_from = true
-
-            // Lazily load input items
-            fetch("https://new.customs.uz/api/v1/data/country?name=" + val + '&lang=uz')
-                .then((res) => res.json())
-                .then(res => {
-                    res.map(function (item) {
-                        item.name = item.CODE + " - " + item.CD_NM;
-                        item.id = item.CODE;
-                        return item;
-                    })
-                    this.countries = res;
-                })
-                .catch(err => {
-                    // console.log(err)
-                })
-                .finally(() => (
-                    this.loading.country_transport_type_from = false
-                ))
-
-        },
-
-    },
+    name: "EditPiecePay",
     methods: {
-        async saveImportDialog() {
-            const _this = this;
-            _this.loading.importer = true;
-            if (!_this.importerIsset) {
-                _this.application.importer.name = _this.person.fio;
-                _this.application.importer.type = 1;
-                _this.isValidImporterA = true;
-                _this.dialog.importqiluvchi = false;
-                this.$refs["importchi_malumotlari"].applyResult({
-                    errors: [], // array of string errors
-                    valid: true, // boolean state
-                    failedRules: {} // should be empty since this is a manual error.
-                })
-            } else {
-                let create_customs_importer;
-                if (Array.isArray(_this.$refs['create_customs_importer']))
-                    create_customs_importer = _this.$refs['create_customs_importer'][0]; else
-                    create_customs_importer = _this.$refs['create_customs_importer'];
-                const isValid = await create_customs_importer.validate();
-                if (isValid && _this.application.importer.type === 1) {
-
-                    setTimeout(async () => {
-
-                        await axios.get('/api/v1/ex_api/getPData', {
-                            params: {
-                                pasnum: (_this.application.importer.passport).toUpperCase(),
-                                //key:md,
-                                pasdata: _this.application.date,
-                            }
-                        }).then(function (response) {
-                            _this.loading.importer = false;
-                            _this.dialog.importqiluvchi = false;
-                            if (response.status === 200) {
-                                _this.application.importer.pdata = response.data.data;
-                                _this.application.importer.name = response.data.data.namelatin + ' ' + response.data.data.engsurname + ' ' + response.data.data.patronymlatin;
-                            }
-                        })
-                    })
-                }
-                if (isValid === true && _this.isValidImporter()) {
-                    this.$refs["importchi_malumotlari"].applyResult({
-                        errors: [], // array of string errors
-                        valid: true, // boolean state
-                        failedRules: {} // should be empty since this is a manual error.
-                    })
-                    _this.isValidImporterA = true;
-                    _this.dialog.importqiluvchi = false;
-
-                }
-            }
-            _this.loading.importer = false;
-
-
-        },
-        async isValidImporter() {
-
-            const _this = this;
-
-
-            let create_customs_importer;
-            if (typeof _this.$refs['create_customs_importer'] === 'undefined') {
-                console.log('sada')
-                return true;
-            }
-            if (Array.isArray(_this.$refs['create_customs_importer']))
-                create_customs_importer = _this.$refs['create_customs_importer'][0]; else
-                create_customs_importer = _this.$refs['create_customs_importer'];
-
-            const isValid = await create_customs_importer.validate({silent: true});
-            if (!isValid) {
-                console.log('1')
-                return false;
-            }
-            if (!_this.importerIsset) {
-                console.log('2')
-                return true;
-            }
-            if ((_this.application.importer.type === 2 && (_this.application.importer.inn.tin).length === 9) ||
-                _this.application.importer.type === 1 && (_this.application.importer.passport).length === 9 && (_this.application.importer.name).length > 1 && _this.application.importer.date && (_this.application.importer.date).length > 5
-            ) {
-                console.log('3')
-                return true;
-            }
-            {
-                console.log('4')
-                return true;
-            }
-        },
-        changeImporterType(val) {
-            if (typeof this.$refs['pasportseriyasi'] !== 'undefined') this.$refs['pasportseriyasi'].reset();
-            if (typeof this.$refs['importerInn'] !== 'undefined') this.$refs['importerInn'].reset();
-            if (typeof this.$refs['importer_datebirth'] !== 'undefined') this.$refs['importer_datebirth'].reset();
-
-            this.application.importer.type = val;
-
-        },
-        parseDate(date) {
-            if (!date) return null
-
-            const [day, month, year] = date.split('.')
-            if (typeof day !== 'undefined' && typeof month !== 'undefined' && typeof year !== 'undefined')
-                return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`
-            else return null;
-        },
-        formatDate(date, type = 1) {
-            if (!date) return null
-
-            const [year, month, day] = date.split('-')
-            if (type === 1) return `${day}.${month}.${year}`; else return `${year}-${day}-${month}`
-        },
         /*        InputFocus(){
                     console.log(this.$refs.usultext0.$el);
                 },*/
@@ -3739,12 +2349,18 @@ export default {
                 if (tab === 1) {
                     _this.application.tovarlar[_this.tovarIndex].tab = 0;
 
-                } else if (tab === 2) {
+                }
+                else if(tab === 2)
+                {
                     _this.application.tovarlar[_this.tovarIndex].tab = 1;
 
-                } else if (tab === 3) {
+                }
+                else if(tab === 3)
+                {
                     _this.application.tovarlar[_this.tovarIndex].tab = 2;
-                } else if (tab === 4) {
+                }
+                else if(tab === 4)
+                {
                     _this.application.tovarlar[_this.tovarIndex].tab = 3;
                 }
 
@@ -3766,6 +2382,7 @@ export default {
 
             }
         },
+
         openTransportturi() {
             this.$refs["transportharakati"].applyResult({
                 errors: [], // array of string errors
@@ -3789,10 +2406,7 @@ export default {
                     if (returnTransport) {
                         return true;
                     }
-                })/*
-              console.log(returnTransport)
-              console.log("!returnTransport")
-              console.log(!returnTransport)*/
+                })
                 return !returnTransport;
             }
         },
@@ -3846,9 +2460,8 @@ export default {
                 //$("#serialNumberHex").attr('value',result_data.data.data.serialnumber)
                 $("#INN").attr('value', result_data.data.data.userinn)
                 $("#PNFL").attr('value', _this.$auth.user().pin)
-if(typeof result_data.data.data.name !=='undefined' && result_data.data.data.name && typeof result_data.data.data.name ==='string')
-                $("#username").attr('value', (result_data.data.data.name).replaceAll("", "'"))
-                else console.log(result_data.data.data.name);
+
+                $("#username").attr('value', result_data.data.data.name.replaceAll("", "'"))
                 ///*_this.$toast.success(result_data.data.data.name)
                 //console.log(_this.$refs['arxivSubmit'])*/
                 //console.log(_this.$refs['arxivSubmit']);
@@ -3889,7 +2502,6 @@ if(typeof result_data.data.data.name !=='undefined' && result_data.data.data.nam
                 $(".product_parts .nav-link").removeClass(["show active"]);
                 $(".product_parts").closest('div').find('.tab-pane').removeClass(["show", "active"]);
                 $('#v-pills-profile' + (product - 1)).addClass(["show", "active"]);
-                $('#v-pills-profile' + product).remove();
                 $('[data-id="' + (product - 1) + '"]').addClass(["active"]);
             }
 
@@ -3911,14 +2523,14 @@ if(typeof result_data.data.data.name !=='undefined' && result_data.data.data.nam
                 })
                 return result;
             } catch (error) {
-                // console.log(error)
+                return error.response
 
             }
         },
         async sendYukHujjatlari(data) {
             let result = null;
             try {
-                await axios.post('/api/v1/ex_api/customprice-yuk', data).then(function (res) {
+                await axios.post('/api/v1/ex_api/customprice-update', data).then(function (res) {
                     result = res;
                 })
                 return result;
@@ -3931,7 +2543,7 @@ if(typeof result_data.data.data.name !=='undefined' && result_data.data.data.nam
         async sendProduct(data) {
             let result = null;
             try {
-                await axios.post('/api/v1/ex_api/customprice-product', {commodity: [data]}).then(function (res) {
+                await axios.post('/api/v1/ex_api/customprice-product', data).then(function (res) {
                     result = res;
                 })
                 return result;
@@ -3968,15 +2580,13 @@ if(typeof result_data.data.data.name !=='undefined' && result_data.data.data.nam
                             this.person.firstName = this.$auth.user().first_name;
                             this.person.surName = this.$auth.user().sur_name;
                             this.person.locationId = this.person.region;
+                            this.person.personId = this.person.person_id;
                             if (this.countries.length < 1) this.getCountries();
 
                             let resultData = await this.sendPerson(this.person);
                             this.loadingButton.first = false;
-                            if (typeof resultData !== 'undefined' && resultData.status === 200 && resultData.data.success === true) {
+                            if (resultData.data.success === true) {
                                 //console.log(resultData.data['data']['data']['id'])
-                                this.person.person_id = resultData.data['data']['data']['id'];
-                                this.$cookie.delete('user');
-                                this.$cookie.set('user', JSON.stringify(this.person), 1);
                                 _this.stepper = 2;
                                 _this.completedSteps.push(_this.stepper - 1);
                                 _this.$toast.success("Аризачи маълумотлари сақланди!");
@@ -3997,13 +2607,7 @@ if(typeof result_data.data.data.name !=='undefined' && result_data.data.data.nam
                 case 2:
                     isValid = false;
                     this.loadingButton.second = true;
-                    if (!(_this.isValidImporterA)) {
-
-
-                    }
                     setTimeout(async () => {
-
-
                         if (!this.isValidTransportTuri()) {
 
                             _this.$refs["transportharakati"].applyResult({
@@ -4020,7 +2624,6 @@ if(typeof result_data.data.data.name !=='undefined' && result_data.data.data.nam
 
                         }
 
-
                         if (!this.isValidDoc()) {
                             _this.$refs["hujjatilova"].applyResult({
                                 errors: ["Илова қилинадиган ҳужжатларни киритинг"], // array of string errors
@@ -4035,13 +2638,7 @@ if(typeof result_data.data.data.name !=='undefined' && result_data.data.data.nam
                                 failedRules: {} // should be empty since this is a manual error.
                             })
                         isValid = await this.validateField("create_customs_yuk_kuzatuv_value");
-                        if (!this.isValidImporterA)
-                            _this.$refs["importchi_malumotlari"].applyResult({
-                                errors: ["Импортчи маълумотлари тўлдирилиши шарт"], // array of string errors
-                                valid: false, // boolean state
-                                failedRules: {} // should be empty since this is a manual error.
-                            })
-                        if (isValid === true && this.isValidImporter() && this.isValidDoc() && this.isValidTransportTuri()) {
+                        if (isValid === true && this.isValidDoc() && this.isValidTransportTuri()) {
 
                             let myYukData = [];
                             myYukData['docs'] = [];
@@ -4062,84 +2659,22 @@ if(typeof result_data.data.data.name !=='undefined' && result_data.data.data.nam
                             })
 
                             _this.yukData['apps']['personId'] = this.person.person_id;
+                            _this.yukData['apps']['id'] = this.$route.params.id;
                             _this.yukData['apps']['customerCountry'] = this.application.seller.country;
                             _this.yukData['apps']['senderCountry'] = this.application.sender.country;
                             _this.yukData['apps']['senderOrg'] = this.application.sender.name;
                             _this.yukData['apps']['sellerOrg'] = this.application.seller.name;
                             _this.yukData['apps']['terms'] = this.application.inkoterms;
                             _this.yukData['apps']['termsAddr'] = this.application.shipping_address;
-                            if (_this.importerIsset) {
-                                if (_this.isValidImporterA) {
-                                    if (_this.application.importer.type === 1) {
-                                        _this.yukData['apps']["authorizedPerson"] = "1"
-                                        _this.yukData['apps']["authorizedPersonPin"] = (typeof _this.application.importer.pdata !== 'undefined' && _this.application.importer.pdata && typeof _this.application.importer.pdata.pinpp !== 'undefined' && _this.application.importer.pdata.pinpp) ? _this.application.importer.pdata.pinpp : "";
-                                        _this.yukData['apps']["authorizedPersonDocDate"] = (typeof _this.application.importer.pdata !== 'undefined' && _this.application.importer.pdata && typeof _this.application.importer.pdata.birth_date !== 'undefined' && _this.application.importer.pdata.birth_date) ? _this.application.importer.pdata.birth_date : "";
-                                        _this.yukData['apps']["authorizedPersonDocNum"] = (typeof _this.application.importer.pdata !== 'undefined' && _this.application.importer.pdata && typeof _this.application.importer.pdata.document !== 'undefined' && _this.application.importer.pdata.document) ? _this.application.importer.pdata.document : "";
-                                        _this.yukData['apps']["stateNumber"] = _this.application.importer.docnum;
-                                        _this.yukData['apps']["stateNumberDate"] = _this.application.importer.docdate;
-                                        _this.yukData['apps']['importerNm'] = _this.application.importer.name;
-                                        _this.yukData['apps']['importerTin'] = _this.yukData['apps']["authorizedPersonPin"];
-                                        _this.yukData['apps']['personAddr'] = _this.application.importer.manzil;
-                                        _this.yukData['apps']['personMail'] = _this.application.importer.email;
-                                        _this.yukData['apps']['personPhone'] = _this.application.importer.phone;
-                                        _this.yukData['apps']['personPosition'] = "02";
-                                    } else {
-                                        _this.yukData['apps']['importerNm'] = _this.application.importer.inn.name;
-                                        //_this.yukData['apps']['orgName'] = _this.application.importer.inn.name;
-                                        _this.yukData['apps']['personPosition'] = "01";
-                                        //_this.yukData['apps']["authorizedPerson"]="1"
-                                        _this.yukData['apps']['personAddr'] = _this.application.importer.manzil;
-                                        _this.yukData['apps']['importerTin'] = _this.application.importer.inn.tin;
-                                        _this.yukData['apps']['personMail'] = _this.application.importer.email;
-                                        _this.yukData['apps']['personPhone'] = _this.application.importer.phone;
-                                        _this.yukData['apps']["stateNumber"] = _this.application.importer.docnum;
-                                        _this.yukData['apps']["stateNumberDate"] = _this.application.importer.docdate;
-
-                                        delete _this.yukData['apps']["authorizedPerson"];
-                                        delete _this.yukData['apps']["authorizedPersonPin"];
-                                        delete _this.yukData['apps']["authorizedPersonDocDate"];
-                                        delete _this.yukData['apps']["authorizedPersonDocNum"];
-
-                                    }
-
-
-                                    /*
-                                        "authorizedPerson": "1", //0 - yo'q // 1 - ha;
-                                        "authorizedPersonPin": "77223669511192",
-                                        "authorizedPersonDocDate": "2022-01-02",
-                                        "authorizedPersonDocNum": "KA12345",
-                                        "stateNumber": "12345",
-                                        "stateNumberDate": "2022-01-02"*/
-
-                                    /*let importer=this.importInns.filter((importInn)=>{
-                                        if(this.application.importInn.tin===importInn.tin) return importInn;
-                                    });
-                                    _this.yukData['apps']['importerNm'] =( typeof importer!='undefined' && typeof importer[0]!='undefined' && typeof importer[0].tin!='undefined')?importer[0].name:"";*/
-                                }
-
-
-                            } else {
-                                _this.yukData['apps']['orgName'] = this.person.organization_name;
-                                _this.yukData['apps']['personPosition'] = this.person.position;
-                                _this.yukData['apps']['personAddr'] = this.person.perAdr;
-                                _this.yukData['apps']['personMail'] = this.person.email;
-                                _this.yukData['apps']['personPhone'] = this.person.phone;
-                                _this.yukData['apps']['importerNm'] = this.person.fio;
-                                _this.yukData['apps']['importerTin'] = _this.person.tin;
-
-                                delete _this.yukData['apps']["authorizedPerson"];
-                                delete _this.yukData['apps']["authorizedPersonPin"];
-                                delete _this.yukData['apps']["authorizedPersonDocDate"];
-                                delete _this.yukData['apps']["authorizedPersonDocNum"];
-
-                            }
-                            _this.yukData['apps']['personTin'] = _this.person.tin;
                             _this.yukData['apps']['personFio'] = this.person.fio;
-                            _this.yukData['apps']['personPin'] = this.person.pin;
                             _this.yukData['apps']['orgName'] = this.person.organization_name;
+                            _this.yukData['apps']['personPosition'] = this.person.position;
+                            _this.yukData['apps']['personAddr'] = this.person.perAdr;
+                            _this.yukData['apps']['personTin'] = this.person.tin;
+                            _this.yukData['apps']['personPin'] = this.person.pin;
+                            _this.yukData['apps']['personMail'] = this.person.email;
+                            _this.yukData['apps']['personPhone'] = this.person.phone;
                             _this.yukData['apps']['locationId'] = this.person.region;
-
-
                             _this.yukData['apps']['transExp'] = null;
                             _this.yukData['docs'] = myYukData['docs'];
                             _this.yukData['transports'] = myYukData['transports'];
@@ -4151,24 +2686,19 @@ if(typeof result_data.data.data.name !=='undefined' && result_data.data.data.nam
                                 //this.person.person_id = resultData.data['data']['data']['id'];
                                 this.commodity.appId = resultData.data['data']['data']['id'];
                                 this.commodity.appNum = resultData.data['data']['data']['appNum'];
-                                this.$cookie.delete('yuk');
-                                this.$cookie.set('yuk', JSON.stringify(_this.yukData), 1);
                                 _this.stepper = 3;
                                 _this.completedSteps.push(_this.stepper - 1);
                                 this.$toast.success("Юк ҳужжатлари тўғрисидаги маълумотлар сақланди!");
                             } else {
                                 if (resultData.status === 400) {
+
                                     if (typeof resultData.data.data.errorsApps !== 'undefined') {
                                         _this.setYukErrors(resultData.data.data.errorsApps);
                                     }
                                     this.$toast.error("Маълумотларингизни текшириб қайтадан юборинг!");
                                 } else
                                     this.$toast.error("Серверда хатолик юз берди. Кейинроқ уриниб кўринг!");
-
-                                _this.loadingButton.second = false;
                             }
-                            _this.loadingButton.second = false;
-
                             /*
                                                         {
                                                             this.$cookie.delete('yuk');
@@ -4191,11 +2721,8 @@ if(typeof result_data.data.data.name !=='undefined' && result_data.data.data.nam
                                     valid: false, // boolean state
                                     failedRules: {} // should be empty since this is a manual error.
                                 })
-                            _this.$toast.error("Маълумотларингизни текшириб қайтадан юборинг!");
-                            _this.loadingButton.second = false;
-
                         }
-
+                        _this.loadingButton.second = false;
                     });
 
 
@@ -4208,7 +2735,7 @@ if(typeof result_data.data.data.name !=='undefined' && result_data.data.data.nam
                     //setTimeout(async () => {
                     setTimeout(async () => {
                         isValid = await this.validateField("create_customs_tovar1_value" + this.tovarIndex)
-                        console.log(_this.$refs['create_customs_tovar1_value0'])
+
                         if (isValid !== true) {
                             //console.log('1111')
                             // console.log(this.$refs['create_customs_tovar1_value'+this.tovarIndex])
@@ -4220,13 +2747,11 @@ if(typeof result_data.data.data.name !=='undefined' && result_data.data.data.nam
                             setTimeout(async () => {
                                 isValid = await this.validateField("create_customs_tovar2_value" + this.tovarIndex);
                                 //isValid = true;
-                                console.log(_this.$refs['create_customs_tovar2_value0'])
                                 if (!isValid || !this.noRequiredTab) {
                                     this.application.tovarlar[this.tovarIndex].tab = 1;
                                     this.noRequiredTab = true;
                                 } else {
                                     setTimeout(async () => {
-                                        console.log(_this.$refs['create_customs_tovar3_value0'])
                                         isValid = await this.validateField("create_customs_tovar3_value" + this.tovarIndex);
                                         //isValid = true;
                                         if (!isValid) this.application.tovarlar[this.tovarIndex].tab = 2;
@@ -4235,7 +2760,6 @@ if(typeof result_data.data.data.name !=='undefined' && result_data.data.data.nam
                                             setTimeout(async () => {
                                                 //if(_this.application.tovarlar[_this.tovarIndex].product.usul<2)
                                                 isValid = await this.validateField("create_customs_tovar4_value" + this.tovarIndex);
-                                                console.log(_this.$refs['create_customs_tovar4_value0'])
                                                 //isValid = true;
                                                 if (!isValid && (_this.application.tovarlar[_this.tovarIndex].product.usul > 2 || _this.application.tovarlar[_this.tovarIndex].product.usul < 1)) {
                                                     this.application.tovarlar[this.tovarIndex].tab = 3;
@@ -4247,9 +2771,10 @@ if(typeof result_data.data.data.name !=='undefined' && result_data.data.data.nam
                                                         _this.application.tovarlar[0].product.usul_panel = j;
                                                         if (typeof this.$refs["usultext" + this.tovarIndex + '-' + j] === 'undefined') {
                                                             noValid.push(j)
+
                                                             setTimeout(() => {
                                                                 this.$refs["usultext" + this.tovarIndex + '-' + j][0].applyResult({
-                                                                    errors: [j + 1 + " - усулни қўлламаслик сабаби майдони албатта тўлдирилиши лозим"], // array of string errors
+                                                                    errors: [j + 1 + " - усулни қўлламаслик сабаби майдони албатта тўлдирилиши лозим1"], // array of string errors
                                                                     valid: false, // boolean state
                                                                     failedRules: {} // should be empty since this is a manual error.
                                                                 })
@@ -4258,10 +2783,9 @@ if(typeof result_data.data.data.name !=='undefined' && result_data.data.data.nam
                                                         }
 
                                                     }
-                                                    //console.log(noValid);
                                                     if (noValid.length < 1) {
                                                         this.loadingButton.third = true;
-
+                                                        this.commodity.appId = _this.$route.params.id;
                                                         this.commodity.hsCode = _this.application.tovarlar[_this.tovarIndex].product.tftn.id;
                                                         this.commodity.hsDecDate = _this.application.tovarlar[_this.tovarIndex].product.tftnqaror.date;
                                                         this.commodity.hsDecNum = _this.application.tovarlar[_this.tovarIndex].product.tftnqaror.name;
@@ -4295,18 +2819,15 @@ if(typeof result_data.data.data.name !=='undefined' && result_data.data.data.nam
                                                         if (_this.application.tovarlar[_this.tovarIndex].product.usul < 6)
                                                             this.commodity.method = "0" + _this.application.tovarlar[_this.tovarIndex].product.usul; else
                                                             this.commodity.method = _this.application.tovarlar[_this.tovarIndex].product.usul;
-                                                        this.commodity.methodDescription = (_this.application.tovarlar[_this.tovarIndex].product.usul_text) ? _this.application.tovarlar[_this.tovarIndex].product.usul_text.join("~~~~~") : "";
+                                                        this.commodity.methodDescription =(_this.application.tovarlar[_this.tovarIndex].product.usul_text)? _this.application.tovarlar[_this.tovarIndex].product.usul_text.join("~~~~~"):"";
 
                                                         let resultData = await this.sendProduct(this.commodity);
                                                         this.loadingButton.third = false;
-                                                        console.log(resultData)
-                                                        if (typeof resultData !== 'undefined' && typeof resultData.data !== 'undefined' && typeof resultData.status !== 'undefined' && resultData.status === 200) {
+                                                        if (typeof resultData !== 'undefined' && typeof resultData.data !== 'undefined' && typeof resultData.data.success !== 'undefined' && resultData.data.success === true) {
                                                             //console.log(resultData.data['data']['data']['id'])
                                                             //this.person.person_id = resultData.data['data']['data']['id'];
                                                             /*_this.stepper = 4;
                                                             _this.completedSteps.push(this.stepper - 1);*/
-                                                            this.$cookie.delete('yuk');
-                                                            this.$cookie.delete('user');
                                                             this.$toast.success("Сизнинг аризангиз омадли тарзда юборилди!");
                                                             setTimeout(() => {
                                                                 _this.$router.push("/services/decisions/" + _this.commodity.appId)
@@ -4347,11 +2868,11 @@ if(typeof result_data.data.data.name !=='undefined' && result_data.data.data.nam
                                         this.stepper = 4;
                                         this.completedSteps.push(this.stepper - 1);*/
                     break;
-
-                case 4:
-                    this.stepper = 4;
-                    this.completedSteps.push(this.stepper - 1);
-                    break;
+                /*
+                                case 4:
+                                    this.stepper = 4;
+                                    this.completedSteps.push(this.stepper - 1);
+                                    break;*/
 
             }
 
@@ -4371,17 +2892,14 @@ if(typeof result_data.data.data.name !=='undefined' && result_data.data.data.nam
                     this.stepper = 2;
                     break;
 
-                case 4:
-                    this.stepper = 3;
-                    break;
+                /*                case 4:
+                                    this.stepper = 3;
+                                    break;*/
 
             }
         },
         goStep(step = 1) {
-
-            if ((this.completedSteps.includes(step - 1) || this.completedSteps.includes(step)) && !this.isCompletedStep(3)) {
-                this.stepper = step;
-            }
+            this.stepper = step;
         },
         isCompleted(step) {
             if (this.completedSteps.includes(step)) {
@@ -4514,10 +3032,15 @@ if(typeof result_data.data.data.name !=='undefined' && result_data.data.data.nam
         },
 
         initialize() {
+
+            this.getAppData();
+            setTimeout(async ()=>{
+                this.setCookieData();
+            },1000)
             this.getBoshqarmalar();
             this.getCountries();
             this.getCurrencies();
-            this.setCookieData();
+
 
 
             /*
@@ -4533,17 +3056,165 @@ if(typeof result_data.data.data.name !=='undefined' && result_data.data.data.nam
 
 
         },
+        getAppData() {
+            const _this = this;
+            this.$store.commit('setLoading', true)
+
+            setTimeout(() => {
+
+                axios.get("/api/v1/ex_api/customprice-get", {
+                    params: {
+                        app_id: _this.$route.params.id
+                    }
+                }).then(function (response) {
+                    _this.$store.commit('setLoading', false)
+                    if (typeof response.data.data !== "undefined") {
+                        _this.app = response.data.data;
+                        if (_this.app.general.status !== 125) {
+                            _this.$router.push('/applications');
+                        } else {
+
+                            if (typeof _this.app.statuses.filter((status)=>{if(status.status=="125") return status;})[0].rolback != 'undefined' && typeof _this.app.statuses.filter((status)=>{if(status.status=="125") return status;})[0].rolback.rollBackComment!= 'undefined') {
+                                _this.comment = _this.app.statuses.filter((status)=>{if(status.status=="125") return status;})[0].rolback.rollBackComment;
+                                if(typeof _this.app.statuses.filter((status)=>{if(status.status=="125") return status;})[0].rolback.rollBackAppList!=='undefined' && Array.isArray(_this.app.statuses.filter((status)=>{if(status.status=="125") return status;})[0].rolback.rollBackAppList))
+                                _this.app.statuses.filter((status)=>{if(status.status=="125") return status;})[0].rolback.rollBackAppList.forEach(function (rolback) {
+                                    _this.comment = _this.comment + '<br/>' + rolback.rollbackName;
+                                })
+
+                            }
+                        }
+                        _this.setPersonData({
+                            'type': (typeof _this.app.general.personPosition !== 'undefined') ? _this.app.general.personPosition : "01",
+                            'pin': (typeof _this.app.general.personPin !== 'undefined') ? _this.app.general.personPin : null,
+                            'tin': (typeof _this.app.general.personTin !== 'undefined') ? _this.app.general.personTin : null,
+                            'fio': (typeof _this.app.general.personFio !== 'undefined') ? _this.app.general.personFio : null,
+                            'perAdr': (typeof _this.app.general.personAddr !== 'undefined') ? _this.app.general.personAddr : null,
+                            'email': (typeof _this.app.general.personMail !== 'undefined') ? _this.app.general.personMail : null,
+                            'phone': (typeof _this.app.general.personPhone !== 'undefined') ? _this.app.general.personPhone : null,
+                            'region': (typeof _this.app.general.locationId !== 'undefined') ? _this.app.general.locationId : null,
+                            'person_id': (typeof _this.app.general.personId !== 'undefined') ? _this.app.general.personId : null,
+                        })
+
+                        let docs = [];
+                        if(_this.app.docs && Array.isArray(_this.app.docs))
+                        _this.app.docs.forEach(function (doc) {
+                            docs.push({
+                                'fileId': (typeof doc.fileId !== 'undefined') ? doc.fileId : null,
+                                'type': (typeof doc.docTypeName !== 'undefined') ? doc.docTypeName : null,
+                                'valid': true,
+                                'color': 'success',
+                                //'file_num':(typeof doc.id !=='undefined')?doc.id:null,
+                            })
+                        })
+                        let transports = [];
+                        _this.app.transports.forEach(function (transport) {
+                            transports.push({
+                                'finishCountry': (typeof transport.finishCountry !== 'undefined') ? transport.finishCountry : null,
+                                'endCountry': (typeof transport.endCountry !== 'undefined') ? transport.endCountry : null,
+                                'tarnsportType': (typeof transport.tarnsportType !== 'undefined') ? transport.tarnsportType : null,
+                                'transportPrice': (typeof transport.transportPrice !== 'undefined') ? transport.transportPrice : null,
+                            })
+                        })
+
+                        _this.setYukData({
+                            "apps": {
+                                'customerCountry': (typeof _this.app.general.customerCountry !== 'undefined') ? _this.app.general.customerCountry : null,
+                                'senderCountry': (typeof _this.app.general.senderCountry !== 'undefined') ? _this.app.general.senderCountry : null,
+                                'senderOrg': (typeof _this.app.general.senderOrg !== 'undefined') ? _this.app.general.senderOrg : null,
+                                'sellerOrg': (typeof _this.app.general.sellerOrg !== 'undefined') ? _this.app.general.sellerOrg : null,
+                                'terms': (typeof _this.app.general.terms !== 'undefined') ? _this.app.general.terms : null,
+                                'termsAddr': (typeof _this.app.general.termsAddr !== 'undefined') ? _this.app.general.termsAddr : null,
+                                'locationId': (typeof _this.app.general.locationId !== 'undefined') ? _this.app.general.locationId : null,
+                            },
+                            "docs": docs,
+                            "transports": transports
+                        })
+                        if (Array.isArray(_this.app.product)) {
+                           /// console.log("asdasd")
+                        } else
+                            _this.setProductData([
+                                {
+                                    product: {
+                                        tftn: _this.app.product.hsCode,
+                                        weight: _this.app.product.basicQty,
+                                        size: _this.app.product.extraQty,
+                                        netto: _this.app.product.netto,
+                                        brutto: _this.app.product.brutto,
+                                        price: _this.app.product.price,
+                                        customsprice: _this.app.product.customsPrice,
+                                        currency: _this.app.product.currencyType,
+                                        trade_name: _this.app.product.tradeName,
+                                        trade_mark: _this.app.product.tradeMark,
+                                        mark: _this.app.product.mark,
+                                        model: _this.app.product.model,
+                                        article: _this.app.product.article,
+                                        nav: _this.app.product.sort,
+                                        standart: _this.app.product.standarts,
+                                        color: _this.app.product.color,
+                                        maqsad: _this.app.product.productGoal,
+                                        function: _this.app.product.functions,
+                                        tijorat_xususiyati: _this.app.product.comProp,
+                                        texnik_xususiyati: _this.app.product.techChar,
+                                        yuk_soni: _this.app.product.cargoSpace,
+                                        oram_turi: _this.app.product.packType,
+                                        oram_soni: _this.app.product.packQty,
+                                        manufacturer: {
+                                            name: _this.app.product.originOrg,
+                                            country: _this.app.product.originCountry,
+                                        },
+                                        tftnqaror: {
+                                            date: _this.app.product.hsDecDate,
+                                            number: _this.app.product.hsDecNum
+                                        },
+                                        old_decision: {
+                                            date: _this.app.product.inDecDate,
+                                            number: _this.app.product.inDecNum
+                                        },
+                                        usul: _this.app.product.method.replace("0", ""),
+                                        usul_text: (typeof _this.app.product.methodDescription !== 'undefined' && _this.app.product.methodDescription !== null) ? _this.app.product.methodDescription.split("~~~~~") : [],
+                                        comment: _this.app.product.extraInfo
+                                    }
+                                }
+                            ])
+
+                        _this.breadcrumb_items.push({
+                            text: "Дастлабки қарор қайта ариза юбориш - " + _this.app.general.appNum,
+                            to: '/services/decisions/' + _this.app.general.appId,
+                            disabled: true,
+                            exact: true,
+                        })
+
+                    } else {
+                        _this.$toast.error("Маълумот топилмади!")
+                        _this.$router.push("/applications");
+
+                    }
+
+
+                })
+
+
+            })
+
+        },
         setCookieData() {
 
 
             /////  Step  1  Fill  Person data
             let CPerson = null;
             CPerson = this.$cookie.get('user') ? JSON.parse(this.$cookie.get('user')) : null;
-            this.setPersonData(CPerson)
-            let CYuk = null;
-            CYuk = this.$cookie.get('yuk') ? JSON.parse(this.$cookie.get('yuk')) : null;
-            if (CYuk) this.setYukData(CYuk);
-
+            if(this.$auth.user() !==null && CPerson!==null) {
+                CPerson['pin'] = this.$auth.user().pin;
+                CPerson['tin'] = this.$auth.user().tin;
+                CPerson['perAdr'] = this.$auth.user().per_adr;
+                CPerson['email'] = this.$auth.user().email;
+                CPerson['type'] = (this.$auth.user().user_type === "I") ? 1 : 0;
+                CPerson['fio'] = this.$auth.user().sur_name + ' ' + this.$auth.user().first_name + ' ' + this.$auth.user().mid_name;
+            }
+            //this.setPersonData(CPerson)
+            //let CYuk = null;
+            ///CYuk = this.$cookie.get('yuk') ? JSON.parse(this.$cookie.get('yuk')) : null;
+            //if(CYuk) this.setYukData(CYuk);
 
             /*            let CProduct = null;
                         CProduct = this.$cookie.get('product') ? JSON.parse(this.$cookie.get('product')) : null;
@@ -4602,29 +3273,18 @@ if(typeof result_data.data.data.name !=='undefined' && result_data.data.data.nam
         setPersonData(data) {
 
             //console.log(this.$auth.user())
-            this.person.pin = this.$auth.user().pin;
+            this.person.pin = (typeof data['pin'] !== 'undefined') ? data['pin'] : null; //.pin;
             //this.person.type=(this.$auth.user().user_type==="I")?1:0;
-            this.person.tin = this.$auth.user().tin;
-            this.person.fio = this.$auth.user().sur_name + ' ' + this.$auth.user().first_name + ' ' + this.$auth.user().mid_name;
-            this.person.perAdr = this.$auth.user().per_adr;
-            this.person.email = this.$auth.user().email;
-            this.person.type = (this.$auth.user().type === 1) ? 1 : 0;
-            if (this.person.type === 0) {
-                let legal_info = JSON.parse(this.$auth.user().legal_info)
-                //console.log(legal_info[0].le_name)
-                if (typeof legal_info[0] !== 'undefined' && typeof legal_info[0].le_name !== 'undefined') {
-                    this.person.organization_name = legal_info[0].le_name
-                } else this.person.organization_name = "";
-                this.person.position = "02";
-            }
+            this.person.type = (typeof data['type'] !== 'undefined') ? data['type'] : "01";
+            this.person.tin = (typeof data['tin'] !== 'undefined') ? data['tin'] : null;
+            this.person.fio = (typeof data['fio'] !== 'undefined') ? data['fio'] : null; //this.$auth.user().sur_name + ' ' + this.$auth.user().first_name + ' ' + this.$auth.user().mid_name;
+            this.person.perAdr = (typeof data['perAdr'] !== 'undefined') ? data['perAdr'] : null;
+            this.person.email = (typeof data['email'] !== 'undefined') ? data['email'] : null;
             let personId = null;
             const _this = this;
-
-            if (data) {
-                this.person.phone = (typeof data['phone'] !== 'undefined') ? data['phone'] : null;
-                this.person.region = (typeof data['region'] !== 'undefined') ? data['region'] : null;
-                this.person.person_id = (typeof data['person_id'] !== 'undefined') ? data['person_id'] : null;
-            }
+            this.person.phone = (typeof data['phone'] !== 'undefined') ? data['phone'] : null;
+            this.person.region = (typeof data['region'] !== 'undefined') ? data['region'] : null;
+            this.person.person_id = (typeof data['person_id'] !== 'undefined') ? data['person_id'] : null;
 
         },
         setYukData(data) {
@@ -4644,7 +3304,9 @@ if(typeof result_data.data.data.name !=='undefined' && result_data.data.data.nam
 
                     _this.application.documents[key] = {
                         id: docs[key].fileId,
-                        type: docs[key].type
+                        type: docs[key].type,
+                        valid: docs[key].type ? docs[key].type : false,
+                        color: docs[key].type ? docs[key].type : null
                     }
                 })
             }
@@ -4661,12 +3323,55 @@ if(typeof result_data.data.data.name !=='undefined' && result_data.data.data.nam
                 })
             }
 
-
-            /// go to next step
-//step=3
-
-
         },
+        setProductData(pData) {
+            const _this = this;
+           // console.log(pData)
+            if (pData && Array.isArray(pData)) {
+                pData.forEach(function (product, key) {
+
+                    product = product['product']
+                    _this.search_tftn = (typeof product['tftn'] !== 'undefined') ? product['tftn'] : null
+                    setTimeout(() => {
+                        _this.application.tovarlar[key].product.tftn = _this.tftncodes[0]
+                    }, 500)
+                    _this.application.tovarlar[key].product.weight = (typeof product['weight'] !== 'undefined') ? product['weight'] : null
+                    _this.application.tovarlar[key].product.size = (typeof product['size'] !== 'undefined') ? product['size'] : null
+                    _this.application.tovarlar[key].product.netto = (typeof product['netto'] !== 'undefined') ? product['netto'] : null
+                    _this.application.tovarlar[key].product.brutto = (typeof product['brutto'] !== 'undefined') ? product['brutto'] : null
+                    _this.application.tovarlar[key].product.price = (typeof product['price'] !== 'undefined') ? product['price'] : null
+                    _this.application.tovarlar[key].product.customsprice = (typeof product['customsprice'] !== 'undefined') ? product['customsprice'] : null
+                    _this.application.tovarlar[key].product.currency = (typeof product['currency'] !== 'undefined') ? product['currency'] : null
+                    _this.application.tovarlar[key].product.trade_name = (typeof product['trade_name'] !== 'undefined') ? product['trade_name'] : null
+                    _this.application.tovarlar[key].product.trade_mark = (typeof product['trade_mark'] !== 'undefined') ? product['trade_mark'] : null
+                    _this.application.tovarlar[key].product.mark = (typeof product['mark'] !== 'undefined') ? product['mark'] : null
+                    _this.application.tovarlar[key].product.model = (typeof product['model'] !== 'undefined') ? product['model'] : null
+                    _this.application.tovarlar[key].product.article = (typeof product['article'] !== 'undefined') ? product['article'] : null
+                    _this.application.tovarlar[key].product.nav = (typeof product['nav'] !== 'undefined') ? product['nav'] : null
+                    _this.application.tovarlar[key].product.standart = (typeof product['standart'] !== 'undefined') ? product['standart'] : null
+                    _this.application.tovarlar[key].product.color = (typeof product['color'] !== 'undefined') ? product['color'] : null
+                    _this.application.tovarlar[key].product.maqsad = (typeof product['maqsad'] !== 'undefined') ? product['maqsad'] : null
+                    _this.application.tovarlar[key].product.function = (typeof product['function'] !== 'undefined') ? product['function'] : null
+                    _this.application.tovarlar[key].product.tijorat_xususiyati = (typeof product['tijorat_xususiyati'] !== 'undefined') ? product['tijorat_xususiyati'] : null
+                    _this.application.tovarlar[key].product.texnik_xususiyati = (typeof product['texnik_xususiyati'] !== 'undefined') ? product['texnik_xususiyati'] : null
+                    _this.application.tovarlar[key].product.yuk_soni = (typeof product['yuk_soni'] !== 'undefined') ? product['yuk_soni'] : null
+                    _this.application.tovarlar[key].product.oram_turi = (typeof product['oram_turi'] !== 'undefined') ? product['oram_turi'] : null
+                    _this.application.tovarlar[key].product.oram_soni = (typeof product['oram_soni'] !== 'undefined') ? product['oram_soni'] : null
+                    _this.application.tovarlar[key].product.usul = (typeof product['usul'] !== 'undefined') ? parseFloat(product['usul']) : null
+                    _this.application.tovarlar[key].product.usul_text = (typeof product['usul_text'] !== 'undefined') ? product['usul_text'] : null
+                    _this.application.tovarlar[key].product.comment = (typeof product['comment'] !== 'undefined') ? product['comment'] : null
+                    _this.application.tovarlar[key].product.manufacturer.name = (typeof product['manufacturer'] !== 'undefined' && typeof product['manufacturer']['name'] !== 'undefined') ? product['manufacturer']['name'] : null
+                    _this.application.tovarlar[key].product.manufacturer.country = (typeof product['manufacturer'] !== 'undefined' && typeof product['manufacturer']['country'] !== 'undefined') ? product['manufacturer']['country'] : null
+                    _this.application.tovarlar[key].product.tftnqaror.date = (typeof product['tftnqaror'] !== 'undefined' && typeof product['tftnqaror']['date'] !== 'undefined') ? product['tftnqaror']['date'] : null
+                    _this.application.tovarlar[key].product.tftnqaror.number = (typeof product['tftnqaror'] !== 'undefined' && typeof product['tftnqaror']['number'] !== 'undefined') ? product['tftnqaror']['number'] : null
+                    _this.application.tovarlar[key].product.old_decision.date = (typeof product['old_decision'] !== 'undefined' && typeof product['old_decision']['date'] !== 'undefined') ? product['old_decision']['date'] : null
+                    _this.application.tovarlar[key].product.old_decision.number = (typeof product['old_decision'] !== 'undefined' && typeof product['old_decision']['number'] !== 'undefined') ? product['old_decision']['number'] : null
+                })
+            } else
+                console.log('aaa111')
+        },
+
+
         async validatePersonData(silent = false) {
             let isValid = false;
 
@@ -4693,7 +3398,7 @@ if(typeof result_data.data.data.name !=='undefined' && result_data.data.data.nam
 
                         this.application.documents.push({
                             id: val,
-                            type: fileIsset[0].cd_id + " - " + fileIsset[0].file_num
+                            type: fileIsset[0].cd_id + " - № " + fileIsset[0].file_num
                         });
                         this.documents[key].color = 'success';
                         this.documents[key].valid = true;
@@ -4714,6 +3419,585 @@ if(typeof result_data.data.data.name !=='undefined' && result_data.data.data.nam
                 this.documents[key].valid = false;
             }
         },
+        getTftn(code) {
+            // Lazily load input items
+            fetch("https://new.customs.uz/api/v1/data/tftn?code=" + val)
+                .then((res) => res.json())
+                .then(res => {
+                    res.map(function (item) {
+                        item.name = item.id + " - " + item.name;
+                        return item;
+                    })
+                    this.tftncodes = res;
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+                .finally(() => (
+                    this.loading.tftncode = false
+                ))
+        },
+
+
+    },
+    data() {
+        return {
+
+            stepper: 1,
+            search_country: null,
+            search_currency: null,
+            search_tftn: null,
+            countries: [],
+            transport_type: null,
+            regions: [],
+            inkoterms: [
+                {text: 'EXW', value: '01'},
+                {text: 'FCA', value: '02'},
+                {text: 'FAS', value: '03'},
+                {text: 'FOB', value: '04'},
+                {text: 'CFR', value: '05'},
+                {text: 'CIF', value: '06'},
+                {text: 'CPT', value: '07'},
+                {text: 'CIP', value: '08'},
+                {text: 'DAF', value: '09'},
+                {text: 'DES', value: '10'},
+                {text: 'DEQ', value: '11'},
+                {text: 'DDU', value: '12'},
+                {text: 'DDP', value: '13'},
+                {text: 'DAР', value: '14'},
+                {text: 'DAT', value: '15'},
+                {text: '---', value: '16'},
+            ],
+            oramlar: [
+                {value: '000', text: 'қадоқсиз'},
+                {value: '001', text: 'комплект'},
+                {value: '002', text: 'ўрам'},
+                {value: '003', text: 'ўрама'},
+                {value: '004', text: 'бонка'},
+                {value: '005', text: 'қадоқ'},
+                {value: '006', text: 'тўплам'},
+                {value: '007', text: 'бочка'},
+                {value: '008', text: 'пакет'},
+                {value: '009', text: 'кип'},
+                {value: '010', text: 'қоп'},
+                {value: '011', text: 'навал'},
+                {value: '012', text: 'қоплар'},
+                {value: '013', text: 'кип'},
+                {value: '014', text: 'бочкалар'},
+                {value: '015', text: 'тахтали қути'},
+                {value: '016', text: 'пластмассали қути'},
+                {value: '017', text: 'тагликлар'},
+                {value: '018', text: 'картонли коробкалар'},
+                {value: '019', text: 'ўрамлар'},
+                {value: '020', text: 'цистерналар'}
+            ],
+            usullar: [
+                {text: '1-усул, Олиб кириладиган товарга доир битимнинг қиймати бўйича', value: 1},
+                {text: '2-усул, Айнан бир xил товарга доир битимнинг қиймати бўйича', value: 2},
+                {text: '3-усул, Ўxшаш товарга доир битимнинг қиймати бўйича', value: 3},
+                {text: '4-усул, Қийматларни чегириб ташлаш', value: 4},
+                {text: '5-усул, Қийматларни қўшиш', value: 5},
+                {text: '6.1-усул, Захира', value: 6.1},
+                {text: '6.2-усул, Захира', value: 6.2},
+                {text: '6.3-усул, Захира', value: 6.3},
+                {text: '6.4-усул, Захира', value: 6.4},
+                {text: '6.5-усул, Захира', value: 6.5}
+            ],
+            tftncodes: [],
+            breadcrumb_items: [
+                {
+                    text: i18n.t('Асосий саҳифа'),
+                    to: '/',
+                    disabled: false,
+                    exact: true,
+                },
+                {
+                    text: 'Менинг аризаларим',
+                    to: '/applications',
+                    disabled: false,
+                    exact: true,
+                },
+            ],
+            document_types: [
+                {
+                    'text': "101 - Лицензия",
+                    'value': 101,
+                },
+                {
+                    'text': "201 - КРГ",
+                    'value': 201,
+                },
+                {
+                    'text': "202 - СМР",
+                    'value': 202,
+                },
+                {
+                    'text': "203 - КНСМ",
+                    'value': 203,
+                },
+                {
+                    'text': "204 - TIR",
+                    'value': 204,
+                },
+                {
+                    'text': "205 - АВИА",
+                    'value': 205,
+                },
+                {
+                    'text': "206 - НКПЧТ",
+                    'value': 206,
+                },
+                {
+                    'text': "207 - СМГС",
+                    'value': 207,
+                },
+                {
+                    'text': "208 - ТТН",
+                    'value': 208,
+                },
+                {
+                    'text': "209 - ПТС",
+                    'value': 209,
+                },
+                {
+                    'text': "220 - ИНВ",
+                    'value': 220,
+                },
+                {
+                    'text': "221 - ИНВПРФ",
+                    'value': 221,
+                },
+                {
+                    'text': "222 - УПЛИСТ",
+                    'value': 222,
+                },
+            ],
+            tovarlar: [
+                {
+                    tab: 0,
+                    product: {
+                        tftn: null,
+                        transport_type: null,
+                        currency: null,
+                        transportations: null,
+                        weight: null,
+                        unit2: null,
+                        u2: null,
+                        size: null,
+                        brutto: null,
+                        netto: null,
+                        price: null,
+                        customsprice: null
+                    },
+                    dialog: {
+                        transportturi: false,
+                        tiftnqaror: false,
+                        ishlabchiqaruvchi: false,
+
+                    },
+                    menu: {
+                        dastlabkiqarorsanasi: null,
+                        tiftnqaror: null,
+                        tftnqarorsanasi: null
+                    },
+                    transportation: {
+                        country_from: null
+                    },
+
+
+                },
+
+            ],
+            tovarIndex: 0,
+            application: {
+
+                date: "",
+                dastlabkiqarorsanasi: false,
+                inkoterms: null,
+                shipping_address: "",
+                sender: {
+                    name: "",
+                    country: "",
+                },
+                seller: {
+                    name: "",
+                    country: "",
+                },
+                old_decision: {
+                    number: null,
+                    date: "",
+                },
+                transportations: [
+                    {
+                        country_from: null,
+                        country_to: null,
+                        transport_type: null,
+                        price: null,
+                    }
+                ],
+                documents: [],
+                errors: {
+                    transportation_error: "",
+                },
+
+                tovarlar: [
+                    {
+                        tab: 0,
+                        product: {
+                            tftn: null,
+                            transport_type: null,
+                            currency: null,
+                            transportations: null,
+                            weight: null,
+                            unit2: null,
+                            u2: null,
+                            size: null,
+                            brutto: null,
+                            netto: null,
+                            price: null,
+                            customsprice: null,
+                            trade_name: "",
+                            trade_mark: "",
+                            mark: "",
+                            model: "",
+                            article: "",
+                            nav: "",
+                            standart: "",
+                            color: "",
+                            maqsad: "",
+                            texnik_xususiyati: "",
+                            tijorat_xususiyati: "",
+                            yuk_soni: null,
+                            oram_turi: null,
+                            manufacturer: {
+                                name: "",
+                                country: "",
+                            },
+                            tftnqaror: {
+                                name: "",
+                                date: null,
+                            },
+                            old_decision: {
+                                number: null,
+                                date: null,
+                            },
+                            usul: null,
+                            usul_text: [],
+                            usul_panel: 0,
+                            comment: ""
+
+                        },
+                        dialog: {
+                            transportturi: false,
+                            tiftnqaror: false,
+                            ishlabchiqaruvchi: false,
+                            dastlabkiqaror: false,
+                        },
+                        menu: {
+                            dastlabkiqarorsanasi: null,
+                            tiftnqaror: null,
+                            tftnqarorsanasi: null
+                        },
+                        transportation: {
+                            country_from: null
+                        },
+
+
+                    },
+
+                ],
+
+
+            },
+            transportations: [
+                {
+                    country_from: null,
+                    country_to: null,
+                    transport_type: null,
+                    price: null,
+                }
+            ],
+            documents: [
+                {
+                    type: null,
+                    id: null,
+                    valid: false,
+                }
+            ],
+            yukData: {
+                apps: {
+                    personId: null,
+                    customerCountry: null,
+                    senderCountry: null,
+                    senderOrg: null,
+                    sellerOrg: null,
+                    terms: null,
+                    termsAddr: null,
+                    personFio: null,
+                    orgName: null,
+                    personPosition: null,
+                    personAddr: null,
+                    personTin: null,
+                    personPin: null,
+                    personMail: null,
+                    personPhone: null,
+                    locationId: null,
+                    transExp: null,
+                },
+                docs: {},
+                transports: {}
+
+            },
+            person: {
+                type: 1, /// 1- fiz 0- yur
+                fio: "",
+                pin: null,
+                tin: null,
+                organization_name: "Жисмоний шахс",
+                position: "01",
+                phone: null,
+                email: null,
+                dqaror: null,
+                tftnqaror: {
+                    number: null,
+                    date: null,
+                }
+
+            },
+            currencies: [{
+                text: "АқШ доллари",
+                value: 840
+            }],
+            transports: [
+                {
+                    text: "10 - Денгиз транспорти",
+                    value: 10
+                },
+                {
+                    text: "20 - Темир йўл транспорти",
+                    value: 20
+                }, {
+
+                    text: "30 - Автомобиль транспорти",
+                    value: 30
+                },
+                {
+                    text: "40 - Ҳаво транспорти",
+                    value: 40
+                },
+                {
+                    text: "80 - Дарё транспорти",
+                    value: 80
+                }, {
+                    text: "90 - САМОХОД",
+                    value: 90
+                },
+
+            ],
+            items: [
+                {tab: 0, content: 'Умумий маълумотлар'},
+                {tab: 1, content: 'Таснифи'},
+                {tab: 2, content: 'Хусусиятлари'},
+                {tab: 3, content: 'Қўшимча маълумотлар'},
+            ],
+            doc: {
+                type: null,
+                file: null,
+            },
+            tabs: {
+                tovar: 1,
+            },
+
+            copytovar: {
+                tab: 0,
+                product: {
+                    tftn: null,
+                    transport_type: null,
+                    currency: null,
+                    transportations: null
+                },
+                dialog: {
+                    transportturi: false,
+                    dastlabkiqaror: false,
+                    tiftnqaror: false,
+                    jonatuvchi: false,
+                    sotuvchi: false,
+                    ishlabchiqaruvchi: false,
+                },
+                menu: {
+                    dastlabkiqarorsanasi: null,
+                    tiftnqaror: null,
+                    tftnqarorsanasi: null
+                },
+                transportation: {
+                    country_from: null
+                }
+
+            },
+            commodity: {
+                appId: null,
+                appNum: null,
+                hsCode: null,
+                hsDecDate: null,
+                hsDecNum: null,
+                inDecDate: null,
+                inDecNum: null,
+                originCountry: null,
+                originOrg: null,
+                tradeName: null,
+                tradeMark: null,
+                mark: null,
+                model: null,
+                article: null,
+                sort: null,
+                standarts: null,
+                functions: null,
+                comProp: null,
+                techChar: null,
+                productGoal: null,
+                brutto: null,
+                netto: null,
+                basicQty: null,
+                extraUnits: null,
+                extraQty: null,
+                price: null,
+                customsprice: null,
+                currencyType: null,
+                cargoSpace: null,
+                packType: null,
+                packQty: null,
+                extraInfo: null,
+                method: null,
+                methodDescription: null,
+            },
+            tab: 0,
+            dialog: {
+                documenttype: false,
+                dastlabkiqaror: false,
+                tiftnqaror: false,
+                ishlabchiqaruvchi: false,
+                sotuvchi: false,
+                jonatuvchi: false,
+                tovarxus: false,
+                tovarmark: false,
+                transportturi: false,
+                openDialogComment: false,
+            },
+            loading: {
+                tftncode: false,
+                country_transport_type_from: false
+            },
+            transport_turi_chips: [
+                '30-Авто',
+                '20-ЖД',
+            ],
+            date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
+            menu: {
+                valyuta: false,
+                dastlabkiqaror: false,
+                dastlabkiqarorsanasi: false,
+                tftnqarorsanasi: false,
+                hujjatsanasi: false
+            },
+            modal: false,
+            completedSteps: [],
+            loadingButton: {
+                first: false,
+                second: false,
+                third: false,
+                four: false
+            },
+            fields: [
+                {key: 'termsAddr', value: 'Етказиб бериш манзили'},
+                {key: 'senderOrg', value: 'Юборувчи ташкилот номи'},
+                {key: 'senderCountry', value: 'Юборувчи ташкилот давлати'},
+                {key: 'sellerOrg', value: 'Сотувчи ташкилот номи'},
+                {key: 'customerCountry', value: 'Сотувчи ташкилот давлати'},
+                {key: 'originOrg', value: 'Ишлаб чиқарувчи ташкилот номи ', tab: 3},
+                {key: 'article', value: 'Артикул', tab: 2},
+                {key: 'basicQty', value: 'Асосий ўлчов бирлигидаги миқдори', tab: 1},
+                {key: 'brutto', value: 'Брутто оғирлиги', tab: 1},
+                {key: 'customsPrice', value: 'Божхона қиймати', tab: 1},
+                {key: 'extraInfo', value: 'Қўшича маълумотлар ва изоҳлар', tab: 4},
+                {key: 'functions', value: 'Вазифаси', tab: 2},
+                {key: 'mark', value: 'Марка', tab: 2},
+                {key: 'model', value: 'Модели', tab: 2},
+                {key: 'netto', value: 'Нетто оғирлиги', tab: 1},
+                {key: 'price', value: 'Товарнинг шартномадаги қиймати', tab: 1},
+                {key: 'productGoal', value: 'Фойдаланиш мақсади', tab: 2},
+                {key: 'sort', value: 'Нав', tab: 2},
+                {key: 'tradeMark', value: 'Савдо белгиси', tab: 2},
+                {key: 'tradeName', value: 'Тижорат номи', tab: 2},
+                {key: 'inDecNum', value: 'Илгари қабул қилинган дастлабки қарор рақами', tab: 3},
+                {key: 'techChar', value: 'ТИФ ТН коди бўйича берилган қарор рақами', tab: 3},
+            ],
+            float: ['^[-+][0-9]+\\.[0-9]+[eE][-+]?[0-9]+$'],
+            noRequiredTab: false,
+            comment: "",
+        }
+
+    },
+    watch: {
+
+        search_tftn: {
+            handler: function (val) {
+
+                if (!val || (val && val.length > 10)) return
+                //if (this.tftncodes.length > 0) return
+
+                // Items have already been requested
+                //if (this.loading.tftncode) return
+
+                this.loading.tftncode = true
+
+                // Lazily load input items
+                fetch("https://new.customs.uz/api/v1/data/tftn?code=" + val)
+                    .then((res) => res.json())
+                    .then(res => {
+                        res.map(function (item) {
+                            item.name = item.id + " - " + item.name;
+                            return item;
+                        })
+                        this.tftncodes = res;
+                    })
+                    .catch(err => {
+                        console.log(err)
+                    })
+                    .finally(() => (
+                        this.loading.tftncode = false
+                    ))
+            },
+            deep: true
+        },
+        search_country: function (val) {
+
+            //if (val.length > 10) return
+            if (this.transportation.country_from && this.transportation.country_from.CODE + " - " + this.transportation.country_from.CD_NM == this.search_country) return
+
+            // Items have already been requested
+            //if (this.loading.tftncode) return
+
+            this.loading.country_transport_type_from = true
+
+            // Lazily load input items
+            fetch("https://new.customs.uz/api/v1/data/country?name=" + val + '&lang=uz')
+                .then((res) => res.json())
+                .then(res => {
+                    res.map(function (item) {
+                        item.name = item.CODE + " - " + item.CD_NM;
+                        item.id = item.CODE;
+                        return item;
+                    })
+                    this.countries = res;
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+                .finally(() => (
+                    this.loading.country_transport_type_from = false
+                ))
+
+        },
 
     },
     mounted() {
@@ -4723,7 +4007,6 @@ if(typeof result_data.data.data.name !=='undefined' && result_data.data.data.nam
         progress(val) {
             this.Initprogress(val)
         },
-
         isvalidTransport() {
             return !this.isValidTransportTuri()
         },
@@ -4741,6 +4024,7 @@ if(typeof result_data.data.data.name !=='undefined' && result_data.data.data.nam
     }
     ,
     components: {
+        ServicePage,
         ValidationProvider,
         ValidationObserver,
     }

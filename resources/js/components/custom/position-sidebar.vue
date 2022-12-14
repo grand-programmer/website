@@ -1,5 +1,5 @@
 <template>
-    <div class="position-sidebar" >
+    <div class="position-sidebar">
         <v-dialog v-model="searchDialog1" max-width="800">
             <v-card class="px-4">
                 <v-col cols="12">
@@ -120,7 +120,7 @@
             <v-icon size="30" color="#fff" style="transform: rotate(265px)">mdi-phone</v-icon>
         </div>
         <v-list v-click-outside="clickOutside" class="sidebar-items specific" :class="specific?'active':''"
-             :style="specific?'margin-right:-153px':'margin-right:154px'">
+                :style="specific?'margin-right:-153px':'margin-right:154px'">
             <div class="specific-fields">
                 <p>{{ $t('Кўриниш') }}</p>
                 <div class="grayscale d-flex mt-1">
@@ -156,10 +156,9 @@
                 </div>
             </div>
             <v-icon size="30" color="#fff" @click="clickedSpecific" class="m-0 eye">
-              mdi-eye-outline
+                mdi-eye-outline
             </v-icon>
         </v-list>
-
 
     </div>
 </template>
@@ -171,7 +170,7 @@ export default {
     name: "position-sidebar",
     data() {
         return {
-            ticksLabels:[
+            ticksLabels: [
                 '-',
                 '0',
                 '+',
@@ -187,7 +186,7 @@ export default {
             votes: [],
             displayResults: [],
             specific: false,
-            clickedEye:true,
+            clickedEye: true,
             colors: [
                 "light-blue",
                 "light-green darken-4",
@@ -200,17 +199,23 @@ export default {
     methods: {
         refreshSpecific() {
             this.grayscale = false;
-            this.shrift =2;
+            this.shrift = 2;
             $("html").removeClass("blackAndWhite")
             $("html").removeClass("maxSize");
             $("html").removeClass("minSize");
 
         },
         clickedSpecific() {
-            const _this=this;
-            if(_this.specific) {
-                _this.specific = false
-            } else _this.specific = true
+
+            if (this.specific) {
+                this.specific = false
+                $(".sidebar-items.specific").removeClass("active");
+                $(".sidebar-items.specific").css("margin-right","154px");
+            } else {
+                $(".sidebar-items.specific").addClass("active");
+                $(".sidebar-items.specific").css("margin-right","-153px");
+                this.specific = true
+            }
         },
         clickOutside() {
             if (this.specific) this.specific = false;
@@ -293,27 +298,41 @@ export default {
             this.getQuestions()
 
         },
-        shrift(val){
-            if(val===1) {
+        shrift(val) {
+            if (val === 1) {
                 $("html").removeClass("maxSize");
                 $("html").addClass("minSize");
             }
-            if(val===2) {
+            if (val === 2) {
                 $("html").removeClass("maxSize");
                 $("html").removeClass("minSize");
             }
-            if(val===3) {
+            if (val === 3) {
                 $("html").removeClass("minSize");
                 $("html").addClass("maxSize");
             }
         }
 
 
+    },
+    computed: {
+        specificValue() {
+            // console.log(this.specific)
+            return this.specific;
+        }
     }
 }
 </script>
 
 <style>
+.specific-fields {
+    z-index: 10000000;
+}
+
+.sidebar-items {
+    z-index: 100000000;
+}
+
 .specific-fields .v-slider__track-container {
     cursor: pointer;
 }
@@ -321,20 +340,24 @@ export default {
 .specific-fields .v-slider__thumb-container {
     cursor: pointer;
 }
-.position-sidebar .v-list.specific{
-    background:none;
+
+.position-sidebar .v-list.specific {
+    background: none;
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
 }
-.position-sidebar p, .position-sidebar a{
+
+.position-sidebar p, .position-sidebar a {
     font-size: 16px;
     color: #000e08;
 }
-.specific-fields  .v-slider__thumb{
+
+.specific-fields .v-slider__thumb {
     width: 20px;
     height: 20px;
 }
-.specific-fields .v-slider__track-container{
-    height:5px;
+
+.specific-fields .v-slider__track-container {
+    height: 5px;
 }
 </style>

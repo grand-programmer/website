@@ -279,14 +279,12 @@ router.beforeEach((to, from, next) => {
     // Simulate request
 
     if (to.params.locale === 'admin') {
-        console.log('locale' + to.params.locale)
+        //console.log('locale' + to.params.locale)
         //return next();
     }
 
 ///console.log(to)
     setTimeout(() => {
-
-        //console.log('333333')
         if (typeof to.params.locale === 'undefined') {
             i18n.locale = localStorage.getItem('language') || 'uz'
             if (to.path.includes("/admin/")) {
@@ -297,7 +295,7 @@ router.beforeEach((to, from, next) => {
                     path: "/" + i18n.locale + to.path,
                     params: {locale: i18n.locale},
                     query: to.query,
-                    replace: true
+                    replace: false
                 });
             }
         } else {
@@ -315,7 +313,7 @@ router.beforeEach((to, from, next) => {
                     path: "/" + i18n.locale + to.path,
                     params: {locale: i18n.locale},
                     query: to.query,
-                    replace: true
+                    replace: false
                 });
             }
         }

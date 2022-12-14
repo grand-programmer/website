@@ -485,7 +485,7 @@ export default {
             return !this.isValidDoc()
         },
         ilovaError() {
-            if (this.$props.errors.length > 0) this.$refs.hujjatilova.applyResult({
+            if (this.$props.errors.length > 0 && typeof this.$refs.hujjatilova!=='undefined') this.$refs.hujjatilova.applyResult({
                 errors: [this.$props.errors], // array of string errors
                 valid: false, // boolean state
                 failedRules: {} // should be empty since this is a manual error.

@@ -14,7 +14,7 @@
                 <div class="col col-12">
                     <div class="single_blog_content">
                         <div class="widget_tittle">
-                            <h3 class="">{{ $t("Давлат божхона қўмитаси Марказий аппарати тузилмаси") }}</h3>
+                            <h3 class="text-white">{{ $t("Давлат божхона қўмитаси Марказий аппарати тузилмаси") }}</h3>
                        </div>
                         <div>
                             <div class="container-fluid ">

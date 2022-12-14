@@ -78,7 +78,7 @@ class ApiController extends Controller
                     if ($response->status() == 200) {
                         $dataLocations = json_decode($response->body());
                         //dd($dataLocations->locations);
-                        if (isset($dataLocations->locations)) {
+                        if (!empty($dataLocations) and isset($dataLocations->locations)) {
                             $locations = collect($dataLocations->locations)->transform(function ($loc) {
                                 if (isset($loc->id) and isset($loc->name))
                                     return [
@@ -90,6 +90,9 @@ class ApiController extends Controller
 
                             });
                             return response()->json(['data' => $locations->all()]);
+                        }
+                        else {
+                            return response()->json(['data' => DB::connection('db2_odbc221')->select("Select id as kod_id, name_uzb as name From Location")]);
                         }
                     } else //return response()->json(['error' => 'Malumot topilmadi'],);
                         return response()->json(['data' => DB::connection('db2_odbc221')->select("Select id as kod_id, name_uzb as name From Location")]);
@@ -344,6 +347,45 @@ class ApiController extends Controller
                     $page = $appData['page'] ?? 0;
                     $size = $appData['size'] ?? 50;
                     $response = Http::contentType("application/json")->get('http://192.168.214.152:7070/DECAPP/s08appsrestapi/getresult', [
+                        "personPin" => $person_id,
+                        "page" => $page,
+                        "size" => $size,
+                    ]);
+
+
+                } else {
+                    return response()->json(["error" => "Хато маълумот юборилди!", "status" => false], 200);
+                }
+                if ($response->status() == 200) {
+                    return response()->json(["data" => $response->json()]);
+                } else return response()->json(["error" => "Серверда хатолик юз берди!", "status" => false], 200);
+                break;
+            ///
+            ///
+            /// stamp begin
+            ///
+            case "stamp":
+                $this->middleware('auth:api');
+                $user = Auth::guard('api')->user();
+                if (!$user) return response()->json([
+                    'success' => false,
+                    'data' => 'Foydalanuvchi avtorizatsiyadan otishi talab etiladi'], 401);
+                $response = Http::contentType("application/json")->send('POST', 'http://192.168.214.152:7070/DECAPP/s09appsrestapi/saveapps', [
+                    'body' => json_encode($request->all())
+                ]);
+                break;
+            case "stamp-get":
+                $appData = $request->only(['app_id', 'person_id', 'page', 'size']);
+                if (isset($appData['app_id'])) {
+                    $app_id = isset($appData['app_id']) ? $appData['app_id'] : null;
+                    $response = Http::contentType("application/json")->get('http://192.168.214.152:7070/DECAPP/s09appsrestapi/getoneapp', [
+                        "appId" => $app_id,
+                    ]);
+                } elseif (isset($appData['person_id'])) {
+                    $person_id = isset($appData['person_id']) ? $appData['person_id'] : null;
+                    $page = $appData['page'] ?? 0;
+                    $size = $appData['size'] ?? 50;
+                    $response = Http::contentType("application/json")->get('http://192.168.214.152:7070/DECAPP/s09appsrestapi/getresult', [
                         "personPin" => $person_id,
                         "page" => $page,
                         "size" => $size,
@@ -629,7 +671,15 @@ class ApiController extends Controller
                     return $response->json();
                 } else return response()->json(['error' => 'Маълумот топилмади']);
                 break;
-
+            case "postsbyregion":
+                $appData = $request->only('code');
+                $code = isset($appData['code']) ? $appData['code'] : "";
+                $response = Http::contentType("application/json")->get('http://192.168.214.152:7070/DECAPP/s09appsrestapi/postsWith', [
+                    "code" => $code,
+                ]);
+                if ($response->status() == 200) {
+                    return $response->json();
+                } else return response()->json(['error' => 'Маълумот топилмади']);
                 break;
 /////customsprice end
             case "test":

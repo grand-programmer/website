@@ -271,6 +271,10 @@ ul#pills-tab {
   /*    padding-top: 60px;*/
 }
 
+.one-page .page-content .container {
+  z-index: 1;
+}
+
 .portfolio_area {
   height: 100%;
 }
@@ -2899,14 +2903,14 @@ a.read_more {
 .categori_widget ul li a i {
   display: none;
 }
-.categori_widget ul li:hover a {
+.categori_widget ul li:hover > a {
   color: #39ae69;
 }
 
-.categori_widget ul li.active a {
+.categori_widget ul li.active > a {
   color: #39ae69;
 }
-.categori_widget ul li.active a i {
+.categori_widget ul li.active > a i {
   display: none;
 }
 

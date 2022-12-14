@@ -18,7 +18,7 @@
                             <ul>
                                 <li  :class="(related_item!=null && $route.params.id==parseInt(related_item.id) || $route.params.id==related_item.url.substr(6)) ? 'active' : ''"  v-for="related_item in relates"><router-link v-if="related_item" :to="related_item.url" ><i aria-hidden="true" class="fa fa-caret-right"></i>{{related_item.title}}</router-link>
                                     <ul>
-                                        <li :class="(childRelated!=null && $route.params.id==parseInt(childRelated.id) || $route.params.id==childRelated.url.substr(6)) ? 'active' : ''"  v-for="childRelated in related_item.children"><router-link v-if="childRelated" :to="childRelated.url" ><i aria-hidden="true" class="fa fa-caret-right"></i>{{childRelated.title}}</router-link>
+                                        <li :class="(childRelated!=null && childRelated.url!=null && ($route.params.id==parseInt(childRelated.id) || $route.params.id==childRelated.url.substr(6))) ? 'active' : ''"  v-for="childRelated in related_item.children"><router-link v-if="childRelated" :to="childRelated.url" ><i aria-hidden="true" class="fa fa-caret-right"></i>{{childRelated.title}}</router-link>
                                         </li>
                                     </ul>
                                 </li>
@@ -84,6 +84,18 @@ export default {
            api.readPage(this.$route.params.id).then((response) => {
                 this.page = response.data.data;
                 if(!this.page.id) this.$router.replace('/404')
+               if(this.page.parent && typeof this.page.parent.url !=='undefined'){
+                   this.breadcrumb_items[1].text=this.page.parent.title;
+                   this.breadcrumb_items[1].to=this.page.parent.url;
+                   this.breadcrumb_items[1].disabled=false;
+                   this.breadcrumb_items[2]={
+                       text: this.page.title,
+                       to: this.page.url,
+                       disabled: true,
+                       exact: true,
+                   }
+
+               }else
                this.breadcrumb_items[1].text=this.page.title;
             }).catch((error) => {
                 this.$toast.error(i18n.t(`Маълумотларни юклашда хатолик содир бўлди!`))
@@ -104,6 +116,20 @@ export default {
 
 }
 </script>
-<style>
+<style lang="scss">
+.categori_widget ul li{
+    padding: 10px 0;
+    border-color: #39ae69;
+    border-bottom: 1px solid #39ae69;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    ul{
+        margin-top: 0;
+        li:last-child{
+            border:none;
+        }
+    }
+}
 
 </style>

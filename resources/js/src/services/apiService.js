@@ -268,5 +268,13 @@ const apiClient = {
     },
     //////////////////////// My rahbariyat End /////////////////////////////
 
+    async getDocuments(requestData) {
+        if(typeof requestData !=='undefined' && requestData)
+        return await axios.get(apiUrl + "documents", {headers:localizationHeader, params:JSON.parse(JSON.stringify(requestData))});
+        return await axios.get(apiUrl + "documents", {headers:localizationHeader});
+    },
+    async getDocumentCategories(requestData) {
+        return await axios.get(apiUrl + "documentcategories", localization);
+    },
 };
 export default apiClient;

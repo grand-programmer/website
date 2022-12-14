@@ -11,7 +11,7 @@
         </div>
 
         <v-container class="mening_arizalarim">
-            <v-row>
+            <v-row v-if="$auth.user()">
                 <v-col cols="3">
                     <v-card
                         class="mx-auto mt-9"
@@ -280,6 +280,39 @@ export default {
     },
 
     methods: {
+        authWithOutside() {
+            var redirect = this.$auth.redirect()
+            var _this = this
+
+            this.$store.commit('setLoading', true)
+            this.$auth.login({
+                data: {
+                    code: _this.$route.query.code
+                },
+                success: function () {
+                    // handle redirection
+                    this.success = true
+                    const redirectTo = 'admin';
+                    //this.$auth.role=
+                    this.$router.push('/profile')
+                },
+                error: function () {
+                    _this.has_error = true
+                    _this.error = res.error
+                },
+                redirect: (this.$route.params.slug === 'admin') ? '/admin' : '/profile',
+                //rememberMe: true,
+                fetchUser: true
+            }).then((res) => {
+                _this.has_error = true
+                _this.error = res.error
+                _this.$store.commit('setLoading', false);
+            }).catch((err) => {
+                _this.has_error = true
+                _this.error = 'login_error'
+            })
+
+        },
         auth() {
             var redirect = this.$auth.redirect()
             var _this = this
