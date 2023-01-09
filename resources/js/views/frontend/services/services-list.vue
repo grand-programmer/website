@@ -329,7 +329,7 @@ export default {
                 {
                     name: 'corruption',
                     img: '/img/icons/korrupsiya-boyicha-xabar-berish.png',
-                    text: this.$t("Корупция бўйича ҳабар бериш"),
+                    text: this.$t("Коррупция бўйича ҳабар бериш"),
                     href: 'https://axborot.customs.uz/Xabar/#',
                     sort: 39,
                 },

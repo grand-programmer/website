@@ -530,7 +530,7 @@
                                     <img src="/img/icons/korrupsiya-boyicha-xabar-berish.png"/>
                                 </div>
                                 <div class="portfolio_text">
-                                    <p>{{ $t("Корупция бўйича ҳабар бериш") }}</p>
+                                    <p>{{ $t("Коррупция бўйича ҳабар бериш") }}</p>
 
                                 </div>
                             </a>
