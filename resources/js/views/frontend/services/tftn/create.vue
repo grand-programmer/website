@@ -691,6 +691,7 @@ export default {
                 {key: 'basicQty', value: 'Намуналар сони', tab: 1},
                 {key: 'extraUnits', value: 'Ўлчов бирлиги'},
                 {key: 'comment', value: 'Қўшимча маълумотлар ва изоҳлар'},
+                {key: 'email', value: 'Электрон почта'},
             ],
             float: ['^[-+][0-9]+\\.[0-9]+[eE][-+]?[0-9]+$']
         }
@@ -718,6 +719,26 @@ export default {
                // this.application.tovarlar.forEach((tovar) => {
 
                     _this.$refs['stepValidation2Product' + tovar_id][0].setErrors(errorfield)
+
+               // })
+
+            }
+        },
+        setCommonErrors(errors) {
+
+            const _this = this;
+            if (errors) {
+                let errorfield = [];
+
+                Object.keys(errors).forEach(keyItem => {
+                    if (typeof _this.getField(keyItem)[0] !== 'undefined' && typeof _this.getField(keyItem)[0].value !== 'undefined') {
+                        errorfield[_this.getField(keyItem)[0].value] = [errors[keyItem]];
+                    }
+                });
+
+               // this.application.tovarlar.forEach((tovar) => {
+
+                    _this.$refs['stepValidation1'].setErrors(errorfield)
 
                // })
 
@@ -854,7 +875,10 @@ export default {
                                 _this.completedSteps.push(_this.stepper - 1);
                                 _this.$toast.success("Аризачи маълумотлари сақланди!");
 
-                            } else if(typeof resultData.data.data.message !=='undefined') this.$toast.error(resultData.data.data.message);
+                            } else if(typeof resultData.data.data.message !=='undefined') {
+                                if(typeof resultData.data.data.data !=='undefined') this.setCommonErrors(resultData.data.data.data);
+                                this.$toast.error(resultData.data.data.message);
+                            }
                             else this.$toast.error("Серверда хатолик юз берди. Кейинроқ уриниб кўринг!");
 
                         }

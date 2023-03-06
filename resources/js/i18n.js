@@ -10,20 +10,20 @@ const messages = {
   en: {
     ...require('./locales/en.json'),
     $vuetify: en,
-      ...require('./locales/en/word.json'),
+      ...require('./locales/dynamic/en.json'),
   },
   ru: {
     ...require('./locales/ru.json'),
     $vuetify: ru,
-      ...require('./locales/ru/word.json'),
+      ...require('./locales/dynamic/ru.json'),
   },
   oz: {
       ...require('./locales/oz.json'),
-      ...require('./locales/oz/word.json'),
+      ...require('./locales/dynamic/oz.json'),
   },
   uz: {
     ...require('./locales/uz.json'),
-    ...require('./locales/uz/word.json'),
+    ...require('./locales/dynamic/uz.json'),
   },
 }
 function loadLocaleMessages () {

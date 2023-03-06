@@ -25,7 +25,7 @@
       v-slot:close="{ toggle }"
     >
       <v-btn
-        :aria-label="$vuetify.lang.t('$vuetify.close')"
+        :aria-label="$vuetify.lang.t($vuetify.close)"
         color
         icon
         small

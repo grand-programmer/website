@@ -171,7 +171,35 @@ const userRoutes =
                                     path: ":id", component: () => import('./views/frontend/services/stamp/info'),
                                 },
                             ]
-                        }, {
+                        },{
+                            path: "bko/",
+                            component: () => import('./views/frontend/services/bko/index'),
+
+                            children: [
+                                {
+                                    path: "create", component: () => import('./views/frontend/services/bko/create'),
+                                    meta: {
+                                        auth: true,
+                                        authRedirect: '/login',
+                                        notFoundRedirect: '/403',
+                                        forbiddenRedirect: '/403',
+                                        routeAuth: '/login'
+                                    },
+                                },
+                                {
+                                    path: ":id", component: () => import('./views/frontend/services/bko/info'),
+                                    meta: {
+                                        auth: true,
+                                        authRedirect: '/login',
+                                        notFoundRedirect: '/403',
+                                        forbiddenRedirect: '/403',
+                                        routeAuth: '/login'
+                                    },
+                                },
+                            ]
+                        },
+
+                            {
                             path: "recycle/",
                             component: () => import('./views/frontend/services/recycle/index'),
                             meta: {
@@ -333,6 +361,37 @@ const userRoutes =
                                 },
                             ]
                         }, {
+                            path: "bko/",
+                            component: () => import('./views/frontend/services/bko/index'),
+                            children: [
+                                {
+                                    path:"main",
+                                    component: () => import('./views/frontend/services/bko/main'),
+
+                                },
+                                {
+                                    path: "create", component: () => import('./views/frontend/services/bko/create'),
+                                    meta: {
+                                        auth: true,
+                                        authRedirect: '/login',
+                                        notFoundRedirect: '/403',
+                                        forbiddenRedirect: '/403',
+                                        routeAuth: '/login'
+                                    },
+                                },
+                                {
+                                    path: ":id", component: () => import('./views/frontend/services/bko/info'),
+                                    meta: {
+                                        auth: true,
+                                        authRedirect: '/login',
+                                        notFoundRedirect: '/403',
+                                        forbiddenRedirect: '/403',
+                                        routeAuth: '/login'
+                                    },
+                                },
+                            ]
+                        },
+                            {
                             path: "recycle/",
                             component: () => import('./views/frontend/services/recycle/index'),
                             meta: {
@@ -607,7 +666,20 @@ let adminRoute = {
 
             ]
 
-        }, // Categories
+        },
+        // Translates
+        {
+            name: 'Таржималар', path: 'translate/', component: {
+                template: '<router-view></router-view>', script: ' export default {}'
+            }, children: [{
+                name: "Таржималар", path: '', component: () => import('./views/dashboard/translate/index'),
+
+            },
+
+            ]
+
+        },
+        // Categories
         {
             name: 'Документ категориялар', path: 'doccategories/', component: {
                 template: '<router-view></router-view>', script: ' export default {}'

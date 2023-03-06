@@ -12,7 +12,7 @@
         <div class="page-content" v-if="app">
             <v-container>
                 <v-row>
-                    <h3 class="pb-5"><b>Ариза рақами: </b>{{ app.appNum }}</h3>
+                    <h3 class="pb-5"><b>Ариза рақами: </b>{{ app.murojatEntityDto?app.murojatEntityDto.num:null }}</h3>
                     <br>
                 </v-row>
                 <v-row>
@@ -36,7 +36,7 @@
                     <v-tabs-items v-model="tab" class="fixed-color-tabs">
 
                         <v-tab-item>
-                            <v-simple-table v-if="app">
+                            <v-simple-table v-if="app && typeof app.murojatEntityDto !== 'undefined'">
                                             <template v-slot:default>
                                                 <thead>
                                                 <tr>
@@ -45,147 +45,72 @@
                                                     </th>
                                                     <th class="text-left" style="font-weight: 550">
                                                         {{
-                                                            typeof app.appNum !== 'undefined' ? app.appNum : ''
+                                                            typeof app.murojatEntityDto.num !== 'undefined' ? app.murojatEntityDto.num : ''
                                                         }}
                                                     </th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
-                                                <tr v-if="typeof app.personFullOrLegalName !== 'undefined'">
+                                                <tr v-if="typeof app.murojatEntityDto.fio !== 'undefined'">
                                                     <td style="font-weight: 550">Аризачи</td>
                                                     <td>{{
-                                                            typeof app.personFullOrLegalName !== 'undefined' ? app.personFullOrLegalName : null
+                                                            typeof app.murojatEntityDto.fio !== 'undefined' ? app.murojatEntityDto.fio : null
                                                         }}
                                                     </td>
                                                 </tr>
-                                                <tr v-if="typeof app.personPhone !== 'undefined' && app.personPhone">
+                                                <tr v-if="typeof app.murojatEntityDto !== 'undefined' && app.murojatEntityDto">
                                                     <td style="font-weight: 550">Аризачи телефон рақами</td>
                                                     <td>{{
-                                                            typeof app.personPhone !== 'undefined' ? app.personPhone : null
+                                                            typeof app.murojatEntityDto.telNumber !== 'undefined' ? app.murojatEntityDto.telNumber : null
                                                         }}
                                                     </td>
                                                 </tr>
-                                                <tr v-if="typeof app.personEmail !== 'undefined' && app.personEmail">
+                                                <tr v-if="typeof app.murojatEntityDto.email !== 'undefined' && app.murojatEntityDto">
                                                     <td style="font-weight: 550">Аризачининг эмаил манзили</td>
                                                     <td>{{
-                                                            typeof app.personEmail !== 'undefined' ? app.personEmail : null
+                                                            typeof app.murojatEntityDto.email !== 'undefined' ? app.murojatEntityDto.email : null
                                                         }}
                                                     </td>
                                                 </tr>
-                                                <tr v-if="typeof app.personAddress !== 'undefined' && app.personAddress">
+                                                <tr v-if="typeof app.murojatEntityDto.g4adres !== 'undefined' && app.murojatEntityDto">
                                                     <td style="font-weight: 550">Аризачининг манзили</td>
                                                     <td>{{
-                                                            typeof app.personAddress !== 'undefined' ? app.personAddress : null
+                                                            typeof app.murojatEntityDto.g4adres !== 'undefined' ? app.murojatEntityDto.g4adres : null
                                                         }}
                                                     </td>
                                                 </tr>
-                                                <tr v-if="typeof app.personPinOrTin !== 'undefined' && app.personPinOrTin">
-                                                    <td style="font-weight: 550">Аризачининг ЖШШИР/ СТИРи</td>
+                                                <tr v-if="typeof app.murojatEntityDto.pinfl !== 'undefined' && app.murojatEntityDto">
+                                                    <td style="font-weight: 550">Аризачининг ЖШШИР</td>
                                                     <td>{{
-                                                            typeof app.personPinOrTin !== 'undefined' ? app.personPinOrTin : null
-                                                        }}
-                                                    </td>
-                                                </tr>
-                                                <tr v-if="typeof app.locationName !== 'undefined' && app.locationName">
-                                                    <td style="font-weight: 550">Танланган божхона бошқармаси</td>
-                                                    <td>{{
-                                                            typeof app.locationName !== 'undefined' ? app.locationName : null
-                                                        }}
-                                                    </td>
-                                                </tr>
-                                                <tr v-if="typeof app.trailerTypeNm !== 'undefined' && app.trailerTypeNm">
-                                                    <td style="font-weight: 550">Автотранспорт воситаси тури</td>
-                                                    <td>{{
-                                                            typeof app.trailerTypeNm !== 'undefined' ? app.trailerTypeNm : null
-                                                        }}
-                                                    </td>
-                                                </tr>
-                                                <tr v-if="typeof app.trailerBrend !== 'undefined' && app.trailerBrend">
-                                                    <td style="font-weight: 550">Автотранспорт русуми (маркаси)</td>
-                                                    <td>{{
-                                                            typeof app.trailerBrend !== 'undefined' ? app.trailerBrend : null
-                                                        }}
-                                                    </td>
-                                                </tr>
-                                                <tr v-if="typeof app.productionDate !== 'undefined' && app.productionDate">
-                                                    <td style="font-weight: 550">Ишлаб чиқарилган санаси</td>
-                                                    <td>{{
-                                                            typeof app.productionDate !== 'undefined' ? app.productionDate : null
-                                                        }}
-                                                    </td>
-                                                </tr>
-                                                <tr v-if="typeof app.stateNumber !== 'undefined' && app.stateNumber">
-                                                    <td style="font-weight: 550">Давлат рақами белгиси</td>
-                                                    <td>{{
-                                                            typeof app.stateNumber !== 'undefined' ? app.stateNumber : null
-                                                        }}
-                                                    </td>
-                                                </tr>
-                                                <tr v-if="typeof app.vinNumber !== 'undefined' && app.vinNumber">
-                                                    <td style="font-weight: 550">Идентификация рақами (VIN)</td>
-                                                    <td>{{
-                                                            typeof app.vinNumber !== 'undefined' ? app.vinNumber : null
-                                                        }}
-                                                    </td>
-                                                </tr>
-                                                <tr v-if="typeof app.techPassportNumber !== 'undefined' && app.techPassportNumber">
-                                                    <td style="font-weight: 550">Гувоҳнома серия рақами</td>
-                                                    <td>{{
-                                                            typeof app.techPassportNumber !== 'undefined' ? app.techPassportNumber : null
-                                                        }}
-                                                    </td>
-                                                </tr>
-                                                <tr v-if="typeof app.containerNumber !== 'undefined' && app.containerNumber">
-                                                    <td style="font-weight: 550">Контейнер рақами</td>
-                                                    <td>{{
-                                                            typeof app.containerNumber !== 'undefined' ? app.containerNumber : null
-                                                        }}
-                                                    </td>
-                                                </tr>
-                                                <tr v-if="typeof app.containerType !== 'undefined' && app.containerType">
-                                                    <td style="font-weight: 550">Контейнер тури</td>
-                                                    <td>{{
-                                                            typeof app.containerType !== 'undefined' ? app.containerType : null
-                                                        }}
-                                                    </td>
-                                                </tr>
-                                                <tr v-if="typeof app.containerVase !== 'undefined' && app.containerVase">
-                                                    <td style="font-weight: 550">Тара вазни</td>
-                                                    <td>{{
-                                                            typeof app.containerVase !== 'undefined' ? app.containerVase : null
-                                                        }}
-                                                    </td>
-                                                </tr>
-                                                <tr v-if="typeof app.containerSize !== 'undefined' && app.containerSize">
-                                                    <td style="font-weight: 550">Ташқи ўлчамлари</td>
-                                                    <td>{{
-                                                            typeof app.containerSize !== 'undefined' ? app.containerSize : null
-                                                        }}
-                                                    </td>
-                                                </tr>
-                                                <tr v-if="typeof app.containerFeature !== 'undefined' && app.containerFeature">
-                                                    <td style="font-weight: 550">Конструкциянинг асосий ҳусусиятлари</td>
-                                                    <td>{{
-                                                            typeof app.containerFeature !== 'undefined' ? app.containerFeature : null
+                                                            typeof app.murojatEntityDto.pinfl !== 'undefined' ? app.murojatEntityDto.pinfl : null
                                                         }}
                                                     </td>
                                                 </tr>
 
-                                                <tr v-if="typeof app.s09EarxivList !== 'undefined' && app.s09EarxivList">
-                                                    <td style="font-weight: 550">Юкланган файллар</td>
-                                                    <td>
-                                                        <template v-for="(file,index) in app.s09EarxivList" v-if="file">
-                                                            {{index>0?', ':''}} {{file.docTypeName}} - {{file.docname}}
-                                                        </template>
-                                                    </td>
-                                                </tr>
-                                                <tr v-if="typeof app.statusNm !== 'undefined' && app.statusNm">
-                                                    <td style="font-weight: 550">Ариза ҳолати</td>
+                                                <tr v-if="typeof app.murojatEntityDto.rs !== 'undefined' && app.murojatEntityDto">
+                                                    <td style="font-weight: 550">Тўловчининг ҳисоб-варақ рақами</td>
                                                     <td>{{
-                                                            typeof app.statusNm !== 'undefined' ? app.statusNm : null
+                                                            typeof app.murojatEntityDto.rs !== 'undefined' ? app.murojatEntityDto.pinfl : null
                                                         }}
                                                     </td>
                                                 </tr>
+
+                                                <tr v-if="typeof app.murojatEntityDto.mfo !== 'undefined' && app.murojatEntityDto">
+                                                    <td style="font-weight: 550">МФО</td>
+                                                    <td>{{
+                                                            typeof app.murojatEntityDto.mfo !== 'undefined' ? app.murojatEntityDto.mfo : null
+                                                        }}
+                                                    </td>
+                                                </tr>
+
+                                                <tr v-if="typeof app.murojatEntityDto.bank !== 'undefined' && app.murojatEntityDto">
+                                                    <td style="font-weight: 550">Банк номи</td>
+                                                    <td>{{
+                                                            typeof app.murojatEntityDto.bank !== 'undefined' ? app.murojatEntityDto.bank : null
+                                                        }}
+                                                    </td>
+                                                </tr>
+
 
                                                 </tbody>
                                             </template>
@@ -301,7 +226,7 @@ export default {
 
             items: [
                 {tab: "Ариза хақида умумиy маълумот"},
-                {tab: 'Ариза ҳолати'},
+                /*{tab: 'Ариза ҳолати'},*/
 
             ],
 
@@ -325,18 +250,19 @@ export default {
 
             setTimeout(() => {
                 this.$store.commit('setLoading', true)
-                axios.get("/api/v1/ex_api/stamp-get", {
+                axios.get("/api/v1/ex_api/tpo-get", {
                     params: {
                         app_id: _this.$route.params.id
                     }
                 }).then(function (response) {
 
                     if (typeof response.data.data !== "undefined") {
+                        console.log(response.data.data)
                         //console.log(response.data.data)
-                        _this.app = response.data.data.data
+                        _this.app = response.data.data
                         _this.breadcrumb_items.push({
                             text: "Транспорт воситасига товарларни божхона пломбалари ва муҳрлари остида ташишга рухсат бериш -" + _this.app.appNum,
-                            to: '/services/stamp/' + _this.app.id,
+                            to: '/services/tpo/' + _this.app.id,
                             disabled: true,
                             exact: true,
                         })
@@ -357,7 +283,7 @@ export default {
                     console.log(error)
                     _this.$store.commit('setLoading', false)
                     _this.$toast.error("Маълумот топилмади!")
-                    _this.$router.push("/applications");
+                    // _this.$router.push("/applications");
                 })
 
 

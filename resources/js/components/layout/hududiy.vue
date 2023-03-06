@@ -130,11 +130,11 @@
                                         {{ $t("Тошкент шаҳар, И.Каримов кўчаси 3-уй") }}
                                     </li>
                                     <li>
-                                        <i class="icon icon-phone"></i> (71) 120-76-31
+                                        <i class="icon icon-phone"></i> (71) 202-76-00
                                         <span class="badge ff-clearsans_bold text-uppercase">
-                                            {{ $t("ишонч телефони") }}</span> <br> (71) 120-76-41
+                                            {{ $t("ишонч телефони") }}</span><!-- <br> (71) 120-76-41
                                         <span class="badge ff-clearsans_bold text-uppercase">
-                                            {{ $t("Факс") }} </span>
+                                            {{ $t("Факс") }} </span>-->
                                     </li>
                                     <li>
                                         <i class="icon icon-clock"></i>

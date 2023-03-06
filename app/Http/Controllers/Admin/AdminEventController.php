@@ -6,12 +6,45 @@ use App\Http\Resources\Admin\AdminEventResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
 use App\Models\MyEvent;
 use App\Http\Controllers\Controller as ParentController;
 
 class AdminEventController extends ParentController
 {
+    public function setLocale(Request $request){
+        $data=$request->only('data');
+        $mylanguage=[];
+        //dd($data);
+        if(is_array($data['data']))
+        {
+            foreach($data['data'] as $localItem){
+
+                if(isset($localItem['uz'])) $mylanguage['uz'][$localItem['key']]=isset($localItem['uz'])?$localItem['uz']:"";
+                if(isset($localItem['ru'])) $mylanguage['ru'][$localItem['key']]=isset($localItem['ru'])?$localItem['ru']:"";
+                if(isset($localItem['oz'])) $mylanguage['oz'][$localItem['key']]=isset($localItem['oz'])?$localItem['oz']:"";
+                if(isset($localItem['en'])) $mylanguage['en'][$localItem['key']]=isset($localItem['en'])?$localItem['en']:"";
+            }
+        }
+
+
+        File::put(base_path('resources/js/locales/dynamic/en.json'), json_encode($mylanguage['en'],JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT));
+        File::put(base_path('resources/js/locales/dynamic/oz.json'), json_encode($mylanguage['oz'],JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT));
+        File::put(base_path('resources/js/locales/dynamic/uz.json'), json_encode($mylanguage['uz'],JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT));
+        File::put(base_path('resources/js/locales/dynamic/ru.json'), json_encode($mylanguage['ru'],JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT));
+
+        return response()->json(['success' => true], 200);
+    }
+    public function getLocales(Request $request){
+        $data=[];
+        $data['en']=json_decode(File::get(base_path('resources/js/locales/dynamic/en.json')));
+        $data['uz']=json_decode(File::get(base_path('resources/js/locales/dynamic/uz.json')));
+        $data['oz']=json_decode(File::get(base_path('resources/js/locales/dynamic/oz.json')));
+        $data['ru']=json_decode(File::get(base_path('resources/js/locales/dynamic/ru.json')));
+        return response()->json(['success' => true,'data'=>$data], 200);
+    }
+
     /**
      * Display a listing of the resource.
      *

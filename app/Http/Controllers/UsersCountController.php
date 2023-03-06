@@ -36,7 +36,8 @@ class UsersCountController extends Controller
         $data['month']=($month->get()->count()>0)?$month->sum('count'):0;
 
         //year
-        $year=UsersCount::whereYear('created_at', Carbon::now()->year);
+        $year=UsersCount::where('id','>',0);
+        //$year=UsersCount::whereYear('created_at', Carbon::now()->year);
 
         $data['year']=($year->get()->count()>0)?$year->sum('count'):0;
 

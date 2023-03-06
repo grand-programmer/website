@@ -5,7 +5,7 @@
                 <img :src="$props['img']"/>
             </div>
             <div class="portfolio_text">
-                <p>{{ $props['name'] }}</p>
+                <p :class="($props['name'].length > 100) ? 'f-s-11':''">{{ $props['name'] }}</p>
             </div>
             <div class="corner-text" :style="$props['corner_text']==='new'?'background-image:url(/img/icons/new-icon/new-' + $i18n.locale + '.svg)':''"
                  v-if="typeof $props['corner_text'] !=='undefined' && $props['corner_text'] && $props['corner_text'].length>0">
@@ -36,10 +36,15 @@ export default {
         },
 
     },
+    created () {
+        console.log(this.$props['name'].length)
+    }
 
 }
 </script>
 
 <style scoped>
-
+.f-s-11 {
+    font-size: 11px !important;
+}
 </style>

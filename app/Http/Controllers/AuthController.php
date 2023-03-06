@@ -222,7 +222,8 @@ class AuthController extends Controller
                 $userData = $responseUser->json();
                 //dd(array_merge($userData, ['type' => $type, 'password' => 'password!!!$$$']));
                 if (isset($userData['legal_info'])) $userData['legal_info'] =  json_encode([$legals]);
-                if (User::where(['email' => $responseUser->json()['email']])->exists()) $userData['email'] = "";
+
+                // if (User::where(['email' => $responseUser->json()['email']])->exists()) $userData['email'] = "";
 
                 if ($type === 1) {
                     $user = User::create(array_merge($userData, ['type' => $type, 'password' => 'password!!!$$$']));

@@ -109,7 +109,7 @@ export default {
                 //this.category.news = response.data.data.news.data;
                 this.category.news.map(function (i) {
                     let dateParts = i.created_at.split("T");
-                    if ((new Date(i.created_at)).getDate() === (new Date).getDate())
+                    if ((new Date(i.created_at)).getDate() === (new Date).getDate() && dateParts.length > 1 )
                         i.created_at = dateParts[1].substring(0, 5);
                     else i.created_at = dateParts[0];
                     return i;

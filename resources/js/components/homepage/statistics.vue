@@ -5,16 +5,16 @@
                 <h3> {{ $t("Божхона статистикаси") }}</h3>
                 <ul class="mb-15">
                     <li><a :class="stat_type==5?'active':''" href="#" @click="stat_type=5">
-                        {{ $t("Товар ва маҳсулотлар " + getRejimByCode(rejim.tovarimex).text + "и") }}</a></li>
-                    <li><a :class="stat_type==4?'active':''" href="#" @click="stat_type=4">
+                        {{ $t("Товар ва маҳсулотлар {rejim}и",{ rejim: getRejimByCode(rejim.tovarimex).text }) }}</a></li>
+                    <li><a :class="stat_type==4?'active':''" href="#" dd @click="stat_type=4">
                         {{
-                            $t("Ўзбекистон Республикасига " + getRejimByCode(rejim.davlatimex).text + " товарлари давлатлар кесимида")
+                            rejim.tovarimex===1?$t("Ўзбекистон Республикасининг товарлар импорти давлатлар кесимида") : $t("Ўзбекистон Республикасининг товарлар экспорти давлатлар кесимида")
                         }}</a></li>
 
 
                     <li><a :class="(stat_type==3)?'active':''" href="#" @click="stat_type=3">
                         {{
-                            $t("Ўзбекистон Республикасидан товарлар " + getRejimByCode(rejim.oyimex).text + "и ойлар кесимида")
+                            rejim.tovarimex===1?$t("Ўзбекистон Республикасининг товарлар импорти ойлар кесимида") : $t("Ўзбекистон Республикасининг товарлар экспорти ойлар кесимида")
                         }}</a></li>
                     <!--                    <li><a :class="(stat_type===6)?'active':''" href="#" @click="stat_type=6">Ҳудудий корхоналар томонидан импорт қилинган товарлар</a></li>-->
 
@@ -85,7 +85,7 @@
         </div>
         <div class="col-9" v-if="stat_type==3">
             <h3>{{
-                    $t("Ўзбекистон Республикасидан товарлар " + getRejimByCode(rejim.oyimex).text + "и ойлар кесимида")
+                rejim.tovarimex===1? $t("Ўзбекистон Республикасидан товарлар импорти ойлар кесимида") :  $t("Ўзбекистон Республикасидан товарлар экспорти ойлар кесимида")
                 }}</h3>
             <div id="columnchart3" class="chart" v-show="apexchartshow">
 
@@ -126,9 +126,9 @@
             </div>
 
         </div>
-        <div class="col-9" v-if="stat_type==4">
+        <div class="col-9" v-if="stat_type===4">
             <h3>{{
-                    $t("Ўзбекистон Республикасига " + getRejimByCode(rejim.davlatimex).text + " товарлари давлатлар кесимида")
+                    rejim.tovarimex===1? $t("Импорт товарлари давлатлар кесимида") : $t("Экспорт товарлари давлатлар кесимида")
                 }}</h3>
             <div id="columnchart4" style="min-height: 65vh; float: left; width: 70%" class="chart mb-10"></div>
             <div id="columnchart4-1" v-if="stat_type===4" style="min-height: 65vh; width: 30%; float: right;"
@@ -137,7 +137,7 @@
                 <v-col cols="3">
                     <v-autocomplete
                         ref="davimex0"
-                        v-model="rejim.davlatimex"
+                        v-model="rejim.tovarimex"
                         :items="[
                                 {text:$t('Импорт'),value:1},
                                 {text:$t('Экспорт'),value:2}
@@ -166,7 +166,8 @@
 
         </div>
         <div class="col-9" v-if="stat_type==5">
-            <h3>{{ $t("Товар ва маҳсулотлар " + getRejimByCode(rejim.tovarimex).text + "и") }}</h3>
+            <h3>{{
+                    rejim.tovarimex===1?$t("Товар ва маҳсулотлар импорти"):$t("Товар ва маҳсулотлар экспорти") }}</h3>
             <div id="columnchart5" style="min-height: 65vh;" class="chart mb-10">
 
                 <mychart :items="mychartdata">
@@ -422,6 +423,14 @@ export default {
             setTimeout(() => this.columnChart4_1(true), 100)
         },
         'rejim.oyimex'(val) {
+            this.columnChart5();
+            this.$refs.scripts.month = this.month;
+            this.$refs.scripts.year = this.year;
+            this.$refs.scripts.rejim = val;
+            setTimeout(() => this.$refs.scripts.createRootColumnChart4(), 100);
+            setTimeout(() => this.columnChart4(true), 100)
+            setTimeout(() => this.$refs.scripts.createRootColumnChart4_1(), 100);
+            setTimeout(() => this.columnChart4_1(true), 100)
             setTimeout(() => this.multipleValue(true), 100)
         }
     },

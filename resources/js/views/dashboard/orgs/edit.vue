@@ -807,7 +807,15 @@ export default {
                 _this.rahbariyat = _this.organization.rahbariyat;
                 _this.rahbariyat.boshliq = _this.organization.rahbariyat.boshliq;
                 //console.log(_this.rahbariyat)
-                const title = (JSON.parse(_this.organization.title))?JSON.parse(_this.organization.title):"";
+                function isJsonString(str) {
+                    try {
+                        JSON.parse(str);
+                    } catch (e) {
+                        return false;
+                    }
+                    return true;
+                }
+                const title = (isJsonString(_this.organization.title))?JSON.parse(_this.organization.title):"";
 
                 if (typeof (title.translates) !== 'undefined' && title.translates !== 'undefined') {
                     this.langtext = JSON.parse(title.translates)

@@ -55,6 +55,8 @@ use Illuminate\Support\Facades\Schema;
          *
          */
         Route::group(['prefix' => 'admin', 'middleware' => 'role:admin'], function () {  //role:editor,approver
+            Route::post('/locales', 'App\Http\Controllers\Admin\AdminEventController@setLocale',['as'=>'admin']);
+            Route::get('/locales', 'App\Http\Controllers\Admin\AdminEventController@getLocales',['as'=>'admin']);
             Route::resource('/news', 'App\Http\Controllers\Admin\AdminNewsController', ['as' => 'admin']);
             Route::get('/categories/select', 'App\Http\Controllers\Admin\AdminCategoryController@getForSelect');
             Route::resource('/categories', 'App\Http\Controllers\Admin\AdminCategoryController', ['as' => 'admin']);
@@ -73,6 +75,7 @@ use Illuminate\Support\Facades\Schema;
             Route::resource('/appeal', 'App\Http\Controllers\Admin\AdminAppealController', ['as' => 'admin']);
             Route::resource('/doccategories', 'App\Http\Controllers\Admin\AdminDocumentCategoryController', ['as' => 'admin']);
             Route::resource('/documents', 'App\Http\Controllers\Admin\AdminDocumentController', ['as' => 'admin']);
+
         });
 
         Route::get('/categories/select', 'App\Http\Controllers\CategoryController@getForSelect');

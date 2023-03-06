@@ -47,8 +47,8 @@
                                     <li><a href="#"><i class="fa fa-map-marker" aria-hidden="true"></i>100003,
                                         {{ $t("Тошкент шаҳри,Ислом Каримов кўчаси 3 уй") }}</a>
                                     </li>
-                                    <li><a href="#"><i class="fa fa-phone" aria-hidden="true"></i>(+998-78)
-                                        120-76-00</a>
+                                    <li><a href="#"><i class="fa fa-phone" aria-hidden="true"></i>(+998-55)
+                                        502-76-00</a>
                                     </li>
                                     <li><a href="#"><i class="fa fa-envelope" aria-hidden="true"></i>info@customs.uz</a>
                                     </li>

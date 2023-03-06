@@ -60,9 +60,9 @@
                                                 <tbody>
                                                 <tr v-if="typeof app.personName !== 'undefined'">
                                                     <td style="font-weight: 550">Аризачи</td>
-                                                    <td>{{
-                                                            typeof app.personName !== 'undefined' ? app.personName : null
-                                                        }}
+                                                    <td>
+                                                        <template v-if="app.legalName!=='Жисмоний шахс'">{{ typeof app.legalName !== 'undefined' ? app.legalName : null }}</template>
+                                                        <template v-else>{{ typeof app.personName !== 'undefined' ? app.personName : null }}</template>
                                                     </td>
                                                 </tr>
                                                 <tr v-if="typeof app.personPhone !== 'undefined' && app.personPhone">

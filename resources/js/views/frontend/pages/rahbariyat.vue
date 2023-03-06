@@ -38,7 +38,7 @@
                                                 <div class="col-9">
                                                     <div>
                                                         <div class="text-row">
-                                                            <p>{{ rais.fio }}</p>
+                                                            <p>{{ $t(rais.fio) }}</p>
                                                         </div>
                                                         <div class="text-row">
                                                             <div class="far fa-user">&nbsp;</div>
@@ -46,7 +46,7 @@
                                                         </div>
                                                         <div class="text-row">
                                                             <div class="far fa-clock">&nbsp;</div>
-                                                            <p>{{ rais.qabul }}</p>
+                                                            <p>{{ (typeof rais.translates !=='undefined' && typeof rais.translates[$i18n.locale] !=='undefined' && rais.translates[$i18n.locale]['qabul'] && typeof rais.translates[$i18n.locale]['qabul'] !=='undefined')? rais.translates[$i18n.locale]['qabul'] : rais.qabul }}</p>
                                                         </div>
                                                         <div class="text-row">
                                                             <div class="fas fa-phone-alt">&nbsp;</div>
@@ -74,7 +74,7 @@
                                                                         &nbsp;
                                                                     </div>
                                                                 </div>
-                                                                <p>{{ birinchi_orinbosar.fio }}</p>
+                                                                <p>{{ $t(birinchi_orinbosar.fio) }}</p>
                                                             </div>
                                                             <div class="orinbosar-info">
                                                                 <div class="text-row">
@@ -84,7 +84,7 @@
                                                                 </div>
                                                                 <div class="text-row">
                                                                     <div class="far fa-clock">&nbsp;</div>
-                                                                    <p>{{ birinchi_orinbosar.qabul }}</p>
+                                                                    <p>{{ (typeof birinchi_orinbosar.translates !=='undefined' && typeof birinchi_orinbosar.translates[$i18n.locale] !=='undefined' && birinchi_orinbosar.translates[$i18n.locale]['qabul'] && typeof birinchi_orinbosar.translates[$i18n.locale]['qabul'] !=='undefined')? birinchi_orinbosar.translates[$i18n.locale]['qabul'] : birinchi_orinbosar.qabul }}</p>
                                                                 </div>
                                                                 <div class="text-row">
                                                                     <div class="fas fa-phone-alt">&nbsp;</div>
@@ -107,7 +107,7 @@
                                                                         &nbsp;
                                                                     </div>
                                                                 </div>
-                                                                <p>{{ orinbosar.fio }}</p>
+                                                                <p>{{ $t(orinbosar.fio) }}</p>
                                                             </div>
                                                             <div class="orinbosar-info">
                                                                 <div class="text-row">
@@ -116,7 +116,7 @@
                                                                 </div>
                                                                 <div class="text-row">
                                                                     <div class="far fa-clock">&nbsp;</div>
-                                                                    <p>{{ orinbosar.qabul }}</p>
+                                                                    <p>{{ (typeof orinbosar.translates !=='undefined' && typeof orinbosar.translates[$i18n.locale] !=='undefined' && orinbosar.translates[$i18n.locale]['qabul'] && typeof orinbosar.translates[$i18n.locale]['qabul'] !=='undefined')? orinbosar.translates[$i18n.locale]['qabul'] : orinbosar.qabul }}</p>
                                                                 </div>
                                                                 <div class="text-row">
                                                                     <div class="fas fa-phone-alt">&nbsp;</div>
@@ -242,8 +242,13 @@ export default {
             await api.readRahbariyats().then((response) => {
                 _this.rahbariyat = response.data.data;
                 Object.entries(_this.rahbariyat).forEach(([valkey, v]) => {
-                    if (v.lavozimi === '1') _this.rais = v;
-                    else if (v.lavozimi === '2') _this.birinchi_orinbosar = v;
+                    v.translates = JSON.parse(v.translates);
+                    if (v.lavozimi === '1') {
+                        _this.rais = v;
+                    }
+                    else if (v.lavozimi === '2') {
+                        _this.birinchi_orinbosar = v;
+                    }
                     else _this.orinbosarlar.push(v);
                 })
             }).catch((error) => {

@@ -104,8 +104,12 @@ export default {
                 this.pageMeta = response.data.meta;
                 this.news = this.news.concat(response.data.data.map(function (i) {
                     let dateParts = i.created_at.split("T");
-                    if ((new Date(i.created_at)).getDate() === (new Date).getDate())
+                    if ((new Date(i.created_at)).getDate() === (new Date).getDate()) {
+                        if(dateParts.length < 2 && typeof dateParts[0] !== 'undefined'){
+                            i.created_at = dateParts[0].substring(0, 5);
+                        } else
                         i.created_at = dateParts[1].substring(0, 5);
+                    }
                     else i.created_at = dateParts[0];
                     return i;
                 }));
@@ -125,9 +129,11 @@ export default {
                 this.pageMeta = response.data.meta;
                 this.related_news = this.news = response.data.data.map(function (i) {
                     let dateParts = i.created_at.split("T");
-                    if ((new Date(i.created_at)).getDate() === (new Date).getDate())
-                        i.created_at = dateParts[1].substring(0, 5);
-                    else i.created_at = dateParts[0];
+                    if(dateParts.length < 2 && typeof dateParts[0] !== 'undefined'){
+                        i.created_at = dateParts[0].substring(0, 10);
+                    } else {
+                        i.created_at = dateParts[1].substring(0, 10);
+                    }
                     return i;
                 });
             }).catch((error) => {

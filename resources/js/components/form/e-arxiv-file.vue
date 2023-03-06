@@ -86,11 +86,12 @@
                                             :ref="'create_customs_documents'"
                                             style="display: flex; flex-direction: column-reverse"
                         >
-                            <v-row
-                                v-for="(doc,key) in documents"
-                                :key="key">
 
-                                <v-col cols="12">
+                                <e-arxiv-file-input :document="doc" v-for="(doc,key) in documents"
+                                                    @remove="removeDocument(key)"
+                                                    :key="key" :multiple="multiple" />
+
+<!--                                <v-col cols="12">
                                     <ValidationProvider
                                         name="ID рақами"
                                         v-slot="{ errors }">
@@ -98,9 +99,8 @@
                                             v-model="documents[key].id"
                                             label="ID рақами"
                                             persistent-hint
-                                            loading
+                                            :loading="loading[key]"
                                             counter="13"
-                                            @keyup="myColor(documents[key].id,key)"
                                             hint="Ҳужжатнинг е-архив тизимидаги Fayl ID рақами"
                                         >
                                             <template v-slot:append>
@@ -128,22 +128,14 @@
                                                     </v-icon>
                                                 </v-btn>
                                             </template>
-                                            <template
-                                                v-slot:progress>
-                                                <v-progress-linear
-                                                    :value="Initprogress(documents[key].id)"
-                                                    :color="documents[key].color"
-                                                    absolute
-                                                    height="3"
-                                                ></v-progress-linear>
-                                            </template>
+
                                         </v-text-field>
-                                        <span class="red--text">{{
+                                        <span class="red&#45;&#45;text">{{
                                                 errors[0]
                                             }}</span>
                                     </ValidationProvider>
-                                </v-col>
-                            </v-row>
+                                </v-col>-->
+
                         </ValidationObserver>
                     </v-container>
                     <small>* майдонлар тўлдирилиши шарт</small>
@@ -187,6 +179,7 @@
 
 <script>
 import {ValidationObserver, ValidationProvider} from "vee-validate";
+import EArxivFileInput from "./e-arxiv-file-input";
 
 export default {
     name: "e-arxiv-file",
@@ -288,80 +281,6 @@ export default {
                 }
             );
         },
-        isValidDoc(index = null) {
-            if (index) {
-                return !(!this.documents[index].id || !this.documents[index].type)
-            } else {
-                var returnDoc = true;
-                if (typeof this.documents !== 'undefined' && this.documents && !this.documents.length) {
-                    return false;
-                }
-                if (typeof this.documents !== 'undefined')
-                    this.documents.forEach((document, k) => {
-                        returnDoc = (document.id && document.type)
-                        if (!returnDoc) {
-                            return false;
-                        }
-                    })
-                return !returnDoc;
-            }
-        },
-        Initprogress(val) {
-            if (val && typeof val !== 'undefined')
-                return Math.min(100, val.length * 8)
-            else return 0;
-        },
-        async myColor(val, key) {
-            const _this = this;
-            let fileIsset = [];
-            if (typeof this.documents[key] !== 'undefined' && this.documents[key]['id'] === val) this.documents[key].color = 'success';
-            if (typeof val !== 'undefined' && val && val.length === 13) {
-                fileIsset = await this.checkFile(val)
-                if (fileIsset && typeof fileIsset !== 'undefined' && typeof fileIsset[0] !== 'undefined' && fileIsset.length > 0) {
-                    if (typeof this.documents !== 'undefined' && typeof this.documents[key] !== 'undefined') {
-                        /*                        this.modelValue[key]['id'] = val;
-                                                this.modelValue[key]['type'] = fileIsset[0].cd_id + " - " + fileIsset[0].file_num;*/
-                        this.documents[key].id = val;
-                        this.documents[key].type = fileIsset[0].cd_id + " - " + fileIsset[0].file_num;
-                        this.documents[key].color = 'success';
-                        this.documents[key].valid = true;
-                    } else {
-                        /*
-                                                this.modelValue.push({
-                                                    id: val,
-                                                    type: fileIsset[0].cd_id + " - " + fileIsset[0].file_num
-                                                });*/
-                        this.documents[key].id = val;
-                        this.documents[key].type = fileIsset[0].cd_id + " - " + fileIsset[0].file_num;
-                        this.documents[key].color = 'success';
-                        this.documents[key].valid = true;
-
-                    }
-                } else {
-                    this.documents[key].color = 'warning';
-                    this.documents[key].valid = false;
-
-                }
-            } else {
-               // console.log(key)
-                this.value.splice(key, 1);
-                this.documents[key].color = 'warning';
-                this.documents[key].valid = false;
-            }
-            if (typeof val !== 'undefined' && val && val.length < 13) {
-                this.documents[key].color = ['error', 'warning'][Math.floor(this.Initprogress(val) / 50)]
-                this.documents[key].valid = false;
-            }
-        },
-        async checkFile(file_id) {
-            if (!file_id || file_id.length !== 13) return false;
-            let response = null;
-            response = await axios.get('/api/v1/ex_api/arxiv?file_id=' + file_id + '&pnfl=' + this.$auth.user().pin);
-            if (response && response.data && response.data.count) {
-                return response.data.data;
-            }
-            return false;
-        },
         removeDocument(document) {
             //this.value.splice(document, 1);
             this.documents.splice(document, 1);
@@ -415,6 +334,7 @@ export default {
             multiple: false,
             myValue: this.$props.value,
             myArray: [],
+            loading: [{}]
 
         }
     },
@@ -429,22 +349,26 @@ export default {
 
                     if (typeof item['id'] !== 'undefined') {
                         setTimeout(async () => {
-                            let validDoc = await this.checkFile(item['id']);
+                            let validDoc = await _this.checkFile(item['id']);
                             if (item['id'] && (item['id']).length === 13 && validDoc) {
 
                                 if (validDoc[0] === 'undefined') {
-                                   // console.log('return');
+                                    // console.log('return');
                                     return;
                                 }
                                 this.$props.value[key] = {
                                     id: item['id'],
                                     valid: true,
-                                    type: validDoc[0]['cd_id'] + ' - ' + validDoc[0]['file_num']
+                                    type: validDoc[0]['cd_id'] + ' - ' + validDoc[0]['file_num'],
+                                    ...validDoc[0]
+
                                 }
                                 _this.documents[key] = {
                                     id: item['id'],
                                     valid: true,
-                                    type: validDoc[0]['cd_id'] + ' - ' + validDoc[0]['file_num']
+                                    type: validDoc[0]['cd_id'] + ' - ' + validDoc[0]['file_num'],
+                                    ...validDoc[0]
+
                                 }
                             }
                         })
@@ -457,7 +381,7 @@ export default {
             this.$nextTick(() => {
                 let size = Object.keys(this.documents).length;
                 if (this.documents && size < 1 && typeof this.documents[0] !== 'undefined' && typeof this.documents[0].id === 'undefined' && typeof this.documents[0].valid === 'undefined') {
-                   // console.log('asd');
+                    // console.log('asd');
                     this.documents = [{}];
                 }
             })
@@ -476,16 +400,13 @@ export default {
                  this.$emit("change", newModelValue);
              },
          },*/
-        progress(val) {
-            this.Initprogress(val)
-        },
-        isvalidDocument(tovar_id = null) {
+/*        isvalidDocument(tovar_id = null) {
             //tovar_id = this.tovarIndex;
             //if (tovar_id === null || isNaN(tovar_id)) tovar_id = this.tovarIndex;
             return !this.isValidDoc()
-        },
+        },*/
         ilovaError() {
-            if (this.$props.errors.length > 0 && typeof this.$refs.hujjatilova!=='undefined') this.$refs.hujjatilova.applyResult({
+            if (this.$props.errors && this.$props.errors.length > 0 && typeof this.$refs.hujjatilova !== 'undefined') this.$refs.hujjatilova.applyResult({
                 errors: [this.$props.errors], // array of string errors
                 valid: false, // boolean state
                 failedRules: {} // should be empty since this is a manual error.
@@ -508,6 +429,7 @@ export default {
                                     id: document.id,
                                     type: document.type,
                                     valid: document.valid,
+                                    ...document
                                     //color: 'default',
                                 });
                             }
@@ -515,7 +437,7 @@ export default {
                         })
                         //console.log(_this.documents)
                         if (typeof _this.documents.length < 1) {
-                           // console.log('aa')
+                            // console.log('aa')
                             _this.documents = [{}];
                         }
 
@@ -539,6 +461,7 @@ export default {
                                     type: document.type,
                                     valid: document.valid,
                                     color: document.color,
+                                    ...document
                                 });
                             }
                         })
@@ -552,7 +475,7 @@ export default {
                     for (const [key, item] of Object.entries(_this.myArray)) {
                         //console.log(item)
                         if (!(item && typeof item.id !== 'undefined' && typeof item.valid !== 'undefined' && item.valid)) {
-                           // console.log('aa')
+                            // console.log('aa')
 
                             if (_this.myArray.indexOf(item)) {
                                 //console.log('sadasddsadsa')
@@ -573,9 +496,20 @@ export default {
                 }
                 this.$emit("input", _this.myArray);
             }
-        }
+        },
+/*        documents: {
+            handler(val) {
+
+                for (const [key, value] of Object.entries(val)) {
+
+                    this.myColor(this.documents[key].id, key)
+                }
+            },
+            deep: true
+        }*/
     },
     components: {
+        EArxivFileInput,
         ValidationProvider,
         ValidationObserver,
     }

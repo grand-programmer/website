@@ -172,7 +172,11 @@ export default {
                 title: 'Ҳужжатлар',
                 icon: 'mdi-yurt',
                 to: '/admin/documents',
-
+            },
+            {
+                title: 'Таржималар',
+                icon: 'mdi-poll',
+                to: '/admin/translate',
             },
             /*{
                 icon: 'mdi-account',

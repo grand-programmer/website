@@ -30,19 +30,19 @@ class StatService
 
     public function saveAllData($name = 'davlatimex')
     {
-        $year=$date = date("Y");
+        $year = $date = date("Y");
         //for ($year = $date; $year >= $date - 2; $year--) {
-            for ($month = 0; $month <= 12; $month++) {
-                for ($rejim = 0; $rejim <= 2; $rejim++) {
-                    $this->saveData($name, $year, $month, $rejim);
-                }
+        for ($month = 0; $month <= 12; $month++) {
+            for ($rejim = 0; $rejim <= 2; $rejim++) {
+                $this->saveData($name, $year, $month, $rejim);
             }
-       // }
+        }
+        // }
     }
 
     public function saveData($name, $year, $month, $rejim)
     {
-        $data = $this->{$this->nameFunctions[$name]}($year, $month,$rejim);
+        $data = $this->{$this->nameFunctions[$name]}($year, $month, $rejim);
         if ($statdata = StatData::where([
             'name' => $name,
             'month' => $month,
@@ -284,7 +284,7 @@ class StatService
 
     public function getDavlatImExData($year = 0, $month = 0, $selectedrejim = 0)
     {
-        $selectedrejim=(int)$selectedrejim;
+        $selectedrejim = (int)$selectedrejim;
 
         if ($selectedrejim === 0) {
             $data['rejim'] = ["ИМ", "ЭК"];
@@ -307,7 +307,7 @@ class StatService
                 'month' => $month,
                 'year' => $year,
             ])->first();
-            if(!$statData) return [];
+            if (!$statData) return [];
             return (array)json_decode($statData->data);
         } else {
 
@@ -375,7 +375,7 @@ class StatService
 
     public function getTovarImExData($year = 0, $month = 0, $selectedrejim = 0)
     {
-        $selectedrejim=(int)$selectedrejim;
+        $selectedrejim = (int)$selectedrejim;
         if ($selectedrejim === 0) {
             $data['rejim'] = ["ИМ", "ЭК"];
         } elseif ($selectedrejim == 1) {
@@ -397,7 +397,7 @@ class StatService
                 'month' => $month,
                 'year' => $year,
             ])->first();
-            if(!$statData) return [];
+            if (!$statData) return [];
             return (array)json_decode($statData->data);
         } else {
 
@@ -471,7 +471,7 @@ class StatService
 
     public function getOyImExData($year = 0, $month = 0, $selectedrejim = 0)
     {
-        $selectedrejim=(int)$selectedrejim;
+        $selectedrejim = (int)$selectedrejim;
         if ($selectedrejim === 0) {
             $data['rejim'] = ["ИМ", "ЭК"];
         } elseif ($selectedrejim == 1) {
@@ -494,7 +494,7 @@ class StatService
                 'month' => $month,
                 'year' => $year,
             ])->first();
-            if(!$statData) return [];
+            if (!$statData) return [];
             return (array)json_decode($statData->data);
         } else {
 
@@ -585,8 +585,14 @@ class StatService
     public function getFileFromEArxiv($file_id, $pnfl = null)
     {
         $whereUser = "";
-       // if ($pnfl) $whereUser = " and f.user_id='" . $pnfl . "'";
-        $query = "  select
+        // if ($pnfl) $whereUser = " and f.user_id='" . $pnfl . "'";
+
+
+        $query = "
+
+
+
+select
                 f.file_id,
                 f.docname,
                 f.doc_type,
@@ -595,13 +601,13 @@ class StatService
                 d.cd_id
                 from
                     e_arxiv.freedoc f
-     join file_type as ft on ft.file_id=f.file_id join
-    e_arxiv.docs_type d
-on
-    d.code=f.doc_type and d.lnga_tpcd='UZ'
+     join e_arxiv.file_type as ft on ft.file_id=f.file_id
+     join e_arxiv.docs_type d on d.lnga_tpcd='UZ'
                 where
                  f.file_id='" . $file_id . "' and
-                      f.isdeleted=0 " . $whereUser;
+                      f.isdeleted=0 " . $whereUser . " FETCH FIRST 1 ROWS ONLY";
+        //     join e_arxiv.docs_type d on d.code=f.doc_type and d.lnga_tpcd='UZ'
+
         return DB::connection('db2_odbcEA')->select($query);
 
     }

@@ -289,6 +289,9 @@
                                     <text-field title="Қонун ҳужжати санаси" v-model="app.taminotsiz_sana"
                                                 hint="Ҳужжат санаси" v-mask="'##-##-####'"/>
                                 </v-col>
+                                <v-col cols="8">
+                                <e-arxiv-file v-model="app.taminotsiz_doc" :errors="app.file_error" />
+                                </v-col>
                             </template>
 
 
@@ -484,6 +487,7 @@ export default {
                 sugurta_doc: [],
                 kafolat_doc: [],
                 kafillik_doc: [],
+                taminotsiz_doc: [],
                 garov_doc: [],
                 kafolat_bsana: null,
                 kafolat_raqami: null,
@@ -627,6 +631,7 @@ export default {
                 {key: 'depositSum', value: 'Таъминлов суммаси'},
                 {key: 'supplyNumber', value: 'Қонун ҳужжати рақами'},
                 {key: 'supplyDate', value: 'Қонун ҳужжати санаси'},
+                {key: 'comment', value: 'Изоҳ'},
                 {
                     key: 'personName',
                     value: (typeof this.person !== 'undefined' && typeof this.person.type !== 'undefined' && this.person.type === 2) ? 'Ташкилот номи' : 'ФИШ'
@@ -672,6 +677,7 @@ export default {
             if (typeof _this.person.phone !== 'undefined' && _this.person.phone)
                 _this.application['persons']['phone'] = _this.person.phone.replaceAll(" ", "").replaceAll("+", "");
             _this.application['appsDTO']['locationId'] = _this.app.region;
+            _this.application['appsDTO']['comment'] = _this.app.comment;
 
             if (typeof _this.app.money !== 'undefined' && _this.app.money && _this.app.money.length > 3) {
                 _this.application['appsDTO']['paySum'] = _this.app.money.replaceAll(" ", "");
@@ -718,6 +724,7 @@ export default {
                     break;
                 case 5:
                     _this.application.supplyDTO.supplyNumber = _this.app.taminotsiz;
+                    _this.application.earxivDTO = _this.arxivToApi(JSON.parse(JSON.stringify(_this.app.taminotsiz_doc)));
                     _this.application.supplyDTO.supplyDate = _this.formatDate(_this.app.taminotsiz_sana);
                     break;
             }
@@ -751,6 +758,8 @@ export default {
                             _this.$router.push("/services/ppay/" + _this.application.id)
 
                         }, 100)
+                    } else if (typeof resultData !== 'undefined' && typeof resultData.data !== 'undefined' && typeof resultData.data.message !== 'undefined'){
+                        _this.$toast.error(resultData.data.message);
                     }
                 })
                 _this.loading.button = false;
@@ -777,6 +786,9 @@ export default {
                     if (errors) _this.setApplicationErrors(errors);
                     else if (typeof error.response.data.data.errors == 'string') _this.$toast.error(error.response.data.data.errors); else {
                         _this.$toast.error('Серверда хатолик юз берди! Кейинроқ уриниб кўринг');
+                    }
+                    if (typeof error.response.data !== 'undefined' && typeof error.response.data.data !== 'undefined' && typeof error.response.data.data.message !== 'undefined'){
+                        _this.$toast.error(error.response.data.data.message);
                     }
                 } else {
                     _this.$toast.error('Серверда хатолик юз берди! Кейинроқ уриниб кўринг!');

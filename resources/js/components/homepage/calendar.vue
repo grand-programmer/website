@@ -32,7 +32,7 @@
 import api from "./../../src/services/apiService";
 
 export default {
-    name: "NewsInHomepage",
+    name: "CalendarInHomepage",
     data() {
         return {
             months: null,
@@ -45,14 +45,16 @@ export default {
     },
     methods: {
        async initialize() {
+           const _this =this
            await api.readEventsForFront().then((response) => {
                 this.months = response.data.data;
+               for (const [key, value] of Object.entries(this.months)) {
+                   this.months[key].month=_this.$t(value.month.substring(0,1).toUpperCase() + value.month.substring(1))
+               }
+
             }).catch((error) => {
 /*                this.$toast.error(i18n.t(`Маълумотларни юклашда хатолик содир бўлди!`)) */
-               this.$toast.error(i18n.t(`Маълумотларни юклашда хатолик содир бўлди!`))
-
-
-
+               this.$toast.error(_this.$t(`Маълумотларни юклашда хатолик содир бўлди!`))
                 console.log(error)
             })
 

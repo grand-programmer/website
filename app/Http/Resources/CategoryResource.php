@@ -18,8 +18,9 @@ class CategoryResource extends JsonResource
      */
     public function toArray($request)
     {
-        $data=$request->only('withnews');
-
+        $data = $request->only('withnews','page');
+        $page=1;
+        if (isset($data['page']) and $data['page'] > 0) $page = (int)$data['page'];
         $translates = DB::table('category_translates')->where(["category_id" => $this->id, "language" => app()->getLocale()])->get();
         $categoryArray=[
             'id' => $this->id,
@@ -33,8 +34,9 @@ class CategoryResource extends JsonResource
             'created_at' => $this->created_at->format('d-m-Y'),
         ];
         if(isset($data['withnews'])){
-            $news=$this->news;
-            if(app()->getLocale()!=='uz') $news=News::whereIn('id',$this->news->pluck('id'))->whereRelation('translates','language','=',app()->getLocale())->get();
+            $news=$this->news()->orderby('created_at', 'desc')->skip(($page - 1) * 6 )->limit(6)->get();
+            if(app()->getLocale()!=='uz') $news=News::orderBy('created_at','desc')->whereIn('id',$this->news->pluck('id'))->whereRelation('translates','language','=',app()->getLocale())->orderby('created_at', 'desc')->skip(($page - 1) * 6 )->limit(6)->get();
+
             $categoryArray['news']= NewsResource::collection($news)->toArray($request);
         }
 

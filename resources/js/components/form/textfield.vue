@@ -10,7 +10,24 @@
             v-on="$listeners"
             :hint="hint.length>0?hint:title"
             v-model="modelValue"
+            v-if="mask"
             v-mask="mask"
+        >
+            <template v-slot:label>
+<!--                <span :style="(typeof $attrs['prepend-inner-icon'] !=='undefined'?'left:-25px;':'')">-->
+                <template v-if="rules.includes('required')"> {{ title }} <span style="color: red">*</span></template>
+                <template v-else> {{ title }}</template>
+
+            </template>
+        </v-text-field>
+        <v-text-field
+            :label="rules.includes('required')?title + ' *':title"
+            v-bind="$attrs"
+            :type="type"
+            v-on="$listeners"
+            :hint="hint.length>0?hint:title"
+            v-model="modelValue"
+            v-else
         >
             <template v-slot:label>
 <!--                <span :style="(typeof $attrs['prepend-inner-icon'] !=='undefined'?'left:-25px;':'')">-->
@@ -64,8 +81,7 @@ export default {
             default: "",
         },
         mask: {
-            type: String,
-            default: "",
+            type: String
         },
         /*        item_text:
         {

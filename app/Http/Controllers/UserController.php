@@ -342,6 +342,39 @@ class UserController extends Controller
         } catch (\Exception $e) {
 
         };
+        /// TPO
+        try {
+            $response = Http::asMultipart();
+            $response = $response->timeout(10)
+                ->get('http://192.168.224.145:8080/api/v1/tpo/get/' + Auth::guard('api')->user()->pin)->throw(function ($response, $e) {
+                    //
+                });
+            if ($response->status() == 200) {
+                $appealdata = $response->json();
+
+                if (is_array($appealdata) and isset($appealdata['data']) and isset($appealdata['data'][0]) and is_array($appealdata['data'][0])) {
+                    collect($appealdata['data'])->transform(function ($appeal) use ($user_id) {
+                        global $services;
+                        $services[] = [
+                            "app_id" => $appeal['id'],
+                            "app_num" => $appeal['num'],
+                            "created_at" => isset($appeal['insTime']) ? $appeal['insTime'] : null,
+                            "status" => $appeal['status'],
+                            "statusNm" => $appeal['status'],
+                            "type" => 3,
+                            "link" => "/services/bko/" . $appeal['id'],
+                            "user_id" => $user_id,
+                        ];
+
+                    });
+
+
+                }
+
+            } //else return response()->json(['error' => 'Сервер билан уланишда муаммо бор!', 'status' => false]);
+        } catch (\Exception $e) {
+
+        };
 
         //  $user=User::with('services')->find($user_id);
 

@@ -1133,11 +1133,11 @@ export default {
             headers: [
                 {text: 'ТИФ ТН', align: 'start', value: 'tftn.id'},
                 {text: 'Товар номи', align: 'start', value: 'nomlanishi'},
-                {text: 'Товар миқдори', align: 'start', value: 'qiymati'},
+                {text: 'Товар миқдори', align: 'start', value: 'weight'},
             ],
             subHeaders: [
                 {text: 'Товар номи', align: 'start', value: 'nomlanishi'},
-                {text: 'Товар миқдори', align: 'start', value: 'miqdor'},
+                {text: 'Товар миқдори', align: 'start', value: 'weight'},
                 {text: 'Операция', align: 'start', value: 'actions'},
             ],
             contracts: [],

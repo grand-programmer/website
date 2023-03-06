@@ -400,6 +400,46 @@ class ApiController extends Controller
                 } else return response()->json(["error" => "Серверда хатолик юз берди!", "status" => false], 200);
                 break;
             ///
+            /// ///
+            /// tpo begin
+            ///
+            case "tpo":
+                $this->middleware('auth:api');
+                $user = Auth::guard('api')->user();
+                if (!$user) return response()->json([
+                    'success' => false,
+                    'data' => 'Foydalanuvchi avtorizatsiyadan otishi talab etiladi'], 401);
+                $response = Http::contentType("application/json")->send('POST', 'http://192.168.224.145:8080/api/v1/tpo/save', [
+                    'body' => json_encode($request->all())
+                ]);
+                break;
+            case "tpo-get":
+                $this->middleware('auth:api');
+                $user = Auth::guard('api')->user();
+                if (!$user) return response()->json([
+                    'success' => false,
+                    'data' => 'Foydalanuvchi avtorizatsiyadan otishi talab etiladi'], 401);
+                $appData = $request->only(['app_id', 'person_id', 'page', 'size']);
+                if (isset($appData['app_id'])) {
+                    $app_id = isset($appData['app_id']) ? $appData['app_id'] : null;
+                    $response = Http::contentType("application/json")->get('http://192.168.224.145:8080/api/v1/tpo/get/' . $user->pin . '/' . $app_id );
+                } elseif (isset($appData['person_id'])) {
+                    $page = $appData['page'] ?? 0;
+                    $size = $appData['size'] ?? 50;
+                    $response = Http::contentType("application/json")->get('http://192.168.224.145:8080/api/v1/tpo/get/' . $user->pin , [
+                        "page" => $page,
+                        "size" => $size,
+                    ]);
+
+
+                } else {
+                    return response()->json(["error" => "Хато маълумот юборилди!", "status" => false], 200);
+                }
+                if ($response->status() == 200) {
+                    return response()->json(["data" => $response->json()]);
+                } else return response()->json(["error" => "Серверда хатолик юз берди!", "status" => false], 200);
+                break;
+            ///
             ///
             /// customsprice begin
             case "customprice-person":

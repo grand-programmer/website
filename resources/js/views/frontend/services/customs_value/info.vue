@@ -409,8 +409,8 @@
                                                     </template>
                                                 </p>
                                                 -->
-                                                <p v-if="appstatus.comment!==null" style="color: orange;border: 1px dashed;padding: 25px 16px;margin: 10px 0px;line-height: 0;border-radius: 5px;" >
-                                                    <template v-if="appstatus.comment!==null"><br> {{ appstatus.comment}} </template>
+                                                <p v-if="appstatus.comment!==null" style="color: orange;border: 1px dashed;padding: 0 16px;margin: 10px 0px;line-height: 16px;border-radius: 5px;" >
+                                                    <template v-if="appstatus.comment!==null">{{ appstatus.comment}} </template>
 
                                                 </p>
                                                 <span style="color: #39ae69; margin-top: 10px; display: block">

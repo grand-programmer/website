@@ -1,5 +1,5 @@
 import { BehaviorSubject } from 'rxjs';
-import * from '../src/services/apiService'
+import apiService from '../src/services/apiService'
 const currentUserSubject = new BehaviorSubject(JSON.parse(localStorage.getItem('currentUser')));
 
 export const authenticationService = {
