@@ -52,10 +52,18 @@
                                                             <div class="fas fa-phone-alt">&nbsp;</div>
                                                             <p>{{ rais.phone }}</p>
                                                         </div>
+                                                        <div  class="text-row" v-show="rais.biografiyasi && rais.biografiyasi.length>10" @click="biograf_show=!biograf_show">
+                                                            <p>{{ $t('Раис биографияси') }}</p>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
+                                        <v-row>
+                                            <v-expand-transition mode="in-out">
+                                                <div v-show="biograf_show" class="px-15 pt-10 white--text biograf_show" v-html="rais.biografiyasi"></div>
+                                            </v-expand-transition>
+                                        </v-row>
                                     </div>
                                     <div class="col-12 orinbosarlar" style="/* margin: 20px auto;">
                                         <div class="row">
@@ -228,6 +236,7 @@ export default {
                 },
             ],
             rahbariyat: null,
+            biograf_show:false,
             rais: [],
             birinchi_orinbosar: [],
             dialog_image:false,
@@ -264,4 +273,9 @@ export default {
     }
 }
 </script>
+<style>
+.biograf_show.white--text p{
+    color: white;
+}
+</style>
 

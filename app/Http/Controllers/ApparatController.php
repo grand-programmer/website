@@ -51,6 +51,7 @@ class ApparatController extends Controller
                 'fio',
                 'lavozimi',
                 'qabul',
+                'biografiyasi',
                 'phone',
                 'add_phone',
                 'email',
@@ -111,15 +112,16 @@ class ApparatController extends Controller
                 'fio',
                 'lavozimi',
                 'qabul',
+                'biografiyasi',
                 'phone',
                 'add_phone',
                 'email',
                 'rahbariyat',
                 'org_name',
                 'image',
-                'rahbariyat',
                 'rahbar',
                 'sort',
+                'translates',
             );
             $validator = Validator::make($data, [
                 'fio' => 'required|min:3',
@@ -132,9 +134,8 @@ class ApparatController extends Controller
                 'sort' => 'numeric',
                 'rahbariyat' => 'required_without:rahbar',
             ]);
-
             if ($validator->fails()) {
-                return response()->json(['error' => $validator->errors()], 401);
+                return response()->json(['error' => $validator->errors()], 400);
             }
             //$data['answers'] = json_encode($data['answers']);
             if ($request->file()) {

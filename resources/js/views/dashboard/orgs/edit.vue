@@ -159,6 +159,79 @@
                                                                                             <img width="100"
                                                                                                  :src="'/storage/uploads/boshqarmalar/boshliq/'+rahbariyat.boshliq.image"/>
                                                                                         </v-col>-->
+
+                                            <v-col cols="12" sm="12" md="12" v-show="lang==='uz'">
+                                                <ValidationProvider name="Бошқарма функция ва вазифалари" rules="required|min:3"
+                                                                    v-slot="{ errors }">
+                                                    <label>Бошқарма функция ва вазифалари</label>
+                                                    <editor ref="tinymce_editor"
+                                                            api-key="08ldvnqyts0iiyqna15dlike72o7nw96ue2f7j0og0ydd4f7"
+                                                            v-model="rahbariyat.boshliq.biografiyasi"
+                                                            :init="{
+                                                                selector: 'textarea',
+                                                                height: 500,
+                                                                plugins: 'print preview paste importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists wordcount imagetools textpattern noneditable help charmap quickbars emoticons',
+                                                                imagetools_cors_hosts: ['picsum.photos'],
+                                                                menubar: 'file edit view insert format tools table help',
+                                                                toolbar: 'undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media template link anchor codesample | ltr rtl',
+                                                                toolbar_sticky: true,
+                                                                autosave_ask_before_unload: true,
+                                                                autosave_interval: '30s',
+                                                                autosave_prefix: '{path}{query}-{id}-',
+                                                                autosave_restore_when_empty: false,
+                                                                autosave_retention: '2m',
+                                                                image_advtab: true,
+                                                                importcss_append: true,
+                                                                image_caption: true,
+                                                                quickbars_selection_toolbar: 'bold italic | quicklink h2 h3 blockquote quickimage quicktable',
+                                                                noneditable_noneditable_class: 'mceNonEditable',
+                                                                toolbar_mode: 'sliding',
+                                                                contextmenu: 'link image imagetools table',
+                                                                content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }',
+                                                                file_browser_callback:file_browser_callback,
+                                                            }"/>
+
+
+                                                    <span class="error--text">{{ errors[0] }}</span>
+                                                </ValidationProvider>
+                                            </v-col>
+                                            <v-col cols="12" sm="12" md="12" :key="langKey"
+                                                   v-for="(langItem,langKey) in langtext" v-show="lang===langKey">
+                                                <ValidationProvider name="Бошқарма функция ва вазифалари"
+                                                                    v-slot="{ errors }">
+                                                    <label>Бошқарма функция ва вазифалари - {{ getLang(langKey)['text'] }}</label>
+                                                    <editor ref="tinymce_editor"
+                                                            api-key="08ldvnqyts0iiyqna15dlike72o7nw96ue2f7j0og0ydd4f7"
+                                                            v-model="rahbariyat_boshliq_translates[langKey].biografiyasi"
+                                                            :init="{
+                                                                selector: 'textarea',
+                                                                height: 500,
+                                                                plugins: 'print preview paste importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists wordcount imagetools textpattern noneditable help charmap quickbars emoticons',
+                                                                imagetools_cors_hosts: ['picsum.photos'],
+                                                                menubar: 'file edit view insert format tools table help',
+                                                                toolbar: 'undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media template link anchor codesample | ltr rtl',
+                                                                toolbar_sticky: true,
+                                                                autosave_ask_before_unload: true,
+                                                                autosave_interval: '30s',
+                                                                autosave_prefix: '{path}{query}-{id}-',
+                                                                autosave_restore_when_empty: false,
+                                                                autosave_retention: '2m',
+                                                                image_advtab: true,
+                                                                importcss_append: true,
+                                                                image_caption: true,
+                                                                quickbars_selection_toolbar: 'bold italic | quicklink h2 h3 blockquote quickimage quicktable',
+                                                                noneditable_noneditable_class: 'mceNonEditable',
+                                                                toolbar_mode: 'sliding',
+                                                                contextmenu: 'link image imagetools table',
+                                                                content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }',
+                                                                file_browser_callback:file_browser_callback,
+                                                            }"/>
+
+
+                                                    <span class="error--text">{{ errors[0] }}</span>
+                                                </ValidationProvider>
+                                            </v-col>
+
                                             <v-col cols="12">
                                                 <hr/>
                                             </v-col>
@@ -543,7 +616,7 @@ import api from "./../../../src/services/adminApi";
 import {extend, ValidationProvider, ValidationObserver} from 'vee-validate';
 import * as rules from 'vee-validate/dist/rules';
 import messages from '../../../locales/oz.json';
-//import Editor from '@tinymce/tinymce-vue';
+import Editor from '@tinymce/tinymce-vue';
 import MyField from '../../../components/form/myfield';
 
 Object.keys(rules).forEach(rule => {
@@ -555,7 +628,6 @@ Object.keys(rules).forEach(rule => {
 });
 import VueCropper from 'vue-cropperjs';
 import 'cropperjs/dist/cropper.css';
-
 export default {
     name: "OrgUpdate",
     data: () => ({
@@ -579,6 +651,7 @@ export default {
                         lavozimi: "Бошқарма бошлиғи",
                         qabul: "Фуқароларни қабул қилиш ҳар куни 09-00 дан 17-00 гача",
                         telefon: "(78) - 120-76-00",
+                        biografiyasi: "",
 
                     },
                     orinbosarlar: [
@@ -646,12 +719,15 @@ export default {
             rahbariyat_boshliq_translates: {
                 oz: {
                     qabul: null,
+                    biografiyasi: null,
                 },
                 ru: {
                     qabul: null,
+                    biografiyasi: null,
                 },
                 en: {
                     qabul: null,
+                    biografiyasi: null,
                 }
             },
             rahbariyat_orinbosar_translates: [{
@@ -902,6 +978,7 @@ export default {
                 form.append('rahbariyat[boshliq][lavozimi]', this.rahbariyat.boshliq.lavozimi);
                 form.append('rahbariyat[boshliq][qabul]', this.rahbariyat.boshliq.qabul);
                 form.append('rahbariyat[boshliq][telefon]', this.rahbariyat.boshliq.telefon);
+                form.append('rahbariyat[boshliq][biografiyasi]', this.rahbariyat.boshliq.biografiyasi);
                 form.append('rahbariyat[boshliq][translates]', JSON.stringify(this.rahbariyat_boshliq_translates));
 
                 if (_this.imgSrc) this.$refs.cropper.getCroppedCanvas().toBlob((blob) => {
@@ -1027,7 +1104,7 @@ export default {
     components: {
         ValidationProvider,
         ValidationObserver,
-        MyField, VueCropper
+        MyField, VueCropper, Editor
     },
 }
 </script>

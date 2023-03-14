@@ -239,6 +239,7 @@ class UserController extends Controller
         try {
             $response = Http::contentType("application/json")->timeout(10)->get('http://192.168.214.152:7070/DECAPP/s08appsrestapi/getresult', [
                 "personPin" => Auth::guard('api')->user()->pin,
+                "personTin" => Auth::guard('api')->user()->tin,
             ])->throw(function ($response, $e) {
                 //
             });

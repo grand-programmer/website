@@ -53,6 +53,7 @@
                             </div>
                         </div>
                     </v-col>
+
                     <div class="col-12 orinbosarlar " style="/* margin: 20px auto;">
                         <div class="row">
                             <h3 style="text-align: center;">&nbsp;</h3>
@@ -94,6 +95,23 @@
                             </div>
                         </div>
                     </div>
+
+                </v-card>
+                <v-card v-if="typeof organization.rahbariyat.boshliq.biografiyasi !=='undefined' && organization.rahbariyat.boshliq.biografiyasi.length>10">
+                    <v-card-title>
+                        <v-col cols="12" class="boshqarma-section-title">
+                            <h3>
+                                <h3>{{$t('Бошқарма функция ва вазифалари')}}</h3>
+
+                            </h3>
+                        </v-col>
+                    </v-card-title>
+                    <v-card-text class="mt-10 pb-10">
+                        <v-row v-html="organization.rahbariyat.boshliq.biografiyasi">
+
+                        </v-row>
+                    </v-card-text>
+
                 </v-card>
                 <v-card v-if="typeof organization.manzil !=='undefined'">
                     <v-card-title>
@@ -172,6 +190,7 @@
                     </v-card-text>
 
                 </v-card>
+
                 <v-card v-if="typeof organization.posts !=='undefined' && organization.posts && organization.posts.length > 0">
                     <v-card-title>
                         <v-col cols="12" class="boshqarma-section-title">

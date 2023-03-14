@@ -29,6 +29,7 @@
                             <div class="f_navigation_widget">
 
                                 <ul v-if="footermenu">
+                                    <li @click="dialog=true"><a>Сайт харитаси</a></li>
                                     <li v-for="(link,index) in footermenu[0]" :key="index">
                                         <router-link :to="link.url"><i class="fa fa-angle-right"
                                                                        aria-hidden="true"></i>{{ link.title }}
@@ -36,6 +37,30 @@
                                     </li>
 
                                 </ul>
+                                <v-dialog v-model="dialog" max-width="1200"  max-height="500" style="max-height:60% !important;">
+                                    <v-card>
+                                        <v-card-title>{{ $t("Сайт харитаси") }}</v-card-title>
+                                        <v-card-text>
+                                        <v-row class="d-flex justify-content-evenly">
+                                            <v-col v-for="(mklink,index) in menu[0]" :key="mklink.url + index">
+                                                <router-link :to="mklink.url">{{ mklink.title }}
+                                                </router-link>
+                                                <ul v-if="mklink.children && mklink.children[0]" class="ml-1">
+                                                    <li v-for="(subchildren,sindex) in mklink.children" :key="subchildren.url + sindex">
+                                                        <router-link :to="subchildren.url"><v-icon>mdi-chevron-right</v-icon> {{ subchildren.title }}</router-link>
+                                                        <ul v-if="subchildren.children && subchildren.children[0]" class="ml-4">
+                                                            <li v-for="(slink,ssindex) in subchildren.children" :key="slink.url + ssindex">
+                                                                <router-link :to="slink.url"><v-icon>mdi-chevron-right</v-icon> {{ slink.title }}</router-link>
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                            </v-col>
+                                        </v-row>
+                                        </v-card-text>
+                                    </v-card>
+
+                                </v-dialog>
 
                             </div>
                         </div>
@@ -54,11 +79,11 @@
                                     </li>
                                 </ul>
                                 <ul class="f_widget_social">
-                                    <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                    <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                    <li><a href="#"><i class="fab fa-telegram-plane"></i></a></li>
-                                    <li><a href="#"><i class="fab fa-google-plus-g"></i></a></li>
-                                    <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                                    <li><a href="https://www.facebook.com/UZDBQ/" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+                                    <li class="d-none"><a href="#"  target="_blank"><i class="fab fa-twitter"></i></a></li>
+                                    <li><a href="https://t.me/customschannel"  target="_blank"><i class="fab fa-telegram-plane"></i></a></li>
+                                    <li class="d-none"><a href="#"  target="_blank"><i class="fab fa-google-plus-g"></i></a></li>
+                                    <li><a href="https://www.instagram.com/dbq.uz/"  target="_blank"><i class="fab fa-instagram-square"></i></a></li>
                                 </ul><!--
                                 <div class="counter-site mt-4">
                                 <div class="mycounter1"></div>
@@ -112,13 +137,14 @@ export default {
     data() {
         return {
             links:[],
+            dialog:false,
 
             currentYear: (new Date()).getFullYear()
         }
 
     },
     computed: {
-        ...mapState(['footermenu','viewed', 'loading'])
+        ...mapState(['footermenu','menu','viewed', 'loading'])
     },
     created() {
         this.initialize();

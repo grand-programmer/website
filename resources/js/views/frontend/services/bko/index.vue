@@ -39,7 +39,7 @@
                         <v-col cols="8">
 
                             <v-expansion-panels multiple v-model="panel" class="mb-5">
-                                <v-expansion-panel v-for="expPanel in panels" class="my-2">
+                                <v-expansion-panel v-for="(expPanel,key) in panels" :key="key" class="my-2">
                                     <v-expansion-panel-header>
                                         <b>{{ expPanel.title }}</b>
                                     </v-expansion-panel-header>

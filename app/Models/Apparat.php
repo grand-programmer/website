@@ -14,6 +14,7 @@ class Apparat extends Model
         'fio',
         'lavozimi',
         'qabul',
+        'biografiyasi',
         'phone',
         'add_phone',
         'email',

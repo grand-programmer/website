@@ -23,6 +23,8 @@ class OrganisationResource extends JsonResource
             $boshliq_translate = json_decode($rahbariyat['boshliq']['translates'], true);
             if (isset($boshliq_translate[app()->getLocale()]['qabul'])) {
                 $rahbariyat['boshliq']['qabul'] = $boshliq_translate[app()->getLocale()]['qabul'];
+            } if (isset($boshliq_translate[app()->getLocale()]['biografiyasi'])) {
+                $rahbariyat['boshliq']['biografiyasi'] = $boshliq_translate[app()->getLocale()]['biografiyasi'];
             }
         }
         if (isset($rahbariyat['orinbosar'])) {

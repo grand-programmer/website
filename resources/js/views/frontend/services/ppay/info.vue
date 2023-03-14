@@ -93,10 +93,10 @@
                                                         }}
                                                     </td>
                                                 </tr>
-                                                <tr v-if="typeof app.generalSum !== 'undefined' && app.generalSum">
+                                                <tr v-if="typeof app.paySum !== 'undefined' && app.paySum">
                                                     <td style="font-weight: 550">Тўлов муддати узайтириладиган сумма</td>
                                                     <td>{{
-                                                            typeof app.generalSum !== 'undefined' ? app.generalSum : null
+                                                            typeof app.paySum !== 'undefined' ? app.paySum : null
                                                         }}
                                                     </td>
                                                 </tr>

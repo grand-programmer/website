@@ -875,11 +875,11 @@
                                         </li>
                                     </ul>
                                     <ul class="f_widget_social">
-                                        <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                        <li><a href="#"><i class="fab fa-google-plus-g"></i></a></li>
-                                        <li><a href="#"><i class="fab fa-pinterest-p"></i></a></li>
-                                        <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                                        <li><a href="https://www.facebook.com/UZDBQ/" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+                                        <li class="d-none"><a href="#"  target="_blank"><i class="fab fa-twitter"></i></a></li>
+                                        <li><a href="https://t.me/customschannel"  target="_blank"><i class="fab fa-telegram-plane"></i></a></li>
+                                        <li class="d-none"><a href="#"  target="_blank"><i class="fab fa-google-plus-g"></i></a></li>
+                                        <li><a href="https://www.instagram.com/dbq.uz/"  target="_blank"><i class="fab fa-instagram-square"></i></a></li>
                                     </ul>
                                 </div>
                             </div>

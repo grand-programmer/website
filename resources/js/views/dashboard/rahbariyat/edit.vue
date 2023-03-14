@@ -150,6 +150,75 @@
 
                                             </section>
 
+                                            <v-col cols="12" sm="12" md="12" v-show="lang==='uz'">
+                                                <ValidationProvider name="Раҳбар биографияси" rules="required|min:3"
+                                                                    v-slot="{ errors }">
+                                                    <label>Раҳбар биографияси</label>
+                                                    <editor ref="tinymce_editor"
+                                                            api-key="08ldvnqyts0iiyqna15dlike72o7nw96ue2f7j0og0ydd4f7"
+                                                            v-model="organization.biografiyasi"
+                                                            :init="{
+                                                                selector: 'textarea',
+                                                                height: 500,
+                                                                plugins: 'print preview paste importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists wordcount imagetools textpattern noneditable help charmap quickbars emoticons',
+                                                                imagetools_cors_hosts: ['picsum.photos'],
+                                                                menubar: 'file edit view insert format tools table help',
+                                                                toolbar: 'undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media template link anchor codesample | ltr rtl',
+                                                                toolbar_sticky: true,
+                                                                autosave_ask_before_unload: true,
+                                                                autosave_interval: '30s',
+                                                                autosave_prefix: '{path}{query}-{id}-',
+                                                                autosave_restore_when_empty: false,
+                                                                autosave_retention: '2m',
+                                                                image_advtab: true,
+                                                                importcss_append: true,
+                                                                image_caption: true,
+                                                                quickbars_selection_toolbar: 'bold italic | quicklink h2 h3 blockquote quickimage quicktable',
+                                                                noneditable_noneditable_class: 'mceNonEditable',
+                                                                toolbar_mode: 'sliding',
+                                                                contextmenu: 'link image imagetools table',
+                                                                content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+                                                            }"/>
+
+
+                                                    <span class="error--text">{{ errors[0] }}</span>
+                                                </ValidationProvider>
+                                            </v-col>
+                                            <v-col cols="12" sm="12" md="12" :key="langKey"
+                                                   v-for="(langItem,langKey) in langtext" v-show="lang===langKey">
+                                                <ValidationProvider name="Раҳбар биографияси"
+                                                                    v-slot="{ errors }">
+                                                    <label>Раҳбар биографияси - {{ getLang(langKey)['text'] }}</label>
+                                                    <editor ref="tinymce_editor"
+                                                            api-key="08ldvnqyts0iiyqna15dlike72o7nw96ue2f7j0og0ydd4f7"
+                                                            v-model="langtext[langKey].biografiyasi"
+                                                            :init="{
+                                                                selector: 'textarea',
+                                                                height: 500,
+                                                                plugins: 'print preview paste importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists wordcount imagetools textpattern noneditable help charmap quickbars emoticons',
+                                                                imagetools_cors_hosts: ['picsum.photos'],
+                                                                menubar: 'file edit view insert format tools table help',
+                                                                toolbar: 'undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media template link anchor codesample | ltr rtl',
+                                                                toolbar_sticky: true,
+                                                                autosave_ask_before_unload: true,
+                                                                autosave_interval: '30s',
+                                                                autosave_prefix: '{path}{query}-{id}-',
+                                                                autosave_restore_when_empty: false,
+                                                                autosave_retention: '2m',
+                                                                image_advtab: true,
+                                                                importcss_append: true,
+                                                                image_caption: true,
+                                                                quickbars_selection_toolbar: 'bold italic | quicklink h2 h3 blockquote quickimage quicktable',
+                                                                noneditable_noneditable_class: 'mceNonEditable',
+                                                                toolbar_mode: 'sliding',
+                                                                contextmenu: 'link image imagetools table',
+                                                                content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+                                                            }"/>
+
+
+                                                    <span class="error--text">{{ errors[0] }}</span>
+                                                </ValidationProvider>
+                                            </v-col>
                                         </v-row>
                                     </v-container>
                                 </v-card-text>
@@ -173,7 +242,7 @@ import api from "./../../../src/services/adminApi";
 import {extend, ValidationProvider, ValidationObserver} from 'vee-validate';
 import * as rules from 'vee-validate/dist/rules';
 import messages from '../../../locales/oz.json';
-//import Editor from '@tinymce/tinymce-vue';
+import Editor from '@tinymce/tinymce-vue';
 import MyField from '../../../components/form/myfield';
 import VueCropper from 'vue-cropperjs';
 import 'cropperjs/dist/cropper.css';
@@ -199,18 +268,22 @@ export default {
                 ],
             organization: {
                 title: "",
+                biografiyasi:""
 
             },
             lang: 'uz',
             langtext: {
                 oz: {
                     qabul: null,
+                    biografiyasi: null,
                 },
                 ru: {
                     qabul: null,
+                    biografiyasi: null,
                 },
                 en: {
                     qabul: null,
+                    biografiyasi: null,
                 }
             },
             languages: [
@@ -305,6 +378,7 @@ export default {
                 form.append('fio', _this.organization.fio);
                 form.append('lavozimi', _this.organization.lavozimi);
                 form.append('qabul', _this.organization.qabul);
+                form.append('biografiyasi', _this.organization.biografiyasi);
                 form.append('phone', _this.organization.phone);
                 form.append('sort', _this.organization.sort);
                 //form.append('add_phone', _this.organization.add_phone);
@@ -339,6 +413,7 @@ export default {
         ValidationProvider,
         ValidationObserver,
         MyField,
+        Editor,
         VueCropper
     },
 }

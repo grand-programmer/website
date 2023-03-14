@@ -268,10 +268,10 @@ const app = new Vue({
             }
         },*/
 }).$mount('#app');
-
+document.title = app.$t('Божхона қўмитаси расмий веб сайти');
 router.beforeEach((to, from, next) => {
     i18n.locale = localStorage.getItem('language') || 'uz'
-
+    document.title = to.meta.title || app.$t('Божхона қўмитаси расмий веб сайти');
 
     app.$store.commit('setLoading', true)
 ///console.log("----+ " + i18n.locale)

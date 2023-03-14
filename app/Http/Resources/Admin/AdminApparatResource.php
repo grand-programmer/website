@@ -19,6 +19,7 @@ class AdminApparatResource extends JsonResource
             'fio' => $this->fio,
             'lavozimi' => $this->lavozimi,
             'qabul' => $this->qabul,
+            'biografiyasi' => $this->biografiyasi,
             'phone' => $this->phone,
             'add_phone' => $this->add_phone,
             'email' => $this->email,

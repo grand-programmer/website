@@ -308,15 +308,16 @@
                         <v-list-item>
                             <div class="v-list-item--title">
                                 <v-icon>mdi-clipboard-text</v-icon>
-                                <v-card-title>Қонун</v-card-title>
+                                <v-card-title>Ҳужжатлар</v-card-title>
                             </div>
-                            <v-card-text align="center">
-                                <p class="card-info" align="center">
-                                    Жисмоний ва юридик шахсларнинг мурожаатлари тўғрисида
-                                </p>
+                            <v-card-text class="p-0 mt-5 text-left">
+                                <a class="d-block my-2" href="https://lex.uz/docs/3336169" target="_blank">"Жисмоний ва юридик шахсларнинг мурожаатлари тўғрисида"ги қонун</a>
+                                <a class="d-block my-2" href="/storage/files/308-buyruq.pdf" target="_blank">Идоравий алоқа маркази фаолиятини ташкил этиш тўғрисида божхона қўмитасининг буйруғи</a>
+
                                 <v-btn color="primary" href="https://lex.uz/docs/3336169" type="button" target="_blank" style="
     position: absolute;
     bottom: 15px;
+    display: none;
     left: 50%;
     transform: translate(-50%, 0);
 ">
