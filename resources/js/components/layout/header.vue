@@ -9,7 +9,7 @@
                         <div class="header-logo">
                             <router-link to="/" class="header-logo">
                                 <img src="/img/gtk_image.png" alt="">
-                                <span>{{ $t("Ўзбекистон Республикаси Давлат божхона қўмитаси") }}  </span>
+                                <span>{{ $t("Ўзбекистон Республикаси Иқтисодиёт ва молия вазирлиги ҳузуридаги Божхона қўмитаси") }}  </span>
 
                             </router-link>
 
@@ -40,11 +40,13 @@
                                             v-if="(link.children && link.children[0])">
                                             <li v-for="(sublink,index) in link.children" :key="index"
                                                 v-if="sublink && index<10">
-                                                <router-link :to="sublink.url" class="dropdown-item"> {{
-                                                        sublink.title
-                                                    }}
-                                                    <span v-if="(sublink.children && sublink.children[0])"><v-icon>mdi-chevron-down</v-icon></span>
+
+                                                <router-link v-if="!sublink.url.includes('http')" :to="sublink.url" class="dropdown-item">
+                                                    {{ sublink.title }} <span v-if="(sublink.children && sublink.children[0])"><v-icon>mdi-chevron-down</v-icon></span>
                                                 </router-link>
+                                                <a v-else  class="dropdown-item" target="_blank" :href="sublink.url" >{{ sublink.title }} <span v-if="(sublink.children && sublink.children[0])"><v-icon>mdi-chevron-down</v-icon></span></a>
+
+
                                                 <ul class="submenu dropdown-menu"
                                                     v-if="(sublink.children && sublink.children[0])">
                                                     <li v-for="(sublinkchildren,index) in sublink.children" :key="index"
@@ -201,17 +203,19 @@
                                     <ul class="dropdown-menu  "
                                         v-if="(link.children && link.children[0])">
                                         <li v-for="(sublink,index) in link.children" :key="index" v-if="sublink ">
-                                            <router-link :to="sublink.url" class="dropdown-item"> {{
-                                                    sublink.title
-                                                }}
+                                            <router-link v-if="!sublink.url.includes('http')" :to="sublink.url" class="dropdown-item">
+                                                {{ sublink.title }}
                                             </router-link>
+                                            <a v-else  class="dropdown-item" :href="sublink.url" >{{ sublink.title }}</a>
+
                                             <ul class="submenu accordion-content"
                                                 v-if="(sublink.children && sublink.children[0])">
                                                 <li v-for="(sublinkchildren,index) in sublink.children" :key="index"
                                                     v-if="sublinkchildren">
-                                                    <router-link :to="sublinkchildren.url" class="dropdown-item">
+                                                    <router-link v-if="!sublinkchildren.url.includes('http')" :to="sublinkchildren.url" class="dropdown-item">
                                                         {{ sublinkchildren.title }}
                                                     </router-link>
+                                                    <a v-else  class="dropdown-item" :href="sublinkchildren.url" >{{ sublinkchildren.title }}</a>
                                                     <ul class="submenu dropdown-menu"
                                                         v-if="(sublinkchildren.children && sublinkchildren.children[0])">
                                                         <li v-for="(slch,index) in sublinkchildren.children"

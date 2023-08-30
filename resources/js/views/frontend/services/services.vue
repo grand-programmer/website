@@ -530,7 +530,7 @@
                                     <img src="/img/icons/korrupsiya-boyicha-xabar-berish.png"/>
                                 </div>
                                 <div class="portfolio_text">
-                                    <p>{{ $t("Коррупция бўйича ҳабар бериш") }}</p>
+                                    <p>{{ $t("Корупция бўйича ҳабар бериш") }}</p>
 
                                 </div>
                             </a>
@@ -762,7 +762,7 @@
                                     <div class="shadow-right"></div>
                                     <div class="portfolio_content">
                                         <div class="portfolio_text"> {{
-                                                $t("Давлат божхона қўмитасига келиб тушган мурожаатлар статистикаси")
+                                                $t("Иқтисодиёт ва молия вазирлиги ҳузуридаги Божхона қўмитасига келиб тушган мурожаатлар статистикаси")
                                             }}
                                         </div>
                                         <div class="download_links"><p><a
@@ -884,6 +884,17 @@
                                 </div>
                                 <div class="mobil-ilova-text">{{
                                         $t("Чегара божхона пости орқали ҳаракатланувчи транспорт воситалари ҳақида олдиндан маълумот тақдим этиш мобил иловаси")
+                                    }}
+
+                                </div>
+                            </a>
+                            <a class="mobil-ilova col-4" target="_blank"
+                               href="https://play.google.com/store/apps/details?id=uz.eskishahar.app.e_navbat&hl=ru&gl=US&pli=1">
+                                <div class="mobil-ilova-image"
+                                     style="background-image: url(/img/service/navbat-mobil.jpg)">
+                                </div>
+                                <div class="mobil-ilova-text">{{
+                                        $t("Мазкур илова автотранспорт воситаси орқали Ўзбекистон Республикасидан чиқишда чегарадан ўтиш учун навбатни белгилаш имконини беради")
                                     }}
 
                                 </div>

@@ -152,7 +152,27 @@
 <noscript><div><img src="https://mc.yandex.ru/watch/90773745" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 <!-- /Yandex.Metrika counter -->
 
-<script src="//code.jivosite.com/widget/4yZcWqNleE" async></script>
+<!-- webim button generation date: 2023-04-19 version: 10.5.67 -->
+<a class="webim_button" href="#" rel="webim">
+    <img src="https://beltelekomuz.webim.ru/button.php" border="0"/>
+</a>
+<script type="text/javascript">
+    webim = {
+        accountName: "beltelekomuz",
+        domain: "beltelekomuz.webim.ru",
+        location: "default"
+    };
 
+    (function () {
+        var s = document.createElement("script");
+        s.type = "text/javascript";
+        s.src = "https://beltelekomuz.webim.ru/js/button.js";
+        document.getElementsByTagName("head")[0].appendChild(s);
+    })();
+</script>
+<!-- /webim button -->
+
+<!--<script src="//code.jivosite.com/widget/4yZcWqNleE" async></script>-->
+<script src="https://code.responsivevoice.org/responsivevoice.js?key=vNL4fpv9"></script>
 </body>
 </html>

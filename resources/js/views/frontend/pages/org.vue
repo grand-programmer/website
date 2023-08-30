@@ -101,7 +101,7 @@
                     <v-card-title>
                         <v-col cols="12" class="boshqarma-section-title">
                             <h3>
-                                <h3>{{$t('Бошқарма функция ва вазифалари')}}</h3>
+                                <h3>{{ organization.title }} {{$t('функция ва вазифалари')}}</h3>
 
                             </h3>
                         </v-col>

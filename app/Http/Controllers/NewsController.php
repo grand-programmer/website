@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\NewsTranslates;
+use App\Models\Page;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -14,10 +15,10 @@ class NewsController extends Controller
 {
     public function index(Request $request)
     {
-        $page=1;
+        $page = 1;
         $requestData = $request->only(['boshqarma', 'page']);
-        $news = News::with(['categories','translates']);
-        if(app()->getLocale()!=='uz') $news=$news->whereRelation('translates','language','=',app()->getLocale());
+        $news = News::with(['categories', 'translates']);
+        if (app()->getLocale() !== 'uz') $news = $news->whereRelation('translates', 'language', '=', app()->getLocale());
 
         if (isset($requestData['boshqarma'])) $news = $news->where('boshqarma', $requestData['boshqarma']);
         if (isset($requestData['page'])) $page = $requestData['page'];
@@ -39,24 +40,26 @@ class NewsController extends Controller
     ];
 });*/
     }
+
     /**
      * Search news in storage.
      *
      * @param \Illuminate\Http\Request $request
      */
-    public function search(Request $request){
+    public function search(Request $request)
+    {
         $data = $request->only(
             'text',
         );
-        if(isset($data['text'])){
-            if(app()->getLocale()!=='uz') {
-                $news=News::whereHas('translates',function($q) use($data){
-                    $q->where('language',app()->getLocale())->where('title','like', "%".$data['text']."%")->orWhere('description','like', "%".$data['text']."%");
+        if (isset($data['text'])) {
+            if (app()->getLocale() !== 'uz') {
+                $news = News::whereHas('translates', function ($q) use ($data) {
+                    $q->where('language', app()->getLocale())->where('title', 'like', "%" . $data['text'] . "%")->orWhere('description', 'like', "%" . $data['text'] . "%");
                 })->limit(5)->get();
                 //$newsTranslates = NewsTranslates::where('title',$data['text'])->orWhere('description',$data['text'])->limit(5);
                 //>whereRelation('translates', 'language', '=', app()->getLocale());
             } else {
-                $news = News::where('title','like', "%".$data['text']."%")->orWhere('description','like', "%".$data['text']."%")->limit(5)->get();
+                $news = News::where('title', 'like', "%" . $data['text'] . "%")->orWhere('description', 'like', "%" . $data['text'] . "%")->limit(5)->get();
             }
             return response()->json($news);
         }
@@ -64,54 +67,94 @@ class NewsController extends Controller
 
     }
 
+    public function spreadedSearch(Request $request)
+    {
+        $data = $request->only(['bolim', 'date', 'text', 'type']);
+        foreach ($data as $dataItemKey => $dataItem) {
+            if (!$data[$dataItemKey]) unset($data[$dataItemKey]);
+        }
+        $validation = Validator::make($data, [
+            'text' => 'min:3',
+            'date' => 'date|date_format:d-m-Y'
+        ]);
+        if ($validation->fails()) {
+            return response()->json([
+                'errors' => $validation->errors()
+            ], 400);
+        }
+
+        if (isset($data['type']) and $data['type'] === 1) {
+            $model = Page::query();
+        } else $model = News::query();
+        // dd($model->limit(10)->get()->toJson());
+
+        if(isset($data['bolim']) and $data['bolim'] > 0){
+            $model=$model->where(['id'=>$data['bolim']]);
+        }
+        if(isset($data['text']) and strlen($data['text'])){
+            $model=$model->where(function($query) use ( $data ) {
+                $query->where('title','like','%' . $data['text']. '%');
+                $query->orWhere('description','like','%' . $data['text']. '%');
+            });
+        }
+        if(isset($data['date'])) {
+            // dd(Carbon::make($data['date']));
+            $model = $model->whereRaw('MONTH(created_at) = ?',[Carbon::make($data['date'])->month])
+                ->whereRaw('DAY(created_at) = ?',[Carbon::make($data['date'])->day])
+                ->whereRaw('YEAR(created_at) = ?',[Carbon::make($data['date'])->year]);
+        }
+        return response()->json($model->get()->toArray(), 200);
+    }
+
+
     /**
      * Store a newly created resource in storage.
      *
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-   /* public function store(Request $request)
-    {
-        if ($request->isMethod('post')) {
-            $data = $request->only(
-                'title',
-                'description',
-                'short',
-                'categories',
-                'image',
-                'home',
-                'boshqarma'
-            );
+    /* public function store(Request $request)
+     {
+         if ($request->isMethod('post')) {
+             $data = $request->only(
+                 'title',
+                 'description',
+                 'short',
+                 'categories',
+                 'image',
+                 'home',
+                 'boshqarma'
+             );
 
-            $validator = Validator::make($data, [
-                'title' => 'required|min:3|max:255',
-                'description' => 'required',
-                'short' => 'required',
-                'categories' => 'array|nullable',
-                'image' => 'file|nullable|mimes:jpg,jpeg,png|max:5048',
-            ]);
-            if ($validator->fails()) {
-                return response()->json(['error' => $validator->errors()], 401);
-            }
-            if (isset($data['home'])) {
-                if ($data['home'] == "true") $data['home'] = true;
-                else $data['home'] = false;
-            }
-            $news = News::create($data);
+             $validator = Validator::make($data, [
+                 'title' => 'required|min:3|max:255',
+                 'description' => 'required',
+                 'short' => 'required',
+                 'categories' => 'array|nullable',
+                 'image' => 'file|nullable|mimes:jpg,jpeg,png|max:5048',
+             ]);
+             if ($validator->fails()) {
+                 return response()->json(['error' => $validator->errors()], 401);
+             }
+             if (isset($data['home'])) {
+                 if ($data['home'] == "true") $data['home'] = true;
+                 else $data['home'] = false;
+             }
+             $news = News::create($data);
 
-            if ($request->file()) {
-                $file_ext = $request->file('image')->getClientOriginalExtension();
-                $file_name = time() . "." . $file_ext;
-                $request->file('image')->storeAs('uploads', $file_name, 'public');
-                $news->image = $file_name;
-            }
+             if ($request->file()) {
+                 $file_ext = $request->file('image')->getClientOriginalExtension();
+                 $file_name = time() . "." . $file_ext;
+                 $request->file('image')->storeAs('uploads', $file_name, 'public');
+                 $news->image = $file_name;
+             }
 
-            $news->save();
-            if (isset($data['categories']))
-                $news->categories()->sync($data['categories']);
-            return response()->json($news, 200);
-        }
-    }*/
+             $news->save();
+             if (isset($data['categories']))
+                 $news->categories()->sync($data['categories']);
+             return response()->json($news, 200);
+         }
+     }*/
 
     /**
      * Display the specified resource.
@@ -195,14 +238,14 @@ class NewsController extends Controller
      * @param \App\Models\News $news
      * @return \Illuminate\Http\JsonResponse
      */
-/*    public function destroy(News $news)
-    {
-        $news->categories()->detach();
-        Storage::delete("public/uploads/" . $news->image);
-        $news->delete();
-        return response()->json([
-            'success'], 200);
-    }*/
+    /*    public function destroy(News $news)
+        {
+            $news->categories()->detach();
+            Storage::delete("public/uploads/" . $news->image);
+            $news->delete();
+            return response()->json([
+                'success'], 200);
+        }*/
 
     public function like(News $news, Request $request)
     {

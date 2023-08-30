@@ -30,7 +30,7 @@ class StatService
 
     public function saveAllData($name = 'davlatimex')
     {
-        $year = $date = date("Y");
+        $year = $date = 2019; /// date("Y");
         //for ($year = $date; $year >= $date - 2; $year--) {
         for ($month = 0; $month <= 12; $month++) {
             for ($rejim = 0; $rejim <= 2; $rejim++) {
@@ -341,13 +341,13 @@ class StatService
             $query = "
                         select v_22.davlat country, v_22.g46 val, value(decimal((decimal(v_22.g46-v_21.g46,15,6)/decimal(v_21.g46,15,6))*100,11,2),0) diff from
                         ---------------->>>>>2022>>>>>>-------------------------------------------------------------------------------------------------------------------------------------------
-                        (select sd.davlat, sum(value(v.g46,0)) g46 from tst_stat.VTO_REZERV_2 v left join tst_stat.SPR_DAVLAT sd on sd.kod=v.G15_17
+                        (select sd.davlat, sum(value(v.g46,0)) g46 from tst_stat.VTO_2022_07_2 v left join tst_stat.SPR_DAVLAT sd on sd.kod=v.G15_17
                         where " . $year . " " . $month . " " . $rejim . "
                         group by sd.davlat) v_22
 
                         ---------------->>>>>2021>>>>>>-------------------------------------------------------------------------------------------------------------------------------------------
                         left join (select sd.davlat,sum(value(v.g46,0)) g46
-                        from tst_stat.VTO_REZERV_2 v
+                        from tst_stat.VTO_2022_07_2 v
                         left join tst_stat.SPR_DAVLAT sd on sd.kod=v.G15_17
                         where " . $year2 . " " . $month . " " . $rejim . "
                         group by sd.davlat) v_21 on v_21.davlat=v_22.davlat
@@ -435,7 +435,7 @@ class StatService
         ---------------->>>>>2022>>>>>>-------------------------------------------------------------------------------------------------------------------------------------------
         (select st.GTK,
                 sum(value(v.g46,0)) g46
-        from tst_stat.VTO_REZERV_2 v
+        from tst_stat.VTO_2022_07_2 v
         left join tst_stat.SPR_TOVAR st on st.G33=v.G33A
         where " . $year . " " . $month . " " . $rejim . "
         group by st.GTK) v_22
@@ -444,7 +444,7 @@ class StatService
         left join
         (select st.GTK,
                 sum(value(v.g46,0)) g46
-        from tst_stat.VTO_REZERV_2 v
+        from tst_stat.VTO_2022_07_2 v
         left join tst_stat.SPR_TOVAR st on st.G33=v.G33A
         where " . $year2 . " " . $month . " " . $rejim . "
         group by st.GTK) v_21 on v_21.GTK=v_22.GTK
@@ -493,7 +493,7 @@ class StatService
                 'rejim' => $selectedrejim,
                 'month' => $month,
                 'year' => $year,
-            ])->first();
+            ])->where('month','<', 8)->first();
             if (!$statData) return [];
             return (array)json_decode($statData->data);
         } else {
@@ -533,7 +533,7 @@ class StatService
                         ---------------->>>>>2022>>>>>>-------------------------------------------------------------------------------------------------------------------------------------------
                         (select month(v.G54d) m,
                                 sum(value(v.g46,0)) g46
-                        from tst_stat.VTO_REZERV_2 v
+                        from tst_stat.VTO_2022_07_2 v
                         where " . $year . "
                         " . $rejim . "
                         group by month(v.G54d)) v_22
@@ -542,7 +542,7 @@ class StatService
                         left join
                         (select month(v.G54d) m,
                                 sum(value(v.g46,0)) g46
-                        from tst_stat.VTO_REZERV_2 v
+                        from tst_stat.VTO_2022_07_2 v
                         where " . $year2 . "
                         " . $rejim . "
                         group by month(v.G54d)) v_21 on v_21.m=v_22.m";
@@ -562,11 +562,11 @@ class StatService
                     5 => 'Май',
                     6 => 'Июн',
                     7 => 'Июл',
-                    8 => 'Август',
+/*                    8 => 'Август',
                     9 => 'Сентябр',
                     10 => 'Октябр',
                     11 => 'Ноябр',
-                    12 => 'Декабр',
+                    12 => 'Декабр',*/
                 ];
 
                 return [
@@ -602,14 +602,18 @@ select
                 from
                     e_arxiv.freedoc f
      join e_arxiv.file_type as ft on ft.file_id=f.file_id
-     join e_arxiv.docs_type d on d.lnga_tpcd='UZ'
+     join e_arxiv.docs_type d on d.lnga_tpcd='UZ' and d.code= ft.docs_type
                 where
                  f.file_id='" . $file_id . "' and
                       f.isdeleted=0 " . $whereUser . " FETCH FIRST 1 ROWS ONLY";
         //     join e_arxiv.docs_type d on d.code=f.doc_type and d.lnga_tpcd='UZ'
-
+// dd($query);
         return DB::connection('db2_odbcEA')->select($query);
 
+    }
+
+    public function generateExcel($data=null){
+        dd($data);
     }
 
 }

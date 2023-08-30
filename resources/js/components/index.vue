@@ -71,6 +71,32 @@
                                 </div>
                             </div>
                         </div>
+                        <v-dialog v-if="popupnews" v-model="popup" max-width="1000">
+                            <v-card>
+                                <v-toolbar class="text-h5 primary white--text">
+                                    <v-toolbar-title>
+                                        <v-icon large color="white">mdi-bell-ring</v-icon>
+                                        <span class="pt-2">{{ $t('Эьлон!') }}</span></v-toolbar-title>
+                                    <v-spacer/>
+                                    <v-btn
+                                        icon
+                                        dark
+                                        @click="popup = false"
+                                    >
+                                        <v-icon>mdi-close</v-icon>
+                                    </v-btn>
+                                </v-toolbar>
+                                <v-card-text v-if="popupnews && typeof popupnews.description !=='undefined'"
+                                             class="popup-news">
+                                    <h3 class="primary-color font-weight-bold"
+                                        v-if="popupnews && typeof popupnews.title !=='undefined'">{{
+                                            popupnews.title
+                                        }}</h3>
+                                    <div class="py-10" v-html="popupnews.description"></div>
+                                </v-card-text>
+                            </v-card>
+
+                        </v-dialog>
 
                         <div data-thumb="/img/custom/slider-9.png" data-src="/img/custom/logistics.jpg">
                             <div class="container">
@@ -80,7 +106,7 @@
                                     <p class="fadeInUp animated">
                                         {{ $t("Божхона ахборот тизмиларига ҳужжатларингизни жойланг") }}</p>
                                     <a class="s_readmore_btn fadeInUp animated" target="_blank"
-                                       href="https://ed2.customs.uz">{{ $t("Хизматдан фойдаланиш") }}</a>
+                                       href="https://ed2.customs.uz/E_ARXIV">{{ $t("Хизматдан фойдаланиш") }}</a>
                                     <!--<a class="s_contact_btn fadeInUp animated" href="#">Contact Us</a>-->
                                 </div>
                                 <div class="slider_image slider-2">
@@ -195,7 +221,7 @@
                                                             <h3 class="fadeInLeft animated">Мурожаатлар</h3>
                                                             <h4 class="fadeInLeft animated">Фуқаролар ва ТИФ қатнашчилари мурожаатларини кўриб
                                                                 чиқиш</h4>
-                                                            <p class="fadeInUp animated">Давлат божхона қўмитасига фуқаролар ва ТИФ қатнашчилари
+                                                            <p class="fadeInUp animated">Иқтисодиёт ва молия вазирлиги ҳузуридаги Божхона қўмитасига фуқаролар ва ТИФ қатнашчилари
                                                                 томонидан <br>берилган мурожаатларни қабул қилиш, кўриб чиқиш, Рахбарият
                                                                 қабуллари
                                                                 тўғрисида маълумотларни шу ердан олинг </p>
@@ -375,6 +401,7 @@ import stat from './homepage/statistics';
 import myFooter from "../components/layout/footer";
 import homefaq2 from "./homepage/faq2";
 import PositionSidebar from "./custom/position-sidebar";
+
 export default {
 
 
@@ -382,6 +409,7 @@ export default {
     data() {
         return {
             stat_type: 1,
+            popupnews: null,
             month: 0,
             months: [
                 {
@@ -436,6 +464,7 @@ export default {
                     value: 12
                 }
             ],
+            popup: false,
             year: 2022,
             firstStart: 1,
             years: [
@@ -497,6 +526,7 @@ export default {
             this.stat = true;
     },
     created() {
+        // this.getPopupNews()
         //this.getFaqs();
         if (this.$route.query.stat == 1)
             this.stat = true;
@@ -508,6 +538,11 @@ export default {
         // this.clusteredColumn();
     },
     methods: {
+        getPopupNews() {
+            api.readOneNews('bozhhona-qomitasi-bilan-boglanish-telefoni-ozgardi').then((res) => {
+                this.popupnews = res.data.data
+            })
+        },
 
         getWidth() {
             return Math.max(
@@ -598,8 +633,15 @@ $(document).ready(function () {
 
 </script>
 
+<style>
+.v-application .popup-news p {
+    font-size: 18px;
+    line-height: 32px;
+}
 
+</style>
 <style scoped>
+
 .v-application {
     font-family: "Montserrat", sans-serif;
 }

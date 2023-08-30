@@ -130,6 +130,12 @@ export default {
 
             },
             {
+                title: 'Файллар',
+                icon: 'mdi-file-check',
+                to: '/admin/files',
+
+            },
+            {
                 title: 'Ходисалар',
                 icon: 'mdi-calendar',
                 to: '/admin/events',
@@ -177,6 +183,11 @@ export default {
                 title: 'Таржималар',
                 icon: 'mdi-poll',
                 to: '/admin/translate',
+            },
+            {
+                title: 'Очиқ маълумотлар',
+                icon: 'mdi-poll',
+                to: '/admin/opendatas',
             },
             /*{
                 icon: 'mdi-account',

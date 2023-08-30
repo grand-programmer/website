@@ -330,12 +330,11 @@ export default {
 
                         });*/
         },
-        saveIshChiq(id = null) {
+        async saveIshChiq(id = null) {
             const _this = this;
-            let isValid = true;
+            let isValid = false;
             if (id === null || typeof id === 'object') {
-                setTimeout(async () => {
-                    isValid = true;//await this.validateField("ishlabchiqarilgan");
+                     isValid = await this.validateField("ishlabchiqarilgan");
                     if (isValid) {
                         if (_this.boolDialogIshChiqNew >= 0) {
                             if (typeof _this.ishlabchiqaruvchilar[_this.boolDialogIshChiqNew] !== 'undefined')
@@ -355,7 +354,7 @@ export default {
                         _this.dialog = false;
 
                     }
-                })
+
 
             } else {
                 // console.log(id)

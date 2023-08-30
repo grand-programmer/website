@@ -37,6 +37,220 @@ const allRoutes = {
         return '/uz';
     }
 }
+const servicesRoutes = [
+    {
+        path: "", component: Yagona_oyna,
+    }, {
+        path: "appeals/",
+        component: () => import('./views/frontend/services/appeal/index'),
+        children: [{
+            path: "", component: ServicesAppeals, query: {appeal_code: ''}
+        }, {
+            path: "create", component: ServicesAppealsCreate,
+        }, {
+            path: ":id", component: () => import('./views/frontend/services/appeal/info_view'),
+        }, {
+            path: ":id/:key", component: () => import('./views/frontend/services/appeal/info_view'),
+        }]
+    }, {
+        path: "decisions/",
+        component: () => import('./views/frontend/services/customs_value/index'),
+        meta: {
+            auth: true,
+            authRedirect: '/login',
+            notFoundRedirect: '/403',
+            forbiddenRedirect: '/403',
+            routeAuth: '/login'
+        },
+        children: [{
+            path: "", component: ServicesDecisionsCreate,
+        }, {
+            path: "info", component: ServicesDecisionsInfo,
+        }, {
+            path: "edit/:id", component: ServicesDecisionsEdit,
+        }, {
+            path: ":id", component: ServicesDecisionsInfo,
+        }]
+    }, {
+        path: "intellectual/",
+        component: () => import('./views/frontend/services/intellectual/index'),
+        meta: {
+            auth: true,
+            authRedirect: '/login',
+            notFoundRedirect: '/403',
+            forbiddenRedirect: '/403',
+            routeAuth: '/login'
+        },
+        children: [
+            {
+                path: "", component: ServicesIntellectualCreate,
+            }, {
+                path: ":id", component: ServicesIntellectualInfo,
+            }, {
+                path: "info", component: ServicesIntellectualInfo,
+            }/*, {
+                                path: "edit/:id", component: ServicesIntellectualEdit,
+                            }*/
+        ]
+    }, {
+        path: "refund/",
+        component: () => import('./views/frontend/services/refund/index'),
+        meta: {
+            auth: true,
+            authRedirect: '/login',
+            notFoundRedirect: '/403',
+            forbiddenRedirect: '/403',
+            routeAuth: '/login'
+        },
+        children: [
+            {
+                path: "", component: () => import('./views/frontend/services/refund/create'),
+            }, {
+                path: ":id", component: () => import('./views/frontend/services/refund/info'),
+            },
+        ]
+    }, {
+        path: "ppay/",
+        component: () => import('./views/frontend/services/ppay/index'),
+        meta: {
+            auth: true,
+            authRedirect: '/login',
+            notFoundRedirect: '/403',
+            forbiddenRedirect: '/403',
+            routeAuth: '/login'
+        },
+        children: [
+            {
+                path: "", component: () => import('./views/frontend/services/ppay/create'),
+            }, {
+                path: ":id", component: () => import('./views/frontend/services/ppay/info'),
+            },
+        ]
+    }, {
+        path: "stamp/",
+        component: () => import('./views/frontend/services/stamp/index'),
+        meta: {
+            auth: true,
+            authRedirect: '/login',
+            notFoundRedirect: '/403',
+            forbiddenRedirect: '/403',
+            routeAuth: '/login'
+        },
+        children: [
+            {
+                path: "", component: () => import('./views/frontend/services/stamp/create'),
+            }, {
+                path: ":id", component: () => import('./views/frontend/services/stamp/info'),
+            },
+        ]
+    }, {
+        path: "bko/",
+        component: () => import('./views/frontend/services/bko/index'),
+
+        children: [
+            {
+                path: "create", component: () => import('./views/frontend/services/bko/create'),
+                meta: {
+                    auth: true,
+                    authRedirect: '/login',
+                    notFoundRedirect: '/403',
+                    forbiddenRedirect: '/403',
+                    routeAuth: '/login'
+                },
+            },
+            {
+                path: ":id", component: () => import('./views/frontend/services/bko/info'),
+                meta: {
+                    auth: true,
+                    authRedirect: '/login',
+                    notFoundRedirect: '/403',
+                    forbiddenRedirect: '/403',
+                    routeAuth: '/login'
+                },
+            },
+        ]
+    },
+
+    {
+        path: "recycle/",
+        component: () => import('./views/frontend/services/recycle/index'),
+        meta: {
+            auth: true,
+            authRedirect: '/login',
+            notFoundRedirect: '/403',
+            forbiddenRedirect: '/403',
+            routeAuth: '/login'
+        },
+        children: [{
+            path: "", component: () => import('./views/frontend/services/recycle/create'),
+        }, {
+            path: ":id", component: () => import('./views/frontend/services/recycle/info'),
+        }]
+    }, {
+        path: "tftn/", component: () => import('./views/frontend/services/tftn/index'), meta: {
+            auth: true,
+            authRedirect: '/login',
+            notFoundRedirect: '/403',
+            forbiddenRedirect: '/403',
+            routeAuth: '/login'
+        }, children: [{
+            path: "", component: ServicesTftnCreate,
+        }, {
+            path: "info", component: ServicesTftnInfo,
+        }, {
+            path: "edit/:id", component: ServicesTftnEdit,
+        }, {
+            path: ":id", component: ServicesTftnInfo,
+        }]
+    }, {
+        path: "stat/", component: () => import('./views/frontend/services/stat/index'), meta:{}, children: [{
+            path: "create", component: () => import('./views/frontend/services/stat/create'),meta: {
+                auth: true,
+                authRedirect: '/login',
+                notFoundRedirect: '/403',
+                forbiddenRedirect: '/403',
+                routeAuth: '/login'
+            }
+        }, {
+            path: "info", component: () => import('./views/frontend/services/stat/info'),meta: {
+                auth: true,
+                authRedirect: '/login',
+                notFoundRedirect: '/403',
+                forbiddenRedirect: '/403',
+                routeAuth: '/login'
+            }
+        }, {
+            path: ":id", component: () => import('./views/frontend/services/stat/info'),
+            meta: {
+                auth: true,
+                authRedirect: '/login',
+                notFoundRedirect: '/403',
+                forbiddenRedirect: '/403',
+                routeAuth: '/login'
+            }
+        }]
+    }, {
+        path: "vacancy/",
+        component: () => import('./views/frontend/services/vacancy/index'),
+        children: [{
+            path: "", component: ServiceVacancyList,
+        },
+
+            {
+                path: "create", component: ServiceVacancyCreate,
+            }, {
+                path: "questions", component: ServiceVacancyQuestions,
+            }, {
+                path: "documents", component: ServiceVacancyDocuments,
+            }, {
+                path: ":id", component: ServiceVacancyShow,
+
+            }, {
+                path: ":id/resume", component: ServiceVacancyResume,
+            }, {
+                path: "*", redirect: "/services/vacancy"
+            }]
+    },]
 const userRoutes =
     {
         path: '/:locale?',
@@ -66,384 +280,12 @@ const userRoutes =
 
                 path: '/', component: OnePage, children: [
                     {
-                        path: "singlewindow/", component: Yagona_oyna, children: [{
-                            path: "", component: Yagona_oyna,
-                        }, {
-                            path: "appeals/",
-                            component: () => import('./views/frontend/services/appeal/index'),
-                            children: [{
-                                path: "", component: ServicesAppeals, query: {appeal_code: ''}
-                            }, {
-                                path: "create", component: ServicesAppealsCreate,
-                            }, {
-                                path: ":id", component: () => import('./views/frontend/services/appeal/info_view'),
-                            }, {
-                                path: ":id/:key", component: () => import('./views/frontend/services/appeal/info_view'),
-                            }]
-                        }, {
-                            path: "decisions/",
-                            component: () => import('./views/frontend/services/customs_value/index'),
-                            meta: {
-                                auth: true,
-                                authRedirect: '/login',
-                                notFoundRedirect: '/403',
-                                forbiddenRedirect: '/403',
-                                routeAuth: '/login'
-                            },
-                            children: [{
-                                path: "", component: ServicesDecisionsCreate,
-                            }, {
-                                path: "info", component: ServicesDecisionsInfo,
-                            }, {
-                                path: "edit/:id", component: ServicesDecisionsEdit,
-                            }, {
-                                path: ":id", component: ServicesDecisionsInfo,
-                            }]
-                        }, {
-                            path: "intellectual/",
-                            component: () => import('./views/frontend/services/intellectual/index'),
-                            meta: {
-                                auth: true,
-                                authRedirect: '/login',
-                                notFoundRedirect: '/403',
-                                forbiddenRedirect: '/403',
-                                routeAuth: '/login'
-                            },
-                            children: [
-                                {
-                                    path: "", component: ServicesIntellectualCreate,
-                                }, {
-                                    path: ":id", component: ServicesIntellectualInfo,
-                                }, {
-                                    path: "info", component: ServicesIntellectualInfo,
-                                }/*, {
-                                path: "edit/:id", component: ServicesIntellectualEdit,
-                            }*/
-                            ]
-                        }, {
-                            path: "refund/",
-                            component: () => import('./views/frontend/services/refund/index'),
-                            meta: {
-                                auth: true,
-                                authRedirect: '/login',
-                                notFoundRedirect: '/403',
-                                forbiddenRedirect: '/403',
-                                routeAuth: '/login'
-                            },
-                            children: [
-                                {
-                                    path: "", component: () => import('./views/frontend/services/refund/create'),
-                                }, {
-                                    path: ":id", component: () => import('./views/frontend/services/refund/info'),
-                                },
-                            ]
-                        }, {
-                            path: "ppay/",
-                            component: () => import('./views/frontend/services/ppay/index'),
-                            meta: {
-                                auth: true,
-                                authRedirect: '/login',
-                                notFoundRedirect: '/403',
-                                forbiddenRedirect: '/403',
-                                routeAuth: '/login'
-                            },
-                            children: [
-                                {
-                                    path: "", component: () => import('./views/frontend/services/ppay/create'),
-                                }, {
-                                    path: ":id", component: () => import('./views/frontend/services/ppay/info'),
-                                },
-                            ]
-                        },{
-                            path: "stamp/",
-                            component: () => import('./views/frontend/services/stamp/index'),
-                            meta: {
-                                auth: true,
-                                authRedirect: '/login',
-                                notFoundRedirect: '/403',
-                                forbiddenRedirect: '/403',
-                                routeAuth: '/login'
-                            },
-                            children: [
-                                {
-                                    path: "", component: () => import('./views/frontend/services/stamp/create'),
-                                }, {
-                                    path: ":id", component: () => import('./views/frontend/services/stamp/info'),
-                                },
-                            ]
-                        },{
-                            path: "bko/",
-                            component: () => import('./views/frontend/services/bko/index'),
+                        path: "singlewindow/", component: Yagona_oyna, children: servicesRoutes
 
-                            children: [
-                                {
-                                    path: "create", component: () => import('./views/frontend/services/bko/create'),
-                                    meta: {
-                                        auth: true,
-                                        authRedirect: '/login',
-                                        notFoundRedirect: '/403',
-                                        forbiddenRedirect: '/403',
-                                        routeAuth: '/login'
-                                    },
-                                },
-                                {
-                                    path: ":id", component: () => import('./views/frontend/services/bko/info'),
-                                    meta: {
-                                        auth: true,
-                                        authRedirect: '/login',
-                                        notFoundRedirect: '/403',
-                                        forbiddenRedirect: '/403',
-                                        routeAuth: '/login'
-                                    },
-                                },
-                            ]
-                        },
-
-                            {
-                            path: "recycle/",
-                            component: () => import('./views/frontend/services/recycle/index'),
-                            meta: {
-                                auth: true,
-                                authRedirect: '/login',
-                                notFoundRedirect: '/403',
-                                forbiddenRedirect: '/403',
-                                routeAuth: '/login'
-                            },
-                            children: [{
-                                path: "", component: () => import('./views/frontend/services/recycle/create'),
-                            }, {
-                                path: ":id", component: () => import('./views/frontend/services/recycle/info'),
-                            }]
-                        }, {
-                            path: "tftn/", component: () => import('./views/frontend/services/tftn/index'), meta: {
-                                auth: true,
-                                authRedirect: '/login',
-                                notFoundRedirect: '/403',
-                                forbiddenRedirect: '/403',
-                                routeAuth: '/login'
-                            }, children: [{
-                                path: "", component: ServicesTftnCreate,
-                            }, {
-                                path: "info", component: ServicesTftnInfo,
-                            }, {
-                                path: "edit/:id", component: ServicesTftnEdit,
-                            }, {
-                                path: ":id", component: ServicesTftnInfo,
-                            }]
-                        }, {
-                            path: "vacancy/",
-                            component: () => import('./views/frontend/services/vacancy/index'),
-                            children: [{
-                                path: "", component: ServiceVacancyList,
-                            },
-
-                                {
-                                    path: "create", component: ServiceVacancyCreate,
-                                }, {
-                                    path: "questions", component: ServiceVacancyQuestions,
-                                }, {
-                                    path: "documents", component: ServiceVacancyDocuments,
-                                }, {
-                                    path: ":id", component: ServiceVacancyShow,
-
-                                }, {
-                                    path: ":id/resume", component: ServiceVacancyResume,
-                                }, {
-                                    path: "*", redirect: "/services/vacancy"
-                                }]
-                        },]
                     },
 
                     {
-                        path: "services/", component: Services, children: [{
-                            path: "", component: ServicesPage,
-                        }, {
-                            path: "appeals/",
-                            component: () => import('./views/frontend/services/appeal/index'),
-                            children: [{
-                                path: "", component: ServicesAppeals, query: {appeal_code: ''}
-                            }, {
-                                path: "create", component: ServicesAppealsCreate,
-                            }, {
-                                path: ":id", component: () => import('./views/frontend/services/appeal/info_view'),
-                            }, {
-                                path: ":id/:key", component: () => import('./views/frontend/services/appeal/info_view'),
-                            }]
-                        }, {
-                            path: "decisions/",
-                            component: () => import('./views/frontend/services/customs_value/index'),
-                            meta: {
-                                auth: true,
-                                authRedirect: '/login',
-                                notFoundRedirect: '/403',
-                                forbiddenRedirect: '/403',
-                                routeAuth: '/login'
-                            },
-                            children: [{
-                                path: "", component: ServicesDecisionsCreate,
-                            }, {
-                                path: "info", component: ServicesDecisionsInfo,
-                            }, {
-                                path: "edit/:id", component: ServicesDecisionsEdit,
-                            }, {
-                                path: ":id", component: ServicesDecisionsInfo,
-                            }]
-                        }, {
-                            path: "intellectual/",
-                            component: () => import('./views/frontend/services/intellectual/index'),
-                            meta: {
-                                auth: true,
-                                authRedirect: '/login',
-                                notFoundRedirect: '/403',
-                                forbiddenRedirect: '/403',
-                                routeAuth: '/login'
-                            },
-                            children: [
-                                {
-                                    path: "", component: ServicesIntellectualCreate,
-                                }, {
-                                    path: ":id", component: ServicesIntellectualInfo,
-                                }, {
-                                    path: "info", component: ServicesIntellectualInfo,
-                                }/*, {
-                                path: "edit/:id", component: ServicesIntellectualEdit,
-                            }*/
-                            ]
-                        }, {
-                            path: "refund/",
-                            component: () => import('./views/frontend/services/refund/index'),
-                            meta: {
-                                auth: true,
-                                authRedirect: '/login',
-                                notFoundRedirect: '/403',
-                                forbiddenRedirect: '/403',
-                                routeAuth: '/login'
-                            },
-                            children: [
-                                {
-                                    path: "", component: () => import('./views/frontend/services/refund/create'),
-                                }, {
-                                    path: ":id", component: () => import('./views/frontend/services/refund/info'),
-                                },
-                            ]
-                        },{
-                            path: "ppay/",
-                            component: () => import('./views/frontend/services/ppay/index'),
-                            meta: {
-                                auth: true,
-                                authRedirect: '/login',
-                                notFoundRedirect: '/403',
-                                forbiddenRedirect: '/403',
-                                routeAuth: '/login'
-                            },
-                            children: [
-                                {
-                                    path: "", component: () => import('./views/frontend/services/ppay/create'),
-                                }, {
-                                    path: ":id", component: () => import('./views/frontend/services/ppay/info'),
-                                },
-                            ]
-                        },{
-                            path: "stamp/",
-                            component: () => import('./views/frontend/services/stamp/index'),
-                            meta: {
-                                auth: true,
-                                authRedirect: '/login',
-                                notFoundRedirect: '/403',
-                                forbiddenRedirect: '/403',
-                                routeAuth: '/login'
-                            },
-                            children: [
-                                {
-                                    path: "", component: () => import('./views/frontend/services/stamp/create'),
-                                }, {
-                                    path: ":id", component: () => import('./views/frontend/services/stamp/info'),
-                                },
-                            ]
-                        }, {
-                            path: "bko/",
-                            component: () => import('./views/frontend/services/bko/index'),
-                            children: [
-                                {
-                                    path:"main",
-                                    component: () => import('./views/frontend/services/bko/main'),
-
-                                },
-                                {
-                                    path: "create", component: () => import('./views/frontend/services/bko/create'),
-                                    meta: {
-                                        auth: true,
-                                        authRedirect: '/login',
-                                        notFoundRedirect: '/403',
-                                        forbiddenRedirect: '/403',
-                                        routeAuth: '/login'
-                                    },
-                                },
-                                {
-                                    path: ":id", component: () => import('./views/frontend/services/bko/info'),
-                                    meta: {
-                                        auth: true,
-                                        authRedirect: '/login',
-                                        notFoundRedirect: '/403',
-                                        forbiddenRedirect: '/403',
-                                        routeAuth: '/login'
-                                    },
-                                },
-                            ]
-                        },
-                            {
-                            path: "recycle/",
-                            component: () => import('./views/frontend/services/recycle/index'),
-                            meta: {
-                                auth: true,
-                                authRedirect: '/login',
-                                notFoundRedirect: '/403',
-                                forbiddenRedirect: '/403',
-                                routeAuth: '/login'
-                            },
-                            children: [{
-                                path: "", component: () => import('./views/frontend/services/recycle/create'),
-                            }, {
-                                path: ":id", component: () => import('./views/frontend/services/recycle/info'),
-                            }]
-                        }, {
-                            path: "tftn/", component: () => import('./views/frontend/services/tftn/index'), meta: {
-                                auth: true,
-                                authRedirect: '/login',
-                                notFoundRedirect: '/403',
-                                forbiddenRedirect: '/403',
-                                routeAuth: '/login'
-                            }, children: [{
-                                path: "", component: ServicesTftnCreate,
-                            }, {
-                                path: "info", component: ServicesTftnInfo,
-                            }, {
-                                path: "edit/:id", component: ServicesTftnEdit,
-                            }, {
-                                path: ":id", component: ServicesTftnInfo,
-                            }]
-                        }, {
-                            path: "vacancy/",
-                            component: () => import('./views/frontend/services/vacancy/index'),
-                            children: [{
-                                path: "", component: ServiceVacancyList,
-                            },
-
-                                {
-                                    path: "create", component: ServiceVacancyCreate,
-                                }, {
-                                    path: "questions", component: ServiceVacancyQuestions,
-                                }, {
-                                    path: "documents", component: ServiceVacancyDocuments,
-                                }, {
-                                    path: ":id", component: ServiceVacancyShow,
-
-                                }, {
-                                    path: ":id/resume", component: ServiceVacancyResume,
-                                }, {
-                                    path: "*", redirect: "/services/vacancy"
-                                }]
-                        },]
+                        path: "services/", component: Services, children: servicesRoutes
                     },
                     {
                         name: '403', path: '403', component: () => import('./views/pages/403')
@@ -483,11 +325,53 @@ const userRoutes =
                         path: 'page/',
                         component: {template: '<router-view></router-view>', script: ' export default {}'},
                         children: [
+                            {path: 'search/', component: () => import("./views/frontend/pages/search")},
                             {path: 'votes/', component: () => import("./views/frontend/pages/votes")},
-                            {path: 'rahbariyat', component: () => import("./views/frontend/pages/rahbariyat")},
-                            {path: 'markaziy', component: () => import("./views/frontend/pages/markaziy")},
+                            {path: 'opendata/', component: () => import("./views/frontend/pages/opendata")},
+                            {
+                                path: 'rahbariyat/',
+                                component: {template: '<router-view></router-view>', script: ' export default {}'},
+                                children: [
+                                    {path: '', component: () => import("./views/frontend/pages/rahbariyat/rahbariyat")},
+                                    {
+                                        path: 'institut/',
+                                        component: () => import("./views/frontend/pages/rahbariyat/institut")
+                                    },
+                                ]
+                            },
+                            {
+                                path: 'markaziy/',
+                                component: {template: '<router-view></router-view>', script: ' export default {}'},
+                                children: [
+                                    {path: '', component: () => import("./views/frontend/pages/markaziy/markaziy")},
+                                    {
+                                        path: 'institut/',
+                                        component: () => import("./views/frontend/pages/markaziy/institut")
+                                    },
+                                ]
+                            },
                             {path: 'documents', component: () => import("./views/frontend/pages/documents/index")},
                             {path: 'structure', component: () => import("./views/frontend/pages/structure/markaziy")},
+                            {
+                                path: 'structure/tashkiliy',
+                                component: () => import("./views/frontend/pages/structure/tashkiliy")
+                            },
+                            {
+                                path: 'structure/institute',
+                                component: () => import("./views/frontend/pages/structure/institut")
+                            },
+                            {
+                                path: 'structure/hududiy',
+                                component: () => import("./views/frontend/pages/structure/hududiy")
+                            },
+                            {
+                                path: 'structure/kinologiya',
+                                component: () => import("./views/frontend/pages/structure/kinologiya")
+                            },
+                            {
+                                path: 'structure/labor',
+                                component: () => import("./views/frontend/pages/structure/labor")
+                            },
                             {path: 'jismoniy', component: () => import("./views/frontend/pages/jismoniy")},
                             {path: 'boshqarma/:id', component: () => import("./views/frontend/pages/org")},
                             {path: ':id', component: () => import('./views/frontend/pages/index'),}
@@ -605,6 +489,21 @@ let adminRoute = {
 
             }, {
                 name: "Сахифани тахрирлаш", path: 'edit/:id', component: () => import('./views/dashboard/pages/edit'),
+
+            }]
+
+        },// Files
+        {
+            name: 'Файллар', path: 'files/', component: {
+                template: '<router-view></router-view>', script: ' export default {}'
+            }, children: [{
+                name: "Файллар", path: '', component: () => import('./views/dashboard/files/index'),
+
+            }, {
+                name: "Файл яратиш", path: 'create', component: () => import('./views/dashboard/files/create'),
+
+            }, {
+                name: "Файлни тахрирлаш", path: 'edit/:id', component: () => import('./views/dashboard/files/edit'),
 
             }]
 
@@ -742,7 +641,49 @@ let adminRoute = {
 
             ]
 
-        }, // Faqs
+        },// Opendatas
+        {
+            name: 'Очиқ маълумотлар', path: 'opendatas/', component: {
+                template: '<router-view></router-view>', script: ' export default {}'
+            }, children: [{
+                name: "Очиқ маълумотлар", path: '', component: () => import('./views/dashboard/opendatas/index'),
+
+            }, {
+                name: "Очиқ маълумот яратиш", path: 'create', component: () => import('./views/dashboard/opendatas/create'),
+
+            }, {
+                name: "Очиқ маълумот тахрирлаш", path: 'edit/:id', component: () => import('./views/dashboard/opendatas/edit'),
+
+            }, {
+                name: "Очиқ маълумот", path: 'view/:id', component: () => import('./views/dashboard/opendatas/view'),
+
+            },
+
+            ]
+
+        },
+        // Opendata files
+        {
+            name: 'Очиқ маълумот файллари', path: 'opendata/:opendata/files', component: {
+                template: '<router-view></router-view>', script: ' export default {}'
+            }, children: [{
+                name: "Очиқ маълумот файллари", path: '', component: () => import('./views/dashboard/opendatafiles/index'),
+
+            }, {
+                name: "Очиқ маълумот файлларини яратиш", path: 'create', component: () => import('./views/dashboard/opendatafiles/create'),
+
+            }, {
+                name: "Очиқ маълумот файлларини тахрирлаш", path: 'edit/:id', component: () => import('./views/dashboard/opendatafiles/edit'),
+
+            }, {
+                name: "Очиқ маълумот файлларини", path: 'view/:id', component: () => import('./views/dashboard/opendatafiles/view'),
+
+            },
+
+            ]
+
+        },
+        // Faqs
         {
             name: 'Кўп бериладиган саволлар', path: 'faqs/', component: {
                 template: '<router-view></router-view>', script: ' export default {}'
@@ -807,6 +748,27 @@ let adminRoute = {
             ]
 
         }, {
+            name: 'Марказий аппарат', path: 'apporg/:org/', component: {
+                template: '<router-view></router-view>', script: ' export default {}'
+            }, children: [{
+                name: "Бошқармалар", path: '', component: () => import('./views/dashboard/apparat/index'),
+
+            }, {
+                name: "Бошқарма яратиш", path: 'create', component: () => import('./views/dashboard/apparat/create'),
+
+            }, {
+                name: "Бошқармани тахрирлаш",
+                path: 'edit/:id',
+                component: () => import('./views/dashboard/apparat/edit'),
+
+            }, {
+                name: "Бошқарма", path: 'view/:id', component: () => import('./views/dashboard/apparat/view'),
+            },
+
+            ]
+
+        },
+        {
             name: 'Раҳбарият', path: 'rahbariyat/', component: {
                 template: '<router-view></router-view>', script: ' export default {}'
             }, children: [{
@@ -826,7 +788,29 @@ let adminRoute = {
 
             ]
 
-        }, // Menus
+        },
+        {
+            name: 'Раҳбарият', path: 'rahbarorg/:org/', component: {
+                template: '<router-view></router-view>', script: ' export default {}'
+            }, children: [{
+                name: "Рахбарият", path: '', component: () => import('./views/dashboard/rahbariyat/index'),
+
+            }, {
+                name: "Рахбарият яратиш",
+                path: 'create',
+                component: () => import('./views/dashboard/rahbariyat/create'),
+
+            }, {
+                name: "Тахрирлаш", path: 'edit/:id', component: () => import('./views/dashboard/rahbariyat/edit'),
+
+            }, {
+                name: "Рахбарият", path: 'view/:id', component: () => import('./views/dashboard/rahbariyat/view'),
+            },
+
+            ]
+
+        },
+        // Menus
         {
             name: 'Менюлар', path: 'menu/', component: {
                 template: '<router-view></router-view>', script: ' export default {}'

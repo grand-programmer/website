@@ -124,6 +124,24 @@
                                                               v-model="news.created_at"
                                                               type="date"></v-text-field>
                                             </v-col>
+                                            <v-col cols="2">
+                                                <v-btn
+                                                    v-if="news.telegram"
+                                                    small
+                                                    class="success"
+                                                >
+                                                    Телеграмга чиқарилган
+                                                </v-btn>
+                                                <v-btn
+                                                    v-else
+                                                    small
+                                                    v-model="news.telegram"
+                                                    :loading="loading.telegram"
+                                                    class="success"
+                                                    @click="telegram(news)"
+                                                > Телеграмга чиқариш
+                                                </v-btn>
+                                            </v-col>
                                             <v-col cols="12" sm="12" md="12" v-show="lang==='uz'">
                                                 <ValidationProvider name="Қисқача мазмуни" rules="required|min:3"
                                                                     v-slot="{ errors }">
@@ -365,6 +383,7 @@ export default {
 
 
             },
+            loading:{ telegram:false },
             languages: [
                 {text: 'Ўзбекча', value: 'uz'},
                 {text: 'Русча', value: 'ru'},
@@ -392,6 +411,30 @@ export default {
         this.initialize();
     },
     methods: {
+        async telegram(news){
+          this.loading.telegram = true
+            if(news.telegram) {
+                this.$toast.error('Аллақачон жойланган')
+                this.loading.telegram = false
+                return
+            }
+            await axios.put("/api/v1/admin/news/" + this.$route.params.id, { telegram: true}).then(res =>{
+                if(res.status===200){
+                    this.$toast.success('Янгилик телеграм каналга юборилди')
+                    this.loading.telegram = false
+                    this.news.telegram = true
+
+                } else {
+                    this.$toast.error('Хатолик содир бўлди')
+                    this.loading.telegram = false
+                }
+            }).catch(error => {
+                console.log(error)
+                this.$toast.error('Хатолик содир бўлди')
+                this.loading.telegram = false
+            });
+            this.loading.telegram = false
+        },
         formatDate(date,type=1) {
             console.log(date)
             if (!date) return null
@@ -499,13 +542,14 @@ export default {
             if (isValid) {
                 var data = new FormData();
                 for (var key in this.news) {
-
-                    if (Array.isArray(this.news[key]) || key === 'cats') {
-                        for (var category in this.news[key]) {
-                            data.append(key + '[]', this.news[key][category]);
-                        }
-                    } else
-                        data.append(key, this.news[key]);
+if(key!=='telegram') {
+    if (Array.isArray(this.news[key]) || key === 'cats') {
+        for (var category in this.news[key]) {
+            data.append(key + '[]', this.news[key][category]);
+        }
+    } else
+        data.append(key, this.news[key]);
+}
                 }
                 data.append("_method", "put");
                 data.append("translates", JSON.stringify(this.langtext));

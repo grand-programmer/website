@@ -20,6 +20,7 @@ class News extends Model
         'image',
         'created_by',
         'created_at',
+        'telegram',
         'boshqarma'
     ];
 

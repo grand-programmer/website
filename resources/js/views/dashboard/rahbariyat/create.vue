@@ -42,7 +42,7 @@
                                                 >
                                                     <span>Лавозими</span>
                                                     <v-autocomplete :items="[
-                                                        {text:'Раис',value:1},
+                                                        {text:'Раҳбар',value:1},
                                                         {text:'Биринчи ўринбосар',value:2},
                                                         {text:'Ўринбосар',value:3}
                                                         ]" v-model="organization.lavozimi">
@@ -177,13 +177,14 @@ export default {
             breadcrumb_items:
                 [
                     {text: 'Админ панел', to: '/admin', exact: true},
-                    {text: 'Бошқармалар', to: '/admin/rahbariyat', exact: true},
-                    {text: 'Бошқарма яратиш', to: '#', exact: true, disabled: true},
+                    {text: 'Рахбарият', to: '/admin/rahbarorg/' + this.$route.params.org, exact: true},
+                    {text: 'Яратиш', to: '#', exact: true, disabled: true},
                 ],
             organization: {
                 name: "",
                 fio: "",
                 lavozimi: "",
+                lavozim_name: "",
                 qabul: "Фуқароларни қабул қилиш ҳар куни 09-00 дан 17-00 гача",
                 phone: "",
                 add_phone: "",
@@ -208,7 +209,7 @@ export default {
 
     },
     created() {
-        //this.initialize()
+        this.initialize()
 
     },
 
@@ -219,6 +220,7 @@ export default {
     },
     methods: {
         initialize() {
+            console.log(this.$route)
             /*            api.readapparat().then((response) => {
                             this.editedItem = response.data;
                         }).catch((error) => {
@@ -229,7 +231,7 @@ export default {
         },
 
         close() {
-            this.$router.replace("/admin/rahbariyat").catch(() => {
+            this.$router.replace("/admin/rahbariyat/"+ this.$route.params.org).catch(() => {
             });
         },
 
@@ -244,11 +246,14 @@ export default {
                 form.append('org_name', _this.organization.name);
                 form.append('fio', _this.organization.fio);
                 form.append('lavozimi', _this.organization.lavozimi);
+                form.append('lavozim_name', _this.organization.lavozim_name);
                 form.append('qabul', _this.organization.qabul);
                 form.append('phone', _this.organization.phone);
                 form.append('add_phone', _this.organization.add_phone);
                 form.append('email', _this.organization.email);
                 form.append('rahbar', 0);
+                // form.append('org', (_this.$route.params.org > 0) ? _this.$route.params.org : 0);
+                if (_this.$route.params.org > 0 && _this.$route.fullPath.indexOf('rahbarorg') !== -1  ) form.append('org', _this.$route.params.org);
                 if(this.cropImg)   this.$refs.cropper.getCroppedCanvas().toBlob((blob) => {
                     form.append('image',blob);
 

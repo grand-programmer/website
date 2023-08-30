@@ -101,7 +101,6 @@ class AuthController extends Controller
                         'access_token' => $userAcces['access_token'],
                         'scope' => 'customs_uz',
                     ]);
-
             if ($responseUser->status() !== 200 or !isset($responseUser->json()['user_type'])) return response()->json(['error' => 'login_error'], 401);
             $type = 1;
             $legal_info = [];

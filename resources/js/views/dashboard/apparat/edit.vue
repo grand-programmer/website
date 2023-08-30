@@ -56,6 +56,23 @@
                                                     name="org_title"/>
 
                                             </v-col>
+
+                                            <v-col cols="4" v-show="lang==='uz'">
+                                                <my-field
+                                                    title="Лавозим номи"
+                                                    v-model="organization.lavozim_name"
+                                                    name="lavozim_name"
+                                                    rules="required|min:3"/>
+
+
+                                            </v-col>
+                                            <v-col cols="4" :key="'lavozim' + langKey"
+                                                   v-for="(langItem,langKey) in langtext" v-show="lang===langKey">
+                                                <my-field
+                                                    :title="'Лавозим номи ' +  getLang()['text']"
+                                                    v-model="langtext[langKey].lavozim_name"/>
+                                            </v-col>
+
                                             <v-col cols="4">
                                                 <my-field
                                                     title="Бошқарма бошлиғи исми фамилияси исми шарифи"
@@ -85,6 +102,13 @@
                                                     v-model="organization.email"
                                                     name="boshliq_telefon"
                                                     rules="required|min:3"/>
+                                            </v-col>
+                                            <v-col cols="4">
+                                                <my-field
+                                                    title="Сортировка"
+                                                    v-model="organization.sort"
+                                                    name="boshliq_sort"
+                                                rules="required"/>
                                             </v-col>
                                             <v-col cols="4">
                                                 <ValidationProvider
@@ -157,6 +181,75 @@
 
                                             </section>
 
+                                            <v-col cols="12" sm="12" md="12" v-show="lang==='uz'">
+                                                <ValidationProvider name="Бошқарма вазифалари" rules="required|min:3"
+                                                                    v-slot="{ errors }">
+                                                    <label>Бошқарма вазифалари</label>
+                                                    <editor ref="tinymce_editor"
+                                                            api-key="08ldvnqyts0iiyqna15dlike72o7nw96ue2f7j0og0ydd4f7"
+                                                            v-model="organization.biografiyasi"
+                                                            :init="{
+                                                                selector: 'textarea',
+                                                                height: 500,
+                                                                plugins: 'print preview paste importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists wordcount imagetools textpattern noneditable help charmap quickbars emoticons',
+                                                                imagetools_cors_hosts: ['picsum.photos'],
+                                                                menubar: 'file edit view insert format tools table help',
+                                                                toolbar: 'undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media template link anchor codesample | ltr rtl',
+                                                                toolbar_sticky: true,
+                                                                autosave_ask_before_unload: true,
+                                                                autosave_interval: '30s',
+                                                                autosave_prefix: '{path}{query}-{id}-',
+                                                                autosave_restore_when_empty: false,
+                                                                autosave_retention: '2m',
+                                                                image_advtab: true,
+                                                                importcss_append: true,
+                                                                image_caption: true,
+                                                                quickbars_selection_toolbar: 'bold italic | quicklink h2 h3 blockquote quickimage quicktable',
+                                                                noneditable_noneditable_class: 'mceNonEditable',
+                                                                toolbar_mode: 'sliding',
+                                                                contextmenu: 'link image imagetools table',
+                                                                content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+                                                            }"/>
+
+
+                                                    <span class="error--text">{{ errors[0] }}</span>
+                                                </ValidationProvider>
+                                            </v-col>
+                                            <v-col cols="12" sm="12" md="12" :key="langKey"
+                                                   v-for="(langItem,langKey) in langtext" v-show="lang===langKey">
+                                                <ValidationProvider name="Бошқарма вазифалари"
+                                                                    v-slot="{ errors }">
+                                                    <label>Бошқарма вазифалари - {{ getLang(langKey)['text'] }}</label>
+                                                    <editor ref="tinymce_editor"
+                                                            api-key="08ldvnqyts0iiyqna15dlike72o7nw96ue2f7j0og0ydd4f7"
+                                                            v-model="langtext[langKey].biografiyasi"
+                                                            :init="{
+                                                                selector: 'textarea',
+                                                                height: 500,
+                                                                plugins: 'print preview paste importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists wordcount imagetools textpattern noneditable help charmap quickbars emoticons',
+                                                                imagetools_cors_hosts: ['picsum.photos'],
+                                                                menubar: 'file edit view insert format tools table help',
+                                                                toolbar: 'undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media template link anchor codesample | ltr rtl',
+                                                                toolbar_sticky: true,
+                                                                autosave_ask_before_unload: true,
+                                                                autosave_interval: '30s',
+                                                                autosave_prefix: '{path}{query}-{id}-',
+                                                                autosave_restore_when_empty: false,
+                                                                autosave_retention: '2m',
+                                                                image_advtab: true,
+                                                                importcss_append: true,
+                                                                image_caption: true,
+                                                                quickbars_selection_toolbar: 'bold italic | quicklink h2 h3 blockquote quickimage quicktable',
+                                                                noneditable_noneditable_class: 'mceNonEditable',
+                                                                toolbar_mode: 'sliding',
+                                                                contextmenu: 'link image imagetools table',
+                                                                content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+                                                            }"/>
+
+
+                                                    <span class="error--text">{{ errors[0] }}</span>
+                                                </ValidationProvider>
+                                            </v-col>
                                         </v-row>
                                     </v-container>
                                 </v-card-text>
@@ -180,7 +273,7 @@ import api from "./../../../src/services/adminApi";
 import {extend, ValidationProvider, ValidationObserver} from 'vee-validate';
 import * as rules from 'vee-validate/dist/rules';
 import messages from '../../../locales/oz.json';
-//import Editor from '@tinymce/tinymce-vue';
+import Editor from '@tinymce/tinymce-vue';
 import MyField from '../../../components/form/myfield';
 import VueCropper from 'vue-cropperjs';
 import 'cropperjs/dist/cropper.css';
@@ -206,6 +299,8 @@ export default {
                 ],
             organization: {
                 title: "",
+                biografiyasi: "",
+                sort: null
 
             },
             organization_image: null,
@@ -213,12 +308,15 @@ export default {
             langtext: {
                 oz: {
                     org_name: null,
+                    biografiyasi: null,
                 },
                 ru: {
                     org_name: null,
+                    biografiyasi: null,
                 },
                 en: {
                     org_name: null,
+                    biografiyasi: null,
                 }
             },
             languages: [
@@ -287,6 +385,9 @@ export default {
         },
         async initialize() {
             const _this = this;
+
+            if(this.$route.params.org!==0) this.breadcrumb_items[1].to='/admin/apporg/' + this.$route.params.org
+            else this.breadcrumb_items[1].to='/admin/apparat/'
             await api.readApparat(this.$route.params.id).then((response) => {
                 _this.organization = response.data.data;
 
@@ -303,7 +404,7 @@ export default {
                 this.$router.replace("/admin/apparat").catch(() => {
                 });
             });
-            await api.readRahbariyats().then((response) => {
+            await api.readRahbariyats(this.$route.params.org).then((response) => {
                 _this.rahbariyat = response.data.data;
             }).catch((error) => {
                 this.$toast.error(i18n.t(`Маълумотларни юклашда хатолик содир бўлди!`))
@@ -322,10 +423,13 @@ export default {
                 form.append('org_name', _this.organization.org_name);
                 form.append('fio', _this.organization.fio);
                 form.append('lavozimi', _this.organization.lavozim);
+                form.append('lavozim_name', _this.organization.lavozim_name);
                 form.append('qabul', _this.organization.qabul);
                 form.append('phone', _this.organization.phone);
+                form.append('biografiyasi', _this.organization.biografiyasi);
                 form.append('add_phone', _this.organization.add_phone);
                 form.append('email', _this.organization.email);
+                form.append('sort', _this.organization.sort);
                 form.append('rahbariyat', _this.organization.rahbariyat);
                 form.append('_method', 'PUT');
                 form.append('translates', JSON.stringify(_this.langtext));
@@ -357,7 +461,8 @@ export default {
         ValidationProvider,
         ValidationObserver,
         MyField,
-        VueCropper
+        VueCropper,
+        Editor
     },
 }
 </script>

@@ -285,6 +285,7 @@ router.beforeEach((to, from, next) => {
 
 ///console.log(to)
     setTimeout(() => {
+        // console.log(to.params)
         if (typeof to.params.locale === 'undefined') {
             i18n.locale = localStorage.getItem('language') || 'uz'
             if (to.path.includes("/admin/")) {
@@ -299,7 +300,7 @@ router.beforeEach((to, from, next) => {
                 });
             }
         } else {
-            // console.log('asd')
+
             if (("uz,ru,en,oz,admin".split(",")).includes(to.params.locale))
                 next();
             else {
@@ -317,7 +318,7 @@ router.beforeEach((to, from, next) => {
                 });
             }
         }
-        app.$store.commit('setLoading', false)
+         app.$store.commit('setLoading', false)
     }, 200)
 
 });

@@ -22,6 +22,7 @@
                             <div @click="openItem(data.item.slug)">{{ data.item.title }}</div>
                         </template>
                     </v-autocomplete>
+                    <a @click="openSpreadedSearch">{{ $t('Кенгайтирилган қидирув') }}</a>
                 </v-col>
             </v-card>
             <template v-slot:activator="{ on, attrs }">
@@ -41,11 +42,30 @@
                     <a href="tel:1108">1108</a>
                     <v-dialog v-model="baholashDialog" max-width="800">
                         <v-card class="px-4">
-                            <v-col cols="12" v-for="(voteItem,key) in votes" :key="key" v-if="voteItem.id===11">
+                            <v-col cols="12">
                                 <h4 style="text-align: center">
-                                    {{ voteItem.question }}
+                                    {{ $t('Ишонч телефонини баҳолаш статистикаси') }}
                                 </h4>
-                                <template v-if="!displayResults.includes(votes[key].id)">
+                                <v-row class="mt-6">
+                                    <v-col cols="2">
+                                        <v-autocomplete
+                                            :items="[
+                                            {text: 2022,value: 2022},
+                                            {text: 2023,value: 2023}
+                                        ]"
+                                            v-model="year"
+                                        >
+                                    </v-autocomplete>
+                                    </v-col><v-col cols="2">
+                                        <v-autocomplete
+                                            :items=months
+                                            v-model="month"
+                                            clearable
+                                        >
+                                    </v-autocomplete>
+                                    </v-col>
+                                </v-row>
+                                <template v-if="!showResults">
                                     <v-radio-group
                                         v-model="votes[key].selected"
                                         dense
@@ -58,7 +78,7 @@
                                     </v-radio-group>
                                     <div class="text-center flex-direction-nav d-flex">
                                         <v-btn class="ma-2" color="primary" small
-                                               @click="answer(votes[key].id,votes[key].selected)">
+                                               @click="answer(key,votes[key].selected)">
                                             {{ $t("Жавоб бериш") }}
                                         </v-btn>
                                         <v-btn
@@ -72,16 +92,16 @@
                                     </div>
                                 </template>
                                 <template v-else>
-                                    <template v-for="(resultItem,rkey) in votes[key].answers">
+                                    <template v-for="(resultItem,rkey) in votes">
                                         <div class="my-5"
-                                             :data="(votes[key].answers[rkey]['count'] / votes[key].total * 100)">
-                                            <p>{{ votes[key].answers[rkey].text }}
+                                             :data="(votes[rkey].count / votes[rkey].total * 100)">
+                                            <p>{{ votes[rkey].text }}
                                                 <v-btn x-small color="#4e4646">
                                                     {{ resultItem.count ? resultItem.count : 0 }}
                                                 </v-btn>
                                             </p>
                                             <v-progress-linear
-                                                :value="(votes[key].answers[rkey]['count'] / votes[key].total * 100)"
+                                                :value="(votes[rkey]['count'] / votes[rkey].total * 100)"
                                                 :color="colors[(rkey % colors.length)]"
                                                 striped
                                                 rounded
@@ -96,12 +116,20 @@
                                         </div>
                                     </template>
 
-                                    <p style="border-top: 1px solid #cccccc4d; padding-top: 15px; margin-top: 25px;">
+                                    <p style="border-top: 1px solid #cccccc4d; padding-top: 15px; margin-top: 25px;" v-if="votes.length">
                                         {{ $t("Барчаси") }}
-                                        <v-btn x-small color="#4e4646">{{ votes[key].total }}</v-btn>
+                                        <v-btn x-small color="#4e4646" v-if="votes[0]">{{ votes[0].total }}</v-btn>
                                     </p>
+                                    <hr>
+                                    <p v-if="votes.length < 1" class="text-center">{{$t('Маълумот топилмади')}}</p>
+                                    <div class="text-center flex-direction-nav d-none mt-10">
+                                        <v-btn class="ma-2" color="primary" small
+                                               @click="showResults = false">
+                                            {{ $t("Баҳолаш") }}
+                                        </v-btn>
+                                    </div>
                                 </template>
-                                <hr>
+
 
                             </v-col>
 
@@ -110,7 +138,7 @@
                             <span
                                 v-bind="attrs"
                                 v-on="on"
-                            >Баҳолаш</span>
+                            >{{$t('Статистика')}}</span>
 
                         </template>
                     </v-dialog>
@@ -137,7 +165,7 @@
                 </div>
                 <v-spacer></v-spacer>
                 <div class="mt-2">
-                    <p>{{ $t('Шрифт ўлчами') }}</p>
+                    <p class="mt-5">{{ $t('Шрифт ўлчами') }}</p>
                     <v-slider
                         class="cursor-pointer w-75"
                         hide-details
@@ -151,6 +179,11 @@
                         v-model="shrift"
                     ></v-slider>
                 </div>
+                <v-spacer></v-spacer>
+                <div class="mt-2">
+                    <p class="mt-5 mb-0">{{ $t('Экран диктори') }}</p>
+                    <v-switch v-model="diktor" color="black"/>
+                </div>
                 <div class="my-2">
                     <a class="text-decoration-underline white--text" @click="refreshSpecific">{{ $t('Тозалаш') }}</a>
                 </div>
@@ -159,7 +192,16 @@
                 mdi-eye-outline
             </v-icon>
         </v-list>
-
+        <div class="sidebar-items"
+             v-on:click="popupWindow('', '', 447, 600)"
+        >
+            <v-icon size="30" class="mr-0" color="#fff" style="margin-right: 0px !important;">mdi-cellphone</v-icon>
+        </div>
+        <div v-show="diktor" style="position: fixed; bottom: 65px; right: 10px;">
+            <v-btn @click="startVoice" color="primary" fab>
+                <v-icon color="white">mdi-volume-high</v-icon>
+            </v-btn>
+        </div>
     </div>
 </template>
 
@@ -175,6 +217,24 @@ export default {
                 '0',
                 '+',
             ],
+            diktor: false,
+            year: (new Date()).getFullYear(),
+            month: (new Date()).getMonth() + 1,
+            months: [
+                { value: 1, text: "Январ"},
+                { value: 2, text: "Феврал"},
+                { value: 3, text: "Март"},
+                { value: 4, text: "Апрел"},
+                { value: 5, text: "Май"},
+                { value: 6, text: "Июн"},
+                { value: 7, text: "Июл"},
+                { value: 8, text: "Август"},
+                { value: 9, text: "Сентябр"},
+                { value: 10, text: "Октябр"},
+                { value: 11, text: "Ноябр"},
+                { value: 12, text: "Декабр"},
+            ],
+            masshtab: 1,
             shrift: 2,
             grayscale: false,
             searchDialog1: false,
@@ -184,6 +244,7 @@ export default {
             isLoading: false,
             search: null,
             votes: [],
+            showResults: true,
             displayResults: [],
             specific: false,
             clickedEye: true,
@@ -197,6 +258,21 @@ export default {
         }
     },
     methods: {
+        openSpreadedSearch(){
+          this.searchDialog1=false;
+          this.$router.push('/page/search')
+        },
+        popupWindow(url, title, w, h) {
+            console.log(window)
+            console.log(document)
+            if (url.length === 0) {
+                url = this.$route.path;
+            }
+            var left = (screen.width / 2) - (w / 2);
+            var top = (screen.height / 2) - (h / 2);
+            return window.open(url, title, 'toolbar=yes, location=yes, directories=no, status=no, menubar=yes, scrollbars=yes, resizable=yes, copyhistory=no, width=' + w + ', height=' + h + ', top=' + top + ', left=' + left);
+
+        },
         refreshSpecific() {
             this.grayscale = false;
             this.shrift = 2;
@@ -210,10 +286,10 @@ export default {
             if (this.specific) {
                 this.specific = false
                 $(".sidebar-items.specific").removeClass("active");
-                $(".sidebar-items.specific").css("margin-right","154px");
+                $(".sidebar-items.specific").css("margin-right", "154px");
             } else {
                 $(".sidebar-items.specific").addClass("active");
-                $(".sidebar-items.specific").css("margin-right","-153px");
+                $(".sidebar-items.specific").css("margin-right", "-153px");
                 this.specific = true
             }
         },
@@ -221,6 +297,7 @@ export default {
             if (this.specific) this.specific = false;
         },
         getResult(id) {
+            this.showResults = true;
             //if(this.displayResults.contain(id))
             //this.displayResults.push(id)
         },
@@ -230,12 +307,28 @@ export default {
                 _app.votes = response.data.data;
             });
         },
+        getPhoneQuestions(){
+            const _app = this;
+            axios.get('/api/v1/phoneVotes',{params: {
+                month: this.month,
+                year: this.year
+                }}).then(function (response) {
+                _app.votes = response.data.data;
+            });
+        },
         answer(key, answer) {
             if (!answer) return;
             const _app = this;
-            axios.post("/api/v1/votescount/" + key, {answer: answer, _method: 'put'}).then(function (response) {
+            if(_app.displayResults.includes(key)) {
+                _app.$toast.warning(_app.$t('Сиз аллақачон овоз бергансиз!'))
+                return
+            }
+            axios.post("/api/v1/votescount/" + _app.votes[key].id, {answer: answer, _method: 'put'}).then(function (response) {
+
                 if (response.data.success === true) {
+                    _app.showResults  = true
                     _app.getQuestions();
+                    if (_app.votes[key]) _app.votes[key].selected =true
                     _app.displayResults.push(key);
                     _app.$cookie.set('votes', JSON.stringify(_app.displayResults), 1);
                 }
@@ -274,10 +367,37 @@ export default {
                 $("html").removeClass("blackAndWhite")
             }
         },
+        startVoice() {
+            const _this = this
+
+
+                setTimeout(function () { // When clicking on a highlighted area, the value stays highlighted until after the mouseup event, and would therefore stil be captured by getSelection. This micro-timeout solves the issue.
+                    responsiveVoice.cancel(); // stop anything currently being spoken
+                    responsiveVoice.speak(getSelectionText()); //speak the text as returned by getSelectionText
+                }, 1);
+
+
+            function getSelectionText() {
+                var text = "";
+                if (window.getSelection) {
+                    text = window.getSelection().toString();
+                    // for Internet Explorer 8 and below. For Blogger, you should use &amp;&amp; instead of &&.
+                } else if (document.selection && document.selection.type !== "Control") {
+                    text = document.selection.createRange().text;
+                }
+                return text;
+            }
+        }
 
 
     },
     watch: {
+        year(val) {
+            this.getPhoneQuestions()
+        },
+        month(val) {
+            this.getPhoneQuestions()
+        },
         search(val) {
             // Items have already been loaded
             this.isLoading = true
@@ -295,7 +415,7 @@ export default {
         baholashDialog(val) {
             if (!val) return;
             this.initialize()
-            this.getQuestions()
+            this.getPhoneQuestions()
 
         },
         shrift(val) {
@@ -310,6 +430,68 @@ export default {
             if (val === 3) {
                 $("html").removeClass("minSize");
                 $("html").addClass("maxSize");
+            }
+        },
+        masshtab(val) {
+            if (val === 1) {
+                $('body').css({
+                    // 'zoom': '1.' + parseInt(size),
+                    // '-ms-zoom': '1.' + parseInt(size),
+                    // '-webkit-zoom': '1.' + parseInt(size),
+                    // '-moz-zoom': '1.' + parseInt(size),
+                    // '-o-zoom': '1.' + parseInt(size),
+                    '-webkit-transform': 'scale(1.' + 0 + ')',
+                    '-moz-transform': 'scale(1.' + 0 + ')',
+                    '-ms-transform': 'scale(1.' + 0 + ')',
+                    'transform': 'scale(1.' + 0 + ')',
+                    '-webkit-transform-origin': 'top center',
+                    '-moz-transform-origin': 'top center',
+                    '-ms-transform-origin': 'top center',
+                    'transform-origin': 'top center',
+                    // '-webkit-transform': 'scale(1.'+parseInt(size)+')',
+                    // 'transform': "scale(1."+parseInt(size)+")",
+                    // 'margin-top': ""+ (parseInt(size) + 20) +"%",
+                });
+            }
+            if (val === 2) {
+                $('body').css({
+                    // 'zoom': '1.' + parseInt(size),
+                    // '-ms-zoom': '1.' + parseInt(size),
+                    // '-webkit-zoom': '1.' + parseInt(size),
+                    // '-moz-zoom': '1.' + parseInt(size),
+                    // '-o-zoom': '1.' + parseInt(size),
+                    '-webkit-transform': 'scale(1.' + 1 + ')',
+                    '-moz-transform': 'scale(1.' + 1 + ')',
+                    '-ms-transform': 'scale(1.' + 1 + ')',
+                    'transform': 'scale(1.' + 1 + ')',
+                    '-webkit-transform-origin': 'top center',
+                    '-moz-transform-origin': 'top center',
+                    '-ms-transform-origin': 'top center',
+                    'transform-origin': 'top center',
+                    // '-webkit-transform': 'scale(1.'+parseInt(size)+')',
+                    // 'transform': "scale(1."+parseInt(size)+")",
+                    // 'margin-top': ""+ (parseInt(size) + 20) +"%",
+                });
+            }
+            if (val === 3) {
+                $('body').css({
+                    // 'zoom': '1.' + parseInt(size),
+                    // '-ms-zoom': '1.' + parseInt(size),
+                    // '-webkit-zoom': '1.' + parseInt(size),
+                    // '-moz-zoom': '1.' + parseInt(size),
+                    // '-o-zoom': '1.' + parseInt(size),
+                    '-webkit-transform': 'scale(1.' + 2 + ')',
+                    '-moz-transform': 'scale(1.' + 2 + ')',
+                    '-ms-transform': 'scale(1.' + 2 + ')',
+                    'transform': 'scale(1.' + 2 + ')',
+                    '-webkit-transform-origin': 'top center',
+                    '-moz-transform-origin': 'top center',
+                    '-ms-transform-origin': 'top center',
+                    'transform-origin': 'top center',
+                    // '-webkit-transform': 'scale(1.'+parseInt(size)+')',
+                    // 'transform': "scale(1."+parseInt(size)+")",
+                    // 'margin-top': ""+ (parseInt(size) + 20) +"%",
+                });
             }
         }
 
@@ -359,5 +541,10 @@ export default {
 
 .specific-fields .v-slider__track-container {
     height: 5px;
+}
+
+.specific-fields .v-slider .v-slider__thumb:before {
+    top: -8px;
+    left: -8px;
 }
 </style>

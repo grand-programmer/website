@@ -105,7 +105,7 @@
                                                 <v-toolbar flat>
                                                     <div class="pull-left logo_neno">
                                                         <img src="/img/gtk_image.png" alt="">
-                                                        <p>Ўзбекистон Республикаси Давлат божхона қўмитаси</p>
+                                                        <p>Ўзбекистон Республикаси Иқтисодиёт ва молия вазирлиги ҳузуридаги Божхона қўмитаси</p>
                                                     </div>
                                                 </v-toolbar>
                                                 <v-divider></v-divider>
@@ -175,7 +175,7 @@
                                     <v-toolbar flat>
                                         <div class="pull-left logo_neno">
                                             <img src="/img/gtk_image.png" alt="">
-                                            <p>Ўзбекистон Республикаси Давлат божхона қўмитаси</p>
+                                            <p>Ўзбекистон Республикаси Иқтисодиёт ва молия вазирлиги ҳузуридаги Божхона қўмитаси</p>
                                         </div>
                                     </v-toolbar>
                                     <div class="appeal-data">

@@ -49,7 +49,24 @@
                                     <span class="red--text">{{ errors[0] }}</span>
                                 </ValidationProvider>
                             </v-col>
-                            <v-col cols="4" v-else>
+                            <template  v-else><v-col cols="4">
+                                <ValidationProvider name="СТИР"
+                                                    v-slot="{ errors }">
+
+                                    <v-text-field
+                                        v-model="$auth.user().tin"
+                                        label="СТИР"
+                                        required
+                                        hint="Жисмоний шахс СТИРи"
+                                        persistent-hint
+                                        name="orgInn"
+                                    >
+                                    </v-text-field>
+
+                                    <span class="red--text">{{ errors[0] }}</span>
+                                </ValidationProvider>
+                            </v-col>
+                            <v-col cols="4" >
                                 <ValidationProvider name="ЖШШИР"
                                                     v-slot="{ errors }">
 
@@ -67,6 +84,7 @@
                                     <span class="red--text">{{ errors[0] }}</span>
                                 </ValidationProvider>
                             </v-col>
+                            </template>
                             <v-col cols="4">
                                 <ValidationProvider :name="person.type===2?'Ташкилот номи':'ФИШ'" rules="required"
                                                     v-slot="{ errors }">
@@ -804,7 +822,7 @@ export default {
                         if (!(['1790', '1791', '1701'].includes(item['kod_id'])))
                             _this.regions.push({
                                 'value': item['kod_id'],
-                                'text': (item['name']).replace("Ўзбекистон Республикаси Давлат божхона қўмитасининг ", "")//(item['name']).substring(("Ўзбекистон Республикаси Давлат божхона қўмитасининг ").length)
+                                'text': (item['name']).replace("Ўзбекистон Республикаси Иқтисодиёт ва молия вазирлиги ҳузуридаги Божхона қўмитасининг ", "")//(item['name']).substring(("Ўзбекистон Республикаси Иқтисодиёт ва молия вазирлиги ҳузуридаги Божхона қўмитасининг ").length)
                             })
                     })
             })

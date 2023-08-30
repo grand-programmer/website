@@ -12,7 +12,9 @@ class Apparat extends Model
     public $table = 'apparat';
     public $fillable = [
         'fio',
+        'org',
         'lavozimi',
+        'lavozim_name',
         'qabul',
         'biografiyasi',
         'phone',

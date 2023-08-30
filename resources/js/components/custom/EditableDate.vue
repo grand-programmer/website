@@ -81,8 +81,9 @@
           return this.value
         },
         set (value) {
-          if (this.isValidDate(value)) {
+          if (this.isValidDate(value) || value===null) {
             this.$emit('input', value)
+              if(value)
             this.datepicker.date = (value.length === 10) ? this.formatDate(value, true) : this.datepicker.date
           }
         }
@@ -99,6 +100,7 @@
         }
       },
       isValidDate: function (dateStr) {
+          if(!dateStr) return false
         const s = dateStr.split('-')
         const d = new Date(s[2], s[1] - 1, s[0])
         if (Object.prototype.toString.call(d) === '[object Date]') {

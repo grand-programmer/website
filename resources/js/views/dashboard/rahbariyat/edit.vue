@@ -37,7 +37,7 @@
 
                                 <v-card-text>
                                     <v-container>
-                                        <v-row >
+                                        <v-row>
                                             <v-col cols="4">
 
                                                 <ValidationProvider
@@ -48,7 +48,7 @@
                                                 >
                                                     <span>Лавозими</span>
                                                     <v-autocomplete :items="[
-                                                        {text:'Раис',value:'1'},
+                                                        {text:'Рахбар',value:'1'},
                                                         {text:'Биринчи ўринбосар',value:'2'},
                                                         {text:'Ўринбосар',value:'3'}
                                                         ]" v-model="organization.lavozimi">
@@ -58,10 +58,8 @@
                                                 </ValidationProvider>
 
 
-
-
                                             </v-col>
-                                            <v-col cols="4">
+                                            <v-col cols="4" v-show="lang==='uz'">
                                                 <my-field
                                                     title="Рахбар исми фамилияси исми шарифи"
                                                     v-model="organization.fio"
@@ -70,6 +68,29 @@
 
 
                                             </v-col>
+                                            <v-col cols="4" :key="'ism' + langKey"
+                                                   v-for="(langItem,langKey) in langtext" v-show="lang===langKey">
+                                                <my-field
+                                                    :title="'Рахбар исми фамилияси исми шарифи ' +  getLang()['text']"
+                                                    v-model="langtext[langKey].fio"/>
+                                            </v-col>
+
+                                            <v-col cols="4" v-show="lang==='uz'">
+                                                <my-field
+                                                    title="Лавозим номи"
+                                                    v-model="organization.lavozim_name"
+                                                    name="lavozim_name"
+                                                    rules="required|min:3"/>
+
+
+                                            </v-col>
+                                            <v-col cols="4" :key="'lavozim' + langKey"
+                                                   v-for="(langItem,langKey) in langtext" v-show="lang===langKey">
+                                                <my-field
+                                                    :title="'Лавозим номи ' +  getLang()['text']"
+                                                    v-model="langtext[langKey].lavozim_name"/>
+                                            </v-col>
+
                                             <v-col cols="4">
                                                 <my-field
                                                     title="Раҳбар телефон рақамлари"
@@ -77,7 +98,7 @@
                                                     name="phone"
                                                     rules="required|min:3"/>
                                             </v-col>
-                                            <v-col cols="4"  v-show="lang==='uz'">
+                                            <v-col cols="4" v-show="lang==='uz'">
                                                 <my-field
                                                     title="Қабул вақти"
                                                     v-model="organization.qabul"
@@ -127,17 +148,22 @@
                                                                 :cropBoxResizable="false"
                                                                 :src="'/storage/uploads/markaziy/'+organization.image"
                                                                 v-show="organization_image"
-                                                                :autoCrop ="true"
+                                                                :autoCrop="true"
                                                                 style="max-width:1000px"
                                                             />
 
                                                         </v-col>
-                                                        <v-col cols="2" v-if="imgSrc" ><v-btn v-if="imgSrc" @click.prevent="cropImage">Кесиш</v-btn>
+                                                        <v-col cols="2" v-if="imgSrc">
+                                                            <v-btn v-if="imgSrc" @click.prevent="cropImage">Кесиш
+                                                            </v-btn>
                                                         </v-col>
                                                         <v-col cols="4">
                                                             <div class="cropped-image">
-                                                                <div class="profile-icon-wrapper" :class="organization.lavozimi==='1'?'boshliq':'orinbosar'" v-if="cropImg">
-                                                                    <div class="profile-icon" :style="'background-image: url('+cropImg+')'">
+                                                                <div class="profile-icon-wrapper"
+                                                                     :class="organization.lavozimi==='1'?'boshliq':'orinbosar'"
+                                                                     v-if="cropImg">
+                                                                    <div class="profile-icon"
+                                                                         :style="'background-image: url('+cropImg+')'">
 
                                                                     </div>
 
@@ -257,18 +283,20 @@ Object.keys(rules).forEach(rule => {
 
 export default {
     name: "ApparatUpdate",
-    data: () => ({
+    data() {
+        return {
             content: '<h1>Initial Content</h1>',
 
             breadcrumb_items:
                 [
                     {text: 'Админ панел', to: '/admin', exact: true},
-                    {text: 'Рахбарият', to: '/admin/rahbariyat', exact: true},
+                    {text: 'Рахбарият', to: '/admin/rahbarorg/' + this.$route.params.org, exact: true},
                     {text: 'Тахрирлаш', to: '#', exact: true, disabled: true},
                 ],
             organization: {
                 title: "",
-                biografiyasi:""
+                biografiyasi: "",
+                lavozim_name: ""
 
             },
             lang: 'uz',
@@ -276,14 +304,20 @@ export default {
                 oz: {
                     qabul: null,
                     biografiyasi: null,
+                    fio: null,
+                    lavozim_name: null,
                 },
                 ru: {
                     qabul: null,
                     biografiyasi: null,
+                    fio: null,
+                    lavozim_name: null,
                 },
                 en: {
                     qabul: null,
                     biografiyasi: null,
+                    fio: null,
+                    lavozim_name: null,
                 }
             },
             languages: [
@@ -292,12 +326,12 @@ export default {
                 {text: 'Инглизча', value: 'en'},
                 {text: 'Ozbekcha', value: 'oz'}
             ],
-            organization_image:null,
-            cropImg:null,
-            imgSrc:null,
+            organization_image: null,
+            cropImg: null,
+            imgSrc: null,
             title: null,
         }
-    ),
+    },
 
     computed: {
         formTitle() {
@@ -350,15 +384,16 @@ export default {
         },
         async initialize() {
             const _this = this;
+            // const org = (_this.$route.params.org > 0 && _this.$route.fullPath.indexOf('rahbarorg') !== -1) ? _this.$route.params.org : 0
             await api.readApparat(this.$route.params.id).then((response) => {
                 _this.organization = response.data.data;
-                if (typeof _this.organization.translates !== 'undefined' && _this.organization.translates ) {
-                    for (const [key, translate] of Object.entries(_this.organization.translates)){
+                if (typeof _this.organization.translates !== 'undefined' && _this.organization.translates) {
+                    for (const [key, translate] of Object.entries(_this.organization.translates)) {
                         //_this.vote.translates.each(function(translate,key){
-                        _this.langtext[key]=translate;
+                        _this.langtext[key] = translate;
                     }
                 }
-                _this.cropImg="/storage/uploads/markaziy/"+ _this.organization.image;
+                _this.cropImg = "/storage/uploads/markaziy/" + _this.organization.image;
             }).catch((error) => {
                 this.$toast.error(i18n.t(`Маълумотларни юклашда хатолик содир бўлди!`))
                 this.$router.replace("/admin/rahbariyat").catch(() => {
@@ -372,11 +407,12 @@ export default {
         async save() {
             const isValid = await this.$refs.pageForm.validate();
             if (isValid) {
-                const _this=this;
+                const _this = this;
                 const form = new FormData();
                 //form.append('org_name', _this.organization.name);
                 form.append('fio', _this.organization.fio);
                 form.append('lavozimi', _this.organization.lavozimi);
+                form.append('lavozim_name', _this.organization.lavozim_name);
                 form.append('qabul', _this.organization.qabul);
                 form.append('biografiyasi', _this.organization.biografiyasi);
                 form.append('phone', _this.organization.phone);
@@ -387,8 +423,8 @@ export default {
                 form.append('translates', JSON.stringify(_this.langtext));
 
                 form.append('_method', 'PUT');
-                if(_this.imgSrc)   this.$refs.cropper.getCroppedCanvas().toBlob((blob) => {
-                    form.append('image',blob);
+                if (_this.imgSrc) this.$refs.cropper.getCroppedCanvas().toBlob((blob) => {
+                    form.append('image', blob);
                     api.updateRahbariyat(_this.organization.id, form).then((response) => {
                         _this.$toast.success(`Маълумотларни омадли тарзда юкланди!`)
                     }).catch((error) => {
@@ -396,7 +432,7 @@ export default {
                     })
                 });
                 else {
-                    form.append('image',_this.cropImg);
+                    form.append('image', _this.cropImg);
                     api.updateRahbariyat(_this.organization.id, form).then((response) => {
                         _this.$toast.success(`Маълумотларни омадли тарзда юкланди!`)
                     }).catch((error) => {
@@ -422,7 +458,8 @@ export default {
 .menu-main .v-data-table button.new_item {
     margin-top: -77px;
 }
-.cropped-image .profile-icon-wrapper.boshliq{
+
+.cropped-image .profile-icon-wrapper.boshliq {
     display: flex;
     align-items: center;
     border-radius: 100%;

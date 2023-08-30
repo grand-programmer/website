@@ -408,11 +408,12 @@ const appName=service.name
 
                     formData.append('userInfoTR', JSON.stringify(this.appData));
                     queryStr = new URLSearchParams(formData).toString();
-                    console.log('http://cargo.customs.uz/oauthTR?' + queryStr)
-                    window.open('http://cargo.customs.uz/oauthTR?' + queryStr);
+                    // console.log('http://cargo.customs.uz/oauthTR?' + queryStr)
+                    window.open('http://cargo.customs.uz/oauthNC?' + queryStr);
                     break;
                 case 'singlewindow':
                     this.$refs.AppForm.action = "//yagonadarcha.uz/oauthTR";
+                    this.$refs.AppForm.action = "//yagonadarcha.uz";
                     this.$nextTick(() => {
                         //console.log($("#appForm").serialize());
                         this.$refs['AppForm'].submit();
@@ -517,7 +518,7 @@ const appName=service.name
                         s.innerHTML = '' +
                             '<input type="hidden" name="SessionID" value="' + result_data.data.data.sesid + '"/>'
                             + '<input type="hidden" name="serialNumberHex" value="' + result_data.data.data.ser_num + '"/>'
-                            + '<input type="hidden" name="INN" value="' + result_data.data.data.inn + '"/>'
+                            + '<input type="hidden" name="INN" value="' + _this.$auth.user().pin + '"/>'
                             //+ '<input type="hidden" name="PNFL" value="' + _this.$auth.user().pin + '"/>'
                             + '<input type="hidden" name="clName" value="' + result_data.data.data.name.replaceAll("", "'") + '"/>'
                             + '<input type="hidden" name="DEP" value="DEP"/>';
@@ -527,7 +528,7 @@ const appName=service.name
                         _this.$refs.AppForm.appendChild(s);
                     }
                     this.$nextTick(() => {
-                        console.log($("#appForm").serialize());
+                        // console.log($("#appForm").serialize());
                         this.$refs['AppForm'].submit();
 
                         _this.appData = JSON.parse(JSON.stringify(appData));

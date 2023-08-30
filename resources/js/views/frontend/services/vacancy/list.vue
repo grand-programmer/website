@@ -15,7 +15,7 @@
 
                 <div class="vacancy-wrapper ml-4">
                     <v-row>
-                        <h3 class="mb-5 vacancies-title">Давлат божхона қўмитаси вакант лавозимларининг ягона очиқ
+                        <h3 class="mb-5 vacancies-title">Иқтисодиёт ва молия вазирлиги ҳузуридаги Божхона қўмитаси вакант лавозимларининг ягона очиқ
                             портали </h3>
 
                         <!--                    <p>Мазкур бўлимда сиз вакант ўринлар тўғрисида маълумот оласиз ҳамда ушбу вакант ўринларга ариза топширишингиз мумкин бўлади</p>-->
@@ -393,7 +393,7 @@ export default {
                 if (response.status === 200) {
                     _app.regions = response.data.data;
                     _app.regions = _app.regions.map(function (item) {
-                        item.name = item.name.replace("Ўзбекистон Республикаси Давлат божхона қўмитасининг ", "")
+                        item.name = item.name.replace("Ўзбекистон Республикаси Иқтисодиёт ва молия вазирлиги ҳузуридаги Божхона қўмитасининг ", "")
                         return item;
                     })
                 }

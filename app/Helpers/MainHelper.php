@@ -4,6 +4,8 @@
 namespace App\Helpers;
 
 
+use Carbon\Carbon;
+
 class MainHelper
 {
     public static function slug($str, $options = array())
@@ -136,7 +138,7 @@ class MainHelper
             "G'" => 'Ғ',
             'G' => 'Г',
             'D' => 'Д',
-            'E'=> 'Е',
+            'E' => 'Е',
             'J' => 'Ж',
             'Z' => 'З',
             'I' => 'И',
@@ -161,7 +163,7 @@ class MainHelper
             /// 'E'=> 'Э',
             'ch' => 'ч',
             'sh' => 'ш',
-            'ye'=>'e',
+            'ye' => 'e',
             'yu' => 'ю',
             'ya' => 'я',
             'yo' => 'ё',
@@ -195,19 +197,40 @@ class MainHelper
             //'e' => 'э',
 
         ];
-        $str=str_replace("e","1e",$str);
-        $str=str_replace("E","1E",$str);
-if(str_contains($str, 'e')) {
-    foreach($chars as $chark=>$char) {
-        $str = str_replace($chark."1e", $chark."е", $str);
-        $str = str_replace($chark."1E", $chark."Е", $str);
-    }
-}
-        $str=str_replace("1e","э",$str);
-        $str=str_replace("1E","Э",$str);
-        $str=str_replace("ts","ц",$str);
-        $str=str_replace("Ts","Ц",$str);
+        $str = str_replace("e", "1e", $str);
+        $str = str_replace("E", "1E", $str);
+        if (str_contains($str, 'e')) {
+            foreach ($chars as $chark => $char) {
+                $str = str_replace($chark . "1e", $chark . "е", $str);
+                $str = str_replace($chark . "1E", $chark . "Е", $str);
+            }
+        }
+        $str = str_replace("1e", "э", $str);
+        $str = str_replace("1E", "Э", $str);
+        $str = str_replace("ts", "ц", $str);
+        $str = str_replace("Ts", "Ц", $str);
         return str_replace(array_keys($chars), $chars, $str);
 
+    }
+
+    public static function getDateFromString($dateString)
+    {
+        $dateFormats = ['Y-m-d', 'Y-d-m'];
+        $date = null;
+        foreach ($dateFormats as $format) {
+            $date = Carbon::createFromFormat($format, $dateString, Carbon::now()->timezone);
+            if ($date !== false && $date->isValid()) {
+                // Date parsed successfully, break out of the loop
+                break;
+            }
+        }
+        // Check if date was parsed successfully
+        if ($date !== null && $date->isValid()) {
+            // Date parsed successfully, $date variable now contains the Carbon object
+           return $date;
+        } else {
+            // Date could not be parsed, show an error message
+            return null;
+        }
     }
 }

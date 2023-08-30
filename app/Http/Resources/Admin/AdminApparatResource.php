@@ -28,6 +28,7 @@ class AdminApparatResource extends JsonResource
             'image' => $this->image,
             'rahbar' => $this->rahbar,
             'sort' => $this->sort,
+            'org' => $this->org,
             'translates' => json_decode($this->translates),
         ];
     }

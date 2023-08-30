@@ -30,7 +30,7 @@ class PageController extends Controller
             return MenuResource::collection(Menu::where('parent', $menu->parent)->with('children')
                 //->where('id','<>',$menu->id)
                 ->get())->transform(function ($item) {
-                    if(Menu::find($item->parent)->parent !== 0) {
+                    if(Menu::find($item->parent) and Menu::find($item->parent)->parent !== 0) {
 
                         if ($item['type'] == 1 ) {
                             if($page = Page::find($item->relation_id))

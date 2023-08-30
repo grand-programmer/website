@@ -7951,6 +7951,11 @@ button.bg-dark:focus {
   margin-left: auto !important;
 }
 
+@media (max-width: 576px) {
+    .position-relative-sm{
+        position: relative !important;
+    }
+}
 @media (min-width: 576px) {
   .m-sm-0 {
     margin: 0 !important;

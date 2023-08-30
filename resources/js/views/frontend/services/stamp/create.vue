@@ -31,7 +31,7 @@
                         <v-row>
                         </v-row>
                         <v-row class="person_data mt-10">
-                            <v-col cols="4" v-if="person.type===2">
+                            <v-col cols="4" sm="12" v-if="person.type===2">
                                 <ValidationProvider name="СТИР"
                                                     v-slot="{ errors }">
 
@@ -49,7 +49,7 @@
                                     <span class="red--text">{{ errors[0] }}</span>
                                 </ValidationProvider>
                             </v-col>
-                            <v-col cols="4" v-else>
+                            <v-col cols="12"  md="4" v-else>
                                 <ValidationProvider name="ЖШШИР"
                                                     v-slot="{ errors }">
 
@@ -67,7 +67,7 @@
                                     <span class="red--text">{{ errors[0] }}</span>
                                 </ValidationProvider>
                             </v-col>
-                            <v-col cols="4">
+                            <v-col cols="12"  md="4">
                                 <ValidationProvider :name="person.type===2?'Ташкилот номи':'ФИШ'" rules="required"
                                                     v-slot="{ errors }">
                                     <v-text-field
@@ -88,7 +88,7 @@
                             </v-col>
 
 
-                            <v-col cols="4">
+                            <v-col cols="12"  md="4">
                                 <ValidationProvider name="Телефон рақами" rules="required"
                                                     v-slot="{ errors }">
                                     <v-text-field
@@ -105,7 +105,7 @@
                                 </ValidationProvider>
 
                             </v-col>
-                            <v-col cols="4">
+                            <v-col cols="12"  md="4">
                                 <ValidationProvider name="Электрон почта" rules="required|email"
                                                     v-slot="{ errors }">
                                     <v-text-field
@@ -123,7 +123,7 @@
                                 </ValidationProvider>
 
                             </v-col>
-                            <v-col cols="4">
+                            <v-col cols="12"  md="4">
                                 <text-field
                                     v-model="person.perAdr"
                                     title="Почта манзили"
@@ -136,7 +136,7 @@
 
                             </v-col>
 
-                            <v-col cols="4">
+                            <v-col cols="12"  md="4">
                                 <ValidationProvider name="Ҳудуд" rules="required"
                                                     v-slot="{ errors }">
                                     <v-autocomplete
@@ -153,7 +153,7 @@
 
                             </v-col>
 
-                            <v-col cols="6">
+                            <v-col cols="12" md="6">
                                 <ValidationProvider name="Пост" rules="required"
                                                     v-slot="{ errors }">
                                     <v-autocomplete
@@ -176,7 +176,7 @@
                         </v-row>
                         <v-row>
                             <v-col cols="12">
-                                <v-col cols="2" class="p-0">
+                                <v-col cols="12" md="2" class="p-0">
                                     <h5 class="mb-2">Транспорт воситаси тури</h5>
                                     <v-btn-toggle v-model="app.type">
                                         <v-btn :color="app.type!==1?'primary':''" class="border-0" small>
@@ -190,7 +190,7 @@
                             </v-col>
                         </v-row>
                         <v-row v-if="app.type!==1">
-                            <v-col cols="4">
+                            <v-col cols="12"  md="4">
                                 <ValidationProvider name="Автотранспорт воситаси тури" v-slot="{ errors }">
                                     <v-autocomplete
                                         v-model="app.type_avto"
@@ -208,29 +208,29 @@
                                     <span class="red--text">{{ errors[0] }}</span>
                                 </ValidationProvider>
                             </v-col>
-                            <v-col cols="4">
+                            <v-col cols="12"  md="4">
                                 <textfield title="Русуми (маркаси)" rules="required" v-model="app.mark"/>
                             </v-col>
-                            <v-col cols="4">
+                            <v-col cols="12"  md="4">
                                 <textfield
                                     title="Ишлаб чиқарилган санаси"
                                     v-mask="'##-##-####'"
                                     rules="required"
                                     v-model="app.produced_date"/>
                             </v-col>
-                            <v-col cols="4">
+                            <v-col cols="12"  md="4">
                                 <textfield
                                     title="Давлат рақами белгиси"
                                     rules="required"
                                     v-model="app.gov_number"/>
                             </v-col>
-                            <v-col cols="4">
+                            <v-col cols="12"  md="4">
                                 <textfield
                                     title="Идентификация рақами (VIN)"
                                     rules="required"
                                     v-model="app.vin"/>
                             </v-col>
-                            <v-col cols="4">
+                            <v-col cols="12"  md="4">
                                 <textfield
                                     title="Гувоҳнома серия рақами"
                                     hint="Автотранспорт воситаси рўйхатдан ўтказилганлиги тўғрисида гувоҳнома (техпаспорт) серия рақами"
@@ -242,21 +242,21 @@
                         </v-row>
                         <v-row v-if="app.type===1">
 
-                            <v-col cols="4">
+                            <v-col cols="12"  md="4">
                                 <textfield
                                     title="Контейнер рақами"
                                     rules="required"
                                     v-model="app.kon_number"/>
                             </v-col>
 
-                            <v-col cols="4">
+                            <v-col cols="12"  md="4">
                                 <textfield
                                     title="Контенер тури"
                                     rules="required"
                                     v-model="app.kon_type"/>
                             </v-col>
 
-                            <v-col cols="4">
+                            <v-col cols="12"  md="4">
 
 
                                 <ValidationProvider name="Тара вазни" rules="required"
@@ -274,14 +274,14 @@
 
                             </v-col>
 
-                            <v-col cols="4">
+                            <v-col cols="12"  md="4">
                                 <textfield
                                     title="Ташқи ўлчамлари"
                                     rules="required"
                                     hint="смда, Мисол: 1289,5*235*239,2"
                                     v-model="app.kon_size"/>
                             </v-col>
-                            <v-col cols="4">
+                            <v-col cols="12"  md="4">
                                 <textfield
                                     title="Конструкциянинг асосий ҳусусиятлари"
                                     rules="required"
@@ -303,13 +303,14 @@
                         </v-row>
                     </ValidationObserver>
 
-                    <v-row class="row mb-3 position-absolute bottom-0 end-0">
+                    <v-row class="row mb-3 position-absolute position-relative-sm bottom-0 end-0">
                         <v-col class="d-flex tab_action_buttons">
 
                             <v-btn
                                 color="primary"
                                 @click="nextStep"
                                 size="large"
+                                class="width-100-sm"
                                 :loading="loading.button"
                             >
                                 Ариза юбориш
@@ -634,7 +635,7 @@ export default {
                         if (!(['1790', '1791', '1701'].includes(item['kod_id'])))
                             _this.regions.push({
                                 'value': item['kod_id'],
-                                'text': (item['name']).replace("Ўзбекистон Республикаси Давлат божхона қўмитасининг ", "")//(item['name']).substring(("Ўзбекистон Республикаси Давлат божхона қўмитасининг ").length)
+                                'text': (item['name']).replace("Ўзбекистон Республикаси Иқтисодиёт ва молия вазирлиги ҳузуридаги Божхона қўмитасининг ", "")//(item['name']).substring(("Ўзбекистон Республикаси Иқтисодиёт ва молия вазирлиги ҳузуридаги Божхона қўмитасининг ").length)
                             })
                     })
             })

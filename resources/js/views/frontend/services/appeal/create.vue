@@ -138,6 +138,15 @@
                                                 <span style="margin-top: 0">{{ errors[0] }}</span>
                                             </ValidationProvider>
                                         </div>
+                                        <div class="form-field"><label>{{ $t('Мурожаат йўналиши') }} </label>
+                                            <ValidationProvider name="Мурожаат йўналиши" rules="required"
+                                                                v-slot="{ errors }">
+                                                <v-autocomplete dense
+                                                                :items="yonalishlar" hide-details="auto"
+                                                                v-model="appeal.yonalish"
+                                                                :error-messages="errors[0]"></v-autocomplete>
+                                            </ValidationProvider>
+                                        </div>
                                         <div class="form-field"><label>Электрон почта </label>
                                             <ValidationProvider name="Электрон почта" rules="required|email"
                                                                 v-slot="{ errors }">
@@ -294,7 +303,8 @@
                                         <div class="buttons">
                                             <v-btn type="button" class="primary orange" to="/services/appeals">Ортга
                                             </v-btn>
-                                            <v-btn class="primary" :loading="jonatishLoading" type="submit">Жўнатиш</v-btn>
+                                            <v-btn class="primary" :loading="jonatishLoading" type="submit">Жўнатиш
+                                            </v-btn>
                                         </div>
                                     </v-col>
                                 </div>
@@ -378,7 +388,7 @@ export default {
             errors: [],
             adresatlar:
                 [
-                    {value: 0, text: 'Давлат божхона қўмитаси'},
+                    {value: 0, text: 'Иқтисодиёт ва молия вазирлиги ҳузуридаги Божхона қўмитаси'},
                     {value: 1, text: 'Қорақалпоғистон Республикаси бошқармаси'},
                     {value: 2, text: 'Андижон вилояти бошқармаси'},
                     {value: 3, text: 'Бухоро вилояти бошқармаси'},
@@ -397,9 +407,10 @@ export default {
                 retry: false,
                 work: '',
                 yur_shaxs: '',
-                personPin:'',
+                personPin: '',
                 email: '',
                 phone: '',
+                yonalish: '07',
                 text: '',
                 file: null,
                 date_birth: this.formatDate((new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10)),
@@ -407,19 +418,33 @@ export default {
             },
             date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
             menu: false,
-            regions:[],
-            jonatishLoading:false,
+            regions: [],
+            yonalishlar: [
+                {text: this.$t('Божхона назорати ва расмийлаштируви'), value: '01'},
+                {text: this.$t('Божхона тўловлари ва имтиёзлар'), value: '02'},
+                {text: this.$t('Валюта назорати йўналиши'), value: '03'},
+                {text: this.$t('Контрабанда қарши курашиш'), value: '04'},
+                {text: this.$t('Божхона статистикаси'), value: '05'},
+                {text: this.$t('Кадрлар йўналишида'), value: '06'},
+                {text: this.$t('Бошқа йўналишлар'), value: '07'},
+                {text: this.$t('Дастлабки қарор (божхона қиймати ёки ТИФ ТН юзасидан)'), value: '08'},
+                {text: this.$t('Суриштирув сохасида'), value: '09'},
+                {text: this.$t('Божхона ходими хатти-харакатидан норози'), value: '10'},
+                {text: this.$t('Нотариф тартибга солиш'), value: '11'},
+                {text: this.$t('Молия-иқтисодиёт ва пенсия'), value: '12'},
+            ],
+            jonatishLoading: false,
         }
     },
-    created(){
-        if(!this.$auth.user())
-        this.getPasportData();
+    created() {
+        if (!this.$auth.user())
+            this.getPasportData();
         else {
             //console.log(this.$auth.user().birth_date)
-            const _this=this;
-            if(_this.$route.query.pasnum && _this.$route.query.pasdate){
+            const _this = this;
+            if (_this.$route.query.pasnum && _this.$route.query.pasdate) {
                 this.getPasportData();
-            }else {
+            } else {
                 //_this.appeal.date_birth=_this.$auth.user().birth_date
                 _this.appeal.personPin = _this.$auth.user().pin
                 _this.appeal.name = _this.$auth.user().first_name
@@ -447,26 +472,26 @@ export default {
         Info
     },
     methods: {
-        async getPasportData(){
-            const _this=this;
+        async getPasportData() {
+            const _this = this;
             //let md=md5( this.passport.seriya + this.passport.number + "(:" + this.passport.date)
-            await axios.get('/api/v1/ex_api/getPData',{params: {
+            await axios.get('/api/v1/ex_api/getPData', {
+                params: {
                     pasnum: _this.$route.query.pasnum,
                     //key:md,
                     pasdata: _this.$route.query.pasdate,
                 }
 
-            }).then(function (response){
-                if(typeof response.data.data.birth_date ==='undefined') {
+            }).then(function (response) {
+                if (typeof response.data.data.birth_date === 'undefined') {
                     _this.$toast.error("Маълумотлар мос келмади1!")
                     _this.$router.push('/services/appeals/');
-                }
-                else{
-                    _this.appeal.date_birth=_this.formatDate(response.data.data.birth_date)
-                    _this.appeal.personPin=response.data.data.pinpp
-                    _this.appeal.name=response.data.data.namelatin
-                    _this.appeal.surname=response.data.data.patronymlatin
-                    _this.appeal.lastname=response.data.data.surnamelatin
+                } else {
+                    _this.appeal.date_birth = _this.formatDate(response.data.data.birth_date)
+                    _this.appeal.personPin = response.data.data.pinpp
+                    _this.appeal.name = response.data.data.namelatin
+                    _this.appeal.surname = response.data.data.patronymlatin
+                    _this.appeal.lastname = response.data.data.surnamelatin
 
                 }
             })
@@ -474,58 +499,59 @@ export default {
         async getBoshqarmalar() {
             const _this = this
             await axios.get('/api/v1/ex_api/boshqarma').then(function (result) {
-                _this.adresatlar=[];
+                _this.adresatlar = [];
                 result.data.data.forEach(function (item) {
                     if (!(['1790', '1791'].includes(item['kod_id'])))
                         _this.adresatlar.push({
                             'value': item['kod_id'],
-                            'text': (item['name']).replace("Ўзбекистон Республикаси Давлат божхона қўмитасининг ", "")//(item['name']).substring(("Ўзбекистон Республикаси Давлат божхона қўмитасининг ").length)
+                            'text': (item['name']).replace("Ўзбекистон Республикаси Иқтисодиёт ва молия вазирлиги ҳузуридаги Божхона қўмитасининг ", "")//(item['name']).substring(("Ўзбекистон Республикаси Иқтисодиёт ва молия вазирлиги ҳузуридаги Божхона қўмитасининг ").length)
                         })
                 })
             })
         },
         //create appeal
         async create_appeal() {
-            const _this=this;
-            this.jonatishLoading=true;
+            const _this = this;
+            this.jonatishLoading = true;
             const isValid = await this.$refs.create_apple.validate();
-            if (isValid && this.appeal.file !=null && this.appeal.file.size > 5 * 1024 * 1024) {
+            if (isValid && this.appeal.file != null && this.appeal.file.size > 5 * 1024 * 1024) {
                 _this.$toast.error("Юкланган файл ҳажми 5мбдан ошмаслиги керак!");
                 this.jonatishLoading = false;
             }
-/*                this.alert = {
-                    value: true,
-                    alert_type: "error",
-                    alert_text: "Юкланган файл ҳажми 5мбдан ошмаслиги керак!"
-                }*/
+            /*                this.alert = {
+                                value: true,
+                                alert_type: "error",
+                                alert_text: "Юкланган файл ҳажми 5мбдан ошмаслиги керак!"
+                            }*/
             if (isValid && !this.agreement) {
                 _this.$toast.error("Фойдаланиш қоидаларига розилик билдиришингиз лозим!");
                 this.jonatishLoading = false;
             }
 
-                /*this.alert = {
-                    value: true,
-                    alert_type: "error",
-                    alert_text: "Фойдаланиш қоидаларига розилик билдиришингиз лозим!"
-                }*/
+            /*this.alert = {
+                value: true,
+                alert_type: "error",
+                alert_text: "Фойдаланиш қоидаларига розилик билдиришингиз лозим!"
+            }*/
             if (isValid && this.agreement) {
                 const appeal = this.appeal;
-                const data=new FormData();
-                data.append("firstName",this.appeal.name);
-                data.append("surName",this.appeal.surname);
-                data.append("lastName",this.appeal.lastname);
-                data.append("address",this.appeal.address);
-                data.append("birthDate",this.appeal.date_birth.split('.').reverse().join('-'));
-                data.append("phoneNumber",this.appeal.phone);
-                data.append("locationId",this.appeal.state);
-                data.append("email",this.appeal.email);
-                data.append("profession",this.appeal.work);
-                data.append("position",this.yur_shaxs);
-                data.append("appealType",this.appeal.retry);
-                data.append("messageBody",this.appeal.text);
-                if(this.appeal.file) data.append("multipartFile",this.appeal.file);
-                data.append("positionNm",this.appeal.yur_shaxs);
-                data.append("personPin",this.appeal.personPin);
+                const data = new FormData();
+                data.append("firstName", this.appeal.name);
+                data.append("surName", this.appeal.surname);
+                data.append("lastName", this.appeal.lastname);
+                data.append("address", this.appeal.address);
+                data.append("birthDate", this.appeal.date_birth.split('.').reverse().join('-'));
+                data.append("phoneNumber", this.appeal.phone);
+                data.append("locationId", this.appeal.state);
+                data.append("email", this.appeal.email);
+                data.append("profession", this.appeal.work);
+                data.append("position", this.yur_shaxs);
+                data.append("appealType", this.appeal.retry);
+                data.append("messageBody", this.appeal.text);
+                if (this.appeal.file) data.append("multipartFile", this.appeal.file);
+                data.append("positionNm", this.appeal.yur_shaxs);
+                data.append("personPin", this.appeal.personPin);
+                data.append("appealFormatCode", this.appeal.yonalish);
 
 
                 /*
@@ -544,7 +570,7 @@ export default {
                     .then((resp) => {
                         if (resp.status === 200) {
                             //reset form
-                            _this.jonatishLoading=false;
+                            _this.jonatishLoading = false;
                             this.appeal = {
                                 surname: '',
                                 name: '',
@@ -558,6 +584,7 @@ export default {
                                 phone: '',
                                 file: null,
                                 text: '',
+                                yonalish: '07',
                                 date_birth: Date.now(),
                             };
                             this.$refs.create_apple.reset();
@@ -569,30 +596,30 @@ export default {
                                 //this.sended_appeal = appeal;
                                 this.sended_appeal.appNum = resp.data.number;
                                 this.sended_appeal.code = resp.data.code;
-                                if(typeof resp.data.appeal.appeal!='undefined' && resp.data.appeal.appeal!==null)
-                                this.sended_appeal.appNum = (typeof resp.data.appeal.appeal.appNum !='undefined')?resp.data.appeal.appeal.appNum:null;
+                                if (typeof resp.data.appeal.appeal != 'undefined' && resp.data.appeal.appeal !== null)
+                                    this.sended_appeal.appNum = (typeof resp.data.appeal.appeal.appNum != 'undefined') ? resp.data.appeal.appeal.appNum : null;
 
-                                this.sended_appeal.lastName = (typeof resp.data.appeal.appeal.lastName !='undefined')?resp.data.appeal.appeal.lastName:null;
-                                this.sended_appeal.firstName = (typeof resp.data.appeal.appeal.firstName !='undefined')?resp.data.appeal.appeal.firstName:null;
-                                this.sended_appeal.surName = (typeof resp.data.appeal.appeal.surName !='undefined')?resp.data.appeal.appeal.surName:null;
-                                this.sended_appeal.address = (typeof resp.data.appeal.appeal.address !='undefined')?resp.data.appeal.appeal.address:null;
-                                this.sended_appeal.birthDate = (typeof resp.data.appeal.appeal.birthDate !='undefined')?resp.data.appeal.appeal.birthDate:null;
-                                this.sended_appeal.profession = (typeof resp.data.appeal.appeal.profession !='undefined')?resp.data.appeal.appeal.profession:null;
-                                this.sended_appeal.position = (typeof resp.data.appeal.appeal.position !='undefined')?resp.data.appeal.appeal.position:null;
-                                this.sended_appeal.positionNm = (typeof resp.data.appeal.appeal.positionNm !='undefined')?resp.data.appeal.appeal.positionNm:null;
-                                this.sended_appeal.phoneNumber = (typeof resp.data.appeal.appeal.phoneNumber !='undefined')?resp.data.appeal.appeal.phoneNumber:null;
-                                this.sended_appeal.email = (typeof resp.data.appeal.appeal.email !='undefined')?resp.data.appeal.appeal.email:null;
-                                this.sended_appeal.fileQuestion = (typeof resp.data.appeal.appeal.fileQuestion !='undefined')?resp.data.appeal.appeal.fileQuestion:null;
-                                this.sended_appeal.status = (typeof resp.data.appeal.appeal.status !='undefined')?resp.data.appeal.appeal.status:null;
-                                this.sended_appeal.statusNm = (typeof resp.data.appeal.appeal.statusNm !='undefined')?resp.data.appeal.appeal.statusNm:null;
-                                this.sended_appeal.messageBody = (typeof resp.data.appeal.appeal.messageBody !='undefined')?resp.data.appeal.appeal.messageBody:null;
+                                this.sended_appeal.lastName = (typeof resp.data.appeal.appeal.lastName != 'undefined') ? resp.data.appeal.appeal.lastName : null;
+                                this.sended_appeal.firstName = (typeof resp.data.appeal.appeal.firstName != 'undefined') ? resp.data.appeal.appeal.firstName : null;
+                                this.sended_appeal.surName = (typeof resp.data.appeal.appeal.surName != 'undefined') ? resp.data.appeal.appeal.surName : null;
+                                this.sended_appeal.address = (typeof resp.data.appeal.appeal.address != 'undefined') ? resp.data.appeal.appeal.address : null;
+                                this.sended_appeal.birthDate = (typeof resp.data.appeal.appeal.birthDate != 'undefined') ? resp.data.appeal.appeal.birthDate : null;
+                                this.sended_appeal.profession = (typeof resp.data.appeal.appeal.profession != 'undefined') ? resp.data.appeal.appeal.profession : null;
+                                this.sended_appeal.position = (typeof resp.data.appeal.appeal.position != 'undefined') ? resp.data.appeal.appeal.position : null;
+                                this.sended_appeal.positionNm = (typeof resp.data.appeal.appeal.positionNm != 'undefined') ? resp.data.appeal.appeal.positionNm : null;
+                                this.sended_appeal.phoneNumber = (typeof resp.data.appeal.appeal.phoneNumber != 'undefined') ? resp.data.appeal.appeal.phoneNumber : null;
+                                this.sended_appeal.email = (typeof resp.data.appeal.appeal.email != 'undefined') ? resp.data.appeal.appeal.email : null;
+                                this.sended_appeal.fileQuestion = (typeof resp.data.appeal.appeal.fileQuestion != 'undefined') ? resp.data.appeal.appeal.fileQuestion : null;
+                                this.sended_appeal.status = (typeof resp.data.appeal.appeal.status != 'undefined') ? resp.data.appeal.appeal.status : null;
+                                this.sended_appeal.statusNm = (typeof resp.data.appeal.appeal.statusNm != 'undefined') ? resp.data.appeal.appeal.statusNm : null;
+                                this.sended_appeal.messageBody = (typeof resp.data.appeal.appeal.messageBody != 'undefined') ? resp.data.appeal.appeal.messageBody : null;
                                 //this.sended_appeal.created_at = resp.data.created_at;
                                 //this.$router.push({path: '/services/appeals?appeal_id=' + resp.data.number + '&appeal_code=' + resp.data.code})
                             }, 1000)
 
 
                         } else {
-                            this.jonatishLoading=false;
+                            this.jonatishLoading = false;
                             this.$toast.error("Маълумотларни юборишда хатолик юз берди!");
                             /*this.alert = {
                                 value: true,
@@ -603,10 +630,9 @@ export default {
 
                     })
                     .catch((e) => {
-                        this.jonatishLoading=false;
+                        this.jonatishLoading = false;
 
-                        for (const [key, value] of Object.entries(e.response.data.error.errors))
-                        {
+                        for (const [key, value] of Object.entries(e.response.data.error.errors)) {
                             _this.$toast.error(key + " - " + value);
 
                         }
@@ -626,7 +652,7 @@ export default {
                     }
                 }, 4000)
             } else
-            this.jonatishLoading = false;
+                this.jonatishLoading = false;
 
         },
         formatDate(date) {
@@ -638,7 +664,7 @@ export default {
         parseDate(date) {
             if (!date) return null
 
-            const [ day,month, year] = date.split('.')
+            const [day, month, year] = date.split('.')
             return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`
         },
     }

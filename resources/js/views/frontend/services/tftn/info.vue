@@ -102,35 +102,35 @@
 :key="ckey"
                                 >
                                     <v-expansion-panel-header>
-                                        Товар {{ckey+1}} тўғрисида асосий маълумотлар
+                                        {{ $t('Товар') }} {{ckey+1}} {{ $t('тўғрисида асосий маълумотлар') }}
                                     </v-expansion-panel-header>
                                     <v-expansion-panel-content>
                                             <v-simple-table >
                                                 <template v-slot:default>
                                                     <tbody>
                                                     <tr>
-                                                        <td style="font-weight: 550">Тижорат номи</td>
+                                                        <td style="font-weight: 550">{{ $t('Тижорат номи') }}</td>
                                                         <td>{{
                                                                 typeof commodity.tradeName !== 'undefined' ? commodity.tradeName : ""
                                                             }}
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <td style="font-weight: 550">Товар маркаси</td>
+                                                        <td style="font-weight: 550">{{ $t('Товар маркаси') }}</td>
                                                         <td>{{
                                                                 typeof commodity.tradeMark !== 'undefined' ? commodity.tradeMark : ""
                                                             }}
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <td style="font-weight: 550">Товар модели</td>
+                                                        <td style="font-weight: 550">{{ $t('Товар модели') }}</td>
                                                         <td>{{
                                                                 typeof commodity.model !== 'undefined' ? commodity.model : ""
                                                             }}
                                                         </td>
                                                     </tr>
                                                     <tr v-if="commodity.basicQty">
-                                                        <td style="font-weight: 550">Намуналар</td>
+                                                        <td style="font-weight: 550">{{ $t('Намуналар') }}</td>
                                                         <td>{{
                                                                 typeof commodity.basicQty !== 'undefined' ? commodity.basicQty : ""
                                                             }}
@@ -142,7 +142,7 @@
                                                     </tr>
 
                                                     <tr>
-                                                        <td style="font-weight: 550">Илова қилинган файллар</td>
+                                                        <td style="font-weight: 550">{{ $t('Илова қилинган файллар') }}</td>
                                                         <td>
                                                             <template v-if="typeof commodity.s05Earxivs !== 'undefined'"
                                                                       v-for="doc in commodity.s05Earxivs">
@@ -185,9 +185,12 @@
 
                                                 <p v-if="appstatus.status==='111'" style="font-size: 15px"><a
                                                     :href="'https://qaror.customs.uz/s05decisionPdfDownloadAppeal/?stId=' + appstatus.id">
-                                                    Қарорни юклаб олинг! </a></p>
+                                                    {{ $t('Қарорни юклаб олинг!') }} </a></p>
                                                 <p v-if="typeof appstatus.userNm!=='undefined' && appstatus.userNm && appstatus.status!=='100'" style="font-size: 15px; margin-top: 10px">
-                                                    Маъсул ҳодим: {{appstatus.userNm}}
+                                                    {{ $t('Маъсул ҳодим:') }} {{appstatus.userNm}}
+                                                </p>
+                                                <p v-if="typeof appstatus.comments!=='undefined' && appstatus.comments" style="font-size: 15px; margin-top: 10px">
+                                                    {{ $t('Изоҳ:') }} {{appstatus.comments}}
                                                 </p>
                                             </v-col>
             </v-row>
@@ -255,7 +258,7 @@ export default {
                 },
 
                 {
-                    text: 'Менинг аризаларим',
+                    text: i18n.t('Менинг аризаларим'),
                     to: '/applications',
                     disabled: false,
                     exact: true,
@@ -269,35 +272,35 @@ export default {
             showed: false,
             dialog: false,
             olchamlar: [
-                {'value': '006', 'text': 'м'},
-                {'value': '055', 'text': 'м2'},
-                {'value': '112', 'text': 'л'},
-                {'value': '113', 'text': 'м3'},
-                {'value': '114', 'text': '1000 м3'},
-                {'value': '130', 'text': '1000 л'},
-                {'value': '162', 'text': 'кар'},
-                {'value': '163', 'text': 'г'},
-                {'value': '166', 'text': 'кг'},
-                {'value': '246', 'text': '1000 кВтч'},
-                {'value': '305', 'text': 'КИ'},
-                {'value': '306', 'text': 'г Д/И'},
-                {'value': '715', 'text': 'пар'},
-                {'value': '796', 'text': 'шт'},
-                {'value': '797', 'text': '100 шт'},
-                {'value': '798', 'text': '1000 шт'},
-                {'value': '831', 'text': 'л100% сп.'},
-                {'value': '841', 'text': 'кг H2O2'},
-                {'value': '845', 'text': 'кг 90% с/в'},
-                {'value': '852', 'text': 'кг К2О'},
-                {'value': '859', 'text': 'кг КОH'},
-                {'value': '861', 'text': 'кг N'},
-                {'value': '863', 'text': 'кг NаОH'},
-                {'value': '865', 'text': 'кг Р2О5'},
-                {'value': '867', 'text': 'кг U'},
+                {'value': '006', 'text': i18n.t('м')},
+                {'value': '055', 'text': i18n.t('м2')},
+                {'value': '112', 'text': i18n.t('л')},
+                {'value': '113', 'text': i18n.t('м3')},
+                {'value': '114', 'text': i18n.t('1000 м3')},
+                {'value': '130', 'text': i18n.t('1000 л')},
+                {'value': '162', 'text': i18n.t('кар')},
+                {'value': '163', 'text': i18n.t('г')},
+                {'value': '166', 'text': i18n.t('кг')},
+                {'value': '246', 'text': i18n.t('1000 кВтч')},
+                {'value': '305', 'text': i18n.t('КИ')},
+                {'value': '306', 'text': i18n.t('г Д/И')},
+                {'value': '715', 'text': i18n.t('пар')},
+                {'value': '796', 'text': i18n.t('шт')},
+                {'value': '797', 'text': i18n.t('100 шт')},
+                {'value': '798', 'text': i18n.t('1000 шт')},
+                {'value': '831', 'text': i18n.t('л100% сп.')},
+                {'value': '841', 'text': i18n.t('кг H2O2')},
+                {'value': '845', 'text': i18n.t('кг 90% с/в')},
+                {'value': '852', 'text': i18n.t('кг К2О')},
+                {'value': '859', 'text': i18n.t('кг КОH')},
+                {'value': '861', 'text': i18n.t('кг N')},
+                {'value': '863', 'text': i18n.t('кг NаОH')},
+                {'value': '865', 'text': i18n.t('кг Р2О5')},
+                {'value': '867', 'text': i18n.t('кг U')},
             ],
             items: [
-                {tab: "Ариза хақида умумиy маълумот"},
-                {tab: 'Ариза ҳолати'},
+                {tab: i18n.t("Ариза хақида умумиy маълумот")},
+                {tab: i18n.t('Ариза ҳолати')},
 
             ],
 
@@ -334,7 +337,7 @@ export default {
                     if (typeof response.data.data.data !== "undefined") {
                         _this.app = response.data.data.data
                         _this.breadcrumb_items.push({
-                            text: "ТИФ ТН кодини аниқлаш бўйича ариза -" + _this.app.appNum,
+                            text: i18n.t("ТИФ ТН кодини аниқлаш бўйича ариза -") + _this.app.appNum,
                             to: '/services/tftn/' + _this.app.id,
                             disabled: true,
                             exact: true,
@@ -346,7 +349,7 @@ export default {
 
                     } else {
                         _this.$store.commit('setLoading', false)
-                        _this.$toast.error("Маълумот топилмади!")
+                        _this.$toast.error(i18n.t("Маълумот топилмади!"))
                         //_this.$router.push("/applications");
 
                     }
@@ -354,7 +357,7 @@ export default {
 
                 }).catch(function (error) {
                     _this.$store.commit('setLoading', false)
-                    _this.$toast.error("Маълумот топилмади!")
+                    _this.$toast.error(i18n.t("Маълумот топилмади!"))
                     _this.$router.push("/applications");
                 })
 

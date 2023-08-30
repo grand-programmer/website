@@ -232,7 +232,7 @@ export default {
                 },
                 {
                     title: i18n.t("Хизмат билан боғлиқ саволлар юзасидан боғланиш"),
-                    content: [this.$t("Тел: (+998-78) 120-76-00, Почта: info@customs.uz")]
+                    content: [this.$t("Тел: 55-502-76-00, Почта: info@customs.uz")]
                 },
                 {
                     title: i18n.t("Хизматдан фойдаланувчилар"),

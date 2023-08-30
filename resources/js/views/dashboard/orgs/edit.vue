@@ -188,7 +188,7 @@
                                                                 toolbar_mode: 'sliding',
                                                                 contextmenu: 'link image imagetools table',
                                                                 content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }',
-                                                                file_browser_callback:file_browser_callback,
+
                                                             }"/>
 
 
@@ -224,7 +224,7 @@
                                                                 toolbar_mode: 'sliding',
                                                                 contextmenu: 'link image imagetools table',
                                                                 content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }',
-                                                                file_browser_callback:file_browser_callback,
+
                                                             }"/>
 
 
@@ -309,7 +309,7 @@
                                                 </v-col>
                                                 <v-col cols="1">
                                                     <v-btn fab x-small color="primary"
-                                                           @click="removeOrinbosar(k)">
+                                                           @click="removeOrinbosar(rahbariyat.orinbosar[k])">
                                                         <v-icon>mdi-close</v-icon>
                                                     </v-btn>
                                                 </v-col>
@@ -1079,9 +1079,11 @@ export default {
                 this.posts.splice(key, 1);
             }
         },
-        removeOrinbosar(key) {
-            if (key > 0)
-                this.rahbariyat.orinbosar.splice(key, 1);
+        removeOrinbosar(orinbosar) {
+            if (this.rahbariyat.orinbosar.indexOf(orinbosar) !== -1) {
+                this.cropImgOrinbosar.splice(this.rahbariyat.orinbosar.indexOf(orinbosar), 1);
+                this.rahbariyat.orinbosar.splice(this.rahbariyat.orinbosar.indexOf(orinbosar), 1);
+            }
         },
         addPost() {
             if (this.posts === null) this.posts = [];

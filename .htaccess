@@ -1,6 +1,11 @@
 php_flag opcache.enable Off
 
 <IfModule mod_rewrite.c>
+
+    <IfModule mod_negotiation.c>
+        Options All -MultiViews -Indexes
+    </IfModule>
+
     RewriteEngine on
     RewriteCond %{REQUEST_URI} !^public
     RewriteRule ^(.*)$ public/$1 [L]

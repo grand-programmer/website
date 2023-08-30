@@ -246,7 +246,7 @@ export default {
 
         async save() {
             if (this.editedIndex > -1) {
-                Object.assign(this.votes[this.editedIndex], this.editedItem)
+                Object.assign(this.dataItems[this.editedIndex], this.editedItem)
             } else {
                 const isValid = await this.$refs.pageForm.validate();
                 if (isValid) {

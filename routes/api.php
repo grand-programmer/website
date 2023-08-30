@@ -1,11 +1,14 @@
 <?php
 
+use App\Models\News;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 use App\AppealController;
 use App\AuthController;
 use Illuminate\Support\Facades\Schema;
+use App\Services\NewsToSocial;
+use Illuminate\Support\Facades\Notification;
 
 
 /*
@@ -20,10 +23,29 @@ use Illuminate\Support\Facades\Schema;
 */
 
 
+
 //Route::group(['prefix' => '{lang?}'], function ($lang) {
 //    App::setLocale($lang||'uz');
     Route::group(['prefix' => 'v1','middleware' => 'locale'], function () {
+        Route::get('test', function(){
+            try {
+                $message = (new NewsToSocial(News::orderBy('id', 'desc')->first()));
 
+                Notification::route('telegram', '-1001530458375')
+                    ->notify($message);
+            }
+            catch(Exception $exception) {
+                dd($exception->getMessage());
+            }
+            // Notification::via('telegram')->notify($message);
+            // phpinfo();
+           $date1=new \Carbon\Carbon('2021-01-10');
+           $date2=new \Carbon\Carbon('2031-01-09');
+           print_r($date1->day);
+           print_r($date1->month);
+           print_r($date1->year);
+            dd($date1->subDay()->getTimestamp() === $date2->subYears(10)->getTimestamp());
+        });
         Route::prefix('auth')->group(function () {
             Route::post('register', 'App\Http\Controllers\AuthController@register');
             Route::post('login', 'App\Http\Controllers\AuthController@login');
@@ -32,6 +54,8 @@ use Illuminate\Support\Facades\Schema;
                 Route::get('services', 'App\Http\Controllers\UserController@getServices');
                 Route::post('logout', 'App\Http\Controllers\AuthController@logout');
                 Route::get('refresh', 'App\Http\Controllers\AuthController@refresh');
+
+
 
             });
 
@@ -43,7 +67,11 @@ use Illuminate\Support\Facades\Schema;
         Route::get('get_image', 'App\Http\Controllers\UserController@showImage');
 
         Route::group(['middleware' => 'auth:api'], function () {
-
+            Route::post('statservice', 'App\Http\Controllers\StatController@saveStat');
+            Route::get('statservice', 'App\Http\Controllers\StatController@getApps');
+            Route::get('statservice/export', 'App\Http\Controllers\StatController@exportByud');
+            Route::post('statservice/agree', 'App\Http\Controllers\StatController@agreed');
+            Route::post('userUpdate', 'App\Http\Controllers\UserController@update');
             Route::get('users', 'App\Http\Controllers\UserController@index')->middleware('isAdmin');
             Route::get('users/{id}', 'App\Http\Controllers\UserController@show')->middleware('isAdminOrSelf');
         });
@@ -61,6 +89,7 @@ use Illuminate\Support\Facades\Schema;
             Route::get('/categories/select', 'App\Http\Controllers\Admin\AdminCategoryController@getForSelect');
             Route::resource('/categories', 'App\Http\Controllers\Admin\AdminCategoryController', ['as' => 'admin']);
             Route::resource('/page', 'App\Http\Controllers\Admin\AdminPageController', ['as' => 'admin']);
+            Route::resource('/file', 'App\Http\Controllers\Admin\AdminFileController', ['as' => 'admin']);
             Route::resource('/events', 'App\Http\Controllers\Admin\AdminEventController', ['as' => 'admin']);
             Route::resource('/organizations', 'App\Http\Controllers\Admin\AdminOrganizationController', ['as' => 'admin']);
             Route::resource('/apparat', 'App\Http\Controllers\Admin\AdminApparatController', ['as' => 'admin']);
@@ -70,6 +99,8 @@ use Illuminate\Support\Facades\Schema;
             Route::get('/footermenu/select', 'App\Http\Controllers\FooterMenuController@getForSelect', ['as' => 'admin']);
             Route::get('/footermenu/front', 'App\Http\Controllers\FooterMenuController@getForFront', ['as' => 'admin']);
             Route::resource('/votes', 'App\Http\Controllers\Admin\AdminVoteController',['as'=>'admin']);
+            Route::resource('/opendatas', 'App\Http\Controllers\Admin\AdminOpenDataController',['as'=>'admin']);
+            Route::resource('/opendata/{opendata}/files', 'App\Http\Controllers\Admin\AdminOpenDataFileController',['as'=>'admin']);
             Route::resource('/menu', 'App\Http\Controllers\Admin\AdminMenuController', ['as' => 'admin']);
             Route::resource('/footermenu', 'App\Http\Controllers\Admin\AdminFooterMenuController', ['as' => 'admin']);
             Route::resource('/appeal', 'App\Http\Controllers\Admin\AdminAppealController', ['as' => 'admin']);
@@ -91,6 +122,8 @@ use Illuminate\Support\Facades\Schema;
         Route::resource('/menu', 'App\Http\Controllers\MenuController');
         Route::get('/footermenu/select', 'App\Http\Controllers\FooterMenuController@getForSelect');
         Route::get('/footermenu/front', 'App\Http\Controllers\FooterMenuController@getForFront');
+        Route::get('/opendata', 'App\Http\Controllers\OpenDataController@index');
+        Route::post('/opendata/{opendata}', 'App\Http\Controllers\OpenDataController@show');
         Route::resource('/footermenu', 'App\Http\Controllers\FooterMenuController');
 
         Route::post('/news/{news}/vote', 'App\Http\Controllers\NewsController@like');
@@ -106,6 +139,7 @@ use Illuminate\Support\Facades\Schema;
         Route::resource('/faqs', 'App\Http\Controllers\FaqController');
         Route::get('/front/faqs', 'App\Http\Controllers\FaqController@getForFront');
         Route::get('/votes/front', 'App\Http\Controllers\VoteController@indexFront');
+        Route::get('/phoneVotes', 'App\Http\Controllers\VoteController@phoneVotes');
         Route::resource('/votes', 'App\Http\Controllers\VoteController');
         Route::put('/votescount/{vote}', 'App\Http\Controllers\VoteController@updateCount');
 
@@ -122,5 +156,6 @@ use Illuminate\Support\Facades\Schema;
         Route::get('/data/mfo', 'App\Http\Controllers\DataController@getMFO');
         Route::get('/data/contract', 'App\Http\Controllers\DataController@getEisvoContract');
         Route::get('/users-viewed', 'App\Http\Controllers\UsersCountController@getCount');
+        Route::post('/spreaded-search', 'App\Http\Controllers\NewsController@spreadedSearch');
     });
 //});

@@ -1563,6 +1563,7 @@ export default {
                             }
                             _this.huquq_egasi.personPin = _this.person.pin;
                             _this.huquq_egasi.personId = _this.person.person_id;
+                            _this.huquq_egasi.appId = _this.person.person_id;
 
                             _this.s01AppsManufacturerInfos = [];
                             /*                            _this.s01AppsManufacturerInfos.push({
@@ -1830,7 +1831,7 @@ export default {
                         if (!(['1790', '1791', '1701'].includes(item['kod_id'])))
                             _this.regions.push({
                                 'value': item['kod_id'],
-                                'text': (item['name']).replace("Ўзбекистон Республикаси Давлат божхона қўмитасининг ", "")//(item['name']).substring(("Ўзбекистон Республикаси Давлат божхона қўмитасининг ").length)
+                                'text': (item['name']).replace("Ўзбекистон Республикаси Иқтисодиёт ва молия вазирлиги ҳузуридаги Божхона қўмитасининг ", "")//(item['name']).substring(("Ўзбекистон Республикаси Иқтисодиёт ва молия вазирлиги ҳузуридаги Божхона қўмитасининг ").length)
                             })
                     })
             })

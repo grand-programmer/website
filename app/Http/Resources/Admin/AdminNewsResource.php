@@ -26,6 +26,7 @@ class AdminNewsResource extends JsonResource
             'short'=>$this->short,
             'slug'=>$this->slug,
             'viewed'=>$this->viewed,
+            'telegram'=>$this->telegram,
             'created_by'=>$this->created_by,
             'boshqarma'=>$this->boshqarma,
             'like'=>(isset($liked['like']))?$liked['like']:0,

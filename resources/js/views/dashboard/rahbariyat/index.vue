@@ -18,7 +18,7 @@
             color="primary"
             dark
             class="new_item"
-            to="rahbariyat/create"
+            :to="$route.params.org? $route.params.org +'/create':'apparat/create'"
         >
             Янги қўшиш
         </v-btn>
@@ -58,7 +58,7 @@
                                 </v-dialog>
                             </template>
                             <template v-slot:item.actions="{ item }">
-                                <v-btn :to="'/admin/rahbariyat/edit/' + item.id" color="primary" small><v-icon
+                                <v-btn :to="($route.params.org > 0) ? '/admin/rahbarorg/' + $route.params.org + '/edit/' + item.id : '/admin/rahbariyat/edit/' + item.id" color="primary" small><v-icon
                                     small
                                     class="mr-2"
 
@@ -66,7 +66,7 @@
                                     mdi-pencil
                                 </v-icon>
                                      Тахрирлаш
-                                </v-btn><!--
+                                </v-btn>
                                 <v-btn @click="deleteItem(item.id)" color="secondary" small>
                                 <v-icon
                                     small
@@ -75,7 +75,7 @@
                                     mdi-delete
                                 </v-icon>
                                     Ўчириш
-                                </v-btn>-->
+                                </v-btn>
                             </template>
                             <template v-slot:no-data><br>
                                 <h3>Маълумотлар топилмади</h3><br>
@@ -146,7 +146,8 @@ export default {
     methods: {
         initialize() {
             const _this=this;
-            api.readRahbariyats().then((response) => {
+            const params= (_this.$route.params.org > 0) ? _this.$route.params.org : 0
+            api.readRahbariyats(params).then((response) => {
                 _this.apparats = response.data.data;
             }).catch((error) => {
                 console.log(error)

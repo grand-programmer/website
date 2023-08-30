@@ -4,9 +4,9 @@
             <div class="stat_menu" style="min-height:80vh">
                 <h3> {{ $t("Божхона статистикаси") }}</h3>
                 <ul class="mb-15">
-                    <li><a :class="stat_type==5?'active':''" href="#" @click="stat_type=5">
+                    <li class="d-none"><a :class="stat_type==5?'active':''" href="#" @click="stat_type=5">
                         {{ $t("Товар ва маҳсулотлар {rejim}и",{ rejim: getRejimByCode(rejim.tovarimex).text }) }}</a></li>
-                    <li><a :class="stat_type==4?'active':''" href="#" dd @click="stat_type=4">
+                    <li><a :class="stat_type===4?'active':''" href="#" @click="stat_type=4">
                         {{
                             rejim.tovarimex===1?$t("Ўзбекистон Республикасининг товарлар импорти давлатлар кесимида") : $t("Ўзбекистон Республикасининг товарлар экспорти давлатлар кесимида")
                         }}</a></li>
@@ -33,6 +33,7 @@
         </div>
         <div class="col-9" id="reyt" v-if="stat_type==1">
             <h3>{{ $t("Ўзбекистон Республикаси товарлар импорти ва экспорти ҳудудлар кесимида") }}</h3>
+            <p class="text-center">({{ $t('Маълумотлар тест режимида') }})</p>
             <div id="columnchart1" ref="clusteredColumn" class="chart"></div>
             <div class="filter row">
                 <v-col cols="3">
@@ -59,6 +60,7 @@
         </div>
         <div class="col-9" v-if="stat_type==2">
             <h3>{{ $t("Ўзбекистон Республикаси чегарасидан ўтаётган автомобилларнинг сони") }} </h3>
+            <p class="text-center">({{ $t('Маълумотлар тест режимида') }})</p>
             <div id="columnchart2" class="chart"></div>
             <div class="filter row">
                 <v-col cols="3">
@@ -87,6 +89,7 @@
             <h3>{{
                 rejim.tovarimex===1? $t("Ўзбекистон Республикасидан товарлар импорти ойлар кесимида") :  $t("Ўзбекистон Республикасидан товарлар экспорти ойлар кесимида")
                 }}</h3>
+            <p class="text-center">({{ $t('Маълумотлар тест режимида') }})</p>
             <div id="columnchart3" class="chart" v-show="apexchartshow">
 
                 <apexchart2 :mydata="apexchartdata"></apexchart2>
@@ -130,6 +133,7 @@
             <h3>{{
                     rejim.tovarimex===1? $t("Импорт товарлари давлатлар кесимида") : $t("Экспорт товарлари давлатлар кесимида")
                 }}</h3>
+            <p class="text-center">({{ $t('Маълумотлар тест режимида') }})</p>
             <div id="columnchart4" style="min-height: 65vh; float: left; width: 70%" class="chart mb-10"></div>
             <div id="columnchart4-1" v-if="stat_type===4" style="min-height: 65vh; width: 30%; float: right;"
                  class="chart mb-10"></div>
@@ -142,6 +146,14 @@
                                 {text:$t('Импорт'),value:1},
                                 {text:$t('Экспорт'),value:2}
                             ]"
+                    ></v-autocomplete>
+                </v-col>
+                <v-col cols="3">
+                    <v-autocomplete
+                        ref="davimex1"
+                        :label="$t('Йиллар бўйича')"
+                        v-model="year"
+                        :items="years"
                     ></v-autocomplete>
                 </v-col>
                 <v-col cols="3">
@@ -165,9 +177,10 @@
             </div>
 
         </div>
-        <div class="col-9" v-if="stat_type==5">
+        <div class="col-9" v-if="stat_type==5 && 1===2">
             <h3>{{
                     rejim.tovarimex===1?$t("Товар ва маҳсулотлар импорти"):$t("Товар ва маҳсулотлар экспорти") }}</h3>
+            <p class="text-center">({{ $t('Маълумотлар тест режимида') }})</p>
             <div id="columnchart5" style="min-height: 65vh;" class="chart mb-10">
 
                 <mychart :items="mychartdata">
@@ -209,8 +222,9 @@
             </div>
 
         </div>
-        <div class="col-9" v-if="stat_type==6">
+        <div class="col-9" v-if="stat_type===6">
             <h3>{{ $t("Ҳудудий корхоналар томонидан импорт қилинган товарлар") }}</h3>
+            <p class="text-center">({{ $t('Маълумотлар тест режимида') }})</p>
             <div id="columnchart6" style="min-height: 65vh;" class="chart">
 
                 <mychart2>
@@ -266,7 +280,7 @@ import i18n from "../../i18n";
 export default {
     data() {
         return {
-            stat_type: 5,
+            stat_type: 4,
             rejim: {
                 oyimex: 1,
                 davlatimex: 1,
@@ -327,11 +341,11 @@ export default {
                     value: 12
                 }
             ],
-            year: 2022,
+            year: 2023,
             firstStart: 1,
             mychartdata: [],
             years: [
-                2020, 2021, 2022
+                2022, 2023
             ],
             apexchartshow: false,
             apexchartdata: {
@@ -436,7 +450,7 @@ export default {
     },
     methods: {
         created() {
-            if (this.year === 2022) this.months.map(function (item) {
+            if (this.year === 2020) this.months.map(function (item) {
                 if (item.value > 2) item.disabled = true;
                 return item;
             })
@@ -501,10 +515,11 @@ export default {
 
 
                     if (typeof res.data.data != 'undefined') {
-
-                        const column1 = getCol(res.data.data, 'column1')
-                        const column2 = getCol(res.data.data, 'column2')
-                        const month = getCol(res.data.data, 'm')
+                        const mystatData = res.data.data
+                        mystatData.splice(7)
+                        const column1 = getCol(mystatData, 'column1')
+                        const column2 = getCol(mystatData, 'column2')
+                        const month = getCol(mystatData, 'm')
 
                         const series = [
                             {name: _this.year, data: column2},
@@ -580,7 +595,10 @@ export default {
             //return item; else if(_this.mymonths.indexOf(key)) _this.months.splice(key,1)
         })
 
-        this.columnChart5();
+        setTimeout(() => this.$refs.scripts.createRootColumnChart4(), 100);
+        setTimeout(() => this.columnChart4(true), 100)
+        setTimeout(() => this.$refs.scripts.createRootColumnChart4_1(), 100);
+        setTimeout(() => this.columnChart4_1(true), 100)
     },
     components: {
         mychart,

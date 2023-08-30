@@ -23,6 +23,9 @@ class ApiController extends Controller
      */
     public function index($action = 'vakantlar', Request $request)
     {
+       // dd($request);
+/*        @ini_set('post_max_size' , '50M' );*/
+        /* phpinfo(); */
         $data = $request->all();
 
         $myrequest = Http::asForm()->acceptJson();
@@ -44,12 +47,11 @@ class ApiController extends Controller
                         $response = $myrequest->get('http://192.168.214.159/vacancy/public/api/vakant_nomer/' . $vacancy);
                 }
 
-
                 if ($response->status() === 200) {
                     $data = $response->json();
                     if (Auth::guard('api')->user()) {
 
-                        $response1 = $myrequest->get('http://192.168.214.159/vacancy/public/api/nomzodtotal/' . Auth::guard('api')->user()->pin);
+                        $response1 = $myrequest->get('http://192.168.214.159/vacancy/public/api/nomzodtotal/' . Auth::guard('api')->user()->pin. '/' . $vacancy);
                         if ($response1->status() == 200) {
                             $data = array_merge($response->json(), $response1->json());
                         }
@@ -70,7 +72,7 @@ class ApiController extends Controller
             case "boshqarma":
 
                 try {
-                    $response = $myrequest
+                    $response = $myrequest->timeout(1)
                         ->get('http://192.168.214.159/vacancy/public/api/hudud');
                     /*                    $response = $myrequest
                                             ->timeout(10)
@@ -257,6 +259,7 @@ class ApiController extends Controller
                 $response = Http::contentType("application/json")->send('POST', 'http://192.168.214.152:7070/DECAPP/s03commodityrestapi/savecommoditys', [
                     'body' => json_encode($request->all())
                 ]);
+
                 break;
             case "recycle-get":
                 $appData = $request->only(['app_id', 'person_id', 'page', 'size']);
@@ -404,11 +407,11 @@ class ApiController extends Controller
             /// tpo begin
             ///
             case "tpo":
-                $this->middleware('auth:api');
+                // $this->middleware('auth:api');
                 $user = Auth::guard('api')->user();
                 if (!$user) return response()->json([
                     'success' => false,
-                    'data' => 'Foydalanuvchi avtorizatsiyadan otishi talab etiladi'], 401);
+                    'data' => 'Foydalanuvchi avtorizatsiyadan otishi talab etiladi1'], 400);
                 $response = Http::contentType("application/json")->send('POST', 'http://192.168.224.145:8080/api/v1/tpo/save', [
                     'body' => json_encode($request->all())
                 ]);
@@ -714,7 +717,7 @@ class ApiController extends Controller
             case "postsbyregion":
                 $appData = $request->only('code');
                 $code = isset($appData['code']) ? $appData['code'] : "";
-                $response = Http::contentType("application/json")->get('http://192.168.214.152:7070/DECAPP/s09appsrestapi/postsWith', [
+                $response = Http::contentType("application/json")->get('http://192.168.214.152:7070/DECAPP/s09appsrestapi/postsWith2', [
                     "code" => $code,
                 ]);
                 if ($response->status() == 200) {
@@ -895,10 +898,10 @@ class ApiController extends Controller
                 if (isset($data['type']) and $data['type'] === 'dep') {
 
 
-                    $query = "Insert into Logging  (SESID,INN,NAME,IP,SER_NUM) values ('" . Str::uuid() . "','" . Auth::guard('api')->user()->tin . "','" . Auth::guard('api')->user()->sur_name . " " . Auth::guard('api')->user()->first_name . " " . Auth::guard('api')->user()->mid_name . "','" . $request->getClientIp() . "', '" . substr(Str::uuid(), 0, 8) . "')";
+                    $query = "Insert into Logging  (SESID,INN,NAME,IP,SER_NUM) values ('" . Str::uuid() . "','" . Auth::guard('api')->user()->pin . "','" . Auth::guard('api')->user()->sur_name . " " . Auth::guard('api')->user()->first_name . " " . Auth::guard('api')->user()->mid_name . "','" . $request->getClientIp() . "', '" . substr(Str::uuid(), 0, 8) . "')";
                     DB::connection("databaseconfig212_227")->insert($query);
                     //else return response()->json(['data' => $sessions[0]]);
-                    $sessions = DB::connection("databaseconfig212_227")->select("Select * from Logging where INN='" . Auth::guard('api')->user()->tin . "' and exit is null and Last > '" . Carbon::now()->subDays(1) . "' order by last desc");
+                    $sessions = DB::connection("databaseconfig212_227")->select("Select * from Logging where INN='" . Auth::guard('api')->user()->pin . "' and exit is null and Last > '" . Carbon::now()->subDays(1) . "' order by last desc");
 
                     return response()->json(['data' => $sessions[0]]);
 

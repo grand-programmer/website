@@ -81,7 +81,7 @@
                 <v-col cols="9">
                     <v-card class="mt-9 p-3 mening_profilim" elevation="1">
                         <h3 class="my-5 mb-10">Менинг профилим</h3>
-
+<validation-observer ref="profileForm" v-slot="{ invalid }" tag="div"   >
                         <v-container>
                             <v-row class="dashed-border">
                                 <v-col cols="12">
@@ -107,21 +107,36 @@
                                     <span>{{ $auth.user().birth_place }}</span>
                                 </v-col>
                                 <v-col cols="4" class="profile-item">
+                                    <ValidationProvider
+                                        v-slot="{ errors}"
+                                        name="Яшаш жойи"
+                                        rules="required"
+                                        tag="div"
+                                    >
                                     <span>Яшаш жойи</span>
-                                    <span>{{ $auth.user().per_adr }}</span>
+                                    <v-text-field v-model="$auth.user().per_adr" :error-messages="errors[0]"></v-text-field>
+                                    </ValidationProvider>
                                 </v-col>
                                 <v-col cols="4" class="profile-item" v-if="$auth.user().email">
                                     <span>Электрон почта</span>
                                     <span>{{ $auth.user().email }}</span>
                                 </v-col>
-                                <v-col cols="4" class="profile-item" v-if="$auth.user().phone">
+                                <v-col cols="4" class="profile-item">
+                                    <ValidationProvider
+                                        v-slot="{ errors}"
+                                        name="Телефон рақами"
+                                        tag="div"
+                                        rules="required"
+                                    >
                                     <span>Телефон рақами</span>
-                                    <span>{{ $auth.user().phone }}</span>
+                                        <v-text-field v-mask="'############'" v-model="$auth.user().phone" :error-messages="errors[0]"></v-text-field>
+                                    </ValidationProvider>
                                 </v-col>
+                                <v-col cols="12" class="mx-5"><v-btn color="primary" @click="changeProfile" >{{$t('Ўзгаришларни сақлаш')}}</v-btn></v-col>
                             </v-row>
 
                         </v-container>
-
+</validation-observer>
 
                         <!--                        <h3 class="my-5">Менинг аризаларим</h3>
 
@@ -237,6 +252,7 @@
 </template>
 <script>
 import i18n from "../../i18n";
+import {ValidationObserver, ValidationProvider} from "vee-validate";
 
 export default {
     name: "MyProfile",
@@ -367,10 +383,35 @@ export default {
 
                 }, 1000);
             }
+        },
+        async changeProfile(){
+            const isValid = await  this.$refs.profileForm.validate()
+            if(isValid) {
+                axios.post('/api/v1/userUpdate', {
+                    address: this.$auth.user().per_adr,
+                    phone: this.$auth.user().phone,
+                }).then(res => {
+                    if (res.status === 200) {
+                        this.$toast.success(this.$t('Маълумотлар омадли тарзда сақланди'))
+                    } else this.$toast.error(this.$t('Маълумотлар сақлашда хатолик юз берди'))
+                })
+            }else
+            {
+                this.$toast.error(this.$t('Маълумотлар тўғрилаб қайтадан юборинг'))
+            }
         }
 
-    }
+    },
+        components:{
+            ValidationProvider,
+            ValidationObserver,
+        }
 
 }
 </script>
+<style>
+.profile-item span:last-child{
+    margin-top: 35px;
+}
+</style>
 

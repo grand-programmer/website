@@ -1,8 +1,8 @@
 <template>
     <div class="chart-container">
         <div class="legends">
+            <div class="legend"><span class="color"></span><span class="value">2023</span></div>
             <div class="legend"><span class="color"></span><span class="value">2022</span></div>
-            <div class="legend"><span class="color"></span><span class="value">2021</span></div>
 
         </div>
         <div class="chart_item d-flex" v-for="item in items">

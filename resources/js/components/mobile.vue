@@ -177,7 +177,7 @@
                                                         <h3 class="fadeInLeft animated">Мурожаатлар</h3>
                                                         <h4 class="fadeInLeft animated">Фуқаролар ва ТИФ қатнашчилари мурожаатларини кўриб
                                                             чиқиш</h4>
-                                                        <p class="fadeInUp animated">Давлат божхона қўмитасига фуқаролар ва ТИФ қатнашчилари
+                                                        <p class="fadeInUp animated">Иқтисодиёт ва молия вазирлиги ҳузуридаги Божхона қўмитасига фуқаролар ва ТИФ қатнашчилари
                                                             томонидан <br>берилган мурожаатларни қабул қилиш, кўриб чиқиш, Рахбарият
                                                             қабуллари
                                                             тўғрисида маълумотларни шу ердан олинг </p>
@@ -226,7 +226,7 @@
                                 <p class="fadeInUp animated">
                                     {{ $t("Божхона ахборот тизмиларига ҳужжатларингизни жойланг") }}</p>
                                 <a class="s_readmore_btn fadeInUp animated" target="_blank"
-                                   href="https://ed2.customs.uz">{{ $t("Хизматдан фойдаланиш") }}</a>
+                                   href="https://ed2.customs.uz/E_ARXIV">{{ $t("Хизматдан фойдаланиш") }}</a>
                                 <!--<a class="s_contact_btn fadeInUp animated" href="#">Contact Us</a>-->
                             </div>
                             <div class="slider_image slider-2">
@@ -340,7 +340,7 @@
                                                         <h3 class="fadeInLeft animated">Мурожаатлар</h3>
                                                         <h4 class="fadeInLeft animated">Фуқаролар ва ТИФ қатнашчилари мурожаатларини кўриб
                                                             чиқиш</h4>
-                                                        <p class="fadeInUp animated">Давлат божхона қўмитасига фуқаролар ва ТИФ қатнашчилари
+                                                        <p class="fadeInUp animated">Иқтисодиёт ва молия вазирлиги ҳузуридаги Божхона қўмитасига фуқаролар ва ТИФ қатнашчилари
                                                             томонидан <br>берилган мурожаатларни қабул қилиш, кўриб чиқиш, Рахбарият
                                                             қабуллари
                                                             тўғрисида маълумотларни шу ердан олинг </p>
@@ -681,7 +681,7 @@
                                     <div id="chose1" class="panel-collapse collapse" role="tabpanel"
                                          aria-labelledby="headingOne">
                                         <div class="panel-body">
-                                            Давлат божхона қўмитасининг расмий веб сайти “Електрон хизматлар”
+                                            Иқтисодиёт ва молия вазирлиги ҳузуридаги Божхона қўмитасининг расмий веб сайти “Електрон хизматлар”
                                             рукнида
                                             “Тадбиркорнинг шахсий кабинети” (http://ed1.customs.uz/PersonCabinet)
                                             орқали
@@ -856,7 +856,7 @@
                                     <p>
                                         ЎзМАА Интернет-ОАВ гувоҳномаси № 0902
                                     </p>
-                                    <p> © 2001-2022 Ўзбекистон Республикаси Давлат божхона қўмитаси.
+                                    <p> © 2001-2022 Ўзбекистон Республикаси Иқтисодиёт ва молия вазирлиги ҳузуридаги Божхона қўмитаси.
                                     </p>
 
                                 </div>
@@ -868,8 +868,8 @@
                                     <ul class="contact_lsit">
                                         <li><a href="#"><i class="fa fa-map-marker" aria-hidden="true"></i>100003,
                                             Тошкент шаҳри,Ислом Каримов кўчаси 3 уй</a></li>
-                                        <li><a href="#"><i class="fa fa-phone" aria-hidden="true"></i>(+998-78)
-                                            120-76-00</a>
+                                        <li><a href="#"><i class="fa fa-phone" aria-hidden="true"></i>(+998-55)
+                                            502-76-00</a>
                                         </li>
                                         <li><a href="#"><i class="fa fa-envelope" aria-hidden="true"></i>info@customs.uz</a>
                                         </li>
@@ -879,7 +879,7 @@
                                         <li class="d-none"><a href="#"  target="_blank"><i class="fab fa-twitter"></i></a></li>
                                         <li><a href="https://t.me/customschannel"  target="_blank"><i class="fab fa-telegram-plane"></i></a></li>
                                         <li class="d-none"><a href="#"  target="_blank"><i class="fab fa-google-plus-g"></i></a></li>
-                                        <li><a href="https://www.instagram.com/dbq.uz/"  target="_blank"><i class="fab fa-instagram-square"></i></a></li>
+                                        <li><a href="https://www.instagram.com/bojxona.official/"  target="_blank"><i class="fab fa-instagram-square"></i></a></li>
                                     </ul>
                                 </div>
                             </div>

@@ -310,17 +310,18 @@
                                 <v-icon>mdi-clipboard-text</v-icon>
                                 <v-card-title>Ҳужжатлар</v-card-title>
                             </div>
-                            <v-card-text class="p-0 mt-5 text-left">
-                                <a class="d-block my-2" href="https://lex.uz/docs/3336169" target="_blank">"Жисмоний ва юридик шахсларнинг мурожаатлари тўғрисида"ги қонун</a>
-                                <a class="d-block my-2" href="/storage/files/308-buyruq.pdf" target="_blank">Идоравий алоқа маркази фаолиятини ташкил этиш тўғрисида божхона қўмитасининг буйруғи</a>
+                            <v-card-text class="p-0 mt-5 text-left hujjatlar">
+                                <a class="d-none my-2" href="https://lex.uz/docs/3336169" target="_blank">"Жисмоний ва юридик шахсларнинг мурожаатлари тўғрисида"ги қонун</a>
+                                <a class="d-block mb-10" :href="$i18n.locale==='oz'?'/storage/files/koribchiqish_oz.pdf':'/storage/files/koribchiqish.pdf'" target="_blank">{{$t('Мурожаатларни кўриб чиқишда жисмоний ва юридик шахсларнинг ҳуқуқлари ҳамда божхона органларининг мажбуриятлари')}}</a>
+                                <a class="d-block my-10" :href="$i18n.locale==='oz'?'/storage/files/tartibi_oz.pdf':'/storage/files/tartibi.pdf'" target="_blank">{{$t('Мурожаатларни қайта ишлаш тартиби ва муддати')}}</a>
 
                                 <v-btn color="primary" href="https://lex.uz/docs/3336169" type="button" target="_blank" style="
-    position: absolute;
-    bottom: 15px;
-    display: none;
-    left: 50%;
-    transform: translate(-50%, 0);
-">
+                                        position: absolute;
+                                        bottom: 15px;
+                                        display: none;
+                                        left: 50%;
+                                        transform: translate(-50%, 0);
+                                    ">
                                     Батафсил
                                 </v-btn>
 
@@ -549,6 +550,9 @@ export default {
 }
 </script>
 <style>
+.hujjatlar a{
+    font-size: 19px;
+}
 .appeal_types {
     display: flex;
     justify-content: center;
@@ -617,6 +621,10 @@ export default {
     font-weight: 500;
     font-size: 14px;
     margin-bottom: 20px !important;
+}
+.appeal_types a:hover{
+    text-decoration: underline;
+
 }
 
 

@@ -24,16 +24,16 @@
                             </v-alert>
                             <form autocomplete="off" @submit.prevent.stop="options.isLoggingIn ? login() : register()"
                                   method="post">
-                                <v-text-field v-if="!options.isLoggingIn" v-model="name" light="light"
+                                <v-text-field class="d-none" disabled v-if="!options.isLoggingIn" v-model="name" light="light"
                                               prepend-icon="mdi-account" label="Исм" required></v-text-field>
-                                <v-text-field v-model="email" light="light" prepend-icon="mdi-email"
+                                <v-text-field class="d-none" disabled v-model="email" light="light" prepend-icon="mdi-email"
                                               label="Электрон почта" type="email" required></v-text-field>
-                                <v-text-field v-model="password" light="light" prepend-icon="mdi-lock"
+                                <v-text-field class="d-none" disabled v-model="password" light="light" prepend-icon="mdi-lock"
                                               label="Парол" type="password" required></v-text-field>
-                                <v-text-field v-model="password_confirmation" v-if="!options.isLoggingIn" light="light"
+                                <v-text-field class="d-none" disabled v-model="password_confirmation" v-if="!options.isLoggingIn" light="light"
                                               prepend-icon="mdi-lock"
                                               label="Паролни тасдиқлаш" type="password" required></v-text-field>
-                                <v-checkbox v-if="options.isLoggingIn" v-model="options.shouldStayLoggedIn"
+                                <v-checkbox class="d-none" disabled v-if="options.isLoggingIn" v-model="options.shouldStayLoggedIn"
                                             light="light"
                                             label="Кириш учун киритган маълумотларингиз сақланиб қолишини хоҳлайсизми?"
                                             hide-details="hide-details"></v-checkbox>
@@ -41,7 +41,7 @@
                                 <div class="d-flex justify-content-center mt-3">
 
                                     <v-btn @click="login" v-if="options.isLoggingIn" type="submit"
-                                           class="d-flex justify-content-center" style="margin:0 auto">
+                                           class="d-none d-fle justify-content-center" style="margin:0 auto">
                                         Кириш
                                     </v-btn>
                                     <div v-if="options.isLoggingIn" type="button"
@@ -54,20 +54,20 @@
                                         </svg>
                                     </div>
                                 </div>
-                                <v-btn @click="login" v-if="!(options.isLoggingIn)" type="submit" class="d-flex justify-content-center"
+                                <v-btn @click="login" v-if="!(options.isLoggingIn)" type="submit" class="d-none d-fle justify-content-center"
                                        style="margin:0 auto">
                                     Рўйҳатдан ўтиш
                                 </v-btn>
                             </form>
                         </v-card-text>
                     </v-card>
-                    <div v-if="options.isLoggingIn">
+                    <div v-if="options.isLoggingIn" class="d-none">
                         <!--                        Рўйхатдан ўтмаганмисиз?-->
                         <v-list-item color="primary" @click="options.isLoggingIn = false; " style="margin: 0 auto">
                             Рўйҳатдан ўтмоқчимисиз ?
                         </v-list-item>
                     </div>
-                    <div v-else>
+                    <div v-else class="d-none">
                         <!--                        Аллақачон рўйхатдан ўтиб қўйганмисиз ?-->
                         <v-list-item color="primary" @click="options.isLoggingIn = true">Тизимдан рўйхатдан
                             ўтганмисиз?
@@ -108,9 +108,7 @@ export default {
             });
     },
     methods: {
-        /*        loginOauth(){
 
-                },*/
         oauth() {
 
             if (this.request) {

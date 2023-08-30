@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\VoteResource;
 use App\Models\Vote;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Request as Input;
 use Illuminate\Support\Str;
@@ -19,6 +21,7 @@ class VoteController extends Controller
      */
     public function index()
     {
+
         return response()->json(['success' => true, 'data' => VoteResource::collection(Vote::orderBy('sort')->get())], 200);
     }
     /**
@@ -29,6 +32,23 @@ class VoteController extends Controller
     public function indexFront()
     {
         return response()->json(['success' => true, 'data' => VoteResource::collection(Vote::where('active',true)->orderBy('sort')->get())], 200);
+    }
+
+    public function phoneVotes(Request $request){
+        $data=$request->only(['month', 'year']);
+if(isset($data['month'])) $queryMonth= ' and month(call_date) = ' . $data['month']; else $queryMonth= '';
+if(isset($data['year'])) $queryYear= ' and year(call_date) = ' . $data['year']; else $queryYear= ' and year(call_date) = ' . Carbon::now()->year;
+
+       $query= "SELECT count(id) count, evaluation text,
+(select count(id)  FROM dbo.system_operator_evaluation_statistics
+    where evaluation <> 0" . $queryYear. $queryMonth. "  ) 'total'
+  FROM dbo.system_operator_evaluation_statistics
+    where evaluation <> 0" . $queryYear. $queryMonth. "
+  Group BY evaluation
+  order by evaluation desc";
+       $phonedata = DB::connection('sqlsrv')->select($query);
+
+        return response()->json(['success'=>true, 'data' => $phonedata]);
     }
 
     /**
@@ -153,15 +173,19 @@ class VoteController extends Controller
 
 
             if ($validator->fails()) {
-                return response()->json(['error' => $validator->errors()], 401);
+                return response()->json(['error' => $validator->errors()], 400);
             }
             $myVote = $vote->toArray();
+
+
+
+
             $myVote['answers'] = (array)json_decode($myVote['answers']);
             //$myVote=$vote;
             $voteCollection = collect($myVote['answers']);
             ///dd($voteCollection->whereIn('value', $data['answer'])->isEmpty());
             if ($voteCollection->whereIn('value', $data['answer'])->isEmpty())
-                return response()->json(['succes' => 'false', 'error' => 'Answer not found'], 401);
+                return response()->json(['succes' => 'false', 'error' => 'Answer not found'], 400);
             $myVote['answers'] = $voteCollection->transform(function ($answer) use ($data) {
                 if (isset($answer->value) && $answer->value === $data['answer']) {
                     if (isset($answer->count)) $answer->count++; else $answer->count = 1;
@@ -178,7 +202,7 @@ class VoteController extends Controller
                 'success' => true,
                 'data' => new VoteResource($vote)], 200);
         }
-        return response()->json(['success' => false], 401);
+        return response()->json(['success' => false], 400);
 
     }
 

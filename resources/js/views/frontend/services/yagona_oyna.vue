@@ -32,9 +32,7 @@
     margin: 0 auto;
     padding: 50px;
     border-bottom: 1px solid #39ae69;
-">{{
-                    $t("Божхона органлари ягона дарча хизматлари")
-                }}</h3>
+">{{ $t('Божхона органлари ягона дарча хизматлари') }}</h3>
 
             <!--            <div class="container">
                             <ul class="nav nav-pills mb-3 portfolio_menu" id="pills-tab" role="tablist">
@@ -300,7 +298,7 @@
                                     <div class="shadow-right"></div>
                                     <div class="portfolio_content">
                                         <div class="portfolio_text"> {{
-                                                $t("Давлат божхона қўмитасига келиб тушган мурожаатлар статистикаси")
+                                                $t("Иқтисодиёт ва молия вазирлиги ҳузуридаги Божхона қўмитасига келиб тушган мурожаатлар статистикаси")
                                             }}
                                         </div>
                                         <div class="download_links"><p><a
@@ -491,7 +489,6 @@
 <script>
 import i18n from "../../../i18n";
 import ServicesList from "./services-list";
-
 export default {
     name: 'Services',
     components: {ServicesList},
@@ -748,7 +745,10 @@ export default {
 }
 </script>
 <style>
-@import '/public/css/services.css';
+ @import '/public/css/services.css';
+
+
+
 
 
 </style>

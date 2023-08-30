@@ -11,7 +11,7 @@
                 persistent-hint
                 single-line
                 :loading="loading"
-                counter="13"
+                counter="16"
                 hint="Ҳужжатнинг е-архив тизимидаги Fayl ID рақами"
             >
                 <template v-slot:append>
@@ -113,7 +113,7 @@ export default {
             let fileIsset = [];
 
             // if (typeof this.documents[key] !== 'undefined' && this.documents[key]['id'] === val) this.documents[key].color = 'success';
-            if (typeof val !== 'undefined' && val && val.length === 13) {
+            if (typeof val !== 'undefined' && val && (val.length === 13 || val.length === 16)) {
 
                 fileIsset = await _this.checkFile(val)
                 if (fileIsset && typeof fileIsset !== 'undefined' && typeof fileIsset[0] !== 'undefined' && fileIsset.length > 0) {
@@ -153,7 +153,7 @@ export default {
         },
         async checkFile(file_id) {
             this.loading = true
-            if (!file_id || file_id.length !== 13) {
+            if (!(file_id && (file_id.length === 13 || file_id.length === 16))) {
                 this.loading = false
                 return false;
             }

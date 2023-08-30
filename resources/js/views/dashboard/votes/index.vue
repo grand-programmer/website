@@ -155,13 +155,13 @@ export default {
         },
 
         editItem(item) {
-            this.editedIndex = this.votes.indexOf(item)
+            this.editedIndex = this.dataItems.indexOf(item)
             this.editedItem = Object.assign({}, {'id': item})
             this.dialog = true
         },
 
         deleteItem(item) {
-            this.editedIndex = this.votes.indexOf(item)
+            this.editedIndex = this.dataItems.indexOf(item)
             this.editedItem = Object.assign({}, {'id': item})
             console.log(this.editedItem.id)
             this.dialogDelete = true

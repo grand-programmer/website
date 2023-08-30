@@ -194,11 +194,13 @@ export default {
                 add_phone: "",
                 email: "",
                 image: null,
+                org: null,
                 rahbariyat: 0,
             },
             title: null,
             rahbariyat:[],
             cropImg: null,
+            organization_image: null,
             imgSrc: '/assets/images/berserk.jpg',
 
         }
@@ -224,8 +226,10 @@ export default {
     },
     methods: {
         initialize() {
+            if(this.$route.params.org!==0) this.breadcrumb_items[1].to='/admin/apporg/' + this.$route.params.org
+            else this.breadcrumb_items[1].to='/admin/apparat/'
 
-                        api.readRahbariyats().then((response) => {
+                        api.readRahbariyats(this.$route.params.org).then((response) => {
                             this.rahbariyat= response.data.data;
                         }).catch((error) => {
                             this.$toast.error(`Ходисаларни олишда муаммо бор!`)
@@ -249,6 +253,7 @@ export default {
                 const _this=this;
                 const form = new FormData();
                 form.append('org_name', _this.organization.name);
+                if (_this.$route.params.org > 0 && _this.$route.fullPath.indexOf('apporg') !== -1  ) form.append('org', _this.$route.params.org);
                 form.append('fio', _this.organization.fio);
                 form.append('lavozimi', _this.organization.lavozim);
                 form.append('qabul', _this.organization.qabul);

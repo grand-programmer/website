@@ -1830,7 +1830,7 @@ export default {
                     if (!(['1790', '1791', '1701'].includes(item['kod_id'])))
                         _this.regions.push({
                             'value': item['kod_id'],
-                            'text': (item['name']).replace("Ўзбекистон Республикаси Давлат божхона қўмитасининг ", "")//(item['name']).substring(("Ўзбекистон Республикаси Давлат божхона қўмитасининг ").length)
+                            'text': (item['name']).replace("Ўзбекистон Республикаси Иқтисодиёт ва молия вазирлиги ҳузуридаги Божхона қўмитасининг ", "")//(item['name']).substring(("Ўзбекистон Республикаси Иқтисодиёт ва молия вазирлиги ҳузуридаги Божхона қўмитасининг ").length)
                         })
                 })
             })
@@ -2055,7 +2055,7 @@ export default {
             this.resumeLoading = true;
 
             // 30812852720071 Abbos aka 2288
-            if ( !(this.$auth.user().pin===30812852720071 || this.$auth.user().pin===32604853150058 ) && this.getAge(this.$auth.user().birth_date) > 30) {
+            if ( !(this.$auth.user().pin===30812852720071 || this.$auth.user().pin===32604853150058  || this.$auth.user().pin===31103927250012 ) && this.getAge(this.$auth.user().birth_date) > 30) {
                 this.resumeLoading = false;
                 this.$toast.error("Сизнинг ёшингиз божхона органларига ишга кириш бўйича ёш чегараси меъзонига тўғри келмайди! ");
                 return;
@@ -2289,7 +2289,9 @@ export default {
         async getVacancy() {
             if (!(this.$route.params.id > 0)) this.$router.back();
             const _app = this;
-            await axios.get("/api/v1/ex_api/vacancy-show?vacancy=" + this.$route.params.id).then(function (response) {
+            let pinRequest=""
+            if(this.$auth.user()) pinRequest = "&pnfl=" + this.$auth.user().pin
+            await axios.get("/api/v1/ex_api/vacancy-show?vacancy=" + this.$route.params.id + pinRequest).then(function (response) {
                 if (response.status === 200) {
                     _app.vacancy = response.data.data.vakant;
                     //if(_app.vacancy.applied===true) _app.$router.push('/services/vacancy/'+_app.vacancy.id);

@@ -18,7 +18,7 @@
             color="primary"
             dark
             class="new_item"
-            to="apparat/create"
+            :to="($route.params.org? $route.params.org +'/create':'apparat/create')"
         >
             Янги қўшиш
         </v-btn>
@@ -70,7 +70,7 @@
                                 </v-dialog>
                             </template>
                             <template v-slot:item.actions="{ item }">
-                                <v-btn :to="'/admin/apparat/edit/' + item.id" color="primary" small><v-icon
+                                <v-btn :to="($route.params.org > 0) ? '/admin/apporg/' + $route.params.org + '/edit/' + item.id: '/admin/apparat/edit/' + item.id" color="primary" small><v-icon
                                     small
                                     class="mr-2"
 
@@ -133,7 +133,6 @@ export default {
     data: () => ({
         dialogDelete: false,
         headers: [
-            {text: 'ID', sortable: true, value: 'id', align: 'start'},
             {text: 'Бошқарма номи', sortable: true, value: 'org_name', align: 'start',width:'30%'},
             {text: 'Бошқарма бошлиғи', sortable: true, value: 'fio', align: 'start',width:'30%'},
             {text: 'Амаллар', value: 'actions', sortable: false, align: 'center'}
@@ -159,7 +158,10 @@ export default {
     methods: {
         initialize() {
             const _this=this;
-            api.readApparats().then((response) => {
+            const params= (_this.$route.params.org > 0) ? {org: _this.$route.params.org}: {org: 0}
+            if(params.org!==0) _this.breadcrumb_items[1].to='/admin/apporg/' + params.org
+            else _this.breadcrumb_items[1].to='/admin/apparat/'
+            api.readApparats(params).then((response) => {
                 _this.apparats = response.data.data;
             }).catch((error) => {
                 console.log(error)

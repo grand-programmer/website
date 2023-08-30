@@ -6,6 +6,7 @@ use http\Env\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Validator;
 use Ramsey\Collection\Collection;
 
 class DataController extends Controller
@@ -13,6 +14,13 @@ class DataController extends Controller
     public function getTftn(Request $request)
     {
         $data = $request->only('code', 'page','name');
+
+/*        $validator = Validator::make($data, [
+            'code' => 'required|min:0|max:20'
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()], 400);
+        }*/
 
         if (isset($data['code'])) {
             $returnData = DB::connection('db2_odbc')->select(

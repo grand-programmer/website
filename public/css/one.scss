@@ -3299,6 +3299,18 @@ a.read_more {
         tbody, td, tfoot, th, thead, tr {
             border: 1px solid #ccc;
         }
+        p{
+            font-size: 14px;
+            font-family: Montserrat, serif;
+            line-height: 20px;
+            /* color: #848484; */
+            text-align: center;
+            color: #000;
+            padding: 5px 3px;
+        }
+        thead {
+            background-color: #e4ffef;
+        }
     }
 
     h3 {
@@ -3318,7 +3330,7 @@ a.read_more {
         padding-bottom: 15px;
     }
 
-    p {
+    p, li {
         font-size: 18px;
         font-family: Montserrat, serif;
         line-height: 30px;
@@ -5383,7 +5395,7 @@ vh
         width: 100%;
         max-width: 72vw;
        /* min-width: 40vw;*/
-        max-height: 75vh;
+        max-height: 80vh;
         height: 100%;
     }
     button.v-btn--icon.v-size--default{
@@ -5495,6 +5507,7 @@ vh
            /// transition: ease 0.9s;
             &.active{
                 background-color: #39ae69;
+                z-index: 100000001;
 
             }
             &:hover{
@@ -5532,6 +5545,9 @@ vh
             bottom: 0;
             opacity: 0.6;
             left: 0;
+        }
+        &:nth-of-type(4)::after{
+            width: 99%;
         }
         &:last-child:after{
             content: none;

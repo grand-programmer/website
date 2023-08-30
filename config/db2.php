@@ -108,7 +108,7 @@ $databaseconfig= [
         'LAZYCLOSE' => 0,
         'MaxFieldLength' => 15360,
         'PREFETCH' => 0,
-        'QUERYTIMEOUT' => 1,
+        'QUERYTIMEOUT' => 1000,
         'DefaultPkgLibrary' => 'QGPL',
         'DefaultPackage' => 'A /DEFAULT(IBM),2,0,1,0',
         'ExtendedDynamic' => 0,
@@ -163,7 +163,7 @@ $databaseconfig= [
                 ], */
 ];
 $databaseconfigEA=$databaseconfig;
-$databaseconfigEA['host']='192.168.212.99';
+$databaseconfigEA['host']='arxiv.db.gtk';
 $databaseconfigEA['schema']='E_ARXIV';
 $databaseconfigEA['database']='B2035C4W';
 $databaseconfigEA['username']='trarxiv';
@@ -194,7 +194,7 @@ $databaseconfig221['username']='Kamol';
 $databaseconfig221['password']='55788204';
 
 $databaseconfig228=$databaseconfig;
-$databaseconfig228['host']='192.168.212.228';
+$databaseconfig228['host']='ed01.db.gtk';
 $databaseconfig228['schema']='epigued';
 $databaseconfig228['database']='S0601A6T';
 $databaseconfig228['username']='Surat';

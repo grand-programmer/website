@@ -114,7 +114,7 @@
                                 <div class="row no-gutters">
                                     <div class="col-md-12">
                                         <h4 class="card-title ff-clearsans_bold" style="margin-bottom: 12px;">
-                                            {{ $t("Давлат божхона қўмитаси") }}
+                                            {{ $t("Иқтисодиёт ва молия вазирлиги ҳузуридаги Божхона қўмитаси") }}
                                         </h4>
                                         <p class="card-subtitle">
                                             {{ $t("Марказий аппарат") }}
@@ -132,9 +132,10 @@
                                         <p>{{ $t('Мўлжал: Давлат ва жамият бошқаруви академияси ва Тошкент Давлат иқтисодиёт университети ўртасида жойлашган') }}</p>
                                     </li>
                                     <li>
-                                        <i class="icon icon-phone"></i> (71) 202-76-00
                                         <span class="badge ff-clearsans_bold text-uppercase">
-                                            {{ $t("ишонч телефони") }}</span><!-- <br> (71) 120-76-41
+                                            {{ $t("Телефон:") }}</span>
+                                        <i class="icon icon-phone"></i> (55) 502-76-00
+                                        <!-- <br> (71) 120-76-41
                                         <span class="badge ff-clearsans_bold text-uppercase">
                                             {{ $t("Факс") }} </span>-->
                                     </li>
@@ -918,5 +919,10 @@ export default {
 .others a {
     font-size: 25px;
     line-height: 40px;
+}
+
+.v-application .v-card__text.mt-10.pb-10 p {
+    line-height: 32px;
+    text-align: justify;
 }
 </style>

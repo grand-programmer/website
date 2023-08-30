@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\DB;
 
 class VoteResource extends JsonResource
 {
@@ -22,13 +23,18 @@ class VoteResource extends JsonResource
         //dd($translates);
         $translates=isset($translates[app()->getLocale()])?$translates[app()->getLocale()]:[];
 
-        $questionAnswers=collect($questionAnswers)->transform(function($answer,$key) use($translates) {
-            $answer->text=isset($translates['answers'][$key])?$translates['answers'][$key]:$answer->text;
-            return $answer;
-        })->all();
-        //dd();
-        //global $total;
-        $total=$answers->sum('count');
+
+           $questionAnswers = collect($questionAnswers)->transform(function ($answer, $key) use ($translates) {
+               $answer->text = isset($translates['answers'][$key]) ? $translates['answers'][$key] : $answer->text;
+               return $answer;
+           })->all();
+           //dd();
+           //global $total;
+
+
+        $total = $answers->sum('count');
+
+
         return [
             "id"=>$this->id,
             "question"=>isset($translates['question'])?$translates['question']:$this->question,

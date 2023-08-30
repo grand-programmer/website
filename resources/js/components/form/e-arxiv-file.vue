@@ -15,7 +15,7 @@
 
                         v-for="(doc,key) in modelVal"
                         :key="key"
-                        v-if="modelVal && typeof modelVal[key]!=='undefined' && typeof modelVal[key].id!=='undefined' && modelVal[key].id && modelVal[key].type && modelVal[key].valid && modelVal[key].id.length ===13"
+                        v-if="modelVal && typeof modelVal[key]!=='undefined' && typeof modelVal[key].id!=='undefined' && modelVal[key].id && modelVal[key].type && modelVal[key].valid && (modelVal[key].id.length ===13 || modelVal[key].id.length ===16)"
                         @click:close="removeDocument(key)"
                     >
                         <template slot="default">
@@ -350,7 +350,7 @@ export default {
                     if (typeof item['id'] !== 'undefined') {
                         setTimeout(async () => {
                             let validDoc = await _this.checkFile(item['id']);
-                            if (item['id'] && (item['id']).length === 13 && validDoc) {
+                            if (item['id'] && ((item['id']).length === 13 || (item['id']).length === 16 )&& validDoc) {
 
                                 if (validDoc[0] === 'undefined') {
                                     // console.log('return');
@@ -424,7 +424,7 @@ export default {
                     if (typeof _this.value[0] !== 'undefined' && typeof _this.value[0].id !== 'undefined' && typeof _this.value[0].type !== 'undefined') {
                         _this.documents = [];
                         _this.value.forEach((document, k) => {
-                            if (typeof document !== 'undefined' && typeof document.id !== 'undefined' && typeof document.type !== 'undefined' && typeof document.valid !== 'undefined' && document.id.length === 13 && document.type && document.valid === true) {
+                            if (typeof document !== 'undefined' && typeof document.id !== 'undefined' && typeof document.type !== 'undefined' && typeof document.valid !== 'undefined' && (document.id.length === 13 || document.id.length === 16) && document.type && document.valid === true) {
                                 _this.documents.push({
                                     id: document.id,
                                     type: document.type,
@@ -448,7 +448,7 @@ export default {
                         //_this.value =[];
 
                         _this.documents.forEach((document, k) => {
-                            if (typeof document !== 'undefined' && typeof document.id !== 'undefined' && typeof document.type !== 'undefined' && typeof document.valid !== 'undefined' && document.id.length === 13 && document.type && document.valid === true) {
+                            if (typeof document !== 'undefined' && typeof document.id !== 'undefined' && typeof document.type !== 'undefined' && typeof document.valid !== 'undefined' && (document.id.length === 13 || document.id.length === 16 )&& document.type && document.valid === true) {
                                 ///console.log('555');
                                 /*_this.value.push(JSON.parse(JSON.stringify({
                                     id: document.id,

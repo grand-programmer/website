@@ -8,7 +8,7 @@
                             <div class="f_about_widget">
                                 <div class="logo"><img src="/img/gtk_image.png"
                                                        alt="">
-                                    <span>{{ $t("Ўзбекистон Республикаси Давлат божхона қўмитаси") }}</span>
+                                    <span>{{ $t("Ўзбекистон Республикаси Иқтисодиёт ва молия вазирлиги ҳузуридаги Божхона қўмитаси") }}</span>
                                 </div>
                                 <p>{{
                                         $t("Сайтдан олинган ҳар қандай маълумотлардан фойдаланганда Ўзбекистон Республикаси ДБҚ сайтидан олинганлиги кўрсатиб ўтилиши шарт.")
@@ -16,7 +16,7 @@
                                 <p>
                                     {{ $t("ЎзМАА Интернет-ОАВ гувоҳномаси № 0902") }}
                                 </p>
-                                <p> © 2001-{{ currentYear }} {{ $t("Ўзбекистон Республикаси Давлат божхона қўмитаси") }}
+                                <p> © 2001-{{ currentYear }} {{ $t("Ўзбекистон Республикаси Иқтисодиёт ва молия вазирлиги ҳузуридаги Божхона қўмитаси") }}
                                 </p>
 
                             </div>
@@ -83,7 +83,7 @@
                                     <li class="d-none"><a href="#"  target="_blank"><i class="fab fa-twitter"></i></a></li>
                                     <li><a href="https://t.me/customschannel"  target="_blank"><i class="fab fa-telegram-plane"></i></a></li>
                                     <li class="d-none"><a href="#"  target="_blank"><i class="fab fa-google-plus-g"></i></a></li>
-                                    <li><a href="https://www.instagram.com/dbq.uz/"  target="_blank"><i class="fab fa-instagram-square"></i></a></li>
+                                    <li><a href="https://www.instagram.com/bojxona.official/"  target="_blank"><i class="fab fa-instagram-square"></i></a></li>
                                 </ul><!--
                                 <div class="counter-site mt-4">
                                 <div class="mycounter1"></div>

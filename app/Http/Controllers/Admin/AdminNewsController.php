@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Resources\Admin\AdminNewsResource;
+use App\Services\NewsToSocial;
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use App\Models\News;
@@ -129,9 +132,24 @@ class AdminNewsController extends ParentController
                 'image',
                 'boshqarma',
                 'translates',
+                'telegram',
                 'created_at'
 
             );
+            if(isset($data['telegram'])) {
+
+                try {
+                    $message = (new NewsToSocial($news));
+                    Notification::route('telegram', '-1001137582956')
+                        ->notify($message);
+                    $news->telegram = true;
+                    $news->save();
+                    return response()->json(['data' => $news]);
+                }
+                catch(Exception $exception) {
+                    return response()->json(['data' => $exception->getMessage()], 400);
+                }
+            }
             $validator = Validator::make($data, [
                 'title' => 'required|min:3|max:255',
                 'description' => 'required',

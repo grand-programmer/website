@@ -16,12 +16,14 @@ class ApparatController extends Controller
      */
     public function index(Request $request)
     {
-        $data = $request->only('rahbar','markaziy');
+        $data = $request->only('rahbar','markaziy','org');
+        if(isset($data['org'])) $apparatModel=Apparat::where(['org'=> (int)$data['org']]);
+        else $apparatModel=Apparat::where('org','=', 0);
         if (isset($data['rahbar']))
-        return response()->json(['success' => true, 'data' => ApparatResource::collection(Apparat::where(['rahbariyat' => 0])->orderby('sort','asc')->get())], 200);
+        return response()->json(['success' => true, 'data' => ApparatResource::collection($apparatModel->where(['rahbariyat' => 0])->orderby('sort','asc')->get())], 200);
         if (isset($data['markaziy']))
-        return response()->json(['success' => true, 'data' => ApparatResource::collection(Apparat::orderby('sort','asc')->orderby('lavozimi','asc')->get())->groupBy('rahbariyat')], 200);
-        return response()->json(['success' => true, 'data' => ApparatResource::collection(Apparat::where('rahbariyat','<>', 0)->orderby('sort','asc')->get())], 200);
+        return response()->json(['success' => true, 'data' => ApparatResource::collection($apparatModel->orderby('sort','asc')->orderby('lavozimi','asc')->get())->groupBy('rahbariyat')], 200);
+        return response()->json(['success' => true, 'data' => ApparatResource::collection($apparatModel->where('rahbariyat','<>', 0)->orderby('sort','asc')->get())], 200);
     }
 
     /**
@@ -50,6 +52,7 @@ class ApparatController extends Controller
             $data = $request->only(
                 'fio',
                 'lavozimi',
+                'lavozim_name',
                 'qabul',
                 'biografiyasi',
                 'phone',
@@ -60,6 +63,7 @@ class ApparatController extends Controller
                 'image',
                 'rahbar',
                 'sort',
+                'org',
             );
             $validator = Validator::make($data, [
                 'fio' => 'required|min:3',
@@ -76,7 +80,7 @@ class ApparatController extends Controller
             if ($validator->fails()) {
                 return response()->json([
                     'success' => false,
-                    'error' => $validator->errors()], 401);
+                    'error' => $validator->errors()], 400);
             }
 
             if ($request->file()) {
@@ -121,6 +125,7 @@ class ApparatController extends Controller
                 'image',
                 'rahbar',
                 'sort',
+                'lavozim_name',
                 'translates',
             );
             $validator = Validator::make($data, [
@@ -160,7 +165,7 @@ class ApparatController extends Controller
                 'success' => true,
                 'data' => new ApparatResource($apparat)], 200);
         }
-        return response()->json(['success' => false], 401);
+        return response()->json(['success' => false], 400);
 
     }
 
@@ -177,6 +182,6 @@ class ApparatController extends Controller
                 'success' => true], 200);
 
         return response()->json([
-            'success' => false], 401);
+            'success' => false], 400);
     }
 }

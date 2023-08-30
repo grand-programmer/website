@@ -102,7 +102,7 @@
                                                                 no-data-text="Бошқа турлари топилмади"
                                                             ></v-autocomplete>
                                                             <span class="error--text">{{ errors[0] }}</span>
-                                                        </ValidationProvider>
+                                                        </ValidationProvider> <!-- 974744114 beruniy salon-->
 
                                                     </v-col>
 

@@ -53,6 +53,9 @@ const apiClient = {
     async readNews(requestData) {
         return await axios.get(apiUrl + "news", {params: requestData,headers:localizationHeader});
     },
+    async search(requestData) {
+        return await axios.post(apiUrl + "spreaded-search",  requestData, localization);
+    },
     async readRelatedNews() {
         return await axios.get(apiUrl + "news/related",localization);
     },
@@ -63,7 +66,7 @@ const apiClient = {
         return await axios.post(apiUrl + "news/" + id, requestData, multipartformdata);
     },
     async readOneNews(slug) {
-        console.log(i18n.locale)
+        // console.log(i18n.locale)
         return await axios.get(apiUrl + "news/" + slug, localization);
     },
     async deleteNews(id) {
@@ -243,15 +246,15 @@ const apiClient = {
     },
     //////////////////////// My boshqarma End /////////////////////////////
 // ////////////////////// My rahbariyat Begin/////////////////////////////
-    async readMarkaziy() {
-        let str = "?markaziy=0";
+    async readMarkaziy(org=null) {
+        let str = "?markaziy=0" + (org ? "&org=" + org : "")
 
         return await axios.get(apiUrl + "apparat" + str,localization);
     },
-    async readRahbariyats() {
-        let str = "?rahbar=0";
+    async readRahbariyats(org=null) {
+        let str = "?rahbar=0" + (org ? "&org=" + org : "");
 
-        return await axios.get(apiUrl + "apparat" + str,localization);
+        return await axios.get(apiUrl + "apparat/" + str,localization);
     },
     async addRahbariyat(requestData) {
         return await axios.post(apiUrl + "apparat", requestData);
@@ -275,6 +278,16 @@ const apiClient = {
     },
     async getDocumentCategories(requestData) {
         return await axios.get(apiUrl + "documentcategories", localization);
+    },
+
+    async getOpenData(requestData) {
+        console.log(requestData)
+        if(typeof requestData !=='undefined' && requestData)
+            return await axios.get(apiUrl + "opendata", {headers:localizationHeader, params:JSON.parse(JSON.stringify(requestData))});
+        return await axios.get(apiUrl + "opendata", {headers:localizationHeader});
+    },
+    async getOneOpenData(id,requestData) {
+            return await axios.post(apiUrl + "opendata/" + id, JSON.parse(JSON.stringify(requestData)), {headers:localizationHeader} );
     },
 };
 export default apiClient;

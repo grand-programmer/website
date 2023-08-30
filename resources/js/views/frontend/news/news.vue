@@ -200,16 +200,17 @@ export default {
                 });
 
                 await api.readNews().then((response) => {
-                    this.related_news = response.data.data.map(function (i) {
+                    this.related_news = response.data.data
+                    /* .map(function (i) {
                         let dateParts = i.created_at.split("T");
                         if ((new Date(i.created_at)).getDate() === (new Date).getDate())
                             i.created_at = dateParts[1].substring(0, 5);
                         else i.created_at = dateParts[0];
                         return i;
-                    });
+                    });*/
                 }).catch((error) => {
                     console.log(error)
-                    this.$toast.error(i18n.t(`Маълумотларни юклашда хатолик содир бўлди!`))
+                    this.$toast.error(i18n.t(`Маълумотларни юклашда хатолик содир бўлди1!`))
                 })
 
             })

@@ -22,6 +22,19 @@
         >
             Янги қўшиш
         </v-btn>
+        <v-row>
+            <v-col cols="4" offset="8" align-self="end">
+                <v-autocomplete
+                    label="Меню номидан қидириш"
+                    single-line
+                    hide-details
+                    clearable
+                    item-text="title"
+                    item-value="id"
+                    :items="menusForSelect"
+                    @change="updateMenus"
+                ></v-autocomplete>
+            </v-col></v-row>
 
         <v-row justify="center">
             <v-col
@@ -129,6 +142,7 @@ export default {
 
     data: () => ({
         dialogDelete: false,
+        menusForSelect: [],
         headers: [
             {text: 'ID', sortable: true, value: 'id', align: 'start'},
             {text: 'Сарлавха', sortable: true, value: 'title', align: 'start',width:'30%'},
@@ -139,6 +153,7 @@ export default {
             {text: 'Амаллар', value: 'actions', sortable: false, align: 'center'}
         ],
         menus: [],
+        originalMenus: [],
         editedIndex: -1,
         editedItem: {
             id: null,
@@ -160,9 +175,19 @@ export default {
     },
 
     methods: {
+        updateMenus(value){
+            if(value===null) this.menusForSelect=this.originalMenus; else
+                this.menus=this.originalMenus.filter(item=>item.id===value);
+        },
         initialize() {
             api.readMenus(0).then((response) => {
                 this.menus = response.data.data;
+            }).catch((error) => {
+                console.log(error)
+            })
+            api.readMenus().then((response) => {
+                this.menusForSelect = response.data;
+                this.originalMenus = response.data;
             }).catch((error) => {
                 console.log(error)
             })

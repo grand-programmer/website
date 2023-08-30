@@ -2,13 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\MainHelper;
 use App\Models\Service;
+use App\Models\StatService as ServiceStat;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
+use Intervention\Image\Facades\Image;
 
 class UserController extends Controller
 {
@@ -32,6 +36,43 @@ class UserController extends Controller
             ], 200);
     }
 
+    public function update(Request $request)
+    {
+        if (!Auth::guard('api')->user()) {
+            return response()->json([
+                'status' => 'error',
+                'errors' => 'You need to authorize!'
+            ], 400);
+        }
+        $data = $request->all();
+        $v = Validator::make($data, [
+            'phone' => 'required|digits:12',
+            'address' => 'required|min:3',
+            'tin' => 'required|digits:9',
+        ]);
+        if ($v->fails()) {
+            return response()->json([
+                'status' => 'error',
+                'errors' => $v->errors()
+            ], 400);
+        }
+
+        $user = Auth::guard('api')->user();
+        $user->phone = $data['phone'];
+        $user->per_adr = $data['address'];
+        $user->save();
+
+        if ($dd = $user->save()) return response()->json(
+            [
+                'status' => 'success',
+                'user' => $user->toArray()
+            ], 200);
+        return response()->json(
+            [
+                'status' => 'error',
+            ], 400);
+    }
+
     /**
      * @throws \Illuminate\Http\Client\RequestException
      */
@@ -43,6 +84,22 @@ class UserController extends Controller
         ///
         /// Dastlabki qaror
         //dd(["personPin" => Auth::guard('api')->user()->pin]);
+
+        $statServices = ServiceStat::where(['user_id' => Auth::guard('api')->user()->id])->where('status', '<>', null)->get();
+        if ($statServices->count() > 0)
+            $statServices->transform(function ($statServices_item) use ($user_id) {
+                global $services;
+                $services[] = [
+                    "app_id" => $statServices_item['id'],
+                    "app_num" => $statServices_item['id'],
+                    "created_at" => $statServices_item['created_at'],
+                    "status" => $statServices_item['status'],
+                    "link" => "/services/stat/" . $statServices_item['id'],
+                    "statusNm" => $statServices_item['statusNm'],
+                    "type" => 10,
+                    "user_id" => $user_id,
+                ];
+            });
         try {
             $response = Http::withoutVerifying()->timeout(10)->get(env('MIX_BASE_URL') . '/api/v1/ex_api/customprice-apps', ["pnfl" => Auth::guard('api')->user()->pin]);
             if ($response->status() == 200) {
@@ -404,7 +461,53 @@ class UserController extends Controller
         if (Auth::guard('api')->user()) {
             $name = "/public/users/" . Auth::guard('api')->user()->id . ".jpg";
             if (!Storage::exists($name)) {
-                return Response::make('File no found.', 404);
+                $user = Auth::guard('api')->user();
+                $userDates = Http::acceptJson()->timeout(15)->withBody(json_encode([
+                    "pinpp" => (string)$user->pin,
+                    "document" => $user->pport_no,
+                    "langId" => 1
+                ]), 'application/json')
+                    ->post('http://192.168.214.231:8084/api/passport',
+                    );
+                $dataUserDates = $userDates->json();
+                $user->_pport_issue_date = $dataUserDates['docdatebegin'];
+                $user->_pport_expr_date = $dataUserDates['docdateend'];
+                $user->save();
+
+
+                /*     $tdate1 = $date1 = MainHelper::getDateFromString($user->_pport_issue_date);
+                     $tdate2 = $date2 = MainHelper::getDateFromString($user->_pport_expr_date);
+                     if ($date1 and $date2) {
+                         /*            $tdate1= new \Carbon\Carbon($user->_pport_issue_date);
+                                     $tdate2=new \Carbon\Carbon($user->_pport_expr_date);
+                                     $date2=new \Carbon\Carbon($user->_pport_expr_date);*/
+                /*
+                    if ($tdate1->subDay()->getTimestamp() !== $tdate2->subYears(10)->getTimestamp()) {
+                        // dd($date1->year);
+                        $user->_pport_issue_date = $date1->year . "-" . ($date1->day < 10 ? '0' . $date1->day : $date1->day) . "-" . ($date1->month < 10 ? '0' . $date1->month : $date1->month);
+                        $user->_pport_expr_date = $date2->year . "-" . ($date2->day < 10 ? '0' . $date2->day : $date2->day) . "-" . ($date2->month < 10 ? '0' . $date2->month : $date2->month);
+                        $user->save();
+                    }
+                } */
+                try {
+                    $userPhoto = Http::acceptJson()->timeout(15)->withBody(json_encode([
+                        "pinfl" => (string)$user->pin,
+                        "doc_give_date" => $user->_pport_issue_date,
+                    ]), 'application/json')
+                        ->post('http://192.168.214.124:9090/GetMIP2/rest/service_MIP2/getMipFoto',
+                        );
+                    //dd($userPhoto->json());
+                    $userPhoto = $userPhoto->json();
+                    $png_url = $user->id . ".jpg";
+                    $path = public_path('storage/users/' . $png_url);
+                    if (strlen($userPhoto['foto']) > 0)
+                        Image::make(base64_decode($userPhoto['foto']))->save($path);
+                } catch (\Exception $e) {
+
+                    return Response::make($e->getMessage(), 404);
+                }
+
+
             }
             $file = Storage::get($name);
             $type = Storage::mimeType($name);
@@ -413,14 +516,140 @@ class UserController extends Controller
         $pinData = $request->only('pnfl');
         if (isset($pinData) and !empty($pinData)) {
             $user = User::where(['pin' => $pinData['pnfl']])->first();
-            if(!$user) return Response::make('User not found', 404);
-            $name = "/public/users/" . $user->id . ".jpg";
-            if (!Storage::exists($name)) {
-                return Response::make('File no found.', 404);
+            if (!$user) return Response::make('User not found', 404);
+
+
+            $name = "public/users/" . $user->id . ".jpg";
+
+            try {
+                if (Storage::get($name)) {
+                    $file = Storage::get($name);
+                    $type = Storage::mimeType($name);
+                    return Response::make($file, 200)->header("Content-Type", $type);
+                }
+            } catch (\Exception $e) {
+
+                try {
+
+                    $userPhoto = Http::acceptJson()->timeout(15)->withBody(json_encode([
+                        "pinfl" => (string)$user->pin,
+                        "doc_give_date" => $user->_pport_issue_date,
+                    ]), 'application/json')
+                        ->post('http://192.168.214.124:9090/GetMIP2/rest/service_MIP2/getMipFoto',
+                        );
+                    //dd($userPhoto->json());
+                    $userPhoto = $userPhoto->json();
+                    $png_url = $user->id . ".jpg";
+                    $path = public_path('storage/users/' . $png_url);
+                    if (strlen($userPhoto['foto']) > 0)
+                        Image::make(base64_decode($userPhoto['foto']))->save($path);
+                    else {
+
+                        $date1 = MainHelper::getDateFromString($user->_pport_issue_date);
+                        $tdate1 = MainHelper::getDateFromString($user->_pport_issue_date);
+                        $date2 = MainHelper::getDateFromString($user->_pport_expr_date);
+                        $tdate2 = MainHelper::getDateFromString($user->_pport_expr_date);
+                        $userDates = Http::acceptJson()->timeout(15)->withBody(json_encode([
+                            "pinpp" => (string)$user->pin,
+                            "document" => $user->pport_no,
+                            "langId" => 1
+                        ]), 'application/json')
+                            ->post('http://192.168.214.231:8084/api/passport',
+                            );
+                        $dataUserDates = $userDates->json();
+                        $user->_pport_issue_date = $dataUserDates['docdatebegin'];
+                        $user->_pport_expr_date = $dataUserDates['docdateend'];
+                        $user->save();
+
+                        // if ($date1 and $date2) {
+                        {
+                            /*            $tdate1= new \Carbon\Carbon($user->_pport_issue_date);
+                                        $tdate2=new \Carbon\Carbon($user->_pport_expr_date);
+                                        $date2=new \Carbon\Carbon($user->_pport_expr_date);*/
+                            if ($tdate1->subDay()->getTimestamp() !== $tdate2->subYears(10)->getTimestamp()) {
+
+                                // dd($date1->year);
+                                // $user->_pport_issue_date = $date1->year . "-" . ($date1->day < 10 ? '0' . $date1->day : $date1->day) . "-" . ($date1->month < 10 ? '0' . $date1->month : $date1->month);
+                                //  $user->_pport_expr_date = $date2->year . "-" . ($date2->day < 10 ? '0' . $date2->day : $date2->day) . "-" . ($date2->month < 10 ? '0' . $date2->month : $date2->month);
+
+                                try {
+                                    $userPhoto = Http::acceptJson()->timeout(15)->withBody(json_encode([
+                                        "pinfl" => (string)$user->pin,
+                                        "doc_give_date" => $user->_pport_issue_date,
+                                    ]), 'application/json')
+                                        ->post('http://192.168.214.124:9090/GetMIP2/rest/service_MIP2/getMipFoto',
+                                        );
+                                    //dd($userPhoto->json());
+                                    $userPhoto = $userPhoto->json();
+                                    $png_url = $user->id . ".jpg";
+                                    $path = public_path('storage/users/' . $png_url);
+                                    if (strlen($userPhoto['foto']) > 0)
+                                        Image::make(base64_decode($userPhoto['foto']))->save($path);
+                                    // $user->save();
+                                    $file = Storage::get($name);
+                                    $type = Storage::mimeType($name);
+                                    return Response::make($file, 200)->header("Content-Type", $type);
+                                } catch (\Exception $e) {
+
+                                }
+                            }
+                        }
+                    }
+                } catch (\Exception $e) {
+                    $date1 = MainHelper::getDateFromString($user->_pport_issue_date);
+                    $tdate1 = MainHelper::getDateFromString($user->_pport_issue_date);
+                    $date2 = MainHelper::getDateFromString($user->_pport_expr_date);
+                    $tdate2 = MainHelper::getDateFromString($user->_pport_expr_date);
+
+
+                    if ($date1 and $date2) {
+                        /*            $tdate1= new \Carbon\Carbon($user->_pport_issue_date);
+                                    $tdate2=new \Carbon\Carbon($user->_pport_expr_date);
+                                    $date2=new \Carbon\Carbon($user->_pport_expr_date);*/
+                        if ($tdate1->subDay()->getTimestamp() !== $tdate2->subYears(10)->getTimestamp()) {
+
+                            // dd($date1->year);
+                            //$user->_pport_issue_date = $date1->year . "-" . ($date1->day < 10 ? '0' . $date1->day : $date1->day) . "-" . ($date1->month < 10 ? '0' . $date1->month : $date1->month);
+                            //$user->_pport_expr_date = $date2->year . "-" . ($date2->day < 10 ? '0' . $date2->day : $date2->day) . "-" . ($date2->month < 10 ? '0' . $date2->month : $date2->month);
+
+                            $userDates = Http::acceptJson()->timeout(15)->withBody(json_encode([
+                                "pinpp" => (string)$user->pin,
+                                "document" => $user->pport_no,
+                                "langId" => 1
+                            ]), 'application/json')
+                                ->post('http://192.168.214.231:8084/api/passport',
+                                );
+                            $dataUserDates = $userDates->json();
+                            $user->_pport_issue_date = $dataUserDates['docdatebegin'];
+                            $user->_pport_expr_date = $dataUserDates['docdateend'];
+                            $user->save();
+                            try {
+                                $userPhoto = Http::acceptJson()->timeout(15)->withBody(json_encode([
+                                    "pinfl" => (string)$user->pin,
+                                    "doc_give_date" => $user->_pport_issue_date,
+                                ]), 'application/json')
+                                    ->post('http://192.168.214.124:9090/GetMIP2/rest/service_MIP2/getMipFoto',
+                                    );
+                                //dd($userPhoto->json());
+                                $userPhoto = $userPhoto->json();
+                                $png_url = $user->id . ".jpg";
+                                $path = public_path('storage/users/' . $png_url);
+                                if (strlen($userPhoto['foto']) > 0)
+                                    Image::make(base64_decode($userPhoto['foto']))->save($path);
+                                $user->save();
+                                $file = Storage::get($name);
+                                $type = Storage::mimeType($name);
+                                return Response::make($file, 200)->header("Content-Type", $type);
+                            } catch (\Exception $e) {
+
+                            }
+                        }
+                    }
+                    return Response::make($e->getMessage(), 404);
+                }
+                print_r(111);
+                return Response::make($e->getMessage(), 404);
             }
-            $file = Storage::get($name);
-            $type = Storage::mimeType($name);
-            return Response::make($file, 200)->header("Content-Type", $type);
 
 
         }

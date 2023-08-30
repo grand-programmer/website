@@ -17,12 +17,14 @@ class AdminApparatController extends ParentController
      */
     public function index(Request $request)
     {
-        $data = $request->only('rahbar','markaziy');
+        $data = $request->only('rahbar','markaziy','org');
+        if(isset($data['org'])) $apparatModel=Apparat::where(['org'=> (int)$data['org']]);
+        else $apparatModel=Apparat::where('org','=', 0);
         if (isset($data['rahbar']))
-        return response()->json(['success' => true, 'data' => AdminApparatResource::collection(Apparat::where(['rahbariyat' => 0])->orderby('sort','asc')->get())], 200);
+        return response()->json(['success' => true, 'data' => AdminApparatResource::collection($apparatModel->where(['rahbariyat' => 0])->orderby('sort','asc')->get())], 200);
         if (isset($data['markaziy']))
-        return response()->json(['success' => true, 'data' => AdminApparatResource::collection(Apparat::orderby('sort','asc')->orderby('lavozimi','asc')->get())->groupBy('rahbariyat')], 200);
-        return response()->json(['success' => true, 'data' => AdminApparatResource::collection(Apparat::where('rahbariyat','<>', 0)->orderby('sort','asc')->get())], 200);
+        return response()->json(['success' => true, 'data' => AdminApparatResource::collection($apparatModel->orderby('sort','asc')->orderby('lavozimi','asc')->get())->groupBy('rahbariyat')], 200);
+        return response()->json(['success' => true, 'data' => AdminApparatResource::collection($apparatModel->where('rahbariyat','<>', 0)->orderby('sort','asc')->get())], 200);
     }
 
     /**
@@ -33,7 +35,7 @@ class AdminApparatController extends ParentController
      */
     public function show(Apparat $apparat, Request $request)
     {
-        $data = $request->only('rahbar');
+        $data = $request->only('rahbar','org');
         if (isset($data['rahbar']) and $apparat->rahbariyat == 0)
             return response()->json(['status' => true, 'data' => new AdminApparatResource($apparat)], 200);
         return response()->json(['status' => true, 'data' => new AdminApparatResource($apparat)], 200);
@@ -51,6 +53,7 @@ class AdminApparatController extends ParentController
             $data = $request->only(
                 'fio',
                 'lavozimi',
+                'lavozim_name',
                 'qabul',
                 'phone',
                 'biografiyasi',
@@ -61,6 +64,7 @@ class AdminApparatController extends ParentController
                 'image',
                 'rahbar',
                 'sort',
+                'org',
                 'translates'
             );
             $validator = Validator::make($data, [
@@ -72,6 +76,7 @@ class AdminApparatController extends ParentController
                 'org_name' => 'required_without:rahbar',
                 'image' => 'required',
                 'sort' => 'numeric',
+                'org' => 'numeric',
                 'rahbariyat' => 'required_without:rahbar',
             ]);
 
@@ -112,7 +117,9 @@ class AdminApparatController extends ParentController
 
             $data = $request->only(
                 'fio',
+                'org',
                 'lavozimi',
+                'lavozim_name',
                 'qabul',
                 'biografiyasi',
                 'phone',
@@ -135,6 +142,7 @@ class AdminApparatController extends ParentController
                 'org_name' => 'required_without:rahbar',
                 'image' => 'required',
                 'sort' => 'numeric',
+                'org' => 'numeric',
                 'rahbariyat' => 'required_without:rahbar',
             ]);
 

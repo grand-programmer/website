@@ -1275,7 +1275,8 @@
                                                 </v-card>
                                             </v-dialog>
                                             <v-col cols="12" class="position-relative">
-                                                <div
+                                                <e-arxiv-file v-model="application.documents" multiple :label="'Юк тўғрисидаги ҳужжатларни илова қилинг'"/>
+<!--                                                <div
                                                     class="border-bottom-dashed chips-dialog"
                                                     @click="openDocumentType"
                                                 >
@@ -1292,8 +1293,8 @@
                                                             @click:close="removeDocument(key)"
                                                         >
                                                             <template slot="default">
-                                                                <!-- HTML that describe how select should render items when the select is open -->
-                                                                <!--                                                                                {{ data.item.value }} - -->
+                                                                &lt;!&ndash; HTML that describe how select should render items when the select is open &ndash;&gt;
+                                                                &lt;!&ndash;                                                                                {{ data.item.value }} - &ndash;&gt;
                                                                 <span class="v-chip__content"
                                                                       style="font-size: 15px">
                                                                         {{ doc.type }}
@@ -1311,12 +1312,12 @@
                                                     name="Илова қилинадиган ҳужжатлар"
                                                     v-show="isvalidDocument"
                                                     v-slot="{ errors }">
-                                                        <span class="error--text">
+                                                        <span class="error&#45;&#45;text">
                                                        {{
                                                                 errors[0]
                                                             }}
                                                               </span>
-                                                </ValidationProvider>
+                                                </ValidationProvider>-->
                                                 <!--
                                                         <v-input
                                                             :messages="['Транспорт тури маълумотлари тўлдирилиши шарт! ']"
@@ -2726,6 +2727,8 @@ import * as rules from 'vee-validate/dist/rules';
 import messages from '../../../../locales/oz.json';
 import {types} from "../../../../../../public/js/mix/pdfmake";
 import i18n from "../../../../i18n";
+import EArxivFileInput from "../../../../components/form/e-arxiv-file-input";
+import EArxivFile from "../../../../components/form/e-arxiv-file";
 
 
 Object.keys(rules).forEach(rule => {
@@ -4021,7 +4024,7 @@ if(typeof result_data.data.data.name !=='undefined' && result_data.data.data.nam
                         }
 
 
-                        if (!this.isValidDoc()) {
+                       /* if (!this.isValidDoc()) {
                             _this.$refs["hujjatilova"].applyResult({
                                 errors: ["Илова қилинадиган ҳужжатларни киритинг"], // array of string errors
                                 valid: false, // boolean state
@@ -4033,7 +4036,7 @@ if(typeof result_data.data.data.name !=='undefined' && result_data.data.data.nam
                                 errors: [], // array of string errors
                                 valid: true, // boolean state
                                 failedRules: {} // should be empty since this is a manual error.
-                            })
+                            })*/
                         isValid = await this.validateField("create_customs_yuk_kuzatuv_value");
                         if (!this.isValidImporterA)
                             _this.$refs["importchi_malumotlari"].applyResult({
@@ -4185,12 +4188,12 @@ if(typeof result_data.data.data.name !=='undefined' && result_data.data.data.nam
                                     valid: false, // boolean state
                                     failedRules: {} // should be empty since this is a manual error.
                                 })
-                            if (!this.isValidDoc())
+           /*                 if (!this.isValidDoc())
                                 _this.$refs["hujjatilova"].applyResult({
                                     errors: ["Илова қилинадиган ҳужжатларни киритинг"], // array of string errors
                                     valid: false, // boolean state
                                     failedRules: {} // should be empty since this is a manual error.
-                                })
+                                })*/
                             _this.$toast.error("Маълумотларингизни текшириб қайтадан юборинг!");
                             _this.loadingButton.second = false;
 
@@ -4474,7 +4477,7 @@ if(typeof result_data.data.data.name !=='undefined' && result_data.data.data.nam
                     if (!(['1790', '1791', '1701'].includes(item['kod_id'])))
                         _this.regions.push({
                             'value': item['kod_id'],
-                            'text': (item['name']).replace("Ўзбекистон Республикаси Давлат божхона қўмитасининг ", "")//(item['name']).substring(("Ўзбекистон Республикаси Давлат божхона қўмитасининг ").length)
+                            'text': (item['name']).replace("Ўзбекистон Республикаси Иқтисодиёт ва молия вазирлиги ҳузуридаги Божхона қўмитасининг ", "")//(item['name']).substring(("Ўзбекистон Республикаси Иқтисодиёт ва молия вазирлиги ҳузуридаги Божхона қўмитасининг ").length)
                         })
                 })
             })
@@ -4741,6 +4744,8 @@ if(typeof result_data.data.data.name !=='undefined' && result_data.data.data.nam
     }
     ,
     components: {
+        EArxivFile,
+        EArxivFileInput,
         ValidationProvider,
         ValidationObserver,
     }

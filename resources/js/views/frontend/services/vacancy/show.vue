@@ -524,7 +524,9 @@ export default {
         async initialize() {
             if (!(this.$route.params.id > 0)) this.$router.back();
             const _app = this;
-            await axios.get("/api/v1/ex_api/vacancy-show?vacancy=" + this.$route.params.id).then(function (response) {
+            let pinRequest=""
+            if(this.$auth.user()) pinRequest = "&pnfl=" + this.$auth.user().pin
+            await axios.get("/api/v1/ex_api/vacancy-show?vacancy=" + this.$route.params.id + pinRequest).then(function (response) {
                 if (response.status === 200) {
                     _app.vacancy = response.data.data.vakant;
                     _app.statuses = response.data.data.status;

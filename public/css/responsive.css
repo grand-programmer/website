@@ -1,3 +1,9 @@
+@media screen and (min-width: 1260px) and  (max-width: 1700px) {
+    .portfolio-card {
+        height: 260px !important;
+    }
+}
+
 @media (max-width: 1199px) {
     .logo_area .pull-left.logo_neno {
         float: none !important;
@@ -19,7 +25,15 @@
     }
 }
 
+
 @media (max-width: 991px) {
+    .position-relative-sm {
+        position: relative !important;
+    }
+    .width-100-sm{
+        width: 100% !important;
+    }
+
     .logo_area .contact_details_area .request_btn {
         margin-left: 0px;
         margin-top: 20px;
@@ -226,13 +240,14 @@
 
         color: #39ae69;
         font-size: 12px;
-        border-bottom: 0 ;
+        border-bottom: 0;
         width: -moz-max-content;
-       width: max-content;
-        margin: 10px!important;
-        text-align: center!important;
+        width: max-content;
+        margin: 10px !important;
+        text-align: center !important;
 
     }
+
     .logo_area .pull-right.contact_details_area {
         display: none;
     }
@@ -293,6 +308,7 @@
         width: 118px;
         margin: 0;
     }
+
     .project_quote .left_content h4 {
         line-height: 30px;
         padding-bottom: 30px;
@@ -442,7 +458,7 @@
     font-family: 'Montserrat-Medium', sans-serif;
     color: #13502c;
 
-    max-width: 305px;
+    max-width: 350px;
     text-transform: uppercase;
     letter-spacing: 1px;
     font-weight: 600;
@@ -512,7 +528,7 @@
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center;
-/*    margin-left: 15px;*/
+    /*    margin-left: 15px;*/
 }
 
 .header-item a i {
@@ -827,8 +843,8 @@ a.openMenu1 {
 
 .header-lang {
     display: flex;
-  /* padding-top: 60px;
-    /*font-weight: 550;*/
+    /* padding-top: 60px;
+      /*font-weight: 550;*/
 }
 
 .mm-lang {
@@ -1433,7 +1449,7 @@ a.openMenu1 {
     display: flex;
     align-items: center;
     justify-content: center;
-/*    margin-bottom: 20px;*/
+    /*    margin-bottom: 20px;*/
 }
 
 
@@ -1662,8 +1678,9 @@ a.openMenu1 {
         flex: 0 0 100%;
 
     }
+
     .f_navigation_widget ul li {
-      width: auto;
+        width: auto;
         padding-right: 5px;
         float: left;
         overflow: hidden;

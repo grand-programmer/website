@@ -1283,178 +1283,9 @@
                                                 </v-card>
                                             </v-dialog>
                                             <v-col cols="12" class="position-relative">
-                                                <div
-                                                    class="border-bottom-dashed chips-dialog"
-                                                    @click="openDocumentType"
-                                                >
-                                                    <span>Илова қилинадиган ҳужжатлар: *</span>
-                                                    <v-chip-group
-                                                        mandatory
-                                                        style="height: 50px" class="d-block"
-
-                                                    >
-                                                        <v-chip
-                                                            v-for="(doc,key) in application.documents"
-                                                            :key="key"
-                                                            v-if="doc.id && doc.type"
-                                                            @click:close="removeDocument(key)"
-                                                        >
-                                                            <template slot="default">
-                                                                <!-- HTML that describe how select should render items when the select is open -->
-                                                                <!--                                                                                {{ data.item.value }} - -->
-                                                                <span class="v-chip__content"
-                                                                      style="font-size: 15px">
-                                                                        {{ doc.type }}
-                                                                            </span>
-                                                            </template>
-                                                        </v-chip>
-                                                    </v-chip-group>
-                                                </div>
-
-                                                <v-input
-                                                    :messages="['Юк тўғрисидаги ҳужжатларни илова қилинг']"
-                                                />
-                                                <ValidationProvider
-                                                    ref="hujjatilova"
-                                                    name="Илова қилинадиган ҳужжатлар"
-                                                    v-show="isvalidDocument"
-                                                    v-slot="{ errors }">
-                                                        <span class="error--text">
-                                                       {{
-                                                                errors[0]
-                                                            }}
-                                                              </span>
-                                                </ValidationProvider>
-                                                <!--
-                                                        <v-input
-                                                            :messages="['Транспорт тури маълумотлари тўлдирилиши шарт! ']"
-                                                        />-->
+                                                <e-arxiv-file v-model="application.documents" multiple :label="'Юк тўғрисидаги ҳужжатларни илова қилинг'"/>
 
                                             </v-col>
-                                            <v-dialog
-                                                v-model="dialog.documenttype"
-                                                max-width="700px"
-
-                                            >
-
-                                                <v-card class="scroll_card" light>
-                                                    <v-card-title class=" px-4 py-4">
-                                                            <span
-                                                                class="text-h5 white--text">Илова қилинадиган ҳужжатлар </span>
-                                                    </v-card-title>
-                                                    <v-card-text>
-                                                        <v-container>
-                                                            <v-row>
-
-                                                                <v-col cols="12">
-                                                                    <v-fab-transition>
-
-                                                                        <v-btn
-                                                                            color="primary"
-                                                                            dark
-                                                                            center
-                                                                            large
-                                                                            class="float-end"
-                                                                            @click="AddDocument"
-                                                                            style="height:35px;"
-                                                                        >
-
-                                                                            <v-icon>mdi-plus
-                                                                            </v-icon>
-                                                                            Файл Қўшиш
-
-                                                                        </v-btn>
-                                                                    </v-fab-transition>
-                                                                    <a class="float-left"
-                                                                       style="border: 2px dashed;  width:50%; border-radius: 15px; padding: 10px 20px 5px;"
-                                                                       @click="authorizeToEArxiv">Э-архив тизимига
-                                                                        ўтиш </a>
-
-                                                                </v-col><!--
-                                                                    <v-col cols="12">
-
-                                                                    </v-col>-->
-                                                            </v-row>
-                                                        </v-container>
-                                                        <v-container>
-                                                            <ValidationObserver v-slot="{ invalid }"
-                                                                                ref="create_customs_documents"
-                                                                                style="display: flex; flex-direction: column-reverse"
-                                                            >
-                                                                <v-row
-                                                                    v-for="(doc,key) in documents"
-                                                                    :key="key">
-
-                                                                    <v-col cols="12">
-                                                                        <ValidationProvider
-                                                                            name="ID рақами"
-                                                                            rules="required"
-                                                                            v-slot="{ errors }">
-                                                                            <v-text-field
-                                                                                v-model="documents[key].id"
-                                                                                label="ID рақами"
-                                                                                persistent-hint
-                                                                                loading
-                                                                                counter="13"
-                                                                                @keyup="myColor(documents[key].id,key)"
-                                                                                @keydown="myColor(documents[key].id,key)"
-                                                                                @change="myColor(documents[key].id,key)"
-                                                                                hint="Ҳужжатнинг е-архив тизимидаги Fayl ID рақами"
-                                                                            >
-                                                                                <template v-slot:append>
-                                                                                    <v-icon color="primary"
-                                                                                            v-if="documents[key].valid">
-                                                                                        mdi-check
-                                                                                    </v-icon>
-                                                                                    <v-icon color="red" v-else>
-                                                                                        mdi-close
-                                                                                    </v-icon>
-                                                                                </template>
-                                                                                <template v-slot:append-outer>
-                                                                                    <v-btn
-                                                                                        color="danger"
-                                                                                        dark
-                                                                                        center
-                                                                                        x-small
-                                                                                        fab>
-                                                                                        <v-icon
-                                                                                            @click="removeDocument(key)">
-                                                                                            mdi-minus
-                                                                                        </v-icon>
-                                                                                    </v-btn>
-                                                                                </template>
-                                                                                <template v-slot:progress>
-                                                                                    <v-progress-linear
-                                                                                        :value="Initprogress(documents[key].id)"
-                                                                                        :color="documents[key].color"
-                                                                                        absolute
-                                                                                        height="3"
-                                                                                    ></v-progress-linear>
-                                                                                </template>
-                                                                            </v-text-field>
-                                                                            <span class="red--text">{{
-                                                                                    errors[0]
-                                                                                }}</span>
-                                                                        </ValidationProvider>
-                                                                    </v-col>
-                                                                </v-row>
-                                                            </ValidationObserver>
-                                                        </v-container>
-                                                        <small>* майдонлар тўлдирилиши шарт</small>
-                                                    </v-card-text>
-                                                    <v-card-actions>
-                                                        <v-spacer></v-spacer>
-                                                        <v-btn
-                                                            color="blue darken-1"
-                                                            text
-                                                            @click="dialog.documenttype = false"
-                                                        >
-                                                            Ёпиш
-                                                        </v-btn>
-
-                                                    </v-card-actions>
-                                                </v-card>
-                                            </v-dialog>
 
 
                                         </v-row>
@@ -2625,6 +2456,7 @@ import messages from '../../../../locales/oz.json';
 import {types} from "../../../../../../public/js/mix/pdfmake";
 import ServicePage from "../index";
 import i18n from "../../../../i18n";
+import EArxivFile from "../../../../components/form/e-arxiv-file";
 
 
 Object.keys(rules).forEach(rule => {
@@ -3073,21 +2905,8 @@ export default {
 
                         }
 
-                        if (!this.isValidDoc()) {
-                            _this.$refs["hujjatilova"].applyResult({
-                                errors: ["Илова қилинадиган ҳужжатларни киритинг"], // array of string errors
-                                valid: false, // boolean state
-                                failedRules: {} // should be empty since this is a manual error.
-                            })
-
-                        } else
-                            _this.$refs["hujjatilova"].applyResult({
-                                errors: [], // array of string errors
-                                valid: true, // boolean state
-                                failedRules: {} // should be empty since this is a manual error.
-                            })
                         isValid = await this.validateField("create_customs_yuk_kuzatuv_value");
-                        if (isValid === true && this.isValidDoc() && this.isValidTransportTuri()) {
+                        if (isValid === true && this.isValidTransportTuri()) {
 
                             let myYukData = [];
                             myYukData['docs'] = [];
@@ -3513,7 +3332,7 @@ export default {
                     if (!(['1790', '1791', '1701'].includes(item['kod_id'])))
                         _this.regions.push({
                             'value': item['kod_id'],
-                            'text': (item['name']).replace("Ўзбекистон Республикаси Давлат божхона қўмитасининг ", "")//(item['name']).substring(("Ўзбекистон Республикаси Давлат божхона қўмитасининг ").length)
+                            'text': (item['name']).replace("Ўзбекистон Республикаси Иқтисодиёт ва молия вазирлиги ҳузуридаги Божхона қўмитасининг ", "")//(item['name']).substring(("Ўзбекистон Республикаси Иқтисодиёт ва молия вазирлиги ҳузуридаги Божхона қўмитасининг ").length)
                         })
                 })
             })
@@ -4636,6 +4455,7 @@ export default {
     }
     ,
     components: {
+        EArxivFile,
         ServicePage,
         ValidationProvider,
         ValidationObserver,

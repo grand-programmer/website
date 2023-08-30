@@ -35,6 +35,23 @@ const apiClient = {
     async deletePage(id) {
         return await axios.delete(apiUrl + "page/" + id);
     },
+    ///////// Files
+    async readFiles(Request) {
+
+        return await axios.get(apiUrl + "file", { params: Request});
+    },
+    async addFile(requestData) {
+        return await axios.post(apiUrl + "file", requestData,multipartformdata);
+    },
+    async updateFile(id, requestData, header) {
+        return await axios.post(apiUrl + "file/" + id, requestData, (header!==null) ? header : multipartformdata);
+    },
+    async readFile(id) {
+        return await axios.get(apiUrl + "file/" + id);
+    },
+    async deleteFile(id) {
+        return await axios.delete(apiUrl + "file/" + id);
+    },
 
     //////////////////////// Categories Begin/////////////////////////////
     async readCategories(limit = 0) {
@@ -224,6 +241,66 @@ const apiClient = {
     },
     //////////////////////// My Votes End /////////////////////////////
 
+    //////////////////////// My Votes Begin/////////////////////////////
+    async readVotes() {
+        return await axios.get(apiUrl + "votes");
+    },
+    async readVotesForFront() {
+        return await axios.get(apiUrl + "front/votes");
+    },
+    async addVote(requestData) {
+        return await axios.post(apiUrl + "votes", requestData);
+    },
+    async updateVote(id, requestData) {
+        return await axios.put(apiUrl + "votes/" + id, requestData);
+    },
+    async readVote(id) {
+        return await axios.get(apiUrl + "votes/" + id);
+    },
+    async deleteVote(id) {
+        return await axios.delete(apiUrl + "votes/" + id);
+    },
+    //////////////////////// My Votes End /////////////////////////////
+
+    //////////////////////// My OpenDatas Begin/////////////////////////////
+    async readOpenDatas() {
+        return await axios.get(apiUrl + "opendatas");
+    },
+    async readOpenDatasForFront() {
+        return await axios.get(apiUrl + "front/opendatas");
+    },
+    async addOpenData(requestData) {
+        return await axios.post(apiUrl + "opendatas", requestData);
+    },
+    async updateOpenData(id, requestData) {
+        return await axios.put(apiUrl + "opendatas/" + id, requestData);
+    },
+    async readOpenData(id) {
+        return await axios.get(apiUrl + "opendatas/" + id);
+    },
+    async deleteOpenData(id) {
+        return await axios.delete(apiUrl + "opendatas/" + id);
+    },
+    //////////////////////// My OpenDatas End /////////////////////////////
+
+    //////////////////////// My OpenData Files Begin/////////////////////////////
+    async readOpenDataFiles(opendata) {
+        return await axios.get(apiUrl + "opendata/" + opendata + "/files");
+    },
+    async addOpenDataFile(opendata,requestData) {
+        return await axios.post(apiUrl + "opendata/" + opendata + "/files", requestData);
+    },
+    async updateOpenDataFile(opendata, id, requestData) {
+        return await axios.put(apiUrl + "opendata/" + opendata + "/files/" + id, requestData);
+    },
+    async readOpenDataFile(opendata, id) {
+        return await axios.get(apiUrl + "opendata/" + opendata + "/files/" + id);
+    },
+    async deleteOpenDataFile(opendata, id) {
+        return await axios.delete(apiUrl + "opendata/" + opendata + "/files/" + id);
+    },
+    //////////////////////// My OpenData Files End /////////////////////////////
+
     //////////////////////// My Faqs Begin/////////////////////////////
     async readFaqs() {
         return await axios.get(apiUrl + "faqs");
@@ -269,7 +346,7 @@ const apiClient = {
         let str = "";
         if (requestData)
             str = "?" + Object.entries(requestData).map(([key, val]) => `${key}=${val}`).join('&');
-        return await axios.get(apiUrl + "apparat" + str);
+        return await axios.get(apiUrl + "apparat/" + str);
     },
     async addApparat(requestData) {
         return await axios.post(apiUrl + "apparat", requestData);
@@ -285,13 +362,13 @@ const apiClient = {
     },
     //////////////////////// My boshqarma End /////////////////////////////
 // ////////////////////// My rahbariyat Begin/////////////////////////////
-    async readMarkaziy() {
-        let str = "?markaziy=0";
+    async readMarkaziy(org=null) {
+        let str = "?markaziy=0" + org ? "&org=" + org : ""
 
         return await axios.get(apiUrl + "apparat" + str);
     },
-    async readRahbariyats() {
-        let str = "?rahbar=0";
+    async readRahbariyats(org=null) {
+        let str = "?rahbar=0" + (org ? "&org=" + org : "");
 
         return await axios.get(apiUrl + "apparat" + str);
     },
