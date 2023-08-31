@@ -5,7 +5,6 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 
     <!-- Font -->
     <link href="{{asset('css/font-awesome.min.css') }}" rel="stylesheet">
@@ -20,10 +19,10 @@
     {{--<link href="{{asset('/vendors/bootstrap-selector/css/bootstrap-select.min.css')}}" rel="stylesheet">--}}
     <link href="{{asset('/vendors/camera-slider/camera.css')}}" rel="stylesheet">
     <link href="{{asset('/vendors/animate/animate.min.css')}}" rel="stylesheet">
-    <link href="{{secure_asset('/vendors/owl-carousel/css/owl.carousel.css')}}" rel="stylesheet">
-    <link href="{{secure_asset('/css/style.css')}}" rel="stylesheet">
-    <link href="{{secure_asset('/css/fullpage.css')}}" rel="stylesheet">
-    <link href="{{secure_asset('/css/all.css')}}" rel="stylesheet">
+    <link href="{{asset('/vendors/owl-carousel/css/owl.carousel.css')}}" rel="stylesheet">
+    <link href="{{asset('/css/style.css')}}" rel="stylesheet">
+    <link href="{{asset('/css/fullpage.css')}}" rel="stylesheet">
+    <link href="{{asset('/css/all.css')}}" rel="stylesheet">
     <link href="{{asset('/css/mix/one.css')}}" rel="stylesheet" type="text/css" charset="utf-8">
     <link href="{{asset('/css/mix/app.css')}}" rel="stylesheet" type="text/css" charset="utf-8">
     <link href="{{asset('/css/slick.css')}}" rel="stylesheet">
