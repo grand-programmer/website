@@ -18,3 +18,4 @@ yarn-error.log
 /.idea
 /.vscode
 /public/css/mix/one.css
+/public/.htaccess
