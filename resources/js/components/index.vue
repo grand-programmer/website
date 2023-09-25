@@ -465,7 +465,7 @@ export default {
                 }
             ],
             popup: false,
-            year: 2022,
+            year: 2023,
             firstStart: 1,
             years: [
                 2018, 2019, 2020, 2021, 2022
@@ -604,7 +604,6 @@ function skipPages(origin, destination, direction) {
         }
     } else {
         if (destination.index != 0 && pageloaded == 0) {
-
             $('.hududiy.section').addClass('skip');
             $('.hududiy.section').css("display", "none !important;");
             fullpage_api.silentMoveTo(destination.index - 1);

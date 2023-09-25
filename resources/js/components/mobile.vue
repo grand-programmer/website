@@ -880,6 +880,7 @@
                                         <li><a href="https://t.me/customschannel"  target="_blank"><i class="fab fa-telegram-plane"></i></a></li>
                                         <li class="d-none"><a href="#"  target="_blank"><i class="fab fa-google-plus-g"></i></a></li>
                                         <li><a href="https://www.instagram.com/bojxona.official/"  target="_blank"><i class="fab fa-instagram-square"></i></a></li>
+                                        <li><a href="https://www.youtube.com/@BojxonaqomitasiAxborotxi-hf6od"  target="_blank"><i class="fab fa-youtube"></i></a></li>
                                     </ul>
                                 </div>
                             </div>

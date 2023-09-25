@@ -73,7 +73,7 @@
                                                     v-model="langtext[langKey].lavozim_name"/>
                                             </v-col>
 
-                                            <v-col cols="4">
+                                            <v-col cols="4"  v-show="lang==='uz'">
                                                 <my-field
                                                     title="Бошқарма бошлиғи исми фамилияси исми шарифи"
                                                     v-model="organization.fio"
@@ -82,6 +82,14 @@
 
 
                                             </v-col>
+
+                                            <v-col cols="4" :key="'fioboshliq' + langKey"
+                                                   v-for="(langItem,langKey) in langtext" v-show="lang===langKey">
+                                                <my-field
+                                                    :title="'Бошқарма бошлиғи исми фамилияси исми шарифи ' +  getLang()['text']"
+                                                    v-model="langtext[langKey].fio"/>
+                                            </v-col>
+
                                             <v-col cols="4">
                                                 <my-field
                                                     title="Раҳбар телефон рақамлари"

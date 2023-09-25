@@ -1137,7 +1137,7 @@ export default {
             ],
             subHeaders: [
                 {text: 'Товар номи', align: 'start', value: 'nomlanishi'},
-                {text: 'Товар миқдори', align: 'start', value: 'weight'},
+                {text: 'Товар миқдори', align: 'start', value: 'miqdor'},
                 {text: 'Операция', align: 'start', value: 'actions'},
             ],
             contracts: [],
@@ -1679,7 +1679,7 @@ export default {
                                 _this.completedSteps.push(_this.stepper - 1);
                                 _this.$toast.success("Аризачи маълумотлари сақланди!");
 
-                            } else this.$toast.error("Серверда хатолик юз берди. Кейинроқ уриниб кўринг!");
+                            } else this.$toast.error("Маълумотлар киритишда хатолик юз берди. Қайта уриниб кўринг!");
 
                         }
 
@@ -1783,7 +1783,7 @@ export default {
                                     this.$toast.error("Маълумотларингизни тўғрилаб юборинг!");
                                 } else
 
-                                    this.$toast.error("Серверда хатолик юз берди. Кейинроқ уриниб кўринг!");
+                                    this.$toast.error("СерверМаълумотлар киритишда хатолик юз берди. Қайта уриниб кўринг!");
                             }
 
 
@@ -1869,7 +1869,7 @@ export default {
                                 } else
                                 this.$toast.error("Маълумотларингизни текшириб қайтадан юборинг!");
                             } else
-                                this.$toast.error("Серверда хатолик юз берди. Кейинроқ уриниб кўринг!");
+                                this.$toast.error("Маълумотлар киритишда хатолик юз берди. Қайта уриниб кўринг!");
                         }
 
 
