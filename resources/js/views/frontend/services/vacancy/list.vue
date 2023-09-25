@@ -15,8 +15,7 @@
 
                 <div class="vacancy-wrapper ml-4">
                     <v-row>
-                        <h3 class="mb-5 vacancies-title">Иқтисодиёт ва молия вазирлиги ҳузуридаги Божхона қўмитаси вакант лавозимларининг ягона очиқ
-                            портали </h3>
+                        <h3 class="mb-5 vacancies-title text-center">Божхона органларидаги хизматга номзодларни қабул қилишнинг ягона очиқ портали </h3>
 
                         <!--                    <p>Мазкур бўлимда сиз вакант ўринлар тўғрисида маълумот оласиз ҳамда ушбу вакант ўринларга ариза топширишингиз мумкин бўлади</p>-->
 
@@ -49,7 +48,7 @@
                             <v-row class="vacancy-list">
                                 <v-container>
                                     <v-col cols="12">
-                                        <h3 style="color: #39ae69; font-weight: bold"
+                                        <h3 v-if="filteredVacancies.length>0"  style="color: #39ae69; font-weight: bold"
                                             class="d-flex justify-content-between align-items-center"> Вакант лавозимлар
                                             рўйхати <span v-if="!loading && filteredVacancies.length>0"
                                                           class="float-end"
@@ -60,8 +59,8 @@
 
                                     </v-col>
                                 </v-container>
-                                <v-col cols="12" class="text-center" v-if="!filteredVacancies.length>0">
-                                    Бўш иш ўринлари топилмади.
+                                <v-col cols="12" class="text-center px-10" style="color: #39ae69; font-size: 16px; font-weight: bold" v-if="!filteredVacancies.length>0">
+                                    {{ $t('Божхона органларидаги бўш ўринлардан келиб чиқиб, танлов ўтказиш тўғрисидаги эълон Божхона қўмитаси раисининг фармойишига асосан амалга оширилади. Божхона органларига хизматга кириш истагингиз бўлса, сайтимизни кузатиб боринг. Танлов эълон қилинганда аризаларни қабул қилишнинг бошланиши ва охирги муддати ушбу рукнда эълон қилинади.') }}
                                 </v-col>
                                 <v-col cols="12" :key="key" v-for="(vacancy,key) in filteredVacancies" v-if="!loading"
                                        data-aos="fade-up">
@@ -280,7 +279,7 @@
                                         <v-list-item to="/services/vacancy/documents">
                                             <div>
                                                 <v-icon>mdi-file-document-multiple-outline</v-icon>
-                                                <span>Меъёрий-ҳуқуқий ҳужжатлар </span>
+                                                <span>Норматив-ҳуқуқий ҳужжатлар </span>
                                             </div>
                                         </v-list-item>
 

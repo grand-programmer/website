@@ -893,6 +893,7 @@ export default {
         },
         hideHududiy(event) {
             if($(event.target).hasClass('tort')) return;
+            if($(event.target).hasClass('tortlink')) return;
             //console.log('asdasd')
             if (!$(".v-application--wrap > div").hasClass("one-page") && !$('.hududiy.section').hasClass('skip')) {
                 setTimeout(() => {

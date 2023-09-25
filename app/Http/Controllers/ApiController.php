@@ -772,25 +772,32 @@ class ApiController extends Controller
                 $pnum = strtoupper($pnum);
                 //dd($pnum);
                 ///dd(md5("AA4774708(:1989-03-08"));
-                $md = md5($pnum . "(:" . $pdate);
+                /*$md = md5($pnum . "(:" . $pdate);
                 $response = Http::get('http://192.168.214.132:8080/GCPInfo/GCP_getINFO', [
                     "pasnum" => $pnum,
                     "pasdata" => $pdate,
                     "key" => $md,
+                ]);*/
+                $response = Http::post('http://192.168.214.231:8084/api/datedocv1', [
+                    "document" => $pnum,
+                    "birth_date" => $pdate,
+                    "langId"=>1
                 ]);
+
                 if ($response->status() == 200) {
-                    $simpleXml = simplexml_load_string($response->body());
+/*                    $simpleXml = simplexml_load_string($response->body());
                     $json = json_encode($simpleXml); // convert the XML string to JSON
-                    $array = json_decode($json); // convert the XML string to JSON
+                    $array = json_decode($json); // convert the XML string to JSON*/
                     $myPasportData = [];
-                    if (!isset($array->birth_date)) {
+                    $array =$response->json();
+                    if ($array['result']!==1) {
                         return response()->json(['error' => 'Маълумотларни текшириб қайтадан киритинг'], 400);
                     }
-                    $myPasportData['birth_date'] = $array->birth_date;
-                    $myPasportData['namelatin'] = $array->namelatin;
-                    $myPasportData['surnamelatin'] = $array->surnamelatin;
-                    $myPasportData['patronymlatin'] = $array->patronymlatin;
-                    $myPasportData['pinpp'] = $array->pinpp;
+                    $myPasportData['birth_date'] = $array['birth_date'];
+                    $myPasportData['namelatin'] = $array['namelatin'];
+                    $myPasportData['surnamelatin'] = $array['surnamelatin'];
+                    $myPasportData['patronymlatin'] = $array['patronymlatin'];
+                    $myPasportData['pinpp'] = $array['pinpp'];
                     return response()->json(['data' => $myPasportData]);
                 }
                 break;

@@ -14,25 +14,37 @@ use App\Http\Controllers\Controller as ParentController;
 class AdminEventController extends ParentController
 {
     public function setLocale(Request $request){
-        $data=$request->only('data');
+        $data=$request->only(['data','lang']);
         $mylanguage=[];
         //dd($data);
         if(is_array($data['data']))
         {
             foreach($data['data'] as $localItem){
-
-                if(isset($localItem['uz'])) $mylanguage['uz'][$localItem['key']]=isset($localItem['uz'])?$localItem['uz']:"";
-                if(isset($localItem['ru'])) $mylanguage['ru'][$localItem['key']]=isset($localItem['ru'])?$localItem['ru']:"";
+                if(isset($localItem[$data['lang']])) $mylanguage[$data['lang']][$localItem['key']]=isset($localItem[$data['lang']])?$localItem[$data['lang']]:"";
+                /*
+                 * if(isset($localItem['ru'])) $mylanguage['ru'][$localItem['key']]=isset($localItem['ru'])?$localItem['ru']:"";
                 if(isset($localItem['oz'])) $mylanguage['oz'][$localItem['key']]=isset($localItem['oz'])?$localItem['oz']:"";
-                if(isset($localItem['en'])) $mylanguage['en'][$localItem['key']]=isset($localItem['en'])?$localItem['en']:"";
+                if(isset($localItem['en'])) $mylanguage['en'][$localItem['key']]=isset($localItem['en'])?$localItem['en']:"";*/
             }
         }
 
 
-        File::put(base_path('resources/js/locales/dynamic/en.json'), json_encode($mylanguage['en'],JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT));
-        File::put(base_path('resources/js/locales/dynamic/oz.json'), json_encode($mylanguage['oz'],JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT));
+        File::put(base_path('resources/js/locales/dynamic/'. $data['lang'] .'.json'), json_encode($mylanguage[$data['lang']],JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT));
+        /*File::put(base_path('resources/js/locales/dynamic/oz.json'), json_encode($mylanguage['oz'],JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT));
         File::put(base_path('resources/js/locales/dynamic/uz.json'), json_encode($mylanguage['uz'],JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT));
-        File::put(base_path('resources/js/locales/dynamic/ru.json'), json_encode($mylanguage['ru'],JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT));
+        File::put(base_path('resources/js/locales/dynamic/ru.json'), json_encode($mylanguage['ru'],JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT));*/
+
+        return response()->json(['success' => true], 200);
+    }
+    public function addLocale(Request $request){
+        $data=$request->only(['key']);
+        $translateKeys=json_decode(File::get(base_path('resources/js/locales/dynamic/uz.json')), JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT);
+        $translateKeys[$data['key']]= '';
+
+        File::put(base_path('resources/js/locales/dynamic/uz.json'), json_encode($translateKeys,JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT));
+        /*File::put(base_path('resources/js/locales/dynamic/oz.json'), json_encode($mylanguage['oz'],JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT));
+        File::put(base_path('resources/js/locales/dynamic/uz.json'), json_encode($mylanguage['uz'],JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT));
+        File::put(base_path('resources/js/locales/dynamic/ru.json'), json_encode($mylanguage['ru'],JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT));*/
 
         return response()->json(['success' => true], 200);
     }

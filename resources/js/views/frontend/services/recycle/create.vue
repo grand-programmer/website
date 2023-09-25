@@ -1137,7 +1137,7 @@ export default {
             ],
             subHeaders: [
                 {text: 'Товар номи', align: 'start', value: 'nomlanishi'},
-                {text: 'Товар миқдори', align: 'start', value: 'weight'},
+                {text: 'Товар миқдори', align: 'start', value: 'miqdor'},
                 {text: 'Операция', align: 'start', value: 'actions'},
             ],
             contracts: [],
@@ -1782,8 +1782,8 @@ export default {
                                     }
                                     this.$toast.error("Маълумотларингизни тўғрилаб юборинг!");
                                 } else
-
                                     this.$toast.error("Маълумотлар киритишда хатолик юз берди. Қайта уриниб кўринг!");
+
                             }
 
 

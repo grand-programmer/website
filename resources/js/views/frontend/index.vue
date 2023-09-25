@@ -1,5 +1,4 @@
 <template>
-
     <div>
         <v-header></v-header>
         <router-view>

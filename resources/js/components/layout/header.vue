@@ -90,9 +90,8 @@
                             <div class="header-item header-mail">
                                 <li class="hududiy_boshqarmalar">
 
-                                    <a href=".hududiy.section" data-toggle="collapse" role="button"
-                                       aria-expanded="false" class="d-inline">
-                                        <i class="fas fa-map-marker-alt mr-1 "></i>
+                                    <a href=".hududiy.section" class="d-inline">
+                                        <i class="tortlink fas fa-map-marker-alt mr-1 "></i>
                                         <span class="tort">{{ $t("Ҳудудий бошқармалар") }}</span>
                                     </a>
                                     <!--                                <ul class="dropdown-menu">
@@ -238,11 +237,11 @@
                                 </li>
 
 
-                                <div class="m-settings d-flex " style="display: block;
+                                <div class="m-settings" style="display: block;
     margin-left: auto;
     margin-right: auto;">
 
-                                    <div class="hududiy_boshqarmalar">
+                                    <div class="hududiy_boshqarmalar2">
 
                                         <a href=".hududiy.section" data-toggle="collapse" role="button"
                                            aria-expanded="false" class="d-inline">

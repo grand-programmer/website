@@ -76,6 +76,7 @@ use Illuminate\Support\Facades\Notification;
          */
         Route::group(['prefix' => 'admin', 'middleware' => 'role:admin'], function () {  //role:editor,approver
             Route::post('/locales', 'App\Http\Controllers\Admin\AdminEventController@setLocale',['as'=>'admin']);
+            Route::post('/addlocale', 'App\Http\Controllers\Admin\AdminEventController@addLocale',['as'=>'admin']);
             Route::get('/locales', 'App\Http\Controllers\Admin\AdminEventController@getLocales',['as'=>'admin']);
             Route::resource('/news', 'App\Http\Controllers\Admin\AdminNewsController', ['as' => 'admin']);
             Route::get('/categories/select', 'App\Http\Controllers\Admin\AdminCategoryController@getForSelect');
