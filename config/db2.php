@@ -79,6 +79,7 @@ $databaseconfig= [
     'host' => '192.168.12.144',
     'username' => 'SURAT',
     'password' => '$UR@Tj0n',
+
     'database' => 'S06271bt',
     'prefix' => '',
     'schema' => 'ASOD',
@@ -177,6 +178,7 @@ $databaseconfigSTAT['schema']='TST_STAT';
 $databaseconfigSTAT['database']='S06271bt';
 $databaseconfigSTAT['username']='SURAT';
 $databaseconfigSTAT['password']='$UR@Tj0n';
+
 
 
 $databaseconfigINN=$databaseconfig;

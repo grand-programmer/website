@@ -484,7 +484,7 @@ export default {
                 navigation: true,
                 slideSelector: '.fslide',
                 sectionSelector: '.section',
-                normalScrollElements: '.select,.v-autocomplete__content, .submenu.dropdown-menu',
+                normalScrollElements: '.select,.v-autocomplete__content, .submenu.dropdown-menu, .v-menu__content',
                 scrollOverflow: false,
                 scrollOverflowOptions: {
                     scrollbars: false,

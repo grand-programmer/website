@@ -21,9 +21,8 @@ class StatController extends Controller
     public function index(Request $request)
     {
         $data = $request->only(['name', 'month', 'year', 'online']);
-
-        $apiCodes = array("davlatimex", "tovarimex", "oyimex"); //"hududimex", "avto", "kunimex",
-        if (isset($data['name']) and in_array($data['name'], $apiCodes)) $apiCode = $data['name']; else $apiCode = "davlatimex";
+        $apiCodes = array("davlatimex_n", "tovarimex_n", "hududimex_n"); //"hududimex", "avto", "kunimex",
+        if (isset($data['name']) and in_array($data['name'], $apiCodes)) $apiCode = $data['name']; else $apiCode = "hududimex_n";
 
         $params = $request->only(['year', 'month', 'rejim']);
         $month = 0;
@@ -31,8 +30,8 @@ class StatController extends Controller
         $rejim = 0;
 
         if (isset($params['year'])) {
-            if($params['year']==='2023') $params['year']=2020;
-            if($params['year']==='2022') $params['year']=2019;
+            //if($params['year']==='2023') $params['year']=2020;
+            //if($params['year']==='2022') $params['year']=2019;
             $year = $params['year'];
         }
 
@@ -43,8 +42,8 @@ class StatController extends Controller
             $rejim = $params['rejim'];
         }
 
-        $statService = new StatService();
-        $statService->fromRepl = !isset($data['online']);
+        $statService = new StatService(!isset($data['online']));
+        // $statService->fromRepl = !isset($data['online']);
         $function = $statService->nameFunctions[$apiCode];
         $locale = app()->getLocale();
         if (!empty($request->lang)) {
@@ -52,11 +51,14 @@ class StatController extends Controller
         }
         $json = json_decode(File::get(base_path('resources/js/locales/dynamic/' . $locale . '.json')), true);
 
-        global $newtranslates;
-        $newtranslates = [];
-        $data = collect($statService->$function($year, $month, $rejim))->transform(function ($item) use ($request, $apiCode) {
-
-            if ($apiCode === 'davlatimex') {
+        global $myApp;
+        $myApp = $this;
+        $returnData = collect($statService->$function($year, $month, $rejim))->transform(function ($item) use ($request, $apiCode) {
+            global $myApp;
+            if ($apiCode === 'tovarimex_n') {
+                $item->title = $myApp->translateText($item->title);
+            }
+            /*if ($apiCode === 'tovarimex_n') {
                 if (!isset($item->country)) return $item;
                 $locale = app()->getLocale();
                 if (!empty($request->lang)) {
@@ -99,27 +101,27 @@ class StatController extends Controller
                 //dd(app()->getLocale());
 
                 //$item->country=(new DataController())->getCountry()
-            }
+            }*/
             return $item;
         })->all();
 
-        if ($apiCode === 'tovarimex' and !empty($newtranslates)) {
-            // $json=json_decode(file_get_contents(base_path('resources/js/locales/dynamic/' . $locale . '.json')),true);
+        /*  if ($apiCode === 'tovarimex' and !empty($newtranslates)) {
+              // $json=json_decode(file_get_contents(base_path('resources/js/locales/dynamic/' . $locale . '.json')),true);
 
 
-            File::put(base_path('resources/js/locales/dynamic/' . $locale . '.json'), json_encode(array_merge($json, $newtranslates), JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
-            // file_put_contents(base_path('resources/js/locales/dynamic/' . $locale . '1.json'), json_encode($json,JSON_PRETTY_PRINT));
+              File::put(base_path('resources/js/locales/dynamic/' . $locale . '.json'), json_encode(array_merge($json, $newtranslates), JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
+              // file_put_contents(base_path('resources/js/locales/dynamic/' . $locale . '1.json'), json_encode($json,JSON_PRETTY_PRINT));
 
 
-            // dd($item);
+              // dd($item);
 
 
-            //dd(app()->getLocale());
+              //dd(app()->getLocale());
 
-            //$item->country=(new DataController())->getCountry()
-        }
+              //$item->country=(new DataController())->getCountry()
+          }*/
 
-        return response()->json(['data' => $data]);
+        return response()->json(['data' => $returnData]);
 
     }
 
@@ -174,7 +176,7 @@ class StatController extends Controller
                     $service->user_id = Auth::guard('api')->user()->id;
                     $service->pin = Auth::guard('api')->user()->pin;
                 }
-                $service->step=2;
+                $service->step = 2;
                 if ($service->save()) {
 
                     return response()->json(['data' => $service]);
@@ -183,8 +185,8 @@ class StatController extends Controller
             case 2:
                 $service = ServiceStat::find($data['id']);
                 if (!$service) return response()->json(['error' => 'Серверга маълумотлар сақлашда хатолик юз берди'], 404);
-                if($data['servicetype']!==$service->servicetype){
-                    $service->grafalar=[];
+                if ($data['servicetype'] !== $service->servicetype) {
+                    $service->grafalar = [];
                 }
                 $service->servicetype = $data['servicetype'];
                 $service->step = 3;
@@ -204,7 +206,7 @@ class StatController extends Controller
                 $service->byud = isset($data['byud']) ? $data['byud'] : null;
                 $service->byudsanadan = date("Y-m-d", strtotime($data['byudsanadan']));
                 $service->byudsanagacha = date("Y-m-d", strtotime($data['byudsanagacha']));
-                $service->step=4;
+                $service->step = 4;
                 if ($service->save()) {
                     return response()->json(['data' => $service], 200);
                 } else return response()->json(['erros' => 'Серверга маълумотлар сақлашда хатолик юз берди'], 400);
@@ -215,8 +217,8 @@ class StatController extends Controller
                 $service->grafalar = isset($data['grafalar']) ? $data['grafalar'] : [];
                 $service->step = 5;
                 $service->save();
-/*                $service->status = 1;
-                $service->statusNm = 'Янги';*/
+                /*                $service->status = 1;
+                                $service->statusNm = 'Янги';*/
 
 
                 if ($service->save()) {
@@ -224,7 +226,7 @@ class StatController extends Controller
                     return response()->json(['data' => $service]);
                 } else return response()->json(['error' => 'Серверга маълумотлар сақлашда хатолик юз берди'], 400);
                 break;
-                case 5:
+            case 5:
                 $service = ServiceStat::find($data['id']);
                 if (!$service) return response()->json(['error' => 'Серверга маълумотлар сақлашда хатолик юз берди'], 404);
 
@@ -242,6 +244,12 @@ class StatController extends Controller
                 break;
         }
 
+    }
+
+    public function translateText($text)
+    {
+        $json = json_decode(File::get(base_path('resources/js/locales/dynamic/' . app()->getLocale() . '.json')), true);
+        return (isset($json[$text]))?$json[$text]:$text;
     }
 
     public function getApps(Request $request)
@@ -272,9 +280,10 @@ class StatController extends Controller
         return response()->json(['data' => StatServiceResource::collection($services)]);
     }
 
+
     public function exportByud()
     {
-        $service= ServiceStat::first();
+        $service = ServiceStat::first();
 
         try {
             return (new ByudExport($service))->download("result.xlsx");
@@ -283,9 +292,11 @@ class StatController extends Controller
         }
 
     }
-    public function agreed(){
-        $service= ServiceStat::where(['status'=>1, 'user_id'=>Auth::guard('api')->user()->id])->first();
-        if($service) {
+
+    public function agreed()
+    {
+        $service = ServiceStat::where(['status' => 1, 'user_id' => Auth::guard('api')->user()->id])->first();
+        if ($service) {
             $service->status = 2;
             $service->save();
         }
@@ -293,33 +304,31 @@ class StatController extends Controller
 
     public function getPrice(ServiceStat $statService)
     {
-        if($statService->step < 5) return;
-        $price= 0;
-        if((int) $statService->servicetype ===0){
-            $data=DB::connection('db2_odbc')->select($statService->getQuery(true));
+        if ($statService->step < 5) return;
+        $price = 0;
+        if ((int)$statService->servicetype === 0) {
+            $data = DB::connection('db2_odbc')->select($statService->getQuery(true));
             $price = (int)$data[0]->count * $statService->getBhm() * 0.01;
-            $price= $price + ($statService->getBhm() * (int)$data[0]->count * 0.01 * count((is_array($statService->grafalar))?$statService->grafalar:json_decode($statService->grafalar)));
+            $price = $price + ($statService->getBhm() * (int)$data[0]->count * 0.01 * count((is_array($statService->grafalar)) ? $statService->grafalar : json_decode($statService->grafalar)));
+        } else {
+            $data = DB::connection('db2_odbc')->select($statService->getQuery(true));
+            if ((int)$data[0]->count > 15000) {
+                $price = 3 * $statService->getBhm();
+            } elseif ((int)$data[0]->count > 5000) {
+                $price = 2 * $statService->getBhm();
+            } elseif ((int)$data[0]->count > 1500) {
+                $price = 1 * $statService->getBhm();
+            } elseif ((int)$data[0]->count > 700) {
+                $price = 0.5 * $statService->getBhm();
+            } elseif ((int)$data[0]->count > 300) {
+                $price = 0.2 * $statService->getBhm();
+            } elseif ((int)$data[0]->count > 100) {
+                $price = 0.1 * $statService->getBhm();
+            } else $price = 0.05 * $statService->getBhm();
+            $price = $price + $price * 0.05 * count((is_array($statService->grafalar)) ? $statService->grafalar : json_decode($statService->grafalar));
         }
-        else {
-            $data=DB::connection('db2_odbc')->select($statService->getQuery(true));
-            if((int)$data[0]->count > 15000){
-                $price= 3 * $statService->getBhm();
-            } elseif ((int)$data[0]->count > 5000){
-                $price= 2 * $statService->getBhm();
-            } elseif ((int)$data[0]->count > 1500){
-                $price= 1 * $statService->getBhm();
-            } elseif ((int)$data[0]->count > 700){
-                $price= 0.5 * $statService->getBhm();
-            } elseif ((int)$data[0]->count > 300){
-                $price= 0.2 * $statService->getBhm();
-            } elseif ((int)$data[0]->count > 100){
-                $price= 0.1 * $statService->getBhm();
-            }
-            else $price= 0.05 * $statService->getBhm();
-            $price= $price + $price * 0.05 * count((is_array($statService->grafalar))?$statService->grafalar:json_decode($statService->grafalar));
-        }
-        $statService->price=$price;
-        $statService->count=(int)$data[0]->count;
+        $statService->price = $price;
+        $statService->count = (int)$data[0]->count;
         $statService->save();
 
     }

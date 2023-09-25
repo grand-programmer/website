@@ -2,27 +2,13 @@
     <div class="row content">
         <div class="col-3">
             <div class="stat_menu" style="min-height:80vh">
-                <h3> {{ $t("Божхона статистикаси") }}</h3>
+                <h3> {{ $t("товарлар ташқи савдо божхона статистикаси") }}</h3>
                 <ul class="mb-15">
-                    <li class="d-none"><a :class="stat_type==5?'active':''" href="#" @click="stat_type=5">
-                        {{ $t("Товар ва маҳсулотлар {rejim}и",{ rejim: getRejimByCode(rejim.tovarimex).text }) }}</a></li>
-                    <li><a :class="stat_type===4?'active':''" href="#" @click="stat_type=4">
-                        {{
-                            rejim.tovarimex===1?$t("Ўзбекистон Республикасининг товарлар импорти давлатлар кесимида") : $t("Ўзбекистон Республикасининг товарлар экспорти давлатлар кесимида")
-                        }}</a></li>
-
-
-                    <li><a :class="(stat_type==3)?'active':''" href="#" @click="stat_type=3">
-                        {{
-                            rejim.tovarimex===1?$t("Ўзбекистон Республикасининг товарлар импорти ойлар кесимида") : $t("Ўзбекистон Республикасининг товарлар экспорти ойлар кесимида")
-                        }}</a></li>
-                    <!--                    <li><a :class="(stat_type===6)?'active':''" href="#" @click="stat_type=6">Ҳудудий корхоналар томонидан импорт қилинган товарлар</a></li>-->
-
-
-                    <!--                                <li><a :class="(stat_type==4)?'active':''" href="#" @click="stat_type=4">Ўзбекистон
-                                                        Республикасида товарлар импорти ва экспорти</a></li>
-                                                    <li><a :class="(stat_type==5)?'active':''" href="#" @click="stat_type=5">Ўзбекистон
-                                                        Республикасида товарлар импорти ва экспорти</a></li>-->
+                    <li v-for="rejimItem in regimes">
+                        <a :class="stat_type===rejimItem.value?'active':''" href="#" @click="stat_type=rejimItem.value">
+                            {{ rejimItem.title }}
+                        </a>
+                    </li>
                 </ul>
                 <a class="all_stats d-none" href="https://charts.customs.uz" target="_blank"
                    style="position: absolute; bottom: 100px">
@@ -31,264 +17,67 @@
                 </a>
             </div>
         </div>
-        <div class="col-9" id="reyt" v-if="stat_type==1">
-            <h3>{{ $t("Ўзбекистон Республикаси товарлар импорти ва экспорти ҳудудлар кесимида") }}</h3>
-            <p class="text-center">({{ $t('Маълумотлар тест режимида') }})</p>
-            <div id="columnchart1" ref="clusteredColumn" class="chart"></div>
-            <div class="filter row">
-                <v-col cols="3">
-                    <v-autocomplete
-                        ref="auto"
-                        :label="$t('Ойлар бўйича')"
-                        v-model="month"
-                        :items="months"
-                        auto-select-first
-                    ></v-autocomplete>
-                </v-col>
-                <v-col cols="3">
-                    <v-autocomplete
-                        ref="auto1"
-                        :label="$t('Йиллар бўйича')"
-                        v-model="year"
-                        :items="years"
-                        hide-selected
-                        auto-select-first
-                    ></v-autocomplete>
-                </v-col>
+        <template v-for="rejimItem in regimes" >
+            <div v-if="stat_type===rejimItem.value" class="col-9" :class="stat_type!==rejimItem.value? 'd-none':''"  :key="'asdasdasd' + rejimItem.value">
+                <h3>{{
+                        regime === 1 ? rejimItem.textIm :  rejimItem.textEx
+                    }}</h3>
+                <div class="statfilterRow">
+                    <div class="regimeButtons">
+                        <v-btn :color="regime===1?'primary':'#F1F5F9'" :style="regime!==1?'color: #39ae69;':'' " small class="ma-0 py-4" @click="regime=1">
+                            {{ $t('Импорт') }}</v-btn>
+                        <v-btn :color="regime===2?'primary':'#F1F5F9'" :style="regime!==2?'color: #39ae69;':'' " small class="ma-0 py-4" @click="regime=2">
+                            {{ $t('Экспорт') }}</v-btn>
+                    </div>
+                    <div class="date_rangers">
+
+
+                        <v-select
+                            :items="years"
+                            v-model="year"
+                            solo
+                            dense
+                            hide-details
+                            style="max-width: 100px;margin-top: -5px"
+                        ></v-select>
+                        <v-select
+                            :items="computedMonths"
+                            v-model="month"
+                            solo
+                            dense
+                            style="max-width: 200px; margin-top: -5px"
+                            class="ml-2"
+                            hide-details
+                        ></v-select>
+                    </div>
+                </div>
+
+                <template v-if="stat_type===1"><stat-products :regime="paramRegime" :month="paramMonth" :year="paramYear" /></template>
+
+                <template v-if="stat_type===2"><stat-countries  :regime="paramRegime" :month="paramMonth" :year="paramYear" /></template>
+                <template v-if="stat_type===3"><stat-states  :regime="paramRegime" :month="paramMonth" :year="paramYear" /></template>
             </div>
-
-        </div>
-        <div class="col-9" v-if="stat_type==2">
-            <h3>{{ $t("Ўзбекистон Республикаси чегарасидан ўтаётган автомобилларнинг сони") }} </h3>
-            <p class="text-center">({{ $t('Маълумотлар тест режимида') }})</p>
-            <div id="columnchart2" class="chart"></div>
-            <div class="filter row">
-                <v-col cols="3">
-                    <v-autocomplete
-                        ref="auto"
-                        :label="$t('Ойлар бўйича')"
-                        v-model="month"
-                        :items="months"
-                        auto-select-first
-                    ></v-autocomplete>
-                </v-col>
-                <v-col cols="3">
-                    <v-autocomplete
-                        ref="auto1"
-                        :label="$t('Йиллар бўйича')"
-                        v-model="year"
-                        :items="years"
-                        hide-selected
-                        auto-select-first
-                    ></v-autocomplete>
-                </v-col>
-            </div>
-
-        </div>
-        <div class="col-9" v-if="stat_type==3">
-            <h3>{{
-                rejim.tovarimex===1? $t("Ўзбекистон Республикасидан товарлар импорти ойлар кесимида") :  $t("Ўзбекистон Республикасидан товарлар экспорти ойлар кесимида")
-                }}</h3>
-            <p class="text-center">({{ $t('Маълумотлар тест режимида') }})</p>
-            <div id="columnchart3" class="chart" v-show="apexchartshow">
-
-                <apexchart2 :mydata="apexchartdata"></apexchart2>
-
-            </div>
-            <div class="filter row"><!--
-                                <v-col cols="3">
-                                    <v-autocomplete
-                                        ref="auto"
-                                        :label="$t('Ойлар бўйича')"
-                                        v-model="month"
-                                        :items="months"
-                                    ></v-autocomplete>
-                                </v-col>-->
-
-                <v-col cols="3">
-                    <v-autocomplete
-                        ref="oyimex0"
-                        v-model="rejim.oyimex"
-                        :items="[
-                                {text:$t('Импорт'),value:1},
-                                {text:$t('Экспорт'),value:2}
-                            ]"
-                    ></v-autocomplete>
-                </v-col>
-
-                <!--                <v-col cols="3">
-                                    <v-autocomplete
-                                        ref="oyimex1"
-                                        :label="$t('Йиллар бўйича')"
-                                        v-model="year"
-                                        :items="years"
-                                        hide-selected
-                                        auto-select-first
-                                    ></v-autocomplete>
-                                </v-col>-->
-            </div>
-
-        </div>
-        <div class="col-9" v-if="stat_type===4">
-            <h3>{{
-                    rejim.tovarimex===1? $t("Импорт товарлари давлатлар кесимида") : $t("Экспорт товарлари давлатлар кесимида")
-                }}</h3>
-            <p class="text-center">({{ $t('Маълумотлар тест режимида') }})</p>
-            <div id="columnchart4" style="min-height: 65vh; float: left; width: 70%" class="chart mb-10"></div>
-            <div id="columnchart4-1" v-if="stat_type===4" style="min-height: 65vh; width: 30%; float: right;"
-                 class="chart mb-10"></div>
-            <div class="filter row">
-                <v-col cols="3">
-                    <v-autocomplete
-                        ref="davimex0"
-                        v-model="rejim.tovarimex"
-                        :items="[
-                                {text:$t('Импорт'),value:1},
-                                {text:$t('Экспорт'),value:2}
-                            ]"
-                    ></v-autocomplete>
-                </v-col>
-                <v-col cols="3">
-                    <v-autocomplete
-                        ref="davimex1"
-                        :label="$t('Йиллар бўйича')"
-                        v-model="year"
-                        :items="years"
-                    ></v-autocomplete>
-                </v-col>
-                <v-col cols="3">
-                    <v-autocomplete
-                        ref="davimex1"
-                        :label="$t('Ойлар бўйича')"
-                        v-model="month"
-                        :items="months"
-                    ></v-autocomplete>
-                </v-col>
-                <!--                <v-col cols="3">
-                                    <v-autocomplete
-                                        ref="davimex2"
-                                        :label="$t('Йиллар бўйича')"
-                                        v-model="year"
-                                        :items="years"
-                                        hide-selected
-                                        auto-select-first
-                                    ></v-autocomplete>
-                                </v-col>-->
-            </div>
-
-        </div>
-        <div class="col-9" v-if="stat_type==5 && 1===2">
-            <h3>{{
-                    rejim.tovarimex===1?$t("Товар ва маҳсулотлар импорти"):$t("Товар ва маҳсулотлар экспорти") }}</h3>
-            <p class="text-center">({{ $t('Маълумотлар тест режимида') }})</p>
-            <div id="columnchart5" style="min-height: 65vh;" class="chart mb-10">
-
-                <mychart :items="mychartdata">
-
-                </mychart>
-
-
-            </div>
-            <div class="filter row">
-
-                <v-col cols="3">
-                    <v-autocomplete
-                        ref="tovimex0"
-                        v-model="rejim.tovarimex"
-                        :items="[
-                                {text:$t('Импорт'),value:1},
-                                {text:$t('Экспорт'),value:2}
-                            ]"
-                    ></v-autocomplete>
-                </v-col>
-                <v-col cols="3">
-                    <v-autocomplete
-                        ref="tovimex1"
-                        :label="$t('Ойлар бўйича')"
-                        v-model="month"
-                        :items="months"
-                    ></v-autocomplete>
-                </v-col>
-                <!--                <v-col cols="3">
-                                    <v-autocomplete
-                                        ref="tovimex2"
-                                        :label="$t('Йиллар бўйича')"
-                                        v-model="year"
-                                        :items="years"
-                                        hide-selected
-                                        auto-select-first
-                                    ></v-autocomplete>
-                                </v-col>-->
-            </div>
-
-        </div>
-        <div class="col-9" v-if="stat_type===6">
-            <h3>{{ $t("Ҳудудий корхоналар томонидан импорт қилинган товарлар") }}</h3>
-            <p class="text-center">({{ $t('Маълумотлар тест режимида') }})</p>
-            <div id="columnchart6" style="min-height: 65vh;" class="chart">
-
-                <mychart2>
-
-                </mychart2>
-
-
-            </div>
-            <div class="filter row">
-                <v-col cols="3">
-                    <v-autocomplete
-                        ref="auto"
-                        v-model="rejim"
-                        :items="[
-                                {text:$t('Импорт'),value:1},
-                                {text:$t('Экспорт'),value:2}
-                            ]"
-                    ></v-autocomplete>
-                </v-col>
-                <v-col cols="3">
-                    <v-autocomplete
-                        ref="auto"
-                        :label="$t('Ойлар бўйича')"
-                        v-model="month"
-                        :items="months"
-                    ></v-autocomplete>
-                </v-col>
-                <v-col cols="3">
-                    <v-autocomplete
-                        ref="auto1"
-                        :label="$t('Йиллар бўйича')"
-                        v-model="year"
-                        :items="years"
-                        hide-selected
-                        auto-select-first
-                    ></v-autocomplete>
-                </v-col>
-            </div>
-
-        </div>
-
-        <index_scripts ref="scripts"></index_scripts>
+        </template>
 
     </div>
 </template>
 <script>
-import mychart from '../custom/mychart1.vue'
-import mychart2 from '../custom/mychart2.vue'
-import apexchart2 from '../custom/apexchart2.vue'
-import i18n from "../../i18n";
+import StatProducts from "../../views/frontend/stat/products";
+import StatCountries from "../../views/frontend/stat/countries";
+import StatStates from "../../views/frontend/stat/states";
 
 
 export default {
     data() {
         return {
-            stat_type: 4,
-            rejim: {
-                oyimex: 1,
-                davlatimex: 1,
-                tovarimex: 1,
-            },
+            stat_type: 1,
+            regimes: [
+                {title: this.$t('Товарлар бўйича'), textIm: this.$t('Товарлар импорти тўғрисида маълумот'), textEx: this.$t('Товарлар экспорти тўғрисида маълумот'),  value: 1, rejim: 1},
+                {title: this.$t('Давлатлар бўйича'), textIm: this.$t('Давлатлар бўйича товарлар импорти тўғрисида маълумот'),textEx: this.$t('Давлатлар бўйича товарлар экспорти тўғрисида маълумот'), value: 2, rejim: 1},
+                {title: this.$t('Ҳудудлар бўйича'), textIm: this.$t('Ҳудудлар бўйича товарлар импорти тўғрисида маълумот'),textEx: this.$t('Ҳудудлар бўйича товарлар экспорти тўғрисида маълумот'), value: 3, rejim: 1},
+            ],
             month: 0,
-            months: [],
-            mymonths: [
+            months: [
                 {
                     text: this.$t('Барчаси'),
                     value: 0
@@ -341,271 +130,126 @@ export default {
                     value: 12
                 }
             ],
-            year: 2023,
+            year: (new Date()).getFullYear(),
+            regime: 1,
             firstStart: 1,
-            mychartdata: [],
             years: [
-                2022, 2023
+                (new Date()).getFullYear() -1, (new Date()).getFullYear()
             ],
-            apexchartshow: false,
-            apexchartdata: {
-                series: [],
-                month: [],
-
-            }
+        }
+    },
+    computed: {
+        paramYear(){
+          return this.year
+        },
+        paramMonth(){
+          return this.month
+        },
+        paramRegime(){
+          return this.regime
+        },
+        computedMonths() {
+            const enabled=[]
+            if (this.year === (new Date()).getFullYear()){
+                this.months.forEach(monthItem => {
+                    if(((new Date()).getMonth()) <= monthItem.value) {
+                        if(((new Date()).getMonth()) === monthItem.value) {
+                            if ((new Date()).getDate() < 5) {
+                                enabled.push({
+                                    ...monthItem,
+                                    disabled: true
+                                })
+                            } else enabled.push({...monthItem})
+                        }
+                        else enabled.push({
+                            ...monthItem,
+                            disabled: true
+                        })
+                    }
+                    else enabled.push({...monthItem})
+                })
+            } else return this.months
+            return enabled
         }
     },
     watch: {
         stat_type: function (v) {
-            this.$refs.scripts.dispose()
-            if (this.$refs.scripts.route2 !== null) this.$refs.scripts.route2.dispose();
-
-            if (v === 3) {
-                //setTimeout(() => this.$refs.scripts.createRootMultipleValue(), 100);
-                setTimeout(() => this.multipleValue(true), 100)
-            }
-            if (v === 4) {
-                setTimeout(() => this.$refs.scripts.createRootColumnChart4(), 100);
-                setTimeout(() => this.columnChart4(true), 100)
-                setTimeout(() => this.$refs.scripts.createRootColumnChart4_1(), 100);
-                setTimeout(() => this.columnChart4_1(true), 100)
-            }
-            if (v === 5) {
-
-                this.columnChart5();
-
-
-                /*                setTimeout(() => this.$refs.scripts.createRootColumnChart5(), 100);
-                                setTimeout(() => this.columnChart5(true), 100)*/
-            }
         },
         year: function (v) {
-            if (this.year === (new Date).getYear()) {
-                if (this.month >= (new Date).getMonth()) this.month = 0;
-                this.months.map(function (item) {
-                    if (item.value >= (new Date).getMonth()) item.disabled = true;
-                    return item;
-                })
-            } else this.months.map(function (item) {
-                item.disabled = false;
-                return item;
-            })
-            if (this.stat_type === 5) {
-                this.columnChart5();
-            }
-            if (this.stat_type === 4) {
-                this.$refs.scripts.month = this.month;
-                this.$refs.scripts.year = this.year;
-                this.$refs.scripts.rejim = this.rejim;
-                setTimeout(() => this.$refs.scripts.createRootColumnChart4(), 100);
-                setTimeout(() => this.columnChart4(true), 100)
-                setTimeout(() => this.$refs.scripts.createRootColumnChart4_1(), 100);
-                setTimeout(() => this.columnChart4_1(true), 100)
-            }
-            if (this.stat_type === 3) {
-                this.multipleValue(true);
-            }
         },
         month: function (v, old) {
             if (this.month > (new Date).getMonth()) this.month = 0;
-            if (this.stat_type === 5) {
-                this.columnChart5();
-            }
-            if (this.stat_type === 4) {
-                this.$refs.scripts.month = this.month;
-                this.$refs.scripts.year = this.year;
-                this.$refs.scripts.rejim = this.rejim;
-                setTimeout(() => this.$refs.scripts.createRootColumnChart4(), 100);
-                setTimeout(() => this.columnChart4(true), 100)
-                setTimeout(() => this.$refs.scripts.createRootColumnChart4_1(), 100);
-                setTimeout(() => this.columnChart4_1(true), 100)
-            }
-            if (this.stat_type === 3) {
-                this.multipleValue(true);
-            }
-        },
-        'rejim.tovarimex'(val) {
-            this.columnChart5();
-        },
-        'rejim.davlatimex'(val) {
-            this.$refs.scripts.month = this.month;
-            this.$refs.scripts.year = this.year;
-            this.$refs.scripts.rejim = val;
-            setTimeout(() => this.$refs.scripts.createRootColumnChart4(), 100);
-            setTimeout(() => this.columnChart4(true), 100)
-            setTimeout(() => this.$refs.scripts.createRootColumnChart4_1(), 100);
-            setTimeout(() => this.columnChart4_1(true), 100)
-        },
-        'rejim.oyimex'(val) {
-            this.columnChart5();
-            this.$refs.scripts.month = this.month;
-            this.$refs.scripts.year = this.year;
-            this.$refs.scripts.rejim = val;
-            setTimeout(() => this.$refs.scripts.createRootColumnChart4(), 100);
-            setTimeout(() => this.columnChart4(true), 100)
-            setTimeout(() => this.$refs.scripts.createRootColumnChart4_1(), 100);
-            setTimeout(() => this.columnChart4_1(true), 100)
-            setTimeout(() => this.multipleValue(true), 100)
         }
     },
     methods: {
-        created() {
-            if (this.year === 2020) this.months.map(function (item) {
-                if (item.value > 2) item.disabled = true;
-                return item;
-            })
-            // hide the overlay when everything has loaded
-            // you could choose some other event, e.g. if you're loading
-            // data asynchronously, you could wait until that process returns
-            //console.log('asdasd');
-            //this.clusteredColumn();
 
-        },
-
-        clusteredColumn(change = false) {
-
-            this.$refs.scripts.year = this.year;
-            this.$refs.scripts.month = this.month;
-            setTimeout(() => {
-                this.$refs.scripts.clusteredColumn()
-            }, 50);
-        },
-        pieChart(change = false) {
-            if (change) this.$refs.scripts.data = [
-                {
-                    "country": "Қорақалпоғистон Респ.",
-                    "import": 89,
-                    "export": 25
-                }, {
-                    "country": "Хоразм вилояти",
-                    "import": 54,
-                    "export": 39
-                }, {
-                    "country": "Бухоро вилояти",
-                    "import": 57,
-                    "export": 53
-                }, {
-                    "country": "Навоий вилояти",
-                    "import": 50,
-                    "export": 28
-                }, {
-                    "country": "Самарқанд вилояти",
-                    "import": 63,
-                    "export": 75
-                }, {
-                    "country": "Сурхондарё вилояти",
-                    "import": 90,
-                    "export": 57
-                }
-            ];
-            setTimeout(() => {
-                this.$refs.scripts.pieChart()
-            }, 50);
-        },
-        multipleValue(change = false) {
-            const _this = this
-            setTimeout(async () => {
-                await axios.get('/api/v1/stat?name=oyimex&rejim=' + _this.rejim.oyimex + '&month=' + _this.month + '&year=' + _this.year,{
-                    headers: {
-                        'X-Localization':i18n.locale
-                    }
-                }).then(function (res) {
-
-                    // console.log(res.data);
-
-
-                    if (typeof res.data.data != 'undefined') {
-                        const mystatData = res.data.data
-                        mystatData.splice(7)
-                        const column1 = getCol(mystatData, 'column1')
-                        const column2 = getCol(mystatData, 'column2')
-                        const month = getCol(mystatData, 'm')
-
-                        const series = [
-                            {name: _this.year, data: column2},
-                            {name: _this.year - 1, data: column1},
-                        ];
-
-                        _this.apexchartdata.series = series;
-                        _this.apexchartdata = {
-                            series: series,
-                            month
-                        };
-                        //console.log(_this.apexchartdata)
-                        _this.apexchartshow = true;
-
-
-                        function getCol(matrix, col) {
-                            var column = [];
-                            for (var i = 0; i < matrix.length; i++) {
-                                column.push(matrix[i][col]);
-                            }
-                            return column;
-                        }
-                    }
-                })
-            })
-        },
-        columnChart4(change = false) {
-            setTimeout(() => {
-                this.$refs.scripts.columnChart4()
-            }, 50);
-
-        },
-        columnChart4_1(change = false) {
-            setTimeout(() => {
-                this.$refs.scripts.columnChart4_1()
-            }, 50);
-
-        },
-        async columnChart5() {
-            const _this = this;
-            await axios.get("/api/v1/stat?name=tovarimex&month=" + this.month + "&year=" + this.year + "&rejim=" + this.rejim.tovarimex,
-                {
-                    headers: {
-                        'X-Localization': i18n.locale
-                    }
-                }).then(function (res) {
-                //console.log(res.data)
-                _this.mychartdata = res.data.data
-            })
-            //return this.mychartdata
-            //this.$refs.scripts.columnChart5()
-
-        },
-        getRejimByCode(code) {
-            if (code === 1) return {
-                text: "импорт",
-                value: 1
-            }
-            else return {
-                text: "экспорт",
-                value: 2
-            }
-            return null;
-        }
-    },
-    created() {
-        const _this = this
-        this.mymonths.map(function (item, key) {
-            //console.log(key)
-            if (item.value <= parseInt((new Date).getMonth()))
-                _this.months.push(item);
-
-            //return item; else if(_this.mymonths.indexOf(key)) _this.months.splice(key,1)
-        })
-
-        setTimeout(() => this.$refs.scripts.createRootColumnChart4(), 100);
-        setTimeout(() => this.columnChart4(true), 100)
-        setTimeout(() => this.$refs.scripts.createRootColumnChart4_1(), 100);
-        setTimeout(() => this.columnChart4_1(true), 100)
     },
     components: {
-        mychart,
-        mychart2,
-        apexchart2,
-
+        StatStates,
+        StatCountries,
+        StatProducts
     }
 }
 
 </script>
+<style lang="scss">
+body #app .asosiy_korsatkichlari2 .row.content .stat_menu h3{
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+.asosiy_korsatkichlari2 .row.content .stat_menu ul li
+{
+    font-family: "Montserrat", sans-serif;
+    font-size: 20px;
+    text-transform: uppercase;
+}
+.statfilterRow {
+    display: flex;
+    justify-content: end;
+    margin-top: 30px;
+    margin-right: 15px;
+
+.regimeButtons {
+    margin-right: 30px;
+    font-weight: bold;
+}
+
+.date_rangers {
+    display: flex;
+    align-items: center;
+
+.begin_date {
+    margin-right: 5px;
+    box-shadow: 0 3px 8px 2px #C9D9E8;
+    border-radius: 6px;
+    padding: 5px 10px;
+    background-color: #F1F5F9;
+    color: #39ae69;
+
+i {
+    border-left: 1px dashed #ccc;
+    margin-left: 5px;
+    padding-left: 7px;
+}
+}
+
+.end_date {
+    box-shadow: 0 3px 8px 2px #C9D9E8;
+    border-radius: 6px;
+    padding: 2px 10px;
+    background-color: #F1F5F9;
+    color: #39ae69;
+    font-size: 17px;
+    margin-left: 10px;
+
+i {
+    border-left: 1px dashed #ccc;
+    margin-left: 5px;
+    padding-left: 7px;
+}
+}
+}
+}
+</style>

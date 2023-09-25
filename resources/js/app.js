@@ -63,6 +63,8 @@ import './plugins/vee-validate'
 import vuetify from './vuetify'
 import AOS from 'aos';
 import 'aos/dist/aos.css'; // You can also use <link> for styles
+import HighchartsVue from 'highcharts-vue'
+Vue.use(HighchartsVue)
 // ..
 AOS.init();
 Vue.router = router

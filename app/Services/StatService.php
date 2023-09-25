@@ -10,15 +10,24 @@ use Illuminate\Support\Facades\DB;
 
 class StatService
 {
+    public function __construct($fromRepl = true)
+    {
+        $this->fromRepl = $fromRepl;
+
+    }
+
     public $yearLoop = 1;
     public $fromRepl = true;
     public $nameFunctions = [
         //'avto' => 'getAvtoData',
         //'kunimex' => 'getKunImExData',
         //'hududimex' => 'getHududImExData',
-        'davlatimex' => 'getDavlatImExData',
-        'tovarimex' => 'getTovarImExData',
-        'oyimex' => 'getOyImExData',
+        // 'davlatimex' => 'getDavlatImExData',
+        // 'tovarimex' => 'getTovarImExData',
+        // 'oyimex' => 'getOyImExData',
+        'davlatimex_n' => 'getDavlatImExDataNew',
+        'tovarimex_n' => 'getTovarImExDataNew',
+        'hududimex_n' => 'getHududImExDataNew',
     ];
 
     public function parse()
@@ -28,16 +37,16 @@ class StatService
         }
     }
 
-    public function saveAllData($name = 'davlatimex')
+    public function saveAllData($name = 'davlatimex_n')
     {
-        $year = $date = 2019; /// date("Y");
-        //for ($year = $date; $year >= $date - 2; $year--) {
-        for ($month = 0; $month <= 12; $month++) {
-            for ($rejim = 0; $rejim <= 2; $rejim++) {
-                $this->saveData($name, $year, $month, $rejim);
+        $year = $date = date("Y");
+        for ($year = $date; $year >= $date - 2; $year--) {
+            for ($month = 0; $month <= 12; $month++) {
+                for ($rejim = 0; $rejim <= 2; $rejim++) {
+                    $this->saveData($name, $year, $month, $rejim);
+                }
             }
         }
-        // }
     }
 
     public function saveData($name, $year, $month, $rejim)
@@ -65,7 +74,7 @@ class StatService
         }
     }
 
-    public function loopGetData($func = 'getAvtoData')
+    public function loopGetData($func = 'getTovarImExDataNew')
     {
         $data = [];
         $yearData = [];
@@ -80,6 +89,299 @@ class StatService
         }
         return $yearData;
 
+    }
+
+    public function getTovarImExDataNew($year = 0, $month = 0, $selectedrejim = 0)
+    {
+        $selectedrejim = (int)$selectedrejim;
+
+        if ($selectedrejim === 0) {
+            $data['rejim'] = "ИМ";
+        } elseif ($selectedrejim === 1) {
+            $data['rejim'] = "ИМ";
+        } else {
+            $selectedrejim = 2;
+            $data['rejim'] = "ЭК";
+        }
+        if ($year == 0) $year = date('Y');
+        $params['year'] = $year;
+
+        if ($month != 0) {
+            $params['month'] = $month;
+        }
+        if ($this->fromRepl) {
+            $statData = StatData::where([
+                'name' => 'tovarimex_n',
+                'rejim' => $selectedrejim,
+                'month' => $month,
+                'year' => $year,
+            ])->first();
+            if (!$statData) return [];
+            return collect(json_decode($statData->data))->values();
+        } else {
+
+            //$month = "month(d.g7b)=" . date("m");
+            $year = "year(v.g54d)=" . date("Y");
+            $year1 = "year(v.g54d)=" . (date("Y") - 1);
+            $year2 = "year(v.g54d) in (" . (int)date("Y") . ", " . ((int)date("Y") - 1) . ")";
+
+            if (isset($params['year'])) {
+                $year = "year(v.g54d)=" . $params['year'];
+                $year1 = "year(v.g54d)=" . ($params['year'] - 1);
+                $year2 = "year(v.g54d) in (" . (int)$params['year'] . ", " . ((int)$params['year'] - 1) . ")";
+            }
+
+
+            if (isset($params['month'])) {
+                $month = "and month(v.g54d)=" . $params['month'];
+            } else $month = "and month(v.g54d) < " . ((int)date("m"));
+
+            $rejim = "";
+            $orderbyrejim = "";
+            $selectrejim = "";
+            if (!isset($data['rejim'])) {
+                $data['rejim'] = 'ИМ';
+            }
+
+            if (is_array($data['rejim'])) {
+                $rejim = "and G01A in ('" . implode("','", $data['rejim']) . "')";
+            } else
+                $rejim = "and G01A in ('" . $data['rejim'] . "')";
+
+            $query = 'select
+                       st.SPRAV_STAT_T1_UZ "title",
+                       st.SPRAV_STAT_T2_UZ "subItem",
+                       sum(case when ' . $year . ' ' . $month . '  then value(v.g46,0) else 0 end) "result1",
+                       sum(case when ' . $year1 . ' ' . $month . ' then value(v.g46,0) else 0 end) "result2"
+
+
+                        from tst_stat.vto_2022_07 v
+                        left join tst_stat.SPR_tovar_2022_2 st on st.znak_10=v.g33a
+                        where ' . $year2 . ' ' . $month . ' ' . $rejim . '
+
+
+                        group by st.SPRAV_STAT_T1_UZ, st.SPRAV_STAT_T2_UZ';
+            $returnData = DB::connection('db2_odbc_stat')->select($query);
+
+            if ($returnData) return collect($returnData)->groupBy('title')->transform(function ($item, $key) {
+                return [
+                    'title' => $key,
+                    'result1' => $item->sum('result1'),
+                    'result2' => $item->sum('result2'),
+                    'cats' => collect($item)->transform(function ($catItem) {
+                        return [
+                            'title' => $catItem->subitem,
+                            'price' => $catItem->result2
+                        ];
+                    }),
+                    'total' => collect($item)->sum(function ($subItem) {
+                        return $subItem->result1;
+                    })
+                ];
+            })->sortByDesc('total', SORT_ASC)->all();
+        }
+    }
+
+    public function getDavlatImExDataNew($year = 0, $month = 0, $selectedrejim = 0)
+    {
+        $selectedrejim = (int)$selectedrejim;
+        if ($selectedrejim === 0) {
+            $data['rejim'] = "ИМ";
+        } elseif ($selectedrejim == 1) {
+            $data['rejim'] = "ИМ";
+        } else {
+            $selectedrejim = 2;
+            $data['rejim'] = "ЭК";
+        }
+        if ($year == 0) $year = date('Y');
+        $params['year'] = $year;
+        if ($month != 0) {
+            $params['month'] = $month;
+        }
+        //$this->fromRepl=false;
+        if ($this->fromRepl) {
+            $statData = StatData::where([
+                'name' => 'davlatimex_n',
+                'rejim' => $selectedrejim,
+                'month' => $month,
+                'year' => $year,
+            ])->first();
+            if (!$statData) return [];
+            return collect(json_decode($statData->data))->values();
+        } else {
+
+            //$month = "month(d.g7b)=" . date("m");
+            $year = "year(v.g54d)=" . date("Y");
+            $year1 = "year(v.g54d)=" . (date("Y") - 1);
+            $year2 = "year(v.g54d) in (" . (int)date("Y") . ", " . ((int)date("Y") - 1) . ")";
+
+            if (isset($params['year'])) {
+                $year = "year(v.g54d)=" . $params['year'];
+                $year1 = "year(v.g54d)=" . ($params['year'] - 1);
+                $year2 = "year(v.g54d) in (" . (int)$params['year'] . ", " . ((int)$params['year'] - 1) . ")";
+            }
+
+            if (isset($params['month'])) {
+                $month = "and month(v.g54d)=" . $params['month'];
+            } else $month = "and month(v.g54d) < " . ((int)date("m"));
+
+            $rejim = "";
+            $orderbyrejim = "";
+            $selectrejim = "";
+            if (!isset($data['rejim'])) {
+                $data['rejim'] = 'ИМ';
+            }
+
+            if (is_array($data['rejim'])) {
+                $rejim = "and G01A in ('" . implode("','", $data['rejim']) . "')";
+            } else
+                $rejim = "and G01A in ('" . $data['rejim'] . "')";
+
+            $query = 'select
+                   sd.KOD "country",
+                   sum(case when ' . $year . ' ' . $month . ' then value(v.g46,0) else 0 end) "result1",
+                   sum(case when ' . $year1 . ' ' . $month . ' then value(v.g46,0) else 0 end) "result2",
+                   sum(case when ' . $year2 . ' ' . $month . ' then value(v.g46,0) else 0 end) "total"
+                    from tst_stat.vto_2022_07 v
+                    left join tst_stat.SPR_DAVLAT sd on sd.kod=v.G15_17
+                    where ' . $year2 . ' ' . $month . ' ' . $rejim . '
+                    group by sd.KOD';
+
+            $returnData = DB::connection('db2_odbc_stat')->select($query);
+
+            if ($returnData) return collect($returnData)->transform(function ($item) {
+                return [
+                    'country' => $item->country,
+                    'column1' => ((float)$item->result1 > 0) ? (((((float)$item->result1 - (float)$item->result2)) / ((float)$item->result1)) * 100) : 0,
+                    'column2' => (((float)$item->total) > 0) ? ((((float)$item->total) - ((float)$item->result1)) / ((float)$item->total) * 100) : 0,
+                    'total' => (float)$item->total,
+                ];
+            })->sortByDesc('total');
+
+        }
+    }
+
+    public function getHududImExDataNew($year = 0, $month = 0, $selectedrejim = 0)
+    {
+        $selectedrejim = (int)$selectedrejim;
+        if ($selectedrejim === 0) {
+            $data['rejim'] = "ИМ";
+        } elseif ($selectedrejim == 1) {
+            $data['rejim'] = "ИМ";
+        } else {
+            $selectedrejim = 2;
+            $data['rejim'] = "ЭК";
+        }
+        if ($year == 0) $year = date('Y');
+        $params['year'] = $year;
+        if ($month != 0) {
+            $params['month'] = $month;
+        }
+        //$this->fromRepl=false;
+        if ($this->fromRepl) {
+            $statData = StatData::where([
+                'name' => 'hududimex_n',
+                'rejim' => $selectedrejim,
+                'month' => $month,
+                'year' => $year,
+            ])->first();
+            if (!$statData) return [];
+            return collect(json_decode($statData->data))->values();
+        } else {
+
+            //$month = "month(d.g7b)=" . date("m");
+            $year = "year(v.g54d)=" . date("Y");
+            $year1 = "year(v.g54d)=" . (date("Y") - 1);
+            $year2 = "year(v.g54d) in (" . (int)date("Y") . ", " . ((int)date("Y") - 1) . ")";
+
+            if (isset($params['year'])) {
+                $year = "year(v.g54d)=" . $params['year'];
+                $year1 = "year(v.g54d)=" . ($params['year'] - 1);
+                $year2 = "year(v.g54d) in (" . (int)$params['year'] . ", " . ((int)$params['year'] - 1) . ")";
+            }
+
+            if (isset($params['month'])) {
+                $month = "and month(v.g54d)=" . $params['month'];
+            } else $month = "and month(v.g54d) < " . ((int)date("m"));
+
+            $rejim = "";
+            $orderbyrejim = "";
+            $selectrejim = "";
+            if (!isset($data['rejim'])) {
+                $data['rejim'] = 'ИМ';
+            }
+
+            if (is_array($data['rejim'])) {
+                $rejim = "and G01A in ('" . implode("','", $data['rejim']) . "')";
+            } else
+                $rejim = "and G01A in ('" . $data['rejim'] . "')";
+
+            $query = '
+            select
+               si.kb "hudud",
+               sum(case when ' . $year . ' ' . $month . ' then value(v.g46,0) else 0 end) "result1",
+               sum(case when ' . $year1 . ' ' . $month . ' then value(v.g46,0) else 0 end) "result2",
+               sum(case when ' . $year2 . ' ' . $month . ' then value(v.g46,0) else 0 end) "total",
+               si.KM "km"   ------- pu - doimiy , jsh - jismoniy shaxs yes - tarmoq korxona, no  - hududiy korxona ----
+
+                from tst_stat.vto_2022_07 v
+                left join tst_stat.SPR_inn si on si.inn=v.inn
+                where ' . $year2 . ' ' . $month . ' ' . $rejim . '
+
+                group by si.kb, si.KM';
+
+            $returnData = DB::connection('db2_odbc_stat')->select($query);
+            $collection = collect($returnData);
+
+            $grouped = $collection->groupBy('km');
+
+// Calculate the sum of each group
+            $sums = $grouped->map(function ($group) {
+                return $group->reduce(function ($carry, $item) {
+                    $carry['hudud'] = null;
+                    $carry['result1'] += (float)$item->result1;
+                    $carry['result2'] += (float)$item->result2;
+                    $carry['total'] += (float)$item->total;
+                    // You can add other properties here if needed
+                    return $carry;
+                }, [
+                    'hudud' => 0,
+                    'result1' => 0,
+                    'result2' => 0,
+                    'total' => 0,
+                    // You can initialize other properties here if needed
+                ]);
+            });
+
+// Convert the sums to strings with the desired format (if necessary)
+            $sums = $sums->map(function ($sum, $sumKey) {
+                return [
+                    'km' => $sumKey,
+                    'hudud' => null,
+                    'result1' => $sum['result1'],
+                    'result2' => $sum['result2'],
+                    'total' => $sum['total'],
+                    // You can format other properties here if needed
+                ];
+            });
+
+            if ($returnData) return ['totaldata' => ['hudud' => null, 'total' => $sums->sum('total'), 'subItems' => $sums->sortByDesc('km')->values()],
+                'data' => $collection->groupBy('hudud')->transform(function ($item) {
+                    return [
+                        'hudud' => $item[0]->hudud,
+                        'total' => collect($item)->sum('total'),
+                        'subItems' => collect($item)->sortByDesc('km')->transform(function ($subItem) {
+                            return [
+                                'hudud' => $subItem->hudud,
+                                'km' => $subItem->km,
+                                'column1' => (float)$subItem->result1,
+                                'column2' => (float)$subItem->result2,
+                                'total' => (float)$subItem->total,
+                            ];
+                        })->all()];
+
+                })];
+        }
     }
 
     public function getAvtoData($year = 0, $month = 0)
@@ -493,7 +795,7 @@ class StatService
                 'rejim' => $selectedrejim,
                 'month' => $month,
                 'year' => $year,
-            ])->where('month','<', 8)->first();
+            ])->where('month', '<', 8)->first();
             if (!$statData) return [];
             return (array)json_decode($statData->data);
         } else {
@@ -562,11 +864,11 @@ class StatService
                     5 => 'Май',
                     6 => 'Июн',
                     7 => 'Июл',
-/*                    8 => 'Август',
-                    9 => 'Сентябр',
-                    10 => 'Октябр',
-                    11 => 'Ноябр',
-                    12 => 'Декабр',*/
+                    /*                    8 => 'Август',
+                                        9 => 'Сентябр',
+                                        10 => 'Октябр',
+                                        11 => 'Ноябр',
+                                        12 => 'Декабр',*/
                 ];
 
                 return [
@@ -612,7 +914,8 @@ select
 
     }
 
-    public function generateExcel($data=null){
+    public function generateExcel($data = null)
+    {
         dd($data);
     }
 
