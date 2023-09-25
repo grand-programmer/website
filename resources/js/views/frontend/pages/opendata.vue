@@ -75,19 +75,19 @@
                                             <template v-slot:default>
                                                 <tbody>
                                                 <tr>
-                                                    <td><b>Маъсул бошқарма:</b></td>
+                                                    <td><b>{{ $t('Масъул бошқарма') }}:</b></td>
                                                     <td>{{ item.boshqarma }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td><b>Маъсул шахс:</b></td>
+                                                    <td><b>{{ $t('Масъул шахс') }}:</b></td>
                                                     <td>{{ item.contact }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td><b>Телефон:</b></td>
+                                                    <td><b>{{ $t('Телефон') }}:</b></td>
                                                     <td>+998{{ item.phone }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td><b>Эл. манзил:</b></td>
+                                                    <td><b>{{ $t('Эл.манзил') }}:</b></td>
                                                     <td>{{ item.email }}</td>
                                                 </tr>
                                                 </tbody>

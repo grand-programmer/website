@@ -28,15 +28,7 @@ use Illuminate\Support\Facades\Notification;
 //    App::setLocale($lang||'uz');
     Route::group(['prefix' => 'v1','middleware' => 'locale'], function () {
         Route::get('test', function(){
-            try {
-                $message = (new NewsToSocial(News::orderBy('id', 'desc')->first()));
 
-                Notification::route('telegram', '-1001530458375')
-                    ->notify($message);
-            }
-            catch(Exception $exception) {
-                dd($exception->getMessage());
-            }
             // Notification::via('telegram')->notify($message);
             // phpinfo();
            $date1=new \Carbon\Carbon('2021-01-10');

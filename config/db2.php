@@ -78,7 +78,7 @@ $databaseconfig= [
     // or '{iSeries Access ODBC Driver}' '{IBM i Access ODBC Driver 64-bit}' / '{IBM i Access ODBC Driver}'
     'host' => '192.168.12.144',
     'username' => 'SURAT',
-    'password' => 's12345',
+    'password' => '$UR@tj0n',
     'database' => 'S06271bt',
     'prefix' => '',
     'schema' => 'ASOD',
@@ -176,7 +176,7 @@ $databaseconfigSTAT['host']='192.168.12.144';
 $databaseconfigSTAT['schema']='TST_STAT';
 $databaseconfigSTAT['database']='S06271bt';
 $databaseconfigSTAT['username']='SURAT';
-$databaseconfigSTAT['password']='s12345';
+$databaseconfigSTAT['password']='$UR@tj0n';
 
 
 $databaseconfigINN=$databaseconfig;
