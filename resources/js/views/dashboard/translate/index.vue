@@ -39,18 +39,73 @@
                             <v-text-field v-model="search" label="Қидириш"></v-text-field>
                         </v-col>
                     </v-col>
-                    <v-btn
-                        color="primary"
-                        dark
-                        class="new_item d-none"
-                        @click="addTranslate"
-                    >
-                        Янги қўшиш
-                    </v-btn>
+                    <v-col cols="3">
+
+                        <v-btn
+                            small
+                            :color="lang==='uz'?'primary':''"
+                            class=""
+                            @click="lang='uz'"
+                        >
+                            Узб
+                        </v-btn>
+                        <v-btn
+                            :color="lang==='oz'?'primary':''"
+                            small
+                            class=""
+                            @click="lang='oz'"
+                        >
+                            Uzb
+                        </v-btn>
+                        <v-btn
+                            :color="lang==='ru'?'primary':''"
+                            small
+                            class=""
+                            @click="lang='ru'"
+                        >
+                            Рус
+                        </v-btn>
+                        <v-btn
+                            :color="lang==='en'?'primary':''"
+                            small
+                            class=""
+                            @click="lang='en'"
+                        >
+                            En
+                        </v-btn>
+                    </v-col>
+
                 </div>
 
             </v-col>
         </v-row>
+        <v-btn
+            color="primary"
+            dark
+            class="new_item my-2"
+            @click="dialog=true"
+        >
+            Янги қўшиш
+        </v-btn>
+        <v-dialog v-model="dialog" max-width="900px">
+            <v-card>
+                <v-card-title class="text-h5">Янги таржима қўшиш
+                </v-card-title>
+                <v-card-text>
+                    <v-row>
+                    <v-col cols="12"> <v-text-field v-model="newTranslate.key" label="Калит сўз" required /> </v-col>
+                    </v-row>
+                </v-card-text>
+                <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn color="blue darken-1" text @click="dialog=false">Ёпиш</v-btn>
+                    <v-btn color="blue darken-1" text @click="addTranslate" >
+                        Қўшиш
+                    </v-btn>
+                </v-card-actions>
+            </v-card>
+        </v-dialog>
+
 
 
         <v-row justify="center">
@@ -115,13 +170,18 @@ export default {
         translates: [],
         search: '',
         filteredTranslates: [],
+        newTranslate:{
+            key:null
+        },
         reqtranslate: false,
         uz: {},
         ru: {},
         en: {},
         oz: {},
+        lang: 'uz',
         sortBy: 'key',
         sortDesc: true,
+        dialog: false
 
     }),
 
@@ -131,43 +191,58 @@ export default {
     },
     computed: {
         headers() {
-            return [
+            const headerData=[
                 {
                     text: 'Keyword',
                     align: 'start',
                     sortable: true,
                     value: 'key',
                     width: 300
-                },
-                {
+                }
+                ]
+            switch(this.lang){
+                case 'uz':
+                    headerData.push({
                     text: 'Ўзбекча', width: 300, value: 'uz',
                     filter: value => {
-                        if (!this.reqtranslate) return true
-                        return value.length > 0
-                    },
+                    if (!this.reqtranslate) return true
+                    return value.length > 0
                 },
+                })
+                    break;
+                case 'ru':
+                    headerData.push(
                 {
                     text: 'Руссча', width: 300, value: 'ru',
                     filter: value => {
-                        if (!this.reqtranslate) return true
-                        return value.length > 0
-                    },
+                    if (!this.reqtranslate) return true
+                    return value.length > 0
                 },
+                })
+                    break;
+                case 'en':
+                    headerData.push(
                 {
                     text: 'Инглизча', width: 300, value: 'en',
                     filter: value => {
-                        if (!this.reqtranslate) return true
-                        return value.length > 0
-                    },
+                    if (!this.reqtranslate) return true
+                    return value.length > 0
                 },
+                })
+                    break;
+                case 'oz':
+                    headerData.push(
                 {
                     text: 'Ozbekcha', width: 300, value: 'oz',
                     filter: value => {
-                        if (!this.reqtranslate) return true
-                        return value.length < 1
-                    },
+                    if (!this.reqtranslate) return true
+                    return value.length < 1
                 },
-            ]
+                })
+                    break;
+
+            }
+            return headerData
         }
     },
     methods: {
@@ -176,6 +251,7 @@ export default {
             this.filteredTranslates=[]
             this.translates=[]
             await axios.get('/api/v1/admin/locales').then(function (res) {
+                // _this[this.lang] = JSON.parse(JSON.stringify(res.data.data[this.lang]))
                 _this.en = JSON.parse(JSON.stringify(res.data.data['en']))
                 _this.uz = JSON.parse(JSON.stringify(res.data.data['uz']))
                 _this.oz = JSON.parse(JSON.stringify(res.data.data['oz']))
@@ -205,22 +281,21 @@ export default {
             return this.filteredTranslates.indexOf(transItem[0])
         },
         addTranslate() {
-            this.filteredTranslates.push({
-                key: "",
-                en: "",
-                uz: "",
-                ru: "",
-                oz: "",
+            const _this = this
+            if(!this.newTranslate.key || (this.newTranslate.key && this.newTranslate.key.length<1)){
+                this.$toast.error(this.$t('Сиз калит сўзни киритимадингиз!'))
+                return
+            }
+            axios.post('/api/v1/admin/addlocale', { ...this.newTranslate}).then(function (res) {
+                if (typeof res.data.success !== 'undefined' && res.data.success) {
+                    _this.$toast.success('Омадли тарзда қўшилди!');
+                    window.location.href='/admin/translate'
+                } else {
+                    _this.$toast.success('Хатолик юз берди!');
+                }
             })
-            this.translates.push({
-                key: "",
-                en: "",
-                uz: "",
-                ru: "",
-                oz: "",
-            })
-            this.sortBy = 'key';
-            this.sortDesc = false;
+
+
         },
         saveFile() {
             const _this = this;
@@ -231,7 +306,7 @@ export default {
                                     this.en[key]=value.en;
                                     this.oz[key]=value.oz;
                                 }*/
-                axios.post('/api/v1/admin/locales', {data: this.filteredTranslates}).then(function (res) {
+                axios.post('/api/v1/admin/locales', {data: this.filteredTranslates, lang: _this.lang}).then(function (res) {
                     if (typeof res.data.success !== 'undefined' && res.data.success) {
                         _this.$toast.success('Омадли тарзда юкланди!');
                         window.location.href='/admin/translate'
@@ -266,12 +341,12 @@ export default {
 
     },
     watch: {
-        /*        options: {
+                lang: {
                     handler () {
                         this.initialize()
                     },
                     deep: true,
-                },*/
+                },
     },
 }
 </script>

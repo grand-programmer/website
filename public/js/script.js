@@ -1,15 +1,18 @@
-$("body").on("click", ".hududiy_boshqarmalar a", function () {
+$("body").on("click", ".hududiy_boshqarmalar", function (e) {
+    e.preventDefault()
 
       // setTimeout($('.hududiy').toggleClass('show'),2000);
+    if ($('.hududiy.section').css("display") === 'none') {
 
-    if ($('.hududiy.section').css("display") == 'none') {
         pageloaded = 0;
-
         if (typeof fullpage_api !== 'undefined' && !$(".v-application--wrap > div").hasClass("one-page")) {
+
+
             fullpage_api.moveTo('0');
         }
+        $('.hududiy.section.fp-section').removeClass('skip');
         $('.hududiy.section').css("display", "table !important");
-        $('.hududiy.section').removeClass('skip');
+
         window.scrollTo(0, 0);
 
 

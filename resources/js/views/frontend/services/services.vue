@@ -31,19 +31,19 @@
             <div class="container">
                 <ul class="nav nav-pills mb-3 portfolio_menu" id="pills-tab" role="tablist">
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link " @click="nav_link=1" :class="nav_link===1?'active':''"
+                        <button class="nav-link " @click="nav_link=1" :class="(nav_link===1 || nav_link===2)?'active':''"
                                 id="pills-home-tab" data-bs-toggle="pill"
                                 data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home"
                                 aria-selected="true">{{ $t("Интерактив хизматлар") }}
                         </button>
-                    </li>
+                    </li><!--
                     <li class="nav-item" role="presentation">
                         <button class="nav-link" @click="nav_link=2" :class="nav_link===2?'active':''"
                                 id="pills-profile-tab" data-bs-toggle="pill"
                                 data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile"
                                 aria-selected="false">{{ $t("Очиқ маълумотлар") }}
                         </button>
-                    </li>
+                    </li>-->
                     <li class="nav-item" role="presentation">
                         <button class="nav-link" @click="nav_link=3" :class="nav_link===3?'active':''"
                                 id="pills-contact-tab" data-bs-toggle="pill"
@@ -60,7 +60,7 @@
                 </ul>
             </div>
             <div class="tab-content" id="pills-tabContent">
-                <div class="tab-pane" :class="nav_link===1?'active':''" id="pills-home" role="tabpanel"
+                <div class="tab-pane" :class="(nav_link===1 || nav_link===2)?'active':''" id="pills-home" role="tabpanel"
                      aria-labelledby="pills-home-tab">
                     <div class="portfolio-background1"></div>
                     <div class="tab-container">
@@ -538,7 +538,7 @@
                     </div>-->
 
                 </div>
-                <div class="tab-pane" :class="nav_link===2?'active':''" id="pills-profile" role="tabpanel"
+<!--                <div class="tab-pane d-none" :class="nav_link===2?'active':''" id="pills-profile" role="tabpanel"
                      aria-labelledby="pills-profile-tab">
                     <div class="background"></div>
                     <div class="tab-container">
@@ -776,7 +776,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>-->
                 <div class="tab-pane" :class="nav_link===3?'active':''" id="pills-contact" role="tabpanel"
                      aria-labelledby="pills-contact-tab">
                     <div class="background"></div>
