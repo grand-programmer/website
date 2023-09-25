@@ -22,12 +22,12 @@
                 <span>
 
                     <p>{{ ((item.column1 * 100)/item.column2).toFixed(1) }} % <v-icon color="primary">mdi-trending-up</v-icon></p>
-                    <p>ўтган йилга нисбатан</p>
+                    <p>{{ $t('ўтган йилга нисбатан') }}</p>
                 </span>
                             <span>
 
                     <p>{{ ((item.total * 100) / (items.map(el => { return el.total; }).reduce((x, y) => { return x + y },0))).toFixed(1) }} %</p>
-                    <p>жамига  нисбатан</p>
+                    <p>{{ $t('жамига  нисбатан') }}</p>
                 </span>
                         </div>
                     </div>

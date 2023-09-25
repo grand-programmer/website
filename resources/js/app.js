@@ -25,6 +25,8 @@ import VueFullPage from 'vue-fullpage.js'
 Vue.use(VueFullPage);
 import VueRouter from 'vue-router'
 //import Index from './Index'
+
+
 import authConfig from './auth'
 import router from './router'
 

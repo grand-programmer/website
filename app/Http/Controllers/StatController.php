@@ -55,9 +55,9 @@ class StatController extends Controller
         $myApp = $this;
         $returnData = collect($statService->$function($year, $month, $rejim))->transform(function ($item) use ($request, $apiCode) {
             global $myApp;
-            if ($apiCode === 'tovarimex_n') {
+/*            if ($apiCode === 'tovarimex_n') {
                 $item->title = $myApp->translateText($item->title);
-            }
+            }*/
             /*if ($apiCode === 'tovarimex_n') {
                 if (!isset($item->country)) return $item;
                 $locale = app()->getLocale();
