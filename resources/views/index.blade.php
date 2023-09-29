@@ -5,31 +5,32 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 
     <!-- Font -->
-    <link href="{{secure_asset('css/font-awesome.min.css') }}" rel="stylesheet">
+    <link href="{{asset('css/font-awesome.min.css') }}" rel="stylesheet">
 
     <!-- Bootstrap -->
-    <link href="{{secure_asset('/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{secure_asset('/css/bootstrap-theme.min.css') }}" rel="stylesheet">
-    <link href="{{secure_asset('/css/bootstrap5.1.min.css')}}" rel="stylesheet" crossorigin="anonymous">
+    <link href="{{asset('/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{asset('/css/bootstrap-theme.min.css') }}" rel="stylesheet">
+    <link href="{{asset('/css/bootstrap5.1.min.css')}}" rel="stylesheet" crossorigin="anonymous">
     <script src="{{('/js/bootstrap5.1.bundle.min.js')}}" crossorigin="anonymous"></script>
     <link href="/vendors/image-dropdown/dd.css" rel="stylesheet">
     <!-- Extra plugin css -->
     {{--<link href="{{asset('/vendors/bootstrap-selector/css/bootstrap-select.min.css')}}" rel="stylesheet">--}}
-    <link href="{{secure_asset('/vendors/camera-slider/camera.css')}}" rel="stylesheet">
-    <link href="{{secure_asset('/vendors/animate/animate.min.css')}}" rel="stylesheet">
+    <link href="{{asset('/vendors/camera-slider/camera.css')}}" rel="stylesheet">
+    <link href="{{asset('/vendors/animate/animate.min.css')}}" rel="stylesheet">
     <link href="{{secure_asset('/vendors/owl-carousel/css/owl.carousel.css')}}" rel="stylesheet">
     <link href="{{secure_asset('/css/style.css')}}" rel="stylesheet">
     <link href="{{secure_asset('/css/fullpage.css')}}" rel="stylesheet">
     <link href="{{secure_asset('/css/all.css')}}" rel="stylesheet">
-    <link href="{{secure_asset('/css/mix/one.css')}}" rel="stylesheet" type="text/css" charset="utf-8">
-    <link href="{{secure_asset('/css/mix/app.css')}}" rel="stylesheet" type="text/css" charset="utf-8">
-    <link href="{{secure_asset('/css/slick.css')}}" rel="stylesheet">
-    <link href="{{secure_asset('/css/slick-theme.css')}}" rel="stylesheet">
-    <link href="{{secure_asset('/css/responsive.css')}}" rel="stylesheet">
-    <link rel="stylesheet" href="{{secure_asset('css/owl-carousel/owl.carousel.css')}}">
-    <link rel="stylesheet" href="{{secure_asset('css/owl-carousel/owl.theme.default.css')}}">
+    <link href="{{asset('/css/mix/one.css')}}" rel="stylesheet" type="text/css" charset="utf-8">
+    <link href="{{asset('/css/mix/app.css')}}" rel="stylesheet" type="text/css" charset="utf-8">
+    <link href="{{asset('/css/slick.css')}}" rel="stylesheet">
+    <link href="{{asset('/css/slick-theme.css')}}" rel="stylesheet">
+    <link href="{{asset('/css/responsive.css')}}" rel="stylesheet">
+    <link rel="stylesheet" href="{{asset('css/owl-carousel/owl.carousel.css')}}">
+    <link rel="stylesheet" href="{{asset('css/owl-carousel/owl.theme.default.css')}}">
 <!--    <script src="public/js/anychart/anychart-base.min.js"></script>-->
 <!--    <link crossorigin="anonymous" rel="stylesheet" id="gillion-fonts-css"
           href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,regular,italic,600,600italic,700,700italic,800,800italic%7CMontserrat:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic&amp;subset=latin"
@@ -72,31 +73,21 @@
 <script src="/js/script.js"></script>
 
 
-<!-- START WWW.UZ TOP-RATING -->
-<SCRIPT language="javascript" type="text/javascript">
+
+<!-- START WWW.UZ TOP-RATING --><SCRIPT language="javascript" type="text/javascript">
     <!--
-    document.addEventListener("DOMContentLoaded", () => {
-        top_js = "1.0";
-        top_r = "id=46694&r=" + escape(document.referrer) + "&pg=" + escape(window.location.href);
-        document.cookie = "smart_top=1; path=/";
-        top_r += "&c=" + (document.cookie ? "Y" : "N")
-    })
+    top_js="1.0";top_r="id=46694&r="+escape(document.referrer)+"&pg="+escape(window.location.href);document.cookie="smart_top=1; path=/"; top_r+="&c="+(document.cookie?"Y":"N")
     //-->
 </SCRIPT>
 <SCRIPT language="javascript1.1" type="text/javascript">
     <!--
-    document.addEventListener("DOMContentLoaded", () => {
-        top_js = "1.1";
-        top_r += "&j=" + (navigator.javaEnabled() ? "Y" : "N")
-    })//-->
+    top_js="1.1";top_r+="&j="+(navigator.javaEnabled()?"Y":"N")
+    //-->
 </SCRIPT>
 <SCRIPT language="javascript1.2" type="text/javascript">
     <!--
-    document.addEventListener("DOMContentLoaded", () => {
-        top_js = "1.2";
-        top_r += "&wh=" + screen.width + 'x' + screen.height + "&px=" +
-            (((navigator.appName.substring(0, 3) == "Mic")) ? screen.colorDepth : screen.pixelDepth)
-    })
+    top_js="1.2";top_r+="&wh="+screen.width+'x'+screen.height+"&px="+
+        (((navigator.appName.substring(0,3)=="Mic"))?screen.colorDepth:screen.pixelDepth)
     //-->
 </SCRIPT>
 <SCRIPT language="javascript1.3" type="text/javascript">
@@ -106,24 +97,9 @@
 </SCRIPT>
 <SCRIPT language="JavaScript" type="text/javascript">
     <!--
-    document.addEventListener("DOMContentLoaded", () => {
+    top_rat="&col=340F6E&t=ffffff&p=BD6F6F";top_r+="&js="+top_js+"";document.write('<img src="https://cnt0.www.uz/counter/collect?'+top_r+top_rat+'" width=0 height=0 border=0 />')//-->
+</SCRIPT><NOSCRIPT><IMG height=0 src="https://cnt0.www.uz/counter/collect?id=46694&pg=http%3A//uzinfocom.uz&col=340F6E&t=ffffff&p=BD6F6F" width=0 border=0 /></NOSCRIPT><!-- FINISH WWW.UZ TOP-RATING -->
 
-        // console.log(document.getElementsByClassName('mycounter1')[0])
-        top_rat="&col=133E43&t=ffffff&p=86C439";top_r+="&js="+top_js+"";
-
-        if(typeof document.getElementsByClassName('mycounter1')[0] !=='undefined')
-        document.getElementsByClassName('mycounter1')[0].innerHTML ='<a href="http://www.uz/ru/res/visitor/index?id=46694" target=_top>' +
-            '<img src="http://cnt0.www.uz/counter/collect?'+top_r+top_rat+'" width=88 height=31 border=0 alt="Топ рейтинг www.uz"/></a>'
-    });
-    //-->
-
-
-</SCRIPT>
-<NOSCRIPT >
-    <A href="http://www.uz/ru/res/visitor/index?id=46694" target="_top" class="mycounter" >
-        <IMG height=31 src="http://cnt0.www.uz/counter/collect?id=46694&pg=http%3A//uzinfocom.uz&&col=133E43&amp;t=ffffff&amp;p=86C439" width=88 border=0 alt="Топ рейтинг www.uz"/></A>
-</NOSCRIPT>
-<!-- FINISH WWW.UZ TOP-RATING -->
 
 
 <!-- Yandex.Metrika counter -->

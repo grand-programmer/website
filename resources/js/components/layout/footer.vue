@@ -29,7 +29,7 @@
                             <div class="f_navigation_widget">
 
                                 <ul v-if="footermenu">
-                                    <li @click="dialog=true"><a>Сайт харитаси</a></li>
+                                    <li @click="dialog=true"><a>{{ $t('Сайт харитаси') }}</a></li>
                                     <li v-for="(link,index) in footermenu[0]" :key="index">
                                         <router-link :to="link.url"><i class="fa fa-angle-right"
                                                                        aria-hidden="true"></i>{{ link.title }}
@@ -107,6 +107,9 @@
                                 <tr><td>{{ $t('Кеча') }}:</td><td><b>{{ viewed[0].yesterday }}</b></td></tr>
                                 <tr><td>{{ $t('Ҳафта давомида') }}:</td><td><b>{{ viewed[0].week }}</b></td></tr>
                                 <tr><td>{{ $t('Ой давомида') }}:</td><td><b>{{ viewed[0].month }}</b></td></tr>
+                                <tr><td>
+                                    <img height="30" src="https://cnt0.www.uz/counter/collect?id=46694&pg=http%3A//uzinfocom.uz&col=340F6E&t=ffffff&p=BD6F6F" border=0 />
+                                </td></tr>
                             </table>
 
 <!--

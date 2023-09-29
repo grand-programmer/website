@@ -28,7 +28,15 @@ use Illuminate\Support\Facades\Notification;
 //    App::setLocale($lang||'uz');
     Route::group(['prefix' => 'v1','middleware' => 'locale'], function () {
         Route::get('test', function(){
+            try {
+                $message = (new NewsToSocial(News::orderBy('id', 'desc')->first()));
 
+                Notification::route('telegram', '-1001530458375')
+                    ->notify($message);
+            }
+            catch(Exception $exception) {
+                dd($exception->getMessage());
+            }
             // Notification::via('telegram')->notify($message);
             // phpinfo();
            $date1=new \Carbon\Carbon('2021-01-10');
@@ -57,7 +65,9 @@ use Illuminate\Support\Facades\Notification;
             });*/
         Route::any('ex_api/{action}', 'App\Http\Controllers\ApiController@index');
         Route::get('get_image', 'App\Http\Controllers\UserController@showImage');
-
+        Route::middleware(['basicAuth'])->group(function () {
+            Route::post('baholash', 'App\Http\Controllers\HodimBallController@index');
+        });
         Route::group(['middleware' => 'auth:api'], function () {
             Route::post('statservice', 'App\Http\Controllers\StatController@saveStat');
             Route::get('statservice', 'App\Http\Controllers\StatController@getApps');

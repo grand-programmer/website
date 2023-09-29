@@ -364,7 +364,7 @@ export default {
     border-bottom: 2px solid #39ae69;
 }
 
-.widget_tittle h3 {
+.v-application .widget_tittle h3 {
     color: #39ae69;
     font-weight: bold;
     font-size: 25px;

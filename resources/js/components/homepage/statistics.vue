@@ -54,7 +54,7 @@
 
                 <template v-if="stat_type===1"><stat-products :regime="paramRegime" :month="paramMonth" :year="paramYear" /></template>
 
-                <template v-if="stat_type===2"><stat-countries  :regime="paramRegime" :month="paramMonth" :year="paramYear" /></template>
+                <template v-if="stat_type===2 && 1===2"><stat-countries  :regime="paramRegime" :month="paramMonth" :year="paramYear" /></template>
                 <template v-if="stat_type===3"><stat-states  :regime="paramRegime" :month="paramMonth" :year="paramYear" /></template>
             </div>
         </template>
@@ -73,7 +73,7 @@ export default {
             stat_type: 1,
             regimes: [
                 {title: this.$t('Товарлар бўйича'), textIm: this.$t('Товарлар импорти тўғрисида маълумот'), textEx: this.$t('Товарлар экспорти тўғрисида маълумот'),  value: 1, rejim: 1},
-                {title: this.$t('Давлатлар бўйича'), textIm: this.$t('Давлатлар бўйича товарлар импорти тўғрисида маълумот'),textEx: this.$t('Давлатлар бўйича товарлар экспорти тўғрисида маълумот'), value: 2, rejim: 1},
+                /*{title: this.$t('Давлатлар бўйича'), textIm: this.$t('Давлатлар бўйича товарлар импорти тўғрисида маълумот'),textEx: this.$t('Давлатлар бўйича товарлар экспорти тўғрисида маълумот'), value: 2, rejim: 1},*/
                 {title: this.$t('Ҳудудлар бўйича'), textIm: this.$t('Ҳудудлар бўйича товарлар импорти тўғрисида маълумот'),textEx: this.$t('Ҳудудлар бўйича товарлар экспорти тўғрисида маълумот'), value: 3, rejim: 1},
             ],
             month: 0,

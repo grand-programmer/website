@@ -285,7 +285,7 @@
                             <div class="bolim_image"><img src="/img/service/sorovnoma.png"/></div>
                             <div class="bolim_title">{{ $t("Сўровнома") }}</div>
                             <div class="bolim_description">
-                                {{ $t("Божхона Қўмитасининг очиқ маълумотларини кўчириб олишингиз мумкин") }}
+                                {{ $t("Қўмита фаолиятини баҳоланг") }}
                             </div>
                         </router-link><!--
                         <div class="card">
