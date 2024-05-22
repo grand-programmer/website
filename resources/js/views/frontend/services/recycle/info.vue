@@ -207,7 +207,7 @@
                                                                   v-for="doc in app.docs">
                                                             {{
                                                                 typeof doc.docname !== 'undefined' ?
-                                                                    doc.docname + " - (" + doc.docTypeName + ")" : null
+                                                                    doc.docname + " - (" + doc.docTypeName +")" : null
                                                             }},
                                                         </template>
                                                     </td>
@@ -443,11 +443,9 @@
 import {mapState} from 'vuex';
 import i18n from "../../../../i18n";
 import ServicePage from "../index";
-import List from "../intellectual2/list";
-import ListItem from "../../../dashboard/component/ListItem";
 
 export default {
-    components: {ListItem, List, ServicePage},
+    components: {ServicePage},
     data() {
         return {
             breadcrumb_items: [

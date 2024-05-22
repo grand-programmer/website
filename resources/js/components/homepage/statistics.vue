@@ -43,6 +43,7 @@
                         <v-select
                             :items="computedMonths"
                             v-model="month"
+                            item-value="value"
                             solo
                             dense
                             style="max-width: 200px; margin-top: -5px"
@@ -76,7 +77,6 @@ export default {
                 /*{title: this.$t('Давлатлар бўйича'), textIm: this.$t('Давлатлар бўйича товарлар импорти тўғрисида маълумот'),textEx: this.$t('Давлатлар бўйича товарлар экспорти тўғрисида маълумот'), value: 2, rejim: 1},*/
                 {title: this.$t('Ҳудудлар бўйича'), textIm: this.$t('Ҳудудлар бўйича товарлар импорти тўғрисида маълумот'),textEx: this.$t('Ҳудудлар бўйича товарлар экспорти тўғрисида маълумот'), value: 3, rejim: 1},
             ],
-            month: 0,
             months: [
                 {
                     text: this.$t('Барчаси'),
@@ -130,7 +130,8 @@ export default {
                     value: 12
                 }
             ],
-            year: (new Date()).getFullYear(),
+            month: 1,
+            year: ((new Date).getMonth() === 0)?(new Date()).getFullYear() - 1 : (new Date()).getFullYear(),
             regime: 1,
             firstStart: 1,
             years: [
@@ -178,7 +179,7 @@ export default {
         year: function (v) {
         },
         month: function (v, old) {
-            if (this.month > (new Date).getMonth()) this.month = 0;
+            if (this.year >= (new Date).getFullYear() && this.month > (new Date).getMonth()) this.month = 0;
         }
     },
     methods: {

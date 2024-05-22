@@ -4,7 +4,7 @@
 
         <loading-bar></loading-bar>
 
-        <v-hududiy></v-hududiy>
+        <hududiy></hududiy>
 
 
         <div class="section" id="section0">
@@ -950,7 +950,7 @@ import index_scripts from "./homepage/scripts";
 
 import {mapState} from 'vuex';
 import loadingBar from "../components/base/loadingbar.vue";
-import NewsInHome from "./homepage/news";
+import NewsInHome from "./homepage/news-in-homepage";
 import FrontCalendar from "./homepage/calendar";
 
 
@@ -1041,7 +1041,7 @@ export default {
             this.showProgress(true);
             this.percent = 0;
 
-            _loadingInterval = setInterval(() => {
+            _loadingInterval  = setInterval(() => {
                 this.percent = this.percent + 1;
             }, 500)
         },

@@ -346,7 +346,7 @@ import {extend, ValidationProvider, ValidationObserver} from 'vee-validate';
 import Myfield from "../../../../components/form/myfield";
 import * as rules from 'vee-validate/dist/rules';
 import messages from '../../../../locales/oz.json';
-import {types} from "../../../../../../public/js/mix/pdfmake";
+
 import i18n from "../../../../i18n";
 import TextField from "../../../../components/form/textfield";
 import AutocompleteField from "../../../../components/form/autocomplete";
@@ -635,7 +635,7 @@ export default {
                         if (!(['1790', '1791', '1701'].includes(item['kod_id'])))
                             _this.regions.push({
                                 'value': item['kod_id'],
-                                'text': (item['name']).replace("Ўзбекистон Республикаси Иқтисодиёт ва молия вазирлиги ҳузуридаги Божхона қўмитасининг ", "")//(item['name']).substring(("Ўзбекистон Республикаси Иқтисодиёт ва молия вазирлиги ҳузуридаги Божхона қўмитасининг ").length)
+                                'text': (item['name']).replace("Ўзбекистон Республикаси Иқтисодиёт ва молия вазирлиги ҳузуридаги Божхона қўмитасининг ", "")//(item['name']).substring(("Ўзбекистон Республикаси Иқтисодиёт ва молия вазирлиги ҳузуридаги Божхона қўмитасининг").length)
                             })
                     })
             })

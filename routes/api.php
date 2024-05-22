@@ -54,9 +54,6 @@ use Illuminate\Support\Facades\Notification;
                 Route::get('services', 'App\Http\Controllers\UserController@getServices');
                 Route::post('logout', 'App\Http\Controllers\AuthController@logout');
                 Route::get('refresh', 'App\Http\Controllers\AuthController@refresh');
-
-
-
             });
 
         });
@@ -84,7 +81,7 @@ use Illuminate\Support\Facades\Notification;
          * Admin routes
          *
          */
-        Route::group(['prefix' => 'admin', 'middleware' => 'role:admin'], function () {  //role:editor,approver
+        Route::group(['prefix' => 'admin', 'middleware' => 'role'], function () {  //role:editor,approver
             Route::post('/locales', 'App\Http\Controllers\Admin\AdminEventController@setLocale',['as'=>'admin']);
             Route::post('/addlocale', 'App\Http\Controllers\Admin\AdminEventController@addLocale',['as'=>'admin']);
             Route::get('/locales', 'App\Http\Controllers\Admin\AdminEventController@getLocales',['as'=>'admin']);
@@ -113,37 +110,41 @@ use Illuminate\Support\Facades\Notification;
         });
 
         Route::get('/categories/select', 'App\Http\Controllers\CategoryController@getForSelect');
+        Route::get('/categories/{category}', 'App\Http\Controllers\CategoryController@show');
         Route::get('/stat', 'App\Http\Controllers\StatController@index');
         Route::post('/appeal/checkAppeal', 'App\Http\Controllers\AppealController@check');
         //Route::resource('/appeal', 'App\Http\Controllers\AppealController');
         Route::post('/page/related/{page}', 'App\Http\Controllers\PageController@related');
-        Route::resource('/page', 'App\Http\Controllers\PageController');
+        Route::get('/page/{page}', 'App\Http\Controllers\PageController@show');
+        Route::get('/page', 'App\Http\Controllers\PageController@index');
         Route::get('/menu/select', 'App\Http\Controllers\MenuController@getForSelect');
         Route::get('/menu/front', 'App\Http\Controllers\MenuController@getForFront');
         Route::get('/documents', 'App\Http\Controllers\DocumentController@index');
         Route::get('/documentcategories', 'App\Http\Controllers\DocumentController@getCategories');
-        Route::resource('/menu', 'App\Http\Controllers\MenuController');
+        Route::get('/menu', 'App\Http\Controllers\MenuController@index');
         Route::get('/footermenu/select', 'App\Http\Controllers\FooterMenuController@getForSelect');
         Route::get('/footermenu/front', 'App\Http\Controllers\FooterMenuController@getForFront');
         Route::get('/opendata', 'App\Http\Controllers\OpenDataController@index');
         Route::post('/opendata/{opendata}', 'App\Http\Controllers\OpenDataController@show');
-        Route::resource('/footermenu', 'App\Http\Controllers\FooterMenuController');
+        Route::get('/footermenu', 'App\Http\Controllers\FooterMenuController@index');
 
         Route::post('/news/{news}/vote', 'App\Http\Controllers\NewsController@like');
         Route::post('/news/search', 'App\Http\Controllers\NewsController@search');
-        Route::resource('/news', 'App\Http\Controllers\NewsController');
+        Route::get('/news/{news}', 'App\Http\Controllers\NewsController@show');
+        Route::get('/news', 'App\Http\Controllers\NewsController@index');
 
 
-        Route::resource('/categories', 'App\Http\Controllers\CategoryController');
+        Route::get('/categories', 'App\Http\Controllers\CategoryController@index');
         Route::get('/front/events', 'App\Http\Controllers\EventController@getForFront');
-        Route::resource('/events', 'App\Http\Controllers\EventController');
-        Route::resource('/organizations', 'App\Http\Controllers\OrganizationController');
-        Route::resource('/apparat', 'App\Http\Controllers\ApparatController');
-        Route::resource('/faqs', 'App\Http\Controllers\FaqController');
+        Route::get('/events', 'App\Http\Controllers\EventController@index');
+        Route::get('/organizations', 'App\Http\Controllers\OrganizationController@index');
+        Route::get('/organizations/{organization}', 'App\Http\Controllers\OrganizationController@show');
+        Route::get('/apparat', 'App\Http\Controllers\ApparatController@index');
+        Route::get('/faqs', 'App\Http\Controllers\FaqController@index');
         Route::get('/front/faqs', 'App\Http\Controllers\FaqController@getForFront');
         Route::get('/votes/front', 'App\Http\Controllers\VoteController@indexFront');
         Route::get('/phoneVotes', 'App\Http\Controllers\VoteController@phoneVotes');
-        Route::resource('/votes', 'App\Http\Controllers\VoteController');
+        Route::get('/votes', 'App\Http\Controllers\VoteController@index');
         Route::put('/votescount/{vote}', 'App\Http\Controllers\VoteController@updateCount');
 
 

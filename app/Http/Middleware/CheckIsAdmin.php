@@ -6,8 +6,9 @@ class CheckIsAdmin
 {
     public function handle($request, Closure $next)
     {
+        print_r($request);
 
-        if(Auth::user()->role === 2) {
+        if(Auth::user()->role > 2) {
             return $next($request);
         }
         else {

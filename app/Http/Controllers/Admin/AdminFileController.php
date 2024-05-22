@@ -32,7 +32,7 @@ class AdminFileController extends ParentController
             $search=$data['search'];
         }
 
-        return DocFile::where('name','like','%'. $search .'%')->paginate($perpage, ['*'], 'page', $page);
+        return DocFile::where('name','like','%'. $search .'%')->orderByDesc('id')->paginate($perpage, ['*'], 'page', $page);
     }
 
     /**

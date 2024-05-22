@@ -884,11 +884,12 @@
 
 
 export default {
-    name: "Hududiy",
+    name: "hududiy",
     methods: {
         goHudud(hudud) {
             //console.log('asdasd')
             $(".hududiy_boshqarmalar a").click();
+            if(hudud === 2 || hudud === '2' )  window.open('http://172.16.112.16:8088', '_blank', 'noreferrer'); else
             this.$router.push('/page/boshqarma/' + hudud);
         },
         hideHududiy(event) {

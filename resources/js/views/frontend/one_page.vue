@@ -11,13 +11,13 @@
         </v-overlay>
 
         <v-header></v-header>
-        <v-hududiy></v-hududiy>
+        <hududiy></hududiy>
 
         <router-view>
 
         </router-view>
-
         <my-footer/>
+        <position-sidebar/>
         <div class="footer_links">
             <div class="footer_links_arrow"><i class="fas fa-chevron-down"></i></div>
             <div class="slide_links">
@@ -57,9 +57,9 @@
                     <div class="image"></div>
                     <p>{{ $t("Oʼzbekiston Respublikasi Ochiq ma'lumotlar portali") }}</p>
                 </a>
-                <a class="footer_link" href="//pm.gov.uz">
+                <a class="footer_link" href="//bojxona-service.uz">
                     <div class="image"></div>
-                    <p>{{ ("Oʼzbekiston Respublikasi Prezidenti Virtual qabulxonasi") }}</p>
+                    <p>{{ ("Bojxona qo'mitasi huzuridagi “Bojxona-servis” davlat muassasasi") }}</p>
                 </a>
 
                 <a class="footer_link" href="//uzbi.uz">
@@ -74,7 +74,7 @@
 </template>
 <script>
 import myFooter from "../../components/layout/footer";
-
+import positionSidebar from "../../components/custom/position-sidebar";
 let _loadingInterval = 0;
 import {mapState} from 'vuex';
 import loadingBar from "../../components/base/loadingbar.vue";
@@ -89,6 +89,7 @@ export default {
 
     },
     components: {
+        positionSidebar,
         loadingBar,
         myFooter,
         MySnack: () => import('../../views/dashboard/component/snack'),

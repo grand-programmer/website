@@ -1,11 +1,14 @@
 {
     "/js/mix/app.js": "/js/mix/app.js",
-    "/js/mix/pdfmake.js": "/js/mix/pdfmake.js",
-    "/js/mix/canvg.js": "/js/mix/canvg.js",
-    "/js/mix/xlsx.js": "/js/mix/xlsx.js",
+    "/js/mix/manifest.js": "/js/mix/manifest.js",
+    "/js/jsAssets/pdfmake.js": "/js/jsAssets/pdfmake.js",
+    "/js/jsAssets/canvg.js": "/js/jsAssets/canvg.js",
+    "/js/jsAssets/xlsx.js": "/js/jsAssets/xlsx.js",
     "/css/style.css": "/css/style.css",
     "/css/mix/vacancy.css": "/css/mix/vacancy.css",
     "/css/mix/one.css": "/css/mix/one.css",
     "/css/mix/app.css": "/css/mix/app.css",
-    "/css/services.css": "/css/services.css"
+    "/css/services.css": "/css/services.css",
+    "/js/mix/vendor.js": "/js/mix/vendor.js",
+    "/js/mix/app.min.js": "/js/mix/app.min.js"
 }

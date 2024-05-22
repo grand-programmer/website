@@ -25,7 +25,7 @@
             v-bind="$attrs"
             :type="type"
             v-on="$listeners"
-            :hint="hint.length>0?hint:title"
+            :hint="hint"
             v-model="modelValue"
             v-else
         >
@@ -57,7 +57,6 @@ export default {
     setup(props, ctx) {
        // console.log(slots)
         const parentSlots = computed(() => Object.keys(ctx.slots))
-
         return {parentSlots}
     },
     name: "text-field",

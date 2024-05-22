@@ -553,7 +553,7 @@
 import {extend, ValidationProvider, ValidationObserver} from 'vee-validate';
 import * as rules from 'vee-validate/dist/rules';
 import messages from '../../../../locales/oz.json';
-import {types} from "../../../../../../public/js/mix/pdfmake";
+
 import i18n from "../../../../i18n";
 import EArxivFile from "../../../../components/form/e-arxiv-file";
 
@@ -1019,7 +1019,7 @@ export default {
                         if (!(['1790', '1791', '1701'].includes(item['kod_id'])))
                             _this.regions.push({
                                 'value': item['kod_id'],
-                                'text': (item['name']).replace("Ўзбекистон Республикаси Иқтисодиёт ва молия вазирлиги ҳузуридаги Божхона қўмитасининг ", "")//(item['name']).substring(("Ўзбекистон Республикаси Иқтисодиёт ва молия вазирлиги ҳузуридаги Божхона қўмитасининг ").length)
+                                'text': (item['name']).replace("Ўзбекистон Республикаси Иқтисодиёт ва молия вазирлиги ҳузуридаги Божхона қўмитасининг ", "")//(item['name']).substring(("Ўзбекистон Республикаси Иқтисодиёт ва молия вазирлиги ҳузуридаги Божхона қўмитасининг").length)
                             })
                     })
             })
@@ -1059,6 +1059,7 @@ export default {
             this.person.perAdr = this.$auth.user().per_adr;
             this.person.email = this.$auth.user().email;
             this.person.type = (this.$auth.user().type === 1) ? 1 : 0;
+            this.person.position = (this.$auth.user().type === 1) ? 1 : 0;
             if (this.person.type === 0) {
                 let legal_info = JSON.parse(this.$auth.user().legal_info)
                 //console.log(legal_info[0].le_name)

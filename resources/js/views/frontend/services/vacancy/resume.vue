@@ -10,7 +10,7 @@
             </v-container>
         </div>
         <div class="page-content">
-            <v-container class="111" v-if="vacancy_send ">
+            <v-container class="111" v-if="vacancy_send">
                 <info :resume="vacancy_resume"></info>
             </v-container>
             <v-container v-else>
@@ -1830,7 +1830,7 @@ export default {
                     if (!(['1790', '1791', '1701'].includes(item['kod_id'])))
                         _this.regions.push({
                             'value': item['kod_id'],
-                            'text': (item['name']).replace("Ўзбекистон Республикаси Иқтисодиёт ва молия вазирлиги ҳузуридаги Божхона қўмитасининг ", "")//(item['name']).substring(("Ўзбекистон Республикаси Иқтисодиёт ва молия вазирлиги ҳузуридаги Божхона қўмитасининг ").length)
+                            'text': (item['name']).replace("Ўзбекистон Республикаси Иқтисодиёт ва молия вазирлиги ҳузуридаги Божхона қўмитасининг ", "")//(item['name']).substring(("Ўзбекистон Республикаси Иқтисодиёт ва молия вазирлиги ҳузуридаги Божхона қўмитасининг").length)
                         })
                 })
             })
@@ -2057,12 +2057,12 @@ export default {
             // 30812852720071 Abbos aka 2288
             if ( !(this.$auth.user().pin===30812852720071 || this.$auth.user().pin===32604853150058  || this.$auth.user().pin===31103927250012 ) && this.getAge(this.$auth.user().birth_date) > 30) {
                 this.resumeLoading = false;
-                this.$toast.error("Сизнинг ёшингиз божхона органларига ишга кириш бўйича ёш чегараси меъзонига тўғри келмайди! ");
+                this.$toast.error("Сизнинг ёшингиз божхона органларига ишга кириш бўйича ёш чегараси меъзонига тўғри келмайди!");
                 return;
             }
             if(this.vacancy.applied){
                 this.resumeLoading = false;
-                this.$toast.error("Сиз олдин ариза юборгансиз! ");
+                this.$toast.error("Сиз олдин ариза юборгансиз!");
                 return ;
             }
             setTimeout(async () => {
@@ -2094,25 +2094,29 @@ export default {
                 _app.vacancy_resume['vacancy'] = this.vacancy;
                 const form = new FormData();
                 form.append('pnfl', this.user.pin);
-                form.append('vakant_id', this.$route.params.id);
-                form.append('tuman', this.user.birth_place);
-                form.append('name', this.user.first_name + ' ' + this.user.sur_name + ' ' + this.user.mid_name);
-                form.append('tug_sana', this.user.birth_date);
-                form.append('telefon', this.user.phone);
-                form.append('add_phone', this.user.add_phone);
-                form.append('manzil', this.user.per_adr);
+                form.append('vakantId', this.$route.params.id);
+                form.append('uztuman', this.user.birth_place);
+                form.append('ism', this.user.first_name);
+                form.append('fam', this.user.sur_name);
+                form.append('sharif', this.user.mid_name);
+                form.append('tugsana', this.user.birth_date);
+                form.append('telefon1', this.user.phone);
+                form.append('telefon2', this.user.add_phone);
+                form.append('uzmanzil', this.user.per_adr);
                 form.append('email', this.user.email);
                 form.append('mutaxasislik', this.user_add.mutaxassisligi);
-                form.append('martaba', "----");
-                form.append('partiya', this.user_add.partiyaviylik);
-                form.append('chet_tili', this.user_add.languages.join(','));
-                form.append('ilmiy_daraja', this.user_add.ilmiy_daraja);
-                form.append('mukofot', this.user_add.mukofot);
-                form.append('millati', this.user.natn);
-                form.append('xudud', this.user_add.hudud);
-                form.append('malimoti', "----");
-                form.append('isdeputat', this.user_add.deputat);
-                form.append('rasm', 'https://new.customs.uz/public/images/users/' + this.user.id + '.jpg');
+                // form.append('martaba', "----");
+                // form.append('partiya', this.user_add.partiyaviylik);
+                form.append('chettili', this.user_add.languages.join(','));
+                // form.append('ilmiy_daraja', this.user_add.ilmiy_daraja);
+                // form.append('mukofot', this.user_add.mukofot);
+                form.append('millat', this.user.natn);
+                // form.append('uzviloyat', this.user_add.hudud);
+                form.append('hudud', this.user_add.hudud);
+                form.append('farmoyishId', 22222);
+                //form.append('malimoti', "----");
+                // form.append('isdeputat', this.user_add.deputat);
+                // form.append('rasm', 'https://new.customs.uz/public/images/users/' + this.user.id + '.jpg');
 
                 //mydata.malumoti.push(this.user_add.malumotlar);
 
@@ -2120,25 +2124,25 @@ export default {
                     Object.entries(v).forEach(([itemkey, item]) => {
                         switch (itemkey) {
                             case 'mamlakat':
-                                form.append(`malumoti[${valkey}][mamlakat]`, `${item}`)
+                                form.append(`talim[${valkey}][mamlakat]`, `${item}`)
                                 break;
                             case 'ooy':
-                                form.append(`malumoti[${valkey}][muassa]`, `${item}`)
+                                form.append(`talim[${valkey}][muassa]`, `${item}`)
                                 break;
                             case 'mutaxassislik':
-                                form.append(`malumoti[${valkey}][mutaxasislik]`, `${item}`)
+                                form.append(`talim[${valkey}][mutaxasislik]`, `${item}`)
                                 break;
                             case 'hujjatsanasi':
-                                form.append(`malumoti[${valkey}][diplom_raqam]`, `${item}`)
+                                form.append(`talim[${valkey}][diplomRaqam]`, `${item}`)
                                 break;
                             case 'davr':
-                                form.append(`malumoti[${valkey}][davri]`, `${item}`)
+                                form.append(`talim[${valkey}][davri]`, `${item}`)
                                 break;
                             case 'talim_darajasi':
-                                form.append(`malumoti[${valkey}][talim_daraja]`, `${item}`)
+                                form.append(`talim[${valkey}][talimDaraja]`, `${item}`)
                                 break;
                             default :
-                                form.append(`malumoti[${valkey}][${valkey}]`, `${item}`)
+                                form.append(`talim[${valkey}][${valkey}]`, `${item}`)
                                 break
                         }
 
@@ -2157,7 +2161,7 @@ export default {
                                 form.append(`sertifikat[${valkey}][doc]`, `${item}`)
                                 break;
                             case 'hujjat_sanasi':
-                                form.append(`sertifikat[${valkey}][doc_date]`, `${item}`)
+                                form.append(`sertifikat[${valkey}][kursdate]`, `${item}`)
                                 break;
                         }
 
@@ -2184,9 +2188,9 @@ export default {
                 setTimeout(async () => {
                     await axios.post("/api/v1/ex_api/resume", form).then(function (response) {
 
-                        if (response.data.data.success === true || response.data.data.succes === true) {
+                        if (response.status===200) {
                             _app.vacancy_send = true;
-                            _app.vacancy_resume.kod = response.data.data.data.kod;
+                            _app.vacancy_resume.kod = response.data.data.messages.kod;
                             _app.$toast.success(`Сизнинг маълумотларингиз юборилди!`);
                         } else {
                             if (!this.user_add.malumotlar) {
@@ -2201,8 +2205,9 @@ export default {
                         }
                         this.resumeLoading = false;
                     }).catch(async (error) => {
+                        this.resumeLoading = false;
                         console.log(error)
-                        if (error.response.data.data.success === true || error.response.data.data.succes === true) {
+                        if (error.response.data.data.success === true || error.response.data.success === true) {
                             _app.vacancy_send = true;
                             _app.$toast.success(`Сизнинг маълумотларингиз юборилди!`);
                         } else {
@@ -2214,6 +2219,7 @@ export default {
                             if (Object.keys(error.response.data.data.messages).length > 0) {
                                 Object.entries(error.response.data.data.messages).map((item) => {
                                     if (item[0] === 'malimoti') _app.$toast.error(`Аризачининг таълим тўғрисидаги маълумотлари кўрсатилмади!`);
+                                    else { _app.$toast.error(item[1]) }
                                 })
                             } else console.log(error.response.data)
                         }
@@ -2287,7 +2293,8 @@ export default {
             this.edit = !this.edit;
         },*/
         async getVacancy() {
-            if (!(this.$route.params.id > 0)) this.$router.back();
+
+            if (!(this.$route.params.id.length>3)) this.$router.back();
             const _app = this;
             let pinRequest=""
             if(this.$auth.user()) pinRequest = "&pnfl=" + this.$auth.user().pin

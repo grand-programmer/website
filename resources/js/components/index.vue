@@ -12,7 +12,7 @@
         </v-overlay>
         <loading-bar></loading-bar>
         <full-page :options="options" ref="fullpage" id="fullpage" :skip-init="false" v-if="isMobile===false">
-            <v-hududiy></v-hududiy>
+            <hududiy></hududiy>
 
 
             <div class="section" id="section0">
@@ -56,7 +56,24 @@
 
                     <div class="slider_inner">
 
-                        <div data-thumb="/img/custom/slider-9.png" data-src="/img/custom/077.jpg">
+                        <div data-thumb="/img/main-slider/1.JPG" data-src="/img/main-slider/1.JPG">
+                            <div class="container">
+                                <div class="slider_text absolute_right" style="top: inherit; bottom: 80px; right: 0px">
+                                    <h3 class="fadeInLeft animated" style="width: 60vw; top: inherit; bottom: 10px; ">{{ $t("МДҲга аъзо давлатлар  божхона хизматлари раҳбарлари Кенгаши йиғилиши") }}</h3>
+                                    <h4 class="fadeInLeft animated d-none">{{ $t("Божхона ахборот тизими") }}</h4>
+                                    <p class="fadeInUp animated d-none">
+                                        {{ $t("2024 йил 23-25 апрель, Тошкент шаҳри") }}</p>
+                                    <a class="s_readmore_btn fadeInUp animated" target="_blank" style="margin-left: 40vw"
+                                       href="/news/%D1%9Ezbekiston-anzhumanlar-saroyida-yigilishning-asosiy-tadbiri-bolib-otdi">{{ $t("Батафсил") }}</a>
+                                    <!--<a class="s_contact_btn fadeInUp animated" href="#">Contact Us</a>-->
+                                </div>
+                                <div class="slider_image slider-2">
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div data-thumb="/img/custom/situatsion_yangi.jpg" data-src="/img/custom/situatsion_yangi.jpg">
                             <div class="container">
                                 <div class="slider_text absolute_right">
                                     <h3 class="fadeInLeft animated" style="max-width: 54%; margin-left: auto;">
@@ -98,7 +115,8 @@
 
                         </v-dialog>
 
-                        <div data-thumb="/img/custom/slider-9.png" data-src="/img/custom/logistics.jpg">
+
+                        <div data-thumb="/img/custom/logistics.jpg" data-src="/img/custom/logistics.jpg">
                             <div class="container">
                                 <div class="slider_text absolute_right">
                                     <h3 class="fadeInLeft animated">E-ARXIV</h3>
@@ -114,7 +132,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div data-thumb="/img/custom/slider-9.png" data-src="/img/custom/transit.jpg">
+                        <div data-thumb="/img/custom/med2023.jpg" data-src="/img/custom/med2023.jpg">
                             <div class="container">
                                 <div class="slider_text absolute_right">
                                     <h3 class="fadeInLeft animated">E-TRANZIT</h3>
@@ -131,7 +149,21 @@
                             </div>
                         </div>
 
+                        <div data-thumb="/img/custom/med_yangi.jpg" data-src="/img/custom/med_yangi.jpg">
+                            <div class="container">
+                                <div class="slider_text absolute_right" style="top: 50vh; left: 50%">
+                                    <h3 class="fadeInLeft animated">{{ $t("Масофавий электрон декларациялаш") }}</h3>
+                                    <h4 class="fadeInLeft animated">{{ $t("Инсон омилисиз декларациялаш") }}</h4>
+                                    <p class="fadeInUp animated">{{ $t("Божхона пости") }}</p>
+                                    <a class="s_readmore_btn fadeInUp animated d-none" href="http://tarif.customs.uz"
+                                       target="_blank">{{ $t("Хизматдан фойдаланиш") }}</a>
+                                    <!--<a class="s_contact_btn fadeInUp animated" href="#">Contact Us</a>-->
+                                </div>
+                                <div class="slider_image slider-2">
 
+                                </div>
+                            </div>
+                        </div><!--
                         <div data-thumb="/img/custom/slider-5.jpg" data-src="/img/custom/slider-5.jpg">
                             <div class="container">
                                 <div class="slider_text absolute_right">
@@ -140,14 +172,14 @@
                                     <p class="fadeInUp animated">{{ $t("Божхона тўловлари ҳисобини олинг") }}</p>
                                     <a class="s_readmore_btn fadeInUp animated" href="http://tarif.customs.uz"
                                        target="_blank">{{ $t("Хизматдан фойдаланиш") }}</a>
-                                    <!--<a class="s_contact_btn fadeInUp animated" href="#">Contact Us</a>-->
+                                    &lt;!&ndash;<a class="s_contact_btn fadeInUp animated" href="#">Contact Us</a>&ndash;&gt;
                                 </div>
                                 <div class="slider_image slider-2">
 
                                 </div>
                             </div>
-                        </div>
-
+                        </div>-->
+<!--
 
                         <div data-thumb="/img/main-slider/slide3.jpg" data-src="/img/main-slider/slide3.jpg">
                             <div class="container">
@@ -160,15 +192,15 @@
                                         }}</p>
                                     <a class="s_readmore_btn fadeInUp animated" href="http://singlewindow.uz"
                                        target="_blank">{{ $t("Хизматдан фойдаланиш") }}</a>
-                                    <!--<a class="s_contact_btn fadeInUp animated" href="#">Contact Us</a>-->
+                                    &lt;!&ndash;<a class="s_contact_btn fadeInUp animated" href="#">Contact Us</a>&ndash;&gt;
                                 </div>
                                 <div class="slider_image slider-2">
 
                                 </div>
                             </div>
-                        </div>
+                        </div>-->
 
-                        <div data-thumb="/img/main-slider/slide4.jpg" data-src="/img/main-slider/slide4.jpg">
+                        <div data-thumb="/img/custom/cyberroom.jpg" data-src="/img/custom/cyberroom.jpg">
                             <div class="container">
                                 <div class="slider_text absolute_left">
                                     <h3 class="fadeInLeft animated" style="width: 70%">
@@ -287,30 +319,7 @@
                             <div class="bolim_description">
                                 {{ $t("Қўмита фаолиятини баҳоланг") }}
                             </div>
-                        </router-link><!--
-                        <div class="card">
-                            <div class="bolim_image"><img src="/img/service/opendata.png"></div>
-                            <div class="bolim_title">Қизил ва яшил йўлак</div>
-                            <div class="bolim_description">
-                                Божхона постларида қизил ва яшил йўлаклар бўйича маълумотлар
-                            </div>
-                        </div>
-                        <div class="card">
-                            <div class="bolim_image">
-                                <img src="/img/service/opendata.png">
-                            </div>
-                            <div class="bolim_title">Кузатув камералари</div>
-                            <div class="bolim_description">Божхона қўмитаси кузатув камералари тўғрисидаги
-                                маълумотлар
-                            </div>
-                        </div>
-                        <div class="card">
-                            <div class="bolim_image"><img src="/img/service/opendata.png"></div>
-                            <div class="bolim_title">Коррупцияга қарши курашиш</div>
-                            <div class="bolim_description">Божхона Қўмитасининг коррупцияга қарши курашиш борасидаги
-                                ишлари
-                            </div>
-                        </div>-->
+                        </router-link>
                         <a href="http://tarif.customs.uz/" target="_blank" class="card">
                             <div class="bolim_image"><img src="/img/service/time.png"/></div>
                             <div class="bolim_title">{{ $t("Тўловлар ва вақт") }}</div>
@@ -356,7 +365,7 @@
 
             <div class="section yangiliklar" id="section3">
 
-                <news-in-home></news-in-home>
+                <news-in-homepage />
             </div>
 
             <div class="section asosiy_korsatkichlari2">
@@ -369,7 +378,7 @@
                 <div class="container-fluid contact_faq">
                     <div class="row">
                         <div class="col-md-6">
-                            <homefaq2/>
+                            <faq2/>
                         </div>
                         <front-calendar></front-calendar>
 
@@ -385,6 +394,7 @@
 
         </full-page>
         <mobile v-else></mobile>
+        <position-sidebar/>
 
 
     </div>
@@ -392,19 +402,18 @@
 
 <script>
 import api from "./../src/services/apiService";
-import index_scripts from '../components/homepage/scripts';
-import NewsInHome from './homepage/news';
-import FrontCalendar from './homepage/calendar';
+import index_scripts from '../components/homepage/scripts.vue';
+import NewsInHomepage from './homepage/news-in-homepage.vue';
+import FrontCalendar from './homepage/calendar.vue';
 import loadingBar from "../components/base/loadingbar.vue";
-import mobile from "./mobile";
-import stat from './homepage/statistics';
-import myFooter from "../components/layout/footer";
-import homefaq2 from "./homepage/faq2";
-import PositionSidebar from "./custom/position-sidebar";
+import mobile from "./mobile.vue";
+import stat from './homepage/statistics.vue';
+import myFooter from "../components/layout/footer.vue";
+import faq2 from "./homepage/faq2.vue";
+// import qrcode from '@chenfengyuan/vue-qrcode';
+import positionSidebar from "./custom/position-sidebar";
 
 export default {
-
-
     name: "Index-Page",
     data() {
         return {
@@ -479,7 +488,7 @@ export default {
                 sectionsColor: ['#fff', '#faf9f9', '#fff', '#efefef', '#fff', '#fff'],
                 //css3: true,
                 menu: '.logo_area',
-                fixedElements: 'body > .footer_links, .position-sidebar',
+                fixedElements: 'body > .footer_links',
                 lazyLoading: false,
                 navigation: true,
                 slideSelector: '.fslide',
@@ -512,7 +521,7 @@ export default {
 
     },
     mounted() {
-        if (this.year == 2022) this.months.map(function (item) {
+        if (this.year === 2022) this.months.map(function (item) {
             if (item.value > 2) item.disabled = true;
             return item;
         })
@@ -522,13 +531,13 @@ export default {
         setTimeout(() => {
             this.overlay = false
         }, 2500);
-        if (this.$route.query.stat == 1)
+        if (this.$route.query.stat === 1)
             this.stat = true;
     },
     created() {
         // this.getPopupNews()
         //this.getFaqs();
-        if (this.$route.query.stat == 1)
+        if (this.$route.query.stat === 1)
             this.stat = true;
         this.stat = true;
         if (this.mobileCheck() && this.getWidth() < 1100) {
@@ -573,22 +582,33 @@ export default {
 
     },
     components: {
-        PositionSidebar,
-        homefaq2,
+/*        'news-in-homepage': async ()=> await import('./homepage/news-in-homepage'),
+        'faq2': async ()=> await import('./homepage/faq2'),
+        'index_scripts':async ()=> await import('../components/homepage/scripts'),
+        'FrontCalendar':async ()=> await import('./homepage/calendar.vue'),
+        'loadingBar':async ()=> await import('../components/base/loadingbar.vue'),
+        'mobile':async ()=> await import('./mobile.vue'),
+        'stat':async ()=> await import('./homepage/statistics.vue'),
+        'myFooter':async ()=> await import('../components/layout/footer.vue'),
+        'positionSidebar':async ()=> await import('./custom/position-sidebar.vue'),*/
+       //  qrcode,
+        faq2,
+        NewsInHomepage,
+         FrontCalendar,
+         loadingBar,
+         mobile,
+         stat,
+         myFooter,
         index_scripts,
-        NewsInHome,
-        FrontCalendar,
-        loadingBar,
-        mobile,
-        stat,
-        myFooter
+        positionSidebar
     }
 
 
 };
 
 function skipPages(origin, destination, direction) {
-    if (destination.index == 1) {
+
+    if (destination.index === 1) {
         $('#fp-nav ul li span').css('background', '#fff');
     } else $('#fp-nav ul li span').css('background', '#000')
     if (origin.index === 0 && destination.index === 1 && pageloaded == 0) {
@@ -599,7 +619,7 @@ function skipPages(origin, destination, direction) {
     }
     if (destination.item.classList.contains('skip')) {
         if (destination.index === 0 && pageloaded == 0) {
-            pageloaded = 1;
+           pageloaded = 1;
             fullpage_api.moveTo(destination.index + 1);
         }
     } else {

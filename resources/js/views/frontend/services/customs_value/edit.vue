@@ -2453,7 +2453,7 @@
 import {extend, ValidationProvider, ValidationObserver} from 'vee-validate';
 import * as rules from 'vee-validate/dist/rules';
 import messages from '../../../../locales/oz.json';
-import {types} from "../../../../../../public/js/mix/pdfmake";
+
 import ServicePage from "../index";
 import i18n from "../../../../i18n";
 import EArxivFile from "../../../../components/form/e-arxiv-file";
@@ -3332,7 +3332,7 @@ export default {
                     if (!(['1790', '1791', '1701'].includes(item['kod_id'])))
                         _this.regions.push({
                             'value': item['kod_id'],
-                            'text': (item['name']).replace("Ўзбекистон Республикаси Иқтисодиёт ва молия вазирлиги ҳузуридаги Божхона қўмитасининг ", "")//(item['name']).substring(("Ўзбекистон Республикаси Иқтисодиёт ва молия вазирлиги ҳузуридаги Божхона қўмитасининг ").length)
+                            'text': (item['name']).replace("Ўзбекистон Республикаси Иқтисодиёт ва молия вазирлиги ҳузуридаги Божхона қўмитасининг ", "")//(item['name']).substring(("Ўзбекистон Республикаси Иқтисодиёт ва молия вазирлиги ҳузуридаги Божхона қўмитасининг").length)
                         })
                 })
             })
@@ -3740,7 +3740,7 @@ export default {
                     _this.search_tftn = (typeof product['tftn'] !== 'undefined') ? product['tftn'] : null
                     setTimeout(() => {
                         _this.application.tovarlar[key].product.tftn = _this.tftncodes[0]
-                    }, 500)
+                    }, 1500)
                     _this.application.tovarlar[key].product.weight = (typeof product['weight'] !== 'undefined') ? product['weight'] : null
                     _this.application.tovarlar[key].product.size = (typeof product['size'] !== 'undefined') ? product['size'] : null
                     _this.application.tovarlar[key].product.netto = (typeof product['netto'] !== 'undefined') ? product['netto'] : null
@@ -3853,6 +3853,7 @@ export default {
             search_country: null,
             search_currency: null,
             search_tftn: null,
+            search_inn: null,
             countries: [],
             transport_type: null,
             regions: [],
@@ -3910,6 +3911,7 @@ export default {
                 {text: '6.5-усул, Захира', value: 6.5}
             ],
             tftncodes: [],
+            importInns: [],
             breadcrumb_items: [
                 {
                     text: i18n.t('Асосий саҳифа'),
@@ -4395,6 +4397,36 @@ export default {
                     })
                     .finally(() => (
                         this.loading.tftncode = false
+                    ))
+            },
+            deep: true
+        },
+        search_inn: {
+            handler: function (val) {
+
+                if (val.length !== 9) return
+                //if (this.tftncodes.length > 0) return
+
+                // Items have already been requested
+                //if (this.loading.tftncode) return
+
+                this.loading.importInn = true
+
+                // Lazily load input items
+                fetch(window.location.origin + "/api/v1/data/inn?code=" + val)
+                    .then((res) => res.json())
+                    .then(res => {
+                        res.map(function (item) {
+                            item.shortname = item.tin + " - " + item.shortname;
+                            return item;
+                        })
+                        this.importInns = res;
+                    })
+                    .catch(err => {
+                        //console.log(err)
+                    })
+                    .finally(() => (
+                        this.loading.importInn = false
                     ))
             },
             deep: true

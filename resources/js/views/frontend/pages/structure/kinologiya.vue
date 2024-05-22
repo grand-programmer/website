@@ -30,7 +30,7 @@
                                                     <div class="tuzilma-card">{{ $t("Xизмат итлари питомниги")}}</div>
                                                     <div class="tuzilma-card">{{ $t("Иxтисослаштирилган ветеренариyа xизмати")}}</div>
                                                     <div class="tuzilma-card">{{ $t("Xизмат итлари билан машқ ўтказиш бўлими")}}</div>
-                                                    <div class="tuzilma-card">{{ $t("Ўқув-услубий бўлими ")}}</div>
+                                                    <div class="tuzilma-card">{{ $t("Ўқув-услубий бўлими")}}</div>
 
                                                </div>
                                            </div>

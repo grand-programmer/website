@@ -956,7 +956,7 @@ import loadingBar from "../components/base/loadingbar.vue";
 export default {
 
 
-    name: "Index-Page",
+    name: "Index-Pageasdada",
     data() {
         return {
             stat_type: 1,
@@ -1059,7 +1059,7 @@ export default {
 
     },
     mounted() {
-        if (this.year == 2022) this.months.map(function (item) {
+        if (this.year === 2022) this.months.map(function (item) {
             if (item.value > 2) item.disabled = true;
             return item;
         })
@@ -1069,7 +1069,7 @@ export default {
         setTimeout(() => {
             this.overlay = false
         }, 2500);
-        if (this.$route.query.stat == 1)
+        if (this.$route.query.stat === 1)
             this.stat = true;
         this.clusteredColumn();
     },

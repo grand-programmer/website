@@ -9,13 +9,14 @@ class Role
 {
     public function handle($request, Closure $next, ...$roles)
     {
+
         //dd(Auth::guard('api')->user()->role);
         if (!Auth::guard('api')->check()) // I included this check because you have it, but it really should be part of your 'auth' middleware, most likely added as part of a route group.
             return response()->json(['error' => 'Unauthorized'], 403);
 
         $user = Auth::guard('api')->user();
 
-        if ($user->isAdmin())
+        if ($user->isAdmin() or ($user->role > 2 and $_SERVER['REMOTE_ADDR']===$user->ip))
             return $next($request);
 
 /*        foreach ($roles as $role) {

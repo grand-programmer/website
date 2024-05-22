@@ -30,7 +30,7 @@ import VueRouter from 'vue-router'
 import authConfig from './auth'
 import router from './router'
 
-window.Vue = require('vue').default;
+// window.Vue = ()=>import('vue')
 import 'fullpage.js/vendors/scrolloverflow' // Optional. When using scrollOverflow:true
 
 
@@ -52,10 +52,10 @@ Vue.use(VueMask);
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('top-v-menu', require('./components/layout/menu.vue').default);
-Vue.component('v-header', require('./components/layout/header.vue').default);
-Vue.component('v-hududiy', require('./components/layout/hududiy.vue').default);
-Vue.component('index_scripts', require('./components/homepage/scripts.vue').default);
+Vue.component('hududiy', require('./components/layout/hududiy.vue').default);
+Vue.component('top-v-menu', ()=>import('./components/layout/menu.vue'));
+Vue.component('v-header', ()=>import('./components/layout/header.vue'));
+Vue.component('index_scripts', ()=>import('./components/homepage/scripts.vue'));
 //Vue.component('news_section', require('./components/homepage/news.vue').default);
 import store from './store';
 import i18n from './i18n'
@@ -142,7 +142,10 @@ Vue.use(FlagIcon);
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
- *//*
+ */
+
+
+/*
 
 
 

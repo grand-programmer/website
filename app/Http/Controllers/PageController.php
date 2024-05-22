@@ -67,7 +67,7 @@ class PageController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function store(Request $request)
+/*    public function store(Request $request)
     {
         if ($request->isMethod('post')) {
             $data = $request->only(
@@ -115,7 +115,7 @@ class PageController extends Controller
 
             return response()->json($page, 200);
         }
-    }
+    }*/
 
     /**
      * Display the specified resource.
@@ -135,7 +135,7 @@ class PageController extends Controller
      * @param \App\Models\Page $page
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update(Request $request, Page $page)
+/*    public function update(Request $request, Page $page)
     {
         if ($request->isMethod('put')) {
             $data = $request->only(
@@ -186,7 +186,7 @@ class PageController extends Controller
         }
         return response()->json('error', 401);
 
-    }
+    }*/
 
 
     /**
@@ -195,10 +195,10 @@ class PageController extends Controller
      * @param \App\Models\Page $page
      * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy(Page $page)
+/*    public function destroy(Page $page)
     {
         $page->delete();
         return response()->json([
             'success'], 200);
-    }
+    }*/
 }

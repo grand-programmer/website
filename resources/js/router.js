@@ -33,20 +33,20 @@ import Yagona_oyna from "./views/frontend/services/yagona_oyna";
 
 const routes = []
 const allRoutes = {
-    path: '*', redirect() {
+    path: 'any', redirect() {
         return '/uz';
     }
 }
 const servicesRoutes = [
     {
-        path: "", component: Yagona_oyna,
+        path: "", component: ()=>import('./views/frontend/services/yagona_oyna'),
     }, {
         path: "appeals/",
         component: () => import('./views/frontend/services/appeal/index'),
         children: [{
-            path: "", component: ServicesAppeals, query: {appeal_code: ''}
+            path: "", component: ()=>import('./views/frontend/services/appeal/main'), query: {appeal_code: ''}
         }, {
-            path: "create", component: ServicesAppealsCreate,
+            path: "create", component: ()=>import('./views/frontend/services/appeal/create'),
         }, {
             path: ":id", component: () => import('./views/frontend/services/appeal/info_view'),
         }, {
@@ -169,6 +169,32 @@ const servicesRoutes = [
                 },
             },
         ]
+    },{
+        path: "vio",
+        component: () => import('./views/frontend/services/vio/index'),
+
+        children: [
+            {
+                path: "create", component: () => import('./views/frontend/services/vio/create'),
+                meta: {
+                    auth: true,
+                    authRedirect: '/login',
+                    notFoundRedirect: '/403',
+                    forbiddenRedirect: '/403',
+                    routeAuth: '/login'
+                },
+            },
+            {
+                path: ":id", component: () => import('./views/frontend/services/vio/info'),
+                meta: {
+                    auth: true,
+                    authRedirect: '/login',
+                    notFoundRedirect: '/403',
+                    forbiddenRedirect: '/403',
+                    routeAuth: '/login'
+                },
+            },
+        ]
     },
 
     {
@@ -270,17 +296,17 @@ const userRoutes =
     }*/
         children: [{
 
-            path: '', component: Index, meta: {
+            path: '', component: ()=>import('./views/frontend/index'), meta: {
                 auth: undefined,
             }, children: [{
-                path: "/", component: HomePage,
+                path: "/", component: ()=>import('./../js/components/index'),
             },],
         },
             {
 
-                path: '/', component: OnePage, children: [
+                path: '/', component: ()=>import('./views/frontend/one_page'), children: [
                     {
-                        path: "singlewindow/", component: Yagona_oyna, children: servicesRoutes
+                        path: "singlewindow/", component: ()=>import('./views/frontend/services/yagona_oyna'), children: servicesRoutes
 
                     },
 
@@ -297,14 +323,14 @@ const userRoutes =
                         name: 'test', path: 'test', component: () => import('./views/frontend/test')
                     },
                     {
-                        path: 'applications', component: Applications, meta: {
+                        path: 'applications', component: ()=>import('./views/frontend/applications'), meta: {
                             auth: true,
                             authRedirect: '/login',
                             notFoundRedirect: '/403',
                             forbiddenRedirect: '/403',
                             routeAuth: '/login'
                         }, children: [{
-                            path: '', component: MyApplicationsList
+                            path: '', component: ()=>import('./views/frontend/applications/list')
                         }]
 
                     }, {
@@ -317,15 +343,18 @@ const userRoutes =
 
                     }, {
                         path: 'category/:slug', component: () => import('./views/frontend/news/category')
-                    }, {
+                    },
+                    {
                         path: 'news', component: () => import('./views/frontend/news/index')
-                    }, {
+                    },
+                    {
                         path: 'news/:slug', component: () => import('./views/frontend/news/news')
-                    }, {
-                        path: 'page/',
-                        component: {template: '<router-view></router-view>', script: ' export default {}'},
+                    },
+                    {
+                        path: 'page',
+                        component: {template: '<router-view></router-view>'},
                         children: [
-                            {path: 'search/', component: () => import("./views/frontend/pages/search")},
+                            {path: 'search', component: () => import("./views/frontend/pages/search")},
                             {path: 'votes/', component: () => import("./views/frontend/pages/votes")},
                             {path: 'opendata/', component: () => import("./views/frontend/pages/opendata")},
                             {
@@ -470,7 +499,7 @@ const userRoutes =
 let adminRoute = {
     path: '/admin/', component: () => import('./views/dashboard/Index'), meta: {
         //auth:true
-        auth: {roles: 2, redirect: {name: 'login', query: {request: '/admin'}}, forbiddenRedirect: '/403'}
+        auth: {roles: [4,3,2], redirect: {name: 'login', query: {request: '/admin'}}, forbiddenRedirect: '/403'}
     }, children: [// Dashboard
         {
             name: 'Dashboard', path: '', component: () => import('./views/dashboard/Dashboard'),

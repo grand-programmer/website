@@ -134,7 +134,7 @@
                                         </v-list-item>
                                     </v-list>
                                 </v-menu>
-                                <router-link v-if="!$auth.check()" to="/login"><i
+                                <router-link v-if="!$auth.check()" to="/login" style="width: min-content; line-height: 16px"><i
                                     class="fas fa-sign-in-alt"></i><span class="tort"> {{
                                         $t("Кабинетга кириш")
                                     }}</span>
@@ -346,6 +346,12 @@
 
 
         </div>
+        <div class="subscribe-notification" v-if="pushAccessComputed===null" >
+            Энг муҳим янгиликларни биринчи бўлиб олишни xоҳлайсизми? Билдиришномаларга обуна бўлинг!    <br>
+            <button class=" btn btn-primary subscribe" @click="setPushAccess(true)">Обуна бўлиш</button>
+            <button class=" btn btn-primary reject "  @click="setPushAccess(false)">Бекор қилиш</button>
+            <br>
+        </div>
 
 
         <!--                =====   =====End Menu area==========-->
@@ -371,14 +377,39 @@ export default {
     data() {
         return {
             links: [],
+            pushAccess: null
         }
 
     },
     created() {
         this.initialize();
     },
+    computed: {
+        pushAccessComputed(){
+            return this.pushAccess
+
+        }
+    },
     methods: {
+        setPushAccess(confirm = false){
+
+          if(confirm) {
+              this.pushAccess = true
+              this.$cookie.set("push", true)
+          }
+          else {
+              this.pushAccess = false
+              this.$cookie.set("push", false)
+          }
+        },
+        getPushAccess(){
+            if(this.$cookie.get('push') !== null){
+                if(this.$cookie.get('push')) this.pushAccess = true; else this.pushAccess = false
+            }
+        },
         initialize() {
+            this.getPushAccess();
+
             api.readMenusFront().then((response) => {
                 this.links = response.data.data;
                 this.$store.dispatch('SET_MENU', this.links);
@@ -500,6 +531,26 @@ $(document).on("click", "ul.lang-list li", function () {
 
 </script>
 <style>
+.subscribe-notification{
+    position: absolute;
+    top: 10px;
+    left: 75px;
+    width: 400px;
+    background-color: #ffff;
+    padding: 10px 25px;
+    z-index: 11;
+    border-radius: 10px;
+    font-family: Roboto;
+    color: #000;
+    border: 1px solid var(--mycolor);
+
+}
+.subscribe-notification .btn-primary {
+    color: #fff;
+    background: var(--mycolor);
+    border-color: var(--mycolor);
+    padding: 0 10px;
+}
 @media all and (min-width: 992px) {
     .dropdown-menu li {
         position: relative;

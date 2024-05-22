@@ -684,7 +684,7 @@
 import {extend, ValidationProvider, ValidationObserver} from 'vee-validate';
 import * as rules from 'vee-validate/dist/rules';
 import messages from '../../../../locales/oz.json';
-import {types} from "../../../../../../public/js/mix/pdfmake";
+
 
 
 Object.keys(rules).forEach(rule => {
@@ -1383,7 +1383,7 @@ export default {
                         if (!(['1790', '1791', '1701'].includes(item['kod_id'])))
                             _this.regions.push({
                                 'value': item['kod_id'],
-                                'text': (item['name']).replace("Ўзбекистон Республикаси Иқтисодиёт ва молия вазирлиги ҳузуридаги Божхона қўмитасининг ", "")//(item['name']).substring(("Ўзбекистон Республикаси Иқтисодиёт ва молия вазирлиги ҳузуридаги Божхона қўмитасининг ").length)
+                                'text': (item['name']).replace("Ўзбекистон Республикаси Иқтисодиёт ва молия вазирлиги ҳузуридаги Божхона қўмитасининг ", "")//(item['name']).substring(("Ўзбекистон Республикаси Иқтисодиёт ва молия вазирлиги ҳузуридаги Божхона қўмитасининг").length)
                             })
                     })
             })

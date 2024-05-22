@@ -37,7 +37,7 @@
                                         <div class="text-row">
                                             <div class="far fa-user">&nbsp;</div>
                                             <p v-if="organization.id===20">{{$t('Институт бошлиғи')}}</p>
-                                            <p v-else-if="organization.id!==16">{{organization.rahbariyat.boshliq.lavozimi}}</p>
+                                            <p v-else-if="organization.id!==16">{{  $t('Бошқарма бошлиғи') }}</p>
                                             <p v-else>{{ $t("Директор") }}</p>
                                         </div>
                                         <div class="text-row">

@@ -39,7 +39,8 @@
             <div/>
 
             <template v-for="(item, i) in computedItems">
-                <base-item-group
+               <template v-if="item.role.includes($auth.user().role)">
+                   <base-item-group
                     v-if="item.children"
                     :key="`group-${i}`"
                     :item="item"
@@ -52,6 +53,7 @@
                     :key="`item-${i}`"
                     :item="item"
                 />
+               </template>
             </template>
 
             <!-- Style cascading bug  -->
@@ -83,16 +85,19 @@ export default {
                 icon: 'mdi-view-dashboard',
                 title: 'dashboard',
                 to: '/admin/#',
+                role: [2,3,4]
             },
             {
                 icon: 'mdi-animation',
                 title: 'Менюлар',
                 to: '/admin/menu',
+                role: [2,3]
             },
             {
                 icon: 'mdi-animation',
                 title: 'Қуйи қисмдаги менюлар',
                 to: '/admin/footermenu',
+                role: [2,3]
             },
 /*            {
                 icon: 'mdi-animation',
@@ -103,6 +108,7 @@ export default {
                 icon: 'mdi-clipboard',
                 title: 'Сахифалар',
                 to: '/admin/pages',
+                role: [2,3]
                 /*children:[
                     {
                         icon: 'mdi-clipboard',
@@ -121,73 +127,86 @@ export default {
                 title: 'Янгиликлар',
                 icon: 'mdi-chart-bubble',
                 to: '/admin/news',
+                role: [2,3]
 
             },
             {
                 title: 'Рубрикалар',
                 icon: 'mdi-chart-bubble',
                 to: '/admin/categories',
+                role: [2,3]
 
             },
             {
                 title: 'Файллар',
                 icon: 'mdi-file-check',
                 to: '/admin/files',
+                role: [2,3,4]
 
             },
             {
                 title: 'Ходисалар',
                 icon: 'mdi-calendar',
                 to: '/admin/events',
+                role: [2,3]
 
             },
             {
                 title: 'Сўровномалар',
                 icon: 'mdi-animation',
                 to: '/admin/votes',
+                role: [2,3]
 
             },
             {
                 title: 'Савол ва жавоблар',
                 icon: 'mdi-calendar-question',
                 to: '/admin/faqs',
+                role: [2,3]
 
             },
             {
                 title: 'Рахбарият',
                 icon: 'mdi-account',
                 to: '/admin/rahbariyat',
+                role: [2,3]
             },
             {
                 title: 'Марказий аппарат бошқармалари',
                 icon: 'mdi-account',
                 to: '/admin/apparat',
+                role: [2,3]
             },
             {
                 title: 'Ҳудудий бошқармалар',
                 icon: 'mdi-yurt',
                 to: '/admin/orgs',
+                role: [2,3]
 
             },
             {
                 title: 'Ҳужжат категориялари',
                 icon: 'mdi-account',
                 to: '/admin/doccategories',
+                role: [2,4]
             },
             {
                 title: 'Ҳужжатлар',
                 icon: 'mdi-yurt',
                 to: '/admin/documents',
+                role: [2,4]
             },
             {
                 title: 'Таржималар',
                 icon: 'mdi-poll',
                 to: '/admin/translate',
+                role: [2,3]
             },
             {
                 title: 'Очиқ маълумотлар',
                 icon: 'mdi-poll',
                 to: '/admin/opendatas',
+                role: [2,3]
             },
             /*{
                 icon: 'mdi-account',

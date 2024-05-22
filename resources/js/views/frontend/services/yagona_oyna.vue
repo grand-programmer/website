@@ -34,7 +34,7 @@
     border-bottom: 1px solid #39ae69;
 ">{{ $t('Божхона органлари ягона дарча хизматлари') }}</h3>
 
-            <!--            <div class="container">
+                        <div class="container">
                             <ul class="nav nav-pills mb-3 portfolio_menu" id="pills-tab" role="tablist">
                                 <li class="nav-item" role="presentation">
                                     <button class="nav-link " @click="nav_link=1" :class="nav_link===1?'active':''"
@@ -43,13 +43,13 @@
                                             aria-selected="true">{{ $t("Интерактив хизматлар") }}
                                     </button>
                                 </li>
-                                <li class="nav-item" role="presentation">
+<!--                                <li class="nav-item" role="presentation">
                                     <button class="nav-link" @click="nav_link=2" :class="nav_link===2?'active':''"
                                             id="pills-profile-tab" data-bs-toggle="pill"
                                             data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile"
                                             aria-selected="false">{{ $t("Очиқ маълумотлар") }}
                                     </button>
-                                </li>
+                                </li>-->
                                 <li class="nav-item" role="presentation">
                                     <button class="nav-link" @click="nav_link=3" :class="nav_link===3?'active':''"
                                             id="pills-contact-tab" data-bs-toggle="pill"
@@ -64,7 +64,7 @@
                                     </button>
                                 </li>
                             </ul>
-                        </div>-->
+                        </div>
             <div class="tab-content" id="pills-tabContent">
                 <div class="tab-pane" :class="nav_link===1?'active':''" id="pills-home" role="tabpanel"
                      aria-labelledby="pills-home-tab">
@@ -387,43 +387,61 @@
                      aria-labelledby="mobil-ilovalar-tab">
                     <div class="background"></div>
                     <div class="tab-container">
-                        <div class="mobil-ilovalar row">
-                            <a class="mobil-ilova col-4"
-                               href="https://play.google.com/store/apps/details?id=uz.eskishahar.app.aktsverki"
-                               target="_blank">
-                                <div class="mobil-ilova-image"
-                                     style="background-image: url(/img/service/akt-sverki.png)">
-                                </div>
-                                <div class="mobil-ilova-text">{{
-                                        $t("Божхона тўловлари бўйича солиштирув далолатномаси бўйича он - лайн маълумот олиш мобил иловаси")
-                                    }}
+                        <div class="mobil-ilovalar row justify-center">
+<v-col cols="8">
+    <v-row class="">
+        <a class="mobil-ilova col-5"
+           href="/rate_customs_service"
+           target="_blank">
+            <div class="mobil-ilova-image"
+                 style="background-image: url(/img/service/baholash.png)">
+            </div>
+            <div class="mobil-ilova-text">{{
+                    $t("Божxона органи xизмат фаолиятини баҳолаш")
+                }}
 
-                                </div>
-                            </a>
+            </div>
+        </a>
+        <v-col cols="1"></v-col>
+        <a class="mobil-ilova col-5"
+           href="https://play.google.com/store/apps/details?id=uz.eskishahar.app.aktsverki"
+           target="_blank">
+            <div class="mobil-ilova-image"
+                 style="background-image: url(/img/service/akt-sverki.png)">
+            </div>
+            <div class="mobil-ilova-text">{{
+                    $t("Божхона тўловлари бўйича солиштирув далолатномаси бўйича он - лайн маълумот олиш мобил иловаси")
+                }}
 
+            </div>
+        </a>
+        <a class="mobil-ilova col-5" target="_blank"
+           href="https://play.google.com/store/apps/details?id=uz.uzbi.audit">
+            <div class="mobil-ilova-image"
+                 style="background-image: url(/img/service/bojxona-auditi.png)">
+            </div>
+            <div class="mobil-ilova-text">{{
+                    $t("Божхона аудити бўйича билим ва кўникмаларни оширишга мўлжалланган мобил илова")
+                }}
 
-                            <a class="mobil-ilova col-4" target="_blank"
-                               href="https://play.google.com/store/apps/details?id=uz.uzbi.audit">
-                                <div class="mobil-ilova-image"
-                                     style="background-image: url(/img/service/bojxona-auditi.png)">
-                                </div>
-                                <div class="mobil-ilova-text">{{
-                                        $t("Божхона аудити бўйича билим ва кўникмаларни оширишга мўлжалланган мобил илова")
-                                    }}
+            </div>
+        </a>
+        <v-col cols="1"></v-col>
+        <a class="mobil-ilova col-5" target="_blank"
+           href="https://play.google.com/store/apps/details?id=uz.eskishahar.app.tranzitlite">
+            <div class="mobil-ilova-image"
+                 style="background-image: url(/img/service/transit-mobil.png)">
+            </div>
+            <div class="mobil-ilova-text">{{
+                    $t("Чегара божхона пости орқали ҳаракатланувчи транспорт воситалари ҳақида олдиндан маълумот тақдим этиш мобил иловаси")
+                }}
 
-                                </div>
-                            </a>
-                            <a class="mobil-ilova col-4" target="_blank"
-                               href="https://play.google.com/store/apps/details?id=uz.eskishahar.app.tranzitlite">
-                                <div class="mobil-ilova-image"
-                                     style="background-image: url(/img/service/transit-mobil.png)">
-                                </div>
-                                <div class="mobil-ilova-text">{{
-                                        $t("Чегара божхона пости орқали ҳаракатланувчи транспорт воситалари ҳақида олдиндан маълумот тақдим этиш мобил иловаси")
-                                    }}
+            </div>
+        </a>
 
-                                </div>
-                            </a>
+    </v-row>
+</v-col>
+
 
                         </div>
 

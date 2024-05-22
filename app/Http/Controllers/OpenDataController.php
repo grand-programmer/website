@@ -47,7 +47,11 @@ class OpenDataController extends Controller
         $years=OpenDataFile::where(['item_id'=>$opendata->id])->groupBy('year')->get( 'year');
         if(isset($data['quarter']))
         $response=OpenDataFile::where(['item_id'=>$opendata->id, 'year'=>isset($data['year'])?$data['year']:Carbon::now()->year, 'quarter'=>$data['quarter']?$data['quarter']:null])->first();
-        else $response=OpenDataFile::where(['item_id'=>$opendata->id, 'year'=>isset($data['year'])?$data['year']:Carbon::now()->year])->first();
+        else {
+            if(isset($data['year']))
+            $response = OpenDataFile::where(['item_id' => $opendata->id, 'year' => isset($data['year']) ? $data['year'] : Carbon::now()->year])->first();
+            else $response = OpenDataFile::where(['item_id' => $opendata->id])->first();
+        }
         if(!$response) return response()->json(["data"=>null],404);
         return response()->json(["data"=>$response, "years"=>$years]);
     }

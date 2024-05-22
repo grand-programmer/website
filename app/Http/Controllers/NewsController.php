@@ -22,6 +22,7 @@ class NewsController extends Controller
 
         if (isset($requestData['boshqarma'])) $news = $news->where('boshqarma', $requestData['boshqarma']);
         if (isset($requestData['page'])) $page = $requestData['page'];
+        $request->limit = 5;
         return NewsResource::collection($news->orderby('created_at', 'desc')->paginate(6, ['*'], 'page', $page));
         /*->transform(function ($item) {
             return [

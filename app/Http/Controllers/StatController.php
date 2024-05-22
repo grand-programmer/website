@@ -18,6 +18,7 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class StatController extends Controller
 {
+
     public function index(Request $request)
     {
         $data = $request->only(['name', 'month', 'year', 'online']);

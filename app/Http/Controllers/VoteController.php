@@ -5,9 +5,12 @@ namespace App\Http\Controllers;
 use App\Http\Resources\VoteResource;
 use App\Models\Vote;
 use Carbon\Carbon;
+use Illuminate\Http\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Request as Input;
 use Illuminate\Support\Str;
@@ -68,7 +71,7 @@ if(isset($data['year'])) $queryYear= ' and year(call_date) = ' . $data['year']; 
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function store(Request $request)
+/*    public function store(Request $request)
     {
         if ($request->isMethod('post')) {
             $data = $request->only(
@@ -102,7 +105,7 @@ if(isset($data['year'])) $queryYear= ' and year(call_date) = ' . $data['year']; 
                 'success' => true,
                 'data' => new VoteResource($vote)], 200);
         }
-    }
+    }*/
 
 
     /**
@@ -110,7 +113,7 @@ if(isset($data['year'])) $queryYear= ' and year(call_date) = ' . $data['year']; 
      * @param Vote $vote
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update(Request $request, Vote $vote)
+/*    public function update(Request $request, Vote $vote)
     {
         if ($request->isMethod('put')) {
 
@@ -153,7 +156,7 @@ if(isset($data['year'])) $queryYear= ' and year(call_date) = ' . $data['year']; 
         }
         return response()->json(['success' => false], 401);
 
-    }
+    }*/
 
     /**
      * Update the specified resource in storage.
@@ -212,7 +215,7 @@ if(isset($data['year'])) $queryYear= ' and year(call_date) = ' . $data['year']; 
      * @param Vote $vote
      * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy(Vote $vote)
+   /* public function destroy(Vote $vote)
     {
         if ($vote->delete())
             return response()->json([
@@ -220,6 +223,10 @@ if(isset($data['year'])) $queryYear= ' and year(call_date) = ' . $data['year']; 
 
         return response()->json([
             'success' => false], 401);
-    }
+    }*/
 
+    public function baholash(){
+        return Redirect::to('https://play.google.com/store/apps/details?id=com.eskishahar.app.bojxonaxizmatinibaholash');
+        // return Storage::download('public/files/baholash.apk');
+    }
 }

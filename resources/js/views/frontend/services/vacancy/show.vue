@@ -47,7 +47,7 @@
                                 </div>
                                 <div class="not-print d-flex flex-col single-vacancy__main-right gap-2">
 
-                                    <v-tooltip nudge-left="0" bottom v-if="vacancy.applied ">
+                                    <v-tooltip nudge-left="0" bottom v-if="statuses.length">
                                         <template v-slot:activator="{ on, attrs }">
                                             <v-fab-transition>
                                                 <v-btn
@@ -89,7 +89,7 @@
                                     </template>
                                 </div>
                                 <div class=" single-vacancy__place d-flex align-items-center py-5 gap-30"
-                                     v-if="vacancy.boshqarma">
+                                     v-if="boshqarma && 1===2">
                                     <p class="single-vacancy__location"><i class="inline-block">
                                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                              xmlns="http://www.w3.org/2000/svg">
@@ -145,7 +145,7 @@
                     <div class="container">
 
 
-                        <div class="tab_panel" style="width: max-content; float: right" v-if="vacancy.applied">
+                        <div class="tab_panel" style="width: max-content; float: right" v-if="statuses.length">
                             <!--                            <v-tabs background-color="primary"
                                                                 slider-color="white"
                                                                 color="white"
@@ -234,7 +234,7 @@
                             <div class="vacancy-description__item"><h2>Иш
                                 шароитлари</h2>
                                 <p>{{ vacancy.shart }}</p></div>
-                            <div class="vacancy-description__item" :data="boshqarma" v-if="boshqarma">
+                            <div class="vacancy-description__item d-none" :data="boshqarma" v-if="boshqarma">
                                 <h2>Ташкилот тўғрисида маълумот</h2>
                                 <div
                                     class="vacancy-description__contacts grid grid-cols-12 gap-20px">
@@ -327,6 +327,7 @@
                             <v-timeline
                                 dense
                                 clipped
+                                v-if="statuses"
                             >
 
 
@@ -348,128 +349,6 @@
                                         </v-col>
                                     </v-row>
                                 </v-timeline-item>
-<!--
-                                <v-timeline-item
-                                    class="mb-4"
-                                    color="primary"
-                                    icon-color="primary"
-                                    small
-                                >
-                                    <v-row justify="space-between">
-                                        <v-col cols="10">
-                                            <h4 class="active"> Номзодни малакавий талабларга мослигини текшириш</h4>
-
-
-                                        </v-col>
-                                    </v-row>
-                                </v-timeline-item>
-
-                                <v-timeline-item
-                                    class="mb-4"
-                                    color="grey"
-                                    icon-color="primary"
-                                    small
-                                >
-                                    <v-row justify="space-between">
-                                        <v-col cols="10">
-                                            <h4> Номзодга тест синови мавжудлигини белгилаш</h4>
-                                        </v-col>
-                                    </v-row>
-                                </v-timeline-item>
-                                <v-timeline-item
-                                    class="mb-4"
-                                    color="grey"
-                                    icon-color="primary"
-                                    small
-                                >
-                                    <v-row justify="space-between">
-                                        <v-col cols="10">
-                                            <h4> Тест натижасини киритиш</h4>
-                                            <p>Изоҳ: Тест натижасини киритиш</p>
-                                        </v-col>
-                                    </v-row>
-                                </v-timeline-item>
-                                <v-timeline-item
-                                    class="mb-4"
-                                    color="grey"
-                                    icon-color="primary"
-                                    small
-                                >
-                                    <v-row justify="space-between">
-                                        <v-col cols="10">
-                                            <h4> Сухбат ўтказиш санасини белгилаш</h4>
-                                            <p>Изоҳ: Суҳбат ўтказиш санасини белгилаш</p>
-                                        </v-col>
-                                    </v-row>
-                                </v-timeline-item>
-                                <v-timeline-item
-                                    class="mb-4"
-                                    color="grey"
-                                    icon-color="primary"
-                                    small
-                                >
-                                    <v-row justify="space-between">
-                                        <v-col cols="10">
-                                            <h4> Сухбат натижасини киритиш</h4>
-                                            <p>Изоҳ: Суҳбат натижасини киритиш</p>
-                                        </v-col>
-                                    </v-row>
-                                </v-timeline-item>
-                                <v-timeline-item
-                                    class="mb-4"
-                                    color="grey"
-                                    icon-color="primary"
-                                    small
-                                >
-                                    <v-row justify="space-between">
-                                        <v-col cols="10">
-                                            <h4> Номзодни тегишли ташкилотлар билан келишиш лозимлигини белгилаш</h4>
-                                            <p>Изоҳ: Номзодни тегишли ташкилотлар билан келишиш лозимлигини белгилаш</p>
-                                        </v-col>
-                                    </v-row>
-                                </v-timeline-item>
-                                <v-timeline-item
-                                    class="mb-4"
-                                    color="grey"
-                                    icon-color="primary"
-                                    small
-                                >
-                                    <v-row justify="space-between">
-                                        <v-col cols="10">
-                                            <h4> Номзодни тегишли ташкилотлар билан келишиш натижасини киритиш</h4>
-                                            <p>Изоҳ: Номзодни тегишли ташкилотлар билан келишиш натижасини киритиш
-                                            </p>
-                                        </v-col>
-                                    </v-row>
-                                </v-timeline-item>
-                                <v-timeline-item
-                                    class="mb-4"
-                                    color="grey"
-                                    icon-color="primary"
-                                    small
-                                >
-                                    <v-row justify="space-between">
-                                        <v-col cols="10">
-                                            <h4> Баённомани юклаш</h4>
-                                            <p>Изоҳ: Баённомани юклаш</p>
-                                        </v-col>
-                                    </v-row>
-                                </v-timeline-item>
-                                <v-timeline-item
-                                    class="mb-4"
-                                    color="grey"
-                                    icon-color="primary"
-                                    small
-                                >
-                                    <v-row justify="space-between">
-                                        <v-col cols="10">
-                                            <h4> Ишга қабул қилиш
-                                            </h4>
-                                            <p>Изоҳ: Ишга қабул қилиш
-                                            </p>
-                                        </v-col>
-                                    </v-row>
-                                </v-timeline-item>-->
 
                             </v-timeline>
                         </div>
@@ -522,23 +401,22 @@ export default {
     },
     methods: {
         async initialize() {
-            if (!(this.$route.params.id > 0)) this.$router.back();
+            // if (!(this.$route.params.id > 0)) this.$router.back();
             const _app = this;
             let pinRequest=""
             if(this.$auth.user()) pinRequest = "&pnfl=" + this.$auth.user().pin
             await axios.get("/api/v1/ex_api/vacancy-show?vacancy=" + this.$route.params.id + pinRequest).then(function (response) {
                 if (response.status === 200) {
-                    _app.vacancy = response.data.data.vakant;
-                    _app.statuses = response.data.data.status;
-                    _app.nomzod = (typeof response.data.data.nomzodlar[0]!=='undefined')?response.data.data.nomzodlar[0]:null;
+                     _app.vacancy = response.data.data.vakant[0];
+                     _app.statuses = response.data.data.status;
+                     _app.nomzod = (typeof response.data.data.nomzods[0]!=='undefined')?response.data.data.nomzods[0]:null;
                     if(typeof _app.$route.query.status!=='undefined') _app.showTab=2;
                 }
-                /*if (response.data.success === true) {
-                    _app.vacancies=_app.filteredVacancies=response.data.data;
-                }*/
+            }).catch(e => {
+                console.log(e)
             });
 
-            if (this.vacancy && this.vacancy.b_id > 0)
+            if (this.vacancy && this.vacancy.b_id)
                 await axios.get("/api/v1/ex_api/boshqarma-show?boshqarma=" + this.vacancy.b_id).then(function (response) {
                     if (response.status === 200) {
                         _app.boshqarma = response.data.data[0];
@@ -561,7 +439,7 @@ export default {
         }
     },
     created() {
-        this.initialize()
+         this.initialize()
     },
     computed: {
         kun() {

@@ -32,7 +32,7 @@
 import api from "../../src/services/apiService";
 
 export default {
-    name: "Homefaq",
+    name: "faq2",
     data(){
         return{
             faqs:[],

@@ -23,7 +23,11 @@ class OrganisationResource extends JsonResource
             $boshliq_translate = json_decode($rahbariyat['boshliq']['translates'], true);
             if (isset($boshliq_translate[app()->getLocale()]['qabul'])) {
                 $rahbariyat['boshliq']['qabul'] = $boshliq_translate[app()->getLocale()]['qabul'];
-            } if (isset($boshliq_translate[app()->getLocale()]['biografiyasi'])) {
+            }
+            if (isset($boshliq_translate[app()->getLocale()]['name'])) {
+                $rahbariyat['boshliq']['name'] = $boshliq_translate[app()->getLocale()]['name'];
+            }
+            if (isset($boshliq_translate[app()->getLocale()]['biografiyasi'])) {
                 $rahbariyat['boshliq']['biografiyasi'] = $boshliq_translate[app()->getLocale()]['biografiyasi'];
             }
         }
@@ -33,6 +37,7 @@ class OrganisationResource extends JsonResource
                     $boshliq_translate = json_decode($rahbariyat['orinbosar'][$itemKey]['translates'], true);
                     if (isset($boshliq_translate[app()->getLocale()]['qabul']) and isset($boshliq_translate[app()->getLocale()]['lavozimi'])) {
                         $rahbariyat['orinbosar'][$itemKey]['qabul'] = $boshliq_translate[app()->getLocale()]['qabul'];
+                        if (isset($boshliq_translate[app()->getLocale()]['name'])) $rahbariyat['orinbosar'][$itemKey]['name'] = $boshliq_translate[app()->getLocale()]['name'];
                         $rahbariyat['orinbosar'][$itemKey]['lavozimi'] = $boshliq_translate[app()->getLocale()]['lavozimi'];
                     }
                 }

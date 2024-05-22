@@ -50,7 +50,7 @@ class CategoryController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function store(Request $request)
+/*    public function store(Request $request)
     {
         if ($request->isMethod('post')) {
             $data = $request->only(
@@ -72,7 +72,7 @@ class CategoryController extends Controller
             $category->save();
             return response()->json($category, 200);
         }
-    }
+    }*/
 
     /**
      * Display the specified resource.
@@ -100,7 +100,7 @@ class CategoryController extends Controller
      * @param \App\Models\Category $category
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update(Request $request, Category $category)
+/*    public function update(Request $request, Category $category)
     {
         if ($request->isMethod('put')) {
             $data = $request->only(
@@ -124,7 +124,7 @@ class CategoryController extends Controller
         }
         return response()->json('error', 401);
 
-    }
+    }*/
 
     /**
      * Remove the specified resource from storage.
@@ -132,10 +132,10 @@ class CategoryController extends Controller
      * @param \App\Models\Category $category
      * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy(Category $category)
+/*    public function destroy(Category $category)
     {
         $category->delete();
         return response()->json([
             'success'], 200);
-    }
+    }*/
 }

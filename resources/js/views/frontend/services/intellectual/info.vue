@@ -222,9 +222,10 @@
                                                 <br>
                                                 <p v-if="appstatus.status==='100'" style="font-size: 15px"> <a :href="'https://qaror.customs.uz/s01decisionPdfDownloadAppeal?stId=' + appstatus.id"> Ариза шаклини юклаб олинг! </a></p>
                                                 <p v-if="appstatus.status==='600'" style="font-size: 15px"> <a :href="'https://qaror.customs.uz/s01decisionPdfDownloadAppeal?stId=' + appstatus.id"> Реестрга киритилганлиги тўғрисида қарорни юклаб олинг! </a></p>
+                                                <p v-if="appstatus.status==='201'" style="font-size: 15px"> <a :href="'https://qaror.customs.uz/s01decisionPdfDownloadAppeal?stId=' + appstatus.id"> Реестрга киритишни рад этиш тўғрисидаги қарорни юклаб олинг! </a></p>
                                                 <p v-if="appstatus.status==='201' && typeof appstatus.comment!=='undefined'" style="font-size: 15px; color: indianred">{{ appstatus.comment }} </p>
 <br>
-<!--                                                <p><b> Инспектор: </b>  {{ appstatus.userNm }} </p>-->
+<!--                                                <p><b> Инспектор: </b>   {{ appstatus.userNm }} </p>-->
 
                                             </v-col>
                                     </v-row>

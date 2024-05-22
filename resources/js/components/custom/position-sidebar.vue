@@ -182,7 +182,7 @@
                 <v-spacer></v-spacer>
                 <div class="mt-2">
                     <p class="mt-5 mb-0">{{ $t('Экран диктори') }}</p>
-                    <v-switch v-model="diktor" color="black"/>
+                    <v-switch v-model="diktor" color="black"></v-switch>
                 </div>
                 <div class="my-2">
                     <a class="text-decoration-underline white--text" @click="refreshSpecific">{{ $t('Тозалаш') }}</a>
@@ -263,8 +263,6 @@ export default {
           this.$router.push('/page/search')
         },
         popupWindow(url, title, w, h) {
-            console.log(window)
-            console.log(document)
             if (url.length === 0) {
                 url = this.$route.path;
             }
@@ -369,8 +367,6 @@ export default {
         },
         startVoice() {
             const _this = this
-
-
                 setTimeout(function () { // When clicking on a highlighted area, the value stays highlighted until after the mouseup event, and would therefore stil be captured by getSelection. This micro-timeout solves the issue.
                     responsiveVoice.cancel(); // stop anything currently being spoken
                     responsiveVoice.speak(getSelectionText()); //speak the text as returned by getSelectionText
@@ -433,6 +429,7 @@ export default {
             }
         },
         masshtab(val) {
+            if (!val) return
             if (val === 1) {
                 $('body').css({
                     // 'zoom': '1.' + parseInt(size),

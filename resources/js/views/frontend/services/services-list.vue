@@ -19,7 +19,7 @@ import ServiceCard from "./service-card";
 
 export default {
     name: "services-list",
-    components: {ServiceCard},
+    components: { ServiceCard },
     data() {
         return {
             news:[
@@ -37,6 +37,7 @@ export default {
                 'navbat',
                 'arxiv',
                 'bko',
+                'vio',
             ],
             services: [
                 {
@@ -96,12 +97,20 @@ export default {
                     sort: 6,
                 },
                 {
+                    name: 'vio',
+                    img: '/img/icons/vio.png',
+                    text: this.$t("Ваколатли иқтисодий операторлар"),
+                    href: '/services/vio',
+                    sort: 6,
+                },
+                /*
+                {
                     name: 'bko',
                     img: '/img/icons/stamp.png',
                     text: this.$t("Божхона кирим ордерини шакллантириш"),
                     href: '/services/bko',
                     sort: 61,
-                },
+                },*/
                 {
                     name: 'ombor',
                     img: '/img/icons/warehouse.png',

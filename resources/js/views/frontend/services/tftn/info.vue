@@ -148,7 +148,7 @@
                                                                       v-for="doc in commodity.s05Earxivs">
                                                                 {{
                                                                     typeof doc.docNameEx !== 'undefined' ?
-                                                                        doc.docNameEx + " - (" + doc.docTypeName + ")" : null
+                                                                        doc.docNameEx + " - (" + doc.docTypeName +")" : null
                                                                 }},
                                                             </template>
                                                         </td>

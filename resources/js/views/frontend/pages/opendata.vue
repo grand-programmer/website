@@ -125,6 +125,7 @@
                                                     {text:'2 - ' + $t('чорак'), value:2},
                                                     {text:'3 - ' + $t('чорак'), value:3},
                                                     {text:'4 - ' + $t('чорак'), value:4},
+                                                    {text:$t('Йиллик'), value: null},
                                                 ]">
                                                 </v-autocomplete>
                                             </v-col>

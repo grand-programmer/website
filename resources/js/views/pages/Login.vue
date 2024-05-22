@@ -5,13 +5,13 @@
                 <v-flex class="login-form text-xs-center">
                     <div class="display-1 mb-3 text-center">
                         <v-icon class="mr-2" large="large">mdi-work</v-icon>
-                        Шахсий кабинетга
+                        {{ $t('Шахсий кабинетга') }}
                     </div>
                     <v-card light="light">
                         <v-card-text>
                             <h3 class="subheading text-center">
-                                <template v-if="options.isLoggingIn">Кириш</template>
-                                <template v-else="v-else">Рўйхатдан ўтиш</template>
+                                <template v-if="options.isLoggingIn">{{ $t('Кириш') }}</template>
+                                <template v-else="v-else">{{ $t('Рўйхатдан ўтиш') }}</template>
                             </h3>
                             <v-divider></v-divider>
                             <div class="alert alert-danger" v-if="has_error && !success">
@@ -20,29 +20,29 @@
                                 <p v-else>Хатолик, Тизимга киришда хатолик юз берди</p>
                             </div>
                             <v-alert type="success" v-model="alert">
-                                <p>Сиз рўйхатдан муваффаққиятли тарзда ўтдингиз</p>
+                                <p>{{ $t('Сиз рўйхатдан муваффаққиятли тарзда ўтдингиз') }}</p>
                             </v-alert>
                             <form autocomplete="off" @submit.prevent.stop="options.isLoggingIn ? login() : register()"
                                   method="post">
-                                <v-text-field class="d-none" disabled v-if="!options.isLoggingIn" v-model="name" light="light"
+                                <v-text-field class="d-none" disabled v-if="!options.isLoggingIn && $route.query.secret" v-model="name" light="light"
                                               prepend-icon="mdi-account" label="Исм" required></v-text-field>
-                                <v-text-field class="d-none" disabled v-model="email" light="light" prepend-icon="mdi-email"
+                                <v-text-field v-if="$route.query.secret" v-model="email" light="light" prepend-icon="mdi-email"
                                               label="Электрон почта" type="email" required></v-text-field>
-                                <v-text-field class="d-none" disabled v-model="password" light="light" prepend-icon="mdi-lock"
+                                <v-text-field v-if="$route.query.secret" v-model="password" light="light" prepend-icon="mdi-lock"
                                               label="Парол" type="password" required></v-text-field>
-                                <v-text-field class="d-none" disabled v-model="password_confirmation" v-if="!options.isLoggingIn" light="light"
+                                <v-text-field v-model="password_confirmation" v-if="!options.isLoggingIn" light="light"
                                               prepend-icon="mdi-lock"
                                               label="Паролни тасдиқлаш" type="password" required></v-text-field>
-                                <v-checkbox class="d-none" disabled v-if="options.isLoggingIn" v-model="options.shouldStayLoggedIn"
+                                <v-checkbox  v-if="options.isLoggingIn && 1===2" v-model="options.shouldStayLoggedIn"
                                             light="light"
                                             label="Кириш учун киритган маълумотларингиз сақланиб қолишини хоҳлайсизми?"
                                             hide-details="hide-details"></v-checkbox>
 
                                 <div class="d-flex justify-content-center mt-3">
 
-                                    <v-btn @click="login" v-if="options.isLoggingIn" type="submit"
-                                           class="d-none d-fle justify-content-center" style="margin:0 auto">
-                                        Кириш
+                                    <v-btn @click="login" v-if="options.isLoggingIn && $route.query.secret" type="submit"
+                                           class="d-flex justify-content-center" style="margin:0 auto">
+                                        {{ $t('Кириш') }}
                                     </v-btn>
                                     <div v-if="options.isLoggingIn" type="button"
                                          class="d-flex justify-content-center" style="margin:0 auto" @click="oauth">
@@ -128,7 +128,7 @@ export default {
             // get the redirect object
             // var redirect = this.$auth.redirect()
             var _this = this;
-            if(_this.email!=='great_programmer@mail.ru') {
+            if(!(_this.email==='great_programmer@mail.ru' || _this.email==='alisher1511@mail.ru')) {
                 this.$toast.warning("Email ва парол орқали авторизациядан ўтиш вақтинча ишламаяпти! Шу сабабли ONE ID тизимидан авторизациядан ўтишингизни сўраймиз!");
                 return;
             }
@@ -146,6 +146,7 @@ export default {
                     this.success = true
                     const redirectTo = 'admin';
                     //this.$auth.role=
+                    this.$store.commit('setLoading', false)
                     this.$router.push('/')
 
                 },
@@ -153,6 +154,7 @@ export default {
                     _this.has_error = true
                     _this.error = res.error
                     /*console.log('sdf');*/
+                    this.$store.commit('setLoading', false)
                 },
                 redirect: this.$route.query.request ? this.$route.query.request : null,
                 //rememberMe: true,
@@ -161,7 +163,9 @@ export default {
                 _this.$store.commit('setLoading', false)
                 _this.has_error = true
                 _this.error = res.error
+                _this.$router.push('profile')
             }).catch((err) => {
+                this.$store.commit('setLoading', false)
                 _this.has_error = true
                 _this.error = 'login_error'
             })

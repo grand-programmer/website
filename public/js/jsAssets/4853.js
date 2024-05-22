@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk=self.webpackChunk||[]).push([[4853],{84853:(e,t,l)=>{l.r(t),l.d(t,{default:()=>s});const n={name:"Appeal"};const s=(0,l(51900).Z)(n,(function(){var e=this.$createElement;return(this._self._c||e)("router-view")}),[],!1,null,null,null).exports}}]);

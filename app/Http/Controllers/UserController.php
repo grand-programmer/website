@@ -127,21 +127,20 @@ class UserController extends Controller
         /// Ishga joylashish
         //dd(["personPin" => Auth::guard('api')->user()->pin]);
         try {
-            $response1 = Http::asForm()->acceptJson()->timeout(10)
-                ->get('http://192.168.214.159/vacancy/public/api/nomzodtotal/' . Auth::guard('api')->user()->pin);
+            $response1 = Http::timeout(10)->withBasicAuth('apiuser', 1)
+                ->get('http://172.16.112.19:7191/nomzod/getAllArizaNomzod?pnfl=' . Auth::guard('api')->user()->pin);
             if ($response1->status() == 200) {
-
                 $vi = $response1->json();
-                if (is_array($vi) and isset($vi['nomzodlar']) and isset($vi['status']) and isset($vi['nomzodlar'][0]) and isset($vi['status'][0]) and isset($vi['nomzodlar'][0]['id']) and isset($vi['nomzodlar'][0]['kod'])) {
+                if (is_array($vi) and isset($vi['allariza']) and isset($vi['allariza'][0])  and isset($vi['allariza'][0]['vak_id']) and isset($vi['allariza'][0]['vak_id'])) {
                     global $services;
                     $services[] = [
-                        "app_id" => $vi['nomzodlar'][0]['id'],
-                        "app_num" => $vi['nomzodlar'][0]['kod'],
-                        "created_at" => isset($vi['nomzodlar'][0]['created_at']) ? $vi['nomzodlar'][0]['created_at'] : null,
-                        "status" => ($vi['status'][count($vi['status']) - 1]['applied'] !== null) ? 'Тайёр' : 'Жараёнда',
-                        "statusNm" => ($vi['status'][count($vi['status']) - 1]['applied'] !== null) ? 'Тайёр' : 'Жараёнда',
+                        "app_id" => $vi['allariza'][0]['vak_id'],
+                        "app_num" => $vi['allariza'][0]['app_num'],
+                        "created_at" => isset($vi['allariza'][0]['created_at']) ? $vi['allariza'][0]['created_at'] : null,
+                        "status" => $vi['allariza'][0]['status'],
+                        "statusNm" => $vi['allariza'][0]['statusNm'],
                         "type" => 0,
-                        "link" => "/services/vacancy/" . $vi['nomzodlar'][0]['vakant_id'] . '?status=show',
+                        "link" => "/services/vacancy/" . $vi['allariza'][0]['vak_id'] . '?status=show',
                         "user_id" => $user_id,
                     ];
 
@@ -388,6 +387,39 @@ class UserController extends Controller
                             "statusNm" => $appeal['statusNm'],
                             "type" => 3,
                             "link" => "/services/tftn/" . $appeal['id'],
+                            "user_id" => $user_id,
+                        ];
+
+                    });
+
+
+                }
+
+            } //else return response()->json(['error' => 'Сервер билан уланишда муаммо бор!', 'status' => false]);
+        } catch (\Exception $e) {
+
+        };
+        /// Vio
+        try {
+            $response = Http::asMultipart();
+            $response = $response->timeout(10)
+                ->get('http://192.168.214.152:7070/DECAPP/s10vio', ['pin' => Auth::guard('api')->user()->pin])->throw(function ($response, $e) {
+                });
+            if ($response->status() == 200) {
+                $appealdata = $response->json();
+
+                if (is_array($appealdata) and isset($appealdata[0]) and is_array($appealdata[0])) {
+                    collect($appealdata)->transform(function ($appeal) use ($user_id) {
+
+                        global $services;
+                        $services[] = [
+                            "app_id" => $appeal['id'],
+                            "app_num" => $appeal['appNum'],
+                            "created_at" => isset($appeal['insTime']) ? $appeal['insTime'] : null,
+                            "status" => $appeal['status'],
+                            "statusNm" => $appeal['statusNm'],
+                            "type" => 11,
+                            "link" => "/services/vio/" . $appeal['id'],
                             "user_id" => $user_id,
                         ];
 

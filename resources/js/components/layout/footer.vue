@@ -16,7 +16,7 @@
                                 <p>
                                     {{ $t("ЎзМАА Интернет-ОАВ гувоҳномаси № 0902") }}
                                 </p>
-                                <p> © 2001-{{ currentYear }} {{ $t("Ўзбекистон Республикаси Иқтисодиёт ва молия вазирлиги ҳузуридаги Божхона қўмитаси") }}
+                                <p> © 2001-{{ currentYear }} {{ $t("Божхона қўмитаси") }} ({{ $t('сайт талқини') }}: 20.5)
                                 </p>
 
                             </div>
@@ -103,12 +103,12 @@
 
                             <table v-if="viewed && typeof viewed[0] !=='undefined'">
                                 <tr><td>{{ $t('04.11.2022дан',{msg:'04.11.2022'}) }}:</td><td><b>{{ viewed[0].year }}</b></td></tr>
-                                <tr><td>{{ $t('Бугун') }}:</td><td><b>{{ viewed[0].today }}</b></td></tr>
+                                <tr><td>{{ $t('Бугун') }}.:</td><td><b>{{ viewed[0].today }}</b></td></tr>
                                 <tr><td>{{ $t('Кеча') }}:</td><td><b>{{ viewed[0].yesterday }}</b></td></tr>
                                 <tr><td>{{ $t('Ҳафта давомида') }}:</td><td><b>{{ viewed[0].week }}</b></td></tr>
                                 <tr><td>{{ $t('Ой давомида') }}:</td><td><b>{{ viewed[0].month }}</b></td></tr>
                                 <tr><td>
-                                    <img height="30" src="https://cnt0.www.uz/counter/collect?id=46694&pg=http%3A//uzinfocom.uz&col=340F6E&t=ffffff&p=BD6F6F" border=0 />
+
                                 </td></tr>
                             </table>
 
@@ -122,11 +122,11 @@
                             <li>Ой давомидан: <b>8022</b></li>-->
                         </ul>
                        </div>
+                        <img height="30" src="https://cnt0.www.uz/counter/collect?id=46694&pg=http%3A//uzinfocom.uz&col=340F6E&t=ffffff&p=BD6F6F" border=0 style="    position: absolute; bottom: 25px; right: 5px;" />
                     </v-col>
                 </div>
             </div>
         </div>
-        <position-sidebar/>
 
     </footer>
 </template>

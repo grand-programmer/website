@@ -15,7 +15,8 @@
 
                 <div class="vacancy-wrapper ml-4">
                     <v-row>
-                        <h3 class="mb-5 vacancies-title text-center">Божхона органларидаги хизматга номзодларни қабул қилишнинг ягона очиқ портали </h3>
+                        <h3 class="mb-5 vacancies-title text-center">
+                            {{ $t('Божхона органларидаги хизматга номзодларни қабул қилишнинг ягона очиқ портали') }} </h3>
 
                         <!--                    <p>Мазкур бўлимда сиз вакант ўринлар тўғрисида маълумот оласиз ҳамда ушбу вакант ўринларга ариза топширишингиз мумкин бўлади</p>-->
 
@@ -26,7 +27,7 @@
                                 <v-col lg="6" md="7" sm="7" xs="12" cols="12">
                                     <v-text-field
                                         v-model="searchVacancy"
-                                        placeholder="Қидириш"
+                                        :placeholder="$t('Қидириш')"
                                         prepend-inner-icon="mdi-magnify">
 
                                     </v-text-field>
@@ -36,8 +37,8 @@
                                         <v-autocomplete
                                             clearable
                                             v-model="myRegion"
-                                            placeholder="Ҳудудлар кесимида"
-                                            item-text="name"
+                                            :placeholder="$t('Ҳудудлар кесимида')"
+                                            :item-text="$i18n.locale==='ru'?'name_ru':'name'"
                                             item-value="kod_id"
                                             :items="regions"
                                         >
@@ -52,7 +53,7 @@
                                             class="d-flex justify-content-between align-items-center"> Вакант лавозимлар
                                             рўйхати <span v-if="!loading && filteredVacancies.length>0"
                                                           class="float-end"
-                                                          style="font-size: 15px">Жами: {{
+                                                          style="font-size: 15px">{{ $t('Жами') }}: {{
                                                     filteredVacancies.length
                                                 }}</span>
                                         </h3>
@@ -68,7 +69,7 @@
                                         <div class="v-card-item" data-aos="flip-up">
                                             <h3>
                                                 {{ vacancy.seven }}
-                                                <div class="d-inline-block float-end" v-if="vacancy.applied && 1===2">
+                                                 <div class="d-inline-block float-end" v-if="vacancy.applied && 1===2">
 
                                                     <v-tooltip nudge-left="0" left>
                                                         <template v-slot:activator="{ on, attrs }">
@@ -96,14 +97,13 @@
                                                                                                                             Left
                                                                                                                         </v-btn>-->
                                                         </template>
-                                                        <span>Сиз ариза бергансиз</span>
+                                                        <span>{{ $t('Сиз ариза бергансиз') }}</span>
                                                     </v-tooltip>
 
                                                 </div>
                                             </h3>
                                             <p class="vac-card__unit">
-
-                                                {{ vacancy.guruh }}<br>
+<!--                                                {{ vacancy.guruh }}--><br>
                                                 {{ vacancy.lavozim }}
                                             </p>
                                         </div>
@@ -142,7 +142,7 @@
                                                 </svg>
                                                 <span> {{ vacancy.boshqarma_name }} </span>
                                             </p>
-                                            <p class="vac-card__location">
+<!--                                            <p class="vac-card__location d-none">
                                                 <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
                                                      xmlns="http://www.w3.org/2000/svg">
                                                     <path fill-rule="evenodd" clip-rule="evenodd"
@@ -150,9 +150,9 @@
                                                           fill="#3165CB"></path>
                                                 </svg>
                                                 <span>{{
-                                                        typeof regions.filter(item => item.kod_id === vacancy.b_id)[0]['address'] !== 'undefined' ? regions.filter(item => item.kod_id === vacancy.b_id)[0]['address'] : ''
+                                                        regions.filter(item => item.kod_id === vacancy.b_id) && typeof regions.filter(item => item.kod_id === vacancy.b_id)[0]['address'] !== 'undefined' ? regions.filter(item => item.kod_id === vacancy.b_id)[0]['address'] : ''
                                                     }} </span>
-                                            </p>
+                                            </p>-->
                                             <p class="vac-card__payment">
                                                 <svg
                                                     width="40" height="40" viewBox="0 0 48 48"
@@ -172,7 +172,7 @@
                                                         d="M24.3945 14H19.6056C19.2713 14 18.959 14.1671 18.7736 14.4453L18.7173 14.5298C18.5029 14.8513 18.493 15.2676 18.6918 15.599L19.8411 17.5145C20.0219 17.8157 20.3474 18 20.6986 18H23.3015C23.6528 18 23.9783 17.8157 24.159 17.5145L25.3083 15.599C25.5071 15.2676 25.4972 14.8513 25.2829 14.5298L25.2266 14.4453C25.0411 14.1671 24.7289 14 24.3945 14ZM19.6056 12C18.6026 12 17.6659 12.5013 17.1095 13.3359L17.0532 13.4204C16.4101 14.385 16.3804 15.6338 16.9768 16.6279L18.1262 18.5435C18.6683 19.4471 19.6449 20 20.6986 20H23.3015C24.3553 20 25.3318 19.4471 25.874 18.5435L27.0233 16.6279C27.6198 15.6338 27.5901 14.385 26.947 13.4204L26.8907 13.3359C26.3343 12.5013 25.3976 12 24.3945 12H19.6056Z"
                                                         fill="#5EA963"></path>
                                                 </svg>
-                                                <span>{{ vacancy.vac_soni }} та номзод</span>
+                                                <span>{{ vacancy.vac_soni }} {{ $t('та номзод') }}</span>
                                             </p>
                                             <p class="vac-card__payment"
                                                v-if="typeof vacancy.shroit !=='undefined' && vacancy.shroit">
@@ -250,7 +250,7 @@
                                             <router-link :to="'vacancy/' + vacancy.id">
                                                 <v-btn color="primary"
                                                        outlined
-                                                       raised>Батафсил
+                                                       raised>{{ $t('Батафсил') }}
                                                 </v-btn>
                                             </router-link>
                                         </div>
@@ -269,17 +269,17 @@
                             <v-row>
                                 <v-container>
                                     <v-list class="vacancy-sidebar">
-                                        <p>Божхона органларида хизмат ўташ бўйича </p>
+                                        <p>{{ $t('Божхона органларида хизмат ўташ бўйича') }} </p>
                                         <v-list-item to="/services/vacancy/questions">
 
                                             <div>
                                                 <v-icon>mdi-frequently-asked-questions</v-icon>
-                                                <span>Савол ва жавоблар</span></div>
+                                                <span>{{ $t('Савол ва жавоблар') }}</span></div>
                                         </v-list-item>
                                         <v-list-item to="/services/vacancy/documents">
                                             <div>
                                                 <v-icon>mdi-file-document-multiple-outline</v-icon>
-                                                <span>Норматив-ҳуқуқий ҳужжатлар </span>
+                                                <span>{{ $t('Норматив - ҳуқуқий ҳужжатлар') }} </span>
                                             </div>
                                         </v-list-item>
 
@@ -310,13 +310,13 @@ export default {
                     exact: true,
                 },
                 {
-                    text: 'Хизматлар',
+                    text: i18n.t('Хизматлар'),
                     to: '/services',
                     disabled: false,
                     exact: true,
                 },
                 {
-                    text: 'Вакансиялар',
+                    text: i18n.t('Вакансиялар'),
                     to: '/services/vacancy',
                     disabled: true,
                     exact: true,
@@ -358,8 +358,7 @@ export default {
                     setTimeout(() => {
                         _app.loading = false;
                     }, 800)
-
-                    _app.vacancies = _app.filteredVacancies = response.data.data;
+                    _app.vacancies = _app.filteredVacancies = response.data.data.vakant;
                 } else _app.loading = false;
             });
             /*_app.vacancies.push({

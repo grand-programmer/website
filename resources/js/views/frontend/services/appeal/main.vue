@@ -439,10 +439,8 @@ export default {
             //let md=md5( this.passport.seriya + this.passport.number + "(:" + this.passport.date)
             await axios.get('/api/v1/ex_api/getPData',{params: {
                     pasnum: _this.passport.seriya + _this.passport.number,
-                    //key:md,
                     pasdata: _this.passport.date,
                 }
-
             }).then(function (response){
                 _this.yuborishLoading=false;
                 if(typeof response.data.data.birth_date !=='undefined')

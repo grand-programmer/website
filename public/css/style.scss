@@ -2332,10 +2332,10 @@ audio, canvas, img, svg, video {
 /* Footer area css
 ============================================================================================ */
 .footer_widget_area {
-    background: #252c35;
-    padding-top: 60px;
-    padding-bottom: 35px;
-}
+     background: #252c35;
+     padding-top: 60px;
+     padding-bottom: 35px;
+ }
 
 .f_about_widget p {
     line-height: 30px;
@@ -2609,8 +2609,8 @@ $tc-primary-color: #4776b3;
 
     path:hover {
         fill: #549243;
-/*        stroke: #207709;
-        stroke-width: 2px;*/
+        /*        stroke: #207709;
+                stroke-width: 2px;*/
     }
 
     path.active {

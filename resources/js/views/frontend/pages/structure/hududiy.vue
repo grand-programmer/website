@@ -54,7 +54,7 @@
                                                 <div class="tuzilma-card">{{ $t("Моддий-техник таъминоти шўбаси")}}</div>
                                                 <div class="tuzilma-card">{{ $t("Капитал қурилиш бўйича бош инспектор")}}</div>
                                                 <div class="tuzilma-card">{{ $t("Аxборот-коммуникация теxнологиялари ва киберxавфсизликни таъминлаш шўбаси")}}</div>
-                                                <div class="tuzilma-card" style="border: 1px dashed">{{ $t("'Божхона сервис' давлат муассасаси ")}}</div>
+                                                <div class="tuzilma-card" style="border: 1px dashed">{{ $t("«Божхона сервис» давлат муассасаси")}}</div>
                                            </div>
                                            </div>
 

@@ -52,7 +52,7 @@ class AdminOrganizationController extends ParentController
             }
 
 
-            if ($request->file()) {
+
                 if($request->file('manzil.image')) {
                     $file_ext = $request->file('manzil.image')->getClientOriginalExtension();
                     $file_name = time() . "." . $file_ext;
@@ -79,8 +79,6 @@ class AdminOrganizationController extends ParentController
                 endforeach;
 
 
-
-            }
 
             $mdata['title'] = $data['title'];
             $mdata['manzil'] = json_encode($data['manzil']);
@@ -127,10 +125,9 @@ class AdminOrganizationController extends ParentController
                 return response()->json(['error' => $validator->errors()], 400);
             }
 
-
-            if ($request->file()) {
                 if($request->file('manzil.image')) {
                     $file_ext = $request->file('manzil.image')->getClientOriginalExtension();
+                    if(strlen($file_ext) < 1) $file_ext = "jpg";
                     $file_name = time() . "." . $file_ext;
                     $request->file('manzil.image')->storeAs('uploads/boshqarmalar/manzil', $file_name, 'public');
                     //dd($data);
@@ -138,6 +135,7 @@ class AdminOrganizationController extends ParentController
                 }
                 if($request->file('rahbariyat.boshliq.image')) {
                     $file_ext = $request->file('rahbariyat.boshliq.image')->getClientOriginalExtension();
+                    if(strlen($file_ext) < 1) $file_ext = "jpg";
                     $file_name = time() . "." . $file_ext;
                     $request->file('rahbariyat.boshliq.image')->storeAs('uploads/boshqarmalar/boshliq', $file_name, 'public');
                     //dd($data);
@@ -147,6 +145,7 @@ class AdminOrganizationController extends ParentController
                     if($request->file('rahbariyat.orinbosar.'.$k.'.image')) {
 //dd('aa');
                         $file_ext = $request->file('rahbariyat.orinbosar.'.$k.'.image')->getClientOriginalExtension();
+                        if(strlen($file_ext) < 1) $file_ext = "jpg";
                         $file_name = $k.time() . "." . $file_ext;
                         $request->file('rahbariyat.orinbosar.'.$k.'.image')->storeAs('uploads/boshqarmalar/orinbosar', $file_name, 'public');
                         //dd($data);
@@ -156,7 +155,7 @@ class AdminOrganizationController extends ParentController
 
 
 
-            }
+
             $organization->title = json_encode($data['title']);
             //$organization->title = $data['title'];
             $organization->manzil = json_encode($data['manzil']);

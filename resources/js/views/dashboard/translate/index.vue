@@ -154,9 +154,9 @@ import api from "./../../../src/services/adminApi";
 import {extend, ValidationProvider, ValidationObserver} from 'vee-validate';
 import * as rules from 'vee-validate/dist/rules';
 import uz from '../../../locales/dynamic/uz.json';
-import oz from '../../../locales/dynamic/oz.json';
+/*import oz from '../../../locales/dynamic/oz.json';
 import ru from '../../../locales/dynamic/ru.json';
-import en from '../../../locales/dynamic/en.json';
+import en from '../../../locales/dynamic/en.json';*/
 
 
 export default {
@@ -269,15 +269,16 @@ export default {
                         oz: _this.oz[key],
                         en: _this.en[key]
                     })
-                    this.filteredTranslates = JSON.parse(JSON.stringify(this.translates));
-
                 }
+                this.filteredTranslates = JSON.parse(JSON.stringify(this.translates));
             }
         },
         getTranslateByKey(key) {
+
             let transItem = this.filteredTranslates.filter((item) => {
                 if (key === item.key) return item;
             });
+            // if(('Ўқув-услубий').indexOf(key) > -1) console.log( transItem)
             return this.filteredTranslates.indexOf(transItem[0])
         },
         addTranslate() {
@@ -297,8 +298,9 @@ export default {
 
 
         },
-        saveFile() {
+        async saveFile() {
             const _this = this;
+            console.log(uz)
             if (typeof uz === 'object') {
                 /*                for (const [key, value] of Object.entries(this.filteredTranslates)) {
                                     this.uz[key]=value.uz;
@@ -306,7 +308,7 @@ export default {
                                     this.en[key]=value.en;
                                     this.oz[key]=value.oz;
                                 }*/
-                axios.post('/api/v1/admin/locales', {data: this.filteredTranslates, lang: _this.lang}).then(function (res) {
+                await axios.post('/api/v1/admin/locales', {data: this.filteredTranslates, lang: _this.lang}).then(function (res) {
                     if (typeof res.data.success !== 'undefined' && res.data.success) {
                         _this.$toast.success('Омадли тарзда юкланди!');
                         window.location.href='/admin/translate'

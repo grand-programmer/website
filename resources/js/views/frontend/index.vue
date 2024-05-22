@@ -43,9 +43,9 @@
                     <div class="image"></div>
                     <p>{{ $t('Oʼzbekiston Respublikasi Ochiq ma`lumotlar portali') }}</p>
                 </a>
-                <a class="footer_link" href="//pm.gov.uz">
+                <a class="footer_link" href="//bojxona-service.uz">
                     <div class="image"></div>
-                    <p>{{ $t('Oʼzbekiston Respublikasi Prezidenti Virtual qabulxonasi') }}</p>
+                    <p>{{ $t('Bojxona qo\'mitasi huzuridagi “Bojxona-servis” davlat muassasasi') }}</p>
                 </a>
 
                 <a class="footer_link" href="//uzbi.uz">

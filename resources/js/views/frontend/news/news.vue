@@ -111,12 +111,11 @@
 </template>
 <script>
 import api from "./../../../src/services/apiService";
-import ListItem from "../../../views/dashboard/component/ListItem";
+ 
 import i18n from "../../../i18n";
 
 export default {
-    name: 'News',
-    components: {ListItem},
+    name: 'NewsShow',
     data: () => ({
         breadcrumb_items: [
             {
@@ -155,7 +154,7 @@ export default {
     }),
     watch: {
         $route(to, from) {
-            this.initialize();
+           this.initialize();
         }
     },
     async created() {

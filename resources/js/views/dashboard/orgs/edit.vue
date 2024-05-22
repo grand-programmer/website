@@ -65,7 +65,7 @@
                                             <v-col cols="12">
 
                                             </v-col>
-                                            <v-col cols="3">
+                                            <v-col cols="3"  v-show="lang==='uz'">
                                                 <my-field
                                                     title="Бошқарма бошлиғи исми фамилияси исми шарифи"
                                                     v-model="rahbariyat.boshliq.name"
@@ -74,6 +74,13 @@
                                                     rules="required|min:3"/>
 
 
+                                            </v-col>
+                                            <v-col cols="3" :key="'name' + langKey"
+                                                   v-for="(langItem,langKey) in langtext" v-show="lang===langKey">
+                                                <my-field
+                                                    :title="'Бошқарма бошлиғи исми фамилияси исми шарифи ' + getLang()['text']"
+                                                    v-model="rahbariyat_boshliq_translates[langKey].name"
+                                                    edit="true"/>
                                             </v-col>
                                             <v-col cols="3" v-show="lang==='uz'">
                                                 <my-field
@@ -245,7 +252,7 @@
                                                     Қўшиш
                                                 </v-btn>
                                             </v-col>
-                                            <v-row v-for="(orinbosarItem,k) in orinbosarlar" :key="k">
+                                            <v-row v-for="(orinbosarItem,k) in orinbosarlar" :key="k"  v-show="lang==='uz'">
                                                 <v-col cols="2">
                                                     <my-field
                                                         title="Исми фамилияси исми шарифи"
@@ -255,6 +262,12 @@
                                                         rules="required|min:3"/>
 
 
+                                                </v-col>
+                                                <v-col cols="2" :key="'orinbosarname' + langKey"
+                                                       v-for="(langItem,langKey) in langtext" v-show="lang===langKey">
+                                                    <my-field
+                                                        :title="'Исми фамилияси исми шарифи ' + getLang()['text']"
+                                                        v-model="rahbariyat_orinbosar_translates[k][langKey].name"/>
                                                 </v-col>
                                                 <v-col cols="2" v-show="lang==='uz'">
                                                     <my-field
@@ -719,14 +732,17 @@ export default {
             rahbariyat_boshliq_translates: {
                 oz: {
                     qabul: null,
+                    name: null,
                     biografiyasi: null,
                 },
                 ru: {
                     qabul: null,
+                    name: null,
                     biografiyasi: null,
                 },
                 en: {
                     qabul: null,
+                    name: null,
                     biografiyasi: null,
                 }
             },
@@ -734,13 +750,16 @@ export default {
                 oz: {
                     lavozimi: null,
                     qabul: null,
+                    name: null,
                 },
                 ru: {
                     lavozimi: null,
+                    name: null,
                     qabul: null,
                 },
                 en: {
                     lavozimi: null,
+                    name: null,
                     qabul: null,
                 }
             }],

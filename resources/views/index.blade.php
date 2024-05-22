@@ -51,18 +51,20 @@
 <script>
     var pageloaded = 0;
 
-    function loadScriptInBody(script) {
+/*    function loadScriptInBody(script) {
         let Script = document.createElement('script')
         Script.setAttribute('src', script)
         Script.async = true
         document.body.appendChild(Script)
         return Script;
-    }
+    }*/
 
 </script>
 <script src="/js/jquery.js"></script>
 {{--<script src="{{asset('js/11vue-fullpage.min.js')}}"></script>--}}
-<script src="/js/mix/app.js"></script>
+<script src="/js/mix/manifest.js?version=<?=(Date::now()->getTimestamp()) ?>"></script>
+<script src="/js/mix/vendor.js?version=<?=(Date::now()->getTimestamp()) ?>"></script>
+<script src="/js/mix/app.min.js?version=<?=(Date::now()->getTimestamp()) ?>"></script>
 <script src="/vendors/bootstrap-selector/js/bootstrap-select.min.js"></script>
 <script src="/vendors/image-dropdown/jquery.dd.min.js"></script>
 <script src="/vendors/camera-slider/jquery.easing.1.3.js"></script>
@@ -70,6 +72,7 @@
 <script src="/vendors/isotop/imagesloaded.pkgd.min.js"></script>
 <script src="/vendors/isotop/isotope.pkgd.min.js"></script>
 <script src="/js/slick.min.js"></script>
+
 <script src="/js/script.js"></script>
 
 
@@ -129,19 +132,19 @@
 
 <!-- webim button generation date: 2023-04-19 version: 10.5.67 -->
 <a class="webim_button" href="#" rel="webim">
-    <img src="https://beltelekomuz.webim.ru/button.php" border="0"/>
+    <img src="https://beltelekomuz.webim2.ru/button.php" border="0"/>
 </a>
 <script type="text/javascript">
     webim = {
         accountName: "beltelekomuz",
-        domain: "beltelekomuz.webim.ru",
+        domain: "beltelekomuz.webim2.ru",
         location: "default"
     };
 
     (function () {
         var s = document.createElement("script");
         s.type = "text/javascript";
-        s.src = "https://beltelekomuz.webim.ru/js/button.js";
+        s.src = "https://beltelekomuz.webim2.ru/js/button.js";
         document.getElementsByTagName("head")[0].appendChild(s);
     })();
 </script>

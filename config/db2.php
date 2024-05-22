@@ -76,11 +76,10 @@ $databaseconfig= [
     // or 'db2_ibmi_ibm' / 'db2_zos_odbc' / 'db2_expressc_odbc db2_ibmi_odbc
     'driverName' => '{IBM i Access ODBC Driver}',
     // or '{iSeries Access ODBC Driver}' '{IBM i Access ODBC Driver 64-bit}' / '{IBM i Access ODBC Driver}'
-    'host' => '192.168.12.144',
+    'host' => 'dc1repl01.db.gtk',
     'username' => 'SURAT',
-    'password' => '$UR@Tj0n',
-
-    'database' => 'S06271bt',
+    'password' => '$UR@Tj0n', //'$UR@Tj0n',
+    'database' => 'S06EF21R',
     'prefix' => '',
     'schema' => 'ASOD',
     'charset'   => 'utf8mb4',
@@ -119,7 +118,7 @@ $databaseconfig= [
         'SORTTABLE' => '',
         'SortSequence' => 0,
         'SORTWEIGHT' => 0,
-        'AllowUnsupportedChar' => 0,
+        'AllowUnsupportedChar' => 1,
         'CCSID' => 1208,
         'GRAPHIC' => 0,
         'TRIMCHAR'=>1,
@@ -173,20 +172,19 @@ $databaseconfigEA['password']='trarxiv';
 
 
 $databaseconfigSTAT=$databaseconfig;
-$databaseconfigSTAT['host']='192.168.12.144';
+$databaseconfigSTAT['host']='dc1repl01.db.gtk';
 $databaseconfigSTAT['schema']='TST_STAT';
-$databaseconfigSTAT['database']='S06271bt';
+$databaseconfigSTAT['database']='S06EF21R';
 $databaseconfigSTAT['username']='SURAT';
 $databaseconfigSTAT['password']='$UR@Tj0n';
 
 
-
 $databaseconfigINN=$databaseconfig;
-$databaseconfigINN['host']='192.168.212.99';
+$databaseconfigINN['host']='mat.db.gtk';
 $databaseconfigINN['schema']='GNK_NEW';
-$databaseconfigINN['database']='B2035C4W';
-$databaseconfigINN['username']='trarxiv';
-$databaseconfigINN['password']='trarxiv';
+$databaseconfigINN['database']='M704BF51';
+$databaseconfigINN['username']='SURAT';
+$databaseconfigINN['password']='$UR@Tj0n';
 
 $databaseconfig221=$databaseconfig;
 $databaseconfig221['host']='192.168.212.221';
@@ -203,7 +201,7 @@ $databaseconfig228['username']='Surat';
 $databaseconfig228['password']='As123456';
 
 $databaseconfig227=$databaseconfig;
-$databaseconfig227['host']='192.168.212.227';
+$databaseconfig227['host']='dc1paym01.db.gtk';
 $databaseconfig227['schema']='TP';
 $databaseconfig227['database']='S2135BFW';
 $databaseconfig227['username']='newsite';

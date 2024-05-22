@@ -249,7 +249,7 @@
                                                             typeof app.product.currencyNmSymbol !== 'undefined' ? app.product.currencyNm : ""
                                                         }}
                                                         {{
-                                                            typeof app.product.currencyNmSymbol !== 'undefined' ? "(" + app.product.currencyNmSymbol + ")" : ""
+                                                            typeof app.product.currencyNmSymbol !== 'undefined' ? "(" + app.product.currencyNmSymbol +")" : ""
                                                         }}
                                                     </td>
                                                 </tr>
@@ -262,7 +262,7 @@
                                                             typeof app.product.currencyNmSymbol !== 'undefined' ? app.product.currencyNm : ""
                                                         }}
                                                         {{
-                                                            typeof app.product.currencyNmSymbol !== 'undefined' ? "(" + app.product.currencyNmSymbol + ")" : ""
+                                                            typeof app.product.currencyNmSymbol !== 'undefined' ? "(" + app.product.currencyNmSymbol +")" : ""
                                                         }}
                                                     </td>
                                                 </tr>

@@ -17,7 +17,7 @@ use App\Models\Page;
 /*Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web']], function () {
     Lfm::routes();
 });*/
-Route::any('/test',function(){
+/*Route::any('/test',function(){
 
     DB::connection('mysql')->delete(
     "
@@ -70,7 +70,7 @@ fetch first 10 rows only");
         return [
             'month'=>$item,
             'items'=>(isset($events[$key]))?$events[$key]->all():null,
-            /*'day'=>intval(date('d',strtotime($item->date)))*/
+            /*'day'=>intval(date('d',strtotime($item->date)))
         ];
 
         });
@@ -117,10 +117,11 @@ fetch first 10 rows only");
     curl_close($curl);
 
 //Print out the response output.
-    echo $result;*/
-});
+    echo $result;
+});*/
 //Route::get('/social-login',[App\Http\Controllers\AuthController::class, 'loginWithOneId']);
 //Route::get('/logout',[App\Http\Controllers\AuthController::class, 'logoutForWeb']);
+Route::get('rate_customs_service', [App\Http\Controllers\VoteController::class, 'baholash']);
 Route::get('{any}', [App\Http\Controllers\HomeController::class, 'index'])->where('any','.*');
 
 /*Route::get('{any}/', function () {
