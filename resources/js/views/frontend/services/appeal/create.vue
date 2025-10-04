@@ -44,7 +44,7 @@
                 <ValidationObserver v-slot="{ invalid }" ref="create_apple">
                     <v-form v-on:submit.prevent="create_appeal" enctype="multipart/form-data">
                         <h3 center class="appeals-title text-center">
-                            Божхона органларига мурожаат юбориш
+                            {{ $t('Божхона органларига мурожаат юбориш') }}
                         </h3>
 
                         <div class="col-12">
@@ -54,40 +54,40 @@
                                 <div class="row">
                                     <div class="col-6">
                                         <div class="form-field">
-                                            <label>Фамилия </label>
-                                            <ValidationProvider name="Фамилия" rules="required|min:3"
+                                            <label>{{ $t('Фамилия') }}</label>
+                                            <ValidationProvider :name="$t('Фамилия')" rules="required|min:3"
                                                                 v-slot="{ errors }">
                                                 <v-text-field v-model="appeal.lastname"></v-text-field>
                                                 <span>{{ errors[0] }}</span>
                                             </ValidationProvider>
                                         </div>
                                         <div class="form-field">
-                                            <label>Исм </label>
-                                            <ValidationProvider name="Исм" rules="required|min:3"
+                                            <label>{{ $t('Исм') }}</label>
+                                            <ValidationProvider :name="$t('Исм')" rules="required|min:3"
                                                                 v-slot="{ errors }">
                                                 <v-text-field v-model="appeal.name"></v-text-field>
                                                 <span>{{ errors[0] }}</span>
                                             </ValidationProvider>
                                         </div>
                                         <div class="form-field">
-                                            <label>Отасининг исми </label>
-                                            <ValidationProvider name="Отасининг исми" rules="required|min:3"
+                                            <label>{{ $t('Отасининг исми') }}</label>
+                                            <ValidationProvider :name="$t('Отасининг исми')" rules="required|min:3"
                                                                 v-slot="{ errors }">
                                                 <v-text-field v-model="appeal.surname"></v-text-field>
                                                 <span>{{ errors[0] }}</span>
                                             </ValidationProvider>
                                         </div>
                                         <div class="form-field">
-                                            <label>Яшаш жойингиз </label>
-                                            <ValidationProvider name="Яшаш жойингиз" rules="required|min:3"
+                                            <label>{{ $t('Яшаш манзили') }}</label>
+                                            <ValidationProvider :name="$t('Яшаш манзили')" rules="required|min:3"
                                                                 v-slot="{ errors }">
                                                 <v-text-field v-model="appeal.address"></v-text-field>
                                                 <span>{{ errors[0] }}</span>
                                             </ValidationProvider>
                                         </div>
                                         <div class="form-field">
-                                            <label>Туғилган сана </label>
-                                            <ValidationProvider name="Туғилган сана" rules="required"
+                                            <label>{{ $t('Туғилган сана') }}</label>
+                                            <ValidationProvider :name="$t('Туғилган сана')" rules="required"
                                                                 v-slot="{ errors }">
                                                 <v-menu
                                                     ref="menu1"
@@ -112,6 +112,7 @@
                                                         v-model="date"
                                                         no-title
                                                         @input="menu = false"
+                                                        :locale="$i18n.locale ==='en'?'en-US':'ru-RU'"
                                                     ></v-date-picker>
                                                 </v-menu>
 
@@ -120,7 +121,7 @@
                                             </ValidationProvider>
                                         </div>
                                         <div class="form-field">
-                                            <label>Такрорий мурожаат </label>
+                                            <label>{{ $t('Такрорий мурожаат') }}</label>
                                             <ValidationProvider name="Такрорий мурожаат" rules=""
                                                                 v-slot="{ errors }">
                                                 <v-switch v-model="appeal.retry"></v-switch>
@@ -129,17 +130,17 @@
                                         </div>
                                     </div>
                                     <div class="col-6">
-                                        <div class="form-field"><label>Ҳудудий бошқарма номи </label>
-                                            <ValidationProvider name="Ҳудудий бошқарма номи" rules="required"
+                                        <div class="form-field"><label>{{ $t('Ҳудудий бошқарма ') }}<br>{{ $t('номи') }}</label>
+                                            <ValidationProvider :name="$t('Ҳудудий бошқарма')" rules="required"
                                                                 v-slot="{ errors }">
-                                                <v-autocomplete dense clearable label="Божхона органи"
+                                                <v-autocomplete dense clearable :label="$t('Божхона органи')"
                                                                 :items="adresatlar" hide-details="auto"
                                                                 v-model="appeal.state"></v-autocomplete>
                                                 <span style="margin-top: 0">{{ errors[0] }}</span>
                                             </ValidationProvider>
                                         </div>
                                         <div class="form-field"><label>{{ $t('Мурожаат йўналиши') }} </label>
-                                            <ValidationProvider name="Мурожаат йўналиши" rules="required"
+                                            <ValidationProvider :name="$t('Мурожаат йўналиши')" rules="required"
                                                                 v-slot="{ errors }">
                                                 <v-autocomplete dense
                                                                 :items="yonalishlar" hide-details="auto"
@@ -147,24 +148,24 @@
                                                                 :error-messages="errors[0]"></v-autocomplete>
                                             </ValidationProvider>
                                         </div>
-                                        <div class="form-field"><label>Электрон почта </label>
-                                            <ValidationProvider name="Электрон почта" rules="required|email"
+                                        <div class="form-field"><label>{{ $t('Электрон почта') }}</label>
+                                            <ValidationProvider :name="$t('Электрон почта')" rules="required|email"
                                                                 v-slot="{ errors }">
                                                 <v-text-field v-model="appeal.email">
                                                 </v-text-field>
                                                 <span>{{ errors[0] }}</span>
                                             </ValidationProvider>
                                         </div>
-                                        <div class="form-field"><label>Иш жойи </label>
-                                            <ValidationProvider name="Иш жойи" rules="required|min:3"
+                                        <div class="form-field"><label>{{ $t('Иш жойи') }}</label>
+                                            <ValidationProvider :name="$t('Иш жойи')" rules="required|min:3"
                                                                 v-slot="{ errors }">
                                                 <v-text-field v-model="appeal.work">
                                                 </v-text-field>
                                                 <span>{{ errors[0] }}</span>
                                             </ValidationProvider>
                                         </div>
-                                        <div class="form-field"><label>Телефон рақами </label>
-                                            <ValidationProvider name="Телефон рақами" rules="required"
+                                        <div class="form-field"><label>{{ $t('Телефон рақами') }}</label>
+                                            <ValidationProvider :name="$t('Телефон рақами')" rules="required"
                                                                 v-slot="{ errors }">
                                                 <v-text-field v-model="appeal.phone" return-masked-value
                                                               v-mask="'## ###-##-##'" placeholder="78 123-45-67"
@@ -173,12 +174,12 @@
                                                 <span>{{ errors[0] }}</span>
                                             </ValidationProvider>
                                         </div>
-                                        <div class="form-field"><label>Тадбиркор ёки юридик шахс </label>
+                                        <div class="form-field"><label>{{ $t('Тадбиркор ёки юридик шахс') }}</label>
                                             <v-switch v-model="yur_shaxs">
                                             </v-switch>
                                         </div>
-                                        <div class="form-field" v-if="yur_shaxs"><label>Юридик шахс номи </label>
-                                            <ValidationProvider name="Юридик шахс номи"
+                                        <div class="form-field" v-if="yur_shaxs"><label>{{ $t('Юридик шахс номи') }}</label>
+                                            <ValidationProvider :name="$t('Юридик шахс номи')"
                                                                 v-slot="{ errors }">
                                                 <v-text-field v-model="appeal.yur_shaxs">
                                                 </v-text-field>
@@ -190,7 +191,7 @@
                                         <div class="floatend">
                                             <div class="form-field">
                                                 <v-file-input v-model="appeal.file"
-                                                              label="Файл бириктириш">
+                                                              :label="$t('Файл бириктириш')">
                                                 </v-file-input>
                                                 <span>{{ errors[0] }}</span>
                                             </div>
@@ -198,8 +199,8 @@
                                     </v-col>
                                     <v-col cols="12" style="margin: -40px auto">
                                         <div class="form-field appeal_text">
-                                            <label>Мурожаат матни </label>
-                                            <ValidationProvider name="Мурожаат матни" rules="required|min:3"
+                                            <label>{{ $t('Мурожаат матни') }}</label>
+                                            <ValidationProvider :name="$t('Мурожаат матни')" rules="required|min:3"
                                                                 v-slot="{ errors }">
                                                 <v-textarea v-model="appeal.text">
                                                 </v-textarea>
@@ -214,7 +215,7 @@
                                                         @click.stop="dialog = true">
                                                 <template v-slot:label>
                                                     <u>
-                                                        Фойдаланиш қоидалари билан танишдим
+                                                        {{ $t('Фойдаланиш қоидалари билан танишдим') }}
                                                     </u>
                                                 </template>
                                             </v-checkbox>
@@ -225,7 +226,7 @@
                                             >
                                                 <v-card>
                                                     <v-card-title>
-                                                        <span class="text-h5">Веб сайт фойдаланиш қоидалари</span>
+                                                        <span class="text-h5">{{ $t('Веб сайт фойдаланиш қоидалари') }}</span>
                                                     </v-card-title>
                                                     <v-card-text>
                                                         Lorem ipsum dolor sit amet, semper quis, sapien id natoque elit.
@@ -284,14 +285,14 @@
                                                             text
                                                             @click="dialog = false; agreement=false;"
                                                         >
-                                                            Disagree
+                                                            {{ $t('Disagree') }}
                                                         </v-btn>
                                                         <v-btn
                                                             color="green darken-1"
                                                             text
                                                             @click="dialog = false; agreement=true;"
                                                         >
-                                                            Agree
+                                                            {{ $t('Agree') }}
                                                         </v-btn>
                                                     </v-card-actions>
                                                 </v-card>
@@ -301,9 +302,9 @@
                                     </v-col>
                                     <v-col cols="6">
                                         <div class="buttons">
-                                            <v-btn type="button" class="primary orange" to="/services/appeals">Ортга
+                                            <v-btn type="button" class="primary orange" to="/services/appeals">{{ $t('Ортга') }}
                                             </v-btn>
-                                            <v-btn class="primary" :loading="jonatishLoading" type="submit">Жўнатиш
+                                            <v-btn class="primary" :loading="jonatishLoading" type="submit">{{ $t('Жўнатиш') }}
                                             </v-btn>
                                         </div>
                                     </v-col>
@@ -324,19 +325,9 @@
 import Info from './info';
 
 
-import {extend, ValidationProvider, ValidationObserver} from 'vee-validate';
-import * as rules from 'vee-validate/dist/rules';
-import messages from '../../../../locales/oz.json';
+import {ValidationProvider, ValidationObserver} from 'vee-validate';
 import api from "../../../../src/services/apiService";
 import i18n from "../../../../i18n";
-
-Object.keys(rules).forEach(rule => {
-    extend(rule, {
-        ...rules[rule], // copies rule configuration
-        message: messages.messages[rule] // assign message
-
-    });
-});
 
 export default {
     name: 'ServiceAppeals',
@@ -366,19 +357,19 @@ export default {
                     exact: true,
                 },
                 {
-                    text: 'Хизматлар',
+                    text: i18n.t('Хизматлар'),
                     to: '/services',
                     disabled: false,
                     exact: true,
                 },
                 {
-                    text: 'Мурожаатлар',
+                    text: i18n.t('Мурожаатлар'),
                     to: '/services/appeals',
                     disabled: false,
                     exact: true,
                 },
                 {
-                    text: 'Мурожаат юбориш',
+                    text: i18n.t('Мурожаат юбориш'),
                     to: '/services/appeals/create',
                     disabled: true,
                     exact: true,
@@ -388,14 +379,22 @@ export default {
             errors: [],
             adresatlar:
                 [
-                    {value: 0, text: 'Иқтисодиёт ва молия вазирлиги ҳузуридаги Божхона қўмитаси'},
-                    {value: 1, text: 'Қорақалпоғистон Республикаси бошқармаси'},
-                    {value: 2, text: 'Андижон вилояти бошқармаси'},
-                    {value: 3, text: 'Бухоро вилояти бошқармаси'},
-                    {value: 4, text: 'Навоий вилояти бошқармаси'},
-                    {value: 5, text: 'Тошкент шахар бошқармаси'},
-                    {value: 6, text: 'Самарқанд вилояти бошқармаси'},
-                    {value: 7, text: 'Наманган вилояти бошқармаси'},
+                    {value: 0, text: i18n.t("Тошкент-Аэро ИБК")},
+                    {value: 1, text: i18n.t("Иқтисодиёт ва молия вазирлиги ҳузуридаги Божхона қўмитаси")},
+                    {value: 2, text: i18n.t("Андижон вилояти божхона бошқармаси")},
+                    {value: 3, text: i18n.t("Бухоро вилояти божхона бошқармаси")},
+                    {value: 4, text: i18n.t("Жиззах вилояти божхона бошқармаси")},
+                    {value: 5, text: i18n.t("Қашқадарё вилояти божхона бошқармаси")},
+                    {value: 6, text: i18n.t("Навоий вилояти божхона бошқармаси")},
+                    {value: 7, text: i18n.t("Наманган вилояти божхона бошқармаси")},
+                    {value: 8, text: i18n.t("Самарқанд вилояти божхона бошқармаси")},
+                    {value: 9, text: i18n.t("Сурхондарё вилояти божхона бошқармаси")},
+                    {value: 10, text: i18n.t("Сирдарё вилояти божхона бошқармаси")},
+                    {value: 11, text: i18n.t("Тошкент шахар божхона бошқармаси")},
+                    {value: 12, text: i18n.t("Тошкент вилояти божхона бошқармаси")},
+                    {value: 13, text: i18n.t("Фарғона вилояти божхона бошқармаси")},
+                    {value: 14, text: i18n.t("Хоразм вилояти божхона бошқармаси")},
+                    {value: 15, text: i18n.t("Қорақалпоғистон Республикаси божхона бошқармаси")}
                 ]
             ,
             appeal: {
@@ -484,7 +483,7 @@ export default {
 
             }).then(function (response) {
                 if (typeof response.data.data.birth_date === 'undefined') {
-                    _this.$toast.error("Маълумотлар мос келмади1!")
+                    _this.$toast.error(i18n.t("Маълумотлар мос келмади!"))
                     _this.$router.push('/services/appeals/');
                 } else {
                     _this.appeal.date_birth = _this.formatDate(response.data.data.birth_date)
@@ -498,7 +497,7 @@ export default {
         },
         async getBoshqarmalar() {
             const _this = this
-            await axios.get('/api/v1/ex_api/boshqarma').then(function (result) {
+            await this.$auth.plugins.http.get('/api/v1/ex_api/boshqarma').then(function (result) {
                 _this.adresatlar = [];
                 result.data.data.forEach(function (item) {
                     if (!(['1790', '1791'].includes(item['kod_id'])))
@@ -515,7 +514,7 @@ export default {
             this.jonatishLoading = true;
             const isValid = await this.$refs.create_apple.validate();
             if (isValid && this.appeal.file != null && this.appeal.file.size > 5 * 1024 * 1024) {
-                _this.$toast.error("Юкланган файл ҳажми 5мбдан ошмаслиги керак!");
+                _this.$toast.error(i18n.t("Юкланган файл ҳажми 5мбдан ошмаслиги керак!"));
                 this.jonatishLoading = false;
             }
             /*                this.alert = {
@@ -524,7 +523,7 @@ export default {
                                 alert_text: "Юкланган файл ҳажми 5мбдан ошмаслиги керак!"
                             }*/
             if (isValid && !this.agreement) {
-                _this.$toast.error("Фойдаланиш қоидаларига розилик билдиришингиз лозим!");
+                _this.$toast.error(i18n.t("Фойдаланиш қоидаларига розилик билдиришингиз лозим!"));
                 this.jonatishLoading = false;
             }
 
@@ -620,7 +619,7 @@ export default {
 
                         } else {
                             this.jonatishLoading = false;
-                            this.$toast.error("Маълумотларни юборишда хатолик юз берди!");
+                            this.$toast.error(i18n.t("Маълумотларни юборишда хатолик юз берди!"));
                             /*this.alert = {
                                 value: true,
                                 alert_type: "error",

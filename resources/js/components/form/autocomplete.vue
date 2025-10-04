@@ -12,6 +12,7 @@
             :hint="hint.length>0?hint:title"
             :items="options"
             allow-overflow
+            :error-messages="errors[0]"
         >
             <template v-slot:label >
                 <template v-if="rules.includes('required')"> {{title}} <span style="color: red">*</span></template>
@@ -40,21 +41,18 @@
                     {{ data.item }}
                 </template>
                 <template v-else>
-
                     <flag :iso="data.item.code"
                           style="font-size: 20px"/>
                     <span
                         class="ml-4">{{
                             data.item.text
                         }}</span>
-
-
                 </template>
             </template>
 
         </v-autocomplete>
 
-        <span class="red--text">{{ errors[0] }}</span>
+
     </ValidationProvider>
 </template>
 
@@ -63,13 +61,6 @@ import {extend, ValidationProvider, ValidationObserver} from 'vee-validate';
 import * as rules from 'vee-validate/dist/rules';
 import messages from '../../locales/oz.json';
 
-Object.keys(rules).forEach(rule => {
-    extend(rule, {
-        ...rules[rule], // copies rule configuration
-        message: messages.messages[rule] // assign message
-
-    });
-});
 
 export default {
     name: "autocomplete-field",

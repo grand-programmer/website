@@ -6,6 +6,7 @@ import driverHttpAxios       from '@websanova/vue-auth/dist/drivers/http/axios.1
 import driverRouterVueRouter from '@websanova/vue-auth/dist/drivers/router/vue-router.2.x.esm.js';
 import driverOAuth2Google    from '@websanova/vue-auth/dist/drivers/oauth2/google.esm.js';
 import driverOAuth2Facebook  from '@websanova/vue-auth/dist/drivers/oauth2/facebook.esm.js';
+import i18n from './i18n';
 
 driverOAuth2Google.params.client_id = '547886745924-4vrbhl09fr3t771drtupacct6f788566.apps.googleusercontent.com';
 driverOAuth2Facebook.params.client_id = '196729390739201';
@@ -18,10 +19,22 @@ driverOAuth2Facebook.params.client_id = '196729390739201';
  * https://jwt-auth.readthedocs.io/en/develop/auth-guard/#methods
  */
 
+
+let baseURL = 'api/v1/'
+
+const httpAxios = axios.create({
+    headers: {
+        'Content-type': 'application/json',
+        'X-Localization': i18n.locale
+    },
+    baseURL
+    //  timeout: 10000 // Set the timeout value in milliseconds
+})
+
 const config = {
 
     plugins: {
-        http: axios, // Axios
+        http: httpAxios, // Axios
         // http: Vue.http, // Vue Resource
         router: router,
     },

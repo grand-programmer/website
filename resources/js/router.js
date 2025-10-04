@@ -34,19 +34,19 @@ import Yagona_oyna from "./views/frontend/services/yagona_oyna";
 const routes = []
 const allRoutes = {
     path: 'any', redirect() {
-        return '/uz';
+        return '/oz';
     }
 }
 const servicesRoutes = [
     {
-        path: "", component: ()=>import('./views/frontend/services/yagona_oyna'),
+        path: "", component: () => import('./views/frontend/services/yagona_oyna'),
     }, {
         path: "appeals/",
         component: () => import('./views/frontend/services/appeal/index'),
         children: [{
-            path: "", component: ()=>import('./views/frontend/services/appeal/main'), query: {appeal_code: ''}
+            path: "", component: () => import('./views/frontend/services/appeal/main'), query: {appeal_code: ''}
         }, {
-            path: "create", component: ()=>import('./views/frontend/services/appeal/create'),
+            path: "create", component: () => import('./views/frontend/services/appeal/create'),
         }, {
             path: ":id", component: () => import('./views/frontend/services/appeal/info_view'),
         }, {
@@ -169,7 +169,7 @@ const servicesRoutes = [
                 },
             },
         ]
-    },{
+    }, {
         path: "vio",
         component: () => import('./views/frontend/services/vio/index'),
 
@@ -195,6 +195,32 @@ const servicesRoutes = [
                 },
             },
         ]
+    }, {
+        path: "spt",
+        component: () => import('./views/frontend/services/spt/index'),
+
+        children: [
+            {
+                path: ":id", component: () => import('./views/frontend/services/spt/create'),
+                meta: {
+                    auth: true,
+                    authRedirect: '/login',
+                    notFoundRedirect: '/403',
+                    forbiddenRedirect: '/403',
+                    routeAuth: '/login'
+                },
+            },
+            {
+                path: ":id/info", component: () => import('./views/frontend/services/spt/info'),
+                meta: {
+                    auth: true,
+                    authRedirect: '/login',
+                    notFoundRedirect: '/403',
+                    forbiddenRedirect: '/403',
+                    routeAuth: '/login'
+                },
+            },
+        ]
     },
 
     {
@@ -207,11 +233,20 @@ const servicesRoutes = [
             forbiddenRedirect: '/403',
             routeAuth: '/login'
         },
-        children: [{
-            path: "", component: () => import('./views/frontend/services/recycle/create'),
-        }, {
-            path: ":id", component: () => import('./views/frontend/services/recycle/info'),
-        }]
+        children: [
+            {
+                path: "", component: () => import('./views/frontend/services/recycle/create'),
+            },
+            {
+                path: "new", component: () => import('./views/frontend/services/recycle1/create'),
+            },
+            {
+                path: ":id", component: () => import('./views/frontend/services/recycle/info'),
+            },
+            {
+                path: "new/:id", component: () => import('./views/frontend/services/recycle1/info'),
+            }
+        ]
     }, {
         path: "tftn/", component: () => import('./views/frontend/services/tftn/index'), meta: {
             auth: true,
@@ -229,23 +264,24 @@ const servicesRoutes = [
             path: ":id", component: ServicesTftnInfo,
         }]
     }, {
-        path: "stat/", component: () => import('./views/frontend/services/stat/index'), meta:{}, children: [{
-            path: "create", component: () => import('./views/frontend/services/stat/create'),meta: {
+        path: "stat/", component: () => import('./views/frontend/services/stat/index'), meta: {}, children: [{
+            path: ":id", component: () => import('./views/frontend/services/stat/create'), meta: {
                 auth: true,
                 authRedirect: '/login',
                 notFoundRedirect: '/403',
                 forbiddenRedirect: '/403',
                 routeAuth: '/login'
             }
-        }, {
-            path: "info", component: () => import('./views/frontend/services/stat/info'),meta: {
+        },{
+            path: "info/:id", component: () => import('./views/frontend/services/stat/info'), meta: {
                 auth: true,
                 authRedirect: '/login',
                 notFoundRedirect: '/403',
                 forbiddenRedirect: '/403',
                 routeAuth: '/login'
             }
-        }, {
+        }]
+        /*, {
             path: ":id", component: () => import('./views/frontend/services/stat/info'),
             meta: {
                 auth: true,
@@ -254,7 +290,7 @@ const servicesRoutes = [
                 forbiddenRedirect: '/403',
                 routeAuth: '/login'
             }
-        }]
+        }*/
     }, {
         path: "vacancy/",
         component: () => import('./views/frontend/services/vacancy/index'),
@@ -296,17 +332,19 @@ const userRoutes =
     }*/
         children: [{
 
-            path: '', component: ()=>import('./views/frontend/index'), meta: {
+            path: '', component: () => import('./views/frontend/index'), meta: {
                 auth: undefined,
             }, children: [{
-                path: "/", component: ()=>import('./../js/components/index'),
+                path: "/", component: () => import('./../js/components/index'),
             },],
         },
             {
 
-                path: '/', component: ()=>import('./views/frontend/one_page'), children: [
+                path: '/', component: () => import('./views/frontend/one_page'), children: [
                     {
-                        path: "singlewindow/", component: ()=>import('./views/frontend/services/yagona_oyna'), children: servicesRoutes
+                        path: "singlewindow/",
+                        component: () => import('./views/frontend/services/yagona_oyna'),
+                        children: servicesRoutes
 
                     },
 
@@ -323,14 +361,14 @@ const userRoutes =
                         name: 'test', path: 'test', component: () => import('./views/frontend/test')
                     },
                     {
-                        path: 'applications', component: ()=>import('./views/frontend/applications'), meta: {
+                        path: 'applications', component: () => import('./views/frontend/applications'), meta: {
                             auth: true,
                             authRedirect: '/login',
                             notFoundRedirect: '/403',
                             forbiddenRedirect: '/403',
                             routeAuth: '/login'
                         }, children: [{
-                            path: '', component: ()=>import('./views/frontend/applications/list')
+                            path: '', component: () => import('./views/frontend/applications/list')
                         }]
 
                     }, {
@@ -499,7 +537,7 @@ const userRoutes =
 let adminRoute = {
     path: '/admin/', component: () => import('./views/dashboard/Index'), meta: {
         //auth:true
-        auth: {roles: [4,3,2], redirect: {name: 'login', query: {request: '/admin'}}, forbiddenRedirect: '/403'}
+        auth: {roles: [4, 3, 2], redirect: {name: 'login', query: {request: '/admin'}}, forbiddenRedirect: '/403'}
     }, children: [// Dashboard
         {
             name: 'Dashboard', path: '', component: () => import('./views/dashboard/Dashboard'),
@@ -678,10 +716,14 @@ let adminRoute = {
                 name: "Очиқ маълумотлар", path: '', component: () => import('./views/dashboard/opendatas/index'),
 
             }, {
-                name: "Очиқ маълумот яратиш", path: 'create', component: () => import('./views/dashboard/opendatas/create'),
+                name: "Очиқ маълумот яратиш",
+                path: 'create',
+                component: () => import('./views/dashboard/opendatas/create'),
 
             }, {
-                name: "Очиқ маълумот тахрирлаш", path: 'edit/:id', component: () => import('./views/dashboard/opendatas/edit'),
+                name: "Очиқ маълумот тахрирлаш",
+                path: 'edit/:id',
+                component: () => import('./views/dashboard/opendatas/edit'),
 
             }, {
                 name: "Очиқ маълумот", path: 'view/:id', component: () => import('./views/dashboard/opendatas/view'),
@@ -696,16 +738,24 @@ let adminRoute = {
             name: 'Очиқ маълумот файллари', path: 'opendata/:opendata/files', component: {
                 template: '<router-view></router-view>', script: ' export default {}'
             }, children: [{
-                name: "Очиқ маълумот файллари", path: '', component: () => import('./views/dashboard/opendatafiles/index'),
+                name: "Очиқ маълумот файллари",
+                path: '',
+                component: () => import('./views/dashboard/opendatafiles/index'),
 
             }, {
-                name: "Очиқ маълумот файлларини яратиш", path: 'create', component: () => import('./views/dashboard/opendatafiles/create'),
+                name: "Очиқ маълумот файлларини яратиш",
+                path: 'create',
+                component: () => import('./views/dashboard/opendatafiles/create'),
 
             }, {
-                name: "Очиқ маълумот файлларини тахрирлаш", path: 'edit/:id', component: () => import('./views/dashboard/opendatafiles/edit'),
+                name: "Очиқ маълумот файлларини тахрирлаш",
+                path: 'edit/:id',
+                component: () => import('./views/dashboard/opendatafiles/edit'),
 
             }, {
-                name: "Очиқ маълумот файлларини", path: 'view/:id', component: () => import('./views/dashboard/opendatafiles/view'),
+                name: "Очиқ маълумот файлларини",
+                path: 'view/:id',
+                component: () => import('./views/dashboard/opendatafiles/view'),
 
             },
 

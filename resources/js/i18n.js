@@ -42,8 +42,8 @@ function loadLocaleMessages () {
 }
 //console.log(loadLocaleMessages())
 export default new VueI18n({
-  locale: localStorage.getItem('language') || 'uz',
-  fallbackLocale: process.env.VUE_APP_I18N_FALLBACK_LOCALE || 'uz',
+  locale: localStorage.getItem('language') || 'oz',
+  fallbackLocale: process.env.VUE_APP_I18N_FALLBACK_LOCALE || 'oz',
     messages: messages,
     silentTranslationWarn:true,
 })

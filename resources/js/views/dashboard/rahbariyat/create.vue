@@ -44,7 +44,8 @@
                                                     <v-autocomplete :items="[
                                                         {text:'Раҳбар',value:1},
                                                         {text:'Биринчи ўринбосар',value:2},
-                                                        {text:'Ўринбосар',value:3}
+                                                        {text:'Ўринбосар',value:3},
+                                                        {text:'Маслаҳатчи',value:'4'}
                                                         ]" v-model="organization.lavozimi">
                                                     </v-autocomplete>
 
@@ -162,13 +163,6 @@ import MyField from '../../../components/form/myfield';
 import VueCropper from 'vue-cropperjs';
 import 'cropperjs/dist/cropper.css';
 
-Object.keys(rules).forEach(rule => {
-    extend(rule, {
-        ...rules[rule], // copies rule configuration
-        message: messages.messages[rule] // assign message
-
-    });
-});
 
 export default {
     name: "OrgCreate",

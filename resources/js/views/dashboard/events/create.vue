@@ -75,6 +75,7 @@
                                                             ></v-text-field>
                                                         </template>
                                                         <v-date-picker
+                                                            :locale="$i18n.locale ==='en'?'en-US':'ru-RU'"
                                                             v-model="date"
                                                             no-title
                                                             @input="menu = false"
@@ -112,13 +113,6 @@ import * as rules from 'vee-validate/dist/rules';
 import messages from '../../../locales/oz.json';
 import Editor from '@tinymce/tinymce-vue';
 
-Object.keys(rules).forEach(rule => {
-    extend(rule, {
-        ...rules[rule], // copies rule configuration
-        message: messages.messages[rule] // assign message
-
-    });
-});
 
 export default {
     name: "EventCreate",

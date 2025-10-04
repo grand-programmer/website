@@ -460,7 +460,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
 
 
 
@@ -476,7 +475,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         disabled: false,
         exact: true
       }, {
-        text: 'Менинг аризаларим',
+        text: _i18n__WEBPACK_IMPORTED_MODULE_0__["default"].t('Менинг аризаларим'),
         to: '/applications',
         disabled: false,
         exact: true
@@ -489,48 +488,48 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       dialog: false,
       headerHighlight: 0,
       methodIdentificationsIn: [{
-        text: "Қайта ишлаш учун олиб кирилаётган товарга муҳрлар қўйиш ва зарур бўлганда штамплар қўйиш, рақамли тарзда ва (ёки) бошқача тарзда тамғалаш",
+        text: _i18n__WEBPACK_IMPORTED_MODULE_0__["default"].t("Қайта ишлаш учун олиб кирилаётган товарга муҳрлар қўйиш ва зарур бўлганда штамплар қўйиш, рақамли тарзда ва (ёки) бошқача тарзда тамғалаш"),
         value: 1
       }, {
-        text: "Қайта ишлаш учун олиб кирилаётган товарни батафсил тавсифлаш, уни фотосуратга тушириш ёки бошқа ўлчамда тасвирлаш",
+        text: _i18n__WEBPACK_IMPORTED_MODULE_0__["default"].t("Қайта ишлаш учун олиб кирилаётган товарни батафсил тавсифлаш, уни фотосуратга тушириш ёки бошқа ўлчамда тасвирлаш"),
         value: 2
       }, {
-        text: "Қайта ишлаш учун олиб кирилаётган товарнинг олдиндан олинган намуналарини ёки нусхаларини ва унинг қайта ишланган маҳсулотини тадқиқ этиш натижаларини қиёслаш",
+        text: _i18n__WEBPACK_IMPORTED_MODULE_0__["default"].t("Қайта ишлаш учун олиб кирилаётган товарнинг олдиндан олинган намуналарини ёки нусхаларини ва унинг қайта ишланган маҳсулотини тадқиқ этиш натижаларини қиёслаш"),
         value: 3
       }, {
-        text: "Қайта ишлаш учун олиб кирилаётган товарнинг завод ва серия рақамлари тарзидаги мавжуд тамғаланишидан ёхуд бошқача тарздаги тамғаланишидан фойдаланиш",
+        text: _i18n__WEBPACK_IMPORTED_MODULE_0__["default"].t("Қайта ишлаш учун олиб кирилаётган товарнинг завод ва серия рақамлари тарзидаги мавжуд тамғаланишидан ёхуд бошқача тарздаги тамғаланишидан фойдаланиш"),
         value: 4
       }, {
-        text: "Бошқа усуллар",
+        text: _i18n__WEBPACK_IMPORTED_MODULE_0__["default"].t("Бошқа усуллар"),
         value: 5
       }],
       methodIdentificationsOut: [{
-        text: "Қайта ишлаш учун олиб чиқилаётган товарга ваколатли шахс ва (ёки) божхона органи томонидан муҳрлар қўйиш ва, зарур бўлган ҳолларда, штамплар қўйиш, рақамли ва (ёки) бошқа турда тамғалаш",
+        text: _i18n__WEBPACK_IMPORTED_MODULE_0__["default"].t("Қайта ишлаш учун олиб чиқилаётган товарга ваколатли шахс ва (ёки) божхона органи томонидан муҳрлар қўйиш ва, зарур бўлган ҳолларда, штамплар қўйиш, рақамли ва (ёки) бошқа турда тамғалаш"),
         value: 1
       }, {
-        text: "Қайта ишлаш учун олиб чиқилаётган товарни батафсил тавсифлаш, уни суратга тушириш ёки бошқа ўлчамларда тасвирлаш",
+        text: _i18n__WEBPACK_IMPORTED_MODULE_0__["default"].t("Қайта ишлаш учун олиб чиқилаётган товарни батафсил тавсифлаш, уни суратга тушириш ёки бошқа ўлчамларда тасвирлаш"),
         value: 2
       }, {
-        text: "қайта ишлаш учун олиб чиқилаётган товарнинг олдиндан олинган намуналарини ёки нусхаларини ва уни қайта ишлаш маҳсулотини тадқиқ этиш натижаларини қиёслаш",
+        text: _i18n__WEBPACK_IMPORTED_MODULE_0__["default"].t("Қайта ишлаш учун олиб чиқилаётган товарнинг олдиндан олинган намуналарини ёки нусхаларини ва уни қайта ишлаш маҳсулотини тадқиқ этиш натижаларини қиёслаш"),
         value: 3
       }, {
-        text: "Қайта ишлаш учун олиб чиқилаётган товарнинг завод ва серия рақамлари тарзида мавжуд бўлган тамғалашдан ёхуд бошқача тамғалашдан фойдаланиш",
+        text: _i18n__WEBPACK_IMPORTED_MODULE_0__["default"].t("Қайта ишлаш учун олиб чиқилаётган товарнинг завод ва серия рақамлари тарзида мавжуд бўлган тамғалашдан ёхуд бошқача тамғалашдан фойдаланиш"),
         value: 4
       }, {
-        text: "Бошқа усуллар",
+        text: _i18n__WEBPACK_IMPORTED_MODULE_0__["default"].t("Бошқа усуллар"),
         value: 5
       }],
       items: [{
-        tab: "Ариза хақида умумиy маълумот"
+        tab: _i18n__WEBPACK_IMPORTED_MODULE_0__["default"].t("Ариза хақида умумий маълумот")
       }, {
-        tab: 'Ариза ҳолати'
+        tab: _i18n__WEBPACK_IMPORTED_MODULE_0__["default"].t("Ариза ҳолати")
       }]
     };
   },
   mounted: function mounted() {
     /*        setTimeout(() => {
                 this.$store.commit('setLoading', true)
-             }, 2000)*/
+              }, 2000)*/
     this.getAppData();
   },
   computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapState)(['loading'])),
@@ -556,7 +555,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             _this.app = response.data.data.data;
 
             _this.breadcrumb_items.push({
-              text: "Қайта ишлаш учун рухсатнома бериш -" + _this.app.appNum,
+              text: _i18n__WEBPACK_IMPORTED_MODULE_0__["default"].t("Қайта ишлаш учун рухсатнома бериш -") + _this.app.appNum,
               to: '/services/recycle/' + _this.app.appId,
               disabled: true,
               exact: true
@@ -568,13 +567,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           } else {
             _this.$store.commit('setLoading', false);
 
-            _this.$toast.error("Маълумот топилмади!"); //_this.$router.push("/applications");
+            _this.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_0__["default"].t("Маълумот топилмади!")); //_this.$router.push("/applications");
 
           }
         })["catch"](function (error) {
           _this.$store.commit('setLoading', false);
 
-          _this.$toast.error("Маълумот топилмади!"); //_this.$router.push("/applications");
+          _this.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_0__["default"].t("Маълумот топилмади!")); //_this.$router.push("/applications");
 
         });
       }, 500);
@@ -714,13 +713,21 @@ var render = function () {
                     },
                     [
                       _vm._v(
-                        "\n                        Товарни\n                        "
+                        "\n            " +
+                          _vm._s(_vm.$t("Товарни")) +
+                          "\n            "
                       ),
                       _vm.app.repubInOut === 100
-                        ? [_vm._v("божхона ҳудудида")]
-                        : [_vm._v("ҳудудидан ташқарида")],
+                        ? [_vm._v(_vm._s(_vm.$t("божхона ҳудудида")))]
+                        : [_vm._v(_vm._s(_vm.$t("ҳудудидан ташқарида")))],
                       _vm._v(
-                        "\n                        қайта ишлаш учун рухсатнома бериш тўғрисида\n                        "
+                        "\n            " +
+                          _vm._s(
+                            _vm.$t(
+                              "қайта ишлаш учун рухсатнома бериш тўғрисида"
+                            )
+                          ) +
+                          "\n            "
                       ),
                       _c("br"),
                     ],
@@ -753,9 +760,7 @@ var render = function () {
                       { key: item.tab, staticStyle: { width: "400px" } },
                       [
                         _vm._v(
-                          "\n                        " +
-                            _vm._s(item.tab) +
-                            "\n                    "
+                          "\n            " + _vm._s(item.tab) + "\n          "
                         ),
                       ]
                     )
@@ -800,7 +805,11 @@ var render = function () {
                               [
                                 _c("v-expansion-panel-header", [
                                   _vm._v(
-                                    "\n                                    Ариза умумий маълумотлари\n                                "
+                                    "\n                  " +
+                                      _vm._s(
+                                        _vm.$t("Ариза умумий маълумотлари")
+                                      ) +
+                                      "\n                "
                                   ),
                                 ]),
                                 _vm._v(" "),
@@ -824,7 +833,11 @@ var render = function () {
                                                   },
                                                   [
                                                     _vm._v(
-                                                      "\n                                                    Ариза рақами\n                                                "
+                                                      "\n                          " +
+                                                        _vm._s(
+                                                          _vm.$t("Ариза рақами")
+                                                        ) +
+                                                        "\n                        "
                                                     ),
                                                   ]
                                                 ),
@@ -839,7 +852,7 @@ var render = function () {
                                                   },
                                                   [
                                                     _vm._v(
-                                                      "\n                                                    " +
+                                                      "\n                          " +
                                                         _vm._s(
                                                           typeof _vm.app
                                                             .appNum !==
@@ -847,7 +860,7 @@ var render = function () {
                                                             ? _vm.app.appNum
                                                             : ""
                                                         ) +
-                                                        "\n                                                "
+                                                        "\n                        "
                                                     ),
                                                   ]
                                                 ),
@@ -863,7 +876,11 @@ var render = function () {
                                                   },
                                                   [
                                                     _vm._v(
-                                                      "Ариза юборилган ҳудуд"
+                                                      _vm._s(
+                                                        _vm.$t(
+                                                          "Ариза юборилган ҳудуд"
+                                                        )
+                                                      )
                                                     ),
                                                   ]
                                                 ),
@@ -877,7 +894,7 @@ var render = function () {
                                                         ? _vm.app.locationNm
                                                         : null
                                                     ) +
-                                                      "\n                                                "
+                                                      "\n                        "
                                                   ),
                                                 ]),
                                               ]),
@@ -892,7 +909,11 @@ var render = function () {
                                                   },
                                                   [
                                                     _vm._v(
-                                                      "Идентификация усули"
+                                                      _vm._s(
+                                                        _vm.$t(
+                                                          "Идентификация усули"
+                                                        )
+                                                      )
                                                     ),
                                                   ]
                                                 ),
@@ -906,7 +927,7 @@ var render = function () {
                                                         ? _vm.app.methodIden
                                                         : null
                                                     ) +
-                                                      "\n                                                "
+                                                      "\n                        "
                                                   ),
                                                 ]),
                                               ]),
@@ -921,7 +942,12 @@ var render = function () {
                                                   },
                                                   [
                                                     _vm._v(
-                                                      "Қайта ишлаш операцияларининг қиймати\n                                                "
+                                                      _vm._s(
+                                                        _vm.$t(
+                                                          "Қайта ишлаш операцияларининг қиймати"
+                                                        )
+                                                      ) +
+                                                        "\n                        "
                                                     ),
                                                   ]
                                                 ),
@@ -935,7 +961,7 @@ var render = function () {
                                                         ? _vm.app.recycleCost
                                                         : null
                                                     ) +
-                                                      "\n                                                    " +
+                                                      "\n                          " +
                                                       _vm._s(
                                                         typeof _vm.app
                                                           .recycleCurrencyNm !==
@@ -944,7 +970,7 @@ var render = function () {
                                                               .recycleCurrencyNm
                                                           : null
                                                       ) +
-                                                      "\n                                                "
+                                                      "\n                        "
                                                   ),
                                                 ]),
                                               ]),
@@ -959,7 +985,11 @@ var render = function () {
                                                   },
                                                   [
                                                     _vm._v(
-                                                      "Қайта ишлаш муддати"
+                                                      _vm._s(
+                                                        _vm.$t(
+                                                          "Қайта ишлаш муддати"
+                                                        )
+                                                      )
                                                     ),
                                                   ]
                                                 ),
@@ -974,7 +1004,7 @@ var render = function () {
                                                             .recycleDeadlineDate
                                                         : null
                                                     ) +
-                                                      "\n                                                "
+                                                      "\n                        "
                                                   ),
                                                 ]),
                                               ]),
@@ -989,7 +1019,11 @@ var render = function () {
                                                   },
                                                   [
                                                     _vm._v(
-                                                      "Шартнома идентификация рақами"
+                                                      _vm._s(
+                                                        _vm.$t(
+                                                          "Шартнома идентификация рақами"
+                                                        )
+                                                      )
                                                     ),
                                                   ]
                                                 ),
@@ -1005,14 +1039,14 @@ var render = function () {
                                                           "undefined"
                                                           ? [
                                                               _vm._v(
-                                                                "\n                                                        " +
+                                                                "\n                            " +
                                                                   _vm._s(
                                                                     typeof contract.contractIdenNumber !==
                                                                       "undefined"
                                                                       ? contract.contractIdenNumber
                                                                       : null
                                                                   ) +
-                                                                  ",\n                                                    "
+                                                                  ",\n                          "
                                                               ),
                                                             ]
                                                           : _vm._e()
@@ -1033,7 +1067,12 @@ var render = function () {
                                                   },
                                                   [
                                                     _vm._v(
-                                                      "Товар қайта ишланадиган жой манзили\n                                                "
+                                                      _vm._s(
+                                                        _vm.$t(
+                                                          "Товар қайта ишланадиган жой манзили"
+                                                        )
+                                                      ) +
+                                                        "\n                        "
                                                     ),
                                                   ]
                                                 ),
@@ -1047,7 +1086,7 @@ var render = function () {
                                                         ? _vm.app.recycleAddress
                                                         : null
                                                     ) +
-                                                      "\n                                                "
+                                                      "\n                        "
                                                   ),
                                                 ]),
                                               ]),
@@ -1062,7 +1101,11 @@ var render = function () {
                                                   },
                                                   [
                                                     _vm._v(
-                                                      "Илова қилинган файллар"
+                                                      _vm._s(
+                                                        _vm.$t(
+                                                          "Илова қилинган файллар"
+                                                        )
+                                                      )
                                                     ),
                                                   ]
                                                 ),
@@ -1077,7 +1120,7 @@ var render = function () {
                                                           .docs !== "undefined"
                                                           ? [
                                                               _vm._v(
-                                                                "\n                                                        " +
+                                                                "\n                            " +
                                                                   _vm._s(
                                                                     typeof doc.docname !==
                                                                       "undefined"
@@ -1087,7 +1130,7 @@ var render = function () {
                                                                           ")"
                                                                       : null
                                                                   ) +
-                                                                  ",\n                                                    "
+                                                                  ",\n                          "
                                                               ),
                                                             ]
                                                           : _vm._e()
@@ -1111,14 +1154,18 @@ var render = function () {
                                                       },
                                                       [
                                                         _vm._v(
-                                                          "Ваколатли органлар рухсатномаси"
+                                                          _vm._s(
+                                                            _vm.$t(
+                                                              "Ваколатли органлар рухсатномаси"
+                                                            )
+                                                          )
                                                         ),
                                                       ]
                                                     ),
                                                     _vm._v(" "),
                                                     _c("td", [
                                                       _vm._v(
-                                                        "\n                                                    " +
+                                                        "\n                          " +
                                                           _vm._s(
                                                             typeof _vm.app
                                                               .orgPermission !==
@@ -1127,7 +1174,7 @@ var render = function () {
                                                                   .orgPermission
                                                               : null
                                                           ) +
-                                                          "\n                                                "
+                                                          "\n                        "
                                                       ),
                                                     ]),
                                                   ])
@@ -1146,14 +1193,18 @@ var render = function () {
                                                       },
                                                       [
                                                         _vm._v(
-                                                          "Алмаштириладиган эквивалент товар"
+                                                          _vm._s(
+                                                            _vm.$t(
+                                                              "Алмаштириладиган эквивалент товар"
+                                                            )
+                                                          )
                                                         ),
                                                       ]
                                                     ),
                                                     _vm._v(" "),
                                                     _c("td", [
                                                       _vm._v(
-                                                        "\n                                                    " +
+                                                        "\n                          " +
                                                           _vm._s(
                                                             typeof _vm.app
                                                               .replProductNm !==
@@ -1162,7 +1213,7 @@ var render = function () {
                                                                   .replProductNm
                                                               : null
                                                           ) +
-                                                          "\n                                                "
+                                                          "\n                        "
                                                       ),
                                                     ]),
                                                   ])
@@ -1185,7 +1236,11 @@ var render = function () {
                               [
                                 _c("v-expansion-panel-header", [
                                   _vm._v(
-                                    "\n                                    Товарлар тўғрисида маълумотлар\n                                "
+                                    "\n                  " +
+                                      _vm._s(
+                                        _vm.$t("Товарлар тўғрисида маълумотлар")
+                                      ) +
+                                      "\n                "
                                   ),
                                 ]),
                                 _vm._v(" "),
@@ -1207,7 +1262,11 @@ var render = function () {
                                               [
                                                 _vm._v(
                                                   _vm._s(key + 1) +
-                                                    " - товар номи\n                                            " +
+                                                    " " +
+                                                    _vm._s(
+                                                      _vm.$t("- товар номи")
+                                                    ) +
+                                                    "\n                      " +
                                                     _vm._s(product.cmdtNm)
                                                 ),
                                               ]
@@ -1235,7 +1294,11 @@ var render = function () {
                                                                 },
                                                                 [
                                                                   _vm._v(
-                                                                    "ТИФ ТН коди"
+                                                                    _vm._s(
+                                                                      _vm.$t(
+                                                                        "ТИФ ТН коди"
+                                                                      )
+                                                                    )
                                                                   ),
                                                                 ]
                                                               ),
@@ -1255,7 +1318,7 @@ var render = function () {
                                                                         ? product.hsNm
                                                                         : ""
                                                                     ) +
-                                                                    "\n                                                    "
+                                                                    "\n                          "
                                                                 ),
                                                               ]),
                                                             ])
@@ -1274,7 +1337,11 @@ var render = function () {
                                                                 },
                                                                 [
                                                                   _vm._v(
-                                                                    "Товар номи"
+                                                                    _vm._s(
+                                                                      _vm.$t(
+                                                                        "Товар номи"
+                                                                      )
+                                                                    )
                                                                   ),
                                                                 ]
                                                               ),
@@ -1287,7 +1354,7 @@ var render = function () {
                                                                       ? product.cmdtNm
                                                                       : ""
                                                                   ) +
-                                                                    "\n                                                    "
+                                                                    "\n                          "
                                                                 ),
                                                               ]),
                                                             ])
@@ -1306,7 +1373,12 @@ var render = function () {
                                                                 },
                                                                 [
                                                                   _vm._v(
-                                                                    "Асосий ўлчов бирлигидаги миқдори\n                                                    "
+                                                                    _vm._s(
+                                                                      _vm.$t(
+                                                                        "Асосий ўлчов бирлигидаги миқдори"
+                                                                      )
+                                                                    ) +
+                                                                      "\n                          "
                                                                   ),
                                                                 ]
                                                               ),
@@ -1319,7 +1391,7 @@ var render = function () {
                                                                       ? product.cmdtNetto
                                                                       : ""
                                                                   ) +
-                                                                    "\n                                                    "
+                                                                    "\n                          "
                                                                 ),
                                                               ]),
                                                             ])
@@ -1338,7 +1410,12 @@ var render = function () {
                                                                 },
                                                                 [
                                                                   _vm._v(
-                                                                    "Қўшимча ўлчов бирлигидаги миқдори\n                                                    "
+                                                                    _vm._s(
+                                                                      _vm.$t(
+                                                                        "Қўшимча ўлчов бирлигидаги миқдори"
+                                                                      )
+                                                                    ) +
+                                                                      "\n                          "
                                                                   ),
                                                                 ]
                                                               ),
@@ -1351,7 +1428,7 @@ var render = function () {
                                                                       ? product.cmdtQty
                                                                       : ""
                                                                   ) +
-                                                                    "\n                                                    "
+                                                                    "\n                          "
                                                                 ),
                                                               ]),
                                                             ])
@@ -1370,7 +1447,11 @@ var render = function () {
                                                                 },
                                                                 [
                                                                   _vm._v(
-                                                                    "Товар қиймати"
+                                                                    _vm._s(
+                                                                      _vm.$t(
+                                                                        "Товар қиймати"
+                                                                      )
+                                                                    )
                                                                   ),
                                                                 ]
                                                               ),
@@ -1390,7 +1471,7 @@ var render = function () {
                                                                         ? product.currencyNm
                                                                         : ""
                                                                     ) +
-                                                                    "\n                                                    "
+                                                                    "\n                          "
                                                                 ),
                                                               ]),
                                                             ])
@@ -1409,7 +1490,11 @@ var render = function () {
                                                                 },
                                                                 [
                                                                   _vm._v(
-                                                                    "Товар мақоми"
+                                                                    _vm._s(
+                                                                      _vm.$t(
+                                                                        "Товар мақоми"
+                                                                      )
+                                                                    )
                                                                   ),
                                                                 ]
                                                               ),
@@ -1422,7 +1507,7 @@ var render = function () {
                                                                       ? product.cmdtStatusNm
                                                                       : ""
                                                                   ) +
-                                                                    "\n                                                    "
+                                                                    "\n                          "
                                                                 ),
                                                               ]),
                                                             ])
@@ -1445,7 +1530,12 @@ var render = function () {
                                                                 },
                                                                 [
                                                                   _vm._v(
-                                                                    "Қайта ишлаш махсулотларининг чиқиш\n                                                        нормаси\n                                                    "
+                                                                    _vm._s(
+                                                                      _vm.$t(
+                                                                        "Қайта ишлаш махсулотларининг чиқиш нормаси"
+                                                                      )
+                                                                    ) +
+                                                                      "\n                          "
                                                                   ),
                                                                 ]
                                                               ),
@@ -1494,7 +1584,12 @@ var render = function () {
                                                                                 "v-list-item-content",
                                                                                 [
                                                                                   _vm._v(
-                                                                                    "Товар номи\n                                                                    "
+                                                                                    _vm._s(
+                                                                                      _vm.$t(
+                                                                                        "Товар номи"
+                                                                                      )
+                                                                                    ) +
+                                                                                      "\n                                  "
                                                                                   ),
                                                                                 ]
                                                                               ),
@@ -1505,7 +1600,12 @@ var render = function () {
                                                                                 "v-list-item-content",
                                                                                 [
                                                                                   _vm._v(
-                                                                                    "Товар миқдори\n                                                                    "
+                                                                                    _vm._s(
+                                                                                      _vm.$t(
+                                                                                        "Товар миқдори"
+                                                                                      )
+                                                                                    ) +
+                                                                                      "\n                                  "
                                                                                   ),
                                                                                 ]
                                                                               ),
@@ -1533,7 +1633,7 @@ var render = function () {
                                                                                         _vm._s(
                                                                                           subProduct.mainCmdtNm
                                                                                         ) +
-                                                                                          "\n                                                                    "
+                                                                                          "\n                                  "
                                                                                       ),
                                                                                     ]
                                                                                   ),
@@ -1547,7 +1647,7 @@ var render = function () {
                                                                                         _vm._s(
                                                                                           subProduct.cmdtQty
                                                                                         ) +
-                                                                                          "\n                                                                    "
+                                                                                          "\n                                  "
                                                                                       ),
                                                                                     ]
                                                                                   ),
@@ -1634,7 +1734,9 @@ var render = function () {
                                                       _vm._v(
                                                         " " +
                                                           _vm._s(
-                                                            appstatus.statusNm
+                                                            _vm.$t(
+                                                              appstatus.statusNm
+                                                            )
                                                           )
                                                       ),
                                                     ]
@@ -1675,7 +1777,13 @@ var render = function () {
                                                             },
                                                             [
                                                               _vm._v(
-                                                                "\n                                                Ариза шаклини юклаб олинг! "
+                                                                "\n                        " +
+                                                                  _vm._s(
+                                                                    _vm.$t(
+                                                                      "Ариза шаклини юклаб олинг!"
+                                                                    )
+                                                                  ) +
+                                                                  " "
                                                               ),
                                                             ]
                                                           ),
@@ -1703,7 +1811,13 @@ var render = function () {
                                                             },
                                                             [
                                                               _vm._v(
-                                                                "\n                                                Рухсатномани юклаб олинг! "
+                                                                "\n                        " +
+                                                                  _vm._s(
+                                                                    _vm.$t(
+                                                                      "Рухсатномани юклаб олинг!"
+                                                                    )
+                                                                  ) +
+                                                                  " "
                                                               ),
                                                             ]
                                                           ),
@@ -1724,11 +1838,11 @@ var render = function () {
                                                         },
                                                         [
                                                           _vm._v(
-                                                            "\n                                                " +
+                                                            "\n                        " +
                                                               _vm._s(
                                                                 appstatus.comment
                                                               ) +
-                                                              "\n                                            "
+                                                              "\n                      "
                                                           ),
                                                         ]
                                                       )
@@ -1769,7 +1883,13 @@ var render = function () {
                                                     [
                                                       _c("h4", [
                                                         _vm._v(
-                                                          " Якуний хулоса "
+                                                          " " +
+                                                            _vm._s(
+                                                              _vm.$t(
+                                                                "Якуний хулоса"
+                                                              )
+                                                            ) +
+                                                            " "
                                                         ),
                                                       ]),
                                                       _vm._v(" "),

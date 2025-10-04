@@ -180,7 +180,7 @@
                                     >
                                         <v-row justify="start">
                                             <v-col cols="10">
-                                                <h4 class="active"> {{ appstatus.statusNm }}</h4>
+                                                <h4 class="active"> {{ $t(appstatus.statusNm) }}</h4>
                                                 <p> {{ new Date(appstatus.insTime).toLocaleString() }}</p>
 
                                                 <p v-if="appstatus.status==='111'" style="font-size: 15px"><a
@@ -299,7 +299,7 @@ export default {
                 {'value': '867', 'text': i18n.t('кг U')},
             ],
             items: [
-                {tab: i18n.t("Ариза хақида умумиy маълумот")},
+                {tab: i18n.t("Ариза хақида умумий маълумот")},
                 {tab: i18n.t('Ариза ҳолати')},
 
             ],

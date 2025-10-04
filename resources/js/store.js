@@ -12,6 +12,11 @@ export default new Vuex.Store({
         menu: [],
         footermenu: [],
         viewed: [],
+        lists:{
+            country:[],
+            unit:[],
+            currency:[]
+        },
         loading: false
     },
     mutations: {
@@ -35,6 +40,30 @@ export default new Vuex.Store({
         },
         setLoading(state, bool) {
             state.loading = bool;
+        },
+        setCountry(state) {
+            if(state.lists.country<1) {
+                Vue.prototype.$auth.plugins.http.get('/api/v1/data/country').then(res=>{
+                    state.lists.country = res.data;
+                })
+
+            }
+        },
+        setCurrency(state) {
+            if(state.lists.currency<1) {
+                Vue.prototype.$auth.plugins.http.get('/api/v1/data/currency').then(res=>{
+                    state.lists.currency = res.data;
+                })
+
+            }
+        },
+        setUnit(state) {
+            if(state.lists.unit<1) {
+                Vue.prototype.$auth.plugins.http.get('/api/v1/data/unit').then(res=>{
+                    state.lists.unit = res.data;
+                })
+
+            }
         }
     },
     getters:{
@@ -69,6 +98,7 @@ export default new Vuex.Store({
         SET_USER_VIEWED({commit}, viewed) {
             commit('SET_USER_VIEWED', viewed);
         },
+
 
     },
 })

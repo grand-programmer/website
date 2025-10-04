@@ -3,19 +3,19 @@
         <VueSlickCarousel
             v-bind="settings"
         >
-            <div class="slide_item" v-for="item in items">
+            <div class="slide_item" v-for="item in items" v-if="item.titleen">
                 <div class="slide_item_wrapper">
                     <div class="slide_item_sub_wrapper">
                         <img v-if="1===2" src="/img/icons/2279036.png"/>
-                        <div class="slide_item_title">{{ $t(item.title) }}</div>
-                        <div class="slide_item_total_price" v-if="(item.total / 1000000000).toFixed(1) !== '0.0'"><span>{{
+                        <div class="slide_item_title">{{ $t(item['title' + $i18n.locale]) }}</div>
+                        <div class="slide_item_total_price" v-if="(item.total / 10000000000).toFixed(1) !== '0.0'"><span>{{
                                 (item.total / 1000000000).toFixed(1)
                             }}</span> {{ $t('трл') }}. $
                         </div>
-                        <div class="slide_item_total_price" v-else-if="(item.total / 1000000).toFixed(1) !== '0.0'">
+                        <div class="slide_item_total_price" v-else-if="parseFloat((item.total / 10000000).toFixed(1)) >1">
                             <span>{{ (item.total / 1000000).toFixed(1) }}</span> {{ $t('млрд') }}. $
                         </div>
-                        <div class="slide_item_total_price" v-else-if="(item.total / 1000).toFixed(1) !== '0.0'"><span>{{
+                        <div class="slide_item_total_price" v-else-if="(item.total / 10000).toFixed(1) !== '0.0'"><span>{{
                                 (item.total / 1000).toFixed(1)
                             }}</span> {{ $t('млн') }}. $
                         </div>
@@ -25,20 +25,21 @@
                         </div>
                         <div class="slide_item_total_difference">
                 <span>
-                    <v-icon color="primary" large>mdi-trending-up</v-icon>
-                    <p v-if="item.result1 && item.result2">{{ ((item.result1 * 100)/item.result2).toFixed(1) }} %</p>
+                    <v-icon v-if="(item.result1 - item.result2) > 0" color="primary" large>mdi-trending-up</v-icon>
+                    <v-icon v-else color="red" large>mdi-trending-down</v-icon>
+                    <p v-if="item.result1 && item.result2">{{ (((item.result1 - item.result2) * 100)/item.result2).toFixed(1) }} %</p>
                     <p>{{ $t('ўтган йилга нисбатан') }}</p>
                 </span>
                             <span>
                     <v-icon color="cyan" large>mdi-check</v-icon>
-                    <p>{{ ((item.total * 100) / (items.map(el => { return el.total; }).reduce((x, y) => { return x + y },0))).toFixed(1) }} %</p>
+                    <p>{{ ((item.total * 100) / (items.map(el => { return (el.result1); }).reduce((x, y) => { return x + y },0))).toFixed(1) }} %</p>
                     <p>{{ $t('жамига  нисбатан') }}</p>
                 </span>
                         </div>
                         <h4>{{ $t('Асосий товарлар') }}</h4>
                         <div class="slide_item_cats">
                             <div class="slide_item_cat_tem" v-for="catItem in item.cats.filter((item,itemKey)=> itemKey < 4)">
-                                <span>{{ $t(catItem.title) }}</span>
+                                <span>{{ $t(catItem['title'+ $i18n.locale]) }}</span>
                                 <div class="catItemPrice" v-html="moneyFormat(catItem.price)"></div>
                             </div>
 
@@ -79,6 +80,9 @@ export default {
             type: [Number]
         },
         month: {
+            type: [Number]
+        },
+        toMonth: {
             type: [Number]
         }
     },
@@ -130,22 +134,21 @@ export default {
     watch: {
         async regime(val, oldVal) {
             if (val !== oldVal) {
-                console.log(val)
-                console.log(oldVal)
                 await this.run()
             }
         },
         async year(val, oldVal) {
             if (val !== oldVal) {
-                console.log(val)
-                console.log(oldVal)
                 await this.run()
             }
         },
         async month(val, oldVal) {
             if (val !== oldVal) {
-                console.log(val)
-                console.log(oldVal)
+                await this.run()
+            }
+        },
+        async toMonth(val, oldVal) {
+            if (val !== oldVal) {
                 await this.run()
             }
         }
@@ -157,20 +160,22 @@ export default {
                     name: 'tovarimex_n',
                     rejim: this.regime,
                     month: this.month ? this.month : 0,
+                    toMonth: this.toMonth ? this.toMonth : 0,
                     year: this.year ? this.year : 0
                 }
             }).then(res => {
                 this.items = res.data.data
             })
         },
-        moneyFormat(price) {
-            if ((price / 1000000000).toFixed(1) !== '0.0')
-                return '<span>' + (price / 1000000000).toFixed(1) + '</span>' + this.$t('трл') + '. $';
-            else if ((price / 1000000).toFixed(1) !== '0.0')
-            return '<span>' + (price / 1000000).toFixed(1) + '</span>' + this.$t('млрд') + '. $';
-            if ((price / 1000).toFixed(1) !== '0.0')
-                return '<span>' + (price / 1000).toFixed(1) + '</span>' + this.$t('млн') + '. $'
-        }
+      moneyFormat(price) {
+        if ((price / 10000000000).toFixed(1) !== '0.0')
+          return '<span>' + (price / 1000000000).toFixed(1) + '</span> ' + this.$t('трл') + '. $';
+        else if (((price / 10000000).toFixed(1)) !== '0.0')
+          return '<span>' + (price / 1000000).toFixed(1) + '</span> ' + this.$t('млрд') + '. $';
+        if ((price / 10000).toFixed(1) !== '0.0')
+          return '<span>' + (price / 1000).toFixed(1) + '</span> ' + this.$t('млн') + '. $'; else
+          return '<span>' + parseFloat(price).toFixed(1) + '</span> ' + this.$t('минг') + ' $'
+      }
     }
 }
 </script>
@@ -330,7 +335,7 @@ export default {
             min-height: 230px;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            justify-content: start;
             .slide_item_cat_tem {
                 display: flex;
                 justify-content: center;

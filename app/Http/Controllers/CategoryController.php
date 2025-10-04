@@ -83,13 +83,16 @@ class CategoryController extends Controller
     public function show(Category $category, Request $request)
     {
         $data = $request->only('withnews','page');
+        $categoryData=$category;
 
         if (isset($data['page'])) $page = (int)$data['page'];
         if (isset($data['withnews'])) {
             // $news= $category->news()->orderby('created_at', 'desc')->skip(($page - 1) * 6 )->limit(6)->get();
-            $category = Category::with('news')->where('id', $category->id)->get()[0];
+            $categoryData = Category::whereHas('news',function ($query){
+                return $query->limit(5);
+            })->where('id', $category->id)->firstOrFail();
         }
-        return CategoryResource::make($category);
+        return CategoryResource::make($categoryData);
 
     }
 

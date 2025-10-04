@@ -14,7 +14,7 @@
                 <v-row>
                     <v-col cols="12">
                         <h3 align="center" class="lh-sm font-weight-bold primary-color my-5">
-                            ТИФ субъектининг божхона органлари ғазна ҳисобварағидаги маблағларини қайтариш бўйича ариза
+                            {{ $t('ТИФ субъектининг божхона органлари ғазна ҳисобварағидаги маблағларини қайтариш бўйича ариза') }}
                             <br>
                         </h3>
                     </v-col>
@@ -24,23 +24,22 @@
 
                 >
                     <div class="row position-absolute yoriqnoma-text"><a
-                        href="/storage/files/dastlabki-user.pptx"> Ариза тўлдириш бўйича йўриқмани юклаб
-                        олинг!
+                        :href="$i18n.locale==='uz'?'/storage/files/refund_uz.pptx':'/storage/files/refund_ru.pptx'"> {{ $t('Ариза тўлдириш бўйича йўриқмани юклаб олинг!') }}
                     </a></div>
                     <ValidationObserver v-slot="{ invalid }" ref="stepValidation1">
                         <v-row>
                         </v-row>
                         <v-row class="person_data mt-10">
                             <v-col cols="6" v-if="person.type===2">
-                                <ValidationProvider name="СТИР"
+                                <ValidationProvider :name="$t('СТИР')"
                                                     v-slot="{ errors }">
 
                                     <v-text-field
                                         v-model="person.organization_inn"
-                                        label="СТИР"
+                                        :label="$t('СТИР')"
                                         required
                                         :disabled="(JSON.parse($auth.user().legal_info)[0].tin).length>0"
-                                        hint="Корхона ёки ташкилот СТИРи"
+                                        :hint="$t('Корхона ёки ташкилот СТИРи')"
                                         persistent-hint
                                         name="orgInn"
                                     >
@@ -50,15 +49,15 @@
                                 </ValidationProvider>
                             </v-col>
                             <v-col cols="6" v-else>
-                                <ValidationProvider name="ЖШШИР"
+                                <ValidationProvider :name="$t('ЖШШИР')"
                                                     v-slot="{ errors }">
 
                                     <v-text-field
                                         v-model="person.pin"
-                                        label="ЖШШИР"
+                                        :label="$t('ЖШШИР')"
                                         required
                                         :disabled="$auth.user().pin > 0"
-                                        hint="Аризачи ЖШШРи"
+                                        :hint="$t('Аризачи ЖШШРи')"
                                         persistent-hint
                                         name="personInn"
                                     >
@@ -68,14 +67,14 @@
                                 </ValidationProvider>
                             </v-col>
                             <v-col cols="6" v-if="!$auth.user().tin || ($auth.user().tin && ($auth.user().tin).length<9)">
-                                <ValidationProvider name="СТИР"
+                                <ValidationProvider :name="$t('СТИР')"
                                                     v-slot="{ errors }">
 
                                     <v-text-field
                                         v-model="person.tin"
-                                        label="СТИР"
+                                        :label="$t('СТИР')"
                                         required
-                                        hint="Аризачи СТИРи"
+                                        :hint="$t('Аризачи СТИРи')"
                                         persistent-hint
                                         name="personInn"
                                     >
@@ -85,18 +84,18 @@
                                 </ValidationProvider>
                             </v-col>
                             <v-col cols="6">
-                                <ValidationProvider :name="person.type===2?'Ташкилот номи':'ФИШ'" rules="required"
+                                <ValidationProvider :name="$t(person.type===2?'Ташкилот номи':'ФИШ')" rules="required"
                                                     v-slot="{ errors }">
                                     <v-text-field
                                         v-model="person.type===2?person.organization_name:person.fio"
                                         :counter="200"
-                                        :label="person.type===2?'Ташкилот номи':'ФИШ'"
+                                        :label="$t(person.type===2?'Ташкилот номи':'ФИШ')"
                                         required
-                                        :hint="person.type===2?'Юридик шахснинг тўлиқ номи':'Мурожаатчи фамилияси, исми, шарифи'"
+                                        :hint="$t(person.type===2?'Юридик шахснинг тўлиқ номи':'Мурожаатчи фамилияси, исми, шарифи')"
                                         persistent-placeholder
                                     >
                                         <template v-slot:label>
-                                            {{ person.type === 2 ? 'Ташкилот номи' : 'ФИШ' }}<sup>*</sup></template>
+                                            {{ $t(person.type === 2 ? 'Ташкилот номи':'ФИШ') }}<sup>*</sup></template>
 
                                     </v-text-field>
                                     <span class="red&#45;&#45;text">{{ errors[0] }}</span>
@@ -108,7 +107,7 @@
                                 <text-field
                                     v-model="app.bank_number"
                                     v-mask="'#### #### #### #### ####'"
-                                    title="Банк ҳисоб рақами"
+                                    :title="$t('Банк ҳисоб рақами')"
                                     required
                                     persistent-placeholder
                                 >
@@ -116,12 +115,12 @@
                             </v-col>
                             <v-col cols="6">
                                 <ValidationProvider
-                                    name="МФО"
+                                    :name="$t('МФО')"
                                     rules="required"
                                     v-slot="{ errors }">
                                     <v-autocomplete
                                         v-model="app.mfo"
-                                        label="МФО*"
+                                        :label="$t('МФО*')"
                                         required
                                         persistent-placeholder
                                         :items="mfos"
@@ -141,7 +140,7 @@
                             </v-col>
                             <v-col cols="6">
                                 <text-field
-                                    title="Қайтарилиши лозим бўлган сумма"
+                                    :title="$t('Қайтарилиши лозим бўлган сумма')"
                                     type="number"
                                     persistent-placeholder
                                     rules="required"
@@ -150,7 +149,7 @@
                             </v-col>
 
                             <v-col cols="6">
-                                <ValidationProvider name="Ҳудуд" rules="required"
+                                <ValidationProvider :name="$t('Ҳудуд')" rules="required"
                                                     v-slot="{ errors }">
                                     <v-autocomplete
                                         v-model="app.region"
@@ -158,7 +157,7 @@
                                         :items="regions"
                                         persistent-hint
                                     >
-                                        <template v-slot:label>Ҳудудий божхона бошқармасини танланг <sup>*</sup>
+                                        <template v-slot:label>{{ $t('Ҳудудий божхона бошқармасини танланг') }}<sup> *</sup>
                                         </template>
                                     </v-autocomplete>
                                     <span class="red--text">{{ errors[0] }}</span>
@@ -167,38 +166,38 @@
                             </v-col>
                             <v-col cols="6">
                                 <e-arxiv-file v-model="app.akt"
-                                              label="Файлни юкланг" norequired/>
+                                              :label="$t('Файлни юкланг')" norequired/>
                             </v-col>
 
                             <v-col cols="6">
-                                <ValidationProvider name="Телефон рақами" rules="required"
+                                <ValidationProvider :name="$t('Телефон рақами')" rules="required"
                                                     v-slot="{ errors }">
                                     <v-text-field
                                         v-model="person.phone"
-                                        label="Телефон рақами"
+                                        :label="$t('Телефон рақами')"
                                         required
                                         v-mask="'+998 ## ### ## ##'"
-                                        hint="Аризачининг телефон рақами"
+                                        :hint="$t('Аризачининг телефон рақами')"
                                         persistent-placeholder
                                     >
-                                        <template v-slot:label>Телефон рақами <sup>*</sup></template>
+                                        <template v-slot:label>{{ $t('Телефон рақами') }}<sup> *</sup></template>
                                     </v-text-field>
                                     <span class="red--text">{{ errors[0] }}</span>
                                 </ValidationProvider>
 
                             </v-col>
                             <v-col cols="6">
-                                <ValidationProvider name="Электрон почта" rules="required|email"
+                                <ValidationProvider :name="$t('Электрон почта')" rules="required|email"
                                                     v-slot="{ errors }">
                                     <v-text-field
                                         v-model="person.email"
                                         :counter="200"
-                                        label="Электрон почта манзили"
+                                        :label="$t('Электрон почта манзили')"
                                         required
-                                        hint="Аризачининг электрон почтаси"
+                                        :hint="$t('Аризачининг электрон почтаси')"
                                         persistent-placeholder
                                     >
-                                        <template v-slot:label>Электрон почта манзили <sup>*</sup>
+                                        <template v-slot:label>{{ $t('Электрон почта манзили') }}<sup> *</sup>
                                         </template>
                                     </v-text-field>
                                     <span class="red--text">{{ errors[0] }}</span>
@@ -208,9 +207,9 @@
                             <v-col cols="6">
                                 <text-field
                                     v-model="person.perAdr"
-                                    title="Яшаш манзили"
+                                    :title="$t('Яшаш манзили')"
                                     rules="required"
-                                    hint="Аризачининг яшаш манзили"
+                                    :hint="$t('Аризачининг яшаш манзили')"
                                     persistent-placeholder
                                 >
 
@@ -223,15 +222,16 @@
 
                     </ValidationObserver>
                     <v-row class="row mb-3 position-absolute bottom-0 end-0">
-                        <v-col class="d-flex tab_action_buttons">
+                        <v-col class="order-2 p-2 bd-highlight">
 
                             <v-btn
                                 color="primary"
                                 @click="nextStep"
                                 size="large"
                                 :loading="loading.button"
+                                style="width: max-content"
                             >
-                                Ариза юбориш
+                                {{ $t('Ариза юбориш') }}
                             </v-btn>
 
 
@@ -239,7 +239,7 @@
                     </v-row>
                     <v-row class="bottom-required-info">
                         <i style="font-size: 12px;"><sub
-                            style="font-size: 20px">*</sub> - майдонлари албатта тўлдирилиши шарт!
+                            style="font-size: 20px">*</sub> {{ $t('- майдонлари албатта тўлдирилиши шарт!') }}
                         </i>
 
                     </v-row>
@@ -253,9 +253,9 @@
             <img src="/public/images/telegram.png">
 
 
-            <p> Саволларингизни йўлланг
+            <p> {{ $t('Саволларингизни йўлланг') }}
                 <br>
-                @dastlabkiqaror
+                {{ $t('@dastlabkiqaror') }}
             </p></a>
     </div>
 </template>
@@ -272,13 +272,6 @@ import EArxivFile from "../../../../components/form/e-arxiv-file";
 import DialogChips from "../../../../components/form/dialog-chips";
 
 
-Object.keys(rules).forEach(rule => {
-    extend(rule, {
-        ...rules[rule], // copies rule configuration
-        message: messages.messages[rule] // assign message
-
-    });
-});
 export default {
     name: "InitialRefund",
     data() {
@@ -291,13 +284,13 @@ export default {
                     exact: true,
                 },
                 {
-                    text: 'Хизматлар',
+                    text: i18n.t('Хизматлар'),
                     to: '/services',
                     disabled: false,
                     exact: true,
                 },
                 {
-                    text: 'Ҳисобварағидаги маблағларини қайтариш',
+                    text: i18n.t('Ҳисобварағидаги маблағларини қайтариш'),
                     to: '/services/refund',
                     disabled: true,
                     exact: true,
@@ -453,7 +446,7 @@ export default {
                         //console.log(resultData.data)
                         ///this.$cookie.delete('user');
                         //this.$cookie.delete('huquqegasi');
-                        _this.$toast.success("Сизнинг аризангиз омадли тарзда юборилди!");
+                        _this.$toast.success(i18n.t("Сизнинг аризангиз омадли тарзда юборилди!"));
                         setTimeout(() => {
                             _this.$router.push("/services/refund/" + _this.application.id)
 
@@ -474,7 +467,7 @@ export default {
                         _this.showFirstError(error.response.data.data.errors);
                     }
                 } else {
-                    _this.$toast.error('Серверда хатолик юз берди! Кейинроқ уриниб кўринг');
+                    _this.$toast.error(i18n.t("Серверда хатолик юз берди! Кейинроқ уриниб кўринг"));
                     console.log(error)
                 }
 
@@ -501,11 +494,11 @@ export default {
             }
 
             toast = getkeyValue(error);
-            this.$toast.error('Майдонларни тўлдиришда хатолик юз берди! \n ' + toast.key + ' - ' + toast.value);
+            this.$toast.error(i18n.t("Майдонларни тўлдиришда хатолик юз берди!") + '\n' + toast.key + ' - ' + toast.value);
         },
         async getBoshqarmalar() {
             const _this = this
-            await axios.get('/api/v1/ex_api/boshqarma').then(function (result) {
+            await this.$auth.plugins.http.get('/api/v1/ex_api/boshqarma').then(function (result) {
                 if (typeof result.data.data !== 'undefined')
                     result.data.data.forEach(function (item) {
                         if (!(['1790', '1791', '1701'].includes(item['kod_id'])))
@@ -703,7 +696,7 @@ export default {
                 this.loading.mfo = true
 
                 // Lazily load input items
-                fetch("https://new.customs.uz/api/v1/data/mfo?code=" + val)
+                fetch("https://customs.uz/api/v1/data/mfo?code=" + val)
                     .then((res) => res.json())
                     .then(res => {
                         if (typeof res.data !== 'undefined') {

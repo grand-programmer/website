@@ -109,14 +109,16 @@ class AuthController extends Controller
                 $legal_info = $responseUser->json()['legal_info'];
                 collect($legal_info)->transform(function ($item, $key) {
                     global $legals;
-                    if ($item['is_basic'] === true) {
+                    if ($item['is_basic'] === "true" || $item['is_basic']) {
                         $legals = $item;
                         return $item;
                     }
                 })->all();
 // dd(array_column($legals,'is_basic'));
+
                 if (isset($legals['le_tin'])) $type = 2;
             }
+
 
             if (DB::table('users')->where(
                 [
@@ -180,7 +182,7 @@ class AuthController extends Controller
                         'type' => $type])->where('legal_tin', $legals['le_tin'])->first();
                     if ($user2) $user = $user2;
                     if ($user) {
-                        $user->update(array_merge($data->all(), ['type' => $type, 'legal_info'=>json_encode([$legals]),'legal_tin' => $legals['tin']]));
+                        $user->update(array_merge($data->all(), ['type' => $type, 'legal_info'=>json_encode([$legals]),'legal_tin' => $legals['le_tin']]));
                         $user->save();
                     } else {
                         $userData = $responseUser->json();
@@ -250,6 +252,16 @@ class AuthController extends Controller
                     Image::make(base64_decode($userPhoto['foto']))->save($path);
 
             }
+            if ($type !== 1) {
+                $returnData = DB::connection('db2_odbcInn')->select(
+                    "select tin,name,shortname,streetname,registrationnumber from INN_ASOS WHERE tin = ?", [$legals['le_tin']]);
+                if($returnData and $returnData[0]) {
+                    $user->per_adr = $returnData[0]->streetname; 
+                    $user->save();
+                }
+            }
+
+
             /*               dd(json_encode([
                                "pinfl" => (string)$user->pin,
                                "doc_give_date" => $user->_pport_issue_date,

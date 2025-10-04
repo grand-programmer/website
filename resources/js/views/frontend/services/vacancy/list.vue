@@ -38,7 +38,7 @@
                                             clearable
                                             v-model="myRegion"
                                             :placeholder="$t('Ҳудудлар кесимида')"
-                                            :item-text="$i18n.locale==='ru'?'name_ru':'name'"
+                                            :item-text="'name'"
                                             item-value="kod_id"
                                             :items="regions"
                                         >
@@ -352,6 +352,8 @@ export default {
         },
         async getVacancies() {
             const _app = this;
+            //console.log(this.$route.query.test)
+            //if(this.$route.query.test)
             //if (this.$auth.user()) {
             await axios.get("/api/v1/ex_api/vakantlar").then(function (response) {
                 if (response.data.success === true) {
@@ -387,11 +389,15 @@ export default {
         },
         async getRegions() {
             const _app = this;
-            await axios.get("/api/v1/ex_api/boshqarma").then(function (response) {
+            await this.$auth.plugins.http.get("/api/v1/ex_api/boshqarma").then(function (response) {
                 if (response.status === 200) {
                     _app.regions = response.data.data;
                     _app.regions = _app.regions.map(function (item) {
-                        item.name = item.name.replace("Ўзбекистон Республикаси Иқтисодиёт ва молия вазирлиги ҳузуридаги Божхона қўмитасининг ", "")
+                        // item.name = item.name.replace("Ўзбекистон Республикаси Иқтисодиёт ва молия вазирлиги ҳузуридаги Божхона қўмитасининг ", "")
+                        item.name = item.name.replace("Иқтисодиёт ва молия вазирлиги ҳузуридаги ", "")
+                        item.name = item.name.replace("Iqtisodiyot va moliya vazirligi huzuridagi ", "")
+                        item.name = item.name.replace(" under the Ministry of Economy and Finance", "")
+                        item.name = item.name.replace("при Министерстве экономики  и финансов", "")
                         return item;
                     })
                 }

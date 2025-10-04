@@ -32,6 +32,7 @@
                                                              :style="'background-image: url(/storage/uploads/markaziy/'+ rais.image +');'">
                                                             &nbsp;
                                                         </div>
+
                                                     </div>
                                                 </div>
                                                 <div class="col-9">
@@ -205,6 +206,56 @@ description=orinbosar.biografiyasi && orinbosar.biografiyasi.length>10? '<h3>' +
                                                                     </div>-->
                                         </div>
                                     </div>
+                                  <!-- maslahatchilar-->
+                                    <div class="col-12 orinbosarlar">
+                                        <div class="row">
+                                            <h3 style="text-align: center;">&nbsp;</h3>
+                                        </div>
+                                        <div class="row justify-content-center">
+
+                                            <div class="orinbosar col-3" v-for="orinbosar in maslahatchilar">
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <div>
+                                                            <div class="orinbosar-header">
+                                                                <div class="profile-icon-wrapper">
+                                                                    <div class="profile-icon"
+                                                                         @click="dialog_image=true; image='/storage/uploads/markaziy/'+ orinbosar.image;
+description=orinbosar.biografiyasi && orinbosar.biografiyasi.length>10? '<h3>' + orinbosar.fio +'</h3>' + orinbosar.biografiyasi:''"
+                                                                         :style="'background-image: url(/storage/uploads/markaziy/'+ orinbosar.image +');'">
+                                                                        &nbsp;
+                                                                    </div>
+                                                                </div>
+                                                                <p>{{ $t(orinbosar.fio) }}</p>
+                                                            </div>
+                                                            <div class="orinbosar-info">
+                                                                <div class="text-row">
+                                                                    <div class="far fa-user">&nbsp;</div>
+                                                                    <p>
+                                                                      {{
+                                                                        (typeof orinbosar.translates !== 'undefined' && typeof orinbosar.translates[$i18n.locale] !== 'undefined' && orinbosar.translates[$i18n.locale]['lavozim_name'] && typeof orinbosar.translates[$i18n.locale]['lavozim_name'] !== 'undefined') ? orinbosar.translates[$i18n.locale]['lavozim_name'] : orinbosar.lavozim_name
+                                                                      }}</p>
+                                                                </div>
+                                                                <div class="text-row">
+                                                                    <div class="far fa-clock">&nbsp;</div>
+                                                                    <p>{{
+                                                                            (typeof orinbosar.translates !== 'undefined' && typeof orinbosar.translates[$i18n.locale] !== 'undefined' && orinbosar.translates[$i18n.locale]['qabul'] && typeof orinbosar.translates[$i18n.locale]['qabul'] !== 'undefined') ? orinbosar.translates[$i18n.locale]['qabul'] : orinbosar.qabul
+                                                                        }}</p>
+                                                                </div>
+                                                                <div class="text-row">
+                                                                    <div class="fas fa-phone-alt">&nbsp;</div>
+                                                                    <p>{{ orinbosar.phone }}</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                  <!-- maslahatchilar -->
                                 </div>
                             </div>
                         </div>
@@ -263,7 +314,8 @@ export default {
             dialog_image: false,
             image: null,
             description: null,
-            orinbosarlar: []
+            orinbosarlar: [],
+            maslahatchilar: []
         }
     },
     methods: {
@@ -277,7 +329,9 @@ export default {
                         _this.rais = v;
                     } else if (v.lavozimi === '2') {
                         _this.birinchi_orinbosar = v;
-                    } else _this.orinbosarlar.push(v);
+                    }  else if (v.lavozimi === '3') {
+                      _this.orinbosarlar.push(v);
+                    } else _this.maslahatchilar.push(v);
                 })
             }).catch((error) => {
                 console.log(error)
@@ -290,7 +344,25 @@ export default {
     },
     created() {
         this.initialize()
-    }
+    },
+  mounted(){
+    const script = document.createElement('script')
+    script.type = 'application/ld+json'
+    script.innerHTML = JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Mavlonov Akmalxuja Yusupovich",
+      "jobTitle": "Bojxona qo‘mitasi raisi",
+      "image": "https://bojxona.uz/storage/uploads/markaziy/1650972408.png",
+      "url": "https://bojxona.uz/oz/page/rahbariyat",
+      "worksFor": {
+        "@type": "GovernmentOrganization",
+        "name": "O‘zbekiston Respublikasi Bojxona qo‘mitasi",
+        "url": "https://bojxona.uz"
+      }
+    })
+    document.head.appendChild(script)
+  }
 }
 </script>
 <style>

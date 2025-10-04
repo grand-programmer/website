@@ -56,7 +56,7 @@
                                 class="mb-15 px-10 py-10"
                             >
                                 <div class="row position-absolute yoriqnoma-text"><a
-                                    href="/storage/files/dastlabki-user.pptx"> {{
+                                    :href="($i18n.locale === 'ru')?'/storage/files/vio_ru.pptx' :'/storage/files/vio_uz.pptx'"> {{
                                         $t("Ариза тўлдириш бўйича йўриқмани юклаб олинг!")
                                     }}
                                 </a></div>
@@ -67,7 +67,7 @@
                                         <v-col cols="4">
                                             <div class="vio_card">
                                                 <div class="vio_card_title">
-                                                    Корхона рахбари
+                                                    {{$t('Корхона рахбари')}}
                                                 </div>
                                                 <div class="field">
                                                     <text-field
@@ -121,7 +121,7 @@
                                         <v-col cols="4">
                                             <div class="vio_card">
                                                 <div class="vio_card_title">
-                                                    Юридик шахс манзили, боғланиш маълумотлари
+                                                   {{ $t('Юридик шахс манзили, боғланиш маълумотлари') }}
                                                 </div>
                                                 <div class="field">
                                                     <text-field
@@ -170,7 +170,7 @@
                                         <v-col cols="4">
                                             <div class="vio_card">
                                                 <div class="vio_card_title">
-                                                    Ариза тури ва юридик шахснинг асосий фаолияти
+                                                    {{$t('Ариза тури ва юридик шахснинг асосий фаолияти')}}
                                                 </div>
                                                 <ValidationProvider name="Ариза тури" rules="required"
                                                                     v-slot="{ errors }" class="field" tag="div">
@@ -241,22 +241,26 @@
                                                 <v-card-text>
                                                     <v-row class="px-4 pt-4">
                                                         <v-col cols="6">
-                                                            <text-field title="ID-картаси (паспорт) маълумотлари"
+                                                            <text-field
+                                                            :title="$t('ID-карта (паспорт) маълумотлари')"
                                                                         persistent-placeholder
                                                                         v-model="temp.founder.passport"></text-field>
                                                         </v-col>
                                                         <v-col cols="6">
-                                                            <editable-date label="Туғилган санаси"
+                                                            <editable-date
+                                                            :label="$t('Туғилган санаси')"
                                                                            v-model="temp.founder.birthdate"
                                                                            persistent-placeholder></editable-date>
                                                         </v-col>
                                                     </v-row>
                                                 </v-card-text>
                                                 <v-card-actions class="d-flex justify-content-end">
-                                                    <v-btn color="primary" text @click="dialog.founder=false">Ёпиш
+                                                    <v-btn color="primary" text @click="dialog.founder=false">
+                                                        {{$t('Ёпиш')}}
                                                     </v-btn>
                                                     <v-btn color="primary" text @click="addFounder"
-                                                           :loading="loading.founder">Сақлаш
+                                                           :loading="loading.founder">
+                                                           {{$t('Сақлаш')}}
                                                     </v-btn>
                                                 </v-card-actions>
 
@@ -267,7 +271,13 @@
                                                 :headers="a.headers"
                                                 :items="app.founders"
                                                 :items-per-page="2"
-                                                class="elevation-1">
+                                                class="elevation-1"
+                                                :no-data-text="$t('Маълумот топилмади')"
+                                                :footer-props="{
+                                                    'items-per-page-text': $t('Сахифадаги элементлар сони'),
+                                                    'items-per-page-all-text': $t('Барчаси')
+                                                }"
+                                                :loading-text="$t('Юкланмоқда... Илтимос кутиб туринг')">
                                                 <template #item.id="{ item }">
                                                     {{ app.founders.indexOf(item) + 1 }}
                                                 </template>
@@ -305,11 +315,11 @@
                             <v-card
                                 class="mb-15 px-10 py-10"
                             >
-                                <div class="row position-absolute yoriqnoma-text"><a
-                                    href="/storage/files/dastlabki-user.pptx"> {{
-                                        $t("Ариза тўлдириш бўйича йўриқмани юклаб олинг!")
-                                    }}
-                                </a></div>
+                              <div class="row position-absolute yoriqnoma-text"><a
+                                  :href="($i18n.locale === 'ru')?'/storage/files/vio_ru.pptx' :'/storage/files/vio_uz.pptx'"> {{
+                                  $t("Ариза тўлдириш бўйича йўриқмани юклаб олинг!")
+                                }}
+                              </a></div>
                                 <ValidationObserver v-slot="{ invalid }" ref="stepValidation2">
                                     <v-row>
                                     </v-row>
@@ -391,22 +401,26 @@
                                                 <v-card-text>
                                                     <v-row class="px-4 pt-4">
                                                         <v-col cols="6">
-                                                            <text-field title="ID-картаси (паспорт) маълумотлари"
+                                                            <text-field
+                                                            :title="$t('ID-картаси (паспорт) маълумотлари')"
                                                                         persistent-placeholder
                                                                         v-model="temp.authPerson.passport"></text-field>
                                                         </v-col>
                                                         <v-col cols="6">
-                                                            <editable-date label="Туғилган санаси"
+                                                            <editable-date
+                                                            :label="$t('Туғилган санаси')"
                                                                            v-model="temp.authPerson.birthdate"
                                                                            persistent-placeholder></editable-date>
                                                         </v-col>
                                                     </v-row>
                                                 </v-card-text>
                                                 <v-card-actions class="d-flex justify-content-end">
-                                                    <v-btn color="primary" text @click="dialog.authPerson=false">Ёпиш
+                                                    <v-btn color="primary" text @click="dialog.authPerson=false">
+                                                        {{$t('Ёпиш')}}
                                                     </v-btn>
                                                     <v-btn color="primary" text @click="addAuthPerson"
-                                                           :loading="loading.authPerson">Сақлаш
+                                                           :loading="loading.authPerson">
+                                                           {{$t('Сақлаш')}}
                                                     </v-btn>
                                                 </v-card-actions>
 
@@ -417,7 +431,13 @@
                                                 :headers="a.headers"
                                                 :items="app.authPersons"
                                                 :items-per-page="2"
-                                                class="elevation-1">
+                                                class="elevation-1"
+                                                :no-data-text="$t('Маълумот топилмади')"
+                                                :footer-props="{
+                                                    'items-per-page-text': $t('Сахифадаги элементлар сони'),
+                                                    'items-per-page-all-text': $t('Барчаси')
+                                                }"
+                                                :loading-text="$t('Юкланмоқда... Илтимос кутиб туринг')">
                                                 <template #item.id="{ item }">
                                                     {{ app.authPersons.indexOf(item) + 1 }}
                                                 </template>
@@ -434,10 +454,14 @@
                                             class="d-flex align-center justify-space-between py-0">{{
                                                 $t('Корхона шартнома асосида брокерлик фирмалари хизматларидан фойдаланиладими ?')
                                             }}
-                                            <span class="d-flex justify-center align-center">Йўқ <v-switch hide-details
+                                            <span class="d-flex justify-center align-center">
+                                                {{$t('Йўқ')}}
+                                                 <v-switch hide-details
                                                                                                            inset
                                                                                                            v-model="temp.issetBranch.broker"
-                                                                                                           class="ml-6 mr-2 my-2"></v-switch> Ҳа</span>
+                                                                                                           class="ml-6 mr-2 my-2"></v-switch>
+                                                                                                            {{$t('Ҳа')}}
+                                                                                                        </span>
                                         </span></div>
                                         <template v-if="temp.issetBranch.broker">
                                             <div class="d-flex justify-end w-100 mb-2 ">
@@ -457,32 +481,36 @@
                                                                              ref="stepValidationBroker" disabled>
                                                             <v-row class="px-4 pt-4">
                                                                 <v-col cols="6">
-                                                                    <text-field title="Ташкилот номи"
+                                                                    <text-field
+                                                                    :title="$t('Ташкилот номи')"
                                                                                 persistent-placeholder
                                                                                 rules="required"
                                                                                 v-model="temp.broker.org"></text-field>
                                                                 </v-col>
                                                                 <v-col cols="6">
-                                                                    <text-field title="Ташкилот СТИРи"
+                                                                    <text-field
+                                                                    :title="$t('Ташкилот СТИРи')"
                                                                                 persistent-placeholder
                                                                                 rules="required"
                                                                                 v-model="temp.broker.tin"></text-field>
                                                                 </v-col>
                                                                 <v-col cols="6">
-                                                                    <text-field title="Шартнома рақами"
+                                                                    <text-field
+                                                                    :title="$t('Шартнома рақами')"
                                                                                 persistent-placeholder
                                                                                 rules="required"
                                                                                 v-model="temp.broker.contract"></text-field>
                                                                 </v-col>
                                                                 <v-col cols="6">
                                                                     <text-field
-                                                                        title="ID-картаси (паспорт) маълумотлари"
+                                                                        :title="$t('ID-картаси (паспорт) маълумотлари')"
                                                                         persistent-placeholder
                                                                         rules="required"
                                                                         v-model="temp.broker.passport"></text-field>
                                                                 </v-col>
                                                                 <v-col cols="6">
-                                                                    <editable-date label="Туғилган санаси"
+                                                                    <editable-date
+                                                                    :label="$t('Туғилган санаси')"
                                                                                    v-model="temp.broker.birthdate"
                                                                                    persistent-placeholder></editable-date>
                                                                 </v-col>
@@ -490,10 +518,12 @@
                                                         </validation-observer>
                                                     </v-card-text>
                                                     <v-card-actions class="d-flex justify-content-end">
-                                                        <v-btn color="primary" text @click="dialog.broker=false">Ёпиш
+                                                        <v-btn color="primary" text @click="dialog.broker=false">
+                                                            {{$t('Ёпиш')}}
                                                         </v-btn>
                                                         <v-btn color="primary" text @click="addBroker"
-                                                               :loading="loading.broker">Сақлаш
+                                                               :loading="loading.broker">
+                                                               {{$t('Сақлаш')}}
                                                         </v-btn>
                                                     </v-card-actions>
 
@@ -504,7 +534,13 @@
                                                     :headers="a.headers2"
                                                     :items="app.brokers"
                                                     :items-per-page="2"
-                                                    class="elevation-1">
+                                                    class="elevation-1"
+                                                    :no-data-text="$t('Маълумот топилмади')"
+                                                    :footer-props="{
+                                                        'items-per-page-text': $t('Сахифадаги элементлар сони'),
+                                                        'items-per-page-all-text': $t('Барчаси')
+                                                    }"
+                                                    :loading-text="$t('Юкланмоқда... Илтимос кутиб туринг')">
                                                     <template #item.id="{ item }">
                                                         {{ app.brokers.indexOf(item) + 1 }}
                                                     </template>
@@ -542,11 +578,11 @@
                             <v-card
                                 class="mb-15 px-10 py-10"
                             >
-                                <div class="row position-absolute yoriqnoma-text"><a
-                                    href="/storage/files/dastlabki-user.pptx"> {{
-                                        $t("Ариза тўлдириш бўйича йўриқмани юклаб олинг!")
-                                    }}
-                                </a></div>
+                              <div class="row position-absolute yoriqnoma-text"><a
+                                  :href="($i18n.locale === 'ru')?'/storage/files/vio_ru.pptx' :'/storage/files/vio_uz.pptx'"> {{
+                                  $t("Ариза тўлдириш бўйича йўриқмани юклаб олинг!")
+                                }}
+                              </a></div>
                                 <ValidationObserver v-slot="{ invalid }" ref="stepValidation3">
                                     <v-row>
                                     </v-row>
@@ -556,10 +592,10 @@
                                             class="d-flex align-center justify-space-between py-0">{{
                                                 $t('Ташкилотингиз доимий бир турдаги етказиб берувчилар хизматидан фойдаланадими?')
                                             }}
-                                            <span class="d-flex justify-center align-center">Йўқ <v-switch hide-details
+                                            <span class="d-flex justify-center align-center">{{$t('Йўқ')}} <v-switch hide-details
                                                                                                            inset
                                                                                                            v-model="temp.issetBranch.shipping"
-                                                                                                           class="ml-6 mr-2 my-2"></v-switch> Ҳа</span>
+                                                                                                           class="ml-6 mr-2 my-2"></v-switch> {{$t('Ҳа')}}</span>
                                         </span></div>
                                         <template v-if="temp.issetBranch.shipping">
                                             <div class="d-flex justify-end w-100 mb-2 ">
@@ -577,22 +613,26 @@
                                                     <v-card-text>
                                                         <v-row class="px-4 pt-4">
                                                             <v-col cols="6">
-                                                                <text-field title="Ташкилот номи"
+                                                                <text-field
+                                                                :title="$t('Ташкилот номи')"
                                                                             persistent-placeholder
                                                                             v-model="temp.shipping.org"></text-field>
                                                             </v-col>
                                                             <v-col cols="6">
-                                                                <text-field title="Ташкилот манзили"
+                                                                <text-field
+                                                                :title="$t('Ташкилот манзили')"
                                                                             v-model="temp.shipping.address"
                                                                             persistent-placeholder></text-field>
                                                             </v-col>
                                                         </v-row>
                                                     </v-card-text>
                                                     <v-card-actions class="d-flex justify-content-end">
-                                                        <v-btn color="primary" text @click="dialog.shipping=false">Ёпиш
+                                                        <v-btn color="primary" text @click="dialog.shipping=false">
+                                                            {{$t('Ёпиш')}}
                                                         </v-btn>
                                                         <v-btn color="primary" text @click="addShipping"
-                                                               :loading="loading.shipping">Сақлаш
+                                                               :loading="loading.shipping">
+                                                               {{$t('Сақлаш')}}
                                                         </v-btn>
                                                     </v-card-actions>
 
@@ -603,7 +643,13 @@
                                                     :headers="a.headers4"
                                                     :items="app.shippings"
                                                     :items-per-page="2"
-                                                    class="elevation-1">
+                                                    class="elevation-1"
+                                                    :no-data-text="$t('Маълумот топилмади')"
+                                                    :footer-props="{
+                                                        'items-per-page-text': $t('Сахифадаги элементлар сони'),
+                                                        'items-per-page-all-text': $t('Барчаси')
+                                                    }"
+                                                    :loading-text="$t('Юкланмоқда... Илтимос кутиб туринг')">
                                                     <template #item.id="{ item }">
                                                         {{ app.shippings.indexOf(item) + 1 }}
                                                     </template>
@@ -622,10 +668,14 @@
                                             class="d-flex align-center justify-space-between py-0">{{
                                                 $t('Эгалик ҳуқуқи асосида иншоотлар, бинолар ва очиқ майдончаларга эгамисиз?')
                                             }}
-                                            <span class="d-flex justify-center align-center">Йўқ <v-switch hide-details
+                                            <span class="d-flex justify-center align-center">
+                                                {{$t('Йўқ')}}
+                                                <v-switch hide-details
                                                                                                            inset
                                                                                                            v-model="temp.issetBranch.owner"
-                                                                                                           class="ml-6 mr-2 my-2"></v-switch> Ҳа</span>
+                                                                                                           class="ml-6 mr-2 my-2"></v-switch>
+                                                                                                           {{$t('Ҳа')}}
+                                                                                                        </span>
                                         </span></div>
                                         <template v-if="temp.issetBranch.owner">
                                             <div class="d-flex justify-end w-100 mb-2 ">
@@ -646,13 +696,15 @@
                                                                              ref="stepValidationOwner" disabled>
                                                             <v-row class="px-4 pt-4">
                                                                 <v-col cols="6">
-                                                                    <text-field title="Ташкилот номи"
+                                                                    <text-field
+                                                                    :title="$t('Ташкилот номи')"
                                                                                 persistent-placeholder
                                                                                 rules="required"
                                                                                 v-model="temp.owner.org"></text-field>
                                                                 </v-col>
                                                                 <v-col cols="6">
-                                                                    <text-field title="Ташкилот СТИРи"
+                                                                    <text-field
+                                                                    :title="$t('Ташкилот СТИРи')"
                                                                                 persistent-placeholder
                                                                                 rules="required"
                                                                                 v-model="temp.owner.address"></text-field>
@@ -661,10 +713,12 @@
                                                         </validation-observer>
                                                     </v-card-text>
                                                     <v-card-actions class="d-flex justify-content-end">
-                                                        <v-btn color="primary" text @click="dialog.owner=false">Ёпиш
+                                                        <v-btn color="primary" text @click="dialog.owner=false">
+                                                            {{$t('Ёпиш')}}
                                                         </v-btn>
                                                         <v-btn color="primary" text @click="addOwner"
-                                                               :loading="loading.owner">Сақлаш
+                                                               :loading="loading.owner">
+                                                               {{$t('Сақлаш')}}
                                                         </v-btn>
                                                     </v-card-actions>
 
@@ -675,7 +729,13 @@
                                                     :headers="a.headers2"
                                                     :items="app.owners"
                                                     :items-per-page="2"
-                                                    class="elevation-1">
+                                                    class="elevation-1"
+                                                    :no-data-text="$t('Маълумот топилмади')"
+                                                    :footer-props="{
+                                                        'items-per-page-text': $t('Сахифадаги элементлар сони'),
+                                                        'items-per-page-all-text': $t('Барчаси')
+                                                    }"
+                                                    :loading-text="$t('Юкланмоқда... Илтимос кутиб туринг')">
                                                     <template #item.id="{ item }">
                                                         {{ app.owners.indexOf(item) + 1 }}
                                                     </template>
@@ -694,10 +754,12 @@
                                             class="d-flex align-center justify-space-between py-0">{{
                                                 $t('Ижара шартномаси асосида иншоотлар, бинолар ва очиқ майдончаларга эгамисиз?')
                                             }}
-                                            <span class="d-flex justify-center align-center">Йўқ <v-switch hide-details
+                                            <span class="d-flex justify-center align-center">
+                                                {{$t('Йўқ')}} <v-switch hide-details
                                                                                                            inset
                                                                                                            v-model="temp.issetBranch.flat"
-                                                                                                           class="ml-6 mr-2 my-2"></v-switch> Ҳа</span>
+                                                                                                           class="ml-6 mr-2 my-2"></v-switch>
+                                                                                                           {{ $t('Ҳа') }} </span>
                                         </span></div>
                                         <template v-if="temp.issetBranch.flat">
                                             <div class="d-flex justify-end w-100 mb-2 ">
@@ -718,22 +780,27 @@
                                                                              ref="stepValidationOwner" disabled>
                                                             <v-row class="px-4 pt-4">
                                                                 <v-col cols="6">
-                                                                    <text-field title="Шартнома рақами"
+                                                                    <text-field
+                                                                    :title="$t('Шартнома рақами')"
                                                                                 persistent-placeholder
                                                                                 rules="required"
                                                                                 v-model="temp.flat.contractNumber"></text-field>
                                                                 </v-col>
                                                                 <v-col cols="6">
-                                                                    <e-arxiv-file label="Шартнома нусхаси" v-model="temp.flat.fileId"></e-arxiv-file>
+                                                                    <e-arxiv-file
+                                                                    :label="$t('Шартнома нусхаси')"
+                                                                    v-model="temp.flat.fileId"></e-arxiv-file>
                                                                 </v-col>
                                                                 <v-col cols="6">
-                                                                    <text-field title="Кадастр рақами"
+                                                                    <text-field
+                                                                    :title="$t('Кадастр рақами')"
                                                                                 persistent-placeholder
                                                                                 rules="required"
                                                                                 v-model="temp.flat.cadastralNumber"></text-field>
                                                                 </v-col>
                                                                 <v-col cols="6">
-                                                                    <text-field title="Омбор манзили"
+                                                                    <text-field
+                                                                    :title="$t('Омбор манзили')"
                                                                                 persistent-placeholder
                                                                                 rules="required"
                                                                                 v-model="temp.flat.address"></text-field>
@@ -742,10 +809,12 @@
                                                         </validation-observer>
                                                     </v-card-text>
                                                     <v-card-actions class="d-flex justify-content-end">
-                                                        <v-btn color="primary" text @click="dialog.flat=false">Ёпиш
+                                                        <v-btn color="primary" text @click="dialog.flat=false">
+                                                            {{$t('Ёпиш')}}
                                                         </v-btn>
                                                         <v-btn color="primary" text @click="addFlat"
-                                                               :loading="loading.flat">Сақлаш
+                                                               :loading="loading.flat">
+                                                               {{$t('Сақлаш')}}
                                                         </v-btn>
                                                     </v-card-actions>
 
@@ -756,7 +825,13 @@
                                                     :headers="a.headers3"
                                                     :items="app.flats"
                                                     :items-per-page="2"
-                                                    class="elevation-1">
+                                                    class="elevation-1"
+                                                    :no-data-text="$t('Маълумот топилмади')"
+                                                    :footer-props="{
+                                                        'items-per-page-text': $t('Сахифадаги элементлар сони'),
+                                                        'items-per-page-all-text': $t('Барчаси')
+                                                    }"
+                                                    :loading-text="$t('Юкланмоқда... Илтимос кутиб туринг')">
                                                     <template #item.id="{ item }">
                                                         {{ app.flats.indexOf(item) + 1 }}
                                                     </template>
@@ -774,10 +849,10 @@
                                             class="d-flex align-center justify-space-between py-0">{{
                                                 $t('Ўқув курслари ўқиб тугатганлиги тўғрисидаги сертификатларга эгамисиз?')
                                             }}
-                                            <span class="d-flex justify-center align-center">Йўқ <v-switch hide-details
+                                            <span class="d-flex justify-center align-center">{{$t('Йўқ')}} <v-switch hide-details
                                                                                                            inset
                                                                                                            v-model="temp.issetBranch.course"
-                                                                                                           class="ml-6 mr-2 my-2"></v-switch> Ҳа</span>
+                                                                                                           class="ml-6 mr-2 my-2"></v-switch> {{$t('Ҳа')}}</span>
                                         </span></div>
                                         <template v-if="temp.issetBranch.course">
                                             <div class="d-flex justify-end w-100 mb-2 ">
@@ -798,22 +873,27 @@
                                                                              ref="stepValidationSertifikat" disabled>
                                                             <v-row class="px-4 pt-4">
                                                                 <v-col cols="6">
-                                                                    <text-field title="Сертификат рақами"
+                                                                    <text-field
+                                                                    :title="$t('Сертификат рақами')"
                                                                                 persistent-placeholder
                                                                                 rules="required"
                                                                                 v-model="temp.course.contractNumber"></text-field>
                                                                 </v-col>
                                                                 <v-col cols="6">
-                                                                    <e-arxiv-file label="Сертификат нусхаси" v-model="temp.course.fileId"></e-arxiv-file>
+                                                                    <e-arxiv-file
+                                                                    :label="$t('Сертификат нусхаси')"
+                                                                    v-model="temp.course.fileId"></e-arxiv-file>
                                                                 </v-col>
                                                                 <v-col cols="6">
-                                                                    <editable-date title="Сертификат санаси"
+                                                                    <editable-date
+                                                                    :title="$t('Сертификат санаси')"
                                                                                 persistent-placeholder
                                                                                 rules="required"
                                                                                 v-model="temp.course.cadastralNumber"></editable-date>
                                                                 </v-col>
                                                                 <v-col cols="6">
-                                                                    <text-field title="Сертификат номи"
+                                                                    <text-field
+                                                                    :title="$t('Сертификат номи')"
                                                                                 persistent-placeholder
                                                                                 rules="required"
                                                                                 v-model="temp.course.address"></text-field>
@@ -822,10 +902,12 @@
                                                         </validation-observer>
                                                     </v-card-text>
                                                     <v-card-actions class="d-flex justify-content-end">
-                                                        <v-btn color="primary" text @click="dialog.course=false">Ёпиш
+                                                        <v-btn color="primary" text @click="dialog.course=false">
+                                                            {{$t('Ёпиш')}}
                                                         </v-btn>
                                                         <v-btn color="primary" text @click="addCourse"
-                                                               :loading="loading.course">Сақлаш
+                                                               :loading="loading.course">
+                                                               {{$t('Сақлаш')}}
                                                         </v-btn>
                                                     </v-card-actions>
 
@@ -836,7 +918,13 @@
                                                     :headers="a.headers5"
                                                     :items="app.courses"
                                                     :items-per-page="2"
-                                                    class="elevation-1">
+                                                    class="elevation-1"
+                                                    :no-data-text="$t('Маълумот топилмади')"
+                                                    :footer-props="{
+                                                        'items-per-page-text': $t('Сахифадаги элементлар сони'),
+                                                        'items-per-page-all-text': $t('Барчаси')
+                                                    }"
+                                                    :loading-text="$t('Юкланмоқда... Илтимос кутиб туринг')">
                                                     <template #item.id="{ item }">
                                                         {{ app.courses.indexOf(item) + 1 }}
                                                     </template>
@@ -901,13 +989,6 @@ import Textfield from "../../../../components/form/textfield";
 import EditableDate from "../../../../components/custom/EditableDate";
 
 
-Object.keys(rules).forEach(rule => {
-    extend(rule, {
-        ...rules[rule], // copies rule configuration
-        message: messages.messages[rule] // assign message
-
-    });
-});
 export default {
     name: "VioCreate",
     data() {
@@ -932,7 +1013,7 @@ export default {
                     exact: true,
                 },
                 {
-                    text: i18n.t('Ариза юбориш '),
+                    text: i18n.t('Ариза юбориш'),
                     to: '/services/vio/create',
                     disabled: true,
                     exact: true,
@@ -1080,15 +1161,15 @@ export default {
             },
             list: {
                 types: [
-                    {value: 1, text: 'Божхона масалалари бўйича ваколатли иқтисодий оператор'},
-                    {value: 2, text: 'Хавфсизлик масалалари бўйича ваколатли иқтисодий оператор'},
-                    {value: 3, text: 'Божхона ва хавфсизлик масалалари бўйича ваколатли иқтисодий оператор'},
+                    {value: 1, text: i18n.t('Божхона масалалари бўйича ваколатли иқтисодий оператор')},
+                    {value: 2, text: i18n.t('Хавфсизлик масалалари бўйича ваколатли иқтисодий оператор')},
+                    {value: 3, text: i18n.t('Божхона ва хавфсизлик масалалари бўйича ваколатли иқтисодий оператор')},
                 ],
                 ways: [
-                    {value: 11, text: 'Божхона брокери'},
-                    {value: 22, text: 'Божхона омбори эгаси'},
-                    {value: 33, text: 'Ташувчи сифатида'},
-                    {value: 44, text: 'Товарлар импорт ва (ёки) экспортини амалга ошириш'},
+                    {value: 11, text: i18n.t('Божхона брокери')},
+                    {value: 22, text: i18n.t('Божхона омбори эгаси')},
+                    {value: 33, text: i18n.t('Ташувчи сифатида')},
+                    {value: 44, text: i18n.t('Товарлар импорт ва (ёки) экспортини амалга ошириш')},
                 ]
             },
             loading: {
@@ -1120,44 +1201,44 @@ export default {
         deleteOwner(item) {
             if (this.app.owners.indexOf(item) !== -1) {
                 this.app.owners.splice(this.app.owners.indexOf(item), 1)
-                this.$toast.success(this.$t('Муваффаққиятли ўчирилди'))
-            } else this.$toast.error(this.$t('Элемент топилмади'))
+                this.$toast.success(i18n.t("Муваффаққиятли ўчирилди"))
+            } else this.$toast.error(i18n.t("Элемент топилмади"))
         },
         deleteFlat(item) {
             if (this.app.flats.indexOf(item) !== -1) {
                 this.app.flats.splice(this.app.flats.indexOf(item), 1)
-                this.$toast.success(this.$t('Муваффаққиятли ўчирилди'))
-            } else this.$toast.error(this.$t('Элемент топилмади'))
+                this.$toast.success(i18n.t("Муваффаққиятли ўчирилди"))
+            } else this.$toast.error(i18n.t("Элемент топилмади"))
         },
         deleteCourse(item) {
             if (this.app.courses.indexOf(item) !== -1) {
                 this.app.courses.splice(this.app.courses.indexOf(item), 1)
-                this.$toast.success(this.$t('Муваффаққиятли ўчирилди'))
-            } else this.$toast.error(this.$t('Элемент топилмади'))
+                this.$toast.success(i18n.t("Муваффаққиятли ўчирилди"))
+            } else this.$toast.error(i18n.t("Элемент топилмади"))
         },
         deleteFounder(item) {
             if (this.app.founders.indexOf(item) !== -1) {
                 this.app.founders.splice(this.app.founders.indexOf(item), 1)
-                this.$toast.success(this.$t('Таъсисчи муваффаққиятли ўчирилди'))
-            } else this.$toast.error(this.$t('Таъсисчи топилмади'))
+                this.$toast.success(i18n.t("Таъсисчи муваффаққиятли ўчирилди"))
+            } else this.$toast.error(i18n.t("Таъсисчи топилмади"))
         },
         deleteAuthPerson(item) {
             if (this.app.authPersons.indexOf(item) !== -1) {
                 this.app.authPersons.splice(this.app.authPersons.indexOf(item), 1)
-                this.$toast.success(this.$t('Ваколатли шахс муваффаққиятли ўчирилди'))
-            } else this.$toast.error(this.$t('Ваколатли шахс топилмади'))
+                this.$toast.success(i18n.t("Ваколатли шахс муваффаққиятли ўчирилди"))
+            } else this.$toast.error(i18n.t("Ваколатли шахс топилмади"))
         },
         deleteBroker(item) {
             if (this.app.brokers.indexOf(item) !== -1) {
                 this.app.brokers.splice(this.app.brokers.indexOf(item), 1)
-                this.$toast.success(this.$t('Брокер муваффаққиятли ўчирилди'))
-            } else this.$toast.error(this.$t('Брокер топилмади'))
+                this.$toast.success(i18n.t("Брокер муваффаққиятли ўчирилди"))
+            } else this.$toast.error(i18n.t("Брокер топилмади"))
         },
         deleteShipping(item) {
             if (this.app.shippings.indexOf(item) !== -1) {
                 this.app.shippings.splice(this.app.shippings.indexOf(item), 1)
-                this.$toast.success(this.$t('Етказиб берувчи муваффаққиятли ўчирилди'))
-            } else this.$toast.error(this.$t('Етказиб берувчи топилмади'))
+                this.$toast.success(i18n.t("Етказиб берувчи муваффаққиятли ўчирилди"))
+            } else this.$toast.error(i18n.t("Етказиб берувчи топилмади"))
         },
         async addFounder() {
             this.loading.founder = true
@@ -1180,10 +1261,10 @@ export default {
                     })
                     _this.$toast.success('Таъсисчи омадли тарзда қўшилди')
 
-                } else _this.$toast.error('Маълумотларни текшириб қайтадан киринг')
+                } else _this.$toast.error(i18n.t("Маълумотларни текшириб қайтадан киринг"))
             }).catch((error) => {
                 console.log(error)
-                _this.$toast.error('Маълумотларни текшириб қайтадан киринг.');
+                _this.$toast.error(i18n.t("Маълумотларни текшириб қайтадан киринг"));
                 this.loading.founder = false;
             })
             this.loading.founder = false;
@@ -1200,11 +1281,11 @@ export default {
                 })
                 _this.dialog.shipping = false
                 this.loading.shipping = false
-                _this.$toast.success('Етказиб берувчи омадли тарзда қўшилди')
+                _this.$toast.success(i18n.t("Етказиб берувчи омадли тарзда қўшилди"))
 
             } else {
                 this.loading.shipping = false
-                _this.$toast.error('Маълумотларни текшириб қайтадан киритинг')
+                _this.$toast.error(i18n.t("Маълумотларни текшириб қайтадан киритинг"))
             }
 
         },
@@ -1220,11 +1301,11 @@ export default {
                 })
                 _this.dialog.owner = false
                 _this.loading.owner = false
-                _this.$toast.success('Эгалик ҳуқуқи асосида иншоотлар, бинолар ва очиқ майдончалар омадли тарзда қўшилди')
+                _this.$toast.success(i18n.t("Эгалик ҳуқуқи асосида иншоотлар, бинолар ва очиқ майдончалар омадли тарзда қўшилди"))
 
             } else {
                 _this.loading.owner = false
-                _this.$toast.error('Маълумотларни текшириб қайтадан киритинг')
+                _this.$toast.error(i18n.t("Маълумотларни текшириб қайтадан киритинг"))
             }
 
         },
@@ -1238,11 +1319,11 @@ export default {
                 })
                 _this.dialog.flat = false
                 _this.loading.flat = false
-                _this.$toast.success('Ижара ҳуқуқи асосида иншоотлар, бинолар ва очиқ майдончалар омадли тарзда қўшилди')
+                _this.$toast.success(i18n.t("Ижара ҳуқуқи асосида иншоотлар, бинолар ва очиқ майдончалар омадли тарзда қўшилди"))
 
             } else {
                 _this.loading.flat = false
-                _this.$toast.error('Маълумотларни текшириб қайтадан киритинг')
+                _this.$toast.error(i18n.t("Маълумотларни текшириб қайтадан киритинг"))
             }
 
         },
@@ -1256,11 +1337,11 @@ export default {
                 })
                 _this.dialog.course = false
                 _this.loading.course = false
-                _this.$toast.success('Ижара ҳуқуқи асосида иншоотлар, бинолар ва очиқ майдончалар омадли тарзда қўшилди')
+                _this.$toast.success(i18n.t("Ижара ҳуқуқи асосида иншоотлар, бинолар ва очиқ майдончалар омадли тарзда қўшилди"))
 
             } else {
                 _this.loading.course = false
-                _this.$toast.error('Маълумотларни текшириб қайтадан киритинг')
+                _this.$toast.error(i18n.t("Маълумотларни текшириб қайтадан киритинг"))
             }
 
         },
@@ -1283,12 +1364,12 @@ export default {
                     Object.keys(_this.temp.authPerson).forEach((propertyItemKey) => {
                         _this.temp.authPerson[propertyItemKey] = null
                     })
-                    _this.$toast.success('Ваколатли шахс омадли тарзда қўшилди')
+                    _this.$toast.success(i18n.t("Ваколатли шахс омадли тарзда қўшилди"))
 
-                } else _this.$toast.error('Маълумотларни текшириб қайтадан киринг')
+                } else _this.$toast.error(i18n.t("Маълумотларни текшириб қайтадан киринг"))
             }).catch((error) => {
                 console.log(error)
-                _this.$toast.error('Маълумотларни текшириб қайтадан киринг.');
+                _this.$toast.error(i18n.t("Маълумотларни текшириб қайтадан киринг"));
                 this.loading.authPerson = false;
             })
             this.loading.authPerson = false;
@@ -1313,15 +1394,15 @@ export default {
                         Object.keys(_this.temp.broker).forEach((propertyItemKey) => {
                             _this.temp.broker[propertyItemKey] = null
                         })
-                        _this.$toast.success('Ваколатли шахс омадли тарзда қўшилди')
+                        _this.$toast.success(i18n.t("Ваколатли шахс омадли тарзда қўшилди"))
 
-                    } else _this.$toast.error('Маълумотларни текшириб қайтадан киринг')
+                    } else _this.$toast.error(i18n.t("Маълумотларни текшириб қайтадан киринг"))
                 }).catch((error) => {
                     console.log(error)
-                    _this.$toast.error('Маълумотларни текшириб қайтадан киринг.');
+                    _this.$toast.error(i18n.t("Маълумотларни текшириб қайтадан киринг."));
                     this.loading.broker = false;
                 })
-            } else _this.$toast.error(_this.$t('Маълумотларни тўлдириб қайтадан юборинг'))
+            } else _this.$toast.error(i18n.t("Маълумотларни тўлдириб қайтадан юборинг"))
             this.loading.broker = false;
         },
         async addAccountant() {
@@ -1338,12 +1419,12 @@ export default {
                 if (response.status === 200 && typeof response.data.data.birth_date !== 'undefined') {
                     _this.app.accountant.fio = response.data.data.surnamelatin + ' ' + response.data.data.namelatin + ' ' + response.data.data.patronymlatin;
                     _this.app.accountant.pin = response.data.data.pinpp
-                    _this.$toast.success('Бухгалтер омадли тарзда қўшилди')
+                    _this.$toast.success(i18n.t("Бухгалтер омадли тарзда қўшилди"))
 
-                } else _this.$toast.error('Маълумотларни текшириб қайтадан киринг')
+                } else _this.$toast.error(i18n.t("Маълумотларни текшириб қайтадан киринг"))
             }).catch((error) => {
                 console.log(error)
-                _this.$toast.error('Маълумотларни текшириб қайтадан киринг.');
+                _this.$toast.error(i18n.t("Маълумотларни текшириб қайтадан киринг."));
                 this.loading.accountant = false;
             })
             this.loading.accountant = false;
@@ -1362,9 +1443,9 @@ export default {
                 if (typeof response.data.data.birth_date !== 'undefined') {
                     _this.app.chief.fio = response.data.data.surnamelatin + ' ' + response.data.data.namelatin + ' ' + response.data.data.patronymlatin;
                     _this.app.chief.pin = response.data.data.pinpp
-                } else _this.$toast.error('Маълумотларни текшириб қайтадан киринг')
+                } else _this.$toast.error(i18n.t("Маълумотларни текшириб қайтадан киринг"))
             }).catch(() => {
-                _this.$toast.error('Маълумотларни текшириб қайтадан киринг.');
+                _this.$toast.error(i18n.t("Маълумотларни текшириб қайтадан киринг."));
                 this.loading.yuborishLoading = false;
             })
             this.loading.yuborishLoading = false;
@@ -1391,11 +1472,11 @@ export default {
                     if (res.status === 200) {
                         _this.app.id = res.data.data.id
                     } else {
-                        _this.$toast.error(_this.$t('Сервер билан алоқа йўқ!'))
+                        _this.$toast.error(i18n.t("Сервер билан алоқа йўқ!"))
                     }
                 })
             } catch (error) {
-                _this.$toast.error(_this.$t('Сервер билан алоқа йўқ!'))
+                _this.$toast.error(i18n.t("Сервер билан алоқа йўқ!"))
                 console.log(error)
             }
         },
@@ -1454,10 +1535,10 @@ export default {
                                 _this.stepper++
                                 _this.completedSteps.push(1)
                             } else {
-                                _this.$toast.error(_this.$t('Хатолик юз берди. Қайта уриниб кўринг!'))
+                                _this.$toast.error(i18n.t("Хатолик юз берди. Қайта уриниб кўринг!"))
                             }
                         }).catch((error) => {
-                            _this.$toast.error(_this.$t('Хатолик юз берди. Қайта уриниб кўринг!'))
+                            _this.$toast.error(i18n.t("Хатолик юз берди. Қайта уриниб кўринг!"))
                             console.log(error)
                         })
                     }
@@ -1511,10 +1592,10 @@ export default {
                                 _this.stepper++
                                 _this.completedSteps.push(2)
                             } else {
-                                _this.$toast.error(_this.$t('Хатолик юз берди. Қайта уриниб кўринг'))
+                                _this.$toast.error(i18n.t("Хатолик юз берди. Қайта уриниб кўринг"))
                             }
                         }).catch((error) => {
-                            _this.$toast.error(_this.$t('Хатолик юз берди. Қайта уриниб кўринг!'))
+                            _this.$toast.error(i18n.t("Хатолик юз берди. Қайта уриниб кўринг!"))
                             console.log(error)
                         })
                     }
@@ -1572,17 +1653,17 @@ export default {
                         })
                         _this.$auth.plugins.http.post('/api/v1/ex_api/vio-app', requestData).then((res) => {
                             if (res.status === 200) {
-                                _this.$toast.success(_this.$t('Аризангиз қабул қилинди!'))
+                                _this.$toast.success(i18n.t("Аризангиз қабул қилинди!"))
                                 setTimeout(() => {
                                     _this.$router.push("/services/vio/" + _this.app.id)
 
                                 }, 500)
 
                             } else {
-                                _this.$toast.error(_this.$t('Хатолик юз берди. Қайта уриниб кўринг'))
+                                _this.$toast.error(i18n.t("Хатолик юз берди. Қайта уриниб кўринг"))
                             }
                         }).catch((error) => {
-                            _this.$toast.error(_this.$t('Хатолик юз берди. Қайта уриниб кўринг!'))
+                            _this.$toast.error(i18n.$t("Хатолик юз берди. Қайта уриниб кўринг!"))
                             console.log(error)
                         })
 
@@ -1592,6 +1673,7 @@ export default {
 
         },
         prevStep() {
+
             switch (this.stepper) {
                 case 1:
                     this.stepper = 1;

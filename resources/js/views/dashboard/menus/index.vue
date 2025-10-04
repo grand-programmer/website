@@ -50,8 +50,11 @@
                             calculate-widths
                             class="elevation-1"
                             :footer-props="{
-                            'items-per-page-text':'Сахифадаги элементлар сони'
+                                'items-per-page-text': $t('Сахифадаги элементлар сони'),
+                                'items-per-page-all-text': $t('Барчаси')
                             }"
+                            :no-data-text="$t('Маълумот топилмади')"
+                            :loading-text="$t('Юкланмоқда... Илтимос кутиб туринг')"
                         >
 
                             <template v-slot:top="{ item }">
@@ -130,13 +133,6 @@ import {extend, ValidationProvider, ValidationObserver} from 'vee-validate';
 import * as rules from 'vee-validate/dist/rules';
 import messages from '../../../locales/oz.json';
 
-Object.keys(rules).forEach(rule => {
-    extend(rule, {
-        ...rules[rule], // copies rule configuration
-        message: messages.messages[rule] // assign message
-
-    });
-});
 
 export default {
 

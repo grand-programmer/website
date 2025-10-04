@@ -27,7 +27,7 @@
                                                  :key="'aa'+1+key" v-for="(rahbar,key) in rahbariyat"
                                                  @click="leftbarClick(rahbar.id,key)"
                                             ><p>
-                                                <template>{{rahbar.lavozim_name}}</template>
+                                                <template>{{$t(rahbar.lavozim_name)}}</template>
 <!--                                                v-if="rahbar.lavozimi==='1'">раиси</template>  <template
                                                 v-else-if="rahbar.lavozimi==='2'">раисининг 1-ўринбосари </template>  <template
                                                 v-else> раисининг ўринбосари</template>-->
@@ -53,7 +53,7 @@
                                                             <div class="col-12 p-0">
                                                                 <div>
                                                                     <div class="my-card-header">
-                                                                        <p>{{ boshqarma.org_name }}</p>
+                                                                        <p>{{ $t(boshqarma.org_name) }}</p>
                                                                         <div class="my-card-header-wrapper">
                                                                             <div class="profile-icon-wrapper">
                                                                                 <div class="profile-icon" @click="dialog_image=true; image='/storage/uploads/markaziy/' + boshqarma.image"
@@ -61,14 +61,15 @@
                                                                                     &nbsp;
                                                                                 </div>
                                                                             </div>
-                                                                            <p>{{ boshqarma.fio }}</p>
+                                                                            <p>{{ $t(boshqarma.fio) }}</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="my-card-info">
                                                                         <div class="text-row">
                                                                             <div class="far fa-user">&nbsp;</div>
                                                                             <div class="column-text">
-                                                                                <p>{{ boshqarma.lavozim_name && boshqarma.lavozim_name.length>0 ? boshqarma.lavozim_name : $t("Бошқарма бошлиғи") }}</p>
+                                                                                <p v-if="$i18n.locale==='uz'">{{ $t(boshqarma.lavozim_name) && boshqarma.lavozim_name.length>0 ? $t(boshqarma.lavozim_name) : $t("Бошқарма бошлиғи") }}</p>
+                                                                                <p v-else>{{ $t(boshqarma.translates[$i18n.locale].lavozim_name) && boshqarma.translates[$i18n.locale].lavozim_name.length>0 ? $t(boshqarma.translates[$i18n.locale].lavozim_name) : $t(boshqarma.lavozim_name) }}</p>
                                                                             </div>
                                                                         </div>
                                                                         <div class="text-row">
@@ -103,7 +104,7 @@
 
                                                                                     <v-card>
                                                                                         <v-card-title class="text-h5 primary white--text bold pb-2" style="word-break: break-word;">
-                                                                                            {{ boshqarma.org_name }}  {{ $t("вазифалари") }}
+                                                                                            {{ $t(boshqarma.org_name) }}  {{ $t("вазифалари") }}
                                                                                         </v-card-title>
 
                                                                                         <v-card-text style="height: 400px;" class="vazifalar" v-html="boshqarma.biografiyasi" color="primary">

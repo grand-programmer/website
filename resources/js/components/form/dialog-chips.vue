@@ -3,7 +3,7 @@
         <!---BEGIN ishlab chiqaruvchi -->
         <v-col cols="12 d-flex align-items-center">
             <h5 class=" pb-2">
-                Ишлаб чиқарувчи *
+                {{$t('Ишлаб чиқарувчи')}} *
             </h5>
 
             <v-btn
@@ -17,7 +17,7 @@
                     mdi-plus
                 </v-icon>
 
-                Қўшиш
+                {{$t('Қўшиш')}}
             </v-btn>
 
         </v-col>
@@ -62,7 +62,7 @@
             <v-card>
                 <v-card-title>
                                                             <span
-                                                                class="text-h5">Ишлаб чиқарувчи тўғрисида маълумотлар</span>
+                                                                class="text-h5">{{$t('Ишлаб чиқарувчи тўғрисида маълумотлар')}}</span>
                 </v-card-title>
                 <v-card-text>
                     <v-container class="w-100 m-0 p-4">
@@ -72,7 +72,7 @@
                                             tag="div" class="row">
                             <v-col cols="4">
                                 <text-field
-                                    title="Ишлаб чиқарувчининг номи"
+                                    :title="$t('Ишлаб чиқарувчининг номи')"
                                     rules="required"
                                     v-model="ishchiq.nomi"
                                     persistent-placeholder
@@ -80,7 +80,7 @@
                             </v-col>
                             <v-col cols="4">
                                 <text-field
-                                    title="Ишлаб чиқарувчининг манзили"
+                                    :title="$t('Ишлаб чиқарувчининг манзили')"
                                     rules="required"
                                     v-model="ishchiq.manzili"
                                     persistent-placeholder
@@ -89,7 +89,7 @@
 
                             <v-col cols="4">
                                 <text-field
-                                    title="Ишлаб чиқарувчининг телефон рақами"
+                                    :title="$t('Ишлаб чиқарувчининг телефон рақами')"
                                     rules="required"
                                     v-model="ishchiq.phone"
                                     v-mask="'+998 ## ### ## ##'"
@@ -98,7 +98,7 @@
                             </v-col>
                             <v-col cols="4">
                                 <text-field
-                                    title="Ишлаб чиқарувчининг email манзили"
+                                    :title="$t('Ишлаб чиқарувчининг email манзили')"
                                     rules="required|email"
                                     type="email"
                                     v-model="ishchiq.mail"
@@ -108,7 +108,7 @@
                         </ValidationObserver>
 
                     </v-container>
-                    <small>* майдонлар тўлдирилиши шарт</small>
+                    <small>{{$t('* майдонлар тўлдирилиши шарт')}}</small>
                 </v-card-text>
                 <v-card-actions>
                     <v-spacer></v-spacer>
@@ -117,14 +117,14 @@
                         text
                         @click="dialog = false"
                     >
-                        Бекор қилиш
+                        {{$t('Бекор қилиш')}}
                     </v-btn>
                     <v-btn
                         color="blue darken-1"
                         text
                         @click="saveIshChiq"
                     >
-                        Сақлаш
+                       {{ $t('Сақлаш') }} 
                     </v-btn>
                 </v-card-actions>
             </v-card>
@@ -160,7 +160,7 @@ export default {
     },
     label: {
         type: String,
-        default: "Илова қилинадиган ҳужжатлар",
+        default:"Илова қилинадиган ҳужжатлар",
     },
     hint: {
         type: String,

@@ -167,13 +167,6 @@ import MyField from '../../../components/form/myfield';
 import VueCropper from 'vue-cropperjs';
 import 'cropperjs/dist/cropper.css';
 
-Object.keys(rules).forEach(rule => {
-    extend(rule, {
-        ...rules[rule], // copies rule configuration
-        message: messages.messages[rule] // assign message
-
-    });
-});
 
 export default {
     name: "OrgCreate",

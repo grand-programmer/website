@@ -36,7 +36,7 @@
                             :complete="isCompleted(2)"
                             @click="goStep(2)"
                         >
-                            Ҳуқуқ эгаси тўғрисидаги маълумотлар
+                         {{ $t('Ҳуқуқ эгаси тўғрисидаги маълумотлар') }}
                         </v-stepper-step>
 
                         <v-divider></v-divider>
@@ -617,7 +617,7 @@
                                                                                                                                     class="border-bottom-dashed chips-dialog"
                                                                                                                                     @click="openDocumentType"
                                                                                                                                 >
-                                                                                                                                    <span>Илова қилинадиган ҳужжатлар: *</span>
+                                                                                                                                    <span>{{$t('Илова қилинадиган ҳужжатлар: *')}}</span>
                                                                                                                                     <v-chip-group
                                                                                                                                         mandatory
                                                                                                                                         style="height: 42px" class="d-block"
@@ -848,13 +848,6 @@ import EArxivFile from "../../../../components/form/e-arxiv-file";
 import DialogChips from "../../../../components/form/dialog-chips";
 
 
-Object.keys(rules).forEach(rule => {
-    extend(rule, {
-        ...rules[rule], // copies rule configuration
-        message: messages.messages[rule] // assign message
-
-    });
-});
 export default {
     name: "InitialIntellectual",
     data() {
@@ -1184,7 +1177,7 @@ export default {
     methods: {
         async getCountries() {
             let root = this
-            await axios.get('/api/v1/data/country?lang=uz').then(function (result) {
+            this.$auth.plugins.http.get('/api/v1/data/country').then(function (result) {
                 let countries = [];
                 result.data.forEach(function (item) {
                     countries.push({
@@ -1760,7 +1753,7 @@ export default {
 
         async getBoshqarmalar() {
             const _this = this
-            await axios.get('/api/v1/ex_api/boshqarma').then(function (result) {
+            await this.$auth.plugins.http.get('/api/v1/ex_api/boshqarma').then(function (result) {
                 if (typeof result.data.data !== 'undefined')
                     result.data.data.forEach(function (item) {
                         if (!(['1790', '1791', '1701'].includes(item['kod_id'])))
@@ -1861,7 +1854,7 @@ export default {
                 this.loading.tftncode = true
 
                 // Lazily load input items
-                fetch("https://new.customs.uz/api/v1/data/tftn?code=" + val)
+                fetch("https://customs.uz/api/v1/data/tftn?code=" + val)
                     .then((res) => res.json())
                     .then(res => {
                         res.map(function (item) {
@@ -1972,7 +1965,7 @@ export default {
                 this.loading.tftncode = true
 
                 // Lazily load input items
-                fetch("https://new.customs.uz/api/v1/data/tftn?code=" + val)
+                fetch("https://customs.uz/api/v1/data/tftn?code=" + val)
                     .then((res) => res.json())
                     .then(res => {
                         res.map(function (item) {

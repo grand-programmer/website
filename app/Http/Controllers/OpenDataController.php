@@ -8,7 +8,7 @@ use App\Http\Resources\StatServiceResource;
 use App\Models\OpenDataFile;
 use App\Models\OpenDataItem;
 use App\Models\StatData;
-use App\Models\StatService as ServiceStat;
+use App\Models\StatServiceApplication as ServiceStat;
 use App\Services\StatService;
 use Carbon\Carbon;
 use Exception;

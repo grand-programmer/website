@@ -21,10 +21,25 @@ class ApiController extends Controller
     /**
      * @throws \Exception
      */
+
+
+    public $serviceIps = [
+        'route_spt' => 'http://192.168.224.18:8000',
+        'route_recycle' => 'http://172.16.112.18:8888'
+        //'route_recycle' => 'http://192.168.224.224:8888'
+    ];
+
+    public function getRouteServiceIp($route)
+    {
+        $routeArray = explode('/', $route);
+        if (isset($this->serviceIps[$routeArray[0]])) return $this->serviceIps[$routeArray[0]];
+        return false;
+    }
+
     public function index($action = 'vakantlar', Request $request)
     {
-       // dd($request);
-/*        @ini_set('post_max_size' , '50M' );*/
+        // dd($request);
+        /*        @ini_set('post_max_size' , '50M' ); */
         /* phpinfo(); */
         $data = $request->all();
 
@@ -37,29 +52,29 @@ class ApiController extends Controller
                         'message' => 'Вакансия коди киритилмади'], 401);
                 if (Auth::guard('api')->user()) {
                     $response = Http::withBasicAuth('apiuser', 1)
-                        ->get('http://172.16.112.19:7191/vakant_nomer?id=' . $vacancy . '&pnfl=' . Auth::guard('api')->user()->pin);
+                        ->get('http://172.16.112.19:7191/vacancy4/vakant_nomer?id=' . $vacancy . '&pnfl=' . Auth::guard('api')->user()->pin);
 
                 } else {
 
                     if ($vacancy_pin = $request->get('pnfl'))
                         $response = Http::withBasicAuth('apiuser', 1)
-                            ->get('http://172.16.112.19:7191/vakant_nomer?id=' . $vacancy . '&pnfl=' . $vacancy_pin);
+                            ->get('http://172.16.112.19:7191/vacancy4/vakant_nomer?id=' . $vacancy . '&pnfl=' . $vacancy_pin);
                     else
-                        $response = Http::withBasicAuth('apiuser', 1)->get('http://172.16.112.19:7191/vakant_nomer?id=' . $vacancy. '&pnfl=');
+                        $response = Http::withBasicAuth('apiuser', 1)->get('http://172.16.112.19:7191/vacancy4/vakant_nomer?id=' . $vacancy . '&pnfl=');
                 }
-/*                if ($response->status() === 200) {
-                    $data = $response->json();
-                    if (Auth::guard('api')->user()) {
+                /*                if ($response->status() === 200) {
+                                    $data = $response->json();
+                                    if (Auth::guard('api')->user()) {
 
-                        $response1 = $myrequest->get('http://192.168.214.159/vacancy/public/api/nomzodtotal/' . Auth::guard('api')->user()->pin. '/' . $vacancy);
-                        if ($response1->status() == 200) {
-                            $data = array_merge($response->json(), $response1->json());
-                        }
-                    }
-                    return response()->json([
-                        'success' => $response->status() === 200 ? true : false,
-                        'data' => $data], $response->status());
-                }*/
+                                        $response1 = $myrequest->get('http://192.168.214.159/vacancy/public/api/nomzodtotal/' . Auth::guard('api')->user()->pin. '/' . $vacancy);
+                                        if ($response1->status() == 200) {
+                                            $data = array_merge($response->json(), $response1->json());
+                                        }
+                                    }
+                                    return response()->json([
+                                        'success' => $response->status() === 200 ? true : false,
+                                        'data' => $data], $response->status());
+                                }*/
                 break;
             case "boshqarma-show":
                 if (!($boshqarma = (int)$request->get('boshqarma')))
@@ -72,36 +87,41 @@ class ApiController extends Controller
             case "boshqarma":
 
                 try {
-                    $response = $myrequest->timeout(1)
-                        ->get('http://192.168.214.159/vacancy/public/api/hudud');
-                    /*                    $response = $myrequest
-                                            ->timeout(10)
-                                            ->get('http://192.168.214.135:9090/CUSTOMSPRICE/api/custom/locations');*/
-                    if ($response->status() == 200) {
-                        $dataLocations = json_decode($response->body());
-                        //dd($dataLocations->locations);
-                        if (!empty($dataLocations) and isset($dataLocations->locations)) {
-                            $locations = collect($dataLocations->locations)->transform(function ($loc) {
-                                if (isset($loc->id) and isset($loc->name))
-                                    return [
-                                        'kod_id' => $loc->id,
-                                        'name' => $loc->name1,
-                                        'address' => $loc->address
-                                    ];
-                                else return [];
+                    /* $response = $myrequest->timeout(1)
+                         ->get('http://192.168.214.159/vacancy/public/api/hudud');
+                     /*                    $response = $myrequest
+                                             ->timeout(10)
+                                             ->get('http://172.16.112.9:9090/CUSTOMSPRICE/api/custom/locations');
+                     if ($response->status() == 200) {
+                         $dataLocations = json_decode($response->body());
+                         //dd($dataLocations->locations);
+                         if (!empty($dataLocations) and isset($dataLocations->locations)) {
+                             $locations = collect($dataLocations->locations)->transform(function ($loc) {
+                                 if (isset($loc->id) and isset($loc->name))
+                                     return [
+                                         'kod_id' => $loc->id,
+                                         'name' => $loc->name1,
+                                         'address' => $loc->address
+                                     ];
+                                 else return [];
 
-                            });
-                            return response()->json(['data' => $locations->all()]);
-                        }
-                        else {
-                            return response()->json(['data' => DB::connection('db2_odbc221')->select("Select id as kod_id, name as name_ru, name_uzb as name From Location")]);
-                        }
-                    } else //return response()->json(['error' => 'Malumot topilmadi'],);
-                        return response()->json(['data' => DB::connection('db2_odbc221')->select("Select id as kod_id, name as name_ru,  name_uzb as name From Location")]);
+                             });
+                             return response()->json(['data' => $locations->all()]);
+                         }
+                         else {
+                             return response()->json(['data' => DB::connection('db2_odbc221')->select("Select id as kod_id, name as name_ru, name_uzb as name From Location")]);
+                         }
+                     } else //return response()->json(['error' => 'Malumot topilmadi'],);*/
+                    $lang = app()->getLocale();
+                    if ($lang === 'en') $lang = 'gb';
+                    return response()->json(['data' => DB::connection('normaLocation')->select("Select id as kod_id, name1 as name From location ")]); //where lang='" . strtoupper($lang) . "'
 
                 } catch (\Exception $e) {
 
-                    return response()->json(['data' => DB::connection('db2_odbc221')->select("Select id as kod_id, name as name_ru, name_uzb as name From Location")]);
+                    $lang = app()->getLocale();
+                    if ($lang === 'en') $lang = 'gb';
+                    return response()->json(['data' => DB::connection('normaLocation')->select("Select id as kod_id, name1 as name From location ")]); //where lang='" . strtoupper($lang) . "'
+
                     $response = $myrequest
                         ->get('http://192.168.214.159/vacancy/public/api/hudud');
 
@@ -110,10 +130,10 @@ class ApiController extends Controller
                 }
                 break;
             case "resume":
-                $myKeyData=$request->only('my_app_key');
-                if(isset($myKeyData['my_app_key'])){
+                $myKeyData = $request->only('my_app_key');
+                if (isset($myKeyData['my_app_key'])) {
                     $response = $myrequest->withBasicAuth('apiuser', 1)
-                        ->post('http://172.16.112.19:7191/nomzod/saveNewNomzod', $request->all());
+                        ->post('http://172.16.112.19:7191/vacancy4/nomzod/saveNewNomzod', $request->all());
                     break;
                 }
                 $this->middleware('auth:api');
@@ -123,7 +143,7 @@ class ApiController extends Controller
                     'data' => 'Foydalanuvchi avtorizatsiyadan otishi talab etiladi'], 401);
                 // print_r(array_merge($request->all(), ['passport' => Auth::guard('api')->user()['pport_no']]));
                 $response = Http::asJson()->withBasicAuth('apiuser', 1)
-                    ->post('http://172.16.112.19:7191/nomzod/saveNewNomzod', array_merge($request->all(), ['passport' => Auth::guard('api')->user()['pport_no']]));
+                    ->post('http://172.16.112.19:7191/vacancy4/nomzod/saveNewNomzod', array_merge($request->all(), ['passport' => Auth::guard('api')->user()['pport_no']]));
                 break;
             //////tftn
             case "tftn-person":
@@ -306,6 +326,7 @@ class ApiController extends Controller
                 if (!$user) return response()->json([
                     'success' => false,
                     'data' => 'Foydalanuvchi avtorizatsiyadan otishi talab etiladi'], 401);
+
                 $response = Http::contentType("application/json")->send('POST', 'http://192.168.214.152:7070/DECAPP/s03commodityrestapi/savecommoditys', [
                     'body' => json_encode($request->all())
                 ]);
@@ -475,11 +496,11 @@ class ApiController extends Controller
                 $appData = $request->only(['app_id', 'person_id', 'page', 'size']);
                 if (isset($appData['app_id'])) {
                     $app_id = isset($appData['app_id']) ? $appData['app_id'] : null;
-                    $response = Http::contentType("application/json")->get('http://192.168.224.145:8080/api/v1/tpo/get/' . $user->pin . '/' . $app_id );
+                    $response = Http::contentType("application/json")->get('http://192.168.224.145:8080/api/v1/tpo/get/' . $user->pin . '/' . $app_id);
                 } elseif (isset($appData['person_id'])) {
                     $page = $appData['page'] ?? 0;
                     $size = $appData['size'] ?? 50;
-                    $response = Http::contentType("application/json")->get('http://192.168.224.145:8080/api/v1/tpo/get/' . $user->pin , [
+                    $response = Http::contentType("application/json")->get('http://192.168.224.145:8080/api/v1/tpo/get/' . $user->pin, [
                         "page" => $page,
                         "size" => $size,
                     ]);
@@ -502,7 +523,7 @@ class ApiController extends Controller
                     'success' => false,
                     'data' => 'Foydalanuvchi avtorizatsiyadan otishi talab etiladi'], 401);
 
-                $response = Http::contentType("application/json")->send('POST', 'http://192.168.214.135:9090/CUSTOMSPRICE/personsrestapi', [
+                $response = Http::contentType("application/json")->send('POST', 'http://172.16.112.9:9090/CUSTOMSPRICE/personsrestapi', [
                     'body' => json_encode($request->all())
                 ]);
                 $this->middleware('auth:api');
@@ -511,7 +532,7 @@ class ApiController extends Controller
                     'success' => false,
                     'data' => 'Foydalanuvchi avtorizatsiyadan otishi talab etiladi'], 401);
 
-                $response = Http::contentType("application/json")->send('POST', 'http://192.168.214.135:9090/CUSTOMSPRICE/personsrestapi', [
+                $response = Http::contentType("application/json")->send('POST', 'http://172.16.112.9:9090/CUSTOMSPRICE/personsrestapi', [
                     'body' => json_encode($request->all())
                 ]);
 
@@ -522,7 +543,7 @@ class ApiController extends Controller
                 if (!$user) return response()->json([
                     'success' => false,
                     'data' => 'Foydalanuvchi avtorizatsiyadan otishi talab etiladi'], 401);
-                $response = Http::contentType("application/json")->send('POST', 'http://192.168.214.135:9090/CUSTOMSPRICE/appsrestapi/updateappsrestapi', [
+                $response = Http::contentType("application/json")->send('POST', 'http://172.16.112.9:9090/CUSTOMSPRICE/appsrestapi/updateappsrestapi', [
                     'body' => json_encode($request->all())
                 ]);
                 break;
@@ -532,7 +553,7 @@ class ApiController extends Controller
                 if (!$user) return response()->json([
                     'success' => false,
                     'data' => 'Foydalanuvchi avtorizatsiyadan otishi talab etiladi'], 401);
-                $response = Http::contentType("application/json")->send('POST', 'http://192.168.214.135:9090/CUSTOMSPRICE/appsrestapi', [
+                $response = Http::contentType("application/json")->send('POST', 'http://172.16.112.9:9090/CUSTOMSPRICE/appsrestapi', [
                     'body' => json_encode($request->all())
                 ]);
                 break;
@@ -542,7 +563,7 @@ class ApiController extends Controller
                 if (!$user) return response()->json([
                     'success' => false,
                     'data' => 'Foydalanuvchi avtorizatsiyadan otishi talab etiladi'], 401);
-                $response = Http::contentType("application/json")->send('POST', 'http://192.168.214.135:9090/CUSTOMSPRICE/commodityrestapi', [
+                $response = Http::contentType("application/json")->send('POST', 'http://172.16.112.9:9090/CUSTOMSPRICE/commodityrestapi', [
                     'body' => json_encode($request->all())
                 ]);
                 if ($response->status() === 200) {
@@ -564,7 +585,7 @@ class ApiController extends Controller
 
                 $appData = $request->only('app_id');
                 $app_id = isset($appData['app_id']) ? $appData['app_id'] : null;
-                $response = Http::contentType("application/json")->get('http://192.168.214.135:9090/CUSTOMSPRICE/api/tutorials/commoditys', [
+                $response = Http::contentType("application/json")->get('http://172.16.112.9:9090/CUSTOMSPRICE/api/tutorials/commoditys', [
                     "page" => 0,
                     "size" => 1000,
                     "appId" => $app_id,
@@ -575,7 +596,7 @@ class ApiController extends Controller
                         'general' => isset($mydata['apps']) ? $mydata['apps'] : null,
                         'product' => isset($mydata['commodityList'][0]) ? $mydata['commodityList'][0] : null,
                     ];
-                    $response2 = Http::contentType("application/json")->get('http://192.168.214.135:9090/CUSTOMSPRICE/api/tutorials/transporttype', [
+                    $response2 = Http::contentType("application/json")->get('http://172.16.112.9:9090/CUSTOMSPRICE/api/tutorials/transporttype', [
                         "page" => 0,
                         "size" => 100,
                         "appId" => $app_id,
@@ -584,7 +605,7 @@ class ApiController extends Controller
                         $transportdata = $response2->json();
                         $returnData['transports'] = isset($transportdata["transportTypeList"]) ? $transportdata["transportTypeList"] : null;
                     }
-                    $response3 = Http::contentType("application/json")->get('http://192.168.214.135:9090/CUSTOMSPRICE/api/tutorials/earxivdocs', [
+                    $response3 = Http::contentType("application/json")->get('http://172.16.112.9:9090/CUSTOMSPRICE/api/tutorials/earxivdocs', [
                         "page" => 0,
                         "size" => 100,
                         "appId" => $app_id,
@@ -606,7 +627,7 @@ class ApiController extends Controller
 
                         //
                     }
-                    $response4 = Http::contentType("application/json")->get('http://192.168.214.135:9090/CUSTOMSPRICE/api/tutorials/historystatus', [
+                    $response4 = Http::contentType("application/json")->get('http://172.16.112.9:9090/CUSTOMSPRICE/api/tutorials/historystatus', [
                         "page" => 0,
                         "size" => 100,
                         "appId" => $app_id,
@@ -619,7 +640,7 @@ class ApiController extends Controller
                         if (isset($returnData['statuses'])) {
                             $returnData['statuses'] = collect($returnData['statuses'])->transform(function ($status) {
                                 //if ((int)$status['status'] === 125) {
-                                $response5 = Http::contentType("application/json")->get('http://192.168.214.135:9090/CUSTOMSPRICE/api/tutorials/historyrollback', [
+                                $response5 = Http::contentType("application/json")->get('http://172.16.112.9:9090/CUSTOMSPRICE/api/tutorials/historyrollback', [
                                     "appId" => $status['appId'],
                                     "size" => 100,
                                     "page" => 0,
@@ -643,7 +664,7 @@ class ApiController extends Controller
 
                 $appData = $request->only('pnfl');
                 $person_pnfl = isset($appData['pnfl']) ? $appData['pnfl'] : null;
-                $response = Http::contentType("application/json")->get('http://192.168.214.135:9090/CUSTOMSPRICE/api/tutorials/published', [
+                $response = Http::contentType("application/json")->get('http://172.16.112.9:9090/CUSTOMSPRICE/api/tutorials/published', [
                     "personPin" => $person_pnfl,
                     "size" => 200,
                 ]);
@@ -665,7 +686,7 @@ class ApiController extends Controller
                 $appData['size'] = (isset($appData['size']) and $appData['size'] === -1) ? 0 : $appData['size'];
                 //$appData = isset($appData['pnfl']) ? $appData['pnfl'] : null;
                 ///dd($appData);
-                $response = Http::contentType("application/json")->get('http://192.168.214.135:9090/CUSTOMSPRICE/api/custom/reestor', $appData);
+                $response = Http::contentType("application/json")->get('http://172.16.112.9:9090/CUSTOMSPRICE/api/custom/reestor', $appData);
                 if ($response->status() == 200) {
                     //$dataApps = json_decode($response->body());
                     //return $response->json();
@@ -767,12 +788,19 @@ class ApiController extends Controller
             case "postsbyregion":
                 $appData = $request->only('code');
                 $code = isset($appData['code']) ? $appData['code'] : "";
-                $response = Http::contentType("application/json")->get('http://192.168.214.152:7070/DECAPP/s09appsrestapi/postsWith2', [
-                    "code" => $code,
-                ]);
-                if ($response->status() == 200) {
-                    return $response->json();
-                } else return response()->json(['error' => 'Маълумот топилмади']);
+
+                $lang = app()->getLocale();
+                if ($lang === 'en') $lang = 'gb';
+                return response()->json(['posts' => DB::connection('databaseconfig_tsodb')->select("Select code, cd_nm as cdNm From spr_post where location='" . $code . "'")]);
+
+
+                /*
+                                $response = Http::contentType("application/json")->get('http://192.168.214.152:7070/DECAPP/s09appsrestapi/postsWith2', [
+                                    "code" => $code,
+                                ]);
+                                if ($response->status() == 200) {
+                                    return $response->json();
+                                } else return response()->json(['error' => 'Маълумот топилмади']);*/
                 break;
 /////customsprice end
             case "test":
@@ -830,27 +858,27 @@ class ApiController extends Controller
                 ]);*/
 
 
-                $response = Http::post('http://172.16.112.17:8083/api/passport', [
+                $response = Http::post('http://172.16.112.17:8888/api/passport', [
                     "document" => $pnum,
                     "birth_date" => $pdate,
                     "sender_pinfl" => '31103927250012',
-                    "pinPP"=> null,
+                    "pinPP" => null,
                 ]);
 
- /*               $response = Http::post('http://192.168.214.247:8081/GetAvto/rest/servicePassNew/getPassNew', [
-                    "passernum"=>"KA0256395",
-                    "pinflzap"=>"31103927250012",
-                    "dataroj"=>"1992-03-11"
-                ]);
- */
+                /*               $response = Http::post('http://192.168.214.247:8081/GetAvto/rest/servicePassNew/getPassNew', [
+                                   "passernum"=>"KA0256395",
+                                   "pinflzap"=>"31103927250012",
+                                   "dataroj"=>"1992-03-11"
+                               ]);
+                */
 
                 if ($response->status() == 200) {
-/*                    $simpleXml = simplexml_load_string($response->body());
-                    $json = json_encode($simpleXml); // convert the XML string to JSON
-                    $array = json_decode($json); // convert the XML string to JSON*/
+                    /*                    $simpleXml = simplexml_load_string($response->body());
+                                        $json = json_encode($simpleXml); // convert the XML string to JSON
+                                        $array = json_decode($json); // convert the XML string to JSON*/
                     $myPasportData = [];
-                    $array =$response->json();
-                    if ($array['result']!==1) {
+                    $array = $response->json();
+                    if ($array['result'] !== 1) {
                         return response()->json(['error' => 'Маълумотларни текшириб қайтадан киритинг'], 400);
                     }
                     $myPasportData['birth_date'] = $array['birth_date'];
@@ -1013,15 +1041,51 @@ class ApiController extends Controller
             default:
                 if (Auth::guard('api')->user())
                     $response = $myrequest->withBasicAuth('apiuser', 1)
-                        ->get('http://172.16.112.19:7191/vakantlar/?pnfl=' . Auth::guard('api')->user()->pin);
+                        ->get('http://172.16.112.19:7191/vacancy4/vakantlar/?pnfl=' . Auth::guard('api')->user()->pin);
                 else $response = $myrequest->withBasicAuth('apiuser', 1)
-                    ->get('http://172.16.112.19:7191/vakantlar'); // http://192.168.214.159/vacancy/public/api/vakantlar/
+                    ->get('http://172.16.112.19:7191/vacancy4/vakantlar'); // http://192.168.214.159/vacancy/public/api/vakantlar/
                 break;
 
         }
         return response()->json([
             'success' => $response->status() === 200 ? true : false,
             'data' => json_decode($response->body())], $response->status());
+    }
+
+    public function responseFromInside($route, Request $request)
+    {
+
+        $httpUrl = $this->getRouteServiceIp($route);
+        $method = strtolower($request->method());
+        if (strpos($route, 'route_recycle') !== false) $route = substr($route, 14);
+        if ($httpUrl) {
+            $header = $request->headers->get('content-type');
+
+            if ($header === 'multipart/form-data')
+                $httpClient = Http::asMultipart();
+            else $httpClient = Http::withHeaders($request->headers->all());
+
+            if ($request->hasFile('file')) {
+                $file = $request->file('file');
+
+                // So'rov yuborish
+                $response = Http::asMultipart() // multipart/form-data formatini o'rnatish
+                ->attach(
+                    'file',                          // Form-data kaliti (Postmandagi 'file' bilan bir xil)
+                    file_get_contents($file),        // Fayl mazmuni
+                    $file->getClientOriginalName()   // Fayl nomi
+                )
+                    ->$method($httpUrl . '/' . $route, $request->all());
+
+                // Javobni qaytarish
+                return response()->json($response->json(), $response->status());
+            }
+
+
+
+            $request = $httpClient->$method($httpUrl . '/' . $route, $request->all());
+            return response()->json($request->json(), $request->status());
+        }
     }
 }
 

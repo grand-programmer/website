@@ -28,6 +28,12 @@
                         :server-items-length="totalDecisions"
                         :loading="loading"
                         class="elevation-1 p-0"
+                        :no-data-text="$t('Маълумот топилмади')"
+                        :footer-props="{
+                            'items-per-page-text': $t('Сахифадаги элементлар сони'),
+                            'items-per-page-all-text': $t('Барчаси')
+                        }"
+                        :loading-text="$t('Юкланмоқда... Илтимос кутиб туринг')"
                     >
                         <template v-slot:header.name="{ header }">
                             <span class="primary"> {{ header.text.toUpperCase() }}</span>
@@ -79,7 +85,7 @@
                                                 no-title
                                                 range
                                                 scrollable
-                                                locale="ru-ru"
+                                                :locale="$i18n.locale ==='en'?'en-US':'ru-RU'"
 
                                             >
                                                 <v-spacer></v-spacer>
@@ -208,13 +214,13 @@ export default {
                     exact: true,
                 },
                 {
-                    text: 'Хизматлар',
+                    text: i18n.t('Хизматлар'),
                     to: '/services',
                     disabled: false,
                     exact: true,
                 },
                 {
-                    text: 'Божхона тўловлари бўйича дастлабки қарорлар реестри',
+                    text: i18n.t('Божхона тўловлари бўйича дастлабки қарорлар реестри'),
                     to: '/registries/decisions',
                     disabled: true,
                     exact: true,

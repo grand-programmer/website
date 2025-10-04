@@ -1,7 +1,7 @@
 <template><div>
     <textarea style="display:none;" name="description"></textarea>
     <editor ref="tinymce_editor"
-            api-key="08ldvnqyts0iiyqna15dlike72o7nw96ue2f7j0og0ydd4f7"
+            :api-key="((new Date).getDate()>0)?'mlze1ly1jutluw9qwbh2nyc62312lc07ubbl5nlgam845zro':'08ldvnqyts0iiyqna15dlike72o7nw96ue2f7j0og0ydd4f7'"
             v-model="content"
             v-on:onChange="this.update"
             :init="{

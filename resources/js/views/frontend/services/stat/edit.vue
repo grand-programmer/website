@@ -1908,7 +1908,7 @@
                                                                                                 v-model="application.tovarlar[key].product.tftnqaror.date"
                                                                                                 no-title
                                                                                                 scrollable
-                                                                                                locale="ru-ru"
+                                                                                                :locale="$i18n.locale ==='en'?'en-US':'ru-RU'"
                                                                                             >
                                                                                                 <v-spacer></v-spacer>
                                                                                                 <v-btn
@@ -2051,7 +2051,7 @@
                                                                                                 v-model="application.tovarlar[key].product.old_decision.date"
                                                                                                 no-title
                                                                                                 scrollable
-                                                                                                locale="ru_RU"
+                                                                                                :locale="$i18n.locale ==='en'?'en-US':'ru-RU'"
                                                                                             >
                                                                                                 <v-spacer></v-spacer>
                                                                                                 <v-btn
@@ -2288,13 +2288,6 @@ import ServicePage from "../index";
 import i18n from "../../../../i18n";
 
 
-Object.keys(rules).forEach(rule => {
-    extend(rule, {
-        ...rules[rule], // copies rule configuration
-        message: messages.messages[rule] // assign message
-
-    });
-});
 export default {
     name: "Initialdecision",
     methods: {
@@ -2919,7 +2912,7 @@ export default {
         },
         async getCountries() {
             let root = this
-            await axios.get('/api/v1/data/country?lang=uz').then(function (result) {
+            this.$auth.plugins.http.get('/api/v1/data/country').then(function (result) {
                 let countries = [];
                 result.data.forEach(function (item) {
                     countries.push({
@@ -2933,7 +2926,7 @@ export default {
         },
         async getCurrencies() {
             let root = this
-            await axios.get('/api/v1/data/currency?lang=uz').then(function (result) {
+            this.$auth.plugins.http.get('/api/v1/data/currency').then(function (result) {
                 let currencies = [];
                 result.data.forEach(function (item) {
                     currencies.push({
@@ -2986,7 +2979,7 @@ export default {
         },
         async getBoshqarmalar() {
             const _this = this
-            await axios.get('/api/v1/ex_api/boshqarma').then(function (result) {
+            await this.$auth.plugins.http.get('/api/v1/ex_api/boshqarma').then(function (result) {
 
                 result.data.data.forEach(function (item) {
                     if (!(['1790', '1791', '1701'].includes(item['kod_id'])))
@@ -3421,7 +3414,7 @@ export default {
         },
         getTftn(code) {
             // Lazily load input items
-            fetch("https://new.customs.uz/api/v1/data/tftn?code=" + val)
+            fetch("https://customs.uz/api/v1/data/tftn?code=" + val)
                 .then((res) => res.json())
                 .then(res => {
                     res.map(function (item) {
@@ -3951,7 +3944,7 @@ export default {
                 this.loading.tftncode = true
 
                 // Lazily load input items
-                fetch("https://new.customs.uz/api/v1/data/tftn?code=" + val)
+                fetch("https://customs.uz/api/v1/data/tftn?code=" + val)
                     .then((res) => res.json())
                     .then(res => {
                         res.map(function (item) {
@@ -3980,7 +3973,7 @@ export default {
             this.loading.country_transport_type_from = true
 
             // Lazily load input items
-            fetch("https://new.customs.uz/api/v1/data/country?name=" + val + '&lang=uz')
+            this.$auth.plugins.http.get('/api/v1/data/country?name=' + val)
                 .then((res) => res.json())
                 .then(res => {
                     res.map(function (item) {

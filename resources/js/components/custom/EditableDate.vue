@@ -34,6 +34,7 @@
           </div>
         </template>
         <v-date-picker
+            :locale="$i18n.locale ==='en'?'en-US':'ru-RU'"
           v-model="datepicker.date"
           :active-picker.sync="activePicker.date"
           :max="(new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10)"

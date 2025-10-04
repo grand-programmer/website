@@ -36,6 +36,13 @@
                     item-key="name"
                     show-expand
                     class="elevation-1"
+                    :no-data-text="$t('Маълумот топилмади')"
+                    :footer-props="{
+                        'items-per-page-text': $t('Сахифадаги элементлар сони'),
+                        'items-per-page-all-text': $t('Барчаси')
+                    }"
+                    :loading-text="$t('Юкланмоқда... Илтимос кутиб туринг')"
+
                 >
                     <template v-slot:top>
                         <v-toolbar flat>
@@ -68,13 +75,6 @@ import {extend, ValidationProvider, ValidationObserver} from 'vee-validate';
 import * as rules from 'vee-validate/dist/rules';
 import messages from '../../../../locales/oz.json';
 
-Object.keys(rules).forEach(rule => {
-    extend(rule, {
-        ...rules[rule], // copies rule configuration
-        message: messages.messages[rule] // assign message
-
-    });
-});
 
 export default {
 

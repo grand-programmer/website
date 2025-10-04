@@ -26,7 +26,7 @@ export default {
                     exact: true,
                 },
                 {
-                    text: 'Менинг аризаларим',
+                    text: i18n.t('Менинг аризаларим'),
                     to: '/applications',
                     disabled: true,
                     exact: true,

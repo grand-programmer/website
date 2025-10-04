@@ -1,14 +1,15 @@
 <?php
 
+use App\Exports\StatProductsExport;
+use App\Http\Controllers\PaymeController;
 use App\Models\News;
+use App\Services\StatService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Route;
-use App\AppealController;
-use App\AuthController;
 use Illuminate\Support\Facades\Schema;
 use App\Services\NewsToSocial;
 use Illuminate\Support\Facades\Notification;
+use Maatwebsite\Excel\Facades\Excel;
 
 
 /*
@@ -27,24 +28,12 @@ use Illuminate\Support\Facades\Notification;
 //Route::group(['prefix' => '{lang?}'], function ($lang) {
 //    App::setLocale($lang||'uz');
     Route::group(['prefix' => 'v1','middleware' => 'locale'], function () {
-        Route::get('test', function(){
-            try {
-                $message = (new NewsToSocial(News::orderBy('id', 'desc')->first()));
+        Route::get('sync', 'App\Http\Controllers\Admin\AdminEventController@syncKeys');
+        Route::get('test',function(){
 
-                Notification::route('telegram', '-1001530458375')
-                    ->notify($message);
-            }
-            catch(Exception $exception) {
-                dd($exception->getMessage());
-            }
-            // Notification::via('telegram')->notify($message);
-            // phpinfo();
-           $date1=new \Carbon\Carbon('2021-01-10');
-           $date2=new \Carbon\Carbon('2031-01-09');
-           print_r($date1->day);
-           print_r($date1->month);
-           print_r($date1->year);
-            dd($date1->subDay()->getTimestamp() === $date2->subYears(10)->getTimestamp());
+
+            /*$statservice = new StatServiceApplication(false);
+            return $statservice->getTovarImExDataNew(2024,1);*/
         });
         Route::prefix('auth')->group(function () {
             Route::post('register', 'App\Http\Controllers\AuthController@register');
@@ -57,19 +46,48 @@ use Illuminate\Support\Facades\Notification;
             });
 
         });
+        Route::get('statdata/{cat}/{year}/{month}/{tomonth?}', function($cat,$year,$month,$tomonth=0){
+            try {
+                /*                $service = new \App\Services\StatServiceApplication(false);
+                                $service->saveData('istemoltovar_n',2024,1,0, 2);*/
+
+
+                return Excel::download(new StatProductsExport($cat,$year,(int)$month,(int)$tomonth), 'products.xlsx');
+
+            }
+            catch(Exception $exception) {
+                die($exception->getMessage());
+            }
+            // Notification::via('telegram')->notify($message);
+            // phpinfo();
+            /*           $date1=new \Carbon\Carbon('2021-01-10');
+                       $date2=new \Carbon\Carbon('2031-01-09');
+                       print_r($date1->day);
+                       print_r($date1->month);
+                       print_r($date1->year);
+                        dd($date1->subDay()->getTimestamp() === $date2->subYears(10)->getTimestamp());*/
+        });
         /*    Route::get('test',function(){
 
             });*/
         Route::any('ex_api/{action}', 'App\Http\Controllers\ApiController@index');
+        Route::group(['middleware' => 'auth:api'], function () {
+            Route::any('response/{route}', 'App\Http\Controllers\ApiController@responseFromInside')
+                ->where('route', '.*');
+        });
         Route::get('get_image', 'App\Http\Controllers\UserController@showImage');
         Route::middleware(['basicAuth'])->group(function () {
             Route::post('baholash', 'App\Http\Controllers\HodimBallController@index');
         });
+        Route::get('statservice/export', 'App\Http\Controllers\StatController@exportByud');
         Route::group(['middleware' => 'auth:api'], function () {
-            Route::post('statservice', 'App\Http\Controllers\StatController@saveStat');
-            Route::get('statservice', 'App\Http\Controllers\StatController@getApps');
+            Route::post('statservice', 'App\Http\Controllers\StatController@generateApp');
+            Route::post('statservice/{statservice}', 'App\Http\Controllers\StatController@saveStat');
+            Route::get('statservice/{statservice}', 'App\Http\Controllers\StatController@show');
+            Route::get('statservice/price/{statservice}', 'App\Http\Controllers\StatController@getPrice');
             Route::get('statservice/export', 'App\Http\Controllers\StatController@exportByud');
             Route::post('statservice/agree', 'App\Http\Controllers\StatController@agreed');
+
             Route::post('userUpdate', 'App\Http\Controllers\UserController@update');
             Route::get('users', 'App\Http\Controllers\UserController@index')->middleware('isAdmin');
             Route::get('users/{id}', 'App\Http\Controllers\UserController@show')->middleware('isAdminOrSelf');
@@ -154,12 +172,25 @@ use Illuminate\Support\Facades\Notification;
             });*/
 
         Route::get('/data/tftn', 'App\Http\Controllers\DataController@getTftn');
+        Route::get('/data/unit', 'App\Http\Controllers\DataController@getUnit');
         Route::get('/data/inn', 'App\Http\Controllers\DataController@getInn');
         Route::get('/data/currency', 'App\Http\Controllers\DataController@getCurrency');
         Route::get('/data/country', 'App\Http\Controllers\DataController@getCountry');
+        Route::get('/data/post', 'App\Http\Controllers\DataController@getPosts');
+        Route::get('/data/region', 'App\Http\Controllers\DataController@getRegions');
         Route::get('/data/mfo', 'App\Http\Controllers\DataController@getMFO');
+        Route::get('/data/statservicetype', 'App\Http\Controllers\DataController@statservicetype');
+        Route::get('/data/statservice/{statservice}/tarmoq', 'App\Http\Controllers\DataController@getStatServiceTarmoq')->middleware('auth:api');
+        Route::get('/data/{statservice}/regime', 'App\Http\Controllers\DataController@getStatServiceRegime');
+        Route::get('/data/{statservice}/fields', 'App\Http\Controllers\DataController@getStatServiceFields');
+        Route::get('/data/tariffs', 'App\Http\Controllers\DataController@getStatServiceTarifs');
         Route::get('/data/contract', 'App\Http\Controllers\DataController@getEisvoContract');
         Route::get('/users-viewed', 'App\Http\Controllers\UsersCountController@getCount');
         Route::post('/spreaded-search', 'App\Http\Controllers\NewsController@spreadedSearch');
+        Route::group(['prefix' => 'payments'], function () {
+
+            Route::post('/payme',PaymeController::class.'@handle')->middleware('paymecheck');
+
+        });
     });
 //});

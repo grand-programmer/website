@@ -28,6 +28,12 @@
                         :server-items-length="totalDecisions"
                         :loading="loading"
                         class="elevation-1 p-0"
+                        :no-data-text="$t('Маълумот топилмади')"
+                        :footer-props="{
+                            'items-per-page-text': $t('Сахифадаги элементлар сони'),
+                            'items-per-page-all-text': $t('Барчаси')
+                        }"
+                        :loading-text="$t('Юкланмоқда... Илтимос кутиб туринг')"
                     >
                         <template v-slot:header.name="{ header }">
                             <span class="primary"> {{ header.text.toUpperCase() }}</span>

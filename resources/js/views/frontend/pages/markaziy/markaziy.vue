@@ -24,7 +24,7 @@
                                             <div class="rahbar-item"
                                                  :class="aktiv_rahbar===rahbar.id?'active':''"
 
-                                                 :key="'aa'+1+key" v-for="(rahbar,key) in rahbariyat"
+                                                 :key="'aa'+1+key" v-for="(rahbar,key) in rahbariyat.filter(item=>(['1','2','3'].includes(item.lavozimi)))"
                                                  @click="leftbarClick(rahbar.id,key)"
                                             ><p>
                                                 <template v-if="rahbar.lavozimi==='1'">{{ $t("Иқтисодиёт ва молия вазирлиги ҳузуридаги Божхона қўмитаси раиси") }}</template>

@@ -9,11 +9,11 @@
                 </v-breadcrumbs>
             </v-container>
         </div>
-        <div class="page-content" v-if=" typeof t_app.appNum !=='undefined'">
+        <div class="page-content" v-if="typeof t_app !=='undefined' && t_app && typeof t_app.appNum !=='undefined'">
             <v-container>
                 <v-row>
-                    <h3 class="pb-5 mt-5 primary-color" style="font-weight: bold">Божхона органларига мурожаат</h3>
-                    <h5><b>Ариза рақами: </b>{{ t_app.appNum }}</h5>
+                    <h3 class="pb-5 mt-5 primary-color" style="font-weight: bold">{{ $t('Божхона органларига мурожаат') }}</h3>
+                    <h5><b>{{ $t('Ариза рақами:') }} </b>{{ t_app.appNum }}</h5>
                 </v-row>
                 <v-row>
                     <!--                    <v-tabs
@@ -38,14 +38,14 @@
                         <template v-slot:default>
                             <tbody>
                             <tr>
-                                <td style="font-weight: 550">ЖШШИР</td>
+                                <td style="font-weight: 550">{{ $t('ЖШШИР') }}</td>
                                 <td>{{
                                         typeof t_app.personPin !== 'undefined' ? t_app.personPin : null
                                     }}
                                 </td>
                             </tr>
                             <tr>
-                                <td style="font-weight: 550">Фамилияси, исми, шарифи</td>
+                                <td style="font-weight: 550">{{ $t('Фамилияси, исми, шарифи') }}</td>
                                 <td>{{
                                         typeof t_app.firstName !== 'undefined' ? t_app.firstName : null
                                     }} {{
@@ -56,21 +56,21 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td style="font-weight: 550">Танланган бошқарма</td>
+                                <td style="font-weight: 550">{{ $t('Танланган бошқарма') }}</td>
                                 <td>{{
                                         typeof t_app.locationNm !== 'undefined' ? t_app.locationNm : null
                                     }}
                                 </td>
                             </tr>
                             <tr>
-                                <td style="font-weight: 550">Такрорий ариза</td>
+                                <td style="font-weight: 550">{{ $t('Такрорий ариза') }}</td>
                                 <td>{{
-                                        (typeof t_app.appealType !== 'undefined' && t_app.appealType === 2) ? 'ХА' : 'ЙЎҚ'
+                                        (typeof t_app.appealType !== 'undefined' && t_app.appealType === 2) ? $t('ХА') : $t('ЙЎҚ')
                                     }}
                                 </td>
                             </tr>
                             <tr>
-                                <td style="font-weight: 550">Манзили</td>
+                                <td style="font-weight: 550">{{ $t('Манзили') }}</td>
                                 <td>{{
                                         typeof t_app.address !== 'undefined' ? t_app.address : null
                                     }}
@@ -79,42 +79,42 @@
 
 
                             <tr>
-                                <td style="font-weight: 550">Телефон рақами</td>
+                                <td style="font-weight: 550">{{ $t('Телефон рақами') }}</td>
                                 <td>{{
                                         typeof t_app.phoneNumber !== 'undefined' ? t_app.phoneNumber : null
                                     }}
                                 </td>
                             </tr>
                             <tr>
-                                <td style="font-weight: 550">Электрон манзили</td>
+                                <td style="font-weight: 550">{{ $t('Электрон манзили') }}</td>
                                 <td>{{
                                         typeof t_app.email !== 'undefined' ? t_app.email : null
                                     }}
                                 </td>
                             </tr>
                             <tr v-if="typeof  t_app.profession !== 'undefined'">
-                                <td style="font-weight: 550">Иш жойи</td>
+                                <td style="font-weight: 550">{{ $t('Иш жойи') }}</td>
                                 <td>{{
                                         typeof t_app.profession !== 'undefined' ? t_app.profession : null
                                     }}
                                 </td>
                             </tr>
                             <tr v-if="typeof  fileQuestion !== 'undefined' && fileQuestion">
-                                <td style="font-weight: 550">Илова қилинган файл</td>
+                                <td style="font-weight: 550">{{ $t('Илова қилинган файл') }}</td>
                                 <td>
                                     <a :href="'data:'+fileQuestion.file_format +';base64,'+ fileQuestion.data"
-                                       :download="fileQuestion.fileNameEx">Юклаб олиш!</a>
+                                       :download="fileQuestion.fileNameEx">{{ $t('Юклаб олиш!') }}</a>
                                 </td>
                             </tr>
                             <tr v-if="typeof  fileAnswer !== 'undefined' && fileAnswer && fileAnswer.length>0">
-                                <td style="font-weight: 550">Жавоб хати</td>
+                                <td style="font-weight: 550">{{ $t('Жавоб хати') }}</td>
                                 <td>
                                     <a :href="'data:'+fileAnswer[0].file_format +';base64,'+ fileAnswer[0].data"
-                                       :download="fileAnswer[0].fileNameEx">Юклаб олиш</a>
+                                       :download="fileAnswer[0].fileNameEx">{{ $t('Юклаб олиш') }}</a>
                                 </td>
                             </tr>
                             <tr v-if="typeof  t_app.statusNm !== 'undefined'">
-                                <td style="font-weight: 550">Ариза ҳолати</td>
+                                <td style="font-weight: 550">{{ $t('Ариза ҳолати') }}</td>
                                 <td>{{
                                         typeof t_app.statusNm !== 'undefined' ? t_app.statusNm : null
                                     }}
@@ -123,10 +123,10 @@
 
                             <tr v-if="typeof $route.params.key !=='undefined' && 1===2">
                                 <td>{{$route.params.key}}</td>
-                                <td> <a @click="generateReport" class="primary-color">Мурожаатни чоп қилиш учун юклаб олинг</a></td>
+                                <td> <a @click="generateReport" class="primary-color">{{ $t('Мурожаатни чоп қилиш учун юклаб олинг') }}</a></td>
                             </tr>
                             <tr v-if="typeof  t_app.messageBody !== 'undefined'">
-                                <td style="font-weight: 550">Мурожаат мазмуни</td>
+                                <td style="font-weight: 550">{{ $t('Мурожаат мазмуни') }}</td>
                                 <td>{{
                                         typeof t_app.messageBody !== 'undefined' ? t_app.messageBody : null
                                     }}
@@ -160,7 +160,7 @@
                                     <div>
                                         <div class="dialog_header">
                                             <img width="40" height="40" src="/img/gtk_image.png">
-                                            <p>Божхона органларига <span>мурожаат</span></p>
+                                            <p>{{ $t('Божхона органларига') }} <span>{{ $t('мурожаат') }}</span></p>
                                             <qrcode :value="baseURL" :options="{ width: 80 }"></qrcode>
                                         </div>
                                         <div class="dialog_content">
@@ -168,15 +168,15 @@
 
                                             <table>
                                                 <tr>
-                                                    <td>Мурожаат тартиб рақами</td>
+                                                    <td>{{ $t('Мурожаат тартиб рақами') }}</td>
                                                     <td>{{ appeal.appNum }}</td>
                                                 </tr>
                                                 <tr v-if="typeof appeal.password !=='undefined'">
-                                                    <td>Мурожаат текшириш коди</td>
+                                                    <td>{{ $t('Мурожаат текшириш коди') }}</td>
                                                     <td>{{ appeal.password }}</td>
                                                 </tr>
                                                 <tr  v-if="typeof appeal.insTime !=='undefined'">
-                                                    <td>Мурожаат тушган сана ва вақт</td>
+                                                    <td>{{ $t('Мурожаат тушган сана ва вақт') }}</td>
                                                     <td>{{ appeal.insTime }}</td>
                                                 </tr>
                                                 <!--                                    <tr>
@@ -184,52 +184,52 @@
                                                                                         <td>2313</td>
                                                                                     </tr>-->
                                                 <tr v-if="typeof appeal.lastName !=='undefined' || typeof appeal.surName !=='undefined' || typeof appeal.firstName !=='undefined'">
-                                                    <td>Мурожаат муаллифи Ф.И.О</td>
+                                                    <td>{{ $t('Мурожаат муаллифи Ф.И.О') }}</td>
                                                     <td>{{ appeal.firstName?appeal.firstName:'' }} {{ appeal.lastName?appeal.lastName:'' }} {{ appeal.surName?appeal.surName:'' }}</td>
                                                 </tr>
                                                 <tr v-if="typeof appeal.address !=='undefined'">
-                                                    <td>Жисмоний ёки юридик шахснинг манзили</td>
+                                                    <td>{{ $t('Жисмоний ёки юридик шахснинг манзили') }}</td>
                                                     <td>{{ appeal.address }}</td>
                                                 </tr>
                                                 <tr v-if="typeof appeal.birthDate !=='undefined'">
-                                                    <td>Туғилган йили</td>
+                                                    <td>{{ $t('Туғилган йили') }}</td>
                                                     <td>{{ appeal.birthDate }}</td>
                                                 </tr>
                                                 <tr v-if="typeof appeal.profession !=='undefined'">
-                                                    <td>Иш жойи</td>
+                                                    <td>{{ $t('Иш жойи') }}</td>
                                                     <td>{{ appeal.profession }}</td>
                                                 </tr>
                                                 <tr v-if="typeof appeal.position !=='undefined' && appeal.position ==='01' && typeof appeal.positionNm !=='undefined'">
-                                                    <td>Юридик шахс номи</td>
+                                                    <td>{{ $t('Юридик шахс номи') }}</td>
                                                     <td>{{ appeal.positionNm }}</td>
                                                 </tr>
                                                 <tr v-if="typeof appeal.phoneNumber !=='undefined'">
-                                                    <td>Телефон рақами</td>
+                                                    <td>{{ $t('Телефон рақами') }}</td>
                                                     <td>{{ appeal.phoneNumber }}</td>
                                                 </tr>
                                                 <tr v-if="typeof appeal.email !=='undefined'">
-                                                    <td>Электрон манзили</td>
+                                                    <td>{{ $t('Электрон манзили') }}</td>
                                                     <td>{{ appeal.email }}</td>
                                                 </tr>
 
                                                 <!--
                                                                                                             <tr  v-if="typeof appeal.fileQuestion !=='undefined' && appeal.fileQuestion !==null && appeal.fileQuestion.data !==null && typeof appeal.fileQuestion.data !=='undefined'">
-                                                                                                                <td>Илова қилинган файл</td>
-                                                                                                                <td><a :href="'data:'+appeal.fileQuestion.file_format +';base64,'+ appeal.fileQuestion.data" :download="appeal.fileQuestion.fileNameEx">Юклаб олиш!</a></td>
+                                                                                                                <td>{{ $t('Илова қилинган файл') }}</td>
+                                                                                                                <td><a :href="'data:'+appeal.fileQuestion.file_format +';base64,'+ appeal.fileQuestion.data" :download="appeal.fileQuestion.fileNameEx">{{ $t('Юклаб олиш!') }}</a></td>
                                                                                                             </tr>-->
                                                 <tr v-if="typeof appeal.status !=='undefined' && typeof appeal.statusNm !=='undefined'">
-                                                    <td>Ариза ҳолати</td>
+                                                    <td>{{ $t('Ариза ҳолати') }}</td>
                                                     <td>{{ appeal.statusNm }}</td>
                                                 </tr><!--
                                                             <tr  v-if="typeof appeal.fileAnswer !=='undefined' && appeal.fileAnswer !==null && appeal.fileAnswer.data !==null && typeof appeal.fileAnswer.data !=='undefined'">
-                                                                <td>Жавоб хати</td>
-                                                                <td><a :href="'data:'+appeal.fileAnswer.file_format +';base64,'+ appeal.fileAnswer.data" :download="appeal.fileAnswer.fileNameEx">Юклаб олиш!</a></td>
+                                                                <td>{{ $t('Жавоб хати') }}</td>
+                                                                <td><a :href="'data:'+appeal.fileAnswer.file_format +';base64,'+ appeal.fileAnswer.data" :download="appeal.fileAnswer.fileNameEx">{{ $t('Юклаб олиш!') }}</a></td>
                                                             </tr>-->
                                             </table>
                                             <table v-if="typeof appeal.messageBody !=='undefined'">
                                                 <tr>
                                                     <td>
-                                                        <p>Мурожаат матни </p>
+                                                        <p>{{ $t('Мурожаат матни') }} </p>
                                                         <p>{{ appeal.messageBody }}</p>
                                                     </td>
                                                 </tr>
@@ -269,43 +269,44 @@ import html2pdf from 'html2pdf.js'
 import i18n from "../../../../i18n";
 export default {
     data() {
-        return {
-            breadcrumb_items: [
-                {
-                    text: i18n.t('Асосий саҳифа'),
-                    to: '/',
-                    disabled: false,
-                    exact: true,
-                },
+      return {
 
-                {
-                    text: 'Менинг аризаларим',
-                    to: '/applications',
-                    disabled: false,
-                    exact: true,
-                },
+        breadcrumb_items: [
+          {
+            text: i18n.t('Асосий саҳифа'),
+            to: '/',
+            disabled: false,
+            exact: true,
+          },
 
-            ],
-            baseURL: window.location.href,
-            appeal:[],
-            tab: null,
-            panel: 0,
-            t_app: [],
-            fileAnswer: null,
-            fileQuestion: null,
-            oferta: false,
-            showed: false,
-            dialog: false,
-           // dialogResult: false,
+          {
+            text: i18n.t('Менинг аризаларим'),
+            to: '/applications',
+            disabled: false,
+            exact: true,
+          },
 
-            items: [
-                {tab: "Аризачи умумиy маълумотлари"},
-                {tab: 'Ариза ҳолати'},
+        ],
+        baseURL: window.location.href,
+        appeal: [],
+        tab: null,
+        panel: 0,
+        t_app: [],
+        fileAnswer: null,
+        fileQuestion: null,
+        oferta: false,
+        showed: false,
+        dialog: false,
+        // dialogResult: false,
 
-            ],
-            showPdf:false,
+        items: [
+          {tab: i18n.t("Аризачи умумий маълумотлари")},
+          {tab: i18n.t("Ариза ҳолати")},
 
-        }
+        ],
+        showPdf: false,
+
+      }
     },
 
     mounted() {
@@ -314,7 +315,7 @@ export default {
             this.getAppData(this.$route.params.key)
         }else
         if (!this.$auth.user()) {
-            this.$toast.success('Авторизациядан ўтишингиз талаб қилинади!')
+            this.$toast.success(i18n.t("Авторизациядан ўтишингиз талаб қилинади!"))
             this.$router.push('/login');
         }
         else
@@ -326,20 +327,27 @@ export default {
         ...mapState(['loading'])
     },
     methods: {
-        getAppData(key = null) {
+        async getAppData(key = null) {
             const _this = this;
             let params = null;
 
-            if (key && key.length > 0) params = {
+            if(!(_this.$route.query.appNum)) {
+              if (key && key.length > 0) params = {
                 appNum: _this.$route.params.id,
                 password: key
-            }
-            else params = {
+              }
+              else params = {
                 appNum: _this.$route.params.id
+              }
+
+            } else {
+              params = {
+                appNum: _this.$route.query.appNum
+              }
             }
-            setTimeout(() => {
+
                 this.$store.commit('setLoading', true)
-                axios.get("/api/v1/ex_api/appeal-check", {
+                await axios.get("/api/v1/ex_api/appeal-check", {
                     params: params
                 }).then(function (response) {
 
@@ -383,7 +391,7 @@ export default {
                             //_this.generateReport()
                         }
                         _this.breadcrumb_items.push({
-                            text: "Мурожаат -" + _this.t_app.appNum,
+                            text: i18n.t("Мурожаат -") + _this.t_app.appNum,
                             to: '/services/appeals/' + _this.t_app.appNum,
                             disabled: true,
                             exact: true,
@@ -395,7 +403,7 @@ export default {
 
                     } else {
                         _this.$store.commit('setLoading', false)
-                        _this.$toast.error("Маълумот топилмади1!")
+                        _this.$toast.error(i18n.t("Маълумот топилмади!"))
                         _this.$router.push("/applications");
 
                     }
@@ -405,13 +413,13 @@ export default {
                    if(error) {
                        console.log(error)
                        _this.$store.commit('setLoading', false)
-                       _this.$toast.error("Маълумот топилмади2!")
+                       _this.$toast.error(i18n.t("Маълумот топилмади!") + '.')
                        _this.$router.push("/applications");
                    }
                 })
 
 
-            }, 500)
+
 
         },
         generateReport() {

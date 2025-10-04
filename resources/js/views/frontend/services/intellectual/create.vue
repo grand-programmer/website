@@ -14,7 +14,7 @@
                 <v-row>
                     <v-col cols="12">
                         <h3 align="center" class="lh-sm font-weight-bold primary-color">
-                            Интеллектуал мулк объектлари божхона реестрига киритиш учун ариза
+                            {{ $t('Интеллектуал мулк объектлари божхона реестрига киритиш учун ариза') }}
                             <br>
                         </h3>
                     </v-col>
@@ -26,7 +26,7 @@
                             step="1"
                             @click="goStep(1)"
                         >
-                            Аризачи тўғрисида маълумотлар
+                            {{ $t('Аризачи тўғрисида маълумотлар') }}
                         </v-stepper-step>
 
                         <v-divider></v-divider>
@@ -36,7 +36,7 @@
                             :complete="isCompleted(2)"
                             @click="goStep(2)"
                         >
-                            Ҳуқуқ эгаси тўғрисидаги маълумотлар
+                            {{ $t('Ҳуқуқ эгаси тўғрисидаги маълумотлар') }}
                         </v-stepper-step>
 
                         <v-divider></v-divider>
@@ -47,7 +47,7 @@
                             step="3"
 
                         >
-                            Интеллектуал мулк объектлари тўғрисидаги маълумотлар
+                            {{$t('Интеллектуал мулк объектлари тўғрисидаги маълумотлар')}}
                         </v-stepper-step>
 
                     </v-stepper-header>
@@ -58,43 +58,44 @@
                                 class="mb-12"
                             >
                                 <div class="row position-absolute yoriqnoma-text"><a
-                                    href="/storage/files/Intellektual-user.pptx"> Ариза тўлдириш бўйича йўриқмани юклаб
-                                    олинг!
+                                    :href="($i18n.locale === 'ru')?'/storage/files/intellectual_ru.pptx' :'/storage/files/intellectual_uz.pptx'"> {{ $t('Ариза тўлдириш бўйича йўриқмани юклаб олинг!') }}
                                 </a></div>
                                 <ValidationObserver v-slot="{ invalid }" ref="stepValidation1">
                                     <v-row>
                                     </v-row>
                                     <v-row class="person_data mt-10">
                                         <v-col cols="6" v-if="person.type===1">
-                                            <ValidationProvider name="ЖШШИР" rules="required|digits:14"
+                                            <ValidationProvider
+                                            :name="$t('ЖШШИР')" rules="required|digits:14"
                                                                 v-slot="{ errors }">
                                                 <v-text-field
                                                     v-model="person.pin"
                                                     :counter="14"
-                                                    label="ЖШШИР"
+                                                    :label="$t('ЖШШИР')"
                                                     required
                                                     disabled
                                                     type="number"
                                                     persistent-hint
-                                                    hint="ЖШШИР - жисмоний шахснинг шахсий идентификацион рақами"
+                                                    :hint="$t('ЖШШИР - жисмоний шахснинг шахсий идентификацион рақами')"
                                                 >
-                                                    <template v-slot:label>ЖШШИР <sup>*</sup></template>
+                                                    <template v-slot:label>{{$t('ЖШШИР')}} <sup>*</sup></template>
                                                 </v-text-field>
                                                 <span class="red--text">{{ errors[0] }}</span>
                                             </ValidationProvider>
                                         </v-col>
                                         <v-col cols="6" v-else>
-                                            <ValidationProvider name="Ташкилот номи" rules="required"
+                                            <ValidationProvider
+                                            :name="$t('Ташкилот номи')" rules="required"
                                                                 v-slot="{ errors }">
                                                 <v-text-field
                                                     v-model="person.organization_name"
                                                     :counter="200"
-                                                    label="Ташкилот номи"
+                                                    :label="$t('Ташкилот номи')"
                                                     required
-                                                    hint="Юридик шахснинг тўлиқ номи"
+                                                    :hint="$t('Юридик шахснинг тўлиқ номи')"
                                                     persistent-placeholder
                                                 >
-                                                    <template v-slot:label>Ташкилот номи <sup>*</sup></template>
+                                                    <template v-slot:label>{{$t('Ташкилот номи')}} <sup>*</sup></template>
 
                                                 </v-text-field>
                                                 <span class="red--text">{{ errors[0] }}</span>
@@ -102,19 +103,20 @@
 
                                         </v-col>
                                         <v-col cols="6">
-                                            <ValidationProvider name="СТИР" rules="required"
+                                            <ValidationProvider
+                                            :name="$t('СТИР')" rules="required"
                                                                 v-slot="{ errors }">
                                                 <v-text-field
                                                     v-model="person.tin"
                                                     :counter="9"
-                                                    label="СТИР"
+                                                    :label="$t('СТИР')"
                                                     type="number"
                                                     required
                                                     :disabled="(person.tin!==null && (person.tin).toString().length===9)"
-                                                    hint="Солиқ тўловчининг идентификацион рақами"
+                                                    :hint="$t('Солиқ тўловчининг идентификацион рақами')"
                                                     persistent-hint
                                                 >
-                                                    <template v-slot:label>СТИР <sup>*</sup></template>
+                                                    <template v-slot:label>{{$t('СТИР')}} <sup>*</sup></template>
 
                                                 </v-text-field>
                                                 <span class="red--text">{{ errors[0] }}</span>
@@ -123,18 +125,19 @@
                                         </v-col>
 
                                         <v-col cols="6">
-                                            <ValidationProvider name="Фамилияси исми шарифи" rules="required"
+                                            <ValidationProvider
+                                            :name="$t('Фамилияси исми шарифи')" rules="required"
                                                                 v-slot="{ errors }">
                                                 <v-text-field
                                                     v-model="person.fio"
                                                     :counter="200"
-                                                    label="Фамилияси исми шарифи"
+                                                    :label="$t('Фамилияси исми шарифи')"
                                                     required
                                                     disabled
-                                                    hint="Аризачининг фамилияси, исми, шарифи"
+                                                    :hint="$t('Аризачининг фамилияси, исми, шарифи')"
                                                     persistent-hint
                                                 >
-                                                    <template v-slot:label>Фамилияси исми шарифи <sup>*</sup></template>
+                                                    <template v-slot:label>{{$t('Фамилияси исми шарифи')}} <sup>*</sup></template>
                                                 </v-text-field>
                                                 <span class="red--text">{{ errors[0] }}</span>
                                             </ValidationProvider>
@@ -144,7 +147,7 @@
 
                                         <v-col cols="6" v-if="person.type==='01'">
                                             <ValidationProvider :slim="(person.type!=='01')" v-if="person.type==='02'"
-                                                                name="Лавозими" rules="required"
+                                                                :name="$t('Лавозими')" rules="required"
                                                                 v-slot="{ errors }">
                                                 <v-text-field
                                                     v-model="person.position"
@@ -153,40 +156,42 @@
                                                     hint="Аризачининг ташкилотдаги лавозими"
                                                     persistent-placeholder
                                                 >
-                                                    <template v-slot:label>Лавозими <sup>*</sup></template>
+                                                    <template v-slot:label>{{$t('Лавозими')}} <sup>*</sup></template>
                                                 </v-text-field>
                                                 <span class="red--text">{{ errors[0] }}</span>
                                             </ValidationProvider>
 
                                         </v-col>
                                         <v-col cols="6">
-                                            <ValidationProvider name="Манзили" rules="required"
+                                            <ValidationProvider
+                                            :name="$t('Манзили')" rules="required"
                                                                 v-slot="{ errors }">
                                                 <v-text-field
                                                     v-model="person.perAdr"
                                                     :counter="200"
                                                     required
-                                                    :hint="person.type==1?'Аризачининг манзили':'Юридик шахснинг манзили'"
+                                                    :hint="person.type==1?$t('Аризачининг манзили'):$t('Юридик шахснинг манзили')"
                                                     persistent-placeholder
                                                 >
-                                                    <template v-slot:label>Манзили <sup>*</sup></template>
+                                                    <template v-slot:label>{{$t('Манзили')}} <sup>*</sup></template>
                                                 </v-text-field>
                                                 <span class="red--text">{{ errors[0] }}</span>
                                             </ValidationProvider>
 
                                         </v-col>
                                         <v-col cols="6">
-                                            <ValidationProvider name="Телефон рақами" rules="required"
+                                            <ValidationProvider
+                                            :name="$t('Телефон рақами')" rules="required"
                                                                 v-slot="{ errors }">
                                                 <v-text-field
                                                     v-model="person.phone"
-                                                    label="Телефон рақами"
+                                                    :label="$t('Телефон рақами')"
                                                     required
                                                     v-mask="'+### ## ### ## ##'"
-                                                    hint="Аризачининг телефон рақами"
+                                                    :hint="$t('Аризачининг телефон рақами')"
                                                     persistent-placeholder
                                                 >
-                                                    <template v-slot:label>Телефон рақами <sup>*</sup></template>
+                                                    <template v-slot:label>{{$t('Телефон рақами')}}<sup>*</sup></template>
                                                 </v-text-field>
                                                 <span class="red--text">{{ errors[0] }}</span>
                                             </ValidationProvider>
@@ -198,15 +203,15 @@
                                                 <v-text-field
                                                     v-model="person.email"
                                                     :counter="200"
-                                                    label="Электрон почта манзили"
+                                                    :label="$t('Электрон почта манзили')"
                                                     required
-                                                    hint="Аризачининг электрон почтаси"
+                                                    :hint="$t('Аризачининг электрон почтаси')"
                                                     persistent-placeholder
                                                 >
-                                                    <template v-slot:label>Электрон почта манзили <sup>*</sup>
+                                                    <template v-slot:label>{{$t('Электрон почта манзили')}} <sup>*</sup>
                                                     </template>
                                                 </v-text-field>
-                                                <span class="red--text">{{ errors[0] }}</span>
+                                                <span class="red--text">{{  errors[0] }}</span>
                                             </ValidationProvider>
 
                                         </v-col>
@@ -220,7 +225,7 @@
                                         <v-btn text
                                                @click="prevStep"
                                         >
-                                            Орқага
+                                            {{$t('Орқага')}}
                                         </v-btn>
                                         <v-btn
                                             color="primary"
@@ -228,7 +233,7 @@
                                             size="large"
                                             :loading="loadingButton.first"
                                         >
-                                            Давом этиш
+                                            {{$t('Давом этиш')}}
                                         </v-btn>
 
 
@@ -236,7 +241,7 @@
                                 </v-row>
                                 <v-row class="bottom-required-info">
                                     <i style="font-size: 12px;"><sub
-                                        style="font-size: 20px">*</sub> - майдонлари албатта тўлдирилиши шарт!
+                                        style="font-size: 20px">*</sub> {{$t('-майдонлари албатта тўлдирилиши шарт!')}}
                                     </i>
 
                                 </v-row>
@@ -251,8 +256,7 @@
                                 class="mb-12 "
                             >
                                 <div class="row position-absolute yoriqnoma-text"><a
-                                    href="/storage/files/Intellektual-user.pptx"> Ариза тўлдириш бўйича йўриқмани юклаб
-                                    олинг!
+                                    :href="($i18n.locale === 'ru')?'/storage/files/intellectual_ru.pptx' :'/storage/files/intellectual_uz.pptx'"> {{ $t('Ариза тўлдириш бўйича йўриқмани юклаб олинг!') }}
                                 </a></div>
 
 
@@ -271,15 +275,15 @@
                                                            style="margin: 0 0 40px 0; border: 1px dashed #39ae69;">
                                                         <v-col cols="4">
                                                             <text-field
-                                                                rules="required"
+                                                            rules="required"
                                                                 persistent-placeholder
                                                                 v-model="application.huquq_egasi_nomi"
-                                                                title="Ҳуқуқ эгасининг номи"/>
+                                                                :title="$t('Ҳуқуқ эгасининг номи')"/>
                                                         </v-col>
 
                                                         <v-col cols="4">
                                                             <text-field
-                                                                title="Ҳуқуқ эгасининг манзили"
+                                                                :title="$t('Ҳуқуқ эгасининг манзили')"
                                                                 rules="required"
                                                                 v-model="application.huquq_egasi_manzili"
                                                                 persistent-placeholder>
@@ -287,7 +291,7 @@
                                                         </v-col>
                                                         <v-col cols="4">
                                                             <autocomplete-field
-                                                                title="Ҳуқуқ эгаси яшаётган давлат"
+                                                                :title="$t('Ҳуқуқ эгаси яшаётган давлат')"
                                                                 rules="required"
                                                                 v-model="application.huquq_egasi_davlat"
                                                                 persistent-placeholder
@@ -301,7 +305,7 @@
                                                         </v-col>
                                                         <v-col cols="4">
                                                             <text-field
-                                                                title="Ҳуқуқ эгасининг телефон рақами"
+                                                                :title="$t('Ҳуқуқ эгасининг телефон рақами')"
                                                                 rules="required"
                                                                 v-model="application.huquq_egasi_phone"
                                                                 v-mask="'+### ## ### ## ##'"
@@ -311,8 +315,8 @@
                                                         </v-col>
                                                         <v-col cols="4">
                                                             <text-field
-                                                                title="Ҳуқуқ эгасининг эмаил манзили"
-                                                                rules="required|email"
+                                                                :title="$t('Ҳуқуқ эгасининг эмаил манзили')"
+                                                                rules="required"
                                                                 type="email"
                                                                 v-model="application.huquq_egasi_mail"
                                                                 persistent-placeholder>
@@ -324,13 +328,13 @@
                                                             :error="ishchiqErrors"
                                                             :total_error="ishchiqTotalErrors"></dialog-chips>
 
-
                                                         <v-col cols="3">
                                                             <text-field
                                                                 v-model="application.ishonchnoma_sana"
-                                                                title="Ишончнома амал қилиш муддати"
-                                                                hint="М: 2020-01-01--2023-01-01"
+                                                                :title="$t('Ишончнома амал қилиш муддати')"
+                                                                :hint="$t('М: 2020-01-01--2023-01-01')"
                                                                 persistent-placeholder
+                                                                rules="required"
                                                                 append-icon="mdi-calendar"
                                                                 v-mask="'####-##-##--####-##-##'"
                                                             />
@@ -338,7 +342,9 @@
                                                         </v-col>
                                                         <v-col cols="5">
                                                             <e-arxiv-file v-model="application.ishonchnoma_file"
-                                                                          norequired label="Ишончнома сканери"/>
+                                                                         norequired
+                                                                         :label="$t('Ишончнома сканери')"
+                                                                         />
                                                         </v-col>
                                                     </v-col>
 
@@ -349,13 +355,13 @@
                                     </ValidationObserver>
                                 </v-card>
                                 <v-row class="bottom-required-info"><i style="font-size: 12px;"><sub
-                                    style="font-size: 20px">*</sub> - майдонлари албатта тўлдирилиши шарт!</i></v-row>
+                                    style="font-size: 20px">*</sub> {{$t('-майдонлари албатта тўлдирилиши шарт!')}}</i></v-row>
                                 <v-row class="row mb-3 position-absolute bottom-0 end-0">
                                     <v-col class="d-flex tab_action_buttons">
                                         <v-btn text
                                                @click="prevStep"
                                         >
-                                            Орқага
+                                            {{$t('Орқага')}}
                                         </v-btn>
                                         <v-btn
                                             color="primary"
@@ -363,7 +369,7 @@
                                             size="large"
                                             :loading="loadingButton.second"
                                         >
-                                            Давом этиш
+                                            {{ $t('Давом этиш') }}
                                         </v-btn>
 
 
@@ -380,7 +386,7 @@
                                      id="v-pills-tab"
                                      role="tablist"
                                      aria-orientation="vertical">
-                                    <button class="nav-link create" @click="AddProduct">Қўшиш
+                                    <button class="nav-link create" @click="AddProduct">{{$t('Қўшиш')}}
                                         <v-icon>mdi-plus-circle-outline</v-icon>
                                     </button>
                                     <button class="nav-link"
@@ -409,7 +415,7 @@
                                          aria-labelledby="v-pills-home-tab" v-for="(tovar,key) in application.tovarlar">
                                         <v-card
                                             class="mb-12">
-                                            <h3 class="primary-color">Товар тўғрисидаги маълумотлар</h3>
+                                            <h3 class="primary-color">{{$t('Товар тўғрисидаги маълумотлар')}}</h3>
                                             <v-tabs-items
                                                 class="product_info_tab">
                                                 <v-row class="p-2 my-2 mx-1"
@@ -420,14 +426,14 @@
                                                         <v-row>
                                                             <v-col cols="6">
                                                                 <ValidationProvider
-                                                                    name="Интеллектуал мулк объекти номланиши"
+                                                                    :name="$t('Интеллектуал мулк объекти номланиши')"
                                                                     rules="required"
                                                                     v-slot="{ errors }">
                                                                     <v-text-field
-                                                                        label="Номланиши *"
+                                                                        :label="$t('Номланиши *')"
                                                                         persistent-placeholder
                                                                         name="nomlanishi"
-                                                                        hint="Интеллектуал мулк объекти тавсифи"
+                                                                        :hint="$t('Номланиши')"
                                                                         v-model="application.tovarlar[key].nomlanishi"
                                                                     >
                                                                     </v-text-field>
@@ -435,18 +441,19 @@
                                                                 </ValidationProvider>
                                                             </v-col>
                                                             <v-col cols="6">
-                                                                <ValidationProvider name="ТИФ ТН код"
+                                                                <ValidationProvider
+                                                                                    :name="$t('ТИФ ТН код')"
                                                                                     rules="required"
                                                                                     v-slot="{ errors }">
                                                                     <v-autocomplete
                                                                         v-model="application.tovarlar[key].tftn"
-                                                                        label="ТИФ ТН кодни киритинг *"
+                                                                        :label="$t('ТИФ ТН кодни киритинг *')"
                                                                         required
                                                                         :items="tftncodes"
                                                                         item-text="name"
                                                                         item-value="id"
                                                                         name="tftncode"
-                                                                        hint="Товарнинг ТИФ ТН коди"
+                                                                        :hint="$t('Товарнинг ТИФ ТН коди')"
                                                                         persistent-placeholder
                                                                         hide-no-data
                                                                         chips
@@ -483,16 +490,16 @@
                                                             <v-col cols="12">
 
                                                                 <ValidationProvider
-                                                                    name="Интеллектуал мулк объекти ТХХК таснифи"
+                                                                    :name="$t('Интеллектуал мулк объекти ТХХК таснифи')"
                                                                     rules="required"
                                                                     v-slot="{ errors }">
                                                                     <v-autocomplete
                                                                         v-model="application.tovarlar[key].tasnifi"
-                                                                        label="Интеллектуал мулк объекти ТХХК таснифи *"
+                                                                        :label="$t('Интеллектуал мулк объекти ТХХК таснифи *')"
                                                                         :items="klassifikatorlar"
                                                                         item-text="label"
                                                                         name="klassifikator"
-                                                                        hint="Товарнинг ва хизматларнинг халқаро классификатори"
+                                                                        :hint="$t('Товарнинг ва хизматларнинг халқаро классификатори')"
                                                                         persistent-placeholder
                                                                         hide-no-data
                                                                         chips
@@ -526,8 +533,8 @@
 
                                                             <v-col cols="3">
                                                                 <text-field
-                                                                    title="Гувоҳнома рақами"
-                                                                    hint="Ҳуқуқий ҳимояга олганлик гувоҳномаси"
+                                                                    :title="$t('Гувоҳнома рақами')"
+                                                                    :hint="$t('Ҳуқуқий ҳимояга олганлик гувоҳномаси')"
                                                                     persistent-placeholder
                                                                     v-model="application.tovarlar[key].guvohnoma_raqami"
                                                                     rules="required"
@@ -539,9 +546,9 @@
                                                             <v-col cols="3">
                                                                 <text-field
                                                                     v-model="application.tovarlar[key].guvohnoma_sana"
-                                                                    title="Гувоҳнома муддати"
+                                                                    :title="$t('Гувоҳнома муддати')"
                                                                     append-icon="mdi-calendar"
-                                                                    hint="М: 2020-01-01--2023-01-01"
+                                                                    :hint="$t('М: 2020-01-01--2023-01-01')"
                                                                     rules="required"
                                                                     persistent-placeholder
                                                                     v-mask="'####-##-##--####-##-##'"
@@ -588,9 +595,9 @@
                                                             <v-col cols="3">
                                                                 <text-field
                                                                     v-model="application.tovarlar[key].reestr_muddat"
-                                                                    title="Реестр муддати"
-                                                                    append-icon="mdi-calendar"
-                                                                    hint="М: 2020-01-01--2023-01-01"
+                                                                    :title="$t('Реестр муддати')"
+                                                                    append-icon= "mdi-calendar"
+                                                                    :hint="$t('М: 2020-01-01--2023-01-01')"
                                                                     rules="required"
                                                                     persistent-placeholder
                                                                     v-mask="'####-##-##--####-##-##'"
@@ -649,7 +656,7 @@
                                                                     v-model="application.tovarlar[key].documents"
                                                                     multiple
                                                                     :errors="ilova_error[key]"
-                                                                    hint="Мулк гувоҳномаси, мулк расми, ва бошқалар"/>
+                                                                    :hint="$t('Мулк гувоҳномаси, мулк расми, ва бошқалар')"/>
                                                                 <!--
                                                                                                                                 <div
                                                                                                                                     class="border-bottom-dashed chips-dialog"
@@ -825,23 +832,54 @@
 
                                             </v-tabs-items>
 
-                                            <v-row class="bottom-required-info"><i style="font-size: 12px;"><sub
-                                                style="font-size: 20px">*</sub> - майдонлари албатта тўлдирилиши
-                                                шарт!</i></v-row>
+                                            <v-row class="bottom-required-info">
+
+
+                                              <i style="font-size: 12px;"><sub
+                                                style="font-size: 20px">*</sub> - {{$t('майдонлари албатта тўлдирилиши шарт')}}!</i>
+                                              <p class="pt-4 font-weight-bold pl-4 d-block red-text"><span class="warning-text">{{$t('Диққат! Хизмат пуллик!')}}</span> <a @click="dialog.warning=true" style="color: var(--mycolor); text-decoration:underline" >{{ $t('Батафсил') }} >>> </a></p>
+                                              <v-dialog v-model="dialog.warning" max-width="800px">
+                                                <v-card>
+                                                  <v-toolbar class="text-h5 primary white--text">
+                                                    <v-toolbar-title>
+                                                      <v-icon color="white">mdi-bell-ring</v-icon>
+                                                      <span class="pt-2">{{ $t('Огоҳлантириш') }}</span></v-toolbar-title>
+                                                    <v-spacer/>
+                                                    <v-btn
+                                                        icon
+                                                        dark
+                                                        @click="dialog.warning = false"
+                                                    >
+                                                      <v-icon>mdi-close</v-icon>
+                                                    </v-btn>
+                                                  </v-toolbar>
+                                                  <v-card-text class="text-justify" style="font-size: 16px">
+                                                    <v-spacer></v-spacer>
+                                                    <p>{{$t('Вазирлар Маҳкамасининг 2024 йил 4 октябрдаги 630-сон қарорига асосан жорий 8 октябрдан эътиборан бир интеллектуал мулк объектини реестрга киритиш учун 1 БҲМ йиғимни Тошкент шаҳар божхона бошқармасининг ғазна ҳисобварағига тўлов қилишингиз ҳамда тўлов ҳужжатини аризага илова қилишингиз сўралади. Акс ҳолда, аризангиз асосида интеллектуал мулк объектларини реестрга киритиш рад этилади')}}</p>
+                                                    <p><b>{{ $t('Тошкент шаҳар божхона бошқармасининг ҳисоб рақами') }}:</b> <br>
+                                                      <b>{{ $t('CТИР') }}:</b> 200 637 640 <br>
+                                                      <b>{{ $t('ғазна ҳисобварағи') }} :</b> 402821860262947950100182001 <br>
+                                                        <b>{{ $t('Маълумот учун') }}</b> +998 55 502 76 00 ( {{ $t('ички') }} 74-47))
+                                                    </p>
+                                                    <v-spacer></v-spacer>
+                                                  </v-card-text>
+                                                </v-card>
+                                              </v-dialog>
+                                            </v-row>
                                             <v-row class="row mb-3 position-absolute bottom-0 end-0">
-                                                <v-col class="d-flex tab_action_buttons">
+                                                <v-col class="order-2 p-2 bd-highlight">
                                                     <v-btn text
                                                            @click="prevStep"
                                                     >
-                                                        Орқага
+                                                        {{$t('Орқага')}}
                                                     </v-btn>
                                                     <v-btn
                                                         color="primary"
                                                         @click="nextStep"
-                                                        size="large"
+                                                        size="80px"
                                                         :loading="loadingButton.second"
                                                     >
-                                                        Ариза юбориш
+                                                        {{$t('Ариза юбориш')}}
                                                     </v-btn>
 
 
@@ -867,7 +905,7 @@
             <img src="/public/images/telegram.png">
 
 
-            <p> Саволларингизни йўлланг
+            <p> {{$t('Саволларингизни йўлланг')}}
                 <br>
                 @IMO_bojxona
             </p></a>
@@ -886,13 +924,6 @@ import EArxivFile from "../../../../components/form/e-arxiv-file";
 import DialogChips from "../../../../components/form/dialog-chips";
 
 
-Object.keys(rules).forEach(rule => {
-    extend(rule, {
-        ...rules[rule], // copies rule configuration
-        message: messages.messages[rule] // assign message
-
-    });
-});
 export default {
     name: "InitialIntellectual",
     data() {
@@ -911,13 +942,13 @@ export default {
                     exact: true,
                 },
                 {
-                    text: 'Хизматлар',
+                    text: i18n.t('Хизматлар'),
                     to: '/services',
                     disabled: false,
                     exact: true,
                 },
                 {
-                    text: 'Божхона тўловлари бўйича дастлабки қарор олиш',
+                    text: i18n.t('Божхона тўловлари бўйича дастлабки қарор олиш'),
                     to: '/services/decisions',
                     disabled: true,
                     exact: true,
@@ -1004,6 +1035,7 @@ export default {
             app: [],
             dialog: {
                 documenttype: false,
+                warning: false,
                 ishlabchiqaruvchi: false,
             },
             date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
@@ -1031,188 +1063,188 @@ export default {
             errors: [],
             totalerrors: "",
             fields: [
-                {key: 'ipHolder', value: 'Ҳуқуқ эгасининг номи'},
-                {key: 'ipHoldersAddr', value: 'Ҳуқуқ эгасининг манзили'},
-                {key: 'ipHolderCountry', value: 'Ҳуқуқ эгаси яшаётган давлат'},
-                {key: 'ipHolderTelNumber', value: 'Ҳуқуқ эгасининг телефон рақами'},
-                {key: 'ipHolderMail', value: 'Ҳуқуқ эгасининг эмаил манзили'},
-                {key: 'fileId', value: 'Ишончнома сканери'},
+                {key: 'ipHolder', value: i18n.t('Ҳуқуқ эгасининг номи')},
+                {key: 'ipHoldersAddr', value:i18n.t('Ҳуқуқ эгасининг манзили')},
+                {key: 'ipHolderCountry', value:i18n.t( 'Ҳуқуқ эгаси яшаётган давлат')},
+                {key: 'ipHolderTelNumber', value: i18n.t('Ҳуқуқ эгасининг телефон рақами')},
+                {key: 'ipHolderMail', value: i18n.t('Ҳуқуқ эгасининг эмаил манзили')},
+                {key: 'fileId', value: i18n.t('Ишончнома сканери')},
                 {key: 'personId', value: 'personId'},
                 {key: 'personPin', value: 'personPin'},
-                {key: 'dateStart', value: 'Ишончнома амал қилиш муддати'},
-                {key: 'dateEnd', value: 'Ишончнома амал қилиш муддати'},
-                {key: 'manufacturer', value: 'Ишлаб чиқарувчининг номи'},
-                {key: 'manufacturerTelNum', value: 'Ишлаб чиқарувчининг телефон рақами'},
-                {key: 'manufacturerAddr', value: 'Ишлаб чиқарувчининг манзили'},
-                {key: 'manufacturerMAil', value: 'Ишлаб чиқарувчининг email манзили'},
-                {key: 'ipDescription', value: 'Интеллектуал мулк объекти номланиши'},
-                {key: 'ipPassEndDate', value: 'Гувоҳнома муддати'},
-                {key: 'ipPassStartDate', value: 'Гувоҳнома муддати'},
-                {key: 'ipPassNum', value: 'Гувоҳнома рақами'},
-                {key: 'ipRegistrStartDate', value: 'Реестр муддати'},
-                {key: 'ipRegistrEndDate', value: 'Реестр муддати'},
-                {key: 'hsCode', value: 'ТИФ ТН код'},
+                {key: 'dateStart', value: i18n.t('Ишончнома амал қилиш муддати')},
+                {key: 'dateEnd', value: i18n.t('Ишончнома амал қилиш муддати')},
+                {key: 'manufacturer', value: i18n.t('Ишлаб чиқарувчининг номи')},
+                {key: 'manufacturerTelNum', value: i18n.t('Ишлаб чиқарувчининг телефон рақами')},
+                {key: 'manufacturerAddr', value: i18n.t('Ишлаб чиқарувчининг манзили')},
+                {key: 'manufacturerMAil', value: i18n.t('Ишлаб чиқарувчининг email манзили')},
+                {key: 'ipDescription', value: i18n.t('Интеллектуал мулк объекти номланиши')},
+                {key: 'ipPassEndDate', value: i18n.t('Гувоҳнома муддати')},
+                {key: 'ipPassStartDate', value: i18n.t('Гувоҳнома муддати')},
+                {key: 'ipPassNum', value: i18n.t('Гувоҳнома рақами')},
+                {key: 'ipRegistrStartDate', value: i18n.t('Реестр муддати')},
+                {key: 'ipRegistrEndDate', value: i18n.t('Реестр муддати')},
+                {key: 'hsCode', value: i18n.t('ТИФ ТН код')},
                 {key: 'mktu', value: 'Интеллектуал мулк объекти ТХХК таснифи'},
                 {key: 'docs', value: 'Интеллектуал мулк объекти ТХХК таснифи'},
             ],
             klassifikatorlar: [
                 {
                     value: '01',
-                    label: '01-Саноат, илмий, фотография, қишлоқ хўжалиги, боғдорчилик ва ўрмон хўжалигида фойдаланиш учун мўлжалланган кимёвий маҳсулотлар; хом синтетик қатронлар, хом пластик материаллар; ўғитлар; ёнғинни ўчириш учун композициялар; металларни қотиш ва элимлаш учун препаратлар; озиқ-овқат маҳсулотларини сақлаш учун препаратлар; танинлар; саноат мақсадлари учун ёпиштирувчи моддалар',
+                    label: i18n.t('01-Саноат, илмий, фотография, қишлоқ хўжалиги, боғдорчилик ва ўрмон хўжалигида фойдаланиш учун мўлжалланган кимёвий маҳсулотлар; хом синтетик қатронлар, хом пластик материаллар; ўғитлар; ёнғинни ўчириш учун композициялар; металларни қотиш ва элимлаш учун препаратлар; озиқ-овқат маҳсулотларини сақлаш учун препаратлар; танинлар; саноат мақсадлари учун ёпиштирувчи моддалар'),
                     text: 'Саноат, илмий, фотография, қишлоқ хўжалиги, боғдорчилик ва ўрмон хўжалигида фойдаланиш учун мўлжалланган кимёвий маҳсулотлар; хом синтетик қатронлар, хом пластик материаллар; ўғитлар; ёнғинни ўчириш учун композициялар; металларни қотиш ва элимлаш учун препаратлар; озиқ-овқат маҳсулотларини сақлаш учун препаратлар; танинлар; саноат мақсадлари учун ёпиштирувчи моддалар'
                 },
                 {
                     value: '02',
-                    label: '02-Бўёқлар, қуритиш мойлари, лаклар; металларни коррозиядан ва ёғочни йўқ қилишдан ҳимоя қилувчи ҳимоя воситалари; бўёқлар; мордантлар; хом табиий қатронлар; бадиий ва безак мақсадларида ва бадиий босма учун ишлатиладиган қатлам ва кукунли металлар',
+                    label: i18n.t('02-Бўёқлар, қуритиш мойлари, лаклар; металларни коррозиядан ва ёғочни йўқ қилишдан ҳимоя қилувчи ҳимоя воситалари; бўёқлар; мордантлар; хом табиий қатронлар; бадиий ва безак мақсадларида ва бадиий босма учун ишлатиладиган қатлам ва кукунли металлар'),
                     text: 'Бўёқлар, қуритиш мойлари, лаклар; металларни коррозиядан ва ёғочни йўқ қилишдан ҳимоя қилувчи ҳимоя воситалари; бўёқлар; мордантлар; хом табиий қатронлар; бадиий ва безак мақсадларида ва бадиий босма учун ишлатиладиган қатлам ва кукунли металлар'
                 },
                 {
                     value: '03',
-                    label: '03-Оқартирувчи препаратлар ва бошқа кир ювиш воситалари; тозалаш, парлатиш, ёғсизлантириш ва абразив ишлов бериш учун препаратлар; доривор бўлмаган совунлар; парфюмерия, эфир мойлари, косметика, соч лосьонлари, тиш кукунлари ва пасталари, доривор бўлмаган',
+                    label: i18n.t('03-Оқартирувчи препаратлар ва бошқа кир ювиш воситалари; тозалаш, парлатиш, ёғсизлантириш ва абразив ишлов бериш учун препаратлар; доривор бўлмаган совунлар; парфюмерия, эфир мойлари, косметика, соч лосьонлари, тиш кукунлари ва пасталари, доривор бўлмаган'),
                     text: 'Оқартирувчи препаратлар ва бошқа кир ювиш воситалари; тозалаш, парлатиш, ёғсизлантириш ва абразив ишлов бериш учун препаратлар; доривор бўлмаган совунлар; парфюмерия, эфир мойлари, косметика, соч лосьонлари, тиш кукунлари ва пасталари, доривор бўлмаган'
                 },
                 {
                     value: '04',
-                    label: '04-Техник мойлар ва мойлаш материаллари; мойлаш материаллари; чангни ютиш, намлаш ва боғлаш учун формулалар; ёқилғи (шу жумладан автобензинлар) ва ёритиш материаллари; ёруғлик учун фитил ва шамлар',
+                    label: i18n.t('04-Техник мойлар ва мойлаш материаллари; мойлаш материаллари; чангни ютиш, намлаш ва боғлаш учун формулалар; ёқилғи (шу жумладан автобензинлар) ва ёритиш материаллари; ёруғлик учун фитил ва шамлар'),
                     text: 'Техник мойлар ва мойлаш материаллари; мойлаш материаллари; чангни ютиш, намлаш ва боғлаш учун формулалар; ёқилғи (шу жумладан автобензинлар) ва ёритиш материаллари; ёруғлик учун фитил ва шамлар'
                 },
                 {
                     value: '05',
-                    label: '05-Фармацевтика маҳсулотлари, тиббий ва ветеринария препаратлари; тиббий мақсадлар учун гигиеник маҳсулотлар; тиббий ёки ветеринария учун мўлжалланган парҳез овқатлар ва моддалар, болалар овқатлари; одамлар ва ҳайвонлар учун озиқ-овқат қўшимчалари; гипслар, қопламалар; тишларни пломбалаш ва тиш гипсларини тайёрлаш учун материаллар; дезинфекциялаш воситалари; зарарли ҳайвонларни йўқ қилиш учун препаратлар; фунгицидлар, гербицидлар',
+                    label: i18n.t('05-Фармацевтика маҳсулотлари, тиббий ва ветеринария препаратлари; тиббий мақсадлар учун гигиеник маҳсулотлар; тиббий ёки ветеринария учун мўлжалланган парҳез овқатлар ва моддалар, болалар овқатлари; одамлар ва ҳайвонлар учун озиқ-овқат қўшимчалари; гипслар, қопламалар; тишларни пломбалаш ва тиш гипсларини тайёрлаш учун материаллар; дезинфекциялаш воситалари; зарарли ҳайвонларни йўқ қилиш учун препаратлар; фунгицидлар, гербицидлар'),
                     text: 'Фармацевтика маҳсулотлари, тиббий ва ветеринария препаратлари; тиббий мақсадлар учун гигиеник маҳсулотлар; тиббий ёки ветеринария учун мўлжалланган парҳез овқатлар ва моддалар, болалар овқатлари; одамлар ва ҳайвонлар учун озиқ-овқат қўшимчалари; гипслар, қопламалар; тишларни пломбалаш ва тиш гипсларини тайёрлаш учун материаллар; дезинфекциялаш воситалари; зарарли ҳайвонларни йўқ қилиш учун препаратлар; фунгицидлар, гербицидлар'
                 },
                 {
                     value: '06',
-                    label: '06-Оддий металлар ва уларнинг қотишмалари, рудалари; металл қурилиш материаллари; мобил металл конструкциялар ва конструкциялар; металл кабеллар ва симлар, электр бўлмаган; кичик металл ва аппарат маҳсулотлари; сақлаш ва ташиш учун металл идишлар; сейфлар',
+                    label: i18n.t('06-Оддий металлар ва уларнинг қотишмалари, рудалари; металл қурилиш материаллари; мобил металл конструкциялар ва конструкциялар; металл кабеллар ва симлар, электр бўлмаган; кичик металл ва аппарат маҳсулотлари; сақлаш ва ташиш учун металл идишлар; сейфлар'),
                     text: 'Оддий металлар ва уларнинг қотишмалари, рудалари; металл қурилиш материаллари; мобил металл конструкциялар ва конструкциялар; металл кабеллар ва симлар, электр бўлмаган; кичик металл ва аппарат маҳсулотлари; сақлаш ва ташиш учун металл идишлар; сейфлар'
                 },
                 {
                     value: '07',
-                    label: '07-Машиналар ва машиналар; двигателлар (қуруқликдаги транспорт воситаларидан ташқари); уланишлар ва узатиш элементлари (ердаги транспорт воситалари учун мўлжалланганлардан ташқари); қўлда бошқариладиган асбоблардан ташқари қишлоқ хўжалиги асбоблари; инкубаторлар; савдо автоматлари',
+                    label: i18n.t('07-Машиналар ва машиналар; двигателлар (қуруқликдаги транспорт воситаларидан ташқари); уланишлар ва узатиш элементлари (ердаги транспорт воситалари учун мўлжалланганлардан ташқари); қўлда бошқариладиган асбоблардан ташқари қишлоқ хўжалиги асбоблари; инкубаторлар; савдо автоматлари'),
                     text: 'Машиналар ва машиналар; двигателлар (қуруқликдаги транспорт воситаларидан ташқари); уланишлар ва узатиш элементлари (ердаги транспорт воситалари учун мўлжалланганлардан ташқари); қўлда бошқариладиган асбоблардан ташқари қишлоқ хўжалиги асбоблари; инкубаторлар; савдо автоматлари'
                 },
                 {
                     value: '08',
-                    label: '08-Қўл асбоблари ва асбоблари; вилкалар пичоқлари, вилкалар ва қошиқлар; темир қўллар; устара',
+                    label: i18n.t('08-Қўл асбоблари ва асбоблари; вилкалар пичоқлари, вилкалар ва қошиқлар; темир қўллар; устара'),
                     text: 'Қўл асбоблари ва асбоблари; вилкалар пичоқлари, вилкалар ва қошиқлар; темир қўллар; устара'
                 },
                 {
                     value: '09',
-                    label: '09-Илмий, денгиз, геодезия, фотография, кино, оптик асбоблар ва тортиш, ўлчаш, сигнализация, назорат қилиш (текшириш), қутқариш ва ўқитиш учун асбоблар; электр энергиясини узатиш, тақсимлаш, ўзгартириш, тўплаш, тартибга солиш ёки назорат қилиш учун асбоблар ва асбоблар; товуш ёки тасвирларни ёзиш, узатиш, қайта ишлаб чиқариш учун ускуналар; магнит сақлаш воситалари, овоз ёзиш дисклари; CД, ДВД ва бошқа рақамли ташувчилар; олдиндан тўлов билан қурилмалар учун механизмлар; касса аппаратлари, ҳисоблаш машиналари, ахборотни қайта ишлаш ускуналари ва компьютерлар; дастурий таъминот; ёнғинга қарши ускуналар',
+                    label: i18n.t('09-Илмий, денгиз, геодезия, фотография, кино, оптик асбоблар ва тортиш, ўлчаш, сигнализация, назорат қилиш (текшириш), қутқариш ва ўқитиш учун асбоблар; электр энергиясини узатиш, тақсимлаш, ўзгартириш, тўплаш, тартибга солиш ёки назорат қилиш учун асбоблар ва асбоблар; товуш ёки тасвирларни ёзиш, узатиш, қайта ишлаб чиқариш учун ускуналар; магнит сақлаш воситалари, овоз ёзиш дисклари; CД, ДВД ва бошқа рақамли ташувчилар; олдиндан тўлов билан қурилмалар учун механизмлар; касса аппаратлари, ҳисоблаш машиналари, ахборотни қайта ишлаш ускуналари ва компьютерлар; дастурий таъминот; ёнғинга қарши ускуналар'),
                     text: 'Илмий, денгиз, геодезия, фотография, кино, оптик асбоблар ва тортиш, ўлчаш, сигнализация, назорат қилиш (текшириш), қутқариш ва ўқитиш учун асбоблар; электр энергиясини узатиш, тақсимлаш, ўзгартириш, тўплаш, тартибга солиш ёки назорат қилиш учун асбоблар ва асбоблар; товуш ёки тасвирларни ёзиш, узатиш, қайта ишлаб чиқариш учун ускуналар; магнит сақлаш воситалари, овоз ёзиш дисклари; CД, ДВД ва бошқа рақамли ташувчилар; олдиндан тўлов билан қурилмалар учун механизмлар; касса аппаратлари, ҳисоблаш машиналари, ахборотни қайта ишлаш ускуналари ва компьютерлар; дастурий таъминот; ёнғинга қарши ускуналар'
                 },
                 {
                     value: '10',
-                    label: '10-Жарроҳлик, тиббий, стоматология ва ветеринария асбоблари ва асбоблари; оёқ-қўл протезлари, кўз ва тиш протезлари; ортопедик маҳсулотлар; тикув учун материаллар; ногиронлар учун мўлжалланган терапевтик ва ёрдамчи ускуналар; массаж учун асбоблар; чақалоқлар учун асбоблар, ускуналар ва маҳсулотлар;',
+                    label: i18n.t('10-Жарроҳлик, тиббий, стоматология ва ветеринария асбоблари ва асбоблари; оёқ-қўл протезлари, кўз ва тиш протезлари; ортопедик маҳсулотлар; тикув учун материаллар; ногиронлар учун мўлжалланган терапевтик ва ёрдамчи ускуналар; массаж учун асбоблар; чақалоқлар учун асбоблар, ускуналар ва маҳсулотлар;'),
                     text: 'Жарроҳлик, тиббий, стоматология ва ветеринария асбоблари ва асбоблари; оёқ-қўл протезлари, кўз ва тиш протезлари; ортопедик маҳсулотлар; тикув учун материаллар; ногиронлар учун мўлжалланган терапевтик ва ёрдамчи ускуналар; массаж учун асбоблар; чақалоқлар учун асбоблар, ускуналар ва маҳсулотлар;'
                 },
                 {
                     value: '11',
-                    label: '11-Озиқ-овқат маҳсулотларини ёритиш, иситиш, буг ʼ ишлаб чиқариш, иссиқлик билан ишлов бериш, совутиш, қуритиш, шамоллатиш, сув тақсимлаш ва санитария учун асбоблар.',
+                    label: i18n.t('11-Озиқ-овқат маҳсулотларини ёритиш, иситиш, буг ʼ ишлаб чиқариш, иссиқлик билан ишлов бериш, совутиш, қуритиш, шамоллатиш, сув тақсимлаш ва санитария учун асбоблар'),
                     text: 'Озиқ-овқат маҳсулотларини ёритиш, иситиш, буг ʼ ишлаб чиқариш, иссиқлик билан ишлов бериш, совутиш, қуритиш, шамоллатиш, сув тақсимлаш ва санитария учун асбоблар.'
                 },
                 {
                     value: '12',
-                    label: '12-Транспорт воситаси; қуруқликда, сувда ва ҳавода ҳаракатланадиган транспорт воситалари"',
+                    label: i18n.t('12-Транспорт воситаси; қуруқликда, сувда ва ҳавода ҳаракатланадиган транспорт воситалари'),
                     text: 'Транспорт воситаси; қуруқликда, сувда ва ҳавода ҳаракатланадиган транспорт воситалари"'
                 },
                 {
                     value: '13',
-                    label: '13-Ўқотар қуроллар; ўқ-дорилар ва снарядлар; портловчи моддалар; оташинлар',
+                    label: i18n.t('13-Ўқотар қуроллар; ўқ-дорилар ва снарядлар; портловчи моддалар; оташинлар'),
                     text: 'Ўқотар қуроллар; ўқ-дорилар ва снарядлар; портловчи моддалар; оташинлар'
                 },
                 {
                     value: '14',
-                    label: '14-Қимматбаҳо металлар ва уларнинг қотишмалари; заргарлик буюмлари, бижутерия, қимматбаҳо ва ярим қимматбаҳо тошлар; соатлар ва хронометрик қурилмалар',
+                    label: i18n.t('14-Қимматбаҳо металлар ва уларнинг қотишмалари; заргарлик буюмлари, бижутерия, қимматбаҳо ва ярим қимматбаҳо тошлар; соатлар ва хронометрик қурилмалар'),
                     text: 'Қимматбаҳо металлар ва уларнинг қотишмалари; заргарлик буюмлари, бижутерия, қимматбаҳо ва ярим қимматбаҳо тошлар; соатлар ва хронометрик қурилмалар'
                 },
-                {value: '15', label: '15-Мусиқий асбоблар', text: 'Мусиқий асбоблар'},
+                {value: '15', label: i18n.t("15-Мусиқий асбоблар"), text: 'Мусиқий асбоблар'},
                 {
                     value: '16',
-                    label: '16-Қоғоз, картон; босма маҳсулотлар; боғловчи материаллар; фотосуратлар; канселярия буюмлари, офис анжомлари, мебелдан ташқари; иш юритиш ва маиший мақсадлар учун ёпиштирувчи моддалар; рассомлар учун материаллар ва чизиш учун материаллар; чўткалар; ўқув материаллари ва кўргазмали қуроллар; қадоқлаш ва қадоқлаш учун чойшаблар, кино ва полиетилен пакетлар; шрифтлар, типографик клишелар',
+                    label: i18n.t('16-Қоғоз, картон; босма маҳсулотлар; боғловчи материаллар; фотосуратлар; канселярия буюмлари, офис анжомлари, мебелдан ташқари; иш юритиш ва маиший мақсадлар учун ёпиштирувчи моддалар; рассомлар учун материаллар ва чизиш учун материаллар; чўткалар; ўқув материаллари ва кўргазмали қуроллар; қадоқлаш ва қадоқлаш учун чойшаблар, кино ва полиетилен пакетлар; шрифтлар, типографик клишелар'),
                     text: 'Қоғоз, картон; босма маҳсулотлар; боғловчи материаллар; фотосуратлар; канселярия буюмлари, офис анжомлари, мебелдан ташқари; иш юритиш ва маиший мақсадлар учун ёпиштирувчи моддалар; рассомлар учун материаллар ва чизиш учун материаллар; чўткалар; ўқув материаллари ва кўргазмали қуроллар; қадоқлаш ва қадоқлаш учун чойшаблар, кино ва полиетилен пакетлар; шрифтлар, типографик клишелар'
                 },
                 {
                     value: '17',
-                    label: '17-Каучук, каучук, гуттаперча, асбест, слюда қисман ишланган ва ушбу материалларнинг ўрнини босувчи моддалар; қисман қайта ишланган пластмасса ва каучук; қуйиш, муҳрлаш ва изоляциялаш учун материаллар; мослашувчан қувурлар металл бўлмаган',
+                    label: i18n.t('17-Каучук, каучук, гуттаперча, асбест, слюда қисман ишланган ва ушбу материалларнинг ўрнини босувчи моддалар; қисман қайта ишланган пластмасса ва каучук; қуйиш, муҳрлаш ва изоляциялаш учун материаллар; мослашувчан қувурлар металл бўлмаган'),
                     text: 'Каучук, каучук, гуттаперча, асбест, слюда қисман ишланган ва ушбу материалларнинг ўрнини босувчи моддалар; қисман қайта ишланган пластмасса ва каучук; қуйиш, муҳрлаш ва изоляциялаш учун материаллар; мослашувчан қувурлар металл бўлмаган'
                 },
                 {
                     value: '18',
-                    label: '18-Чарм ва тақлид тери; ҳайвонларнинг терилари; саёҳат сандиқлари, чамадонлар; ёмғир ва қуёшдан соябонлар; қамишлар; қамчи, қамчи, от жабдуқлари ва эгар; ёқалар, тасмалар ва ҳайвонлар учун кийим',
+                    label: i18n.t('18-Чарм ва тақлид тери; ҳайвонларнинг терилари; саёҳат сандиқлари, чамадонлар; ёмғир ва қуёшдан соябонлар; қамишлар; қамчи, қамчи, от жабдуқлари ва эгар; ёқалар, тасмалар ва ҳайвонлар учун кийим'),
                     text: 'Чарм ва тақлид тери; ҳайвонларнинг терилари; саёҳат сандиқлари, чамадонлар; ёмғир ва қуёшдан соябонлар; қамишлар; қамчи, қамчи, от жабдуқлари ва эгар; ёқалар, тасмалар ва ҳайвонлар учун кийим'
                 },
                 {
                     value: '19',
-                    label: '19-Нометалл қурилиш материаллари; қурилиш учун мўлжалланган металл бўлмаган қаттиқ қувурлар; асфальт, қатронлар ва битум; металл бўлмаган мобил тузилмалар ва иншоотлар; металл бўлмаган ёдгорликлар.',
+                    label: i18n.t('19-Нометалл қурилиш материаллари; қурилиш учун мўлжалланган металл бўлмаган қаттиқ қувурлар; асфальт, қатронлар ва битум; металл бўлмаган мобил тузилмалар ва иншоотлар; металл бўлмаган ёдгорликлар'),
                     text: 'Нометалл қурилиш материаллари; қурилиш учун мўлжалланган металл бўлмаган қаттиқ қувурлар; асфальт, қатронлар ва битум; металл бўлмаган мобил тузилмалар ва иншоотлар; металл бўлмаган ёдгорликлар.'
                 },
                 {
                     value: '20',
-                    label: '20-Мебель, шиша (ойна), расм рамкалари; сақлаш ёки ташиш контейнерлари, металл бўлмаган; шох, суяк, фил суяги, марварид, ишланган ёки қисман ишланган; чиғаноқлар; меэрсчаум; амбер.',
+                    label: i18n.t('20-Мебель, шиша (ойна), расм рамкалари; сақлаш ёки ташиш контейнерлари, металл бўлмаган; шох, суяк, фил суяги, марварид, ишланган ёки қисман ишланган; чиғаноқлар; меэрсчаум; амбер'),
                     text: 'Мебель, шиша (ойна), расм рамкалари; сақлаш ёки ташиш контейнерлари, металл бўлмаган; шох, суяк, фил суяги, марварид, ишланган ёки қисман ишланган; чиғаноқлар; меэрсчаум; амбер.'
                 },
                 {
                     value: '21',
-                    label: '21-Уй ва ошхона анжомлари ва идиш-товоқлар; тароқ ва губкалар; чўткалар, чўткалар бундан мустасно; чўтка маҳсулотлари учун материаллар; тозалаш ва тозалаш учун материал; ишлов берилмаган ёки қисман қайта ишланган шиша, қурилиш ойнасидан ташқари; шиша идишлар, чинни ва сопол идишлар',
+                    label: i18n.t('21-Уй ва ошхона анжомлари ва идиш-товоқлар; тароқ ва губкалар; чўткалар, чўткалар бундан мустасно; чўтка маҳсулотлари учун материаллар; тозалаш ва тозалаш учун материал; ишлов берилмаган ёки қисман қайта ишланган шиша, қурилиш ойнасидан ташқари; шиша идишлар, чинни ва сопол идишлар'),
                     text: 'Уй ва ошхона анжомлари ва идиш-товоқлар; тароқ ва губкалар; чўткалар, чўткалар бундан мустасно; чўтка маҳсулотлари учун материаллар; тозалаш ва тозалаш учун материал; ишлов берилмаган ёки қисман қайта ишланган шиша, қурилиш ойнасидан ташқари; шиша идишлар, чинни ва сопол идишлар'
                 },
                 {
                     value: '22',
-                    label: '22-Арқонлар, арқонлар, иплар; тармоқлар; чодирлар, шийпонлар; тўқимачилик ёки синтетик  материаллардан тайёрланган тентлар; сузиб юриш; юкларни қадоқланмаган ҳолда ташиш ва сақлаш учун сумкалар; қоғоз, картон, каучук ва пластмассадан ташқари пломба материаллари; тўқимачилик толали хом ашё ва уларнинг ўрнини босувчи материаллардан',
+                    label: i18n.t('22-Арқонлар, арқонлар, иплар; тармоқлар; чодирлар, шийпонлар; тўқимачилик ёки синтетик  материаллардан тайёрланган тентлар; сузиб юриш; юкларни қадоқланмаган ҳолда ташиш ва сақлаш учун сумкалар; қоғоз, картон, каучук ва пластмассадан ташқари пломба материаллари; тўқимачилик толали хом ашё ва уларнинг ўрнини босувчи материаллардан'),
                     text: 'Арқонлар, арқонлар, иплар; тармоқлар; чодирлар, шийпонлар; тўқимачилик ёки синтетик  материаллардан тайёрланган тентлар; сузиб юриш; юкларни қадоқланмаган ҳолда ташиш ва сақлаш учун сумкалар; қоғоз, картон, каучук ва пластмассадан ташқари пломба материаллари; тўқимачилик толали хом ашё ва уларнинг ўрнини босувчи материаллардан'
                 },
-                {value: '23', label: '23-Тўқимачилик иплари ва ипи', text: 'Тўқимачилик иплари ва ипи'},
+                {value: '23', label: i18n.t('23-Тўқимачилик иплари ва ипи'), text: 'Тўқимачилик иплари ва ипи'},
                 {
                     value: '24',
-                    label: '24-Тўқимачилик ва унинг ўрнини босувчи маҳсулотлар; маиший фойдаланиш учун чойшаблар; тўқимачилик ва пластмасса материаллардан тайёрланган пардалар;',
+                    label: i18n.t('24-Тўқимачилик ва унинг ўрнини босувчи маҳсулотлар; маиший фойдаланиш учун чойшаблар; тўқимачилик ва пластмасса материаллардан тайёрланган пардалар'),
                     text: 'Тўқимачилик ва унинг ўрнини босувчи маҳсулотлар; маиший фойдаланиш учун чойшаблар; тўқимачилик ва пластмасса материаллардан тайёрланган пардалар;'
                 },
 
-                {value: '25', label: '25-Кийим, пойабзал, бош кийимлар.', text: 'Кийим, пойабзал, бош кийимлар.'},
+                {value: '25', label: i18n.t('25-Кийим, пойабзал, бош кийимлар'), text: 'Кийим, пойабзал, бош кийимлар.'},
                 {
                     value: '26',
-                    label: '26-Дантел ва кашталар, ортиқча оро бермай ва ленталар; тугмалар, тугмалар, илгаклар ва блоклар, игналар ва игналар; сунъий гуллар; соч безаклари; сунъий сочлар',
+                    label: i18n.t('26-Дантел ва кашталар, ортиқча оро бермай ва ленталар; тугмалар, тугмалар, илгаклар ва блоклар, игналар ва игналар; сунъий гуллар; соч безаклари; сунъий сочлар'),
                     text: 'Дантел ва кашталар, ортиқча оро бермай ва ленталар; тугмалар, тугмалар, илгаклар ва блоклар, игналар ва игналар; сунъий гуллар; соч безаклари; сунъий сочлар'
                 },
                 {
                     value: '27',
-                    label: '27-Гиламлар,гиламларчалар, линолеум ва бошқа пол қопламалари; девор қоғози ва қоплама материаллари (тўқимачилик бўлмаган).',
+                    label: i18n.t('27-Гиламлар,гиламларчалар, линолеум ва бошқа пол қопламалари; девор қоғози ва қоплама материаллари (тўқимачилик бўлмаган)'),
                     text: 'Гиламлар,гиламларчалар, линолеум ва бошқа пол қопламалари; девор қоғози ва қоплама материаллари (тўқимачилик бўлмаган).'
                 },
                 {
                     value: '28',
-                    label: '28-Ўйинлар, ўйинчоқлар; видео ўйинлар учун қурилмалар; гимнастика ва спорт буюмлари; Рождество безаклари',
+                    label: i18n.t('28-Ўйинлар, ўйинчоқлар; видео ўйинлар учун қурилмалар; гимнастика ва спорт буюмлари; Рождество безаклари'),
                     text: 'Ўйинлар, ўйинчоқлар; видео ўйинлар учун қурилмалар; гимнастика ва спорт буюмлари; Рождество безаклари'
                 },
                 {
                     value: '29',
-                    label: '29-Гўшт, балиқ, парранда ва ов; гўшт экстракти; консерваланган, қуритилган ва иссиқлик билан ишлов берилган сабзавотлар ва мевалар; желе, мураббо, компотлар; тухум; сут ва сут маҳсулотлари; истеъмол қилинадиган ёғлар ва ёғлар.',
+                    label: i18n.t('29-Гўшт, балиқ, парранда ва ов; гўшт экстракти; консерваланган, қуритилган ва иссиқлик билан ишлов берилган сабзавотлар ва мевалар; желе, мураббо, компотлар; тухум; сут ва сут маҳсулотлари; истеъмол қилинадиган ёғлар ва ёғлар'),
                     text: 'Гўшт, балиқ, парранда ва ов; гўшт экстракти; консерваланган, қуритилган ва иссиқлик билан ишлов берилган сабзавотлар ва мевалар; желе, мураббо, компотлар; тухум; сут ва сут маҳсулотлари; истеъмол қилинадиган ёғлар ва ёғлар.'
                 },
                 {
                     value: '30',
-                    label: '30-Қаҳва, чой, какао ва кофе ўрнини босувчи маҳсулотлар; гуруч; тапиока (маниока) ва саго; ун ва дон маҳсулотлари;нон маҳсулотлари, қандолат маҳсулотлари; музқаймоқ; шакар, асал, мелас сиропи; хамиртуруш, пишириш кукунлари; туз; хантал; сирка, зираворлар; зираворлар; совутиш учун муз',
+                    label: i18n.t('30-Қаҳва, чой, какао ва кофе ўрнини босувчи маҳсулотлар; гуруч; тапиока (маниока) ва саго; ун ва дон маҳсулотлари;нон маҳсулотлари, қандолат маҳсулотлари; музқаймоқ; шакар, асал, мелас сиропи; хамиртуруш, пишириш кукунлари; туз; хантал; сирка, зираворлар; зираворлар; совутиш учун муз'),
                     text: 'Қаҳва, чой, какао ва кофе ўрнини босувчи маҳсулотлар; гуруч; тапиока (маниока) ва саго; ун ва дон маҳсулотлари;нон маҳсулотлари, қандолат маҳсулотлари; музқаймоқ; шакар, асал, мелас сиропи; хамиртуруш, пишириш кукунлари; туз; хантал; сирка, зираворлар; зираворлар; совутиш учун муз'
                 },
                 {
                     value: '31',
-                    label: '31-Қишлоқ, сув хўжалиги, боғдорчилик ва ўрмон хўжалиги маҳсулотлари, қайта ишланмаган ва қайта ишланмаган; қайта ишланган ёки қайта ишланмаган дон ва уруғлар; янги мевалар, сабзавотлар ва хушбўй ўтлар; тирик ўсимликлар ва гуллар; лампочкалар, кўчатлар ва уруғлар; тирик ҳайвонлар; ҳайвонлар учун озуқа ва ичимликлар; солод.',
+                    label: i18n.t('31-Қишлоқ, сув хўжалиги, боғдорчилик ва ўрмон хўжалиги маҳсулотлари, қайта ишланмаган ва қайта ишланмаган; қайта ишланган ёки қайта ишланмаган дон ва уруғлар; янги мевалар, сабзавотлар ва хушбўй ўтлар; тирик ўсимликлар ва гуллар; лампочкалар, кўчатлар ва уруғлар; тирик ҳайвонлар; ҳайвонлар учун озуқа ва ичимликлар; солод'),
                     text: 'Қишлоқ, сув хўжалиги, боғдорчилик ва ўрмон хўжалиги маҳсулотлари, қайта ишланмаган ва қайта ишланмаган; қайта ишланган ёки қайта ишланмаган дон ва уруғлар; янги мевалар, сабзавотлар ва хушбўй ўтлар; тирик ўсимликлар ва гуллар; лампочкалар, кўчатлар ва уруғлар; тирик ҳайвонлар; ҳайвонлар учун озуқа ва ичимликлар; солод.'
                 },
                 {
                     value: '32',
-                    label: '32-Пиво; минерал ва газланган сувлар ва бошқа алкоголсиз ичимликлар; мевали ичимликлар ва мева шарбатлари; сироплар ва бошқа ичимликлар препаратлари',
+                    label: i18n.t('32-Пиво; минерал ва газланган сувлар ва бошқа алкоголсиз ичимликлар; мевали ичимликлар ва мева шарбатлари; сироплар ва бошқа ичимликлар препаратлари'),
                     text: 'Пиво; минерал ва газланган сувлар ва бошқа алкоголсиз ичимликлар; мевали ичимликлар ва мева шарбатлари; сироплар ва бошқа ичимликлар препаратлари'
                 },
                 {
                     value: '33',
-                    label: '33-Спиртли ичимликлар (пиводан ташқари).',
+                    label: i18n.t('33-Спиртли ичимликлар (пиводан ташқари)'),
                     text: 'Спиртли ичимликлар (пиводан ташқари).'
                 },
                 {
                     value: '34',
-                    label: '34-Табак; Чекиш учун аксессуарлар; Гугурт',
+                    label: i18n.t('34-Табак; Чекиш учун аксессуарлар; Гугурт'),
                     text: 'Табак; Чекиш учун аксессуарлар; Гугурт'
                 },
             ],
@@ -1225,7 +1257,7 @@ export default {
     methods: {
         async getCountries() {
             let root = this
-            await axios.get('/api/v1/data/country?lang=uz').then(function (result) {
+            this.$auth.plugins.http.get('/api/v1/data/country').then(function (result) {
                 let countries = [];
                 result.data.forEach(function (item) {
                     countries.push({
@@ -1413,13 +1445,13 @@ export default {
                         let errorString = '';
                         if (typeof error.response.data.data.errorsApps !== 'undefined') {
                             _this.setHuquqEgasiErrors(error.response.data.data.errorsApps);
-                            errorString = 'Ҳуқуқ эгаси тўғрисидаги маълумотлардаги хатоликларни тўғрилаб қайтадан юборинг!'
+                            errorString = i18n.t("Ҳуқуқ эгаси тўғрисидаги маълумотлардаги хатоликларни тўғрилаб қайтадан юборинг!")
                         }
                         if (typeof error.response.data.data.errorsCommodity !== 'undefined') {
                             if (errorString.length > 0) {
-                                errorString = 'Ҳуқуқ эгаси ва ишлаб чиқарувчи тўғрисидаги маълумотлардаги хатоликларни тўғрилаб қайтадан юборинг!'
+                                errorString = i18n.t("Ҳуқуқ эгаси ва ишлаб чиқарувчи тўғрисидаги маълумотлардаги хатоликларни тўғрилаб қайтадан юборинг!")
                             } else {
-                                errorString = 'ишлаб чиқарувчи тўғрисидаги маълумотлардаги хатоликларни тўғрилаб қайтадан юборинг!'
+                                errorString = i18n.t("ишлаб чиқарувчи тўғрисидаги маълумотлардаги хатоликларни тўғрилаб қайтадан юборинг!")
                             }
                             //_this.errors=error.response.data.data.errorsCommodity;
                             _this.setIshlabChiqaruvchiErrors(error.response.data.data.errorsCommodity);
@@ -1453,9 +1485,9 @@ export default {
                         if (typeof error.response.data.data.errorInManufacturer !== 'undefined') {
 
                             if (errorString.length > 0) {
-                                errorString = 'Ҳуқуқ эгаси ва ишлаб чиқарувчи тўғрисидаги маълумотлардаги хатоликларни тўғрилаб қайтадан юборинг!'
+                                errorString = i18n.t("Ҳуқуқ эгаси ва ишлаб чиқарувчи тўғрисидаги маълумотлардаги хатоликларни тўғрилаб қайтадан юборинг!")
                             } else {
-                                errorString = 'ишлаб чиқарувчи тўғрисидаги маълумотлардаги хатоликларни тўғрилаб қайтадан юборинг!'
+                                errorString = i18n.t("ишлаб чиқарувчи тўғрисидаги маълумотлардаги хатоликларни тўғрилаб қайтадан юборинг!")
                             }
 
                             _this.totalerrors = error.response.data.data.errorInManufacturer;
@@ -1470,7 +1502,7 @@ export default {
                         _this.$toast.error(errorString);
 
                     } else {
-                        _this.$toast.error("Серверда хатолик юз берди! Бироздан ҳаракат қилиб кўринг!");
+                        _this.$toast.error(i18n.t("Серверда хатолик юз берди. Кейинроқ уриниб кўринг!"));
                         return error.response;
                     }
                 })
@@ -1521,9 +1553,9 @@ export default {
                                 this.$cookie.set('user', JSON.stringify(this.person), 1);
                                 _this.stepper = 2;
                                 _this.completedSteps.push(_this.stepper - 1);
-                                _this.$toast.success("Аризачи маълумотлари сақланди!");
+                                _this.$toast.success(i18n.t("Аризачи маълумотлари сақланди!"));
 
-                            } else this.$toast.error("Серверда хатолик юз берди. Кейинроқ уриниб кўринг!");
+                            } else this.$toast.error(i18n.t("Серверда хатолик юз берди. Кейинроқ уриниб кўринг!"));
 
                         }
                         /*                        _this.stepper = 2;
@@ -1606,7 +1638,7 @@ export default {
                                 this.$cookie.set('user', JSON.stringify(this.person), 1);
                                 _this.stepper = 3;
                                 _this.completedSteps.push(_this.stepper - 1);
-                                _this.$toast.success("Ҳуқуқ эгаси ва ишлаб чиқарувчи маълумотлари сақланди!");
+                                _this.$toast.success(i18n.t("Ҳуқуқ эгаси ва ишлаб чиқарувчи маълумотлари сақланди!"));
 
                             } else {
                                 // console.log(resultData)
@@ -1752,7 +1784,7 @@ export default {
                                         })
                                         //_this.setProductErrors(resultData.data.data.errorsCommodity);
                                     }
-                                    this.$toast.error("Маълумотларингизни текшириб қайтадан юборинг!");
+                                    this.$toast.error(i18n.t("Маълумотларингизни текшириб қайтадан юборинг!"));
                                 } else
                                     this.$toast.error("Серверда хатолик юз берди! Маълумотларингизни текшириб қайтадан юборинг!");
                             }
@@ -1825,7 +1857,7 @@ export default {
 
         async getBoshqarmalar() {
             const _this = this
-            await axios.get('/api/v1/ex_api/boshqarma').then(function (result) {
+            await this.$auth.plugins.http.get('/api/v1/ex_api/boshqarma').then(function (result) {
                 if (typeof result.data.data !== 'undefined')
                     result.data.data.forEach(function (item) {
                         if (!(['1790', '1791', '1701'].includes(item['kod_id'])))
@@ -1960,7 +1992,7 @@ export default {
                 this.loading.tftncode = true
 
                 // Lazily load input items
-                fetch("https://new.customs.uz/api/v1/data/tftn?code=" + val)
+                fetch("https://customs.uz/api/v1/data/tftn?code=" + val)
                     .then((res) => res.json())
                     .then(res => {
                         res.map(function (item) {
@@ -2071,7 +2103,7 @@ export default {
                 this.loading.tftncode = true
 
                 // Lazily load input items
-                fetch("https://new.customs.uz/api/v1/data/tftn?code=" + val)
+                fetch("https://customs.uz/api/v1/data/tftn?code=" + val)
                     .then((res) => res.json())
                     .then(res => {
                         res.map(function (item) {
@@ -2137,3 +2169,27 @@ export default {
     }
 }
 </script>
+<style>
+b{
+  font-weight: bold !important;
+}
+.red-text{
+  color: red;
+}
+.warning-text{
+  animation-name: opacityAnimation;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-duration: 1s;
+  animation-direction: alternate;
+  animation-delay: 1s;
+}
+@keyframes opacityAnimation {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+</style>

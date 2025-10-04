@@ -56,6 +56,20 @@ class AdminEventController extends ParentController
         $data['ru']=json_decode(File::get(base_path('resources/js/locales/dynamic/ru.json')));
         return response()->json(['success' => true,'data'=>$data], 200);
     }
+    public function syncKeys(){
+        $ruKeys=json_decode(File::get(base_path('resources/js/locales/dynamic/ru.json')), JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT);
+        $uzKeys=json_decode(File::get(base_path('resources/js/locales/dynamic/uz.json')), JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT);
+
+        foreach($ruKeys as $ruKey=>$ruItem){
+            if(!isset($uzKeys[$ruKey])){
+                $uzKeys[$ruKey] = $ruKey;
+            }
+        }
+
+        File::put(base_path('resources/js/locales/dynamic/uz.json'), json_encode($uzKeys,JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT));
+        return response()->json(['success' => true], 200);
+
+    }
 
     /**
      * Display a listing of the resource.

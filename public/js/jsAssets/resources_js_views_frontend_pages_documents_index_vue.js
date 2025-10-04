@@ -13,6 +13,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../i18n */ "./resources/js/i18n.js");
 /* harmony import */ var _src_services_apiService__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../src/services/apiService */ "./resources/js/src/services/apiService.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -205,12 +211,27 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Documents",
   data: function data() {
     return {
+      total: 0,
+      page: 1,
       breadcrumb_items: [{
         text: _i18n__WEBPACK_IMPORTED_MODULE_0__["default"].t('Асосий саҳифа'),
         to: '/',
@@ -247,6 +268,14 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
     };
   },
   methods: {
+    next: function next(page) {
+      this.$router.push({
+        path: this.$route.path,
+        query: {
+          page: page
+        }
+      });
+    },
     changedDatepicker: function changedDatepicker() {
       var type = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
 
@@ -272,15 +301,16 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       var _this = this;
 
       _src_services_apiService__WEBPACK_IMPORTED_MODULE_1__["default"].getDocuments(requestData).then(function (res) {
-        if (res.status === 200 && typeof res.data.data !== 'undefined') _this.documents = res.data.data;
+        if (res.status === 200 && typeof res.data.data !== 'undefined') {
+          _this.documents = res.data.data;
+          _this.total = res.data.count;
+        }
       });
     },
     getCategories: function getCategories(requestData) {
       var _this2 = this;
 
       _src_services_apiService__WEBPACK_IMPORTED_MODULE_1__["default"].getDocumentCategories(requestData).then(function (res) {
-        console.log(res);
-
         if (res.status === 200 && typeof res.data !== 'undefined') {
           _this2.categories = res.data;
         }
@@ -357,11 +387,25 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       val && setTimeout(function () {
         return _this4.activePicker.sanagacha = 'YEAR';
       });
+    },
+    page: function page(val) {
+      this.getDocuments(JSON.parse(JSON.stringify(_objectSpread(_objectSpread({}, this.options), {}, {
+        page: val
+      }))));
     }
   },
   mounted: function mounted() {
+    if (typeof this.$route.query.page === 'undefined') {
+      this.page = 1;
+    } else this.page = parseInt(this.$route.query.page);
+
     this.getDocuments();
     this.getCategories();
+  },
+  computed: {
+    computedLength: function computedLength() {
+      return parseInt(this.total / 20);
+    }
   }
 });
 
@@ -604,7 +648,7 @@ var render = function () {
                       solo: "",
                       "background-color": "white",
                       "hide-details": "",
-                      label: "Ҳужжат рақами",
+                      label: _vm.$t("Ҳужжат рақами"),
                       clearable: "",
                     },
                     model: {
@@ -655,7 +699,7 @@ var render = function () {
                                   "background-color": "white",
                                   "hide-details": "",
                                   clearable: "",
-                                  label: "Ушбу санадан",
+                                  label: _vm.$t("Ушбу санадан"),
                                 },
                                 on: {
                                   change: function ($event) {
@@ -714,6 +758,7 @@ var render = function () {
                       _c("v-date-picker", {
                         staticClass: "mt-0",
                         attrs: {
+                          locale: _vm.$i18n.locale === "en" ? "en-US" : "ru-RU",
                           "active-picker": _vm.activePicker.sanadan,
                           min: "1950-01-01",
                         },
@@ -779,7 +824,7 @@ var render = function () {
                                   solo: "",
                                   "background-color": "white",
                                   clearable: "",
-                                  label: "Ушбу санагача",
+                                  label: _vm.$t("Ушбу санагача"),
                                 },
                                 on: {
                                   change: function ($event) {
@@ -838,6 +883,7 @@ var render = function () {
                       _c("v-date-picker", {
                         staticClass: "mt-0",
                         attrs: {
+                          locale: _vm.$i18n.locale === "en" ? "en-US" : "ru-RU",
                           "active-picker": _vm.activePicker.sanagacha,
                           min: "1950-01-01",
                         },
@@ -913,7 +959,7 @@ var render = function () {
                       solo: "",
                       "background-color": "white",
                       "hide-details": "",
-                      label: "Номлардаги калит сўзлар",
+                      label: _vm.$t("Номлардаги калит сўзлар"),
                       clearable: "",
                     },
                     model: {
@@ -927,12 +973,36 @@ var render = function () {
                 ],
                 1
               ),
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-row",
+            [
+              _c(
+                "v-col",
+                { attrs: { cols: "10" } },
+                [
+                  _vm.total > 0
+                    ? [
+                        _vm._v(
+                          _vm._s(_vm.total) +
+                            " " +
+                            _vm._s(_vm.$t("та ҳужжат аниқланди")) +
+                            " "
+                        ),
+                      ]
+                    : _vm._e(),
+                ],
+                2
+              ),
               _vm._v(" "),
               _c(
                 "v-col",
                 {
                   staticClass: "justify-content-end d-flex",
-                  attrs: { offset: "10", cols: "2" },
+                  attrs: { cols: "2" },
                 },
                 [
                   _c(
@@ -962,33 +1032,57 @@ var render = function () {
             { staticClass: "documents_content" },
             [
               _vm.documents && _vm.documents.length > 0
-                ? _vm._l(_vm.documents, function (document, docKey) {
-                    return _c(
-                      "a",
-                      {
-                        staticClass: "document",
-                        attrs: { href: document.url, target: "_blank" },
-                      },
+                ? [
+                    _vm._l(_vm.documents, function (document, docKey) {
+                      return _c(
+                        "a",
+                        {
+                          staticClass: "document",
+                          attrs: { href: document.url, target: "_blank" },
+                        },
+                        [
+                          _c("span", { staticClass: "document_index" }, [
+                            _vm._v(_vm._s(docKey + 1 + (_vm.page - 1) * 20)),
+                          ]),
+                          _vm._v(" "),
+                          _c("h3", { staticClass: "document_text" }, [
+                            _vm._v(_vm._s(document.name)),
+                          ]),
+                          _vm._v(" "),
+                          _c("p", { staticClass: "document_number" }, [
+                            _vm._v(
+                              "№ " +
+                                _vm._s(document.code) +
+                                " " +
+                                _vm._s(document.date)
+                            ),
+                          ]),
+                        ]
+                      )
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "text-center mb-5" },
                       [
-                        _c("span", { staticClass: "document_index" }, [
-                          _vm._v(_vm._s(docKey + 1)),
-                        ]),
-                        _vm._v(" "),
-                        _c("h3", { staticClass: "document_text" }, [
-                          _vm._v(_vm._s(document.name)),
-                        ]),
-                        _vm._v(" "),
-                        _c("p", { staticClass: "document_number" }, [
-                          _vm._v(
-                            "№ " +
-                              _vm._s(document.code) +
-                              " " +
-                              _vm._s(document.date)
-                          ),
-                        ]),
-                      ]
-                    )
-                  })
+                        _c("v-pagination", {
+                          attrs: {
+                            length: _vm.computedLength,
+                            "total-visible": 10,
+                          },
+                          on: { input: _vm.next },
+                          model: {
+                            value: _vm.page,
+                            callback: function ($$v) {
+                              _vm.page = $$v
+                            },
+                            expression: "page",
+                          },
+                        }),
+                      ],
+                      1
+                    ),
+                  ]
                 : [
                     _c("p", { staticClass: "m-10" }, [
                       _vm._v(" " + _vm._s(_vm.$t("Маълумот топилмади"))),

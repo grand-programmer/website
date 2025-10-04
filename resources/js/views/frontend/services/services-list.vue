@@ -8,7 +8,7 @@
                       :corner_text="(news.includes(service.name))?'new':null"
         />
         <form ref="AppForm" id="appForm" method="get" target="_blank" class="d-none">
-            <input type="hidden" name="userInfoTR" v-model="JSON.stringify(appData)"/>
+            <input type="hidden" name="userInfoTR" :value="JSON.stringify(appData)"/>
         </form>
 
     </div>
@@ -38,6 +38,8 @@ export default {
                 'arxiv',
                 'bko',
                 'vio',
+                'imei',
+                'exim',
             ],
             services: [
                 {
@@ -46,6 +48,13 @@ export default {
                     text: this.$t("Божхона органларига ишга жойлашиш"),
                     href: '/services/vacancy',
                     sort: 1,
+                },
+                {
+                    name: 'exim',
+                    img: '/img/icons/exim.png',
+                    text: this.$t("Экспорт ва импорт бўйича маълумотларни олиш"),
+                    href: '/services/stat',
+                    sort: 2,
                 },
                 {
                     name: 'decision',
@@ -101,6 +110,13 @@ export default {
                     img: '/img/icons/vio.png',
                     text: this.$t("Ваколатли иқтисодий операторлар"),
                     href: '/services/vio',
+                    sort: 6,
+                },
+                {
+                    name: 'imei',
+                    img: 'mdi-text-box-search',
+                    text: this.$t("IMEI коднинг Божхонадан рўйхатдан ўтганлигини текшириш"),
+                    href: 'https://uzimei.customs.uz/' + this.$i18n.locale,
                     sort: 6,
                 },
                 /*
@@ -161,17 +177,19 @@ export default {
                     sort: 12,
                 },
                 {
-                    name: 'mevaSabzavot',
+                    name: 'cabinet',
                     img: '/img/icons/meva.png',
                     text: this.$t("Мева-сабзавот маҳсулотлари экспорти тўғрисида маълумот"),
-                    href: 'http://service.customs.uz/autogtd_report/index.jsp?pc=4#',
+                    href: null,
+                    //href: 'http://https://ed1.customs.uz/hisobotImEx/index.jsp?pc=4#',
                     sort: 13,
                 },
                 {
-                    name: 'import-tovar-qiymati',
+                    name: 'cabinet',
                     img: '/img/icons/import_malumot.png',
                     text: this.$t("Ўзбекистон Республикасига импорт қилинаётган товарларнинг божхона қиймати тўғрисида маълумот"),
-                    href: 'http://service.customs.uz/autogtd_report/index.jsp?pc=4',
+                    href: 'https://ed1.customs.uz/hisobotImEx/index.jsp?pc=9&rn=0.7553820141929496#',
+                    //href: null,
                     sort: 14,
                 },
                 {
@@ -276,7 +294,7 @@ export default {
                     name: 'mygov-list-of-declaration',
                     img: '/img/icons/deklaratsiyalovchi-shaxlar-ruyhati.png',
                     text: this.$t("Декларацияловчи шахслар рўйхати"),
-                    href: 'https://my.gov.uz/uz/list-of-declaration-persons/default/force',
+                    href: 'https://my.gov.uz/'+ this.$i18n.locale +'/list-of-declaration-persons/default/force',
                     sort: 29,
                 },
                 {
@@ -285,19 +303,20 @@ export default {
                     text: this.$t("Интеграциялашган тариф"),
                     href: 'http://tarif.customs.uz/',
                     sort: 30,
-                },
+                },/*
                 {
                     name: 'bojxona-qoida-buzilishi',
                     img: '/img/icons/bojxona-qoida-buzilishi.png',
                     text: this.$t("Божхона қоида бузилиши"),
                     href: 'https://ed1.customs.uz/REESTR_BQB/',
                     sort: 31,
-                },
+                },*/
                 {
-                    name: 'tovarlar-importi',
+                    name: 'cabinet',
                     img: '/img/icons/tovarlar-importi.png',
                     text: this.$t("Товарлар импорти"),
-                    href: 'http://service.customs.uz/autogtd_report/index.jsp?pc=9#',
+                    href: null,
+                    //href: 'https://ed1.customs.uz/hisobotImEx/index.jsp?pc=9#',
                     sort: 32,
 
                 },
@@ -307,14 +326,14 @@ export default {
                     text: this.$t("Тадбирконинг шахсий кабинети"),
                     href: null,
                     sort: 33,
-                },
+                },/*
                 {
                     name: 'mygov365',
                     img: '/img/icons/bojxona-tolovlarini-kechiktirib.png',
                     text: this.$t("Божхона тўловларини кечиктириб ёки бўлиб тўлаш"),
                     href: 'https://my.gov.uz/' + this.$i18n.locale + '/service/365',
                     sort: 34,
-                },
+                },*/
                 {
                     name: 'mygov331',
                     img: '/img/icons/ombor-litsenziyalari.png',
@@ -336,20 +355,20 @@ export default {
                     href: null,
                     sort: 37,
                 },
-                {
+                /*{
                     name: 'chiqish-vaqtini-tadqiqot',
                     img: '/img/icons/chiqish-vaqtini-tadqiqot-va-monitoring.png',
                     text: this.$t("Чиқиш вақтини тадқиқот ва мониторинг қилиш ахборот платформаси"),
                     href: 'http://time.customs.uz/',
                     sort: 38,
-                },
+                },*//*
                 {
                     name: 'corruption',
                     img: '/img/icons/korrupsiya-boyicha-xabar-berish.png',
                     text: this.$t("Корупция бўйича ҳабар бериш"),
                     href: 'https://axborot.customs.uz/Xabar/#',
                     sort: 39,
-                },
+                },*/
             ],
             appData: {
                 //issuerName:"CN=OMONOV OTAJON JURAQULOVICH,T=Директор,O=DUK YANGI TEXNOLOGIYALAR ILMIY-AXBOROT MARKAZI,OU=ЭРИ яратиш ва реестрини юритиш,L=100096 Тошкент ш. Чилонзор тум. Муқимий кўч. 166-уй,E=info@yt.uz,C=UZ",
@@ -450,7 +469,6 @@ const appName=service.name
                             + '<input type="hidden" name="username" value="' + result_data.data.data.name.replaceAll("", "'") + '"/>'
                             + '<input type="hidden" name="SHK" value="SHK"/>'
                             + '<input type="hidden" name="prcod" value="' + result_data.data.data.prcod + '"/>';
-
 
                         _this.appData = "";
                         _this.$refs.AppForm.appendChild(s);

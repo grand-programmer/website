@@ -301,7 +301,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         disabled: false,
         exact: true
       }, {
-        text: 'Менинг аризаларим',
+        text: _i18n__WEBPACK_IMPORTED_MODULE_0__["default"].t('Менинг аризаларим'),
         to: '/applications',
         disabled: false,
         exact: true
@@ -313,16 +313,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       showed: false,
       dialog: false,
       items: [{
-        tab: "Ариза хақида умумиy маълумот"
+        tab: _i18n__WEBPACK_IMPORTED_MODULE_0__["default"].t("Ариза хақида умумий маълумот")
       }, {
-        tab: 'Ариза ҳолати'
+        tab: _i18n__WEBPACK_IMPORTED_MODULE_0__["default"].t("Ариза ҳолати")
       }]
     };
   },
   mounted: function mounted() {
     /*        setTimeout(() => {
                 this.$store.commit('setLoading', true)
-             }, 2000)*/
+              }, 2000)*/
     this.getAppData();
   },
   computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapState)(['loading'])),
@@ -345,7 +345,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             _this.app = response.data.data.data;
 
             _this.breadcrumb_items.push({
-              text: "Транспорт воситасига товарларни божхона пломбалари ва муҳрлари остида ташишга рухсат бериш -" + _this.app.appNum,
+              text: _i18n__WEBPACK_IMPORTED_MODULE_0__["default"].t("Транспорт воситасига товарларни божхона пломбалари ва муҳрлари остида ташишга рухсат бериш -") + _this.app.appNum,
               to: '/services/stamp/' + _this.app.id,
               disabled: true,
               exact: true
@@ -357,7 +357,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           } else {
             _this.$store.commit('setLoading', false);
 
-            _this.$toast.error("Маълумот топилмади!");
+            _this.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_0__["default"].t("Маълумот топилмади!"));
 
             _this.$router.push("/applications");
           }
@@ -366,7 +366,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
           _this.$store.commit('setLoading', false);
 
-          _this.$toast.error("Маълумот топилмади!");
+          _this.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_0__["default"].t("Маълумот топилмади!"));
 
           _this.$router.push("/applications");
         });
@@ -498,7 +498,7 @@ var render = function () {
               [
                 _c("v-row", [
                   _c("h3", { staticClass: "pb-5" }, [
-                    _c("b", [_vm._v("Ариза рақами: ")]),
+                    _c("b", [_vm._v(_vm._s(_vm.$t("Ариза рақами:")))]),
                     _vm._v(_vm._s(_vm.app.appNum)),
                   ]),
                   _vm._v(" "),
@@ -573,7 +573,11 @@ var render = function () {
                                                   },
                                                   [
                                                     _vm._v(
-                                                      "\n                                                        Ариза рақами\n                                                    "
+                                                      "\n                                                        " +
+                                                        _vm._s(
+                                                          _vm.$t("Ариза рақами")
+                                                        ) +
+                                                        "\n                                                    "
                                                     ),
                                                   ]
                                                 ),
@@ -615,7 +619,13 @@ var render = function () {
                                                           "font-weight": "550",
                                                         },
                                                       },
-                                                      [_vm._v("Аризачи")]
+                                                      [
+                                                        _vm._v(
+                                                          _vm._s(
+                                                            _vm.$t("Аризачи")
+                                                          )
+                                                        ),
+                                                      ]
                                                     ),
                                                     _vm._v(" "),
                                                     _c("td", [
@@ -647,7 +657,11 @@ var render = function () {
                                                       },
                                                       [
                                                         _vm._v(
-                                                          "Аризачи телефон рақами"
+                                                          _vm._s(
+                                                            _vm.$t(
+                                                              "Аризачи телефон рақами"
+                                                            )
+                                                          )
                                                         ),
                                                       ]
                                                     ),
@@ -681,7 +695,11 @@ var render = function () {
                                                       },
                                                       [
                                                         _vm._v(
-                                                          "Аризачининг эмаил манзили"
+                                                          _vm._s(
+                                                            _vm.$t(
+                                                              "Аризачининг эмаил манзили"
+                                                            )
+                                                          )
                                                         ),
                                                       ]
                                                     ),
@@ -715,7 +733,11 @@ var render = function () {
                                                       },
                                                       [
                                                         _vm._v(
-                                                          "Аризачининг манзили"
+                                                          _vm._s(
+                                                            _vm.$t(
+                                                              "Аризачининг манзили"
+                                                            )
+                                                          )
                                                         ),
                                                       ]
                                                     ),
@@ -749,7 +771,11 @@ var render = function () {
                                                       },
                                                       [
                                                         _vm._v(
-                                                          "Аризачининг ЖШШИР/ СТИРи"
+                                                          _vm._s(
+                                                            _vm.$t(
+                                                              "Аризачининг ЖШШИР/ СТИРи"
+                                                            )
+                                                          )
                                                         ),
                                                       ]
                                                     ),
@@ -783,7 +809,11 @@ var render = function () {
                                                       },
                                                       [
                                                         _vm._v(
-                                                          "Танланган божхона бошқармаси"
+                                                          _vm._s(
+                                                            _vm.$t(
+                                                              "Танланган божхона бошқармаси"
+                                                            )
+                                                          )
                                                         ),
                                                       ]
                                                     ),
@@ -817,7 +847,11 @@ var render = function () {
                                                       },
                                                       [
                                                         _vm._v(
-                                                          "Автотранспорт воситаси тури"
+                                                          _vm._s(
+                                                            _vm.$t(
+                                                              "Автотранспорт воситаси тури"
+                                                            )
+                                                          )
                                                         ),
                                                       ]
                                                     ),
@@ -851,7 +885,11 @@ var render = function () {
                                                       },
                                                       [
                                                         _vm._v(
-                                                          "Автотранспорт русуми (маркаси)"
+                                                          _vm._s(
+                                                            _vm.$t(
+                                                              "Автотранспорт русуми (маркаси)"
+                                                            )
+                                                          )
                                                         ),
                                                       ]
                                                     ),
@@ -885,7 +923,11 @@ var render = function () {
                                                       },
                                                       [
                                                         _vm._v(
-                                                          "Ишлаб чиқарилган санаси"
+                                                          _vm._s(
+                                                            _vm.$t(
+                                                              "Ишлаб чиқарилган санаси"
+                                                            )
+                                                          )
                                                         ),
                                                       ]
                                                     ),
@@ -919,7 +961,11 @@ var render = function () {
                                                       },
                                                       [
                                                         _vm._v(
-                                                          "Давлат рақами белгиси"
+                                                          _vm._s(
+                                                            _vm.$t(
+                                                              "Давлат рақами белгиси"
+                                                            )
+                                                          )
                                                         ),
                                                       ]
                                                     ),
@@ -952,7 +998,11 @@ var render = function () {
                                                       },
                                                       [
                                                         _vm._v(
-                                                          "Идентификация рақами (VIN)"
+                                                          _vm._s(
+                                                            _vm.$t(
+                                                              "Идентификация рақами (VIN)"
+                                                            )
+                                                          )
                                                         ),
                                                       ]
                                                     ),
@@ -986,7 +1036,11 @@ var render = function () {
                                                       },
                                                       [
                                                         _vm._v(
-                                                          "Гувоҳнома серия рақами"
+                                                          _vm._s(
+                                                            _vm.$t(
+                                                              "Гувоҳнома серия рақами"
+                                                            )
+                                                          )
                                                         ),
                                                       ]
                                                     ),
@@ -1020,7 +1074,11 @@ var render = function () {
                                                       },
                                                       [
                                                         _vm._v(
-                                                          "Контейнер рақами"
+                                                          _vm._s(
+                                                            _vm.$t(
+                                                              "Контейнер рақами"
+                                                            )
+                                                          )
                                                         ),
                                                       ]
                                                     ),
@@ -1052,7 +1110,15 @@ var render = function () {
                                                           "font-weight": "550",
                                                         },
                                                       },
-                                                      [_vm._v("Контейнер тури")]
+                                                      [
+                                                        _vm._v(
+                                                          _vm._s(
+                                                            _vm.$t(
+                                                              "Контейнер тури"
+                                                            )
+                                                          )
+                                                        ),
+                                                      ]
                                                     ),
                                                     _vm._v(" "),
                                                     _c("td", [
@@ -1082,7 +1148,13 @@ var render = function () {
                                                           "font-weight": "550",
                                                         },
                                                       },
-                                                      [_vm._v("Тара вазни")]
+                                                      [
+                                                        _vm._v(
+                                                          _vm._s(
+                                                            _vm.$t("Тара вазни")
+                                                          )
+                                                        ),
+                                                      ]
                                                     ),
                                                     _vm._v(" "),
                                                     _c("td", [
@@ -1114,7 +1186,11 @@ var render = function () {
                                                       },
                                                       [
                                                         _vm._v(
-                                                          "Ташқи ўлчамлари"
+                                                          _vm._s(
+                                                            _vm.$t(
+                                                              "Ташқи ўлчамлари"
+                                                            )
+                                                          )
                                                         ),
                                                       ]
                                                     ),
@@ -1149,7 +1225,11 @@ var render = function () {
                                                       },
                                                       [
                                                         _vm._v(
-                                                          "Конструкциянинг асосий ҳусусиятлари"
+                                                          _vm._s(
+                                                            _vm.$t(
+                                                              "Конструкциянинг асосий ҳусусиятлари"
+                                                            )
+                                                          )
                                                         ),
                                                       ]
                                                     ),
@@ -1183,7 +1263,11 @@ var render = function () {
                                                       },
                                                       [
                                                         _vm._v(
-                                                          "Юкланган файллар"
+                                                          _vm._s(
+                                                            _vm.$t(
+                                                              "Юкланган файллар"
+                                                            )
+                                                          )
                                                         ),
                                                       ]
                                                     ),
@@ -1237,7 +1321,15 @@ var render = function () {
                                                           "font-weight": "550",
                                                         },
                                                       },
-                                                      [_vm._v("Ариза ҳолати")]
+                                                      [
+                                                        _vm._v(
+                                                          _vm._s(
+                                                            _vm.$t(
+                                                              "Ариза ҳолати"
+                                                            )
+                                                          )
+                                                        ),
+                                                      ]
                                                     ),
                                                     _vm._v(" "),
                                                     _c("td", [
@@ -1262,7 +1354,7 @@ var render = function () {
                                     ],
                                     null,
                                     false,
-                                    1520365153
+                                    3285566977
                                   ),
                                 })
                               : _vm._e(),
@@ -1313,7 +1405,9 @@ var render = function () {
                                                           _vm._v(
                                                             " " +
                                                               _vm._s(
-                                                                appstatus.statusNm
+                                                                _vm.$t(
+                                                                  appstatus.statusNm
+                                                                )
                                                               )
                                                           ),
                                                         ]
@@ -1355,7 +1449,13 @@ var render = function () {
                                                                 },
                                                                 [
                                                                   _vm._v(
-                                                                    " Рухсатномани юклаб олинг! "
+                                                                    " " +
+                                                                      _vm._s(
+                                                                        _vm.$t(
+                                                                          "Рухсатномани юклаб олинг!"
+                                                                        )
+                                                                      ) +
+                                                                      " "
                                                                   ),
                                                                 ]
                                                               ),
@@ -1386,7 +1486,13 @@ var render = function () {
                                                                 },
                                                                 [
                                                                   _vm._v(
-                                                                    " Аризангиз жавоб хатини юклаб олинг! "
+                                                                    " " +
+                                                                      _vm._s(
+                                                                        _vm.$t(
+                                                                          "Аризангиз жавоб хатини юклаб олинг!"
+                                                                        )
+                                                                      ) +
+                                                                      " "
                                                                   ),
                                                                 ]
                                                               ),

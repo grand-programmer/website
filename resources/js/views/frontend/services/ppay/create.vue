@@ -14,7 +14,7 @@
                 <v-row>
                     <v-col cols="12">
                         <h3 align="center" class="lh-sm font-weight-bold primary-color my-5">
-                            ТИФ субъектининг божхона тўловларини кечиктириб ёки бўлиб-бўлиб тўлашга рухсат бериш
+                            {{ $t('ТИФ субъектининг божхона тўловларини кечиктириб ёки бўлиб-бўлиб тўлашга рухсат бериш') }}
                             <br>
                         </h3>
                     </v-col>
@@ -24,23 +24,22 @@
 
                 >
                     <div class="row position-absolute yoriqnoma-text"><a
-                        href="/storage/files/dastlabki-user.pptx"> Ариза тўлдириш бўйича йўриқмани юклаб
-                        олинг!
+                        :href="$i18n.locale==='uz'?'/storage/files/ppay_uz.pptx':'/storage/files/ppay_ru.pptx'"> {{ $t('Ариза тўлдириш бўйича йўриқмани юклаб олинг!') }}
                     </a></div>
                     <ValidationObserver v-slot="{ invalid }" ref="stepValidation1">
                         <v-row>
                         </v-row>
                         <v-row class="person_data mt-10">
                             <v-col cols="4" v-if="person.type===2">
-                                <ValidationProvider name="СТИР"
+                                <ValidationProvider :name="$t('СТИР')"
                                                     v-slot="{ errors }">
 
                                     <v-text-field
                                         v-model="person.organization_inn"
-                                        label="СТИР"
+                                        :label="$t('СТИР')"
                                         required
                                         :disabled="(JSON.parse($auth.user().legal_info)[0].tin).length>0"
-                                        hint="Корхона ёки ташкилот СТИРи"
+                                        :hint="$t('Корхона ёки ташкилот СТИРи')"
                                         persistent-hint
                                         name="orgInn"
                                     >
@@ -50,14 +49,14 @@
                                 </ValidationProvider>
                             </v-col>
                             <template  v-else><v-col cols="4">
-                                <ValidationProvider name="СТИР"
+                                <ValidationProvider :name="$t('СТИР')"
                                                     v-slot="{ errors }">
 
                                     <v-text-field
                                         v-model="$auth.user().tin"
-                                        label="СТИР"
+                                        :label="$t('СТИР')"
                                         required
-                                        hint="Жисмоний шахс СТИРи"
+                                        :hint="$t('Жисмоний шахс СТИРи')"
                                         persistent-hint
                                         name="orgInn"
                                     >
@@ -67,15 +66,15 @@
                                 </ValidationProvider>
                             </v-col>
                             <v-col cols="4" >
-                                <ValidationProvider name="ЖШШИР"
+                                <ValidationProvider :name="$t('ЖШШИР')"
                                                     v-slot="{ errors }">
 
                                     <v-text-field
                                         v-model="person.pin"
-                                        label="ЖШШИР"
+                                        :label="$t('ЖШШИР')"
                                         required
                                         :disabled="$auth.user().pin > 0"
-                                        hint="Аризачи ЖШШРи"
+                                        :hint="$t('Аризачи ЖШШРи')"
                                         persistent-hint
                                         name="personInn"
                                     >
@@ -86,18 +85,18 @@
                             </v-col>
                             </template>
                             <v-col cols="4">
-                                <ValidationProvider :name="person.type===2?'Ташкилот номи':'ФИШ'" rules="required"
+                                <ValidationProvider :name="$t(person.type===2?'Ташкилот номи':'ФИШ')" rules="required"
                                                     v-slot="{ errors }">
                                     <v-text-field
                                         v-model="person.type===2?person.organization_name:person.fio"
                                         :counter="200"
-                                        :label="person.type===2?'Ташкилот номи':'ФИШ'"
+                                        :label="$t(person.type===2?'Ташкилот номи':'ФИШ')"
                                         required
-                                        :hint="person.type===2?'Юридик шахснинг тўлиқ номи':'Мурожаатчи фамилияси, исми, шарифи'"
+                                        :hint="$t(person.type===2?'Юридик шахснинг тўлиқ номи':'Мурожаатчи фамилияси, исми, шарифи')"
                                         persistent-placeholder
                                     >
                                         <template v-slot:label>
-                                            {{ person.type === 2 ? 'Ташкилот номи' : 'ФИШ' }}<sup>*</sup></template>
+                                            {{ $t(person.type === 2 ? 'Ташкилот номи':'ФИШ') }}<sup>*</sup></template>
 
                                     </v-text-field>
                                     <span class="red&#45;&#45;text">{{ errors[0] }}</span>
@@ -108,7 +107,7 @@
                             <v-col cols="4">
                                 <text-field
                                     v-model="app.money"
-                                    title="Тўлов муддати узайтириладиган сумма"
+                                    :title="$t('Тўлов муддати узайтириладиган сумма')"
                                     required
                                     persistent-placeholder
                                 >
@@ -116,7 +115,7 @@
                             </v-col>
 
                             <v-col cols="4">
-                                <ValidationProvider name="Ҳудуд" rules="required"
+                                <ValidationProvider :name="$t('Ҳудуд')" rules="required"
                                                     v-slot="{ errors }">
                                     <v-autocomplete
                                         v-model="app.region"
@@ -124,7 +123,7 @@
                                         :items="regions"
                                         persistent-hint
                                     >
-                                        <template v-slot:label>Ҳудудий божхона бошқармасини танланг <sup>*</sup>
+                                        <template v-slot:label>{{ $t('Ҳудудий божхона бошқармасини танланг') }}<sup> *</sup>
                                         </template>
                                     </v-autocomplete>
                                     <span class="red--text">{{ errors[0] }}</span>
@@ -133,34 +132,34 @@
                             </v-col>
 
                             <v-col cols="4">
-                                <ValidationProvider name="Телефон рақами" rules="required"
+                                <ValidationProvider :name="$t('Телефон рақами')" rules="required"
                                                     v-slot="{ errors }">
                                     <v-text-field
                                         v-model="person.phone"
-                                        label="Телефон рақами"
+                                        :label="$t('Телефон рақами')"
                                         required
                                         v-mask="'+998 ## ### ## ##'"
-                                        hint="Аризачининг телефон рақами"
+                                        :hint="$t('Аризачининг телефон рақами')"
                                         persistent-placeholder
                                     >
-                                        <template v-slot:label>Телефон рақами <sup>*</sup></template>
+                                        <template v-slot:label>{{ $t('Телефон рақами') }}<sup> *</sup></template>
                                     </v-text-field>
                                     <span class="red--text">{{ errors[0] }}</span>
                                 </ValidationProvider>
 
                             </v-col>
                             <v-col cols="4">
-                                <ValidationProvider name="Электрон почта" rules="required|email"
+                                <ValidationProvider :name="$t('Электрон почта')" rules="required|email"
                                                     v-slot="{ errors }">
                                     <v-text-field
                                         v-model="person.email"
                                         :counter="200"
-                                        label="Электрон почта манзили"
+                                        :label="$t('Электрон почта манзили')"
                                         required
-                                        hint="Аризачининг электрон почтаси"
+                                        :hint="$t('Аризачининг электрон почтаси')"
                                         persistent-placeholder
                                     >
-                                        <template v-slot:label>Электрон почта манзили <sup>*</sup>
+                                        <template v-slot:label>{{ $t('Электрон почта манзили') }}<sup> *</sup>
                                         </template>
                                     </v-text-field>
                                     <span class="red--text">{{ errors[0] }}</span>
@@ -170,9 +169,9 @@
                             <v-col cols="4">
                                 <text-field
                                     v-model="person.perAdr"
-                                    title="Почта манзили"
+                                    :title="$t('Почта манзили')"
                                     rules="required"
-                                    hint="Аризачининг яшаш манзили"
+                                    :hint="$t('Аризачининг яшаш манзили')"
                                     persistent-placeholder
                                 >
 
@@ -180,7 +179,7 @@
 
                             </v-col>
                             <v-col cols="4">
-                                <ValidationProvider name="Божхона тўловлари таъминлови тури" rules="required"
+                                <ValidationProvider :name="$t('Божхона тўловлари таъминлови тури')" rules="required"
                                                     v-slot="{ errors }">
                                     <v-autocomplete
                                         v-model="app.type"
@@ -188,7 +187,7 @@
                                         :items="types"
                                         persistent-hint
                                     >
-                                        <template v-slot:label>Божхона тўловлари таъминлови тури <sup>*</sup>
+                                        <template v-slot:label>{{ $t('Божхона тўловлари таъминлови тури') }}<sup> *</sup>
                                         </template>
                                     </v-autocomplete>
                                     <span class="red--text">{{ errors[0] }}</span>
@@ -197,89 +196,89 @@
                             <template v-if="app.type===0">
                                 <v-col cols="4">
                                     <text-field
-                                        title="Cуғурта полиси рақами"
+                                        :title="$t('Cуғурта полиси рақами')"
                                         v-model="app.sugurta_number"/>
 
                                 </v-col>
                                 <v-col cols="4">
                                     <text-field
-                                        title="Cуғурта полиси санаси"
+                                        :title="$t('Cуғурта полиси санаси')"
                                         v-mask="'##-##-####'"
                                         v-model="app.sugurta_sana"/>
 
                                 </v-col>
                                 <v-col cols="4">
                                     <e-arxiv-file v-model="app.sugurta_doc" :errors="app.file_error"
-                                                  label="Суғурта файлини юкланг"/>
+                                                  :label="$t('Суғурта файлини юкланг')"/>
                                 </v-col>
                             </template>
                             <template v-if="app.type===1">
                                 <v-col cols="4">
-                                    <text-field title="Банк кафолати санаси" v-mask="'##-##-####'" v-model="app.kafolat_bsana"/>
+                                    <text-field :title="$t('Банк кафолати санаси')" v-mask="'##-##-####'" v-model="app.kafolat_bsana"/>
 
                                 </v-col>
                                 <v-col cols="4">
-                                    <text-field title="Банк кафолати рақами" v-model="app.kafolat_raqami"/>
+                                    <text-field :title="$t('Банк кафолати рақами')" v-model="app.kafolat_raqami"/>
                                 </v-col>
                                 <v-col cols="4">
-                                    <text-field title="Кафолат миқдори" v-model="app.kafolat_miqdor"/>
+                                    <text-field :title="$t('Кафолат миқдори')" v-model="app.kafolat_miqdor"/>
                                 </v-col>
                                 <v-col cols="4">
-                                    <text-field title="Банк кафолати амал қилиш санаси" v-mask="'##-##-####'" v-model="app.kafolat_sana"/>
+                                    <text-field :title="$t('Банк кафолати амал қилиш санаси')" v-mask="'##-##-####'" v-model="app.kafolat_sana"/>
                                 </v-col>
 
                                 <v-col cols="4">
                                     <e-arxiv-file v-model="app.kafolat_doc" :errors="app.file_error"
-                                                  label="Кафолат файлини юкланг"/>
+                                                  :label="$t('Кафолат файлини юкланг')"/>
                                 </v-col>
 
                             </template>
                             <template v-if="app.type===2">
                                 <v-col cols="4">
-                                    <text-field title="Кафил - СТИР/ЖШШИР" v-model="app.kafil_nomi"
+                                    <text-field :title="$t('Кафил - СТИР/ЖШШИР')" v-model="app.kafil_nomi"
                                                 />
                                 </v-col>
                                 <v-col cols="4">
-                                    <text-field title="Кафил - Ташкилот номи/Ф.И.Ш" v-model="app.kafil_tin_pin"
+                                    <text-field :title="$t('Кафил - Ташкилот номи/Ф.И.Ш')" v-model="app.kafil_tin_pin"
                                                 />
                                 </v-col>
                                 <v-col cols="4">
-                                    <text-field title="Кафиллик хати" v-model="app.kafil_xati"/>
+                                    <text-field :title="$t('Кафиллик хати')" v-model="app.kafil_xati"/>
                                 </v-col>
                                 <v-col cols="4">
-                                    <text-field title="Кафиллик хати берилган санаси" v-mask="'##-##-####'"
+                                    <text-field :title="$t('Кафиллик хати берилган санаси')" v-mask="'##-##-####'"
                                                 v-model="app.kafillik_sana"/>
                                 </v-col>
                                 <v-col cols="4">
-                                    <text-field title="Кафиллик миқдори" v-model="app.kafil_miqdori" type="number"/>
+                                    <text-field :title="$t('Кафиллик миқдори')" v-model="app.kafil_miqdori" type="number"/>
                                 </v-col>
                                 <v-col cols="4">
-                                    <text-field title="Кафиллик хати амал қилиш санаси" v-mask="'##-##-####'"
-                                                v-model="app.kafillik_sana"/>
+                                    <text-field :title="$t('Кафиллик хати амал қилиш санаси')" v-mask="'##-##-####'"
+                                                v-model="app.kafillik_bsana"/>
                                 </v-col>
                                 <v-col cols="4">
                                     <e-arxiv-file v-model="app.kafillik_doc" :errors="app.file_error"
-                                                  label="Кафиллик хати файл идни киритинг"/>
+                                                  :label="$t('Кафиллик хати файл ID ни киритинг')"/>
                                 </v-col>
 
                             </template>
                             <template v-if="app.type===3">
                                 <v-col cols="4">
-                                    <text-field title="Гаров шартномаси" v-model="app.garov_shart"
-                                                hint="Шартнома рақами"/>
+                                    <text-field :title="$t('Гаров шартномаси')" v-model="app.garov_shart"
+                                                :hint="$t('Шартнома рақами')"/>
 
                                 </v-col>
                                 <v-col cols="4">
-                                    <text-field title="Гаров шартномаси берилган санаси" v-mask="'##-##-####'" v-model="app.garov_shart_sana"
-                                                hint="Шартнома санаси"/>
+                                    <text-field :title="$t('Гаров шартномаси берилган санаси')" v-mask="'##-##-####'" v-model="app.garov_shart_sana"
+                                                :hint="$t('Шартнома санаси')"/>
 
                                 </v-col>
                                 <v-col cols="4">
-                                    <text-field title="Гаров товар қиймати" v-model="app.garov_qiymat" type="number"/>
+                                    <text-field :title="$t('Гаров товар қиймати')" v-model="app.garov_qiymat" type="number"/>
                                 </v-col>
                                 <v-col cols="4">
                                     <text-field
-                                        title="Гаров шартномаси амал қилиш санаси"
+                                        :title="$t('Гаров шартномаси амал қилиш санаси')"
                                         persistent-hint
                                         v-mask="'##-##-####'"
                                         v-model="app.garov_sana"
@@ -288,24 +287,24 @@
 
                                 <v-col cols="4">
                                     <e-arxiv-file v-model="app.garov_doc" :errors="app.file_error"
-                                                  label="Гаров шартномаси е-архив рақамини киритинг"/>
+                                                  :label="$t('Гаров шартномаси е-архив рақамини киритинг')"/>
                                 </v-col>
 
                             </template>
                             <template v-if="app.type===4">
                                 <v-col cols="4">
-                                    <text-field title="Таъминлов суммаси" v-model="app.taminlov"
-                                                hint="Суммани киритинг"/>
+                                    <text-field :title="$t('Таъминлов суммаси')" v-model="app.taminlov"
+                                                :hint="$t('Суммани киритинг')"/>
                                 </v-col>
                             </template>
                             <template v-if="app.type===5">
                                 <v-col cols="4">
-                                    <text-field title="Қонун ҳужжати рақами" v-model="app.taminotsiz"
-                                                hint="Ҳужжат рақами "/>
+                                    <text-field :title="$t('Қонун ҳужжати рақами')" v-model="app.taminotsiz"
+                                                :hint="$t('Ҳужжат рақами')"/>
                                 </v-col>
                                 <v-col cols="4">
-                                    <text-field title="Қонун ҳужжати санаси" v-model="app.taminotsiz_sana"
-                                                hint="Ҳужжат санаси" v-mask="'##-##-####'"/>
+                                    <text-field :title="$t('Қонун ҳужжати санаси')" v-model="app.taminotsiz_sana"
+                                                :hint="$t('Ҳужжат санаси')" v-mask="'##-##-####'"/>
                                 </v-col>
                                 <v-col cols="8">
                                 <e-arxiv-file v-model="app.taminotsiz_doc" :errors="app.file_error" />
@@ -316,8 +315,8 @@
                             <v-col cols="12">
                                 <text-field
                                     v-model="app.comment"
-                                    title="Изоҳ"
-                                    hint="Қўшимча маълумотлар мавжуд бўлса киритинг"
+                                    :title="$t('Изоҳ')"
+                                    :hint="$t('Қўшимча маълумотлар мавжуд бўлса киритинг')"
                                     persistent-placeholder
                                 >
 
@@ -333,7 +332,7 @@
                             <span
                                 style="padding: 3px 2px;border: 1px solid rgb(21, 165, 51);margin-right: 10px;margin-bottom: -5px;height: 23px;width: 25px;display: inline-flex;">
                                 <v-icon v-show="(checkbox.first && checkbox.second)">mdi-check</v-icon></span>
-                            <span>Фойдаланиш шартларига розилик билдираман</span>
+                            <span>{{ $t('Фойдаланиш шартларига розилик билдираман') }}</span>
 
                         </div>
 
@@ -342,7 +341,7 @@
                         <v-card>
 
                             <v-toolbar color="primary" dark class="text-center white--text"><span class="text-h5">
-                                    Фойдаланиш шартлари
+                                    {{ $t('Фойдаланиш шартлари') }}
                                     </span>
                             </v-toolbar>
                             <v-card-text>
@@ -350,7 +349,7 @@
                                     <v-checkbox v-model="checkbox.first" hide-details dense color="primary">
                                         <template v-slot:label>
                                             <div>
-                                                Божхона тўловлари суммаларини ўз муддатида тўланишига кафолат берамиз.
+                                                {{ $t('Божхона тўловлари суммаларини ўз муддатида тўланишига кафолат берамиз.') }}
                                             </div>
                                         </template>
                                     </v-checkbox>
@@ -358,33 +357,20 @@
                                                 class="d-flex justify-content-start align-items-start">
                                         <template v-slot:label>
                                             <div>
-                                                Божхона тўловларини кечиктириб ёки бўлиб-бўлиб тўлаш бўйича қонунчилик
-                                                ва унинг бузилишига нисбатан бўлган жавобгарлик билан танишганмиз ҳамда
-                                                мазкур мажбуриятга риоя қилинмаган тақдирда қонунчиликда белгиланган
-                                                жавобгарликга тортилишга розимиз.
+                                                {{ $t('Божхона тўловларини кечиктириб ёки бўлиб-бўлиб тўлаш бўйича қонунчилик ва унинг бузилишига нисбатан бўлган жавобгарлик билан танишганмиз ҳамда мазкур мажбуриятга риоя қилинмаган тақдирда қонунчиликда белгиланган жавобгарликга тортилишга розимиз.') }}
                                             </div>
                                         </template>
                                     </v-checkbox>
 
                                 </v-row>
                                 <v-row>
-                                    <h4>Эслатма:</h4>
+                                    <h4>{{ $t('Эслатма:') }}</h4>
                                     <ul style="list-style: none; padding-left: 30px !important;  font-style: italic;  display: block; width:100%">
-                                        <li>Божхона тўловларини кечиктириб ёки бўлиб-бўлиб тўлаш имконияти умумий
-                                            тартибда божхона декларацияси қабул қилинган кундан эътиборан Божхона
-                                            кодекси 329-моддасига асосан олтмиш календарь кундан ҳамда қўшилган қиймат
-                                            солиғи Ўзбекистон Республикаси Вазирлар Маҳкамасининг 2020 йил 10 февралдаги
-                                            76-сон қарорига мувофиқ 120 кундан ошмаган даврга тақдим қилинади.
+                                        <li>{{ $t('Божхона тўловларини кечиктириб ёки бўлиб-бўлиб тўлаш имконияти умумий тартибда божхона декларацияси қабул қилинган кундан эътиборан Божхона кодекси 329-моддасига асосан олтмиш календарь кундан ҳамда қўшилган қиймат солиғи Ўзбекистон Республикаси Вазирлар Маҳкамасининг 2020 йил 10 февралдаги 76-сон қарорига мувофиқ 120 кундан ошмаган даврга тақдим қилинади.') }}
                                         </li>
-                                        <li>Шунингдек, Божхона кодекси 329-моддаси ўн биринчи қисмига мувофиқ божхона
-                                            тўловларини кечиктириб ёки бўлиб-бўлиб тўлаш имконияти Ўзбекистон
-                                            Республикаси Президентининг ёхуд Ўзбекистон Республикаси Вазирлар
-                                            Маҳкамасининг қарорига биноан узоқроқ муддатларга берилиши мумкин.
+                                        <li>{{ $t('Шунингдек, Божхона кодекси 329-моддаси ўн биринчи қисмига мувофиқ божхона тўловларини кечиктириб ёки бўлиб-бўлиб тўлаш имконияти Ўзбекистон Республикаси Президентининг ёхуд Ўзбекистон Республикаси Вазирлар Маҳкамасининг қарорига биноан узоқроқ муддатларга берилиши мумкин.') }}
                                         </li>
-                                        <li>Агар Сизда, божхона тўловларини кечиктириб ёки бўлиб-бўлиб имкониятидан
-                                            қонунчиликга мувофиқ узоқроқ муддатларга фойдаланиш учун ҳуқуқий асослар
-                                            мавжуд бўлган тақдирда, мазкур асосларни ариза изоҳ қисмида кўрсатишингиз
-                                            лозим.
+                                        <li>{{ $t('Агар Сизда, божхона тўловларини кечиктириб ёки бўлиб-бўлиб имкониятидан қонунчиликга мувофиқ узоқроқ муддатларга фойдаланиш учун ҳуқуқий асослар мавжуд бўлган тақдирда, мазкур асосларни ариза изоҳ қисмида кўрсатишингиз лозим.') }}
                                         </li>
                                     </ul>
                                 </v-row>
@@ -398,28 +384,29 @@
                                     text
                                     @click="dialog = false"
                                 >
-                                    Қабул Қилмайман
+                                    {{ $t('Қабул Қилмайман') }}
                                 </v-btn>
                                 <v-btn
                                     color="green darken-1"
                                     :disabled="!(checkbox.first && checkbox.second)"
                                     @click="dialog = false"
                                 >
-                                    Қабул қиламан
+                                    {{ $t('Қабул қиламан') }}
                                 </v-btn>
                             </v-card-actions>
                         </v-card>
                     </v-dialog>
                     <v-row class="row mb-3 position-absolute bottom-0 end-0">
-                        <v-col class="d-flex tab_action_buttons">
+                        <v-col class="order-2 p-2 bd-highlight">
 
                             <v-btn
                                 color="primary"
                                 @click="nextStep"
                                 size="large"
                                 :loading="loading.button"
+                                style="width: max-content"
                             >
-                                Ариза юбориш
+                                {{ $t('Ариза юбориш') }}
                             </v-btn>
 
 
@@ -427,7 +414,7 @@
                     </v-row>
                     <v-row class="bottom-required-info">
                         <i style="font-size: 12px;"><sub
-                            style="font-size: 20px">*</sub> - майдонлари албатта тўлдирилиши шарт!
+                            style="font-size: 20px">*</sub> {{ $t('- майдонлари албатта тўлдирилиши шарт!') }}
                         </i>
 
                     </v-row>
@@ -441,9 +428,9 @@
             <img src="/public/images/telegram.png">
 
 
-            <p> Саволларингизни йўлланг
+            <p> {{ $t('Саволларингизни йўлланг') }}
                 <br>
-                @dastlabkiqaror
+                {{ $t('@dastlabkiqaror') }}
             </p></a>
     </div>
 </template>
@@ -460,13 +447,6 @@ import EArxivFile from "../../../../components/form/e-arxiv-file";
 import DialogChips from "../../../../components/form/dialog-chips";
 
 
-Object.keys(rules).forEach(rule => {
-    extend(rule, {
-        ...rules[rule], // copies rule configuration
-        message: messages.messages[rule] // assign message
-
-    });
-});
 export default {
     name: "InitialPiecePay",
     data() {
@@ -479,13 +459,13 @@ export default {
                     exact: true,
                 },
                 {
-                    text: 'Хизматлар',
+                    text: i18n.t('Хизматлар'),
                     to: '/services',
                     disabled: false,
                     exact: true,
                 },
                 {
-                    text: 'Ҳисобварағидаги маблағларини қайтариш',
+                    text: i18n.t('Ҳисобварағидаги маблағларини қайтариш'),
                     to: '/services/ppay',
                     disabled: true,
                     exact: true,
@@ -528,12 +508,12 @@ export default {
                 file_error: "",
             },
             types: [
-                {text: "Cуғурта полиси", value: 0},
-                {text: "Банк кафолати", value: 1},
-                {text: "Учинчи шахс кафиллиги", value: 2},
-                {text: "Гаров таъминоти", value: 3},
-                {text: "Депозитга пул маблағларини киритиш", value: 4},
-                {text: "Таъминотсиз", value: 5},
+                {text: i18n.t('Cуғурта полиси'), value: 0},
+                {text: i18n.t('Банк кафолати'), value: 1},
+                {text: i18n.t('Учинчи шахс кафиллиги'), value: 2},
+                {text: i18n.t('Гаров таъминоти'), value: 3},
+                {text: i18n.t('Депозитга пул маблағларини киритиш'), value: 4},
+                {text: i18n.t('Таъминотсиз'), value: 5},
             ],
 
             modal: false,
@@ -771,7 +751,7 @@ export default {
                         //console.log(resultData.data)
                         ///this.$cookie.delete('user');
                         //this.$cookie.delete('huquqegasi');
-                        _this.$toast.success("Сизнинг аризангиз омадли тарзда юборилди!");
+                        _this.$toast.success(i18n.t("Сизнинг аризангиз омадли тарзда юборилди!"));
                         setTimeout(() => {
                             _this.$router.push("/services/ppay/" + _this.application.id)
 
@@ -803,20 +783,20 @@ export default {
                     }
                     if (errors) _this.setApplicationErrors(errors);
                     else if (typeof error.response.data.data.errors == 'string') _this.$toast.error(error.response.data.data.errors); else {
-                        _this.$toast.error('Серверда хатолик юз берди! Кейинроқ уриниб кўринг');
+                        _this.$toast.error(i18n.t("Серверда хатолик юз берди! Кейинроқ уриниб кўринг"));
                     }
                     if (typeof error.response.data !== 'undefined' && typeof error.response.data.data !== 'undefined' && typeof error.response.data.data.message !== 'undefined'){
                         _this.$toast.error(error.response.data.data.message);
                     }
                 } else {
-                    _this.$toast.error('Серверда хатолик юз берди! Кейинроқ уриниб кўринг!');
+                    _this.$toast.error(i18n.t("Серверда хатолик юз берди! Кейинроқ уриниб кўринг!"));
                 }
 
             }
         },
         async getBoshqarmalar() {
             const _this = this
-            await axios.get('/api/v1/ex_api/boshqarma').then(function (result) {
+            await this.$auth.plugins.http.get('/api/v1/ex_api/boshqarma').then(function (result) {
                 if (typeof result.data.data !== 'undefined')
                     result.data.data.forEach(function (item) {
                         if (!(['1790', '1791', '1701'].includes(item['kod_id'])))
@@ -833,7 +813,7 @@ export default {
             const _this = this;
 
             if (!(_this.checkbox.first && _this.checkbox.second)) {
-                _this.$toast.error("Фойдаланиш шартларига розилик билдиришингиз лозим!");
+                _this.$toast.error(i18n.t("Фойдаланиш шартларига розилик билдиришингиз лозим!"));
                 return;
             }
 

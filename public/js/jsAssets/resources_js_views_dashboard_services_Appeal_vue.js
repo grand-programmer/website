@@ -173,6 +173,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
@@ -2647,8 +2650,15 @@ var render = function () {
                           headers: _vm.headers,
                           items: _vm.appeals,
                           "footer-props": {
-                            "items-per-page-text": "Сахифадаги элементлар сони",
+                            "items-per-page-text": _vm.$t(
+                              "Сахифадаги элементлар сони"
+                            ),
+                            "items-per-page-all-text": _vm.$t("Барчаси"),
                           },
+                          "no-data-text": _vm.$t("Маълумот топилмади"),
+                          "loading-text": _vm.$t(
+                            "Юкланмоқда... Илтимос кутиб туринг"
+                          ),
                         },
                         scopedSlots: _vm._u([
                           {

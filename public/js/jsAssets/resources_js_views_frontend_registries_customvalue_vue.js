@@ -215,6 +215,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "customvalue",
@@ -226,12 +232,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         disabled: false,
         exact: true
       }, {
-        text: 'Хизматлар',
+        text: _i18n__WEBPACK_IMPORTED_MODULE_1__["default"].t('Хизматлар'),
         to: '/services',
         disabled: false,
         exact: true
       }, {
-        text: 'Божхона тўловлари бўйича дастлабки қарорлар реестри',
+        text: _i18n__WEBPACK_IMPORTED_MODULE_1__["default"].t('Божхона тўловлари бўйича дастлабки қарорлар реестри'),
         to: '/registries/decisions',
         disabled: true,
         exact: true
@@ -553,7 +559,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.v-data-table .v-input {\n    font-size: 12px;\n}\n.v-data-table .v-data-table-header th span {\n    color: var(--mycolor);\n    font-weight: bold;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.v-data-table .v-input {\r\n    font-size: 12px;\n}\n.v-data-table .v-data-table-header th span {\r\n    color: var(--mycolor);\r\n    font-weight: bold;\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -753,6 +759,16 @@ var render = function () {
                       options: _vm.options,
                       "server-items-length": _vm.totalDecisions,
                       loading: _vm.loading,
+                      "no-data-text": _vm.$t("Маълумот топилмади"),
+                      "footer-props": {
+                        "items-per-page-text": _vm.$t(
+                          "Сахифадаги элементлар сони"
+                        ),
+                        "items-per-page-all-text": _vm.$t("Барчаси"),
+                      },
+                      "loading-text": _vm.$t(
+                        "Юкланмоқда... Илтимос кутиб туринг"
+                      ),
                     },
                     on: {
                       "update:options": function ($event) {
@@ -944,7 +960,11 @@ var render = function () {
                                                       "no-title": "",
                                                       range: "",
                                                       scrollable: "",
-                                                      locale: "ru-ru",
+                                                      locale:
+                                                        _vm.$i18n.locale ===
+                                                        "en"
+                                                          ? "en-US"
+                                                          : "ru-RU",
                                                     },
                                                     model: {
                                                       value:

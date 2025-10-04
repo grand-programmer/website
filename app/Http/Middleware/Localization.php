@@ -16,7 +16,7 @@ class Localization
      */
     public function handle(Request $request, Closure $next)
     {
-        $local = ($request->hasHeader('X-localization') and in_array($request->header('X-localization'),["uz","ru","en","oz"])) ? $request->header('X-localization') : 'uz';
+        $local = ($request->hasHeader('X-localization') and in_array($request->header('X-localization'),["uz","ru","en","oz"])) ? $request->header('X-localization') : 'oz';
         // set laravel localization
         ///dd($local);
         app()->setLocale($local);

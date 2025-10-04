@@ -12,7 +12,7 @@
         <div class="page-content" v-if="app">
             <v-container>
                 <v-row>
-                    <h3 class="pb-5"><b>Ариза рақами: </b>{{ app.appNum }}</h3>
+                    <h3 class="pb-5"><b>{{$t('Ариза рақами:')}} </b>{{ app.appNum }}</h3>
                     <br>
                 </v-row>
                 <v-row>
@@ -47,7 +47,7 @@
 
                                 >
                                     <v-expansion-panel-header class="primary-color">
-                                        Аризачи тўғрисида маълумотлар
+                                       {{ $t('Аризачи тўғрисида маълумотлар') }}
                                     </v-expansion-panel-header>
                                     <v-expansion-panel-content>
                                         <v-simple-table v-if="app">
@@ -55,7 +55,7 @@
                                                 <thead>
                                                 <tr>
                                                     <th class="text-left" style="font-weight: 550">
-                                                        Ариза рақами
+                                                        {{$t('Ариза рақами')}}
                                                     </th>
                                                     <th class="text-left" style="font-weight: 550">
                                                         {{
@@ -66,35 +66,35 @@
                                                 </thead>
                                                 <tbody>
                                                 <tr v-if="typeof app.ipHolder !== 'undefined'">
-                                                    <td style="font-weight: 550">Ҳуқуқ эгасининг номи</td>
+                                                    <td style="font-weight: 550">{{$t('Ҳуқуқ эгасининг номи')}}</td>
                                                     <td>{{
                                                             typeof app.ipHolder !== 'undefined' ? app.ipHolder : null
                                                         }}
                                                     </td>
                                                 </tr>
                                                 <tr v-if="typeof app.ipHolderTelNumber !== 'undefined' && app.ipHolderTelNumber">
-                                                    <td style="font-weight: 550">Ҳуқуқ эгасининг телефон рақами</td>
+                                                    <td style="font-weight: 550">{{$t('Ҳуқуқ эгасининг телефон рақами')}}</td>
                                                     <td>{{
                                                             typeof app.ipHolderTelNumber !== 'undefined' ? app.ipHolderTelNumber : null
                                                         }}
                                                     </td>
                                                 </tr>
                                                 <tr v-if="typeof app.ipHolderMail !== 'undefined' && app.ipHolderMail">
-                                                    <td style="font-weight: 550">Ҳуқуқ эгасининг эмаил манзили</td>
+                                                    <td style="font-weight: 550">{{$t('Ҳуқуқ эгасининг эмаил манзили')}}</td>
                                                     <td>{{
                                                             typeof app.ipHolderMail !== 'undefined' ? app.ipHolderMail : null
                                                         }}
                                                     </td>
                                                 </tr>
                                                 <tr v-if="typeof app.ipHoldersAddr !== 'undefined' && app.ipHoldersAddr">
-                                                    <td style="font-weight: 550">Ҳуқуқ эгасининг манзили</td>
+                                                    <td style="font-weight: 550">{{$t('Ҳуқуқ эгасининг манзили')}}</td>
                                                     <td>{{
                                                             typeof app.ipHoldersAddr !== 'undefined' ? app.ipHoldersAddr : null
                                                         }}
                                                     </td>
                                                 </tr>
                                                 <tr v-if="typeof app.statusNm !== 'undefined' && app.statusNm">
-                                                    <td style="font-weight: 550">Ариза ҳолати</td>
+                                                    <td style="font-weight: 550">{{$t('Ариза ҳолати')}}</td>
                                                     <td>{{
                                                             typeof app.statusNm !== 'undefined' ? app.statusNm : null
                                                         }}
@@ -111,7 +111,7 @@
 
                                 >
                                     <v-expansion-panel-header>
-                                        Ишлаб чиқарувчилар тўғрисида
+                                        {{$t('Ишлаб чиқарувчилар тўғрисида')}}
                                     </v-expansion-panel-header>
                                     <v-expansion-panel-content>
                                         <template v-for="ishchiq in app.s01AppsManufacturerInfos"  v-if="app.s01AppsManufacturerInfos">
@@ -119,25 +119,25 @@
                                                 <template v-slot:default>
                                                     <tbody>
                                                     <tr v-if="typeof ishchiq.manufacturer !=='undefined'">
-                                                        <td style="font-weight: 550">Ишлаб чиқарувчи номи</td>
+                                                        <td style="font-weight: 550">{{$t('Ишлаб чиқарувчи номи')}}</td>
                                                         <td>
                                                             {{ishchiq.manufacturer}}
                                                         </td>
                                                     </tr>
                                                     <tr v-if="typeof ishchiq.manufacturerAddr !=='undefined'">
-                                                        <td style="font-weight: 550">Ишлаб чиқарувчи манзили</td>
+                                                        <td style="font-weight: 550">{{$t('Ишлаб чиқарувчи манзили')}}</td>
                                                         <td>
                                                             {{ishchiq.manufacturerAddr}}
                                                         </td>
                                                     </tr>
                                                     <tr v-if="typeof ishchiq.manufacturerMAil !=='undefined'">
-                                                        <td style="font-weight: 550">Ишлаб чиқарувчи электрон почтаси</td>
+                                                        <td style="font-weight: 550">{{$t('Ишлаб чиқарувчи электрон почтаси')}}</td>
                                                         <td>
                                                             {{ishchiq.manufacturerMAil}}
                                                         </td>
                                                     </tr>
                                                     <tr v-if="typeof ishchiq.manufacturerTelNum !=='undefined'">
-                                                        <td style="font-weight: 550">Ишлаб чиқарувчи телефон номери</td>
+                                                        <td style="font-weight: 550">{{$t('Ишлаб чиқарувчи телефон номери')}}</td>
                                                         <td>
                                                             {{ishchiq.manufacturerTelNum}}
                                                         </td>
@@ -155,7 +155,7 @@
 
                                 >
                                     <v-expansion-panel-header>
-                                        Товар тўғрисида маълумотлар
+                                        {{$t('Товар тўғрисида маълумотлар')}}
                                     </v-expansion-panel-header>
                                     <v-expansion-panel-content>
 <span style="height: 20px">  </span>
@@ -167,23 +167,23 @@
                                                     <tbody>
 
                                                     <tr v-if="typeof tovar.ipDescription !=='undefined' && tovar.ipDescription ">
-                                                        <td style="font-weight: 550">Интеллектуал мулк номланиши
+                                                        <td style="font-weight: 550">{{$t('Интеллектуал мулк номланиши')}}
                                                         </td>
                                                         <td>{{ tovar.ipDescription }} </td>
                                                     </tr>
 
                                                     <tr v-if="typeof tovar.ipPassNum !=='undefined' && tovar.ipPassNum ">
-                                                        <td style="font-weight: 550">Гувохнома рақами
+                                                        <td style="font-weight: 550">{{$t('Гувоҳнома рақами')}}
                                                         </td>
                                                         <td>{{ tovar.ipPassNum }} </td>
                                                     </tr>
                                                     <tr v-if="typeof tovar.ipPassStartDate !=='undefined' && tovar.ipPassStartDate && typeof tovar.ipPassEndDate !=='undefined' && tovar.ipPassEndDate ">
-                                                        <td style="font-weight: 550">Гувохнома муддати
+                                                        <td style="font-weight: 550">{{$t('Гувоҳнома муддати')}}
                                                         </td>
                                                         <td>{{ tovar.ipPassStartDate }} -  {{ tovar.ipPassEndDate }} </td>
                                                     </tr>
                                                     <tr v-if="typeof tovar.ipRegistrStartDate !=='undefined' && tovar.ipRegistrStartDate && typeof tovar.ipRegistrEndDate !=='undefined' && tovar.ipRegistrEndDate ">
-                                                        <td style="font-weight: 550">Реестр муддати
+                                                        <td style="font-weight: 550">{{$t('Реестр муддати')}}
                                                         </td>
                                                         <td>{{ tovar.ipRegistrStartDate }} -  {{ tovar.ipRegistrEndDate }} </td>
                                                     </tr>
@@ -216,13 +216,13 @@
                                     >
                                         <v-row justify="start">
                                             <v-col cols="10">
-                                                <h4 class="active"> {{ appstatus.statusNm }}</h4>
+                                                <h4 class="active"> {{ $t(appstatus.statusNm) }}</h4>
                                                 <br>
                                                 <p> {{ new Date(appstatus.insTime).toLocaleString() }}</p>
                                                 <br>
-                                                <p v-if="appstatus.status==='100'" style="font-size: 15px"> <a :href="'https://qaror.customs.uz/s01decisionPdfDownloadAppeal?stId=' + appstatus.id"> Ариза шаклини юклаб олинг! </a></p>
-                                                <p v-if="appstatus.status==='600'" style="font-size: 15px"> <a :href="'https://qaror.customs.uz/s01decisionPdfDownloadAppeal?stId=' + appstatus.id"> Реестрга киритилганлиги тўғрисида қарорни юклаб олинг! </a></p>
-                                                <p v-if="appstatus.status==='201'" style="font-size: 15px"> <a :href="'https://qaror.customs.uz/s01decisionPdfDownloadAppeal?stId=' + appstatus.id"> Реестрга киритишни рад этиш тўғрисидаги қарорни юклаб олинг! </a></p>
+                                                <p v-if="appstatus.status==='100'" style="font-size: 15px"> <a :href="'https://qaror.customs.uz/s01decisionPdfDownloadAppeal?stId=' + appstatus.id"> {{$t('Ариза шаклини юклаб олинг!')}} </a></p>
+                                                <p v-if="appstatus.status==='600'" style="font-size: 15px"> <a :href="'https://qaror.customs.uz/s01decisionPdfDownloadAppeal?stId=' + appstatus.id"> {{ $t('Реестрга киритилганлиги тўғрисида қарорни юклаб олинг!') }} </a></p>
+                                                <p v-if="appstatus.status==='201'" style="font-size: 15px"> <a :href="'https://qaror.customs.uz/s01decisionPdfDownloadAppeal?stId=' + appstatus.id"> {{ $t('Реестрга киритишни рад этиш тўғрисидаги қарорни юклаб олинг!')}} </a></p>
                                                 <p v-if="appstatus.status==='201' && typeof appstatus.comment!=='undefined'" style="font-size: 15px; color: indianred">{{ appstatus.comment }} </p>
 <br>
 <!--                                                <p><b> Инспектор: </b>   {{ appstatus.userNm }} </p>-->
@@ -239,7 +239,7 @@
                                 >
                                     <v-row justify="start">
                                         <v-col cols="10">
-                                            <h4> Якуний хулоса </h4>
+                                            <h4> {{$t('Якуний хулоса')}} </h4>
                                             <p></p>
                                             <p></p>
                                         </v-col>
@@ -307,7 +307,7 @@ export default {
                 },
 
                 {
-                    text: 'Менинг аризаларим',
+                    text: i18n.t('Менинг аризаларим'),
                     to: '/applications',
                     disabled: false,
                     exact: true,
@@ -322,8 +322,8 @@ export default {
             dialog: false,
 
             items: [
-                {tab: "Ариза хақида умумиy маълумот"},
-                {tab: 'Ариза ҳолати'},
+                {tab: i18n.t("Ариза хақида умумий маълумот")},
+                {tab: i18n.t('Ариза ҳолати')},
 
             ],
 
@@ -361,7 +361,7 @@ export default {
                         //console.log(response.data.data)
                         _this.app = response.data.data.data
                         _this.breadcrumb_items.push({
-                            text: "Интеллектуал мулк -" + _this.app.appNum,
+                            text: i18n.t("Интеллектуал мулк -") + _this.app.appNum,
                             to: '/services/intellectual/' + _this.app.id,
                             disabled: true,
                             exact: true,
@@ -373,7 +373,7 @@ export default {
 
                     } else {
                         _this.$store.commit('setLoading', false)
-                        _this.$toast.error("Маълумот топилмади!")
+                        _this.$toast.error(i18n.t("Маълумот топилмади!"))
                         _this.$router.push("/applications");
 
                     }
@@ -382,7 +382,7 @@ export default {
                 }).catch(function (error) {
                     console.log(error)
                     _this.$store.commit('setLoading', false)
-                    _this.$toast.error("Маълумот топилмади!")
+                    _this.$toast.error(i18n.t("Маълумот топилмади!"))
                     _this.$router.push("/applications");
                 })
 

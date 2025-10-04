@@ -175,6 +175,34 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "OpenDatas",
@@ -192,6 +220,23 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
+    sendCommit: function sendCommit(rating, text, id) {
+      if (!rating || !text) {
+        this.$toast.error(this.$t('Майдонларни тўлдириб қайтадан ҳаракат қилинг'));
+      } else {
+        var panelData = this.items.filter(function (panelItem) {
+          return panelItem.id === id;
+        });
+
+        if (panelData && panelData[0]) {
+          panelData[0].rating = null;
+          panelData[0].text = null;
+          this.$toast.success(this.$t('Маълумотлар омадли тарзда юборилди. Билдирган фикрингиз учун катта рахмат!'));
+        } else {
+          this.$toast.error(this.$t('Хатолик содир бўлди, қайтадан ҳаракат қилинг'));
+        }
+      }
+    },
     headerClicked: function headerClicked(e) {
       e.prevent.stop;
       console.log(e);
@@ -1048,6 +1093,93 @@ var render = function () {
                                               ),
                                             ]
                                           ),
+                                      _vm._v(" "),
+                                      _c("div", [
+                                        _c("p", [
+                                          _vm._v(_vm._s(_vm.$t("Рейтинг"))),
+                                        ]),
+                                        _vm._v(" "),
+                                        _c(
+                                          "p",
+                                          {
+                                            staticStyle: {
+                                              "margin-left": "-10px",
+                                            },
+                                          },
+                                          [
+                                            _c("v-rating", {
+                                              attrs: {
+                                                hover: "",
+                                                length: "5",
+                                                size: "20",
+                                                "background-color":
+                                                  "grey darken-1",
+                                              },
+                                              model: {
+                                                value: item.rating,
+                                                callback: function ($$v) {
+                                                  _vm.$set(item, "rating", $$v)
+                                                },
+                                                expression: "item.rating",
+                                              },
+                                            }),
+                                          ],
+                                          1
+                                        ),
+                                      ]),
+                                      _vm._v(" "),
+                                      _c(
+                                        "div",
+                                        [
+                                          _c("p", [
+                                            _vm._v(
+                                              _vm._s(_vm.$t("Фикр қолдириш"))
+                                            ),
+                                          ]),
+                                          _vm._v(" "),
+                                          _c(
+                                            "p",
+                                            [
+                                              _c("v-textarea", {
+                                                staticClass: "my-2",
+                                                attrs: {
+                                                  "auto-grow": "",
+                                                  outlined: "",
+                                                  rows: "1",
+                                                  "row-height": "15",
+                                                  "hide-details": "",
+                                                },
+                                                model: {
+                                                  value: item.text,
+                                                  callback: function ($$v) {
+                                                    _vm.$set(item, "text", $$v)
+                                                  },
+                                                  expression: "item.text",
+                                                },
+                                              }),
+                                            ],
+                                            1
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "v-btn",
+                                            {
+                                              attrs: { color: "primary" },
+                                              on: {
+                                                click: function ($event) {
+                                                  return _vm.sendCommit(
+                                                    item.rating,
+                                                    item.text,
+                                                    item.id
+                                                  )
+                                                },
+                                              },
+                                            },
+                                            [_vm._v(_vm._s(_vm.$t("Юбориш")))]
+                                          ),
+                                        ],
+                                        1
+                                      ),
                                     ],
                                     1
                                   ),

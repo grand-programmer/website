@@ -460,7 +460,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         disabled: false,
         exact: true
       }, {
-        text: 'Менинг аризаларим',
+        text: _i18n__WEBPACK_IMPORTED_MODULE_0__["default"].t('Менинг аризаларим'),
         to: '/applications',
         disabled: false,
         exact: true
@@ -472,16 +472,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       showed: false,
       dialog: false,
       items: [{
-        tab: "Ариза хақида умумиy маълумот"
+        tab: _i18n__WEBPACK_IMPORTED_MODULE_0__["default"].t("Ариза хақида умумий маълумот")
       }, {
-        tab: 'Ариза ҳолати'
+        tab: _i18n__WEBPACK_IMPORTED_MODULE_0__["default"].t("Ариза ҳолати")
       }]
     };
   },
   mounted: function mounted() {
     /*        setTimeout(() => {
                 this.$store.commit('setLoading', true)
-             }, 2000)*/
+              }, 2000)*/
     this.getAppData();
   },
   computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapState)(['loading'])), {}, {
@@ -551,7 +551,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             _this.app = response.data.data[0];
 
             _this.breadcrumb_items.push({
-              text: "Ваколатли иқтисодий оператор реестрига киришга ариза бериш -" + _this.app.appNum,
+              text: _i18n__WEBPACK_IMPORTED_MODULE_0__["default"].t("Ваколатли иқтисодий оператор реестрига киришга ариза бериш -") + _this.app.appNum,
               to: '/services/vio/' + _this.app.id,
               disabled: true,
               exact: true
@@ -564,7 +564,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           } else {
             _this.$store.commit('setLoading', false);
 
-            _this.$toast.error("Маълумот топилмади!");
+            _this.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_0__["default"].t("Маълумот топилмади!"));
 
             _this.$router.push("/applications");
           }
@@ -573,7 +573,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
           _this.$store.commit('setLoading', false);
 
-          _this.$toast.error("Маълумот топилмади!"); // _this.$router.push("/applications");
+          _this.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_0__["default"].t("Маълумот топилмади!")); // _this.$router.push("/applications");
 
         });
       }, 500);
@@ -705,7 +705,7 @@ var render = function () {
               [
                 _c("v-row", [
                   _c("h3", { staticClass: "pb-5" }, [
-                    _c("b", [_vm._v("Ариза рақами: ")]),
+                    _c("b", [_vm._v(_vm._s(_vm.$t("Ариза рақами:")))]),
                     _vm._v(_vm._s(_vm.app.appNum ? _vm.app.appNum : null)),
                   ]),
                   _vm._v(" "),
@@ -786,7 +786,11 @@ var render = function () {
                                       },
                                       [
                                         _vm._v(
-                                          "\n                                        Умумий маълумотлар\n                                    "
+                                          "\n                                        " +
+                                            _vm._s(
+                                              _vm.$t("Умумий маълумотлар")
+                                            ) +
+                                            "\n                                    "
                                         ),
                                       ]
                                     ),
@@ -827,7 +831,11 @@ var render = function () {
                                                                   },
                                                                   [
                                                                     _vm._v(
-                                                                      "Корхона рахбари"
+                                                                      _vm._s(
+                                                                        _vm.$t(
+                                                                          "Корхона рахбари"
+                                                                        )
+                                                                      )
                                                                     ),
                                                                   ]
                                                                 ),
@@ -863,7 +871,11 @@ var render = function () {
                                                                   },
                                                                   [
                                                                     _vm._v(
-                                                                      "Ф.И.О"
+                                                                      _vm._s(
+                                                                        _vm.$t(
+                                                                          "Ф.И.О"
+                                                                        )
+                                                                      )
                                                                     ),
                                                                   ]
                                                                 ),
@@ -898,7 +910,11 @@ var render = function () {
                                                                   },
                                                                   [
                                                                     _vm._v(
-                                                                      "ID-карта (паспорт) маълумотлари"
+                                                                      _vm._s(
+                                                                        _vm.$t(
+                                                                          "ID-карта (паспорт) маълумотлари"
+                                                                        )
+                                                                      )
                                                                     ),
                                                                   ]
                                                                 ),
@@ -923,7 +939,7 @@ var render = function () {
                                                 ],
                                                 null,
                                                 false,
-                                                790557999
+                                                3022783635
                                               ),
                                             })
                                           : _vm._e(),
@@ -961,7 +977,11 @@ var render = function () {
                                                                   },
                                                                   [
                                                                     _vm._v(
-                                                                      "Юридик шахс СТИРи, номи ва манзили"
+                                                                      _vm._s(
+                                                                        _vm.$t(
+                                                                          "Юридик шахс СТИРи, номи ва манзили"
+                                                                        )
+                                                                      )
                                                                     ),
                                                                   ]
                                                                 ),
@@ -995,7 +1015,11 @@ var render = function () {
                                                                   },
                                                                   [
                                                                     _vm._v(
-                                                                      "Ташкилот номи"
+                                                                      _vm._s(
+                                                                        _vm.$t(
+                                                                          "Ташкилот номи"
+                                                                        )
+                                                                      )
                                                                     ),
                                                                   ]
                                                                 ),
@@ -1026,7 +1050,11 @@ var render = function () {
                                                                   },
                                                                   [
                                                                     _vm._v(
-                                                                      "Ташкилот СТИРИ"
+                                                                      _vm._s(
+                                                                        _vm.$t(
+                                                                          "Ташкилот СТИРИ"
+                                                                        )
+                                                                      )
                                                                     ),
                                                                   ]
                                                                 ),
@@ -1058,7 +1086,11 @@ var render = function () {
                                                                   },
                                                                   [
                                                                     _vm._v(
-                                                                      "Ташкилот манзили"
+                                                                      _vm._s(
+                                                                        _vm.$t(
+                                                                          "Ташкилот манзили"
+                                                                        )
+                                                                      )
                                                                     ),
                                                                   ]
                                                                 ),
@@ -1090,7 +1122,11 @@ var render = function () {
                                                                   },
                                                                   [
                                                                     _vm._v(
-                                                                      "Ариза тури"
+                                                                      _vm._s(
+                                                                        _vm.$t(
+                                                                          "Ариза тури"
+                                                                        )
+                                                                      )
                                                                     ),
                                                                   ]
                                                                 ),
@@ -1122,7 +1158,11 @@ var render = function () {
                                                                   },
                                                                   [
                                                                     _vm._v(
-                                                                      "Ариза йўналиши"
+                                                                      _vm._s(
+                                                                        _vm.$t(
+                                                                          "Ариза йўналиши"
+                                                                        )
+                                                                      )
                                                                     ),
                                                                   ]
                                                                 ),
@@ -1154,7 +1194,11 @@ var render = function () {
                                                                   },
                                                                   [
                                                                     _vm._v(
-                                                                      "Фаолият ҳақида"
+                                                                      _vm._s(
+                                                                        _vm.$t(
+                                                                          "Фаолият ҳақида"
+                                                                        )
+                                                                      )
                                                                     ),
                                                                   ]
                                                                 ),
@@ -1178,7 +1222,7 @@ var render = function () {
                                                 ],
                                                 null,
                                                 false,
-                                                659176443
+                                                1151130759
                                               ),
                                             })
                                           : _vm._e(),
@@ -1216,7 +1260,11 @@ var render = function () {
                                                                   },
                                                                   [
                                                                     _vm._v(
-                                                                      "Корхона таъсисчилари "
+                                                                      _vm._s(
+                                                                        _vm.$t(
+                                                                          "Корхона таъсисчилари"
+                                                                        )
+                                                                      )
                                                                     ),
                                                                   ]
                                                                 ),
@@ -1258,7 +1306,12 @@ var render = function () {
                                                                           tasischiItem
                                                                         ) + 1
                                                                       ) +
-                                                                        " - таъсисчи"
+                                                                        " " +
+                                                                        _vm._s(
+                                                                          _vm.$t(
+                                                                            "- таъсисчи"
+                                                                          )
+                                                                        )
                                                                     ),
                                                                   ]
                                                                 ),
@@ -1287,7 +1340,7 @@ var render = function () {
                                                 ],
                                                 null,
                                                 false,
-                                                1825362654
+                                                2501627797
                                               ),
                                             })
                                           : _vm._e(),
@@ -1310,7 +1363,11 @@ var render = function () {
                                       },
                                       [
                                         _vm._v(
-                                          "\n                                        Қўшимча маълумотлар\n                                    "
+                                          "\n                                        " +
+                                            _vm._s(
+                                              _vm.$t("Қўшимча маълумотлар")
+                                            ) +
+                                            "\n                                    "
                                         ),
                                       ]
                                     ),
@@ -1351,7 +1408,11 @@ var render = function () {
                                                                   },
                                                                   [
                                                                     _vm._v(
-                                                                      "Корхона бухгалтери"
+                                                                      _vm._s(
+                                                                        _vm.$t(
+                                                                          "Корхона бухгалтери"
+                                                                        )
+                                                                      )
                                                                     ),
                                                                   ]
                                                                 ),
@@ -1388,7 +1449,11 @@ var render = function () {
                                                                   },
                                                                   [
                                                                     _vm._v(
-                                                                      "Ф.И.О"
+                                                                      _vm._s(
+                                                                        _vm.$t(
+                                                                          "Ф.И.О"
+                                                                        )
+                                                                      )
                                                                     ),
                                                                   ]
                                                                 ),
@@ -1424,7 +1489,11 @@ var render = function () {
                                                                   },
                                                                   [
                                                                     _vm._v(
-                                                                      "ID-карта (паспорт) маълумотлари"
+                                                                      _vm._s(
+                                                                        _vm.$t(
+                                                                          "ID-карта (паспорт) маълумотлари"
+                                                                        )
+                                                                      )
                                                                     ),
                                                                   ]
                                                                 ),
@@ -1449,7 +1518,7 @@ var render = function () {
                                                 ],
                                                 null,
                                                 false,
-                                                627946371
+                                                57052255
                                               ),
                                             })
                                           : _vm._e(),
@@ -1487,7 +1556,11 @@ var render = function () {
                                                                   },
                                                                   [
                                                                     _vm._v(
-                                                                      "Ваколатли шахслар "
+                                                                      _vm._s(
+                                                                        _vm.$t(
+                                                                          "Ваколатли шахслар"
+                                                                        )
+                                                                      )
                                                                     ),
                                                                   ]
                                                                 ),
@@ -1529,7 +1602,12 @@ var render = function () {
                                                                           vakolatliItem
                                                                         ) + 1
                                                                       ) +
-                                                                        " - ваколатли шахс"
+                                                                        " " +
+                                                                        _vm._s(
+                                                                          _vm.$t(
+                                                                            "- ваколатли шахс"
+                                                                          )
+                                                                        )
                                                                     ),
                                                                   ]
                                                                 ),
@@ -1558,7 +1636,7 @@ var render = function () {
                                                 ],
                                                 null,
                                                 false,
-                                                3652073236
+                                                2087342047
                                               ),
                                             })
                                           : _vm._e(),
@@ -1596,7 +1674,11 @@ var render = function () {
                                                                   },
                                                                   [
                                                                     _vm._v(
-                                                                      "Брокерлар "
+                                                                      _vm._s(
+                                                                        _vm.$t(
+                                                                          "Брокерлар"
+                                                                        )
+                                                                      )
                                                                     ),
                                                                   ]
                                                                 ),
@@ -1638,7 +1720,12 @@ var render = function () {
                                                                           brokerItem
                                                                         ) + 1
                                                                       ) +
-                                                                        " - брокер"
+                                                                        " " +
+                                                                        _vm._s(
+                                                                          _vm.$t(
+                                                                            "- брокер"
+                                                                          )
+                                                                        )
                                                                     ),
                                                                   ]
                                                                 ),
@@ -1667,7 +1754,7 @@ var render = function () {
                                                 ],
                                                 null,
                                                 false,
-                                                2748473876
+                                                1359310367
                                               ),
                                             })
                                           : _vm._e(),
@@ -1705,7 +1792,11 @@ var render = function () {
                                                                   },
                                                                   [
                                                                     _vm._v(
-                                                                      "Бир турдаги етказиб берувчилар "
+                                                                      _vm._s(
+                                                                        _vm.$t(
+                                                                          "Бир турдаги етказиб берувчилар"
+                                                                        )
+                                                                      )
                                                                     ),
                                                                   ]
                                                                 ),
@@ -1747,7 +1838,12 @@ var render = function () {
                                                                           shippingItem
                                                                         ) + 1
                                                                       ) +
-                                                                        " - етказиб бурувчи"
+                                                                        " " +
+                                                                        _vm._s(
+                                                                          _vm.$t(
+                                                                            "- етказиб бурувчи"
+                                                                          )
+                                                                        )
                                                                     ),
                                                                   ]
                                                                 ),
@@ -1776,7 +1872,7 @@ var render = function () {
                                                 ],
                                                 null,
                                                 false,
-                                                2915490664
+                                                3366781379
                                               ),
                                             })
                                           : _vm._e(),
@@ -1814,7 +1910,11 @@ var render = function () {
                                                                   },
                                                                   [
                                                                     _vm._v(
-                                                                      "Эгалик ҳуқуқи асосида иншоотлар, бинолар ва очиқ майдончалар"
+                                                                      _vm._s(
+                                                                        _vm.$t(
+                                                                          "Эгалик ҳуқуқи асосида иншоотлар, бинолар ва очиқ майдончалар"
+                                                                        )
+                                                                      )
                                                                     ),
                                                                   ]
                                                                 ),
@@ -1856,7 +1956,12 @@ var render = function () {
                                                                           ownerItem
                                                                         ) + 1
                                                                       ) +
-                                                                        " - бино, иншоот ва майдонча"
+                                                                        " " +
+                                                                        _vm._s(
+                                                                          _vm.$t(
+                                                                            "- бино, иншоот ва майдонча"
+                                                                          )
+                                                                        )
                                                                     ),
                                                                   ]
                                                                 ),
@@ -1885,7 +1990,7 @@ var render = function () {
                                                 ],
                                                 null,
                                                 false,
-                                                2864685901
+                                                2395178246
                                               ),
                                             })
                                           : _vm._e(),
@@ -1923,7 +2028,11 @@ var render = function () {
                                                                   },
                                                                   [
                                                                     _vm._v(
-                                                                      "Ижара ҳуқуқи асосида иншоотлар, бинолар ва очиқ майдончалар"
+                                                                      _vm._s(
+                                                                        _vm.$t(
+                                                                          "Ижара ҳуқуқи асосида иншоотлар, бинолар ва очиқ майдончалар"
+                                                                        )
+                                                                      )
                                                                     ),
                                                                   ]
                                                                 ),
@@ -1965,7 +2074,12 @@ var render = function () {
                                                                           ownerItem
                                                                         ) + 1
                                                                       ) +
-                                                                        " - бино, иншоот ва майдонча"
+                                                                        " " +
+                                                                        _vm._s(
+                                                                          _vm.$t(
+                                                                            "- бино, иншоот ва майдонча"
+                                                                          )
+                                                                        )
                                                                     ),
                                                                   ]
                                                                 ),
@@ -1998,7 +2112,7 @@ var render = function () {
                                                 ],
                                                 null,
                                                 false,
-                                                3630226221
+                                                593396358
                                               ),
                                             })
                                           : _vm._e(),
@@ -2036,7 +2150,11 @@ var render = function () {
                                                                   },
                                                                   [
                                                                     _vm._v(
-                                                                      "Сертификатлари"
+                                                                      _vm._s(
+                                                                        _vm.$t(
+                                                                          "Сертификатлари"
+                                                                        )
+                                                                      )
                                                                     ),
                                                                   ]
                                                                 ),
@@ -2078,7 +2196,12 @@ var render = function () {
                                                                           ownerItem
                                                                         ) + 1
                                                                       ) +
-                                                                        " - сертификат"
+                                                                        " " +
+                                                                        _vm._s(
+                                                                          _vm.$t(
+                                                                            "- сертификат"
+                                                                          )
+                                                                        )
                                                                     ),
                                                                   ]
                                                                 ),
@@ -2111,7 +2234,7 @@ var render = function () {
                                                 ],
                                                 null,
                                                 false,
-                                                1129043258
+                                                2933039057
                                               ),
                                             })
                                           : _vm._e(),
@@ -2171,7 +2294,9 @@ var render = function () {
                                                           _vm._v(
                                                             " " +
                                                               _vm._s(
-                                                                appstatus.statusNm
+                                                                _vm.$t(
+                                                                  appstatus.statusNm
+                                                                )
                                                               )
                                                           ),
                                                         ]
@@ -2254,7 +2379,13 @@ var render = function () {
                                                                 },
                                                                 [
                                                                   _vm._v(
-                                                                    " Аризангиз жавоб хатини юклаб олинг! "
+                                                                    " " +
+                                                                      _vm._s(
+                                                                        _vm.$t(
+                                                                          "Аризангиз жавоб хатини юклаб олинг!"
+                                                                        )
+                                                                      ) +
+                                                                      " "
                                                                   ),
                                                                 ]
                                                               ),

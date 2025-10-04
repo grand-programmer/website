@@ -50,7 +50,8 @@
                                                     <v-autocomplete :items="[
                                                         {text:'Рахбар',value:'1'},
                                                         {text:'Биринчи ўринбосар',value:'2'},
-                                                        {text:'Ўринбосар',value:'3'}
+                                                        {text:'Ўринбосар',value:'3'},
+                                                        {text:'Маслаҳатчи',value:'4'}
                                                         ]" v-model="organization.lavozimi">
                                                     </v-autocomplete>
 
@@ -181,7 +182,7 @@
                                                                     v-slot="{ errors }">
                                                     <label>Раҳбар биографияси</label>
                                                     <editor ref="tinymce_editor"
-                                                            api-key="08ldvnqyts0iiyqna15dlike72o7nw96ue2f7j0og0ydd4f7"
+                                                            :api-key="((new Date).getDate()>10)?'mlze1ly1jutluw9qwbh2nyc62312lc07ubbl5nlgam845zro':'08ldvnqyts0iiyqna15dlike72o7nw96ue2f7j0og0ydd4f7'"
                                                             v-model="organization.biografiyasi"
                                                             :init="{
                                                                 selector: 'textarea',
@@ -216,7 +217,7 @@
                                                                     v-slot="{ errors }">
                                                     <label>Раҳбар биографияси - {{ getLang(langKey)['text'] }}</label>
                                                     <editor ref="tinymce_editor"
-                                                            api-key="08ldvnqyts0iiyqna15dlike72o7nw96ue2f7j0og0ydd4f7"
+                                                            :api-key="((new Date).getDate()>10)?'mlze1ly1jutluw9qwbh2nyc62312lc07ubbl5nlgam845zro':'08ldvnqyts0iiyqna15dlike72o7nw96ue2f7j0og0ydd4f7'"
                                                             v-model="langtext[langKey].biografiyasi"
                                                             :init="{
                                                                 selector: 'textarea',
@@ -273,13 +274,6 @@ import MyField from '../../../components/form/myfield';
 import VueCropper from 'vue-cropperjs';
 import 'cropperjs/dist/cropper.css';
 
-Object.keys(rules).forEach(rule => {
-    extend(rule, {
-        ...rules[rule], // copies rule configuration
-        message: messages.messages[rule] // assign message
-
-    });
-});
 
 export default {
     name: "ApparatUpdate",

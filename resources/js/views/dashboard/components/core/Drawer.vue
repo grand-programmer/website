@@ -194,7 +194,7 @@ export default {
                 title: 'Ҳужжатлар',
                 icon: 'mdi-yurt',
                 to: '/admin/documents',
-                role: [2,4]
+                role: [2,3,4]
             },
             {
                 title: 'Таржималар',

@@ -174,13 +174,6 @@ import messages from '../../../locales/oz.json';
 import Editor from '@tinymce/tinymce-vue';
 import Textfield from "../../../components/form/textfield";
 
-Object.keys(rules).forEach(rule => {
-    extend(rule, {
-        ...rules[rule], // copies rule configuration
-        message: messages.messages[rule] // assign message
-
-    });
-});
 
 export default {
     name: "DocumentsEdit",

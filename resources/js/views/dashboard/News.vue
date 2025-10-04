@@ -17,8 +17,11 @@
                             :items="appeals"
                             class="elevation-1"
                             :footer-props="{
-                            'items-per-page-text':'Сахифадаги элементлар сони'
+                                'items-per-page-text': $t('Сахифадаги элементлар сони'),
+                                'items-per-page-all-text': $t('Барчаси')
                             }"
+                            :no-data-text="$t('Маълумот топилмади')"
+                            :loading-text="$t('Юкланмоқда... Илтимос кутиб туринг')"
                         >
                             <template v-slot:top>
 

@@ -2,7 +2,7 @@
 
 namespace App\Exports;
 
-use App\Models\StatService;
+use App\Models\StatServiceApplication;
 use Carbon\Carbon;
 use Carbon\Traits\Date;
 use Illuminate\Support\Facades\DB;
@@ -76,7 +76,7 @@ class ByudExport implements WithEvents, WithCustomStartCell, FromCollection, Wit
     ];
 
 
-    public function __construct(StatService $service)
+    public function __construct(StatServiceApplication $service)
     {
         $this->service = $service;
     }
@@ -164,7 +164,7 @@ class ByudExport implements WithEvents, WithCustomStartCell, FromCollection, Wit
         //$array->add(array_keys((array)$data[0]));
         // $keys->merge($array->all());
         return $array;
-        //return StatService::all();
+        //return StatServiceApplication::all();
         // return collect(DB::connection('db2_odbc')->select($this->service->getQuery()));
         // TODO: Implement collection() method.
     }

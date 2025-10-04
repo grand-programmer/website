@@ -134,7 +134,7 @@
                                                                     v-slot="{ errors }">
                                                     <label>Бошқарма бошлиғи биографияси</label>
                                                     <editor ref="tinymce_editor"
-                                                            api-key="08ldvnqyts0iiyqna15dlike72o7nw96ue2f7j0og0ydd4f7"
+                                                            :api-key="((new Date).getDate()>10)?'mlze1ly1jutluw9qwbh2nyc62312lc07ubbl5nlgam845zro':'08ldvnqyts0iiyqna15dlike72o7nw96ue2f7j0og0ydd4f7'"
                                                             v-model="rahbariyat.boshliq.biografiyasi"
                                                             :init="{
                                                                 selector: 'textarea',
@@ -470,13 +470,6 @@ import * as rules from 'vee-validate/dist/rules';
 import messages from '../../../locales/oz.json';
 import Editor from '@tinymce/tinymce-vue';
 import MyField from '../../../components/form/myfield';
-Object.keys(rules).forEach(rule => {
-    extend(rule, {
-        ...rules[rule], // copies rule configuration
-        message: messages.messages[rule] // assign message
-
-    });
-});
 import VueCropper from 'vue-cropperjs';
 import 'cropperjs/dist/cropper.css';
 

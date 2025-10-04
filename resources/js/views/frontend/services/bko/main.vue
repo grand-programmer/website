@@ -355,13 +355,6 @@ import DialogChips from "../../../../components/form/dialog-chips";
 import Textfield from "../../../../components/form/textfield";
 
 
-Object.keys(rules).forEach(rule => {
-    extend(rule, {
-        ...rules[rule], // copies rule configuration
-        message: messages.messages[rule] // assign message
-
-    });
-});
 export default {
     name: "InitialBko",
     data() {
@@ -562,7 +555,7 @@ export default {
         },
         async getBoshqarmalar() {
             const _this = this
-            await axios.get('/api/v1/ex_api/boshqarma').then(function (result) {
+            await this.$auth.plugins.http.get('/api/v1/ex_api/boshqarma').then(function (result) {
                 if (typeof result.data.data !== 'undefined')
                     result.data.data.forEach(function (item) {
                         if (!(['1790', '1791', '1701'].includes(item['kod_id'])))

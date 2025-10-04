@@ -285,7 +285,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         disabled: false,
         exact: true
       }, {
-        text: 'Хизматлар',
+        text: _i18n__WEBPACK_IMPORTED_MODULE_1__["default"].t('Хизматлар'),
         to: '/profile',
         disabled: true,
         exact: true
@@ -293,19 +293,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       selectedItem: 0,
       user_image: null,
       items: [{
-        text: 'Профил',
+        text: _i18n__WEBPACK_IMPORTED_MODULE_1__["default"].t('Профил'),
         icon: 'mdi-account',
         link: '/profile'
       }, {
-        text: 'Менинг аризаларим',
+        text: _i18n__WEBPACK_IMPORTED_MODULE_1__["default"].t('Менинг аризаларим'),
         icon: 'mdi-history',
         link: '/applications'
       }, {
-        text: 'Хизматлар',
+        text: _i18n__WEBPACK_IMPORTED_MODULE_1__["default"].t('Хизматлар'),
         icon: 'mdi-star',
         link: '/services'
       }, {
-        text: 'Реестрлар',
+        text: _i18n__WEBPACK_IMPORTED_MODULE_1__["default"].t('Реестрлар'),
         icon: 'mdi-book-open-outline',
         link: '/services?page=3'
       }]
@@ -489,7 +489,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.profile-item span:last-child{\n    margin-top: 35px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.profile-item span:last-child{\r\n    margin-top: 35px;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -810,7 +810,7 @@ var render = function () {
                         },
                         [
                           _c("h3", { staticClass: "my-5 mb-10" }, [
-                            _vm._v("Менинг профилим"),
+                            _vm._v(_vm._s(_vm.$t("Менинг профилим"))),
                           ]),
                           _vm._v(" "),
                           _c("validation-observer", {
@@ -909,7 +909,11 @@ var render = function () {
                                                 },
                                                 [
                                                   _c("span", [
-                                                    _vm._v("Туғилган сана"),
+                                                    _vm._v(
+                                                      _vm._s(
+                                                        _vm.$t("Туғилган сана")
+                                                      )
+                                                    ),
                                                   ]),
                                                   _vm._v(" "),
                                                   _c("span", [
@@ -931,7 +935,11 @@ var render = function () {
                                                 },
                                                 [
                                                   _c("span", [
-                                                    _vm._v("Туғилган жойи"),
+                                                    _vm._v(
+                                                      _vm._s(
+                                                        _vm.$t("Туғилган жойи")
+                                                      )
+                                                    ),
                                                   ]),
                                                   _vm._v(" "),
                                                   _c("span", [
@@ -954,7 +962,7 @@ var render = function () {
                                                 [
                                                   _c("ValidationProvider", {
                                                     attrs: {
-                                                      name: "Яшаш жойи",
+                                                      name: _vm.$t("Яшаш жойи"),
                                                       rules: "required",
                                                       tag: "div",
                                                     },
@@ -968,7 +976,11 @@ var render = function () {
                                                             return [
                                                               _c("span", [
                                                                 _vm._v(
-                                                                  "Яшаш жойи"
+                                                                  _vm._s(
+                                                                    _vm.$t(
+                                                                      "Яшаш жойи"
+                                                                    )
+                                                                  )
                                                                 ),
                                                               ]),
                                                               _vm._v(" "),
@@ -1021,7 +1033,11 @@ var render = function () {
                                                     [
                                                       _c("span", [
                                                         _vm._v(
-                                                          "Электрон почта"
+                                                          _vm._s(
+                                                            _vm.$t(
+                                                              "Электрон почта"
+                                                            )
+                                                          )
                                                         ),
                                                       ]),
                                                       _vm._v(" "),
@@ -1060,7 +1076,11 @@ var render = function () {
                                                             return [
                                                               _c("span", [
                                                                 _vm._v(
-                                                                  "Телефон рақами"
+                                                                  _vm._s(
+                                                                    _vm.$t(
+                                                                      "Телефон рақами"
+                                                                    )
+                                                                  )
                                                                 ),
                                                               ]),
                                                               _vm._v(" "),
@@ -1156,7 +1176,7 @@ var render = function () {
                               ],
                               null,
                               false,
-                              151825184
+                              3564335533
                             ),
                           }),
                         ],

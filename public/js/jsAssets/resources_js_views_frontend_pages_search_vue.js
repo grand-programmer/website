@@ -72,6 +72,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 //
 //
 //
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'EditableDate',
@@ -639,6 +640,7 @@ var render = function () {
                     _vm._v(" "),
                     _c("v-date-picker", {
                       attrs: {
+                        locale: _vm.$i18n.locale === "en" ? "en-US" : "ru-RU",
                         "active-picker": _vm.activePicker.date,
                         max: new Date(
                           Date.now() - new Date().getTimezoneOffset() * 60000

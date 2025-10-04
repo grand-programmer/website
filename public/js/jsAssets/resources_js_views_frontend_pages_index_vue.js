@@ -62,6 +62,48 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -82,6 +124,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       /*id:this.$route.params.id,*/
       page: {},
+      rateitem: {
+        rating: null,
+        text: null
+      },
       relates: {}
     };
   },
@@ -108,43 +154,72 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }, _callee);
     }))();
   },
+  computed: {
+    breadcrumbs: function breadcrumbs() {
+      return this.breadcrumb_items;
+    }
+  },
   title: function title() {
     this.page.title;
   },
   methods: {
+    sendCommit: function sendCommit() {
+      if (!this.rateitem.rating || !this.rateitem.text) {
+        this.$toast.error(this.$t('Майдонларни тўлдириб қайтадан ҳаракат қилинг'));
+      } else {
+        this.$toast.success(this.$t('Маълумотлар омадли тарзда юборилди. Билдирган фикрингиз учун катта рахмат!'));
+      }
+    },
     close: function close() {
       this.$router.replace('/');
     },
     initialize: function initialize() {
       var _this2 = this;
 
-      _src_services_apiService__WEBPACK_IMPORTED_MODULE_1__["default"].readPage(this.$route.params.id).then(function (response) {
-        _this2.page = response.data.data;
-        if (!_this2.page.id) _this2.$router.replace('/404');
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _this2.page.title = '';
+                _context2.next = 3;
+                return _src_services_apiService__WEBPACK_IMPORTED_MODULE_1__["default"].readPage(_this2.$route.params.id).then(function (response) {
+                  _this2.page = response.data.data;
+                  if (!_this2.page.id) _this2.$router.replace('/404');
 
-        if (_this2.page.parent && typeof _this2.page.parent.url !== 'undefined') {
-          _this2.breadcrumb_items[1].text = _this2.page.parent.title;
-          _this2.breadcrumb_items[1].to = _this2.page.parent.url;
-          _this2.breadcrumb_items[1].disabled = false;
-          _this2.breadcrumb_items[2] = {
-            text: _this2.page.title,
-            to: _this2.page.url,
-            disabled: true,
-            exact: true
-          };
-        } else _this2.breadcrumb_items[1].text = _this2.page.title;
-      })["catch"](function (error) {
-        _this2.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_2__["default"].t("\u041C\u0430\u044A\u043B\u0443\u043C\u043E\u0442\u043B\u0430\u0440\u043D\u0438 \u044E\u043A\u043B\u0430\u0448\u0434\u0430 \u0445\u0430\u0442\u043E\u043B\u0438\u043A \u0441\u043E\u0434\u0438\u0440 \u0431\u045E\u043B\u0434\u0438!"));
+                  if (_this2.page.parent && typeof _this2.page.parent.url !== 'undefined') {
+                    _this2.breadcrumb_items[1].text = _this2.page.parent.title;
+                    _this2.breadcrumb_items[1].to = _this2.page.parent.url;
+                    _this2.breadcrumb_items[1].disabled = false;
+                    _this2.breadcrumb_items[2] = {
+                      text: _this2.page.title,
+                      to: _this2.page.url,
+                      disabled: true,
+                      exact: true
+                    };
+                  } else _this2.breadcrumb_items[1].text = _this2.page.title;
+                })["catch"](function (error) {
+                  _this2.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_2__["default"].t("\u041C\u0430\u044A\u043B\u0443\u043C\u043E\u0442\u043B\u0430\u0440\u043D\u0438 \u044E\u043A\u043B\u0430\u0448\u0434\u0430 \u0445\u0430\u0442\u043E\u043B\u0438\u043A \u0441\u043E\u0434\u0438\u0440 \u0431\u045E\u043B\u0434\u0438!"));
 
-        _this2.$router.replace("/")["catch"](function () {});
-      });
-      _src_services_apiService__WEBPACK_IMPORTED_MODULE_1__["default"].readRelated(this.$route.params.id).then(function (response) {
-        _this2.relates = response.data;
-      })["catch"](function (error) {
-        _this2.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_2__["default"].t("\u041C\u0430\u044A\u043B\u0443\u043C\u043E\u0442\u043B\u0430\u0440\u043D\u0438 \u044E\u043A\u043B\u0430\u0448\u0434\u0430 \u0445\u0430\u0442\u043E\u043B\u0438\u043A \u0441\u043E\u0434\u0438\u0440 \u0431\u045E\u043B\u0434\u0438!"));
+                  _this2.$router.replace("/")["catch"](function () {});
+                });
 
-        _this2.$router.replace("/")["catch"](function () {});
-      });
+              case 3:
+                _src_services_apiService__WEBPACK_IMPORTED_MODULE_1__["default"].readRelated(_this2.$route.params.id).then(function (response) {
+                  _this2.relates = response.data;
+                })["catch"](function (error) {
+                  _this2.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_2__["default"].t("\u041C\u0430\u044A\u043B\u0443\u043C\u043E\u0442\u043B\u0430\u0440\u043D\u0438 \u044E\u043A\u043B\u0430\u0448\u0434\u0430 \u0445\u0430\u0442\u043E\u043B\u0438\u043A \u0441\u043E\u0434\u0438\u0440 \u0431\u045E\u043B\u0434\u0438!"));
+
+                  _this2.$router.replace("/")["catch"](function () {});
+                });
+
+              case 4:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }))();
     }
   }
 });
@@ -309,24 +384,31 @@ var render = function () {
         "div",
         { staticClass: "whitebreadcrumb breadcrumb-site" },
         [
-          _c(
-            "v-container",
-            [
-              _c("v-breadcrumbs", {
-                attrs: { items: _vm.breadcrumb_items },
-                scopedSlots: _vm._u([
-                  {
-                    key: "divider",
-                    fn: function () {
-                      return [_c("v-icon", [_vm._v("mdi-chevron-right")])]
-                    },
-                    proxy: true,
-                  },
-                ]),
-              }),
-            ],
-            1
-          ),
+          _vm.page.title.length
+            ? _c(
+                "v-container",
+                [
+                  _c("v-breadcrumbs", {
+                    attrs: { items: _vm.breadcrumbs },
+                    scopedSlots: _vm._u(
+                      [
+                        {
+                          key: "divider",
+                          fn: function () {
+                            return [_c("v-icon", [_vm._v("mdi-chevron-right")])]
+                          },
+                          proxy: true,
+                        },
+                      ],
+                      null,
+                      false,
+                      3681283568
+                    ),
+                  }),
+                ],
+                1
+              )
+            : _vm._e(),
         ],
         1
       ),
@@ -376,7 +458,10 @@ var render = function () {
                                             staticClass: "fa fa-caret-right",
                                             attrs: { "aria-hidden": "true" },
                                           }),
-                                          _vm._v(_vm._s(related_item.title)),
+                                          _vm._v(
+                                            _vm._s(related_item.title) +
+                                              "\n                "
+                                          ),
                                         ]
                                       )
                                     : _vm._e(),
@@ -417,7 +502,10 @@ var render = function () {
                                                       },
                                                     }),
                                                     _vm._v(
-                                                      _vm._s(childRelated.title)
+                                                      _vm._s(
+                                                        childRelated.title
+                                                      ) +
+                                                        "\n                    "
                                                     ),
                                                   ]
                                                 )
@@ -454,7 +542,101 @@ var render = function () {
                       domProps: { innerHTML: _vm._s(_vm.page.description) },
                     }),
                   ]),
-                ]
+                  _vm._v(" "),
+                  _vm.page.id === 157
+                    ? [
+                        _c(
+                          "div",
+                          {
+                            staticStyle: {
+                              border: "1px dashed #ccc",
+                              "border-radius": "10px",
+                              "margin-top": "20px",
+                              padding: "10px",
+                            },
+                          },
+                          [
+                            _c("h4", { staticClass: "mb-2" }, [
+                              _vm._v(
+                                _vm._s(_vm.$t("Ҳужжат лойихаларини баҳоланг"))
+                              ),
+                            ]),
+                            _vm._v(" "),
+                            _c("div", [
+                              _c("p", [_vm._v(_vm._s(_vm.$t("Рейтинг")))]),
+                              _vm._v(" "),
+                              _c(
+                                "p",
+                                { staticStyle: { "margin-left": "-10px" } },
+                                [
+                                  _c("v-rating", {
+                                    attrs: {
+                                      hover: "",
+                                      length: "5",
+                                      size: "20",
+                                      "background-color": "grey darken-1",
+                                    },
+                                    model: {
+                                      value: _vm.rateitem.rating,
+                                      callback: function ($$v) {
+                                        _vm.$set(_vm.rateitem, "rating", $$v)
+                                      },
+                                      expression: "rateitem.rating",
+                                    },
+                                  }),
+                                ],
+                                1
+                              ),
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              [
+                                _c("p", [
+                                  _vm._v(_vm._s(_vm.$t("Фикр қолдириш"))),
+                                ]),
+                                _vm._v(" "),
+                                _c(
+                                  "p",
+                                  [
+                                    _c("v-textarea", {
+                                      staticClass: "my-2",
+                                      attrs: {
+                                        "auto-grow": "",
+                                        outlined: "",
+                                        rows: "1",
+                                        "row-height": "15",
+                                        "hide-details": "",
+                                      },
+                                      model: {
+                                        value: _vm.rateitem.text,
+                                        callback: function ($$v) {
+                                          _vm.$set(_vm.rateitem, "text", $$v)
+                                        },
+                                        expression: "rateitem.text",
+                                      },
+                                    }),
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "v-btn",
+                                  {
+                                    attrs: { color: "primary" },
+                                    on: { click: _vm.sendCommit },
+                                  },
+                                  [_vm._v(_vm._s(_vm.$t("Юбориш")))]
+                                ),
+                              ],
+                              1
+                            ),
+                          ]
+                        ),
+                      ]
+                    : _vm._e(),
+                ],
+                2
               ),
             ],
             1

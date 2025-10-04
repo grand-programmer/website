@@ -172,6 +172,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "customvalue",
@@ -422,7 +428,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.v-data-table .v-input {\n    font-size: 12px;\n}\n.v-data-table .v-data-table-header th span {\n    color: var(--mycolor);\n    font-weight: bold;\n    font-size: 15px;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.v-data-table .v-input {\r\n    font-size: 12px;\n}\n.v-data-table .v-data-table-header th span {\r\n    color: var(--mycolor);\r\n    font-weight: bold;\r\n    font-size: 15px;\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -623,6 +629,16 @@ var render = function () {
                       options: _vm.options,
                       "server-items-length": _vm.totalDecisions,
                       loading: _vm.loading,
+                      "no-data-text": _vm.$t("Маълумот топилмади"),
+                      "footer-props": {
+                        "items-per-page-text": _vm.$t(
+                          "Сахифадаги элементлар сони"
+                        ),
+                        "items-per-page-all-text": _vm.$t("Барчаси"),
+                      },
+                      "loading-text": _vm.$t(
+                        "Юкланмоқда... Илтимос кутиб туринг"
+                      ),
                     },
                     on: {
                       "update:options": function ($event) {

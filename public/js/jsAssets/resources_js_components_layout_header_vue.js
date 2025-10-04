@@ -639,7 +639,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.language-dropdown label {\n    border: 1px solid var(--mycolor);\n    justify-content: center;\n}\n.language-dropdown ul.lang-list li{\n    padding: 4px 6px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.language-dropdown label {\r\n    border: 1px solid var(--mycolor);\r\n    justify-content: center;\n}\n.language-dropdown ul.lang-list li{\r\n    padding: 4px 6px;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -662,7 +662,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.subscribe-notification{\n    position: absolute;\n    top: 10px;\n    left: 75px;\n    width: 400px;\n    background-color: #ffff;\n    padding: 10px 25px;\n    z-index: 11;\n    border-radius: 10px;\n    font-family: Roboto;\n    color: #000;\n    border: 1px solid var(--mycolor);\n}\n.subscribe-notification .btn-primary {\n    color: #fff;\n    background: var(--mycolor);\n    border-color: var(--mycolor);\n    padding: 0 10px;\n}\n@media all and (min-width: 992px) {\n.dropdown-menu li {\n        position: relative;\n}\n.nav-item .submenu {\n        display: none;\n        position: absolute;\n        left: 100%;\n        top: -7px;\n}\n.nav-item .submenu-left {\n        right: 100%;\n        left: auto;\n}\n.dropdown-menu > li:hover {\n        background-color: #f1f1f1\n}\n.dropdown-menu > li:hover > .submenu {\n        display: block;\n}\n}\n\n/* ============ desktop view .end// ============ */\n/* ============ small devices ============ */\n@media (max-width: 991px) {\n.dropdown-menu .dropdown-menu {\n        margin-left: 0.7rem;\n        margin-right: 0.7rem;\n        margin-bottom: .5rem;\n}\n}\n.navbar-nav .dropdown-menu {\n    position: absolute;\n    max-width: 15vw;\n    width: -webkit-max-content;\n    width: -moz-max-content;\n    width: max-content;\n}\n.navbar-nav .dropdown-menu > li > a {\n    white-space: unset !important;\n}\n\n\n/*mobile*/\n.menu-wrapper {\n    overflow: hidden;\n    max-width: 100%;\n    cursor: pointer;\n}\n.menu-wrapper .hamburger-menu {\n    position: relative;\n    width: 25px;\n    height: 20px;\n    margin-top: 19px;\n}\n.menu-wrapper .hamburger-menu span {\n    opacity: 1;\n    left: 0;\n    display: block;\n    width: 100%;\n    height: 2px;\n    border-radius: 10px;\n    color: black;\n    background-color: #000;\n    position: absolute;\n    transform: rotate(0deg);\n    transition: .4s ease-in-out;\n}\n.menu-wrapper .hamburger-menu span:nth-child(1) {\n    top: 0;\n}\n.menu-wrapper .hamburger-menu span:nth-child(2) {\n    top: 9px;\n}\n.menu-wrapper .hamburger-menu span:nth-child(3) {\n    top: 18px;\n}\n.menu-wrapper .hamburger-menu.open span:nth-child(1) {\n    transform: translateY(9px) rotate(135deg);\n}\n.menu-wrapper .hamburger-menu.open span:nth-child(2) {\n    opacity: 0;\n    transform: translateX(-60px);\n}\n.menu-wrapper .hamburger-menu.open span:nth-child(3) {\n    transform: translateY(-9px) rotate(-135deg);\n}\n\n/*.menu-container .menu-list .menu-submenu {*/\n/*    white-space: unset;*/\n/*    padding: 20px !important;*/\n/*    left: 10%;*/\n/*}*/\n.menu-container .menu-list {\n    padding-left: 0;\n    display: block;\n    position: absolute;\n    width: 100%;\n    max-width: 450px;\n    height: 1024px;\n    background: white;\n    box-shadow: rgba(100, 100, 100, 0.2) 6px 2px 10px;\n    z-index: 999;\n    overflow-y: auto;\n    overflow-x: hidden;\n    left: -100%;\n}\n.menu-container .menu-list li.accordion-toggle, .menu-container .menu-list .menu-login {\n    font-size: 16px;\n    text-align: center;\n    padding: 20px;\n    text-transform: uppercase;\n    border-top: 1px solid #dbdcd2;\n}\n.menu-container .menu-list li:first-of-type {\n    border-top: 0;\n}\n.accordion-toggle, .accordion-content {\n    cursor: pointer;\n    font-size: 16px;\n    position: relative;\n    letter-spacing: 1px;\n}\n.accordion-content {\n    display: none;\n}\n\n/*.accordion-toggle a:before, .accordion-toggle a:after {*/\n/*    content: '';*/\n/*    display: block;*/\n/*    position: absolute;*/\n/*    top: 50%;*/\n/*    right: 30px;*/\n/*    width: 15px;*/\n/*    height: 2px;*/\n/*    margin-top: -1px;*/\n/*    background-color: #5a5858;*/\n/*    transform-origin: 50% 50%;*/\n/*    transition: all 0.3s ease-out;*/\n/*}*/\n\n/*.accordion-toggle a:before {*/\n/*    transform: rotate(-90deg);*/\n/*    opacity: 1;*/\n/*    z-index: 2;*/\n/*}*/\n.accordion-toggle.active-tab {\n    background: #000;\n\n    transition: all 0.3s ease;\n}\n.accordion-toggle a.active:before {\n    transform: rotate(0deg);\n    background: #fff !important;\n}\n.accordion-toggle a.active:after {\n    transform: rotate(180deg);\n    background: #fff !important;\n    opacity: 0;\n}\n.menu-wrapper {\n    display: none !important;\n}\n.menu-container .menu-list.accordion {\n    display: none;\n}\n@media (max-width: 1480px) {\n.menu-wrapper {\n        display: block !important;\n}\n.menu-container .menu-list.accordion {\n        display: block !important;\n}\n}\n@media (max-width: 576px) {\n.menu-wrapper .hamburger-menu {\n        position: absolute;\n        margin-top: -38px;\n        left: 83%;\n}\n.menu-list {\n        margin-top: 5px !important;\n}\n}\n\n/* ============ small devices .end// ============ */\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.subscribe-notification{\r\n    position: absolute;\r\n    top: 10px;\r\n    left: 75px;\r\n    width: 400px;\r\n    background-color: #ffff;\r\n    padding: 10px 25px;\r\n    z-index: 11;\r\n    border-radius: 10px;\r\n    font-family: Roboto;\r\n    color: #000;\r\n    border: 1px solid var(--mycolor);\n}\n.subscribe-notification .btn-primary {\r\n    color: #fff;\r\n    background: var(--mycolor);\r\n    border-color: var(--mycolor);\r\n    padding: 0 10px;\n}\n@media all and (min-width: 992px) {\n.dropdown-menu li {\r\n        position: relative;\n}\n.nav-item .submenu {\r\n        display: none;\r\n        position: absolute;\r\n        left: 100%;\r\n        top: -7px;\n}\n.nav-item .submenu-left {\r\n        right: 100%;\r\n        left: auto;\n}\n.dropdown-menu > li:hover {\r\n        background-color: #f1f1f1\n}\n.dropdown-menu > li:hover > .submenu {\r\n        display: block;\n}\n}\r\n\r\n/* ============ desktop view .end// ============ */\r\n/* ============ small devices ============ */\n@media (max-width: 991px) {\n.dropdown-menu .dropdown-menu {\r\n        margin-left: 0.7rem;\r\n        margin-right: 0.7rem;\r\n        margin-bottom: .5rem;\n}\n}\n.navbar-nav .dropdown-menu {\r\n    position: absolute;\r\n    max-width: 15vw;\r\n    width: -webkit-max-content;\r\n    width: -moz-max-content;\r\n    width: max-content;\n}\n.navbar-nav .dropdown-menu > li > a {\r\n    white-space: unset !important;\n}\r\n\r\n\r\n/*mobile*/\n.menu-wrapper {\r\n    overflow: hidden;\r\n    max-width: 100%;\r\n    cursor: pointer;\n}\n.menu-wrapper .hamburger-menu {\r\n    position: relative;\r\n    width: 25px;\r\n    height: 20px;\r\n    margin-top: 19px;\n}\n.menu-wrapper .hamburger-menu span {\r\n    opacity: 1;\r\n    left: 0;\r\n    display: block;\r\n    width: 100%;\r\n    height: 2px;\r\n    border-radius: 10px;\r\n    color: black;\r\n    background-color: #000;\r\n    position: absolute;\r\n    transform: rotate(0deg);\r\n    transition: .4s ease-in-out;\n}\n.menu-wrapper .hamburger-menu span:nth-child(1) {\r\n    top: 0;\n}\n.menu-wrapper .hamburger-menu span:nth-child(2) {\r\n    top: 9px;\n}\n.menu-wrapper .hamburger-menu span:nth-child(3) {\r\n    top: 18px;\n}\n.menu-wrapper .hamburger-menu.open span:nth-child(1) {\r\n    transform: translateY(9px) rotate(135deg);\n}\n.menu-wrapper .hamburger-menu.open span:nth-child(2) {\r\n    opacity: 0;\r\n    transform: translateX(-60px);\n}\n.menu-wrapper .hamburger-menu.open span:nth-child(3) {\r\n    transform: translateY(-9px) rotate(-135deg);\n}\r\n\r\n/*.menu-container .menu-list .menu-submenu {*/\r\n/*    white-space: unset;*/\r\n/*    padding: 20px !important;*/\r\n/*    left: 10%;*/\r\n/*}*/\n.menu-container .menu-list {\r\n    padding-left: 0;\r\n    display: block;\r\n    position: absolute;\r\n    width: 100%;\r\n    max-width: 450px;\r\n    height: 1024px;\r\n    background: white;\r\n    box-shadow: rgba(100, 100, 100, 0.2) 6px 2px 10px;\r\n    z-index: 999;\r\n    overflow-y: auto;\r\n    overflow-x: hidden;\r\n    left: -100%;\n}\n.menu-container .menu-list li.accordion-toggle, .menu-container .menu-list .menu-login {\r\n    font-size: 16px;\r\n    text-align: center;\r\n    padding: 20px;\r\n    text-transform: uppercase;\r\n    border-top: 1px solid #dbdcd2;\n}\n.menu-container .menu-list li:first-of-type {\r\n    border-top: 0;\n}\n.accordion-toggle, .accordion-content {\r\n    cursor: pointer;\r\n    font-size: 16px;\r\n    position: relative;\r\n    letter-spacing: 1px;\n}\n.accordion-content {\r\n    display: none;\n}\r\n\r\n/*.accordion-toggle a:before, .accordion-toggle a:after {*/\r\n/*    content: '';*/\r\n/*    display: block;*/\r\n/*    position: absolute;*/\r\n/*    top: 50%;*/\r\n/*    right: 30px;*/\r\n/*    width: 15px;*/\r\n/*    height: 2px;*/\r\n/*    margin-top: -1px;*/\r\n/*    background-color: #5a5858;*/\r\n/*    transform-origin: 50% 50%;*/\r\n/*    transition: all 0.3s ease-out;*/\r\n/*}*/\r\n\r\n/*.accordion-toggle a:before {*/\r\n/*    transform: rotate(-90deg);*/\r\n/*    opacity: 1;*/\r\n/*    z-index: 2;*/\r\n/*}*/\n.accordion-toggle.active-tab {\r\n    background: #000;\r\n\r\n    transition: all 0.3s ease;\n}\n.accordion-toggle a.active:before {\r\n    transform: rotate(0deg);\r\n    background: #fff !important;\n}\n.accordion-toggle a.active:after {\r\n    transform: rotate(180deg);\r\n    background: #fff !important;\r\n    opacity: 0;\n}\n.menu-wrapper {\r\n    display: none !important;\n}\n.menu-container .menu-list.accordion {\r\n    display: none;\n}\n@media (max-width: 1480px) {\n.menu-wrapper {\r\n        display: block !important;\n}\n.menu-container .menu-list.accordion {\r\n        display: block !important;\n}\n}\n@media (max-width: 576px) {\n.menu-wrapper .hamburger-menu {\r\n        position: absolute;\r\n        margin-top: -38px;\r\n        left: 83%;\n}\n.menu-list {\r\n        margin-top: 5px !important;\n}\n}\r\n\r\n/* ============ small devices .end// ============ */\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -1416,13 +1416,17 @@ var render = function () {
                                   _c(
                                     "v-list-item",
                                     { attrs: { to: "/profile" } },
-                                    [_vm._v("Менинг профилим")]
+                                    [_vm._v(_vm._s(_vm.$t("Менинг профилим")))]
                                   ),
                                   _vm._v(" "),
                                   _c(
                                     "v-list-item",
                                     { attrs: { to: "/applications" } },
-                                    [_vm._v("Менинг аризаларим")]
+                                    [
+                                      _vm._v(
+                                        _vm._s(_vm.$t("Менинг аризаларим"))
+                                      ),
+                                    ]
                                   ),
                                   _vm._v(" "),
                                   _c(
@@ -1931,41 +1935,8 @@ var render = function () {
       ]),
     ]),
     _vm._v(" "),
-    _vm.pushAccessComputed === null
-      ? _c("div", { staticClass: "subscribe-notification" }, [
-          _vm._v(
-            "\n        Энг муҳим янгиликларни биринчи бўлиб олишни xоҳлайсизми? Билдиришномаларга обуна бўлинг!    "
-          ),
-          _c("br"),
-          _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass: " btn btn-primary subscribe",
-              on: {
-                click: function ($event) {
-                  return _vm.setPushAccess(true)
-                },
-              },
-            },
-            [_vm._v("Обуна бўлиш")]
-          ),
-          _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass: " btn btn-primary reject ",
-              on: {
-                click: function ($event) {
-                  return _vm.setPushAccess(false)
-                },
-              },
-            },
-            [_vm._v("Бекор қилиш")]
-          ),
-          _vm._v(" "),
-          _c("br"),
-        ])
+     false
+      ? 0
       : _vm._e(),
   ])
 }

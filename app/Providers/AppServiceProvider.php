@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Exceptions\PaymeExceptionHandler;
+use Illuminate\Contracts\Debug\ExceptionHandler;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 
@@ -14,7 +16,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->singleton(
+            ExceptionHandler::class,
+            PaymeExceptionHandler::class
+        );
     }
 
     /**

@@ -817,6 +817,7 @@
                                                                                         <v-date-picker
                                                                                             v-model="application.date"
                                                                                             no-title
+                                                                                            :locale="$i18n.locale ==='en'?'en-US':'ru-RU'"
                                                                                             @input="menu.importer = false"
                                                                                         ></v-date-picker>
                                                                                     </v-menu>
@@ -889,6 +890,7 @@
                                                                                     <v-date-picker
                                                                                         v-model="application.importerhdate"
                                                                                         no-title
+                                                                                        :locale="$i18n.locale ==='en'?'en-US':'ru-RU'"
                                                                                         @input="menu.importerhdate = false"
                                                                                     ></v-date-picker>
                                                                                 </v-menu>
@@ -2078,7 +2080,7 @@
                                                                                                 v-model="application.tovarlar[key].product.tftnqaror.date"
                                                                                                 no-title
                                                                                                 scrollable
-                                                                                                locale="ru-ru"
+                                                                                                :locale="$i18n.locale ==='en'?'en-US':'ru-RU'"
                                                                                             >
                                                                                                 <v-spacer></v-spacer>
                                                                                                 <v-btn
@@ -2221,7 +2223,7 @@
                                                                                                 v-model="application.tovarlar[key].product.old_decision.date"
                                                                                                 no-title
                                                                                                 scrollable
-                                                                                                locale="ru_RU"
+                                                                                                :locale="$i18n.locale ==='en'?'en-US':'ru-RU'"
                                                                                             >
                                                                                                 <v-spacer></v-spacer>
                                                                                                 <v-btn
@@ -2450,22 +2452,14 @@
     </div>
 </template>
 <script>
-import {extend, ValidationProvider, ValidationObserver} from 'vee-validate';
-import * as rules from 'vee-validate/dist/rules';
-import messages from '../../../../locales/oz.json';
+import {ValidationProvider, ValidationObserver} from 'vee-validate';
+
 
 import ServicePage from "../index";
 import i18n from "../../../../i18n";
 import EArxivFile from "../../../../components/form/e-arxiv-file";
 
 
-Object.keys(rules).forEach(rule => {
-    extend(rule, {
-        ...rules[rule], // copies rule configuration
-        message: messages.messages[rule] // assign message
-
-    });
-});
 export default {
     name: "Initialdecision",
     methods: {
@@ -3113,7 +3107,7 @@ export default {
 
                                                             setTimeout(() => {
                                                                 this.$refs["usultext" + this.tovarIndex + '-' + j][0].applyResult({
-                                                                    errors: [j + 1 + " - усулни қўлламаслик сабаби майдони албатта тўлдирилиши лозим1"], // array of string errors
+                                                                    errors: [j + 1 + " - усулни қўлламаслик сабаби майдони албатта тўлдирилиши лозим"], // array of string errors
                                                                     valid: false, // boolean state
                                                                     failedRules: {} // should be empty since this is a manual error.
                                                                 })
@@ -3259,7 +3253,7 @@ export default {
         },
         async getCountries() {
             let root = this
-            await axios.get('/api/v1/data/country?lang=uz').then(function (result) {
+            this.$auth.plugins.http.get('/api/v1/data/country').then(function (result) {
                 let countries = [];
                 result.data.forEach(function (item) {
                     countries.push({
@@ -3273,7 +3267,7 @@ export default {
         },
         async getCurrencies() {
             let root = this
-            await axios.get('/api/v1/data/currency?lang=uz').then(function (result) {
+            this.$auth.plugins.http.get('/api/v1/data/currency').then(function (result) {
                 let currencies = [];
                 result.data.forEach(function (item) {
                     currencies.push({
@@ -3326,7 +3320,7 @@ export default {
         },
         async getBoshqarmalar() {
             const _this = this
-            await axios.get('/api/v1/ex_api/boshqarma').then(function (result) {
+            await this.$auth.plugins.http.get('/api/v1/ex_api/boshqarma').then(function (result) {
 
                 result.data.data.forEach(function (item) {
                     if (!(['1790', '1791', '1701'].includes(item['kod_id'])))
@@ -3827,7 +3821,7 @@ export default {
         },
         getTftn(code) {
             // Lazily load input items
-            fetch("https://new.customs.uz/api/v1/data/tftn?code=" + val)
+            fetch("https://customs.uz/api/v1/data/tftn?code=" + val)
                 .then((res) => res.json())
                 .then(res => {
                     res.map(function (item) {
@@ -4383,7 +4377,7 @@ export default {
                 this.loading.tftncode = true
 
                 // Lazily load input items
-                fetch("https://new.customs.uz/api/v1/data/tftn?code=" + val)
+                fetch("https://customs.uz/api/v1/data/tftn?code=" + val)
                     .then((res) => res.json())
                     .then(res => {
                         res.map(function (item) {
@@ -4442,7 +4436,7 @@ export default {
             this.loading.country_transport_type_from = true
 
             // Lazily load input items
-            fetch("https://new.customs.uz/api/v1/data/country?name=" + val + '&lang=uz')
+            this.$auth.plugins.http.get('/api/v1/data/country?name=' + val)
                 .then((res) => res.json())
                 .then(res => {
                     res.map(function (item) {

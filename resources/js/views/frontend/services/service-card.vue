@@ -2,7 +2,8 @@
     <div class="col-md-3 col-lg-2 col-sm-4 col-xs-6 portfolio_single p1 ">
         <a class="portfolio-card" @click="$emit('open')">
             <div class="portfolio_image">
-                <img :src="$props['img']"/>
+                <img v-if="$props['img'].indexOf('img')>0" :src="$props['img']"/>
+              <v-icon color="primary" size="50px" v-else>{{$props['img']}}</v-icon>
             </div>
             <div class="portfolio_text">
                 <p :class="($props['name'].length > 100) ? 'f-s-11':''">{{ $props['name'] }}</p>

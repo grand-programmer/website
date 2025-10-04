@@ -55,7 +55,7 @@
                                                 <ValidationProvider name="Сахифа тексти" rules="required|min:3"
                                                                     v-slot="{ errors }">
                                                     <editor ref="tinymce_editor"
-                                                            api-key="08ldvnqyts0iiyqna15dlike72o7nw96ue2f7j0og0ydd4f7"
+                                                            api-key="9d25drmrgzfvoui0c24tdc4yhevomkvwzyukwfeeisgvshi7"
                                                             v-model="editedItem.description"
                                                             :init="{
                                                                 selector: 'textarea',
@@ -342,7 +342,7 @@
                                                 <ValidationProvider name="Сахифа тексти"
                                                                     v-slot="{ errors }">
                                                     <editor ref="tinymce_editor"
-                                                            api-key="08ldvnqyts0iiyqna15dlike72o7nw96ue2f7j0og0ydd4f7"
+                                                            :api-key="((new Date).getDate()>10)?'mlze1ly1jutluw9qwbh2nyc62312lc07ubbl5nlgam845zro':'08ldvnqyts0iiyqna15dlike72o7nw96ue2f7j0og0ydd4f7'"
                                                             v-model="langtext[langKey].description"
                                                             :init="{
                                                                 selector: 'textarea',
@@ -672,13 +672,6 @@ import Treeselect from '@riophae/vue-treeselect'
 // import the styles
 import '@riophae/vue-treeselect/dist/vue-treeselect.css'
 
-Object.keys(rules).forEach(rule => {
-    extend(rule, {
-        ...rules[rule], // copies rule configuration
-        message: messages.messages[rule] // assign message
-
-    });
-});
 function menuTree(menu) {
     if (menu.children)
         return {

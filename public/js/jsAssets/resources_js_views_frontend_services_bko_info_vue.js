@@ -238,7 +238,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       showed: false,
       dialog: false,
       items: [{
-        tab: "Ариза хақида умумиy маълумот"
+        tab: "Ариза хақида умумий маълумот"
       }
       /*{tab: 'Ариза ҳолати'},*/
       ]
@@ -247,7 +247,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   mounted: function mounted() {
     /*        setTimeout(() => {
                 this.$store.commit('setLoading', true)
-             }, 2000)*/
+              }, 2000)*/
     this.getAppData();
   },
   computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapState)(['loading'])),

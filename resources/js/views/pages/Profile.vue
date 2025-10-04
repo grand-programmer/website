@@ -80,7 +80,7 @@
                 </v-col>
                 <v-col cols="9">
                     <v-card class="mt-9 p-3 mening_profilim" elevation="1">
-                        <h3 class="my-5 mb-10">Менинг профилим</h3>
+                        <h3 class="my-5 mb-10">{{ $t('Менинг профилим') }}</h3>
 <validation-observer ref="profileForm" v-slot="{ invalid }" tag="div"   >
                         <v-container>
                             <v-row class="dashed-border">
@@ -99,26 +99,26 @@
                                     </v-row>
                                 </v-col>
                                 <v-col cols="4" class="profile-item">
-                                    <span>Туғилган сана</span>
+                                    <span>{{ $t('Туғилган сана') }}</span>
                                     <span>{{ $auth.user().birth_date }}</span>
                                 </v-col>
                                 <v-col cols="4" class="profile-item">
-                                    <span>Туғилган жойи</span>
+                                    <span>{{ $t('Туғилган жойи') }}</span>
                                     <span>{{ $auth.user().birth_place }}</span>
                                 </v-col>
                                 <v-col cols="4" class="profile-item">
                                     <ValidationProvider
                                         v-slot="{ errors}"
-                                        name="Яшаш жойи"
+                                        :name="$t('Яшаш жойи')"
                                         rules="required"
                                         tag="div"
                                     >
-                                    <span>Яшаш жойи</span>
+                                    <span>{{ $t('Яшаш жойи') }}</span>
                                     <v-text-field v-model="$auth.user().per_adr" :error-messages="errors[0]"></v-text-field>
                                     </ValidationProvider>
                                 </v-col>
                                 <v-col cols="4" class="profile-item" v-if="$auth.user().email">
-                                    <span>Электрон почта</span>
+                                    <span>{{ $t('Электрон почта') }}</span>
                                     <span>{{ $auth.user().email }}</span>
                                 </v-col>
                                 <v-col cols="4" class="profile-item">
@@ -128,7 +128,7 @@
                                         tag="div"
                                         rules="required"
                                     >
-                                    <span>Телефон рақами</span>
+                                    <span>{{ $t('Телефон рақами') }}</span>
                                         <v-text-field v-mask="'############'" v-model="$auth.user().phone" :error-messages="errors[0]"></v-text-field>
                                     </ValidationProvider>
                                 </v-col>
@@ -266,7 +266,7 @@ export default {
                     exact: true,
                 },
                 {
-                    text: 'Хизматлар',
+                    text: i18n.t('Хизматлар'),
                     to: '/profile',
                     disabled: true,
                     exact: true,
@@ -275,10 +275,10 @@ export default {
             selectedItem: 0,
             user_image:null,
             items: [
-                {text: 'Профил', icon: 'mdi-account', link: '/profile'},
-                {text: 'Менинг аризаларим', icon: 'mdi-history', link: '/applications'},
-                {text: 'Хизматлар', icon: 'mdi-star', link: '/services'},
-                {text: 'Реестрлар', icon: 'mdi-book-open-outline', link: '/services?page=3'},
+                {text: i18n.t('Профил'), icon: 'mdi-account', link: '/profile'},
+                {text: i18n.t('Менинг аризаларим'), icon: 'mdi-history', link: '/applications'},
+                {text: i18n.t('Хизматлар'), icon: 'mdi-star', link: '/services'},
+                {text: i18n.t('Реестрлар'), icon: 'mdi-book-open-outline', link: '/services?page=3'},
             ],
 
         }

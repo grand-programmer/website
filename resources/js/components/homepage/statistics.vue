@@ -5,16 +5,12 @@
                 <h3> {{ $t("товарлар ташқи савдо божхона статистикаси") }}</h3>
                 <ul class="mb-15">
                     <li v-for="rejimItem in regimes">
+
                         <a :class="stat_type===rejimItem.value?'active':''" href="#" @click="stat_type=rejimItem.value">
                             {{ rejimItem.title }}
                         </a>
                     </li>
                 </ul>
-                <a class="all_stats d-none" href="https://charts.customs.uz" target="_blank"
-                   style="position: absolute; bottom: 100px">
-                    {{ $t("Барча статистика") }} <i class="fa fa-arrow-right"></i>
-
-                </a>
             </div>
         </div>
         <template v-for="rejimItem in regimes" >
@@ -23,11 +19,17 @@
                         regime === 1 ? rejimItem.textIm :  rejimItem.textEx
                     }}</h3>
                 <div class="statfilterRow">
-                    <div class="regimeButtons">
+                    <div class="regimeButtons" v-if="stat_type!==4">
                         <v-btn :color="regime===1?'primary':'#F1F5F9'" :style="regime!==1?'color: #39ae69;':'' " small class="ma-0 py-4" @click="regime=1">
                             {{ $t('Импорт') }}</v-btn>
                         <v-btn :color="regime===2?'primary':'#F1F5F9'" :style="regime!==2?'color: #39ae69;':'' " small class="ma-0 py-4" @click="regime=2">
                             {{ $t('Экспорт') }}</v-btn>
+                    </div>
+                    <div class="regimeButtons" v-if="stat_type===4">
+                        <v-btn :color="type===1?'primary':'#F1F5F9'" :style="type!==1?'color: #39ae69;':'' " small class="ma-0 py-4" @click="type=1">
+                            {{ $t('Озиқ-овқат') }}</v-btn>
+                        <v-btn :color="type===2?'primary':'#F1F5F9'" :style="type!==2?'color: #39ae69;':'' " small class="ma-0 py-4" @click="type=2">
+                            {{ $t('Ноозиқ-овқат') }}</v-btn>
                     </div>
                     <div class="date_rangers">
 
@@ -49,14 +51,34 @@
                             style="max-width: 200px; margin-top: -5px"
                             class="ml-2"
                             hide-details
+                            :suffix="$t('дан')"
+                        ></v-select>
+                        <v-select
+                            v-if="month!==0"
+                            :items="computedMonths"
+                            v-model="toMonth"
+                            item-value="value"
+                            :item-disabled="(item)=>item.value===0"
+                            solo
+                            dense
+                            style="max-width: 200px; margin-top: -5px"
+                            class="ml-2"
+                            hide-details
+                            clearable
+                            :suffix="$t('гача')"
                         ></v-select>
                     </div>
                 </div>
 
-                <template v-if="stat_type===1"><stat-products :regime="paramRegime" :month="paramMonth" :year="paramYear" /></template>
+                <template v-if="stat_type===1"><stat-products :regime="paramRegime" :month="paramMonth" :year="paramYear" :to-month="paramToMonth" /></template>
 
-                <template v-if="stat_type===2 && 1===2"><stat-countries  :regime="paramRegime" :month="paramMonth" :year="paramYear" /></template>
-                <template v-if="stat_type===3"><stat-states  :regime="paramRegime" :month="paramMonth" :year="paramYear" /></template>
+                <template v-if="stat_type===2"><stat-countries  :regime="paramRegime" :month="paramMonth" :year="paramYear" :to-month="paramToMonth" /></template>
+                <template v-if="stat_type===3">
+                  <stat-states  :regime="paramRegime" :month="paramMonth" :year="paramYear" :to-month="paramToMonth" />
+                </template>
+              <template v-if="stat_type===4">
+                  <oziq-ovqat  :regime="paramType" :month="paramMonth" :to-month="paramToMonth" :year="paramYear" />
+                </template>
             </div>
         </template>
 
@@ -66,6 +88,7 @@
 import StatProducts from "../../views/frontend/stat/products";
 import StatCountries from "../../views/frontend/stat/countries";
 import StatStates from "../../views/frontend/stat/states";
+import OziqOvqat from "../../views/frontend/stat/oziqOvqat";
 
 
 export default {
@@ -74,8 +97,9 @@ export default {
             stat_type: 1,
             regimes: [
                 {title: this.$t('Товарлар бўйича'), textIm: this.$t('Товарлар импорти тўғрисида маълумот'), textEx: this.$t('Товарлар экспорти тўғрисида маълумот'),  value: 1, rejim: 1},
-                /*{title: this.$t('Давлатлар бўйича'), textIm: this.$t('Давлатлар бўйича товарлар импорти тўғрисида маълумот'),textEx: this.$t('Давлатлар бўйича товарлар экспорти тўғрисида маълумот'), value: 2, rejim: 1},*/
+                {title: this.$t('Давлатлар бўйича'), textIm: this.$t('Давлатлар бўйича товарлар импорти тўғрисида маълумот'),textEx: this.$t('Давлатлар бўйича товарлар экспорти тўғрисида маълумот'), value: 2, rejim: 1},
                 {title: this.$t('Ҳудудлар бўйича'), textIm: this.$t('Ҳудудлар бўйича товарлар импорти тўғрисида маълумот'),textEx: this.$t('Ҳудудлар бўйича товарлар экспорти тўғрисида маълумот'), value: 3, rejim: 1},
+                {title: this.$t('Истеъмол товарлар импорти'), textIm: this.$t('Истеъмол товарлар импорти тўғрисида маълумот'),textEx: this.$t('Истеъмол товарлар импорти тўғрисида маълумот'), value: 4, rejim: 1},
             ],
             months: [
                 {
@@ -131,8 +155,10 @@ export default {
                 }
             ],
             month: 1,
+            toMonth: null,
             year: ((new Date).getMonth() === 0)?(new Date()).getFullYear() - 1 : (new Date()).getFullYear(),
             regime: 1,
+            type: 1,
             firstStart: 1,
             years: [
                 (new Date()).getFullYear() -1, (new Date()).getFullYear()
@@ -146,8 +172,14 @@ export default {
         paramMonth(){
           return this.month
         },
+        paramToMonth(){
+          return this.toMonth
+        },
         paramRegime(){
           return this.regime
+        },
+        paramType(){
+          return this.type
         },
         computedMonths() {
             const enabled=[]
@@ -186,6 +218,7 @@ export default {
 
     },
     components: {
+      OziqOvqat,
         StatStates,
         StatCountries,
         StatProducts

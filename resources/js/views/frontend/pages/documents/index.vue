@@ -39,7 +39,7 @@
                         solo
                         background-color="white"
                         hide-details
-                        label="Ҳужжат рақами"
+                        :label="$t('Ҳужжат рақами')"
                         clearable
                         v-model="options.number"
                     />
@@ -61,7 +61,7 @@
                                 background-color="white"
                                 hide-details
                                 clearable
-                                label="Ушбу санадан"
+                                :label="$t('Ушбу санадан')"
                                 v-mask="'##-##-####'"
                                 v-model="options.sanadan"
                                 @change="sanaChanged('dan')"
@@ -75,6 +75,7 @@
                             </v-text-field>
                         </template>
                         <v-date-picker
+                            :locale="$i18n.locale ==='en'?'en-US':'ru-RU'"
                             v-model="datepicker.sanadan"
                             :active-picker.sync="activePicker.sanadan"
                             min="1950-01-01"
@@ -100,7 +101,7 @@
                                 solo
                                 background-color="white"
                                 clearable
-                                label="Ушбу санагача"
+                                :label="$t('Ушбу санагача')"
                                 v-mask="'##-##-####'"
                                 v-model="options.sanagacha"
                                 @change="sanaChanged('2')"
@@ -114,6 +115,7 @@
                             </v-text-field>
                         </template>
                         <v-date-picker
+                            :locale="$i18n.locale ==='en'?'en-US':'ru-RU'"
                             v-model="datepicker.sanagacha"
                             :active-picker.sync="activePicker.sanagacha"
                             min="1950-01-01"
@@ -146,12 +148,15 @@
                         solo
                         background-color="white"
                         hide-details
-                        label="Номлардаги калит сўзлар"
+                        :label="$t('Номлардаги калит сўзлар')"
                         v-model="options.terms"
                         clearable
                     />
                 </v-col>
-                <v-col offset="10" cols="2" class="justify-content-end d-flex">
+            </v-row>
+          <v-row>
+            <v-col cols="10"><template v-if="total>0">{{total}} {{ $t('та ҳужжат аниқланди') }} </template></v-col>
+                <v-col cols="2" class="justify-content-end d-flex">
                     <v-btn
                         color="primary"
                         class="mr-0"
@@ -165,10 +170,18 @@
             <v-row class="documents_content">
                 <template v-if="documents && documents.length > 0">
                     <a class="document" v-for="(document,docKey) in documents" :href="document.url" target="_blank">
-                        <span class="document_index">{{ docKey + 1 }}</span>
+                        <span class="document_index">{{ docKey + 1 + ((page-1) * 20) }}</span>
                         <h3 class="document_text">{{ document.name }}</h3>
                         <p class="document_number">№ {{ document.code }} {{ document.date }}</p>
                     </a>
+                  <div class="text-center mb-5">
+                    <v-pagination
+                        v-model="page"
+                        :length="computedLength"
+                        :total-visible="10"
+                        @input="next"
+                    ></v-pagination>
+                  </div>
                 </template>
                 <template v-else>
                     <p class="m-10"> {{ $t('Маълумот топилмади') }}</p>
@@ -186,6 +199,8 @@ export default {
     name: "Documents",
     data() {
         return {
+          total:0,
+          page:1,
             breadcrumb_items: [
                 {
                     text: i18n.t('Асосий саҳифа'),
@@ -226,6 +241,11 @@ export default {
 
     },
     methods: {
+      next (page) {
+
+          this.$router.push({path: this.$route.path, query:{page}})
+
+      },
         changedDatepicker(type = 1) {
 
             if (type === 1) {
@@ -239,13 +259,14 @@ export default {
         },
         getDocuments(requestData) {
             apiClient.getDocuments(requestData).then((res) => {
-                if (res.status === 200 && typeof res.data.data !== 'undefined') this.documents = res.data.data
+                if (res.status === 200 && typeof res.data.data !== 'undefined') {
+                  this.documents = res.data.data
+                  this.total = res.data.count
+                }
             });
         },
         getCategories(requestData) {
             apiClient.getDocumentCategories(requestData).then((res) => {
-                console.log(res)
-
                 if (res.status === 200 && typeof res.data !== 'undefined') {
 
                     this.categories = res.data
@@ -302,10 +323,21 @@ export default {
             'menu.sanagacha' (val) {
                 val && setTimeout(() => (this.activePicker.sanagacha = 'YEAR'))
             },
+            page(val) {
+              this.getDocuments(JSON.parse(JSON.stringify({...this.options, page: val})))
+            },
         },
     mounted() {
+        if(typeof this.$route.query.page ==='undefined'){
+          this.page=1
+        } else this.page = parseInt(this.$route.query.page)
         this.getDocuments();
         this.getCategories();
+    },
+    computed:{
+      computedLength(){
+        return parseInt(this.total/20)
+      }
     }
 }
 </script>

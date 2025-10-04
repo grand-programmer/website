@@ -18,13 +18,15 @@ class PageResource extends JsonResource
     public function toArray($request)
     {
         $translates = DB::table('page_translates')->where(["page_id" => $this->id, "language" => app()->getLocale()])->get();
+        $parent = ($menu=Menu::where([
+            'relation_id'=>$this->id,
+        ])->first())?(($menu1=Menu::where([
+            'id'=>$menu->parent,
+        ])->first())?$menu1:$menu->parent):-1;
+        if($parent and isset($parent->id)) $parent=MenuResource::make($parent);
         return [
             'id'=>$this->id,
-            'parent'=>($menu=Menu::where([
-                'relation_id'=>$this->id,
-            ])->first())?(($menu1=Menu::where([
-                'id'=>$menu->parent,
-            ])->first())?$menu1:$menu->parent):-1,
+            'parent'=>$parent,
             'publish'=>$this->publish,
             'title'=>isset($translates[0]) ? $translates[0]->title : $this->title,
             'slug'=>$this->slug,

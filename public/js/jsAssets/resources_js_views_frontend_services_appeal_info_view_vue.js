@@ -11,13 +11,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var _chenfengyuan_vue_qrcode__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @chenfengyuan/vue-qrcode */ "./node_modules/@chenfengyuan/vue-qrcode/dist/vue-qrcode.js");
-/* harmony import */ var _chenfengyuan_vue_qrcode__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_chenfengyuan_vue_qrcode__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var vue_html2pdf__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-html2pdf */ "./node_modules/vue-html2pdf/dist/vue-html2pdf.esm.js");
-/* harmony import */ var html2pdf_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! html2pdf.js */ "./node_modules/html2pdf.js/dist/html2pdf.js");
-/* harmony import */ var html2pdf_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(html2pdf_js__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _i18n__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../i18n */ "./resources/js/i18n.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _chenfengyuan_vue_qrcode__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @chenfengyuan/vue-qrcode */ "./node_modules/@chenfengyuan/vue-qrcode/dist/vue-qrcode.js");
+/* harmony import */ var _chenfengyuan_vue_qrcode__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_chenfengyuan_vue_qrcode__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var vue_html2pdf__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-html2pdf */ "./node_modules/vue-html2pdf/dist/vue-html2pdf.esm.js");
+/* harmony import */ var html2pdf_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! html2pdf.js */ "./node_modules/html2pdf.js/dist/html2pdf.js");
+/* harmony import */ var html2pdf_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(html2pdf_js__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _i18n__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../i18n */ "./resources/js/i18n.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -296,12 +304,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   data: function data() {
     return {
       breadcrumb_items: [{
-        text: _i18n__WEBPACK_IMPORTED_MODULE_3__["default"].t('Асосий саҳифа'),
+        text: _i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t('Асосий саҳифа'),
         to: '/',
         disabled: false,
         exact: true
       }, {
-        text: 'Менинг аризаларим',
+        text: _i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t('Менинг аризаларим'),
         to: '/applications',
         disabled: false,
         exact: true
@@ -318,9 +326,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       dialog: false,
       // dialogResult: false,
       items: [{
-        tab: "Аризачи умумиy маълумотлари"
+        tab: _i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t("Аризачи умумий маълумотлари")
       }, {
-        tab: 'Ариза ҳолати'
+        tab: _i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t("Ариза ҳолати")
       }],
       showPdf: false
     };
@@ -329,101 +337,122 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     if (typeof this.$route.params.key != 'undefined' && this.$route.params.key.length > 0) {
       this.getAppData(this.$route.params.key);
     } else if (!this.$auth.user()) {
-      this.$toast.success('Авторизациядан ўтишингиз талаб қилинади!');
+      this.$toast.success(_i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t("Авторизациядан ўтишингиз талаб қилинади!"));
       this.$router.push('/login');
     } else this.getAppData();
   },
-  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapState)(['loading'])),
+  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_5__.mapState)(['loading'])),
   methods: {
     getAppData: function getAppData() {
-      var _this2 = this;
+      var _arguments = arguments,
+          _this2 = this;
 
-      var key = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        var key, _this, params;
 
-      var _this = this;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                key = _arguments.length > 0 && _arguments[0] !== undefined ? _arguments[0] : null;
+                _this = _this2;
+                params = null;
 
-      var params = null;
-      if (key && key.length > 0) params = {
-        appNum: _this.$route.params.id,
-        password: key
-      };else params = {
-        appNum: _this.$route.params.id
-      };
-      setTimeout(function () {
-        _this2.$store.commit('setLoading', true);
+                if (!_this.$route.query.appNum) {
+                  if (key && key.length > 0) params = {
+                    appNum: _this.$route.params.id,
+                    password: key
+                  };else params = {
+                    appNum: _this.$route.params.id
+                  };
+                } else {
+                  params = {
+                    appNum: _this.$route.query.appNum
+                  };
+                }
 
-        axios.get("/api/v1/ex_api/appeal-check", {
-          params: params
-        }).then(function (response) {
-          if (typeof response.data.data !== "undefined") {
-            if (typeof response.data.data.file != 'undefined' && typeof response.data.data.file[0] !== 'undefined' && response.data.data.file[0] !== null) {
-              _this.fileAnswer = response.data.data.file;
+                _this2.$store.commit('setLoading', true);
+
+                _context.next = 7;
+                return axios.get("/api/v1/ex_api/appeal-check", {
+                  params: params
+                }).then(function (response) {
+                  if (typeof response.data.data !== "undefined") {
+                    if (typeof response.data.data.file != 'undefined' && typeof response.data.data.file[0] !== 'undefined' && response.data.data.file[0] !== null) {
+                      _this.fileAnswer = response.data.data.file;
+                    }
+
+                    if (typeof response.data.data.fileQuestion != 'undefined' && response.data.data.fileQuestion != null && typeof response.data.data.fileQuestion['fileName'] !== 'undefined') {
+                      _this.fileQuestion = response.data.data.fileQuestion;
+                    }
+
+                    if (typeof response.data.data.fileAnswer != 'undefined' && response.data.data.fileAnswer != null && typeof response.data.data.fileAnswer[0] !== 'undefined' && response.data.data.fileAnswer[0] !== null) {
+                      _this.fileAnswer = response.data.data.fileAnswer;
+                    }
+
+                    _this.t_app = response.data.data.appeal;
+                    _this.appeal = response.data.data.appeal;
+
+                    if (typeof _this.$route.params.key != 'undefined') {
+                      //_this.dialogResult = true;
+                      _this.appeal.appNum = _this.$route.params.id;
+                      _this.appeal.password = _this.$route.params.key;
+                      _this.appeal.insTime = typeof response.data.data.appeal.insTime != 'undefined' ? response.data.data.appeal.insTime : null;
+                      _this.appeal.firstName = typeof response.data.data.appeal.firstName != 'undefined' ? response.data.data.appeal.firstName : null;
+                      _this.appeal.surName = typeof response.data.data.appeal.surName != 'undefined' ? response.data.data.appeal.surName : null;
+                      _this.appeal.lastName = typeof response.data.data.appeal.lastName != 'undefined' ? response.data.data.appeal.lastName : null;
+                      _this.appeal.address = typeof response.data.data.appeal.address != 'undefined' ? response.data.data.appeal.address : null;
+                      _this.appeal.birthDate = typeof response.data.data.appeal.birthDate != 'undefined' ? response.data.data.appeal.birthDate : null;
+                      _this.appeal.position = typeof response.data.data.appeal.position != 'undefined' ? response.data.data.appeal.position : null;
+                      _this.appeal.positionNm = typeof response.data.data.appeal.positionNm != 'undefined' ? response.data.data.appeal.positionNm : null;
+                      _this.appeal.phoneNumber = typeof response.data.data.appeal.phoneNumber != 'undefined' ? response.data.data.appeal.phoneNumber : null;
+                      _this.appeal.email = typeof response.data.data.appeal.email != 'undefined' ? response.data.data.appeal.email : null;
+                      _this.appeal.profession = typeof response.data.data.appeal.profession != 'undefined' ? response.data.data.appeal.profession : null;
+                      _this.appeal.messageBody = typeof response.data.data.appeal.messageBody != 'undefined' ? response.data.data.appeal.messageBody : null;
+                      _this.appeal.locationNm = typeof response.data.data.appeal.locationNm != 'undefined' ? response.data.data.appeal.locationNm : null;
+                      _this.appeal.status = typeof response.data.data.appeal.status != 'undefined' ? response.data.data.appeal.status : null;
+                      _this.appeal.statusNm = typeof response.data.data.appeal.statusNm != 'undefined' ? response.data.data.appeal.statusNm : null;
+                      _this.appeal.appealAnswer = typeof response.data.data.appealAnswer != 'undefined' ? response.data.data.appealAnswer : null;
+                      _this.appeal.fileAnswer = typeof response.data.data.fileAnswer != 'undefined' ? response.data.data.fileAnswer : null;
+                      _this.appeal.fileQuestion = typeof response.data.data.fileQuestion != 'undefined' ? response.data.data.fileQuestion : null; //_this.generateReport()
+                    }
+
+                    _this.breadcrumb_items.push({
+                      text: _i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t("Мурожаат -") + _this.t_app.appNum,
+                      to: '/services/appeals/' + _this.t_app.appNum,
+                      disabled: true,
+                      exact: true
+                    });
+
+                    setTimeout(function () {
+                      _this.$store.commit('setLoading', false);
+                    }, 1000);
+                  } else {
+                    _this.$store.commit('setLoading', false);
+
+                    _this.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t("Маълумот топилмади!"));
+
+                    _this.$router.push("/applications");
+                  }
+                })["catch"](function (error) {
+                  if (error) {
+                    console.log(error);
+
+                    _this.$store.commit('setLoading', false);
+
+                    _this.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t("Маълумот топилмади!") + '.');
+
+                    _this.$router.push("/applications");
+                  }
+                });
+
+              case 7:
+              case "end":
+                return _context.stop();
             }
-
-            if (typeof response.data.data.fileQuestion != 'undefined' && response.data.data.fileQuestion != null && typeof response.data.data.fileQuestion['fileName'] !== 'undefined') {
-              _this.fileQuestion = response.data.data.fileQuestion;
-            }
-
-            if (typeof response.data.data.fileAnswer != 'undefined' && response.data.data.fileAnswer != null && typeof response.data.data.fileAnswer[0] !== 'undefined' && response.data.data.fileAnswer[0] !== null) {
-              _this.fileAnswer = response.data.data.fileAnswer;
-            }
-
-            _this.t_app = response.data.data.appeal;
-            _this.appeal = response.data.data.appeal;
-
-            if (typeof _this.$route.params.key != 'undefined') {
-              //_this.dialogResult = true;
-              _this.appeal.appNum = _this.$route.params.id;
-              _this.appeal.password = _this.$route.params.key;
-              _this.appeal.insTime = typeof response.data.data.appeal.insTime != 'undefined' ? response.data.data.appeal.insTime : null;
-              _this.appeal.firstName = typeof response.data.data.appeal.firstName != 'undefined' ? response.data.data.appeal.firstName : null;
-              _this.appeal.surName = typeof response.data.data.appeal.surName != 'undefined' ? response.data.data.appeal.surName : null;
-              _this.appeal.lastName = typeof response.data.data.appeal.lastName != 'undefined' ? response.data.data.appeal.lastName : null;
-              _this.appeal.address = typeof response.data.data.appeal.address != 'undefined' ? response.data.data.appeal.address : null;
-              _this.appeal.birthDate = typeof response.data.data.appeal.birthDate != 'undefined' ? response.data.data.appeal.birthDate : null;
-              _this.appeal.position = typeof response.data.data.appeal.position != 'undefined' ? response.data.data.appeal.position : null;
-              _this.appeal.positionNm = typeof response.data.data.appeal.positionNm != 'undefined' ? response.data.data.appeal.positionNm : null;
-              _this.appeal.phoneNumber = typeof response.data.data.appeal.phoneNumber != 'undefined' ? response.data.data.appeal.phoneNumber : null;
-              _this.appeal.email = typeof response.data.data.appeal.email != 'undefined' ? response.data.data.appeal.email : null;
-              _this.appeal.profession = typeof response.data.data.appeal.profession != 'undefined' ? response.data.data.appeal.profession : null;
-              _this.appeal.messageBody = typeof response.data.data.appeal.messageBody != 'undefined' ? response.data.data.appeal.messageBody : null;
-              _this.appeal.locationNm = typeof response.data.data.appeal.locationNm != 'undefined' ? response.data.data.appeal.locationNm : null;
-              _this.appeal.status = typeof response.data.data.appeal.status != 'undefined' ? response.data.data.appeal.status : null;
-              _this.appeal.statusNm = typeof response.data.data.appeal.statusNm != 'undefined' ? response.data.data.appeal.statusNm : null;
-              _this.appeal.appealAnswer = typeof response.data.data.appealAnswer != 'undefined' ? response.data.data.appealAnswer : null;
-              _this.appeal.fileAnswer = typeof response.data.data.fileAnswer != 'undefined' ? response.data.data.fileAnswer : null;
-              _this.appeal.fileQuestion = typeof response.data.data.fileQuestion != 'undefined' ? response.data.data.fileQuestion : null; //_this.generateReport()
-            }
-
-            _this.breadcrumb_items.push({
-              text: "Мурожаат -" + _this.t_app.appNum,
-              to: '/services/appeals/' + _this.t_app.appNum,
-              disabled: true,
-              exact: true
-            });
-
-            setTimeout(function () {
-              _this.$store.commit('setLoading', false);
-            }, 1000);
-          } else {
-            _this.$store.commit('setLoading', false);
-
-            _this.$toast.error("Маълумот топилмади1!");
-
-            _this.$router.push("/applications");
           }
-        })["catch"](function (error) {
-          if (error) {
-            console.log(error);
-
-            _this.$store.commit('setLoading', false);
-
-            _this.$toast.error("Маълумот топилмади2!");
-
-            _this.$router.push("/applications");
-          }
-        });
-      }, 500);
+        }, _callee);
+      }))();
     },
     generateReport: function generateReport() {
       var _this3 = this;
@@ -443,8 +472,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   },
   components: {
-    VueHtml2pdf: vue_html2pdf__WEBPACK_IMPORTED_MODULE_1__["default"],
-    Qrcode: (_chenfengyuan_vue_qrcode__WEBPACK_IMPORTED_MODULE_0___default())
+    VueHtml2pdf: vue_html2pdf__WEBPACK_IMPORTED_MODULE_2__["default"],
+    Qrcode: (_chenfengyuan_vue_qrcode__WEBPACK_IMPORTED_MODULE_1___default())
   }
 });
 
@@ -1496,6 +1525,8 @@ var render = function () {
       1
     ),
     _vm._v(" "),
+    typeof _vm.t_app !== "undefined" &&
+    _vm.t_app &&
     typeof _vm.t_app.appNum !== "undefined"
       ? _c(
           "div",
@@ -1511,11 +1542,11 @@ var render = function () {
                       staticClass: "pb-5 mt-5 primary-color",
                       staticStyle: { "font-weight": "bold" },
                     },
-                    [_vm._v("Божхона органларига мурожаат")]
+                    [_vm._v(_vm._s(_vm.$t("Божхона органларига мурожаат")))]
                   ),
                   _vm._v(" "),
                   _c("h5", [
-                    _c("b", [_vm._v("Ариза рақами: ")]),
+                    _c("b", [_vm._v(_vm._s(_vm.$t("Ариза рақами:")) + " ")]),
                     _vm._v(_vm._s(_vm.t_app.appNum)),
                   ]),
                 ]),
@@ -1544,7 +1575,7 @@ var render = function () {
                                               "font-weight": "550",
                                             },
                                           },
-                                          [_vm._v("ЖШШИР")]
+                                          [_vm._v(_vm._s(_vm.$t("ЖШШИР")))]
                                         ),
                                         _vm._v(" "),
                                         _c("td", [
@@ -1568,7 +1599,15 @@ var render = function () {
                                               "font-weight": "550",
                                             },
                                           },
-                                          [_vm._v("Фамилияси, исми, шарифи")]
+                                          [
+                                            _vm._v(
+                                              _vm._s(
+                                                _vm.$t(
+                                                  "Фамилияси, исми, шарифи"
+                                                )
+                                              )
+                                            ),
+                                          ]
                                         ),
                                         _vm._v(" "),
                                         _c("td", [
@@ -1606,7 +1645,13 @@ var render = function () {
                                               "font-weight": "550",
                                             },
                                           },
-                                          [_vm._v("Танланган бошқарма")]
+                                          [
+                                            _vm._v(
+                                              _vm._s(
+                                                _vm.$t("Танланган бошқарма")
+                                              )
+                                            ),
+                                          ]
                                         ),
                                         _vm._v(" "),
                                         _c("td", [
@@ -1630,7 +1675,11 @@ var render = function () {
                                               "font-weight": "550",
                                             },
                                           },
-                                          [_vm._v("Такрорий ариза")]
+                                          [
+                                            _vm._v(
+                                              _vm._s(_vm.$t("Такрорий ариза"))
+                                            ),
+                                          ]
                                         ),
                                         _vm._v(" "),
                                         _c("td", [
@@ -1639,8 +1688,8 @@ var render = function () {
                                               typeof _vm.t_app.appealType !==
                                                 "undefined" &&
                                                 _vm.t_app.appealType === 2
-                                                ? "ХА"
-                                                : "ЙЎҚ"
+                                                ? _vm.$t("ХА")
+                                                : _vm.$t("ЙЎҚ")
                                             ) +
                                               "\n                                "
                                           ),
@@ -1655,7 +1704,7 @@ var render = function () {
                                               "font-weight": "550",
                                             },
                                           },
-                                          [_vm._v("Манзили")]
+                                          [_vm._v(_vm._s(_vm.$t("Манзили")))]
                                         ),
                                         _vm._v(" "),
                                         _c("td", [
@@ -1679,7 +1728,11 @@ var render = function () {
                                               "font-weight": "550",
                                             },
                                           },
-                                          [_vm._v("Телефон рақами")]
+                                          [
+                                            _vm._v(
+                                              _vm._s(_vm.$t("Телефон рақами"))
+                                            ),
+                                          ]
                                         ),
                                         _vm._v(" "),
                                         _c("td", [
@@ -1703,7 +1756,11 @@ var render = function () {
                                               "font-weight": "550",
                                             },
                                           },
-                                          [_vm._v("Электрон манзили")]
+                                          [
+                                            _vm._v(
+                                              _vm._s(_vm.$t("Электрон манзили"))
+                                            ),
+                                          ]
                                         ),
                                         _vm._v(" "),
                                         _c("td", [
@@ -1729,7 +1786,11 @@ var render = function () {
                                                   "font-weight": "550",
                                                 },
                                               },
-                                              [_vm._v("Иш жойи")]
+                                              [
+                                                _vm._v(
+                                                  _vm._s(_vm.$t("Иш жойи"))
+                                                ),
+                                              ]
                                             ),
                                             _vm._v(" "),
                                             _c("td", [
@@ -1756,7 +1817,15 @@ var render = function () {
                                                   "font-weight": "550",
                                                 },
                                               },
-                                              [_vm._v("Илова қилинган файл")]
+                                              [
+                                                _vm._v(
+                                                  _vm._s(
+                                                    _vm.$t(
+                                                      "Илова қилинган файл"
+                                                    )
+                                                  )
+                                                ),
+                                              ]
                                             ),
                                             _vm._v(" "),
                                             _c("td", [
@@ -1775,7 +1844,13 @@ var render = function () {
                                                         .fileNameEx,
                                                   },
                                                 },
-                                                [_vm._v("Юклаб олиш!")]
+                                                [
+                                                  _vm._v(
+                                                    _vm._s(
+                                                      _vm.$t("Юклаб олиш!")
+                                                    )
+                                                  ),
+                                                ]
                                               ),
                                             ]),
                                           ])
@@ -1792,7 +1867,11 @@ var render = function () {
                                                   "font-weight": "550",
                                                 },
                                               },
-                                              [_vm._v("Жавоб хати")]
+                                              [
+                                                _vm._v(
+                                                  _vm._s(_vm.$t("Жавоб хати"))
+                                                ),
+                                              ]
                                             ),
                                             _vm._v(" "),
                                             _c("td", [
@@ -1811,7 +1890,11 @@ var render = function () {
                                                         .fileNameEx,
                                                   },
                                                 },
-                                                [_vm._v("Юклаб олиш")]
+                                                [
+                                                  _vm._v(
+                                                    _vm._s(_vm.$t("Юклаб олиш"))
+                                                  ),
+                                                ]
                                               ),
                                             ]),
                                           ])
@@ -1826,7 +1909,11 @@ var render = function () {
                                                   "font-weight": "550",
                                                 },
                                               },
-                                              [_vm._v("Ариза ҳолати")]
+                                              [
+                                                _vm._v(
+                                                  _vm._s(_vm.$t("Ариза ҳолати"))
+                                                ),
+                                              ]
                                             ),
                                             _vm._v(" "),
                                             _c("td", [
@@ -1858,7 +1945,13 @@ var render = function () {
                                                   "font-weight": "550",
                                                 },
                                               },
-                                              [_vm._v("Мурожаат мазмуни")]
+                                              [
+                                                _vm._v(
+                                                  _vm._s(
+                                                    _vm.$t("Мурожаат мазмуни")
+                                                  )
+                                                ),
+                                              ]
                                             ),
                                             _vm._v(" "),
                                             _c("td", [
@@ -1882,7 +1975,7 @@ var render = function () {
                             ],
                             null,
                             false,
-                            713848382
+                            3237167298
                           ),
                         })
                       : _vm._e(),
@@ -1934,8 +2027,14 @@ var render = function () {
                                         }),
                                         _vm._v(" "),
                                         _c("p", [
-                                          _vm._v("Божхона органларига "),
-                                          _c("span", [_vm._v("мурожаат")]),
+                                          _vm._v(
+                                            _vm._s(
+                                              _vm.$t("Божхона органларига")
+                                            ) + " "
+                                          ),
+                                          _c("span", [
+                                            _vm._v(_vm._s(_vm.$t("мурожаат"))),
+                                          ]),
                                         ]),
                                         _vm._v(" "),
                                         _c("qrcode", {
@@ -1955,7 +2054,13 @@ var render = function () {
                                         _c("table", [
                                           _c("tr", [
                                             _c("td", [
-                                              _vm._v("Мурожаат тартиб рақами"),
+                                              _vm._v(
+                                                _vm._s(
+                                                  _vm.$t(
+                                                    "Мурожаат тартиб рақами"
+                                                  )
+                                                )
+                                              ),
                                             ]),
                                             _vm._v(" "),
                                             _c("td", [
@@ -1968,7 +2073,11 @@ var render = function () {
                                             ? _c("tr", [
                                                 _c("td", [
                                                   _vm._v(
-                                                    "Мурожаат текшириш коди"
+                                                    _vm._s(
+                                                      _vm.$t(
+                                                        "Мурожаат текшириш коди"
+                                                      )
+                                                    )
                                                   ),
                                                 ]),
                                                 _vm._v(" "),
@@ -1985,7 +2094,11 @@ var render = function () {
                                             ? _c("tr", [
                                                 _c("td", [
                                                   _vm._v(
-                                                    "Мурожаат тушган сана ва вақт"
+                                                    _vm._s(
+                                                      _vm.$t(
+                                                        "Мурожаат тушган сана ва вақт"
+                                                      )
+                                                    )
                                                   ),
                                                 ]),
                                                 _vm._v(" "),
@@ -2006,7 +2119,11 @@ var render = function () {
                                             ? _c("tr", [
                                                 _c("td", [
                                                   _vm._v(
-                                                    "Мурожаат муаллифи Ф.И.О"
+                                                    _vm._s(
+                                                      _vm.$t(
+                                                        "Мурожаат муаллифи Ф.И.О"
+                                                      )
+                                                    )
                                                   ),
                                                 ]),
                                                 _vm._v(" "),
@@ -2039,7 +2156,11 @@ var render = function () {
                                             ? _c("tr", [
                                                 _c("td", [
                                                   _vm._v(
-                                                    "Жисмоний ёки юридик шахснинг манзили"
+                                                    _vm._s(
+                                                      _vm.$t(
+                                                        "Жисмоний ёки юридик шахснинг манзили"
+                                                      )
+                                                    )
                                                   ),
                                                 ]),
                                                 _vm._v(" "),
@@ -2055,7 +2176,11 @@ var render = function () {
                                           "undefined"
                                             ? _c("tr", [
                                                 _c("td", [
-                                                  _vm._v("Туғилган йили"),
+                                                  _vm._v(
+                                                    _vm._s(
+                                                      _vm.$t("Туғилган йили")
+                                                    )
+                                                  ),
                                                 ]),
                                                 _vm._v(" "),
                                                 _c("td", [
@@ -2069,7 +2194,11 @@ var render = function () {
                                           typeof _vm.appeal.profession !==
                                           "undefined"
                                             ? _c("tr", [
-                                                _c("td", [_vm._v("Иш жойи")]),
+                                                _c("td", [
+                                                  _vm._v(
+                                                    _vm._s(_vm.$t("Иш жойи"))
+                                                  ),
+                                                ]),
                                                 _vm._v(" "),
                                                 _c("td", [
                                                   _vm._v(
@@ -2088,7 +2217,11 @@ var render = function () {
                                             "undefined"
                                             ? _c("tr", [
                                                 _c("td", [
-                                                  _vm._v("Юридик шахс номи"),
+                                                  _vm._v(
+                                                    _vm._s(
+                                                      _vm.$t("Юридик шахс номи")
+                                                    )
+                                                  ),
                                                 ]),
                                                 _vm._v(" "),
                                                 _c("td", [
@@ -2105,7 +2238,11 @@ var render = function () {
                                           "undefined"
                                             ? _c("tr", [
                                                 _c("td", [
-                                                  _vm._v("Телефон рақами"),
+                                                  _vm._v(
+                                                    _vm._s(
+                                                      _vm.$t("Телефон рақами")
+                                                    )
+                                                  ),
                                                 ]),
                                                 _vm._v(" "),
                                                 _c("td", [
@@ -2122,7 +2259,11 @@ var render = function () {
                                           "undefined"
                                             ? _c("tr", [
                                                 _c("td", [
-                                                  _vm._v("Электрон манзили"),
+                                                  _vm._v(
+                                                    _vm._s(
+                                                      _vm.$t("Электрон манзили")
+                                                    )
+                                                  ),
                                                 ]),
                                                 _vm._v(" "),
                                                 _c("td", [
@@ -2139,7 +2280,11 @@ var render = function () {
                                             "undefined"
                                             ? _c("tr", [
                                                 _c("td", [
-                                                  _vm._v("Ариза ҳолати"),
+                                                  _vm._v(
+                                                    _vm._s(
+                                                      _vm.$t("Ариза ҳолати")
+                                                    )
+                                                  ),
                                                 ]),
                                                 _vm._v(" "),
                                                 _c("td", [
@@ -2157,7 +2302,11 @@ var render = function () {
                                               _c("tr", [
                                                 _c("td", [
                                                   _c("p", [
-                                                    _vm._v("Мурожаат матни "),
+                                                    _vm._v(
+                                                      _vm._s(
+                                                        _vm.$t("Мурожаат матни")
+                                                      ) + " "
+                                                    ),
                                                   ]),
                                                   _vm._v(" "),
                                                   _c("p", [

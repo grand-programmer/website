@@ -140,6 +140,34 @@
                                         <div class="d-flex justify-content-end mt-2" v-else>
                                             {{$t('Маълумот топилмади')}}
                                         </div>
+                                      <div>
+                                        <p>{{$t('Рейтинг')}}</p>
+                                        <p style="margin-left: -10px">
+                                          <v-rating
+                                            hover
+                                            length="5"
+                                            size="20"
+                                            background-color="grey darken-1"
+                                            v-model="item.rating"
+                                        ></v-rating></p>
+                                      </div>
+                                      <div>
+                                        <p>{{$t('Фикр қолдириш')}}</p>
+                                        <p>
+                                          <v-textarea class="my-2"
+                                            auto-grow
+                                            outlined
+                                            rows="1"
+                                                      v-model="item.text"
+                                            row-height="15"
+                                                      hide-details
+                                        >
+
+                                        </v-textarea>
+                                        </p>
+                                        <v-btn color="primary" @click="sendCommit(item.rating,item.text,item.id)">{{ $t('Юбориш') }}</v-btn>
+                                      </div>
+
                                     </v-col>
                                 </v-row>
 
@@ -182,6 +210,24 @@ export default {
         }
     },
     methods: {
+      sendCommit(rating,text,id){
+
+        if(!rating || !text){
+          this.$toast.error(this.$t('Майдонларни тўлдириб қайтадан ҳаракат қилинг'))
+        } else {
+          const panelData = this.items.filter(panelItem=>panelItem.id===id)
+          if(panelData && panelData[0]){
+            panelData[0].rating=null
+            panelData[0].text=null
+            this.$toast.success(this.$t('Маълумотлар омадли тарзда юборилди. Билдирган фикрингиз учун катта рахмат!'))
+
+          } else {
+            this.$toast.error(this.$t('Хатолик содир бўлди, қайтадан ҳаракат қилинг'))
+          }
+
+        }
+
+      },
         headerClicked(e){
             e.prevent.stop
           console.log(e)

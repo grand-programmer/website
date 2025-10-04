@@ -176,13 +176,6 @@ import Editor from '@tinymce/tinymce-vue';
 import Textfield from "../../../components/form/textfield";
 import i18n from "../../../i18n";
 
-Object.keys(rules).forEach(rule => {
-    extend(rule, {
-        ...rules[rule], // copies rule configuration
-        message: messages.messages[rule] // assign message
-
-    });
-});
 
 export default {
     name: "DocumentCreate",

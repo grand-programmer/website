@@ -190,7 +190,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         title: 'Ҳужжатлар',
         icon: 'mdi-yurt',
         to: '/admin/documents',
-        role: [2, 4]
+        role: [2, 3, 4]
       }, {
         title: 'Таржималар',
         icon: 'mdi-poll',
@@ -217,7 +217,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           icon: 'mdi-format-font',
           to: '/admin/components/typography',
       },
-       {
+        {
           title: 'google',
           icon: 'mdi-map-marker',
           to: '/admin/maps/google-maps',

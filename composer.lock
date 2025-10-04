@@ -1612,13 +1612,6 @@
                 "phpunit/phpunit": "^9.0"
             },
             "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "NotificationChannels\\Telegram\\TelegramServiceProvider"
-                    ]
-                }
-            },
             "autoload": {
                 "psr-4": {
                     "NotificationChannels\\Telegram\\": "src"

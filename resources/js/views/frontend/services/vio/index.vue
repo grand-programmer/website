@@ -53,9 +53,9 @@
                         </v-col>
                         <v-col cols="4" class="service_main_right_sidebar">
 
-                            <a href="/storage/files/Intellektual-user.pptx" class="video_link">
+                            <a :href="($i18n.locale === 'ru')?'/storage/files/vio_ru.pptx' :'/storage/files/vio_uz.pptx'" class="video_link">
                                 <img src="/img/services/bg-services.png" />
-                                <div><img src="/img/icons/play.svg"> <span>Йўриқнома</span></div>
+                                <div><img src="/img/icons/play.svg"> <span>{{$t('Йўриқнома')}}</span></div>
                             </a>
 
                             <base-material-chart-card
@@ -104,11 +104,28 @@
                                     <h4 class="card-title font-weight-light mt-2 ml-2">
                                         {{ $t('Хизматдан фойдаланганлар') }}
                                     </h4>
-                                    <p class="green--text card-title font-weight-light mt-2 ml-2">14500 та </p>
+                                    <p class="green--text card-title font-weight-light mt-2 ml-2">{{$t('14500 та')}} </p>
                                 </div>
 
 
                                 <p class="d-inline-flex font-weight-light ml-2 mt-1">
+                                    {{$t('Бугун ')}}
+                                    <v-icon
+                                        color="green"
+                                        small
+                                        class="font-weight-bold ml-1"
+                                    >
+                                        mdi-arrow-up
+                                    </v-icon>
+                                    <span class="green--text font-weight-bold"> 55%</span>
+                                    <span class="green--text mx-1">{{$t('(155 та)')}} </span>
+
+                                    {{$t('ўртача кунлик кўрсаткич')}} <span class="green--text">{{$t('(120 та)')}}</span> {{$t('дан ')}}
+                                </p>
+
+                                <!-- bu eskisi ruschasiga utkazganida tarjimasi yaxshi mano bermadi -->
+
+                                <!-- <p class="d-inline-flex font-weight-light ml-2 mt-1">
                                     Бугун
                                     <v-icon
                                         color="green"
@@ -121,7 +138,10 @@
                                     <span class="green--text mx-1">(155 та) </span>
 
                                     ўртача кунлик кўрсаткич (<span class="green--text">120 та</span>) дан
-                                </p>
+                                </p> -->
+
+
+
                                 <!--
                                                                 <template v-slot:actions>
                                                                     <v-icon

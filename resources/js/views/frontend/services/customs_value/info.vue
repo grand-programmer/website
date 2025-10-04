@@ -12,7 +12,7 @@
         <div class="page-content" v-if="app.general">
             <v-container>
                 <v-row>
-                    <h3 class="pb-5"><b>Ариза рақами: </b>{{ app.general.appNum }}</h3>
+                    <h3 class="pb-5"><b>{{$t('Ариза рақами:')}} </b>{{ app.general.appNum }}</h3>
                     <br>
                 </v-row>
                 <v-row>
@@ -47,7 +47,7 @@
 
                                 >
                                     <v-expansion-panel-header class="primary-color">
-                                        Аризачи тўғрисида маълумотлар
+                                        {{$t('Аризачи тўғрисида маълумотлар')}}
                                     </v-expansion-panel-header>
                                     <v-expansion-panel-content>
                                         <v-simple-table v-if="app.general">
@@ -55,7 +55,7 @@
                                                 <thead>
                                                 <tr>
                                                     <th class="text-left" style="font-weight: 550">
-                                                        Ариза рақами
+                                                        {{$t('Ариза рақами')}}
                                                     </th>
                                                     <th class="text-left" style="font-weight: 550">
                                                         {{
@@ -66,49 +66,49 @@
                                                 </thead>
                                                 <tbody>
                                                 <tr>
-                                                    <td style="font-weight: 550">ЖШШИР</td>
+                                                    <td style="font-weight: 550">{{$t('ЖШШИР')}}</td>
                                                     <td>{{
                                                             typeof app.general.personPin !== 'undefined' ? app.general.personPin : null
                                                         }}
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td style="font-weight: 550">Фамилияси, исми, шарифи</td>
+                                                    <td style="font-weight: 550">{{$t('Фамилияси, исми, шарифи')}}</td>
                                                     <td>{{
                                                             typeof app.general.personFio !== 'undefined' ? app.general.personFio : null
                                                         }}
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td style="font-weight: 550">СТИР</td>
+                                                    <td style="font-weight: 550">{{$t('СТИР')}}</td>
                                                     <td>{{
                                                             typeof app.general.personTin !== 'undefined' ? app.general.personTin : null
                                                         }}
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td style="font-weight: 550">Ариза юборилган ҳудуд</td>
+                                                    <td style="font-weight: 550">{{$t('Ариза юборилган ҳудуд')}}</td>
                                                     <td>{{
                                                             typeof app.general.locationNm !== 'undefined' ? app.general.locationNm : null
                                                         }}
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td style="font-weight: 550">Манзили</td>
+                                                    <td style="font-weight: 550">{{$t('Манзили')}}</td>
                                                     <td>{{
                                                             typeof app.general.personAddr !== 'undefined' ? app.general.personAddr : null
                                                         }}
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td style="font-weight: 550">Телефон рақами</td>
+                                                    <td style="font-weight: 550">{{$t('Телефон рақами')}}</td>
                                                     <td>{{
                                                             typeof app.general.personPhone !== 'undefined' ? app.general.personPhone : null
                                                         }}
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td style="font-weight: 550">Электрон манзили</td>
+                                                    <td style="font-weight: 550">{{$t('Электрон манзили')}}</td>
                                                     <td>{{
                                                             typeof app.general.personMail !== 'undefined' ? app.general.personMail : null
                                                         }}
@@ -124,14 +124,14 @@
 
                                 >
                                     <v-expansion-panel-header>
-                                        Юк тўғрисида асосий маълумотлар
+                                        {{$t('Юк тўғрисида асосий маълумотлар')}}
                                     </v-expansion-panel-header>
                                     <v-expansion-panel-content>
                                         <v-simple-table v-if="app.general">
                                             <template v-slot:default>
                                                 <tbody>
                                                 <tr>
-                                                    <td style="font-weight: 550">Юк жўнатувчи ташкилот / давлат</td>
+                                                    <td style="font-weight: 550">{{$t('Юк жўнатувчи ташкилот / давлат')}}</td>
                                                     <td>{{
                                                             typeof app.general.senderOrg !== 'undefined' ? app.general.senderOrg : ""
                                                         }} / {{
@@ -140,28 +140,28 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td style="font-weight: 550">Сотувчи ташкилот</td>
+                                                    <td style="font-weight: 550">{{$t('Сотувчи ташкилот')}}</td>
                                                     <td>{{
                                                             typeof app.general.sellerOrg !== 'undefined' ? app.general.sellerOrg : ""
                                                         }}
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td style="font-weight: 550">Товарни етказиб бериш шарти</td>
+                                                    <td style="font-weight: 550">{{$t('Товарни етказиб бериш шарти')}}</td>
                                                     <td>{{
                                                             typeof app.general.termsNm !== 'undefined' ? app.general.termsNm : ""
                                                         }}
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td style="font-weight: 550">Етказиб бериш манзили</td>
+                                                    <td style="font-weight: 550">{{$t('Етказиб бериш манзили')}}</td>
                                                     <td>{{
                                                             typeof app.general.termsAddr !== 'undefined' ? app.general.termsAddr : ""
                                                         }}
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td style="font-weight: 550">Товарнинг транспортлардаги ҳаракати
+                                                    <td style="font-weight: 550">{{$t('Товарнинг транспортлардаги ҳаракати')}}
                                                     </td>
                                                     <td>
                                                         <template v-if="typeof app.transports !=='undefined'"
@@ -184,7 +184,7 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td style="font-weight: 550">Илова қилинган ҳужжатлар</td>
+                                                    <td style="font-weight: 550">{{$t('Илова қилинган ҳужжатлар')}}</td>
                                                     <td>
                                                         <template v-if="typeof app.docs !=='undefined'"
                                                                   v-for="(doc,docindex) in app.docs">
@@ -203,7 +203,7 @@
 
                                 >
                                     <v-expansion-panel-header>
-                                        Товар тўғрисида маълумотлар
+                                        {{ $t('Товар тўғрисида маълумотлар') }}
                                     </v-expansion-panel-header>
                                     <v-expansion-panel-content>
                                         <v-simple-table>
@@ -211,7 +211,7 @@
 
                                                 <tbody>
                                                 <tr v-if="typeof app.product.hsCode !=='undefined'">
-                                                    <td style="font-weight: 550">ТИФ ТН коди</td>
+                                                    <td style="font-weight: 550">{{$t('ТИФ ТН коди')}}</td>
                                                     <td>{{
                                                             typeof app.product.hsCode !== 'undefined' ? app.product.hsCode : ""
                                                         }} - {{
@@ -220,28 +220,28 @@
                                                     </td>
                                                 </tr>
                                                 <tr v-if="typeof app.product.basicQty !=='undefined'">
-                                                    <td style="font-weight: 550">Асосий ўлчов бирлигидаги миқдори</td>
+                                                    <td style="font-weight: 550">{{$t('Асосий ўлчов бирлигидаги миқдори')}}</td>
                                                     <td>{{
                                                             typeof app.product.basicQty !== 'undefined' ? app.product.basicQty : ""
                                                         }}
                                                     </td>
                                                 </tr>
                                                 <tr v-if="typeof app.product.netto !=='undefined'">
-                                                    <td style="font-weight: 550">Нетто оғирлиги</td>
+                                                    <td style="font-weight: 550">{{$t('Нетто оғирлиги')}}</td>
                                                     <td>{{
                                                             typeof app.product.netto !== 'undefined' ? app.product.netto : ""
                                                         }}
                                                     </td>
                                                 </tr>
                                                 <tr v-if="typeof app.product.brutto !=='undefined'">
-                                                    <td style="font-weight: 550">Брутто оғирлиги</td>
+                                                    <td style="font-weight: 550">{{$t('Брутто оғирлиги')}}</td>
                                                     <td>{{
                                                             typeof app.product.brutto !== 'undefined' ? app.product.brutto : ""
                                                         }}
                                                     </td>
                                                 </tr>
                                                 <tr v-if="typeof app.product.price !=='undefined'">
-                                                    <td style="font-weight: 550">Товарнинг шартномадаги қиймати</td>
+                                                    <td style="font-weight: 550">{{$t('Товарнинг шартномадаги қиймати')}}</td>
                                                     <td>{{
                                                             typeof app.product.price !== 'undefined' ? app.product.price : ""
                                                         }}
@@ -254,7 +254,7 @@
                                                     </td>
                                                 </tr>
                                                 <tr v-if="typeof app.product.customsPrice !=='undefined'">
-                                                    <td style="font-weight: 550">Товарнинг божхона қиймати</td>
+                                                    <td style="font-weight: 550">{{$t('Товарнинг божхона қиймати')}}</td>
                                                     <td>{{
                                                             typeof app.product.customsPrice !== 'undefined' ? app.product.customsPrice : ""
                                                         }}
@@ -267,110 +267,110 @@
                                                     </td>
                                                 </tr>
                                                 <tr v-if="typeof app.product.tradeName !=='undefined' && app.product.tradeName">
-                                                    <td style="font-weight: 550">Тижорат номи</td>
+                                                    <td style="font-weight: 550">{{$t('Тижорат номи')}}</td>
                                                     <td>{{
                                                             typeof app.product.tradeName !== 'undefined' ? app.product.tradeName : ""
                                                         }}
                                                     </td>
                                                 </tr>
                                                 <tr v-if="typeof app.product.tradeMark !=='undefined' && app.product.tradeMark">
-                                                    <td style="font-weight: 550">Савдо белгиси</td>
+                                                    <td style="font-weight: 550">{{$t('Савдо белгиси')}}</td>
                                                     <td>{{
                                                             typeof app.product.tradeMark !== 'undefined' ? app.product.tradeMark : ""
                                                         }}
                                                     </td>
                                                 </tr>
                                                 <tr v-if="typeof app.product.mark !=='undefined' && app.product.mark">
-                                                    <td style="font-weight: 550">Маркаси</td>
+                                                    <td style="font-weight: 550">{{$t('Маркаси')}}</td>
                                                     <td>{{
                                                             typeof app.product.mark !== 'undefined' ? app.product.mark : ""
                                                         }}
                                                     </td>
                                                 </tr>
                                                 <tr v-if="typeof app.product.model !=='undefined' && app.product.model ">
-                                                    <td style="font-weight: 550">Модели</td>
+                                                    <td style="font-weight: 550">{{$t('Модели')}}</td>
                                                     <td>{{ app.product.model }}</td>
                                                 </tr>
                                                 <tr v-if="typeof app.product.article !=='undefined' && app.product.article">
-                                                    <td style="font-weight: 550">Артикули</td>
+                                                    <td style="font-weight: 550">{{$t('Артикули')}}</td>
                                                     <td>{{ app.product.article }}</td>
                                                 </tr>
                                                 <tr v-if="typeof app.product.sort !=='undefined' && app.product.sort && app.product.sort.length>0 ">
-                                                    <td style="font-weight: 550">Нави</td>
+                                                    <td style="font-weight: 550">{{$t('Нави')}}</td>
                                                     <td>{{ app.product.sort }}</td>
                                                 </tr>
                                                 <tr v-if="typeof app.product.sort !=='undefined' && app.product.sort  && app.product.sort.length>0 ">
-                                                    <td style="font-weight: 550">Стандарти</td>
+                                                    <td style="font-weight: 550">{{$t('Стандарти')}}</td>
                                                     <td>{{ app.product.sort }}</td>
                                                 </tr>
                                                 <tr v-if="typeof app.product.standarts !=='undefined' && app.product.standarts && app.product.standarts.length>0 ">
-                                                    <td style="font-weight: 550">Нави</td>
+                                                    <td style="font-weight: 550">{{$t('Нави')}}</td>
                                                     <td>{{ app.product.standarts }}</td>
                                                 </tr>
                                                 <tr v-if="typeof app.product.color !=='undefined' && app.product.color && app.product.color.length>0 ">
-                                                    <td style="font-weight: 550">Ранги</td>
+                                                    <td style="font-weight: 550">{{$t('Ранги')}}</td>
                                                     <td>{{ app.product.color }}</td>
                                                 </tr>
                                                 <tr v-if="typeof app.product.productGoal !=='undefined' && app.product.productGoal && app.product.productGoal.length>0 ">
-                                                    <td style="font-weight: 550">Фойдаланиш мақсади</td>
+                                                    <td style="font-weight: 550">{{$t('Фойдаланиш мақсади')}}</td>
                                                     <td>{{ app.product.productGoal }}</td>
                                                 </tr>
                                                 <tr v-if="typeof app.product.functions !=='undefined' && app.product.functions && app.product.functions.length>0 ">
                                                     <td style="font-weight: 550">
-                                                        Вазифаси
+                                                        {{$t('Вазифаси')}}
                                                     </td>
                                                     <td>{{ app.product.functions }}</td>
                                                 </tr>
                                                 <tr v-if="typeof app.product.comProp !=='undefined' && app.product.comProp && app.product.comProp.length>0 ">
-                                                    <td style="font-weight: 550">Тижорат хусусияти</td>
+                                                    <td style="font-weight: 550">{{$t('Тижорат хусусияти')}}</td>
                                                     <td>{{ app.product.comProp }}</td>
                                                 </tr>
                                                 <tr v-if="typeof app.product.techChar !=='undefined' && app.product.techChar && app.product.techChar.length>0 ">
-                                                    <td style="font-weight: 550">Техник хусусияти</td>
+                                                    <td style="font-weight: 550">{{$t('Техник хусусияти')}}</td>
                                                     <td>{{ app.product.techChar }}</td>
                                                 </tr>
                                                 <tr v-if="typeof app.product.packTypeNm !=='undefined' && app.product.packTypeNm  && app.product.packTypeNm.length>0 ">
-                                                    <td style="font-weight: 550">Ўрам тури</td>
+                                                    <td style="font-weight: 550">{{$t('Ўрам тури')}}</td>
                                                     <td>{{ app.product.packTypeNm }}</td>
                                                 </tr>
                                                 <tr v-if="typeof app.product.packQty !=='undefined' && app.product.packQty && app.product.packQty.length>0 ">
-                                                    <td style="font-weight: 550">Ўрамлар сони</td>
+                                                    <td style="font-weight: 550">{{$t('Ўрамлар сони')}}</td>
                                                     <td>{{ app.product.packQty }}</td>
                                                 </tr>
                                                 <tr v-if="typeof app.product.orignCountrNm !=='undefined' && app.product.orignCountrNm && app.product.orignCountrNm.length>0 && typeof app.product.originOrg !=='undefined' && app.product.originOrg && app.product.originOrg.length>0 ">
-                                                    <td style="font-weight: 550">Ишлаб чиқарувчи давлат / ташкилот</td>
+                                                    <td style="font-weight: 550">{{$t('Ишлаб чиқарувчи давлат / ташкилот')}}</td>
                                                     <td>{{ app.product.orignCountrNm }} / {{
                                                             app.product.originOrg
                                                         }}
                                                     </td>
                                                 </tr>
                                                 <tr v-if="typeof app.product.hsDecNum !=='undefined' && app.product.hsDecNum  && app.product.hsDecNum.length>0  && app.product.hsDecNum && typeof app.product.hsDecDate !=='undefined' && app.product.hsDecDate.length>0  && app.product.hsDecDate">
-                                                    <td style="font-weight: 550">ТИФ ТН коди бўйича берилган қарор
-                                                        рақами / санаси
+                                                    <td style="font-weight: 550">{{$t('ТИФ ТН коди бўйича берилган қарор')}}
+                                                        {{$t('рақами / санаси')}}
                                                     </td>
                                                     <td>{{ app.product.hsDecNum }} / {{ app.product.hsDecDate }}</td>
                                                 </tr>
                                                 <tr v-if="typeof app.product.hsDecNum !=='undefined' && app.product.hsDecNum && app.product.hsDecNum.length>0 && typeof app.product.hsDecDate !=='undefined'  && app.product.hsDecDate && app.product.hsDecDate.length>0  ">
-                                                    <td style="font-weight: 550">Илгари қабул қилинган дастлабки қарор
-                                                        рақами / санаси
+                                                    <td style="font-weight: 550">{{$t('Илгари қабул қилинган дастлабки қарор')}}
+                                                        {{$t('рақами / санаси')}}
                                                     </td>
                                                     <td>{{ app.product.inDecNum }} / {{ app.product.inDecDate }}</td>
                                                 </tr>
                                                 <tr v-if="typeof app.product.inDecNum !=='undefined' && app.product.inDecNum && app.product.inDecNum.length>0 && typeof app.product.inDecDate !=='undefined' && app.product.inDecDate  && app.product.inDecDate.length>0 ">
-                                                    <td style="font-weight: 550">Илгари қабул қилинган дастлабки қарор
-                                                        рақами / санаси
+                                                    <td style="font-weight: 550">{{$t('Илгари қабул қилинган дастлабки қарор')}}
+                                                        {{$t('рақами / санаси')}}
                                                     </td>
                                                     <td>{{ app.product.inDecNum }} / {{ app.product.inDecDate }}</td>
                                                 </tr>
                                                 <tr v-if="typeof app.product.method !=='undefined' && app.product.method && app.product.method.length>0 && typeof app.product.methodNm !=='undefined' && app.product.methodNm.length>0 ">
-                                                    <td style="font-weight: 550">Божхона қийматини аниқлаш усули</td>
+                                                    <td style="font-weight: 550">{{$t('Божхона қийматини аниқлаш усули')}}</td>
                                                     <td>{{ app.product.method }} - {{ app.product.methodNm }}
                                                         <template
                                                             v-if="typeof app.product.methodDescription !=='undefined' && app.product.methodDescription!==null && app.product.methodDescription.length>0">
                                                             <div
                                                                 v-if="typeof app.product.methodDescription !=='undefined' && app.product.methodDescription!==null && app.product.methodDescription.length>0"
                                                                 v-for="(description,dkey) in (app.product.methodDescription.split('~~~~~'))">
-                                                                <p>{{dkey+1}} - усулни қўлламаслик сабаби: {{ description }}</p>
+                                                                <p>{{dkey+1}} {{$t('- усулни қўлламаслик сабаби:')}} {{ description }}</p>
                                                             </div>
                                                         </template>
                                                     </td>
@@ -400,7 +400,7 @@
                                     >
                                         <v-row justify="start">
                                             <v-col cols="10">
-                                                <h4 class="active"> {{ appstatus.statusComment }}</h4>
+                                                <h4 class="active"> {{ $t(appstatus.statusComment) }}</h4>
                                                 <p> {{ new Date(appstatus.insTime).toLocaleString() }}</p>
 <!--                                                <p style="margin: 10px 20px; line-height: 20px; color: orange" v-if="(appstatus.status==='125' && app.general.status===125) || appstatus.status==='120' || appstatus.status==='125'" >
                                                     <template v-if="typeof appstatus.rolback !='undefined' && typeof appstatus.rolback.rollBackComment !='undefined'">{{ appstatus.rolback.rollBackComment }}</template>
@@ -417,15 +417,15 @@
 
                                                     <router-link color="primary" class="v-btn v-btn--has-bg" style="background: #39ae69; padding: 10px; color: #fff;"
                                                                  dark v-if="appstatus.status==='125' && app.general.status===125" :to="'/services/decisions/edit/'+app.general.id">
-                                                        Тузатиш учун босинг!
+                                                        {{$t('Тузатиш учун босинг!')}}'
                                                     </router-link>
                                                 <p v-if="appstatus.status==='170'">
-                                                    Сизнинг аризангиз бўйича дастлабки қарор шакллантирилди.
+                                                    {{$t('Сизнинг аризангиз бўйича дастлабки қарор шакллантирилди.')}}
 
                                                                   <v-btn
                                                                       color="primary"
                                                                       dark
-                                                                      v-if="oferta">Дастлабки қарорни юклаб олинг!</v-btn>
+                                                                      v-if="oferta">{{$t('Дастлабки қарорни юклаб олинг!')}}</v-btn>
 
                                                     <v-dialog
                                                         v-model="dialog"
@@ -441,18 +441,18 @@
                                                             v-on="on"
                                                             v-if="!oferta"
                                                         >
-                                                          Дастлабки қарорни юклаб олинг!
+                                                          {{$t('Дастлабки қарорни юклаб олинг!')}}
                                                         </v-btn>
                                                   </template>
                                                     <v-card>
                                                         <v-card-title color="primary">
-                                                          <span class="text-h5">Хизматдан фойдаланиш шартларига розимисиз?</span>
+                                                          <span class="text-h5">{{$t('Хизматдан фойдаланиш шартларига розимисиз?')}}</span>
                                                         </v-card-title>
                                                         <v-card-text>
                                                           <v-container>
                                                             <v-row>
                                                                 <a v-if="!showed" href="https://lex.uz/docs/5796669" target="_blank"
-                                                                   @click="showed=true">Хизматдан фойдаланиш шартлари билан танишиш</a>
+                                                                   @click="showed=true">{{$t('Хизматдан фойдаланиш шартлари билан танишиш')}}</a>
 
 
 
@@ -462,7 +462,7 @@
                                                                                      class="fs-6">
                                                                              <template v-slot:label>
                                                                                 <span
-                                                                                    class="fs-6 label-roziman">Хизматдан фойдаланиш шартларига розиман!</span>
+                                                                                    class="fs-6 label-roziman">{{$t('Хизматдан фойдаланиш шартларига розиман!')}}</span>
                                                                              </template>
                                                                          </v-checkbox>
                                                                 </div>
@@ -478,14 +478,14 @@
                                                                 @click="downloadPdf"
                                                                 v-if="oferta"
                                                             >
-                                                                Юклаб олиш
+                                                                {{$t('Юклаб олиш')}}
                                                             </v-btn>
                                                             <v-btn
                                                                 color="blue darken-1"
                                                                 text
                                                                 @click="dialog = false"
                                                             >
-                                                                Ёпиш
+                                                                {{$t('Ёпиш')}}
                                                             </v-btn>
 
                                                         </v-card-actions>
@@ -493,15 +493,15 @@
                                                         </v-dialog>
                                                 </p>
                                                 <p v-if="appstatus.status==='195'">
-                                                    Сизнинг аризангиз бўйича дастлабки қарор бериш бекор қилинди. Ариза бўйича хулосани <a
-                                                    @click="downloadPdf"> юлаб олинг!</a>
+                                                    {{$t('Сизнинг аризангиз бўйича дастлабки қарор бериш бекор қилинди. Ариза бўйича хулосани')}} <a
+                                                    @click="downloadPdf"> {{$T('юклаб олинг!')}}</a>
                                                 </p>
                                                 <p v-if=" ['110'].includes(appstatus.status)" style="font-size: 23px; margin-top: 10px" >
-                                                    <a :href="'https://d-qaror.customs.uz/decisionPdfDownloadRollback?stId=' + appstatus.id" target="_blank">Аризани юклаб олинг!</a>
+                                                    <a :href="'https://d-qaror.customs.uz/decisionPdfDownloadRollback?stId=' + appstatus.id" target="_blank">{{$t('Аризани юклаб олинг!')}}</a>
                                                 </p>
 
                                                 <p v-if=" ['125','120'].includes(appstatus.status)" style="font-size: 23px;margin-top: 10px " >
-                                                    <a class="v-btn btn" :href="'https://d-qaror.customs.uz/decisionPdfDownloadRollback?stId=' + appstatus.id" target="_blank">Ариза ҳолати бўйича хабарномани юклаб олинг!</a>
+                                                    <a class="v-btn btn" :href="'https://d-qaror.customs.uz/decisionPdfDownloadRollback?stId=' + appstatus.id" target="_blank">{{$t('Ариза ҳолати бўйича хабарномани юклаб олинг!')}}</a>
                                                 </p>
 
                                                 </span>
@@ -517,7 +517,7 @@
                                 >
                                     <v-row justify="start">
                                         <v-col cols="10">
-                                            <h4> Якуний хулоса </h4>
+                                            <h4> {{$t('Якуний хулоса')}} </h4>
                                             <p></p>
                                             <p></p>
                                         </v-col>
@@ -585,7 +585,7 @@ export default {
                 },
 
                 {
-                    text: 'Менинг аризаларим',
+                    text: i18n.t('Менинг аризаларим'),
                     to: '/applications',
                     disabled: false,
                     exact: true,
@@ -600,8 +600,8 @@ export default {
             dialog: false,
 
             items: [
-                {tab: "Ариза хақида умумиy маълумот"},
-                {tab: 'Ариза ҳолати'},
+                {tab: i18n.t("Ариза хақида умумий маълумот")},
+                {tab: i18n.t('Ариза ҳолати')},
 
             ],
 
@@ -638,7 +638,7 @@ export default {
                     if (typeof response.data.data !== "undefined") {
                         _this.app = response.data.data
                         _this.breadcrumb_items.push({
-                            text: "Дастлабки қарор -" + _this.app.general.appNum,
+                            text: i18n.t("Дастлабки қарор -") + _this.app.general.appNum,
                             to: '/services/decisions/' + _this.app.general.appId,
                             disabled: true,
                             exact: true,
@@ -650,7 +650,7 @@ export default {
 
                     } else {
                         _this.$store.commit('setLoading', false)
-                        _this.$toast.error("Маълумот топилмади!")
+                        _this.$toast.error(i18n.t("Маълумот топилмади!"))
                         _this.$router.push("/applications");
 
                     }
@@ -658,7 +658,7 @@ export default {
 
                 }).catch(function (error) {
                     _this.$store.commit('setLoading', false)
-                    _this.$toast.error("Маълумот топилмади!")
+                    _this.$toast.error(i18n.t("Маълумот топилмади!"))
                     _this.$router.push("/applications");
                 })
 

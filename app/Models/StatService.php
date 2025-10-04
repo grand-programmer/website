@@ -4,13 +4,20 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
-class StatService extends Model
+class StatServiceApplication extends Model
 {
     use HasFactory;
 
     protected $bhm = 330000;
     protected $table = 'statservice';
+    protected $primaryKey = 'id';
+    public $incrementing = false;
+    protected $connection='db2_odbc223';
+
+    protected $keyType = 'string';
+    // protected $guarded = false;
     public $fillable = [
         'step',
         'org_name',
@@ -34,13 +41,22 @@ class StatService extends Model
         'price',
         'status',
         'comment',
-        'statusNm',
+        'statusnm',
     ];
-    public $jsonable = ['grafalar'];
+    public $casts = ['grafalar' => 'json'];
 
     public function getBhm()
     {
         return $this->bhm;
+    }
+    protected static function boot()
+    {
+        parent::boot();
+        static::creating(function ($model) {
+            if (empty($model->{$model->getKeyName()})) {
+                $model->{$model->getKeyName()} = (string) Str::uuid();
+            }
+        });
     }
 
     public function getQuery($count = false)

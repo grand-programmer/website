@@ -155,6 +155,9 @@
 }
 
 @media (max-width: 767px) {
+    .absolute_right{
+        right: auto;
+    }
     .main_menu_area .navbar.navbar-default .navbar-header .navbar-toggle {
         border-color: #26a65b;
         transition: all 300ms linear;
@@ -304,6 +307,9 @@
 }
 
 @media (max-width: 480px) {
+    .all-news_link span{
+        display: none;
+    }
     .tab_action_buttons button {
         width: 118px;
         margin: 0;

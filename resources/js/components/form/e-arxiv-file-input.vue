@@ -2,17 +2,17 @@
     <v-row>
     <v-col cols="12">
         <ValidationProvider
-            name="ID рақами"
+            :name="$t('ID рақами')"
             v-slot="{ errors }"
         ref="myInput">
             <v-text-field
                 v-model="document.id"
-                label="ID рақами"
+                :label="$t('ID рақами')"
                 persistent-hint
                 single-line
                 :loading="loading"
                 counter="16"
-                hint="Ҳужжатнинг е-архив тизимидаги Fayl ID рақами"
+                :hint="$t('Ҳужжатнинг е-архив тизимидаги Fayl ID рақами')"
             >
                 <template v-slot:append>
                     <v-icon
@@ -62,6 +62,7 @@
 
 <script>
 import {ValidationObserver, ValidationProvider} from "vee-validate";
+import i18n from "../../i18n";
 export default {
     name: "e-arxiv-file-input",
     props: ['document', "multiple"],
@@ -169,7 +170,7 @@ export default {
                 return response.data.data;
             } else {
                 this.$refs["myInput"].applyResult({
-                    errors: ['Бундай файл топилмади'], // array of string errors
+                    errors: [i18n.t('Бундай файл топилмади')], // array of string errors
                     valid: true, // boolean state
                     failedRules: {} // should be empty since this is a manual error.
                 })

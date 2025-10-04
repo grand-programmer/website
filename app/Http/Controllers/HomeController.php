@@ -68,8 +68,8 @@ class HomeController extends Controller
             ]);
         }
         return view('index');
+/*
 
-
-        return view('home');
+        return view('home');*/
     }
 }

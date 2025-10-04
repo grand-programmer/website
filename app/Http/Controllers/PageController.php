@@ -38,6 +38,7 @@ class PageController extends Controller
                             else $item['url'] = "/page1/" . $item['url'];
                         }
                         if ($item['url'] == '#' and !(count($item->children) > 0)) return false;
+                        $item['children'] = MenuResource::collection($item['children']);
                         return $item;
                     }
                 })->whereNotNull()->toJson();

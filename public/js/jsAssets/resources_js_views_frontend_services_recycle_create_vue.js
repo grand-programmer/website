@@ -13,13 +13,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var vee_validate__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! vee-validate */ "./node_modules/vee-validate/dist/vee-validate.esm.js");
-/* harmony import */ var vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vee-validate/dist/rules */ "./node_modules/vee-validate/dist/rules.js");
-/* harmony import */ var _locales_oz_json__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../locales/oz.json */ "./resources/js/locales/oz.json");
-/* harmony import */ var _i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../i18n */ "./resources/js/i18n.js");
-/* harmony import */ var _components_form_autocomplete__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../components/form/autocomplete */ "./resources/js/components/form/autocomplete.vue");
-/* harmony import */ var _components_form_e_arxiv_file__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../components/form/e-arxiv-file */ "./resources/js/components/form/e-arxiv-file.vue");
-/* harmony import */ var _components_form_textfield__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../components/form/textfield */ "./resources/js/components/form/textfield.vue");
+/* harmony import */ var vee_validate__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vee-validate */ "./node_modules/vee-validate/dist/vee-validate.esm.js");
+/* harmony import */ var vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vee-validate/dist/rules */ "./node_modules/vee-validate/dist/rules.js");
+/* harmony import */ var _locales_oz_json__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../locales/oz.json */ "./resources/js/locales/oz.json");
+/* harmony import */ var _i18n__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../i18n */ "./resources/js/i18n.js");
+/* harmony import */ var _components_form_autocomplete__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../components/form/autocomplete */ "./resources/js/components/form/autocomplete.vue");
+/* harmony import */ var _components_form_e_arxiv_file__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../../components/form/e-arxiv-file */ "./resources/js/components/form/e-arxiv-file.vue");
+/* harmony import */ var _components_form_textfield__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../../components/form/textfield */ "./resources/js/components/form/textfield.vue");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -40,12 +40,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 //
 //
 //
@@ -1110,20 +1104,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-
-
-
+//
+//
+//
+//
+//
+//
+//
 
 
 
 
-Object.keys(vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_6__).forEach(function (rule) {
-  (0,vee_validate__WEBPACK_IMPORTED_MODULE_7__.extend)(rule, _objectSpread(_objectSpread({}, vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_6__[rule]), {}, {
-    // copies rule configuration
-    message: _locales_oz_json__WEBPACK_IMPORTED_MODULE_1__.messages[rule] // assign message
 
-  }));
-});
+
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "InitialIntellectual",
   data: function data() {
@@ -1137,36 +1131,36 @@ Object.keys(vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_6__).forEach(functi
       search_inn: null,
       colors: ['#000000', '#d747a4', '#1e2de5', '#39e70e', '#7ed1f1', '#c9b210'],
       maqomlar: [{
-        text: typeof this.application !== 'undefined' && this.application.rejim === 200 ? "Олиб чиқиладиган товарлар" : "Олиб кириладиган товарлар",
+        text: typeof this.application !== 'undefined' && this.application.rejim === 200 ? _i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t("Олиб чиқиладиган товарлар") : _i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t("Олиб кириладиган товарлар"),
         value: 1
       }, {
-        text: typeof this.application !== 'undefined' && this.application.rejim === 200 ? "Ишлатиладиган чет эл товари" : "Ўзбекистон товари",
+        text: typeof this.application !== 'undefined' && this.application.rejim === 200 ? _i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t("Ишлатиладиган чет эл товари") : _i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t("Ўзбекистон товари"),
         value: 2
       }, {
-        text: "Қайта ишлаш маҳсулоти",
+        text: _i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t("Қайта ишлаш маҳсулоти"),
         value: 3
       }, {
-        text: "Қайта ишлашда ҳосил бўладиган иккиламчи товар",
+        text: _i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t("Қайта ишлашда ҳосил бўладиган иккиламчи товар"),
         value: 4
       }, {
-        text: "Чиқиндилар",
+        text: _i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t("Чиқиндилар"),
         value: 5
       }, {
-        text: "Йўқ бўлиб кетадиган товарлар",
+        text: _i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t("Йўқ бўлиб кетадиган товарлар"),
         value: 6
       }],
       breadcrumb_items: [{
-        text: _i18n__WEBPACK_IMPORTED_MODULE_2__["default"].t('Асосий саҳифа'),
+        text: _i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t('Асосий саҳифа'),
         to: '/',
         disabled: false,
         exact: true
       }, {
-        text: 'Хизматлар',
+        text: _i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t('Хизматлар'),
         to: '/services',
         disabled: false,
         exact: true
       }, {
-        text: 'Товарни божхона ҳудудида/ҳудудидан ташқарида қайта ишлаш учун рухсатнома бериш тўғрисида ариза',
+        text: _i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t('Товарни божхона ҳудудида/ҳудудидан ташқарида қайта ишлаш учун рухсатнома бериш тўғрисида ариза'),
         to: '/services/decisions',
         disabled: true,
         exact: true
@@ -1174,28 +1168,28 @@ Object.keys(vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_6__).forEach(functi
       tovarIndex: 0,
       tab: 0,
       headers: [{
-        text: 'ТИФ ТН',
+        text: _i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t('ТИФ ТН'),
         align: 'start',
         value: 'tftn.id'
       }, {
-        text: 'Товар номи',
+        text: _i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t('Товар номи'),
         align: 'start',
         value: 'nomlanishi'
       }, {
-        text: 'Товар миқдори',
+        text: _i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t('Товар миқдори'),
         align: 'start',
         value: 'weight'
       }],
       subHeaders: [{
-        text: 'Товар номи',
+        text: _i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t('Товар номи'),
         align: 'start',
         value: 'nomlanishi'
       }, {
-        text: 'Товар миқдори',
+        text: _i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t('Товар миқдори'),
         align: 'start',
         value: 'miqdor'
       }, {
-        text: 'Операция',
+        text: _i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t('Операция'),
         align: 'start',
         value: 'actions'
       }],
@@ -1308,36 +1302,43 @@ Object.keys(vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_6__).forEach(functi
       completedSteps: [],
       tags: [],
       methodIdentificationsIn: [{
-        text: "Қайта ишлаш учун олиб кирилаётган товарга муҳрлар қўйиш ва зарур бўлганда штамплар қўйиш, рақамли тарзда ва (ёки) бошқача тарзда тамғалаш",
+        text: _i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t("Қайта ишлаш учун олиб кирилаётган товарга муҳрлар қўйиш ва зарур бўлганда штамплар қўйиш, рақамли тарзда ва (ёки) бошқача тарзда тамғалаш"),
         value: 1
       }, {
-        text: "Қайта ишлаш учун олиб кирилаётган товарни батафсил тавсифлаш, уни фотосуратга тушириш ёки бошқа ўлчамда тасвирлаш",
+        text: _i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t("Қайта ишлаш учун олиб кирилаётган товарни батафсил тавсифлаш, уни фотосуратга тушириш ёки бошқа ўлчамда тасвирлаш"),
         value: 2
       }, {
-        text: "Қайта ишлаш учун олиб кирилаётган товарнинг олдиндан олинган намуналарини ёки нусхаларини ва унинг қайта ишланган маҳсулотини тадқиқ этиш натижаларини қиёслаш",
+        text: _i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t("Қайта ишлаш учун олиб кирилаётган товарнинг олдиндан олинган намуналарини ёки нусхаларини ва унинг қайта ишланган маҳсулотини тадқиқ этиш натижаларини қиёслаш"),
         value: 3
       }, {
-        text: "Қайта ишлаш учун олиб кирилаётган товарнинг завод ва серия рақамлари тарзидаги мавжуд тамғаланишидан ёхуд бошқача тарздаги тамғаланишидан фойдаланиш",
+        text: _i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t("Қайта ишлаш учун олиб кирилаётган товарнинг завод ва серия рақамлари тарзидаги мавжуд тамғаланишидан ёхуд бошқача тарздаги тамғаланишидан фойдаланиш"),
         value: 4
       }, {
-        text: "Бошқа усуллар",
+        text: _i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t("Бошқа усуллар"),
         value: 5
       }],
       methodIdentificationsOut: [{
-        text: "Қайта ишлаш учун олиб чиқилаётган товарга ваколатли шахс ва (ёки) божхона органи томонидан муҳрлар қўйиш ва, зарур бўлган ҳолларда, штамплар қўйиш, рақамли ва (ёки) бошқа турда тамғалаш",
+        text: _i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t("Қайта ишлаш учун олиб чиқилаётган товарга ваколатли шахс ва (ёки) божхона органи томонидан муҳрлар қўйиш ва, зарур бўлган ҳолларда, штамплар қўйиш, рақамли ва (ёки) бошқа турда тамғалаш"),
         value: 1
       }, {
-        text: "Қайта ишлаш учун олиб чиқилаётган товарни батафсил тавсифлаш, уни суратга тушириш ёки бошқа ўлчамларда тасвирлаш",
+        text: _i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t("Қайта ишлаш учун олиб чиқилаётган товарни батафсил тавсифлаш, уни суратга тушириш ёки бошқа ўлчамларда тасвирлаш"),
         value: 2
       }, {
-        text: "қайта ишлаш учун олиб чиқилаётган товарнинг олдиндан олинган намуналарини ёки нусхаларини ва уни қайта ишлаш маҳсулотини тадқиқ этиш натижаларини қиёслаш",
+        text: _i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t("Қайта ишлаш учун олиб чиқилаётган товарнинг олдиндан олинган намуналарини ёки нусхаларини ва уни қайта ишлаш маҳсулотини тадқиқ этиш натижаларини қиёслаш"),
         value: 3
       }, {
-        text: "Қайта ишлаш учун олиб чиқилаётган товарнинг завод ва серия рақамлари тарзида мавжуд бўлган тамғалашдан ёхуд бошқача тамғалашдан фойдаланиш",
+        text: _i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t("Қайта ишлаш учун олиб чиқилаётган товарнинг завод ва серия рақамлари тарзида мавжуд бўлган тамғалашдан ёхуд бошқача тамғалашдан фойдаланиш"),
         value: 4
       }, {
-        text: "Бошқа усуллар",
+        text: _i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t("Бошқа усуллар"),
         value: 5
+      }],
+      regims: [{
+        text: _i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t('Божхона ҳудудида қайта ишлаш'),
+        value: 100
+      }, {
+        text: _i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t('Божхона ҳудудидан ташқарида қайта ишлаш'),
+        value: 200
       }],
       loadingButton: {
         first: false,
@@ -1436,7 +1437,7 @@ Object.keys(vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_6__).forEach(functi
       }
 
       toast = getkeyValue(error);
-      this.$toast.error('Майдонларни тўлдиришда хатолик юз берди! \n ' + toast.key + ' - ' + toast.value);
+      this.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t('Майдонларни тўлдиришда хатолик юз берди!') + toast.key + ' - ' + toast.value);
     },
     getCurrencies: function getCurrencies() {
       var _this2 = this;
@@ -1448,8 +1449,8 @@ Object.keys(vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_6__).forEach(functi
             switch (_context.prev = _context.next) {
               case 0:
                 root = _this2;
-                _context.next = 3;
-                return axios.get('/api/v1/data/currency?lang=uz').then(function (result) {
+
+                _this2.$auth.plugins.http.get('/api/v1/data/currency').then(function (result) {
                   var currencies = [];
                   result.data.forEach(function (item) {
                     currencies.push({
@@ -1461,7 +1462,7 @@ Object.keys(vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_6__).forEach(functi
                   root.currencies = currencies;
                 });
 
-              case 3:
+              case 2:
               case "end":
                 return _context.stop();
             }
@@ -1935,8 +1936,8 @@ Object.keys(vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_6__).forEach(functi
 
                             _this.completedSteps.push(_this.stepper - 1);
 
-                            _this.$toast.success("Аризачи маълумотлари сақланди!");
-                          } else _this6.$toast.error("Маълумотлар киритишда хатолик юз берди. Қайта уриниб кўринг!");
+                            _this.$toast.success(_i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t("Аризачи маълумотлари сақланди!"));
+                          } else _this6.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t("Маълумотлар киритишда хатолик юз берди. Қайта уриниб кўринг!"));
 
                         case 13:
                           _this6.loadingButton.first = false;
@@ -2045,7 +2046,7 @@ Object.keys(vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_6__).forEach(functi
 
                             _this.completedSteps.push(_this.stepper - 1);
 
-                            _this.$toast.success("Ариза умумий маълумотлари сақланди!");
+                            _this.$toast.success(_i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t("Ариза умумий маълумотлари сақланди!"));
                           } else {
                             if (typeof resultData.data !== 'undefined' && resultData.data && typeof resultData.data.data !== 'undefined' && resultData.data.data && typeof resultData.data.data.errors !== 'undefined' && _typeof(resultData.data.data.errors)) {
                               if (typeof resultData.data.data.errors.appsBody !== 'undefined') _this.setCommonErrors(resultData.data.data.errors.appsBody);
@@ -2056,8 +2057,8 @@ Object.keys(vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_6__).forEach(functi
                                 if (typeof resultData.data.data.errors.docsBody[0] !== 'undefined' && typeof resultData.data.data.errors.docsBody[0]['fileId'] !== 'undefined') _this.application.ilova_error = resultData.data.data.errors.docsBody[0]['fileId'];
                               }
 
-                              _this6.$toast.error("Маълумотларингизни тўғрилаб юборинг!");
-                            } else _this6.$toast.error("Маълумотлар киритишда хатолик юз берди. Қайта уриниб кўринг!");
+                              _this6.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t("Маълумотларингизни тўғрилаб юборинг!"));
+                            } else _this6.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t("Маълумотлар киритишда хатолик юз берди. Қайта уриниб кўринг!"));
                           }
 
                         case 21:
@@ -2134,7 +2135,7 @@ Object.keys(vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_6__).forEach(functi
                             //console.log(resultData.data)
                             _this6.$cookie["delete"]('user');
 
-                            _this6.$toast.success("Сизнинг аризангиз омадли тарзда юборилди!");
+                            _this6.$toast.success(_i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t("Сизнинг аризангиз омадли тарзда юборилди!"));
 
                             setTimeout(function () {
                               _this.$router.push("/services/recycle/" + _this.app.id);
@@ -2151,8 +2152,8 @@ Object.keys(vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_6__).forEach(functi
                                 }); //_this.setProductErrors(resultData.data.data.errorsCommodity);
                               } else if (typeof resultData.data.data !== 'undefined' && typeof resultData.data.data.error !== 'undefined') {
                                 _this6.$toast.error(resultData.data.data.error);
-                              } else _this6.$toast.error("Маълумотларингизни текшириб қайтадан юборинг!");
-                            } else _this6.$toast.error("Маълумотлар киритишда хатолик юз берди. Қайта уриниб кўринг!");
+                              } else _this6.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t("Маълумотларингизни текшириб қайтадан юборинг!"));
+                            } else _this6.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t("Маълумотлар киритишда хатолик юз берди. Қайта уриниб кўринг!"));
                           } // console.log(_this.app)
 
 
@@ -2167,7 +2168,7 @@ Object.keys(vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_6__).forEach(functi
                 //isValid = true;
 
                 /*
-                                     this.stepper = 4;
+                                      this.stepper = 4;
                                     this.completedSteps.push(this.stepper - 1);*/
 
                 return _context11.abrupt("break", 19);
@@ -2284,7 +2285,7 @@ Object.keys(vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_6__).forEach(functi
               case 0:
                 _this = _this9;
                 _context13.next = 3;
-                return axios.get('/api/v1/ex_api/boshqarma').then(function (result) {
+                return _this9.$auth.plugins.http.get('/api/v1/ex_api/boshqarma').then(function (result) {
                   if (typeof result.data.data !== 'undefined') result.data.data.forEach(function (item) {
                     if (!['1790', '1791', '1701'].includes(item['kod_id'])) _this.regions.push({
                       'value': item['kod_id'],
@@ -2603,7 +2604,7 @@ Object.keys(vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_6__).forEach(functi
         if (val === null || val && val.length > 10) return;
         _this15.loading.tftncode = true; // Lazily load input items
 
-        fetch("https://new.customs.uz/api/v1/data/tftn?code=" + val).then(function (res) {
+        fetch("/api/v1/data/tftn?code=" + val).then(function (res) {
           return res.json();
         }).then(function (res) {
           res.map(function (item) {
@@ -2784,8 +2785,8 @@ Object.keys(vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_6__).forEach(functi
   computed: {
     statusList: function statusList() {
       if (this.application.rejim === 200) {
-        this.maqomlar[0].text = "Олиб чиқиладиган товарлар";
-        this.maqomlar[1].text = "Ишлатиладиган чет эл товари";
+        this.maqomlar[0].text = _i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t("Олиб чиқиладиган товарлар");
+        this.maqomlar[1].text = _i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t("Ишлатиладиган чет эл товари");
       }
 
       return this.maqomlar;
@@ -2847,11 +2848,11 @@ Object.keys(vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_6__).forEach(functi
     }
   },
   components: {
-    Textfield: _components_form_textfield__WEBPACK_IMPORTED_MODULE_5__["default"],
-    EArxivFile: _components_form_e_arxiv_file__WEBPACK_IMPORTED_MODULE_4__["default"],
-    AutocompleteField: _components_form_autocomplete__WEBPACK_IMPORTED_MODULE_3__["default"],
-    ValidationProvider: vee_validate__WEBPACK_IMPORTED_MODULE_7__.ValidationProvider,
-    ValidationObserver: vee_validate__WEBPACK_IMPORTED_MODULE_7__.ValidationObserver
+    Textfield: _components_form_textfield__WEBPACK_IMPORTED_MODULE_7__["default"],
+    EArxivFile: _components_form_e_arxiv_file__WEBPACK_IMPORTED_MODULE_6__["default"],
+    AutocompleteField: _components_form_autocomplete__WEBPACK_IMPORTED_MODULE_5__["default"],
+    ValidationProvider: vee_validate__WEBPACK_IMPORTED_MODULE_1__.ValidationProvider,
+    ValidationObserver: vee_validate__WEBPACK_IMPORTED_MODULE_1__.ValidationObserver
   }
 });
 
@@ -2873,7 +2874,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.append-slot {\n    font-size: 15px;\n}\n.recyle-product-wrapper .v-stepper__wrapper {\n    box-shadow: 0 0 28px 2px #e5e5e5;\n    padding: 20px;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.append-slot {\r\n  font-size: 15px;\n}\n.recyle-product-wrapper .v-stepper__wrapper {\r\n  box-shadow: 0 0 28px 2px #e5e5e5;\r\n  padding: 20px;\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -3057,7 +3058,13 @@ var render = function () {
                       },
                       [
                         _vm._v(
-                          "\n                        Товарни божхона ҳудудида/ҳудудидан ташқарида қайта ишлаш учун рухсатнома бериш тўғрисида\n                        ариза\n                        "
+                          "\n            " +
+                            _vm._s(
+                              _vm.$t(
+                                "Товарни божхона ҳудудида/ҳудудидан ташқарида қайта ишлаш учун рухсатнома бериш тўғрисида ариза"
+                              )
+                            ) +
+                            "\n            "
                         ),
                         _c("br"),
                       ]
@@ -3095,7 +3102,9 @@ var render = function () {
                         },
                         [
                           _vm._v(
-                            "\n                        Аризачи тўғрисида маълумотлар\n                    "
+                            "\n            " +
+                              _vm._s(_vm.$t("Аризачи тўғрисида маълумотлар")) +
+                              "\n          "
                           ),
                         ]
                       ),
@@ -3114,7 +3123,9 @@ var render = function () {
                         },
                         [
                           _vm._v(
-                            "\n                        Ариза маълумотлари\n                    "
+                            "\n            " +
+                              _vm._s(_vm.$t("Ариза маълумотлари")) +
+                              "\n          "
                           ),
                         ]
                       ),
@@ -3133,7 +3144,9 @@ var render = function () {
                         },
                         [
                           _vm._v(
-                            "\n                        Товар тўғрисидаги маълумотлар\n                    "
+                            "\n            " +
+                              _vm._s(_vm.$t("Товар тўғрисидаги маълумотлар")) +
+                              "\n          "
                           ),
                         ]
                       ),
@@ -3168,7 +3181,13 @@ var render = function () {
                                     },
                                     [
                                       _vm._v(
-                                        " Ариза тўлдириш бўйича йўриқмани юклаб\n                                олинг!\n                            "
+                                        " " +
+                                          _vm._s(
+                                            _vm.$t(
+                                              "Ариза тўлдириш бўйича йўриқмани юклаб олинг!"
+                                            )
+                                          ) +
+                                          "\n              "
                                       ),
                                     ]
                                   ),
@@ -3196,7 +3215,7 @@ var render = function () {
                                                   [
                                                     _c("ValidationProvider", {
                                                       attrs: {
-                                                        name: "ЖШШИР",
+                                                        name: _vm.$t("ЖШШИР"),
                                                         rules:
                                                           "required|digits:14",
                                                       },
@@ -3214,7 +3233,9 @@ var render = function () {
                                                                     attrs: {
                                                                       counter: 14,
                                                                       label:
-                                                                        "ЖШШИР",
+                                                                        _vm.$t(
+                                                                          "ЖШШИР"
+                                                                        ),
                                                                       required:
                                                                         "",
                                                                       disabled:
@@ -3222,7 +3243,9 @@ var render = function () {
                                                                       type: "number",
                                                                       "persistent-hint":
                                                                         "",
-                                                                      hint: "ЖШШИР - жисмоний шахснинг шахсий идентификацион рақами",
+                                                                      hint: _vm.$t(
+                                                                        "ЖШШИР - жисмоний шахснинг шахсий идентификацион рақами"
+                                                                      ),
                                                                     },
                                                                     scopedSlots:
                                                                       _vm._u(
@@ -3232,13 +3255,17 @@ var render = function () {
                                                                             fn: function () {
                                                                               return [
                                                                                 _vm._v(
-                                                                                  "ЖШШИР "
+                                                                                  _vm._s(
+                                                                                    _vm.$t(
+                                                                                      "ЖШШИР"
+                                                                                    )
+                                                                                  )
                                                                                 ),
                                                                                 _c(
                                                                                   "sup",
                                                                                   [
                                                                                     _vm._v(
-                                                                                      "*"
+                                                                                      " *"
                                                                                     ),
                                                                                   ]
                                                                                 ),
@@ -3302,7 +3329,9 @@ var render = function () {
                                                   [
                                                     _c("ValidationProvider", {
                                                       attrs: {
-                                                        name: "Ташкилот номи",
+                                                        name: _vm.$t(
+                                                          "Ташкилот номи"
+                                                        ),
                                                         rules: "required",
                                                       },
                                                       scopedSlots: _vm._u(
@@ -3319,10 +3348,14 @@ var render = function () {
                                                                     attrs: {
                                                                       counter: 200,
                                                                       label:
-                                                                        "Ташкилот номи",
+                                                                        _vm.$t(
+                                                                          "Ташкилот номи"
+                                                                        ),
                                                                       required:
                                                                         "",
-                                                                      hint: "Юридик шахснинг тўлиқ номи",
+                                                                      hint: _vm.$t(
+                                                                        "Юридик шахснинг тўлиқ номи"
+                                                                      ),
                                                                       "persistent-placeholder":
                                                                         "",
                                                                     },
@@ -3334,7 +3367,11 @@ var render = function () {
                                                                             fn: function () {
                                                                               return [
                                                                                 _vm._v(
-                                                                                  "Ташкилот номи "
+                                                                                  _vm._s(
+                                                                                    _vm.$t(
+                                                                                      "Ташкилот номи"
+                                                                                    )
+                                                                                  )
                                                                                 ),
                                                                                 _c(
                                                                                   "sup",
@@ -3405,7 +3442,7 @@ var render = function () {
                                               [
                                                 _c("ValidationProvider", {
                                                   attrs: {
-                                                    name: "СТИР",
+                                                    name: _vm.$t("СТИР"),
                                                     rules: "required",
                                                   },
                                                   scopedSlots: _vm._u(
@@ -3419,7 +3456,10 @@ var render = function () {
                                                             _c("v-text-field", {
                                                               attrs: {
                                                                 counter: 9,
-                                                                label: "СТИР",
+                                                                label:
+                                                                  _vm.$t(
+                                                                    "СТИР"
+                                                                  ),
                                                                 type: "number",
                                                                 required: "",
                                                                 disabled:
@@ -3429,7 +3469,9 @@ var render = function () {
                                                                   _vm.person.tin.toString()
                                                                     .length ===
                                                                     9,
-                                                                hint: "Солиқ тўловчининг идентификацион рақами",
+                                                                hint: _vm.$t(
+                                                                  "Солиқ тўловчининг идентификацион рақами"
+                                                                ),
                                                                 "persistent-hint":
                                                                   "",
                                                               },
@@ -3441,13 +3483,17 @@ var render = function () {
                                                                       fn: function () {
                                                                         return [
                                                                           _vm._v(
-                                                                            "СТИР "
+                                                                            _vm._s(
+                                                                              _vm.$t(
+                                                                                "СТИР"
+                                                                              )
+                                                                            )
                                                                           ),
                                                                           _c(
                                                                             "sup",
                                                                             [
                                                                               _vm._v(
-                                                                                "*"
+                                                                                " *"
                                                                               ),
                                                                             ]
                                                                           ),
@@ -3510,7 +3556,9 @@ var render = function () {
                                               [
                                                 _c("ValidationProvider", {
                                                   attrs: {
-                                                    name: "Фамилияси исми шарифи",
+                                                    name: _vm.$t(
+                                                      "Фамилияси исми шарифи"
+                                                    ),
                                                     rules: "required",
                                                   },
                                                   scopedSlots: _vm._u(
@@ -3524,11 +3572,14 @@ var render = function () {
                                                             _c("v-text-field", {
                                                               attrs: {
                                                                 counter: 200,
-                                                                label:
-                                                                  "Фамилияси исми шарифи",
+                                                                label: _vm.$t(
+                                                                  "Фамилияси исми шарифи"
+                                                                ),
                                                                 required: "",
                                                                 disabled: "",
-                                                                hint: "Аризачининг фамилияси, исми, шарифи",
+                                                                hint: _vm.$t(
+                                                                  "Аризачининг фамилияси, исми, шарифи"
+                                                                ),
                                                                 "persistent-hint":
                                                                   "",
                                                               },
@@ -3540,13 +3591,17 @@ var render = function () {
                                                                       fn: function () {
                                                                         return [
                                                                           _vm._v(
-                                                                            "Фамилияси исми шарифи "
+                                                                            _vm._s(
+                                                                              _vm.$t(
+                                                                                "Фамилияси исми шарифи"
+                                                                              )
+                                                                            )
                                                                           ),
                                                                           _c(
                                                                             "sup",
                                                                             [
                                                                               _vm._v(
-                                                                                "*"
+                                                                                " *"
                                                                               ),
                                                                             ]
                                                                           ),
@@ -3617,7 +3672,9 @@ var render = function () {
                                                                 _vm.person
                                                                   .type !==
                                                                 "01",
-                                                              name: "Лавозими",
+                                                              name: _vm.$t(
+                                                                "Лавозими"
+                                                              ),
                                                               rules: "required",
                                                             },
                                                             scopedSlots: _vm._u(
@@ -3638,7 +3695,9 @@ var render = function () {
                                                                               counter: 200,
                                                                               required:
                                                                                 "",
-                                                                              hint: "Аризачининг ташкилотдаги лавозими",
+                                                                              hint: _vm.$t(
+                                                                                "Аризачининг ташкилотдаги лавозими"
+                                                                              ),
                                                                               "persistent-placeholder":
                                                                                 "",
                                                                             },
@@ -3650,7 +3709,11 @@ var render = function () {
                                                                                   fn: function () {
                                                                                     return [
                                                                                       _vm._v(
-                                                                                        "Лавозими "
+                                                                                        _vm._s(
+                                                                                          _vm.$t(
+                                                                                            "Лавозими"
+                                                                                          )
+                                                                                        )
                                                                                       ),
                                                                                       _c(
                                                                                         "sup",
@@ -3727,7 +3790,7 @@ var render = function () {
                                               [
                                                 _c("ValidationProvider", {
                                                   attrs: {
-                                                    name: "Манзили",
+                                                    name: _vm.$t("Манзили"),
                                                     rules: "required",
                                                   },
                                                   scopedSlots: _vm._u(
@@ -3742,11 +3805,12 @@ var render = function () {
                                                               attrs: {
                                                                 counter: 200,
                                                                 required: "",
-                                                                hint:
+                                                                hint: _vm.$t(
                                                                   _vm.person
                                                                     .type == 1
                                                                     ? "Аризачининг манзили"
-                                                                    : "Юридик шахснинг манзили",
+                                                                    : "Юридик шахснинг манзили"
+                                                                ),
                                                                 "persistent-placeholder":
                                                                   "",
                                                               },
@@ -3758,13 +3822,17 @@ var render = function () {
                                                                       fn: function () {
                                                                         return [
                                                                           _vm._v(
-                                                                            "Манзили "
+                                                                            _vm._s(
+                                                                              _vm.$t(
+                                                                                "Манзили"
+                                                                              )
+                                                                            )
                                                                           ),
                                                                           _c(
                                                                             "sup",
                                                                             [
                                                                               _vm._v(
-                                                                                "*"
+                                                                                " *"
                                                                               ),
                                                                             ]
                                                                           ),
@@ -3827,7 +3895,9 @@ var render = function () {
                                               [
                                                 _c("ValidationProvider", {
                                                   attrs: {
-                                                    name: "Телефон рақами",
+                                                    name: _vm.$t(
+                                                      "Телефон рақами"
+                                                    ),
                                                     rules: "required",
                                                   },
                                                   scopedSlots: _vm._u(
@@ -3852,9 +3922,13 @@ var render = function () {
                                                               ],
                                                               attrs: {
                                                                 label:
-                                                                  "Телефон рақами",
+                                                                  _vm.$t(
+                                                                    "Телефон рақами"
+                                                                  ),
                                                                 required: "",
-                                                                hint: "Аризачининг телефон рақами",
+                                                                hint: _vm.$t(
+                                                                  "Аризачининг телефон рақами"
+                                                                ),
                                                                 "persistent-placeholder":
                                                                   "",
                                                               },
@@ -3866,13 +3940,17 @@ var render = function () {
                                                                       fn: function () {
                                                                         return [
                                                                           _vm._v(
-                                                                            "Телефон рақами "
+                                                                            _vm._s(
+                                                                              _vm.$t(
+                                                                                "Телефон рақами"
+                                                                              )
+                                                                            )
                                                                           ),
                                                                           _c(
                                                                             "sup",
                                                                             [
                                                                               _vm._v(
-                                                                                "*"
+                                                                                " *"
                                                                               ),
                                                                             ]
                                                                           ),
@@ -3935,7 +4013,9 @@ var render = function () {
                                               [
                                                 _c("ValidationProvider", {
                                                   attrs: {
-                                                    name: "Электрон почта",
+                                                    name: _vm.$t(
+                                                      "Электрон почта"
+                                                    ),
                                                     rules: "required|email",
                                                   },
                                                   scopedSlots: _vm._u(
@@ -3949,10 +4029,13 @@ var render = function () {
                                                             _c("v-text-field", {
                                                               attrs: {
                                                                 counter: 200,
-                                                                label:
-                                                                  "Электрон почта манзили",
+                                                                label: _vm.$t(
+                                                                  "Электрон почта манзили"
+                                                                ),
                                                                 required: "",
-                                                                hint: "Аризачининг электрон почтаси",
+                                                                hint: _vm.$t(
+                                                                  "Аризачининг электрон почтаси"
+                                                                ),
                                                                 "persistent-placeholder":
                                                                   "",
                                                               },
@@ -3964,13 +4047,17 @@ var render = function () {
                                                                       fn: function () {
                                                                         return [
                                                                           _vm._v(
-                                                                            "Электрон почта манзили "
+                                                                            _vm._s(
+                                                                              _vm.$t(
+                                                                                "Электрон почта манзили"
+                                                                              )
+                                                                            )
                                                                           ),
                                                                           _c(
                                                                             "sup",
                                                                             [
                                                                               _vm._v(
-                                                                                "*"
+                                                                                " *"
                                                                               ),
                                                                             ]
                                                                           ),
@@ -4056,7 +4143,9 @@ var render = function () {
                                         },
                                         [
                                           _vm._v(
-                                            "\n                                        Орқага\n                                    "
+                                            "\n                    " +
+                                              _vm._s(_vm.$t("Орқага")) +
+                                              "\n                  "
                                           ),
                                         ]
                                       ),
@@ -4073,7 +4162,9 @@ var render = function () {
                                         },
                                         [
                                           _vm._v(
-                                            "\n                                        Давом этиш\n                                    "
+                                            "\n                    " +
+                                              _vm._s(_vm.$t("Давом этиш")) +
+                                              "\n                  "
                                           ),
                                         ]
                                       ),
@@ -4100,7 +4191,13 @@ var render = function () {
                                         [_vm._v("*")]
                                       ),
                                       _vm._v(
-                                        " - майдонлари албатта тўлдирилиши шарт!\n                                "
+                                        " " +
+                                          _vm._s(
+                                            _vm.$t(
+                                              "- майдонлари албатта тўлдирилиши шарт!"
+                                            )
+                                          ) +
+                                          "\n                "
                                       ),
                                     ]
                                   ),
@@ -4137,7 +4234,13 @@ var render = function () {
                                     },
                                     [
                                       _vm._v(
-                                        " Ариза тўлдириш бўйича йўриқмани юклаб\n                                олинг!\n                            "
+                                        " " +
+                                          _vm._s(
+                                            _vm.$t(
+                                              "Ариза тўлдириш бўйича йўриқмани юклаб олинг!"
+                                            )
+                                          ) +
+                                          "\n              "
                                       ),
                                     ]
                                   ),
@@ -4186,20 +4289,14 @@ var render = function () {
                                                               "autocomplete-field",
                                                               {
                                                                 attrs: {
-                                                                  options: [
-                                                                    {
-                                                                      text: "Божхона ҳудудида қайта ишлаш",
-                                                                      value: 100,
-                                                                    },
-                                                                    {
-                                                                      text: "Божхона ҳудудидан ташқарида қайта ишлаш",
-                                                                      value: 200,
-                                                                    },
-                                                                  ],
+                                                                  options:
+                                                                    _vm.regims,
                                                                   rules:
                                                                     "required",
                                                                   title:
-                                                                    "Режим",
+                                                                    _vm.$t(
+                                                                      "Режим"
+                                                                    ),
                                                                   hint: " ",
                                                                 },
                                                                 model: {
@@ -4245,8 +4342,9 @@ var render = function () {
                                                                     200
                                                                       ? _vm.methodIdentificationsOut
                                                                       : _vm.methodIdentificationsIn,
-                                                                  title:
-                                                                    "Идентификация усули",
+                                                                  title: _vm.$t(
+                                                                    "Идентификация усули"
+                                                                  ),
                                                                   rules:
                                                                     "required",
                                                                 },
@@ -4300,7 +4398,9 @@ var render = function () {
                                                               "ValidationProvider",
                                                               {
                                                                 attrs: {
-                                                                  name: "Бошқа идентификация усули",
+                                                                  name: _vm.$t(
+                                                                    "Бошқа идентификация усули"
+                                                                  ),
                                                                   rules:
                                                                     "required",
                                                                 },
@@ -4321,10 +4421,14 @@ var render = function () {
                                                                                 attrs:
                                                                                   {
                                                                                     label:
-                                                                                      "Идентификация усулини ёзинг",
+                                                                                      _vm.$t(
+                                                                                        "Идентификация усулини ёзинг"
+                                                                                      ),
                                                                                     required:
                                                                                       "",
-                                                                                    hint: "Рўйхатда йўқ бўлган идентификация усули",
+                                                                                    hint: _vm.$t(
+                                                                                      "Рўйхатда йўқ бўлган идентификация усули"
+                                                                                    ),
                                                                                     "persistent-placeholder":
                                                                                       "",
                                                                                   },
@@ -4394,7 +4498,9 @@ var render = function () {
                                                                   options:
                                                                     _vm.regions,
                                                                   title:
-                                                                    "Ҳудудий бошқарма",
+                                                                    _vm.$t(
+                                                                      "Ҳудудий бошқарма"
+                                                                    ),
                                                                   rules:
                                                                     "required",
                                                                 },
@@ -4434,7 +4540,9 @@ var render = function () {
                                                               "ValidationProvider",
                                                               {
                                                                 attrs: {
-                                                                  name: "Қайта ишлаш операцияларининг қиймати",
+                                                                  name: _vm.$t(
+                                                                    "Қайта ишлаш операцияларининг қиймати"
+                                                                  ),
                                                                   rules:
                                                                     "required",
                                                                 },
@@ -4455,10 +4563,14 @@ var render = function () {
                                                                                 attrs:
                                                                                   {
                                                                                     label:
-                                                                                      "Қайта ишлаш операцияларининг қиймати *",
+                                                                                      _vm.$t(
+                                                                                        "Қайта ишлаш операцияларининг қиймати *"
+                                                                                      ),
                                                                                     required:
                                                                                       "",
-                                                                                    hint: "Қайта ишлаш операцияларининг қиймати",
+                                                                                    hint: _vm.$t(
+                                                                                      "Қайта ишлаш операцияларининг қиймати"
+                                                                                    ),
                                                                                     "persistent-placeholder":
                                                                                       "",
                                                                                   },
@@ -4525,7 +4637,9 @@ var render = function () {
                                                               "ValidationProvider",
                                                               {
                                                                 attrs: {
-                                                                  name: "Валюта",
+                                                                  name: _vm.$t(
+                                                                    "Валюта"
+                                                                  ),
                                                                   rules:
                                                                     "required",
                                                                 },
@@ -4546,7 +4660,9 @@ var render = function () {
                                                                                 attrs:
                                                                                   {
                                                                                     label:
-                                                                                      "Валюта *",
+                                                                                      _vm.$t(
+                                                                                        "Валюта *"
+                                                                                      ),
                                                                                     required:
                                                                                       "",
                                                                                     items:
@@ -4567,13 +4683,13 @@ var render = function () {
                                                                                         ) {
                                                                                           return [
                                                                                             _vm._v(
-                                                                                              "\n                                                                " +
+                                                                                              "\n                                " +
                                                                                                 _vm._s(
                                                                                                   data
                                                                                                     .item
                                                                                                     .text
                                                                                                 ) +
-                                                                                                "\n                                                            "
+                                                                                                "\n                              "
                                                                                             ),
                                                                                           ]
                                                                                         },
@@ -4645,7 +4761,9 @@ var render = function () {
                                                               "ValidationProvider",
                                                               {
                                                                 attrs: {
-                                                                  name: "Қайта ишлаш муддати",
+                                                                  name: _vm.$t(
+                                                                    "Қайта ишлаш муддати"
+                                                                  ),
                                                                   rules:
                                                                     "required|max_value:24|numeric|between:1,24",
                                                                 },
@@ -4666,12 +4784,16 @@ var render = function () {
                                                                                 attrs:
                                                                                   {
                                                                                     label:
-                                                                                      "Қайта ишлаш муддати *",
+                                                                                      _vm.$t(
+                                                                                        "Қайта ишлаш муддати *"
+                                                                                      ),
                                                                                     "persistent-placeholder":
                                                                                       "",
                                                                                     name: "muddat",
                                                                                     type: "number",
-                                                                                    hint: "1 ойдан 24 ойгача муддатда",
+                                                                                    hint: _vm.$t(
+                                                                                      "1 ойдан 24 ойгача муддатда"
+                                                                                    ),
                                                                                   },
                                                                                 scopedSlots:
                                                                                   _vm._u(
@@ -4681,7 +4803,13 @@ var render = function () {
                                                                                         fn: function () {
                                                                                           return [
                                                                                             _vm._v(
-                                                                                              "\n                                                                ой\n                                                            "
+                                                                                              "\n                                " +
+                                                                                                _vm._s(
+                                                                                                  _vm.$t(
+                                                                                                    "ой"
+                                                                                                  )
+                                                                                                ) +
+                                                                                                "\n                              "
                                                                                             ),
                                                                                           ]
                                                                                         },
@@ -4754,7 +4882,9 @@ var render = function () {
                                                               "ValidationProvider",
                                                               {
                                                                 attrs: {
-                                                                  name: "Қайта ишловчи СТИРи",
+                                                                  name: _vm.$t(
+                                                                    "Қайта ишловчи СТИРи"
+                                                                  ),
                                                                   rules:
                                                                     "required",
                                                                 },
@@ -4779,10 +4909,14 @@ var render = function () {
                                                                                     attrs:
                                                                                       {
                                                                                         label:
-                                                                                          "Қайта ишловчи СТИРи*",
+                                                                                          _vm.$t(
+                                                                                            "Қайта ишловчи СТИРи*"
+                                                                                          ),
                                                                                         required:
                                                                                           "",
-                                                                                        hint: "Қайта ишловчи СТИРи",
+                                                                                        hint: _vm.$t(
+                                                                                          "Қайта ишловчи СТИРи"
+                                                                                        ),
                                                                                         "persistent-placeholder":
                                                                                           "",
                                                                                         items:
@@ -4848,7 +4982,9 @@ var render = function () {
                                                                                     attrs:
                                                                                       {
                                                                                         label:
-                                                                                          "Қайта ишловчи ташкилот*",
+                                                                                          _vm.$t(
+                                                                                            "Қайта ишловчи ташкилот*"
+                                                                                          ),
                                                                                         "persistent-placeholder":
                                                                                           "",
                                                                                       },
@@ -4915,7 +5051,9 @@ var render = function () {
                                                               "ValidationProvider",
                                                               {
                                                                 attrs: {
-                                                                  name: "Шартнома идентификация рақами",
+                                                                  name: _vm.$t(
+                                                                    "Шартнома идентификация рақами"
+                                                                  ),
                                                                   rules:
                                                                     "required",
                                                                 },
@@ -4940,7 +5078,9 @@ var render = function () {
                                                                                     attrs:
                                                                                       {
                                                                                         label:
-                                                                                          "Шартнома идентификация рақами*",
+                                                                                          _vm.$t(
+                                                                                            "Шартнома идентификация рақами*"
+                                                                                          ),
                                                                                         required:
                                                                                           "",
                                                                                         "persistent-placeholder":
@@ -5001,7 +5141,9 @@ var render = function () {
                                                                                       {
                                                                                         type: "number",
                                                                                         label:
-                                                                                          "Шартнома идентификация рақами",
+                                                                                          _vm.$t(
+                                                                                            "Шартнома идентификация рақами"
+                                                                                          ),
                                                                                         "persistent-placeholder":
                                                                                           "",
                                                                                       },
@@ -5068,7 +5210,9 @@ var render = function () {
                                                               "ValidationProvider",
                                                               {
                                                                 attrs: {
-                                                                  name: "Товар қайта ишланадиган жой манзили",
+                                                                  name: _vm.$t(
+                                                                    "Товар қайта ишланадиган жой манзили"
+                                                                  ),
                                                                   rules:
                                                                     "required",
                                                                 },
@@ -5089,10 +5233,14 @@ var render = function () {
                                                                                 attrs:
                                                                                   {
                                                                                     label:
-                                                                                      "Товар қайта ишланадиган жой манзили *",
+                                                                                      _vm.$t(
+                                                                                        "Товар қайта ишланадиган жой манзили *"
+                                                                                      ),
                                                                                     required:
                                                                                       "",
-                                                                                    hint: "Товар қайта ишланадиган жой манзили",
+                                                                                    hint: _vm.$t(
+                                                                                      "Товар қайта ишланадиган жой манзили"
+                                                                                    ),
                                                                                     "persistent-placeholder":
                                                                                       "",
                                                                                   },
@@ -5164,9 +5312,12 @@ var render = function () {
                                                                   _vm
                                                                     .application
                                                                     .ilova_error,
-                                                                title:
-                                                                  "Илова қилинадиган файллар",
-                                                                hint: "Шартнома, техник иқтисодий асос, чиқиш нормаси, идентификация усули ",
+                                                                title: _vm.$t(
+                                                                  "Илова қилинадиган файллар"
+                                                                ),
+                                                                hint: _vm.$t(
+                                                                  "Шартнома, техник иқтисодий асос, чиқиш нормаси, идентификация усули"
+                                                                ),
                                                               },
                                                               model: {
                                                                 value:
@@ -5211,8 +5362,9 @@ var render = function () {
                                                           [
                                                             _c("textfield", {
                                                               attrs: {
-                                                                title:
-                                                                  "Ваколатли органлар рухсатномаси",
+                                                                title: _vm.$t(
+                                                                  "Ваколатли органлар рухсатномаси"
+                                                                ),
                                                                 "persistent-placeholder":
                                                                   "",
                                                               },
@@ -5249,8 +5401,9 @@ var render = function () {
                                                           [
                                                             _c("textfield", {
                                                               attrs: {
-                                                                title:
-                                                                  "Алмаштириладиган эквивалент товар",
+                                                                title: _vm.$t(
+                                                                  "Алмаштириладиган эквивалент товар"
+                                                                ),
                                                                 "persistent-placeholder":
                                                                   "",
                                                               },
@@ -5310,7 +5463,12 @@ var render = function () {
                                         [_vm._v("*")]
                                       ),
                                       _vm._v(
-                                        " - майдонлари албатта тўлдирилиши шарт!"
+                                        " " +
+                                          _vm._s(
+                                            _vm.$t(
+                                              "- майдонлари албатта тўлдирилиши шарт!"
+                                            )
+                                          )
                                       ),
                                     ]
                                   ),
@@ -5338,7 +5496,9 @@ var render = function () {
                                         },
                                         [
                                           _vm._v(
-                                            "\n                                        Орқага\n                                    "
+                                            "\n                    " +
+                                              _vm._s(_vm.$t("Орқага")) +
+                                              "\n                  "
                                           ),
                                         ]
                                       ),
@@ -5355,7 +5515,9 @@ var render = function () {
                                         },
                                         [
                                           _vm._v(
-                                            "\n                                        Давом этиш\n                                    "
+                                            "\n                    " +
+                                              _vm._s(_vm.$t("Давом этиш")) +
+                                              "\n                  "
                                           ),
                                         ]
                                       ),
@@ -5403,7 +5565,8 @@ var render = function () {
                                     },
                                     [
                                       _vm._v(
-                                        "Қўшиш\n                                    "
+                                        _vm._s(_vm.$t("Қўшиш")) +
+                                          "\n                  "
                                       ),
                                       _c("v-icon", [
                                         _vm._v("mdi-plus-circle-outline"),
@@ -5475,9 +5638,11 @@ var render = function () {
                                                 ]
                                               : [
                                                   _vm._v(
-                                                    "\n                                            Товар\n                                            " +
+                                                    "\n                      " +
+                                                      _vm._s(_vm.$t("Товар")) +
+                                                      "\n                      " +
                                                       _vm._s(key + 1) +
-                                                      "\n                                        "
+                                                      "\n                    "
                                                   ),
                                                 ],
                                             _vm._v(" "),
@@ -5498,7 +5663,7 @@ var render = function () {
                                                   },
                                                   [
                                                     _vm._v(
-                                                      "\n                                                mdi-close-circle-outline\n                                            "
+                                                      "\n                        mdi-close-circle-outline\n                      "
                                                     ),
                                                   ]
                                                 ),
@@ -5547,7 +5712,11 @@ var render = function () {
                                             { staticClass: "primary-color" },
                                             [
                                               _vm._v(
-                                                "Товар тўғрисидаги маълумотлар"
+                                                _vm._s(
+                                                  _vm.$t(
+                                                    "Товар тўғрисидаги маълумотлар"
+                                                  )
+                                                )
                                               ),
                                             ]
                                           ),
@@ -5592,7 +5761,9 @@ var render = function () {
                                                                         {
                                                                           attrs:
                                                                             {
-                                                                              name: "Мақоми",
+                                                                              name: _vm.$t(
+                                                                                "Мақоми"
+                                                                              ),
                                                                             },
                                                                           scopedSlots:
                                                                             _vm._u(
@@ -5611,7 +5782,9 @@ var render = function () {
                                                                                           attrs:
                                                                                             {
                                                                                               label:
-                                                                                                "Мақоми *",
+                                                                                                _vm.$t(
+                                                                                                  "Мақоми *"
+                                                                                                ),
                                                                                               required:
                                                                                                 "",
                                                                                               items:
@@ -5655,13 +5828,13 @@ var render = function () {
                                                                                                             }
                                                                                                           ),
                                                                                                           _vm._v(
-                                                                                                            "\n                                                                            " +
+                                                                                                            "\n                                      " +
                                                                                                               _vm._s(
                                                                                                                 data
                                                                                                                   .item
                                                                                                                   .text
                                                                                                               ) +
-                                                                                                              "\n                                                                        "
+                                                                                                              "\n                                    "
                                                                                                           ),
                                                                                                         ]
                                                                                                       ),
@@ -5698,13 +5871,13 @@ var render = function () {
                                                                                                             }
                                                                                                           ),
                                                                                                           _vm._v(
-                                                                                                            "\n                                                                            " +
+                                                                                                            "\n                                      " +
                                                                                                               _vm._s(
                                                                                                                 data
                                                                                                                   .item
                                                                                                                   .text
                                                                                                               ) +
-                                                                                                              "\n                                                                        "
+                                                                                                              "\n                                    "
                                                                                                           ),
                                                                                                         ]
                                                                                                       ),
@@ -5786,7 +5959,9 @@ var render = function () {
                                                                         {
                                                                           attrs:
                                                                             {
-                                                                              name: "ТИФ ТН код",
+                                                                              name: _vm.$t(
+                                                                                "ТИФ ТН код"
+                                                                              ),
                                                                             },
                                                                           scopedSlots:
                                                                             _vm._u(
@@ -5805,7 +5980,9 @@ var render = function () {
                                                                                           attrs:
                                                                                             {
                                                                                               label:
-                                                                                                "ТИФ ТН кодни киритинг *",
+                                                                                                _vm.$t(
+                                                                                                  "ТИФ ТН кодни киритинг *"
+                                                                                                ),
                                                                                               required:
                                                                                                 "",
                                                                                               items:
@@ -5820,7 +5997,9 @@ var render = function () {
                                                                                               "item-value":
                                                                                                 "id",
                                                                                               name: "tftncode",
-                                                                                              hint: "Товарнинг ТИФ ТН коди",
+                                                                                              hint: _vm.$t(
+                                                                                                "Товарнинг ТИФ ТН коди"
+                                                                                              ),
                                                                                               "persistent-placeholder":
                                                                                                 "",
                                                                                               "hide-no-data":
@@ -5946,7 +6125,9 @@ var render = function () {
                                                                         {
                                                                           attrs:
                                                                             {
-                                                                              name: "Товар номи",
+                                                                              name: _vm.$t(
+                                                                                "Товар номи"
+                                                                              ),
                                                                             },
                                                                           scopedSlots:
                                                                             _vm._u(
@@ -5965,11 +6146,15 @@ var render = function () {
                                                                                           attrs:
                                                                                             {
                                                                                               label:
-                                                                                                "Товар номи *",
+                                                                                                _vm.$t(
+                                                                                                  "Товар номи *"
+                                                                                                ),
                                                                                               "persistent-placeholder":
                                                                                                 "",
                                                                                               name: "nomlanishi",
-                                                                                              hint: "Товар номи",
+                                                                                              hint: _vm.$t(
+                                                                                                "Товар номи"
+                                                                                              ),
                                                                                             },
                                                                                           model:
                                                                                             {
@@ -6042,7 +6227,9 @@ var render = function () {
                                                                         {
                                                                           attrs:
                                                                             {
-                                                                              name: "Товар қиймати",
+                                                                              name: _vm.$t(
+                                                                                "Товар қиймати"
+                                                                              ),
                                                                             },
                                                                           scopedSlots:
                                                                             _vm._u(
@@ -6061,11 +6248,15 @@ var render = function () {
                                                                                           attrs:
                                                                                             {
                                                                                               label:
-                                                                                                "Товар қиймати *",
+                                                                                                _vm.$t(
+                                                                                                  "Товар қиймати *"
+                                                                                                ),
                                                                                               "persistent-placeholder":
                                                                                                 "",
                                                                                               name: "tasnifi",
-                                                                                              hint: "Қиймати",
+                                                                                              hint: _vm.$t(
+                                                                                                "Қиймати"
+                                                                                              ),
                                                                                             },
                                                                                           scopedSlots:
                                                                                             _vm._u(
@@ -6075,7 +6266,7 @@ var render = function () {
                                                                                                   fn: function () {
                                                                                                     return [
                                                                                                       _vm._v(
-                                                                                                        "\n                                                                        " +
+                                                                                                        "\n                                    " +
                                                                                                           _vm._s(
                                                                                                             typeof _vm
                                                                                                               .application
@@ -6104,7 +6295,7 @@ var render = function () {
                                                                                                                   .name
                                                                                                               : ""
                                                                                                           ) +
-                                                                                                          "\n                                                                    "
+                                                                                                          "\n                                  "
                                                                                                       ),
                                                                                                     ]
                                                                                                   },
@@ -6185,7 +6376,9 @@ var render = function () {
                                                                         {
                                                                           attrs:
                                                                             {
-                                                                              name: "Валюта",
+                                                                              name: _vm.$t(
+                                                                                "Валюта"
+                                                                              ),
                                                                             },
                                                                           scopedSlots:
                                                                             _vm._u(
@@ -6204,7 +6397,9 @@ var render = function () {
                                                                                           attrs:
                                                                                             {
                                                                                               label:
-                                                                                                "Валюта *",
+                                                                                                _vm.$t(
+                                                                                                  "Валюта *"
+                                                                                                ),
                                                                                               required:
                                                                                                 "",
                                                                                               items:
@@ -6225,13 +6420,13 @@ var render = function () {
                                                                                                   ) {
                                                                                                     return [
                                                                                                       _vm._v(
-                                                                                                        "\n                                                                        " +
+                                                                                                        "\n                                    " +
                                                                                                           _vm._s(
                                                                                                             data
                                                                                                               .item
                                                                                                               .text
                                                                                                           ) +
-                                                                                                          "\n                                                                    "
+                                                                                                          "\n                                  "
                                                                                                       ),
                                                                                                     ]
                                                                                                   },
@@ -6311,7 +6506,9 @@ var render = function () {
                                                                         {
                                                                           attrs:
                                                                             {
-                                                                              name: "Асосий ўлчов бирлигидаги миқдори",
+                                                                              name: _vm.$t(
+                                                                                "Асосий ўлчов бирлигидаги миқдори"
+                                                                              ),
                                                                             },
                                                                           scopedSlots:
                                                                             _vm._u(
@@ -6330,11 +6527,15 @@ var render = function () {
                                                                                           attrs:
                                                                                             {
                                                                                               label:
-                                                                                                "Асосий ўлчов бирлигидаги миқдори *",
+                                                                                                _vm.$t(
+                                                                                                  "Асосий ўлчов бирлигидаги миқдори *"
+                                                                                                ),
                                                                                               "persistent-placeholder":
                                                                                                 "",
                                                                                               name: "guvohnoma_raqami",
-                                                                                              hint: "Миқдори",
+                                                                                              hint: _vm.$t(
+                                                                                                "Миқдори"
+                                                                                              ),
                                                                                             },
                                                                                           scopedSlots:
                                                                                             _vm._u(
@@ -6351,7 +6552,11 @@ var render = function () {
                                                                                                         },
                                                                                                         [
                                                                                                           _vm._v(
-                                                                                                            "кг"
+                                                                                                            _vm._s(
+                                                                                                              _vm.$t(
+                                                                                                                "кг"
+                                                                                                              )
+                                                                                                            )
                                                                                                           ),
                                                                                                         ]
                                                                                                       ),
@@ -6447,7 +6652,9 @@ var render = function () {
                                                                             {
                                                                               attrs:
                                                                                 {
-                                                                                  name: "Қўшимча ўлчов бирлигидаги миқдори",
+                                                                                  name: _vm.$t(
+                                                                                    "Қўшимча ўлчов бирлигидаги миқдори"
+                                                                                  ),
                                                                                 },
                                                                               scopedSlots:
                                                                                 _vm._u(
@@ -6466,10 +6673,14 @@ var render = function () {
                                                                                               attrs:
                                                                                                 {
                                                                                                   label:
-                                                                                                    "Қўшимча ўлчов бирлигидаги миқдори",
+                                                                                                    _vm.$t(
+                                                                                                      "Қўшимча ўлчов бирлигидаги миқдори"
+                                                                                                    ),
                                                                                                   "persistent-placeholder":
                                                                                                     "",
-                                                                                                  hint: "Товарнинг қўшимча ўлчов бирлигидаги миқдори",
+                                                                                                  hint: _vm.$t(
+                                                                                                    "Товарнинг қўшимча ўлчов бирлигидаги миқдори"
+                                                                                                  ),
                                                                                                   name: "size",
                                                                                                   type: "number",
                                                                                                 },
@@ -6594,7 +6805,11 @@ var render = function () {
                                                                             "h4",
                                                                             [
                                                                               _vm._v(
-                                                                                "Қайта ишлаш махсулотларининг чиқиш нормаси "
+                                                                                _vm._s(
+                                                                                  _vm.$t(
+                                                                                    "Қайта ишлаш махсулотларининг чиқиш нормаси"
+                                                                                  )
+                                                                                )
                                                                               ),
                                                                             ]
                                                                           ),
@@ -6630,7 +6845,9 @@ var render = function () {
                                                                                       attrs:
                                                                                         {
                                                                                           title:
-                                                                                            "Шартли бирлик",
+                                                                                            _vm.$t(
+                                                                                              "Шартли бирлик"
+                                                                                            ),
                                                                                           rules:
                                                                                             "required",
                                                                                           options:
@@ -6715,7 +6932,9 @@ var render = function () {
                                                                                           attrs:
                                                                                             {
                                                                                               label:
-                                                                                                "Товар",
+                                                                                                _vm.$t(
+                                                                                                  "Товар"
+                                                                                                ),
                                                                                               items:
                                                                                                 _vm.listForSubProduct,
                                                                                               "item-text":
@@ -6770,7 +6989,9 @@ var render = function () {
                                                                                           attrs:
                                                                                             {
                                                                                               label:
-                                                                                                "Миқдор",
+                                                                                                _vm.$t(
+                                                                                                  "Миқдор"
+                                                                                                ),
                                                                                               "persistent-placeholder":
                                                                                                 "",
                                                                                               type: "number",
@@ -6893,6 +7114,8 @@ var render = function () {
                                                                                       _c(
                                                                                         "v-btn",
                                                                                         {
+                                                                                          staticClass:
+                                                                                            "new",
                                                                                           attrs:
                                                                                             {
                                                                                               color:
@@ -6911,7 +7134,12 @@ var render = function () {
                                                                                         },
                                                                                         [
                                                                                           _vm._v(
-                                                                                            "Қўшиш\n                                                                        "
+                                                                                            _vm._s(
+                                                                                              _vm.$t(
+                                                                                                "Қўшиш"
+                                                                                              )
+                                                                                            ) +
+                                                                                              "\n                                    "
                                                                                           ),
                                                                                         ]
                                                                                       ),
@@ -6957,6 +7185,25 @@ var render = function () {
                                                                                                   key
                                                                                                 ]
                                                                                                   .subProducts,
+                                                                                              "no-data-text":
+                                                                                                _vm.$t(
+                                                                                                  "Маълумот топилмади"
+                                                                                                ),
+                                                                                              "footer-props":
+                                                                                                {
+                                                                                                  "items-per-page-text":
+                                                                                                    _vm.$t(
+                                                                                                      "Сахифадаги элементлар сони"
+                                                                                                    ),
+                                                                                                  "items-per-page-all-text":
+                                                                                                    _vm.$t(
+                                                                                                      "Барчаси"
+                                                                                                    ),
+                                                                                                },
+                                                                                              "loading-text":
+                                                                                                _vm.$t(
+                                                                                                  "Юкланмоқда... Илтимос кутиб туринг"
+                                                                                                ),
                                                                                             },
                                                                                           scopedSlots:
                                                                                             _vm._u(
@@ -6970,11 +7217,11 @@ var render = function () {
                                                                                                       ref.header
                                                                                                     return [
                                                                                                       _vm._v(
-                                                                                                        "\n                                                                            " +
+                                                                                                        "\n                                      " +
                                                                                                           _vm._s(
                                                                                                             header.text.toUpperCase()
                                                                                                           ) +
-                                                                                                          "\n                                                                        "
+                                                                                                          "\n                                    "
                                                                                                       ),
                                                                                                     ]
                                                                                                   },
@@ -6988,11 +7235,11 @@ var render = function () {
                                                                                                       ref.item
                                                                                                     return [
                                                                                                       _vm._v(
-                                                                                                        "\n                                                                            " +
+                                                                                                        "\n                                      " +
                                                                                                           _vm._s(
                                                                                                             item.miqdor
                                                                                                           ) +
-                                                                                                          "\n                                                                            " +
+                                                                                                          "\n                                      " +
                                                                                                           _vm._s(
                                                                                                             _vm.getProductsByID(
                                                                                                               item.id
@@ -7025,7 +7272,7 @@ var render = function () {
                                                                                                                     .u1
                                                                                                               : ""
                                                                                                           ) +
-                                                                                                          "\n\n\n                                                                        "
+                                                                                                          "\n\n\n                                    "
                                                                                                       ),
                                                                                                     ]
                                                                                                   },
@@ -7062,7 +7309,7 @@ var render = function () {
                                                                                                         },
                                                                                                         [
                                                                                                           _vm._v(
-                                                                                                            "\n                                                                                mdi-pencil\n                                                                            "
+                                                                                                            "\n                                        mdi-pencil\n                                      "
                                                                                                           ),
                                                                                                         ]
                                                                                                       ),
@@ -7091,7 +7338,7 @@ var render = function () {
                                                                                                         },
                                                                                                         [
                                                                                                           _vm._v(
-                                                                                                            "\n                                                                                mdi-delete\n                                                                            "
+                                                                                                            "\n                                        mdi-delete\n                                      "
                                                                                                           ),
                                                                                                         ]
                                                                                                       ),
@@ -7158,7 +7405,12 @@ var render = function () {
                                                     [_vm._v("*")]
                                                   ),
                                                   _vm._v(
-                                                    " - майдонлари албатта тўлдирилиши\n                                            шарт!"
+                                                    " " +
+                                                      _vm._s(
+                                                        _vm.$t(
+                                                          "- майдонлари албатта тўлдирилиши шарт!"
+                                                        )
+                                                      )
                                                   ),
                                                 ]
                                               ),
@@ -7211,7 +7463,11 @@ var render = function () {
                                                 ),
                                                 [
                                                   _vm._v(
-                                                    "Киритилган товарлар - "
+                                                    _vm._s(
+                                                      _vm.$t(
+                                                        "Киритилган товарлар -"
+                                                      )
+                                                    ) + " "
                                                   ),
                                                   _c(
                                                     "span",
@@ -7267,7 +7523,13 @@ var render = function () {
                                                 },
                                                 [
                                                   _vm._v(
-                                                    " Киритилган товарлар рўйхати мақомлар кесимида "
+                                                    " " +
+                                                      _vm._s(
+                                                        _vm.$t(
+                                                          "Киритилган товарлар рўйхати мақомлар кесимида"
+                                                        )
+                                                      ) +
+                                                      " "
                                                   ),
                                                 ]
                                               ),
@@ -7388,7 +7650,7 @@ var render = function () {
                                                                                 },
                                                                                 [
                                                                                   _vm._v(
-                                                                                    "\n                                                                " +
+                                                                                    "\n                                " +
                                                                                       _vm._s(
                                                                                         item.text
                                                                                       )
@@ -7427,6 +7689,25 @@ var render = function () {
                                                                                         _vm.getProductsByStatus(
                                                                                           item.value
                                                                                         ),
+                                                                                      "no-data-text":
+                                                                                        _vm.$t(
+                                                                                          "Маълумот топилмади"
+                                                                                        ),
+                                                                                      "loading-text":
+                                                                                        _vm.$t(
+                                                                                          "Юкланмоқда... Илтимос кутиб туринг"
+                                                                                        ),
+                                                                                      "footer-props":
+                                                                                        {
+                                                                                          "items-per-page-text":
+                                                                                            _vm.$t(
+                                                                                              "Сахифадаги элементлар сони"
+                                                                                            ),
+                                                                                          "items-per-page-all-text":
+                                                                                            _vm.$t(
+                                                                                              "Барчаси"
+                                                                                            ),
+                                                                                        },
                                                                                     },
                                                                                   scopedSlots:
                                                                                     _vm._u(
@@ -7440,11 +7721,11 @@ var render = function () {
                                                                                               ref.header
                                                                                             return [
                                                                                               _vm._v(
-                                                                                                "\n                                                                    " +
+                                                                                                "\n                                  " +
                                                                                                   _vm._s(
                                                                                                     header.text.toUpperCase()
                                                                                                   ) +
-                                                                                                  "\n                                                                "
+                                                                                                  "\n                                "
                                                                                               ),
                                                                                             ]
                                                                                           },
@@ -7469,7 +7750,13 @@ var render = function () {
                                                                                 },
                                                                                 [
                                                                                   _vm._v(
-                                                                                    "\n                                                                Бу мақомдаги товарлар киритилмади\n                                                            "
+                                                                                    "\n                                " +
+                                                                                      _vm._s(
+                                                                                        _vm.$t(
+                                                                                          "Бу мақомдаги товарлар киритилмади"
+                                                                                        )
+                                                                                      ) +
+                                                                                      "\n                              "
                                                                                   ),
                                                                                 ]
                                                                               ),
@@ -7502,7 +7789,13 @@ var render = function () {
                                                     },
                                                     [
                                                       _vm._v(
-                                                        "\n                                                Товарлар киритилмади\n                                            "
+                                                        "\n                        " +
+                                                          _vm._s(
+                                                            _vm.$t(
+                                                              "Товарлар киритилмади"
+                                                            )
+                                                          ) +
+                                                          "\n                      "
                                                       ),
                                                     ]
                                                   ),
@@ -7530,7 +7823,9 @@ var render = function () {
                                                 },
                                                 [
                                                   _vm._v(
-                                                    "\n                                                Ёпиш\n                                            "
+                                                    "\n                        " +
+                                                      _vm._s(_vm.$t("Ёпиш")) +
+                                                      "\n                      "
                                                   ),
                                                 ]
                                               ),
@@ -7551,7 +7846,7 @@ var render = function () {
                                 "v-col",
                                 {
                                   staticClass:
-                                    "d-flex tab_action_buttons justify-content-end p-0",
+                                    "d-flex p-2 bd-highlight justify-content-end p-0",
                                 },
                                 [
                                   _c(
@@ -7562,7 +7857,9 @@ var render = function () {
                                     },
                                     [
                                       _vm._v(
-                                        "\n                                    Орқага\n                                "
+                                        "\n                  " +
+                                          _vm._s(_vm.$t("Орқага")) +
+                                          "\n                "
                                       ),
                                     ]
                                   ),
@@ -7570,6 +7867,7 @@ var render = function () {
                                   _c(
                                     "v-btn",
                                     {
+                                      staticStyle: { width: "max-content" },
                                       attrs: {
                                         color: "primary",
                                         size: "large",
@@ -7579,7 +7877,9 @@ var render = function () {
                                     },
                                     [
                                       _vm._v(
-                                        "\n                                    Ариза юбориш\n                                "
+                                        "\n                  " +
+                                          _vm._s(_vm.$t("Ариза юбориш")) +
+                                          "\n                "
                                       ),
                                     ]
                                   ),
@@ -7674,33 +7974,30 @@ var render = function () {
         ]
       ),
       _vm._v(" "),
-      _vm._m(0),
+      _c(
+        "a",
+        {
+          staticClass: "all_news service",
+          attrs: { target: "_blank", href: "https://t.me/bojxonaqaytaishlash" },
+        },
+        [
+          _c("img", { attrs: { src: "/public/images/telegram.png" } }),
+          _vm._v(" "),
+          _c("p", [
+            _vm._v(
+              " " + _vm._s(_vm.$t("Саволларингизни йўлланг")) + "\n      "
+            ),
+            _c("br"),
+            _vm._v(
+              "\n      " + _vm._s(_vm.$t("@bojxonaqaytaishlash")) + "\n    "
+            ),
+          ]),
+        ]
+      ),
     ]
   )
 }
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "a",
-      {
-        staticClass: "all_news service",
-        attrs: { target: "_blank", href: "https://t.me/bojxonaqaytaishlash" },
-      },
-      [
-        _c("img", { attrs: { src: "/public/images/telegram.png" } }),
-        _vm._v(" "),
-        _c("p", [
-          _vm._v(" Саволларингизни йўлланг\n            "),
-          _c("br"),
-          _vm._v("\n            @bojxonaqaytaishlash\n        "),
-        ]),
-      ]
-    )
-  },
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

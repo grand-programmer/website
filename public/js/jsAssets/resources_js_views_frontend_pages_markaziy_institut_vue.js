@@ -185,6 +185,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 
 
 
@@ -489,7 +490,7 @@ var render = function () {
                             [
                               _c(
                                 "p",
-                                [[_vm._v(_vm._s(rahbar.lavozim_name))]],
+                                [[_vm._v(_vm._s(_vm.$t(rahbar.lavozim_name)))]],
                                 2
                               ),
                               _vm._v(" "),
@@ -558,7 +559,11 @@ var render = function () {
                                                 [
                                                   _c("p", [
                                                     _vm._v(
-                                                      _vm._s(boshqarma.org_name)
+                                                      _vm._s(
+                                                        _vm.$t(
+                                                          boshqarma.org_name
+                                                        )
+                                                      )
                                                     ),
                                                   ]),
                                                   _vm._v(" "),
@@ -607,7 +612,11 @@ var render = function () {
                                                       _vm._v(" "),
                                                       _c("p", [
                                                         _vm._v(
-                                                          _vm._s(boshqarma.fio)
+                                                          _vm._s(
+                                                            _vm.$t(
+                                                              boshqarma.fio
+                                                            )
+                                                          )
                                                         ),
                                                       ]),
                                                     ]
@@ -639,20 +648,63 @@ var render = function () {
                                                             "column-text",
                                                         },
                                                         [
-                                                          _c("p", [
-                                                            _vm._v(
-                                                              _vm._s(
-                                                                boshqarma.lavozim_name &&
-                                                                  boshqarma
-                                                                    .lavozim_name
-                                                                    .length > 0
-                                                                  ? boshqarma.lavozim_name
-                                                                  : _vm.$t(
-                                                                      "Бошқарма бошлиғи"
-                                                                    )
-                                                              )
-                                                            ),
-                                                          ]),
+                                                          _vm.$i18n.locale ===
+                                                          "uz"
+                                                            ? _c("p", [
+                                                                _vm._v(
+                                                                  _vm._s(
+                                                                    _vm.$t(
+                                                                      boshqarma.lavozim_name
+                                                                    ) &&
+                                                                      boshqarma
+                                                                        .lavozim_name
+                                                                        .length >
+                                                                        0
+                                                                      ? _vm.$t(
+                                                                          boshqarma.lavozim_name
+                                                                        )
+                                                                      : _vm.$t(
+                                                                          "Бошқарма бошлиғи"
+                                                                        )
+                                                                  )
+                                                                ),
+                                                              ])
+                                                            : _c("p", [
+                                                                _vm._v(
+                                                                  _vm._s(
+                                                                    _vm.$t(
+                                                                      boshqarma
+                                                                        .translates[
+                                                                        _vm
+                                                                          .$i18n
+                                                                          .locale
+                                                                      ]
+                                                                        .lavozim_name
+                                                                    ) &&
+                                                                      boshqarma
+                                                                        .translates[
+                                                                        _vm
+                                                                          .$i18n
+                                                                          .locale
+                                                                      ]
+                                                                        .lavozim_name
+                                                                        .length >
+                                                                        0
+                                                                      ? _vm.$t(
+                                                                          boshqarma
+                                                                            .translates[
+                                                                            _vm
+                                                                              .$i18n
+                                                                              .locale
+                                                                          ]
+                                                                            .lavozim_name
+                                                                        )
+                                                                      : _vm.$t(
+                                                                          boshqarma.lavozim_name
+                                                                        )
+                                                                  )
+                                                                ),
+                                                              ]),
                                                         ]
                                                       ),
                                                     ]
@@ -871,7 +923,9 @@ var render = function () {
                                                                       _vm._v(
                                                                         "\n                                                                                            " +
                                                                           _vm._s(
-                                                                            boshqarma.org_name
+                                                                            _vm.$t(
+                                                                              boshqarma.org_name
+                                                                            )
                                                                           ) +
                                                                           "  " +
                                                                           _vm._s(

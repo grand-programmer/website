@@ -13,15 +13,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var vee_validate__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! vee-validate */ "./node_modules/vee-validate/dist/vee-validate.esm.js");
-/* harmony import */ var _components_form_myfield__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../components/form/myfield */ "./resources/js/components/form/myfield.vue");
-/* harmony import */ var vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! vee-validate/dist/rules */ "./node_modules/vee-validate/dist/rules.js");
-/* harmony import */ var _locales_oz_json__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../locales/oz.json */ "./resources/js/locales/oz.json");
-/* harmony import */ var _i18n__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../i18n */ "./resources/js/i18n.js");
-/* harmony import */ var _components_form_textfield__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../components/form/textfield */ "./resources/js/components/form/textfield.vue");
-/* harmony import */ var _components_form_autocomplete__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../components/form/autocomplete */ "./resources/js/components/form/autocomplete.vue");
-/* harmony import */ var _components_form_e_arxiv_file__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../../components/form/e-arxiv-file */ "./resources/js/components/form/e-arxiv-file.vue");
-/* harmony import */ var _components_form_dialog_chips__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../../components/form/dialog-chips */ "./resources/js/components/form/dialog-chips.vue");
+/* harmony import */ var vee_validate__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vee-validate */ "./node_modules/vee-validate/dist/vee-validate.esm.js");
+/* harmony import */ var _components_form_myfield__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../components/form/myfield */ "./resources/js/components/form/myfield.vue");
+/* harmony import */ var vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vee-validate/dist/rules */ "./node_modules/vee-validate/dist/rules.js");
+/* harmony import */ var _locales_oz_json__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../locales/oz.json */ "./resources/js/locales/oz.json");
+/* harmony import */ var _i18n__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../i18n */ "./resources/js/i18n.js");
+/* harmony import */ var _components_form_textfield__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../../components/form/textfield */ "./resources/js/components/form/textfield.vue");
+/* harmony import */ var _components_form_autocomplete__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../../components/form/autocomplete */ "./resources/js/components/form/autocomplete.vue");
+/* harmony import */ var _components_form_e_arxiv_file__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../../components/form/e-arxiv-file */ "./resources/js/components/form/e-arxiv-file.vue");
+/* harmony import */ var _components_form_dialog_chips__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../../components/form/dialog-chips */ "./resources/js/components/form/dialog-chips.vue");
 
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -42,25 +42,6 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -506,29 +487,22 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-Object.keys(vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_8__).forEach(function (rule) {
-  (0,vee_validate__WEBPACK_IMPORTED_MODULE_9__.extend)(rule, _objectSpread(_objectSpread({}, vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_8__[rule]), {}, {
-    // copies rule configuration
-    message: _locales_oz_json__WEBPACK_IMPORTED_MODULE_2__.messages[rule] // assign message
-
-  }));
-});
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "InitialPiecePay",
   data: function data() {
     return {
       breadcrumb_items: [{
-        text: _i18n__WEBPACK_IMPORTED_MODULE_3__["default"].t('Асосий саҳифа'),
+        text: _i18n__WEBPACK_IMPORTED_MODULE_5__["default"].t('Асосий саҳифа'),
         to: '/',
         disabled: false,
         exact: true
       }, {
-        text: 'Хизматлар',
+        text: _i18n__WEBPACK_IMPORTED_MODULE_5__["default"].t('Хизматлар'),
         to: '/services',
         disabled: false,
         exact: true
       }, {
-        text: 'Ҳисобварағидаги маблағларини қайтариш',
+        text: _i18n__WEBPACK_IMPORTED_MODULE_5__["default"].t('Ҳисобварағидаги маблағларини қайтариш'),
         to: '/services/ppay',
         disabled: true,
         exact: true
@@ -569,22 +543,22 @@ Object.keys(vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_8__).forEach(functi
         file_error: ""
       },
       types: [{
-        text: "Cуғурта полиси",
+        text: _i18n__WEBPACK_IMPORTED_MODULE_5__["default"].t('Cуғурта полиси'),
         value: 0
       }, {
-        text: "Банк кафолати",
+        text: _i18n__WEBPACK_IMPORTED_MODULE_5__["default"].t('Банк кафолати'),
         value: 1
       }, {
-        text: "Учинчи шахс кафиллиги",
+        text: _i18n__WEBPACK_IMPORTED_MODULE_5__["default"].t('Учинчи шахс кафиллиги'),
         value: 2
       }, {
-        text: "Гаров таъминоти",
+        text: _i18n__WEBPACK_IMPORTED_MODULE_5__["default"].t('Гаров таъминоти'),
         value: 3
       }, {
-        text: "Депозитга пул маблағларини киритиш",
+        text: _i18n__WEBPACK_IMPORTED_MODULE_5__["default"].t('Депозитга пул маблағларини киритиш'),
         value: 4
       }, {
-        text: "Таъминотсиз",
+        text: _i18n__WEBPACK_IMPORTED_MODULE_5__["default"].t('Таъминотсиз'),
         value: 5
       }],
       modal: false,
@@ -894,7 +868,7 @@ Object.keys(vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_8__).forEach(functi
                             _this.application['earxivDTO'].push({
                                 fileId: item.id
                             })
-                     })
+                      })
                 }*/
                 //_this.application['earxivDTO']=_this.app.akt;
                 result = null;
@@ -910,7 +884,7 @@ Object.keys(vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_8__).forEach(functi
                     //console.log(resultData.data)
                     ///this.$cookie.delete('user');
                     //this.$cookie.delete('huquqegasi');
-                    _this.$toast.success("Сизнинг аризангиз омадли тарзда юборилди!");
+                    _this.$toast.success(_i18n__WEBPACK_IMPORTED_MODULE_5__["default"].t("Сизнинг аризангиз омадли тарзда юборилди!"));
 
                     setTimeout(function () {
                       _this.$router.push("/services/ppay/" + _this.application.id);
@@ -948,14 +922,14 @@ Object.keys(vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_8__).forEach(functi
                   }
 
                   if (errors) _this.setApplicationErrors(errors);else if (typeof _context.t1.response.data.data.errors == 'string') _this.$toast.error(_context.t1.response.data.data.errors);else {
-                    _this.$toast.error('Серверда хатолик юз берди! Кейинроқ уриниб кўринг');
+                    _this.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_5__["default"].t("Серверда хатолик юз берди! Кейинроқ уриниб кўринг"));
                   }
 
                   if (typeof _context.t1.response.data !== 'undefined' && typeof _context.t1.response.data.data !== 'undefined' && typeof _context.t1.response.data.data.message !== 'undefined') {
                     _this.$toast.error(_context.t1.response.data.data.message);
                   }
                 } else {
-                  _this.$toast.error('Серверда хатолик юз берди! Кейинроқ уриниб кўринг!');
+                  _this.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_5__["default"].t("Серверда хатолик юз берди! Кейинроқ уриниб кўринг!"));
                 }
 
               case 67:
@@ -978,7 +952,7 @@ Object.keys(vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_8__).forEach(functi
               case 0:
                 _this = _this3;
                 _context2.next = 3;
-                return axios.get('/api/v1/ex_api/boshqarma').then(function (result) {
+                return _this3.$auth.plugins.http.get('/api/v1/ex_api/boshqarma').then(function (result) {
                   if (typeof result.data.data !== 'undefined') result.data.data.forEach(function (item) {
                     if (!['1790', '1791', '1701'].includes(item['kod_id'])) _this.regions.push({
                       'value': item['kod_id'],
@@ -1014,7 +988,7 @@ Object.keys(vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_8__).forEach(functi
                   break;
                 }
 
-                _this.$toast.error("Фойдаланиш шартларига розилик билдиришингиз лозим!");
+                _this.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_5__["default"].t("Фойдаланиш шартларига розилик билдиришингиз лозим!"));
 
                 return _context4.abrupt("return");
 
@@ -1054,7 +1028,7 @@ Object.keys(vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_8__).forEach(functi
                                                   //this.$cookie.delete('user');
                                                   this.$cookie.set('user', JSON.stringify(this.person), 1);
                                                   _this.$toast.success("Аризачи маълумотлари сақланди!");
-                                               }*/
+                                                }*/
                           ///else this.$toast.error("Серверда хатолик юз берди. Кейинроқ уриниб кўринг!");
 
                         case 10:
@@ -1304,13 +1278,13 @@ Object.keys(vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_8__).forEach(functi
     }
   },
   components: {
-    DialogChips: _components_form_dialog_chips__WEBPACK_IMPORTED_MODULE_7__["default"],
-    EArxivFile: _components_form_e_arxiv_file__WEBPACK_IMPORTED_MODULE_6__["default"],
-    AutocompleteField: _components_form_autocomplete__WEBPACK_IMPORTED_MODULE_5__["default"],
-    TextField: _components_form_textfield__WEBPACK_IMPORTED_MODULE_4__["default"],
-    ValidationProvider: vee_validate__WEBPACK_IMPORTED_MODULE_9__.ValidationProvider,
-    ValidationObserver: vee_validate__WEBPACK_IMPORTED_MODULE_9__.ValidationObserver,
-    Myfield: _components_form_myfield__WEBPACK_IMPORTED_MODULE_1__["default"]
+    DialogChips: _components_form_dialog_chips__WEBPACK_IMPORTED_MODULE_9__["default"],
+    EArxivFile: _components_form_e_arxiv_file__WEBPACK_IMPORTED_MODULE_8__["default"],
+    AutocompleteField: _components_form_autocomplete__WEBPACK_IMPORTED_MODULE_7__["default"],
+    TextField: _components_form_textfield__WEBPACK_IMPORTED_MODULE_6__["default"],
+    ValidationProvider: vee_validate__WEBPACK_IMPORTED_MODULE_1__.ValidationProvider,
+    ValidationObserver: vee_validate__WEBPACK_IMPORTED_MODULE_1__.ValidationObserver,
+    Myfield: _components_form_myfield__WEBPACK_IMPORTED_MODULE_2__["default"]
   }
 });
 
@@ -1332,7 +1306,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.yoriqnoma-text {\n    right: 40px;\n    font-weight: bold;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.yoriqnoma-text {\r\n    right: 40px;\r\n    font-weight: bold;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -1513,7 +1487,13 @@ var render = function () {
                     },
                     [
                       _vm._v(
-                        "\n                        ТИФ субъектининг божхона тўловларини кечиктириб ёки бўлиб-бўлиб тўлашга рухсат бериш\n                        "
+                        "\n                        " +
+                          _vm._s(
+                            _vm.$t(
+                              "ТИФ субъектининг божхона тўловларини кечиктириб ёки бўлиб-бўлиб тўлашга рухсат бериш"
+                            )
+                          ) +
+                          "\n                        "
                       ),
                       _c("br"),
                     ]
@@ -1533,10 +1513,23 @@ var render = function () {
                   [
                     _c(
                       "a",
-                      { attrs: { href: "/storage/files/dastlabki-user.pptx" } },
+                      {
+                        attrs: {
+                          href:
+                            _vm.$i18n.locale === "uz"
+                              ? "/storage/files/ppay_uz.pptx"
+                              : "/storage/files/ppay_ru.pptx",
+                        },
+                      },
                       [
                         _vm._v(
-                          " Ариза тўлдириш бўйича йўриқмани юклаб\n                    олинг!\n                "
+                          " " +
+                            _vm._s(
+                              _vm.$t(
+                                "Ариза тўлдириш бўйича йўриқмани юклаб олинг!"
+                              )
+                            ) +
+                            "\n                "
                         ),
                       ]
                     ),
@@ -1563,7 +1556,7 @@ var render = function () {
                                     { attrs: { cols: "4" } },
                                     [
                                       _c("ValidationProvider", {
-                                        attrs: { name: "СТИР" },
+                                        attrs: { name: _vm.$t("СТИР") },
                                         scopedSlots: _vm._u(
                                           [
                                             {
@@ -1573,14 +1566,16 @@ var render = function () {
                                                 return [
                                                   _c("v-text-field", {
                                                     attrs: {
-                                                      label: "СТИР",
+                                                      label: _vm.$t("СТИР"),
                                                       required: "",
                                                       disabled:
                                                         JSON.parse(
                                                           _vm.$auth.user()
                                                             .legal_info
                                                         )[0].tin.length > 0,
-                                                      hint: "Корхона ёки ташкилот СТИРи",
+                                                      hint: _vm.$t(
+                                                        "Корхона ёки ташкилот СТИРи"
+                                                      ),
                                                       "persistent-hint": "",
                                                       name: "orgInn",
                                                     },
@@ -1624,7 +1619,7 @@ var render = function () {
                                       { attrs: { cols: "4" } },
                                       [
                                         _c("ValidationProvider", {
-                                          attrs: { name: "СТИР" },
+                                          attrs: { name: _vm.$t("СТИР") },
                                           scopedSlots: _vm._u(
                                             [
                                               {
@@ -1634,9 +1629,11 @@ var render = function () {
                                                   return [
                                                     _c("v-text-field", {
                                                       attrs: {
-                                                        label: "СТИР",
+                                                        label: _vm.$t("СТИР"),
                                                         required: "",
-                                                        hint: "Жисмоний шахс СТИРи",
+                                                        hint: _vm.$t(
+                                                          "Жисмоний шахс СТИРи"
+                                                        ),
                                                         "persistent-hint": "",
                                                         name: "orgInn",
                                                       },
@@ -1686,7 +1683,7 @@ var render = function () {
                                       { attrs: { cols: "4" } },
                                       [
                                         _c("ValidationProvider", {
-                                          attrs: { name: "ЖШШИР" },
+                                          attrs: { name: _vm.$t("ЖШШИР") },
                                           scopedSlots: _vm._u(
                                             [
                                               {
@@ -1696,12 +1693,14 @@ var render = function () {
                                                   return [
                                                     _c("v-text-field", {
                                                       attrs: {
-                                                        label: "ЖШШИР",
+                                                        label: _vm.$t("ЖШШИР"),
                                                         required: "",
                                                         disabled:
                                                           _vm.$auth.user().pin >
                                                           0,
-                                                        hint: "Аризачи ЖШШРи",
+                                                        hint: _vm.$t(
+                                                          "Аризачи ЖШШРи"
+                                                        ),
                                                         "persistent-hint": "",
                                                         name: "personInn",
                                                       },
@@ -1752,10 +1751,11 @@ var render = function () {
                                 [
                                   _c("ValidationProvider", {
                                     attrs: {
-                                      name:
+                                      name: _vm.$t(
                                         _vm.person.type === 2
                                           ? "Ташкилот номи"
-                                          : "ФИШ",
+                                          : "ФИШ"
+                                      ),
                                       rules: "required",
                                     },
                                     scopedSlots: _vm._u(
@@ -1768,15 +1768,17 @@ var render = function () {
                                               _c("v-text-field", {
                                                 attrs: {
                                                   counter: 200,
-                                                  label:
+                                                  label: _vm.$t(
                                                     _vm.person.type === 2
                                                       ? "Ташкилот номи"
-                                                      : "ФИШ",
+                                                      : "ФИШ"
+                                                  ),
                                                   required: "",
-                                                  hint:
+                                                  hint: _vm.$t(
                                                     _vm.person.type === 2
                                                       ? "Юридик шахснинг тўлиқ номи"
-                                                      : "Мурожаатчи фамилияси, исми, шарифи",
+                                                      : "Мурожаатчи фамилияси, исми, шарифи"
+                                                  ),
                                                   "persistent-placeholder": "",
                                                 },
                                                 scopedSlots: _vm._u(
@@ -1788,10 +1790,12 @@ var render = function () {
                                                           _vm._v(
                                                             "\n                                        " +
                                                               _vm._s(
-                                                                _vm.person
-                                                                  .type === 2
-                                                                  ? "Ташкилот номи"
-                                                                  : "ФИШ"
+                                                                _vm.$t(
+                                                                  _vm.person
+                                                                    .type === 2
+                                                                    ? "Ташкилот номи"
+                                                                    : "ФИШ"
+                                                                )
                                                               )
                                                           ),
                                                           _c("sup", [
@@ -1852,8 +1856,9 @@ var render = function () {
                                 [
                                   _c("text-field", {
                                     attrs: {
-                                      title:
-                                        "Тўлов муддати узайтириладиган сумма",
+                                      title: _vm.$t(
+                                        "Тўлов муддати узайтириладиган сумма"
+                                      ),
                                       required: "",
                                       "persistent-placeholder": "",
                                     },
@@ -1874,7 +1879,10 @@ var render = function () {
                                 { attrs: { cols: "4" } },
                                 [
                                   _c("ValidationProvider", {
-                                    attrs: { name: "Ҳудуд", rules: "required" },
+                                    attrs: {
+                                      name: _vm.$t("Ҳудуд"),
+                                      rules: "required",
+                                    },
                                     scopedSlots: _vm._u(
                                       [
                                         {
@@ -1895,10 +1903,14 @@ var render = function () {
                                                       fn: function () {
                                                         return [
                                                           _vm._v(
-                                                            "Ҳудудий божхона бошқармасини танланг "
+                                                            _vm._s(
+                                                              _vm.$t(
+                                                                "Ҳудудий божхона бошқармасини танланг"
+                                                              )
+                                                            )
                                                           ),
                                                           _c("sup", [
-                                                            _vm._v("*"),
+                                                            _vm._v(" *"),
                                                           ]),
                                                         ]
                                                       },
@@ -1944,7 +1956,7 @@ var render = function () {
                                 [
                                   _c("ValidationProvider", {
                                     attrs: {
-                                      name: "Телефон рақами",
+                                      name: _vm.$t("Телефон рақами"),
                                       rules: "required",
                                     },
                                     scopedSlots: _vm._u(
@@ -1965,9 +1977,12 @@ var render = function () {
                                                   },
                                                 ],
                                                 attrs: {
-                                                  label: "Телефон рақами",
+                                                  label:
+                                                    _vm.$t("Телефон рақами"),
                                                   required: "",
-                                                  hint: "Аризачининг телефон рақами",
+                                                  hint: _vm.$t(
+                                                    "Аризачининг телефон рақами"
+                                                  ),
                                                   "persistent-placeholder": "",
                                                 },
                                                 scopedSlots: _vm._u(
@@ -1977,10 +1992,14 @@ var render = function () {
                                                       fn: function () {
                                                         return [
                                                           _vm._v(
-                                                            "Телефон рақами "
+                                                            _vm._s(
+                                                              _vm.$t(
+                                                                "Телефон рақами"
+                                                              )
+                                                            )
                                                           ),
                                                           _c("sup", [
-                                                            _vm._v("*"),
+                                                            _vm._v(" *"),
                                                           ]),
                                                         ]
                                                       },
@@ -2026,7 +2045,7 @@ var render = function () {
                                 [
                                   _c("ValidationProvider", {
                                     attrs: {
-                                      name: "Электрон почта",
+                                      name: _vm.$t("Электрон почта"),
                                       rules: "required|email",
                                     },
                                     scopedSlots: _vm._u(
@@ -2039,10 +2058,13 @@ var render = function () {
                                               _c("v-text-field", {
                                                 attrs: {
                                                   counter: 200,
-                                                  label:
-                                                    "Электрон почта манзили",
+                                                  label: _vm.$t(
+                                                    "Электрон почта манзили"
+                                                  ),
                                                   required: "",
-                                                  hint: "Аризачининг электрон почтаси",
+                                                  hint: _vm.$t(
+                                                    "Аризачининг электрон почтаси"
+                                                  ),
                                                   "persistent-placeholder": "",
                                                 },
                                                 scopedSlots: _vm._u(
@@ -2052,10 +2074,14 @@ var render = function () {
                                                       fn: function () {
                                                         return [
                                                           _vm._v(
-                                                            "Электрон почта манзили "
+                                                            _vm._s(
+                                                              _vm.$t(
+                                                                "Электрон почта манзили"
+                                                              )
+                                                            )
                                                           ),
                                                           _c("sup", [
-                                                            _vm._v("*"),
+                                                            _vm._v(" *"),
                                                           ]),
                                                         ]
                                                       },
@@ -2101,9 +2127,9 @@ var render = function () {
                                 [
                                   _c("text-field", {
                                     attrs: {
-                                      title: "Почта манзили",
+                                      title: _vm.$t("Почта манзили"),
                                       rules: "required",
-                                      hint: "Аризачининг яшаш манзили",
+                                      hint: _vm.$t("Аризачининг яшаш манзили"),
                                       "persistent-placeholder": "",
                                     },
                                     model: {
@@ -2124,7 +2150,9 @@ var render = function () {
                                 [
                                   _c("ValidationProvider", {
                                     attrs: {
-                                      name: "Божхона тўловлари таъминлови тури",
+                                      name: _vm.$t(
+                                        "Божхона тўловлари таъминлови тури"
+                                      ),
                                       rules: "required",
                                     },
                                     scopedSlots: _vm._u(
@@ -2147,10 +2175,14 @@ var render = function () {
                                                       fn: function () {
                                                         return [
                                                           _vm._v(
-                                                            "Божхона тўловлари таъминлови тури "
+                                                            _vm._s(
+                                                              _vm.$t(
+                                                                "Божхона тўловлари таъминлови тури"
+                                                              )
+                                                            )
                                                           ),
                                                           _c("sup", [
-                                                            _vm._v("*"),
+                                                            _vm._v(" *"),
                                                           ]),
                                                         ]
                                                       },
@@ -2198,7 +2230,9 @@ var render = function () {
                                       [
                                         _c("text-field", {
                                           attrs: {
-                                            title: "Cуғурта полиси рақами",
+                                            title: _vm.$t(
+                                              "Cуғурта полиси рақами"
+                                            ),
                                           },
                                           model: {
                                             value: _vm.app.sugurta_number,
@@ -2230,7 +2264,9 @@ var render = function () {
                                             },
                                           ],
                                           attrs: {
-                                            title: "Cуғурта полиси санаси",
+                                            title: _vm.$t(
+                                              "Cуғурта полиси санаси"
+                                            ),
                                           },
                                           model: {
                                             value: _vm.app.sugurta_sana,
@@ -2255,7 +2291,9 @@ var render = function () {
                                         _c("e-arxiv-file", {
                                           attrs: {
                                             errors: _vm.app.file_error,
-                                            label: "Суғурта файлини юкланг",
+                                            label: _vm.$t(
+                                              "Суғурта файлини юкланг"
+                                            ),
                                           },
                                           model: {
                                             value: _vm.app.sugurta_doc,
@@ -2291,7 +2329,9 @@ var render = function () {
                                             },
                                           ],
                                           attrs: {
-                                            title: "Банк кафолати санаси",
+                                            title: _vm.$t(
+                                              "Банк кафолати санаси"
+                                            ),
                                           },
                                           model: {
                                             value: _vm.app.kafolat_bsana,
@@ -2315,7 +2355,9 @@ var render = function () {
                                       [
                                         _c("text-field", {
                                           attrs: {
-                                            title: "Банк кафолати рақами",
+                                            title: _vm.$t(
+                                              "Банк кафолати рақами"
+                                            ),
                                           },
                                           model: {
                                             value: _vm.app.kafolat_raqami,
@@ -2338,7 +2380,9 @@ var render = function () {
                                       { attrs: { cols: "4" } },
                                       [
                                         _c("text-field", {
-                                          attrs: { title: "Кафолат миқдори" },
+                                          attrs: {
+                                            title: _vm.$t("Кафолат миқдори"),
+                                          },
                                           model: {
                                             value: _vm.app.kafolat_miqdor,
                                             callback: function ($$v) {
@@ -2369,8 +2413,9 @@ var render = function () {
                                             },
                                           ],
                                           attrs: {
-                                            title:
-                                              "Банк кафолати амал қилиш санаси",
+                                            title: _vm.$t(
+                                              "Банк кафолати амал қилиш санаси"
+                                            ),
                                           },
                                           model: {
                                             value: _vm.app.kafolat_sana,
@@ -2395,7 +2440,9 @@ var render = function () {
                                         _c("e-arxiv-file", {
                                           attrs: {
                                             errors: _vm.app.file_error,
-                                            label: "Кафолат файлини юкланг",
+                                            label: _vm.$t(
+                                              "Кафолат файлини юкланг"
+                                            ),
                                           },
                                           model: {
                                             value: _vm.app.kafolat_doc,
@@ -2423,7 +2470,7 @@ var render = function () {
                                       [
                                         _c("text-field", {
                                           attrs: {
-                                            title: "Кафил - СТИР/ЖШШИР",
+                                            title: _vm.$t("Кафил - СТИР/ЖШШИР"),
                                           },
                                           model: {
                                             value: _vm.app.kafil_nomi,
@@ -2447,8 +2494,9 @@ var render = function () {
                                       [
                                         _c("text-field", {
                                           attrs: {
-                                            title:
-                                              "Кафил - Ташкилот номи/Ф.И.Ш",
+                                            title: _vm.$t(
+                                              "Кафил - Ташкилот номи/Ф.И.Ш"
+                                            ),
                                           },
                                           model: {
                                             value: _vm.app.kafil_tin_pin,
@@ -2471,7 +2519,9 @@ var render = function () {
                                       { attrs: { cols: "4" } },
                                       [
                                         _c("text-field", {
-                                          attrs: { title: "Кафиллик хати" },
+                                          attrs: {
+                                            title: _vm.$t("Кафиллик хати"),
+                                          },
                                           model: {
                                             value: _vm.app.kafil_xati,
                                             callback: function ($$v) {
@@ -2502,8 +2552,9 @@ var render = function () {
                                             },
                                           ],
                                           attrs: {
-                                            title:
-                                              "Кафиллик хати берилган санаси",
+                                            title: _vm.$t(
+                                              "Кафиллик хати берилган санаси"
+                                            ),
                                           },
                                           model: {
                                             value: _vm.app.kafillik_sana,
@@ -2527,7 +2578,7 @@ var render = function () {
                                       [
                                         _c("text-field", {
                                           attrs: {
-                                            title: "Кафиллик миқдори",
+                                            title: _vm.$t("Кафиллик миқдори"),
                                             type: "number",
                                           },
                                           model: {
@@ -2560,19 +2611,20 @@ var render = function () {
                                             },
                                           ],
                                           attrs: {
-                                            title:
-                                              "Кафиллик хати амал қилиш санаси",
+                                            title: _vm.$t(
+                                              "Кафиллик хати амал қилиш санаси"
+                                            ),
                                           },
                                           model: {
-                                            value: _vm.app.kafillik_sana,
+                                            value: _vm.app.kafillik_bsana,
                                             callback: function ($$v) {
                                               _vm.$set(
                                                 _vm.app,
-                                                "kafillik_sana",
+                                                "kafillik_bsana",
                                                 $$v
                                               )
                                             },
-                                            expression: "app.kafillik_sana",
+                                            expression: "app.kafillik_bsana",
                                           },
                                         }),
                                       ],
@@ -2586,8 +2638,9 @@ var render = function () {
                                         _c("e-arxiv-file", {
                                           attrs: {
                                             errors: _vm.app.file_error,
-                                            label:
-                                              "Кафиллик хати файл идни киритинг",
+                                            label: _vm.$t(
+                                              "Кафиллик хати файл ID ни киритинг"
+                                            ),
                                           },
                                           model: {
                                             value: _vm.app.kafillik_doc,
@@ -2615,8 +2668,8 @@ var render = function () {
                                       [
                                         _c("text-field", {
                                           attrs: {
-                                            title: "Гаров шартномаси",
-                                            hint: "Шартнома рақами",
+                                            title: _vm.$t("Гаров шартномаси"),
+                                            hint: _vm.$t("Шартнома рақами"),
                                           },
                                           model: {
                                             value: _vm.app.garov_shart,
@@ -2648,9 +2701,10 @@ var render = function () {
                                             },
                                           ],
                                           attrs: {
-                                            title:
-                                              "Гаров шартномаси берилган санаси",
-                                            hint: "Шартнома санаси",
+                                            title: _vm.$t(
+                                              "Гаров шартномаси берилган санаси"
+                                            ),
+                                            hint: _vm.$t("Шартнома санаси"),
                                           },
                                           model: {
                                             value: _vm.app.garov_shart_sana,
@@ -2674,7 +2728,9 @@ var render = function () {
                                       [
                                         _c("text-field", {
                                           attrs: {
-                                            title: "Гаров товар қиймати",
+                                            title: _vm.$t(
+                                              "Гаров товар қиймати"
+                                            ),
                                             type: "number",
                                           },
                                           model: {
@@ -2707,8 +2763,9 @@ var render = function () {
                                             },
                                           ],
                                           attrs: {
-                                            title:
-                                              "Гаров шартномаси амал қилиш санаси",
+                                            title: _vm.$t(
+                                              "Гаров шартномаси амал қилиш санаси"
+                                            ),
                                             "persistent-hint": "",
                                           },
                                           model: {
@@ -2734,8 +2791,9 @@ var render = function () {
                                         _c("e-arxiv-file", {
                                           attrs: {
                                             errors: _vm.app.file_error,
-                                            label:
-                                              "Гаров шартномаси е-архив рақамини киритинг",
+                                            label: _vm.$t(
+                                              "Гаров шартномаси е-архив рақамини киритинг"
+                                            ),
                                           },
                                           model: {
                                             value: _vm.app.garov_doc,
@@ -2763,8 +2821,8 @@ var render = function () {
                                       [
                                         _c("text-field", {
                                           attrs: {
-                                            title: "Таъминлов суммаси",
-                                            hint: "Суммани киритинг",
+                                            title: _vm.$t("Таъминлов суммаси"),
+                                            hint: _vm.$t("Суммани киритинг"),
                                           },
                                           model: {
                                             value: _vm.app.taminlov,
@@ -2788,8 +2846,10 @@ var render = function () {
                                       [
                                         _c("text-field", {
                                           attrs: {
-                                            title: "Қонун ҳужжати рақами",
-                                            hint: "Ҳужжат рақами ",
+                                            title: _vm.$t(
+                                              "Қонун ҳужжати рақами"
+                                            ),
+                                            hint: _vm.$t("Ҳужжат рақами"),
                                           },
                                           model: {
                                             value: _vm.app.taminotsiz,
@@ -2821,8 +2881,10 @@ var render = function () {
                                             },
                                           ],
                                           attrs: {
-                                            title: "Қонун ҳужжати санаси",
-                                            hint: "Ҳужжат санаси",
+                                            title: _vm.$t(
+                                              "Қонун ҳужжати санаси"
+                                            ),
+                                            hint: _vm.$t("Ҳужжат санаси"),
                                           },
                                           model: {
                                             value: _vm.app.taminotsiz_sana,
@@ -2870,8 +2932,10 @@ var render = function () {
                                 [
                                   _c("text-field", {
                                     attrs: {
-                                      title: "Изоҳ",
-                                      hint: "Қўшимча маълумотлар мавжуд бўлса киритинг",
+                                      title: _vm.$t("Изоҳ"),
+                                      hint: _vm.$t(
+                                        "Қўшимча маълумотлар мавжуд бўлса киритинг"
+                                      ),
                                       "persistent-placeholder": "",
                                     },
                                     model: {
@@ -2944,7 +3008,11 @@ var render = function () {
                       ),
                       _vm._v(" "),
                       _c("span", [
-                        _vm._v("Фойдаланиш шартларига розилик билдираман"),
+                        _vm._v(
+                          _vm._s(
+                            _vm.$t("Фойдаланиш шартларига розилик билдираман")
+                          )
+                        ),
                       ]),
                     ]
                   ),
@@ -2975,7 +3043,9 @@ var render = function () {
                           [
                             _c("span", { staticClass: "text-h5" }, [
                               _vm._v(
-                                "\n                                Фойдаланиш шартлари\n                                "
+                                "\n                                " +
+                                  _vm._s(_vm.$t("Фойдаланиш шартлари")) +
+                                  "\n                                "
                               ),
                             ]),
                           ]
@@ -3000,7 +3070,13 @@ var render = function () {
                                         return [
                                           _c("div", [
                                             _vm._v(
-                                              "\n                                            Божхона тўловлари суммаларини ўз муддатида тўланишига кафолат берамиз.\n                                        "
+                                              "\n                                            " +
+                                                _vm._s(
+                                                  _vm.$t(
+                                                    "Божхона тўловлари суммаларини ўз муддатида тўланишига кафолат берамиз."
+                                                  )
+                                                ) +
+                                                "\n                                        "
                                             ),
                                           ]),
                                         ]
@@ -3032,7 +3108,13 @@ var render = function () {
                                         return [
                                           _c("div", [
                                             _vm._v(
-                                              "\n                                            Божхона тўловларини кечиктириб ёки бўлиб-бўлиб тўлаш бўйича қонунчилик\n                                            ва унинг бузилишига нисбатан бўлган жавобгарлик билан танишганмиз ҳамда\n                                            мазкур мажбуриятга риоя қилинмаган тақдирда қонунчиликда белгиланган\n                                            жавобгарликга тортилишга розимиз.\n                                        "
+                                              "\n                                            " +
+                                                _vm._s(
+                                                  _vm.$t(
+                                                    "Божхона тўловларини кечиктириб ёки бўлиб-бўлиб тўлаш бўйича қонунчилик ва унинг бузилишига нисбатан бўлган жавобгарлик билан танишганмиз ҳамда мазкур мажбуриятга риоя қилинмаган тақдирда қонунчиликда белгиланган жавобгарликга тортилишга розимиз."
+                                                  )
+                                                ) +
+                                                "\n                                        "
                                             ),
                                           ]),
                                         ]
@@ -3053,7 +3135,7 @@ var render = function () {
                             ),
                             _vm._v(" "),
                             _c("v-row", [
-                              _c("h4", [_vm._v("Эслатма:")]),
+                              _c("h4", [_vm._v(_vm._s(_vm.$t("Эслатма:")))]),
                               _vm._v(" "),
                               _c(
                                 "ul",
@@ -3069,19 +3151,34 @@ var render = function () {
                                 [
                                   _c("li", [
                                     _vm._v(
-                                      "Божхона тўловларини кечиктириб ёки бўлиб-бўлиб тўлаш имконияти умумий\n                                        тартибда божхона декларацияси қабул қилинган кундан эътиборан Божхона\n                                        кодекси 329-моддасига асосан олтмиш календарь кундан ҳамда қўшилган қиймат\n                                        солиғи Ўзбекистон Республикаси Вазирлар Маҳкамасининг 2020 йил 10 февралдаги\n                                        76-сон қарорига мувофиқ 120 кундан ошмаган даврга тақдим қилинади.\n                                    "
+                                      _vm._s(
+                                        _vm.$t(
+                                          "Божхона тўловларини кечиктириб ёки бўлиб-бўлиб тўлаш имконияти умумий тартибда божхона декларацияси қабул қилинган кундан эътиборан Божхона кодекси 329-моддасига асосан олтмиш календарь кундан ҳамда қўшилган қиймат солиғи Ўзбекистон Республикаси Вазирлар Маҳкамасининг 2020 йил 10 февралдаги 76-сон қарорига мувофиқ 120 кундан ошмаган даврга тақдим қилинади."
+                                        )
+                                      ) +
+                                        "\n                                    "
                                     ),
                                   ]),
                                   _vm._v(" "),
                                   _c("li", [
                                     _vm._v(
-                                      "Шунингдек, Божхона кодекси 329-моддаси ўн биринчи қисмига мувофиқ божхона\n                                        тўловларини кечиктириб ёки бўлиб-бўлиб тўлаш имконияти Ўзбекистон\n                                        Республикаси Президентининг ёхуд Ўзбекистон Республикаси Вазирлар\n                                        Маҳкамасининг қарорига биноан узоқроқ муддатларга берилиши мумкин.\n                                    "
+                                      _vm._s(
+                                        _vm.$t(
+                                          "Шунингдек, Божхона кодекси 329-моддаси ўн биринчи қисмига мувофиқ божхона тўловларини кечиктириб ёки бўлиб-бўлиб тўлаш имконияти Ўзбекистон Республикаси Президентининг ёхуд Ўзбекистон Республикаси Вазирлар Маҳкамасининг қарорига биноан узоқроқ муддатларга берилиши мумкин."
+                                        )
+                                      ) +
+                                        "\n                                    "
                                     ),
                                   ]),
                                   _vm._v(" "),
                                   _c("li", [
                                     _vm._v(
-                                      "Агар Сизда, божхона тўловларини кечиктириб ёки бўлиб-бўлиб имкониятидан\n                                        қонунчиликга мувофиқ узоқроқ муддатларга фойдаланиш учун ҳуқуқий асослар\n                                        мавжуд бўлган тақдирда, мазкур асосларни ариза изоҳ қисмида кўрсатишингиз\n                                        лозим.\n                                    "
+                                      _vm._s(
+                                        _vm.$t(
+                                          "Агар Сизда, божхона тўловларини кечиктириб ёки бўлиб-бўлиб имкониятидан қонунчиликга мувофиқ узоқроқ муддатларга фойдаланиш учун ҳуқуқий асослар мавжуд бўлган тақдирда, мазкур асосларни ариза изоҳ қисмида кўрсатишингиз лозим."
+                                        )
+                                      ) +
+                                        "\n                                    "
                                     ),
                                   ]),
                                 ]
@@ -3108,7 +3205,9 @@ var render = function () {
                               },
                               [
                                 _vm._v(
-                                  "\n                                Қабул Қилмайман\n                            "
+                                  "\n                                " +
+                                    _vm._s(_vm.$t("Қабул Қилмайман")) +
+                                    "\n                            "
                                 ),
                               ]
                             ),
@@ -3130,7 +3229,9 @@ var render = function () {
                               },
                               [
                                 _vm._v(
-                                  "\n                                Қабул қиламан\n                            "
+                                  "\n                                " +
+                                    _vm._s(_vm.$t("Қабул қиламан")) +
+                                    "\n                            "
                                 ),
                               ]
                             ),
@@ -3150,11 +3251,12 @@ var render = function () {
                   [
                     _c(
                       "v-col",
-                      { staticClass: "d-flex tab_action_buttons" },
+                      { staticClass: "order-2 p-2 bd-highlight" },
                       [
                         _c(
                           "v-btn",
                           {
+                            staticStyle: { width: "max-content" },
                             attrs: {
                               color: "primary",
                               size: "large",
@@ -3164,7 +3266,9 @@ var render = function () {
                           },
                           [
                             _vm._v(
-                              "\n                            Ариза юбориш\n                        "
+                              "\n                            " +
+                                _vm._s(_vm.$t("Ариза юбориш")) +
+                                "\n                        "
                             ),
                           ]
                         ),
@@ -3181,7 +3285,11 @@ var render = function () {
                       _vm._v("*"),
                     ]),
                     _vm._v(
-                      " - майдонлари албатта тўлдирилиши шарт!\n                    "
+                      " " +
+                        _vm._s(
+                          _vm.$t("- майдонлари албатта тўлдирилиши шарт!")
+                        ) +
+                        "\n                    "
                     ),
                   ]),
                 ]),
@@ -3195,15 +3303,7 @@ var render = function () {
       1
     ),
     _vm._v(" "),
-    _vm._m(0),
-  ])
-}
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
+    _c(
       "a",
       {
         staticClass: "all_news service",
@@ -3213,14 +3313,19 @@ var staticRenderFns = [
         _c("img", { attrs: { src: "/public/images/telegram.png" } }),
         _vm._v(" "),
         _c("p", [
-          _vm._v(" Саволларингизни йўлланг\n            "),
+          _vm._v(
+            " " + _vm._s(_vm.$t("Саволларингизни йўлланг")) + "\n            "
+          ),
           _c("br"),
-          _vm._v("\n            @dastlabkiqaror\n        "),
+          _vm._v(
+            "\n            " + _vm._s(_vm.$t("@dastlabkiqaror")) + "\n        "
+          ),
         ]),
       ]
-    )
-  },
-]
+    ),
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 

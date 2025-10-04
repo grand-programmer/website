@@ -30,6 +30,7 @@
     "html2pdf.js": "^0.9.1",
     "jsmpeg": "^1.0.0",
     "jsmpeg-player": "^3.0.3",
+    "leaflet": "^1.9.4",
     "node-rtsp-stream": "^0.0.9",
     "print-js": "^1.6.0",
     "qrcode": "^1.5.0",

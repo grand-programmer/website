@@ -5,6 +5,7 @@ namespace App\Helpers;
 
 
 use Carbon\Carbon;
+use Illuminate\Support\Facades\File;
 
 class MainHelper
 {
@@ -232,5 +233,11 @@ class MainHelper
             // Date could not be parsed, show an error message
             return null;
         }
+    }
+
+    public static function translateText($text)
+    {
+        $json = json_decode(File::get(base_path('resources/js/locales/dynamic/' . app()->getLocale() . '.json')), true);
+        return (isset($json[$text]))?$json[$text]:$text;
     }
 }

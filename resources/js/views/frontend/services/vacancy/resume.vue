@@ -1633,13 +1633,6 @@ import Editablefield from "../../../../components/form/editablefield";
 import Info from './info';
 import i18n from "../../../../i18n";
 
-Object.keys(rules).forEach(rule => {
-    extend(rule, {
-        ...rules[rule], // copies rule configuration
-        message: messages.messages[rule] // assign message
-
-    });
-});
 export default {
     name: "InitialVacancy",
 
@@ -1824,7 +1817,7 @@ export default {
     methods: {
         async getBoshqarmalar() {
             const _this = this
-            await axios.get('/api/v1/ex_api/boshqarma').then(function (result) {
+            await this.$auth.plugins.http.get('/api/v1/ex_api/boshqarma').then(function (result) {
 
                 result.data.data.forEach(function (item) {
                     if (!(['1790', '1791', '1701'].includes(item['kod_id'])))
@@ -2055,7 +2048,7 @@ export default {
             this.resumeLoading = true;
 
             // 30812852720071 Abbos aka 2288
-            if ( !(this.$auth.user().pin===30812852720071 || this.$auth.user().pin===32604853150058  || this.$auth.user().pin===31103927250012 ) && this.getAge(this.$auth.user().birth_date) > 30) {
+            if ( !(this.$auth.user().pin===30812852720071 || this.$auth.user().pin===31502891781221  || this.$auth.user().pin===31103927250012 ) && this.getAge(this.$auth.user().birth_date) > 30) {
                 this.resumeLoading = false;
                 this.$toast.error("Сизнинг ёшингиз божхона органларига ишга кириш бўйича ёш чегараси меъзонига тўғри келмайди!");
                 return;
@@ -2193,7 +2186,7 @@ export default {
                             _app.vacancy_resume.kod = response.data.data.messages.kod;
                             _app.$toast.success(`Сизнинг маълумотларингиз юборилди!`);
                         } else {
-                            if (!this.user_add.malumotlar) {
+                            if (!_app.user_add.malumotlar) {
                                 _app.$toast.error(`Аризачининг таълим тўғрисидаги маълумотлари кўрсатилмади!`);
                                 return;
                             }
@@ -2203,15 +2196,15 @@ export default {
                                 })
                             } else console.log(response.data)
                         }
-                        this.resumeLoading = false;
+                        _app.resumeLoading = false;
                     }).catch(async (error) => {
-                        this.resumeLoading = false;
+                        _app.resumeLoading = false;
                         console.log(error)
                         if (error.response.data.data.success === true || error.response.data.success === true) {
                             _app.vacancy_send = true;
                             _app.$toast.success(`Сизнинг маълумотларингиз юборилди!`);
                         } else {
-                            if (this.user_add.malumotlar.length < 1) {
+                            if (_app.user_add.malumotlar.length < 1) {
                                 _app.$toast.error(`Аризачининг таълим тўғрисидаги маълумотлари кўрсатилмади!`);
                                 return;
                             }
@@ -2221,9 +2214,9 @@ export default {
                                     if (item[0] === 'malimoti') _app.$toast.error(`Аризачининг таълим тўғрисидаги маълумотлари кўрсатилмади!`);
                                     else { _app.$toast.error(item[1]) }
                                 })
-                            } else console.log(error.response.data)
+                            } // else console.log(error.response.data)
                         }
-                        this.resumeLoading = false;
+                        _app.resumeLoading = false;
                     });
                 });
             })
@@ -2273,7 +2266,7 @@ export default {
         },
         getCountries() {
             const _app = this;
-            axios.get('/api/v1/data/country?lang=ru').then(function (response) {
+            this.$auth.plugins.http.get('/api/v1/data/country').then(function (response) {
                 let countries = response.data;
                 countries.forEach(function (country) {
                     _app.countries.push({

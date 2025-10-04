@@ -14,7 +14,7 @@
                 <v-row>
                     <v-col cols="12">
                         <h3 align="center" class="lh-sm font-weight-bold primary-color my-5">
-                            Транспорт воситасига товарларни божхона пломбалари ва муҳрлари остида ташишга рухсат бериш
+                            {{ $t('Транспорт воситасига товарларни божхона пломбалари ва муҳрлари остида ташишга рухсат бериш') }}
                             <br>
                         </h3>
                     </v-col>
@@ -24,23 +24,22 @@
 
                 >
                     <div class="row position-absolute yoriqnoma-text"><a
-                        href="/storage/files/dastlabki-user.pptx"> Ариза тўлдириш бўйича йўриқмани юклаб
-                        олинг!
+                        :href="$i18n.locale==='uz'?'/storage/files/stamp_uz.pptx':'/storage/files/stamp_ru.pptx'"> {{ $t('Ариза тўлдириш бўйича йўриқмани юклаб олинг!') }}
                     </a></div>
                     <ValidationObserver v-slot="{ invalid }" ref="stepValidation1">
                         <v-row>
                         </v-row>
                         <v-row class="person_data mt-10">
                             <v-col cols="4" sm="12" v-if="person.type===2">
-                                <ValidationProvider name="СТИР"
+                                <ValidationProvider :name="$t('СТИР')"
                                                     v-slot="{ errors }">
 
                                     <v-text-field
                                         v-model="person.organization_inn"
-                                        label="СТИР"
+                                        :label="$t('СТИР')"
                                         required
                                         :disabled="(JSON.parse($auth.user().legal_info)[0].tin).length>0"
-                                        hint="Корхона ёки ташкилот СТИРи"
+                                        :hint="$t('Корхона ёки ташкилот СТИРи')"
                                         persistent-hint
                                         name="orgInn"
                                     >
@@ -50,15 +49,15 @@
                                 </ValidationProvider>
                             </v-col>
                             <v-col cols="12"  md="4" v-else>
-                                <ValidationProvider name="ЖШШИР"
+                                <ValidationProvider :name="$t('ЖШШИР')"
                                                     v-slot="{ errors }">
 
                                     <v-text-field
                                         v-model="person.pin"
-                                        label="ЖШШИР"
+                                        :label="$t('ЖШШИР')"
                                         required
                                         :disabled="$auth.user().pin > 0"
-                                        hint="Аризачи ЖШШРи"
+                                        :hint="$t('Аризачи ЖШШРи')"
                                         persistent-hint
                                         name="personInn"
                                     >
@@ -68,18 +67,18 @@
                                 </ValidationProvider>
                             </v-col>
                             <v-col cols="12"  md="4">
-                                <ValidationProvider :name="person.type===2?'Ташкилот номи':'ФИШ'" rules="required"
+                                <ValidationProvider :name="person.type===2?$t('Ташкилот номи'):$t('ФИШ')" rules="required"
                                                     v-slot="{ errors }">
                                     <v-text-field
                                         v-model="person.type===2?person.organization_name:person.fio"
                                         :counter="200"
-                                        :label="person.type===2?'Ташкилот номи':'ФИШ'"
+                                        :label="person.type===2?$t('Ташкилот номи'):$t('ФИШ')"
                                         required
-                                        :hint="person.type===2?'Юридик шахснинг тўлиқ номи':'Мурожаатчи фамилияси, исми, шарифи'"
+                                        :hint="person.type===2?$t('Юридик шахснинг тўлиқ номи'):$t('Мурожаатчи фамилияси, исми, шарифи')"
                                         persistent-placeholder
                                     >
                                         <template v-slot:label>
-                                            {{ person.type === 2 ? 'Ташкилот номи' : 'ФИШ' }}<sup>*</sup></template>
+                                            {{ person.type === 2 ? $t('Ташкилот номи') : $t('ФИШ') }}<sup>*</sup></template>
 
                                     </v-text-field>
                                     <span class="red&#45;&#45;text">{{ errors[0] }}</span>
@@ -89,34 +88,34 @@
 
 
                             <v-col cols="12"  md="4">
-                                <ValidationProvider name="Телефон рақами" rules="required"
+                                <ValidationProvider :name="$t('Телефон рақами')" rules="required"
                                                     v-slot="{ errors }">
                                     <v-text-field
                                         v-model="person.phone"
-                                        label="Телефон рақами"
+                                        :label="$t('Телефон рақами')"
                                         required
                                         v-mask="'+998 ## ### ## ##'"
-                                        hint="Аризачининг телефон рақами"
+                                        :hint="$t('Аризачининг телефон рақами')"
                                         persistent-placeholder
                                     >
-                                        <template v-slot:label>Телефон рақами <sup>*</sup></template>
+                                        <template v-slot:label>{{ $t('Телефон рақами') }}<sup> *</sup></template>
                                     </v-text-field>
                                     <span class="red--text">{{ errors[0] }}</span>
                                 </ValidationProvider>
 
                             </v-col>
                             <v-col cols="12"  md="4">
-                                <ValidationProvider name="Электрон почта" rules="required|email"
+                                <ValidationProvider :name="$t('Электрон почта')" rules="required|email"
                                                     v-slot="{ errors }">
                                     <v-text-field
                                         v-model="person.email"
                                         :counter="200"
-                                        label="Электрон почта манзили"
+                                        :label="$t('Электрон почта манзили')"
                                         required
-                                        hint="Аризачининг электрон почтаси"
+                                        :hint="$t('Аризачининг электрон почтаси')"
                                         persistent-placeholder
                                     >
-                                        <template v-slot:label>Электрон почта манзили <sup>*</sup>
+                                        <template v-slot:label>{{ $t('Электрон почта манзили') }}<sup> *</sup>
                                         </template>
                                     </v-text-field>
                                     <span class="red--text">{{ errors[0] }}</span>
@@ -126,9 +125,9 @@
                             <v-col cols="12"  md="4">
                                 <text-field
                                     v-model="person.perAdr"
-                                    title="Почта манзили"
+                                    :title="$t('Почта манзили')"
                                     rules="required"
-                                    hint="Аризачининг яшаш манзили"
+                                    :hint="$t('Аризачининг яшаш манзили')"
                                     persistent-placeholder
                                 >
 
@@ -137,7 +136,7 @@
                             </v-col>
 
                             <v-col cols="12"  md="4">
-                                <ValidationProvider name="Ҳудуд" rules="required"
+                                <ValidationProvider :name="$t('Ҳудуд')" rules="required"
                                                     v-slot="{ errors }">
                                     <v-autocomplete
                                         v-model="app.region"
@@ -145,7 +144,7 @@
                                         :items="regions"
                                         persistent-hint
                                     >
-                                        <template v-slot:label>Ҳудудий божхона бошқармасини танланг <sup>*</sup>
+                                        <template v-slot:label>{{ $t('Ҳудудий божхона бошқармасини танланг') }}<sup> *</sup>
                                         </template>
                                     </v-autocomplete>
                                     <span class="red--text">{{ errors[0] }}</span>
@@ -154,18 +153,18 @@
                             </v-col>
 
                             <v-col cols="12" md="6">
-                                <ValidationProvider name="Пост" rules="required"
+                                <ValidationProvider :name="$t('Пост')" rules="required"
                                                     v-slot="{ errors }">
                                     <v-autocomplete
                                         v-model="app.post"
                                         :loading="postloading"
                                         required
                                         :disabled="postloading"
-                                        hint="Божхона постини танланг"
+                                        :hint="$t('Божхона постини танланг')"
                                         :items="posts"
                                         persistent-placeholder
                                     >
-                                        <template v-slot:label>Божхона постини танланг <sup>*</sup>
+                                        <template v-slot:label>{{ $t('Божхона постини танланг') }}<sup> *</sup>
                                         </template>
                                     </v-autocomplete>
                                     <span class="red--text">{{ errors[0] }}</span>
@@ -177,13 +176,13 @@
                         <v-row>
                             <v-col cols="12">
                                 <v-col cols="12" md="2" class="p-0">
-                                    <h5 class="mb-2">Транспорт воситаси тури</h5>
+                                    <h5 class="mb-2">{{ $t('Транспорт воситаси тури') }}</h5>
                                     <v-btn-toggle v-model="app.type">
                                         <v-btn :color="app.type!==1?'primary':''" class="border-0" small>
-                                            Автотранспорт воситаси
+                                            {{ $t('Автотранспорт воситаси') }}
                                         </v-btn>
                                         <v-btn :color="app.type===1?'primary':''" class="border-0" small>
-                                            Контейнер
+                                            {{ $t('Контейнер') }}
                                         </v-btn>
                                     </v-btn-toggle>
                                 </v-col>
@@ -191,16 +190,11 @@
                         </v-row>
                         <v-row v-if="app.type!==1">
                             <v-col cols="12"  md="4">
-                                <ValidationProvider name="Автотранспорт воситаси тури" v-slot="{ errors }">
+                                <ValidationProvider :name="$t('Автотранспорт воситаси тури')" v-slot="{ errors }">
                                     <v-autocomplete
                                         v-model="app.type_avto"
-                                        :items="[
-                                           {text:'Тиркама',value:'Тиркама'},
-                                           {text:'Ярим тиркама',value:'Ярим тиркама'},
-                                           {text:'Юк тортгич',value:'Юк тортгич'},
-                                           {text:'Бошқа',value:'Бошқа'}
-                                       ]"
-                                        label="Автотранспорт воситаси тури*"
+                                        :items=avto
+                                        :label="$t('Автотранспорт воситаси тури*')"
                                         persistent-placeholder
                                     >
 
@@ -209,31 +203,31 @@
                                 </ValidationProvider>
                             </v-col>
                             <v-col cols="12"  md="4">
-                                <textfield title="Русуми (маркаси)" rules="required" v-model="app.mark"/>
+                                <textfield :title="$t('Русуми (маркаси)')" rules="required" v-model="app.mark"/>
                             </v-col>
                             <v-col cols="12"  md="4">
                                 <textfield
-                                    title="Ишлаб чиқарилган санаси"
+                                    :title="$t('Ишлаб чиқарилган санаси')"
                                     v-mask="'##-##-####'"
                                     rules="required"
                                     v-model="app.produced_date"/>
                             </v-col>
                             <v-col cols="12"  md="4">
                                 <textfield
-                                    title="Давлат рақами белгиси"
+                                    :title="$t('Давлат рақами белгиси')"
                                     rules="required"
                                     v-model="app.gov_number"/>
                             </v-col>
                             <v-col cols="12"  md="4">
                                 <textfield
-                                    title="Идентификация рақами (VIN)"
+                                    :title="$t('Идентификация рақами (VIN)')"
                                     rules="required"
                                     v-model="app.vin"/>
                             </v-col>
                             <v-col cols="12"  md="4">
                                 <textfield
-                                    title="Гувоҳнома серия рақами"
-                                    hint="Автотранспорт воситаси рўйхатдан ўтказилганлиги тўғрисида гувоҳнома (техпаспорт) серия рақами"
+                                    :title="$t('Гувоҳнома серия рақами')"
+                                    :hint="$t('Автотранспорт воситаси рўйхатдан ўтказилганлиги тўғрисида гувоҳнома (техпаспорт) серия рақами')"
                                     rules="required"
                                     v-model="app.texpasport"/>
                             </v-col>
@@ -244,14 +238,14 @@
 
                             <v-col cols="12"  md="4">
                                 <textfield
-                                    title="Контейнер рақами"
+                                    :title="$t('Контейнер рақами')"
                                     rules="required"
                                     v-model="app.kon_number"/>
                             </v-col>
 
                             <v-col cols="12"  md="4">
                                 <textfield
-                                    title="Контенер тури"
+                                    :title="$t('Контенер тури')"
                                     rules="required"
                                     v-model="app.kon_type"/>
                             </v-col>
@@ -259,13 +253,13 @@
                             <v-col cols="12"  md="4">
 
 
-                                <ValidationProvider name="Тара вазни" rules="required"
+                                <ValidationProvider :name="$t('Тара вазни')" rules="required"
                                                     v-slot="{ errors }">
                                     <v-text-field
                                         v-model="app.konWeight"
                                         persistent-placeholder
                                     >
-                                        <template v-slot:label>Тара вазни <sup>*</sup>
+                                        <template v-slot:label>{{ $t('Тара вазни') }}<sup> *</sup>
                                         </template>
                                     </v-text-field>
                                     <span class="red--text">{{ errors[0] }}</span>
@@ -276,16 +270,16 @@
 
                             <v-col cols="12"  md="4">
                                 <textfield
-                                    title="Ташқи ўлчамлари"
+                                    :title="$t('Ташқи ўлчамлари')"
                                     rules="required"
-                                    hint="смда, Мисол: 1289,5*235*239,2"
+                                    :hint="$t('смда, Мисол: 1289,5*235*239,2')"
                                     v-model="app.kon_size"/>
                             </v-col>
                             <v-col cols="12"  md="4">
                                 <textfield
-                                    title="Конструкциянинг асосий ҳусусиятлари"
+                                    :title="$t('Конструкциянинг асосий ҳусусиятлари')"
                                     rules="required"
-                                    hint="материал типи, конструкция тури ва бошқа. Мисол: Темирдан ясалган, йиғилмайдиган "
+                                    :hint="$t('материал типи, конструкция тури ва бошқа. Мисол: Темирдан ясалган, йиғилмайдиган')"
                                     v-model="app.kon_xususiyat"/>
                             </v-col>
 
@@ -295,16 +289,16 @@
                                 <e-arxiv-file
                                     multiple
                                     v-model="app.files"
-                                    label="Транспорт воситаси расмлари"
+                                    :label="$t('Транспорт воситаси расмлари')"
                                     :errors="ilova_error"
-                                    hint="Транспорт воситасининг чап тарафи, Транспорт воситасининг ўнг тарафи, Транспорт воситасининг олди, Транспорт воситасининг орқаси, Пломбалар ва муҳрлар қўйиладиган жой"/>
+                                    :hint="$t('Транспорт воситасининг чап тарафи, Транспорт воситасининг ўнг тарафи, Транспорт воситасининг олди, Транспорт воситасининг орқаси, Пломбалар ва муҳрлар қўйиладиган жой')"/>
                             </v-col>
                             <v-col cols="12"></v-col>
                         </v-row>
                     </ValidationObserver>
 
                     <v-row class="row mb-3 position-absolute position-relative-sm bottom-0 end-0">
-                        <v-col class="d-flex tab_action_buttons">
+                        <v-col class="order-2 p-2 bd-highlight">
 
                             <v-btn
                                 color="primary"
@@ -312,8 +306,9 @@
                                 size="large"
                                 class="width-100-sm"
                                 :loading="loading.button"
+                                style="width: max-content"
                             >
-                                Ариза юбориш
+                                {{ $t('Ариза юбориш') }}
                             </v-btn>
 
 
@@ -321,7 +316,7 @@
                     </v-row>
                     <v-row class="bottom-required-info">
                         <i style="font-size: 12px;"><sub
-                            style="font-size: 20px">*</sub> - майдонлари албатта тўлдирилиши шарт!
+                            style="font-size: 20px">*</sub> {{ $t('- майдонлари албатта тўлдирилиши шарт!') }}
                         </i>
 
                     </v-row>
@@ -335,9 +330,9 @@
             <img src="/public/images/telegram.png">
 
 
-            <p> Саволларингизни йўлланг
+            <p> {{ $t('Саволларингизни йўлланг') }}
                 <br>
-                @dastlabkiqaror
+                {{ $t('@dastlabkiqaror') }}
             </p></a>
     </div>
 </template>
@@ -355,13 +350,6 @@ import DialogChips from "../../../../components/form/dialog-chips";
 import Textfield from "../../../../components/form/textfield";
 
 
-Object.keys(rules).forEach(rule => {
-    extend(rule, {
-        ...rules[rule], // copies rule configuration
-        message: messages.messages[rule] // assign message
-
-    });
-});
 export default {
     name: "InitialStamp",
     data() {
@@ -374,19 +362,28 @@ export default {
                     exact: true,
                 },
                 {
-                    text: 'Хизматлар',
+                    text: i18n.t('Хизматлар'),
                     to: '/services',
                     disabled: false,
                     exact: true,
                 },
                 {
-                    text: 'Транспорт воситасига товарларни божхона пломбалари ва муҳрлари остида ташишга рухсат бериш',
+                    text: i18n.t('Транспорт воситасига товарларни божхона пломбалари ва муҳрлари остида ташишга рухсат бериш'),
                     to: '/services/stamp',
                     disabled: true,
                     exact: true,
                 },
             ],
-
+            avto: [
+                {text:i18n.t("Тиркама"),
+                value:'Тиркама'},
+                {text:i18n.t("Ярим тиркама"),
+                value:'Ярим тиркама'},
+                {text:i18n.t("Юк тортгич"),
+                value:'Юк тортгич'},
+                {text:i18n.t("Бошқа"),
+                value:'Бошқа'}
+            ],
             app: {
                 type: 0,
                 type_avto: null,
@@ -513,7 +510,7 @@ export default {
                     result.data.posts.forEach(function (item) {
                         _this.posts.push({
                             'value': item['code'],
-                            'text': item['cdNm']
+                            'text': item['cdnm']
                         })
                     })
             })
@@ -588,7 +585,7 @@ export default {
                         //console.log(resultData.data)
                         ///this.$cookie.delete('user');
                         //this.$cookie.delete('huquqegasi');
-                        _this.$toast.success("Сизнинг аризангиз омадли тарзда юборилди!");
+                        _this.$toast.success(i18n.t("Сизнинг аризангиз омадли тарзда юборилди!"));
                         setTimeout(() => {
                             _this.$router.push("/services/stamp/" + _this.application.id)
 
@@ -617,19 +614,19 @@ export default {
                     }
                     if (errors) {
                         _this.setApplicationErrors(errors);
-                        _this.$toast.warning('Тўлдирилган майдонлардан бири хато тўлдирилди!');
+                        _this.$toast.warning(i18n.t("Тўлдирилган майдонлардан бири хато тўлдирилди!"));
                     } else if (typeof error.response.data.data.errors == 'string') _this.$toast.error(error.response.data.data.errors); else {
-                        _this.$toast.error('Серверда хатолик юз берди! Кейинроқ уриниб кўринг');
+                        _this.$toast.error(i18n.t("Серверда хатолик юз берди! Кейинроқ уриниб кўринг"));
                     }
                 } else {
-                    _this.$toast.error('Серверда хатолик юз берди! Кейинроқ уриниб кўринг!');
+                    _this.$toast.error(i18n.t("Серверда хатолик юз берди! Кейинроқ уриниб кўринг!"));
                 }
 
             }
         },
         async getBoshqarmalar() {
             const _this = this
-            await axios.get('/api/v1/ex_api/boshqarma').then(function (result) {
+            await this.$auth.plugins.http.get('/api/v1/ex_api/boshqarma').then(function (result) {
                 if (typeof result.data.data !== 'undefined')
                     result.data.data.forEach(function (item) {
                         if (!(['1790', '1791', '1701'].includes(item['kod_id'])))

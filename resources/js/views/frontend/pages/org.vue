@@ -212,6 +212,7 @@
                         :items="organization.posts"
                         :search="search"
                         class="boshqarma-postlar"
+                        :no-data-text="$t('Маълумот топилмади')"
                     ></v-data-table>
                 </v-card>
                 <v-card v-if="news.length>0">

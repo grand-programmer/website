@@ -59,7 +59,7 @@
                 </a>
                 <a class="footer_link" href="//bojxona-service.uz">
                     <div class="image"></div>
-                    <p>{{ ("Bojxona qo'mitasi huzuridagi “Bojxona-servis” davlat muassasasi") }}</p>
+                    <p>{{ $t("Bojxona qo'mitasi huzuridagi “Bojxona-servis” davlat muassasasi") }}</p>
                 </a>
 
                 <a class="footer_link" href="//uzbi.uz">

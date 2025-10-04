@@ -72,6 +72,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 //
 //
 //
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'EditableDate',
@@ -173,16 +174,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var vee_validate__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! vee-validate */ "./node_modules/vee-validate/dist/vee-validate.esm.js");
-/* harmony import */ var _components_form_myfield__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../components/form/myfield */ "./resources/js/components/form/myfield.vue");
-/* harmony import */ var vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! vee-validate/dist/rules */ "./node_modules/vee-validate/dist/rules.js");
-/* harmony import */ var _locales_oz_json__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../locales/oz.json */ "./resources/js/locales/oz.json");
-/* harmony import */ var _i18n__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../i18n */ "./resources/js/i18n.js");
-/* harmony import */ var _components_form_textfield__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../components/form/textfield */ "./resources/js/components/form/textfield.vue");
-/* harmony import */ var _components_form_autocomplete__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../components/form/autocomplete */ "./resources/js/components/form/autocomplete.vue");
-/* harmony import */ var _components_form_e_arxiv_file__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../../components/form/e-arxiv-file */ "./resources/js/components/form/e-arxiv-file.vue");
-/* harmony import */ var _components_form_dialog_chips__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../../components/form/dialog-chips */ "./resources/js/components/form/dialog-chips.vue");
-/* harmony import */ var _components_custom_EditableDate__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../../components/custom/EditableDate */ "./resources/js/components/custom/EditableDate.vue");
+/* harmony import */ var vee_validate__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vee-validate */ "./node_modules/vee-validate/dist/vee-validate.esm.js");
+/* harmony import */ var _components_form_myfield__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../components/form/myfield */ "./resources/js/components/form/myfield.vue");
+/* harmony import */ var vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vee-validate/dist/rules */ "./node_modules/vee-validate/dist/rules.js");
+/* harmony import */ var _locales_oz_json__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../locales/oz.json */ "./resources/js/locales/oz.json");
+/* harmony import */ var _i18n__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../i18n */ "./resources/js/i18n.js");
+/* harmony import */ var _components_form_textfield__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../../components/form/textfield */ "./resources/js/components/form/textfield.vue");
+/* harmony import */ var _components_form_autocomplete__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../../components/form/autocomplete */ "./resources/js/components/form/autocomplete.vue");
+/* harmony import */ var _components_form_e_arxiv_file__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../../components/form/e-arxiv-file */ "./resources/js/components/form/e-arxiv-file.vue");
+/* harmony import */ var _components_form_dialog_chips__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../../components/form/dialog-chips */ "./resources/js/components/form/dialog-chips.vue");
+/* harmony import */ var _components_custom_EditableDate__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../../../components/custom/EditableDate */ "./resources/js/components/custom/EditableDate.vue");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
@@ -199,47 +200,16 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 //
 //
 //
@@ -747,34 +717,27 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-Object.keys(vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_9__).forEach(function (rule) {
-  (0,vee_validate__WEBPACK_IMPORTED_MODULE_10__.extend)(rule, _objectSpread(_objectSpread({}, vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_9__[rule]), {}, {
-    // copies rule configuration
-    message: _locales_oz_json__WEBPACK_IMPORTED_MODULE_2__.messages[rule] // assign message
-
-  }));
-});
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "InitialBkoCreate",
   data: function data() {
     return {
       breadcrumb_items: [{
-        text: _i18n__WEBPACK_IMPORTED_MODULE_3__["default"].t('Асосий саҳифа'),
+        text: _i18n__WEBPACK_IMPORTED_MODULE_5__["default"].t('Асосий саҳифа'),
         to: '/',
         disabled: false,
         exact: true
       }, {
-        text: _i18n__WEBPACK_IMPORTED_MODULE_3__["default"].t('Хизматлар'),
+        text: _i18n__WEBPACK_IMPORTED_MODULE_5__["default"].t('Хизматлар'),
         to: '/services',
         disabled: false,
         exact: true
       }, {
-        text: _i18n__WEBPACK_IMPORTED_MODULE_3__["default"].t('Божхона кирим ордерини шакллантириш'),
+        text: _i18n__WEBPACK_IMPORTED_MODULE_5__["default"].t('Божхона кирим ордерини шакллантириш'),
         to: '/services/bko',
         disabled: false,
         exact: true
       }, {
-        text: _i18n__WEBPACK_IMPORTED_MODULE_3__["default"].t('Ариза юбориш '),
+        text: _i18n__WEBPACK_IMPORTED_MODULE_5__["default"].t('Ариза юбориш'),
         to: '/services/bko/create',
         disabled: true,
         exact: true
@@ -1580,7 +1543,7 @@ Object.keys(vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_9__).forEach(functi
               case 0:
                 _this = _this5;
                 _context4.next = 3;
-                return axios.get('/api/v1/ex_api/boshqarma').then(function (result) {
+                return _this5.$auth.plugins.http.get('/api/v1/ex_api/boshqarma').then(function (result) {
                   if (typeof result.data.data !== 'undefined') result.data.data.forEach(function (item) {
                     if (!['1790', '1791', '1701'].includes(item['kod_id'])) _this.regions.push({
                       'value': item['kod_id'],
@@ -1646,7 +1609,7 @@ Object.keys(vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_9__).forEach(functi
                                                   //this.$cookie.delete('user');
                                                   this.$cookie.set('user', JSON.stringify(this.person), 1);
                                                   _this.$toast.success("Аризачи маълумотлари сақланди!");
-                                               }*/
+                                                }*/
                           ///else this.$toast.error("Серверда хатолик юз берди. Кейинроқ уриниб кўринг!");
 
                         case 12:
@@ -1895,7 +1858,7 @@ Object.keys(vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_9__).forEach(functi
                 this.getPosts(region)
                 // })
             }
-         },
+          },
         immediate: true,
         deep: true,
         sync: true
@@ -1910,15 +1873,15 @@ Object.keys(vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_9__).forEach(functi
     }
   },
   components: {
-    EditableDate: _components_custom_EditableDate__WEBPACK_IMPORTED_MODULE_8__["default"],
-    Textfield: _components_form_textfield__WEBPACK_IMPORTED_MODULE_4__["default"],
-    DialogChips: _components_form_dialog_chips__WEBPACK_IMPORTED_MODULE_7__["default"],
-    EArxivFile: _components_form_e_arxiv_file__WEBPACK_IMPORTED_MODULE_6__["default"],
-    AutocompleteField: _components_form_autocomplete__WEBPACK_IMPORTED_MODULE_5__["default"],
-    TextField: _components_form_textfield__WEBPACK_IMPORTED_MODULE_4__["default"],
-    ValidationProvider: vee_validate__WEBPACK_IMPORTED_MODULE_10__.ValidationProvider,
-    ValidationObserver: vee_validate__WEBPACK_IMPORTED_MODULE_10__.ValidationObserver,
-    Myfield: _components_form_myfield__WEBPACK_IMPORTED_MODULE_1__["default"]
+    EditableDate: _components_custom_EditableDate__WEBPACK_IMPORTED_MODULE_10__["default"],
+    Textfield: _components_form_textfield__WEBPACK_IMPORTED_MODULE_6__["default"],
+    DialogChips: _components_form_dialog_chips__WEBPACK_IMPORTED_MODULE_9__["default"],
+    EArxivFile: _components_form_e_arxiv_file__WEBPACK_IMPORTED_MODULE_8__["default"],
+    AutocompleteField: _components_form_autocomplete__WEBPACK_IMPORTED_MODULE_7__["default"],
+    TextField: _components_form_textfield__WEBPACK_IMPORTED_MODULE_6__["default"],
+    ValidationProvider: vee_validate__WEBPACK_IMPORTED_MODULE_1__.ValidationProvider,
+    ValidationObserver: vee_validate__WEBPACK_IMPORTED_MODULE_1__.ValidationObserver,
+    Myfield: _components_form_myfield__WEBPACK_IMPORTED_MODULE_2__["default"]
   }
 });
 
@@ -1941,7 +1904,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.yoriqnoma-text {\n    right: 40px;\n    font-weight: bold;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.yoriqnoma-text {\r\n    right: 40px;\r\n    font-weight: bold;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -2242,6 +2205,7 @@ var render = function () {
                     _vm._v(" "),
                     _c("v-date-picker", {
                       attrs: {
+                        locale: _vm.$i18n.locale === "en" ? "en-US" : "ru-RU",
                         "active-picker": _vm.activePicker.date,
                         max: new Date(
                           Date.now() - new Date().getTimezoneOffset() * 60000
@@ -4014,6 +3978,18 @@ var render = function () {
                                           headers: _vm.headersTolov,
                                           items: _vm.tolovlar,
                                           "items-per-page": 5,
+                                          "no-data-text":
+                                            _vm.$t("Маълумот топилмади"),
+                                          "footer-props": {
+                                            "items-per-page-text": _vm.$t(
+                                              "Сахифадаги элементлар сони"
+                                            ),
+                                            "items-per-page-all-text":
+                                              _vm.$t("Барчаси"),
+                                          },
+                                          "loading-text": _vm.$t(
+                                            "Юкланмоқда... Илтимос кутиб туринг"
+                                          ),
                                         },
                                         scopedSlots: _vm._u(
                                           [
@@ -4021,167 +3997,7 @@ var render = function () {
                                               key: "item.actions",
                                               fn: function (ref) {
                                                 var item = ref.item
-                                                return [
-                                                  _c(
-                                                    "v-dialog",
-                                                    {
-                                                      attrs: {
-                                                        "max-width": "500",
-                                                      },
-                                                      scopedSlots: _vm._u(
-                                                        [
-                                                          {
-                                                            key: "activator",
-                                                            fn: function (ref) {
-                                                              var on = ref.on
-                                                              var attrs =
-                                                                ref.attrs
-                                                              return [
-                                                                _c(
-                                                                  "v-icon",
-                                                                  _vm._g(
-                                                                    _vm._b(
-                                                                      {
-                                                                        attrs: {
-                                                                          small:
-                                                                            "",
-                                                                        },
-                                                                      },
-                                                                      "v-icon",
-                                                                      attrs,
-                                                                      false
-                                                                    ),
-                                                                    on
-                                                                  ),
-                                                                  [
-                                                                    _vm._v(
-                                                                      "\n                                                    mdi-delete\n                                                "
-                                                                    ),
-                                                                  ]
-                                                                ),
-                                                              ]
-                                                            },
-                                                          },
-                                                        ],
-                                                        null,
-                                                        true
-                                                      ),
-                                                      model: {
-                                                        value:
-                                                          _vm.confirmDialogTolov,
-                                                        callback: function (
-                                                          $$v
-                                                        ) {
-                                                          _vm.confirmDialogTolov =
-                                                            $$v
-                                                        },
-                                                        expression:
-                                                          "confirmDialogTolov",
-                                                      },
-                                                    },
-                                                    [
-                                                      _vm._v(" "),
-                                                      _c(
-                                                        "v-card",
-                                                        [
-                                                          _c(
-                                                            "v-card-title",
-                                                            {
-                                                              staticClass:
-                                                                "text-h5",
-                                                            },
-                                                            [
-                                                              _vm._v(
-                                                                "\n                                                    " +
-                                                                  _vm._s(
-                                                                    _vm.$t(
-                                                                      "Сиз ҳақиқатдан ҳам ўчирмоқчимисиз!"
-                                                                    )
-                                                                  ) +
-                                                                  "\n                                                "
-                                                              ),
-                                                            ]
-                                                          ),
-                                                          _vm._v(" "),
-                                                          _c("v-card-text"),
-                                                          _vm._v(" "),
-                                                          _c(
-                                                            "v-card-actions",
-                                                            [
-                                                              _c("v-spacer"),
-                                                              _vm._v(" "),
-                                                              _c(
-                                                                "v-btn",
-                                                                {
-                                                                  attrs: {
-                                                                    color:
-                                                                      "green darken-1",
-                                                                    text: "",
-                                                                  },
-                                                                  on: {
-                                                                    click:
-                                                                      function (
-                                                                        $event
-                                                                      ) {
-                                                                        _vm.confirmDialogTolov = false
-                                                                      },
-                                                                  },
-                                                                },
-                                                                [
-                                                                  _vm._v(
-                                                                    "\n                                                        " +
-                                                                      _vm._s(
-                                                                        _vm.$t(
-                                                                          "Бекор қилиш"
-                                                                        )
-                                                                      ) +
-                                                                      "\n                                                    "
-                                                                  ),
-                                                                ]
-                                                              ),
-                                                              _vm._v(" "),
-                                                              _c(
-                                                                "v-btn",
-                                                                {
-                                                                  attrs: {
-                                                                    color:
-                                                                      "green darken-1",
-                                                                    text: "",
-                                                                  },
-                                                                  on: {
-                                                                    click:
-                                                                      function (
-                                                                        $event
-                                                                      ) {
-                                                                        _vm.deleteItemTolov(
-                                                                          item.id
-                                                                        )
-                                                                        _vm.confirmDialogTolov = false
-                                                                      },
-                                                                  },
-                                                                },
-                                                                [
-                                                                  _vm._v(
-                                                                    "\n                                                        " +
-                                                                      _vm._s(
-                                                                        _vm.$t(
-                                                                          "Ўчириш"
-                                                                        )
-                                                                      ) +
-                                                                      "\n                                                    "
-                                                                  ),
-                                                                ]
-                                                              ),
-                                                            ],
-                                                            1
-                                                          ),
-                                                        ],
-                                                        1
-                                                      ),
-                                                    ],
-                                                    1
-                                                  ),
-                                                ]
+                                                return undefined
                                               },
                                             },
                                           ],
@@ -4215,6 +4031,7 @@ var render = function () {
                         _c(
                           "v-btn",
                           {
+                            staticStyle: { width: "max-content" },
                             attrs: {
                               color: "primary",
                               size: "large",

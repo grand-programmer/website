@@ -68,15 +68,13 @@
 
                                         <v-icon>mdi-plus
                                         </v-icon>
-                                        Файл Қўшиш
+                                        {{ $t('Файл Қўшиш') }}
 
                                     </v-btn>
                                 </v-fab-transition>
                                 <a class="float-left"
                                    style="border: 2px dashed;  width:50%; border-radius: 15px; padding: 10px 20px 5px;"
-                                   @click="authorizeToEArxiv">Э-архив
-                                    тизимига
-                                    ўтиш </a>
+                                   @click="authorizeToEArxiv">{{ $t('Э-архив тизимига ўтиш') }}</a>
 
                             </v-col>
                         </v-row>
@@ -96,7 +94,7 @@
                                         name="ID рақами"
                                         v-slot="{ errors }">
                                         <v-text-field
-                                            v-model="documents[key].id"
+                                            v-model="documents[key][this.idColumn]"
                                             label="ID рақами"
                                             persistent-hint
                                             :loading="loading[key]"
@@ -138,7 +136,7 @@
 
                         </ValidationObserver>
                     </v-container>
-                    <small>* майдонлар тўлдирилиши шарт</small>
+                    <small>{{ $t('* майдонлар тўлдирилиши шарт') }}</small>
                 </v-card-text>
                 <v-card-actions>
                     <v-spacer></v-spacer>
@@ -147,7 +145,7 @@
                         text
                         @click="dialog = false"
                     >
-                        Ёпиш
+                        {{ $t('Ёпиш') }}
                     </v-btn>
 
                 </v-card-actions>
@@ -180,6 +178,7 @@
 <script>
 import {ValidationObserver, ValidationProvider} from "vee-validate";
 import EArxivFileInput from "./e-arxiv-file-input";
+import i18n from "../../i18n";
 
 export default {
     name: "e-arxiv-file",
@@ -188,6 +187,10 @@ export default {
         event: "input",
     },
     props: {
+      idColumn:{
+        type: String,
+        default: 'id'
+      },
 
         /*openDocumentMethod: {
             type: String,
@@ -200,7 +203,7 @@ export default {
         },
         label: {
             type: String,
-            default: "Илова қилинадиган ҳужжатлар",
+            default: i18n.t("Илова қилинадиган ҳужжатлар"),
         },
         hint: {
             type: String,
@@ -229,13 +232,12 @@ export default {
     created() {
         const _this = this;
         //this.value = this.modelValue
-        //console.log('multiple 1'+ this.value )
-        if (typeof _this.value[0] !== 'undefined' && typeof _this.value[0].id !== 'undefined' && typeof _this.value[0].type !== 'undefined') {
+        if (typeof _this.value[0] !== 'undefined' && typeof _this.value[0][this.idColumn] !== 'undefined' && typeof _this.value[0].type !== 'undefined') {
             _this.documents = [];
             _this.value.forEach((document, k) => {
-                if (typeof document !== 'undefined' && typeof document.id !== 'undefined' && typeof document.type !== 'undefined' && typeof document.valid !== 'undefined' && document.id.length === 13 && document.type && document.valid === true) {
+                if (typeof document !== 'undefined' && typeof document[_this.idColumn] !== 'undefined' && typeof document.type !== 'undefined' && typeof document.valid !== 'undefined' && document[_this.idColumn].length === 13 && document.type && document.valid === true) {
                     _this.documents.push({
-                        id: document.id,
+                        id: document[_this.idColumn],
                         type: document.type,
                         valid: document.valid,
                         //color: 'default',
@@ -258,6 +260,33 @@ export default {
 
     },
     methods: {
+      async checkFile(file_id) {
+
+        this.loading = true
+        if (!(file_id && (('' + file_id).length === 13 || ('' + file_id).length === 16))) {
+          this.loading = false
+          return false;
+        }
+        let response = null;
+        response = await axios.get('/api/v1/ex_api/arxiv?file_id=' + file_id + '&pnfl=' + this.$auth.user().pin);
+        if (response && response.data && response.data.count) {
+          this.loading = false
+          this.$refs["hujjatilova"].applyResult({
+            errors: [], // array of string errors
+            valid: true, // boolean state
+            failedRules: {} // should be empty since this is a manual error.
+          })
+          return response.data.data;
+        } else {
+          this.$refs["hujjatilova"].applyResult({
+            errors: [i18n.t('Бундай файл топилмади')], // array of string errors
+            valid: true, // boolean state
+            failedRules: {} // should be empty since this is a manual error.
+          })
+          this.loading = false
+        }
+        return false;
+      },
         openDocumentType() {
             this.$refs["hujjatilova"].applyResult({
                 errors: [], // array of string errors
@@ -347,24 +376,24 @@ export default {
                 //this.documents = [];
                 this.$props.value.forEach((item, key) => {
 
-                    if (typeof item['id'] !== 'undefined') {
+                    if (typeof item[_this.idColumn] !== 'undefined') {
                         setTimeout(async () => {
-                            let validDoc = await _this.checkFile(item['id']);
-                            if (item['id'] && ((item['id']).length === 13 || (item['id']).length === 16 )&& validDoc) {
+                            let validDoc = await _this.checkFile(item[_this.idColumn]);
+                            if (item[_this.idColumn]&& ((item[_this.idColumn]).length === 13 || (item[_this.idColumn]).length === 16 )&& validDoc) {
 
                                 if (validDoc[0] === 'undefined') {
                                     // console.log('return');
                                     return;
                                 }
                                 this.$props.value[key] = {
-                                    id: item['id'],
+                                    id: item[_this.idColumn],
                                     valid: true,
                                     type: validDoc[0]['cd_id'] + ' - ' + validDoc[0]['file_num'],
                                     ...validDoc[0]
 
                                 }
                                 _this.documents[key] = {
-                                    id: item['id'],
+                                    id: item[_this.idColumn],
                                     valid: true,
                                     type: validDoc[0]['cd_id'] + ' - ' + validDoc[0]['file_num'],
                                     ...validDoc[0]
@@ -372,6 +401,34 @@ export default {
                                 }
                             }
                         })
+                    } else {
+                      if(item && ((item + '').length === 13 || (item + '').length === 16))
+                      setTimeout(async () => {
+                        let validDoc = await _this.checkFile(item);
+                        if (item && ((item+'').length === 13 || (item+'').length === 16 )&& validDoc) {
+
+                          if (validDoc[0] === 'undefined') {
+                            // console.log('return');
+                            return;
+                          }
+
+                          this.$props.value[key] = {
+                            id: '' + item,
+                            valid: true,
+                            type: validDoc[0]['cd_id'] + ' - ' + validDoc[0]['file_num'],
+                            ...validDoc[0]
+
+                          }
+
+                          _this.documents[0] = {
+                            id: item + '',
+                            valid: true,
+                            type: validDoc[0]['cd_id'] + ' - ' + validDoc[0]['file_num'],
+                            ...validDoc[0]
+
+                          }
+                        }
+                      })
                     }
 
 
@@ -380,7 +437,7 @@ export default {
             //console.log(this.documents.length)
             this.$nextTick(() => {
                 let size = Object.keys(this.documents).length;
-                if (this.documents && size < 1 && typeof this.documents[0] !== 'undefined' && typeof this.documents[0].id === 'undefined' && typeof this.documents[0].valid === 'undefined') {
+                if (this.documents && size < 1 && typeof this.documents[0] !== 'undefined' && typeof this.documents[0][this.idColumn] === 'undefined' && typeof this.documents[0].valid === 'undefined') {
                     // console.log('asd');
                     this.documents = [{}];
                 }
@@ -390,7 +447,7 @@ export default {
         },
         /* modelValue: {
              get() {
-                 if (typeof this.value !== 'undefined' && typeof this.value[0] !== 'undefined' && typeof this.value[0].id !== 'undefined')
+                 if (typeof this.value !== 'undefined' && typeof this.value[0] !== 'undefined' && typeof this.value[0][this.idColumn] !== 'undefined')
                      return this.value;
                  else return this.value = [{}];
              },
@@ -406,11 +463,12 @@ export default {
             return !this.isValidDoc()
         },*/
         ilovaError() {
-            if (this.$props.errors && this.$props.errors.length > 0 && typeof this.$refs.hujjatilova !== 'undefined') this.$refs.hujjatilova.applyResult({
+            if (this.$props.errors && this.$props.errors!=='aa' && this.$props.errors.length > 0 && typeof this.$refs.hujjatilova !== 'undefined') this.$refs.hujjatilova.applyResult({
                 errors: [this.$props.errors], // array of string errors
                 valid: false, // boolean state
                 failedRules: {} // should be empty since this is a manual error.
             });
+
             return this.$props.errors;
 
         }
@@ -421,12 +479,12 @@ export default {
                 const _this = this;
                 //_this.modelValue = [];
                 if (val === true) {
-                    if (typeof _this.value[0] !== 'undefined' && typeof _this.value[0].id !== 'undefined' && typeof _this.value[0].type !== 'undefined') {
+                    if (typeof _this.value[0] !== 'undefined' && typeof _this.value[0][this.idColumn] !== 'undefined' && typeof _this.value[0].type !== 'undefined') {
                         _this.documents = [];
                         _this.value.forEach((document, k) => {
-                            if (typeof document !== 'undefined' && typeof document.id !== 'undefined' && typeof document.type !== 'undefined' && typeof document.valid !== 'undefined' && (document.id.length === 13 || document.id.length === 16) && document.type && document.valid === true) {
+                            if (typeof document !== 'undefined' && typeof document[this.idColumn] !== 'undefined' && typeof document.type !== 'undefined' && typeof document.valid !== 'undefined' && (document[this.idColumn].length === 13 || document[this.idColumn].length === 16) && document.type && document.valid === true) {
                                 _this.documents.push({
-                                    id: document.id,
+                                    id: document[this.idColumn],
                                     type: document.type,
                                     valid: document.valid,
                                     ...document
@@ -448,16 +506,16 @@ export default {
                         //_this.value =[];
 
                         _this.documents.forEach((document, k) => {
-                            if (typeof document !== 'undefined' && typeof document.id !== 'undefined' && typeof document.type !== 'undefined' && typeof document.valid !== 'undefined' && (document.id.length === 13 || document.id.length === 16 )&& document.type && document.valid === true) {
+                            if (typeof document !== 'undefined' && typeof document[this.idColumn] !== 'undefined' && typeof document.type !== 'undefined' && typeof document.valid !== 'undefined' && (document[this.idColumn].length === 13 || document[this.idColumn].length === 16 )&& document.type && document.valid === true) {
                                 ///console.log('555');
                                 /*_this.value.push(JSON.parse(JSON.stringify({
-                                    id: document.id,
+                                    id: document[this.idColumn],
                                     type: document.type,
                                     valid: document.valid,
                                     color: document.color,
                                 })));*/
                                 _this.myArray.push({
-                                    id: document.id,
+                                    id: document[this.idColumn],
                                     type: document.type,
                                     valid: document.valid,
                                     color: document.color,
@@ -474,7 +532,7 @@ export default {
 
                     for (const [key, item] of Object.entries(_this.myArray)) {
                         //console.log(item)
-                        if (!(item && typeof item.id !== 'undefined' && typeof item.valid !== 'undefined' && item.valid)) {
+                        if (!(item && typeof item[this.idColumn] !== 'undefined' && typeof item.valid !== 'undefined' && item.valid)) {
                             // console.log('aa')
 
                             if (_this.myArray.indexOf(item)) {
@@ -485,7 +543,7 @@ export default {
                     }
 
                     /*                    _this.myArray.forEach((item)=>{
-                                            if(!(item && typeof item.id !=='undefined' && typeof item.valid !=='undefined' && item.valid))
+                                            if(!(item && typeof item[this.idColumn] !=='undefined' && typeof item.valid !=='undefined' && item.valid))
                                             {
                                                 if(_this.myArray.indexOf(item)) {
                                                     console.log('sadasddsadsa')
@@ -502,11 +560,15 @@ export default {
 
                 for (const [key, value] of Object.entries(val)) {
 
-                    this.myColor(this.documents[key].id, key)
+                    this.myColor(this.documents[key][this.idColumn], key)
                 }
             },
             deep: true
         }*/
+      errors(val){
+/*          console.log('valval')
+          console.log(val)*/
+      }
     },
     components: {
         EArxivFileInput,

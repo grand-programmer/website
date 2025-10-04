@@ -18,6 +18,7 @@ class UsersCountController extends Controller
     {
         //today
         $today=UsersCount::whereDate('created_at', Carbon::today())->first();
+
         $data['today']=$today?$today->count:0;
         //yesterday
         $yesterday=UsersCount::whereDate('created_at', Carbon::yesterday())->first();
@@ -36,10 +37,10 @@ class UsersCountController extends Controller
         $data['month']=($month->get()->count()>0)?$month->sum('count'):0;
 
         //year
-        $year=UsersCount::where('id','>',0);
+        // $year=UsersCount::where('id','>',0);
         //$year=UsersCount::whereYear('created_at', Carbon::now()->year);
 
-        $data['year']=($year->get()->count()>0)?$year->sum('count'):0;
+        $data['year']=UsersCount::where('id','>',0)->sum('count');
 
         return response()->json(['data'=>$data]);
 

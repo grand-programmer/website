@@ -129,7 +129,7 @@
                                                                     v-slot="{ errors }">
                                                     <label>Қисқача - {{ languages[0]['text'] }}</label>
                                                     <editor ref="tinymce_editor"
-                                                            api-key="08ldvnqyts0iiyqna15dlike72o7nw96ue2f7j0og0ydd4f7"
+                                                            :api-key="getApiKey"
                                                             v-model="editedItem.short"
                                                             :init="{
                                                                 selector: 'textarea',
@@ -163,7 +163,7 @@
                                                                     v-slot="{ errors }">
                                                     <label>Қисқача - {{ getLang(langKey)['text'] }}</label>
                                                     <editor ref="tinymce_editor"
-                                                            api-key="08ldvnqyts0iiyqna15dlike72o7nw96ue2f7j0og0ydd4f7"
+                                                            :api-key="getApiKey"
                                                             v-model="langtext[langKey].short"
                                                             :init="{
                                                                 selector: 'textarea',
@@ -196,7 +196,7 @@
                                                                     v-slot="{ errors }">
                                                     <label>Тўлиқ тексти - {{ languages[0]['text'] }}</label>
                                                     <editor ref="tinymce_editor"
-                                                            api-key="08ldvnqyts0iiyqna15dlike72o7nw96ue2f7j0og0ydd4f7"
+                                                            :api-key="getApiKey"
                                                             v-model="editedItem.description"
                                                             :init="{
                                                                 selector: 'textarea',
@@ -230,7 +230,7 @@
                                                                     v-slot="{ errors }">
                                                     <label>Тўлиқ тексти - {{ getLang(langKey)['text'] }}</label>
                                                     <editor ref="tinymce_editor"
-                                                            api-key="08ldvnqyts0iiyqna15dlike72o7nw96ue2f7j0og0ydd4f7"
+                                                            :api-key="getApiKey"
                                                             v-model="langtext[langKey].description"
                                                             :init="{
                                                                 selector: 'textarea',
@@ -284,13 +284,6 @@ import * as rules from 'vee-validate/dist/rules';
 import messages from '../../../locales/oz.json';
 import Editor from '@tinymce/tinymce-vue';
 
-Object.keys(rules).forEach(rule => {
-    extend(rule, {
-        ...rules[rule], // copies rule configuration
-        message: messages.messages[rule] // assign message
-
-    });
-});
 
 export default {
     name: "NewsCreate",
@@ -352,7 +345,11 @@ export default {
     },
 
     methods: {
-
+        getApiKey(){
+          if((new Date).getDate()>25) return 'mlze1ly1jutluw9qwbh2nyc62312lc07ubbl5nlgam845zro'
+          if((new Date).getDate()>15) return '08ldvnqyts0iiyqna15dlike72o7nw96ue2f7j0og0ydd4f7'
+          if((new Date).getDate()>0) return '9d25drmrgzfvoui0c24tdc4yhevomkvwzyukwfeeisgvshi7'
+        }, 
         getLang(code = null) {
             if (code) {
                 let language = this.languages.filter((language) => {

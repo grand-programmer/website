@@ -129,7 +129,7 @@
 
 <noscript><div><img src="https://mc.yandex.ru/watch/90773745" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 <!-- /Yandex.Metrika counter -->
-
+{{--
 <!-- webim button generation date: 2023-04-19 version: 10.5.67 -->
 <a class="webim_button" href="#" rel="webim">
     <img src="https://beltelekomuz.webim2.ru/button.php" border="0"/>
@@ -138,7 +138,7 @@
     webim = {
         accountName: "beltelekomuz",
         domain: "beltelekomuz.webim2.ru",
-        location: "default"
+        location: localStorage.language
     };
 
     (function () {
@@ -148,7 +148,7 @@
         document.getElementsByTagName("head")[0].appendChild(s);
     })();
 </script>
-<!-- /webim button -->
+<!-- /webim button -->--}}
 
 <!--<script src="//code.jivosite.com/widget/4yZcWqNleE" async></script>-->
 <script src="https://code.responsivevoice.org/responsivevoice.js?key=vNL4fpv9"></script>

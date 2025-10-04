@@ -107,6 +107,9 @@ import driverOAuth2Facebook from '@websanova/vue-auth/dist/drivers/oauth2/facebo
 driverOAuth2Google.params.client_id = '547886745924-4vrbhl09fr3t771drtupacct6f788566.apps.googleusercontent.com';
 driverOAuth2Facebook.params.client_id = '196729390739201';
 
+
+
+Vue.axios.defaults.headers.common['X-Localization'] = i18n.locale
 Vue.use(auth, {
     plugins: {
         http: Vue.axios, // Axios

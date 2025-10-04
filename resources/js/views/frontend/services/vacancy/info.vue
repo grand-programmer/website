@@ -7,7 +7,7 @@
                     <div>
                         <div class="dialog_header">
                             <img src="/img/gtk_image.png">
-                            <p style=""> Божхона органларига номзод <span> маълумотномаси </span></p>
+                            <p style=""> {{$t('Божхона органларига номзод')}} <span> {{$t('маълумотномаси')}} </span></p>
                             <div id="qrcode">
                                 <qrcode value="Hello, World!" :options="{ width: 80 }"></qrcode>
                             </div>
@@ -26,22 +26,22 @@
                                 </tr>
                                 <tr>
                                     <td style="width: 60%" class="umumiy header">
-                                        <p style=""> Умумий маълумотлар</p>
+                                        <p style=""> {{$t('Умумий маълумотлар')}}</p>
                                         <table style="width:100%; text-align: left">
                                             <tr>
-                                                <td>Туғилган сана</td>
+                                                <td>{{$t('Туғилган сана')}}</td>
                                                 <td>{{ resume.user.birth_date }}</td>
                                             </tr>
                                             <tr>
-                                                <td>Манзил</td>
+                                                <td>{{$t('Манзил')}}</td>
                                                 <td>{{ resume.per_adr }}</td>
                                             </tr>
                                             <tr>
-                                                <td>Email</td>
+                                                <td>{{$t('Email')}}</td>
                                                 <td>{{ resume.user.email }}</td>
                                             </tr>
                                             <tr>
-                                                <td>Телефон</td>
+                                                <td>{{$t('Телефон')}}</td>
                                                 <td>{{ resume.user.phone }}</td>
                                             </tr>
                                         </table>
@@ -53,12 +53,12 @@
                                 </tr>
                                 <template v-if="resume.user_add">
                                     <tr>
-                                        <td colspan="2" class="header"><p style="">Таълим тўғрисида</p></td>
+                                        <td colspan="2" class="header"><p style="">{{$t('Таълим тўғрисида')}}</p></td>
                                     </tr>
 
                                     <tr>
-                                        <td style="text-align: left">Ўқув юрти номи</td>
-                                        <td >Ўқиган даври</td>
+                                        <td style="text-align: left">{{$t('Ўқув юрти номи')}}</td>
+                                        <td >{{$t('Ўқиган даври')}}</td>
                                     </tr>
                                     <tr v-for="talim in resume.user_add.malumotlar" v-if="resume.user_add">
                                         <td style="width: 60%; text-align: left">
@@ -68,12 +68,12 @@
                                     </tr>
 
                                     <tr v-if="resume.user_add.sertifikatlar">
-                                        <td colspan="2" class="header"><p style="">Сертификатлари</p></td>
+                                        <td colspan="2" class="header"><p style="">{{$t('Сертификатлари')}}</p></td>
                                     </tr>
 
                                     <tr v-if="resume.user_add.sertifikatlar">
-                                        <td style="text-align: left"> Ўқув маркази</td>
-                                        <td > Тугатган санаси</td>
+                                        <td style="text-align: left"> {{$t('Ўқув маркази')}}</td>
+                                        <td > {{$t('Тугатган санаси')}}</td>
                                     </tr>
                                     <tr v-for="sertifikat in resume.user_add.sertifikatlar">
                                         <td style="width: 60%; text-align: left">
@@ -132,7 +132,7 @@
                             <div>
                                 <div class="dialog_header">
                                     <img width="40" height="40" src="/img/gtk_image.png">
-                                    <p> Божхона органларига номзод <span> маълумотномаси </span></p>
+                                    <p> {{$t('Божхона органларига номзод')}} <span> {{$t('маълумотномаси')}} </span></p>
                                     <qrcode value="Hello, World!" :options="{ width: 80 }"></qrcode>
                                 </div>
                                 <div class="dialog_content">
@@ -148,22 +148,22 @@
                                         </tr>
                                         <tr>
                                             <td style="width: 90%" class="umumiy header">
-                                                <p style=""> Умумий маълумотлар</p>
+                                                <p style=""> {{$t('Умумий маълумотлар')}}</p>
                                                 <table style="width:100%; text-align: left">
                                                     <tr>
-                                                        <td>Туғилган сана</td>
+                                                        <td>{{$t('Туғилган сана')}}</td>
                                                         <td>{{ resume.user.birth_date }}</td>
                                                     </tr>
                                                     <tr>
-                                                        <td>Манзил</td>
+                                                        <td>{{$t('Манзил')}}</td>
                                                         <td>{{ resume.per_adr }}</td>
                                                     </tr>
                                                     <tr>
-                                                        <td>Email</td>
+                                                        <td>{{$t('Email')}}</td>
                                                         <td>{{ resume.user.email }}</td>
                                                     </tr>
                                                     <tr>
-                                                        <td>Телефон</td>
+                                                        <td>{{$t('Телефон')}}</td>
                                                         <td>{{ resume.user.phone }}</td>
                                                     </tr>
                                                 </table>
@@ -175,11 +175,11 @@
                                         </tr>
                                         <template v-if="resume.user_add">
                                             <tr>
-                                                <td colspan="2" class="header"><p style="">Таълим тўғрисида</p></td>
+                                                <td colspan="2" class="header"><p style="">{{$t('Таълим тўғрисида')}}</p></td>
                                             </tr>
                                             <tr>
-                                                <td >Ўқув юрти номи</td>
-                                                <td >Ўқиган даври</td>
+                                                <td >{{$t('Ўқув юрти номи')}}</td>
+                                                <td >{{$t('Ўқиган даври')}}</td>
                                             </tr>
                                             <tr v-for="talim in resume.user_add.malumotlar" v-if="resume.user_add">
                                                 <td style="width: 60%; text-align: left">
@@ -189,11 +189,11 @@
                                             </tr>
 
                                             <tr v-if="resume.user_add.sertifikatlar">
-                                                <td colspan="2" class="header"><p style="">Сертификатлари</p></td>
+                                                <td colspan="2" class="header"><p style="">{{$t('Сертификатлари')}}</p></td>
                                             </tr>
                                             <tr v-if="resume.user_add.sertifikatlar">
-                                                <td > Ўқув маркази</td>
-                                                <td > Тугатган санаси</td>
+                                                <td > {{$t('Ўқув маркази')}}</td>
+                                                <td > {{$t('Тугатган санаси')}}</td>
                                             </tr>
 
                                             <tr v-for="sertifikat in resume.user_add.sertifikatlar">
@@ -287,15 +287,15 @@
         </v-container>
         <div class="background"></div>
         <div class="resume_info_content">
-            <h3>Сизнинг аризангиз қабул қилинди</h3>
+            <h3>{{$t('Сизнинг аризангиз қабул қилинди')}}</h3>
             <span class="info_check">
             <v-icon>fa-check</v-icon>
         </span>
-            <p>Ариза рақами</p>
+            <p>{{$t('Ариза рақами')}}</p>
             <p><strong>{{ resume.kod ? resume.kod : '' }}</strong></p>
             <br>
-            <p>Аризалар рўйхатига ўтиб <br>аризангиз ҳолатини кўришингиз мумкин!</p>
-            <router-link to="/applications" class="fs-3"><p> Аризаларингиз рўйхати</p></router-link>
+            <p>{{$t('Аризалар рўйхатига ўтиб')}} <br>{{$t('аризангиз ҳолатини кўришингиз мумкин!')}}'</p>
+            <router-link to="/applications" class="fs-3"><p> {{$t('Аризаларингиз рўйхати')}}</p></router-link>
 
             <div class="actions">
                 <router-link :to="'/services/vacancy/'+ (resume.vacancy?resume.vacancy.id:1)"><img src="/img/icons/return.png"/>

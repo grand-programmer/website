@@ -157,6 +157,26 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "VioMain",
@@ -534,7 +554,10 @@ var render = function () {
                             {
                               staticClass: "video_link",
                               attrs: {
-                                href: "/storage/files/Intellektual-user.pptx",
+                                href:
+                                  _vm.$i18n.locale === "ru"
+                                    ? "/storage/files/vio_ru.pptx"
+                                    : "/storage/files/vio_uz.pptx",
                               },
                             },
                             [
@@ -547,7 +570,9 @@ var render = function () {
                                   attrs: { src: "/img/icons/play.svg" },
                                 }),
                                 _vm._v(" "),
-                                _c("span", [_vm._v("Йўриқнома")]),
+                                _c("span", [
+                                  _vm._v(_vm._s(_vm.$t("Йўриқнома"))),
+                                ]),
                               ]),
                             ]
                           ),
@@ -703,7 +728,7 @@ var render = function () {
                                       staticClass:
                                         "green--text card-title font-weight-light mt-2 ml-2",
                                     },
-                                    [_vm._v("14500 та ")]
+                                    [_vm._v(_vm._s(_vm.$t("14500 та")) + " ")]
                                   ),
                                 ]
                               ),
@@ -716,7 +741,9 @@ var render = function () {
                                 },
                                 [
                                   _vm._v(
-                                    "\n                                Бугун\n                                "
+                                    "\n                                " +
+                                      _vm._s(_vm.$t("Бугун ")) +
+                                      "\n                                "
                                   ),
                                   _c(
                                     "v-icon",
@@ -743,15 +770,23 @@ var render = function () {
                                   _c(
                                     "span",
                                     { staticClass: "green--text mx-1" },
-                                    [_vm._v("(155 та) ")]
+                                    [_vm._v(_vm._s(_vm.$t("(155 та)")) + " ")]
                                   ),
                                   _vm._v(
-                                    "\n\n                                ўртача кунлик кўрсаткич ("
+                                    "\n\n                                " +
+                                      _vm._s(
+                                        _vm.$t("ўртача кунлик кўрсаткич")
+                                      ) +
+                                      " "
                                   ),
                                   _c("span", { staticClass: "green--text" }, [
-                                    _vm._v("120 та"),
+                                    _vm._v(_vm._s(_vm.$t("(120 та)"))),
                                   ]),
-                                  _vm._v(") дан\n                            "),
+                                  _vm._v(
+                                    " " +
+                                      _vm._s(_vm.$t("дан ")) +
+                                      "\n                            "
+                                  ),
                                 ],
                                 1
                               ),

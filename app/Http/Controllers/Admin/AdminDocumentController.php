@@ -51,7 +51,7 @@ class AdminDocumentController extends Controller
         $validator = Validator::make($data, [
             'name' => 'required|min:3',
             'url' => 'required|min:3',
-            'code' => 'required|min:3',
+            'code' => 'required|min:1',
             'date' => 'required|min:3|date',
             'categories' => 'required',
             'type' => 'required',

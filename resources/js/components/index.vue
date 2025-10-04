@@ -55,7 +55,38 @@
 
 
                     <div class="slider_inner">
+                      <div data-thumb="/img/main-slider/general_yoshlar.jpg" data-src="/img/main-slider/general_yoshlar.jpg">
+                        <div class="container">
+                          <div class="slider_text absolute_right" style="top: inherit; bottom: 80px; right: 0px">
+                            <h3 class="fadeInLeft animated" style="width: 60vw; top: inherit; bottom: 10px; ">{{ $t("Генерал ва ёшлар учрашуви") }}</h3>
+                            <h4 class="fadeInLeft animated d-none">{{ $t("Божхона ахборот тизими") }}</h4>
+                            <p class="fadeInUp animated d-none">
+                              {{ $t("2024 йил 23-25 апрель, Тошкент шаҳри") }}</p>
+                            <a class="s_readmore_btn fadeInUp animated" target="_blank" style="margin-left: 40vw"
+                               href="/news/bozhhona-qomitasi-raisi-akmalhozha-mavlonovning-bozhhona-instituti-kursantlari-bilan-general-va-yoshlar-uchrashuvi-bolib-otdi">{{ $t("Батафсил") }}</a>
+                            <!--<a class="s_contact_btn fadeInUp animated" href="#">Contact Us</a>-->
+                          </div>
+                          <div class="slider_image slider-2">
 
+                          </div>
+                        </div>
+                      </div>
+                        <div data-thumb="/img/main-slider/1U0A4415.jpg" data-src="/img/main-slider/1U0A4415.jpg">
+                            <div class="container">
+                                <div class="slider_text absolute_right" style="top: inherit; bottom: 80px; right: 0px">
+                                    <h3 class="fadeInLeft animated" style="width: 60vw; top: inherit; bottom: 10px; ">{{ $t("Ватан учун, миллат учун, халқ учун!") }}</h3>
+                                    <h4 class="fadeInLeft animated d-none">{{ $t("Божхона ахборот тизими") }}</h4>
+                                    <p class="fadeInUp animated d-none">
+                                        {{ $t("2024 йил 23-25 апрель, Тошкент шаҳри") }}</p>
+                                    <a class="s_readmore_btn fadeInUp animated" target="_blank" style="margin-left: 40vw"
+                                       href="/news/bozhhona-qomitasida-mamlakatimiz-mustaqilligining-34-yilligiga-bagishlangan-tantanali-tadbir-bolib-otdi">{{ $t("Батафсил") }}</a>
+                                    <!--<a class="s_contact_btn fadeInUp animated" href="#">Contact Us</a>-->
+                                </div>
+                                <div class="slider_image slider-2">
+
+                                </div>
+                            </div>
+                        </div>
                         <div data-thumb="/img/main-slider/1.JPG" data-src="/img/main-slider/1.JPG">
                             <div class="container">
                                 <div class="slider_text absolute_right" style="top: inherit; bottom: 80px; right: 0px">
@@ -294,7 +325,7 @@
                                 }}
                             </div>
                         </router-link>
-                        <router-link to="/page/yuridik-shahslar-tomonidan-avtotransport-vositalarni-olib-kirish-tartibi"
+                        <router-link to="/page/byud-va-bdtning-elektron-shakllari"
                                      class="card">
                             <div class="bolim_image">
                                 <img src="/img/service/mask-group.png"/>
@@ -320,7 +351,7 @@
                                 {{ $t("Қўмита фаолиятини баҳоланг") }}
                             </div>
                         </router-link>
-                        <a href="http://tarif.customs.uz/" target="_blank" class="card">
+                        <a :href="$t('http://tarif.customs.uz/')" target="_blank" class="card">
                             <div class="bolim_image"><img src="/img/service/time.png"/></div>
                             <div class="bolim_title">{{ $t("Тўловлар ва вақт") }}</div>
                             <div class="bolim_description">
@@ -330,7 +361,7 @@
                             </div>
 
                         </a>
-                        <a href="http://service.customs.uz/autogtd_report/index.jsp?pc=7#" target="_blank" class="card">
+                        <a href="https://ed1.customs.uz/hisobotImEx/index.jsp?pc=7#" target="_blank" class="card">
                             <div class="bolim_image"><img src="/img/service/yuridik.png"/></div>
                             <div class="bolim_title">{{ $t("Юридик шахслар учун") }}</div>
                             <div class="bolim_description">{{

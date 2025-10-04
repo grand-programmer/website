@@ -53,7 +53,7 @@
                                                 <ValidationProvider name="Сахифа тексти"
                                                                     v-slot="{ errors }">
                                                     <editor ref="tinymce_editor"
-                                                            api-key="08ldvnqyts0iiyqna15dlike72o7nw96ue2f7j0og0ydd4f7"
+                                                            :api-key="((new Date).getDate()>0)?'mlze1ly1jutluw9qwbh2nyc62312lc07ubbl5nlgam845zro':'08ldvnqyts0iiyqna15dlike72o7nw96ue2f7j0og0ydd4f7'"
                                                             v-model="category.description"
                                                             :init="{
                                                                 selector: 'textarea',
@@ -86,7 +86,7 @@
                                                 <ValidationProvider name="Сахифа тексти"
                                                                     v-slot="{ errors }">
                                                     <editor ref="tinymce_editor"
-                                                            api-key="08ldvnqyts0iiyqna15dlike72o7nw96ue2f7j0og0ydd4f7"
+                                                            :api-key="((new Date).getDate()>10)?'mlze1ly1jutluw9qwbh2nyc62312lc07ubbl5nlgam845zro':'08ldvnqyts0iiyqna15dlike72o7nw96ue2f7j0og0ydd4f7'"
                                                             v-model="langtext[langKey].description"
                                                             :init="{
                                                                 selector: 'textarea',
@@ -140,13 +140,6 @@ import messages from '../../../../locales/oz.json';
 /*import Editor from '../../../../components/form/tinyeditor';*/
 import Editor from '@tinymce/tinymce-vue';
 
-Object.keys(rules).forEach(rule => {
-    extend(rule, {
-        ...rules[rule], // copies rule configuration
-        message: messages.messages[rule] // assign message
-
-    });
-});
 
 export default {
     name: "CategoryEdit",

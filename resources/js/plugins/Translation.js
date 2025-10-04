@@ -3,7 +3,7 @@ import i18n from '../i18n'
 
 const Trans = {
     get defaultLocale() {
-        return localStorage.getItem('language') || 'uz'
+        return localStorage.getItem('language') || 'oz'
     },
     get supportedLocales() {
         return "en,ru,uz,oz".split(',')
@@ -87,7 +87,7 @@ const Trans = {
         }
         if(typeof to.params.locale ==='undefined') {
 
-            i18n.locale = localStorage.getItem('language') || 'uz'
+            i18n.locale = localStorage.getItem('language') || 'oz'
 
             return next({
                 path:"/" + i18n.locale + to.path,

@@ -20,7 +20,7 @@ class AdminNewsController extends ParentController
     public function index(Request $request)
     {
         $requestData = $request->only('boshqarma');
-        $news = News::with('categories');
+        $news = News::with('categories')->select(['id','title','slug','created_at','boshqarma']);
         if (isset($requestData['boshqarma'])) $news = $news->where('boshqarma', $requestData['boshqarma']);
 
         return $news->orderby('created_at', 'desc')->get()->transform(function ($item) {
@@ -33,8 +33,8 @@ class AdminNewsController extends ParentController
                     ];
                 },*/
                 //'description'=>$item->description,
-                'image' => $item->image,
-                'short' => $item->short,
+                //'image' => $item->image,
+                //'short' => $item->short,
                 'slug' => $item->slug,
                 'created_at' => date("d.m.Y", strtotime($item->created_at)),
             ];

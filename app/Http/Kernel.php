@@ -4,6 +4,7 @@ namespace App\Http;
 
 use App\Http\Middleware\CheckRole;
 use App\Http\Middleware\Localization;
+use App\Http\Middleware\PaymeCheck;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -69,6 +70,7 @@ class Kernel extends HttpKernel
         'isAdmin' => \App\Http\Middleware\CheckIsAdmin::class,
         'isAdminOrSelf' => \App\Http\Middleware\CheckIsAdminOrSelf::class,
         'role' => \App\Http\Middleware\Role::class,
-        'locale'=>Localization::class
+        'locale'=>Localization::class,
+        'paymecheck'=>PaymeCheck::class
     ];
 }

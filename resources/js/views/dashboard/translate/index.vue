@@ -120,6 +120,12 @@
                     :search="search"
                     :sort-by.sync="sortBy"
                     :sort-desc.sync="sortDesc"
+                    :no-data-text="$t('Маълумот топилмади')"
+                    :footer-props="{
+                        'items-per-page-text': $t('Сахифадаги элементлар сони'),
+                        'items-per-page-all-text': $t('Барчаси')
+                    }"
+                    :loading-text="$t('Юкланмоқда... Илтимос кутиб туринг')"
                 >
                     <template v-slot:item.key="{ item }">
                         <v-text-field v-if="filteredTranslates[getTranslateByKey(item.key)].key.length<1"

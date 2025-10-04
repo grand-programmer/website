@@ -268,6 +268,57 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -292,7 +343,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       dialog_image: false,
       image: null,
       description: null,
-      orinbosarlar: []
+      orinbosarlar: [],
+      maslahatchilar: []
     };
   },
   methods: {
@@ -319,7 +371,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                       _this.rais = v;
                     } else if (v.lavozimi === '2') {
                       _this.birinchi_orinbosar = v;
-                    } else _this.orinbosarlar.push(v);
+                    } else if (v.lavozimi === '3') {
+                      _this.orinbosarlar.push(v);
+                    } else _this.maslahatchilar.push(v);
                   });
                 })["catch"](function (error) {
                   console.log(error);
@@ -340,6 +394,24 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   created: function created() {
     this.initialize();
+  },
+  mounted: function mounted() {
+    var script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.innerHTML = JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Mavlonov Akmalxuja Yusupovich",
+      "jobTitle": "Bojxona qo‘mitasi raisi",
+      "image": "https://bojxona.uz/storage/uploads/markaziy/1650972408.png",
+      "url": "https://bojxona.uz/oz/page/rahbariyat",
+      "worksFor": {
+        "@type": "GovernmentOrganization",
+        "name": "O‘zbekiston Respublikasi Bojxona qo‘mitasi",
+        "url": "https://bojxona.uz"
+      }
+    });
+    document.head.appendChild(script);
   }
 });
 
@@ -361,7 +433,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.biograf_show.white--text p {\n    color: white;\n}\n.rahbar_description{\n    width: 500px;\n    padding: 30px;\n    background-color: rgb(132 132 132);\n    font-size: 20px;\n    display: flex;\n    flex-direction: column;\n    color: #fff;\n}\n.rahbar_description h3{\n    text-align: center;\n    margin-bottom: 60px;\n}\n.rahbar_description p{\n    line-height: 36px;\n    text-align: justify;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.biograf_show.white--text p {\r\n    color: white;\n}\n.rahbar_description{\r\n    width: 500px;\r\n    padding: 30px;\r\n    background-color: rgb(132 132 132);\r\n    font-size: 20px;\r\n    display: flex;\r\n    flex-direction: column;\r\n    color: #fff;\n}\n.rahbar_description h3{\r\n    text-align: center;\r\n    margin-bottom: 60px;\n}\n.rahbar_description p{\r\n    line-height: 36px;\r\n    text-align: justify;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -1037,6 +1109,150 @@ var render = function () {
                         ),
                       ]
                     ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-12 orinbosarlar" }, [
+                      _vm._m(1),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "row justify-content-center" },
+                        _vm._l(_vm.maslahatchilar, function (orinbosar) {
+                          return _c("div", { staticClass: "orinbosar col-3" }, [
+                            _c("div", { staticClass: "row" }, [
+                              _c("div", { staticClass: "col-12" }, [
+                                _c("div", [
+                                  _c(
+                                    "div",
+                                    { staticClass: "orinbosar-header" },
+                                    [
+                                      _c(
+                                        "div",
+                                        { staticClass: "profile-icon-wrapper" },
+                                        [
+                                          _c(
+                                            "div",
+                                            {
+                                              staticClass: "profile-icon",
+                                              style:
+                                                "background-image: url(/storage/uploads/markaziy/" +
+                                                orinbosar.image +
+                                                ");",
+                                              on: {
+                                                click: function ($event) {
+                                                  _vm.dialog_image = true
+                                                  _vm.image =
+                                                    "/storage/uploads/markaziy/" +
+                                                    orinbosar.image
+                                                  _vm.description =
+                                                    orinbosar.biografiyasi &&
+                                                    orinbosar.biografiyasi
+                                                      .length > 10
+                                                      ? "<h3>" +
+                                                        orinbosar.fio +
+                                                        "</h3>" +
+                                                        orinbosar.biografiyasi
+                                                      : ""
+                                                },
+                                              },
+                                            },
+                                            [
+                                              _vm._v(
+                                                "\n                                                                         \n                                                                    "
+                                              ),
+                                            ]
+                                          ),
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c("p", [
+                                        _vm._v(_vm._s(_vm.$t(orinbosar.fio))),
+                                      ]),
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "orinbosar-info" }, [
+                                    _c("div", { staticClass: "text-row" }, [
+                                      _c(
+                                        "div",
+                                        { staticClass: "far fa-user" },
+                                        [_vm._v(" ")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c("p", [
+                                        _vm._v(
+                                          "\n                                                                      " +
+                                            _vm._s(
+                                              typeof orinbosar.translates !==
+                                                "undefined" &&
+                                                typeof orinbosar.translates[
+                                                  _vm.$i18n.locale
+                                                ] !== "undefined" &&
+                                                orinbosar.translates[
+                                                  _vm.$i18n.locale
+                                                ]["lavozim_name"] &&
+                                                typeof orinbosar.translates[
+                                                  _vm.$i18n.locale
+                                                ]["lavozim_name"] !==
+                                                  "undefined"
+                                                ? orinbosar.translates[
+                                                    _vm.$i18n.locale
+                                                  ]["lavozim_name"]
+                                                : orinbosar.lavozim_name
+                                            )
+                                        ),
+                                      ]),
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("div", { staticClass: "text-row" }, [
+                                      _c(
+                                        "div",
+                                        { staticClass: "far fa-clock" },
+                                        [_vm._v(" ")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c("p", [
+                                        _vm._v(
+                                          _vm._s(
+                                            typeof orinbosar.translates !==
+                                              "undefined" &&
+                                              typeof orinbosar.translates[
+                                                _vm.$i18n.locale
+                                              ] !== "undefined" &&
+                                              orinbosar.translates[
+                                                _vm.$i18n.locale
+                                              ]["qabul"] &&
+                                              typeof orinbosar.translates[
+                                                _vm.$i18n.locale
+                                              ]["qabul"] !== "undefined"
+                                              ? orinbosar.translates[
+                                                  _vm.$i18n.locale
+                                                ]["qabul"]
+                                              : orinbosar.qabul
+                                          )
+                                        ),
+                                      ]),
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("div", { staticClass: "text-row" }, [
+                                      _c(
+                                        "div",
+                                        { staticClass: "fas fa-phone-alt" },
+                                        [_vm._v(" ")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c("p", [
+                                        _vm._v(_vm._s(orinbosar.phone)),
+                                      ]),
+                                    ]),
+                                  ]),
+                                ]),
+                              ]),
+                            ]),
+                          ])
+                        }),
+                        0
+                      ),
+                    ]),
                   ]),
                 ]),
               ]),
@@ -1101,6 +1317,14 @@ var render = function () {
   )
 }
 var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("h3", { staticStyle: { "text-align": "center" } }, [_vm._v(" ")]),
+    ])
+  },
   function () {
     var _vm = this
     var _h = _vm.$createElement

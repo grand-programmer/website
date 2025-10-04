@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Helpers\MainHelper;
 use App\Models\Service;
-use App\Models\StatService as ServiceStat;
+use App\Models\StatServiceApplication;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
@@ -81,11 +82,13 @@ class UserController extends Controller
         global $services;
         $services = [];
         $user_id = Auth::guard('api')->user()->id;
+/*        $user= User::where('type','<>',1)->first();
+        dd($user);*/
         ///
         /// Dastlabki qaror
         //dd(["personPin" => Auth::guard('api')->user()->pin]);
 
-        $statServices = ServiceStat::where(['user_id' => Auth::guard('api')->user()->id])->where('status', '<>', null)->get();
+/*        $statServices = ServiceStat::where(['user_id' => Auth::guard('api')->user()->id])->where('status', '<>', null)->get();
         if ($statServices->count() > 0)
             $statServices->transform(function ($statServices_item) use ($user_id) {
                 global $services;
@@ -99,9 +102,10 @@ class UserController extends Controller
                     "type" => 10,
                     "user_id" => $user_id,
                 ];
-            });
+            });*/
         try {
-            $response = Http::withoutVerifying()->timeout(10)->get(env('MIX_BASE_URL') . '/api/v1/ex_api/customprice-apps', ["pnfl" => Auth::guard('api')->user()->pin]);
+            $response = Http::withoutVerifying()->timeout(10)->get('//customs.uz/api/v1/ex_api/customprice-apps', ["pnfl" => Auth::guard('api')->user()->pin]);
+
             if ($response->status() == 200) {
 
                 $dq = $response->json();
@@ -124,11 +128,38 @@ class UserController extends Controller
         } catch (\Exception $e) {
 
         };
+
+        // Stat Service
+        try {
+            $user = Auth::guard('api')->user();
+            $where=['pin'=>$user->pin,'tin'=>((auth()->user()->type === 2) ? auth()->user()->legal_tin : auth()->user()->tin)];
+
+
+            foreach (StatServiceApplication::where($where)->whereHas('status',function($query){
+                return $query->withTrashed()->where('status_id','>',3)->where('status_id','<>',8);
+            })->get() as $dq_item){
+                global $services;
+                $services[] = [
+                    "app_id" => $dq_item['id'],
+                    "app_num" => $dq_item['appnum'],
+                    "created_at" => $dq_item['updated_at'],
+                    "status" => $dq_item->status()->first()?$dq_item->status()->first()->id:null,
+                    "link" => "/services/stat/info/" . $dq_item['id'],
+                    "statusNm" => $dq_item->status()->first() ? $dq_item->status()->first()['name_' . app()->getLocale()]:'',
+                    "type" => 12,
+                    "user_id" => null,
+                ];
+
+            }
+        } catch (\Exception $e) {
+
+dd($e);
+        };
         /// Ishga joylashish
         //dd(["personPin" => Auth::guard('api')->user()->pin]);
         try {
             $response1 = Http::timeout(10)->withBasicAuth('apiuser', 1)
-                ->get('http://172.16.112.19:7191/nomzod/getAllArizaNomzod?pnfl=' . Auth::guard('api')->user()->pin);
+                ->get('http://172.16.112.19:7191/vacancy4/nomzod/getAllArizaNomzod?pnfl=' . Auth::guard('api')->user()->pin);
             if ($response1->status() == 200) {
                 $vi = $response1->json();
                 if (is_array($vi) and isset($vi['allariza']) and isset($vi['allariza'][0])  and isset($vi['allariza'][0]['vak_id']) and isset($vi['allariza'][0]['vak_id'])) {
@@ -154,7 +185,10 @@ class UserController extends Controller
         try {
             $response = Http::asMultipart();
             $response = $response->timeout(10)
-                ->get('http://192.168.214.152:7070/DECAPP/s06appealrestapianswer/getResult', ['personPin' => Auth::guard('api')->user()->pin])->throw(function ($response, $e) {
+                ->get('http://192.168.214.152:7070/DECAPP/s06appealrestapianswer/getResult', [
+                    'personPin' => Auth::guard('api')->user()->pin,
+                    "personTin" => ((auth()->user()->type === 2) ? auth()->user()->legal_tin : auth()->user()->tin)
+                    ])->throw(function ($response, $e) {
                     //
                 });
 
@@ -172,7 +206,49 @@ class UserController extends Controller
                             "status" => $appeal['status'],
                             "statusNm" => $appeal['statusNm'],
                             "type" => 2,
-                            "link" => "/services/appeals/" . $appeal['appNum'],
+                            "link" => "/services/appeals/" . $appeal['id']."/?appNum=". $appeal['appNum'],
+                            "user_id" => $user_id,
+                        ];
+
+                    });
+
+
+                }
+
+            } //else return response()->json(['error' => 'Сервер билан уланишда муаммо бор!', 'status' => false]);
+        } catch (\Exception $e) {
+
+        };
+
+        /// recycle yangisi murojaat
+        try {
+            $apicontroller = new ApiController();
+            $route_url='';
+            if(Auth::guard('api')->user()->type ===1){
+                $route_url= '/0/'. Auth::guard('api')->user()->pin;
+            }else {
+                $route_url = '/1/' . ((auth()->user()->type === 2) ? auth()->user()->legal_tin : auth()->user()->tin);
+            }
+
+            $response = Http::timeout(10)
+                ->get($apicontroller->serviceIps['route_recycle']. '/route-apps/all'. $route_url)->throw(function ($response, $e) {
+
+                });
+            if ($response->status() == 200) {
+                $responseData = $response->json();
+
+                if (is_array($responseData) and isset($responseData['data']) and isset($responseData['data'][0]) and is_array($responseData['data'][0])) {
+                    collect($responseData['data'])->transform(function ($data) use ($user_id) {
+
+                        global $services;
+                        $services[] = [
+                            "app_id" => $data['appId'],
+                            "app_num" => $data['appNum'],
+                            "created_at" => isset($data['insTime']) ? $data['insTime'] : null,
+                            "status" => $data['status'],
+                            "statusNm" => $data['statusNm'],
+                            "type" => 6,
+                            "link" => "/services/recycle/new/" . $data['appId'],
                             "user_id" => $user_id,
                         ];
 
@@ -189,6 +265,7 @@ class UserController extends Controller
         try {
             $response = Http::contentType("application/json")->timeout(10)->get('http://192.168.214.152:7070/DECAPP/s01apiresponse/getresult', [
                 "personPin" => Auth::guard('api')->user()->pin,
+                "personTin" => ((auth()->user()->type === 2) ? auth()->user()->legal_tin : auth()->user()->tin),
             ])->throw(function ($response, $e) {
                 //
             });
@@ -224,6 +301,7 @@ class UserController extends Controller
         try {
             $response = Http::contentType("application/json")->timeout(10)->get('http://192.168.214.152:7070/DECAPP/s03apiresponse/getresult', [
                 "personPin" => Auth::guard('api')->user()->pin,
+                "personTin" => ((auth()->user()->type === 2) ? auth()->user()->legal_tin : auth()->user()->tin),
             ])->throw(function ($response, $e) {
                 //
             });
@@ -255,10 +333,12 @@ class UserController extends Controller
         } catch (\Exception $e) {
 
         };
+
         /// Refund
         try {
             $response = Http::contentType("application/json")->timeout(10)->get('http://192.168.214.152:7070/DECAPP/s04apiresponse/getresult', [
                 "personPin" => Auth::guard('api')->user()->pin,
+                "personTin" => ((auth()->user()->type === 2) ? auth()->user()->legal_tin : auth()->user()->tin),
             ])->throw(function ($response, $e) {
                 //
             });
@@ -295,7 +375,7 @@ class UserController extends Controller
         try {
             $response = Http::contentType("application/json")->timeout(10)->get('http://192.168.214.152:7070/DECAPP/s08appsrestapi/getresult', [
                 "personPin" => Auth::guard('api')->user()->pin,
-                "personTin" => Auth::guard('api')->user()->tin,
+                "personTin" => ((auth()->user()->type === 2) ? auth()->user()->legal_tin : auth()->user()->tin),
             ])->throw(function ($response, $e) {
                 //
             });
@@ -332,6 +412,7 @@ class UserController extends Controller
         try {
             $response = Http::contentType("application/json")->timeout(10)->get('http://192.168.214.152:7070/DECAPP/s09appsrestapi/getresult', [
                 "personPin" => Auth::guard('api')->user()->pin,
+                "personTin" => ((auth()->user()->type === 2) ? auth()->user()->legal_tin : auth()->user()->tin),
             ])->throw(function ($response, $e) {
                 //
             });
@@ -369,7 +450,10 @@ class UserController extends Controller
         try {
             $response = Http::asMultipart();
             $response = $response->timeout(10)
-                ->get('http://192.168.214.152:7070/DECAPP/s05appealrestapi/getresult', ['personPin' => Auth::guard('api')->user()->pin])->throw(function ($response, $e) {
+                ->get('http://192.168.214.152:7070/DECAPP/s05appealrestapi/getresult', [
+                    'personPin' => Auth::guard('api')->user()->pin,
+                    "personTin" => ((auth()->user()->type === 2) ? auth()->user()->legal_tin : auth()->user()->tin),
+                ])->throw(function ($response, $e) {
                     //
                 });
             if ($response->status() == 200) {
@@ -494,7 +578,7 @@ class UserController extends Controller
             $name = "/public/users/" . Auth::guard('api')->user()->id . ".jpg";
             if (!Storage::exists($name)) {
                 $user = Auth::guard('api')->user();
-                $userDates = Http::acceptJson()->timeout(15)->withBody(json_encode([
+/*                $userDates = Http::acceptJson()->timeout(15)->withBody(json_encode([
                     "pinpp" => (string)$user->pin,
                     "document" => $user->pport_no,
                     "langId" => 1
@@ -504,7 +588,7 @@ class UserController extends Controller
                 $dataUserDates = $userDates->json();
                 $user->_pport_issue_date = $dataUserDates['docdatebegin'];
                 $user->_pport_expr_date = $dataUserDates['docdateend'];
-                $user->save();
+                $user->save();*/
 
 
                 /*     $tdate1 = $date1 = MainHelper::getDateFromString($user->_pport_issue_date);

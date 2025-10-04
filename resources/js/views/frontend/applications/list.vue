@@ -114,6 +114,7 @@
                                                     ></v-text-field>
                                                 </template>
                                                 <v-date-picker
+                                                    :locale="$i18n.locale ==='en'?'en-US':'ru-RU'"
                                                     class="m-0"
                                                     :active-picker.sync="activePickerDan"
                                                     v-model="filter_date_sanadan"
@@ -145,6 +146,7 @@
                                                 </template>
 <!--                                                :max="(new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10)"-->
                                                 <v-date-picker
+                                                    :locale="$i18n.locale ==='en'?'en-US':'ru-RU'"
                                                     class="m-0"
                                                     :active-picker.sync="activePickerGacha"
                                                     v-model="filter_date_sanagacha"
@@ -188,6 +190,12 @@
                                     :items-per-page="5"
                                     @click:row="gotoApp"
                                     :loading="loadingApps"
+                                    :no-data-text="$t('Маълумот топилмади')"
+                                    :footer-props="{
+                                      'items-per-page-text': $t('Сахифадаги элементлар сони'),
+                                      'items-per-page-all-text': $t('Барчаси')
+                                    }"
+                                    :loading-text="$t('Юкланмоқда... Илтимос кутиб туринг')"
                                 >
                                     <template v-slot:item.status="{ item }">
 <!--                                        <v-chip
@@ -286,6 +294,10 @@ export default {
                 {
                     text: i18n.t("Ваколатли иқтисодий оператор реестрига кириш учун ариза топшириш"),
                     value: 11
+                },
+                {
+                    text: i18n.t("Экспорт ва импорт бўйича маълумотларни олиш"),
+                    value: 12
                 },
             ],
             filter: {
@@ -406,7 +418,8 @@ export default {
                     break;
                 default://'raqam' :
                     this.filter_apps = this.apps.filter(obj => {
-                        return ((obj.app_num).indexOf(val) >= 0)
+                      if(obj && obj.app_num)
+                        return ((obj.app_num).indexOf(val) >= 0); else return false
                         //return obj.app_num === val
                     })
                     break;

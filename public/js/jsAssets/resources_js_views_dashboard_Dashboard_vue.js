@@ -405,6 +405,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'DashboardDashboard',
   data: function data() {
@@ -1283,7 +1289,18 @@ var render = function () {
                     "v-card-text",
                     [
                       _c("v-data-table", {
-                        attrs: { headers: _vm.headers, items: _vm.items },
+                        attrs: {
+                          headers: _vm.headers,
+                          items: _vm.items,
+                          "no-data-text": _vm.$t("Маълумот топилмади"),
+                          "footer-props": {
+                            "items-per-page-text": _vm.$t("Саҳифа қаторлари"),
+                            "items-per-page-all-text": _vm.$t("Барчаси"),
+                          },
+                          "loading-text": _vm.$t(
+                            "Юкланмоқда... Илтимос кутиб туринг"
+                          ),
+                        },
                       }),
                     ],
                     1

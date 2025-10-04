@@ -476,73 +476,80 @@ var render = function () {
                       _c(
                         "div",
                         { staticClass: "rahbar-items" },
-                        _vm._l(_vm.rahbariyat, function (rahbar, key) {
-                          return _c(
-                            "div",
-                            {
-                              key: "aa" + 1 + key,
-                              staticClass: "rahbar-item",
-                              class:
-                                _vm.aktiv_rahbar === rahbar.id ? "active" : "",
-                              on: {
-                                click: function ($event) {
-                                  return _vm.leftbarClick(rahbar.id, key)
+                        _vm._l(
+                          _vm.rahbariyat.filter(function (item) {
+                            return ["1", "2", "3"].includes(item.lavozimi)
+                          }),
+                          function (rahbar, key) {
+                            return _c(
+                              "div",
+                              {
+                                key: "aa" + 1 + key,
+                                staticClass: "rahbar-item",
+                                class:
+                                  _vm.aktiv_rahbar === rahbar.id
+                                    ? "active"
+                                    : "",
+                                on: {
+                                  click: function ($event) {
+                                    return _vm.leftbarClick(rahbar.id, key)
+                                  },
                                 },
                               },
-                            },
-                            [
-                              _c(
-                                "p",
-                                [
-                                  rahbar.lavozimi === "1"
-                                    ? [
-                                        _vm._v(
-                                          _vm._s(
-                                            _vm.$t(
-                                              "Иқтисодиёт ва молия вазирлиги ҳузуридаги Божхона қўмитаси раиси"
+                              [
+                                _c(
+                                  "p",
+                                  [
+                                    rahbar.lavozimi === "1"
+                                      ? [
+                                          _vm._v(
+                                            _vm._s(
+                                              _vm.$t(
+                                                "Иқтисодиёт ва молия вазирлиги ҳузуридаги Божхона қўмитаси раиси"
+                                              )
                                             )
-                                          )
-                                        ),
-                                      ]
-                                    : rahbar.lavozimi === "2"
-                                    ? [
-                                        _vm._v(
-                                          _vm._s(
-                                            _vm.$t(
-                                              "Иқтисодиёт ва молия вазирлиги ҳузуридаги Божхона қўмитаси раисининг биринчи ўринбосари"
+                                          ),
+                                        ]
+                                      : rahbar.lavozimi === "2"
+                                      ? [
+                                          _vm._v(
+                                            _vm._s(
+                                              _vm.$t(
+                                                "Иқтисодиёт ва молия вазирлиги ҳузуридаги Божхона қўмитаси раисининг биринчи ўринбосари"
+                                              )
                                             )
-                                          )
-                                        ),
-                                      ]
-                                    : [
-                                        _vm._v(
-                                          _vm._s(
-                                            _vm.$t(
-                                              "Иқтисодиёт ва молия вазирлиги ҳузуридаги Божхона қўмитаси раисининг ўринбосари"
+                                          ),
+                                        ]
+                                      : [
+                                          _vm._v(
+                                            _vm._s(
+                                              _vm.$t(
+                                                "Иқтисодиёт ва молия вазирлиги ҳузуридаги Божхона қўмитаси раисининг ўринбосари"
+                                              )
                                             )
-                                          )
-                                        ),
-                                      ],
-                                ],
-                                2
-                              ),
-                              _vm._v(" "),
-                              _c("p", { staticClass: "fw-bold" }, [
-                                _vm._v(_vm._s(rahbar.fio ? rahbar.fio : "")),
-                              ]),
-                              _vm._v(" "),
-                              _c("p", [
-                                _vm._v(
-                                  _vm._s(
-                                    _vm.$t(
-                                      "мутасаддилигидаги таркибий тузилмалар"
-                                    )
-                                  )
+                                          ),
+                                        ],
+                                  ],
+                                  2
                                 ),
-                              ]),
-                            ]
-                          )
-                        }),
+                                _vm._v(" "),
+                                _c("p", { staticClass: "fw-bold" }, [
+                                  _vm._v(_vm._s(rahbar.fio ? rahbar.fio : "")),
+                                ]),
+                                _vm._v(" "),
+                                _c("p", [
+                                  _vm._v(
+                                    _vm._s(
+                                      _vm.$t(
+                                        "мутасаддилигидаги таркибий тузилмалар"
+                                      )
+                                    )
+                                  ),
+                                ]),
+                              ]
+                            )
+                          }
+                        ),
                         0
                       ),
                     ]),

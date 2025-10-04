@@ -437,47 +437,15 @@
                                         :items="tolovlar"
                                         :items-per-page="5"
                                         class="elevation-1"
+                                        :no-data-text="$t('Маълумот топилмади')"
+                                        :footer-props="{
+                                            'items-per-page-text': $t('Сахифадаги элементлар сони'),
+                                            'items-per-page-all-text': $t('Барчаси')
+                                        }"
+                                        :loading-text="$t('Юкланмоқда... Илтимос кутиб туринг')"
                                     >
                                         <template #[`item.actions`]="{ item }">
-                                            <v-dialog
-                                                max-width="500"
-                                                v-model="confirmDialogTolov"
-                                            >
-                                                <template v-slot:activator="{ on, attrs }">
-                                                    <v-icon
-                                                        small
-                                                        v-bind="attrs"
-                                                        v-on="on"
-                                                    >
-                                                        mdi-delete
-                                                    </v-icon>
-                                                </template>
-                                                <v-card>
-                                                    <v-card-title class="text-h5">
-                                                        {{ $t('Сиз ҳақиқатдан ҳам ўчирмоқчимисиз!') }}
-                                                    </v-card-title>
-                                                    <v-card-text>
 
-                                                    </v-card-text>
-                                                    <v-card-actions>
-                                                        <v-spacer></v-spacer>
-                                                        <v-btn
-                                                            color="green darken-1"
-                                                            text
-                                                            @click="confirmDialogTolov = false"
-                                                        >
-                                                            {{ $t("Бекор қилиш") }}
-                                                        </v-btn>
-                                                        <v-btn
-                                                            color="green darken-1"
-                                                            text
-                                                            @click="deleteItemTolov(item.id); confirmDialogTolov=false "
-                                                        >
-                                                            {{ $t("Ўчириш") }}
-                                                        </v-btn>
-                                                    </v-card-actions>
-                                                </v-card>
-                                            </v-dialog>
                                         </template>
                                     </v-data-table>
                                 </v-card>
@@ -496,6 +464,7 @@
                                 @click="nextStep"
                                 size="large"
                                 :loading="loading.button"
+                                style="width: max-content"
                             >
                                 {{ $t('Ариза юбориш') }}
                             </v-btn>
@@ -540,13 +509,6 @@ import Textfield from "../../../../components/form/textfield";
 import EditableDate from "../../../../components/custom/EditableDate";
 
 
-Object.keys(rules).forEach(rule => {
-    extend(rule, {
-        ...rules[rule], // copies rule configuration
-        message: messages.messages[rule] // assign message
-
-    });
-});
 export default {
     name: "InitialBkoCreate",
     data() {
@@ -571,7 +533,7 @@ export default {
                     exact: true,
                 },
                 {
-                    text: i18n.t('Ариза юбориш '),
+                    text: i18n.t('Ариза юбориш'),
                     to: '/services/bko/create',
                     disabled: true,
                     exact: true,
@@ -1036,7 +998,7 @@ export default {
         },
         async getBoshqarmalar() {
             const _this = this
-            await axios.get('/api/v1/ex_api/boshqarma').then(function (result) {
+            await this.$auth.plugins.http.get('/api/v1/ex_api/boshqarma').then(function (result) {
                 if (typeof result.data.data !== 'undefined')
                     result.data.data.forEach(function (item) {
                         if (!(['1790', '1791', '1701'].includes(item['kod_id'])))

@@ -12,7 +12,7 @@
         <div class="page-content" v-if="app">
             <v-container>
                 <v-row>
-                    <h3 class="pb-5"><b>Ариза рақами: </b>{{ app.appNum }}</h3>
+                    <h3 class="pb-5"><b>{{$t('Ариза рақами:')}} </b>{{ app.appNum }}</h3>
                     <br>
                 </v-row>
                 <v-row>
@@ -48,7 +48,7 @@
                                                 <thead>
                                                 <tr>
                                                     <th class="text-left" style="font-weight: 550">
-                                                        Ариза рақами
+                                                        {{$t('Ариза рақами')}}
                                                     </th>
                                                     <th class="text-left" style="font-weight: 550">
                                                         {{
@@ -59,63 +59,63 @@
                                                 </thead>
                                                 <tbody>
                                                 <tr v-if="typeof app.personName !== 'undefined'">
-                                                    <td style="font-weight: 550">Аризачи</td>
+                                                    <td style="font-weight: 550">{{$t('Аризачи')}}</td>
                                                     <td>
                                                         <template v-if="app.legalName!=='Жисмоний шахс'">{{ typeof app.legalName !== 'undefined' ? app.legalName : null }}</template>
                                                         <template v-else>{{ typeof app.personName !== 'undefined' ? app.personName : null }}</template>
                                                     </td>
                                                 </tr>
                                                 <tr v-if="typeof app.personPhone !== 'undefined' && app.personPhone">
-                                                    <td style="font-weight: 550">Аризачи телефон рақами</td>
+                                                    <td style="font-weight: 550">{{$t('Аризачи телефон рақами')}}</td>
                                                     <td>{{
                                                             typeof app.personPhone !== 'undefined' ? app.personPhone : null
                                                         }}
                                                     </td>
                                                 </tr>
                                                 <tr v-if="typeof app.personMail !== 'undefined' && app.personMail">
-                                                    <td style="font-weight: 550">Аризачининг эмаил манзили</td>
+                                                    <td style="font-weight: 550">{{$t('Аризачининг эмаил манзили')}}</td>
                                                     <td>{{
                                                             typeof app.personMail !== 'undefined' ? app.personMail : null
                                                         }}
                                                     </td>
                                                 </tr>
                                                 <tr v-if="typeof app.personAddress !== 'undefined' && app.personAddress">
-                                                    <td style="font-weight: 550">Аризачининг манзили</td>
+                                                    <td style="font-weight: 550">{{$t('Аризачининг манзили')}}</td>
                                                     <td>{{
                                                             typeof app.personAddress !== 'undefined' ? app.personAddress : null
                                                         }}
                                                     </td>
                                                 </tr>
                                                 <tr v-if="typeof app.personPinTin !== 'undefined' && app.personPinTin">
-                                                    <td style="font-weight: 550">Аризачининг ЖШШИР/ СТИРи</td>
+                                                    <td style="font-weight: 550">{{$t('Аризачининг ЖШШИР/ СТИРи')}}</td>
                                                     <td>{{
                                                             typeof app.personPinTin !== 'undefined' ? app.personPinTin : null
                                                         }}
                                                     </td>
                                                 </tr>
                                                 <tr v-if="typeof app.locationNm !== 'undefined' && app.locationNm">
-                                                    <td style="font-weight: 550">Танланган божхона бошқармаси</td>
+                                                    <td style="font-weight: 550">{{$t('Танланган божхона бошқармаси')}}</td>
                                                     <td>{{
                                                             typeof app.locationNm !== 'undefined' ? app.locationNm : null
                                                         }}
                                                     </td>
                                                 </tr>
                                                 <tr v-if="typeof app.mfoNm !== 'undefined' && app.mfoNm">
-                                                    <td style="font-weight: 550">Танланган банк</td>
+                                                    <td style="font-weight: 550">{{$t('Танланган банк')}}</td>
                                                     <td>{{
                                                             typeof app.mfoNm !== 'undefined' ? app.mfoNm : null
                                                         }}
                                                     </td>
                                                 </tr>
                                                 <tr v-if="typeof app.moneyBack !== 'undefined' && app.moneyBack">
-                                                    <td style="font-weight: 550">Қайтариладиган пул маблағи миқдори</td>
+                                                    <td style="font-weight: 550">{{$t('Қайтариладиган пул маблағи миқдори')}}</td>
                                                     <td>{{
                                                             typeof app.moneyBack !== 'undefined' ? app.moneyBack : null
                                                         }}
                                                     </td>
                                                 </tr>
                                                 <tr v-if="typeof app.statusNm !== 'undefined' && app.statusNm">
-                                                    <td style="font-weight: 550">Ариза ҳолати</td>
+                                                    <td style="font-weight: 550">{{$t('Ариза ҳолати')}}</td>
                                                     <td>{{
                                                             typeof app.statusNm !== 'undefined' ? app.statusNm : null
                                                         }}
@@ -146,13 +146,13 @@
                                     >
                                         <v-row justify="start">
                                             <v-col cols="10">
-                                                <h4 class="active"> {{ appstatus.statusNm }}</h4>
+                                                <h4 class="active"> {{ $t(appstatus.statusNm )}}</h4>
                                                 <br>
                                                 <p> {{ new Date(appstatus.insTime).toLocaleString() }}</p>
                                                 <br>
-                                                <p v-if="appstatus.status==='100' && 1===2" style="font-size: 15px"> <a :href="'https://qaror.customs.uz/s04decisionPdfDownloadAppeal?stId=' + appstatus.id"> Ариза шаклини юклаб олинг! </a></p>
-                                                <p v-if="appstatus.status==='600'" style="font-size: 15px"> <a :href="'https://qaror.customs.uz/s04decisionPdfDownloadAppeal?stId=' + appstatus.id"> Реестрга киритилганлиги тўғрисида қарорни юклаб олинг! </a></p>
-                                                <p v-if="appstatus.status==='201' || appstatus.status==='600'" style="font-size: 15px"> <a :href="'https://qaror.customs.uz/s04decisionPdfDownloadAppeal?stId=' + appstatus.id"> Аризангиз жавоб хатини юклаб олинг! </a></p>
+                                                <p v-if="appstatus.status==='100' && 1===2" style="font-size: 15px"> <a :href="'https://qaror.customs.uz/s04decisionPdfDownloadAppeal?stId=' + appstatus.id"> {{$t('Ариза шаклини юклаб олинг!')}} </a></p>
+                                                <p v-if="appstatus.status==='600'" style="font-size: 15px"> <a :href="'https://qaror.customs.uz/s04decisionPdfDownloadAppeal?stId=' + appstatus.id"> {{$t('Реестрга киритилганлиги тўғрисида қарорни юклаб олинг!')}} </a></p>
+                                                <p v-if="appstatus.status==='201' || appstatus.status==='600'" style="font-size: 15px"> <a :href="'https://qaror.customs.uz/s04decisionPdfDownloadAppeal?stId=' + appstatus.id"> {{$t('Аризангиз жавоб хатини юклаб олинг!')}} </a></p>
 <br>
 <!--                                                <p><b> Инспектор: </b>  {{ appstatus.userNm }} </p>-->
 
@@ -168,7 +168,7 @@
                                 >
                                     <v-row justify="start">
                                         <v-col cols="10">
-                                            <h4> Якуний хулоса </h4>
+                                            <h4> {{$t('Якуний хулоса')}}</h4>
                                             <p></p>
                                             <p></p>
                                         </v-col>
@@ -236,7 +236,7 @@ export default {
                 },
 
                 {
-                    text: 'Менинг аризаларим',
+                    text: i18n.t('Менинг аризаларим'),
                     to: '/applications',
                     disabled: false,
                     exact: true,
@@ -251,8 +251,8 @@ export default {
             dialog: false,
 
             items: [
-                {tab: "Ариза хақида умумиy маълумот"},
-                {tab: 'Ариза ҳолати'},
+                {tab: i18n.t("Ариза хақида умумий маълумот")},
+                {tab: i18n.t('Ариза ҳолати')},
 
             ],
 
@@ -290,7 +290,7 @@ export default {
                         //console.log(response.data.data)
                         _this.app = response.data.data.data
                         _this.breadcrumb_items.push({
-                            text: "Пул маблағларини қайтариш -" + _this.app.appNum,
+                            text: i18n.t("Пул маблағларини қайтариш -") + _this.app.appNum,
                             to: '/services/refund/' + _this.app.id,
                             disabled: true,
                             exact: true,
@@ -302,7 +302,7 @@ export default {
 
                     } else {
                         _this.$store.commit('setLoading', false)
-                        _this.$toast.error("Маълумот топилмади!")
+                        _this.$toast.error(i18n.t("Маълумот топилмади!"))
                         _this.$router.push("/applications");
 
                     }
@@ -311,7 +311,7 @@ export default {
                 }).catch(function (error) {
                     console.log(error)
                     _this.$store.commit('setLoading', false)
-                    _this.$toast.error("Маълумот топилмади!")
+                    _this.$toast.error(i18n.t("Маълумот топилмади!"))
                     _this.$router.push("/applications");
                 })
 

@@ -18,6 +18,12 @@
             <v-data-table
               :headers="headers"
               :items="items"
+              :no-data-text="$t('Маълумот топилмади')"
+              :footer-props="{
+                'items-per-page-text': $t('Сахифадаги элементлар сони'),
+                'items-per-page-all-text': $t('Барчаси')
+              }"
+              :loading-text="$t('Юкланмоқда... Илтимос кутиб туринг')"
             />
           </v-card-text>
         </base-material-card>

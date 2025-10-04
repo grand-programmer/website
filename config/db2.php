@@ -174,7 +174,7 @@ $databaseconfigEA['password']='trarxiv';
 $databaseconfigSTAT=$databaseconfig;
 $databaseconfigSTAT['host']='dc1repl01.db.gtk';
 $databaseconfigSTAT['schema']='TST_STAT';
-$databaseconfigSTAT['database']='S06EF21R';
+$databaseconfigSTAT['database']='B2035C4W';
 $databaseconfigSTAT['username']='SURAT';
 $databaseconfigSTAT['password']='$UR@Tj0n';
 
@@ -193,6 +193,29 @@ $databaseconfig221['database']='S0601A6T';
 $databaseconfig221['username']='Kamol';
 $databaseconfig221['password']='55788204';
 
+$databaseconfig223=$databaseconfig;
+$databaseconfigNewStat=$databaseconfig;
+
+
+$databaseconfig223['host']='192.168.212.223';
+$databaseconfig223['schema']='STATPDF';
+$databaseconfig223['database']='S0636b7t';
+$databaseconfig223['username']='STATSRV';
+$databaseconfig223['password']='St@t_$Rv';
+
+$databaseconfigNewStat['host']='ed01.db.gtk';
+$databaseconfigNewStat['schema']='STATPDF';
+$databaseconfigNewStat['database']='N704BF51';
+$databaseconfigNewStat['username']='STATSRV';
+$databaseconfigNewStat['password']='St@t_$Rv';
+
+$databaseconfigEd1=$databaseconfig;
+$databaseconfigEd1['host']='ed01.db.gtk';
+$databaseconfigEd1['schema']='STATPDF';
+$databaseconfigEd1['database']='N704BF51';
+$databaseconfigEd1['username']='STATSRV';
+$databaseconfigEd1['password']='St@t_$Rv';
+
 $databaseconfig228=$databaseconfig;
 $databaseconfig228['host']='ed01.db.gtk';
 $databaseconfig228['schema']='epigued';
@@ -208,13 +231,35 @@ $databaseconfig227['username']='newsite';
 $databaseconfig227['password']='new$1te';
 
 $databaseconfig2_10=$databaseconfig;
-$databaseconfig2_10['host']='192.168.2.10';
+$databaseconfig2_10['host']='db210.db.gtk';
 $databaseconfig2_10['schema']='ELZVK';
-$databaseconfig2_10['database']='S2135C3W';
-$databaseconfig2_10['username']='kamol';
-$databaseconfig2_10['password']='q55788204';
+$databaseconfig2_10['database']='L704BF41';
+$databaseconfig2_10['username']='SURAT';
+$databaseconfig2_10['password']='$UR@Tj0n';
+
+$databaseconfig_tsodb=$databaseconfig;
+$databaseconfig_tsodb['host']='Tco2mir.db.gtk';
+$databaseconfig_tsodb['schema']='YEISVO';
+$databaseconfig_tsodb['database']='E704BF51';
+$databaseconfig_tsodb['username']='SURAT';
+$databaseconfig_tsodb['password']='$UR@Tj0n';
+
+$normaLocation=$databaseconfig;
+$normaLocation['host']='norma.db.gtk';
+$normaLocation['schema']='DECAPP';
+$normaLocation['database']='E704BF51';
+$normaLocation['username']='rustam';
+$normaLocation['password']='9061648';
+
 $databaseconfig2_10_EISVO=$databaseconfig2_10;
+$databaseconfig2_10_EISVO['host']='tco1mir.db.gtk';
+$databaseconfig2_10_EISVO['database']='L704BF41';
+$databaseconfig2_10_EISVO['username']='YEISVNEW';
+$databaseconfig2_10_EISVO['password']='Ye@sV0S1';
 $databaseconfig2_10_EISVO['schema']='YEISVO';
+
+$databaseconfig2_10_Tranzit=$databaseconfig2_10;
+$databaseconfig2_10_Tranzit['schema']='ETRANZIT';
 
 return [
 
@@ -226,9 +271,15 @@ return [
         'databaseconfig212_228' => $databaseconfig228,
         'databaseconfig212_227' => $databaseconfig227,
         'db2_odbc221' => $databaseconfig221,
+        'db2_odbc223' => $databaseconfig223,
+        'db2_odbc_new_stat' => $databaseconfigNewStat,
+        'databaseconfigEd1' => $databaseconfigEd1,
         'db2_odbc_stat' => $databaseconfigSTAT,
         'databaseconfig2_10' => $databaseconfig2_10,
         'databaseconfig2_10_EISVO' => $databaseconfig2_10_EISVO,
+        'databaseconfig2_10_Tranzit' => $databaseconfig2_10_Tranzit,
+        'databaseconfig_tsodb' => $databaseconfig_tsodb,
+        'normaLocation' => $normaLocation,
 
     ],
 

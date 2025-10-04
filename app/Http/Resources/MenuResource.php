@@ -26,7 +26,10 @@ class MenuResource extends JsonResource
         }
         else $url=$this->url;
 
-
+           if(isset($this->parent->id)) {
+               $parent_translate = DB::table('menu_translates')->where(["menu_id" => $this->parent->id, "language" => app()->getLocale()])->first();
+               $this->parent->title = $parent_translate ? $parent_translate->title : $this->parent->title;
+           }
         return [
             'id'=>$this->id,
             'parent'=>$this->parent,

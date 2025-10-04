@@ -124,8 +124,8 @@
                                     </template>
                                     <v-list><!--
                                     <v-list-item to="/services">Менинг аризаларим</v-list-item>-->
-                                        <v-list-item to="/profile">Менинг профилим</v-list-item>
-                                        <v-list-item to="/applications">Менинг аризаларим</v-list-item>
+                                        <v-list-item to="/profile">{{ $t('Менинг профилим') }}</v-list-item>
+                                        <v-list-item to="/applications">{{ $t('Менинг аризаларим') }}</v-list-item>
                                         <!--                      <v-list-item> <v-list-item-title>Settings</v-list-item-title></v-list-item>-->
                                         <v-list-item @click.prevent="$auth.logout({
                         makeRequest: true,
@@ -346,10 +346,10 @@
 
 
         </div>
-        <div class="subscribe-notification" v-if="pushAccessComputed===null" >
-            Энг муҳим янгиликларни биринчи бўлиб олишни xоҳлайсизми? Билдиришномаларга обуна бўлинг!    <br>
-            <button class=" btn btn-primary subscribe" @click="setPushAccess(true)">Обуна бўлиш</button>
-            <button class=" btn btn-primary reject "  @click="setPushAccess(false)">Бекор қилиш</button>
+        <div class="subscribe-notification "   v-if="false && pushAccessComputed===null" >
+            {{ $t('Энг муҳим янгиликларни биринчи бўлиб олишни xоҳлайсизми? Билдиришномаларга обуна бўлинг!') }}    <br>
+            <button class=" btn btn-primary subscribe" @click="setPushAccess(true)">{{ $t('Обуна бўлиш') }}</button>
+            <button class=" btn btn-primary reject "  @click="setPushAccess(false)">{{ $t('Бекор қилиш') }}</button>
             <br>
         </div>
 

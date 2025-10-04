@@ -46,9 +46,9 @@
                                 class="mb-12"
                             >
                                 <div class="row position-absolute yoriqnoma-text"><a
-                                    href="/storage/files/hscode_guide.pptx"> {{
+                                    :href="($i18n.locale === 'ru')?'/storage/files/tftn_ru.pptx':'/storage/files/tftn_uz.pptx'"> {{
                                         $t('Ариза тўлдириш бўйича йўриқмани юклаб олинг')
-                                    }}!
+                                    }}
                                 </a></div>
                                 <ValidationObserver v-slot="{ invalid }" ref="stepValidation1">
                                     <v-row>
@@ -195,12 +195,12 @@
 
                                         </v-col>
                                         <v-col cols="6">
-                                            <ValidationProvider :name="$t('Ҳудуд')" rules="required"
+                                            <ValidationProvider :name="$t('Ҳудуд')"
                                                                 v-slot="{ errors }">
                                                 <v-autocomplete
                                                     v-model="person.region"
                                                     required
-                                                    hint="Ҳудудий божхона бошқармаси жойлашган ҳудуд"
+                                                    :hint="$t('Ҳудудий божхона бошқармаси жойлашган ҳудуд')"
                                                     :items="regions"
                                                     persistent-hint
                                                 >
@@ -211,7 +211,7 @@
 
                                         </v-col>
                                         <v-col cols="6">
-                                            <ValidationProvider :name="$t('Пост')" rules="required"
+                                            <ValidationProvider :name="$t('Пост')"
                                                                 v-slot="{ errors }">
                                                 <v-autocomplete
                                                     v-model="person.post"
@@ -473,15 +473,15 @@
                                             </v-tabs-items>
 
                                             <v-row class="bottom-required-info"><i style="font-size: 12px;"><sub
-                                                style="font-size: 20px">*</sub> {{ $t('-майдонлари албатта тўлдирилиши') }}
-                                                шарт!</i>
+                                                style="font-size: 20px">*</sub> {{ $t('-майдонлари албатта тўлдирилиши шарт!') }}
+                                                </i>
 
                                                 <i style="font-size: 12px;"><sub
                                                     style="font-size: 20px">**</sub> {{$t('- майдонлари агар маълумот мавжуд бўлса албатта тўлдирилиши шарт!')}}
                                                 </i>
                                             </v-row>
                                             <v-row class="row mb-3 position-absolute bottom-0 end-0">
-                                                <v-col class="d-flex tab_action_buttons">
+                                                <v-col class="order-2 p-2 bd-highlight">
                                                     <v-btn text
                                                            @click="prevStep"
                                                     >
@@ -491,6 +491,7 @@
                                                         color="primary"
                                                         @click="nextStep"
                                                         size="large"
+                                                        style="width: max-content"
                                                         :loading="loadingButton.second"
                                                     >
                                                         {{ $t('Ариза юбориш') }}
@@ -558,13 +559,6 @@ import i18n from "../../../../i18n";
 import EArxivFile from "../../../../components/form/e-arxiv-file";
 
 
-Object.keys(rules).forEach(rule => {
-    extend(rule, {
-        ...rules[rule], // copies rule configuration
-        message: messages.messages[rule] // assign message
-
-    });
-});
 export default {
     name: "InitialTftn",
     data() {
@@ -1013,7 +1007,7 @@ export default {
 
         async getBoshqarmalar() {
             const _this = this
-            await axios.get('/api/v1/ex_api/boshqarma').then(function (result) {
+            await this.$auth.plugins.http.get('/api/v1/ex_api/boshqarma').then(function (result) {
                 if (typeof result.data.data !== 'undefined')
                     result.data.data.forEach(function (item) {
                         if (!(['1790', '1791', '1701'].includes(item['kod_id'])))

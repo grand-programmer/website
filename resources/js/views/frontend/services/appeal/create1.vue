@@ -163,18 +163,8 @@
 <script>
 import Radio3 from '../../../../components/form/radio3';
 
-import {extend, ValidationProvider, ValidationObserver} from 'vee-validate';
-import * as rules from 'vee-validate/dist/rules';
-import messages from '../../../../locales/oz.json';
+import { ValidationProvider, ValidationObserver} from 'vee-validate';
 import i18n from "../../../../i18n";
-
-Object.keys(rules).forEach(rule => {
-    extend(rule, {
-        ...rules[rule], // copies rule configuration
-        message: messages.messages[rule] // assign message
-
-    });
-});
 
 export default {
     name: 'ServiceAppeals',

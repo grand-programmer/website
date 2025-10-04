@@ -75,6 +75,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 //
 //
 //
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'EditableDate',
@@ -119,10 +120,10 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       }
     },
     minValue: function minValue() {
-      return this.$attrs.min ? this.getFormattedDate(this.$attrs.min) : '01-01-1950';
+      return this.$attrs.min ? this.$attrs.min : '1950-01-01';
     },
     maxValue: function maxValue() {
-      return this.$attrs.max ? this.getFormattedDate(this.$attrs.max) : new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().substr(0, 10);
+      return this.$attrs.max ? this.$attrs.max : new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString();
     }
   },
   watch: {
@@ -131,6 +132,10 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
     deep: true
   },
   methods: {
+    save: function save(datepicker) {
+      this.modelValue = JSON.parse(JSON.stringify(this.formatDate(datepicker.date)));
+      this.$refs.date_menu.save(datepicker.date);
+    },
     formatDate: function formatDate(date) {
       var desc = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
       if (!date) return null;
@@ -168,7 +173,10 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       } // Format the date string as "d-m-Y"
 
 
-      return year + '-' + month + '-' + day;
+      var dateString = year + '-' + month + '-' + day;
+      console.log(dateString);
+      var date = new Date(dateString).toISOString();
+      return date;
     },
     isValidDate: function isValidDate(dateStr) {
       var s = dateStr.split('-');
@@ -200,814 +208,1201 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var vee_validate__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vee-validate */ "./node_modules/vee-validate/dist/vee-validate.esm.js");
-/* harmony import */ var vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vee-validate/dist/rules */ "./node_modules/vee-validate/dist/rules.js");
-/* harmony import */ var _locales_oz_json__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../locales/oz.json */ "./resources/js/locales/oz.json");
-/* harmony import */ var _i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../i18n */ "./resources/js/i18n.js");
-/* harmony import */ var _components_form_EditableDate__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../components/form/EditableDate */ "./resources/js/components/form/EditableDate.vue");
-/* harmony import */ var _src_services_apiService__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../src/services/apiService */ "./resources/js/src/services/apiService.js");
+/* harmony import */ var vee_validate__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vee-validate */ "./node_modules/vee-validate/dist/vee-validate.esm.js");
+/* harmony import */ var vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vee-validate/dist/rules */ "./node_modules/vee-validate/dist/rules.js");
+/* harmony import */ var _locales_oz_json__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../locales/oz.json */ "./resources/js/locales/oz.json");
+/* harmony import */ var _i18n__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../i18n */ "./resources/js/i18n.js");
+/* harmony import */ var _components_form_EditableDate__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../components/form/EditableDate */ "./resources/js/components/form/EditableDate.vue");
+/* harmony import */ var _src_services_apiService__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../../src/services/apiService */ "./resources/js/src/services/apiService.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
 
 
-
-Object.keys(vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_5__).forEach(function (rule) {
-  (0,vee_validate__WEBPACK_IMPORTED_MODULE_6__.extend)(rule, _objectSpread(_objectSpread({}, vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_5__[rule]), {}, {
-    // copies rule configuration
-    message: _locales_oz_json__WEBPACK_IMPORTED_MODULE_1__.messages[rule] // assign message
-
-  }));
-});
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "InitialStat",
   data: function data() {
     return {
+      dialog: {
+        primaryFields: false
+      },
+      threeYearsAgo: this.getThreeYearsAgo(),
       stepper: 1,
       breadcrumb_items: [{
-        text: _i18n__WEBPACK_IMPORTED_MODULE_2__["default"].t('Асосий саҳифа'),
+        text: _i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t('Асосий саҳифа'),
         to: '/',
         disabled: false,
         exact: true
       }, {
-        text: 'Хизматлар',
+        text: _i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t('Хизматлар'),
         to: '/services',
         disabled: false,
         exact: true
       }, {
-        text: 'Расмийлаштирилган божхона юк декларациялари тўғрисидаги маълумотларни олиш',
+        text: _i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t('Экспорт ва импорт бўйича маълумотларни олиш'),
         to: '/services/stat',
         disabled: false,
         exact: true
       }, {
-        text: 'Ариза юбориш',
+        text: _i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t('Ариза юбориш'),
         to: '/services/stat/create',
         disabled: true,
         exact: true
       }],
+      temp: {
+        tftn: null,
+        byud: null,
+        shartnoma: null
+      },
       application: {
         id: null,
-        serviceType: null,
+        application_type: null,
+        status: null,
         rejim: null,
         region: null,
         post: null,
         org: null,
-        tftn: null,
-        shartnoma: null,
+        org_name: null,
+        tftn: [],
+        shartnoma: [],
         country: null,
-        byud: null,
+        byud: [],
+        isCreatedDate: true,
+        isRejim: true,
+        is_tsa: true,
         sanadan: null,
         sanagacha: null,
         grafalar: []
       },
       list: {
+        tarifs: null,
         countries: [],
+        prices: [],
         posts: [],
         regions: [],
-        regimes: [{
-          title: 'ЭК 10',
-          value: 'ЭК10'
-        }, {
-          title: 'ЭК 11',
-          value: 'ЭК11'
-        }, {
-          title: 'ЭК 12',
-          value: 'ЭК12'
-        }, {
-          title: 'ИМ 40',
-          value: 'ИМ40'
-        }, {
-          title: 'ИМ 41',
-          value: 'ИМ41'
-        }, {
-          title: 'ИМ 42',
-          value: 'ИМ42'
-        }, {
-          title: 'ИМ 51',
-          value: 'ИМ51'
-        }, {
-          title: 'ЭК 61',
-          value: 'ЭК61'
-        }, {
-          title: 'ИМ 70',
-          value: 'ИМ70'
-        }, {
-          title: 'ИМ 71',
-          value: 'ИМ71'
-        }, {
-          title: 'ЭК 71',
-          value: 'ЭК71'
-        }, {
-          title: 'ИМ 72',
-          value: 'ИМ72'
-        }, {
-          title: 'ЭК 73',
-          value: 'ЭК73'
-        }, {
-          title: 'ИМ 74',
-          value: 'ИМ74'
-        }, {
-          title: 'ИМ 75',
-          value: 'ИМ75'
-        }, {
-          title: 'ИМ 76',
-          value: 'ИМ76'
-        }, {
-          title: 'ТР 80',
-          value: 'ТР80'
-        }, {
-          title: 'ПЕ 40',
-          value: 'ПЕ40'
-        }, {
-          title: 'ПР 40',
-          value: 'ПР40'
-        }, {
-          title: 'ЭК 72',
-          value: 'ЭК72'
-        }, {
-          title: 'ВД 40',
-          value: 'ВД40'
-        }, {
-          title: 'ИМ 73',
-          value: 'ИМ73'
-        }, {
-          title: 'ЭК 74',
-          value: 'ЭК74'
-        }, {
-          title: 'ПЕ 72',
-          value: 'ПЕ72'
-        }, {
-          title: 'ВД 10',
-          value: 'ВД10'
-        }, {
-          title: 'НД 40',
-          value: 'НД40'
-        }],
-        netOrgs: [200242936, 200460222, 200523356, 200541438, 200541754, 200542744, 200547444, 200547792, 200548371, 200548507, 200555349, 200626188, 200626805, 200628564, 200628589, 200637561, 200637696, 200638710, 200794677, 200794867, 200825794, 200827404, 200829053, 200833707, 200836354, 200837914, 200848172, 200849203, 200896691, 200897144, 200898285, 200933985, 200934644, 200934675, 200935112, 200935548, 200935974, 200936110, 200936214, 200936561, 200936593, 200981397, 200984194, 200986825, 201042345, 201051421, 201051699, 201051951, 201053774, 201053901, 201053918, 201055090, 201055108, 201059022, 201059473, 201099116, 201122696, 201122744, 201122775, 201122808, 201122919, 201122941, 201123125, 201124242, 201124281, 201155766, 201162995, 201178469, 201190645, 201204514, 201221770, 201221898, 201222058, 201272843, 201283204, 201389395, 201589828, 201590962, 201675942, 201685882, 201794794, 201794810, 201862006, 201960034, 201981049, 202076247, 202167236, 202184026, 202288236, 202328794, 202328944, 202858483, 202880854, 202883501, 202990646, 203071206, 203556638, 203621367, 203644820, 203709707, 203940968, 204815109, 205471782, 206276564, 206916313, 206942764, 207018693, 207086151, 207127843, 207168405, 207215726, 207243390, 207246047, 207250605, 207254433, 207254654, 207255503, 207257279, 207258024, 207262226, 207269209, 207270540, 207271524, 207273386, 207274052, 207275011, 207277776, 207290120, 207291167, 207291293, 207293307, 207297973, 207318613, 207323290, 207324986, 207327024, 207327665, 302762364, 303489171, 304413384, 304457511, 304457693, 304952767, 305105101, 305166715, 305188309, 305410292, 305601481, 305636074, 306045611, 306135831, 306142966, 306303488, 306347741, 306349304, 306350099, 306605769, 306628114, 306646884, 306649190, 306705224, 308425864, 308450922, 309016201, 309319117, 309339432]
+        regimes: [],
+        fields: [],
+        primaryFields: [],
+        netOrgs: []
       },
       loading: {
         country: false,
         post: false,
-        org: false
+        fields: false,
+        org: false,
+        calculate: false
       },
-      serviceTypes: [{
-        id: 0,
-        title: 'Божхона юк декларацияларини юклаб олиш'
-      }, {
-        id: 1,
-        title: 'Ташқи иқтисодий фаолият иштирокчиларининг ўзи томонидан расмийлаштирилган товарлар тўғрисида маълумот (жадвал кўринишида)'
-      }, {
-        id: 2,
-        title: 'Республикага импорт қилинган ҳамда ундан экспорт қилинган товарлар тўғрисида маълумот (жадвал кўринишида)'
-      }, {
-        id: 3,
-        title: 'Иқтисодиёт тармоқлари таркибидаги ташкилотлар импорти ва экспорти тўғрисида маълумот (жадвал кўринишида)'
-      }],
-      additionFields: [this.$t('101 - Лицензия'), this.$t('202 - CMR'), this.$t('203 - Коносамент'), this.$t('204 - ТИР-карнет'), this.$t('205 - Авиа-юк хати'), this.$t('206 - Почта юк хати'), this.$t('207 - СМГС шаклидаги темир йўл юк хати'), this.$t('220 - Инвойси (ҳисоб, ҳисоб-фактура)'), this.$t('222 - Ўров варағи'), this.$t('406 - Санитария-эпидемиология хулосаси'), this.$t('410 - Карантин рухсатномаси'), this.$t('417 - Мувофиқлик сертификати'), this.$t('418 - Ўзстандарт агентлигининг хати'), this.$t('419 - Фитосанитария сертификати'), this.$t('420 - Экология сертификати'), this.$t('701 - Товарларнинг келиб чиқиш сертификати (импортда)'), this.$t('804 - Экспорт БЮДси')],
-      additionalFields2: [this.$t('11-графа - Савдо қилинаётган мамлакат'), this.$t('13-графа - АҚШ доллари курси'), this.$t('14-графа - Декларант/божхона брокери'), this.$t('18-графа - Жўнатиш/етказиб бериш вақтидаги транспорт воситаси'), this.$t('20-графа - Етказиб бериш шартлари'), this.$t('21-графа - Чегарадаги транспорт воситаси'), this.$t('23-графа - Валюта курси'), this.$t('24-графа - Битим хусусияти'), this.$t('28-графа - Молия ва банк маълумотлари'), this.$t('29-графа - Чегарадаги божхона'), this.$t('34-графа - Келиб чиқиш мамлакати коди'), this.$t('35-графа - Брутто вазн (кг)'), this.$t('37-графа – Процедура'), this.$t('40-графа - Умумий декларация/аввалги ҳужжат'), this.$t('43-графа – Товар олиб ўтиш мақсади (ўз эҳтиёжи/тижорат)'), this.$t('44-графа – Тақдим этилаётган ҳужжатлар (620, 627, 629 - бандлар)'), this.$t('47-графа - Божхона тўловларининг ҳисоби'), this.$t('50-графа - Ишонч билдирган шахс'), this.$t('54-графа - Жой ва сана')],
+      application_types: [],
       results: [{
         label: 'БЮД сони',
         value: '',
@@ -1017,11 +1412,11 @@ Object.keys(vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_5__).forEach(functi
         value: '',
         type: 1
       }, {
-        label: 'Қатор (товар) сони',
+        label: 'Қўшимча белгиланган графалар',
         value: '',
         type: 2
       }, {
-        label: 'Қўшимча белгиланган графалар',
+        label: 'Қатор (товар) сони',
         value: '',
         type: 2
       }, {
@@ -1062,32 +1457,215 @@ Object.keys(vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_5__).forEach(functi
       agreed: false,
       fields: [{
         key: 'tradeName',
-        value: 'Товарнинг тижорат номи'
+        value: _i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t('Товарнинг тижорат номи')
       }, {
         key: 'tradeMark',
-        value: 'Товар маркаси'
+        value: _i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t('Товар маркаси')
       }, {
         key: 'model',
-        value: 'Товар модели',
+        value: _i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t('Товар модели'),
         tab: 1
       }, {
         key: 'basicQty',
-        value: 'Намуналар сони',
+        value: _i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t('Намуналар сони'),
         tab: 1
       }, {
         key: 'extraUnits',
-        value: 'Ўлчов бирлиги'
+        value: _i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t('Ўлчов бирлиги')
       }, {
         key: 'comment',
-        value: 'Қўшимча маълумотлар ва изоҳлар'
+        value: _i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t('Қўшимча маълумотлар ва изоҳлар')
       }, {
         key: 'email',
-        value: 'Электрон почта'
+        value: _i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t('Электрон почта')
       }],
-      "float": ['^[-+][0-9]+\\.[0-9]+[eE][-+]?[0-9]+$']
+      "float": ['^[-+][0-9]+\\.[0-9]+[eE][-+]?[0-9]+$'],
+      interval: [],
+      bhm: null
     };
   },
   methods: {
+    getThreeYearsAgo: function getThreeYearsAgo() {
+      var date = new Date();
+      date.setFullYear(date.getFullYear() - 3);
+      date.setDate('01');
+      date.setMonth('00');
+      return date.toISOString().split('T')[0]; // YYYY-MM-DD
+    },
+    getTariffs: function getTariffs() {
+      var _this2 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return axios.get('/api/v1/data/tariffs').then(function (res) {
+                  _this2.list.tarifs = res.data;
+                });
+
+              case 2:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
+    },
+    getPrice: function getPrice() {
+      var _arguments = arguments,
+          _this3 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+        var calculate, _this;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                calculate = _arguments.length > 0 && _arguments[0] !== undefined ? _arguments[0] : false;
+                _this = _this3;
+
+                if (!calculate) {
+                  _context2.next = 14;
+                  break;
+                }
+
+                _context2.prev = 3;
+                _this3.loading.calculate = true;
+                _context2.next = 7;
+                return axios.get('/api/v1/statservice/price/' + _this3.$route.params.id, {
+                  params: {
+                    calculate: true
+                  }
+                }).then(function (res) {
+                  _this.loading.calculate = false;
+                  if (res.data.data) _this.list.prices = res.data.data;else _this.list.prices = [];
+                  if (res.data.status) _this.application.status = res.data.status;
+                  if (res.data.error) _this3.$toast.info(res.data.error);
+                })["catch"](function (e) {
+                  if (e.response && e.response.data && e.response.data.error) _this.$toast.info(e.response.data.error);
+                  if (e.response && e.response.data && e.response.data.status) _this.application.status = e.response.data.status;
+                  _this.loading.calculate = false;
+                });
+
+              case 7:
+                _context2.next = 12;
+                break;
+
+              case 9:
+                _context2.prev = 9;
+                _context2.t0 = _context2["catch"](3);
+                _this.loading.calculate = false;
+
+              case 12:
+                _context2.next = 16;
+                break;
+
+              case 14:
+                _context2.next = 16;
+                return axios.get('/api/v1/statservice/price/' + _this3.$route.params.id).then(function (res) {
+                  _this.loading.calculate = false;
+                  if (res.data.data) _this.list.prices = res.data.data;
+                  if (res.data.bhm) _this.bhm = res.data.bhm;
+                  if (res.data.status) _this.application.status = res.data.status;
+                })["catch"](function (e) {
+                  if (e.response && e.response.data && e.response.data.status) _this.application.status = e.response.data.status;
+                  _this.loading.calculate = false;
+                });
+
+              case 16:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, null, [[3, 9]]);
+      }))();
+    },
+    removeItem: function removeItem() {
+      var code = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'tftn';
+      var item = arguments.length > 1 ? arguments[1] : undefined;
+      var field = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+
+      if (field) {
+        this.application[code] = this.application[code].filter(function (filterItem) {
+          return filterItem[field] !== item;
+        });
+      } else {
+        this.application[code] = this.application[code].filter(function (filterItem) {
+          return filterItem !== item;
+        });
+      }
+    },
+    addData: function addData() {
+      var code = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'tftn';
+      var length = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 2;
+
+      if (!this.temp[code] || this.temp[code].length < length) {
+        this.$toast.error(this.$t('Сиз {length} тадан кўп ракам киритишингиз керак', {
+          length: length - 1
+        }));
+        return;
+      }
+
+      if (this.application[code].indexOf(this.temp[code]) < 0) this.application[code].push(this.temp[code]);
+      this.temp[code] = null;
+    },
+    getApplicationTypes: function getApplicationTypes() {
+      var _this4 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _context3.next = 2;
+                return axios.get('/api/v1/data/statservicetype').then(function (res) {
+                  console.log(res);
+                  _this4.application_types = res.data;
+                });
+
+              case 2:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
+      }))();
+    },
+    getApplicationTarmoq: function getApplicationTarmoq() {
+      var _this5 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                _context4.next = 2;
+                return axios.get('/api/v1/data/statservice/' + _this5.$route.params.id + '/tarmoq').then(function (res) {
+                  _this5.list.netOrgs = res.data;
+                });
+
+              case 2:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4);
+      }))();
+    },
+    formatDate: function formatDate(date) {
+      if (!date) return null;
+
+      var _date$split = date.split('-'),
+          _date$split2 = _slicedToArray(_date$split, 3),
+          year = _date$split2[0],
+          month = _date$split2[1],
+          day = _date$split2[2];
+
+      return "".concat(day, "-").concat(month, "-").concat(year);
+    },
     findElementInlist: function findElementInlist() {
       var list = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
       var search = arguments.length > 1 ? arguments[1] : undefined;
@@ -1103,236 +1681,172 @@ Object.keys(vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_5__).forEach(functi
       } else return element;
     },
     getStatServices: function getStatServices() {
-      var _this2 = this;
+      var _this6 = this;
 
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5() {
         var _this;
 
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
           while (1) {
-            switch (_context2.prev = _context2.next) {
+            switch (_context5.prev = _context5.next) {
               case 0:
-                _this = _this2;
+                _this = _this6;
 
-                _this2.$store.commit('setLoading', true);
+                _this6.$store.commit('setLoading', true);
 
-                _context2.next = 4;
-                return axios.get('/api/v1/statservice', {
+                _context5.next = 4;
+                return axios.get('/api/v1/statservice/' + _this6.$route.params.id, {
                   params: {
-                    status: 0
+                    pin: _this6.$auth.user().pin,
+                    tin: _this6.$auth.user().tin
                   }
-                }).then( /*#__PURE__*/function () {
-                  var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee(res) {
-                    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
-                      while (1) {
-                        switch (_context.prev = _context.next) {
-                          case 0:
-                            if (!(res.status === 200)) {
-                              _context.next = 51;
-                              break;
-                            }
+                }).then(function (res) {
+                  if (res.status === 200) {
+                    if (typeof res.data.data.id !== 'undefined') {
+                      _this.application.id = res.data.data.id;
+                      _this.application.status = res.data.data.status;
 
-                            if (!(typeof res.data.data.id !== 'undefined')) {
-                              _context.next = 51;
-                              break;
-                            }
+                      if (res.data.data.step) {
+                        _this.stepper = parseInt(res.data.data.step);
+                      } else {
+                        _this6.stepper = 1;
 
-                            _this.application.id = res.data.data.id;
-                            _this.stepper = res.data.data.step;
-                            _context.t0 = res.data.data.step;
-                            _context.next = _context.t0 === 1 ? 7 : _context.t0 === 2 ? 10 : _context.t0 === 3 ? 15 : _context.t0 === 4 ? 22 : _context.t0 === 5 ? 36 : 51;
-                            break;
+                        _this6.$store.commit('setLoading', false);
 
-                          case 7:
-                            _this.setPersonData(res.data.data);
-
-                            _this.completedSteps.push(1);
-
-                            return _context.abrupt("break", 51);
-
-                          case 10:
-                            _this.setPersonData(res.data.data);
-
-                            _this.application.serviceType = parseInt(res.data.data.servicetype);
-
-                            _this.completedSteps.push(1);
-
-                            _this.completedSteps.push(2);
-
-                            return _context.abrupt("break", 51);
-
-                          case 15:
-                            _this.setPersonData(res.data.data);
-
-                            _this.application.serviceType = parseInt(res.data.data.servicetype);
-
-                            _this.setThirdStep(res.data.data);
-
-                            _this.completedSteps.push(1);
-
-                            _this.completedSteps.push(2);
-
-                            _this.completedSteps.push(3);
-
-                            return _context.abrupt("break", 51);
-
-                          case 22:
-                            _this.setPersonData(res.data.data);
-
-                            _this.application.serviceType = parseInt(res.data.data.servicetype);
-
-                            _this.setThirdStep(res.data.data);
-
-                            _this.application.grafalar = res.data.data.grafalar;
-
-                            _this.completedSteps.push(1);
-
-                            _this.completedSteps.push(2);
-
-                            _this.completedSteps.push(3);
-
-                            _this.completedSteps.push(4);
-
-                            _this.results.forEach(function (item, itemKey) {
-                              _this.results[itemKey].value = '';
-                            });
-
-                            _this.results[0].value = res.data.data.count;
-                            _this.results[2].value = res.data.data.count;
-                            _this.results[4].value = res.data.data.price + ' ' + _this.$t('сўм');
-                            if (_this.application.grafalar) _this.application.grafalar.forEach(function (item, itemKey) {
-                              if (_this.application.serviceType === 0) {
-                                if (_this.results[1].value.length > 0) {
-                                  _this.results[1].value = _this.results[1].value + ', ' + _this.additionFields[item];
-                                  _this.results[3].value = _this.results[3].value + ', ' + _this.additionFields[item];
-                                } else {
-                                  _this.results[1].value = _this.additionFields[item];
-                                  _this.results[3].value = _this.additionFields[item];
-                                }
-                              } else {
-                                if (_this.results[1].value.length > 0) {
-                                  _this.results[1].value = _this.results[1].value + ', ' + _this.additionalFields2[item];
-                                  _this.results[3].value = _this.results[3].value + ', ' + _this.additionalFields2[item];
-                                } else {
-                                  _this.results[1].value = _this.additionalFields2[item];
-                                  _this.results[3].value = _this.additionalFields2[item];
-                                }
-                              }
-                            });
-                            return _context.abrupt("break", 51);
-
-                          case 36:
-                            _this.setPersonData(res.data.data);
-
-                            _this.application.serviceType = parseInt(res.data.data.servicetype);
-
-                            _this.setThirdStep(res.data.data);
-
-                            _this.application.grafalar = res.data.data.grafalar;
-
-                            _this.completedSteps.push(1);
-
-                            _this.completedSteps.push(2);
-
-                            _this.completedSteps.push(3);
-
-                            _this.completedSteps.push(4);
-
-                            _this.results.forEach(function (item, itemKey) {
-                              _this.results[itemKey].value = '';
-                            });
-
-                            _this.results[0].value = res.data.data.count;
-                            _this.results[2].value = res.data.data.count;
-                            _this.results[4].value = res.data.data.price + ' ' + _this.$t('сўм');
-
-                            _this.application.grafalar.forEach(function (item, itemKey) {
-                              if (_this.application.serviceType === 0) {
-                                if (_this.results[1].value.length > 0) {
-                                  _this.results[1].value = _this.results[1].value + ', ' + _this.additionFields[item];
-                                  _this.results[3].value = _this.results[3].value + ', ' + _this.additionFields[item];
-                                } else {
-                                  _this.results[1].value = _this.additionFields[item];
-                                  _this.results[3].value = _this.additionFields[item];
-                                }
-                              } else {
-                                if (_this.results[1].value.length > 0) {
-                                  _this.results[1].value = _this.results[1].value + ', ' + _this.additionalFields2[item];
-                                  _this.results[3].value = _this.results[3].value + ', ' + _this.additionalFields2[item];
-                                } else {
-                                  _this.results[1].value = _this.additionalFields2[item];
-                                  _this.results[3].value = _this.additionalFields2[item];
-                                }
-                              }
-                            });
-
-                            _this.stepper = 5;
-                            return _context.abrupt("break", 51);
-
-                          case 51:
-                            setTimeout(function () {
-                              _this2.$store.commit('setLoading', false);
-                            }, 200);
-
-                          case 52:
-                          case "end":
-                            return _context.stop();
-                        }
+                        return;
                       }
-                    }, _callee);
-                  }));
 
-                  return function (_x) {
-                    return _ref.apply(this, arguments);
-                  };
-                }())["catch"](function (e) {
-                  console.log(e);
+                      switch (_this.stepper) {
+                        case 1:
+                          _this.setPersonData(res.data.data);
+
+                          _this.completedSteps.push(1);
+
+                          break;
+
+                        case 2:
+                          _this.setPersonData(res.data.data);
+
+                          _this.application.application_type = parseInt(res.data.data.application_type);
+
+                          _this.completedSteps.push(1);
+
+                          _this.completedSteps.push(2);
+
+                          break;
+
+                        case 3:
+                          _this.setPersonData(res.data.data);
+
+                          _this.application.application_type = parseInt(res.data.data.application_type);
+
+                          _this.setThirdStep(res.data.data);
+
+                          _this.completedSteps.push(1);
+
+                          _this.completedSteps.push(2);
+
+                          _this.completedSteps.push(3);
+
+                          break;
+
+                        case 4:
+                          _this.setPersonData(res.data.data);
+
+                          _this.application.application_type = parseInt(res.data.data.application_type);
+
+                          _this.setThirdStep(res.data.data);
+
+                          _this.application.grafalar = JSON.parse(JSON.stringify(res.data.data.grafalar));
+
+                          _this.completedSteps.push(1);
+
+                          _this.completedSteps.push(2);
+
+                          _this.completedSteps.push(3);
+
+                          _this.completedSteps.push(4);
+
+                          break;
+
+                        case 5:
+                          _this.setPersonData(res.data.data);
+
+                          _this.application.application_type = parseInt(res.data.data.application_type);
+
+                          _this.setThirdStep(res.data.data);
+
+                          _this.application.grafalar = JSON.parse(JSON.stringify(res.data.data.grafalar));
+
+                          _this.completedSteps.push(1);
+
+                          _this.completedSteps.push(2);
+
+                          _this.completedSteps.push(3);
+
+                          _this.completedSteps.push(4);
+
+                          _this.stepper = 5;
+                          break;
+                      }
+                    }
+                  }
+
                   setTimeout(function () {
-                    _this2.$store.commit('setLoading', false);
+                    _this6.$store.commit('setLoading', false);
+                  }, 200);
+                })["catch"](function (e) {
+                  console.log(e);
+
+                  _this6.$toast.error(_this6.$t('Хатолик юз берди'));
+
+                  _this6.$router.push('/services/stat');
+
+                  setTimeout(function () {
+                    _this6.$store.commit('setLoading', false);
                   }, 200);
                 });
 
               case 4:
               case "end":
-                return _context2.stop();
+                return _context5.stop();
             }
           }
-        }, _callee2);
+        }, _callee5);
       }))();
     },
     setThirdStep: function setThirdStep(data) {
-      this.application.region = typeof data['boshqarma'] !== 'undefined' ? data['boshqarma'] : null;
+      this.application.region = typeof data['region'] !== 'undefined' ? data['region'] : null;
       this.application.post = typeof data['post'] !== 'undefined' ? data['post'] : null;
+      this.application.org = typeof data['org'] !== 'undefined' ? data['org'] : null;
       this.application.rejim = typeof data['rejim'] !== 'undefined' ? data['rejim'] : null;
-      this.application.tftn = typeof data['tftn'] !== 'undefined' ? data['tftn'] : null;
-      this.application.shartnoma = typeof data['shartnoma'] !== 'undefined' ? data['shartnoma'] : null;
+      this.application.isRejim = typeof data['is_tsa'] !== 'undefined' ? !data['is_tsa'] : true;
+      this.application.tftn = typeof data['tftn'] !== 'undefined' ? data['tftn'] : [];
+      this.application.shartnoma = typeof data['shartnoma'] !== 'undefined' ? data['shartnoma'] : [];
       this.application.country = typeof data['country'] !== 'undefined' ? data['country'] : null;
-      this.application.tftn = typeof data['tftn'] !== 'undefined' ? data['tftn'] : null;
-      this.application.byud = typeof data['byud'] !== 'undefined' ? data['byud'] : null;
+      this.application.tftn = typeof data['tftn'] !== 'undefined' ? data['tftn'] : [];
+      this.application.org_name = typeof data['org_name'] !== 'undefined' ? data['org_name'] : null;
+      this.application.byud = typeof data['byud'] !== 'undefined' ? data['byud'] : [];
       this.application.sanadan = typeof data['byudsanadan'] !== 'undefined' ? data['byudsanadan'] : null;
       this.application.sanagacha = typeof data['byudsanagacha'] !== 'undefined' ? data['byudsanagacha'] : null;
+      this.application.isCreatedDate = typeof data['isCreatedDate'] !== 'undefined' ? data['isCreatedDate'] : false;
     },
     getPosts: function getPosts(code) {
-      var _this3 = this;
+      var _this7 = this;
 
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee6() {
         var _this;
 
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee6$(_context6) {
           while (1) {
-            switch (_context3.prev = _context3.next) {
+            switch (_context6.prev = _context6.next) {
               case 0:
-                _this3.loading.post = true;
-                _this = _this3;
-                _this3.list.posts = [];
-                _context3.next = 5;
-                return axios.get('/api/v1/ex_api/postsbyregion?code=' + code).then(function (result) {
-                  if (typeof result.data.posts !== 'undefined') result.data.posts.forEach(function (item) {
-                    _this.list.posts.push({
-                      'value': item['code'],
-                      'text': item['cdNm']
-                    });
-                  });
+                _this7.loading.post = true;
+                _this = _this7;
+                _this7.list.posts = [];
+                _context6.next = 5;
+                return axios.get('/api/v1/data/post?code=' + code).then(function (result) {
+                  if (typeof result.data !== 'undefined') _this.list.posts = result.data.posts;
                 })["catch"](function (e) {
                   console.log(e);
 
@@ -1340,81 +1854,114 @@ Object.keys(vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_5__).forEach(functi
                 });
 
               case 5:
-                _this3.loading.post = false;
+                _this7.loading.post = false;
 
               case 6:
               case "end":
-                return _context3.stop();
+                return _context6.stop();
             }
           }
-        }, _callee3);
+        }, _callee6);
+      }))();
+    },
+    getRegimes: function getRegimes() {
+      var _this8 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee7() {
+        var _this;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee7$(_context7) {
+          while (1) {
+            switch (_context7.prev = _context7.next) {
+              case 0:
+                _this8.loading.regime = true;
+                _this = _this8;
+                _this8.list.regimes = [];
+                _context7.next = 5;
+                return axios.get('/api/v1/data/' + _this8.$route.params.id + '/regime').then(function (result) {
+                  if (typeof result.data !== 'undefined') _this.list.regimes = result.data;
+                  _this.loading.regime = false;
+                })["catch"](function (e) {
+                  _this.loading.regime = false;
+                  console.log(e);
+
+                  _this.$toast.error(_this.$t('Режим маълумотларини олишда хатолик юз берди'));
+                });
+
+              case 5:
+                _this8.loading.regime = false;
+
+              case 6:
+              case "end":
+                return _context7.stop();
+            }
+          }
+        }, _callee7);
+      }))();
+    },
+    getFields: function getFields() {
+      var _this9 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee8() {
+        var grafalar, _this;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee8$(_context8) {
+          while (1) {
+            switch (_context8.prev = _context8.next) {
+              case 0:
+                _this9.loading.fields = true;
+                grafalar = JSON.parse(JSON.stringify(_this9.application.grafalar));
+                _this = _this9;
+                _this9.list.fields = [];
+                _context8.next = 6;
+                return axios.get('/api/v1/data/' + _this9.$route.params.id + '/fields').then(function (result) {
+                  if (typeof result.data !== 'undefined') _this.list.fields = result.data.data;
+                  _this.list.primaryFields = result.data.secondary;
+                  _this.application.grafalar = grafalar.length > 0 ? JSON.parse(JSON.stringify(grafalar)) : _this.application.grafalar;
+                })["catch"](function (e) {
+                  console.log(e);
+
+                  _this.$toast.error(_this.$t('Режим маълумотларини олишда хатолик юз берди'));
+                });
+
+              case 6:
+                _this9.loading.fields = false;
+
+              case 7:
+              case "end":
+                return _context8.stop();
+            }
+          }
+        }, _callee8);
       }))();
     },
     getCountries: function getCountries() {
-      var _this4 = this;
+      var _this10 = this;
 
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee9() {
         var root;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee9$(_context9) {
           while (1) {
-            switch (_context4.prev = _context4.next) {
+            switch (_context9.prev = _context9.next) {
               case 0:
-                root = _this4;
-                _context4.next = 3;
-                return axios.get('/api/v1/data/country?lang=uz').then(function (result) {
-                  var countries = [];
-                  result.data.forEach(function (item) {
-                    countries.push({
-                      'value': item['CODE'],
-                      'text': item['CODE'] + '-' + item['CD_NM'],
-                      'code': item['CD_ID_L']
-                    });
-                  });
-                  root.list.countries = countries;
+                root = _this10;
+                _context9.next = 3;
+                return _this10.$auth.plugins.http.get('/api/v1/data/country').then(function (result) {
+                  root.list.countries = result.data;
                 });
 
               case 3:
               case "end":
-                return _context4.stop();
+                return _context9.stop();
             }
           }
-        }, _callee4);
+        }, _callee9);
       }))();
     },
     getField: function getField(val) {
       return this.fields.filter(function (obj) {
         if (obj.key === val) return obj.value;
       });
-    },
-    setProductErrors: function setProductErrors(tovar_id, errors) {
-      var _this = this;
-
-      if (errors) {
-        var errorfield = [];
-        Object.keys(errors).forEach(function (keyItem) {
-          if (typeof _this.getField(keyItem)[0] !== 'undefined' && typeof _this.getField(keyItem)[0].value !== 'undefined') {
-            errorfield[_this.getField(keyItem)[0].value] = [errors[keyItem]];
-          }
-        }); // this.application.tovarlar.forEach((tovar) => {
-
-        _this.$refs['stepValidation2Product' + tovar_id][0].setErrors(errorfield); // })
-
-      }
-    },
-    setCommonErrors: function setCommonErrors(errors) {
-      var _this = this;
-
-      if (errors) {
-        var errorfield = [];
-        Object.keys(errors).forEach(function (keyItem) {
-          if (typeof _this.getField(keyItem)[0] !== 'undefined' && typeof _this.getField(keyItem)[0].value !== 'undefined') {
-            errorfield[_this.getField(keyItem)[0].value] = [errors[keyItem]];
-          }
-        }); // this.application.tovarlar.forEach((tovar) => {
-
-        _this.$refs['stepValidation1'].setErrors(errorfield); // })
-
-      }
     },
     isCompletedStep: function isCompletedStep(step) {
       return this.completedSteps.includes(step);
@@ -1429,57 +1976,56 @@ Object.keys(vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_5__).forEach(functi
       if (typeof object !== 'undefined') return object[0];else return null; //return (objects.find(object => { object[prop] === parseInt(element)}))
     },
     nextStep: function nextStep() {
-      var _this5 = this;
+      var _this11 = this;
 
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee13() {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee18() {
         var isValid, _this;
 
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee13$(_context13) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee18$(_context18) {
           while (1) {
-            switch (_context13.prev = _context13.next) {
+            switch (_context18.prev = _context18.next) {
               case 0:
                 isValid = false;
-                _this = _this5;
-                _context13.t0 = _this5.stepper;
-                _context13.next = _context13.t0 === 1 ? 5 : _context13.t0 === 2 ? 8 : _context13.t0 === 3 ? 12 : _context13.t0 === 4 ? 16 : _context13.t0 === 5 ? 20 : 24;
+                _this = _this11;
+                _context18.t0 = _this11.stepper;
+                _context18.next = _context18.t0 === 1 ? 5 : _context18.t0 === 2 ? 8 : _context18.t0 === 3 ? 12 : _context18.t0 === 4 ? 16 : _context18.t0 === 5 ? 20 : 24;
                 break;
 
               case 5:
-                _this5.loadingButton.first = true; //console.log(!this.validateField("create_customs_person_value"))
+                _this11.loadingButton.first = true; //console.log(!this.validateField("create_customs_person_value"))
 
-                setTimeout( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee6() {
-                  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee6$(_context6) {
+                setTimeout( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee11() {
+                  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee11$(_context11) {
                     while (1) {
-                      switch (_context6.prev = _context6.next) {
+                      switch (_context11.prev = _context11.next) {
                         case 0:
-                          _context6.next = 2;
-                          return _this5.validateField("stepValidation1");
+                          _context11.next = 2;
+                          return _this11.validateField("stepValidation1");
 
                         case 2:
-                          isValid = _context6.sent;
+                          isValid = _context11.sent;
 
                           if (!(isValid === true)) {
-                            _context6.next = 7;
+                            _context11.next = 7;
                             break;
                           }
 
-                          _this5.$store.commit('setLoading', true);
+                          _this11.$store.commit('setLoading', true);
 
-                          _context6.next = 7;
-                          return axios.post('/api/v1/statservice', {
+                          _context11.next = 7;
+                          return axios.post('/api/v1/statservice/' + _this11.$route.params.id, {
                             step: _this.stepper,
-                            org_name: _this.person.organization_name,
-                            tin: _this.person.tin,
-                            address: _this.person.perAdr,
-                            phone: _this.person.phone,
-                            email: _this.person.email
+                            org_name: _this11.person.type == 0 ? _this.person.organization_name : _this11.person.fio,
+                            address: _this11.person.perAdr,
+                            phone: _this11.person.phone,
+                            email: _this11.person.email
                           }).then( /*#__PURE__*/function () {
-                            var _ref3 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5(res) {
-                              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
+                            var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee10(res) {
+                              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee10$(_context10) {
                                 while (1) {
-                                  switch (_context5.prev = _context5.next) {
+                                  switch (_context10.prev = _context10.next) {
                                     case 0:
-                                      _context5.next = 2;
+                                      _context10.next = 2;
                                       return _this.getStatServices();
 
                                     case 2:
@@ -1491,54 +2037,53 @@ Object.keys(vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_5__).forEach(functi
 
                                     case 5:
                                     case "end":
-                                      return _context5.stop();
+                                      return _context10.stop();
                                   }
                                 }
-                              }, _callee5);
+                              }, _callee10);
                             }));
 
-                            return function (_x2) {
-                              return _ref3.apply(this, arguments);
+                            return function (_x) {
+                              return _ref2.apply(this, arguments);
                             };
                           }())["catch"](function (e) {
-                            console.log(e);
+                            console.log(e.response.data);
 
                             _this.$toast.error(_this.$t('Аризачи маълумотларини сақлашда хатолик юз берди'));
                           });
 
                         case 7:
-                          _this5.$store.commit('setLoading', false);
+                          _this11.$store.commit('setLoading', false);
 
-                          _this5.loadingButton.first = false;
+                          _this11.loadingButton.first = false;
 
                         case 9:
                         case "end":
-                          return _context6.stop();
+                          return _context11.stop();
                       }
                     }
-                  }, _callee6);
+                  }, _callee11);
                 })));
-                return _context13.abrupt("break", 27);
+                return _context18.abrupt("break", 27);
 
               case 8:
-                _this5.loadingButton.second = true;
-                setTimeout( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee7() {
-                  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee7$(_context7) {
+                _this11.loadingButton.second = true;
+                setTimeout( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee12() {
+                  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee12$(_context12) {
                     while (1) {
-                      switch (_context7.prev = _context7.next) {
+                      switch (_context12.prev = _context12.next) {
                         case 0:
-                          if (!(_this.application.serviceType !== null)) {
-                            _context7.next = 6;
+                          if (!(_this.application.application_type !== null)) {
+                            _context12.next = 6;
                             break;
                           }
 
-                          _this5.$store.commit('setLoading', true);
+                          _this11.$store.commit('setLoading', true);
 
-                          _context7.next = 4;
-                          return axios.post('/api/v1/statservice', {
+                          _context12.next = 4;
+                          return axios.post('/api/v1/statservice/' + _this11.$route.params.id, {
                             step: _this.stepper,
-                            id: _this.application.id,
-                            servicetype: _this.application.serviceType
+                            application_type: _this.application.application_type
                           }).then(function (res) {
                             _this.completedSteps.push(_this.stepper);
 
@@ -1554,67 +2099,72 @@ Object.keys(vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_5__).forEach(functi
                           });
 
                         case 4:
-                          _context7.next = 7;
+                          _context12.next = 7;
                           break;
 
                         case 6:
                           _this.$toast.warning(_this.$t('Илтимос хизмат турини танланг!'));
 
                         case 7:
-                          _this5.$store.commit('setLoading', false);
+                          _this11.$store.commit('setLoading', false);
 
-                          _this5.loadingButton.second = false;
+                          _this11.loadingButton.second = false;
 
                         case 9:
                         case "end":
-                          return _context7.stop();
+                          return _context12.stop();
                       }
                     }
-                  }, _callee7);
+                  }, _callee12);
                 })));
-                _this5.loadingButton.second = false;
-                return _context13.abrupt("break", 27);
+                _this11.loadingButton.second = false;
+                return _context18.abrupt("break", 27);
 
               case 12:
-                _this5.loadingButton.third = true;
-                setTimeout( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee9() {
-                  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee9$(_context9) {
+                _this11.loadingButton.third = true;
+                setTimeout( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee14() {
+                  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee14$(_context14) {
                     while (1) {
-                      switch (_context9.prev = _context9.next) {
+                      switch (_context14.prev = _context14.next) {
                         case 0:
-                          _context9.next = 2;
-                          return _this5.validateField("stepValidation3");
+                          _context14.next = 2;
+                          return _this11.validateField("stepValidation3");
 
                         case 2:
-                          isValid = _context9.sent;
+                          isValid = _context14.sent;
 
                           if (!(isValid === true)) {
-                            _context9.next = 8;
+                            _context14.next = 8;
                             break;
                           }
 
-                          _this5.$store.commit('setLoading', true);
+                          _this11.$store.commit('setLoading', true);
 
-                          _context9.next = 7;
-                          return axios.post('/api/v1/statservice', {
+                          _context14.next = 7;
+                          return axios.post('/api/v1/statservice/' + _this11.$route.params.id, {
+                            pin: _this.$auth.user().pin,
+                            tin: _this.$auth.user().tin,
                             step: _this.stepper,
                             id: _this.application.id,
-                            boshqarma: _this.application.boshqarma ? _this.application.boshqarma : null,
+                            region: _this.application.region ? _this.application.region : [],
                             post: _this.application.post ? _this.application.post : null,
+                            org: _this.application.org ? _this.application.org : null,
                             rejim: _this.application.rejim ? _this.application.rejim : null,
-                            tftn: _this.application.tftn ? _this.application.tftn : null,
-                            shartnoma: _this.application.shartnoma ? _this.application.shartnoma : null,
+                            is_tsa: !_this.application.isRejim,
+                            tftn: _this.application.tftn ? _this.application.tftn : [],
+                            shartnoma: _this.application.shartnoma ? _this.application.shartnoma : [],
                             country: _this.application.country ? _this.application.country : null,
-                            byud: _this.application.byud ? _this.application.byud : null,
+                            byud: _this.application.byud ? _this.application.byud : [],
                             byudsanadan: _this.application.sanadan ? _this.application.sanadan : null,
-                            byudsanagacha: _this.application.sanagacha ? _this.application.sanagacha : null
+                            byudsanagacha: _this.application.sanagacha ? _this.application.sanagacha : null,
+                            isCreatedDate: _this.application.isCreatedDate ? _this.application.isCreatedDate : null
                           }).then( /*#__PURE__*/function () {
-                            var _ref6 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee8(res) {
-                              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee8$(_context8) {
+                            var _ref5 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee13(res) {
+                              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee13$(_context13) {
                                 while (1) {
-                                  switch (_context8.prev = _context8.next) {
+                                  switch (_context13.prev = _context13.next) {
                                     case 0:
-                                      _context8.next = 2;
+                                      _context13.next = 2;
                                       return _this.getStatServices();
 
                                     case 2:
@@ -1628,14 +2178,14 @@ Object.keys(vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_5__).forEach(functi
 
                                     case 5:
                                     case "end":
-                                      return _context8.stop();
+                                      return _context13.stop();
                                   }
                                 }
-                              }, _callee8);
+                              }, _callee13);
                             }));
 
-                            return function (_x3) {
-                              return _ref6.apply(this, arguments);
+                            return function (_x2) {
+                              return _ref5.apply(this, arguments);
                             };
                           }())["catch"](function (e) {
                             console.log(e);
@@ -1644,43 +2194,47 @@ Object.keys(vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_5__).forEach(functi
                           });
 
                         case 7:
-                          _this5.$store.commit('setLoading', false);
+                          _this11.$store.commit('setLoading', false);
 
                         case 8:
-                          _this5.loadingButton.third = false;
+                          _this11.loadingButton.third = false;
 
                         case 9:
                         case "end":
-                          return _context9.stop();
+                          return _context14.stop();
                       }
                     }
-                  }, _callee9);
+                  }, _callee14);
                 })));
-                _this5.loadingButton.third = false;
-                return _context13.abrupt("break", 27);
+                _this11.loadingButton.third = false;
+                return _context18.abrupt("break", 27);
 
               case 16:
-                _this5.loadingButton.four = true;
-                setTimeout( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee11() {
-                  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee11$(_context11) {
+                _this11.loadingButton.four = true;
+                setTimeout( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee16() {
+                  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee16$(_context16) {
                     while (1) {
-                      switch (_context11.prev = _context11.next) {
+                      switch (_context16.prev = _context16.next) {
                         case 0:
-                          _context11.next = 2;
-                          return axios.post('/api/v1/statservice', {
+                          _this11.$store.commit('setLoading', true);
+
+                          _context16.next = 3;
+                          return axios.post('/api/v1/statservice/' + _this11.$route.params.id, {
+                            pin: _this.$auth.user().pin,
+                            tin: _this.$auth.user().tin,
                             step: _this.stepper,
                             id: _this.application.id,
                             grafalar: _this.application.grafalar ? _this.application.grafalar : null
                           }).then( /*#__PURE__*/function () {
-                            var _ref8 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee10(res) {
-                              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee10$(_context10) {
+                            var _ref7 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee15(res) {
+                              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee15$(_context15) {
                                 while (1) {
-                                  switch (_context10.prev = _context10.next) {
+                                  switch (_context15.prev = _context15.next) {
                                     case 0:
                                       // _this.getStatServices();
                                       _this.completedSteps.push(_this.stepper);
 
-                                      _context10.next = 3;
+                                      _context15.next = 3;
                                       return _this.getStatServices();
 
                                     case 3:
@@ -1690,14 +2244,14 @@ Object.keys(vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_5__).forEach(functi
 
                                     case 5:
                                     case "end":
-                                      return _context10.stop();
+                                      return _context15.stop();
                                   }
                                 }
-                              }, _callee10);
+                              }, _callee15);
                             }));
 
-                            return function (_x4) {
-                              return _ref8.apply(this, arguments);
+                            return function (_x3) {
+                              return _ref7.apply(this, arguments);
                             };
                           }())["catch"](function (e) {
                             console.log(e);
@@ -1705,33 +2259,37 @@ Object.keys(vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_5__).forEach(functi
                             _this.$toast.error(_this.$t('Қўшимча маълумотларни сақлашда хатолик юз берди'));
                           });
 
-                        case 2:
-                          _this5.loadingButton.four = false;
-
                         case 3:
+                          _this11.$store.commit('setLoading', false);
+
+                          _this11.loadingButton.four = false;
+
+                        case 5:
                         case "end":
-                          return _context11.stop();
+                          return _context16.stop();
                       }
                     }
-                  }, _callee11);
+                  }, _callee16);
                 })));
-                _this5.loadingButton.four = false;
-                return _context13.abrupt("break", 27);
+                _this11.loadingButton.four = false;
+                return _context18.abrupt("break", 27);
 
               case 20:
-                _this5.loadingButton.five = true;
-                setTimeout( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee12() {
-                  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee12$(_context12) {
+                _this11.loadingButton.five = true;
+                setTimeout( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee17() {
+                  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee17$(_context17) {
                     while (1) {
-                      switch (_context12.prev = _context12.next) {
+                      switch (_context17.prev = _context17.next) {
                         case 0:
-                          _context12.next = 2;
-                          return axios.post('/api/v1/statservice', {
+                          _this11.$store.commit('setLoading', true);
+
+                          _context17.next = 3;
+                          return axios.post('/api/v1/statservice/' + _this11.$route.params.id, {
                             step: _this.stepper,
                             id: _this.application.id
                           }).then(function (res) {
                             // _this.getStatServices();
-                            _this.$router.push('/services/stat/' + _this.application.id);
+                            _this.$router.push('/services/stat/info/' + _this.application.id);
 
                             _this.loadingButton.five = false;
 
@@ -1742,34 +2300,38 @@ Object.keys(vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_5__).forEach(functi
                             _this.$toast.error(_this.$t('Аризани сақлашда хатолик юз берди'));
                           });
 
-                        case 2:
+                        case 3:
                           _this.loadingButton.five = false;
 
-                        case 3:
+                          _this11.$store.commit('setLoading', false);
+
+                        case 5:
                         case "end":
-                          return _context12.stop();
+                          return _context17.stop();
                       }
                     }
-                  }, _callee12);
+                  }, _callee17);
                 })));
                 _this.loadingButton.five = false;
-                return _context13.abrupt("break", 27);
+                return _context18.abrupt("break", 27);
 
               case 24:
-                _this5.completedSteps.push(_this5.stepper);
+                _this11.completedSteps.push(_this11.stepper);
 
-                _this5.stepper++;
-                return _context13.abrupt("break", 27);
+                _this11.stepper++;
+                return _context18.abrupt("break", 27);
 
               case 27:
               case "end":
-                return _context13.stop();
+                return _context18.stop();
             }
           }
-        }, _callee13);
+        }, _callee18);
       }))();
     },
     prevStep: function prevStep() {
+      if (this.application.status === 2) return;
+
       switch (this.stepper) {
         case 1:
           this.stepper = 1;
@@ -1786,8 +2348,9 @@ Object.keys(vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_5__).forEach(functi
     },
     goStep: function goStep() {
       var step = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+      if (this.application.status === 2) return;
 
-      if (this.completedSteps.includes(step - 1) || this.completedSteps.includes(step)) {
+      if (this.completedSteps.includes(step)) {
         this.stepper = step;
       }
     },
@@ -1798,64 +2361,58 @@ Object.keys(vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_5__).forEach(functi
       } else return false;
     },
     validateField: function validateField(field) {
-      var _this6 = this;
+      var _this12 = this;
 
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee14() {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee19() {
         var provider;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee14$(_context14) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee19$(_context19) {
           while (1) {
-            switch (_context14.prev = _context14.next) {
+            switch (_context19.prev = _context19.next) {
               case 0:
-                provider = _this6.$refs[field];
+                provider = _this12.$refs[field];
                 if (Array.isArray(provider)) provider = provider[0]; // Validate the field
 
                 if (!provider) {
-                  _context14.next = 6;
+                  _context19.next = 6;
                   break;
                 }
 
-                _context14.next = 5;
+                _context19.next = 5;
                 return provider.validate();
 
               case 5:
-                return _context14.abrupt("return", _context14.sent);
+                return _context19.abrupt("return", _context19.sent);
 
               case 6:
               case "end":
-                return _context14.stop();
+                return _context19.stop();
             }
           }
-        }, _callee14);
+        }, _callee19);
       }))();
     },
     getBoshqarmalar: function getBoshqarmalar() {
-      var _this7 = this;
+      var _this13 = this;
 
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee15() {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee20() {
         var _this;
 
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee15$(_context15) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee20$(_context20) {
           while (1) {
-            switch (_context15.prev = _context15.next) {
+            switch (_context20.prev = _context20.next) {
               case 0:
-                _this = _this7;
-                _context15.next = 3;
-                return axios.get('/api/v1/ex_api/boshqarma').then(function (result) {
-                  if (typeof result.data.data !== 'undefined') result.data.data.forEach(function (item) {
-                    if (!['1790', '1791', '1701'].includes(item['kod_id'])) _this.list.regions.push({
-                      'value': item['kod_id'],
-                      'text': item['name'].replace("Ўзбекистон Республикаси Иқтисодиёт ва молия вазирлиги ҳузуридаги Божхона қўмитасининг ", "") //(item['name']).substring(("Ўзбекистон Республикаси Иқтисодиёт ва молия вазирлиги ҳузуридаги Божхона қўмитасининг").length)
-
-                    });
-                  });
+                _this = _this13;
+                _context20.next = 3;
+                return _this13.$auth.plugins.http.get('/api/v1/data/region').then(function (result) {
+                  _this.list.regions = result.data;
                 });
 
               case 3:
               case "end":
-                return _context15.stop();
+                return _context20.stop();
             }
           }
-        }, _callee15);
+        }, _callee20);
       }))();
     },
     initialize: function initialize() {
@@ -1864,18 +2421,23 @@ Object.keys(vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_5__).forEach(functi
     },
     setPersonData: function setPersonData() {
       var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-      this.person.type = this.$auth.user().type === 1 ? 1 : 0;
+      this.person.type = this.$auth.user().type !== 2 ? 1 : 0;
 
       if (data) {
-        this.person.pin = typeof data['pin'] !== 'undefined' ? data['pin'] : this.$auth.user().pin;
-        this.person.tin = typeof data['tin'] !== 'undefined' ? data['tin'] : this.$auth.user().tin;
-        this.person.perAdr = typeof data['address'] !== 'undefined' ? data['address'] : this.$auth.user().per_adr;
-        this.person.email = typeof data['email'] !== 'undefined' ? data['email'] : this.$auth.user().email;
-        this.person.phone = typeof data['phone'] !== 'undefined' ? data['phone'] : this.$auth.user().phone;
+        this.person.pin =
+        /*(typeof data['pin'] !== 'undefined') ? data['pin'] : */
+        this.$auth.user().pin;
+        this.person.tin =
+        /*(typeof data['tin'] !== 'undefined') ? data['tin'] : */
+        this.$auth.user().tin;
+        this.person.perAdr = typeof data['address'] !== 'undefined' && data['address'] ? data['address'] : this.$auth.user().per_adr;
+        this.person.email = typeof data['email'] !== 'undefined' && data['email'] ? data['email'] : this.$auth.user().email;
+        this.person.phone = typeof data['phone'] !== 'undefined' && data['phone'] ? data['phone'] : this.$auth.user().phone;
+        /*if (typeof data['org_name'] !== 'undefined' ) {
+          this.person.organization_name = data['org_name']
+        } else*/
 
-        if (typeof data['org_name'] !== 'undefined') {
-          this.person.organization_name = data['org_name'];
-        } else {
+        {
           if (this.person.type === 0) {
             var legal_info = JSON.parse(this.$auth.user().legal_info); //console.log(legal_info[0].le_name)
 
@@ -1904,10 +2466,20 @@ Object.keys(vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_5__).forEach(functi
     }
   },
   watch: {
+    'application.application_type': {
+      handler: function handler(value, oldValue) {
+        if (value !== oldValue && value) {
+          this.completedSteps = [1, 2];
+        }
+      },
+      immediate: true,
+      deep: true,
+      sync: true
+    },
     'application.region': {
       handler: function handler(value) {
         //console.log(value)
-        if (typeof value !== 'undefined' && value && value.length > 3) {
+        if (typeof value !== 'undefined' && value) {
           // const region = value.substr(2, 2);
           //setTimeout(async () => {
           this.getPosts(value); // })
@@ -1916,91 +2488,262 @@ Object.keys(vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_5__).forEach(functi
       immediate: true,
       deep: true,
       sync: true
+    },
+    'application.status': {
+      handler: function handler(value) {
+        var _this14 = this;
+
+        if (typeof value !== 'undefined' && value) {
+          // const region = value.substr(2, 2);
+          //setTimeout(async () => {
+          if (value === 2 && this.interval.length < 1) {
+            var interval = setInterval(function () {
+              _this14.getPrice();
+            }, 5000);
+            this.interval.push(interval);
+          }
+
+          if ([3, 8].includes(value) && this.interval.length > 0) {
+            this.interval.forEach(function (intervalItem) {
+              clearInterval(intervalItem);
+            });
+            this.interval = [];
+          } // })
+
+        }
+      },
+      immediate: true,
+      deep: true,
+      sync: true
+    },
+    'application.isRejim': {
+      handler: function handler(value, oldValue) {
+        if (value !== oldValue) {
+          if (!value && this.application.application_type === 3) {
+            this.application.isCreatedDate = false;
+          }
+
+          this.application.rejim = [];
+        }
+      },
+      immediate: true,
+      deep: true,
+      sync: true
+    },
+    'stepper': {
+      handler: function handler(value) {
+        var _this15 = this;
+
+        return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee21() {
+          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee21$(_context21) {
+            while (1) {
+              switch (_context21.prev = _context21.next) {
+                case 0:
+                  if (!(typeof value !== 'undefined' && [3, 4, 5].includes(value))) {
+                    _context21.next = 3;
+                    break;
+                  }
+
+                  _context21.next = 3;
+                  return _this15.getRegimes();
+
+                case 3:
+                  if (!(typeof value !== 'undefined' && [4, 5].includes(value))) {
+                    _context21.next = 6;
+                    break;
+                  }
+
+                  _context21.next = 6;
+                  return _this15.getFields();
+
+                case 6:
+                case "end":
+                  return _context21.stop();
+              }
+            }
+          }, _callee21);
+        }))();
+      },
+      immediate: true,
+      deep: true,
+      sync: true
     }
   },
   created: function created() {
-    var _this8 = this;
+    var _this16 = this;
 
-    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee16() {
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee16$(_context16) {
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee22() {
+      var interval;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee22$(_context22) {
         while (1) {
-          switch (_context16.prev = _context16.next) {
+          switch (_context22.prev = _context22.next) {
             case 0:
-              _context16.next = 2;
-              return _this8.getStatServices();
+              _context22.next = 2;
+              return _this16.getApplicationTarmoq();
 
             case 2:
-              _context16.next = 4;
-              return _this8.getCountries();
+              _context22.next = 4;
+              return _this16.getStatServices();
 
             case 4:
+              if (_this16.application.status === 2) {
+                interval = setInterval(function () {
+                  _this16.getPrice();
+                }, 5000);
+
+                _this16.interval.push(interval);
+              }
+
+              _context22.next = 7;
+              return _this16.getCountries();
+
+            case 7:
+              _context22.next = 9;
+              return _this16.getTariffs();
+
+            case 9:
             case "end":
-              return _context16.stop();
+              return _context22.stop();
           }
         }
-      }, _callee16);
+      }, _callee22);
     }))();
   },
   mounted: function mounted() {
-    var _this9 = this;
+    var _this17 = this;
 
+    this.getRegimes();
+    /*
+    this.getFields();*/
+
+    this.getApplicationTypes();
     setTimeout(function () {
-      _this9.$store.commit('setLoading', true);
+      _this17.$store.commit('setLoading', true);
     });
     this.initialize();
     this.$store.commit('setLoading', false);
+    this.getPrice();
+  },
+  beforeUnmount: function beforeUnmount() {
+    this.interval.forEach(function (intervalItem) {
+      clearInterval(intervalItem);
+    });
   },
   computed: {
+    maxDate: function maxDate() {
+      if (![2, 3].includes(this.application.application_type)) {
+        return new Date().toISOString().split('T')[0];
+      }
+
+      if (this.application.application_type === 3 && this.application.isRejim) return new Date().toISOString().split('T')[0];
+      var now = new Date();
+      var lastDay = new Date(now.getFullYear(), now.getMonth(), 1);
+      return lastDay.toISOString().split("T")[0];
+    },
+    myAppComputed: function myAppComputed() {
+      return this.application;
+    },
+    loadingComputed: function loadingComputed() {
+      return this.loading;
+    },
     completedData: function completedData() {
+      var _this18 = this;
+
+      var _this = this;
+
       return [{
-        label: 'ТИФ иштирокчиси номи',
-        value: this.person.organization_name
+        label: _i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t('ТИФ иштирокчиси'),
+        value: this.application.org_name
       }, {
-        label: 'СТИР',
+        label: _i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t('СТИР'),
         value: this.person.tin
       }, {
-        label: 'Манзили',
+        label: _i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t('Манзили'),
         value: this.person.perAdr
       }, {
-        label: 'Телефон рақами',
+        label: _i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t('Телефон рақами'),
         value: this.person.phone
       }, {
-        label: 'Электрон почта манзили',
+        label: _i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t('Электрон почта манзили'),
         value: this.person.email
       }, {
-        label: 'Хизмат тури',
-        value: this.application.serviceType !== null ? this.serviceTypes[this.application.serviceType].title : ''
+        label: _i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t('Хизмат тури'),
+        value: this.application.application_type !== null && this.application_types[this.application.application_type] ? this.application_types[this.application.application_type].name : ''
       }, {
-        label: 'Ҳудудий божхона бошқармаси',
-        value: this.application.region !== null ? this.findElementInlist(this.list.regions, this.application.region, 'value').title : ''
+        label: this.application.application_type !== 0 ? this.$t('Илова хужжатлар тури') : this.$t('Қўшимча белгиланган графалар'),
+        value: this.application.grafalar && this.application.grafalar.length > 0 ? this.additions.filter(function (fieldItem) {
+          return _this18.application.grafalar.includes(fieldItem.code);
+        }).map(function (grafaItem) {
+          return grafaItem.name;
+        }).join(', ') : null
       }, {
-        label: 'Пост',
-        value: this.application.post !== null ? this.findElementInlist(this.list.posts, this.application.post, 'value').title : ''
+        label: _i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t('Ҳудудий божхона бошқармаси'),
+        value: this.application.region && this.application.region.length > 0 ? this.list.regions.filter(function (item) {
+          return _this18.application.region.includes(item.value);
+        }).map(function (el) {
+          return el.text;
+        }).join(', ') : null
       }, {
-        label: 'Божхона режими',
-        value: this.application.rejim !== null ? this.findElementInlist(this.list.regimes, this.application.rejim, 'value').title : ''
+        label: _i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t('Пост'),
+        value: this.application.post && this.application.post.length > 0 ? this.list.posts.filter(function (item) {
+          return _this18.application.post.includes(item.code);
+        }).map(function (el) {
+          return el.name;
+        }).join(', ') : ''
       }, {
-        label: 'ТИФ ТН код',
-        value: this.application.tftn
+        label: _i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t('Тармоқ корхоналар'),
+        value: this.application.org && this.application.org.length > 0 ? this.list.netOrgs.filter(function (item) {
+          return _this18.application.org.includes(item.value);
+        }).map(function (el) {
+          return el.text;
+        }).join(', ') : ''
       }, {
-        label: 'Шартноманинг ТСО ЯЭАТдаги идентификация рақами',
-        value: this.application.shartnoma
+        label: _i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t('Божхона режими'),
+        value: this.application.rejim && this.application.rejim.length > 0 ? this.list.regimes.filter(function (item) {
+          return _this18.application.rejim.includes(item.id);
+        }).map(function (el) {
+          return el.name;
+        }).join(', ') : ''
       }, {
-        label: 'Давлат',
-        value: this.application.country !== null ? this.findElementInlist(this.list.countries, this.application.country, 'value').title : ''
+        label: _i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t('ТИФ ТН код'),
+        value: this.application.tftn && this.application.tftn.length > 0 ? this.application.tftn.join(',') : null
       }, {
-        label: 'БЮДнинг тартиб рақами',
-        value: this.application.byud
+        label: _i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t('Шартноманинг ТСО ЯЭАТдаги идентификация рақами'),
+        value: this.application.shartnoma && this.application.shartnoma.length > 0 ? this.application.shartnoma.join(',') : null
       }, {
-        label: 'БЮД тақдим этилган санадан',
+        label: _i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t('Давлат'),
+        value: this.application.country !== null && this.findElementInlist(this.list.countries, this.application.country, 'value') ? this.findElementInlist(this.list.countries, this.application.country, 'value').title : ''
+      }, {
+        label: _i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t('БЮДнинг тартиб рақами'),
+        value: this.application.byud && this.application.byud.length > 0 ? this.application.byud.join(',') : null
+      }, {
+        label: this.application.application_type !== 2 && this.application.isCreatedDate ? this.$t('БЮД тақдим этилган санадан') : this.$t('БЮД расмийлаштирилган санадан'),
         value: this.application.sanadan
       }, {
-        label: 'БЮД тақдим этилган санагача',
+        label: this.application.application_type !== 2 && this.application.isCreatedDate ? this.$t('БЮД тақдим этилган санагача') : this.$t('БЮД расмийлаштирилган санагача'),
         value: this.application.sanagacha
       }];
     },
     additions: function additions() {
-      if (this.application.serviceType === 0) return this.additionFields;else return this.additionalFields2;
+      if (this.application.application_type === 0) return Object.values(this.list.fields);else return Object.values(this.list.fields);
+    },
+    primaryFields: function primaryFields() {
+      return this.list.primaryFields;
+    },
+    app_type: function app_type() {
+      return this.application.application_type;
+    },
+    listTarifs: function listTarifs() {
+      return this.list.tarifs;
+    },
+    comp_rejimes: function comp_rejimes() {
+      if (this.application.application_type === 2) return this.list.regimes;
+      if (this.application.isRejim || [0, 1].includes(this.application.application_type)) return this.list.regimes.filter(function (item) {
+        return item.type === 'umumiy';
+      });
+      return this.list.regimes.filter(function (item) {
+        return item.type === 'tsa';
+      });
     }
   },
   filters: {
@@ -2009,9 +2752,9 @@ Object.keys(vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_5__).forEach(functi
     }
   },
   components: {
-    EditableDate: _components_form_EditableDate__WEBPACK_IMPORTED_MODULE_3__["default"],
-    ValidationProvider: vee_validate__WEBPACK_IMPORTED_MODULE_6__.ValidationProvider,
-    ValidationObserver: vee_validate__WEBPACK_IMPORTED_MODULE_6__.ValidationObserver
+    EditableDate: _components_form_EditableDate__WEBPACK_IMPORTED_MODULE_5__["default"],
+    ValidationProvider: vee_validate__WEBPACK_IMPORTED_MODULE_1__.ValidationProvider,
+    ValidationObserver: vee_validate__WEBPACK_IMPORTED_MODULE_1__.ValidationObserver
   }
 });
 
@@ -2034,7 +2777,31 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".price-block[data-v-19ce7ad4] {\n  padding: 30px;\n  border: 1px solid var(--mycolor);\n  margin-top: 25px;\n  border-radius: 10px;\n}\n.price-block h4[data-v-19ce7ad4] {\n  color: var(--mycolor);\n  font-size: 14px;\n  text-transform: uppercase;\n  text-align: center;\n  margin-bottom: 30px;\n}\n.price-block h5[data-v-19ce7ad4] {\n  color: var(--mycolor);\n  font-size: 14px;\n  margin: 10px 5px;\n}\n.price-block p[data-v-19ce7ad4] {\n  font-size: 14px;\n  line-height: 24px;\n}\n.resultTable td[data-v-19ce7ad4] {\n  border: 1px solid #ccc;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".price-block[data-v-19ce7ad4] {\n  padding: 30px;\n  border: 1px solid var(--mycolor);\n  margin-top: 25px;\n  border-radius: 10px;\n  min-height: 330px;\n}\n.price-block h4[data-v-19ce7ad4] {\n  color: var(--mycolor);\n  font-size: 14px;\n  text-transform: uppercase;\n  text-align: center;\n  margin-bottom: 30px;\n}\n.price-block h5[data-v-19ce7ad4] {\n  color: var(--mycolor);\n  font-size: 14px;\n  margin: 10px 5px;\n}\n.price-block p[data-v-19ce7ad4] {\n  font-size: 14px;\n  line-height: 24px;\n}\n.resultTable td[data-v-19ce7ad4] {\n  border: 1px solid #ccc;\n}", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-16[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-16[0].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-16[0].rules[0].use[3]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/frontend/services/stat/create.vue?vue&type=style&index=1&lang=scss&":
+/*!**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-16[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-16[0].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-16[0].rules[0].use[3]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/frontend/services/stat/create.vue?vue&type=style&index=1&lang=scss& ***!
+  \**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, ".isCreatedDate label {\n  top: 3px !important;\n}\n.v-chip:not(.v-chip--no-color).primary-close button.v-chip__close {\n  color: #39ae69;\n}\n.section.customs-value-section .switch .v-label {\n  top: 2px;\n}\n.section.customs-value-section .v-label {\n  font-weight: bolder;\n  color: #565656 !important;\n  top: -5px;\n}\n.section.customs-value-section .v-label.v-label--active {\n  font-size: 20px;\n}\n.additionalfields .v-expansion-panel-content__wrap {\n  max-height: 15rem;\n  min-height: 15rem;\n  overflow: scroll;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -2068,6 +2835,36 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_16_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_16_0_rules_0_use_2_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_16_0_rules_0_use_3_node_modules_vue_loader_lib_index_js_vue_loader_options_create_vue_vue_type_style_index_0_id_19ce7ad4_scoped_true_lang_scss___WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+
+/***/ }),
+
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-16[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-16[0].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-16[0].rules[0].use[3]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/frontend/services/stat/create.vue?vue&type=style&index=1&lang=scss&":
+/*!**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-16[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-16[0].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-16[0].rules[0].use[3]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/frontend/services/stat/create.vue?vue&type=style&index=1&lang=scss& ***!
+  \**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_16_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_16_0_rules_0_use_2_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_16_0_rules_0_use_3_node_modules_vue_loader_lib_index_js_vue_loader_options_create_vue_vue_type_style_index_1_lang_scss___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-16[0].rules[0].use[1]!../../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-16[0].rules[0].use[2]!../../../../../../node_modules/sass-loader/dist/cjs.js??clonedRuleSet-16[0].rules[0].use[3]!../../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./create.vue?vue&type=style&index=1&lang=scss& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-16[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-16[0].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-16[0].rules[0].use[3]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/frontend/services/stat/create.vue?vue&type=style&index=1&lang=scss&");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_16_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_16_0_rules_0_use_2_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_16_0_rules_0_use_3_node_modules_vue_loader_lib_index_js_vue_loader_options_create_vue_vue_type_style_index_1_lang_scss___WEBPACK_IMPORTED_MODULE_1__["default"], options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_16_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_16_0_rules_0_use_2_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_16_0_rules_0_use_3_node_modules_vue_loader_lib_index_js_vue_loader_options_create_vue_vue_type_style_index_1_lang_scss___WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
 
 /***/ }),
 
@@ -2124,16 +2921,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _create_vue_vue_type_template_id_19ce7ad4_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./create.vue?vue&type=template&id=19ce7ad4&scoped=true& */ "./resources/js/views/frontend/services/stat/create.vue?vue&type=template&id=19ce7ad4&scoped=true&");
 /* harmony import */ var _create_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./create.vue?vue&type=script&lang=js& */ "./resources/js/views/frontend/services/stat/create.vue?vue&type=script&lang=js&");
 /* harmony import */ var _create_vue_vue_type_style_index_0_id_19ce7ad4_scoped_true_lang_scss___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./create.vue?vue&type=style&index=0&id=19ce7ad4&scoped=true&lang=scss& */ "./resources/js/views/frontend/services/stat/create.vue?vue&type=style&index=0&id=19ce7ad4&scoped=true&lang=scss&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _create_vue_vue_type_style_index_1_lang_scss___WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./create.vue?vue&type=style&index=1&lang=scss& */ "./resources/js/views/frontend/services/stat/create.vue?vue&type=style&index=1&lang=scss&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! !../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
 ;
 
 
+
 /* normalize component */
 
-var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_4__["default"])(
   _create_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _create_vue_vue_type_template_id_19ce7ad4_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
   _create_vue_vue_type_template_id_19ce7ad4_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
@@ -2192,6 +2991,19 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_16_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_16_0_rules_0_use_2_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_16_0_rules_0_use_3_node_modules_vue_loader_lib_index_js_vue_loader_options_create_vue_vue_type_style_index_0_id_19ce7ad4_scoped_true_lang_scss___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/style-loader/dist/cjs.js!../../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-16[0].rules[0].use[1]!../../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-16[0].rules[0].use[2]!../../../../../../node_modules/sass-loader/dist/cjs.js??clonedRuleSet-16[0].rules[0].use[3]!../../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./create.vue?vue&type=style&index=0&id=19ce7ad4&scoped=true&lang=scss& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-16[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-16[0].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-16[0].rules[0].use[3]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/frontend/services/stat/create.vue?vue&type=style&index=0&id=19ce7ad4&scoped=true&lang=scss&");
+
+
+/***/ }),
+
+/***/ "./resources/js/views/frontend/services/stat/create.vue?vue&type=style&index=1&lang=scss&":
+/*!************************************************************************************************!*\
+  !*** ./resources/js/views/frontend/services/stat/create.vue?vue&type=style&index=1&lang=scss& ***!
+  \************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_16_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_16_0_rules_0_use_2_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_16_0_rules_0_use_3_node_modules_vue_loader_lib_index_js_vue_loader_options_create_vue_vue_type_style_index_1_lang_scss___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/style-loader/dist/cjs.js!../../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-16[0].rules[0].use[1]!../../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-16[0].rules[0].use[2]!../../../../../../node_modules/sass-loader/dist/cjs.js??clonedRuleSet-16[0].rules[0].use[3]!../../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./create.vue?vue&type=style&index=1&lang=scss& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-16[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-16[0].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-16[0].rules[0].use[3]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/frontend/services/stat/create.vue?vue&type=style&index=1&lang=scss&");
 
 
 /***/ }),
@@ -2342,6 +3154,7 @@ var render = function () {
                       _vm._v(" "),
                       _c("v-date-picker", {
                         attrs: {
+                          locale: _vm.$i18n.locale === "en" ? "en-US" : "ru-RU",
                           "active-picker": _vm.activePicker.date,
                           max: _vm.maxValue,
                           min: _vm.minValue,
@@ -2354,11 +3167,7 @@ var render = function () {
                             return _vm.$set(_vm.activePicker, "date", $event)
                           },
                           change: function ($event) {
-                            _vm.modelValue = JSON.parse(
-                              JSON.stringify(
-                                _vm.formatDate(_vm.datepicker.date)
-                              )
-                            )
+                            return _vm.save(_vm.datepicker)
                           },
                         },
                         model: {
@@ -2471,7 +3280,13 @@ var render = function () {
                     },
                     [
                       _vm._v(
-                        "\n                        Расмийлаштирилган божхона юк декларациялари тўғрисидаги маълумотларни олиш\n                    "
+                        "\n              " +
+                          _vm._s(
+                            _vm.$t(
+                              "Экспорт ва импорт бўйича маълумотларни олиш"
+                            )
+                          ) +
+                          "\n            "
                       ),
                     ]
                   ),
@@ -2508,7 +3323,9 @@ var render = function () {
                       },
                       [
                         _vm._v(
-                          "\n                        Аризачи маълумотлари\n                    "
+                          "\n              " +
+                            _vm._s(_vm.$t("Аризачи маълумотлари")) +
+                            "\n            "
                         ),
                       ]
                     ),
@@ -2527,7 +3344,9 @@ var render = function () {
                       },
                       [
                         _vm._v(
-                          "\n                        Хизмат тури\n                    "
+                          "\n              " +
+                            _vm._s(_vm.$t("Хизмат тури")) +
+                            "\n            "
                         ),
                       ]
                     ),
@@ -2546,7 +3365,9 @@ var render = function () {
                       },
                       [
                         _vm._v(
-                          "\n                        Асосий маълумотлар\n                    "
+                          "\n              " +
+                            _vm._s(_vm.$t("Асосий маълумотлар")) +
+                            "\n            "
                         ),
                       ]
                     ),
@@ -2565,7 +3386,9 @@ var render = function () {
                       },
                       [
                         _vm._v(
-                          "\n                        Қўшимча маълумотлар\n                    "
+                          "\n              " +
+                            _vm._s(_vm.$t("Қўшимча маълумотлар")) +
+                            "\n            "
                         ),
                       ]
                     ),
@@ -2584,7 +3407,9 @@ var render = function () {
                       },
                       [
                         _vm._v(
-                          "\n                        Якуний\n                    "
+                          "\n              " +
+                            _vm._s(_vm.$t("Якуний")) +
+                            "\n            "
                         ),
                       ]
                     ),
@@ -2619,7 +3444,13 @@ var render = function () {
                                   },
                                   [
                                     _vm._v(
-                                      " Ариза тўлдириш бўйича йўриқмани юклаб\n                                олинг!\n                            "
+                                      " " +
+                                        _vm._s(
+                                          _vm.$t(
+                                            "Ариза тўлдириш бўйича йўриқмани юклаб олинг"
+                                          )
+                                        ) +
+                                        "!\n                "
                                     ),
                                   ]
                                 ),
@@ -2638,179 +3469,421 @@ var render = function () {
                                         "v-row",
                                         { staticClass: "person_data" },
                                         [
-                                          _c(
-                                            "v-col",
-                                            { attrs: { cols: "6" } },
-                                            [
-                                              _c("ValidationProvider", {
-                                                attrs: {
-                                                  name: "ТИФ иштирокчиси номи",
-                                                  rules: "required",
-                                                },
-                                                scopedSlots: _vm._u(
-                                                  [
-                                                    {
-                                                      key: "default",
-                                                      fn: function (ref) {
-                                                        var errors = ref.errors
-                                                        return [
-                                                          _c("v-text-field", {
-                                                            attrs: {
-                                                              counter: 200,
-                                                              label:
-                                                                "Ташкилот номи",
-                                                              required: "",
-                                                              hint: "Юридик шахснинг тўлиқ номи",
-                                                              "persistent-placeholder":
-                                                                "",
-                                                              "error-messages":
-                                                                errors[0],
-                                                            },
-                                                            scopedSlots: _vm._u(
-                                                              [
-                                                                {
-                                                                  key: "label",
-                                                                  fn: function () {
-                                                                    return [
-                                                                      _vm._v(
-                                                                        "Ташкилот номи "
-                                                                      ),
-                                                                      _c(
-                                                                        "sup",
-                                                                        [
-                                                                          _vm._v(
-                                                                            "*"
-                                                                          ),
-                                                                        ]
-                                                                      ),
-                                                                    ]
-                                                                  },
-                                                                  proxy: true,
-                                                                },
-                                                              ],
-                                                              null,
-                                                              true
-                                                            ),
-                                                            model: {
-                                                              value:
-                                                                _vm.person
-                                                                  .organization_name,
-                                                              callback:
-                                                                function ($$v) {
-                                                                  _vm.$set(
-                                                                    _vm.person,
-                                                                    "organization_name",
-                                                                    $$v
-                                                                  )
-                                                                },
-                                                              expression:
-                                                                "person.organization_name",
-                                                            },
-                                                          }),
-                                                        ]
-                                                      },
+                                          _vm.person.type === 0
+                                            ? _c(
+                                                "v-col",
+                                                { attrs: { cols: "6" } },
+                                                [
+                                                  _c("ValidationProvider", {
+                                                    attrs: {
+                                                      name: _vm.$t(
+                                                        "ТИФ иштирокчиси номи"
+                                                      ),
+                                                      rules: "required",
                                                     },
-                                                  ],
-                                                  null,
-                                                  true
-                                                ),
-                                              }),
-                                            ],
-                                            1
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "v-col",
-                                            { attrs: { cols: "6" } },
-                                            [
-                                              _c("ValidationProvider", {
-                                                attrs: {
-                                                  name: "СТИР",
-                                                  rules: "required",
-                                                },
-                                                scopedSlots: _vm._u(
-                                                  [
-                                                    {
-                                                      key: "default",
-                                                      fn: function (ref) {
-                                                        var errors = ref.errors
-                                                        return [
-                                                          _c("v-text-field", {
-                                                            attrs: {
-                                                              counter: 9,
-                                                              label: "СТИР",
-                                                              type: "number",
-                                                              required: "",
-                                                              hint: "Солиқ тўловчининг идентификацион рақами",
-                                                              "persistent-hint":
-                                                                "",
-                                                            },
-                                                            scopedSlots: _vm._u(
-                                                              [
+                                                    scopedSlots: _vm._u(
+                                                      [
+                                                        {
+                                                          key: "default",
+                                                          fn: function (ref) {
+                                                            var errors =
+                                                              ref.errors
+                                                            return [
+                                                              _c(
+                                                                "v-text-field",
                                                                 {
-                                                                  key: "label",
-                                                                  fn: function () {
-                                                                    return [
-                                                                      _vm._v(
-                                                                        "СТИР "
+                                                                  attrs: {
+                                                                    counter: 200,
+                                                                    label:
+                                                                      _vm.$t(
+                                                                        "Ташкилот номи"
                                                                       ),
-                                                                      _c(
-                                                                        "sup",
-                                                                        [
-                                                                          _vm._v(
-                                                                            "*"
-                                                                          ),
-                                                                        ]
-                                                                      ),
-                                                                    ]
+                                                                    required:
+                                                                      "",
+                                                                    disabled:
+                                                                      "",
+                                                                    "persistent-placeholder":
+                                                                      "",
+                                                                    "error-messages":
+                                                                      errors[0],
                                                                   },
-                                                                  proxy: true,
-                                                                },
-                                                              ],
-                                                              null,
-                                                              true
-                                                            ),
-                                                            model: {
-                                                              value:
-                                                                _vm.person.tin,
-                                                              callback:
-                                                                function ($$v) {
-                                                                  _vm.$set(
-                                                                    _vm.person,
-                                                                    "tin",
-                                                                    $$v
-                                                                  )
-                                                                },
-                                                              expression:
-                                                                "person.tin",
-                                                            },
-                                                          }),
-                                                          _vm._v(" "),
-                                                          _c(
-                                                            "span",
-                                                            {
-                                                              staticClass:
-                                                                "red--text",
-                                                            },
-                                                            [
-                                                              _vm._v(
-                                                                _vm._s(
-                                                                  errors[0]
-                                                                )
+                                                                  scopedSlots:
+                                                                    _vm._u(
+                                                                      [
+                                                                        {
+                                                                          key: "label",
+                                                                          fn: function () {
+                                                                            return [
+                                                                              _vm._v(
+                                                                                _vm._s(
+                                                                                  _vm
+                                                                                    .person
+                                                                                    .type ===
+                                                                                    0
+                                                                                    ? "Ташкилот номи"
+                                                                                    : "Жисмоний шахс Ф.И.О"
+                                                                                ) +
+                                                                                  "\n                            "
+                                                                              ),
+                                                                              _c(
+                                                                                "sup",
+                                                                                [
+                                                                                  _vm._v(
+                                                                                    "*"
+                                                                                  ),
+                                                                                ]
+                                                                              ),
+                                                                            ]
+                                                                          },
+                                                                          proxy: true,
+                                                                        },
+                                                                      ],
+                                                                      null,
+                                                                      true
+                                                                    ),
+                                                                  model: {
+                                                                    value:
+                                                                      _vm.person
+                                                                        .organization_name,
+                                                                    callback:
+                                                                      function (
+                                                                        $$v
+                                                                      ) {
+                                                                        _vm.$set(
+                                                                          _vm.person,
+                                                                          "organization_name",
+                                                                          $$v
+                                                                        )
+                                                                      },
+                                                                    expression:
+                                                                      "person.organization_name",
+                                                                  },
+                                                                }
                                                               ),
                                                             ]
-                                                          ),
-                                                        ]
-                                                      },
+                                                          },
+                                                        },
+                                                      ],
+                                                      null,
+                                                      true
+                                                    ),
+                                                  }),
+                                                ],
+                                                1
+                                              )
+                                            : _c(
+                                                "v-col",
+                                                { attrs: { cols: "6" } },
+                                                [
+                                                  _c("ValidationProvider", {
+                                                    attrs: {
+                                                      name: _vm.$t(
+                                                        "ТИФ иштирокчиси номи"
+                                                      ),
+                                                      rules: "required",
                                                     },
-                                                  ],
-                                                  null,
-                                                  true
-                                                ),
-                                              }),
-                                            ],
-                                            1
-                                          ),
+                                                    scopedSlots: _vm._u(
+                                                      [
+                                                        {
+                                                          key: "default",
+                                                          fn: function (ref) {
+                                                            var errors =
+                                                              ref.errors
+                                                            return [
+                                                              _c(
+                                                                "v-text-field",
+                                                                {
+                                                                  attrs: {
+                                                                    counter: 200,
+                                                                    label:
+                                                                      _vm.person
+                                                                        .type ===
+                                                                      0
+                                                                        ? _vm.$t(
+                                                                            "Ташкилот номи"
+                                                                          )
+                                                                        : _vm.$t(
+                                                                            "Жисмоний шахс Ф.И.О"
+                                                                          ),
+                                                                    required:
+                                                                      "",
+                                                                    disabled:
+                                                                      "",
+                                                                    "persistent-placeholder":
+                                                                      "",
+                                                                    "error-messages":
+                                                                      errors[0],
+                                                                  },
+                                                                  scopedSlots:
+                                                                    _vm._u(
+                                                                      [
+                                                                        {
+                                                                          key: "label",
+                                                                          fn: function () {
+                                                                            return [
+                                                                              _vm._v(
+                                                                                _vm._s(
+                                                                                  _vm
+                                                                                    .person
+                                                                                    .type ===
+                                                                                    0
+                                                                                    ? _vm.$t(
+                                                                                        "Ташкилот номи"
+                                                                                      )
+                                                                                    : _vm.$t(
+                                                                                        "Жисмоний шахс Ф.И.О"
+                                                                                      )
+                                                                                ) +
+                                                                                  "\n                            "
+                                                                              ),
+                                                                              _c(
+                                                                                "sup",
+                                                                                [
+                                                                                  _vm._v(
+                                                                                    "*"
+                                                                                  ),
+                                                                                ]
+                                                                              ),
+                                                                            ]
+                                                                          },
+                                                                          proxy: true,
+                                                                        },
+                                                                      ],
+                                                                      null,
+                                                                      true
+                                                                    ),
+                                                                  model: {
+                                                                    value:
+                                                                      _vm.person
+                                                                        .fio,
+                                                                    callback:
+                                                                      function (
+                                                                        $$v
+                                                                      ) {
+                                                                        _vm.$set(
+                                                                          _vm.person,
+                                                                          "fio",
+                                                                          $$v
+                                                                        )
+                                                                      },
+                                                                    expression:
+                                                                      "person.fio",
+                                                                  },
+                                                                }
+                                                              ),
+                                                            ]
+                                                          },
+                                                        },
+                                                      ],
+                                                      null,
+                                                      true
+                                                    ),
+                                                  }),
+                                                ],
+                                                1
+                                              ),
+                                          _vm._v(" "),
+                                          _vm.person.type === 0
+                                            ? _c(
+                                                "v-col",
+                                                { attrs: { cols: "6" } },
+                                                [
+                                                  _c("ValidationProvider", {
+                                                    attrs: {
+                                                      name: _vm.$t("СТИР"),
+                                                      rules: "required",
+                                                    },
+                                                    scopedSlots: _vm._u(
+                                                      [
+                                                        {
+                                                          key: "default",
+                                                          fn: function (ref) {
+                                                            var errors =
+                                                              ref.errors
+                                                            return [
+                                                              _c(
+                                                                "v-text-field",
+                                                                {
+                                                                  attrs: {
+                                                                    counter: 9,
+                                                                    label:
+                                                                      _vm.$t(
+                                                                        "СТИР"
+                                                                      ),
+                                                                    type: "number",
+                                                                    required:
+                                                                      "",
+                                                                    disabled:
+                                                                      "",
+                                                                    hint: _vm.$t(
+                                                                      "Солиқ тўловчининг идентификацион рақами"
+                                                                    ),
+                                                                    "persistent-hint":
+                                                                      "",
+                                                                    "error-messages":
+                                                                      errors[0],
+                                                                  },
+                                                                  scopedSlots:
+                                                                    _vm._u(
+                                                                      [
+                                                                        {
+                                                                          key: "label",
+                                                                          fn: function () {
+                                                                            return [
+                                                                              _vm._v(
+                                                                                _vm._s(
+                                                                                  _vm.$t(
+                                                                                    "СТИР"
+                                                                                  )
+                                                                                ) +
+                                                                                  " "
+                                                                              ),
+                                                                              _c(
+                                                                                "sup",
+                                                                                [
+                                                                                  _vm._v(
+                                                                                    "*"
+                                                                                  ),
+                                                                                ]
+                                                                              ),
+                                                                            ]
+                                                                          },
+                                                                          proxy: true,
+                                                                        },
+                                                                      ],
+                                                                      null,
+                                                                      true
+                                                                    ),
+                                                                  model: {
+                                                                    value:
+                                                                      _vm.person
+                                                                        .tin,
+                                                                    callback:
+                                                                      function (
+                                                                        $$v
+                                                                      ) {
+                                                                        _vm.$set(
+                                                                          _vm.person,
+                                                                          "tin",
+                                                                          $$v
+                                                                        )
+                                                                      },
+                                                                    expression:
+                                                                      "person.tin",
+                                                                  },
+                                                                }
+                                                              ),
+                                                            ]
+                                                          },
+                                                        },
+                                                      ],
+                                                      null,
+                                                      true
+                                                    ),
+                                                  }),
+                                                ],
+                                                1
+                                              )
+                                            : _c(
+                                                "v-col",
+                                                { attrs: { cols: "6" } },
+                                                [
+                                                  _c("ValidationProvider", {
+                                                    attrs: {
+                                                      name: _vm.$t("ЖШШИР"),
+                                                      rules: "required",
+                                                    },
+                                                    scopedSlots: _vm._u(
+                                                      [
+                                                        {
+                                                          key: "default",
+                                                          fn: function (ref) {
+                                                            var errors =
+                                                              ref.errors
+                                                            return [
+                                                              _c(
+                                                                "v-text-field",
+                                                                {
+                                                                  attrs: {
+                                                                    counter: 14,
+                                                                    label:
+                                                                      _vm.$t(
+                                                                        "ЖШШИР"
+                                                                      ),
+                                                                    type: "number",
+                                                                    required:
+                                                                      "",
+                                                                    disabled:
+                                                                      "",
+                                                                    hint: _vm.$t(
+                                                                      "Жисмоний шахснинг шахсий идентификацион рақами"
+                                                                    ),
+                                                                    "persistent-hint":
+                                                                      "",
+                                                                    "error-messages":
+                                                                      errors[0],
+                                                                  },
+                                                                  scopedSlots:
+                                                                    _vm._u(
+                                                                      [
+                                                                        {
+                                                                          key: "label",
+                                                                          fn: function () {
+                                                                            return [
+                                                                              _vm._v(
+                                                                                _vm._s(
+                                                                                  _vm.$t(
+                                                                                    "ЖШШИР"
+                                                                                  )
+                                                                                ) +
+                                                                                  " "
+                                                                              ),
+                                                                              _c(
+                                                                                "sup",
+                                                                                [
+                                                                                  _vm._v(
+                                                                                    "*"
+                                                                                  ),
+                                                                                ]
+                                                                              ),
+                                                                            ]
+                                                                          },
+                                                                          proxy: true,
+                                                                        },
+                                                                      ],
+                                                                      null,
+                                                                      true
+                                                                    ),
+                                                                  model: {
+                                                                    value:
+                                                                      _vm.person
+                                                                        .pin,
+                                                                    callback:
+                                                                      function (
+                                                                        $$v
+                                                                      ) {
+                                                                        _vm.$set(
+                                                                          _vm.person,
+                                                                          "pin",
+                                                                          $$v
+                                                                        )
+                                                                      },
+                                                                    expression:
+                                                                      "person.pin",
+                                                                  },
+                                                                }
+                                                              ),
+                                                            ]
+                                                          },
+                                                        },
+                                                      ],
+                                                      null,
+                                                      true
+                                                    ),
+                                                  }),
+                                                ],
+                                                1
+                                              ),
                                           _vm._v(" "),
                                           _c(
                                             "v-col",
@@ -2818,7 +3891,7 @@ var render = function () {
                                             [
                                               _c("ValidationProvider", {
                                                 attrs: {
-                                                  name: "Манзили",
+                                                  name: _vm.$t("Манзили"),
                                                   rules: "required",
                                                 },
                                                 scopedSlots: _vm._u(
@@ -2835,10 +3908,16 @@ var render = function () {
                                                               hint:
                                                                 _vm.person
                                                                   .type == 1
-                                                                  ? "Аризачининг манзили"
-                                                                  : "Юридик шахснинг манзили",
+                                                                  ? _vm.$t(
+                                                                      "Аризачининг манзили"
+                                                                    )
+                                                                  : _vm.$t(
+                                                                      "Юридик шахснинг манзили"
+                                                                    ),
                                                               "persistent-placeholder":
                                                                 "",
+                                                              "error-messages":
+                                                                errors[0],
                                                             },
                                                             scopedSlots: _vm._u(
                                                               [
@@ -2847,7 +3926,11 @@ var render = function () {
                                                                   fn: function () {
                                                                     return [
                                                                       _vm._v(
-                                                                        "Манзили "
+                                                                        _vm._s(
+                                                                          _vm.$t(
+                                                                            "Манзили"
+                                                                          )
+                                                                        ) + " "
                                                                       ),
                                                                       _c(
                                                                         "sup",
@@ -2881,21 +3964,6 @@ var render = function () {
                                                                 "person.perAdr",
                                                             },
                                                           }),
-                                                          _vm._v(" "),
-                                                          _c(
-                                                            "span",
-                                                            {
-                                                              staticClass:
-                                                                "red--text",
-                                                            },
-                                                            [
-                                                              _vm._v(
-                                                                _vm._s(
-                                                                  errors[0]
-                                                                )
-                                                              ),
-                                                            ]
-                                                          ),
                                                         ]
                                                       },
                                                     },
@@ -2914,7 +3982,9 @@ var render = function () {
                                             [
                                               _c("ValidationProvider", {
                                                 attrs: {
-                                                  name: "Телефон рақами",
+                                                  name: _vm.$t(
+                                                    "Телефон рақами"
+                                                  ),
                                                   rules: "required",
                                                 },
                                                 scopedSlots: _vm._u(
@@ -2938,11 +4008,17 @@ var render = function () {
                                                             ],
                                                             attrs: {
                                                               label:
-                                                                "Телефон рақами",
+                                                                _vm.$t(
+                                                                  "Телефон рақами"
+                                                                ),
                                                               required: "",
-                                                              hint: "Аризачининг телефон рақами",
+                                                              hint: _vm.$t(
+                                                                "Аризачининг телефон рақами"
+                                                              ),
                                                               "persistent-placeholder":
                                                                 "",
+                                                              "error-messages":
+                                                                errors[0],
                                                             },
                                                             scopedSlots: _vm._u(
                                                               [
@@ -2985,21 +4061,6 @@ var render = function () {
                                                                 "person.phone",
                                                             },
                                                           }),
-                                                          _vm._v(" "),
-                                                          _c(
-                                                            "span",
-                                                            {
-                                                              staticClass:
-                                                                "red--text",
-                                                            },
-                                                            [
-                                                              _vm._v(
-                                                                _vm._s(
-                                                                  errors[0]
-                                                                )
-                                                              ),
-                                                            ]
-                                                          ),
                                                         ]
                                                       },
                                                     },
@@ -3018,7 +4079,9 @@ var render = function () {
                                             [
                                               _c("ValidationProvider", {
                                                 attrs: {
-                                                  name: "Электрон почта",
+                                                  name: _vm.$t(
+                                                    "Электрон почта"
+                                                  ),
                                                   rules: "required|email",
                                                 },
                                                 scopedSlots: _vm._u(
@@ -3031,12 +4094,17 @@ var render = function () {
                                                           _c("v-text-field", {
                                                             attrs: {
                                                               counter: 200,
-                                                              label:
-                                                                "Электрон почта манзили",
+                                                              label: _vm.$t(
+                                                                "Электрон почта манзили"
+                                                              ),
                                                               required: "",
-                                                              hint: "Аризачининг электрон почтаси",
+                                                              hint: _vm.$t(
+                                                                "Аризачининг электрон почтаси"
+                                                              ),
                                                               "persistent-placeholder":
                                                                 "",
+                                                              "error-messages":
+                                                                errors[0],
                                                             },
                                                             scopedSlots: _vm._u(
                                                               [
@@ -3045,7 +4113,11 @@ var render = function () {
                                                                   fn: function () {
                                                                     return [
                                                                       _vm._v(
-                                                                        "Электрон почта манзили "
+                                                                        _vm._s(
+                                                                          _vm.$t(
+                                                                            "Электрон почта манзили"
+                                                                          )
+                                                                        ) + " "
                                                                       ),
                                                                       _c(
                                                                         "sup",
@@ -3079,21 +4151,6 @@ var render = function () {
                                                                 "person.email",
                                                             },
                                                           }),
-                                                          _vm._v(" "),
-                                                          _c(
-                                                            "span",
-                                                            {
-                                                              staticClass:
-                                                                "red--text",
-                                                            },
-                                                            [
-                                                              _vm._v(
-                                                                _vm._s(
-                                                                  errors[0]
-                                                                )
-                                                              ),
-                                                            ]
-                                                          ),
                                                         ]
                                                       },
                                                     },
@@ -3133,7 +4190,9 @@ var render = function () {
                                       },
                                       [
                                         _vm._v(
-                                          "\n                                        Орқага\n                                    "
+                                          "\n                      " +
+                                            _vm._s(_vm.$t("Орқага")) +
+                                            "\n                    "
                                         ),
                                       ]
                                     ),
@@ -3150,7 +4209,9 @@ var render = function () {
                                       },
                                       [
                                         _vm._v(
-                                          "\n                                        Давом этиш\n                                    "
+                                          "\n                      " +
+                                            _vm._s(_vm.$t("Давом этиш")) +
+                                            "\n                    "
                                         ),
                                       ]
                                     ),
@@ -3175,7 +4236,13 @@ var render = function () {
                                       [_vm._v("*")]
                                     ),
                                     _vm._v(
-                                      " - майдонлари албатта тўлдирилиши шарт!\n                                "
+                                      " - " +
+                                        _vm._s(
+                                          _vm.$t(
+                                            "майдонлари албатта тўлдирилиши шарт"
+                                          )
+                                        ) +
+                                        "!\n                  "
                                     ),
                                   ]
                                 ),
@@ -3198,12 +4265,8 @@ var render = function () {
                           [
                             _c("h5", { staticClass: "text-center mb-4" }, [
                               _vm._v(
-                                "\n                                " +
-                                  _vm._s(
-                                    _vm.$t(
-                                      "Импорт ва экспорт қилинган товарлар тўғрисида маълумот олиш"
-                                    )
-                                  )
+                                "\n                  " +
+                                  _vm._s(_vm.$t("Хизмат турини танланг"))
                               ),
                             ]),
                             _vm._v(" "),
@@ -3225,20 +4288,21 @@ var render = function () {
                                             attrs: { "active-class": "" },
                                             model: {
                                               value:
-                                                _vm.application.serviceType,
+                                                _vm.application
+                                                  .application_type,
                                               callback: function ($$v) {
                                                 _vm.$set(
                                                   _vm.application,
-                                                  "serviceType",
+                                                  "application_type",
                                                   $$v
                                                 )
                                               },
                                               expression:
-                                                "application.serviceType",
+                                                "application.application_type",
                                             },
                                           },
                                           _vm._l(
-                                            _vm.serviceTypes,
+                                            _vm.application_types,
                                             function (
                                               serviceItem,
                                               serviceItemKey
@@ -3253,9 +4317,9 @@ var render = function () {
                                                 attrs: {
                                                   "two-line": "",
                                                   disabled:
-                                                    !_vm.list.netOrgs.includes(
-                                                      _vm.$auth.user().tin
-                                                    ) && serviceItemKey === 2,
+                                                    _vm.list.netOrgs.length <
+                                                      1 &&
+                                                    serviceItem.code === "4",
                                                 },
                                                 scopedSlots: _vm._u(
                                                   [
@@ -3294,17 +4358,17 @@ var render = function () {
                                                                 },
                                                                 [
                                                                   _vm._v(
-                                                                    "\n                                                            " +
+                                                                    "\n                                " +
                                                                       _vm._s(
-                                                                        serviceItem.title
+                                                                        serviceItem.name
                                                                       ) +
-                                                                      "\n                                                        "
+                                                                      "\n                              "
                                                                   ),
                                                                 ]
                                                               ),
                                                               _vm._v(" "),
-                                                              serviceItemKey ===
-                                                              2
+                                                              serviceItem.code ===
+                                                              "4"
                                                                 ? _c(
                                                                     "v-list-item-subtitle",
                                                                     {
@@ -3318,7 +4382,13 @@ var render = function () {
                                                                     },
                                                                     [
                                                                       _vm._v(
-                                                                        "\n                                                            Фақат тармоқ корхоналари учун\n                                                        "
+                                                                        "\n                                " +
+                                                                          _vm._s(
+                                                                            _vm.$t(
+                                                                              "Фақат хўжалик бошқаруви органлари учун"
+                                                                            )
+                                                                          ) +
+                                                                          "\n                              "
                                                                       ),
                                                                     ]
                                                                   )
@@ -3346,134 +4416,516 @@ var render = function () {
                                 ),
                                 _vm._v(" "),
                                 _c("v-col", { attrs: { cols: "6" } }, [
-                                  _c(
-                                    "div",
-                                    { staticClass: "price-block" },
-                                    [
-                                      _c("h4", [
-                                        _vm._v(
-                                          _vm._s(
-                                            _vm.$t("Хизматдан фойдаланиш нархи")
-                                          )
-                                        ),
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("h5", [
-                                        _vm._v(
-                                          _vm._s(
-                                            _vm.$t(
-                                              "Божхона юк декларацияси ва илова ҳужжатларини юклаб олиш нархи:"
-                                            )
-                                          )
-                                        ),
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("p", [
-                                        _vm._v(
-                                          "- " +
-                                            _vm._s(
-                                              _vm.$t(
-                                                "битта божхона юк декларациясини юклаб олиш БҲМ 1 %"
-                                              )
-                                            ) +
-                                            ";"
-                                        ),
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("p", [
-                                        _vm._v(
-                                          "- " +
-                                            _vm._s(
-                                              _vm.$t(
-                                                "божхона юк декларациясига илова қилинган ҳар бир хужжат турини юклаб олиш БҲМ 1 %"
-                                              )
-                                            ) +
-                                            ";"
-                                        ),
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("h5", [
-                                        _vm._v(
-                                          "\n                                            " +
-                                            _vm._s(
-                                              _vm.$t(
-                                                "Жадвал кўринишидаги маълумотларни юклаб олиш учун хизмат нархи:"
-                                              )
-                                            )
-                                        ),
-                                      ]),
-                                      _vm._v(" "),
-                                      _c(
-                                        "v-row",
+                                  _vm.list.tarifs && _vm.list.tarifs[1]
+                                    ? _c(
+                                        "div",
+                                        { staticClass: "price-block" },
                                         [
-                                          _c(
-                                            "v-col",
-                                            { attrs: { cols: "6" } },
-                                            [
-                                              _c("p", [
-                                                _vm._v(
-                                                  "- 100 та қаторгача (товар) - БҲМ 5%;"
-                                                ),
-                                              ]),
-                                              _vm._v(" "),
-                                              _c("p", [
-                                                _vm._v(
-                                                  "- 300 та қаторгача (товар) - БҲМ 10%;"
-                                                ),
-                                              ]),
-                                              _vm._v(" "),
-                                              _c("p", [
-                                                _vm._v(
-                                                  "- 700 та қаторгача (товар) - БҲМ 20%;"
-                                                ),
-                                              ]),
-                                              _vm._v(" "),
-                                              _c("p", [
-                                                _vm._v(
-                                                  "- 1500 та қаторгача (товар) - БҲМ 50%;"
-                                                ),
-                                              ]),
-                                            ]
-                                          ),
+                                          _c("h4", [
+                                            _vm._v(
+                                              _vm._s(
+                                                _vm.$t(
+                                                  "Хизматдан фойдаланиш нархи"
+                                                )
+                                              )
+                                            ),
+                                          ]),
                                           _vm._v(" "),
-                                          _c(
-                                            "v-col",
-                                            { attrs: { cols: "6" } },
-                                            [
-                                              _c("p", [
-                                                _vm._v(
-                                                  "- 5 000 та қаторгача (товар) - 1 БҲМ;"
+                                          _vm.myAppComputed.application_type ===
+                                          0
+                                            ? [
+                                                _c("h5", [
+                                                  _vm._v(
+                                                    _vm._s(
+                                                      _vm.$t(
+                                                        "Божхона юк декларацияси ва илова ҳужжатларини юклаб олиш нархи:"
+                                                      )
+                                                    )
+                                                  ),
+                                                ]),
+                                                _vm._v(" "),
+                                                _c("p", [
+                                                  _vm._v(
+                                                    "- " +
+                                                      _vm._s(
+                                                        _vm.list.tarifs[1][0]
+                                                          .name
+                                                      ) +
+                                                      " - " +
+                                                      _vm._s(
+                                                        _vm.$t("БҲМ {value}%", {
+                                                          value:
+                                                            _vm.list
+                                                              .tarifs[1][0]
+                                                              .value,
+                                                        })
+                                                      ) +
+                                                      ";"
+                                                  ),
+                                                ]),
+                                                _vm._v(" "),
+                                                _c("p", [
+                                                  _vm._v(
+                                                    "- " +
+                                                      _vm._s(
+                                                        _vm.list.tarifs[2][0]
+                                                          .name
+                                                      ) +
+                                                      " - " +
+                                                      _vm._s(
+                                                        _vm.$t("БҲМ {value}%", {
+                                                          value:
+                                                            _vm.list
+                                                              .tarifs[2][0]
+                                                              .value,
+                                                        })
+                                                      )
+                                                  ),
+                                                ]),
+                                              ]
+                                            : _vm._e(),
+                                          _vm._v(" "),
+                                          [1, 3].includes(
+                                            _vm.myAppComputed.application_type
+                                          )
+                                            ? [
+                                                _c(
+                                                  "v-row",
+                                                  [
+                                                    _c(
+                                                      "v-col",
+                                                      { attrs: { cols: "6" } },
+                                                      [
+                                                        _c("p", [
+                                                          _vm._v(
+                                                            "- " +
+                                                              _vm._s(
+                                                                _vm.list
+                                                                  .tarifs[3][0]
+                                                                  .name
+                                                              ) +
+                                                              " -\n                            " +
+                                                              _vm._s(
+                                                                _vm.$t(
+                                                                  "БҲМ {value}%",
+                                                                  {
+                                                                    value:
+                                                                      _vm.list
+                                                                        .tarifs[3][0]
+                                                                        .value,
+                                                                  }
+                                                                )
+                                                              ) +
+                                                              ";"
+                                                          ),
+                                                        ]),
+                                                        _vm._v(" "),
+                                                        _c("p", [
+                                                          _vm._v(
+                                                            "- " +
+                                                              _vm._s(
+                                                                _vm.list
+                                                                  .tarifs[4][0]
+                                                                  .name
+                                                              ) +
+                                                              " -\n                            " +
+                                                              _vm._s(
+                                                                _vm.$t(
+                                                                  "БҲМ {value}%",
+                                                                  {
+                                                                    value:
+                                                                      _vm.list
+                                                                        .tarifs[4][0]
+                                                                        .value,
+                                                                  }
+                                                                )
+                                                              ) +
+                                                              ";"
+                                                          ),
+                                                        ]),
+                                                        _vm._v(" "),
+                                                        _c("p", [
+                                                          _vm._v(
+                                                            "- " +
+                                                              _vm._s(
+                                                                _vm.list
+                                                                  .tarifs[5][0]
+                                                                  .name
+                                                              ) +
+                                                              " -\n                            " +
+                                                              _vm._s(
+                                                                _vm.$t(
+                                                                  "БҲМ {value}%",
+                                                                  {
+                                                                    value:
+                                                                      _vm.list
+                                                                        .tarifs[5][0]
+                                                                        .value,
+                                                                  }
+                                                                )
+                                                              ) +
+                                                              ";"
+                                                          ),
+                                                        ]),
+                                                        _vm._v(" "),
+                                                        _c("p", [
+                                                          _vm._v(
+                                                            "- " +
+                                                              _vm._s(
+                                                                _vm.list
+                                                                  .tarifs[6][0]
+                                                                  .name
+                                                              ) +
+                                                              " -\n                            " +
+                                                              _vm._s(
+                                                                _vm.$t(
+                                                                  "БҲМ {value}%",
+                                                                  {
+                                                                    value:
+                                                                      _vm.list
+                                                                        .tarifs[6][0]
+                                                                        .value,
+                                                                  }
+                                                                )
+                                                              ) +
+                                                              ";"
+                                                          ),
+                                                        ]),
+                                                      ]
+                                                    ),
+                                                    _vm._v(" "),
+                                                    _c(
+                                                      "v-col",
+                                                      { attrs: { cols: "6" } },
+                                                      [
+                                                        _c("p", [
+                                                          _vm._v(
+                                                            "- " +
+                                                              _vm._s(
+                                                                _vm.list
+                                                                  .tarifs[7][0]
+                                                                  .name
+                                                              ) +
+                                                              " -\n                            " +
+                                                              _vm._s(
+                                                                _vm.$t(
+                                                                  "хизмат тарифининг {value}%",
+                                                                  {
+                                                                    value:
+                                                                      _vm.list
+                                                                        .tarifs[7][0]
+                                                                        .value,
+                                                                  }
+                                                                )
+                                                              ) +
+                                                              ";"
+                                                          ),
+                                                        ]),
+                                                      ]
+                                                    ),
+                                                  ],
+                                                  1
                                                 ),
-                                              ]),
-                                              _vm._v(" "),
-                                              _c("p", [
-                                                _vm._v(
-                                                  "- 15 000 та қаторгача (товар) - 2 БҲМ;"
+                                              ]
+                                            : _vm._e(),
+                                          _vm._v(" "),
+                                          _vm.myAppComputed.application_type ===
+                                          2
+                                            ? [
+                                                _c(
+                                                  "v-row",
+                                                  [
+                                                    _c(
+                                                      "v-col",
+                                                      { attrs: { cols: "6" } },
+                                                      [
+                                                        _c("p", [
+                                                          _vm._v(
+                                                            "- " +
+                                                              _vm._s(
+                                                                _vm.list
+                                                                  .tarifs[8][0]
+                                                                  .name
+                                                              ) +
+                                                              " -\n                            " +
+                                                              _vm._s(
+                                                                _vm.$t(
+                                                                  "БҲМ {value}%",
+                                                                  {
+                                                                    value:
+                                                                      _vm.list
+                                                                        .tarifs[8][0]
+                                                                        .value,
+                                                                  }
+                                                                )
+                                                              ) +
+                                                              ";"
+                                                          ),
+                                                        ]),
+                                                        _vm._v(" "),
+                                                        _c("p", [
+                                                          _vm._v(
+                                                            "- " +
+                                                              _vm._s(
+                                                                _vm.list
+                                                                  .tarifs[9][0]
+                                                                  .name
+                                                              ) +
+                                                              " -\n                            " +
+                                                              _vm._s(
+                                                                _vm.$t(
+                                                                  "БҲМ {value}%",
+                                                                  {
+                                                                    value:
+                                                                      _vm.list
+                                                                        .tarifs[9][0]
+                                                                        .value,
+                                                                  }
+                                                                )
+                                                              ) +
+                                                              ";"
+                                                          ),
+                                                        ]),
+                                                        _vm._v(" "),
+                                                        _c("p", [
+                                                          _vm._v(
+                                                            "- " +
+                                                              _vm._s(
+                                                                _vm.list
+                                                                  .tarifs[10][0]
+                                                                  .name
+                                                              ) +
+                                                              " -\n                            " +
+                                                              _vm._s(
+                                                                _vm.$t(
+                                                                  "БҲМ {value}%",
+                                                                  {
+                                                                    value:
+                                                                      _vm.list
+                                                                        .tarifs[10][0]
+                                                                        .value,
+                                                                  }
+                                                                )
+                                                              ) +
+                                                              ";"
+                                                          ),
+                                                        ]),
+                                                        _vm._v(" "),
+                                                        _c("p", [
+                                                          _vm._v(
+                                                            "- " +
+                                                              _vm._s(
+                                                                _vm.list
+                                                                  .tarifs[11][0]
+                                                                  .name
+                                                              ) +
+                                                              " -\n                            " +
+                                                              _vm._s(
+                                                                _vm.$t(
+                                                                  "БҲМ {value}%",
+                                                                  {
+                                                                    value:
+                                                                      _vm.list
+                                                                        .tarifs[11][0]
+                                                                        .value,
+                                                                  }
+                                                                )
+                                                              ) +
+                                                              ";"
+                                                          ),
+                                                        ]),
+                                                        _vm._v(" "),
+                                                        _c("p", [
+                                                          _vm._v(
+                                                            "- " +
+                                                              _vm._s(
+                                                                _vm.list
+                                                                  .tarifs[12][0]
+                                                                  .name
+                                                              ) +
+                                                              " -\n                            " +
+                                                              _vm._s(
+                                                                _vm.$t(
+                                                                  "БҲМ {value}%",
+                                                                  {
+                                                                    value:
+                                                                      _vm.list
+                                                                        .tarifs[12][0]
+                                                                        .value,
+                                                                  }
+                                                                )
+                                                              ) +
+                                                              ";"
+                                                          ),
+                                                        ]),
+                                                      ]
+                                                    ),
+                                                    _vm._v(" "),
+                                                    _c(
+                                                      "v-col",
+                                                      { attrs: { cols: "6" } },
+                                                      [
+                                                        _c("p", [
+                                                          _vm._v(
+                                                            "- " +
+                                                              _vm._s(
+                                                                _vm.list
+                                                                  .tarifs[13][0]
+                                                                  .name
+                                                              ) +
+                                                              " -\n                            " +
+                                                              _vm._s(
+                                                                _vm.$t(
+                                                                  "БҲМ {value}%",
+                                                                  {
+                                                                    value:
+                                                                      _vm.list
+                                                                        .tarifs[13][0]
+                                                                        .value,
+                                                                  }
+                                                                )
+                                                              ) +
+                                                              ";"
+                                                          ),
+                                                        ]),
+                                                        _vm._v(" "),
+                                                        _c("p", [
+                                                          _vm._v(
+                                                            "- " +
+                                                              _vm._s(
+                                                                _vm.list
+                                                                  .tarifs[14][0]
+                                                                  .name
+                                                              ) +
+                                                              " -\n                            " +
+                                                              _vm._s(
+                                                                _vm.$t(
+                                                                  "БҲМ {value}%",
+                                                                  {
+                                                                    value:
+                                                                      _vm.list
+                                                                        .tarifs[14][0]
+                                                                        .value,
+                                                                  }
+                                                                )
+                                                              ) +
+                                                              ";"
+                                                          ),
+                                                        ]),
+                                                        _vm._v(" "),
+                                                        _c("p", [
+                                                          _vm._v(
+                                                            "- " +
+                                                              _vm._s(
+                                                                _vm.list
+                                                                  .tarifs[15][0]
+                                                                  .name
+                                                              ) +
+                                                              " -\n                            " +
+                                                              _vm._s(
+                                                                _vm.$t(
+                                                                  "БҲМ {value}%",
+                                                                  {
+                                                                    value:
+                                                                      _vm.list
+                                                                        .tarifs[15][0]
+                                                                        .value,
+                                                                  }
+                                                                )
+                                                              ) +
+                                                              ";"
+                                                          ),
+                                                        ]),
+                                                        _vm._v(" "),
+                                                        _c("p", [
+                                                          _vm._v(
+                                                            "- " +
+                                                              _vm._s(
+                                                                _vm.list
+                                                                  .tarifs[16][0]
+                                                                  .name
+                                                              ) +
+                                                              " -\n                            " +
+                                                              _vm._s(
+                                                                _vm.$t(
+                                                                  "БҲМ {value}%",
+                                                                  {
+                                                                    value:
+                                                                      _vm.list
+                                                                        .tarifs[16][0]
+                                                                        .value,
+                                                                  }
+                                                                )
+                                                              ) +
+                                                              ";"
+                                                          ),
+                                                        ]),
+                                                        _vm._v(" "),
+                                                        _c("p", [
+                                                          _vm._v(
+                                                            "- " +
+                                                              _vm._s(
+                                                                _vm.list
+                                                                  .tarifs[7][0]
+                                                                  .name
+                                                              ) +
+                                                              " -\n                            " +
+                                                              _vm._s(
+                                                                _vm.$t(
+                                                                  "хизмат тарифининг {value}%",
+                                                                  {
+                                                                    value:
+                                                                      _vm.list
+                                                                        .tarifs[7][0]
+                                                                        .value,
+                                                                  }
+                                                                )
+                                                              ) +
+                                                              ";"
+                                                          ),
+                                                        ]),
+                                                      ]
+                                                    ),
+                                                  ],
+                                                  1
                                                 ),
-                                              ]),
-                                              _vm._v(" "),
-                                              _c("p", [
-                                                _vm._v(
-                                                  "- 15001 тадан ортиқ қаторгача (товар) - 3 БҲМ;"
-                                                ),
-                                              ]),
-                                              _vm._v(" "),
-                                              _c("p", [
-                                                _vm._v(
-                                                  "- Қўшимча хар бир графа учун - хизмат тарифининг 5%."
-                                                ),
-                                              ]),
-                                            ]
-                                          ),
+                                              ]
+                                            : _vm._e(),
                                         ],
-                                        1
-                                      ),
-                                    ],
-                                    1
-                                  ),
+                                        2
+                                      )
+                                    : _vm._e(),
                                 ]),
                               ],
                               1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "v-row",
+                              {
+                                staticClass:
+                                  "row mb-3 position-absolute bottom-2 start-0",
+                              },
+                              [
+                                _c(
+                                  "a",
+                                  {
+                                    staticClass: "ml-10 font-weight-bold ",
+                                    attrs: {
+                                      href: "https://t.me/eximcustomsproducts",
+                                    },
+                                  },
+                                  [
+                                    _vm._v(
+                                      _vm._s(
+                                        _vm.$t(
+                                          "Савол ва таклифлар учун телеграм гуруҳга ёзинг"
+                                        )
+                                      )
+                                    ),
+                                  ]
+                                ),
+                              ]
                             ),
                             _vm._v(" "),
                             _c(
@@ -3495,7 +4947,9 @@ var render = function () {
                                       },
                                       [
                                         _vm._v(
-                                          "\n                                        Орқага\n                                    "
+                                          "\n                      " +
+                                            _vm._s(_vm.$t("Орқага")) +
+                                            "\n                    "
                                         ),
                                       ]
                                     ),
@@ -3512,7 +4966,9 @@ var render = function () {
                                       },
                                       [
                                         _vm._v(
-                                          "\n                                        Давом этиш\n                                    "
+                                          "\n                      " +
+                                            _vm._s(_vm.$t("Давом этиш")) +
+                                            "\n                    "
                                         ),
                                       ]
                                     ),
@@ -3557,16 +5013,18 @@ var render = function () {
                                                   rawName: "v-show",
                                                   value:
                                                     _vm.application
-                                                      .serviceType !== 2,
+                                                      .application_type !== 2,
                                                   expression:
-                                                    "application.serviceType!==2",
+                                                    "application.application_type!==2",
                                                 },
                                               ],
                                               attrs: { cols: "6" },
                                             },
                                             [
                                               _c("ValidationProvider", {
-                                                attrs: { name: "Ҳудуд" },
+                                                attrs: {
+                                                  name: _vm.$t("Ҳудуд"),
+                                                },
                                                 scopedSlots: _vm._u(
                                                   [
                                                     {
@@ -3576,36 +5034,118 @@ var render = function () {
                                                         return [
                                                           _c("v-autocomplete", {
                                                             attrs: {
+                                                              label: _vm.$t(
+                                                                "Ҳудудий божхона бошқармаси"
+                                                              ),
                                                               required: "",
-                                                              hint: "Ҳудудий божхона бошқармаси",
+                                                              placeholder:
+                                                                _vm.$t(
+                                                                  "Барча ҳудудий бошқармалар"
+                                                                ),
+                                                              hint:
+                                                                _vm.application
+                                                                  .region &&
+                                                                _vm.application
+                                                                  .region
+                                                                  .count > 0
+                                                                  ? _vm.$t(
+                                                                      "Танланган ҳудудий бошқармалар"
+                                                                    )
+                                                                  : _vm.$t(
+                                                                      "Барча ҳудудий бошқармалар"
+                                                                    ),
                                                               items:
                                                                 _vm.list
                                                                   .regions,
-                                                              "persistent-hint":
+                                                              "item-text":
+                                                                function (
+                                                                  item
+                                                                ) {
+                                                                  return (
+                                                                    item.value +
+                                                                    "-" +
+                                                                    item.text
+                                                                  )
+                                                                },
+                                                              "persistent-placeholder":
                                                                 "",
+                                                              multiple: "",
+                                                              clearable: "",
                                                               "error-messages":
                                                                 errors[0],
                                                             },
                                                             scopedSlots: _vm._u(
                                                               [
                                                                 {
-                                                                  key: "label",
-                                                                  fn: function () {
+                                                                  key: "selection",
+                                                                  fn: function (
+                                                                    data
+                                                                  ) {
                                                                     return [
-                                                                      _vm._v(
-                                                                        "Ҳудудий божхона бошқармаси "
-                                                                      ),
                                                                       _c(
-                                                                        "sup",
+                                                                        "v-chip",
+                                                                        _vm._b(
+                                                                          {
+                                                                            staticClass:
+                                                                              "primary-close",
+                                                                            staticStyle:
+                                                                              {
+                                                                                "font-size":
+                                                                                  "14px",
+                                                                              },
+                                                                            attrs:
+                                                                              {
+                                                                                "input-value":
+                                                                                  data.selected,
+                                                                                close:
+                                                                                  "",
+                                                                                color:
+                                                                                  "#e7f5ed",
+                                                                              },
+                                                                            on: {
+                                                                              click:
+                                                                                data.select,
+                                                                              "click:close":
+                                                                                function (
+                                                                                  $event
+                                                                                ) {
+                                                                                  return _vm.removeItem(
+                                                                                    "region",
+                                                                                    data
+                                                                                      .item
+                                                                                      .value
+                                                                                  )
+                                                                                },
+                                                                            },
+                                                                          },
+                                                                          "v-chip",
+                                                                          data.attrs,
+                                                                          false
+                                                                        ),
                                                                         [
-                                                                          _vm._v(
-                                                                            "*"
+                                                                          _c(
+                                                                            "span",
+                                                                            {
+                                                                              staticStyle:
+                                                                                {
+                                                                                  "font-size":
+                                                                                    "14px",
+                                                                                },
+                                                                            },
+                                                                            [
+                                                                              _vm._v(
+                                                                                _vm._s(
+                                                                                  data
+                                                                                    .item
+                                                                                    .text
+                                                                                )
+                                                                              ),
+                                                                            ]
                                                                           ),
                                                                         ]
                                                                       ),
                                                                     ]
                                                                   },
-                                                                  proxy: true,
                                                                 },
                                                               ],
                                                               null,
@@ -3648,16 +5188,16 @@ var render = function () {
                                                   rawName: "v-show",
                                                   value:
                                                     _vm.application
-                                                      .serviceType !== 2,
+                                                      .application_type !== 2,
                                                   expression:
-                                                    "application.serviceType!==2",
+                                                    "application.application_type!==2",
                                                 },
                                               ],
                                               attrs: { cols: "6" },
                                             },
                                             [
                                               _c("ValidationProvider", {
-                                                attrs: { name: "Пост" },
+                                                attrs: { name: _vm.$t("Пост") },
                                                 scopedSlots: _vm._u(
                                                   [
                                                     {
@@ -3671,16 +5211,113 @@ var render = function () {
                                                                 _vm.loading
                                                                   .post,
                                                               required: "",
-                                                              hint: "Божхона постини танланг",
+                                                              hint: _vm.$t(
+                                                                "Божхона постини танланг"
+                                                              ),
                                                               items:
                                                                 _vm.list.posts,
-                                                              "persistent-hint":
+                                                              placeholder:
+                                                                _vm.$t(
+                                                                  "Барча божхона постлари"
+                                                                ),
+                                                              "item-text":
+                                                                function (
+                                                                  item
+                                                                ) {
+                                                                  return (
+                                                                    item.code +
+                                                                    "-" +
+                                                                    item.name
+                                                                  )
+                                                                },
+                                                              "item-value":
+                                                                "code",
+                                                              "persistent-placeholder":
                                                                 "",
-                                                              label:
-                                                                "Божхона постини танланг",
+                                                              multiple: "",
+                                                              label: _vm.$t(
+                                                                "Божхона постини танланг"
+                                                              ),
                                                               "error-messages":
                                                                 errors[0],
                                                             },
+                                                            scopedSlots: _vm._u(
+                                                              [
+                                                                {
+                                                                  key: "selection",
+                                                                  fn: function (
+                                                                    data
+                                                                  ) {
+                                                                    return [
+                                                                      _c(
+                                                                        "v-chip",
+                                                                        _vm._b(
+                                                                          {
+                                                                            staticClass:
+                                                                              "primary-close",
+                                                                            staticStyle:
+                                                                              {
+                                                                                "font-size":
+                                                                                  "14px",
+                                                                              },
+                                                                            attrs:
+                                                                              {
+                                                                                "input-value":
+                                                                                  data.selected,
+                                                                                close:
+                                                                                  "",
+                                                                                color:
+                                                                                  "#e7f5ed",
+                                                                              },
+                                                                            on: {
+                                                                              click:
+                                                                                data.select,
+                                                                              "click:close":
+                                                                                function (
+                                                                                  $event
+                                                                                ) {
+                                                                                  return _vm.removeItem(
+                                                                                    "post",
+                                                                                    data
+                                                                                      .item
+                                                                                      .code
+                                                                                  )
+                                                                                },
+                                                                            },
+                                                                          },
+                                                                          "v-chip",
+                                                                          data.attrs,
+                                                                          false
+                                                                        ),
+                                                                        [
+                                                                          _c(
+                                                                            "span",
+                                                                            {
+                                                                              staticStyle:
+                                                                                {
+                                                                                  "font-size":
+                                                                                    "14px",
+                                                                                },
+                                                                            },
+                                                                            [
+                                                                              _vm._v(
+                                                                                _vm._s(
+                                                                                  data
+                                                                                    .item
+                                                                                    .name
+                                                                                )
+                                                                              ),
+                                                                            ]
+                                                                          ),
+                                                                        ]
+                                                                      ),
+                                                                    ]
+                                                                  },
+                                                                },
+                                                              ],
+                                                              null,
+                                                              true
+                                                            ),
                                                             model: {
                                                               value:
                                                                 _vm.application
@@ -3713,9 +5350,62 @@ var render = function () {
                                             "v-col",
                                             { attrs: { cols: "6" } },
                                             [
+                                              _vm.application.application_type >
+                                              2
+                                                ? _c(
+                                                    "v-radio-group",
+                                                    {
+                                                      staticClass:
+                                                        "isCreatedDate",
+                                                      attrs: {
+                                                        row: "",
+                                                        mandatory: "",
+                                                      },
+                                                      model: {
+                                                        value:
+                                                          _vm.application
+                                                            .isRejim,
+                                                        callback: function (
+                                                          $$v
+                                                        ) {
+                                                          _vm.$set(
+                                                            _vm.application,
+                                                            "isRejim",
+                                                            $$v
+                                                          )
+                                                        },
+                                                        expression:
+                                                          "application.isRejim",
+                                                      },
+                                                    },
+                                                    [
+                                                      _c("v-radio", {
+                                                        attrs: {
+                                                          label: _vm.$t(
+                                                            "Ташқи савдо айланмаси бўйича"
+                                                          ),
+                                                          value: false,
+                                                        },
+                                                      }),
+                                                      _vm._v(" "),
+                                                      _c("v-radio", {
+                                                        attrs: {
+                                                          label: _vm.$t(
+                                                            "Божхона режимлари бўйича"
+                                                          ),
+                                                          value: true,
+                                                        },
+                                                      }),
+                                                    ],
+                                                    1
+                                                  )
+                                                : _vm._e(),
+                                              _vm._v(" "),
                                               _c("ValidationProvider", {
                                                 attrs: {
-                                                  name: "Божхона режими",
+                                                  name: _vm.$t(
+                                                    "Божхона режими"
+                                                  ),
                                                 },
                                                 scopedSlots: _vm._u(
                                                   [
@@ -3726,28 +5416,152 @@ var render = function () {
                                                         return [
                                                           _c("v-autocomplete", {
                                                             attrs: {
+                                                              loading:
+                                                                _vm.loading
+                                                                  .regime,
                                                               required: "",
-                                                              hint: "Божхона режимини танланг",
+                                                              hint: _vm.$t(
+                                                                "Божхона режимини танланг"
+                                                              ),
+                                                              placeholder:
+                                                                _vm.$t(
+                                                                  "Барча божхона режимлари"
+                                                                ),
                                                               items:
-                                                                _vm.list
-                                                                  .regimes,
-                                                              "persistent-hint":
+                                                                _vm.comp_rejimes,
+                                                              "persistent-placeholder":
                                                                 "",
                                                               "item-text":
-                                                                "title",
+                                                                function (
+                                                                  item
+                                                                ) {
+                                                                  return (
+                                                                    item.code1 +
+                                                                    item.code2 +
+                                                                    "-" +
+                                                                    item.name
+                                                                  )
+                                                                },
                                                               "item-value":
-                                                                "value",
+                                                                "id",
+                                                              multiple: "",
                                                               "error-messages":
                                                                 errors[0],
                                                             },
                                                             scopedSlots: _vm._u(
                                                               [
                                                                 {
+                                                                  key: "selection",
+                                                                  fn: function (
+                                                                    data
+                                                                  ) {
+                                                                    return [
+                                                                      _c(
+                                                                        "v-chip",
+                                                                        _vm._b(
+                                                                          {
+                                                                            staticClass:
+                                                                              "primary-close",
+                                                                            staticStyle:
+                                                                              {
+                                                                                "font-size":
+                                                                                  "14px",
+                                                                              },
+                                                                            attrs:
+                                                                              {
+                                                                                "input-value":
+                                                                                  data.selected,
+                                                                                close:
+                                                                                  "",
+                                                                                color:
+                                                                                  "#e7f5ed",
+                                                                              },
+                                                                            on: {
+                                                                              click:
+                                                                                data.select,
+                                                                              "click:close":
+                                                                                function (
+                                                                                  $event
+                                                                                ) {
+                                                                                  return _vm.removeItem(
+                                                                                    "rejim",
+                                                                                    data
+                                                                                      .item
+                                                                                      .id
+                                                                                  )
+                                                                                },
+                                                                            },
+                                                                          },
+                                                                          "v-chip",
+                                                                          data.attrs,
+                                                                          false
+                                                                        ),
+                                                                        [
+                                                                          _c(
+                                                                            "span",
+                                                                            {
+                                                                              staticStyle:
+                                                                                {
+                                                                                  "font-size":
+                                                                                    "14px",
+                                                                                },
+                                                                            },
+                                                                            [
+                                                                              _vm
+                                                                                .application
+                                                                                .application_type ===
+                                                                                2 ||
+                                                                              (_vm
+                                                                                .application
+                                                                                .application_type ===
+                                                                                3 &&
+                                                                                !_vm
+                                                                                  .application
+                                                                                  .isRejim)
+                                                                                ? [
+                                                                                    _vm._v(
+                                                                                      _vm._s(
+                                                                                        data
+                                                                                          .item
+                                                                                          .code1
+                                                                                      )
+                                                                                    ),
+                                                                                  ]
+                                                                                : [
+                                                                                    _vm._v(
+                                                                                      "\n                                  " +
+                                                                                        _vm._s(
+                                                                                          data
+                                                                                            .item
+                                                                                            .code1
+                                                                                        ) +
+                                                                                        "-" +
+                                                                                        _vm._s(
+                                                                                          data
+                                                                                            .item
+                                                                                            .code2
+                                                                                        ) +
+                                                                                        "\n                              "
+                                                                                    ),
+                                                                                  ],
+                                                                            ],
+                                                                            2
+                                                                          ),
+                                                                        ]
+                                                                      ),
+                                                                    ]
+                                                                  },
+                                                                },
+                                                                {
                                                                   key: "label",
                                                                   fn: function () {
                                                                     return [
                                                                       _vm._v(
-                                                                        "Божхона режими"
+                                                                        _vm._s(
+                                                                          _vm.$t(
+                                                                            "Божхона режими"
+                                                                          )
+                                                                        )
                                                                       ),
                                                                     ]
                                                                   },
@@ -3790,7 +5604,14 @@ var render = function () {
                                             { attrs: { cols: "6" } },
                                             [
                                               _c("ValidationProvider", {
-                                                attrs: { name: "ТИФ ТН код" },
+                                                staticClass:
+                                                  "d-flex align-items-center",
+                                                staticStyle: {
+                                                  "padding-top": "7px",
+                                                },
+                                                attrs: {
+                                                  name: _vm.$t("ТИФ ТН код"),
+                                                },
                                                 scopedSlots: _vm._u(
                                                   [
                                                     {
@@ -3810,13 +5631,130 @@ var render = function () {
                                                                   "'##########'",
                                                               },
                                                             ],
+                                                            staticClass:
+                                                              "mr-10",
                                                             attrs: {
-                                                              "persistent-hint":
+                                                              "persistent-placeholder":
                                                                 "",
                                                               label:
-                                                                "ТИФ ТН код",
+                                                                _vm.$t(
+                                                                  "ТИФ ТН код"
+                                                                ) +
+                                                                (_vm.application
+                                                                  .application_type ===
+                                                                2
+                                                                  ? "*"
+                                                                  : ""),
+                                                              placeholder:
+                                                                (_vm.application
+                                                                  .tftn &&
+                                                                  _vm
+                                                                    .application
+                                                                    .tftn
+                                                                    .length >
+                                                                    0) ||
+                                                                _vm.application
+                                                                  .application_type ===
+                                                                  2
+                                                                  ? ""
+                                                                  : _vm.$t(
+                                                                      "Барча товарлар"
+                                                                    ),
                                                               "error-messages":
                                                                 errors[0],
+                                                            },
+                                                            model: {
+                                                              value:
+                                                                _vm.temp.tftn,
+                                                              callback:
+                                                                function ($$v) {
+                                                                  _vm.$set(
+                                                                    _vm.temp,
+                                                                    "tftn",
+                                                                    $$v
+                                                                  )
+                                                                },
+                                                              expression:
+                                                                "temp.tftn",
+                                                            },
+                                                          }),
+                                                          _vm._v(" "),
+                                                          _c(
+                                                            "v-btn",
+                                                            {
+                                                              attrs: {
+                                                                small: "",
+                                                                color:
+                                                                  "primary",
+                                                              },
+                                                              on: {
+                                                                click:
+                                                                  function (
+                                                                    $event
+                                                                  ) {
+                                                                    _vm.addData(
+                                                                      "tftn",
+                                                                      _vm
+                                                                        .application
+                                                                        .application_type ===
+                                                                        2
+                                                                        ? 4
+                                                                        : 2
+                                                                    )
+                                                                  },
+                                                              },
+                                                            },
+                                                            [
+                                                              _c("v-icon", [
+                                                                _vm._v(
+                                                                  "mdi-plus"
+                                                                ),
+                                                              ]),
+                                                              _vm._v(
+                                                                "\n                          " +
+                                                                  _vm._s(
+                                                                    _vm.$t(
+                                                                      "Қўшиш"
+                                                                    )
+                                                                  ) +
+                                                                  "\n                        "
+                                                              ),
+                                                            ],
+                                                            1
+                                                          ),
+                                                        ]
+                                                      },
+                                                    },
+                                                  ],
+                                                  null,
+                                                  true
+                                                ),
+                                              }),
+                                              _vm._v(" "),
+                                              _c("ValidationProvider", {
+                                                staticStyle: {
+                                                  "margin-bottom": "-20px",
+                                                },
+                                                attrs: {
+                                                  name: _vm.$t("ТИФ ТН код"),
+                                                  rules:
+                                                    _vm.application
+                                                      .application_type === 2
+                                                      ? "required"
+                                                      : "",
+                                                },
+                                                scopedSlots: _vm._u(
+                                                  [
+                                                    {
+                                                      key: "default",
+                                                      fn: function (ref) {
+                                                        var errors = ref.errors
+                                                        return [
+                                                          _c("v-text-field", {
+                                                            staticClass:
+                                                              "d-none",
+                                                            attrs: {
+                                                              type: "hidden",
                                                             },
                                                             model: {
                                                               value:
@@ -3834,6 +5772,25 @@ var render = function () {
                                                                 "application.tftn",
                                                             },
                                                           }),
+                                                          _vm._v(" "),
+                                                          _vm.application
+                                                            .application_type ===
+                                                          2
+                                                            ? _c(
+                                                                "span",
+                                                                {
+                                                                  staticClass:
+                                                                    "red--text",
+                                                                },
+                                                                [
+                                                                  _vm._v(
+                                                                    _vm._s(
+                                                                      errors[0]
+                                                                    )
+                                                                  ),
+                                                                ]
+                                                              )
+                                                            : _vm._e(),
                                                         ]
                                                       },
                                                     },
@@ -3842,6 +5799,71 @@ var render = function () {
                                                   true
                                                 ),
                                               }),
+                                              _vm._v(" "),
+                                              _vm.application.tftn
+                                                ? _c(
+                                                    "div",
+                                                    {
+                                                      staticClass:
+                                                        "selected-chips-content w-100",
+                                                    },
+                                                    _vm._l(
+                                                      _vm.application.tftn,
+                                                      function (
+                                                        appItem,
+                                                        appItemKey
+                                                      ) {
+                                                        return _c(
+                                                          "v-chip",
+                                                          {
+                                                            key: appItemKey,
+                                                            staticClass:
+                                                              "primary-close",
+                                                            staticStyle: {
+                                                              "font-size":
+                                                                "14px",
+                                                              margin: "2px 5px",
+                                                            },
+                                                            attrs: {
+                                                              close: "",
+                                                              color: "#e7f5ed",
+                                                            },
+                                                            on: {
+                                                              "click:close":
+                                                                function (
+                                                                  $event
+                                                                ) {
+                                                                  return _vm.removeItem(
+                                                                    "tftn",
+                                                                    appItem
+                                                                  )
+                                                                },
+                                                            },
+                                                          },
+                                                          [
+                                                            _c(
+                                                              "span",
+                                                              {
+                                                                staticStyle: {
+                                                                  "font-size":
+                                                                    "14px",
+                                                                },
+                                                              },
+                                                              [
+                                                                _vm._v(
+                                                                  _vm._s(
+                                                                    appItem
+                                                                  )
+                                                                ),
+                                                              ]
+                                                            ),
+                                                          ]
+                                                        )
+                                                      }
+                                                    ),
+                                                    1
+                                                  )
+                                                : _vm._e(),
                                             ],
                                             1
                                           ),
@@ -3855,17 +5877,21 @@ var render = function () {
                                                   rawName: "v-show",
                                                   value:
                                                     _vm.application
-                                                      .serviceType !== 2,
+                                                      .application_type !== 2,
                                                   expression:
-                                                    "application.serviceType!==2",
+                                                    "application.application_type!==2",
                                                 },
                                               ],
                                               attrs: { cols: "6" },
                                             },
                                             [
                                               _c("ValidationProvider", {
+                                                staticClass:
+                                                  "d-flex align-items-center",
                                                 attrs: {
-                                                  name: "Шартноманинг ТСО ЯЭАТдаги идентификация рақами",
+                                                  name: _vm.$t(
+                                                    "Шартноманинг ТСО ЯЭАТдаги идентификация рақами"
+                                                  ),
                                                 },
                                                 scopedSlots: _vm._u(
                                                   [
@@ -3886,30 +5912,82 @@ var render = function () {
                                                                   "'###########################'",
                                                               },
                                                             ],
+                                                            staticClass:
+                                                              "mr-10",
                                                             attrs: {
-                                                              "persistent-hint":
-                                                                "",
-                                                              label:
-                                                                "Шартноманинг ТСО ЯЭАТдаги идентификация рақами",
+                                                              label: _vm.$t(
+                                                                "Шартноманинг ТСО ЯЭАТдаги идентификация рақами"
+                                                              ),
                                                               "error-messages":
                                                                 errors[0],
+                                                              placeholder:
+                                                                _vm.application
+                                                                  .shartnoma &&
+                                                                _vm.application
+                                                                  .shartnoma
+                                                                  .length > 0
+                                                                  ? ""
+                                                                  : _vm.$t(
+                                                                      "Барча шартномалар"
+                                                                    ),
+                                                              "persistent-placeholder":
+                                                                "",
                                                             },
                                                             model: {
                                                               value:
-                                                                _vm.application
+                                                                _vm.temp
                                                                   .shartnoma,
                                                               callback:
                                                                 function ($$v) {
                                                                   _vm.$set(
-                                                                    _vm.application,
+                                                                    _vm.temp,
                                                                     "shartnoma",
                                                                     $$v
                                                                   )
                                                                 },
                                                               expression:
-                                                                "application.shartnoma",
+                                                                "temp.shartnoma",
                                                             },
                                                           }),
+                                                          _vm._v(" "),
+                                                          _c(
+                                                            "v-btn",
+                                                            {
+                                                              attrs: {
+                                                                small: "",
+                                                                color:
+                                                                  "primary",
+                                                              },
+                                                              on: {
+                                                                click:
+                                                                  function (
+                                                                    $event
+                                                                  ) {
+                                                                    return _vm.addData(
+                                                                      "shartnoma",
+                                                                      27
+                                                                    )
+                                                                  },
+                                                              },
+                                                            },
+                                                            [
+                                                              _c("v-icon", [
+                                                                _vm._v(
+                                                                  "mdi-plus"
+                                                                ),
+                                                              ]),
+                                                              _vm._v(
+                                                                "\n                          " +
+                                                                  _vm._s(
+                                                                    _vm.$t(
+                                                                      "Қўшиш"
+                                                                    )
+                                                                  ) +
+                                                                  "\n                        "
+                                                              ),
+                                                            ],
+                                                            1
+                                                          ),
                                                         ]
                                                       },
                                                     },
@@ -3918,6 +5996,73 @@ var render = function () {
                                                   true
                                                 ),
                                               }),
+                                              _vm._v(" "),
+                                              _vm.application.shartnoma
+                                                ? _c(
+                                                    "div",
+                                                    {
+                                                      staticClass:
+                                                        "selected-chips-content w-100",
+                                                    },
+                                                    _vm._l(
+                                                      _vm.application.shartnoma,
+                                                      function (
+                                                        appItem,
+                                                        appItemKey
+                                                      ) {
+                                                        return _c(
+                                                          "v-chip",
+                                                          {
+                                                            key:
+                                                              "shartnoma" +
+                                                              appItemKey,
+                                                            staticClass:
+                                                              "primary-close",
+                                                            staticStyle: {
+                                                              "font-size":
+                                                                "14px",
+                                                              margin: "2px 5px",
+                                                            },
+                                                            attrs: {
+                                                              close: "",
+                                                              color: "#e7f5ed",
+                                                            },
+                                                            on: {
+                                                              "click:close":
+                                                                function (
+                                                                  $event
+                                                                ) {
+                                                                  return _vm.removeItem(
+                                                                    "shartnoma",
+                                                                    appItem
+                                                                  )
+                                                                },
+                                                            },
+                                                          },
+                                                          [
+                                                            _c(
+                                                              "span",
+                                                              {
+                                                                staticStyle: {
+                                                                  "font-size":
+                                                                    "14px",
+                                                                },
+                                                              },
+                                                              [
+                                                                _vm._v(
+                                                                  _vm._s(
+                                                                    appItem
+                                                                  )
+                                                                ),
+                                                              ]
+                                                            ),
+                                                          ]
+                                                        )
+                                                      }
+                                                    ),
+                                                    1
+                                                  )
+                                                : _vm._e(),
                                             ],
                                             1
                                           ),
@@ -3927,7 +6072,9 @@ var render = function () {
                                             { attrs: { cols: "6" } },
                                             [
                                               _c("ValidationProvider", {
-                                                attrs: { name: "Давлат" },
+                                                attrs: {
+                                                  name: _vm.$t("Давлат"),
+                                                },
                                                 scopedSlots: _vm._u(
                                                   [
                                                     {
@@ -3937,19 +6084,122 @@ var render = function () {
                                                         return [
                                                           _c("v-autocomplete", {
                                                             attrs: {
-                                                              label: "Давлат",
+                                                              label:
+                                                                _vm.$t(
+                                                                  "Давлат"
+                                                                ),
                                                               loading:
                                                                 _vm.loading
                                                                   .country,
                                                               required: "",
+                                                              placeholder:
+                                                                _vm.$t(
+                                                                  "Барча давлатлар"
+                                                                ),
+                                                              "item-text":
+                                                                function (
+                                                                  item
+                                                                ) {
+                                                                  return (
+                                                                    item.CODE +
+                                                                    " - " +
+                                                                    item.CD_NM
+                                                                  )
+                                                                },
+                                                              "item-value":
+                                                                "CODE",
                                                               items:
                                                                 _vm.list
                                                                   .countries,
-                                                              "persistent-hint":
+                                                              "persistent-placeholder":
                                                                 "",
                                                               "error-messages":
                                                                 errors[0],
+                                                              multiple: "",
                                                             },
+                                                            scopedSlots: _vm._u(
+                                                              [
+                                                                {
+                                                                  key: "selection",
+                                                                  fn: function (
+                                                                    data
+                                                                  ) {
+                                                                    return [
+                                                                      _c(
+                                                                        "v-chip",
+                                                                        _vm._b(
+                                                                          {
+                                                                            staticClass:
+                                                                              "primary-close",
+                                                                            staticStyle:
+                                                                              {
+                                                                                "font-size":
+                                                                                  "14px",
+                                                                              },
+                                                                            attrs:
+                                                                              {
+                                                                                "input-value":
+                                                                                  data.selected,
+                                                                                close:
+                                                                                  "",
+                                                                                color:
+                                                                                  "#e7f5ed",
+                                                                              },
+                                                                            on: {
+                                                                              click:
+                                                                                data.select,
+                                                                              "click:close":
+                                                                                function (
+                                                                                  $event
+                                                                                ) {
+                                                                                  return _vm.removeItem(
+                                                                                    "country",
+                                                                                    data
+                                                                                      .item
+                                                                                      .CODE
+                                                                                  )
+                                                                                },
+                                                                            },
+                                                                          },
+                                                                          "v-chip",
+                                                                          data.attrs,
+                                                                          false
+                                                                        ),
+                                                                        [
+                                                                          _c(
+                                                                            "span",
+                                                                            {
+                                                                              staticStyle:
+                                                                                {
+                                                                                  "font-size":
+                                                                                    "14px",
+                                                                                },
+                                                                            },
+                                                                            [
+                                                                              _vm._v(
+                                                                                _vm._s(
+                                                                                  data
+                                                                                    .item
+                                                                                    .CODE
+                                                                                ) +
+                                                                                  "-" +
+                                                                                  _vm._s(
+                                                                                    data
+                                                                                      .item
+                                                                                      .CD_NM
+                                                                                  )
+                                                                              ),
+                                                                            ]
+                                                                          ),
+                                                                        ]
+                                                                      ),
+                                                                    ]
+                                                                  },
+                                                                },
+                                                              ],
+                                                              null,
+                                                              true
+                                                            ),
                                                             model: {
                                                               value:
                                                                 _vm.application
@@ -3978,76 +6228,85 @@ var render = function () {
                                             1
                                           ),
                                           _vm._v(" "),
-                                          _c(
-                                            "v-col",
-                                            {
-                                              directives: [
-                                                {
-                                                  name: "show",
-                                                  rawName: "v-show",
-                                                  value:
-                                                    _vm.application
-                                                      .serviceType === 2 &&
-                                                    1 === 2,
-                                                  expression:
-                                                    "application.serviceType===2 && 1===2",
-                                                },
-                                              ],
-                                              attrs: { cols: "6" },
-                                            },
-                                            [
-                                              _c("ValidationProvider", {
-                                                attrs: {
-                                                  name: "Тармоқ таркибидаги ташкилотлар",
-                                                },
-                                                scopedSlots: _vm._u(
-                                                  [
-                                                    {
-                                                      key: "default",
-                                                      fn: function (ref) {
-                                                        var errors = ref.errors
-                                                        return [
-                                                          _c("v-autocomplete", {
-                                                            attrs: {
-                                                              label:
-                                                                "Тармоқ таркибидаги ташкилотлар",
-                                                              loading:
-                                                                _vm.loading.org,
-                                                              required: "",
-                                                              items:
-                                                                _vm.list.orgs,
-                                                              "persistent-hint":
-                                                                "",
-                                                              "error-messages":
-                                                                errors[0],
-                                                            },
-                                                            model: {
-                                                              value:
-                                                                _vm.application
-                                                                  .org,
-                                                              callback:
-                                                                function ($$v) {
-                                                                  _vm.$set(
-                                                                    _vm.application,
-                                                                    "org",
-                                                                    $$v
-                                                                  )
-                                                                },
-                                                              expression:
-                                                                "application.org",
-                                                            },
-                                                          }),
-                                                        ]
-                                                      },
+                                          _vm.application.application_type === 3
+                                            ? _c(
+                                                "v-col",
+                                                { attrs: { cols: "6" } },
+                                                [
+                                                  _c("ValidationProvider", {
+                                                    attrs: {
+                                                      name: _vm.$t(
+                                                        "Тармоқ таркибидаги ташкилотлар"
+                                                      ),
                                                     },
-                                                  ],
-                                                  null,
-                                                  true
-                                                ),
-                                              }),
-                                            ],
-                                            1
-                                          ),
+                                                    scopedSlots: _vm._u(
+                                                      [
+                                                        {
+                                                          key: "default",
+                                                          fn: function (ref) {
+                                                            var errors =
+                                                              ref.errors
+                                                            return [
+                                                              _c(
+                                                                "v-autocomplete",
+                                                                {
+                                                                  attrs: {
+                                                                    label:
+                                                                      _vm.$t(
+                                                                        "Тармоқ таркибидаги ташкилотлар"
+                                                                      ),
+                                                                    loading:
+                                                                      _vm
+                                                                        .loading
+                                                                        .org,
+                                                                    multiple:
+                                                                      "",
+                                                                    required:
+                                                                      "",
+                                                                    placeholder:
+                                                                      _vm.$t(
+                                                                        "Барча ташкилотлар"
+                                                                      ),
+                                                                    items:
+                                                                      _vm.list
+                                                                        .netOrgs,
+                                                                    "persistent-placeholder":
+                                                                      "",
+                                                                    "error-messages":
+                                                                      errors[0],
+                                                                  },
+                                                                  model: {
+                                                                    value:
+                                                                      _vm
+                                                                        .application
+                                                                        .org,
+                                                                    callback:
+                                                                      function (
+                                                                        $$v
+                                                                      ) {
+                                                                        _vm.$set(
+                                                                          _vm.application,
+                                                                          "org",
+                                                                          $$v
+                                                                        )
+                                                                      },
+                                                                    expression:
+                                                                      "application.org",
+                                                                  },
+                                                                }
+                                                              ),
+                                                            ]
+                                                          },
+                                                        },
+                                                      ],
+                                                      null,
+                                                      true
+                                                    ),
+                                                  }),
+                                                ],
+                                                1
+                                              )
+                                            : _vm._e(),
                                           _vm._v(" "),
                                           _c(
                                             "v-col",
@@ -4058,17 +6317,21 @@ var render = function () {
                                                   rawName: "v-show",
                                                   value:
                                                     _vm.application
-                                                      .serviceType !== 2,
+                                                      .application_type !== 2,
                                                   expression:
-                                                    "application.serviceType!==2",
+                                                    "application.application_type!==2",
                                                 },
                                               ],
                                               attrs: { cols: "6" },
                                             },
                                             [
                                               _c("ValidationProvider", {
+                                                staticClass:
+                                                  "d-flex align-items-center",
                                                 attrs: {
-                                                  name: "БЮДнинг тартиб рақами",
+                                                  name: _vm.$t(
+                                                    "БЮДнинг тартиб рақами"
+                                                  ),
                                                 },
                                                 scopedSlots: _vm._u(
                                                   [
@@ -4089,30 +6352,81 @@ var render = function () {
                                                                   "'#####/##.##.####/#######'",
                                                               },
                                                             ],
+                                                            staticClass:
+                                                              "mr-10",
                                                             attrs: {
                                                               "error-messages":
                                                                 errors[0],
                                                               "persistent-placeholder":
                                                                 "",
-                                                              label:
-                                                                "БЮДнинг тартиб рақами",
+                                                              placeholder:
+                                                                _vm.application
+                                                                  .byud &&
+                                                                _vm.application
+                                                                  .byud.length >
+                                                                  0
+                                                                  ? ""
+                                                                  : _vm.$t(
+                                                                      "Барча БЮДлар"
+                                                                    ),
+                                                              label: _vm.$t(
+                                                                "БЮДнинг тартиб рақами"
+                                                              ),
                                                             },
                                                             model: {
                                                               value:
-                                                                _vm.application
-                                                                  .byud,
+                                                                _vm.temp.byud,
                                                               callback:
                                                                 function ($$v) {
                                                                   _vm.$set(
-                                                                    _vm.application,
+                                                                    _vm.temp,
                                                                     "byud",
                                                                     $$v
                                                                   )
                                                                 },
                                                               expression:
-                                                                "application.byud",
+                                                                "temp.byud",
                                                             },
                                                           }),
+                                                          _vm._v(" "),
+                                                          _c(
+                                                            "v-btn",
+                                                            {
+                                                              attrs: {
+                                                                small: "",
+                                                                color:
+                                                                  "primary",
+                                                              },
+                                                              on: {
+                                                                click:
+                                                                  function (
+                                                                    $event
+                                                                  ) {
+                                                                    return _vm.addData(
+                                                                      "byud",
+                                                                      24
+                                                                    )
+                                                                  },
+                                                              },
+                                                            },
+                                                            [
+                                                              _c("v-icon", [
+                                                                _vm._v(
+                                                                  "mdi-plus"
+                                                                ),
+                                                              ]),
+                                                              _vm._v(
+                                                                "\n                          " +
+                                                                  _vm._s(
+                                                                    _vm.$t(
+                                                                      "Қўшиш"
+                                                                    )
+                                                                  ) +
+                                                                  "\n                        "
+                                                              ),
+                                                            ],
+                                                            1
+                                                          ),
                                                         ]
                                                       },
                                                     },
@@ -4121,49 +6435,171 @@ var render = function () {
                                                   true
                                                 ),
                                               }),
+                                              _vm._v(" "),
+                                              _vm.application.byud
+                                                ? _c(
+                                                    "div",
+                                                    {
+                                                      staticClass:
+                                                        "selected-chips-content w-100",
+                                                    },
+                                                    _vm._l(
+                                                      _vm.application.byud,
+                                                      function (
+                                                        appItem,
+                                                        appItemKey
+                                                      ) {
+                                                        return _c(
+                                                          "v-chip",
+                                                          {
+                                                            key:
+                                                              "byud" +
+                                                              appItemKey,
+                                                            staticClass:
+                                                              "primary-close",
+                                                            staticStyle: {
+                                                              "font-size":
+                                                                "14px",
+                                                              margin: "2px 5px",
+                                                            },
+                                                            attrs: {
+                                                              close: "",
+                                                              color: "#e7f5ed",
+                                                            },
+                                                            on: {
+                                                              "click:close":
+                                                                function (
+                                                                  $event
+                                                                ) {
+                                                                  return _vm.removeItem(
+                                                                    "byud",
+                                                                    appItem
+                                                                  )
+                                                                },
+                                                            },
+                                                          },
+                                                          [
+                                                            _c(
+                                                              "span",
+                                                              {
+                                                                staticStyle: {
+                                                                  "font-size":
+                                                                    "14px",
+                                                                },
+                                                              },
+                                                              [
+                                                                _vm._v(
+                                                                  _vm._s(
+                                                                    appItem
+                                                                  )
+                                                                ),
+                                                              ]
+                                                            ),
+                                                          ]
+                                                        )
+                                                      }
+                                                    ),
+                                                    1
+                                                  )
+                                                : _vm._e(),
                                             ],
                                             1
                                           ),
                                           _vm._v(" "),
                                           _c(
                                             "v-col",
-                                            {
-                                              directives: [
-                                                {
-                                                  name: "show",
-                                                  rawName: "v-show",
-                                                  value:
-                                                    _vm.application
-                                                      .serviceType !== 2,
-                                                  expression:
-                                                    "application.serviceType!==2",
-                                                },
-                                              ],
-                                              attrs: { cols: "6" },
-                                            },
+                                            { attrs: { cols: "6" } },
                                             [
                                               _c(
                                                 "v-row",
                                                 [
+                                                  _vm.application
+                                                    .application_type !== 2
+                                                    ? _c(
+                                                        "v-radio-group",
+                                                        {
+                                                          staticClass:
+                                                            "isCreatedDate",
+                                                          attrs: { row: "" },
+                                                          model: {
+                                                            value:
+                                                              _vm.application
+                                                                .isCreatedDate,
+                                                            callback: function (
+                                                              $$v
+                                                            ) {
+                                                              _vm.$set(
+                                                                _vm.application,
+                                                                "isCreatedDate",
+                                                                $$v
+                                                              )
+                                                            },
+                                                            expression:
+                                                              "application.isCreatedDate",
+                                                          },
+                                                        },
+                                                        [
+                                                          _c("v-radio", {
+                                                            attrs: {
+                                                              label: _vm.$t(
+                                                                "БЮД тақдим этилган сана"
+                                                              ),
+                                                              value: true,
+                                                              disabled:
+                                                                _vm.application
+                                                                  .application_type ===
+                                                                  3 &&
+                                                                !_vm.application
+                                                                  .isRejim,
+                                                            },
+                                                          }),
+                                                          _vm._v(" "),
+                                                          _c("v-radio", {
+                                                            attrs: {
+                                                              label: _vm.$t(
+                                                                "БЮД расмийлаштирилган сана"
+                                                              ),
+                                                              value: false,
+                                                            },
+                                                          }),
+                                                        ],
+                                                        1
+                                                      )
+                                                    : _vm._e(),
+                                                  _vm._v(" "),
                                                   _c(
                                                     "v-col",
                                                     {
                                                       staticStyle: {
                                                         "margin-top": "-15px",
                                                         "margin-bottom":
-                                                          "-45px",
+                                                          "-30px",
                                                       },
                                                       attrs: { cols: "12" },
                                                     },
                                                     [
-                                                      _vm._v(
-                                                        "\n                                                " +
-                                                          _vm._s(
-                                                            _vm.$t(
-                                                              "БЮД тақдим этилган сана"
-                                                            )
-                                                          ) +
-                                                          "\n                                            "
+                                                      _c(
+                                                        "span",
+                                                        {
+                                                          staticStyle: {
+                                                            "font-weight":
+                                                              "bold",
+                                                            color: "#565656",
+                                                          },
+                                                        },
+                                                        [
+                                                          _vm._v(
+                                                            _vm._s(
+                                                              _vm.application
+                                                                .application_type !==
+                                                                2
+                                                                ? _vm.$t("Сана")
+                                                                : _vm.$t(
+                                                                    "БЮД расмийлаштирилган сана"
+                                                                  )
+                                                            ) + "*"
+                                                          ),
+                                                        ]
                                                       ),
                                                     ]
                                                   ),
@@ -4174,7 +6610,9 @@ var render = function () {
                                                     [
                                                       _c("ValidationProvider", {
                                                         attrs: {
-                                                          name: "БЮД тақдим этилган санадан",
+                                                          name: _vm.$t(
+                                                            "Cанадан"
+                                                          ),
                                                           rules: "required",
                                                         },
                                                         scopedSlots: _vm._u(
@@ -4192,7 +6630,11 @@ var render = function () {
                                                                     {
                                                                       attrs: {
                                                                         suffix:
-                                                                          "дан",
+                                                                          _vm.$t(
+                                                                            "дан"
+                                                                          ),
+                                                                        min: _vm.threeYearsAgo,
+                                                                        max: _vm.maxDate,
                                                                         hint: "Мисол: 01-01-2023",
                                                                         "error-messages":
                                                                           errors[0],
@@ -4235,7 +6677,9 @@ var render = function () {
                                                     [
                                                       _c("ValidationProvider", {
                                                         attrs: {
-                                                          name: "БЮД тақдим этилган санагача",
+                                                          name: _vm.$t(
+                                                            "Cанагача"
+                                                          ),
                                                           rules: "required",
                                                         },
                                                         scopedSlots: _vm._u(
@@ -4253,7 +6697,11 @@ var render = function () {
                                                                     {
                                                                       attrs: {
                                                                         suffix:
-                                                                          "гача",
+                                                                          _vm.$t(
+                                                                            "гача"
+                                                                          ),
+                                                                        min: _vm.threeYearsAgo,
+                                                                        max: _vm.maxDate,
                                                                         hint: "Мисол: 01-01-2023",
                                                                         "error-messages":
                                                                           errors[0],
@@ -4323,7 +6771,9 @@ var render = function () {
                                       },
                                       [
                                         _vm._v(
-                                          "\n                                        Орқага\n                                    "
+                                          "\n                      " +
+                                            _vm._s(_vm.$t("Орқага")) +
+                                            "\n                    "
                                         ),
                                       ]
                                     ),
@@ -4340,7 +6790,9 @@ var render = function () {
                                       },
                                       [
                                         _vm._v(
-                                          "\n                                        Давом этиш\n                                    "
+                                          "\n                      " +
+                                            _vm._s(_vm.$t("Давом этиш")) +
+                                            "\n                    "
                                         ),
                                       ]
                                     ),
@@ -4365,7 +6817,13 @@ var render = function () {
                                       [_vm._v("*")]
                                     ),
                                     _vm._v(
-                                      " - майдонлари албатта тўлдирилиши шарт!\n                                "
+                                      " - " +
+                                        _vm._s(
+                                          _vm.$t(
+                                            "майдонлари албатта тўлдирилиши шарт"
+                                          )
+                                        ) +
+                                        "!\n                  "
                                     ),
                                   ]
                                 ),
@@ -4389,119 +6847,506 @@ var render = function () {
                             _c(
                               "v-row",
                               [
-                                _c("h5", { staticClass: "mb-6" }, [
-                                  _vm._v(
-                                    _vm._s(
-                                      _vm.application.serviceType === 0
-                                        ? _vm.$t(
-                                            "Қўшимча қайси илова ҳужжатларидан нусха олишни хохлайсиз?"
-                                          )
-                                        : _vm.$t(
-                                            "Қўшимча қайси графаларни юклаб олишни хохлайсиз?"
-                                          )
-                                    )
-                                  ),
-                                ]),
+                                _c(
+                                  "h5",
+                                  { staticClass: "mb-6" },
+                                  [
+                                    _vm.app_type === 0
+                                      ? [
+                                          _vm._v(
+                                            "\n                      " +
+                                              _vm._s(
+                                                _vm.$t(
+                                                  "Қўшимча қайси илова ҳужжатларидан нусха олишни хохлайсиз?"
+                                                )
+                                              ) +
+                                              "\n                    "
+                                          ),
+                                        ]
+                                      : [
+                                          _vm._v(
+                                            _vm._s(
+                                              _vm.$t(
+                                                "Қўшимча қайси графаларни юклаб олишни хохлайсиз?"
+                                              )
+                                            ) + " "
+                                          ),
+                                          _c(
+                                            "span",
+                                            {
+                                              staticStyle: {
+                                                color: "var(--mycolor)",
+                                                cursor: "pointer",
+                                              },
+                                              on: {
+                                                click: function ($event) {
+                                                  _vm.dialog.primaryFields = true
+                                                },
+                                              },
+                                            },
+                                            [
+                                              _vm._v(
+                                                _vm._s(
+                                                  _vm.$t(
+                                                    "Асосий графаларни кўриш"
+                                                  )
+                                                )
+                                              ),
+                                            ]
+                                          ),
+                                        ],
+                                  ],
+                                  2
+                                ),
                                 _vm._v(" "),
                                 _c(
-                                  "v-list",
-                                  { staticClass: "pa-4", attrs: { flat: "" } },
+                                  "v-dialog",
+                                  {
+                                    attrs: { "max-width": "900" },
+                                    model: {
+                                      value: _vm.dialog.primaryFields,
+                                      callback: function ($$v) {
+                                        _vm.$set(
+                                          _vm.dialog,
+                                          "primaryFields",
+                                          $$v
+                                        )
+                                      },
+                                      expression: "dialog.primaryFields",
+                                    },
+                                  },
                                   [
                                     _c(
-                                      "v-list-item-group",
-                                      {
-                                        staticClass: "d-flex flex-wrap",
-                                        attrs: {
-                                          "active-class": "",
-                                          multiple: "",
-                                        },
-                                        model: {
-                                          value: _vm.application.grafalar,
-                                          callback: function ($$v) {
-                                            _vm.$set(
-                                              _vm.application,
-                                              "grafalar",
-                                              $$v
-                                            )
-                                          },
-                                          expression: "application.grafalar",
-                                        },
-                                      },
-                                      _vm._l(
-                                        _vm.additions,
-                                        function (
-                                          additionField,
-                                          additionFieldKey
-                                        ) {
-                                          return _c("v-list-item", {
-                                            staticStyle: {
-                                              "flex-basis": "50%",
+                                      "v-card",
+                                      [
+                                        _c(
+                                          "v-toolbar",
+                                          {
+                                            staticClass:
+                                              "text-center white--text ",
+                                            attrs: {
+                                              color: "primary",
+                                              dark: "",
                                             },
-                                            scopedSlots: _vm._u(
+                                          },
+                                          [
+                                            _c(
+                                              "div",
+                                              {
+                                                staticClass:
+                                                  "d-flex justify-content-between w-100 align-items-center",
+                                              },
                                               [
-                                                {
-                                                  key: "default",
-                                                  fn: function (ref) {
-                                                    var active = ref.active
-                                                    return [
-                                                      _c(
-                                                        "v-list-item-action",
-                                                        { staticClass: "my-0" },
-                                                        [
-                                                          _c("v-checkbox", {
-                                                            attrs: {
-                                                              "input-value":
-                                                                active,
-                                                            },
-                                                          }),
-                                                        ],
-                                                        1
-                                                      ),
-                                                      _vm._v(" "),
-                                                      _c(
-                                                        "v-list-item-content",
-                                                        { staticClass: "p-0" },
-                                                        [
-                                                          _c(
-                                                            "v-list-item-title",
-                                                            {
-                                                              staticClass:
-                                                                "text-wrap",
-                                                              staticStyle: {
-                                                                "line-height":
-                                                                  "22px",
-                                                                "font-size":
-                                                                  "16px",
-                                                              },
-                                                            },
-                                                            [
-                                                              _vm._v(
-                                                                "\n                                                        " +
-                                                                  _vm._s(
-                                                                    additionField
-                                                                  ) +
-                                                                  "\n                                                    "
+                                                _c(
+                                                  "span",
+                                                  { staticClass: "text-h5" },
+                                                  [
+                                                    _vm._v(
+                                                      "\n                                    " +
+                                                        _vm._s(
+                                                          _vm.$t(
+                                                            "Асосий графалар"
+                                                          )
+                                                        ) +
+                                                        "\n                                    "
+                                                    ),
+                                                  ]
+                                                ),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "v-btn",
+                                                  {
+                                                    attrs: {
+                                                      icon: "",
+                                                      dark: "",
+                                                    },
+                                                    on: {
+                                                      click: function ($event) {
+                                                        _vm.dialog.primaryFields = false
+                                                      },
+                                                    },
+                                                  },
+                                                  [
+                                                    _c("v-icon", [
+                                                      _vm._v("mdi-close"),
+                                                    ]),
+                                                  ],
+                                                  1
+                                                ),
+                                              ],
+                                              1
+                                            ),
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "v-list",
+                                          {
+                                            staticClass: "pa-4",
+                                            attrs: { flat: "" },
+                                          },
+                                          [
+                                            _c(
+                                              "v-list-item-group",
+                                              {
+                                                staticClass: "d-flex flex-wrap",
+                                              },
+                                              _vm._l(
+                                                _vm.primaryFields,
+                                                function (
+                                                  additionField,
+                                                  additionFieldKey
+                                                ) {
+                                                  return _c("v-list-item", {
+                                                    key:
+                                                      "asdadasda" +
+                                                      additionFieldKey,
+                                                    staticStyle: {
+                                                      "flex-basis": "50%",
+                                                    },
+                                                    scopedSlots: _vm._u(
+                                                      [
+                                                        {
+                                                          key: "default",
+                                                          fn: function (ref) {
+                                                            var active =
+                                                              ref.active
+                                                            return [
+                                                              _c(
+                                                                "v-list-item-content",
+                                                                {
+                                                                  staticClass:
+                                                                    "p-0",
+                                                                },
+                                                                [
+                                                                  _c(
+                                                                    "v-list-item-title",
+                                                                    {
+                                                                      staticClass:
+                                                                        "text-wrap",
+                                                                      staticStyle:
+                                                                        {
+                                                                          "line-height":
+                                                                            "22px",
+                                                                          "font-size":
+                                                                            "16px",
+                                                                        },
+                                                                    },
+                                                                    [
+                                                                      _vm._v(
+                                                                        "\n                                  " +
+                                                                          _vm._s(
+                                                                            additionFieldKey +
+                                                                              1
+                                                                          ) +
+                                                                          ". " +
+                                                                          _vm._s(
+                                                                            additionField.name
+                                                                          ) +
+                                                                          "\n                                "
+                                                                      ),
+                                                                    ]
+                                                                  ),
+                                                                ],
+                                                                1
                                                               ),
                                                             ]
-                                                          ),
-                                                        ],
-                                                        1
-                                                      ),
-                                                    ]
-                                                  },
-                                                },
-                                              ],
-                                              null,
-                                              true
+                                                          },
+                                                        },
+                                                      ],
+                                                      null,
+                                                      true
+                                                    ),
+                                                  })
+                                                }
+                                              ),
+                                              1
                                             ),
-                                          })
-                                        }
-                                      ),
+                                          ],
+                                          1
+                                        ),
+                                      ],
                                       1
                                     ),
                                   ],
                                   1
                                 ),
+                                _vm._v(" "),
+                                _vm.additions && _vm.application.grafalar
+                                  ? _c(
+                                      "v-list",
+                                      {
+                                        staticClass: "pa-4",
+                                        attrs: { flat: "" },
+                                      },
+                                      [
+                                        _c(
+                                          "v-list-item-group",
+                                          {
+                                            staticClass: "d-flex flex-wrap",
+                                            attrs: { multiple: "" },
+                                            model: {
+                                              value: _vm.application.grafalar,
+                                              callback: function ($$v) {
+                                                _vm.$set(
+                                                  _vm.application,
+                                                  "grafalar",
+                                                  $$v
+                                                )
+                                              },
+                                              expression:
+                                                "application.grafalar",
+                                            },
+                                          },
+                                          [
+                                            _vm.app_type === 0
+                                              ? _c(
+                                                  "v-expansion-panels",
+                                                  {
+                                                    staticClass:
+                                                      "additionalfields",
+                                                    attrs: { multiple: "" },
+                                                  },
+                                                  _vm._l(
+                                                    _vm.additions,
+                                                    function (
+                                                      additionItem,
+                                                      additionItemKey
+                                                    ) {
+                                                      return _c(
+                                                        "v-col",
+                                                        {
+                                                          key: additionItemKey,
+                                                          attrs: { cols: "6" },
+                                                        },
+                                                        [
+                                                          additionItem[0]
+                                                            ? _c(
+                                                                "v-expansion-panel",
+                                                                [
+                                                                  _c(
+                                                                    "v-expansion-panel-header",
+                                                                    [
+                                                                      _vm._v(
+                                                                        _vm._s(
+                                                                          additionItem[0]
+                                                                            .group_name
+                                                                        )
+                                                                      ),
+                                                                    ]
+                                                                  ),
+                                                                  _vm._v(" "),
+                                                                  _c(
+                                                                    "v-expansion-panel-content",
+                                                                    _vm._l(
+                                                                      additionItem,
+                                                                      function (
+                                                                        additionField,
+                                                                        additionFieldKey
+                                                                      ) {
+                                                                        return _c(
+                                                                          "v-list-item",
+                                                                          {
+                                                                            staticStyle:
+                                                                              {
+                                                                                "flex-basis":
+                                                                                  "50%",
+                                                                              },
+                                                                            attrs:
+                                                                              {
+                                                                                value:
+                                                                                  additionField.code,
+                                                                              },
+                                                                            scopedSlots:
+                                                                              _vm._u(
+                                                                                [
+                                                                                  {
+                                                                                    key: "default",
+                                                                                    fn: function (
+                                                                                      ref
+                                                                                    ) {
+                                                                                      var active =
+                                                                                        ref.active
+                                                                                      return [
+                                                                                        _c(
+                                                                                          "v-list-item-action",
+                                                                                          {
+                                                                                            staticClass:
+                                                                                              "my-0",
+                                                                                          },
+                                                                                          [
+                                                                                            _c(
+                                                                                              "v-checkbox",
+                                                                                              {
+                                                                                                attrs:
+                                                                                                  {
+                                                                                                    "input-value":
+                                                                                                      active,
+                                                                                                  },
+                                                                                              }
+                                                                                            ),
+                                                                                          ],
+                                                                                          1
+                                                                                        ),
+                                                                                        _vm._v(
+                                                                                          " "
+                                                                                        ),
+                                                                                        _c(
+                                                                                          "v-list-item-content",
+                                                                                          {
+                                                                                            staticClass:
+                                                                                              "p-0",
+                                                                                          },
+                                                                                          [
+                                                                                            _c(
+                                                                                              "v-list-item-title",
+                                                                                              {
+                                                                                                staticClass:
+                                                                                                  "text-wrap",
+                                                                                                staticStyle:
+                                                                                                  {
+                                                                                                    "line-height":
+                                                                                                      "22px",
+                                                                                                    "font-size":
+                                                                                                      "16px",
+                                                                                                  },
+                                                                                              },
+                                                                                              [
+                                                                                                _vm._v(
+                                                                                                  "\n                                      " +
+                                                                                                    _vm._s(
+                                                                                                      additionField.code
+                                                                                                    ) +
+                                                                                                    " -\n                                      " +
+                                                                                                    _vm._s(
+                                                                                                      additionField.name
+                                                                                                    ) +
+                                                                                                    "\n                                    "
+                                                                                                ),
+                                                                                              ]
+                                                                                            ),
+                                                                                          ],
+                                                                                          1
+                                                                                        ),
+                                                                                      ]
+                                                                                    },
+                                                                                  },
+                                                                                ],
+                                                                                null,
+                                                                                true
+                                                                              ),
+                                                                          }
+                                                                        )
+                                                                      }
+                                                                    ),
+                                                                    1
+                                                                  ),
+                                                                ],
+                                                                1
+                                                              )
+                                                            : _vm._e(),
+                                                        ],
+                                                        1
+                                                      )
+                                                    }
+                                                  ),
+                                                  1
+                                                )
+                                              : _vm._l(
+                                                  _vm.additions,
+                                                  function (
+                                                    additionField,
+                                                    additionFieldKey
+                                                  ) {
+                                                    return _c("v-list-item", {
+                                                      key:
+                                                        "asdad" +
+                                                        additionFieldKey,
+                                                      staticStyle: {
+                                                        "flex-basis": "50%",
+                                                      },
+                                                      attrs: {
+                                                        value:
+                                                          additionField.code,
+                                                      },
+                                                      scopedSlots: _vm._u(
+                                                        [
+                                                          {
+                                                            key: "default",
+                                                            fn: function (ref) {
+                                                              var active =
+                                                                ref.active
+                                                              return [
+                                                                _c(
+                                                                  "v-list-item-action",
+                                                                  {
+                                                                    staticClass:
+                                                                      "my-0",
+                                                                  },
+                                                                  [
+                                                                    _c(
+                                                                      "v-checkbox",
+                                                                      {
+                                                                        attrs: {
+                                                                          "input-value":
+                                                                            active,
+                                                                        },
+                                                                      }
+                                                                    ),
+                                                                  ],
+                                                                  1
+                                                                ),
+                                                                _vm._v(" "),
+                                                                _c(
+                                                                  "v-list-item-content",
+                                                                  {
+                                                                    staticClass:
+                                                                      "p-0",
+                                                                  },
+                                                                  [
+                                                                    _c(
+                                                                      "v-list-item-title",
+                                                                      {
+                                                                        staticClass:
+                                                                          "text-wrap",
+                                                                        staticStyle:
+                                                                          {
+                                                                            "line-height":
+                                                                              "22px",
+                                                                            "font-size":
+                                                                              "16px",
+                                                                          },
+                                                                      },
+                                                                      [
+                                                                        _vm._v(
+                                                                          "\n                              " +
+                                                                            _vm._s(
+                                                                              additionField.name
+                                                                            ) +
+                                                                            "\n                            "
+                                                                        ),
+                                                                      ]
+                                                                    ),
+                                                                  ],
+                                                                  1
+                                                                ),
+                                                              ]
+                                                            },
+                                                          },
+                                                        ],
+                                                        null,
+                                                        true
+                                                      ),
+                                                    })
+                                                  }
+                                                ),
+                                          ],
+                                          2
+                                        ),
+                                      ],
+                                      1
+                                    )
+                                  : _vm._e(),
                               ],
                               1
                             ),
@@ -4525,7 +7370,9 @@ var render = function () {
                                       },
                                       [
                                         _vm._v(
-                                          "\n                                        Орқага\n                                    "
+                                          "\n                      " +
+                                            _vm._s(_vm.$t("Орқага")) +
+                                            "\n                    "
                                         ),
                                       ]
                                     ),
@@ -4542,7 +7389,9 @@ var render = function () {
                                       },
                                       [
                                         _vm._v(
-                                          "\n                                        Давом этиш\n                                    "
+                                          "\n                      " +
+                                            _vm._s(_vm.$t("Давом этиш")) +
+                                            "\n                    "
                                         ),
                                       ]
                                     ),
@@ -4574,141 +7423,543 @@ var render = function () {
                                   _vm._v(_vm._s(_vm.$t("Ариза маълумотлари"))),
                                 ]),
                                 _vm._v(" "),
-                                _c("v-simple-table", {
-                                  staticClass: "pa-15 resultTable",
-                                  scopedSlots: _vm._u([
-                                    {
-                                      key: "default",
-                                      fn: function () {
-                                        return [
-                                          _c(
-                                            "tbody",
-                                            _vm._l(
-                                              _vm.completedData,
-                                              function (item) {
-                                                return item.value
-                                                  ? _c(
-                                                      "tr",
-                                                      { key: item.label },
-                                                      [
+                                _vm.completedData
+                                  ? _c("v-simple-table", {
+                                      staticClass: "pa-15 resultTable",
+                                      scopedSlots: _vm._u(
+                                        [
+                                          {
+                                            key: "default",
+                                            fn: function () {
+                                              return [
+                                                _c(
+                                                  "tbody",
+                                                  _vm._l(
+                                                    _vm.completedData,
+                                                    function (item) {
+                                                      return item.value
+                                                        ? _c(
+                                                            "tr",
+                                                            { key: item.label },
+                                                            [
+                                                              _c(
+                                                                "td",
+                                                                {
+                                                                  staticStyle: {
+                                                                    "max-width":
+                                                                      "20%",
+                                                                  },
+                                                                },
+                                                                [
+                                                                  _vm._v(
+                                                                    _vm._s(
+                                                                      item.label
+                                                                    )
+                                                                  ),
+                                                                ]
+                                                              ),
+                                                              _vm._v(" "),
+                                                              _c(
+                                                                "td",
+                                                                {
+                                                                  staticStyle: {
+                                                                    width:
+                                                                      "80%",
+                                                                  },
+                                                                },
+                                                                [
+                                                                  item.value
+                                                                    ? [
+                                                                        _vm._v(
+                                                                          _vm._s(
+                                                                            item.value
+                                                                          )
+                                                                        ),
+                                                                      ]
+                                                                    : [
+                                                                        _vm._v(
+                                                                          _vm._s(
+                                                                            _vm.$t(
+                                                                              "Филтр киритилмаган"
+                                                                            )
+                                                                          )
+                                                                        ),
+                                                                      ],
+                                                                ],
+                                                                2
+                                                              ),
+                                                            ]
+                                                          )
+                                                        : _vm._e()
+                                                    }
+                                                  ),
+                                                  0
+                                                ),
+                                              ]
+                                            },
+                                            proxy: true,
+                                          },
+                                        ],
+                                        null,
+                                        false,
+                                        2931038703
+                                      ),
+                                    })
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                _vm.list.prices.length > 0 &&
+                                ![1, 2, 8].includes(_vm.application.status)
+                                  ? _c("h5", { staticClass: "text-center" }, [
+                                      _vm._v(
+                                        _vm._s(
+                                          _vm.$t(
+                                            "Аниқланган маълумот хажми ва нархи"
+                                          )
+                                        )
+                                      ),
+                                    ])
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                ![1, 2, 8].includes(_vm.application.status) &&
+                                _vm.list.prices &&
+                                _vm.list.prices.reduce(function (sum, item) {
+                                  return sum + parseFloat(item.price)
+                                }, 0) > 0
+                                  ? [
+                                      _c("v-simple-table", {
+                                        staticClass: "pa-15 pt-1 resultTable",
+                                        staticStyle: { "text-align": "center" },
+                                        scopedSlots: _vm._u(
+                                          [
+                                            {
+                                              key: "default",
+                                              fn: function () {
+                                                return [
+                                                  _c("thead", [
+                                                    _c("tr", [
+                                                      _c(
+                                                        "td",
+                                                        {
+                                                          staticStyle: {
+                                                            width: "200px",
+                                                          },
+                                                        },
+                                                        [
+                                                          _vm._v(
+                                                            _vm._s(
+                                                              _vm.$t(
+                                                                "Таъриф номи"
+                                                              )
+                                                            )
+                                                          ),
+                                                        ]
+                                                      ),
+                                                      _vm._v(" "),
+                                                      _c("td", [
+                                                        _vm._v(
+                                                          _vm._s(
+                                                            _vm.$t("Миқдор")
+                                                          )
+                                                        ),
+                                                      ]),
+                                                      _vm._v(" "),
+                                                      _c("td", [
+                                                        _vm._v(
+                                                          _vm._s(_vm.$t("Нарх"))
+                                                        ),
+                                                      ]),
+                                                      _vm._v(" "),
+                                                      _c("td", [
+                                                        _vm._v(
+                                                          _vm._s(
+                                                            _vm.$t(
+                                                              "Таъриф ҳисоб - китоби"
+                                                            )
+                                                          )
+                                                        ),
+                                                      ]),
+                                                    ]),
+                                                  ]),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "tbody",
+                                                    [
+                                                      _vm._l(
+                                                        _vm.list.prices,
+                                                        function (listItem) {
+                                                          return _c("tr", [
+                                                            _c(
+                                                              "td",
+                                                              {
+                                                                staticStyle: {
+                                                                  "max-width":
+                                                                    "20%",
+                                                                },
+                                                              },
+                                                              [
+                                                                _vm._v(
+                                                                  "\n                            " +
+                                                                    _vm._s(
+                                                                      listItem.tarif
+                                                                        ? listItem
+                                                                            .tarif[
+                                                                            "name_" +
+                                                                              _vm
+                                                                                .$i18n
+                                                                                .locale
+                                                                          ]
+                                                                        : _vm.$t(
+                                                                            "Аниқланмади"
+                                                                          )
+                                                                    ) +
+                                                                    "\n                          "
+                                                                ),
+                                                              ]
+                                                            ),
+                                                            _vm._v(" "),
+                                                            _c(
+                                                              "td",
+                                                              {
+                                                                staticStyle: {
+                                                                  width: "20%",
+                                                                },
+                                                              },
+                                                              [
+                                                                _vm._v(
+                                                                  _vm._s(
+                                                                    listItem.meta
+                                                                  )
+                                                                ),
+                                                              ]
+                                                            ),
+                                                            _vm._v(" "),
+                                                            _c(
+                                                              "td",
+                                                              {
+                                                                staticStyle: {
+                                                                  width: "20%",
+                                                                },
+                                                              },
+                                                              [
+                                                                _vm._v(
+                                                                  _vm._s(
+                                                                    new Intl.NumberFormat(
+                                                                      "en-US",
+                                                                      {
+                                                                        style:
+                                                                          "currency",
+                                                                        currency:
+                                                                          "USD",
+                                                                      }
+                                                                    )
+                                                                      .format(
+                                                                        listItem.price
+                                                                      )
+                                                                      .replace(
+                                                                        "$",
+                                                                        ""
+                                                                      )
+                                                                  ) +
+                                                                    " " +
+                                                                    _vm._s(
+                                                                      _vm.$t(
+                                                                        "сўм"
+                                                                      )
+                                                                    ) +
+                                                                    "\n                          "
+                                                                ),
+                                                              ]
+                                                            ),
+                                                            _vm._v(" "),
+                                                            _c(
+                                                              "td",
+                                                              [
+                                                                listItem.tarif
+                                                                  ? [
+                                                                      listItem.tariff_id ===
+                                                                      "7"
+                                                                        ? [
+                                                                            _vm._v(
+                                                                              "\n                                " +
+                                                                                _vm._s(
+                                                                                  _vm.$t(
+                                                                                    "хизмат тарифининг {value}%",
+                                                                                    {
+                                                                                      value:
+                                                                                        listItem
+                                                                                          .tarif
+                                                                                          .value,
+                                                                                    }
+                                                                                  )
+                                                                                ) +
+                                                                                "\n                              "
+                                                                            ),
+                                                                          ]
+                                                                        : [
+                                                                            _vm._v(
+                                                                              "\n                                " +
+                                                                                _vm._s(
+                                                                                  _vm.$t(
+                                                                                    "БҲМ {value}%",
+                                                                                    {
+                                                                                      value:
+                                                                                        listItem
+                                                                                          .tarif
+                                                                                          .value,
+                                                                                    }
+                                                                                  )
+                                                                                ) +
+                                                                                " (" +
+                                                                                _vm._s(
+                                                                                  _vm.$t(
+                                                                                    "БҲМ миқдори:"
+                                                                                  )
+                                                                                ) +
+                                                                                _vm._s(
+                                                                                  new Intl.NumberFormat(
+                                                                                    "en-US",
+                                                                                    {
+                                                                                      style:
+                                                                                        "currency",
+                                                                                      currency:
+                                                                                        "USD",
+                                                                                    }
+                                                                                  )
+                                                                                    .format(
+                                                                                      _vm.bhm
+                                                                                    )
+                                                                                    .replace(
+                                                                                      "$",
+                                                                                      ""
+                                                                                    )
+                                                                                ) +
+                                                                                " " +
+                                                                                _vm._s(
+                                                                                  _vm.$t(
+                                                                                    "сўм"
+                                                                                  )
+                                                                                ) +
+                                                                                ")\n                              "
+                                                                            ),
+                                                                          ],
+                                                                    ]
+                                                                  : _vm._e(),
+                                                              ],
+                                                              2
+                                                            ),
+                                                          ])
+                                                        }
+                                                      ),
+                                                      _vm._v(" "),
+                                                      _c("tr", [
                                                         _c(
                                                           "td",
                                                           {
                                                             staticStyle: {
                                                               "max-width":
                                                                 "20%",
+                                                              "font-weight":
+                                                                "bold",
+                                                            },
+                                                            attrs: {
+                                                              colspan: "2",
                                                             },
                                                           },
                                                           [
                                                             _vm._v(
-                                                              _vm._s(item.label)
+                                                              _vm._s(
+                                                                _vm.$t("Жами")
+                                                              )
                                                             ),
                                                           ]
                                                         ),
                                                         _vm._v(" "),
-                                                        _c(
-                                                          "td",
-                                                          {
-                                                            staticStyle: {
-                                                              width: "80%",
-                                                            },
-                                                          },
-                                                          [
-                                                            _vm._v(
-                                                              _vm._s(item.value)
-                                                            ),
-                                                          ]
-                                                        ),
-                                                      ]
-                                                    )
-                                                  : _vm._e()
-                                              }
-                                            ),
-                                            0
-                                          ),
-                                        ]
-                                      },
-                                      proxy: true,
-                                    },
-                                  ]),
-                                }),
-                                _vm._v(" "),
-                                _c("h5", { staticClass: "text-center" }, [
-                                  _vm._v(
-                                    _vm._s(
-                                      _vm.$t(
-                                        "Аниқланган маълумот хажми ва нархи"
-                                      )
-                                    )
-                                  ),
-                                ]),
-                                _vm._v(" "),
-                                _c("v-simple-table", {
-                                  staticClass: "pa-15 resultTable",
-                                  scopedSlots: _vm._u([
-                                    {
-                                      key: "default",
-                                      fn: function () {
-                                        return [
-                                          _c(
-                                            "tbody",
-                                            _vm._l(
-                                              _vm.results,
-                                              function (item) {
-                                                return (_vm.application
-                                                  .serviceType === 0 &&
-                                                  item.type === 1) ||
-                                                  (_vm.application
-                                                    .serviceType !== 0 &&
-                                                    item.type === 2) ||
-                                                  item.type === 3
-                                                  ? _c(
-                                                      "tr",
-                                                      { key: item.label },
-                                                      [
-                                                        _c(
-                                                          "td",
-                                                          {
-                                                            staticStyle: {
-                                                              "max-width":
-                                                                "20%",
-                                                            },
-                                                          },
-                                                          [
-                                                            _vm._v(
-                                                              _vm._s(item.label)
-                                                            ),
-                                                          ]
-                                                        ),
+                                                        _vm.list.prices
+                                                          ? _c(
+                                                              "td",
+                                                              {
+                                                                staticStyle: {
+                                                                  width: "20%",
+                                                                  "font-weight":
+                                                                    "bold",
+                                                                },
+                                                              },
+                                                              [
+                                                                _vm._v(
+                                                                  "\n\n                            " +
+                                                                    _vm._s(
+                                                                      new Intl.NumberFormat(
+                                                                        "en-US",
+                                                                        {
+                                                                          style:
+                                                                            "currency",
+                                                                          currency:
+                                                                            "USD",
+                                                                        }
+                                                                      )
+                                                                        .format(
+                                                                          _vm.list.prices.reduce(
+                                                                            function (
+                                                                              sum,
+                                                                              item
+                                                                            ) {
+                                                                              return (
+                                                                                sum +
+                                                                                parseFloat(
+                                                                                  item.price
+                                                                                )
+                                                                              )
+                                                                            },
+                                                                            0
+                                                                          )
+                                                                        )
+                                                                        .replace(
+                                                                          "$",
+                                                                          ""
+                                                                        )
+                                                                    ) +
+                                                                    " " +
+                                                                    _vm._s(
+                                                                      _vm.$t(
+                                                                        "сўм"
+                                                                      )
+                                                                    ) +
+                                                                    "\n\n\n                          "
+                                                                ),
+                                                              ]
+                                                            )
+                                                          : _vm._e(),
                                                         _vm._v(" "),
-                                                        _c(
-                                                          "td",
-                                                          {
-                                                            staticStyle: {
-                                                              width: "80%",
-                                                            },
-                                                          },
-                                                          [
-                                                            _vm._v(
-                                                              _vm._s(item.value)
-                                                            ),
-                                                          ]
-                                                        ),
-                                                      ]
-                                                    )
-                                                  : _vm._e()
-                                              }
-                                            ),
-                                            0
-                                          ),
-                                        ]
-                                      },
-                                      proxy: true,
-                                    },
-                                  ]),
-                                }),
+                                                        _c("td"),
+                                                      ]),
+                                                    ],
+                                                    2
+                                                  ),
+                                                ]
+                                              },
+                                              proxy: true,
+                                            },
+                                          ],
+                                          null,
+                                          false,
+                                          2711622020
+                                        ),
+                                      }),
+                                    ]
+                                  : [
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass:
+                                            "d-flex flex-column align-items-center justify-content-center",
+                                        },
+                                        [
+                                          [1, 8].includes(
+                                            _vm.myAppComputed.status
+                                          )
+                                            ? _c(
+                                                "v-btn",
+                                                {
+                                                  staticClass: "mx-0",
+                                                  attrs: {
+                                                    color: "info",
+                                                    loading:
+                                                      _vm.loadingComputed
+                                                        .calculate,
+                                                  },
+                                                  on: {
+                                                    click: function ($event) {
+                                                      return _vm.getPrice(true)
+                                                    },
+                                                  },
+                                                },
+                                                [
+                                                  _c("v-icon", [
+                                                    _vm._v("mdi-refresh"),
+                                                  ]),
+                                                  _vm._v(
+                                                    "\n                        " +
+                                                      _vm._s(
+                                                        _vm.$t(
+                                                          "Маълумот хажми ва нархини Ҳисоблаш"
+                                                        )
+                                                      ) +
+                                                      "\n                      "
+                                                  ),
+                                                ],
+                                                1
+                                              )
+                                            : _vm._e(),
+                                          _vm._v(" "),
+                                          !_vm.list.prices.length
+                                            ? _c("v-btn", {
+                                                attrs: {
+                                                  color: "primary",
+                                                  text: "",
+                                                  loading:
+                                                    _vm.application.status ===
+                                                      2 &&
+                                                    _vm.list.prices.length < 1,
+                                                },
+                                              })
+                                            : _vm._e(),
+                                          _vm._v(" "),
+                                          _vm.myAppComputed.status === 2
+                                            ? _c(
+                                                "h6",
+                                                {
+                                                  staticClass:
+                                                    "pa-10 text-center font-weight-bold text",
+                                                  staticStyle: {
+                                                    color: "var(--mycolor)",
+                                                  },
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "\n                        " +
+                                                      _vm._s(
+                                                        _vm.$t(
+                                                          "Маълумотлар қидирилмоқда. Бу бир нечта дақиқа олиши мумкин. Илтимос, кутинг!"
+                                                        )
+                                                      )
+                                                  ),
+                                                ]
+                                              )
+                                            : _vm._e(),
+                                          _vm._v(" "),
+                                          ![1, 2].includes(
+                                            _vm.application.status
+                                          )
+                                            ? _c(
+                                                "h6",
+                                                {
+                                                  staticClass:
+                                                    "pa-10 text-center font-weight-bold text",
+                                                  staticStyle: {
+                                                    color: "var(--mycolor)",
+                                                  },
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "\n                        " +
+                                                      _vm._s(
+                                                        _vm.list.prices.length >
+                                                          0
+                                                          ? _vm.$t(
+                                                              "Ушбу ариза бўйича маълумот топилмади"
+                                                            )
+                                                          : ""
+                                                      )
+                                                  ),
+                                                ]
+                                              )
+                                            : _vm._e(),
+                                        ],
+                                        1
+                                      ),
+                                    ],
                               ],
-                              1
+                              2
                             ),
                             _vm._v(" "),
                             _c(
@@ -4730,7 +7981,9 @@ var render = function () {
                                       },
                                       [
                                         _vm._v(
-                                          "\n                                        Орқага\n                                    "
+                                          "\n                      " +
+                                            _vm._s(_vm.$t("Орқага")) +
+                                            "\n                    "
                                         ),
                                       ]
                                     ),
@@ -4739,6 +7992,17 @@ var render = function () {
                                       "v-btn",
                                       {
                                         attrs: {
+                                          disabled:
+                                            _vm.myAppComputed.status !== 3 &&
+                                            !_vm.list.prices.reduce(function (
+                                              sum,
+                                              item
+                                            ) {
+                                              return (
+                                                sum + parseFloat(item.price)
+                                              )
+                                            },
+                                            0) > 0,
                                           color: "primary",
                                           size: "large",
                                           loading: _vm.loadingButton.five,
@@ -4747,7 +8011,9 @@ var render = function () {
                                       },
                                       [
                                         _vm._v(
-                                          "\n                                        Ариза юбориш\n                                    "
+                                          "\n                      " +
+                                            _vm._s(_vm.$t("Ариза юбориш")) +
+                                            "\n                    "
                                         ),
                                       ]
                                     ),
@@ -4776,32 +8042,27 @@ var render = function () {
       1
     ),
     _vm._v(" "),
-    _vm._m(0),
-  ])
-}
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
+    _c(
       "a",
       {
         staticClass: "all_news service",
-        attrs: { target: "_blank", href: "https://t.me/HsCodeDecisions" },
+        attrs: { target: "_blank", href: "https://t.me/eximcustomsproducts" },
       },
       [
         _c("img", { attrs: { src: "/public/images/telegram.png" } }),
         _vm._v(" "),
         _c("p", [
-          _vm._v(" Саволларингизни йўлланг\n            "),
+          _vm._v(
+            " " + _vm._s(_vm.$t("Саволларингизни йўлланг")) + "\n        "
+          ),
           _c("br"),
-          _vm._v("\n            @HsCodeDecisions\n        "),
+          _vm._v("\n        @eximcustomsproducts\n      "),
         ]),
       ]
-    )
-  },
-]
+    ),
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 

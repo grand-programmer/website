@@ -363,7 +363,8 @@
 
                                 </div>
                             </a>
-                            <a class="foydali-resurs col-3" target="_blank" href="http://ed1.customs.uz/REESTR_GTK/">
+                            <a class="foydali-resurs col-3" target="_blank"
+                            :href="'http://ed1.customs.uz/REESTR_GTK/'">
                                 <div class="foydali-resurs-image" style="background-image: url(/img/icons/nohalol.png)">
                                 </div>
                                 <div class="foydali-resurs-text">{{ $t("ноҳалол экспортчилар реестри") }}
@@ -371,7 +372,7 @@
                                 </div>
                             </a>
                             <a class="foydali-resurs col-3" target="_blank"
-                               href="http://service.customs.uz/autogtd_report/index.jsp?pc=9">
+                               href="https://ed1.customs.uz/hisobotImEx/index.jsp?pc=9">
                                 <div class="foydali-resurs-image"
                                      style="background-image: url(/img/icons/import-qiymati.png)">
                                 </div>
@@ -388,9 +389,9 @@
                     <div class="background"></div>
                     <div class="tab-container">
                         <div class="mobil-ilovalar row justify-center">
-<v-col cols="8">
+<v-col cols="12">
     <v-row class="">
-        <a class="mobil-ilova col-5"
+        <a class="mobil-ilova col-3"
            href="/rate_customs_service"
            target="_blank">
             <div class="mobil-ilova-image"
@@ -402,8 +403,7 @@
 
             </div>
         </a>
-        <v-col cols="1"></v-col>
-        <a class="mobil-ilova col-5"
+        <a class="mobil-ilova col-3"
            href="https://play.google.com/store/apps/details?id=uz.eskishahar.app.aktsverki"
            target="_blank">
             <div class="mobil-ilova-image"
@@ -415,7 +415,7 @@
 
             </div>
         </a>
-        <a class="mobil-ilova col-5" target="_blank"
+        <a class="mobil-ilova col-3" target="_blank"
            href="https://play.google.com/store/apps/details?id=uz.uzbi.audit">
             <div class="mobil-ilova-image"
                  style="background-image: url(/img/service/bojxona-auditi.png)">
@@ -426,8 +426,7 @@
 
             </div>
         </a>
-        <v-col cols="1"></v-col>
-        <a class="mobil-ilova col-5" target="_blank"
+        <a class="mobil-ilova col-3" target="_blank"
            href="https://play.google.com/store/apps/details?id=uz.eskishahar.app.tranzitlite">
             <div class="mobil-ilova-image"
                  style="background-image: url(/img/service/transit-mobil.png)">
@@ -435,6 +434,68 @@
             <div class="mobil-ilova-text">{{
                     $t("Чегара божхона пости орқали ҳаракатланувчи транспорт воситалари ҳақида олдиндан маълумот тақдим этиш мобил иловаси")
                 }}
+
+            </div>
+        </a>
+        <a class="mobil-ilova col-3"
+           href="https://play.google.com/store/apps/details?id=uz.eskishahar.app.e_tijorat&hl=uz">
+            <div class="mobil-ilova-image"
+                 style="background-image: url(/img/service/etijorat.jpeg)">
+            </div>
+            <div class="mobil-ilova-text">{{
+                    $t("Халқаро курерлик жўнатмалари тўғрисида маълумот олиш")
+                }}
+              <v-dialog v-model="dialog.destroyUser" max-width="600">
+                <v-card>
+                  <v-card-title class="d-flex">{{ $t('E-Tijorat иловасидаги аккаунтингизни ўчирмоқчимисиз') }}? <v-spacer/> <v-icon @click="dialog.destroyUser = false" color="black">mdi-close</v-icon></v-card-title>
+                  <v-card-text>
+                      <v-row class="pa-4">
+                        <v-col cols="12" class="pa-0">
+                                          <text-field v-model="form.etijorat.user" :title="$t('Телефон рақами')" :mask="'+998 ##-###-##-##'" clearable ></text-field>
+                        </v-col>
+                        <v-col cols="12" class="pa-0">
+                                          <v-text-field v-model="form.etijorat.password" :label="$t('Парол')" type="password" clearable></v-text-field>
+                      </v-col>
+                      </v-row>
+                  </v-card-text>
+                  <v-card-actions>
+                    <v-spacer/>
+                    <v-btn color="primary" @click="deleteEtijoratUser" :loading="loading.deleteUser">{{$t('Ўчириш')}}</v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-dialog>
+              <a class="btn" @click="event => {event.preventDefault(); dialog.destroyUser=true}">{{ $t('Аккаунтни ўчириш') }}</a>
+
+            </div>
+        </a>
+        <a class="mobil-ilova col-3"
+           href="#">
+            <div class="mobil-ilova-image"
+                 style="background-image: url(/img/service/ybd.jpg)">
+            </div>
+            <div class="mobil-ilova-text">{{
+                    $t("Йўловчи божхона декларацияси")
+                }}
+              <v-dialog v-model="dialog.destroyYbdUser" max-width="600">
+                <v-card>
+                  <v-card-title class="d-flex">{{ $t('Йўловчи божхона декларацияси иловасидаги аккаунтингизни ўчирмоқчимисиз') }}? <v-spacer/> <v-icon @click="dialog.destroyYbdUser = false" color="black">mdi-close</v-icon></v-card-title>
+                  <v-card-text>
+                      <v-row class="pa-4">
+                        <v-col cols="12" class="pa-0">
+                                          <text-field v-model="form.ybd.user" :title="$t('Логин')"  clearable ></text-field>
+                        </v-col>
+                        <v-col cols="12" class="pa-0">
+                                          <v-text-field v-model="form.ybd.password" :label="$t('Парол')" type="password" clearable></v-text-field>
+                      </v-col>
+                      </v-row>
+                  </v-card-text>
+                  <v-card-actions>
+                    <v-spacer/>
+                    <v-btn color="primary" @click="deleteYbdUser" :loading="loading.deleteYbdUser">{{$t('Ўчириш')}}</v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-dialog>
+              <a class="btn" @click="event => {event.preventDefault(); dialog.destroyYbdUser=true}">{{ $t('Аккаунтни ўчириш') }}</a>
 
             </div>
         </a>
@@ -507,9 +568,10 @@
 <script>
 import i18n from "../../../i18n";
 import ServicesList from "./services-list";
+import TextField from "../../../components/form/textfield";
 export default {
     name: 'Services',
-    components: {ServicesList},
+    components: {ServicesList,TextField, },
     data() {
         return {
             breadcrumb_items: [
@@ -537,15 +599,87 @@ export default {
                 subjectName: "", //"CN=Abdullayev Surat Ilhomboy O\\u2018G\\u2018LI,Name=Surat,SURNAME=Abdullayev,O=Не указано,L=ЯШНАБАДСКИЙ РАЙОН,ST=ГОРОД ТАШКЕНТ,C=UZ,UID=547854884,1.2.860.3.16.1.2=31103927250012,T=(noaniq)",
                 validTo: "2023.03.26 23:59:59"
             },
+          dialog:{
+              destroyUser:false,
+            destroyYbdUser:false
+          },
+          loading: {
+              deleteUser: false,
+              deleteYbdUser: false
+          },
+          form: {
+              etijorat: {
+                user: null,
+                password: null,
+              },
+              ybd: {
+                user: null,
+                password: null,
+              }
+          }
         }
     },
     created() {
         this.initialize();
     },
     methods: {
+      async deleteEtijoratUser(){
+        if(!(this.form.etijorat.user && this.form.etijorat.user.length>4) || !(this.form.etijorat.password && this.form.etijorat.password.length>0))
+          this.$toast.error(this.t('Сиз фойдаланувчи телефон раками ёки паролини киритмадингиз'))
+        this.loading.deleteUser = true
+          await axios.post('https://cci.customs.uz/deleteUser',{
+            "login": this.form.etijorat.user.replace(' ','').replaceAll('-',''),
+            "password": this.form.etijorat.password
+          }).then(res => {
+            if(res.data.result_code===0){
+              this.$toast.success(this.$t('Сизнинг иловадаги аккаунтингиз ўчирилди!'))
+              this.form.etijorat.user = null
+              this.form.etijorat.password = null
+            }else
+            if(res.data.result_code===2){
+              this.$toast.error(res.data.result_note)
+            } else this.$toast.error(res.data.result_note)
+            this.dialog.destroyUser = false
+            this.loading.deleteUser = false
+          }).catch(e =>{
+            this.$toast.error(this.$t('Хатолик юз берди!'))
+            console.log(e)
+          })
+        this.loading.deleteUser = false
+      },
+      async deleteYbdUser(){
+        if(!(this.form.ybd.user && this.form.ybd.user.length>4) || !(this.form.ybd.password && this.form.ybd.password.length>0))
+          this.$toast.error(this.t('Сиз фойдаланувчи телефон раками ёки паролини киритмадингиз'))
+        this.loading.deleteYbdUser = true
+          await axios.post('https://ybd.customs.uz/deleteUser',{
+            "login": this.form.ybd.user.replace(' ','').replaceAll('-',''),
+            "password": this.form.ybd.password
+          }).then(res => {
+            if(res.data.result_code===0){
+              this.$toast.success(this.$t('Сизнинг иловадаги аккаунтингиз ўчирилди!'))
+              this.form.ybd.user = null
+              this.form.ybd.password = null
+            }else
+            if(res.data.result_code===2){
+              this.$toast.error(res.data.result_note)
+            } else this.$toast.error(res.data.result_note)
+            this.dialog.destroyYbdUser = false
+            this.loading.deleteYbdUser = false
+          }).catch(e =>{
+            this.$toast.error(this.$t('Хатолик юз берди!'))
+            console.log(e)
+          })
+        this.loading.deleteYbdUser = false
+      },
         initialize() {
             if (this.$route.query.page) {
                 this.nav_link = parseInt(this.$route.query.page);
+            }
+
+            if (this.$route.query.mobile) {
+              setTimeout(()=>{
+                this.dialog.destroyYbdUser = true;
+              })
             }
         },
         async getSessionId(type = null) {
@@ -758,7 +892,7 @@ export default {
 
 
         }
-    }
+    },
 
 }
 </script>

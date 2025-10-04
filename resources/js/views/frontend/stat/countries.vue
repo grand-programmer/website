@@ -21,7 +21,7 @@
                         <div class="slide_item_total_difference">
                 <span>
 
-                    <p>{{ ((item.column1 * 100)/item.column2).toFixed(1) }} % <v-icon color="primary">mdi-trending-up</v-icon></p>
+                    <p>{{ (item.column1).toFixed(1) }} % <v-icon color="primary">mdi-trending-up</v-icon></p>
                     <p>{{ $t('ўтган йилга нисбатан') }}</p>
                 </span>
                             <span>
@@ -69,7 +69,10 @@ export default {
         },
         month: {
             type: [Number]
-        }
+        },
+      toMonth: {
+        type: [Number]
+      }
     },
     data() {
         return {
@@ -384,7 +387,12 @@ export default {
             if (val !== oldVal) {
                 await this.run()
             }
+        },
+      async toMonth(val, oldVal) {
+        if (val !== oldVal) {
+          await this.run()
         }
+      }
     },
     methods: {
         async run() {
@@ -393,20 +401,22 @@ export default {
                     name: 'davlatimex_n',
                     rejim: this.regime,
                     month: this.month ? this.month : 0,
+                  toMonth: this.toMonth ? this.toMonth : 0,
                     year: this.year ? this.year : 0
                 }
             }).then(res => {
                 this.items = res.data.data
             })
         },
-        moneyFormat(price) {
-            if ((price / 1000000000).toFixed(1) !== '0.0')
-                return '<span>' + (price / 1000000000).toFixed(1) + '</span> ' + this.$t('трл') + '. $';
-            else if ((price / 1000000).toFixed(1) !== '0.0')
-                return '<span>' + (price / 1000000).toFixed(1) + '</span> ' + this.$t('млрд') + '. $';
-            if ((price / 1000).toFixed(1) !== '0.0')
-                return '<span>' + (price / 1000).toFixed(1) + '</span> ' + this.$t('млн') + '. $'
-        }
+      moneyFormat(price) {
+        if ((price / 10000000000).toFixed(1) !== '0.0')
+          return '<span>' + (price / 1000000000).toFixed(1) + '</span> ' + this.$t('трл') + '. $';
+        else if ((price / 10000000).toFixed(1) !== '0.0')
+          return '<span>' + (price / 1000000).toFixed(1) + '</span> ' + this.$t('млрд') + '. $';
+        if ((price / 1000).toFixed(1) !== '0.0')
+          return '<span>' + (price / 1000).toFixed(1) + '</span> ' + this.$t('млн') + '. $'; else
+          return '<span>' + parseFloat(price).toFixed(1) + '</span> ' + this.$t('минг') + ' $'
+      }
     }
 }
 </script>
