@@ -307,7 +307,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.biograf_show.white--text p {\n    color: white;\n}\n.rahbar_description{\n    width: 500px;\n    padding: 30px;\n    background-color: rgb(132 132 132);\n    font-size: 20px;\n    display: flex;\n    flex-direction: column;\n    color: #fff;\n}\n.rahbar_description h3{\n    text-align: center;\n    margin-bottom: 60px;\n}\n.rahbar_description p{\n    line-height: 36px;\n    text-align: justify;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.biograf_show.white--text p {\r\n    color: white;\n}\n.rahbar_description{\r\n    width: 500px;\r\n    padding: 30px;\r\n    background-color: rgb(132 132 132);\r\n    font-size: 20px;\r\n    display: flex;\r\n    flex-direction: column;\r\n    color: #fff;\n}\n.rahbar_description h3{\r\n    text-align: center;\r\n    margin-bottom: 60px;\n}\n.rahbar_description p{\r\n    line-height: 36px;\r\n    text-align: justify;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

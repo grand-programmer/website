@@ -35,7 +35,7 @@ export default {
           language:localStorage.getItem('language') || 'uz',
           languages:[
               {code:'uz',title:'ЎЗБ'},
-              {code:'oz',title:'UZB'},
+              {code:'oz',title:'O\'ZB'},
               {code:'ru',title:'РУС'},
               {code:'en',title:'ENG'},
           ],

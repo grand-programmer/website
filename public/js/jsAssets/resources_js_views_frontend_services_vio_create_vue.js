@@ -174,16 +174,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var vee_validate__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vee-validate */ "./node_modules/vee-validate/dist/vee-validate.esm.js");
-/* harmony import */ var _components_form_myfield__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../components/form/myfield */ "./resources/js/components/form/myfield.vue");
-/* harmony import */ var vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vee-validate/dist/rules */ "./node_modules/vee-validate/dist/rules.js");
-/* harmony import */ var _locales_oz_json__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../locales/oz.json */ "./resources/js/locales/oz.json");
-/* harmony import */ var _i18n__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../i18n */ "./resources/js/i18n.js");
-/* harmony import */ var _components_form_textfield__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../../components/form/textfield */ "./resources/js/components/form/textfield.vue");
-/* harmony import */ var _components_form_autocomplete__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../../components/form/autocomplete */ "./resources/js/components/form/autocomplete.vue");
-/* harmony import */ var _components_form_e_arxiv_file__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../../components/form/e-arxiv-file */ "./resources/js/components/form/e-arxiv-file.vue");
-/* harmony import */ var _components_form_dialog_chips__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../../components/form/dialog-chips */ "./resources/js/components/form/dialog-chips.vue");
-/* harmony import */ var _components_custom_EditableDate__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../../../components/custom/EditableDate */ "./resources/js/components/custom/EditableDate.vue");
+/* harmony import */ var vee_validate__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! vee-validate */ "./node_modules/vee-validate/dist/vee-validate.esm.js");
+/* harmony import */ var _components_form_myfield__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../components/form/myfield */ "./resources/js/components/form/myfield.vue");
+/* harmony import */ var _locales_oz_json__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../locales/oz.json */ "./resources/js/locales/oz.json");
+/* harmony import */ var _i18n__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../i18n */ "./resources/js/i18n.js");
+/* harmony import */ var _components_form_textfield__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../components/form/textfield */ "./resources/js/components/form/textfield.vue");
+/* harmony import */ var _components_form_autocomplete__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../components/form/autocomplete */ "./resources/js/components/form/autocomplete.vue");
+/* harmony import */ var _components_form_e_arxiv_file__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../../components/form/e-arxiv-file */ "./resources/js/components/form/e-arxiv-file.vue");
+/* harmony import */ var _components_form_dialog_chips__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../../components/form/dialog-chips */ "./resources/js/components/form/dialog-chips.vue");
+/* harmony import */ var _components_custom_EditableDate__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../../components/custom/EditableDate */ "./resources/js/components/custom/EditableDate.vue");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -1183,22 +1182,22 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   data: function data() {
     return {
       breadcrumb_items: [{
-        text: _i18n__WEBPACK_IMPORTED_MODULE_5__["default"].t('Асосий саҳифа'),
+        text: _i18n__WEBPACK_IMPORTED_MODULE_3__["default"].t('Асосий саҳифа'),
         to: '/',
         disabled: false,
         exact: true
       }, {
-        text: _i18n__WEBPACK_IMPORTED_MODULE_5__["default"].t('Хизматлар'),
+        text: _i18n__WEBPACK_IMPORTED_MODULE_3__["default"].t('Хизматлар'),
         to: '/services',
         disabled: false,
         exact: true
       }, {
-        text: _i18n__WEBPACK_IMPORTED_MODULE_5__["default"].t('Ваколатли иқтисодий оператор реестрига кириш учун ариза топшириш'),
+        text: _i18n__WEBPACK_IMPORTED_MODULE_3__["default"].t('Ваколатли иқтисодий оператор реестрига кириш учун ариза топшириш'),
         to: '/services/vio',
         disabled: false,
         exact: true
       }, {
-        text: _i18n__WEBPACK_IMPORTED_MODULE_5__["default"].t('Ариза юбориш'),
+        text: _i18n__WEBPACK_IMPORTED_MODULE_3__["default"].t('Ариза юбориш'),
         to: '/services/vio/create',
         disabled: true,
         exact: true
@@ -1415,26 +1414,26 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       list: {
         types: [{
           value: 1,
-          text: _i18n__WEBPACK_IMPORTED_MODULE_5__["default"].t('Божхона масалалари бўйича ваколатли иқтисодий оператор')
+          text: _i18n__WEBPACK_IMPORTED_MODULE_3__["default"].t('Божхона масалалари бўйича ваколатли иқтисодий оператор')
         }, {
           value: 2,
-          text: _i18n__WEBPACK_IMPORTED_MODULE_5__["default"].t('Хавфсизлик масалалари бўйича ваколатли иқтисодий оператор')
+          text: _i18n__WEBPACK_IMPORTED_MODULE_3__["default"].t('Хавфсизлик масалалари бўйича ваколатли иқтисодий оператор')
         }, {
           value: 3,
-          text: _i18n__WEBPACK_IMPORTED_MODULE_5__["default"].t('Божхона ва хавфсизлик масалалари бўйича ваколатли иқтисодий оператор')
+          text: _i18n__WEBPACK_IMPORTED_MODULE_3__["default"].t('Божхона ва хавфсизлик масалалари бўйича ваколатли иқтисодий оператор')
         }],
         ways: [{
           value: 11,
-          text: _i18n__WEBPACK_IMPORTED_MODULE_5__["default"].t('Божхона брокери')
+          text: _i18n__WEBPACK_IMPORTED_MODULE_3__["default"].t('Божхона брокери')
         }, {
           value: 22,
-          text: _i18n__WEBPACK_IMPORTED_MODULE_5__["default"].t('Божхона омбори эгаси')
+          text: _i18n__WEBPACK_IMPORTED_MODULE_3__["default"].t('Божхона омбори эгаси')
         }, {
           value: 33,
-          text: _i18n__WEBPACK_IMPORTED_MODULE_5__["default"].t('Ташувчи сифатида')
+          text: _i18n__WEBPACK_IMPORTED_MODULE_3__["default"].t('Ташувчи сифатида')
         }, {
           value: 44,
-          text: _i18n__WEBPACK_IMPORTED_MODULE_5__["default"].t('Товарлар импорт ва (ёки) экспортини амалга ошириш')
+          text: _i18n__WEBPACK_IMPORTED_MODULE_3__["default"].t('Товарлар импорт ва (ёки) экспортини амалга ошириш')
         }]
       },
       loading: {
@@ -1465,44 +1464,44 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     deleteOwner: function deleteOwner(item) {
       if (this.app.owners.indexOf(item) !== -1) {
         this.app.owners.splice(this.app.owners.indexOf(item), 1);
-        this.$toast.success(_i18n__WEBPACK_IMPORTED_MODULE_5__["default"].t("Муваффаққиятли ўчирилди"));
-      } else this.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_5__["default"].t("Элемент топилмади"));
+        this.$toast.success(_i18n__WEBPACK_IMPORTED_MODULE_3__["default"].t("Муваффаққиятли ўчирилди"));
+      } else this.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_3__["default"].t("Элемент топилмади"));
     },
     deleteFlat: function deleteFlat(item) {
       if (this.app.flats.indexOf(item) !== -1) {
         this.app.flats.splice(this.app.flats.indexOf(item), 1);
-        this.$toast.success(_i18n__WEBPACK_IMPORTED_MODULE_5__["default"].t("Муваффаққиятли ўчирилди"));
-      } else this.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_5__["default"].t("Элемент топилмади"));
+        this.$toast.success(_i18n__WEBPACK_IMPORTED_MODULE_3__["default"].t("Муваффаққиятли ўчирилди"));
+      } else this.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_3__["default"].t("Элемент топилмади"));
     },
     deleteCourse: function deleteCourse(item) {
       if (this.app.courses.indexOf(item) !== -1) {
         this.app.courses.splice(this.app.courses.indexOf(item), 1);
-        this.$toast.success(_i18n__WEBPACK_IMPORTED_MODULE_5__["default"].t("Муваффаққиятли ўчирилди"));
-      } else this.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_5__["default"].t("Элемент топилмади"));
+        this.$toast.success(_i18n__WEBPACK_IMPORTED_MODULE_3__["default"].t("Муваффаққиятли ўчирилди"));
+      } else this.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_3__["default"].t("Элемент топилмади"));
     },
     deleteFounder: function deleteFounder(item) {
       if (this.app.founders.indexOf(item) !== -1) {
         this.app.founders.splice(this.app.founders.indexOf(item), 1);
-        this.$toast.success(_i18n__WEBPACK_IMPORTED_MODULE_5__["default"].t("Таъсисчи муваффаққиятли ўчирилди"));
-      } else this.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_5__["default"].t("Таъсисчи топилмади"));
+        this.$toast.success(_i18n__WEBPACK_IMPORTED_MODULE_3__["default"].t("Таъсисчи муваффаққиятли ўчирилди"));
+      } else this.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_3__["default"].t("Таъсисчи топилмади"));
     },
     deleteAuthPerson: function deleteAuthPerson(item) {
       if (this.app.authPersons.indexOf(item) !== -1) {
         this.app.authPersons.splice(this.app.authPersons.indexOf(item), 1);
-        this.$toast.success(_i18n__WEBPACK_IMPORTED_MODULE_5__["default"].t("Ваколатли шахс муваффаққиятли ўчирилди"));
-      } else this.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_5__["default"].t("Ваколатли шахс топилмади"));
+        this.$toast.success(_i18n__WEBPACK_IMPORTED_MODULE_3__["default"].t("Ваколатли шахс муваффаққиятли ўчирилди"));
+      } else this.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_3__["default"].t("Ваколатли шахс топилмади"));
     },
     deleteBroker: function deleteBroker(item) {
       if (this.app.brokers.indexOf(item) !== -1) {
         this.app.brokers.splice(this.app.brokers.indexOf(item), 1);
-        this.$toast.success(_i18n__WEBPACK_IMPORTED_MODULE_5__["default"].t("Брокер муваффаққиятли ўчирилди"));
-      } else this.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_5__["default"].t("Брокер топилмади"));
+        this.$toast.success(_i18n__WEBPACK_IMPORTED_MODULE_3__["default"].t("Брокер муваффаққиятли ўчирилди"));
+      } else this.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_3__["default"].t("Брокер топилмади"));
     },
     deleteShipping: function deleteShipping(item) {
       if (this.app.shippings.indexOf(item) !== -1) {
         this.app.shippings.splice(this.app.shippings.indexOf(item), 1);
-        this.$toast.success(_i18n__WEBPACK_IMPORTED_MODULE_5__["default"].t("Етказиб берувчи муваффаққиятли ўчирилди"));
-      } else this.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_5__["default"].t("Етказиб берувчи топилмади"));
+        this.$toast.success(_i18n__WEBPACK_IMPORTED_MODULE_3__["default"].t("Етказиб берувчи муваффаққиятли ўчирилди"));
+      } else this.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_3__["default"].t("Етказиб берувчи топилмади"));
     },
     addFounder: function addFounder() {
       var _this2 = this;
@@ -1538,11 +1537,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     });
 
                     _this.$toast.success('Таъсисчи омадли тарзда қўшилди');
-                  } else _this.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_5__["default"].t("Маълумотларни текшириб қайтадан киринг"));
+                  } else _this.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_3__["default"].t("Маълумотларни текшириб қайтадан киринг"));
                 })["catch"](function (error) {
                   console.log(error);
 
-                  _this.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_5__["default"].t("Маълумотларни текшириб қайтадан киринг"));
+                  _this.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_3__["default"].t("Маълумотларни текшириб қайтадан киринг"));
 
                   _this2.loading.founder = false;
                 });
@@ -1580,11 +1579,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   _this.dialog.shipping = false;
                   _this3.loading.shipping = false;
 
-                  _this.$toast.success(_i18n__WEBPACK_IMPORTED_MODULE_5__["default"].t("Етказиб берувчи омадли тарзда қўшилди"));
+                  _this.$toast.success(_i18n__WEBPACK_IMPORTED_MODULE_3__["default"].t("Етказиб берувчи омадли тарзда қўшилди"));
                 } else {
                   _this3.loading.shipping = false;
 
-                  _this.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_5__["default"].t("Маълумотларни текшириб қайтадан киритинг"));
+                  _this.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_3__["default"].t("Маълумотларни текшириб қайтадан киритинг"));
                 }
 
               case 3:
@@ -1617,11 +1616,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   _this.dialog.owner = false;
                   _this.loading.owner = false;
 
-                  _this.$toast.success(_i18n__WEBPACK_IMPORTED_MODULE_5__["default"].t("Эгалик ҳуқуқи асосида иншоотлар, бинолар ва очиқ майдончалар омадли тарзда қўшилди"));
+                  _this.$toast.success(_i18n__WEBPACK_IMPORTED_MODULE_3__["default"].t("Эгалик ҳуқуқи асосида иншоотлар, бинолар ва очиқ майдончалар омадли тарзда қўшилди"));
                 } else {
                   _this.loading.owner = false;
 
-                  _this.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_5__["default"].t("Маълумотларни текшириб қайтадан киритинг"));
+                  _this.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_3__["default"].t("Маълумотларни текшириб қайтадан киритинг"));
                 }
 
               case 3:
@@ -1654,11 +1653,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   _this.dialog.flat = false;
                   _this.loading.flat = false;
 
-                  _this.$toast.success(_i18n__WEBPACK_IMPORTED_MODULE_5__["default"].t("Ижара ҳуқуқи асосида иншоотлар, бинолар ва очиқ майдончалар омадли тарзда қўшилди"));
+                  _this.$toast.success(_i18n__WEBPACK_IMPORTED_MODULE_3__["default"].t("Ижара ҳуқуқи асосида иншоотлар, бинолар ва очиқ майдончалар омадли тарзда қўшилди"));
                 } else {
                   _this.loading.flat = false;
 
-                  _this.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_5__["default"].t("Маълумотларни текшириб қайтадан киритинг"));
+                  _this.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_3__["default"].t("Маълумотларни текшириб қайтадан киритинг"));
                 }
 
               case 3:
@@ -1691,11 +1690,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   _this.dialog.course = false;
                   _this.loading.course = false;
 
-                  _this.$toast.success(_i18n__WEBPACK_IMPORTED_MODULE_5__["default"].t("Ижара ҳуқуқи асосида иншоотлар, бинолар ва очиқ майдончалар омадли тарзда қўшилди"));
+                  _this.$toast.success(_i18n__WEBPACK_IMPORTED_MODULE_3__["default"].t("Ижара ҳуқуқи асосида иншоотлар, бинолар ва очиқ майдончалар омадли тарзда қўшилди"));
                 } else {
                   _this.loading.course = false;
 
-                  _this.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_5__["default"].t("Маълумотларни текшириб қайтадан киритинг"));
+                  _this.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_3__["default"].t("Маълумотларни текшириб қайтадан киритинг"));
                 }
 
               case 3:
@@ -1739,12 +1738,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                       _this.temp.authPerson[propertyItemKey] = null;
                     });
 
-                    _this.$toast.success(_i18n__WEBPACK_IMPORTED_MODULE_5__["default"].t("Ваколатли шахс омадли тарзда қўшилди"));
-                  } else _this.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_5__["default"].t("Маълумотларни текшириб қайтадан киринг"));
+                    _this.$toast.success(_i18n__WEBPACK_IMPORTED_MODULE_3__["default"].t("Ваколатли шахс омадли тарзда қўшилди"));
+                  } else _this.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_3__["default"].t("Маълумотларни текшириб қайтадан киринг"));
                 })["catch"](function (error) {
                   console.log(error);
 
-                  _this.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_5__["default"].t("Маълумотларни текшириб қайтадан киринг"));
+                  _this.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_3__["default"].t("Маълумотларни текшириб қайтадан киринг"));
 
                   _this7.loading.authPerson = false;
                 });
@@ -1803,12 +1802,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                       _this.temp.broker[propertyItemKey] = null;
                     });
 
-                    _this.$toast.success(_i18n__WEBPACK_IMPORTED_MODULE_5__["default"].t("Ваколатли шахс омадли тарзда қўшилди"));
-                  } else _this.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_5__["default"].t("Маълумотларни текшириб қайтадан киринг"));
+                    _this.$toast.success(_i18n__WEBPACK_IMPORTED_MODULE_3__["default"].t("Ваколатли шахс омадли тарзда қўшилди"));
+                  } else _this.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_3__["default"].t("Маълумотларни текшириб қайтадан киринг"));
                 })["catch"](function (error) {
                   console.log(error);
 
-                  _this.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_5__["default"].t("Маълумотларни текшириб қайтадан киринг."));
+                  _this.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_3__["default"].t("Маълумотларни текшириб қайтадан киринг."));
 
                   _this8.loading.broker = false;
                 });
@@ -1818,7 +1817,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 break;
 
               case 10:
-                _this.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_5__["default"].t("Маълумотларни тўлдириб қайтадан юборинг"));
+                _this.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_3__["default"].t("Маълумотларни тўлдириб қайтадан юборинг"));
 
               case 11:
                 _this8.loading.broker = false;
@@ -1857,12 +1856,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     _this.app.accountant.fio = response.data.data.surnamelatin + ' ' + response.data.data.namelatin + ' ' + response.data.data.patronymlatin;
                     _this.app.accountant.pin = response.data.data.pinpp;
 
-                    _this.$toast.success(_i18n__WEBPACK_IMPORTED_MODULE_5__["default"].t("Бухгалтер омадли тарзда қўшилди"));
-                  } else _this.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_5__["default"].t("Маълумотларни текшириб қайтадан киринг"));
+                    _this.$toast.success(_i18n__WEBPACK_IMPORTED_MODULE_3__["default"].t("Бухгалтер омадли тарзда қўшилди"));
+                  } else _this.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_3__["default"].t("Маълумотларни текшириб қайтадан киринг"));
                 })["catch"](function (error) {
                   console.log(error);
 
-                  _this.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_5__["default"].t("Маълумотларни текшириб қайтадан киринг."));
+                  _this.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_3__["default"].t("Маълумотларни текшириб қайтадан киринг."));
 
                   _this9.loading.accountant = false;
                 });
@@ -1903,9 +1902,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   if (typeof response.data.data.birth_date !== 'undefined') {
                     _this.app.chief.fio = response.data.data.surnamelatin + ' ' + response.data.data.namelatin + ' ' + response.data.data.patronymlatin;
                     _this.app.chief.pin = response.data.data.pinpp;
-                  } else _this.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_5__["default"].t("Маълумотларни текшириб қайтадан киринг"));
+                  } else _this.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_3__["default"].t("Маълумотларни текшириб қайтадан киринг"));
                 })["catch"](function () {
-                  _this.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_5__["default"].t("Маълумотларни текшириб қайтадан киринг."));
+                  _this.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_3__["default"].t("Маълумотларни текшириб қайтадан киринг."));
 
                   _this10.loading.yuborishLoading = false;
                 });
@@ -1956,7 +1955,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   if (res.status === 200) {
                     _this.app.id = res.data.data.id;
                   } else {
-                    _this.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_5__["default"].t("Сервер билан алоқа йўқ!"));
+                    _this.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_3__["default"].t("Сервер билан алоқа йўқ!"));
                   }
                 });
 
@@ -1968,7 +1967,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _context10.prev = 15;
                 _context10.t0 = _context10["catch"](1);
 
-                _this.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_5__["default"].t("Сервер билан алоқа йўқ!"));
+                _this.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_3__["default"].t("Сервер билан алоқа йўқ!"));
 
                 console.log(_context10.t0);
 
@@ -2052,10 +2051,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                       _this.completedSteps.push(1);
                     } else {
-                      _this.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_5__["default"].t("Хатолик юз берди. Қайта уриниб кўринг!"));
+                      _this.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_3__["default"].t("Хатолик юз берди. Қайта уриниб кўринг!"));
                     }
                   })["catch"](function (error) {
-                    _this.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_5__["default"].t("Хатолик юз берди. Қайта уриниб кўринг!"));
+                    _this.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_3__["default"].t("Хатолик юз берди. Қайта уриниб кўринг!"));
 
                     console.log(error);
                   });
@@ -2117,10 +2116,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                       _this.completedSteps.push(2);
                     } else {
-                      _this.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_5__["default"].t("Хатолик юз берди. Қайта уриниб кўринг"));
+                      _this.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_3__["default"].t("Хатолик юз берди. Қайта уриниб кўринг"));
                     }
                   })["catch"](function (error) {
-                    _this.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_5__["default"].t("Хатолик юз берди. Қайта уриниб кўринг!"));
+                    _this.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_3__["default"].t("Хатолик юз берди. Қайта уриниб кўринг!"));
 
                     console.log(error);
                   });
@@ -2181,16 +2180,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 _this.$auth.plugins.http.post('/api/v1/ex_api/vio-app', requestData).then(function (res) {
                   if (res.status === 200) {
-                    _this.$toast.success(_i18n__WEBPACK_IMPORTED_MODULE_5__["default"].t("Аризангиз қабул қилинди!"));
+                    _this.$toast.success(_i18n__WEBPACK_IMPORTED_MODULE_3__["default"].t("Аризангиз қабул қилинди!"));
 
                     setTimeout(function () {
                       _this.$router.push("/services/vio/" + _this.app.id);
                     }, 500);
                   } else {
-                    _this.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_5__["default"].t("Хатолик юз берди. Қайта уриниб кўринг"));
+                    _this.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_3__["default"].t("Хатолик юз берди. Қайта уриниб кўринг"));
                   }
                 })["catch"](function (error) {
-                  _this.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_5__["default"].$t("Хатолик юз берди. Қайта уриниб кўринг!"));
+                  _this.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_3__["default"].$t("Хатолик юз берди. Қайта уриниб кўринг!"));
 
                   console.log(error);
                 });
@@ -2235,15 +2234,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   },
   components: {
-    EditableDate: _components_custom_EditableDate__WEBPACK_IMPORTED_MODULE_10__["default"],
-    Textfield: _components_form_textfield__WEBPACK_IMPORTED_MODULE_6__["default"],
-    DialogChips: _components_form_dialog_chips__WEBPACK_IMPORTED_MODULE_9__["default"],
-    EArxivFile: _components_form_e_arxiv_file__WEBPACK_IMPORTED_MODULE_8__["default"],
-    AutocompleteField: _components_form_autocomplete__WEBPACK_IMPORTED_MODULE_7__["default"],
-    TextField: _components_form_textfield__WEBPACK_IMPORTED_MODULE_6__["default"],
-    ValidationProvider: vee_validate__WEBPACK_IMPORTED_MODULE_1__.ValidationProvider,
-    ValidationObserver: vee_validate__WEBPACK_IMPORTED_MODULE_1__.ValidationObserver,
-    Myfield: _components_form_myfield__WEBPACK_IMPORTED_MODULE_2__["default"]
+    EditableDate: _components_custom_EditableDate__WEBPACK_IMPORTED_MODULE_8__["default"],
+    Textfield: _components_form_textfield__WEBPACK_IMPORTED_MODULE_4__["default"],
+    DialogChips: _components_form_dialog_chips__WEBPACK_IMPORTED_MODULE_7__["default"],
+    EArxivFile: _components_form_e_arxiv_file__WEBPACK_IMPORTED_MODULE_6__["default"],
+    AutocompleteField: _components_form_autocomplete__WEBPACK_IMPORTED_MODULE_5__["default"],
+    TextField: _components_form_textfield__WEBPACK_IMPORTED_MODULE_4__["default"],
+    ValidationProvider: vee_validate__WEBPACK_IMPORTED_MODULE_9__.ValidationProvider,
+    ValidationObserver: vee_validate__WEBPACK_IMPORTED_MODULE_9__.ValidationObserver,
+    Myfield: _components_form_myfield__WEBPACK_IMPORTED_MODULE_1__["default"]
   }
 });
 

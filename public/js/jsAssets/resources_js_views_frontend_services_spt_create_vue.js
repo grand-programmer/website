@@ -369,16 +369,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var vee_validate__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vee-validate */ "./node_modules/vee-validate/dist/vee-validate.esm.js");
-/* harmony import */ var _components_form_myfield__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../components/form/myfield */ "./resources/js/components/form/myfield.vue");
-/* harmony import */ var _i18n__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../i18n */ "./resources/js/i18n.js");
-/* harmony import */ var _components_form_textfield__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../components/form/textfield */ "./resources/js/components/form/textfield.vue");
-/* harmony import */ var _components_form_autocomplete__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../components/form/autocomplete */ "./resources/js/components/form/autocomplete.vue");
-/* harmony import */ var _components_form_e_arxiv_file__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../../components/form/e-arxiv-file */ "./resources/js/components/form/e-arxiv-file.vue");
-/* harmony import */ var _components_form_dialog_chips__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../../components/form/dialog-chips */ "./resources/js/components/form/dialog-chips.vue");
-/* harmony import */ var _components_custom_EditableDate__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../../components/custom/EditableDate */ "./resources/js/components/custom/EditableDate.vue");
-/* harmony import */ var _components_form_e_arxiv_file_input__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../../components/form/e-arxiv-file-input */ "./resources/js/components/form/e-arxiv-file-input.vue");
-/* harmony import */ var _sptCommodity__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./sptCommodity */ "./resources/js/views/frontend/services/spt/sptCommodity.vue");
+/* harmony import */ var vee_validate__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! vee-validate */ "./node_modules/vee-validate/dist/vee-validate.esm.js");
+/* harmony import */ var _components_form_myfield__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../components/form/myfield */ "./resources/js/components/form/myfield.vue");
+/* harmony import */ var _i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../i18n */ "./resources/js/i18n.js");
+/* harmony import */ var _components_form_textfield__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../components/form/textfield */ "./resources/js/components/form/textfield.vue");
+/* harmony import */ var _components_form_autocomplete__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../components/form/autocomplete */ "./resources/js/components/form/autocomplete.vue");
+/* harmony import */ var _components_form_e_arxiv_file__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../components/form/e-arxiv-file */ "./resources/js/components/form/e-arxiv-file.vue");
+/* harmony import */ var _components_form_dialog_chips__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../../components/form/dialog-chips */ "./resources/js/components/form/dialog-chips.vue");
+/* harmony import */ var _components_custom_EditableDate__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../../components/custom/EditableDate */ "./resources/js/components/custom/EditableDate.vue");
+/* harmony import */ var _components_form_e_arxiv_file_input__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../../components/form/e-arxiv-file-input */ "./resources/js/components/form/e-arxiv-file-input.vue");
+/* harmony import */ var _sptCommodity__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./sptCommodity */ "./resources/js/views/frontend/services/spt/sptCommodity.vue");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
@@ -692,22 +692,22 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   data: function data() {
     return {
       breadcrumb_items: [{
-        text: _i18n__WEBPACK_IMPORTED_MODULE_3__["default"].t('Асосий саҳифа'),
+        text: _i18n__WEBPACK_IMPORTED_MODULE_2__["default"].t('Асосий саҳифа'),
         to: '/',
         disabled: false,
         exact: true
       }, {
-        text: _i18n__WEBPACK_IMPORTED_MODULE_3__["default"].t('Хизматлар'),
+        text: _i18n__WEBPACK_IMPORTED_MODULE_2__["default"].t('Хизматлар'),
         to: '/services',
         disabled: false,
         exact: true
       }, {
-        text: _i18n__WEBPACK_IMPORTED_MODULE_3__["default"].t('Товарнинг келиб чиқиш мамлакати тўғрисидаги дастлабки қарор олиш'),
+        text: _i18n__WEBPACK_IMPORTED_MODULE_2__["default"].t('Товарнинг келиб чиқиш мамлакати тўғрисидаги дастлабки қарор олиш'),
         to: '/services/spt',
         disabled: false,
         exact: true
       }, {
-        text: _i18n__WEBPACK_IMPORTED_MODULE_3__["default"].t('Ариза юбориш'),
+        text: _i18n__WEBPACK_IMPORTED_MODULE_2__["default"].t('Ариза юбориш'),
         to: '/services/spt/create',
         disabled: true,
         exact: true
@@ -1040,9 +1040,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   if (typeof response.data.data.birth_date !== 'undefined') {
                     _this.app.chief.fio = response.data.data.surnamelatin + ' ' + response.data.data.namelatin + ' ' + response.data.data.patronymlatin;
                     _this.app.chief.pin = response.data.data.pinpp;
-                  } else _this.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_3__["default"].t("Маълумотларни текшириб қайтадан киринг"));
+                  } else _this.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_2__["default"].t("Маълумотларни текшириб қайтадан киринг"));
                 })["catch"](function () {
-                  _this.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_3__["default"].t("Маълумотларни текшириб қайтадан киринг."));
+                  _this.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_2__["default"].t("Маълумотларни текшириб қайтадан киринг."));
 
                   _this5.loading.yuborishLoading = false;
                 });
@@ -1119,16 +1119,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   },
   components: {
-    SptCommodity: _sptCommodity__WEBPACK_IMPORTED_MODULE_10__["default"],
-    EditableDate: _components_custom_EditableDate__WEBPACK_IMPORTED_MODULE_8__["default"],
-    Textfield: _components_form_textfield__WEBPACK_IMPORTED_MODULE_4__["default"],
-    DialogChips: _components_form_dialog_chips__WEBPACK_IMPORTED_MODULE_7__["default"],
-    EArxivFile: _components_form_e_arxiv_file__WEBPACK_IMPORTED_MODULE_6__["default"],
-    AutocompleteField: _components_form_autocomplete__WEBPACK_IMPORTED_MODULE_5__["default"],
-    TextField: _components_form_textfield__WEBPACK_IMPORTED_MODULE_4__["default"],
-    ValidationProvider: vee_validate__WEBPACK_IMPORTED_MODULE_1__.ValidationProvider,
-    ValidationObserver: vee_validate__WEBPACK_IMPORTED_MODULE_1__.ValidationObserver,
-    Myfield: _components_form_myfield__WEBPACK_IMPORTED_MODULE_2__["default"]
+    SptCommodity: _sptCommodity__WEBPACK_IMPORTED_MODULE_9__["default"],
+    EditableDate: _components_custom_EditableDate__WEBPACK_IMPORTED_MODULE_7__["default"],
+    Textfield: _components_form_textfield__WEBPACK_IMPORTED_MODULE_3__["default"],
+    DialogChips: _components_form_dialog_chips__WEBPACK_IMPORTED_MODULE_6__["default"],
+    EArxivFile: _components_form_e_arxiv_file__WEBPACK_IMPORTED_MODULE_5__["default"],
+    AutocompleteField: _components_form_autocomplete__WEBPACK_IMPORTED_MODULE_4__["default"],
+    TextField: _components_form_textfield__WEBPACK_IMPORTED_MODULE_3__["default"],
+    ValidationProvider: vee_validate__WEBPACK_IMPORTED_MODULE_10__.ValidationProvider,
+    ValidationObserver: vee_validate__WEBPACK_IMPORTED_MODULE_10__.ValidationObserver,
+    Myfield: _components_form_myfield__WEBPACK_IMPORTED_MODULE_1__["default"]
   }
 });
 
@@ -1145,8 +1145,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var vee_validate__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vee-validate */ "./node_modules/vee-validate/dist/vee-validate.esm.js");
-/* harmony import */ var _sptCommodityContent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./sptCommodityContent */ "./resources/js/views/frontend/services/spt/sptCommodityContent.vue");
+/* harmony import */ var vee_validate__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vee-validate */ "./node_modules/vee-validate/dist/vee-validate.esm.js");
+/* harmony import */ var _sptCommodityContent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./sptCommodityContent */ "./resources/js/views/frontend/services/spt/sptCommodityContent.vue");
 //
 //
 //
@@ -1233,9 +1233,9 @@ __webpack_require__.r(__webpack_exports__);
     selectTabTovar: function selectTabTovar() {}
   },
   components: {
-    SptCommodityContent: _sptCommodityContent__WEBPACK_IMPORTED_MODULE_1__["default"],
-    ValidationProvider: vee_validate__WEBPACK_IMPORTED_MODULE_0__.ValidationProvider,
-    ValidationObserver: vee_validate__WEBPACK_IMPORTED_MODULE_0__.ValidationObserver
+    SptCommodityContent: _sptCommodityContent__WEBPACK_IMPORTED_MODULE_0__["default"],
+    ValidationProvider: vee_validate__WEBPACK_IMPORTED_MODULE_1__.ValidationProvider,
+    ValidationObserver: vee_validate__WEBPACK_IMPORTED_MODULE_1__.ValidationObserver
   }
 });
 
@@ -1254,10 +1254,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var vee_validate__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vee-validate */ "./node_modules/vee-validate/dist/vee-validate.esm.js");
-/* harmony import */ var _components_form_EditableDate__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../components/form/EditableDate */ "./resources/js/components/form/EditableDate.vue");
-/* harmony import */ var _components_form_e_arxiv_file__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../components/form/e-arxiv-file */ "./resources/js/components/form/e-arxiv-file.vue");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var vee_validate__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vee-validate */ "./node_modules/vee-validate/dist/vee-validate.esm.js");
+/* harmony import */ var _components_form_EditableDate__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../components/form/EditableDate */ "./resources/js/components/form/EditableDate.vue");
+/* harmony import */ var _components_form_e_arxiv_file__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../components/form/e-arxiv-file */ "./resources/js/components/form/e-arxiv-file.vue");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -1771,7 +1771,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     this.$store.commit('setCurrency');
     this.$store.commit('setUnit');
   },
-  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapState)({
+  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_3__.mapState)({
     countries: function countries(state) {
       return state.lists.country;
     },
@@ -1870,10 +1870,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   },
   components: {
-    EditableDate: _components_form_EditableDate__WEBPACK_IMPORTED_MODULE_2__["default"],
-    ValidationObserver: vee_validate__WEBPACK_IMPORTED_MODULE_1__.ValidationObserver,
-    ValidationProvider: vee_validate__WEBPACK_IMPORTED_MODULE_1__.ValidationProvider,
-    EArxivFile: _components_form_e_arxiv_file__WEBPACK_IMPORTED_MODULE_3__["default"]
+    EditableDate: _components_form_EditableDate__WEBPACK_IMPORTED_MODULE_1__["default"],
+    ValidationObserver: vee_validate__WEBPACK_IMPORTED_MODULE_4__.ValidationObserver,
+    ValidationProvider: vee_validate__WEBPACK_IMPORTED_MODULE_4__.ValidationProvider,
+    EArxivFile: _components_form_e_arxiv_file__WEBPACK_IMPORTED_MODULE_2__["default"]
   }
 });
 

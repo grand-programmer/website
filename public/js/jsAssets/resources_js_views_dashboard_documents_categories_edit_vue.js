@@ -14,9 +14,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _src_services_adminApi__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../src/services/adminApi */ "./resources/js/src/services/adminApi.js");
-/* harmony import */ var vee_validate__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vee-validate */ "./node_modules/vee-validate/dist/vee-validate.esm.js");
-/* harmony import */ var vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vee-validate/dist/rules */ "./node_modules/vee-validate/dist/rules.js");
-/* harmony import */ var _locales_oz_json__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../locales/oz.json */ "./resources/js/locales/oz.json");
+/* harmony import */ var vee_validate__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vee-validate */ "./node_modules/vee-validate/dist/vee-validate.esm.js");
+/* harmony import */ var _locales_oz_json__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../locales/oz.json */ "./resources/js/locales/oz.json");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -231,8 +230,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   },
   components: {
-    ValidationProvider: vee_validate__WEBPACK_IMPORTED_MODULE_2__.ValidationProvider,
-    ValidationObserver: vee_validate__WEBPACK_IMPORTED_MODULE_2__.ValidationObserver
+    ValidationProvider: vee_validate__WEBPACK_IMPORTED_MODULE_3__.ValidationProvider,
+    ValidationObserver: vee_validate__WEBPACK_IMPORTED_MODULE_3__.ValidationObserver
   }
 });
 
@@ -2457,7 +2456,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.categories-main .v-data-table button.new_item {\n    margin-top: -77px;\n}\n.categories-main .v-card.v-sheet {\n    margin-top: 50px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.categories-main .v-data-table button.new_item {\r\n    margin-top: -77px;\n}\n.categories-main .v-card.v-sheet {\r\n    margin-top: 50px;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

@@ -49,7 +49,7 @@ __webpack_require__.r(__webpack_exports__);
         title: 'ЎЗБ'
       }, {
         code: 'oz',
-        title: 'UZB'
+        title: 'O\'ZB'
       }, {
         code: 'ru',
         title: 'РУС'
@@ -358,132 +358,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -493,19 +367,28 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      model: 0,
+      colors: ['primary', 'secondary', 'yellow darken-2', 'red', 'orange'],
+      admins: [['Management', 'mdi-account-multiple-outline'], ['Settings', 'mdi-cog-outline']],
+      cruds: [['Create', 'mdi-plus-outline'], ['Read', 'mdi-file-outline'], ['Update', 'mdi-update'], ['Delete', 'mdi-delete']],
       links: [],
-      pushAccess: null
+      pushAccess: null,
+      openDropdownIndex: null // Ochiq menyuni saqlash uchun
+
     };
   },
   created: function created() {
     this.initialize();
   },
   computed: {
-    pushAccessComputed: function pushAccessComputed() {
-      return this.pushAccess;
-    }
+    /*pushAccessComputed(){
+        return this.pushAccess
+      }*/
   },
   methods: {
+    // sideOpenClose() {
+    //   document.querySelector('.side').classList.toggle('show');
+    // },
     setPushAccess: function setPushAccess() {
       var confirm = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
 
@@ -525,7 +408,7 @@ __webpack_require__.r(__webpack_exports__);
     initialize: function initialize() {
       var _this = this;
 
-      this.getPushAccess();
+      /*this.getPushAccess();*/
       _src_services_apiService__WEBPACK_IMPORTED_MODULE_0__["default"].readMenusFront().then(function (response) {
         _this.links = response.data.data;
 
@@ -533,6 +416,19 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (error) {
         console.log(error);
       });
+    },
+    toggleDropdown: function toggleDropdown(index) {
+      if (this.openDropdownIndex === index) {
+        // Agar shu menyu ochiq bo'lsa, uni yopamiz
+        this.openDropdownIndex = null;
+      } else {
+        // Boshqa menyuni ochamiz va avvalgisini yopamiz
+        this.openDropdownIndex = index;
+      }
+    },
+    isDropdownOpen: function isDropdownOpen(index) {
+      // Faqat ochiq menyuni ko'rsatamiz
+      return this.openDropdownIndex === index;
     }
   }
 });
@@ -582,10 +478,17 @@ $(function () {
     var activeState = $(".menu-container .menu-list").hasClass("active");
     $(".menu-container .menu-list").animate({
       left: activeState ? "0%" : "-100%"
-    }, 400);
+    }, 200);
   }
 
   $("body").on("click", ".menu-wrapper .hamburger-menu", function (event) {
+    event.stopPropagation();
+    $(".hamburger-menu").toggleClass("open");
+    $(".menu-container .menu-list").toggleClass("active");
+    slideMenu();
+    $("body").toggleClass("overflow-hidden");
+  });
+  $("body").on("click", ".hamburger-menu-close", function (event) {
     event.stopPropagation();
     $(".hamburger-menu").toggleClass("open");
     $(".menu-container .menu-list").toggleClass("active");
@@ -662,7 +565,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.subscribe-notification{\r\n    position: absolute;\r\n    top: 10px;\r\n    left: 75px;\r\n    width: 400px;\r\n    background-color: #ffff;\r\n    padding: 10px 25px;\r\n    z-index: 11;\r\n    border-radius: 10px;\r\n    font-family: Roboto;\r\n    color: #000;\r\n    border: 1px solid var(--mycolor);\n}\n.subscribe-notification .btn-primary {\r\n    color: #fff;\r\n    background: var(--mycolor);\r\n    border-color: var(--mycolor);\r\n    padding: 0 10px;\n}\n@media all and (min-width: 992px) {\n.dropdown-menu li {\r\n        position: relative;\n}\n.nav-item .submenu {\r\n        display: none;\r\n        position: absolute;\r\n        left: 100%;\r\n        top: -7px;\n}\n.nav-item .submenu-left {\r\n        right: 100%;\r\n        left: auto;\n}\n.dropdown-menu > li:hover {\r\n        background-color: #f1f1f1\n}\n.dropdown-menu > li:hover > .submenu {\r\n        display: block;\n}\n}\r\n\r\n/* ============ desktop view .end// ============ */\r\n/* ============ small devices ============ */\n@media (max-width: 991px) {\n.dropdown-menu .dropdown-menu {\r\n        margin-left: 0.7rem;\r\n        margin-right: 0.7rem;\r\n        margin-bottom: .5rem;\n}\n}\n.navbar-nav .dropdown-menu {\r\n    position: absolute;\r\n    max-width: 15vw;\r\n    width: -webkit-max-content;\r\n    width: -moz-max-content;\r\n    width: max-content;\n}\n.navbar-nav .dropdown-menu > li > a {\r\n    white-space: unset !important;\n}\r\n\r\n\r\n/*mobile*/\n.menu-wrapper {\r\n    overflow: hidden;\r\n    max-width: 100%;\r\n    cursor: pointer;\n}\n.menu-wrapper .hamburger-menu {\r\n    position: relative;\r\n    width: 25px;\r\n    height: 20px;\r\n    margin-top: 19px;\n}\n.menu-wrapper .hamburger-menu span {\r\n    opacity: 1;\r\n    left: 0;\r\n    display: block;\r\n    width: 100%;\r\n    height: 2px;\r\n    border-radius: 10px;\r\n    color: black;\r\n    background-color: #000;\r\n    position: absolute;\r\n    transform: rotate(0deg);\r\n    transition: .4s ease-in-out;\n}\n.menu-wrapper .hamburger-menu span:nth-child(1) {\r\n    top: 0;\n}\n.menu-wrapper .hamburger-menu span:nth-child(2) {\r\n    top: 9px;\n}\n.menu-wrapper .hamburger-menu span:nth-child(3) {\r\n    top: 18px;\n}\n.menu-wrapper .hamburger-menu.open span:nth-child(1) {\r\n    transform: translateY(9px) rotate(135deg);\n}\n.menu-wrapper .hamburger-menu.open span:nth-child(2) {\r\n    opacity: 0;\r\n    transform: translateX(-60px);\n}\n.menu-wrapper .hamburger-menu.open span:nth-child(3) {\r\n    transform: translateY(-9px) rotate(-135deg);\n}\r\n\r\n/*.menu-container .menu-list .menu-submenu {*/\r\n/*    white-space: unset;*/\r\n/*    padding: 20px !important;*/\r\n/*    left: 10%;*/\r\n/*}*/\n.menu-container .menu-list {\r\n    padding-left: 0;\r\n    display: block;\r\n    position: absolute;\r\n    width: 100%;\r\n    max-width: 450px;\r\n    height: 1024px;\r\n    background: white;\r\n    box-shadow: rgba(100, 100, 100, 0.2) 6px 2px 10px;\r\n    z-index: 999;\r\n    overflow-y: auto;\r\n    overflow-x: hidden;\r\n    left: -100%;\n}\n.menu-container .menu-list li.accordion-toggle, .menu-container .menu-list .menu-login {\r\n    font-size: 16px;\r\n    text-align: center;\r\n    padding: 20px;\r\n    text-transform: uppercase;\r\n    border-top: 1px solid #dbdcd2;\n}\n.menu-container .menu-list li:first-of-type {\r\n    border-top: 0;\n}\n.accordion-toggle, .accordion-content {\r\n    cursor: pointer;\r\n    font-size: 16px;\r\n    position: relative;\r\n    letter-spacing: 1px;\n}\n.accordion-content {\r\n    display: none;\n}\r\n\r\n/*.accordion-toggle a:before, .accordion-toggle a:after {*/\r\n/*    content: '';*/\r\n/*    display: block;*/\r\n/*    position: absolute;*/\r\n/*    top: 50%;*/\r\n/*    right: 30px;*/\r\n/*    width: 15px;*/\r\n/*    height: 2px;*/\r\n/*    margin-top: -1px;*/\r\n/*    background-color: #5a5858;*/\r\n/*    transform-origin: 50% 50%;*/\r\n/*    transition: all 0.3s ease-out;*/\r\n/*}*/\r\n\r\n/*.accordion-toggle a:before {*/\r\n/*    transform: rotate(-90deg);*/\r\n/*    opacity: 1;*/\r\n/*    z-index: 2;*/\r\n/*}*/\n.accordion-toggle.active-tab {\r\n    background: #000;\r\n\r\n    transition: all 0.3s ease;\n}\n.accordion-toggle a.active:before {\r\n    transform: rotate(0deg);\r\n    background: #fff !important;\n}\n.accordion-toggle a.active:after {\r\n    transform: rotate(180deg);\r\n    background: #fff !important;\r\n    opacity: 0;\n}\n.menu-wrapper {\r\n    display: none !important;\n}\n.menu-container .menu-list.accordion {\r\n    display: none;\n}\n@media (max-width: 1480px) {\n.menu-wrapper {\r\n        display: block !important;\n}\n.menu-container .menu-list.accordion {\r\n        display: block !important;\n}\n}\n@media (max-width: 576px) {\n.menu-wrapper .hamburger-menu {\r\n        position: absolute;\r\n        margin-top: -38px;\r\n        left: 83%;\n}\n.menu-list {\r\n        margin-top: 5px !important;\n}\n}\r\n\r\n/* ============ small devices .end// ============ */\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/*.side {\r\n  position: fixed;\r\n  top: 0;\r\n  width: 100vw;\r\n  height: 100vh;\r\n  background-color: silver;\r\n  margin-left: -100vw;\r\n  transition: all .2s ease-in-out;\r\n}\r\n.side.show {\r\n  margin-left: 0px;\r\n} */\n.subscribe-notification{\r\n    position: absolute;\r\n    top: 10px;\r\n    left: 75px;\r\n    width: 400px;\r\n    background-color: #ffff;\r\n    padding: 10px 25px;\r\n    z-index: 11;\r\n    border-radius: 10px;\r\n    font-family: Roboto;\r\n    color: #000;\r\n    border: 1px solid var(--mycolor);\n}\n.subscribe-notification .btn-primary {\r\n    color: #fff;\r\n    background: var(--mycolor);\r\n    border-color: var(--mycolor);\r\n    padding: 0 10px;\n}\n@media all and (min-width: 992px) {\n.dropdown-menu li {\r\n        position: relative;\n}\n.nav-item .submenu {\r\n        display: none;\r\n        position: absolute;\r\n        left: 100%;\r\n        top: -7px;\n}\n.nav-item .submenu-left {\r\n        right: 100%;\r\n        left: auto;\n}\n.dropdown-menu > li:hover {\r\n        background-color: #f1f1f1\n}\n.dropdown-menu > li:hover > .submenu {\r\n        display: block;\n}\n}\r\n\r\n/* ============ desktop view .end// ============ */\r\n/* ============ small devices ============ */\n@media (max-width: 991px) {\n.dropdown-menu .dropdown-menu {\r\n        margin-left: 0.7rem;\r\n        margin-right: 0.7rem;\r\n        margin-bottom: .5rem;\n}\n}\n.navbar-nav .dropdown-menu {\r\n    position: absolute;\r\n    max-width: 15vw;\r\n    width: -webkit-max-content;\r\n    width: -moz-max-content;\r\n    width: max-content;\n}\n.navbar-nav .dropdown-menu > li > a {\r\n    white-space: unset !important;\n}\r\n\r\n\r\n/*mobile*/\n.menu-wrapper {\r\n    overflow: hidden;\r\n    max-width: 100%;\r\n    cursor: pointer;\n}\n.menu-wrapper .hamburger-menu {\r\n    position: relative;\r\n    width: 25px;\r\n    height: 20px;\r\n    margin-top: 19px;\r\n    z-index: 900;\n}\n.menu-wrapper .hamburger-menu span {\r\n    opacity: 1;\r\n    left: 0;\r\n    display: block;\r\n    width: 100%;\r\n    height: 2px;\r\n    border-radius: 10px;\r\n    color: #118E1B;\r\n    background-color: #118E1B;\r\n    position: absolute;\r\n    transform: rotate(0deg);\r\n    transition: .4s ease-in-out;\n}\n.menu-wrapper .hamburger-menu span:nth-child(1) {\r\n    top: 0;\n}\n.menu-wrapper .hamburger-menu span:nth-child(2) {\r\n    top: 9px;\n}\n.menu-wrapper .hamburger-menu span:nth-child(3) {\r\n    top: 18px;\n}\n.menu-wrapper .hamburger-menu.open span:nth-child(1) {\r\n    transform: translateY(9px) rotate(135deg);\n}\n.menu-wrapper .hamburger-menu.open span:nth-child(2) {\r\n    opacity: 0;\r\n    transform: translateX(-60px);\n}\n.menu-wrapper .hamburger-menu.open span:nth-child(3) {\r\n    transform: translateY(-9px) rotate(-135deg);\n}\n.cabinet {\r\n    text-transform: uppercase;\r\n    border-radius: 15px;\r\n    display: block !important;\r\n    border: 1px solid #118E1B;\r\n    padding: 10px;\r\n    color: #118E1B !important;\r\n    white-space: nowrap;\r\n    font-size: 14px !important;\n}\n.tort {\r\n    text-transform: uppercase;\r\n    white-space: nowrap;\r\n    font-size: 14px !important;\r\n    font-weight: 400 !important;\n}\n.cabinet:hover {\r\n\r\n    background: #118E1B !important;\r\n    color: #fff !important;\r\n    transition: background 0.3s ease, transform 0.3s ease;\n}\r\n\r\n/*.menu-container .menu-list .menu-submenu {*/\r\n/*    white-space: unset;*/\r\n/*    padding: 20px !important;*/\r\n/*    left: 10%;*/\r\n/*}*/\n.menu-container .menu-list {\r\n    padding-left: 0;\r\n    display: block;\r\n    position: absolute;\r\n    width: 100%;\r\n    max-width: 450px;\r\n    height: 1024px;\r\n    background: #F2F4F8;\r\n    box-shadow: rgba(100, 100, 100, 0.2) 6px 2px 10px;\r\n    z-index: 800;\r\n    overflow-y: auto;\r\n    overflow-x: hidden;\r\n    left: -100%;\n}\n.menu-container .menu-list li.accordion-toggle, .menu-container .menu-list .menu-login {\r\n    font-size: 16px;\r\n    text-align: center;\r\n    padding: 20px;\r\n    text-transform: uppercase;\r\n    border-top: 1px solid #dbdcd2;\n}\n.menu-container .menu-list li:first-of-type {\r\n    border-top: 0;\n}\n.accordion-toggle, .accordion-content {\r\n    cursor: pointer;\r\n    font-size: 16px;\r\n    position: relative;\r\n    letter-spacing: 1px;\n}\r\n\r\n/*.accordion-toggle a:before, .accordion-toggle a:after {*/\r\n/*    content: '';*/\r\n/*    display: block;*/\r\n/*    position: absolute;*/\r\n/*    top: 50%;*/\r\n/*    right: 30px;*/\r\n/*    width: 15px;*/\r\n/*    height: 2px;*/\r\n/*    margin-top: -1px;*/\r\n/*    background-color: #5a5858;*/\r\n/*    transform-origin: 50% 50%;*/\r\n/*    transition: all 0.3s ease-out;*/\r\n/*}*/\r\n\r\n/*.accordion-toggle a:before {*/\r\n/*    transform: rotate(-90deg);*/\r\n/*    opacity: 1;*/\r\n/*    z-index: 2;*/\r\n/*}*/\n.accordion-toggle.active-tab {\r\n    background: #000;\r\n\r\n    transition: all 0.3s ease;\n}\n.accordion-toggle a.active:before {\r\n    transform: rotate(0deg);\r\n    background: #fff !important;\n}\n.accordion-toggle a.active:after {\r\n    transform: rotate(180deg);\r\n    background: #fff !important;\r\n    opacity: 0;\n}\n.menu-wrapper {\r\n    display: none !important;\n}\n.menu-container .menu-list.accordion {\r\n    display: none;\n}\n@media (max-width: 1480px) {\n.menu-wrapper {\r\n        display: block !important;\n}\n.menu-container .menu-list.accordion {\r\n        display: block !important;\n}\n}\n@media (max-width: 576px) {\n.mm-lang {\r\n        width: -webkit-max-content;\r\n        width: -moz-max-content;\r\n        width: max-content;\r\n        margin-left: 75%;\r\n        margin-top: -40px;\n}\n.mm-lang .language-dropdown {\r\n        text-decoration: underline;\n}\n.language-dropdown label {\r\n        border-color: white;\r\n        justify-content: center;\n}\n.menu-wrapper .hamburger-menu {\r\n        position: absolute;\r\n        margin-top: -35px;\r\n        left: 88vw;\n}\n.menu-container .menu-list {\r\n        margin-top: -13% !important;\n}\n}\n.link_title {\r\n    font-size: 18px !important;\n}\n.sublink_title {\r\n    margin-left: 15px;\r\n    font-size: 16px !important;\n}\n.sublinkchildren_title {\r\n    margin-left: 30px;\r\n    font-size: 14px !important;\n}\nul#icons li {\r\n    display: inline;\n}\n@media (min-width: 700px) {\n.mm-lang {\r\n        display: none;\n}\n}\n.menu-header {\r\n    display: contents;\n}\n.menu-header-icon {\r\n    margin-top: 20px;\r\n    margin-left: 15px;\n}\n.menu-header-title {\r\n    text-transform: uppercase;\r\n    font-weight: bold;\r\n    margin-left: 50px;\r\n    margin-top: -20px;\r\n    display: flex;\r\n    width: -webkit-max-content;\r\n    width: -moz-max-content;\r\n    width: max-content;\r\n    color: #000000;\n}\n.menu-header .menu-header-line {\r\n    width: 90%;\r\n    height: 2px;\r\n    background-color: #97A7C1;\r\n    margin-top: 20px;\r\n    margin-left: 18px;\n}\n.menu-list .link-list {\r\n    background-color: #F2F4F8;\n}\r\n/* ============ small devices .end// ============ */\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -999,8 +902,8 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "logo_area" }, [
-    _c("div", { staticClass: "header" }, [
-      _c("div", { staticClass: "header-main" }, [
+    _c("div", { staticClass: "header mx-auto" }, [
+      _c("div", [
         _c(
           "div",
           {
@@ -1018,17 +921,31 @@ var render = function () {
                     { staticClass: "header-logo", attrs: { to: "/" } },
                     [
                       _c("img", {
-                        attrs: { src: "/img/gtk_image.png", alt: "" },
+                        attrs: {
+                          src: "/img/gtk_image.png",
+                          alt: "logo customs",
+                        },
                       }),
                       _vm._v(" "),
-                      _c("span", [
-                        _vm._v(
-                          _vm._s(
-                            _vm.$t(
-                              "Ўзбекистон Республикаси Иқтисодиёт ва молия вазирлиги ҳузуридаги Божхона қўмитаси"
-                            )
-                          ) + "  "
-                        ),
+                      _c("img", {
+                        staticStyle: { "margin-right": "10px!important" },
+                        attrs: { src: "/img/flag01.svg", alt: "logo customs" },
+                      }),
+                      _vm._v(" "),
+                      _c("div", [
+                        _c("span", { staticStyle: { display: "block" } }, [
+                          _vm._v(_vm._s(_vm.$t("Ўзбекистон Республикаси"))),
+                        ]),
+                        _vm._v(" "),
+                        _c("span", { staticStyle: { display: "block" } }, [
+                          _vm._v(
+                            _vm._s(_vm.$t("Иқтисодиёт ва молия вазирлиги"))
+                          ),
+                        ]),
+                        _vm._v(" "),
+                        _c("span", { staticStyle: { display: "block" } }, [
+                          _vm._v(_vm._s(_vm.$t("ҳузуридаги Божхона қўмитаси"))),
+                        ]),
                       ]),
                     ]
                   ),
@@ -1310,12 +1227,50 @@ var render = function () {
                                 "tortlink fas fa-map-marker-alt mr-1 ",
                             }),
                             _vm._v(" "),
-                            _c("span", { staticClass: "tort" }, [
-                              _vm._v(_vm._s(_vm.$t("Ҳудудий бошқармалар"))),
-                            ]),
+                            _c(
+                              "span",
+                              {
+                                staticClass: "tort",
+                                staticStyle: {
+                                  "text-transform": "initial",
+                                  "font-size": "16px!important",
+                                },
+                              },
+                              [_vm._v(_vm._s(_vm.$t("Ҳудудий бошқармалар")))]
+                            ),
                           ]
                         ),
                       ]),
+                      _vm._v(" "),
+                      !_vm.$auth.check()
+                        ? _c(
+                            "router-link",
+                            {
+                              staticStyle: {
+                                width: "min-content",
+                                "line-height": "16px",
+                              },
+                              attrs: { to: "/login" },
+                            },
+                            [
+                              _c("i", { staticClass: "fas fa-sign-in-alt" }),
+                              _c(
+                                "span",
+                                {
+                                  staticStyle: {
+                                    "text-transform": "initial",
+                                    "font-size": "16px!important",
+                                  },
+                                },
+                                [
+                                  _vm._v(
+                                    " " + _vm._s(_vm.$t("Кабинетга кириш"))
+                                  ),
+                                ]
+                              ),
+                            ]
+                          )
+                        : _vm._e(),
                       _vm._v(" "),
                       _vm.$auth.check()
                         ? _c(
@@ -1457,25 +1412,6 @@ var render = function () {
                             1
                           )
                         : _vm._e(),
-                      _vm._v(" "),
-                      !_vm.$auth.check()
-                        ? _c(
-                            "router-link",
-                            {
-                              staticStyle: {
-                                width: "min-content",
-                                "line-height": "16px",
-                              },
-                              attrs: { to: "/login" },
-                            },
-                            [
-                              _c("i", { staticClass: "fas fa-sign-in-alt" }),
-                              _c("span", { staticClass: "tort" }, [
-                                _vm._v(" " + _vm._s(_vm.$t("Кабинетга кириш"))),
-                              ]),
-                            ]
-                          )
-                        : _vm._e(),
                     ],
                     1
                   ),
@@ -1485,459 +1421,370 @@ var render = function () {
                 1
               ),
               _vm._v(" "),
-              _c("div", { staticClass: "menu-container" }, [
-                _vm._m(0),
-                _vm._v(" "),
-                _c(
-                  "ul",
-                  {
-                    staticClass: "menu-list accordion ",
-                    staticStyle: { "margin-top": "25px" },
-                  },
-                  [
-                    _vm._l(_vm.links, function (link, index) {
-                      return _c(
-                        "li",
-                        {
-                          key: index,
-                          staticClass: "toggle accordion-toggle",
-                          class:
-                            _vm.$route.params.id == link.id ? "active" : "",
-                          attrs: { id: "main-menu11" },
-                        },
+              _c(
+                "div",
+                { staticClass: "menu-container" },
+                [
+                  _vm._m(0),
+                  _vm._v(" "),
+                  _c(
+                    "v-card",
+                    {
+                      staticClass: "mx-auto menu-list",
+                      staticStyle: { "margin-top": "-16% !important" },
+                    },
+                    [
+                      _c(
+                        "v-card",
+                        { staticClass: "menu-header" },
                         [
-                          link.children && link.children[0]
-                            ? _c(
-                                "router-link",
+                          _c(
+                            "div",
+                            {
+                              staticStyle: {
+                                display: "flex",
+                                "justify-content": "space-between",
+                              },
+                            },
+                            [
+                              !_vm.$auth.check()
+                                ? _c(
+                                    "router-link",
+                                    {
+                                      staticClass: "mt-4 ml-4",
+                                      staticStyle: {
+                                        display: "flex",
+                                        "align-items": "center",
+                                      },
+                                      attrs: { to: "/login" },
+                                    },
+                                    [
+                                      _c("i", {
+                                        staticClass: "fas fa-sign-in-alt",
+                                        staticStyle: { "font-size": "25px" },
+                                      }),
+                                      _c(
+                                        "span",
+                                        {
+                                          staticStyle: {
+                                            "text-transform": "initial",
+                                            "font-size": "16px!important",
+                                            color: "black",
+                                            "margin-left": "5px",
+                                          },
+                                        },
+                                        [
+                                          _vm._v(
+                                            "\n                                        " +
+                                              _vm._s(_vm.$t("Кабинетга кириш"))
+                                          ),
+                                        ]
+                                      ),
+                                    ]
+                                  )
+                                : _vm._e(),
+                              _vm._v(" "),
+                              _c(
+                                "div",
                                 {
-                                  staticClass: "nav-link dropdown-toggle",
-                                  attrs: {
-                                    "data-bs-toggle": "dropdown",
-                                    to: link.url,
+                                  staticClass: "hamburger-menu-close",
+                                  staticStyle: {
+                                    "align-self": "center",
+                                    "margin-right": "1rem",
                                   },
                                 },
                                 [
-                                  _c("span", { staticClass: "menu_slider" }),
-                                  _vm._v(
-                                    _vm._s(link.title) +
-                                      "\n                                "
+                                  _c(
+                                    "v-icon",
+                                    {
+                                      staticClass: "menu-header-icon",
+                                      attrs: { color: "primary" },
+                                    },
+                                    [_vm._v("mdi-close")]
                                   ),
-                                ]
-                              )
-                            : _c(
-                                "router-link",
-                                {
-                                  staticClass: "nav-link",
-                                  attrs: { to: link.url },
-                                },
-                                [
-                                  _c("span", { staticClass: "menu_slider" }),
-                                  _vm._v(
-                                    _vm._s(link.title) +
-                                      "\n                                "
-                                  ),
-                                ]
+                                ],
+                                1
                               ),
+                            ],
+                            1
+                          ),
                           _vm._v(" "),
-                          link.children && link.children[0]
-                            ? _c(
-                                "ul",
-                                { staticClass: "dropdown-menu  " },
-                                _vm._l(
-                                  link.children,
-                                  function (sublink, index) {
-                                    return sublink
-                                      ? _c(
-                                          "li",
-                                          { key: index },
+                          _c("v-card", { staticClass: "menu-header-line" }),
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _vm._l(_vm.links, function (link, index) {
+                        return _c(
+                          "v-list",
+                          {
+                            key: index,
+                            staticClass: "link-list",
+                            class:
+                              _vm.$route.params.id == link.id ? "active" : "",
+                            attrs: { id: "main-menu", value: true },
+                          },
+                          [
+                            link.children && link.children[0]
+                              ? _c(
+                                  "v-list-group",
+                                  {
+                                    scopedSlots: _vm._u(
+                                      [
+                                        {
+                                          key: "activator",
+                                          fn: function () {
+                                            return [
+                                              _c(
+                                                "v-list-item-title",
+                                                {
+                                                  staticClass: "link_title",
+                                                  attrs: { to: link.url },
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "\n                                            " +
+                                                      _vm._s(link.title) +
+                                                      "\n                                        "
+                                                  ),
+                                                ]
+                                              ),
+                                            ]
+                                          },
+                                          proxy: true,
+                                        },
+                                      ],
+                                      null,
+                                      true
+                                    ),
+                                  },
+                                  [
+                                    _vm._v(" "),
+                                    _vm._l(
+                                      link.children,
+                                      function (sublink, index) {
+                                        return _c(
+                                          "v-list",
+                                          {
+                                            key: index,
+                                            staticClass: "link-list",
+                                          },
                                           [
-                                            !sublink.url.includes("http")
-                                              ? _c(
-                                                  "router-link",
-                                                  {
-                                                    staticClass:
-                                                      "dropdown-item",
-                                                    attrs: { to: sublink.url },
-                                                  },
-                                                  [
-                                                    _vm._v(
-                                                      "\n                                            " +
-                                                        _vm._s(sublink.title) +
-                                                        "\n                                        "
-                                                    ),
-                                                  ]
-                                                )
-                                              : _c(
-                                                  "a",
-                                                  {
-                                                    staticClass:
-                                                      "dropdown-item",
-                                                    attrs: {
-                                                      href: sublink.url,
-                                                    },
-                                                  },
-                                                  [
-                                                    _vm._v(
-                                                      _vm._s(sublink.title)
-                                                    ),
-                                                  ]
-                                                ),
-                                            _vm._v(" "),
                                             sublink.children &&
                                             sublink.children[0]
                                               ? _c(
-                                                  "ul",
+                                                  "v-list-group",
                                                   {
-                                                    staticClass:
-                                                      "submenu accordion-content",
-                                                  },
-                                                  _vm._l(
-                                                    sublink.children,
-                                                    function (
-                                                      sublinkchildren,
-                                                      index
-                                                    ) {
-                                                      return sublinkchildren
-                                                        ? _c(
-                                                            "li",
-                                                            { key: index },
-                                                            [
-                                                              !sublinkchildren.url.includes(
+                                                    scopedSlots: _vm._u(
+                                                      [
+                                                        {
+                                                          key: "activator",
+                                                          fn: function () {
+                                                            return [
+                                                              !sublink.url.includes(
                                                                 "http"
                                                               )
                                                                 ? _c(
-                                                                    "router-link",
+                                                                    "v-list-item-title",
                                                                     {
                                                                       staticClass:
-                                                                        "dropdown-item",
+                                                                        "sublink_title",
                                                                       attrs: {
-                                                                        to: sublinkchildren.url,
+                                                                        to: sublink.url,
                                                                       },
                                                                     },
                                                                     [
                                                                       _vm._v(
                                                                         "\n                                                    " +
                                                                           _vm._s(
-                                                                            sublinkchildren.title
+                                                                            sublink.title
                                                                           ) +
                                                                           "\n                                                "
                                                                       ),
                                                                     ]
                                                                   )
-                                                                : _c(
-                                                                    "a",
-                                                                    {
-                                                                      staticClass:
-                                                                        "dropdown-item",
-                                                                      attrs: {
-                                                                        href: sublinkchildren.url,
-                                                                      },
-                                                                    },
-                                                                    [
-                                                                      _vm._v(
-                                                                        _vm._s(
-                                                                          sublinkchildren.title
-                                                                        )
-                                                                      ),
-                                                                    ]
-                                                                  ),
-                                                              _vm._v(" "),
-                                                              sublinkchildren.children &&
-                                                              sublinkchildren
-                                                                .children[0]
-                                                                ? _c(
-                                                                    "ul",
-                                                                    {
-                                                                      staticClass:
-                                                                        "submenu dropdown-menu",
-                                                                    },
-                                                                    _vm._l(
-                                                                      sublinkchildren.children,
-                                                                      function (
-                                                                        slch,
-                                                                        index
-                                                                      ) {
-                                                                        return slch
-                                                                          ? _c(
-                                                                              "li",
-                                                                              {
-                                                                                key:
-                                                                                  index +
-                                                                                  slch.id,
-                                                                              },
-                                                                              [
-                                                                                _c(
-                                                                                  "router-link",
-                                                                                  {
-                                                                                    staticClass:
-                                                                                      "dropdown-item",
-                                                                                    attrs:
-                                                                                      {
-                                                                                        to: slch.url,
-                                                                                      },
-                                                                                  },
-                                                                                  [
-                                                                                    _vm._v(
-                                                                                      "\n                                                            " +
-                                                                                        _vm._s(
-                                                                                          slch.title
-                                                                                        ) +
-                                                                                        "\n                                                        "
-                                                                                    ),
-                                                                                  ]
-                                                                                ),
-                                                                              ],
-                                                                              1
-                                                                            )
-                                                                          : _vm._e()
-                                                                      }
-                                                                    ),
-                                                                    0
-                                                                  )
                                                                 : _vm._e(),
-                                                            ],
-                                                            1
-                                                          )
-                                                        : _vm._e()
-                                                    }
-                                                  ),
-                                                  0
+                                                            ]
+                                                          },
+                                                          proxy: true,
+                                                        },
+                                                      ],
+                                                      null,
+                                                      true
+                                                    ),
+                                                  },
+                                                  [
+                                                    _vm._v(" "),
+                                                    _vm._l(
+                                                      sublink.children,
+                                                      function (
+                                                        sublinkchildren,
+                                                        index
+                                                      ) {
+                                                        return _c(
+                                                          "v-list",
+                                                          {
+                                                            key: index,
+                                                            staticClass:
+                                                              "link-list",
+                                                          },
+                                                          [
+                                                            _c(
+                                                              "v-list-item",
+                                                              {
+                                                                attrs: {
+                                                                  link: "",
+                                                                  to: sublinkchildren.url,
+                                                                  href: sublinkchildren.url,
+                                                                },
+                                                              },
+                                                              [
+                                                                _c(
+                                                                  "v-list-item-title",
+                                                                  {
+                                                                    staticClass:
+                                                                      "sublinkchildren_title",
+                                                                  },
+                                                                  [
+                                                                    _vm._v(
+                                                                      _vm._s(
+                                                                        sublinkchildren.title
+                                                                      )
+                                                                    ),
+                                                                  ]
+                                                                ),
+                                                              ],
+                                                              1
+                                                            ),
+                                                          ],
+                                                          1
+                                                        )
+                                                      }
+                                                    ),
+                                                  ],
+                                                  2
                                                 )
-                                              : _vm._e(),
+                                              : _c(
+                                                  "v-list-item",
+                                                  {
+                                                    attrs: {
+                                                      link: "",
+                                                      to: sublink.url,
+                                                      href: sublink.url,
+                                                    },
+                                                  },
+                                                  [
+                                                    _c(
+                                                      "v-list-item-title",
+                                                      {
+                                                        staticClass:
+                                                          "sublink_title",
+                                                      },
+                                                      [
+                                                        _vm._v(
+                                                          "\n                                                " +
+                                                            _vm._s(
+                                                              sublink.title
+                                                            ) +
+                                                            "\n                                            "
+                                                        ),
+                                                      ]
+                                                    ),
+                                                  ],
+                                                  1
+                                                ),
                                           ],
                                           1
                                         )
-                                      : _vm._e()
-                                  }
-                                ),
-                                0
-                              )
-                            : _vm._e(),
-                        ],
-                        1
-                      )
-                    }),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        staticClass: "m-settings",
-                        staticStyle: {
-                          display: "block",
-                          "margin-left": "auto",
-                          "margin-right": "auto",
-                        },
-                      },
-                      [
-                        _c("div", { staticClass: "hududiy_boshqarmalar2" }, [
-                          _c(
-                            "a",
-                            {
-                              staticClass: "d-inline",
-                              attrs: {
-                                href: ".hududiy.section",
-                                "data-toggle": "collapse",
-                                role: "button",
-                                "aria-expanded": "false",
-                              },
-                            },
-                            [
-                              _c("i", {
-                                staticClass: "fas fa-map-marker-alt mr-1 ",
-                              }),
-                              _vm._v(" "),
-                              _c("span", { staticClass: "tort" }, [
-                                _vm._v(_vm._s(_vm.$t("Ҳудудий бошқармалар"))),
-                              ]),
-                            ]
-                          ),
-                        ]),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          { staticClass: "d-flex" },
-                          [
-                            _vm.$auth.check()
-                              ? _c(
-                                  "v-menu",
-                                  {
-                                    attrs: { "offset-y": "", left: "" },
-                                    scopedSlots: _vm._u(
-                                      [
-                                        {
-                                          key: "activator",
-                                          fn: function (ref) {
-                                            var on = ref.on
-                                            var attrs = ref.attrs
-                                            return [
-                                              _c(
-                                                "div",
-                                                _vm._g(
-                                                  _vm._b(
-                                                    {
-                                                      staticClass:
-                                                        "d-flex align-items-center",
-                                                    },
-                                                    "div",
-                                                    attrs,
-                                                    false
-                                                  ),
-                                                  on
-                                                ),
-                                                [
-                                                  _c(
-                                                    "v-btn",
-                                                    {
-                                                      staticClass: "mr-1",
-                                                      attrs: {
-                                                        elevation: "0",
-                                                        "x-small": "",
-                                                        fab: "",
-                                                        color: "primary",
-                                                      },
-                                                    },
-                                                    [
-                                                      _c("v-icon", [
-                                                        _vm._v("mdi-account"),
-                                                      ]),
-                                                    ],
-                                                    1
-                                                  ),
-                                                  _vm._v(" "),
-                                                  _c(
-                                                    "p",
-                                                    {
-                                                      staticStyle: {
-                                                        width: "min-content",
-                                                        "font-size": "12px",
-                                                        "text-align": "center",
-                                                        margin: "0 10px",
-                                                        "font-weight": "600",
-                                                      },
-                                                    },
-                                                    [
-                                                      _vm._v(
-                                                        "\n                                                    " +
-                                                          _vm._s(
-                                                            _vm.$auth.user()
-                                                              .first_name
-                                                          ) +
-                                                          " " +
-                                                          _vm._s(
-                                                            _vm.$auth.user()
-                                                              .sur_name
-                                                          )
-                                                      ),
-                                                    ]
-                                                  ),
-                                                ],
-                                                1
-                                              ),
-                                            ]
-                                          },
-                                        },
-                                      ],
-                                      null,
-                                      false,
-                                      1951186320
+                                      }
                                     ),
+                                  ],
+                                  2
+                                )
+                              : _c(
+                                  "v-list-item",
+                                  {
+                                    attrs: {
+                                      link: "",
+                                      to: link.url,
+                                      href: link.url,
+                                    },
                                   },
                                   [
-                                    _vm._v(" "),
                                     _c(
-                                      "v-list",
+                                      "v-list-item-title",
+                                      { staticClass: "link_title" },
                                       [
-                                        _c(
-                                          "v-list-item",
-                                          { attrs: { to: "/profile" } },
-                                          [
-                                            _vm._v(
-                                              _vm._s(_vm.$t("Менинг профилим"))
-                                            ),
-                                          ]
+                                        _vm._v(
+                                          "\n                                        " +
+                                            _vm._s(link.title) +
+                                            "\n                                    "
                                         ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "v-list-item",
-                                          { attrs: { to: "/applications" } },
-                                          [
-                                            _vm._v(
-                                              _vm._s(
-                                                _vm.$t("Менинг аризаларим")
-                                              ) +
-                                                "\n                                            "
-                                            ),
-                                          ]
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "v-list-item",
-                                          { attrs: { to: "/services?page=3" } },
-                                          [
-                                            _vm._v(
-                                              _vm._s(_vm.$t("Реестрлар")) +
-                                                "\n                                            "
-                                            ),
-                                          ]
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "v-list-item",
-                                          {
-                                            attrs: { href: "#" },
-                                            on: {
-                                              click: function ($event) {
-                                                $event.preventDefault()
-                                                return _vm.$auth.logout({
-                                                  makeRequest: true,
-                                                  redirect: { name: "login" },
-                                                })
-                                              },
-                                            },
-                                          },
-                                          [
-                                            _vm._v(
-                                              _vm._s(_vm.$t("Чиқиш")) +
-                                                "\n                                            "
-                                            ),
-                                          ]
-                                        ),
-                                      ],
-                                      1
+                                      ]
                                     ),
                                   ],
                                   1
-                                )
-                              : _vm._e(),
-                            _vm._v(" "),
-                            !_vm.$auth.check()
-                              ? _c("router-link", { attrs: { to: "/login" } }, [
-                                  _c("i", {
-                                    staticClass: "fas fa-sign-in-alt",
-                                  }),
-                                ])
-                              : _vm._e(),
+                                ),
                           ],
                           1
-                        ),
-                        _vm._v(" "),
-                        _c("language-dropdown", { staticClass: "mm-lang" }),
-                      ],
-                      1
-                    ),
-                  ],
-                  2
-                ),
-              ]),
+                        )
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "v-list-item",
+                        [
+                          _c(
+                            "v-list-item-title",
+                            { staticClass: "link_title" },
+                            [_vm._v(_vm._s(_vm.$t("Ҳудудий бошқармалар")))]
+                          ),
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c("language-dropdown"),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass: "single-window",
+                          staticStyle: { padding: "20px 10px" },
+                        },
+                        [
+                          _c(
+                            "a",
+                            {
+                              staticStyle: {
+                                color: "#f7f7f7",
+                                "background-color": "#39ae69",
+                                padding: "10px",
+                                "border-radius": "5px",
+                              },
+                              attrs: { href: "/singlewindow" },
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(
+                                  _vm.$t(
+                                    "Божхона органлари ягона дарча хизматлари"
+                                  )
+                                )
+                              ),
+                            ]
+                          ),
+                        ]
+                      ),
+                    ],
+                    2
+                  ),
+                ],
+                1
+              ),
             ]),
           ]
         ),
       ]),
     ]),
-    _vm._v(" "),
-     false
-      ? 0
-      : _vm._e(),
   ])
 }
 var staticRenderFns = [
@@ -1946,13 +1793,20 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "menu-wrapper" }, [
-      _c("div", { staticClass: "hamburger-menu" }, [
-        _c("span"),
-        _vm._v(" "),
-        _c("span"),
-        _vm._v(" "),
-        _c("span"),
-      ]),
+      _c(
+        "div",
+        {
+          staticClass: "hamburger-menu",
+          staticStyle: {
+            float: "right",
+            width: "20px",
+            "margin-left": "10px",
+            "z-index": "auto !important",
+            "margin-top": "-40px",
+          },
+        },
+        [_c("span"), _vm._v(" "), _c("span"), _vm._v(" "), _c("span")]
+      ),
     ])
   },
 ]
