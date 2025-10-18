@@ -1431,7 +1431,7 @@ var render = function () {
                     "v-card",
                     {
                       staticClass: "mx-auto menu-list",
-                      staticStyle: { "margin-top": "-16% !important" },
+                      staticStyle: { "margin-top": "-19% !important" },
                     },
                     [
                       _c(

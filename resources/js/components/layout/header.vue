@@ -136,7 +136,7 @@
                             </div>
                             <v-card
                                 class="mx-auto menu-list"
-                                style="margin-top: -16% !important;"
+                                style="margin-top: -19% !important;"
                             >
                                 <v-card class="menu-header">
                                     <div style="display: flex; justify-content: space-between;">

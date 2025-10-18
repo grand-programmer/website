@@ -18,351 +18,106 @@
 
 
             <!--==========Main Slider area==========-->
-            <div class="main_slider_area" style="padding-top: 70px; width: 100%">
-
-                <router-link class="all_news" to="/services">
+            <div class="main_slider_area" style="width: 100%; padding-top: 70px">
+                <router-link class="all_news" to="/singlewindow">
                     <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
                          xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                          viewBox="0 0 490.667 490.667" style="enable-background:new 0 0 490.667 490.667;"
                          xml:space="preserve">
-<path style="fill:#009688;" d="M245.333,0C109.839,0,0,109.839,0,245.333s109.839,245.333,245.333,245.333
-	s245.333-109.839,245.333-245.333C490.514,109.903,380.764,0.153,245.333,0z"/>
+              <path style="fill:#009688;" d="M245.333,0C109.839,0,0,109.839,0,245.333s109.839,245.333,245.333,245.333
+              s245.333-109.839,245.333-245.333C490.514,109.903,380.764,0.153,245.333,0z"/>
                         <path style="fill:#FAFAFA;" d="M290.133,104.533c-19.139-18.289-49.277-18.289-68.416,0c-18.893,18.881-18.902,49.503-0.021,68.395
-	c0.007,0.007,0.014,0.014,0.021,0.021l19.2,19.2H117.333C87.878,192.149,64,216.027,64,245.483
-	c0,29.455,23.878,53.333,53.333,53.333h123.584l-19.2,19.2c-17.522,20.175-15.371,50.734,4.804,68.257
-	c18.259,15.858,45.423,15.799,63.612-0.139l118.251-118.251c12.492-12.496,12.492-32.752,0-45.248L290.133,104.533z"/>
-
-</svg>
-
-
-                    <p> {{ $t("Барча хизматлар") }} </p></router-link>
-
-
-<!--                <div class="slider_inner">
-
-                    <div data-thumb="/img/custom/slider-9.png" data-src="/img/custom/077.png">
+              c0.007,0.007,0.014,0.014,0.021,0.021l19.2,19.2H117.333C87.878,192.149,64,216.027,64,245.483
+              c0,29.455,23.878,53.333,53.333,53.333h123.584l-19.2,19.2c-17.522,20.175-15.371,50.734,4.804,68.257
+              c18.259,15.858,45.423,15.799,63.612-0.139l118.251-118.251c12.492-12.496,12.492-32.752,0-45.248L290.133,104.533z"/>
+            </svg>
+                    <p>{{ $t("Божхона органлари ягона дарча хизматлари") }}</p>
+                </router-link>
+                <div class="services-opens">
+                </div>
+                <v-carousel interval="5000" class="custom-carousel-overlay" style="height: 565px">
+                    <v-carousel-item src="/img/main-slider/general_yoshlar.jpg">
                         <div class="container">
-                            <div class="slider_text absolute_right">
-                                <h3 class="fadeInLeft animated">Шаффофлик замирида <br> иқтисодий хавфсизлик</h3>
-                                &lt;!&ndash; <p class="fadeInUp animated">Божхона ахборот тизмиларига =ужжатларингизни жойланг</p>
-                                <a class="s_readmore_btn fadeInUp animated" target="_blank"
-                                   href="https://ed2.customs.uz/E_ARXIV/authentication">Хизматдан фойдаланиш</a>&ndash;&gt;
-                                &lt;!&ndash;<a class="s_contact_btn fadeInUp animated" href="#">Contact Us</a>&ndash;&gt;
+                            <div class="slider_text absolute_right" style="top: inherit; bottom: 80px; right: 0">
+                                <h3 class="fadeInLeft animated" style="color: white; margin-top: 100%">{{ $t("Генерал ва ёшлар учрашуви") }}</h3>
+                                <h4 class="fadeInLeft animated d-none">{{ $t("Божхона ахборот тизими") }}</h4>
+                                <p class="fadeInUp animated d-none">{{ $t("2024 йил 23-25 апрель, Тошкент шаҳри") }}</p>
+                                <a class="fadeInUp animated mobile_carousel_button" target="_blank" style="text-align: right"
+                                   href="/news/bozhhona-qomitasi-raisi-akmalhozha-mavlonovning-bozhhona-instituti-kursantlari-bilan-general-va-yoshlar-uchrashuvi-bolib-otdi">{{ $t("Батафсил") }}</a>
                             </div>
                             <div class="slider_image slider-2">
-
                             </div>
                         </div>
-                    </div>
-
-                    <div data-thumb="/img/custom/slider-9.png" data-src="/img/custom/logistics.jpg">
+                    </v-carousel-item>
+                    <v-carousel-item src="/img/main-slider/1U0A4415.jpg">
                         <div class="container">
-                            <div class="slider_text absolute_right">
-                                <h3 class="fadeInLeft animated">E-ARHIV</h3>
-                                <h4 class="fadeInLeft animated">Божхона ахборот тизими</h4>
-                                <p class="fadeInUp animated">Божхона ахборот тизмиларига ҳужжатларингизни
-                                    жойланг</p>
-                                <a class="s_readmore_btn fadeInUp animated" target="_blank"
-                                   href="https://ed2.customs.uz/E_ARXIV/authentication">Хизматдан фойдаланиш</a>
-                                &lt;!&ndash;<a class="s_contact_btn fadeInUp animated" href="#">Contact Us</a>&ndash;&gt;
+                            <div class="slider_text absolute_right" style="top: inherit; bottom: 80px; right: 0">
+                                <h2 class="fadeInLeft animated" style="color: white; margin-top: 100%">{{ $t("Ватан учун, миллат учун, халқ учун!") }}</h2>
+                                <h4 class="fadeInLeft animated d-none">{{ $t("Божхона ахборот тизими") }}</h4>
+                                <p class="fadeInUp animated d-none">
+                                    {{ $t("2024 йил 23-25 апрель, Тошкент шаҳри") }}</p>
+                                <a class="s_readmore_btn fadeInUp animated mobile_carousel_button" target="_parent"
+                                   href="/news/bozhhona-qomitasida-mamlakatimiz-mustaqilligining-34-yilligiga-bagishlangan-tantanali-tadbir-bolib-otdi">{{ $t("Батафсил") }}</a>
                             </div>
                             <div class="slider_image slider-2">
-
                             </div>
                         </div>
-                    </div>
-                    <div data-thumb="/img/custom/slider-9.png" data-src="/img/custom/transit.jpg">
+                    </v-carousel-item>
+                    <v-carousel-item src="/img/custom/situatsion_yangi.jpg">
                         <div class="container">
-                            <div class="slider_text absolute_right">
-                                <h3 class="fadeInLeft animated">Э-транзит</h3>
-                                <h4 class="fadeInLeft animated">Божхона ахборот тизими</h4>
-                                <p class="fadeInUp animated">Чегарадан юкларни электрон декларация қилинг</p>
-                                <a class="s_readmore_btn fadeInUp animated" target="_blank"
-                                   href="http://cargo.customs.uz">Хизматдан фойдаланиш</a>
-                                &lt;!&ndash;<a class="s_contact_btn fadeInUp animated" href="#">Contact Us</a>&ndash;&gt;
+                            <div class="slider_text absolute_right" style="top: inherit; bottom: 80px; right: 0">
+                                <h2 class="fadeInLeft animated" style="color: white; margin-top: 100%">{{ $t("Шаффофлик замирида иқтисодий хавфсизлик") }}</h2>
+                                <h4 class="fadeInLeft animated d-none">{{ $t("Божхона ахборот тизими") }}</h4>
+                                <p class="fadeInUp animated d-none">
+                                    {{ $t("2024 йил 23-25 апрель, Тошкент шаҳри") }}</p>
                             </div>
                             <div class="slider_image slider-2">
-
                             </div>
                         </div>
-                    </div>
-
-
-                    <div data-thumb="/img/custom/slider-5.jpg" data-src="/img/custom/slider-5.jpg">
+                    </v-carousel-item>
+                    <v-carousel-item src="/img/custom/logistics.jpg">
                         <div class="container">
-                            <div class="slider_text absolute_right">
-                                <h3 class="fadeInLeft animated">Интеграциялашган таъриф</h3>
-                                <h4 class="fadeInLeft animated">Божхона ахборот тизими</h4>
-                                <p class="fadeInUp animated">Божхона тўловлари ҳисобини олинг</p>
-                                <a class="s_readmore_btn fadeInUp animated" href="http://tarif.customs.uz"
-                                   target="_blank">Хизматдан фойдаланиш</a>
-                                &lt;!&ndash;<a class="s_contact_btn fadeInUp animated" href="#">Contact Us</a>&ndash;&gt;
-                            </div>
-                            <div class="slider_image slider-2">
-
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div data-thumb="/img/main-slider/slide3.jpg" data-src="/img/main-slider/slide3.jpg">
-                        <div class="container">
-                            <div class="slider_text absolute_right">
-                                <h3 class="fadeInLeft animated">Ягона дарча</h3>
-                                <h4 class="fadeInLeft animated">Божхона ахборот тизими</h4>
-                                <p class="fadeInUp animated">Чегарадан товарлар олиб ўтишда сертификат ва
-                                    рухсатномаларни
-                                    ушбу ахборот тизими ёрдамида олинг.</p>
-                                <a class="s_readmore_btn fadeInUp animated" href="http://singlewindow.uz"
-                                   target="_blank">Хизматдан фойдаланиш</a>
-                                &lt;!&ndash;<a class="s_contact_btn fadeInUp animated" href="#">Contact Us</a>&ndash;&gt;
-                            </div>
-                            <div class="slider_image slider-2">
-
-                            </div>
-                        </div>
-                    </div>
-
-                    <div data-thumb="/img/main-slider/slide4.jpg" data-src="/img/main-slider/slide4.jpg">
-                        <div class="container">
-                            <div class="slider_text absolute_left">
-                                <h3 class="fadeInLeft animated">Ишга кириш учун онлайн ариза бериш</h3>
-                                <h4 class="fadeInLeft animated">Божхона ахборот тизими</h4>
-                                <p class="fadeInUp animated">Божхона хизмати органларидаги вакансиялар рўйхатини
-                                    билиб олинг ҳамда ишга кириш учун онлайн ариза юборинг</p>
-                                <a class="s_readmore_btn fadeInUp animated" to="/services/vacancy"
-                                   target="_blank">Хизматдан фойдаланиш</a>
-                                &lt;!&ndash;<a class="s_contact_btn fadeInUp animated" href="#">Contact Us</a>&ndash;&gt;
-                            </div>
-                            <div class="slider_image slider-2">
-
-                            </div>
-                        </div>
-                    </div>
-                    &lt;!&ndash;                        <div data-thumb="/img/main-slider/slide2.jpg" data-src="/img/main-slider/slide2.jpg">
-                                                <div class="container">
-                                                    <div class="slider_text absolute_left" style="top:315px">
-                                                        <h3 class="fadeInLeft animated">Э-назорат</h3>
-                                                        <h4 class="fadeInLeft animated">Божхона ахборот тизими</h4>
-                                                        <p class="fadeInUp animated"></p>
-                                                        <a class="s_readmore_btn fadeInUp animated" href="#">Хизматдан фойдаланиш</a>
-                                                        &lt;!&ndash;<a class="s_contact_btn fadeInUp animated" href="#">Contact Us</a>&ndash;&gt;
-                                                    </div>
-                                                    <div class="slider_image slider-2">
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div data-thumb="/img/custom/slide-6.jpg" data-src="/img/custom/slider-6.jpg">
-                                                <div class="container">
-
-                                                    <div class="slider_image">
-
-                                                    </div>
-                                                    <div class="slider_text absolute_right text-center">
-                                                        <h3 class="fadeInLeft animated">Экспорт ва импорт</h3>
-                                                        <h4 class="fadeInLeft animated">товарлар тўғрисидаги маълумотларни олиш</h4>
-                                                        <p class="fadeInUp animated">Ўзбекистон Республикасидан эспорт қилинган ва импорт
-                                                            қилинган
-                                                            товарларнинг миқдори қиймати тўғрисида маълумотларни олинг.</p>
-                                                        <a class="s_readmore_btn fadeInUp animated" href="#">Хизматдан фойдаланиш</a>
-                                                        &lt;!&ndash;<a class="s_contact_btn fadeInUp animated" href="#">Contact Us</a>&ndash;&gt;
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div data-thumb="/img/custom/dron.jpg" data-src="/img/custom/dron.jpg">
-                                                <div class="container">
-                                                    <div class="slider_text">
-                                                        <h3 class="fadeInLeft animated">Мурожаатлар</h3>
-                                                        <h4 class="fadeInLeft animated">Фуқаролар ва ТИФ қатнашчилари мурожаатларини кўриб
-                                                            чиқиш</h4>
-                                                        <p class="fadeInUp animated">Иқтисодиёт ва молия вазирлиги ҳузуридаги Божхона қўмитасига фуқаролар ва ТИФ қатнашчилари
-                                                            томонидан <br>берилган мурожаатларни қабул қилиш, кўриб чиқиш, Рахбарият
-                                                            қабуллари
-                                                            тўғрисида маълумотларни шу ердан олинг </p>
-                                                        <a class="s_readmore_btn fadeInUp animated" href="#">Хизматдан фойдаланиш</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div data-thumb="/img/custom/slider-8.jpg" data-src="/img/custom/slider-8.jpg">
-                                                <div class="container">
-                                                    <div class="slider_text">
-                                                        <h3 class="fadeInLeft animated">Е-Навбат</h3>
-                                                        <h4 class="fadeInLeft animated">Чегарадан ўтиш учун электрон навбат олиш</h4>
-                                                        <p class="fadeInUp animated">Автотранспорт воситасида чегара орқали ҳаракатланиш
-                                                            учун
-                                                            олдиндан навбат олиш хизматидан фойдаланинг </p>
-                                                        <a class="s_readmore_btn fadeInUp animated" href="#">Хизматдан фойдаланиш</a>
-                                                        &lt;!&ndash;<a class="s_contact_btn fadeInUp animated" href="#">Contact Us</a>&ndash;&gt;
-                                                    </div>
-                                                </div>
-                                            </div>&ndash;&gt;
-
-                </div>-->
-                <div class="slider_inner">
-
-                    <div data-thumb="/img/custom/slider-9.png" data-src="/img/custom/077.jpg">
-                        <div class="container">
-                            <div class="slider_text absolute_right">
-                                <h3 class="fadeInLeft animated" style="max-width: 63%; margin-left: auto;">
-                                    {{ $t("Шаффофлик замирида иқтисодий хавфсизлик") }}</h3>
-                                <!-- <p class="fadeInUp animated">Божхона ахборот тизмиларига ҳужжатларингизни жойланг</p>
-                                <a class="s_readmore_btn fadeInUp animated" target="_blank"
-                                   href="https://ed2.customs.uz/E_ARXIV/authentication">Хизматдан фойдаланиш</a>-->
-                                <!--<a class="s_contact_btn fadeInUp animated" href="#">Contact Us</a>-->
-                            </div>
-                            <div class="slider_image slider-2">
-
-                            </div>
-                        </div>
-                    </div>
-
-                    <div data-thumb="/img/custom/slider-9.png" data-src="/img/custom/logistics.jpg">
-                        <div class="container">
-                            <div class="slider_text absolute_right">
-                                <h3 class="fadeInLeft animated">E-ARHIV</h3>
-                                <h4 class="fadeInLeft animated">{{ $t("Божхона ахборот тизими") }}</h4>
-                                <p class="fadeInUp animated">
+                            <div class="slider_text absolute_right" style="top: inherit; bottom: 80px; right: 0">
+                                <h3 class="fadeInLeft animated" style="color: white; margin-top: 90%">E-ARXIV</h3>
+                                <h4 class="fadeInLeft animated" style="color: white">{{ $t("Божхона ахборот тизими") }}</h4>
+                                <p class="fadeInUp animated" style="color: white">
                                     {{ $t("Божхона ахборот тизмиларига ҳужжатларингизни жойланг") }}</p>
-                                <a class="s_readmore_btn fadeInUp animated" target="_blank"
+                                <a class="s_readmore_btn fadeInUp animated mobile_carousel_button" target="_blank"
                                    href="https://ed2.customs.uz/E_ARXIV">{{ $t("Хизматдан фойдаланиш") }}</a>
-                                <!--<a class="s_contact_btn fadeInUp animated" href="#">Contact Us</a>-->
                             </div>
                             <div class="slider_image slider-2">
-
                             </div>
                         </div>
-                    </div>
-                    <div data-thumb="/img/custom/slider-9.png" data-src="/img/custom/transit.jpg">
+                    </v-carousel-item>
+                    <v-carousel-item src="/img/custom/med_yangi.jpg">
                         <div class="container">
-                            <div class="slider_text absolute_right">
-                                <h3 class="fadeInLeft animated">E-TRANZIT</h3>
-                                <h4 class="fadeInLeft animated">{{ $t("Божхона ахборот тизими") }}</h4>
-                                <p class="fadeInUp animated">
-                                    {{ $t("Чегарадан юкларни электрон декларация қилинг") }}</p>
-                                <a class="s_readmore_btn fadeInUp animated" target="_blank"
-                                   href="http://cargo.customs.uz">{{ $t("Хизматдан фойдаланиш") }}</a>
-                                <!--<a class="s_contact_btn fadeInUp animated" href="#">Contact Us</a>-->
-                            </div>
-                            <div class="slider_image slider-2">
-
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div data-thumb="/img/custom/slider-5.jpg" data-src="/img/custom/slider-5.jpg">
-                        <div class="container">
-                            <div class="slider_text absolute_right">
-                                <h3 class="fadeInLeft animated">{{ $t("Интеграциялашган таъриф") }}</h3>
-                                <h4 class="fadeInLeft animated">{{ $t("Божхона ахборот тизими") }}</h4>
-                                <p class="fadeInUp animated">{{ $t("Божхона тўловлари ҳисобини олинг") }}</p>
-                                <a class="s_readmore_btn fadeInUp animated" href="http://tarif.customs.uz"
+                            <div class="slider_text absolute_right" style="top: inherit; bottom: 80px; right: 0px">
+                                <h4 class="fadeInLeft animated" style="margin-top: 100%; color: white">{{ $t("Масофавий электрон декларациялаш") }}</h4>
+                                <h6 class="fadeInLeft animated" style="color: white;">{{ $t("Инсон омилисиз декларациялаш") }}</h6>
+                                <a class="s_readmore_btn fadeInUp animated mobile_carousel_button" href="http://tarif.customs.uz"
                                    target="_blank">{{ $t("Хизматдан фойдаланиш") }}</a>
-                                <!--<a class="s_contact_btn fadeInUp animated" href="#">Contact Us</a>-->
                             </div>
                             <div class="slider_image slider-2">
-
                             </div>
                         </div>
-                    </div>
-
-
-                    <div data-thumb="/img/main-slider/slide3.jpg" data-src="/img/main-slider/slide3.jpg">
+                    </v-carousel-item>
+                    <v-carousel-item src="/img/custom/cyberroom.jpg">
                         <div class="container">
-                            <div class="slider_text absolute_right">
-                                <h3 class="fadeInLeft animated">{{ $t("Ягона дарча") }}</h3>
-                                <h4 class="fadeInLeft animated">{{ $t("Божхона ахборот тизими") }}</h4>
-                                <p class="fadeInUp animated">
-                                    {{
-                                        $t("Чегарадан товарлар олиб ўтишда сертификат ва рухсатномаларни ушбу ахборот тизими ёрдамида олинг.")
-                                    }}</p>
-                                <a class="s_readmore_btn fadeInUp animated" href="http://singlewindow.uz"
-                                   target="_blank">{{ $t("Хизматдан фойдаланиш") }}</a>
-                                <!--<a class="s_contact_btn fadeInUp animated" href="#">Contact Us</a>-->
-                            </div>
-                            <div class="slider_image slider-2">
-
-                            </div>
-                        </div>
-                    </div>
-
-                    <div data-thumb="/img/main-slider/slide4.jpg" data-src="/img/main-slider/slide4.jpg">
-                        <div class="container">
-                            <div class="slider_text absolute_left">
-                                <h3 class="fadeInLeft animated">{{ $t("Ишга кириш учун онлайн ариза бериш") }}</h3>
-                                <h4 class="fadeInLeft animated">{{ $t("Божхона ахборот тизими") }}</h4>
-                                <p class="fadeInUp animated">{{
+                            <div class="slider_text absolute_left" style="top: 350px !important;">
+                                <h4 class="fadeInLeft animated" style="margin-top: 85%; color: white; ">
+                                    {{ $t("Ишга кириш учун онлайн ариза бериш") }} {{ $t("Божхона ахборот тизими") }}</h4>
+                                <p class="fadeInUp animated" style="padding: 0 !important; color: white">{{
                                         $t("Божхона хизмати органларидаги вакансиялар рўйхатини билиб олинг ҳамда ишга кириш учун онлайн ариза юборинг")
                                     }}</p>
-                                <router-link class="s_readmore_btn fadeInUp animated" to="/services/vacancy"
+                                <router-link class="s_readmore_btn fadeInUp animated mobile_carousel_button" to="/services/vacancy"
                                              target="_blank">{{ $t("Хизматдан фойдаланиш") }}
                                 </router-link>
-                                <!--<a class="s_contact_btn fadeInUp animated" href="#">Contact Us</a>-->
                             </div>
                             <div class="slider_image slider-2">
-
                             </div>
                         </div>
-                    </div>
-                    <!--                        <div data-thumb="/img/main-slider/slide2.jpg" data-src="/img/main-slider/slide2.jpg">
-                                                <div class="container">
-                                                    <div class="slider_text absolute_left" style="top:315px">
-                                                        <h3 class="fadeInLeft animated">Э-назорат</h3>
-                                                        <h4 class="fadeInLeft animated">Божхона ахборот тизими</h4>
-                                                        <p class="fadeInUp animated"></p>
-                                                        <a class="s_readmore_btn fadeInUp animated" href="#">Хизматдан фойдаланиш</a>
-                                                        &lt;!&ndash;<a class="s_contact_btn fadeInUp animated" href="#">Contact Us</a>&ndash;&gt;
-                                                    </div>
-                                                    <div class="slider_image slider-2">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div data-thumb="/img/custom/slide-6.jpg" data-src="/img/custom/slider-6.jpg">
-                                                <div class="container">
-                                                    <div class="slider_image">
-                                                    </div>
-                                                    <div class="slider_text absolute_right text-center">
-                                                        <h3 class="fadeInLeft animated">Экспорт ва импорт</h3>
-                                                        <h4 class="fadeInLeft animated">товарлар тўғрисидаги маълумотларни олиш</h4>
-                                                        <p class="fadeInUp animated">Ўзбекистон Республикасидан эспорт қилинган ва импорт
-                                                            қилинган
-                                                            товарларнинг миқдори қиймати тўғрисида маълумотларни олинг.</p>
-                                                        <a class="s_readmore_btn fadeInUp animated" href="#">Хизматдан фойдаланиш</a>
-                                                        &lt;!&ndash;<a class="s_contact_btn fadeInUp animated" href="#">Contact Us</a>&ndash;&gt;
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div data-thumb="/img/custom/dron.jpg" data-src="/img/custom/dron.jpg">
-                                                <div class="container">
-                                                    <div class="slider_text">
-                                                        <h3 class="fadeInLeft animated">Мурожаатлар</h3>
-                                                        <h4 class="fadeInLeft animated">Фуқаролар ва ТИФ қатнашчилари мурожаатларини кўриб
-                                                            чиқиш</h4>
-                                                        <p class="fadeInUp animated">Иқтисодиёт ва молия вазирлиги ҳузуридаги Божхона қўмитасига фуқаролар ва ТИФ қатнашчилари
-                                                            томонидан <br>берилган мурожаатларни қабул қилиш, кўриб чиқиш, Рахбарият
-                                                            қабуллари
-                                                            тўғрисида маълумотларни шу ердан олинг </p>
-                                                        <a class="s_readmore_btn fadeInUp animated" href="#">Хизматдан фойдаланиш</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div data-thumb="/img/custom/slider-8.jpg" data-src="/img/custom/slider-8.jpg">
-                                                <div class="container">
-                                                    <div class="slider_text">
-                                                        <h3 class="fadeInLeft animated">Е-Навбат</h3>
-                                                        <h4 class="fadeInLeft animated">Чегарадан ўтиш учун электрон навбат олиш</h4>
-                                                        <p class="fadeInUp animated">Автотранспорт воситасида чегара орқали ҳаракатланиш
-                                                            учун
-                                                            олдиндан навбат олиш хизматидан фойдаланинг </p>
-                                                        <a class="s_readmore_btn fadeInUp animated" href="#">Хизматдан фойдаланиш</a>
-                                                        &lt;!&ndash;<a class="s_contact_btn fadeInUp animated" href="#">Contact Us</a>&ndash;&gt;
-                                                    </div>
-                                                </div>
-                                            </div>-->
-
-                </div>
+                    </v-carousel-item>
+                </v-carousel>
             </div>
             <!--==========End Main Slider area==========-->
             <component is="script" src="/js/theme.js"></component>
@@ -879,7 +634,7 @@
                                         <li><a href="https://t.me/customschannel"  target="_blank"><i class="fab fa-telegram-plane"></i></a></li>
                                         <li class="d-none"><a href="#"  target="_blank"><i class="fab fa-google-plus-g"></i></a></li>
                                         <li><a href="https://www.instagram.com/bojxona.official/"  target="_blank"><i class="fab fa-instagram-square"></i></a></li>
-<!--                                        <li><a href="https://www.youtube.com/@BojxonaqomitasiAxborotxi-hf6od"  target="_blank"><i class="fab fa-youtube"></i></a></li>-->
+                                        <!--                                        <li><a href="https://www.youtube.com/@BojxonaqomitasiAxborotxi-hf6od"  target="_blank"><i class="fab fa-youtube"></i></a></li>-->
                                     </ul>
                                 </div>
                             </div>
@@ -1071,6 +826,32 @@ export default {
 
 </script>
 <style>
-
-
+.v-carousel__item {
+    height: 565px !important;
+}
+.v-window.custom-carousel-overlay .v-image__image {
+    filter: brightness(0.6);
+}
+.mobile_carousel_button {
+    background: #26a65b;
+    border-radius: 3px;
+    color: #fff!important;
+    display: inline-block;
+    font-family: Lato, sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 35px;
+    margin-right: 15px;
+    margin-top: 10px;
+    padding: 0 25px;
+    transition: all .4s
+    linear 0s;
+}
+</style>
+<style scoped>
+.slider_text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
 </style>

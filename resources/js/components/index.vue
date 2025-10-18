@@ -425,7 +425,8 @@
 
         </full-page>
         <mobile v-else></mobile>
-        <position-sidebar/>
+<!--    #mobil versiyada position-sidebar halaqit bervotdi-->
+        <position-sidebar v-if="!isMobile"/>
 
 
     </div>

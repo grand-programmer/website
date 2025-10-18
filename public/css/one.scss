@@ -5368,7 +5368,7 @@ html body .Vue-Toastification__container.top-right {
     display: flex;
     justify-content: center;
     align-items: center;
-    top: 74px;
+    top: 70px; /*old 74px*/
     z-index: 10;
     background-image: linear-gradient(180deg, #005e2778, transparent);
     height: 62px;
