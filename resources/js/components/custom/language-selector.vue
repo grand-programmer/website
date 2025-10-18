@@ -94,6 +94,6 @@ export default {
     justify-content: center;
 }
 .language-dropdown ul.lang-list li{
-    padding: 4px 6px;
+    padding: 4px 3px;
 }
 </style>

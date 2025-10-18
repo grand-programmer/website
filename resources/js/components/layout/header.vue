@@ -127,7 +127,7 @@
                         </div>
                         <div class="menu-container">
                             <div class="menu-wrapper">
-                                <div class="hamburger-menu" style="float: right; width: 20px; margin-left: 10px; z-index: auto !important; margin-top: -40px">
+                                <div class="hamburger-menu" style="float: right; width: 20px; margin-left: 10px; z-index: auto !important;">
                                     <span></span>
                                     <span></span>
                                     <span></span>
@@ -135,17 +135,22 @@
                                 <!-- hamburger-menu -->
                             </div>
                             <v-card
-                                class="mx-auto menu-list"
-                                style="margin-top: -19% !important;"
-                            >
+                                class="mx-auto menu-list">
                                 <v-card class="menu-header">
-                                    <div style="display: flex; justify-content: space-between;">
-                                        <router-link v-if="!$auth.check()" to="/login" class="mt-4 ml-4" style="display: flex; align-items: center"><i
+                                    <div style="display: flex; align-items: center; justify-content: center; width: max-content; flex-wrap: nowrap">
+                                        <router-link v-if="!$auth.check()" to="/login" class="ml-4" style="display: flex; align-items: center"><i
                                             class="fas fa-sign-in-alt" style="font-size: 25px"></i><span style="text-transform: initial; font-size: 16px!important; color: black; margin-left: 5px">
                                             {{ $t("Кабинетга кириш") }}</span>
                                         </router-link>
-                                        <div style="align-self: center; margin-right: 1rem;" class="hamburger-menu-close">
-                                            <v-icon class="menu-header-icon" color="primary">mdi-close</v-icon>
+                                        <language-dropdown/>
+                                        <li class="hududiy_boshqarmalar">
+                                            <a href=".hududiy.section" class="d-inline">
+                                                <i class="tortlink fas fa-map-marker-alt mr-1 "></i>
+                                                <span class="tort" style="text-transform: initial; font-size: 16px!important;">{{ $t("Ҳудудий бошқармалар") }}</span>
+                                            </a>
+                                        </li>
+                                        <div class="single-window" style="padding: 20px 10px">
+                                            <a href="/singlewindow" style="color: #f7f7f7; background-color: #39ae69; padding: 10px; border-radius: 5px">{{ $t("Хизматлар") }}</a>
                                         </div>
                                     </div>
                                     <v-card class="menu-header-line"></v-card>
@@ -226,13 +231,6 @@
                                         </v-list-item-title>
                                     </v-list-item>
                                 </v-list>
-                                <v-list-item>
-                                    <v-list-item-title class="link_title">{{ $t("Ҳудудий бошқармалар") }}</v-list-item-title>
-                                </v-list-item>
-                                <language-dropdown/>
-                                <div class="single-window" style="padding: 20px 10px">
-                                    <a href="/singlewindow" style="color: #f7f7f7; background-color: #39ae69; padding: 10px; border-radius: 5px">{{ $t("Божхона органлари ягона дарча хизматлари") }}</a>
-                                </div>
                             </v-card>
                         </div>
                     </div>
@@ -282,6 +280,26 @@ export default {
             return this.pushAccess
 
         }*/
+    },
+    watch: {
+        $route() {
+            this.openDropdownIndex = null;
+
+            this.$nextTick(() => {
+                const menuList = $(".menu-container .menu-list");
+                const hamburger = $(".hamburger-menu");
+
+                if (menuList.hasClass("active")) {
+                    hamburger.removeClass("open");
+                    menuList.removeClass("active");
+                    menuList.animate({left: "-100%"}, 200);
+                    $("body").removeClass("overflow-hidden");
+                }
+
+                $(".menu-list .accordion-content").slideUp("fast").removeClass("open");
+                $(".menu-list .accordion-toggle").removeClass("active-tab").find(".menu-link").removeClass("active");
+            });
+        },
     },
     methods: {
         // sideOpenClose() {
@@ -616,7 +634,7 @@ $(document).on("click", "ul.lang-list li", function () {
     display: block;
     position: absolute;
     width: 100%;
-    max-width: 450px;
+    max-width: 100%;
     height: 1024px;
     background: #F2F4F8;
     box-shadow: rgba(100, 100, 100, 0.2) 6px 2px 10px;
@@ -699,7 +717,6 @@ $(document).on("click", "ul.lang-list li", function () {
     .menu-container .menu-list.accordion {
         display: block !important;
     }
-
 }
 
 @media (max-width: 576px) {
@@ -726,7 +743,7 @@ $(document).on("click", "ul.lang-list li", function () {
     }
 
     .menu-container .menu-list {
-        margin-top: -13% !important;
+        margin-top: 1px !important;
     }
 }
 
@@ -774,9 +791,10 @@ ul#icons li {
 }
 
 .menu-header .menu-header-line {
-    width: 90%;
-    height: 2px;
+    width: 100%;
+    height: 1px;
     background-color: #97A7C1;
+    margin: 0!important;
     margin-top: 20px;
     margin-left: 18px;
 }
@@ -785,4 +803,14 @@ ul#icons li {
     background-color: #F2F4F8;
 }
 /* ============ small devices .end// ============ */
+</style>
+<style scoped>
+.v-card {
+    border-radius: 0!important  ;
+     margin-top: calc(0% + 26px);
+    margin-bottom: 15px;
+}
+.v-sheet.v-card:not(.v-sheet--outlined) {
+     box-shadow: none!important;
+}
 </style>
