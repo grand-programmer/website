@@ -155,7 +155,8 @@ export default {
     },
     methods: {
         async run() {
-            await axios.get('/api/v1/stat', {
+            /* vaqtinchalik https://customs.uz/ ishlatib turilibdi*/
+            await axios.get('https://customs.uz/api/v1/stat', {
                 params: {
                     name: 'tovarimex_n',
                     rejim: this.regime,
@@ -376,6 +377,21 @@ export default {
     font-size: 15px;
     margin-right: 5px;
 }
+@media (max-width: 590px) {
+
+    .slick-list {
+        display: inline-grid;
+    }
+
+    .slick-slider {
+        margin-top: 30%;
+    }
+
+    .slick-slider .slick-dots {
+        display: none !important;
+    }
+}
+
 .slick-dots {
     display: flex !important;
     justify-content: center;

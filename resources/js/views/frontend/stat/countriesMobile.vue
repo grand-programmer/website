@@ -1,53 +1,37 @@
 <template>
     <div class="slide_products" v-if="items.length">
-        <VueSlickCarousel
-            v-bind="settings"
-        >
-            <div class="slide_item" v-for="item in items.filter((filterItem,filterItemKey) => (filterItemKey<45))">
-                <div class="slide_item_wrapper">
-                    <div class="slide_item_sub_wrapper">
-                        <div class="country_header">
-                            <country-flag
-                                :country="countries.filter(country => country.code===item.country)[0].slug"
-                                size="big"
-                                rounded
-                                shadow
-                                class="country-flag"
-                            />
-                            <span>{{ countries.filter(country => country.code===item.country)[0][$i18n.locale] }}</span>
+        <v-carousel class="stat_country_carousel" v-bind="settings">
+            <v-carousel-item v-for="item in items.filter((filterItem, filterItemKey) => (filterItemKey<45))">
+                <div class="slide_item">
+                    <div class="slide_item_wrapper">
+                        <div class="slide_item_sub_wrapper">
+                            <div class="country_header">
+                                <country-flag
+                                    :country="countries.filter(country => country.code===item.country)[0].slug"
+                                    size="big"
+                                    rounded
+                                    shadow
+                                    class="country-flag"
+                                />
+                                <span>{{ countries.filter(country => country.code===item.country)[0][$i18n.locale] }}</span>
 
-                        </div>
-                        <div class="slide_item_total_price" v-html="moneyFormat(item.total)"></div>
-                        <div class="slide_item_total_difference">
-                <span>
-
-                    <p>{{ (item.column1).toFixed(1) }} % <v-icon color="primary">mdi-trending-up</v-icon></p>
-                    <p>{{ $t('ўтган йилга нисбатан') }}</p>
-                </span>
+                            </div>
+                            <div class="slide_item_total_price" v-html="moneyFormat(item.total)"></div>
+                            <div class="slide_item_total_difference">
                             <span>
-
-                    <p>{{ ((item.total * 100) / (items.map(el => { return el.total; }).reduce((x, y) => { return x + y },0))).toFixed(1) }} %</p>
-                    <p>{{ $t('жамига  нисбатан') }}</p>
-                </span>
+                                <p>{{ (item.column1).toFixed(1) }} % <v-icon color="primary">mdi-trending-up</v-icon></p>
+                                <p>{{ $t('ўтган йилга нисбатан') }}</p>
+                            </span>
+                            <span>
+                                <p>{{ ((item.total * 100) / (items.map(el => { return el.total; }).reduce((x, y) => { return x + y },0))).toFixed(1) }} %</p>
+                                <p>{{ $t('жамига  нисбатан') }}</p>
+                            </span>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <template #prevArrow="arrowOption">
-                <div class="custom-arrow left-arrow">
-                    <v-icon x-large :color="arrowOption.currentSlide  > 0 ? 'primary': 'default'">mdi-chevron-left
-                    </v-icon>
-                </div>
-            </template>
-            <template #nextArrow="arrowOption">
-                <div class="custom-arrow">
-                    <v-icon x-large
-                            :color="arrowOption.currentSlide  <  arrowOption.slideCount - 4 ? 'primary': 'default'">
-                        mdi-chevron-right
-                    </v-icon>
-                </div>
-            </template>
-        </VueSlickCarousel>
+            </v-carousel-item>
+        </v-carousel>
     </div>
 </template>
 
@@ -70,9 +54,9 @@ export default {
         month: {
             type: [Number]
         },
-      toMonth: {
-        type: [Number]
-      }
+        toMonth: {
+            type: [Number]
+        }
     },
     data() {
         return {
@@ -388,11 +372,11 @@ export default {
                 await this.run()
             }
         },
-      async toMonth(val, oldVal) {
-        if (val !== oldVal) {
-          await this.run()
+        async toMonth(val, oldVal) {
+            if (val !== oldVal) {
+                await this.run()
+            }
         }
-      }
     },
     methods: {
         async run() {
@@ -401,27 +385,32 @@ export default {
                     name: 'davlatimex_n',
                     rejim: this.regime,
                     month: this.month ? this.month : 0,
-                  toMonth: this.toMonth ? this.toMonth : 0,
+                    toMonth: this.toMonth ? this.toMonth : 0,
                     year: this.year ? this.year : 0
                 }
             }).then(res => {
                 this.items = res.data.data
             })
         },
-      moneyFormat(price) {
-        if ((price / 10000000000).toFixed(1) !== '0.0')
-          return '<span>' + (price / 1000000000).toFixed(1) + '</span> ' + this.$t('трл') + '. $';
-        else if ((price / 10000000).toFixed(1) !== '0.0')
-          return '<span>' + (price / 1000000).toFixed(1) + '</span> ' + this.$t('млрд') + '. $';
-        if ((price / 1000).toFixed(1) !== '0.0')
-          return '<span>' + (price / 1000).toFixed(1) + '</span> ' + this.$t('млн') + '. $'; else
-          return '<span>' + parseFloat(price).toFixed(1) + '</span> ' + this.$t('минг') + ' $'
-      }
+        moneyFormat(price) {
+            if ((price / 10000000000).toFixed(1) !== '0.0')
+                return '<span>' + (price / 1000000000).toFixed(1) + '</span> ' + this.$t('трл') + '. $';
+            else if ((price / 10000000).toFixed(1) !== '0.0')
+                return '<span>' + (price / 1000000).toFixed(1) + '</span> ' + this.$t('млрд') + '. $';
+            if ((price / 1000).toFixed(1) !== '0.0')
+                return '<span>' + (price / 1000).toFixed(1) + '</span> ' + this.$t('млн') + '. $'; else
+                return '<span>' + parseFloat(price).toFixed(1) + '</span> ' + this.$t('минг') + ' $'
+        }
     }
 }
 </script>
 
 <style scoped lang="scss">
+
+.slide_products .v-window.stat_country_carousel .v-carousel__controls{
+    display: none;
+}
+
 .v-picker.v-card.v-picker--date {
     margin: 0;
 }
@@ -636,6 +625,27 @@ export default {
 
 </style>
 <style lang="scss">
+
+.v-window {
+    .v-window__container {
+        .v-window-item {
+            .v-image {
+                .v-responsive__content {
+                    margin-top: 10px;
+                }
+            }
+        }
+    }
+}
+
+.v-responsive__content {
+    margin-top: 10px;
+}
+
+/*.v-window .v-carousel__controls {
+  display: none;
+}*/
+
 .slick-arrow.slick-prev:before, .slick-arrow.slick-next:before {
     display: none;
 }

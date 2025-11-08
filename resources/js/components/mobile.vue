@@ -1,12 +1,7 @@
 <template>
     <div class="one-page">
-
-
         <loading-bar></loading-bar>
-
         <hududiy></hududiy>
-
-
         <div class="section" id="section0">
 
             <!--==========Logo area==========-->
@@ -204,295 +199,27 @@
             </div>
         </div>
         <div class="section yangiliklar" id="section3">
-
-            <news-in-home></news-in-home>
+            <MobileNews />
         </div>
 
         <div class="section asosiy_korsatkichlari2">
-            <div class="row content">
-                <div class="col-3">
-                    <div class="stat_menu">
-                        <h3> Божхона статистикаси</h3>
-                        <ul>
-                            <li><a class="active" href="#" @click="stat_type=1">Ўзбекистон
-                                Республикаси товарлар импорти ва экспорти ҳудудлар кесимида</a></li>
-                            <li><a :class="(stat_type==2)?'active':''" href="#" @click="stat_type=2">Божхона
-                                чегараларидан ўтган автомобиллар сони </a></li>
-                            <li><a :class="(stat_type==3)?'active':''" href="#" @click="stat_type=3">Ўзбекистон
-                                Республикасида кунлик товарлар импорти ва экспорти</a></li>
-
-
-                            <!--                                <li><a :class="(stat_type==4)?'active':''" href="#" @click="stat_type=4">Ўзбекистон
-                                                                Республикасида товарлар импорти ва экспорти</a></li>
-                                                            <li><a :class="(stat_type==5)?'active':''" href="#" @click="stat_type=5">Ўзбекистон
-                                                                Республикасида товарлар импорти ва экспорти</a></li>-->
-                        </ul>
-                        <a class="all_stats" href="https://charts.customs.uz" target="_blank">
-                            Барча статистика <i class="fa fa-arrow-right"></i>
-
-                        </a>
-                    </div>
-                </div>
-                <div class="col-9" id="reyt">
-                    <h3>Ўзбекистон Республикаси товарлар импорти ва экспорти ҳудудлар кесимида</h3>
-                    <div id="columnchart1" ref="clusteredColumn" class="chart"></div>
-                    <div class="filter row">
-                        <v-col cols="3">
-                            <v-autocomplete
-                                ref="auto"
-                                label="Ойлар бўйича"
-                                v-model="month"
-                                :items="months"
-                                auto-select-first
-                            ></v-autocomplete>
-                        </v-col>
-                        <v-col cols="3">
-                            <v-autocomplete
-                                ref="auto1"
-                                label="Йиллар бўйича"
-                                v-model="year"
-                                :items="years"
-                                hide-selected
-                                auto-select-first
-                            ></v-autocomplete>
-                        </v-col>
-                    </div>
-
-                </div>
-                <div class="col-9" v-if="stat_type==2">
-                    <h3>Ўзбекистон Республикаси кунлик товарлар импорти ва экспорти</h3>
-                    <div id="columnchart2" class="chart"></div>
-                    <div class="filter row">
-                        <v-col cols="3">
-                            <v-autocomplete
-                                ref="auto"
-                                label="Ойлар бўйича"
-                                v-model="month"
-                                :items="months"
-                                auto-select-first
-                            ></v-autocomplete>
-                        </v-col>
-                        <v-col cols="3">
-                            <v-autocomplete
-                                ref="auto1"
-                                label="Йиллар бўйича"
-                                v-model="year"
-                                :items="years"
-                                hide-selected
-                                auto-select-first
-                            ></v-autocomplete>
-                        </v-col>
-                    </div>
-
-                </div>
-                <div class="col-9" v-if="stat_type==3">
-                    <h3>Ўзбекистон Республикаси кунлик товарлар импорти ва экспорти</h3>
-                    <div id="columnchart3" class="chart"></div>
-                    <div class="filter row">
-                        <v-col cols="3">
-                            <v-autocomplete
-                                ref="auto"
-                                label="Ойлар бўйича"
-                                v-model="month"
-                                :items="months"
-                            ></v-autocomplete>
-                        </v-col>
-                        <v-col cols="3">
-                            <v-autocomplete
-                                ref="auto1"
-                                label="Йиллар бўйича"
-                                v-model="year"
-                                :items="years"
-                                hide-selected
-                                auto-select-first
-                            ></v-autocomplete>
-                        </v-col>
-                    </div>
-
-                </div>
-            </div>
-
+            <MobileStatistics />
         </div>
 
 
         <!--==========End Our partner area==========-->
         <div class="section">
-            <div class="container-fluid contact_faq">
+            <div class="contact_faq" style="width: 100%; padding-left: 15px; padding-right: 15px; margin-top: 100px;">
                 <div class="row">
                     <div class="col-md-6">
-                        <div class="chose_inner_area">
-                            <div class="section_tittle">
-                                <h2>Кўп бериладиган саволлар</h2>
-                            </div>
-                            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="false">
-
-                                <div class="panel panel-default">
-                                    <div class="panel-heading" role="tab" id="headingThree">
-                                        <h4 class="panel-title">
-                                            <a role="button" data-bs-toggle="collapse" data-bs-parent="#accordion"
-                                               href="#chose3" aria-expanded="true" aria-controls="chose3">
-                                                Тариф преференциялари қайси қонун ҳужжатларига мувофиқ қай тартибда
-                                                қўлланилади?
-                                                <span>
-                                                    <i class="fa fa-plus" aria-hidden="false"></i>
-                                                    <i class="fa fa-minus" aria-hidden="true"></i>
-                                                </span>
-                                            </a>
-                                        </h4>
-                                    </div>
-                                    <div id="chose3" class="panel-collapse collapse  in show" role="tabpanel"
-                                         aria-labelledby="headingThree">
-                                        <div class="panel-body">
-                                            Ўзбекистон Республикаси Божхона кодексининг 300-моддасига мувофиқ
-                                            тартибга
-                                            солиниб, тариф преференсиялари божхона божларини тўлашдан озод етиш,
-                                            божхона
-                                            божлари ставкаларини камайтириш ёки муайян давлатларда ишлаб чиқарилган
-                                            товарларни божхона ҳудудига преференсиал олиб кириш ёки ушбу ҳудуддан
-                                            преференсиал олиб чиқишда квоталар белгилаш тарзида берилади.
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="panel panel-default">
-                                    <div class="panel-heading" role="tab" id="headingOne">
-                                        <h4 class="panel-title">
-                                            <a role="button" class="collapsed" data-bs-toggle="collapse"
-                                               data-bs-parent="#accordion" href="#chose1"
-                                               aria-expanded="false" aria-controls="chose1">
-                                                Қандай қилиб ҳудудий божхона бошқармалари билан солиштирма
-                                                далолатнома
-                                                тузиш мумкин?
-                                                <span>
-                                                    <i class="fa fa-plus" aria-hidden="true"></i>
-                                                    <i class="fa fa-minus" aria-hidden="true"></i>
-                                                </span>
-                                            </a>
-                                        </h4>
-                                    </div>
-                                    <div id="chose1" class="panel-collapse collapse" role="tabpanel"
-                                         aria-labelledby="headingOne">
-                                        <div class="panel-body">
-                                            Иқтисодиёт ва молия вазирлиги ҳузуридаги Божхона қўмитасининг расмий веб сайти “Електрон хизматлар”
-                                            рукнида
-                                            “Тадбиркорнинг шахсий кабинети” (http://ed1.customs.uz/PersonCabinet)
-                                            орқали
-                                            олиш мумкин.
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="panel panel-default">
-                                    <div class="panel-heading" role="tab" id="headingTwo">
-                                        <h4 class="panel-title">
-                                            <a class="collapsed" role="button" data-bs-toggle="collapse"
-                                               data-bs-parent="#accordion"
-                                               href="#chose2" aria-expanded="false" aria-controls="chose2">
-
-                                                Божхона тўловларини бўлиб-бўлиб ёки кечиктириб тўлаш тўғрисида
-                                                маълумот
-                                                берсангиз?
-                                                <span>
-                                                    <i class="fa fa-plus" aria-hidden="true"></i>
-                                                    <i class="fa fa-minus" aria-hidden="true"></i>
-                                                </span>
-                                            </a>
-                                        </h4>
-                                    </div>
-                                    <div id="chose2" class="panel-collapse collapse" role="tabpanel"
-                                         aria-labelledby="headingTwo">
-                                        <div class="panel-body">
-                                            Божхона кодексининг 329, 330, 331-моддаларига мувофиқ божхона
-                                            тўловларини
-                                            кечиктириб ёки бўлиб-бўлиб тўлаш божхона декларацияси қабул қилинган
-                                            кундан
-                                            еътиборан олтмиш календар кундан ошмаслиги лозим. Божхона тўловларини
-                                            кечиктириб ёки бўлиб-бўлиб тўлаш имконияти Ўзбекистон Республикаси
-                                            Президентининг ёхуд Ўзбекистон Республикаси Вазирлар Маҳкамасининг
-                                            қарорига
-                                            биноан узоқроқ муддатларга ва божхона тўловлари тўланиши таъминланмаган
-                                            ҳолда берилиши мумкин.
-
-                                            Божхона тўловларини кечиктириб ёки бўлиб-бўлиб тўлаш имкониятини олиш
-                                            учун
-                                            тўловчи божхона органига божхона тўловлари суммаларини тўлаш бўйича ёзма
-                                            мажбуриятни ўз ичига олган аризани ва жхона тўловлари тўланиши
-                                            таъминланганлигини тасдиқловчи ҳужжатни тақдим етади.
-
-                                            Божхона тўловлари тўланишини таъминлаш тўловчининг танловига кўра
-                                            исталган –
-                                            пул маблағларини божхона органининг шахсий ғазна ҳисобварағига киритиш,
-                                            товарларни гаровга қўйиш, банк кафолатини тақдим етиш, божхона
-                                            тўловларини
-                                            тўлаш мажбуриятини суғурталаш ёки кафиллик орқали амалга оширилади.
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="panel panel-default">
-                                    <div class="panel-heading" role="tab" id="headingFive">
-                                        <h4 class="panel-title">
-                                            <a class="collapsed" role="button" data-bs-toggle="collapse"
-                                               data-bs-parent="#accordion"
-                                               href="#chose5" aria-expanded="false" aria-controls="chose5">
-                                                Енг кўп қулайлик бериш режимини белгиланган давлатлар ҳамда тариф
-                                                ставкалари қандай?
-                                                <span><i class="fa fa-plus" aria-hidden="true"></i>
-                                                    <i class="fa fa-minus" aria-hidden="true"></i>
-                                                </span>
-                                            </a>
-                                        </h4>
-                                    </div>
-                                    <div id="chose5" class="panel-collapse collapse" role="tabpanel"
-                                         aria-labelledby="headingFive">
-                                        <div class="panel-body">
-                                            Ўзбекистон Республикаси билан енг кўп қулайлик бериш режимини
-                                            белгиланган
-                                            давлатлар (рўйхат рақами 3267, 30.06.2020й.) сони 47 та бўлиб,
-                                            Ўзбекистон
-                                            Республикаси савдо-иқтисодий муносабатларда енг кўп қулайлик бериш
-                                            режимини
-                                            қўллаётган мамлакатларда ишлаб чиқарилган товарларга нисбатан, товарни
-                                            жўнатувчи ва експорт қилувчи мамлакатдан қатъи назар бож тарифи билан
-                                            белгиланган ставкалар (бир баровар) миқдоридаги божхона божлари
-                                            қўлланилади.
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="panel panel-default">
-                                    <div class="panel-heading" role="tab" id="headingSix">
-                                        <h4 class="panel-title">
-                                            <a class="collapsed" role="button" data-bs-toggle="collapse"
-                                               data-bs-parent="#accordion"
-                                               href="#chose6" aria-expanded="false" aria-controls="chose6">
-                                                Товарни муайян мамлактда ишлаб чиқарилганлигини тасдиқловчи ҳужжат
-                                                нима
-                                                ва унинг турлари?
-                                                <span><i class="fa fa-plus" aria-hidden="true"></i>
-                                                    <i class="fa fa-minus" aria-hidden="true"></i>
-                                                </span>
-                                            </a>
-                                        </h4>
-                                    </div>
-                                    <div id="chose6" class="panel-collapse collapse" role="tabpanel"
-                                         aria-labelledby="headingFive">
-                                        <div class="panel-body">
-                                            Божхона кодекси 363-моддасида, товарнинг муайян мамлакатда ишлаб
-                                            чиқарилганлиги, експорт ёки реекспорт қилувчи мамлакатда белгиланган
-                                            тартиб
-                                            ва шаклга мувофиқ ваколатли орган томонидан берилган, шу жумладан
-                                            електрон
-                                            шаклда берилган товарнинг келиб чиқиши тўғрисидаги сертификат билан
-                                            тасдиқланади.
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
+                        <MobileFaq />
                     </div>
-                    <front-calendar></front-calendar>
-
                 </div>
             </div>
 
+        </div>
+        <div class="section">
+        <FrontCalendar />
         </div>
 
 
@@ -642,8 +369,9 @@ import {mapState} from 'vuex';
 import loadingBar from "../components/base/loadingbar.vue";
 import NewsInHome from "./homepage/news-in-homepage";
 import FrontCalendar from "./homepage/calendar";
-
-
+import MobileFaq from "./homepage/mobile-faq.vue";
+import MobileNews from "./homepage/mobile-news.vue";
+import MobileStatistics from "./homepage/mobile-statistics.vue";
 export default {
     name: 'mobile',
     data() {
@@ -721,7 +449,9 @@ export default {
         NewsInHome,
         FrontCalendar,
         loadingBar,
-
+        MobileFaq,
+        MobileNews,
+        MobileStatistics
     },
     methods: {
         showProgress(show) {

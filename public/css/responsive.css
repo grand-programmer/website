@@ -1364,7 +1364,7 @@ a.openMenu1 {
 
 @media (max-width: 1280px) {
     .asosiy_korsatkichlari2 .row div {
-        flex: 0 0 100%;
+        /*flex: 0 0 100%;*/
         max-width: 100%;
     }
 
