@@ -1,7 +1,7 @@
 <template>
     <div class="slide_oziqovqat" v-if="collectionItems.length">
         <VueSlickCarousel
-            v-bind="settings"
+            v-bind="settings" style="gap: 10px; display: flex;"
         >
             <div class="slide_item" v-for="item in collectionItems">
                 <div class="slide_item_wrapper">

@@ -12,7 +12,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _src_services_adminApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../src/services/adminApi */ "./resources/js/src/services/adminApi.js");
-/* harmony import */ var _locales_oz_json__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../locales/oz.json */ "./resources/js/locales/oz.json");
+/* harmony import */ var vee_validate__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vee-validate */ "./node_modules/vee-validate/dist/vee-validate.esm.js");
+/* harmony import */ var vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vee-validate/dist/rules */ "./node_modules/vee-validate/dist/rules.js");
+/* harmony import */ var _locales_oz_json__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../locales/oz.json */ "./resources/js/locales/oz.json");
 //
 //
 //

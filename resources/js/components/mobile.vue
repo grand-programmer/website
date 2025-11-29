@@ -117,10 +117,10 @@
             <!--==========End Main Slider area==========-->
             <component is="script" src="/js/theme.js"></component>
         </div>
-        <div class="section" style="min-height: 0 !important; margin-top: -80px">
-            <div class="row"><h3 class="text-center section_title">{{ $t("Асосий маълумотлар") }}</h3></div>
+        <div class="section" style="min-height: 0 !important; margin-top: -100px">
+            <div class="row"><h3 class="text-center section_title" style="width: 100%">{{ $t("Асосий маълумотлар") }}</h3></div>
             <div class="container-fluid">
-                <div class="row pb-8" style="justify-content: center; row-gap: 35px">
+                <div class="row" style="justify-content: center; row-gap: 35px">
                     <v-carousel :show-arrows="false" class="main-info-carousel" style="height: 325px !important;">
                         <v-carousel-item>
                             <router-link to="/page/jismoniy" class="card">

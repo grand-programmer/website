@@ -14,7 +14,7 @@
         </svg>
             <p> {{ $t("Барча янгиликлар") }} </p>
         </router-link>
-        <div class="container" style="padding: 15px">
+        <div class="container px-10 pt-0">
             <div class="news-head">
                 <div class="news-title">{{ $t("Янгиликлар") }}</div>
                 <router-link to="/news"  class="all-news_link"> <span>{{ $t("Барча янгиликлар") }}</span>
@@ -30,7 +30,7 @@
                 </router-link>
             </div>
 
-            <v-carousel cycle interval="3000" hide-delimiters class="news-carousel" style="height: 360px">
+            <v-carousel cycle interval="3000" hide-delimiters class="news-carousel">
                 <v-carousel-item v-for="(newsItem,key) in news" id="yangi">
                     <div class="news in-style">
                         <div class="news-content" style="margin-top: -20%">

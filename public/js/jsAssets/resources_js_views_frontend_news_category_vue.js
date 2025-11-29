@@ -150,7 +150,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return _src_services_apiService__WEBPACK_IMPORTED_MODULE_1__["default"].readCategory(_this2.$route.params.slug, true, null).then(function (response) {
                   _this2.category = response.data.data; //this.category.news = response.data.data.news.data;
 
-                  //this.category.news = response.data.data.news.data;
                   _this2.category.news.map(function (i) {
                     var dateParts = i.created_at.split("T");
                     if (new Date(i.created_at).getDate() === new Date().getDate() && dateParts.length > 1) i.created_at = dateParts[1].substring(0, 5);else i.created_at = dateParts[0];

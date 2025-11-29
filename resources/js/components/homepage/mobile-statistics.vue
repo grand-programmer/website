@@ -1,5 +1,5 @@
 <template>
-    <div class="row content" style="min-height: 210vw;" :style="stat_type===3 ? 'min-height: 275vw' : ''">
+    <div class="row content" style="min-height: min-content; height: max-content" :style="[stat_type===3 ? 'min-height: 275vw' : '']">
         <div style="height: max-content;">
             <h3 style="font-size: 14px; color: #007F5F; font-weight: bold; text-transform: uppercase; text-align: center">
                 {{ $t('Товарларнинг ташқи савдо') }}
@@ -11,40 +11,40 @@
                         {{ rejimItem.title }}
                     </a>
                 </li>
-                <li>
+<!--                <li>
                     <a class="stat_a" href="https://charts.customs.uz" target="_blank">
                         {{ $t("Барча статистика") }}
                     </a>
-                </li>
+                </li>-->
             </ul>
         </div>
         <template class="template_btn" v-for="rejimItem in regimes">
             <div v-if="stat_type===rejimItem.value" :class="stat_type!==rejimItem.value? 'd-none':''" :key="'asdasdasd' + rejimItem.value">
                 <div>
-                    <div v-if="stat_type!==4" style="margin-top: 10px; width: max-content; float: right">
-                        <v-btn style="font-size: 8px" :color="regime===1?'primary':'#F1F5F9'" :style="regime!==1?'color: #39ae69;':'' " small class="ma-0 py-4" @click="regime=1">
+                    <div v-if="stat_type!==4" style="width: max-content; float: right" class="py-4">
+                        <v-btn style="font-size: 10px" :color="regime===1?'primary':'#F1F5F9'" :style="regime!==1?'color: #39ae69;':'' " small class="ma-0 py-4" @click="regime=1">
                             {{ $t("Импорт") }}
                         </v-btn>
-                        <v-btn style="font-size: 8px" :color="regime===2?'primary':'#F1F5F9'" :style="regime!==2?'color: #39ae69;':'' " small class="ma-0 py-4" @click="regime=2">
+                        <v-btn style="font-size: 10px" :color="regime===2?'primary':'#F1F5F9'" :style="regime!==2?'color: #39ae69;':'' " small class="ma-0 py-4" @click="regime=2">
                             {{ $t("Экспорт") }}
                         </v-btn>
                     </div>
-                    <div v-if="stat_type===4" style="margin-top: 10px; width: max-content; float: right">
-                        <v-btn style="font-size: 8px" :color="type===1?'primary':'#F1F5F9'" :style="type!==1?'color: #39ae69;':'' " small class="ma-0 py-4" @click="type=1">
+                    <div v-if="stat_type===4" style="width: max-content; float: right" class="py-4">
+                        <v-btn style="font-size: 10px" :color="type===1?'primary':'#F1F5F9'" :style="type!==1?'color: #39ae69;':'' " small class="ma-0 py-4" @click="type=1">
                             {{ $t("Озиқ - овқат") }}
                         </v-btn>
-                        <v-btn style="font-size: 8px" :color="type===2?'primary':'#F1F5F9'" :style="type!==2?'color: #39ae69;':'' " small class="ma-0 py-4" @click="type=2">
+                        <v-btn style="font-size: 10px" :color="type===2?'primary':'#F1F5F9'" :style="type!==2?'color: #39ae69;':'' " small class="ma-0 py-4" @click="type=2">
                             {{ $t("Ноозиқ - овқат") }}
                         </v-btn>
                     </div>
-                    <div style="display: flex; width: max-content; float: right; padding-top: 5px">
+                    <div style="display: flex; width: max-content; justify-content: center; padding-top: 5px; gap: 5px">
                         <v-select
                             :items="years"
                             v-model="year"
                             solo
                             dense
                             hide-details
-                            style="font-size: 8px; max-width: 100px; padding-right: 5px"
+                            style="font-size: 10px; max-width: 120px"
                         ></v-select>
                         <v-select
                             :items="computedMonths"
@@ -52,7 +52,7 @@
                             item-value="value"
                             solo
                             dense
-                            style="font-size: 8px; max-width: 100px; padding-right: 5px"
+                            style="font-size: 10px; max-width: 110px"
                             hide-details
                             :suffix="$t('дан')"
                         ></v-select>
@@ -64,7 +64,7 @@
                             :item-disabled="(item)=>item.value===0"
                             solo
                             dense
-                            style="font-size: 8px; max-width: 100px"
+                            style="font-size: 10px; max-width: 110px"
                             hide-details
                             clearable
                             :suffix="$t('гача')"

@@ -13,14 +13,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var vee_validate__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! vee-validate */ "./node_modules/vee-validate/dist/vee-validate.esm.js");
-/* harmony import */ var _components_form_myfield__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../components/form/myfield */ "./resources/js/components/form/myfield.vue");
-/* harmony import */ var _locales_oz_json__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../locales/oz.json */ "./resources/js/locales/oz.json");
-/* harmony import */ var _i18n__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../i18n */ "./resources/js/i18n.js");
-/* harmony import */ var _components_form_textfield__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../components/form/textfield */ "./resources/js/components/form/textfield.vue");
-/* harmony import */ var _components_form_autocomplete__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../components/form/autocomplete */ "./resources/js/components/form/autocomplete.vue");
-/* harmony import */ var _components_form_e_arxiv_file__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../../components/form/e-arxiv-file */ "./resources/js/components/form/e-arxiv-file.vue");
-/* harmony import */ var _components_form_dialog_chips__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../../components/form/dialog-chips */ "./resources/js/components/form/dialog-chips.vue");
+/* harmony import */ var vee_validate__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vee-validate */ "./node_modules/vee-validate/dist/vee-validate.esm.js");
+/* harmony import */ var _components_form_myfield__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../components/form/myfield */ "./resources/js/components/form/myfield.vue");
+/* harmony import */ var vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vee-validate/dist/rules */ "./node_modules/vee-validate/dist/rules.js");
+/* harmony import */ var _locales_oz_json__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../locales/oz.json */ "./resources/js/locales/oz.json");
+/* harmony import */ var _i18n__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../i18n */ "./resources/js/i18n.js");
+/* harmony import */ var _components_form_textfield__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../../components/form/textfield */ "./resources/js/components/form/textfield.vue");
+/* harmony import */ var _components_form_autocomplete__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../../components/form/autocomplete */ "./resources/js/components/form/autocomplete.vue");
+/* harmony import */ var _components_form_e_arxiv_file__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../../components/form/e-arxiv-file */ "./resources/js/components/form/e-arxiv-file.vue");
+/* harmony import */ var _components_form_dialog_chips__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../../components/form/dialog-chips */ "./resources/js/components/form/dialog-chips.vue");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -316,17 +317,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   data: function data() {
     return {
       breadcrumb_items: [{
-        text: _i18n__WEBPACK_IMPORTED_MODULE_3__["default"].t('Асосий саҳифа'),
+        text: _i18n__WEBPACK_IMPORTED_MODULE_5__["default"].t('Асосий саҳифа'),
         to: '/',
         disabled: false,
         exact: true
       }, {
-        text: _i18n__WEBPACK_IMPORTED_MODULE_3__["default"].t('Хизматлар'),
+        text: _i18n__WEBPACK_IMPORTED_MODULE_5__["default"].t('Хизматлар'),
         to: '/services',
         disabled: false,
         exact: true
       }, {
-        text: _i18n__WEBPACK_IMPORTED_MODULE_3__["default"].t('Ҳисобварағидаги маблағларини қайтариш'),
+        text: _i18n__WEBPACK_IMPORTED_MODULE_5__["default"].t('Ҳисобварағидаги маблағларини қайтариш'),
         to: '/services/refund',
         disabled: true,
         exact: true
@@ -524,10 +525,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     ///this.$cookie.delete('user');
                     //this.$cookie.delete('huquqegasi');
 
-                    //console.log(resultData.data)
-                    ///this.$cookie.delete('user');
-                    //this.$cookie.delete('huquqegasi');
-                    _this.$toast.success(_i18n__WEBPACK_IMPORTED_MODULE_3__["default"].t("Сизнинг аризангиз омадли тарзда юборилди!"));
+                    _this.$toast.success(_i18n__WEBPACK_IMPORTED_MODULE_5__["default"].t("Сизнинг аризангиз омадли тарзда юборилди!"));
 
                     setTimeout(function () {
                       _this.$router.push("/services/refund/" + _this.application.id);
@@ -553,7 +551,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     _this.showFirstError(_context.t0.response.data.data.errors);
                   }
                 } else {
-                  _this.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_3__["default"].t("Серверда хатолик юз берди! Кейинроқ уриниб кўринг"));
+                  _this.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_5__["default"].t("Серверда хатолик юз берди! Кейинроқ уриниб кўринг"));
 
                   console.log(_context.t0);
                 }
@@ -586,7 +584,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
 
       toast = getkeyValue(error);
-      this.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_3__["default"].t("Майдонларни тўлдиришда хатолик юз берди!") + '\n' + toast.key + ' - ' + toast.value);
+      this.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_5__["default"].t("Майдонларни тўлдиришда хатолик юз берди!") + '\n' + toast.key + ' - ' + toast.value);
     },
     getBoshqarmalar: function getBoshqarmalar() {
       var _this3 = this;
@@ -919,13 +917,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   },
   components: {
-    DialogChips: _components_form_dialog_chips__WEBPACK_IMPORTED_MODULE_7__["default"],
-    EArxivFile: _components_form_e_arxiv_file__WEBPACK_IMPORTED_MODULE_6__["default"],
-    AutocompleteField: _components_form_autocomplete__WEBPACK_IMPORTED_MODULE_5__["default"],
-    TextField: _components_form_textfield__WEBPACK_IMPORTED_MODULE_4__["default"],
-    ValidationProvider: vee_validate__WEBPACK_IMPORTED_MODULE_8__.ValidationProvider,
-    ValidationObserver: vee_validate__WEBPACK_IMPORTED_MODULE_8__.ValidationObserver,
-    Myfield: _components_form_myfield__WEBPACK_IMPORTED_MODULE_1__["default"]
+    DialogChips: _components_form_dialog_chips__WEBPACK_IMPORTED_MODULE_9__["default"],
+    EArxivFile: _components_form_e_arxiv_file__WEBPACK_IMPORTED_MODULE_8__["default"],
+    AutocompleteField: _components_form_autocomplete__WEBPACK_IMPORTED_MODULE_7__["default"],
+    TextField: _components_form_textfield__WEBPACK_IMPORTED_MODULE_6__["default"],
+    ValidationProvider: vee_validate__WEBPACK_IMPORTED_MODULE_1__.ValidationProvider,
+    ValidationObserver: vee_validate__WEBPACK_IMPORTED_MODULE_1__.ValidationObserver,
+    Myfield: _components_form_myfield__WEBPACK_IMPORTED_MODULE_2__["default"]
   }
 });
 

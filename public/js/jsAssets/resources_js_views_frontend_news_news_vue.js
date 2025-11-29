@@ -219,10 +219,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                       this.news.created_at = dateParts[1].substring(0, 5);
                   else this.news.created_at = dateParts[0];*/
 
-                  /*let dateParts = this.news.created_at.split("T");
-                  if ((new Date(this.news.created_at)).getDate() === (new Date).getDate())
-                      this.news.created_at = dateParts[1].substring(0, 5);
-                  else this.news.created_at = dateParts[0];*/
                   if (_this3.news.categories.length > 0) {
                     _this3.breadcrumb_items[2].text = _this3.news.categories[0].title;
                     _this3.breadcrumb_items[2].to = "/category/" + _this3.news.categories[0].slug;

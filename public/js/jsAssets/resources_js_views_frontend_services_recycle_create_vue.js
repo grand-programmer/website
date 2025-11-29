@@ -13,12 +13,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var vee_validate__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vee-validate */ "./node_modules/vee-validate/dist/vee-validate.esm.js");
-/* harmony import */ var _locales_oz_json__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../locales/oz.json */ "./resources/js/locales/oz.json");
-/* harmony import */ var _i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../i18n */ "./resources/js/i18n.js");
-/* harmony import */ var _components_form_autocomplete__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../components/form/autocomplete */ "./resources/js/components/form/autocomplete.vue");
-/* harmony import */ var _components_form_e_arxiv_file__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../components/form/e-arxiv-file */ "./resources/js/components/form/e-arxiv-file.vue");
-/* harmony import */ var _components_form_textfield__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../components/form/textfield */ "./resources/js/components/form/textfield.vue");
+/* harmony import */ var vee_validate__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vee-validate */ "./node_modules/vee-validate/dist/vee-validate.esm.js");
+/* harmony import */ var vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vee-validate/dist/rules */ "./node_modules/vee-validate/dist/rules.js");
+/* harmony import */ var _locales_oz_json__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../locales/oz.json */ "./resources/js/locales/oz.json");
+/* harmony import */ var _i18n__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../i18n */ "./resources/js/i18n.js");
+/* harmony import */ var _components_form_autocomplete__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../components/form/autocomplete */ "./resources/js/components/form/autocomplete.vue");
+/* harmony import */ var _components_form_e_arxiv_file__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../../components/form/e-arxiv-file */ "./resources/js/components/form/e-arxiv-file.vue");
+/* harmony import */ var _components_form_textfield__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../../components/form/textfield */ "./resources/js/components/form/textfield.vue");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -1130,36 +1131,36 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       search_inn: null,
       colors: ['#000000', '#d747a4', '#1e2de5', '#39e70e', '#7ed1f1', '#c9b210'],
       maqomlar: [{
-        text: typeof this.application !== 'undefined' && this.application.rejim === 200 ? _i18n__WEBPACK_IMPORTED_MODULE_2__["default"].t("Олиб чиқиладиган товарлар") : _i18n__WEBPACK_IMPORTED_MODULE_2__["default"].t("Олиб кириладиган товарлар"),
+        text: typeof this.application !== 'undefined' && this.application.rejim === 200 ? _i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t("Олиб чиқиладиган товарлар") : _i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t("Олиб кириладиган товарлар"),
         value: 1
       }, {
-        text: typeof this.application !== 'undefined' && this.application.rejim === 200 ? _i18n__WEBPACK_IMPORTED_MODULE_2__["default"].t("Ишлатиладиган чет эл товари") : _i18n__WEBPACK_IMPORTED_MODULE_2__["default"].t("Ўзбекистон товари"),
+        text: typeof this.application !== 'undefined' && this.application.rejim === 200 ? _i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t("Ишлатиладиган чет эл товари") : _i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t("Ўзбекистон товари"),
         value: 2
       }, {
-        text: _i18n__WEBPACK_IMPORTED_MODULE_2__["default"].t("Қайта ишлаш маҳсулоти"),
+        text: _i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t("Қайта ишлаш маҳсулоти"),
         value: 3
       }, {
-        text: _i18n__WEBPACK_IMPORTED_MODULE_2__["default"].t("Қайта ишлашда ҳосил бўладиган иккиламчи товар"),
+        text: _i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t("Қайта ишлашда ҳосил бўладиган иккиламчи товар"),
         value: 4
       }, {
-        text: _i18n__WEBPACK_IMPORTED_MODULE_2__["default"].t("Чиқиндилар"),
+        text: _i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t("Чиқиндилар"),
         value: 5
       }, {
-        text: _i18n__WEBPACK_IMPORTED_MODULE_2__["default"].t("Йўқ бўлиб кетадиган товарлар"),
+        text: _i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t("Йўқ бўлиб кетадиган товарлар"),
         value: 6
       }],
       breadcrumb_items: [{
-        text: _i18n__WEBPACK_IMPORTED_MODULE_2__["default"].t('Асосий саҳифа'),
+        text: _i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t('Асосий саҳифа'),
         to: '/',
         disabled: false,
         exact: true
       }, {
-        text: _i18n__WEBPACK_IMPORTED_MODULE_2__["default"].t('Хизматлар'),
+        text: _i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t('Хизматлар'),
         to: '/services',
         disabled: false,
         exact: true
       }, {
-        text: _i18n__WEBPACK_IMPORTED_MODULE_2__["default"].t('Товарни божхона ҳудудида/ҳудудидан ташқарида қайта ишлаш учун рухсатнома бериш тўғрисида ариза'),
+        text: _i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t('Товарни божхона ҳудудида/ҳудудидан ташқарида қайта ишлаш учун рухсатнома бериш тўғрисида ариза'),
         to: '/services/decisions',
         disabled: true,
         exact: true
@@ -1167,28 +1168,28 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       tovarIndex: 0,
       tab: 0,
       headers: [{
-        text: _i18n__WEBPACK_IMPORTED_MODULE_2__["default"].t('ТИФ ТН'),
+        text: _i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t('ТИФ ТН'),
         align: 'start',
         value: 'tftn.id'
       }, {
-        text: _i18n__WEBPACK_IMPORTED_MODULE_2__["default"].t('Товар номи'),
+        text: _i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t('Товар номи'),
         align: 'start',
         value: 'nomlanishi'
       }, {
-        text: _i18n__WEBPACK_IMPORTED_MODULE_2__["default"].t('Товар миқдори'),
+        text: _i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t('Товар миқдори'),
         align: 'start',
         value: 'weight'
       }],
       subHeaders: [{
-        text: _i18n__WEBPACK_IMPORTED_MODULE_2__["default"].t('Товар номи'),
+        text: _i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t('Товар номи'),
         align: 'start',
         value: 'nomlanishi'
       }, {
-        text: _i18n__WEBPACK_IMPORTED_MODULE_2__["default"].t('Товар миқдори'),
+        text: _i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t('Товар миқдори'),
         align: 'start',
         value: 'miqdor'
       }, {
-        text: _i18n__WEBPACK_IMPORTED_MODULE_2__["default"].t('Операция'),
+        text: _i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t('Операция'),
         align: 'start',
         value: 'actions'
       }],
@@ -1301,42 +1302,42 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       completedSteps: [],
       tags: [],
       methodIdentificationsIn: [{
-        text: _i18n__WEBPACK_IMPORTED_MODULE_2__["default"].t("Қайта ишлаш учун олиб кирилаётган товарга муҳрлар қўйиш ва зарур бўлганда штамплар қўйиш, рақамли тарзда ва (ёки) бошқача тарзда тамғалаш"),
+        text: _i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t("Қайта ишлаш учун олиб кирилаётган товарга муҳрлар қўйиш ва зарур бўлганда штамплар қўйиш, рақамли тарзда ва (ёки) бошқача тарзда тамғалаш"),
         value: 1
       }, {
-        text: _i18n__WEBPACK_IMPORTED_MODULE_2__["default"].t("Қайта ишлаш учун олиб кирилаётган товарни батафсил тавсифлаш, уни фотосуратга тушириш ёки бошқа ўлчамда тасвирлаш"),
+        text: _i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t("Қайта ишлаш учун олиб кирилаётган товарни батафсил тавсифлаш, уни фотосуратга тушириш ёки бошқа ўлчамда тасвирлаш"),
         value: 2
       }, {
-        text: _i18n__WEBPACK_IMPORTED_MODULE_2__["default"].t("Қайта ишлаш учун олиб кирилаётган товарнинг олдиндан олинган намуналарини ёки нусхаларини ва унинг қайта ишланган маҳсулотини тадқиқ этиш натижаларини қиёслаш"),
+        text: _i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t("Қайта ишлаш учун олиб кирилаётган товарнинг олдиндан олинган намуналарини ёки нусхаларини ва унинг қайта ишланган маҳсулотини тадқиқ этиш натижаларини қиёслаш"),
         value: 3
       }, {
-        text: _i18n__WEBPACK_IMPORTED_MODULE_2__["default"].t("Қайта ишлаш учун олиб кирилаётган товарнинг завод ва серия рақамлари тарзидаги мавжуд тамғаланишидан ёхуд бошқача тарздаги тамғаланишидан фойдаланиш"),
+        text: _i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t("Қайта ишлаш учун олиб кирилаётган товарнинг завод ва серия рақамлари тарзидаги мавжуд тамғаланишидан ёхуд бошқача тарздаги тамғаланишидан фойдаланиш"),
         value: 4
       }, {
-        text: _i18n__WEBPACK_IMPORTED_MODULE_2__["default"].t("Бошқа усуллар"),
+        text: _i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t("Бошқа усуллар"),
         value: 5
       }],
       methodIdentificationsOut: [{
-        text: _i18n__WEBPACK_IMPORTED_MODULE_2__["default"].t("Қайта ишлаш учун олиб чиқилаётган товарга ваколатли шахс ва (ёки) божхона органи томонидан муҳрлар қўйиш ва, зарур бўлган ҳолларда, штамплар қўйиш, рақамли ва (ёки) бошқа турда тамғалаш"),
+        text: _i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t("Қайта ишлаш учун олиб чиқилаётган товарга ваколатли шахс ва (ёки) божхона органи томонидан муҳрлар қўйиш ва, зарур бўлган ҳолларда, штамплар қўйиш, рақамли ва (ёки) бошқа турда тамғалаш"),
         value: 1
       }, {
-        text: _i18n__WEBPACK_IMPORTED_MODULE_2__["default"].t("Қайта ишлаш учун олиб чиқилаётган товарни батафсил тавсифлаш, уни суратга тушириш ёки бошқа ўлчамларда тасвирлаш"),
+        text: _i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t("Қайта ишлаш учун олиб чиқилаётган товарни батафсил тавсифлаш, уни суратга тушириш ёки бошқа ўлчамларда тасвирлаш"),
         value: 2
       }, {
-        text: _i18n__WEBPACK_IMPORTED_MODULE_2__["default"].t("Қайта ишлаш учун олиб чиқилаётган товарнинг олдиндан олинган намуналарини ёки нусхаларини ва уни қайта ишлаш маҳсулотини тадқиқ этиш натижаларини қиёслаш"),
+        text: _i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t("Қайта ишлаш учун олиб чиқилаётган товарнинг олдиндан олинган намуналарини ёки нусхаларини ва уни қайта ишлаш маҳсулотини тадқиқ этиш натижаларини қиёслаш"),
         value: 3
       }, {
-        text: _i18n__WEBPACK_IMPORTED_MODULE_2__["default"].t("Қайта ишлаш учун олиб чиқилаётган товарнинг завод ва серия рақамлари тарзида мавжуд бўлган тамғалашдан ёхуд бошқача тамғалашдан фойдаланиш"),
+        text: _i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t("Қайта ишлаш учун олиб чиқилаётган товарнинг завод ва серия рақамлари тарзида мавжуд бўлган тамғалашдан ёхуд бошқача тамғалашдан фойдаланиш"),
         value: 4
       }, {
-        text: _i18n__WEBPACK_IMPORTED_MODULE_2__["default"].t("Бошқа усуллар"),
+        text: _i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t("Бошқа усуллар"),
         value: 5
       }],
       regims: [{
-        text: _i18n__WEBPACK_IMPORTED_MODULE_2__["default"].t('Божхона ҳудудида қайта ишлаш'),
+        text: _i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t('Божхона ҳудудида қайта ишлаш'),
         value: 100
       }, {
-        text: _i18n__WEBPACK_IMPORTED_MODULE_2__["default"].t('Божхона ҳудудидан ташқарида қайта ишлаш'),
+        text: _i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t('Божхона ҳудудидан ташқарида қайта ишлаш'),
         value: 200
       }],
       loadingButton: {
@@ -1436,7 +1437,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       }
 
       toast = getkeyValue(error);
-      this.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_2__["default"].t('Майдонларни тўлдиришда хатолик юз берди!') + toast.key + ' - ' + toast.value);
+      this.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t('Майдонларни тўлдиришда хатолик юз берди!') + toast.key + ' - ' + toast.value);
     },
     getCurrencies: function getCurrencies() {
       var _this2 = this;
@@ -1935,8 +1936,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
                             _this.completedSteps.push(_this.stepper - 1);
 
-                            _this.$toast.success(_i18n__WEBPACK_IMPORTED_MODULE_2__["default"].t("Аризачи маълумотлари сақланди!"));
-                          } else _this6.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_2__["default"].t("Маълумотлар киритишда хатолик юз берди. Қайта уриниб кўринг!"));
+                            _this.$toast.success(_i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t("Аризачи маълумотлари сақланди!"));
+                          } else _this6.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t("Маълумотлар киритишда хатолик юз берди. Қайта уриниб кўринг!"));
 
                         case 13:
                           _this6.loadingButton.first = false;
@@ -2045,7 +2046,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
                             _this.completedSteps.push(_this.stepper - 1);
 
-                            _this.$toast.success(_i18n__WEBPACK_IMPORTED_MODULE_2__["default"].t("Ариза умумий маълумотлари сақланди!"));
+                            _this.$toast.success(_i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t("Ариза умумий маълумотлари сақланди!"));
                           } else {
                             if (typeof resultData.data !== 'undefined' && resultData.data && typeof resultData.data.data !== 'undefined' && resultData.data.data && typeof resultData.data.data.errors !== 'undefined' && _typeof(resultData.data.data.errors)) {
                               if (typeof resultData.data.data.errors.appsBody !== 'undefined') _this.setCommonErrors(resultData.data.data.errors.appsBody);
@@ -2056,8 +2057,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
                                 if (typeof resultData.data.data.errors.docsBody[0] !== 'undefined' && typeof resultData.data.data.errors.docsBody[0]['fileId'] !== 'undefined') _this.application.ilova_error = resultData.data.data.errors.docsBody[0]['fileId'];
                               }
 
-                              _this6.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_2__["default"].t("Маълумотларингизни тўғрилаб юборинг!"));
-                            } else _this6.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_2__["default"].t("Маълумотлар киритишда хатолик юз берди. Қайта уриниб кўринг!"));
+                              _this6.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t("Маълумотларингизни тўғрилаб юборинг!"));
+                            } else _this6.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t("Маълумотлар киритишда хатолик юз берди. Қайта уриниб кўринг!"));
                           }
 
                         case 21:
@@ -2134,7 +2135,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
                             //console.log(resultData.data)
                             _this6.$cookie["delete"]('user');
 
-                            _this6.$toast.success(_i18n__WEBPACK_IMPORTED_MODULE_2__["default"].t("Сизнинг аризангиз омадли тарзда юборилди!"));
+                            _this6.$toast.success(_i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t("Сизнинг аризангиз омадли тарзда юборилди!"));
 
                             setTimeout(function () {
                               _this.$router.push("/services/recycle/" + _this.app.id);
@@ -2151,8 +2152,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
                                 }); //_this.setProductErrors(resultData.data.data.errorsCommodity);
                               } else if (typeof resultData.data.data !== 'undefined' && typeof resultData.data.data.error !== 'undefined') {
                                 _this6.$toast.error(resultData.data.data.error);
-                              } else _this6.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_2__["default"].t("Маълумотларингизни текшириб қайтадан юборинг!"));
-                            } else _this6.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_2__["default"].t("Маълумотлар киритишда хатолик юз берди. Қайта уриниб кўринг!"));
+                              } else _this6.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t("Маълумотларингизни текшириб қайтадан юборинг!"));
+                            } else _this6.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t("Маълумотлар киритишда хатолик юз берди. Қайта уриниб кўринг!"));
                           } // console.log(_this.app)
 
 
@@ -2784,8 +2785,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
   computed: {
     statusList: function statusList() {
       if (this.application.rejim === 200) {
-        this.maqomlar[0].text = _i18n__WEBPACK_IMPORTED_MODULE_2__["default"].t("Олиб чиқиладиган товарлар");
-        this.maqomlar[1].text = _i18n__WEBPACK_IMPORTED_MODULE_2__["default"].t("Ишлатиладиган чет эл товари");
+        this.maqomlar[0].text = _i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t("Олиб чиқиладиган товарлар");
+        this.maqomlar[1].text = _i18n__WEBPACK_IMPORTED_MODULE_4__["default"].t("Ишлатиладиган чет эл товари");
       }
 
       return this.maqomlar;
@@ -2847,11 +2848,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     }
   },
   components: {
-    Textfield: _components_form_textfield__WEBPACK_IMPORTED_MODULE_5__["default"],
-    EArxivFile: _components_form_e_arxiv_file__WEBPACK_IMPORTED_MODULE_4__["default"],
-    AutocompleteField: _components_form_autocomplete__WEBPACK_IMPORTED_MODULE_3__["default"],
-    ValidationProvider: vee_validate__WEBPACK_IMPORTED_MODULE_6__.ValidationProvider,
-    ValidationObserver: vee_validate__WEBPACK_IMPORTED_MODULE_6__.ValidationObserver
+    Textfield: _components_form_textfield__WEBPACK_IMPORTED_MODULE_7__["default"],
+    EArxivFile: _components_form_e_arxiv_file__WEBPACK_IMPORTED_MODULE_6__["default"],
+    AutocompleteField: _components_form_autocomplete__WEBPACK_IMPORTED_MODULE_5__["default"],
+    ValidationProvider: vee_validate__WEBPACK_IMPORTED_MODULE_1__.ValidationProvider,
+    ValidationObserver: vee_validate__WEBPACK_IMPORTED_MODULE_1__.ValidationObserver
   }
 });
 

@@ -13,14 +13,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var vee_validate__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! vee-validate */ "./node_modules/vee-validate/dist/vee-validate.esm.js");
-/* harmony import */ var _components_form_myfield__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../components/form/myfield */ "./resources/js/components/form/myfield.vue");
-/* harmony import */ var _locales_oz_json__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../locales/oz.json */ "./resources/js/locales/oz.json");
-/* harmony import */ var _i18n__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../i18n */ "./resources/js/i18n.js");
-/* harmony import */ var _components_form_textfield__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../components/form/textfield */ "./resources/js/components/form/textfield.vue");
-/* harmony import */ var _components_form_autocomplete__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../components/form/autocomplete */ "./resources/js/components/form/autocomplete.vue");
-/* harmony import */ var _components_form_e_arxiv_file__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../../components/form/e-arxiv-file */ "./resources/js/components/form/e-arxiv-file.vue");
-/* harmony import */ var _components_form_dialog_chips__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../../components/form/dialog-chips */ "./resources/js/components/form/dialog-chips.vue");
+/* harmony import */ var vee_validate__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vee-validate */ "./node_modules/vee-validate/dist/vee-validate.esm.js");
+/* harmony import */ var _components_form_myfield__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../components/form/myfield */ "./resources/js/components/form/myfield.vue");
+/* harmony import */ var vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vee-validate/dist/rules */ "./node_modules/vee-validate/dist/rules.js");
+/* harmony import */ var _locales_oz_json__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../locales/oz.json */ "./resources/js/locales/oz.json");
+/* harmony import */ var _i18n__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../i18n */ "./resources/js/i18n.js");
+/* harmony import */ var _components_form_textfield__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../../components/form/textfield */ "./resources/js/components/form/textfield.vue");
+/* harmony import */ var _components_form_autocomplete__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../../components/form/autocomplete */ "./resources/js/components/form/autocomplete.vue");
+/* harmony import */ var _components_form_e_arxiv_file__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../../components/form/e-arxiv-file */ "./resources/js/components/form/e-arxiv-file.vue");
+/* harmony import */ var _components_form_dialog_chips__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../../components/form/dialog-chips */ "./resources/js/components/form/dialog-chips.vue");
 
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -491,17 +492,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   data: function data() {
     return {
       breadcrumb_items: [{
-        text: _i18n__WEBPACK_IMPORTED_MODULE_3__["default"].t('Асосий саҳифа'),
+        text: _i18n__WEBPACK_IMPORTED_MODULE_5__["default"].t('Асосий саҳифа'),
         to: '/',
         disabled: false,
         exact: true
       }, {
-        text: _i18n__WEBPACK_IMPORTED_MODULE_3__["default"].t('Хизматлар'),
+        text: _i18n__WEBPACK_IMPORTED_MODULE_5__["default"].t('Хизматлар'),
         to: '/services',
         disabled: false,
         exact: true
       }, {
-        text: _i18n__WEBPACK_IMPORTED_MODULE_3__["default"].t('Ҳисобварағидаги маблағларини қайтариш'),
+        text: _i18n__WEBPACK_IMPORTED_MODULE_5__["default"].t('Ҳисобварағидаги маблағларини қайтариш'),
         to: '/services/ppay',
         disabled: true,
         exact: true
@@ -542,22 +543,22 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         file_error: ""
       },
       types: [{
-        text: _i18n__WEBPACK_IMPORTED_MODULE_3__["default"].t('Cуғурта полиси'),
+        text: _i18n__WEBPACK_IMPORTED_MODULE_5__["default"].t('Cуғурта полиси'),
         value: 0
       }, {
-        text: _i18n__WEBPACK_IMPORTED_MODULE_3__["default"].t('Банк кафолати'),
+        text: _i18n__WEBPACK_IMPORTED_MODULE_5__["default"].t('Банк кафолати'),
         value: 1
       }, {
-        text: _i18n__WEBPACK_IMPORTED_MODULE_3__["default"].t('Учинчи шахс кафиллиги'),
+        text: _i18n__WEBPACK_IMPORTED_MODULE_5__["default"].t('Учинчи шахс кафиллиги'),
         value: 2
       }, {
-        text: _i18n__WEBPACK_IMPORTED_MODULE_3__["default"].t('Гаров таъминоти'),
+        text: _i18n__WEBPACK_IMPORTED_MODULE_5__["default"].t('Гаров таъминоти'),
         value: 3
       }, {
-        text: _i18n__WEBPACK_IMPORTED_MODULE_3__["default"].t('Депозитга пул маблағларини киритиш'),
+        text: _i18n__WEBPACK_IMPORTED_MODULE_5__["default"].t('Депозитга пул маблағларини киритиш'),
         value: 4
       }, {
-        text: _i18n__WEBPACK_IMPORTED_MODULE_3__["default"].t('Таъминотсиз'),
+        text: _i18n__WEBPACK_IMPORTED_MODULE_5__["default"].t('Таъминотсиз'),
         value: 5
       }],
       modal: false,
@@ -880,10 +881,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     ///this.$cookie.delete('user');
                     //this.$cookie.delete('huquqegasi');
 
-                    //console.log(resultData.data)
-                    ///this.$cookie.delete('user');
-                    //this.$cookie.delete('huquqegasi');
-                    _this.$toast.success(_i18n__WEBPACK_IMPORTED_MODULE_3__["default"].t("Сизнинг аризангиз омадли тарзда юборилди!"));
+                    _this.$toast.success(_i18n__WEBPACK_IMPORTED_MODULE_5__["default"].t("Сизнинг аризангиз омадли тарзда юборилди!"));
 
                     setTimeout(function () {
                       _this.$router.push("/services/ppay/" + _this.application.id);
@@ -921,14 +919,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   }
 
                   if (errors) _this.setApplicationErrors(errors);else if (typeof _context.t1.response.data.data.errors == 'string') _this.$toast.error(_context.t1.response.data.data.errors);else {
-                    _this.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_3__["default"].t("Серверда хатолик юз берди! Кейинроқ уриниб кўринг"));
+                    _this.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_5__["default"].t("Серверда хатолик юз берди! Кейинроқ уриниб кўринг"));
                   }
 
                   if (typeof _context.t1.response.data !== 'undefined' && typeof _context.t1.response.data.data !== 'undefined' && typeof _context.t1.response.data.data.message !== 'undefined') {
                     _this.$toast.error(_context.t1.response.data.data.message);
                   }
                 } else {
-                  _this.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_3__["default"].t("Серверда хатолик юз берди! Кейинроқ уриниб кўринг!"));
+                  _this.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_5__["default"].t("Серверда хатолик юз берди! Кейинроқ уриниб кўринг!"));
                 }
 
               case 67:
@@ -987,7 +985,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   break;
                 }
 
-                _this.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_3__["default"].t("Фойдаланиш шартларига розилик билдиришингиз лозим!"));
+                _this.$toast.error(_i18n__WEBPACK_IMPORTED_MODULE_5__["default"].t("Фойдаланиш шартларига розилик билдиришингиз лозим!"));
 
                 return _context4.abrupt("return");
 
@@ -1277,13 +1275,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   },
   components: {
-    DialogChips: _components_form_dialog_chips__WEBPACK_IMPORTED_MODULE_7__["default"],
-    EArxivFile: _components_form_e_arxiv_file__WEBPACK_IMPORTED_MODULE_6__["default"],
-    AutocompleteField: _components_form_autocomplete__WEBPACK_IMPORTED_MODULE_5__["default"],
-    TextField: _components_form_textfield__WEBPACK_IMPORTED_MODULE_4__["default"],
-    ValidationProvider: vee_validate__WEBPACK_IMPORTED_MODULE_8__.ValidationProvider,
-    ValidationObserver: vee_validate__WEBPACK_IMPORTED_MODULE_8__.ValidationObserver,
-    Myfield: _components_form_myfield__WEBPACK_IMPORTED_MODULE_1__["default"]
+    DialogChips: _components_form_dialog_chips__WEBPACK_IMPORTED_MODULE_9__["default"],
+    EArxivFile: _components_form_e_arxiv_file__WEBPACK_IMPORTED_MODULE_8__["default"],
+    AutocompleteField: _components_form_autocomplete__WEBPACK_IMPORTED_MODULE_7__["default"],
+    TextField: _components_form_textfield__WEBPACK_IMPORTED_MODULE_6__["default"],
+    ValidationProvider: vee_validate__WEBPACK_IMPORTED_MODULE_1__.ValidationProvider,
+    ValidationObserver: vee_validate__WEBPACK_IMPORTED_MODULE_1__.ValidationObserver,
+    Myfield: _components_form_myfield__WEBPACK_IMPORTED_MODULE_2__["default"]
   }
 });
 

@@ -14,7 +14,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _src_services_adminApi__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../../../src/services/adminApi */ "./resources/js/src/services/adminApi.js");
-/* harmony import */ var _locales_dynamic_uz_json__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../locales/dynamic/uz.json */ "./resources/js/locales/dynamic/uz.json");
+/* harmony import */ var vee_validate__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vee-validate */ "./node_modules/vee-validate/dist/vee-validate.esm.js");
+/* harmony import */ var vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vee-validate/dist/rules */ "./node_modules/vee-validate/dist/rules.js");
+/* harmony import */ var _locales_dynamic_uz_json__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../locales/dynamic/uz.json */ "./resources/js/locales/dynamic/uz.json");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -389,9 +391,9 @@ import en from '../../../locales/dynamic/en.json';*/
             switch (_context2.prev = _context2.next) {
               case 0:
                 _this = _this4;
-                console.log(_locales_dynamic_uz_json__WEBPACK_IMPORTED_MODULE_2__);
+                console.log(_locales_dynamic_uz_json__WEBPACK_IMPORTED_MODULE_4__);
 
-                if (!(_typeof(_locales_dynamic_uz_json__WEBPACK_IMPORTED_MODULE_2__) === 'object')) {
+                if (!(_typeof(_locales_dynamic_uz_json__WEBPACK_IMPORTED_MODULE_4__) === 'object')) {
                   _context2.next = 5;
                   break;
                 }

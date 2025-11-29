@@ -1,6 +1,6 @@
 <template>
     <div class="slide_products" v-if="items.length">
-        <VueSlickCarousel
+        <VueSlickCarousel class="mt-0"
             v-bind="settings"
         >
             <div class="slide_item" v-for="item in items" v-if="item.titleen">

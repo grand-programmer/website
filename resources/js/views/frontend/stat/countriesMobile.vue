@@ -17,7 +17,7 @@
 
                             </div>
                             <div class="slide_item_total_price" v-html="moneyFormat(item.total)"></div>
-                            <div class="slide_item_total_difference">
+                            <div class="slide_item_total_difference" style="padding: 10px">
                             <span>
                                 <p>{{ (item.column1).toFixed(1) }} % <v-icon color="primary">mdi-trending-up</v-icon></p>
                                 <p>{{ $t('ўтган йилга нисбатан') }}</p>

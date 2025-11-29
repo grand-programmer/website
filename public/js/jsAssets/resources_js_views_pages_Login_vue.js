@@ -176,7 +176,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     this.success = true;
                     var redirectTo = 'admin'; //this.$auth.role=
 
-                    //this.$auth.role=
                     this.$store.commit('setLoading', false);
                     this.$router.push('/');
                   },
@@ -185,7 +184,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     _this.error = res.error;
                     /*console.log('sdf');*/
 
-                    /*console.log('sdf');*/
                     this.$store.commit('setLoading', false);
                   },
                   redirect: _this2.$route.query.request ? _this2.$route.query.request : null,
