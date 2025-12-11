@@ -416,7 +416,7 @@ export default {
                 this.loading.telegram = false
                 return
             }
-            await axios.put("/api/v1/admin/news/" + this.$route.params.id, { telegram: true}).then(res =>{
+            await this.$auth.plugins.http.put("/api/v1/admin/news/" + this.$route.params.id, { telegram: true}).then(res =>{
                 if(res.status===200){
                     this.$toast.success('Янгилик телеграм каналга юборилди')
                     this.loading.telegram = false

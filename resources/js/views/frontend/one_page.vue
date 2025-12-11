@@ -11,7 +11,7 @@
         </v-overlay>
 
         <v-header></v-header>
-        <hududiy></hududiy>
+<!--        <hududiy></hududiy>-->
 
         <router-view>
 

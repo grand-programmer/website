@@ -1712,47 +1712,38 @@ a.openMenu1 {
 
     .section .card:nth-child(4) {
         display: none;
-    !important;
     }
 
     .section .card:nth-child(5) {
         display: none;
-    !important;
     }
 
     .section .card:nth-child(6) {
         display: none;
-    !important;
     }
 
     .section .card:nth-child(7) {
         display: none;
-    !important;
     }
 
     .section .card:nth-child(8) {
         display: none;
-    !important;
     }
 
     .section .card:nth-child(9) {
         display: none;
-    !important;
     }
 
     .section .card:nth-child(10) {
         display: none;
-    !important;
     }
 
     .news-content #yangi:nth-child(5) {
         display: none;
-    !important;
     }
 
     .news-content #yangi:nth-child(6) {
         display: none;
-    !important;
     }
 
 }

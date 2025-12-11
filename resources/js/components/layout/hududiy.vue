@@ -1,8 +1,9 @@
 <template>
-    <div class="hududiy section skip collapse">
+    <div class="hududiy section">
         <div id="sharedMap">
             <div class="container-fluid" v-click-outside="hideHududiy">
                 <div class="row">
+                  <h3 style="color: var(--mycolor)">{{ $t('Ҳудудий бошқармалар') }}</h3>
                     <div class="col-8">
                         <div class="map_overlay"></div>
                         <div id="map">

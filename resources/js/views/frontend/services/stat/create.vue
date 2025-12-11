@@ -1238,7 +1238,7 @@ export default {
       return date.toISOString().split('T')[0]; // YYYY-MM-DD
     },
     async getTariffs() {
-      await axios.get('/api/v1/data/tariffs').then(res => {
+      await this.$auth.plugins.http.get('/api/v1/data/tariffs').then(res => {
         this.list.tarifs = res.data
       })
     },
@@ -1247,7 +1247,7 @@ export default {
       if (calculate) {
         try {
           this.loading.calculate = true
-          await axios.get('/api/v1/statservice/price/' + this.$route.params.id, {
+          await this.$auth.plugins.http.get('/api/v1/statservice/price/' + this.$route.params.id, {
             params: {calculate: true}
           }).then(res => {
             _this.loading.calculate = false
@@ -1264,7 +1264,7 @@ export default {
         }
 
       } else
-        await axios.get('/api/v1/statservice/price/' + this.$route.params.id).then(res => {
+        await this.$auth.plugins.http.get('/api/v1/statservice/price/' + this.$route.params.id).then(res => {
           _this.loading.calculate = false
           if (res.data.data) _this.list.prices = res.data.data
           if (res.data.bhm) _this.bhm = res.data.bhm
@@ -1293,13 +1293,13 @@ export default {
 
     },
     async getApplicationTypes() {
-      await axios.get('/api/v1/data/statservicetype').then(res => {
+      await this.$auth.plugins.http.get('/api/v1/data/statservicetype').then(res => {
         console.log(res)
         this.application_types = res.data
       })
     },
     async getApplicationTarmoq() {
-      await axios.get('/api/v1/data/statservice/' + this.$route.params.id + '/tarmoq').then(res => {
+      await this.$auth.plugins.http.get('/api/v1/data/statservice/' + this.$route.params.id + '/tarmoq').then(res => {
 
         this.list.netOrgs = res.data
       })
@@ -1322,7 +1322,7 @@ export default {
     async getStatServices() {
       const _this = this
       this.$store.commit('setLoading', true);
-      await axios.get('/api/v1/statservice/' + this.$route.params.id, {
+      await this.$auth.plugins.http.get('/api/v1/statservice/' + this.$route.params.id, {
         params: {
           pin: this.$auth.user().pin,
           tin: this.$auth.user().tin
@@ -1420,7 +1420,7 @@ export default {
       this.loading.post = true;
       const _this = this
       this.list.posts = [];
-      await axios.get('/api/v1/data/post?code=' + code).then(function (result) {
+      await this.$auth.plugins.http.get('/api/v1/data/post?code=' + code).then(function (result) {
         if (typeof result.data !== 'undefined')
           _this.list.posts = result.data.posts
       }).catch(e => {
@@ -1433,7 +1433,7 @@ export default {
       this.loading.regime = true;
       const _this = this
       this.list.regimes = [];
-      await axios.get('/api/v1/data/' + this.$route.params.id + '/regime').then(function (result) {
+      await this.$auth.plugins.http.get('/api/v1/data/' + this.$route.params.id + '/regime').then(function (result) {
         if (typeof result.data !== 'undefined')
           _this.list.regimes = result.data
         _this.loading.regime = false;
@@ -1450,7 +1450,7 @@ export default {
       const grafalar = JSON.parse(JSON.stringify(this.application.grafalar))
       const _this = this
       this.list.fields = [];
-      await axios.get('/api/v1/data/' + this.$route.params.id + '/fields').then(function (result) {
+      await this.$auth.plugins.http.get('/api/v1/data/' + this.$route.params.id + '/fields').then(function (result) {
         if (typeof result.data !== 'undefined')
           _this.list.fields = result.data.data
         _this.list.primaryFields = result.data.secondary
@@ -1499,7 +1499,7 @@ export default {
             isValid = await this.validateField("stepValidation1");
             if (isValid === true) {
               this.$store.commit('setLoading', true);
-              await axios.post('/api/v1/statservice/' + this.$route.params.id, {
+              await this.$auth.plugins.http.post('/api/v1/statservice/' + this.$route.params.id, {
                 step: _this.stepper,
                 org_name: (this.person.type == 0) ? _this.person.organization_name : this.person.fio,
                 address: this.person.perAdr,
@@ -1532,7 +1532,7 @@ export default {
           setTimeout(async () => {
             if (_this.application.application_type !== null) {
               this.$store.commit('setLoading', true);
-              await axios.post('/api/v1/statservice/' + this.$route.params.id, {
+              await this.$auth.plugins.http.post('/api/v1/statservice/' + this.$route.params.id, {
                 step: _this.stepper,
                 application_type: _this.application.application_type
               }).then(function (res) {
@@ -1565,7 +1565,7 @@ export default {
             isValid = await this.validateField("stepValidation3");
             if (isValid === true) {
               this.$store.commit('setLoading', true);
-              await axios.post('/api/v1/statservice/' + this.$route.params.id, {
+              await this.$auth.plugins.http.post('/api/v1/statservice/' + this.$route.params.id, {
                 pin: _this.$auth.user().pin,
                 tin: _this.$auth.user().tin,
                 step: _this.stepper,
@@ -1609,7 +1609,7 @@ export default {
 
           setTimeout(async () => {
             this.$store.commit('setLoading', true);
-            await axios.post('/api/v1/statservice/' + this.$route.params.id, {
+            await this.$auth.plugins.http.post('/api/v1/statservice/' + this.$route.params.id, {
               pin: _this.$auth.user().pin,
               tin: _this.$auth.user().tin,
               step: _this.stepper,
@@ -1640,7 +1640,7 @@ export default {
 
           setTimeout(async () => {
             this.$store.commit('setLoading', true);
-            await axios.post('/api/v1/statservice/' + this.$route.params.id, {
+            await this.$auth.plugins.http.post('/api/v1/statservice/' + this.$route.params.id, {
               step: _this.stepper,
               id: _this.application.id,
             }).then(function (res) {

@@ -811,7 +811,7 @@ export default {
                 afterLoad: function (origin, destination, direction) {
                     //fullpage_api.init();
 
-                    skipPages(origin, destination, direction);
+                    //skipPages(origin, destination, direction);
                     $('body').on('click', 'a.logo_link', function () {
                         fullpage_api.moveTo(1);
                     })
@@ -896,7 +896,7 @@ export default {
     methods: {
         getFaqs(){
             const _this=this;
-          axios.get('/api/v1/front/faqs').then(function(response){
+          this.$auth.plugins.http.get('/api/v1/front/faqs').then(function(response){
               if(response.status===200) _this.faqs=response.data.data;
 
           });

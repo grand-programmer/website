@@ -20,7 +20,7 @@
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="left-bar">
-                                        <div class="rahbar-items">
+                                        <div class="rahbar-items" v-if="rahbariyat">
                                             <div class="rahbar-item"
                                                  :class="aktiv_rahbar===rahbar.id?'active':''"
 
@@ -353,16 +353,16 @@ $first-color: #39ae69;
                 top: 20px;
             }
             &.rahbar2{
-                top: 175px;
+                top: 15rem;
             }
             &.rahbar3{
-                top: 350px;
+                top: 30rem;
             }
             &.rahbar4{
-                top: 530px;
+                top: 40rem;
             }
             &.rahbar5{
-                top: 685px;
+                top: 55rem;
             }
 
             &:before {

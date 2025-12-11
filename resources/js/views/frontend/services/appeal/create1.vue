@@ -252,7 +252,7 @@ export default {
         async create_appeal() {
             const isValid = await this.$refs.create_apple.validate();
             if (isValid) {
-                axios
+                this.$auth.plugins.http
                     .post('/api/v1/appeal', this.appeal)
                     .then((resp) => {
                         if (resp.status == 200) {

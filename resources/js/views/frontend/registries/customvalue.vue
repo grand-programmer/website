@@ -396,7 +396,7 @@ export default {
             const _this = this;
             setTimeout(async () => {
 
-                await axios.post('/api/v1/ex_api/customprice-registries',_this.hfilters).then(function (res) {
+                await this.$auth.plugins.http.post('/api/v1/ex_api/customprice-registries',_this.hfilters).then(function (res) {
                     _this.decisions = res.data.inDecReestr;
                     _this.totalDecisions = res.data.totalItems;
 
@@ -408,7 +408,7 @@ export default {
 
 
         /**
-         * In a real application this would be a call to fetch() or axios.get()
+         * In a real application this would be a call to fetch() or this.$auth.plugins.http.get()
          */
         fakeApiCall() {
             console.log(this.options);

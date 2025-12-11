@@ -12,7 +12,7 @@
         </v-overlay>
         <loading-bar></loading-bar>
         <full-page :options="options" ref="fullpage" id="fullpage" :skip-init="false" v-if="isMobile===false">
-            <hududiy></hududiy>
+<!--            <hududiy></hududiy>-->
 
 
             <div class="section" id="section0">
@@ -540,9 +540,9 @@ export default {
                 afterLoad: function (origin, destination, direction) {
                     //fullpage_api.init();
 
-                    skipPages(origin, destination, direction);
+                    //skipPages(origin, destination, direction);
                     $('body').on('click', 'a.logo_link', function () {
-                        fullpage_api.moveTo(1);
+                        fullpage_api.moveTo(0);
                     })
                 }
             },

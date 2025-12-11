@@ -1,3 +1,5 @@
+import Vue from "vue";
+
 var apiUrl = "/api/v1/admin/";
 const multipartformdata = {
     headers: {
@@ -6,319 +8,319 @@ const multipartformdata = {
 }
 const apiClient = {
     async addAppeals(requestData) {
-        return await axios.get(apiUrl + "appeal", requestData);
+        return await Vue.prototype.$auth.plugins.http.get(apiUrl + "appeal", requestData);
     },
     async readAppeals() {
-        return await axios.get(apiUrl + "appeal");
+        return await Vue.prototype.$auth.plugins.http.get(apiUrl + "appeal");
     },
     async checkAppeal(requestData) {
-        return await axios.post(apiUrl + "appeal/checkAppeal", requestData);
+        return await Vue.prototype.$auth.plugins.http.post(apiUrl + "appeal/checkAppeal", requestData);
     },
     async deleteAppeal(appealId) {
-        return await axios.delete(apiUrl + "appeal/" + appealId);
+        return await Vue.prototype.$auth.plugins.http.delete(apiUrl + "appeal/" + appealId);
     },
     async readPages() {
-        return await axios.get(apiUrl + "page");
+        return await Vue.prototype.$auth.plugins.http.get(apiUrl + "page");
     },
     async addPage(requestData) {
-        return await axios.post(apiUrl + "page", requestData);
+        return await Vue.prototype.$auth.plugins.http.post(apiUrl + "page", requestData);
     },
     async updatePage(id, requestData) {
-        return await axios.put(apiUrl + "page/" + id, requestData);
+        return await Vue.prototype.$auth.plugins.http.put(apiUrl + "page/" + id, requestData);
     },
     async readPage(id) {
-        return await axios.get(apiUrl + "page/" + id);
+        return await Vue.prototype.$auth.plugins.http.get(apiUrl + "page/" + id);
     },
     async readRelated(id) {
-        return await axios.post(apiUrl + "page/related/" + id);
+        return await Vue.prototype.$auth.plugins.http.post(apiUrl + "page/related/" + id);
     },
     async deletePage(id) {
-        return await axios.delete(apiUrl + "page/" + id);
+        return await Vue.prototype.$auth.plugins.http.delete(apiUrl + "page/" + id);
     },
     ///////// Files
     async readFiles(Request) {
 
-        return await axios.get(apiUrl + "file", { params: Request});
+        return await Vue.prototype.$auth.plugins.http.get(apiUrl + "file", { params: Request});
     },
     async addFile(requestData) {
-        return await axios.post(apiUrl + "file", requestData,multipartformdata);
+        return await Vue.prototype.$auth.plugins.http.post(apiUrl + "file", requestData,multipartformdata);
     },
     async updateFile(id, requestData, header) {
-        return await axios.post(apiUrl + "file/" + id, requestData, (header!==null) ? header : multipartformdata);
+        return await Vue.prototype.$auth.plugins.http.post(apiUrl + "file/" + id, requestData, (header!==null) ? header : multipartformdata);
     },
     async readFile(id) {
-        return await axios.get(apiUrl + "file/" + id);
+        return await Vue.prototype.$auth.plugins.http.get(apiUrl + "file/" + id);
     },
     async deleteFile(id) {
-        return await axios.delete(apiUrl + "file/" + id);
+        return await Vue.prototype.$auth.plugins.http.delete(apiUrl + "file/" + id);
     },
 
     //////////////////////// Categories Begin/////////////////////////////
     async readCategories(limit = 0) {
         if (limit > 0)
-            return await axios.get(apiUrl + "categories?limit=" + limit);
+            return await Vue.prototype.$auth.plugins.http.get(apiUrl + "categories?limit=" + limit);
         else
-            return await axios.get(apiUrl + "categories");
+            return await Vue.prototype.$auth.plugins.http.get(apiUrl + "categories");
     },
     async readCategoriesForSelect() {
-        return await axios.get(apiUrl + "categories/select");
+        return await Vue.prototype.$auth.plugins.http.get(apiUrl + "categories/select");
     },
     async addCategory(requestData) {
-        return await axios.post(apiUrl + "categories", requestData);
+        return await Vue.prototype.$auth.plugins.http.post(apiUrl + "categories", requestData);
     },
     async updateCategory(id, requestData) {
-        return await axios.put(apiUrl + "categories/" + id, requestData);
+        return await Vue.prototype.$auth.plugins.http.put(apiUrl + "categories/" + id, requestData);
     },
     async readCategory(slug, withNews = false) {
         if (withNews)
-            return await axios.get(apiUrl + "categories/" + slug + "?withnews=1",);
+            return await Vue.prototype.$auth.plugins.http.get(apiUrl + "categories/" + slug + "?withnews=1",);
         else
-            return await axios.get(apiUrl + "categories/" + slug);
+            return await Vue.prototype.$auth.plugins.http.get(apiUrl + "categories/" + slug);
     },
     async deleteCategory(id) {
-        return await axios.delete(apiUrl + "categories/" + id);
+        return await Vue.prototype.$auth.plugins.http.delete(apiUrl + "categories/" + id);
     },
     //////////////////////// Categories End /////////////////////////////
 
 
     //////////////////////// News Begin/////////////////////////////
     async readNews(requestData) {
-        return await axios.get(apiUrl + "news", {params: requestData});
+        return await Vue.prototype.$auth.plugins.http.get(apiUrl + "news", {params: requestData});
     },
     async readRelatedNews() {
-        return await axios.get(apiUrl + "news/related");
+        return await Vue.prototype.$auth.plugins.http.get(apiUrl + "news/related");
     },
     async addNews(requestData) {
-        return await axios.post(apiUrl + "news", requestData, multipartformdata);
+        return await Vue.prototype.$auth.plugins.http.post(apiUrl + "news", requestData, multipartformdata);
     },
     async updateNews(id, requestData) {
-        return await axios.post(apiUrl + "news/" + id, requestData, multipartformdata);
+        return await Vue.prototype.$auth.plugins.http.post(apiUrl + "news/" + id, requestData, multipartformdata);
     },
     async readOneNews(slug) {
-        return await axios.get(apiUrl + "news/" + slug);
+        return await Vue.prototype.$auth.plugins.http.get(apiUrl + "news/" + slug);
     },
     async deleteNews(id) {
-        return await axios.delete(apiUrl + "news/" + id);
+        return await Vue.prototype.$auth.plugins.http.delete(apiUrl + "news/" + id);
     },
     //////////////////////// News End /////////////////////////////
 
     //////////////////////// Menus Begin/////////////////////////////
 
     async readMenusForSelect(idMenu = 0) {
-        return await axios.get(apiUrl + "menu/select");
+        return await Vue.prototype.$auth.plugins.http.get(apiUrl + "menu/select");
     },
     async readMenusFront() {
-        return await axios.get(apiUrl + "menu/front");
+        return await Vue.prototype.$auth.plugins.http.get(apiUrl + "menu/front");
     },
     async readMenus(parent = null) {
-        if (parent == null) return await axios.get(apiUrl + "menu");
-        else return await axios.get(apiUrl + "menu?parent=" + parent);
+        if (parent == null) return await Vue.prototype.$auth.plugins.http.get(apiUrl + "menu");
+        else return await Vue.prototype.$auth.plugins.http.get(apiUrl + "menu?parent=" + parent);
     },
 
     async addMenu(requestData) {
-        return await axios.post(apiUrl + "menu", requestData);
+        return await Vue.prototype.$auth.plugins.http.post(apiUrl + "menu", requestData);
     },
     async updateMenu(id, requestData) {
-        return await axios.put(apiUrl + "menu/" + id, requestData);
+        return await Vue.prototype.$auth.plugins.http.put(apiUrl + "menu/" + id, requestData);
     },
     async readOneMenu(id) {
-        return await axios.get(apiUrl + "menu/" + id);
+        return await Vue.prototype.$auth.plugins.http.get(apiUrl + "menu/" + id);
     },
     async deleteMenu(id) {
-        return await axios.delete(apiUrl + "menu/" + id);
+        return await Vue.prototype.$auth.plugins.http.delete(apiUrl + "menu/" + id);
     },
     //////////////////////// Menus End /////////////////////////////
 
     //////////////////////// Footer Menus Begin/////////////////////////////
 
     async readFooterMenusForSelect(idMenu = 0) {
-        return await axios.get(apiUrl + "footermenu/select");
+        return await Vue.prototype.$auth.plugins.http.get(apiUrl + "footermenu/select");
     },
     async readFooterMenusFront() {
-        return await axios.get(apiUrl + "footermenu/front");
+        return await Vue.prototype.$auth.plugins.http.get(apiUrl + "footermenu/front");
     },
     async readFooterMenus(parent = null) {
-        if (parent == null) return await axios.get(apiUrl + "footermenu");
-        else return await axios.get(apiUrl + "footermenu?parent=" + parent);
+        if (parent == null) return await Vue.prototype.$auth.plugins.http.get(apiUrl + "footermenu");
+        else return await Vue.prototype.$auth.plugins.http.get(apiUrl + "footermenu?parent=" + parent);
     },
 
     async addFooterMenu(requestData) {
-        return await axios.post(apiUrl + "footermenu", requestData);
+        return await Vue.prototype.$auth.plugins.http.post(apiUrl + "footermenu", requestData);
     },
     async updateFooterMenu(id, requestData) {
-        return await axios.put(apiUrl + "footermenu/" + id, requestData);
+        return await Vue.prototype.$auth.plugins.http.put(apiUrl + "footermenu/" + id, requestData);
     },
     async readFooterOneMenu(id) {
-        return await axios.get(apiUrl + "footermenu/" + id);
+        return await Vue.prototype.$auth.plugins.http.get(apiUrl + "footermenu/" + id);
     },
     async deleteFooterMenu(id) {
-        return await axios.delete(apiUrl + "footermenu/" + id);
+        return await Vue.prototype.$auth.plugins.http.delete(apiUrl + "footermenu/" + id);
     },
     //////////////////////// Footer Menus End /////////////////////////////
 
 
     //////////////////////// DocumentCategories Begin/////////////////////////////
     async readDocumentCategories(requestData) {
-            return await axios.get(apiUrl + "doccategories", {params:requestData});
+            return await Vue.prototype.$auth.plugins.http.get(apiUrl + "doccategories", {params:requestData});
     },
     async readDocumentCategoriesForSelect() {
-        return await axios.get(apiUrl + "doccategories/select");
+        return await Vue.prototype.$auth.plugins.http.get(apiUrl + "doccategories/select");
     },
     async addDocumentCategory(requestData) {
-        return await axios.post(apiUrl + "doccategories", requestData);
+        return await Vue.prototype.$auth.plugins.http.post(apiUrl + "doccategories", requestData);
     },
     async updateDocumentCategory(id, requestData) {
-        return await axios.put(apiUrl + "doccategories/" + id, requestData);
+        return await Vue.prototype.$auth.plugins.http.put(apiUrl + "doccategories/" + id, requestData);
     },
     async readDocumentCategory(slug, withNews = false) {
         if (withNews)
-            return await axios.get(apiUrl + "doccategories/" + slug + "?withnews=1",);
+            return await Vue.prototype.$auth.plugins.http.get(apiUrl + "doccategories/" + slug + "?withnews=1",);
         else
-            return await axios.get(apiUrl + "doccategories/" + slug);
+            return await Vue.prototype.$auth.plugins.http.get(apiUrl + "doccategories/" + slug);
     },
     async deleteDocumentCategory(id) {
-        return await axios.delete(apiUrl + "doccategories/" + id);
+        return await Vue.prototype.$auth.plugins.http.delete(apiUrl + "doccategories/" + id);
     },
     //////////////////////// DocumentCategories End /////////////////////////////
 
 
     //////////////////////// Document Begin/////////////////////////////
     async readDocuments(requestData) {
-        return await axios.get(apiUrl + "documents", {params: requestData});
+        return await Vue.prototype.$auth.plugins.http.get(apiUrl + "documents", {params: requestData});
     },
     async addDocument(requestData) {
-        return await axios.post(apiUrl + "documents", requestData, multipartformdata);
+        return await Vue.prototype.$auth.plugins.http.post(apiUrl + "documents", requestData, multipartformdata);
     },
     async updateDocument(id, requestData) {
-        return await axios.put(apiUrl + "documents/" + id, requestData);
+        return await Vue.prototype.$auth.plugins.http.put(apiUrl + "documents/" + id, requestData);
     },
     async readOneDocument(slug) {
-        return await axios.get(apiUrl + "documents/" + slug);
+        return await Vue.prototype.$auth.plugins.http.get(apiUrl + "documents/" + slug);
     },
     async deleteDocument(id) {
-        return await axios.delete(apiUrl + "documents/" + id);
+        return await Vue.prototype.$auth.plugins.http.delete(apiUrl + "documents/" + id);
     },
     //////////////////////// Document End /////////////////////////////
 
     //////////////////////// My Events Begin/////////////////////////////
     async readEvents() {
-        return await axios.get(apiUrl + "events");
+        return await Vue.prototype.$auth.plugins.http.get(apiUrl + "events");
     },
     async readEventsForFront() {
-        return await axios.get(apiUrl + "front/events");
+        return await Vue.prototype.$auth.plugins.http.get(apiUrl + "front/events");
     },
     async addEvent(requestData) {
-        return await axios.post(apiUrl + "events", requestData);
+        return await Vue.prototype.$auth.plugins.http.post(apiUrl + "events", requestData);
     },
     async updateEvent(id, requestData) {
-        return await axios.put(apiUrl + "events/" + id, requestData);
+        return await Vue.prototype.$auth.plugins.http.put(apiUrl + "events/" + id, requestData);
     },
     async readEvent(id) {
-        return await axios.get(apiUrl + "events/" + id);
+        return await Vue.prototype.$auth.plugins.http.get(apiUrl + "events/" + id);
     },
     async deleteEvent(id) {
-        return await axios.delete(apiUrl + "events/" + id);
+        return await Vue.prototype.$auth.plugins.http.delete(apiUrl + "events/" + id);
     },
     //////////////////////// My Events End /////////////////////////////
     //////////////////////// My Votes Begin/////////////////////////////
     async readVotes() {
-        return await axios.get(apiUrl + "votes");
+        return await Vue.prototype.$auth.plugins.http.get(apiUrl + "votes");
     },
     async readVotesForFront() {
-        return await axios.get(apiUrl + "front/votes");
+        return await Vue.prototype.$auth.plugins.http.get(apiUrl + "front/votes");
     },
     async addVote(requestData) {
-        return await axios.post(apiUrl + "votes", requestData);
+        return await Vue.prototype.$auth.plugins.http.post(apiUrl + "votes", requestData);
     },
     async updateVote(id, requestData) {
-        return await axios.put(apiUrl + "votes/" + id, requestData);
+        return await Vue.prototype.$auth.plugins.http.put(apiUrl + "votes/" + id, requestData);
     },
     async readVote(id) {
-        return await axios.get(apiUrl + "votes/" + id);
+        return await Vue.prototype.$auth.plugins.http.get(apiUrl + "votes/" + id);
     },
     async deleteVote(id) {
-        return await axios.delete(apiUrl + "votes/" + id);
+        return await Vue.prototype.$auth.plugins.http.delete(apiUrl + "votes/" + id);
     },
     //////////////////////// My Votes End /////////////////////////////
 
     //////////////////////// My Votes Begin/////////////////////////////
     async readVotes() {
-        return await axios.get(apiUrl + "votes");
+        return await Vue.prototype.$auth.plugins.http.get(apiUrl + "votes");
     },
     async readVotesForFront() {
-        return await axios.get(apiUrl + "front/votes");
+        return await Vue.prototype.$auth.plugins.http.get(apiUrl + "front/votes");
     },
     async addVote(requestData) {
-        return await axios.post(apiUrl + "votes", requestData);
+        return await Vue.prototype.$auth.plugins.http.post(apiUrl + "votes", requestData);
     },
     async updateVote(id, requestData) {
-        return await axios.put(apiUrl + "votes/" + id, requestData);
+        return await Vue.prototype.$auth.plugins.http.put(apiUrl + "votes/" + id, requestData);
     },
     async readVote(id) {
-        return await axios.get(apiUrl + "votes/" + id);
+        return await Vue.prototype.$auth.plugins.http.get(apiUrl + "votes/" + id);
     },
     async deleteVote(id) {
-        return await axios.delete(apiUrl + "votes/" + id);
+        return await Vue.prototype.$auth.plugins.http.delete(apiUrl + "votes/" + id);
     },
     //////////////////////// My Votes End /////////////////////////////
 
     //////////////////////// My OpenDatas Begin/////////////////////////////
     async readOpenDatas() {
-        return await axios.get(apiUrl + "opendatas");
+        return await Vue.prototype.$auth.plugins.http.get(apiUrl + "opendatas");
     },
     async readOpenDatasForFront() {
-        return await axios.get(apiUrl + "front/opendatas");
+        return await Vue.prototype.$auth.plugins.http.get(apiUrl + "front/opendatas");
     },
     async addOpenData(requestData) {
-        return await axios.post(apiUrl + "opendatas", requestData);
+        return await Vue.prototype.$auth.plugins.http.post(apiUrl + "opendatas", requestData);
     },
     async updateOpenData(id, requestData) {
-        return await axios.put(apiUrl + "opendatas/" + id, requestData);
+        return await Vue.prototype.$auth.plugins.http.put(apiUrl + "opendatas/" + id, requestData);
     },
     async readOpenData(id) {
-        return await axios.get(apiUrl + "opendatas/" + id);
+        return await Vue.prototype.$auth.plugins.http.get(apiUrl + "opendatas/" + id);
     },
     async deleteOpenData(id) {
-        return await axios.delete(apiUrl + "opendatas/" + id);
+        return await Vue.prototype.$auth.plugins.http.delete(apiUrl + "opendatas/" + id);
     },
     //////////////////////// My OpenDatas End /////////////////////////////
 
     //////////////////////// My OpenData Files Begin/////////////////////////////
     async readOpenDataFiles(opendata) {
-        return await axios.get(apiUrl + "opendata/" + opendata + "/files");
+        return await Vue.prototype.$auth.plugins.http.get(apiUrl + "opendata/" + opendata + "/files");
     },
     async addOpenDataFile(opendata,requestData) {
-        return await axios.post(apiUrl + "opendata/" + opendata + "/files", requestData);
+        return await Vue.prototype.$auth.plugins.http.post(apiUrl + "opendata/" + opendata + "/files", requestData);
     },
     async updateOpenDataFile(opendata, id, requestData) {
-        return await axios.put(apiUrl + "opendata/" + opendata + "/files/" + id, requestData);
+        return await Vue.prototype.$auth.plugins.http.put(apiUrl + "opendata/" + opendata + "/files/" + id, requestData);
     },
     async readOpenDataFile(opendata, id) {
-        return await axios.get(apiUrl + "opendata/" + opendata + "/files/" + id);
+        return await Vue.prototype.$auth.plugins.http.get(apiUrl + "opendata/" + opendata + "/files/" + id);
     },
     async deleteOpenDataFile(opendata, id) {
-        return await axios.delete(apiUrl + "opendata/" + opendata + "/files/" + id);
+        return await Vue.prototype.$auth.plugins.http.delete(apiUrl + "opendata/" + opendata + "/files/" + id);
     },
     //////////////////////// My OpenData Files End /////////////////////////////
 
     //////////////////////// My Faqs Begin/////////////////////////////
     async readFaqs() {
-        return await axios.get(apiUrl + "faqs");
+        return await Vue.prototype.$auth.plugins.http.get(apiUrl + "faqs");
     },
     async readFaqsForFront() {
-        return await axios.get(apiUrl + "front/faqs");
+        return await Vue.prototype.$auth.plugins.http.get(apiUrl + "front/faqs");
     },
     async addFaq(requestData) {
-        return await axios.post(apiUrl + "faqs", requestData);
+        return await Vue.prototype.$auth.plugins.http.post(apiUrl + "faqs", requestData);
     },
     async updateFaq(id, requestData) {
-        return await axios.put(apiUrl + "faqs/" + id, requestData);
+        return await Vue.prototype.$auth.plugins.http.put(apiUrl + "faqs/" + id, requestData);
     },
     async readFaq(id) {
-        return await axios.get(apiUrl + "faqs/" + id);
+        return await Vue.prototype.$auth.plugins.http.get(apiUrl + "faqs/" + id);
     },
     async deleteFaq(id) {
-        return await axios.delete(apiUrl + "faqs/" + id);
+        return await Vue.prototype.$auth.plugins.http.delete(apiUrl + "faqs/" + id);
     },
     //////////////////////// My Faqs End /////////////////////////////
     //////////////////////// My Organizations Begin/////////////////////////////
@@ -326,19 +328,19 @@ const apiClient = {
         let str = "";
         if (requestData)
             str = "?" + Object.entries(requestData).map(([key, val]) => `${key}=${val}`).join('&');
-        return await axios.get(apiUrl + "organizations" + str);
+        return await Vue.prototype.$auth.plugins.http.get(apiUrl + "organizations" + str);
     },
     async addOrg(requestData) {
-        return await axios.post(apiUrl + "organizations", requestData);
+        return await Vue.prototype.$auth.plugins.http.post(apiUrl + "organizations", requestData);
     },
     async updateOrg(id, requestData) {
-        return await axios.post(apiUrl + "organizations/" + id, requestData);
+        return await Vue.prototype.$auth.plugins.http.post(apiUrl + "organizations/" + id, requestData);
     },
     async readOrg(id) {
-        return await axios.get(apiUrl + "organizations/" + id);
+        return await Vue.prototype.$auth.plugins.http.get(apiUrl + "organizations/" + id);
     },
     async deleteOrg(id) {
-        return await axios.delete(apiUrl + "organizations/" + id);
+        return await Vue.prototype.$auth.plugins.http.delete(apiUrl + "organizations/" + id);
     },
     //////////////////////// My Organizations End /////////////////////////////
     // ////////////////////// My boshqarma Begin/////////////////////////////
@@ -346,44 +348,44 @@ const apiClient = {
         let str = "";
         if (requestData)
             str = "?" + Object.entries(requestData).map(([key, val]) => `${key}=${val}`).join('&');
-        return await axios.get(apiUrl + "apparat/" + str);
+        return await Vue.prototype.$auth.plugins.http.get(apiUrl + "apparat/" + str);
     },
     async addApparat(requestData) {
-        return await axios.post(apiUrl + "apparat", requestData);
+        return await Vue.prototype.$auth.plugins.http.post(apiUrl + "apparat", requestData);
     },
     async updateApparat(id, requestData) {
-        return await axios.post(apiUrl + "apparat/" + id, requestData);
+        return await Vue.prototype.$auth.plugins.http.post(apiUrl + "apparat/" + id, requestData);
     },
     async readApparat(id) {
-        return await axios.get(apiUrl + "apparat/" + id);
+        return await Vue.prototype.$auth.plugins.http.get(apiUrl + "apparat/" + id);
     },
     async deleteApparat(id) {
-        return await axios.delete(apiUrl + "apparat/" + id);
+        return await Vue.prototype.$auth.plugins.http.delete(apiUrl + "apparat/" + id);
     },
     //////////////////////// My boshqarma End /////////////////////////////
 // ////////////////////// My rahbariyat Begin/////////////////////////////
     async readMarkaziy(org=null) {
         let str = "?markaziy=0" + org ? "&org=" + org : ""
 
-        return await axios.get(apiUrl + "apparat" + str);
+        return await Vue.prototype.$auth.plugins.http.get(apiUrl + "apparat" + str);
     },
     async readRahbariyats(org=null) {
         let str = "?rahbar=0" + (org ? "&org=" + org : "");
 
-        return await axios.get(apiUrl + "apparat" + str);
+        return await Vue.prototype.$auth.plugins.http.get(apiUrl + "apparat" + str);
     },
     async addRahbariyat(requestData) {
-        return await axios.post(apiUrl + "apparat", requestData);
+        return await Vue.prototype.$auth.plugins.http.post(apiUrl + "apparat", requestData);
     },
     async updateRahbariyat(id, requestData) {
-        return await axios.post(apiUrl + "apparat/" + id, requestData);
+        return await Vue.prototype.$auth.plugins.http.post(apiUrl + "apparat/" + id, requestData);
     },
     async readRahbariyat(id) {
 
-        return await axios.get(apiUrl + "apparat/" + id+"?rahbar=0");
+        return await Vue.prototype.$auth.plugins.http.get(apiUrl + "apparat/" + id+"?rahbar=0");
     },
     async deleteRahbariyat(id) {
-        return await axios.delete(apiUrl + "apparat/" + id);
+        return await Vue.prototype.$auth.plugins.http.delete(apiUrl + "apparat/" + id);
     },
     //////////////////////// My rahbariyat End /////////////////////////////
 

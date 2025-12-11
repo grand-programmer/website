@@ -367,12 +367,7 @@ export default {
             let returnValue;
             if(this.$auth.user) {
                 setTimeout(async () => {
-                    await this.axios.get("/api/v1/get_image", {responseType: 'arraybuffer'}).then(res => {
-                        /*                    let reader = new FileReader();
-                    reader.readAsDataURL(res.data);
-                    reader.onload = () => {
-                        _this.user_image = reader.result;
-                    }*/
+                    await this.$auth.plugins.http.get("/api/v1/get_image", {responseType: 'arraybuffer'}).then(res => {
                         let bytes = new Uint8Array(res.data);
                         let binary = bytes.reduce((data, b) => data += String.fromCharCode(b), '');
                         _this.user_image = "data:image/jpeg;base64," + btoa(binary);
@@ -387,7 +382,7 @@ export default {
         async changeProfile(){
             const isValid = await  this.$refs.profileForm.validate()
             if(isValid) {
-                axios.post('/api/v1/userUpdate', {
+                this.$auth.plugins.http.post('/api/v1/userUpdate', {
                     address: this.$auth.user().per_adr,
                     phone: this.$auth.user().phone,
                 }).then(res => {

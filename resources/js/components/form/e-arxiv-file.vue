@@ -268,7 +268,7 @@ export default {
           return false;
         }
         let response = null;
-        response = await axios.get('/api/v1/ex_api/arxiv?file_id=' + file_id + '&pnfl=' + this.$auth.user().pin);
+        response = await this.$auth.plugins.http.get('/api/v1/ex_api/arxiv?file_id=' + file_id + '&pnfl=' + this.$auth.user().pin);
         if (response && response.data && response.data.count) {
           this.loading = false
           this.$refs["hujjatilova"].applyResult({
@@ -350,7 +350,7 @@ export default {
         },
         async getSessionId() {
             let returnObject;
-            await axios.get("/api/v1/ex_api/gen_session").then(function (response) {
+            await this.$auth.plugins.http.get("/api/v1/ex_api/gen_session").then(function (response) {
                 returnObject = response;
             })
             return returnObject;

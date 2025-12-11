@@ -10,12 +10,24 @@ const mix = require('laravel-mix');
  | file for the application as well as bundling up all the JS files.
  |
  */
+const removeCharset = () => {
+    return {
+        postcssPlugin: 'remove-charset',
+        AtRule: {
+            charset: (atRule) => {
+                atRule.remove();
+            }
+        }
+    }
+}
+removeCharset.postcss = true;
+
 mix.webpackConfig({
     stats: {
         children: true
     },
-    output:{
-        chunkFilename:'js/jsAssets/[name].js',
+    output: {
+        chunkFilename: 'js/jsAssets/[name].js?id==[chunkhash]',
     },
     optimization: {
         splitChunks: {
@@ -28,10 +40,12 @@ mix.js('resources/js/app.js', 'public/js/mix')
     .sass('resources/sass/app.scss', 'public/css/mix')
     .sass('public/css/one.scss', 'public/css/mix/one.css')
     .sass('public/css/vacancy.scss', 'public/css/mix/vacancy.css')
-    .sass('public/css/style.scss', 'public/css/style.css')
+    .sass('public/css/style.scss', 'public/css/style.css').options({
+    postCss: [removeCharset()]
+})
     .sass('public/css/services.scss', 'public/css/services.css')
     // .minify('public/js/mix/app.js','public/js/min/app.js')
-    // .version();
+    // .version(); 
     .minify('public/js/mix/app.js');
-    mix.extract(['vue','jquery'])
+mix.extract(['vue', 'jquery'])
 

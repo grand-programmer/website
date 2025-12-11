@@ -82,7 +82,7 @@ class ApiController extends Controller
                         'success' => false,
                         'message' => 'Вакансия коди киритилмади'], 401);
                 $response = $myrequest
-                    ->get('http://192.168.214.159/vacancy/public/api/hudud/' . $boshqarma);
+                    ->get('http://172.16.112.19:7191/vacancy4/public/api/hudud/' . $boshqarma);
                 break;
             case "boshqarma":
 
@@ -123,7 +123,7 @@ class ApiController extends Controller
                     return response()->json(['data' => DB::connection('normaLocation')->select("Select id as kod_id, name1 as name From location ")]); //where lang='" . strtoupper($lang) . "'
 
                     $response = $myrequest
-                        ->get('http://192.168.214.159/vacancy/public/api/hudud');
+                        ->get('http://172.16.112.19:7191/vacancy4/public/api/hudud');
 
 
                     return response()->json(['error' => 'Malumot topilmadi']);

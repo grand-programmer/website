@@ -1048,7 +1048,7 @@ export default {
                 afterLoad: function (origin, destination, direction) {
                     //fullpage_api.init();
 
-                    skipPages(origin, destination, direction);
+                    //skipPages(origin, destination, direction);
                     $('body').on('click', 'a.logo_link', function () {
                         fullpage_api.moveTo(1);
                     })

@@ -336,7 +336,7 @@ export default {
     methods: {
         getAppeal(){
             const _this=this;
-            axios.post("/api/v1/ex_api/appeal-check", {
+            this.$auth.plugins.http.post("/api/v1/ex_api/appeal-check", {
                 appNum: appeal.id,
                 password: appeal.number,
             }).then((response) => {

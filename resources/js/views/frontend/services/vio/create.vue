@@ -1244,7 +1244,7 @@ export default {
             this.loading.founder = true
             const _this = this;
             //let md=md5( this.passport.seriya + this.passport.number + "(:" + this.passport.date)
-            await axios.get('/api/v1/ex_api/getPData', {
+            await this.$auth.plugins.http.get('/api/v1/ex_api/getPData', {
                 params: {
                     pasnum: _this.temp.founder.passport,
                     pasdata: _this.temp.founder.birthdate,
@@ -1349,7 +1349,7 @@ export default {
             this.loading.authPerson = true
             const _this = this;
             //let md=md5( this.passport.seriya + this.passport.number + "(:" + this.passport.date)
-            await axios.get('/api/v1/ex_api/getPData', {
+            await this.$auth.plugins.http.get('/api/v1/ex_api/getPData', {
                 params: {
                     pasnum: _this.temp.authPerson.passport,
                     pasdata: _this.temp.authPerson.birthdate,
@@ -1379,7 +1379,7 @@ export default {
             const _this = this;
             const isValid = await this.$refs.stepValidationBroker.validate()
             if (isValid) {
-                await axios.get('/api/v1/ex_api/getPData', {
+                await this.$auth.plugins.http.get('/api/v1/ex_api/getPData', {
                     params: {
                         pasnum: _this.temp.broker.passport,
                         pasdata: _this.temp.broker.birthdate,
@@ -1409,7 +1409,7 @@ export default {
             this.loading.accountant = true
             const _this = this;
             //let md=md5( this.passport.seriya + this.passport.number + "(:" + this.passport.date)
-            await axios.get('/api/v1/ex_api/getPData', {
+            await this.$auth.plugins.http.get('/api/v1/ex_api/getPData', {
                 params: {
                     pasnum: _this.app.accountant.passport,
                     pasdata: _this.app.accountant.birthdate,
@@ -1433,7 +1433,7 @@ export default {
             this.loading.yuborishLoading = true
             const _this = this;
             //let md=md5( this.passport.seriya + this.passport.number + "(:" + this.passport.date)
-            await axios.get('/api/v1/ex_api/getPData', {
+            await this.$auth.plugins.http.get('/api/v1/ex_api/getPData', {
                 params: {
                     pasnum: _this.app.chief.passport,
                     pasdata: _this.app.chief.birthdate,

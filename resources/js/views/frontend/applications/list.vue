@@ -428,7 +428,7 @@ export default {
         },
         getServices() {
             const _this = this;
-            axios.get('/api/v1/auth/services').then(function (response) {
+            this.$auth.plugins.http.get('/api/v1/auth/services').then(function (response) {
                 _this.loadingApps=false;
                 if (typeof response.status === 200 || response.data.status === 'success')
                     _this.apps = [];

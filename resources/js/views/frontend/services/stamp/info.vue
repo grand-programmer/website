@@ -325,7 +325,7 @@ export default {
 
             setTimeout(() => {
                 this.$store.commit('setLoading', true)
-                axios.get("/api/v1/ex_api/stamp-get", {
+                this.$auth.plugins.http.get("/api/v1/ex_api/stamp-get", {
                     params: {
                         app_id: _this.$route.params.id
                     }

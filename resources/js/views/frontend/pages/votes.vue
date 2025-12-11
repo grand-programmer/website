@@ -128,7 +128,7 @@ export default {
         answer(key, answer) {
             if(!answer) return;
             const _app = this;
-            axios.post("/api/v1/votescount/" + key, {answer: answer, _method: 'put'}).then(function (response) {
+            this.$auth.plugins.http.post("/api/v1/votescount/" + key, {answer: answer, _method: 'put'}).then(function (response) {
                 if (response.data.success === true) {
                     _app.getQuestions();
                     _app.displayResults.push(key);

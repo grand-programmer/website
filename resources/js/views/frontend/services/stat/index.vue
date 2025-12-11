@@ -327,13 +327,13 @@ export default {
   },
   methods: {
     async getTariffs() {
-      await axios.get('/api/v1/data/tariffs').then(res => {
+      await this.$auth.plugins.http.get('/api/v1/data/tariffs').then(res => {
         this.list.tarifs = JSON.parse(JSON.stringify(res.data))
       })
     },
     async gotoService(value) {
       if (this.$auth.check()) {
-        await axios.post('/api/v1/statservice', {
+        await this.$auth.plugins.http.post('/api/v1/statservice', {
           tin: this.$auth.user().tin,
           pin: this.$auth.user().pin,
         }).then(res => {

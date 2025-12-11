@@ -434,7 +434,7 @@ export default {
             this.postloading = true;
             const _this = this
             this.posts = [];
-            await axios.get('/api/v1/ex_api/postsbyregion?code=' + code,).then(function (result) {
+            await this.$auth.plugins.http.get('/api/v1/ex_api/postsbyregion?code=' + code,).then(function (result) {
                 if (typeof result.data.posts !== 'undefined')
                     result.data.posts.forEach(function (item) {
                         _this.posts.push({
@@ -508,7 +508,7 @@ export default {
             let result = null;
             try {
                 let obj = JSON.parse(JSON.stringify(_this.application));
-                await axios.post('/api/v1/ex_api/stamp', obj).then(function (resultData) {
+                await this.$auth.plugins.http.post('/api/v1/ex_api/stamp', obj).then(function (resultData) {
                     if (typeof resultData !== 'undefined' && typeof resultData.data !== 'undefined' && typeof resultData.data.success !== 'undefined' && resultData.data.success === true) {
                         _this.application.id = resultData.data.data.apps.id;
                         //console.log(resultData.data)

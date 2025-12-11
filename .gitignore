@@ -2,7 +2,8 @@
 /public/hot
 /public/storage
 /public/js/mix
-/public/js/mix
+public/js/jsAssets/
+public/docfiles/
 /public/.htaccess
 /public/js/mix-manifest.json
 /storage/*.key

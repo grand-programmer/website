@@ -405,7 +405,7 @@ export default {
             const _app = this;
             let pinRequest=""
             if(this.$auth.user()) pinRequest = "&pnfl=" + this.$auth.user().pin
-            await axios.get("/api/v1/ex_api/vacancy-show?vacancy=" + this.$route.params.id + pinRequest).then(function (response) {
+            await this.$auth.plugins.http.get("/api/v1/ex_api/vacancy-show?vacancy=" + this.$route.params.id + pinRequest).then(function (response) {
                 if (response.status === 200) {
                      _app.vacancy = response.data.data.vakant[0];
                      _app.statuses = response.data.data.status;
@@ -417,7 +417,7 @@ export default {
             });
 
             if (this.vacancy && this.vacancy.b_id)
-                await axios.get("/api/v1/ex_api/boshqarma-show?boshqarma=" + this.vacancy.b_id).then(function (response) {
+                await this.$auth.plugins.http.get("/api/v1/ex_api/boshqarma-show?boshqarma=" + this.vacancy.b_id).then(function (response) {
                     if (response.status === 200) {
                         _app.boshqarma = response.data.data[0];
                     }

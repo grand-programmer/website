@@ -1,0 +1,151 @@
+.single_blog_content {
+  .accordion > input[name="collapse"] {
+    display: none;
+  }
+
+  .innerUl {
+    list-style: square inside;
+    text-align: justify;
+    margin: 0 20px;
+  }
+
+  li {
+    text-align: left !important;
+    padding: 5px 0 !important;
+  }
+
+  .accordion label,
+  .accordion .content {
+    width: 100%;
+    margin: auto 0;
+  }
+
+  .accordion .content {
+    position: relative;
+    z-index: 1000;
+    top: -25px;
+    background: #edf7ee;
+    overflow: hidden;
+    border-radius: 10px;
+    height: 0;
+    transition: 0.5s;
+    padding-top: 15px;
+    box-shadow: inset 1px 2px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  .accordion > input[name="collapse"]:checked ~ .content {
+    height: auto;
+    transition: height 0.5s;
+    position: relative;
+    z-index: 1000;
+  }
+
+  .accordion label {
+    display: block;
+  }
+}
+
+@media only screen and (min-width: 620px) {
+  .single_blog_content .accordion>input[name="collapse"]:checked~.hand1 {
+    height: 700px;
+  }
+}
+
+@media only screen and (min-width: 620px) {
+  .single_blog_content .accordion>input[name="collapse"]:checked~.hand2 {
+    height: 335px;
+  }
+}
+@media only screen and (min-width: 620px) {
+  .single_blog_content .accordion>input[name="collapse"]:checked~.hand3 {
+    height: 325px;
+  }
+}
+
+@media only screen and (min-width: 620px) {
+  .single_blog_content .accordion>input[name="collapse"]:checked~.hand4 {
+    height: 450px;
+  }
+}
+
+@media only screen and (min-width: 620px) {
+  .single_blog_content .accordion>input[name="collapse"]:checked~.hand5 {
+    height: 300px;
+  }
+}
+
+.single_blog_content {
+  .accordion > input[name="collapse"]:checked ~ .content {
+    border-top: 0;
+    transition: 0.3s;
+    position: relative;
+    z-index: 1000;
+  }
+
+  .accordion .handle {
+    position: relative;
+    z-index: 10000;
+    margin: 0;
+    font-size: 16px;
+  }
+
+  .accordion label {
+    color: #fff;
+    cursor: pointer;
+    font-weight: normal;
+    padding: 10px;
+    background: #33a246;
+    user-select: none;
+    border-radius: 10px;
+    z-index: 1000;
+  }
+
+  .accordion label:hover,
+  .accordion label:focus {
+    background: MediumSeaGreen;
+  }
+
+  .accordion .handle label:before {
+    font-family: FontAwesome;
+    content: "\f107";
+    display: inline-block;
+    margin-right: 10px;
+    font-size: 1em;
+    line-height: 1.556em;
+    vertical-align: middle;
+    transition: 0.4s;
+  }
+
+  .accordion > input[name="collapse"]:checked ~ .handle label:before {
+    transform: rotate(180deg);
+    transform-origin: center;
+    transition: 0.4s;
+  }
+}
+
+
+.single_blog_content{
+.accordion p:last-child {
+  margin-bottom: 0;
+}
+
+.container {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.headerimg {
+  border-radius: 5px;
+  width: 85%;
+}
+
+blockquote {
+  padding: 10px 20px;
+  margin: 0 0 20px;
+  font-size: 17.5px;
+  border-left: 8px solid #009846;
+  border-radius: 3px;
+  background-color: rgb(238, 238, 238);
+}
+
+}

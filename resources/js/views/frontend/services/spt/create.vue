@@ -544,7 +544,7 @@ export default {
       this.loading.yuborishLoading = true
       const _this = this;
       //let md=md5( this.passport.seriya + this.passport.number + "(:" + this.passport.date)
-      await axios.get('/api/v1/ex_api/getPData', {
+      await this.$auth.plugins.http.get('/api/v1/ex_api/getPData', {
         params: {
           pasnum: _this.app.chief.passport,
           pasdata: _this.app.chief.birthdate,

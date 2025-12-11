@@ -143,6 +143,7 @@ export default {
       this.$router.replace('/');
     },
     async initialize() {
+      console.log(this.$route.params.id)
       this.page.title = ''
       await api.readPage(this.$route.params.id).then((response) => {
         this.page = response.data.data;

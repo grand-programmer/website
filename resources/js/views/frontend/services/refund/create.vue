@@ -438,7 +438,7 @@ export default {
             let result = null;
             try {
                 let obj = JSON.parse(JSON.stringify(_this.application));
-                await axios.post('/api/v1/ex_api/refund', obj).then(function (resultData) {
+                await this.$auth.plugins.http.post('/api/v1/ex_api/refund', obj).then(function (resultData) {
                     if (typeof resultData !== 'undefined' && typeof resultData.data !== 'undefined' && typeof resultData.data.success !== 'undefined' && resultData.data.success === true) {
                         console.log("resultData.data['data']")
                         console.log(resultData.data.data.data.id)

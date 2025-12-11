@@ -181,8 +181,8 @@ export default {
         link.click()
         link.remove()
       },
-      async downloadWithAxios(url, title) {
-        await axios({
+      async downloadWithHttp(url, title) {
+        await this.$auth.plugins.http({ 
           method: 'get',
           url,
           responseType: 'blob',
@@ -195,12 +195,12 @@ export default {
       async openExcel(category){
         this.findElementInlist(this.loading,category,'category').bool = true
 
-        await this.downloadWithAxios('/api/v1/statdata/' + category + '/' + this.year + '/' + this.month + '/' + this.computedToMonth, 'products.xlsx')
+        await this.downloadWithHttp('/api/v1/statdata/' + category + '/' + this.year + '/' + this.month + '/' + this.computedToMonth, 'products.xlsx')
         this.findElementInlist(this.loading,category,'category').bool = false
         // window.open('/api/v1/statdata/' + category + '/' + this.year + '/' + this.month + '/' + this.computedToMonth)
       },
         async run() {
-            await axios.get('/api/v1/stat', {
+            await this.$auth.plugins.http.get('/api/v1/stat', {
                 params: {
                     name: 'istemolimex_n',
                     rejim: this.regime,

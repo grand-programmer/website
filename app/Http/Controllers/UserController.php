@@ -163,17 +163,19 @@ dd($e);
             if ($response1->status() == 200) {
                 $vi = $response1->json();
                 if (is_array($vi) and isset($vi['allariza']) and isset($vi['allariza'][0])  and isset($vi['allariza'][0]['vak_id']) and isset($vi['allariza'][0]['vak_id'])) {
-                    global $services;
-                    $services[] = [
-                        "app_id" => $vi['allariza'][0]['vak_id'],
-                        "app_num" => $vi['allariza'][0]['app_num'],
-                        "created_at" => isset($vi['allariza'][0]['created_at']) ? $vi['allariza'][0]['created_at'] : null,
-                        "status" => $vi['allariza'][0]['status'],
-                        "statusNm" => $vi['allariza'][0]['statusNm'],
-                        "type" => 0,
-                        "link" => "/services/vacancy/" . $vi['allariza'][0]['vak_id'] . '?status=show',
-                        "user_id" => $user_id,
-                    ];
+                    foreach ($vi['allariza'] as $arizaItem) {
+                        global $services;
+                        $services[] = [
+                            "app_id" => $arizaItem['vak_id'],
+                            "app_num" => $arizaItem['app_num'],
+                            "created_at" => isset($arizaItem['created_at']) ? $arizaItem['created_at'] : null,
+                            "status" => $arizaItem['status'],
+                            "statusNm" => $arizaItem['statusNm'],
+                            "type" => 0,
+                            "link" => "/services/vacancy/" . $arizaItem['vak_id'] . '?status=show',
+                            "user_id" => $user_id,
+                        ];
+                    }
 
                 }
 
@@ -610,7 +612,7 @@ dd($e);
                         "pinfl" => (string)$user->pin,
                         "doc_give_date" => $user->_pport_issue_date,
                     ]), 'application/json')
-                        ->post('http://192.168.214.124:9090/GetMIP2/rest/service_MIP2/getMipFoto',
+                        ->post('http://172.16.212.17:9090/GetMIP2/rest/service_MIP2/getMipFoto',
                         );
                     //dd($userPhoto->json());
                     $userPhoto = $userPhoto->json();
@@ -651,7 +653,7 @@ dd($e);
                         "pinfl" => (string)$user->pin,
                         "doc_give_date" => $user->_pport_issue_date,
                     ]), 'application/json')
-                        ->post('http://192.168.214.124:9090/GetMIP2/rest/service_MIP2/getMipFoto',
+                        ->post('http://172.16.212.17:9090/GetMIP2/rest/service_MIP2/getMipFoto',
                         );
                     //dd($userPhoto->json());
                     $userPhoto = $userPhoto->json();
@@ -693,7 +695,7 @@ dd($e);
                                         "pinfl" => (string)$user->pin,
                                         "doc_give_date" => $user->_pport_issue_date,
                                     ]), 'application/json')
-                                        ->post('http://192.168.214.124:9090/GetMIP2/rest/service_MIP2/getMipFoto',
+                                        ->post('http://172.16.212.17:9090/GetMIP2/rest/service_MIP2/getMipFoto',
                                         );
                                     //dd($userPhoto->json());
                                     $userPhoto = $userPhoto->json();
@@ -744,7 +746,7 @@ dd($e);
                                     "pinfl" => (string)$user->pin,
                                     "doc_give_date" => $user->_pport_issue_date,
                                 ]), 'application/json')
-                                    ->post('http://192.168.214.124:9090/GetMIP2/rest/service_MIP2/getMipFoto',
+                                    ->post('http://172.16.212.17:9090/GetMIP2/rest/service_MIP2/getMipFoto',
                                     );
                                 //dd($userPhoto->json());
                                 $userPhoto = $userPhoto->json();

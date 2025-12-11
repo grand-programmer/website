@@ -437,7 +437,7 @@ export default {
         async getPasportData(){
             const _this=this;
             //let md=md5( this.passport.seriya + this.passport.number + "(:" + this.passport.date)
-            await axios.get('/api/v1/ex_api/getPData',{params: {
+            await this.$auth.plugins.http.get('/api/v1/ex_api/getPData',{params: {
                     pasnum: _this.passport.seriya + _this.passport.number,
                     pasdata: _this.passport.date,
                 }
@@ -478,7 +478,7 @@ export default {
         },
         checkData(appeal) {
             const _this=this;
-            axios.post("/api/v1/ex_api/appeal-check", {
+            this.$auth.plugins.http.post("/api/v1/ex_api/appeal-check", {
                 appNum: appeal.appeal_id,
                 password: appeal.appeal_code,
             }).then((response) => {

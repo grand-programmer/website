@@ -111,7 +111,7 @@
 </template>
 <script>
 import api from "./../../../src/services/apiService";
- 
+
 import i18n from "../../../i18n";
 
 export default {
@@ -263,7 +263,7 @@ export default {
             }
             if (discount) _this.mdata['discount'] = 1;
             setTimeout(async () => {
-                await axios.post('/api/v1/news/' + _this.news.id + '/vote', _this.mdata).then(() => {
+                await this.$auth.plugins.http.post('/api/v1/news/' + _this.news.id + '/vote', _this.mdata).then(() => {
                     if (vote === 1) {
                         _this.news.like = _this.news.like + 1;
                         if (discount) {

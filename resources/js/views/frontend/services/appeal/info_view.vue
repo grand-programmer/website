@@ -347,7 +347,7 @@ export default {
             }
 
                 this.$store.commit('setLoading', true)
-                await axios.get("/api/v1/ex_api/appeal-check", {
+                await this.$auth.plugins.http.get("/api/v1/ex_api/appeal-check", {
                     params: params
                 }).then(function (response) {
 

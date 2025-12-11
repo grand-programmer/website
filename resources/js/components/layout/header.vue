@@ -88,12 +88,16 @@
 
                         <div class="header-settings">
                             <div class="header-item header-mail">
-                                <li class="hududiy_boshqarmalar">
+                                <li class="hududiy_boshqarmalar1  ">
+                                  <a href="tel:1108" class="d-flex">
+                                    <i class="tortlink fas fa-phone mr-1"></i>
+                                    <span class="tort">1108</span>
+                                  </a>
 
-                                    <a href=".hududiy.section" class="d-inline">
+<!--                                    <a href=".hududiy.section" class="d-inline">
                                         <i class="tortlink fas fa-map-marker-alt mr-1 "></i>
                                         <span class="tort">{{ $t("Ҳудудий бошқармалар") }}</span>
-                                    </a>
+                                    </a>-->
                                     <!--                                <ul class="dropdown-menu">
                                                                         <li><a href="contact.html">Contact</a></li>
                                                                         <li><a href="contact-2.html">Contact - 02</a></li>
@@ -531,6 +535,22 @@ $(document).on("click", "ul.lang-list li", function () {
 
 </script>
 <style>
+.hududiy_boshqarmalar1 {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin-right: 15px;
+}
+.hududiy_boshqarmalar1 i.tortlink{
+  rotate: 90deg;
+
+}
+.hududiy_boshqarmalar1 .tort{
+  font-size: 25px;
+  font-weight: bold;
+  color: var(--mycolor);
+
+}
 .subscribe-notification{
     position: absolute;
     top: 10px;

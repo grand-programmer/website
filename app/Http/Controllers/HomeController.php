@@ -47,7 +47,7 @@ class HomeController extends Controller
 
         }
 
-
+/*
         $userCounts = UsersCount::whereDate('created_at', Carbon::today())->first();
         if ($userCounts) {
             $ips = json_decode($userCounts->ips, true);
@@ -66,10 +66,8 @@ class HomeController extends Controller
                 'count' => 1,
                 'ips' => json_encode($data['ip']),
             ]);
-        }
+        }*/
         return view('index');
-/*
 
-        return view('home');*/
     }
 }

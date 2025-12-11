@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" >
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 
     <!-- Font -->
     <link href="{{asset('css/font-awesome.min.css') }}" rel="stylesheet">
-
+<title>Bojxona qo'mitasi rasmiy veb sayti</title>
     <!-- Bootstrap -->
     <link href="{{asset('/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{asset('/css/bootstrap-theme.min.css') }}" rel="stylesheet">
@@ -18,19 +18,20 @@
     <link href="/vendors/image-dropdown/dd.css" rel="stylesheet">
     <!-- Extra plugin css -->
     {{--<link href="{{asset('/vendors/bootstrap-selector/css/bootstrap-select.min.css')}}" rel="stylesheet">--}}
-    <link href="{{asset('/vendors/camera-slider/camera.css')}}" rel="stylesheet">
+    <link href="{{asset('/vendors/camera-slider/camera.css?version=' . (Date::now()->getTimestamp()) )}}" rel="stylesheet">
     <link href="{{asset('/vendors/animate/animate.min.css')}}" rel="stylesheet">
-    <link href="{{secure_asset('/vendors/owl-carousel/css/owl.carousel.css')}}" rel="stylesheet">
-    <link href="{{secure_asset('/css/style.css')}}" rel="stylesheet">
+    <link href="{{secure_asset('/vendors/owl-carousel/css/owl.carousel.css?version=' . (Date::now()->getTimestamp()) )}}" rel="stylesheet">
+    <link href="{{secure_asset('/css/style.css?version=' . (Date::now()->getTimestamp()) )}}" rel="stylesheet">
     <link href="{{secure_asset('/css/fullpage.css')}}" rel="stylesheet">
     <link href="{{secure_asset('/css/all.css')}}" rel="stylesheet">
-    <link href="{{asset('/css/mix/one.css')}}" rel="stylesheet" type="text/css" charset="utf-8">
-    <link href="{{asset('/css/mix/app.css')}}" rel="stylesheet" type="text/css" charset="utf-8">
-    <link href="{{asset('/css/slick.css')}}" rel="stylesheet">
+    <link href="{{asset('/css/mix/one.css?version=' . (Date::now()->getTimestamp()) )}}" rel="stylesheet" type="text/css">
+    <link href="{{asset('/css/mix/app.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{asset('/css/slick.css?version=' . (Date::now()->getTimestamp()) )}}" rel="stylesheet">
     <link href="{{asset('/css/slick-theme.css')}}" rel="stylesheet">
-    <link href="{{asset('/css/responsive.css')}}" rel="stylesheet">
+    <link href="{{asset('/css/responsive.css?version=' . (Date::now()->getTimestamp()) )}}" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('css/owl-carousel/owl.carousel.css')}}">
     <link rel="stylesheet" href="{{asset('css/owl-carousel/owl.theme.default.css')}}">
+    <link rel="stylesheet" href="//chat.customs.uz/widget/style.css">
 <!--    <script src="public/js/anychart/anychart-base.min.js"></script>-->
 <!--    <link crossorigin="anonymous" rel="stylesheet" id="gillion-fonts-css"
           href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,regular,italic,600,600italic,700,700italic,800,800italic%7CMontserrat:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic&amp;subset=latin"
@@ -77,36 +78,43 @@
 
 
 
-<!-- START WWW.UZ TOP-RATING --><SCRIPT language="javascript" type="text/javascript">
-    <!--
-    top_js="1.0";top_r="id=46694&r="+escape(document.referrer)+"&pg="+escape(window.location.href);document.cookie="smart_top=1; path=/"; top_r+="&c="+(document.cookie?"Y":"N")
-    //-->
-</SCRIPT>
-<SCRIPT language="javascript1.1" type="text/javascript">
-    <!--
-    top_js="1.1";top_r+="&j="+(navigator.javaEnabled()?"Y":"N")
-    //-->
-</SCRIPT>
-<SCRIPT language="javascript1.2" type="text/javascript">
-    <!--
-    top_js="1.2";top_r+="&wh="+screen.width+'x'+screen.height+"&px="+
-        (((navigator.appName.substring(0,3)=="Mic"))?screen.colorDepth:screen.pixelDepth)
-    //-->
-</SCRIPT>
-<SCRIPT language="javascript1.3" type="text/javascript">
-    <!--
-    top_js="1.3";
-    //-->
-</SCRIPT>
-<SCRIPT language="JavaScript" type="text/javascript">
-    <!--
-    top_rat="&col=340F6E&t=ffffff&p=BD6F6F";top_r+="&js="+top_js+"";document.write('<img src="https://cnt0.www.uz/counter/collect?'+top_r+top_rat+'" width=0 height=0 border=0 />')//-->
-</SCRIPT><NOSCRIPT><IMG height=0 src="https://cnt0.www.uz/counter/collect?id=46694&pg=http%3A//uzinfocom.uz&col=340F6E&t=ffffff&p=BD6F6F" width=0 border=0 /></NOSCRIPT><!-- FINISH WWW.UZ TOP-RATING -->
+<!-- START WWW.UZ TOP-RATING -->
+<script>
+    top_js = "1.0";
+    top_r = "id=46694&r=" + encodeURIComponent(document.referrer) + "&pg=" + encodeURIComponent(window.location.href);
+    document.cookie = "smart_top=1; path=/";
+    top_r += "&c=" + (document.cookie ? "Y" : "N");
+</script>
 
+<script>
+    top_js = "1.1";
+    top_r += "&j=" + (navigator.javaEnabled() ? "Y" : "N");
+</script>
+
+<script>
+    top_js = "1.2";
+    top_r += "&wh=" + screen.width + 'x' + screen.height + "&px=" +
+        ((navigator.appName.substring(0, 3) === "Mic") ? screen.colorDepth : screen.pixelDepth);
+</script>
+
+<script>
+    top_js = "1.3";
+</script>
+
+<script>
+    top_rat = "&col=340F6E&t=ffffff&p=BD6F6F";
+    top_r += "&js=" + top_js;
+    document.write('<img src="https://cnt0.www.uz/counter/collect?' + top_r + top_rat + '" width="0" height="0" alt="">');
+</script>
+
+<noscript>
+    <img src="https://cnt0.www.uz/counter/collect?id=46694&pg=http%3A//uzinfocom.uz&col=340F6E&t=ffffff&p=BD6F6F" width="0" height="0" alt="">
+</noscript>
+<!-- FINISH WWW.UZ TOP-RATING -->
 
 
 <!-- Yandex.Metrika counter -->
-<script type="text/javascript" >
+<script>
     (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
         m[i].l=1*new Date();
         for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
@@ -121,17 +129,17 @@
     document.addEventListener("DOMContentLoaded", () => {
         setTimeout(()=>{
             if(typeof document.getElementsByClassName('mycounter1')[0] !=='undefined')
-                document.getElementsByClassName('mycounter1')[0].innerHTML =document.getElementsByClassName('mycounter1')[0].innerHTML + '<div><img src="https://mc.yandex.ru/watch/90773745" style="position:absolute; left:-9999px;" alt="" /></div>'
+                document.getElementsByClassName('mycounter1')[0].innerHTML =document.getElementsByClassName('mycounter1')[0].innerHTML + '<div>' +
+                    '<img src="https://mc.yandex.ru/watch/90773745" style="position:absolute; left:-9999px;" alt="" ></div>'
         },500)
 
     })
 </script>
 
-<noscript><div><img src="https://mc.yandex.ru/watch/90773745" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<noscript><div><img src="https://mc.yandex.ru/watch/90773745" style="position:absolute; left:-9999px;" alt="" ></div></noscript>
 <!-- /Yandex.Metrika counter -->
-{{--
 <!-- webim button generation date: 2023-04-19 version: 10.5.67 -->
-<a class="webim_button" href="#" rel="webim">
+{{--<a class="webim_button" href="#" rel="webim">
     <img src="https://beltelekomuz.webim2.ru/button.php" border="0"/>
 </a>
 <script type="text/javascript">
@@ -147,8 +155,15 @@
         s.src = "https://beltelekomuz.webim2.ru/js/button.js";
         document.getElementsByTagName("head")[0].appendChild(s);
     })();
-</script>
-<!-- /webim button -->--}}
+</script>--}}
+<!-- /webim button -->
+
+<!---- chatbot --->
+<chat-widget></chat-widget>
+<script src="//chat.customs.uz/widget/chat-widget.iife.js"></script>
+
+
+<!---chatbot -->
 
 <!--<script src="//code.jivosite.com/widget/4yZcWqNleE" async></script>-->
 <script src="https://code.responsivevoice.org/responsivevoice.js?key=vNL4fpv9"></script>

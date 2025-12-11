@@ -627,7 +627,7 @@ export default {
         if(!(this.form.etijorat.user && this.form.etijorat.user.length>4) || !(this.form.etijorat.password && this.form.etijorat.password.length>0))
           this.$toast.error(this.t('Сиз фойдаланувчи телефон раками ёки паролини киритмадингиз'))
         this.loading.deleteUser = true
-          await axios.post('https://cci.customs.uz/deleteUser',{
+          await this.$auth.plugins.http.post('https://cci.customs.uz/deleteUser',{
             "login": this.form.etijorat.user.replace(' ','').replaceAll('-',''),
             "password": this.form.etijorat.password
           }).then(res => {
@@ -651,7 +651,7 @@ export default {
         if(!(this.form.ybd.user && this.form.ybd.user.length>4) || !(this.form.ybd.password && this.form.ybd.password.length>0))
           this.$toast.error(this.t('Сиз фойдаланувчи телефон раками ёки паролини киритмадингиз'))
         this.loading.deleteYbdUser = true
-          await axios.post('https://ybd.customs.uz/deleteUser',{
+          await this.$auth.plugins.http.post('https://ybd.customs.uz/deleteUser',{
             "login": this.form.ybd.user.replace(' ','').replaceAll('-',''),
             "password": this.form.ybd.password
           }).then(res => {
@@ -685,15 +685,15 @@ export default {
         async getSessionId(type = null) {
             let returnObject;
             if (type === 'cabinet')
-                await axios.post("/api/v1/ex_api/gen_session", {type: 'cabinet'}).then(function (response) {
+                await this.$auth.plugins.http.post("/api/v1/ex_api/gen_session", {type: 'cabinet'}).then(function (response) {
                     returnObject = response;
                 }); else {
                 if (type === "dep") {
-                    await axios.post("/api/v1/ex_api/gen_session", {type: 'dep'}).then(function (response) {
+                    await this.$auth.plugins.http.post("/api/v1/ex_api/gen_session", {type: 'dep'}).then(function (response) {
                         returnObject = response;
                     })
                 } else
-                    await axios.get("/api/v1/ex_api/gen_session").then(function (response) {
+                    await this.$auth.plugins.http.get("/api/v1/ex_api/gen_session").then(function (response) {
                         returnObject = response;
                     })
             }

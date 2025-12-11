@@ -545,9 +545,6 @@ $m: 45px;
 $f: calc(1.732 * #{$s} + (-6 * #{$m}) - 1px);
 .opendata-container {
     display: flex;
-    --s: $s;
-    --m: $m;
-    --f: $f;
 }
 
 .opendata {
@@ -563,7 +560,7 @@ $f: calc(1.732 * #{$s} + (-6 * #{$m}) - 1px);
         width: calc(#{$s} / 2 + (#{$m}) * 4 / 3);
         float: left;
         height: 144%;
-        shape-outside: repeating-linear-gradient(#0000 0 calc(#{$f} - 1vw), #000 0 $f);
+        /*shape-outside: repeating-linear-gradient(#0000 0 calc(#{$f} - 1vw), #000 0 $f);*/
     }
 
     .portfolio_single.p2 {
@@ -869,7 +866,7 @@ section.content_block .tab-content > .tab-pane {
             }
 
             .mobil-ilova-text {
-                margin-top: -15 px;
+                margin-top: -15px;
                 width: 95%;
                 padding: 0 5px;
                 color: #000;
@@ -1842,6 +1839,17 @@ a.read_more {
 .one-page .hududiy.section {
     height: 100vh;
     position: static;
+}
+
+.hududiy.section{
+  height: 100vh;
+  display: block;
+  position: relative;
+  #sharedMap{
+    position: relative;
+    height: auto;
+    top: 0;
+  }
 }
 
 body .logo_area {

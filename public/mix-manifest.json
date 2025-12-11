@@ -1,9 +1,9 @@
 {
     "/js/mix/app.js": "/js/mix/app.js",
     "/js/mix/manifest.js": "/js/mix/manifest.js",
-    "/js/jsAssets/pdfmake.js": "/js/jsAssets/pdfmake.js",
-    "/js/jsAssets/canvg.js": "/js/jsAssets/canvg.js",
-    "/js/jsAssets/xlsx.js": "/js/jsAssets/xlsx.js",
+    "/js/jsAssets/pdfmake.js?id==2fb3e0bff331892f": "/js/jsAssets/pdfmake.js?id==2fb3e0bff331892f",
+    "/js/jsAssets/canvg.js?id==479b3c45334c7d34": "/js/jsAssets/canvg.js?id==479b3c45334c7d34",
+    "/js/jsAssets/xlsx.js?id==6394ae78f58f05f8": "/js/jsAssets/xlsx.js?id==6394ae78f58f05f8",
     "/css/style.css": "/css/style.css",
     "/css/mix/vacancy.css": "/css/mix/vacancy.css",
     "/css/mix/one.css": "/css/mix/one.css",

@@ -34,6 +34,13 @@ class DataController extends Controller
     left join contracts c on c.idcol=s.contract_key
     where c.kntid in ($placeholders)
 ";
+            if (isset($data['code'])){
+                $sql = "
+    select ktnved from tov_k t
+    left join specification s on s.idcol=t.specification_key
+    left join contracts c on c.idcol=s.contract_key
+    where c.kntid in ($placeholders) and ktnved like '%" . $data['code'] ."%' ";
+            }
 
 
             $ktnvedValues = collect(

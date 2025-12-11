@@ -309,7 +309,7 @@ export default {
         },
         getPhoneQuestions(){
             const _app = this;
-            axios.get('/api/v1/phoneVotes',{params: {
+            this.$auth.plugins.http.get('/api/v1/phoneVotes',{params: {
                 month: this.month,
                 year: this.year
                 }}).then(function (response) {
@@ -323,7 +323,7 @@ export default {
                 _app.$toast.warning(_app.$t('Сиз аллақачон овоз бергансиз!'))
                 return
             }
-            axios.post("/api/v1/votescount/" + _app.votes[key].id, {answer: answer, _method: 'put'}).then(function (response) {
+            this.$auth.plugins.http.post("/api/v1/votescount/" + _app.votes[key].id, {answer: answer, _method: 'put'}).then(function (response) {
 
                 if (response.data.success === true) {
                     _app.showResults  = true
@@ -401,7 +401,7 @@ export default {
             this.isLoading = true
 
             // Lazily load input items
-            axios.post('/api/v1/news/search', {text: val})
+            this.$auth.plugins.http.post('/api/v1/news/search', {text: val})
                 .then(res => {
                     this.searchResults = res.data
                 })

@@ -1500,7 +1500,7 @@ export default {
     },
     async getSessionId() {
       let returnObject;
-      await axios.get("/api/v1/ex_api/gen_session").then(function (response) {
+      await this.$auth.plugins.http.get("/api/v1/ex_api/gen_session").then(function (response) {
         returnObject = response;
       })
       return returnObject;
@@ -1612,7 +1612,7 @@ export default {
 
       let result = null;
       try {
-        await axios.post('/api/v1/ex_api/recycle-person', data).then(function (res) {
+        await this.$auth.plugins.http.post('/api/v1/ex_api/recycle-person', data).then(function (res) {
           result = res;
         })
         return result;
@@ -1625,7 +1625,7 @@ export default {
 
       let result = null;
       try {
-        await axios.post('/api/v1/ex_api/recycle-common', data).then(function (res) {
+        await this.$auth.plugins.http.post('/api/v1/ex_api/recycle-common', data).then(function (res) {
           result = res;
         }).catch((inValidErrors) => {
           if (typeof inValidErrors.response !== 'undefined') result = inValidErrors.response;
@@ -1640,7 +1640,7 @@ export default {
     async sendProduct(data) {
       let result = null;
       try {
-        await axios.post('/api/v1/ex_api/recycle-product', data).then(function (res) {
+        await this.$auth.plugins.http.post('/api/v1/ex_api/recycle-product', data).then(function (res) {
           result = res;
         })
         return result;
@@ -1652,7 +1652,7 @@ export default {
     },
     async checkFile(file_id) {
       let response = null;
-      response = await axios.get('/api/v1/ex_api/arxiv?file_id=' + file_id + '&pnfl=' + this.$auth.user().pin);
+      response = await this.$auth.plugins.http.get('/api/v1/ex_api/arxiv?file_id=' + file_id + '&pnfl=' + this.$auth.user().pin);
       if (response && response.data && response.data.count) {
         return response.data.data;
       }
@@ -1988,7 +1988,7 @@ export default {
       this.postloading = true;
       const _this = this
       this.posts = [];
-      await axios.get('/api/v1/ex_api/posts?code=' + code,).then(function (result) {
+      await this.$auth.plugins.http.get('/api/v1/ex_api/posts?code=' + code,).then(function (result) {
         if (typeof result.data.locations !== 'undefined')
           result.data.locations.forEach(function (item) {
             _this.posts.push({

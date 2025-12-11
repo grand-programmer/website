@@ -790,7 +790,7 @@ export default {
             //series.data.setAll(importExport);
 
 
-            /* await axios.get("api/v1/stat?rejim[0]=ИМ40&year=2022&rejim[1]=ЭК10")
+            /* await this.$auth.plugins.http.get("api/v1/stat?rejim[0]=ИМ40&year=2022&rejim[1]=ЭК10")
                  .then(function (response) {
                      if (response.data) {
                          let data = response.data;
@@ -925,7 +925,7 @@ export default {
                 // ... handle error
                 console.log("Error loading " + result);
             });
-            /* axios
+            /* this.$auth.plugins.http
                  .get('api/v1/stat?name=hududimex&year=2022')
                  .then(response => (data = response))
              const finalData = JSON.parse(JSON.stringify(data));

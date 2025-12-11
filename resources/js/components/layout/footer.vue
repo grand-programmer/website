@@ -161,7 +161,7 @@ export default {
             }).catch((error) => {
                 console.log(error)
             })
-            axios.get("/api/v1/users-viewed").then((response)=>{
+            this.$auth.plugins.http.get("/api/v1/users-viewed").then((response)=>{
                 this.$store.dispatch('SET_USER_VIEWED',JSON.parse(JSON.stringify( response.data.data)));
 
             })

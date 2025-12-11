@@ -805,7 +805,7 @@ export default {
         async sendPerson(data = null) {
             let result = null;
             try {
-                await axios.post('/api/v1/ex_api/tftn-person', data).then(function (res) {
+                await this.$auth.plugins.http.post('/api/v1/ex_api/tftn-person', data).then(function (res) {
                     result = res;
                 })
                 return result;
@@ -817,7 +817,7 @@ export default {
         async sendProduct(data) {
             let result = null;
             try {
-                await axios.post('/api/v1/ex_api/tftn-product', data).then(function (res) {
+                await this.$auth.plugins.http.post('/api/v1/ex_api/tftn-product', data).then(function (res) {
                     result = res;
                 })
                 return result;
@@ -1022,7 +1022,7 @@ export default {
             this.postloading = true;
             const _this = this
             this.posts = [];
-            await axios.get('/api/v1/ex_api/posts?code=' + code,).then(function (result) {
+            await this.$auth.plugins.http.get('/api/v1/ex_api/posts?code=' + code,).then(function (result) {
                 if (typeof result.data.locations !== 'undefined')
                     result.data.locations.forEach(function (item) {
                         _this.posts.push({

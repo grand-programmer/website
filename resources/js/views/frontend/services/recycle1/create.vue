@@ -303,8 +303,9 @@
                     <v-col cols="8">
                       <div id="locationMap" style="height: 300px; width: 100%"></div>
                     </v-col>
-                    <v-col cols="8" >
-                      <ValidationProvider :name="$t('Шартнома идентификация рақами')" :rules="[300].includes(app.common.repubInOut)?'':'required'"
+                    <v-col cols="8">
+                      <ValidationProvider :name="$t('Шартнома идентификация рақами')"
+                                          :rules="[300].includes(app.common.repubInOut)?'':'required'"
                                           v-slot="{ errors }">
                         <v-autocomplete
                             v-model="app.common.contractIdenNumber"
@@ -579,6 +580,7 @@
                                         hide-selected
                                         :loading="loading.tftncode"
                                         return-object
+                                        :search-input.sync="search_tftn"
                                         :error-messages="errors[0]"
                                     >
                                     </v-autocomplete>
@@ -655,7 +657,9 @@
                                 <template #header.cmdtUnit> ТИФ ТН коди бўйича <br> қўшимча ўлчов бирлигида</template>
                                 <template #header.cmdtCost>Қиймати <br> шартнома тузилган валютада</template>
                                 <template #header.cmdtQty> Миқдори <br> қўшимча ўлчов бирлигида</template>
-                                <template #item.cmdtStatusNm="{ item }">{{capitalizeFirstLetter((item.cmdtStatusNm).trim())}}</template>
+                                <template #item.cmdtStatusNm="{ item }">
+                                  {{ capitalizeFirstLetter((item.cmdtStatusNm).trim()) }}
+                                </template>
                                 <template #item.cmdtId="{ item }">{{ list.products.indexOf(item) + 1 }}</template>
                                 <template #item.cmdtUnit="{ item }"> {{ item.cmdtUnitNm }}</template>
                                 <template #item.actions="{ item }">
@@ -858,11 +862,20 @@
                                 >
                                   <template #item.cmdtDopId="{item}">{{ list.dopProducts.indexOf(item) + 1 }}</template>
                                   <template #item.shareQty="{item}">{{ item.shareQty }} %</template>
-                                  <template #header.cmdtUnitNm>{{$t('ТИФ ТН бўйича')}}<br/>{{$t('қўшимча ўлчов бирлигида')}}</template>
-                                  <template #header.cmdtQty>{{$t('Миқдори')}}<br/>{{$t('қўшимча ўлчов бирлигида')}}</template>
-                                  <template #header.cmdtCost>{{$t('Қиймати')}}<br/>{{$t('шартнома тузилган валютада')}}</template>
-                                  <template #item.cmdtStatus1="{item}">{{ (statusList.filter(filteredItem => filteredItem.value==item.cmdtStatus1) && statusList.filter(filteredItem => filteredItem.value==item.cmdtStatus1)[0])?capitalizeFirstLetter(statusList.filter(filteredItem => filteredItem.value==item.cmdtStatus1)[0].text):''}}</template>
-                                  <template #item.cmdtStatus2="{item}">{{ (statusList.filter(filteredItem => filteredItem.value==item.cmdtStatus2) && statusList.filter(filteredItem => filteredItem.value==item.cmdtStatus2)[0])?capitalizeFirstLetter(statusList.filter(filteredItem => filteredItem.value==item.cmdtStatus2)[0].text):''}}</template>
+                                  <template #header.cmdtUnitNm>
+                                    {{ $t('ТИФ ТН бўйича') }}<br/>{{ $t('қўшимча ўлчов бирлигида') }}
+                                  </template>
+                                  <template #header.cmdtQty>{{ $t('Миқдори') }}<br/>{{ $t('қўшимча ўлчов бирлигида') }}
+                                  </template>
+                                  <template #header.cmdtCost>
+                                    {{ $t('Қиймати') }}<br/>{{ $t('шартнома тузилган валютада') }}
+                                  </template>
+                                  <template #item.cmdtStatus1="{item}">
+                                    {{ (statusList.filter(filteredItem => filteredItem.value == item.cmdtStatus1) && statusList.filter(filteredItem => filteredItem.value == item.cmdtStatus1)[0]) ? capitalizeFirstLetter(statusList.filter(filteredItem => filteredItem.value == item.cmdtStatus1)[0].text) : '' }}
+                                  </template>
+                                  <template #item.cmdtStatus2="{item}">
+                                    {{ (statusList.filter(filteredItem => filteredItem.value == item.cmdtStatus2) && statusList.filter(filteredItem => filteredItem.value == item.cmdtStatus2)[0]) ? capitalizeFirstLetter(statusList.filter(filteredItem => filteredItem.value == item.cmdtStatus2)[0].text) : '' }}
+                                  </template>
                                   <template #item.actions="{ item }">
                                     <div class="d-flex justify-content-center align-items-center">
                                       <v-btn color="primary" icon text @click="editDopProductClicked(item)">
@@ -1146,11 +1159,21 @@
                                         :no-data-text="$t('Маълумот топилмади')"
                                         :loading-text="$t('Юкланмоқда... Илтимос кутиб туринг')"
                                     >
-                                      <template #header.cmdtUnitNm>{{$t('ТИФ ТН бўйича')}}<br/>{{$t('қўшимча ўлчов бирлигида')}}</template>
-                                      <template #header.cmdtQty>{{$t('Миқдори')}}<br/>{{$t('қўшимча ўлчов бирлигида')}}</template>
-                                      <template #header.cmdtCost>{{$t('Қиймати')}}<br/>{{$t('шартнома тузилган валютада')}}</template>
-                                      <template #item.cmdtStatus1="{item}">{{ statusList.filter(filteredItem => filteredItem.value==item.cmdtStatus1)[0]?capitalizeFirstLetter(statusList.filter(filteredItem => filteredItem.value==item.cmdtStatus1)[0].text):''}}</template>
-                                      <template #item.cmdtStatus2="{item}">{{ statusList.filter(filteredItem => filteredItem.value==item.cmdtStatus2)[0]?capitalizeFirstLetter(statusList.filter(filteredItem => filteredItem.value==item.cmdtStatus2)[0].text):''}}</template>
+                                      <template #header.cmdtUnitNm>
+                                        {{ $t('ТИФ ТН бўйича') }}<br/>{{ $t('қўшимча ўлчов бирлигида') }}
+                                      </template>
+                                      <template #header.cmdtQty>
+                                        {{ $t('Миқдори') }}<br/>{{ $t('қўшимча ўлчов бирлигида') }}
+                                      </template>
+                                      <template #header.cmdtCost>
+                                        {{ $t('Қиймати') }}<br/>{{ $t('шартнома тузилган валютада') }}
+                                      </template>
+                                      <template #item.cmdtStatus1="{item}">
+                                        {{ statusList.filter(filteredItem => filteredItem.value == item.cmdtStatus1)[0] ? capitalizeFirstLetter(statusList.filter(filteredItem => filteredItem.value == item.cmdtStatus1)[0].text) : '' }}
+                                      </template>
+                                      <template #item.cmdtStatus2="{item}">
+                                        {{ statusList.filter(filteredItem => filteredItem.value == item.cmdtStatus2)[0] ? capitalizeFirstLetter(statusList.filter(filteredItem => filteredItem.value == item.cmdtStatus2)[0].text) : '' }}
+                                      </template>
                                       <template #item.cmdtDopId="{item}">{{
                                           list.dopProducts.indexOf(item) + 1
                                         }}
@@ -1250,10 +1273,12 @@
           </v-toolbar>
 
           <v-card-text>
-          <v-col cols="12">
-            <p class="text-center" style="line-height: 25px; font-size: 20px">Божхона кодексининг 135-моддаси ва ПФ-115-сонли фармон бўйича аризада тақдим этилган маълумотлар учун жавобгарлик ваколатли шахснинг зиммасида бўлади!</p>
+            <v-col cols="12">
+              <p class="text-center" style="line-height: 25px; font-size: 20px">Божхона кодексининг 135-моддаси ва
+                ПФ-115-сонли фармон бўйича аризада тақдим этилган маълумотлар учун жавобгарлик ваколатли шахснинг
+                зиммасида бўлади!</p>
 
-          </v-col>
+            </v-col>
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
@@ -1374,19 +1399,19 @@ export default {
       tovarIndex: 0,
       tab: 0,
       headers: [
-        {sortable:false, text: i18n.t('№'), align: 'start', value: 'cmdtDopId'},
-        {sortable:false, text: i18n.t('Махсулот мақоми'), align: 'start', value: 'cmdtStatus2'},
-        {sortable:false, text: i18n.t('Маҳсулот ТИФ ТН коди'), align: 'start', value: 'hsCode2'},
-        {sortable:false, text: i18n.t('Махсулот номи'), align: 'start', value: 'cmdtNm2'},
-        {sortable:false, text: i18n.t('Хомашё мақоми'), align: 'start', value: 'cmdtStatus1'},
-        {sortable:false, text: i18n.t('Хомашё ТИФ ТН коди'), align: 'start', value: 'hsCode1'},
-        {sortable:false, text: i18n.t('Хомашё номи'), align: 'start', value: 'cmdtNm1'},
-        {sortable:false, text: i18n.t('Улуш тури билан'), align: 'start', value: 'shareQty'},
-        {sortable:false, text: i18n.t('ТИФ ТН бўйича'), align: 'start', value: 'cmdtUnitNm'},
-        {sortable:false, text: i18n.t('Нетто вазни (кг)'), align: 'start', value: 'cmdtNetto'},
-        {sortable:false, text: i18n.t('Миқдори'), align: 'start', value: 'cmdtQty'},
-        {sortable:false, text: i18n.t('Қиймати'), align: 'start', value: 'cmdtCost'},
-        {sortable:false, text: i18n.t('Амаллар'), align: 'start', value: 'actions'},
+        {sortable: false, text: i18n.t('№'), align: 'start', value: 'cmdtDopId'},
+        {sortable: false, text: i18n.t('Махсулот мақоми'), align: 'start', value: 'cmdtStatus2'},
+        {sortable: false, text: i18n.t('Маҳсулот ТИФ ТН коди'), align: 'start', value: 'hsCode2'},
+        {sortable: false, text: i18n.t('Махсулот номи'), align: 'start', value: 'cmdtNm2'},
+        {sortable: false, text: i18n.t('Хомашё мақоми'), align: 'start', value: 'cmdtStatus1'},
+        {sortable: false, text: i18n.t('Хомашё ТИФ ТН коди'), align: 'start', value: 'hsCode1'},
+        {sortable: false, text: i18n.t('Хомашё номи'), align: 'start', value: 'cmdtNm1'},
+        {sortable: false, text: i18n.t('Улуш тури билан'), align: 'start', value: 'shareQty'},
+        {sortable: false, text: i18n.t('ТИФ ТН бўйича'), align: 'start', value: 'cmdtUnitNm'},
+        {sortable: false, text: i18n.t('Нетто вазни (кг)'), align: 'start', value: 'cmdtNetto'},
+        {sortable: false, text: i18n.t('Миқдори'), align: 'start', value: 'cmdtQty'},
+        {sortable: false, text: i18n.t('Қиймати'), align: 'start', value: 'cmdtCost'},
+        {sortable: false, text: i18n.t('Амаллар'), align: 'start', value: 'actions'},
       ],
       headers1: [
         {text: i18n.t('№'), align: 'start', value: 'cmdtId'},
@@ -1666,35 +1691,35 @@ export default {
 
   },
   methods: {
-    getTftnCodesForContract(contracts){
-        const _this = this
+    getTftnCodesForContract(contracts,code=null) {
+      const _this = this
 
-        this.loading.tftncode = true
+      this.loading.tftncode = true
       const params = new URLSearchParams();
       contracts.forEach(val => params.append('contract[]', val));
 
-        // Lazily load input items
-        fetch("/api/v1/data/tftn?" + params.toString())
-            .then((res) => res.json())
-            .then(res => {
-              res.map(function (item) {
-                item.name = item.id + " - " + item.name;
-                return item;
-              })
+      // Lazily load input items
+      fetch("/api/v1/data/tftn?" + params.toString() + (code?`&code=${code}`:''))
+          .then((res) => res.json())
+          .then(res => {
+            res.map(function (item) {
+              item.name = item.id + " - " + item.name;
+              return item;
+            })
 
-              _this.list.tftncodes = res;
-            })
-            .catch(err => {
-              //console.log(err)
-            })
-            .finally(() => (
-                this.loading.tftncode = false
-            ))
+            _this.list.tftncodes = res;
+          })
+          .catch(err => {
+            //console.log(err)
+          })
+          .finally(() => (
+              this.loading.tftncode = false
+          ))
     },
     capitalizeFirstLetter(val) {
-    return String(val).charAt(0).toUpperCase() + String(val).slice(1);
+      return String(val).charAt(0).toUpperCase() + String(val).slice(1);
     },
-    downloadFile(){
+    downloadFile() {
       window.open('/storage/files/SHABLON_COMMODITY_MAIN.xlsx')
     },
     chooseFile() {
@@ -1713,7 +1738,7 @@ export default {
         formData.append("appId", this.app.common.appId);
 
         // Send the file to the backend
-        await axios
+        await this.$auth.plugins.http
             .post("/api/v1/response/route_recycle/route-excel", formData, {
               headers: {
                 "Content-Type": "multipart/form-data",
@@ -1752,7 +1777,7 @@ export default {
       data.hsCode = this.product.hsCode.id
       data.appId = this.app.common.appId
 
-      await axios.post('/api/v1/response/route_recycle/route-commodity', data).then(function (res) {
+      await this.$auth.plugins.http.post('/api/v1/response/route_recycle/route-commodity', data).then(function (res) {
         _this.$toast.success(_this.$t('Товар маълумотлари омадли тарзда сақланди!'))
         _this.getProducts()
       }).catch((error) => {
@@ -1798,7 +1823,7 @@ export default {
       data.appId = this.app.common.appId
 
       data.shareType = 1
-      await axios.post('/api/v1/response/route_recycle/route-commoditydop', data).then(function (res) {
+      await this.$auth.plugins.http.post('/api/v1/response/route_recycle/route-commoditydop', data).then(function (res) {
         _this.$toast.success(_this.$t('Товар маълумотлари омадли тарзда сақланди!'))
         _this.getDopProducts()
       }).catch((error) => {
@@ -1820,7 +1845,7 @@ export default {
     async getProducts() {
       const _this = this
       this.loading.apps = true
-      await axios.get('/api/v1/response/route_recycle/route-commodity/' + this.app.common.appId).then(function (res) {
+      await this.$auth.plugins.http.get('/api/v1/response/route_recycle/route-commodity/' + this.app.common.appId).then(function (res) {
         _this.list.products = res.data.data
         Object.keys(_this.product).forEach(productKey => {
           _this.product[productKey] = null
@@ -1843,7 +1868,7 @@ export default {
     async getDopProducts() {
       const _this = this
       this.loading.apps = true
-      await axios.get('/api/v1/response/route_recycle/route-commoditydop/' + this.app.common.appId).then(function (res) {
+      await this.$auth.plugins.http.get('/api/v1/response/route_recycle/route-commoditydop/' + this.app.common.appId).then(function (res) {
         _this.list.dopProducts = res.data.data
         Object.keys(_this.dopProduct).forEach(productKey => {
           _this.dopProduct[productKey] = null
@@ -2035,7 +2060,7 @@ export default {
     },
     async getSessionId() {
       let returnObject;
-      await axios.get("/api/v1/ex_api/gen_session").then(function (response) {
+      await this.$auth.plugins.http.get("/api/v1/ex_api/gen_session").then(function (response) {
         returnObject = response;
       })
       return returnObject;
@@ -2098,7 +2123,7 @@ export default {
       // delete data.contractIdenNumber
       let result = null;
       try {
-        await axios.post('/api/v1/response/route_recycle/route-apps', data).then(function (res) {
+        await this.$auth.plugins.http.post('/api/v1/response/route_recycle/route-apps', data).then(function (res) {
           result = res;
         }).catch((inValidErrors) => {
           if (typeof inValidErrors.response !== 'undefined') result = inValidErrors.response;
@@ -2147,7 +2172,7 @@ export default {
     deleteProduct(item) {
       const _this = this
       setTimeout(async () => {
-        await axios.post('/api/v1/response/route_recycle/route-commodity/' + item.appId + '/' + item.cmdtId).then(() => {
+        await this.$auth.plugins.http.post('/api/v1/response/route_recycle/route-commodity/' + item.appId + '/' + item.cmdtId).then(() => {
           _this.$toast.success(_this.$t('Товар омадли тарзда ўчирилди!'))
           _this.dialog.deleteProduct = false
           _this.getProducts()
@@ -2168,7 +2193,7 @@ export default {
     deleteAllProducts() {
       const _this = this
       setTimeout(async () => {
-        await axios.post('/api/v1/response/route_recycle/route-commodity/' + _this.app.common.appId).then(() => {
+        await this.$auth.plugins.http.post('/api/v1/response/route_recycle/route-commodity/' + _this.app.common.appId).then(() => {
           _this.$toast.success(_this.$t('Барча товарлар омадли тарзда ўчирилди!'))
           _this.dialog.deleteAllProduct = false
           _this.getProducts()
@@ -2188,7 +2213,7 @@ export default {
     deleteDopProduct(item) {
       const _this = this
       setTimeout(async () => {
-        await axios.post('/api/v1/response/route_recycle/route-commoditydop/' + item.appId + '/' + item.cmdtDopId).then(() => {
+        await this.$auth.plugins.http.post('/api/v1/response/route_recycle/route-commoditydop/' + item.appId + '/' + item.cmdtDopId).then(() => {
           _this.$toast.success(_this.$t('Товар омадли тарзда ўчирилди!'))
           _this.dialog.deleteDopProduct = false
           _this.getDopProducts()
@@ -2206,7 +2231,7 @@ export default {
     deleteAllDopProducts() {
       const _this = this
       setTimeout(async () => {
-        await axios.delete('/api/v1/response/route_recycle/route-commoditydop/' + _this.app.common.appId).then(() => {
+        await this.$auth.plugins.http.delete('/api/v1/response/route_recycle/route-commoditydop/' + _this.app.common.appId).then(() => {
           _this.$toast.success(_this.$t('Барча товарлар омадли тарзда ўчирилди!'))
           _this.dialog.deleteAllDopProduct = false
           _this.getDopProducts()
@@ -2224,7 +2249,7 @@ export default {
 
     async checkFile(file_id) {
       let response = null;
-      response = await axios.get('/api/v1/ex_api/arxiv?file_id=' + file_id + '&pnfl=' + this.$auth.user().pin);
+      response = await this.$auth.plugins.http.get('/api/v1/ex_api/arxiv?file_id=' + file_id + '&pnfl=' + this.$auth.user().pin);
       if (response && response.data && response.data.count) {
         return response.data.data;
       }
@@ -2286,7 +2311,7 @@ export default {
                 } else {
                   if (resultData.data && resultData.data.error) {
                     this.$toast.error(resultData.data.error);
-                    if(resultData.data.message) this.$toast.error(resultData.data.message + ' ('+resultData.data.status + ')');
+                    if (resultData.data.message) this.$toast.error(resultData.data.message + ' (' + resultData.data.status + ')');
                     this.$toast.error('Response:  ' + JSON.stringify(resultData.data))
 
                   } else
@@ -2304,7 +2329,7 @@ export default {
 
 
         case 2:
-          if(!this.loading.oferta) {
+          if (!this.loading.oferta) {
             this.loading.dialogoferta = true
             return
           }
@@ -2356,7 +2381,7 @@ export default {
       await this.$auth.plugins.http.get('/api/v1/ex_api/boshqarma').then(function (result) {
         if (typeof result.data.data !== 'undefined')
           result.data.data.forEach(function (item) {
-            if (!(['1790', '1791','1702'].includes(item['kod_id'])))
+            if (!(['1790', '1791', '1702'].includes(item['kod_id'])))
               _this.regions.push({
                 'value': item['kod_id'],
                 'text': (item['name']).replace("Ўзбекистон Республикаси Иқтисодиёт ва молия вазирлиги ҳузуридаги Божхона қўмитасининг ", "")//(item['name']).substring(("Ўзбекистон Республикаси Иқтисодиёт ва молия вазирлиги ҳузуридаги Божхона қўмитасининг").length)
@@ -2368,7 +2393,7 @@ export default {
       this.postloading = true;
       const _this = this
       this.posts = [];
-      await axios.get('/api/v1/ex_api/posts?code=' + code,).then(function (result) {
+      await this.$auth.plugins.http.get('/api/v1/ex_api/posts?code=' + code,).then(function (result) {
         if (typeof result.data.locations !== 'undefined')
           result.data.locations.forEach(function (item) {
             _this.posts.push({
@@ -2422,7 +2447,7 @@ export default {
       this.person.type = (this.$auth.user().type === 2) ? 1 : 0;
       _this.person.legalName = (data.legalName) ? data.legalName : null
       _this.loading.init = true
-      await axios.post('/api/v1/response/route_recycle/route-persons', data).then(res => {
+      await this.$auth.plugins.http.post('/api/v1/response/route_recycle/route-persons', data).then(res => {
 
         Object.keys(_this.app.common).forEach(key => {
           if (res.data.data[0][key]) _this.app.common[key] = res.data.data[0][key]
@@ -2575,7 +2600,7 @@ export default {
 
     async sendAppeal() {
       const _this = this
-      await axios.post("/api/v1/response/route_recycle/route-apps/" + this.app.common.personId + '/' + this.app.common.appId)
+      await this.$auth.plugins.http.post("/api/v1/response/route_recycle/route-apps/" + this.app.common.personId + '/' + this.app.common.appId)
           .then(() => {
             _this.$toast.success(_this.$t('Сизнинг аризангиз муваффаққиятли сақланди!'))
             _this.$router.push('/services/recycle/new/' + _this.app.common.appId)
@@ -2602,13 +2627,13 @@ export default {
       },
       deep: true
     },
-    "product.cmdtStatus":{
-      handler:function(val){
-        if(val){
-          if(val==='1'){
+    "product.cmdtStatus": {
+      handler: function (val) {
+        if (val) {
+          if (val === '1') {
             this.getTftnCodesForContract(this.app.common.contractIdenNumber)
           }
-          this.product.hsCode=null
+          this.product.hsCode = null
 
         }
       }
@@ -2617,30 +2642,33 @@ export default {
       handler: function (val) {
         const _this = this
         if (val === null || (val && val.length > 10)) return
+        if (['1'].includes(this.product.cmdtStatus)) {
+          this.getTftnCodesForContract(this.app.common.contractIdenNumber, val)
+        } else {
+          this.loading.tftncode = true
 
-        this.loading.tftncode = true
+          // Lazily load input items
+          fetch("/api/v1/data/tftn?code=" + val)
+              .then((res) => res.json())
+              .then(res => {
+                res.map(function (item) {
+                  item.name = item.id + " - " + item.name;
+                  return item;
+                })
 
-        // Lazily load input items
-        fetch("/api/v1/data/tftn?code=" + val)
-            .then((res) => res.json())
-            .then(res => {
-              res.map(function (item) {
-                item.name = item.id + " - " + item.name;
-                return item;
+                _this.tftncodes = res;
+                if (_this.product.hsCode && typeof _this.product.hsCode !== 'object' && _this.product.hsCode.length === 10) {
+                  const findedTftn = _this.tftncodes.filter(tftnCodeItem => tftnCodeItem.id === _this.product.hsCode)
+                  if (findedTftn && findedTftn[0]) _this.product.hsCode = findedTftn[0]
+                }
               })
-
-              _this.tftncodes = res;
-              if (_this.product.hsCode && typeof _this.product.hsCode !== 'object' && _this.product.hsCode.length === 10) {
-                const findedTftn = _this.tftncodes.filter(tftnCodeItem => tftnCodeItem.id === _this.product.hsCode)
-                if (findedTftn && findedTftn[0]) _this.product.hsCode = findedTftn[0]
-              }
-            })
-            .catch(err => {
-              //console.log(err)
-            })
-            .finally(() => (
-                this.loading.tftncode = false
-            ))
+              .catch(err => {
+                //console.log(err)
+              })
+              .finally(() => (
+                  this.loading.tftncode = false
+              ))
+        }
       },
       deep: true
     },
@@ -2762,17 +2790,17 @@ export default {
         map.invalidateSize();
       }, 300); // 300ms delay to ensure DOM is ready
     });
-    let marker = L.marker([41.3111, 69.2797], { icon: myIcon }).addTo(map)
-    map.on('click', function(e) {
+    let marker = L.marker([41.3111, 69.2797], {icon: myIcon}).addTo(map)
+    map.on('click', function (e) {
       if (marker) {
         map.removeLayer(marker)
       }
-      const userMarker = marker= L.marker(e.latlng,{ icon: myIcon }).addTo(map);
+      const userMarker = marker = L.marker(e.latlng, {icon: myIcon}).addTo(map);
 
-      _this.app.common.recycleLocation = e.latlng.lat+ ':'+e.latlng.lng
-/*      userMarker.on('click', function() {
-        alert(`Sizning koordinatalaringiz:\nLatitude: ${e.latlng.lat}\nLongitude: ${e.latlng.lng}`);
-      });*/
+      _this.app.common.recycleLocation = e.latlng.lat + ':' + e.latlng.lng
+      /*      userMarker.on('click', function() {
+              alert(`Sizning koordinatalaringiz:\nLatitude: ${e.latlng.lat}\nLongitude: ${e.latlng.lng}`);
+            });*/
     });
 
 
@@ -2789,19 +2817,19 @@ export default {
       }
       return this.headers
     },
-    listProductsComputed(){
+    listProductsComputed() {
       return this.list.products
     },
-    listDopProductsComputed(){
+    listDopProductsComputed() {
       return this.list.dopProducts
     },
     dopProductsComputed() {
       return this.listProductsComputed.filter(productItem => {
-          // Faqat kerakli cmdtStatus qiymatlarini tekshir
+        // Faqat kerakli cmdtStatus qiymatlarini tekshir
         const isRelevantStatus = ['3', '4', '5', '6'].includes(productItem.cmdtStatus);
 
         // Agar dopProducts bo‘sh bo‘lsa, dopProductga tekshirishsiz true
-        if (this.repubTypeComputed===2 || !this.listDopProductsComputed || this.listDopProductsComputed.length === 0) {
+        if (this.repubTypeComputed === 2 || !this.listDopProductsComputed || this.listDopProductsComputed.length === 0) {
           return isRelevantStatus;
         }
 

@@ -2486,7 +2486,7 @@ export default {
 
                     setTimeout(async () => {
 
-                        await axios.get('/api/v1/ex_api/getPData', {
+                        await this.$auth.plugins.http.get('/api/v1/ex_api/getPData', {
                             params: {
                                 pasnum: (_this.application.importer.passport).toUpperCase(),
                                 //key:md,
@@ -2720,7 +2720,7 @@ export default {
         },
         async getSessionId() {
             let returnObject;
-            await axios.get("/api/v1/ex_api/gen_session").then(function (response) {
+            await this.$auth.plugins.http.get("/api/v1/ex_api/gen_session").then(function (response) {
                 returnObject = response;
             })
             return returnObject;
@@ -2793,7 +2793,7 @@ export default {
         async sendPerson(data = null) {
             let result = null;
             try {
-                await axios.post('/api/v1/ex_api/customprice-person', data).then(function (res) {
+                await this.$auth.plugins.http.post('/api/v1/ex_api/customprice-person', data).then(function (res) {
                     result = res;
                 })
                 return result;
@@ -2805,7 +2805,7 @@ export default {
         async sendYukHujjatlari(data) {
             let result = null;
             try {
-                await axios.post('/api/v1/ex_api/customprice-update', data).then(function (res) {
+                await this.$auth.plugins.http.post('/api/v1/ex_api/customprice-update', data).then(function (res) {
                     result = res;
                 })
                 return result;
@@ -2818,7 +2818,7 @@ export default {
         async sendProduct(data) {
             let result = null;
             try {
-                await axios.post('/api/v1/ex_api/customprice-product', {commodity:[data]}).then(function (res) {
+                await this.$auth.plugins.http.post('/api/v1/ex_api/customprice-product', {commodity:[data]}).then(function (res) {
                     result = res;
                 })
                 return result;
@@ -2830,7 +2830,7 @@ export default {
         },
         async checkFile(file_id) {
             let response = null;
-            response = await axios.get('/api/v1/ex_api/arxiv?file_id=' + file_id + '&pnfl=' + this.$auth.user().pin);
+            response = await this.$auth.plugins.http.get('/api/v1/ex_api/arxiv?file_id=' + file_id + '&pnfl=' + this.$auth.user().pin);
             if (response && response.data && response.data.count) {
                 return response.data.data;
             }
@@ -3396,7 +3396,7 @@ export default {
 
             setTimeout(() => {
 
-                axios.get("/api/v1/ex_api/customprice-get", {
+                this.$auth.plugins.http.get("/api/v1/ex_api/customprice-get", {
                     params: {
                         app_id: _this.$route.params.id
                     }
@@ -3694,7 +3694,7 @@ export default {
                     _this.importerIsset=true;
                     setTimeout(async () => {
 
-                        await axios.get('/api/v1/ex_api/getPData', {
+                        await this.$auth.plugins.http.get('/api/v1/ex_api/getPData', {
                             params: {
                                 pasnum: (_this.application.importer.passport).toUpperCase(),
                                 //key:md,

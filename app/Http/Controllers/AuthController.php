@@ -207,7 +207,8 @@ class AuthController extends Controller
                             "pinfl" => (string)$user->pin,
                             "doc_give_date" => $user->_pport_issue_date,
                         ]), 'application/json')
-                            ->post('http://192.168.214.124:9090/GetMIP2/rest/service_MIP2/getMipFoto',
+//                            ->post('http://172.16.212.17:9090/GetMIP2/rest/service_MIP2/getMipFoto',
+                            ->post('http://172.16.212.17:9090/GetMIP2/rest/service_MIP2/getMipFoto',
                             );
                         //dd($userPhoto->json());
                         $userPhoto = $userPhoto->json();
@@ -242,7 +243,7 @@ class AuthController extends Controller
                     "pinfl" => (string)$user->pin,
                     "doc_give_date" => $user->_pport_issue_date,
                 ]), 'application/json')
-                    ->post('http://192.168.214.124:9090/GetMIP2/rest/service_MIP2/getMipFoto',
+                    ->post('http://172.16.212.17:9090/GetMIP2/rest/service_MIP2/getMipFoto',
                     );
 
                 $userPhoto = $userPhoto->json();
@@ -256,7 +257,7 @@ class AuthController extends Controller
                 $returnData = DB::connection('db2_odbcInn')->select(
                     "select tin,name,shortname,streetname,registrationnumber from INN_ASOS WHERE tin = ?", [$legals['le_tin']]);
                 if($returnData and $returnData[0]) {
-                    $user->per_adr = $returnData[0]->streetname; 
+                    $user->per_adr = $returnData[0]->streetname;
                     $user->save();
                 }
             }

@@ -38,7 +38,6 @@ Table of Content:
 /*font Variables*/
 /*Color Variables*/
 @import 'fonts.css';
-
 /* montserrat-regular - latin_cyrillic-ext_cyrillic */
 @font-face {
     font-family: 'Montserrat';
@@ -2569,9 +2568,9 @@ $tc-primary-color: #4776b3;
     padding-top: 130px;
     margin: 0 auto;
     width: 95%;
-    height: 0;
+/*    height: 0;
     position: absolute;
-    top: -100%;
+    top: -100%;*/
 
     > div > .row {
         justify-content: center;
@@ -2710,9 +2709,9 @@ $tc-primary-color: #4776b3;
     }
 }
 
-#fp-nav ul li:first-child {
+/*#fp-nav ul li:first-child {
     display: none;
-}
+}*/
 
 /* End Footer area css
 ============================================================================================ */

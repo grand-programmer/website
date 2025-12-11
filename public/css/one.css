@@ -458,9 +458,6 @@ ul#pills-tab {
 
 .opendata-container {
   display: flex;
-  --s: $s;
-  --m: $m;
-  --f: $f;
 }
 
 .opendata {
@@ -476,7 +473,9 @@ ul#pills-tab {
   width: calc(260px / 2 + (45px) * 4 / 3);
   float: left;
   height: 144%;
-  shape-outside: repeating-linear-gradient(#0000 0 calc(calc(1.732 * 260px + (-6 * 45px) - 1px) - 1vw), #000 0 calc(1.732 * 260px + (-6 * 45px) - 1px));
+    /*
+    shape-outside: repeating-linear-gradient(#0000 0 calc(1.732 * 260px + (-6 * 45px) - 1px), #000 0 calc(1.732 * 260px + (-6 * 45px) - 1px));
+    */
 }
 .opendata .portfolio_single.p2 {
   width: 260px;
@@ -744,7 +743,7 @@ section.content_block .tab-content > .tab-pane {
   background-size: contain;
 }
 #mobil-ilovalar .mobil-ilovalar a.mobil-ilova .mobil-ilova-text {
-  margin-top: -15 px;
+  margin-top: -15px;
   width: 95%;
   padding: 0 5px;
   color: #000;
@@ -1545,6 +1544,7 @@ a.read_more {
   font-size: 20px;
   color: #39ae69;
   float: left;
+
 }
 .hududiy_boshqarmalar a {
   border: none;

@@ -4,7 +4,7 @@
 
         <loading-bar></loading-bar>
 
-        <hududiy></hududiy>
+<!--        <hududiy></hududiy>-->
 
 
         <div class="section" id="section0">

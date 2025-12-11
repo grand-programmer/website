@@ -280,7 +280,7 @@ export default {
 
             setTimeout(() => {
                 this.$store.commit('setLoading', true)
-                axios.get("/api/v1/ex_api/refund-get", {
+                this.$auth.plugins.http.get("/api/v1/ex_api/refund-get", {
                     params: {
                         app_id: _this.$route.params.id
                     }

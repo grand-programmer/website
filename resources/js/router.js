@@ -4,6 +4,7 @@ import Vue from 'vue';
 Vue.use(vueRouter);
 
 import Index from "./views/frontend/index";
+import Page from "./views/frontend/pages/index";
 import OnePage from "./views/frontend/one_page";
 import HomePage from "./../js/components/index";
 import Services from "./views/frontend/services";
@@ -33,7 +34,7 @@ import Yagona_oyna from "./views/frontend/services/yagona_oyna";
 
 const routes = []
 const allRoutes = {
-    path: 'any', redirect() {
+    path: '/any', redirect() {
         return '/oz';
     }
 }
@@ -390,11 +391,14 @@ const userRoutes =
                     },
                     {
                         path: 'page',
+                        name: 'Sahifalar',
                         component: {template: '<router-view></router-view>'},
                         children: [
-                            {path: 'search', component: () => import("./views/frontend/pages/search")},
-                            {path: 'votes/', component: () => import("./views/frontend/pages/votes")},
-                            {path: 'opendata/', component: () => import("./views/frontend/pages/opendata")},
+                            {path: 'search',name:'Qidirish', component: () => import("./views/frontend/pages/search")},
+                            {path: 'faqs',name:'Faqs', component: () => import("./views/pages/Faq"), meta:{auth:undefined}},
+                            {path: 'hududiy',name:'Hududiy', component: () => import("./components/layout/hududiy")},
+                            {path: 'votes/', name:'Votes',component: () => import("./views/frontend/pages/votes")},
+                            {path: 'opendata/',name:'openData', component: () => import("./views/frontend/pages/opendata")},
                             {
                                 path: 'rahbariyat/',
                                 component: {template: '<router-view></router-view>', script: ' export default {}'},
@@ -402,17 +406,19 @@ const userRoutes =
                                     {path: '', component: () => import("./views/frontend/pages/rahbariyat/rahbariyat")},
                                     {
                                         path: 'institut/',
+                                        name:'Institut',
                                         component: () => import("./views/frontend/pages/rahbariyat/institut")
                                     },
                                 ]
                             },
                             {
-                                path: 'markaziy/',
+                                path: 'markaziy',
                                 component: {template: '<router-view></router-view>', script: ' export default {}'},
                                 children: [
                                     {path: '', component: () => import("./views/frontend/pages/markaziy/markaziy")},
                                     {
-                                        path: 'institut/',
+                                        path: 'institut',
+                                        name:'MarkaziyInstitut',
                                         component: () => import("./views/frontend/pages/markaziy/institut")
                                     },
                                 ]
@@ -441,7 +447,7 @@ const userRoutes =
                             },
                             {path: 'jismoniy', component: () => import("./views/frontend/pages/jismoniy")},
                             {path: 'boshqarma/:id', component: () => import("./views/frontend/pages/org")},
-                            {path: ':id', component: () => import('./views/frontend/pages/index'),}
+                            {path: ':id', component: Page}
                         ]
                     },
                     {
@@ -546,10 +552,9 @@ let adminRoute = {
             name: 'Мурожаатлар', path: 'services/appeals', component: () => import('./views/dashboard/services/Appeal'),
         }, // Pages
         {
-            name: 'Сахифалар', path: 'pages/', component: {
-                template: '<router-view></router-view>', script: ' export default {}'
-            }, children: [{
-                name: "Сахифалар", path: '', component: () => import('./views/dashboard/pages/index'),
+            path: 'pages', component: { template: '<router-view></router-view>' },
+            children: [{
+                name: "Сахифалар рўйхати", path: '', component: () => import('./views/dashboard/pages/index'),
 
             }, {
                 name: "Сахифа яратиш", path: 'create', component: () => import('./views/dashboard/pages/create'),
@@ -561,10 +566,10 @@ let adminRoute = {
 
         },// Files
         {
-            name: 'Файллар', path: 'files/', component: {
+            path: 'files/', component: {
                 template: '<router-view></router-view>', script: ' export default {}'
             }, children: [{
-                name: "Файллар", path: '', component: () => import('./views/dashboard/files/index'),
+                name: "Файллар рўйхати", path: '', component: () => import('./views/dashboard/files/index'),
 
             }, {
                 name: "Файл яратиш", path: 'create', component: () => import('./views/dashboard/files/create'),
@@ -576,10 +581,10 @@ let adminRoute = {
 
         }, // News
         {
-            name: 'Янгиликлар', path: 'news/', component: {
+            path: 'news/', component: {
                 template: '<router-view></router-view>', script: ' export default {}'
             }, children: [{
-                name: "Янгиликлар", path: '', component: () => import('./views/dashboard/news/index'),
+                name: "Янгиликлар рўйхати", path: '', component: () => import('./views/dashboard/news/index'),
 
             }, {
                 name: "Янгилик яратиш", path: 'create', component: () => import('./views/dashboard/news/create'),
@@ -593,10 +598,10 @@ let adminRoute = {
 
         }, // Categories
         {
-            name: 'Категориялар', path: 'categories/', component: {
+            path: 'categories/', component: {
                 template: '<router-view></router-view>', script: ' export default {}'
             }, children: [{
-                name: "Категориялар", path: '', component: () => import('./views/dashboard/news/categories/index'),
+                name: "Категориялар рўйхати", path: '', component: () => import('./views/dashboard/news/categories/index'),
 
             }, {
                 name: "Категория яратиш",
@@ -615,10 +620,10 @@ let adminRoute = {
         },
         // Documents
         {
-            name: 'Документлар', path: 'documents/', component: {
+            path: 'documents/', component: {
                 template: '<router-view></router-view>', script: ' export default {}'
             }, children: [{
-                name: "Документлар", path: '', component: () => import('./views/dashboard/documents/index'),
+                name: "Документлар рўйхати", path: '', component: () => import('./views/dashboard/documents/index'),
 
             }, {
                 name: "Документ яратиш", path: 'create', component: () => import('./views/dashboard/documents/create'),
@@ -635,10 +640,10 @@ let adminRoute = {
         },
         // Translates
         {
-            name: 'Таржималар', path: 'translate/', component: {
+           path: 'translate/', component: {
                 template: '<router-view></router-view>', script: ' export default {}'
             }, children: [{
-                name: "Таржималар", path: '', component: () => import('./views/dashboard/translate/index'),
+                name: "Таржималар рўйхати", path: '', component: () => import('./views/dashboard/translate/index'),
 
             },
 
@@ -647,10 +652,10 @@ let adminRoute = {
         },
         // Categories
         {
-            name: 'Документ категориялар', path: 'doccategories/', component: {
+            path: 'doccategories/', component: {
                 template: '<router-view></router-view>', script: ' export default {}'
             }, children: [{
-                name: "Документ категориялари",
+                name: "Документ категориялари рўйхати",
                 path: '',
                 component: () => import('./views/dashboard/documents/categories/index'),
 
@@ -670,10 +675,10 @@ let adminRoute = {
 
         }, // Events
         {
-            name: 'Ходисалар', path: 'events/', component: {
+            path: 'events/', component: {
                 template: '<router-view></router-view>', script: ' export default {}'
             }, children: [{
-                name: "Ходисалар", path: '', component: () => import('./views/dashboard/events/index'),
+                name: "Ходисалар рўйхати", path: '', component: () => import('./views/dashboard/events/index'),
 
             }, {
                 name: "Ходиса яратиш", path: 'create', component: () => import('./views/dashboard/events/create'),
@@ -690,10 +695,10 @@ let adminRoute = {
 
         }, // Votes
         {
-            name: 'Сўровнома', path: 'votes/', component: {
+           path: 'votes/', component: {
                 template: '<router-view></router-view>', script: ' export default {}'
             }, children: [{
-                name: "Сўровномалар", path: '', component: () => import('./views/dashboard/votes/index'),
+                name: "Сўровномалар рўйхати", path: '', component: () => import('./views/dashboard/votes/index'),
 
             }, {
                 name: "Сўровнома яратиш", path: 'create', component: () => import('./views/dashboard/votes/create'),
@@ -710,10 +715,10 @@ let adminRoute = {
 
         },// Opendatas
         {
-            name: 'Очиқ маълумотлар', path: 'opendatas/', component: {
+            path: 'opendatas/', component: {
                 template: '<router-view></router-view>', script: ' export default {}'
             }, children: [{
-                name: "Очиқ маълумотлар", path: '', component: () => import('./views/dashboard/opendatas/index'),
+                name: "Очиқ маълумотлар рўйхати", path: '', component: () => import('./views/dashboard/opendatas/index'),
 
             }, {
                 name: "Очиқ маълумот яратиш",
@@ -735,10 +740,10 @@ let adminRoute = {
         },
         // Opendata files
         {
-            name: 'Очиқ маълумот файллари', path: 'opendata/:opendata/files', component: {
+            path: 'opendata/:opendata/files', component: {
                 template: '<router-view></router-view>', script: ' export default {}'
             }, children: [{
-                name: "Очиқ маълумот файллари",
+                name: "Очиқ маълумот файллари рўйхати",
                 path: '',
                 component: () => import('./views/dashboard/opendatafiles/index'),
 
@@ -764,10 +769,10 @@ let adminRoute = {
         },
         // Faqs
         {
-            name: 'Кўп бериладиган саволлар', path: 'faqs/', component: {
+            path: 'faqs/', component: {
                 template: '<router-view></router-view>', script: ' export default {}'
             }, children: [{
-                name: "Кўп бериладиган савол ва жавоблар",
+                name: "Кўп бериладиган савол ва жавоблар рўйхати",
                 path: '',
                 component: () => import('./views/dashboard/faqs/index'),
             }, {
@@ -788,7 +793,7 @@ let adminRoute = {
 
         }, // Organizations
         {
-            name: 'Organisations', path: 'orgs/', component: {
+            path: 'orgs/', component: {
                 template: '<router-view></router-view>', script: ' export default {}'
             }, children: [{
                 name: "Бошқармалар", path: '', component: () => import('./views/dashboard/orgs/index'),
@@ -807,51 +812,51 @@ let adminRoute = {
 
         },        // Organizations
         {
-            name: 'Марказий аппарат', path: 'apparat/', component: {
+            path: 'apparat/', component: {
                 template: '<router-view></router-view>', script: ' export default {}'
             }, children: [{
-                name: "Бошқармалар", path: '', component: () => import('./views/dashboard/apparat/index'),
+                name: "Бошқармалар рўйхати", path: '', component: () => import('./views/dashboard/apparat/index'),
 
             }, {
-                name: "Бошқарма яратиш", path: 'create', component: () => import('./views/dashboard/apparat/create'),
+                name: "Бошқарма яратиш марказий", path: 'create', component: () => import('./views/dashboard/apparat/create'),
 
             }, {
-                name: "Бошқармани тахрирлаш",
+                name: "Бошқармани тахрирлаш марказий",
                 path: 'edit/:id',
                 component: () => import('./views/dashboard/apparat/edit'),
 
             }, {
-                name: "Бошқарма", path: 'view/:id', component: () => import('./views/dashboard/apparat/view'),
+                name: "Бошқарма марказий", path: 'view/:id', component: () => import('./views/dashboard/apparat/view'),
             },
 
             ]
 
         }, {
-            name: 'Марказий аппарат', path: 'apporg/:org/', component: {
+           path: 'apporg/:org/', component: {
                 template: '<router-view></router-view>', script: ' export default {}'
             }, children: [{
-                name: "Бошқармалар", path: '', component: () => import('./views/dashboard/apparat/index'),
+                name: "Бошқармалар худуд", path: '', component: () => import('./views/dashboard/apparat/index'),
 
             }, {
-                name: "Бошқарма яратиш", path: 'create', component: () => import('./views/dashboard/apparat/create'),
+                name: "Бошқарма яратиш худуд", path: 'create', component: () => import('./views/dashboard/apparat/create'),
 
             }, {
-                name: "Бошқармани тахрирлаш",
+                name: "Бошқармани тахрирлаш худуд",
                 path: 'edit/:id',
                 component: () => import('./views/dashboard/apparat/edit'),
 
             }, {
-                name: "Бошқарма", path: 'view/:id', component: () => import('./views/dashboard/apparat/view'),
+                name: "Бошқарма худуд", path: 'view/:id', component: () => import('./views/dashboard/apparat/view'),
             },
 
             ]
 
         },
         {
-            name: 'Раҳбарият', path: 'rahbariyat/', component: {
+            path: 'rahbariyat/', component: {
                 template: '<router-view></router-view>', script: ' export default {}'
             }, children: [{
-                name: "Рахбарият", path: '', component: () => import('./views/dashboard/rahbariyat/index'),
+                name: "Рахбарият рўйхати", path: '', component: () => import('./views/dashboard/rahbariyat/index'),
 
             }, {
                 name: "Рахбарият яратиш",
@@ -869,21 +874,21 @@ let adminRoute = {
 
         },
         {
-            name: 'Раҳбарият', path: 'rahbarorg/:org/', component: {
+            path: 'rahbarorg/:org/', component: {
                 template: '<router-view></router-view>', script: ' export default {}'
             }, children: [{
-                name: "Рахбарият", path: '', component: () => import('./views/dashboard/rahbariyat/index'),
+                name: "Рахбарият рўйхати худуд", path: '', component: () => import('./views/dashboard/rahbariyat/index'),
 
             }, {
-                name: "Рахбарият яратиш",
+                name: "Рахбарият яратиш худуд",
                 path: 'create',
                 component: () => import('./views/dashboard/rahbariyat/create'),
 
             }, {
-                name: "Тахрирлаш", path: 'edit/:id', component: () => import('./views/dashboard/rahbariyat/edit'),
+                name: "Тахрирлаш худуд", path: 'edit/:id', component: () => import('./views/dashboard/rahbariyat/edit'),
 
             }, {
-                name: "Рахбарият", path: 'view/:id', component: () => import('./views/dashboard/rahbariyat/view'),
+                name: "Рахбарият худуд", path: 'view/:id', component: () => import('./views/dashboard/rahbariyat/view'),
             },
 
             ]
@@ -891,10 +896,10 @@ let adminRoute = {
         },
         // Menus
         {
-            name: 'Менюлар', path: 'menu/', component: {
+            path: 'menu/', component: {
                 template: '<router-view></router-view>', script: ' export default {}'
             }, children: [{
-                name: "Менюлар", path: '', component: () => import('./views/dashboard/menus/index'),
+                name: "Менюлар рўйхати", path: '', component: () => import('./views/dashboard/menus/index'),
 
             }, {
                 name: "Меню яратиш", path: 'create', component: () => import('./views/dashboard/menus/create'),
@@ -911,21 +916,21 @@ let adminRoute = {
 
         },// Footer Menus
         {
-            name: 'Менюлар', path: 'footermenu/', component: {
+            path: 'footermenu/', component: {
                 template: '<router-view></router-view>', script: ' export default {}'
             }, children: [{
-                name: "Менюлар", path: '', component: () => import('./views/dashboard/footer-menus/index'),
+                name: "Менюлар вниз рўйхати", path: '', component: () => import('./views/dashboard/footer-menus/index'),
 
             }, {
-                name: "Меню яратиш", path: 'create', component: () => import('./views/dashboard/footer-menus/create'),
+                name: "Меню яратиш вниз", path: 'create', component: () => import('./views/dashboard/footer-menus/create'),
 
             }, {
-                name: "Менюни тахрирлаш",
+                name: "Менюни тахрирлаш вниз",
                 path: 'edit/:id',
                 component: () => import('./views/dashboard/footer-menus/edit'),
 
             }, {
-                name: "Подменюлар", path: 'view/:id', component: () => import('./views/dashboard/footer-menus/view'),
+                name: "Подменюлар вниз", path: 'view/:id', component: () => import('./views/dashboard/footer-menus/view'),
 
             },
 

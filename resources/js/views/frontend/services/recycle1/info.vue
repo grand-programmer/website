@@ -517,7 +517,7 @@ export default {
   methods: {
     async checkFile(file_id) {
       let response = null;
-      response = await axios.get('/api/v1/ex_api/arxiv?file_id=' + file_id + '&pnfl=' + this.$auth.user().pin);
+      response = await this.$auth.plugins.http.get('/api/v1/ex_api/arxiv?file_id=' + file_id + '&pnfl=' + this.$auth.user().pin);
       if (response && response.data && response.data.count) {
         return response.data.data;
       }
@@ -532,7 +532,7 @@ export default {
 
       setTimeout(async () => {
         this.$store.commit('setLoading', true)
-        await axios.get("/api/v1/response/route_recycle/route-apps/only/" + _this.$route.params.id).then(function (response) {
+        await this.$auth.plugins.http.get("/api/v1/response/route_recycle/route-apps/only/" + _this.$route.params.id).then(function (response) {
 
           if (typeof response.data.data !== "undefined") {
             _this.app = response.data.data[0]
@@ -572,7 +572,7 @@ export default {
     },
     async getHistory() {
       const _this = this
-      await axios.get("/api/v1/response/route_recycle/route-status-history/" + _this.$route.params.id).then(function (response) {
+      await this.$auth.plugins.http.get("/api/v1/response/route_recycle/route-status-history/" + _this.$route.params.id).then(function (response) {
 
         if (typeof response.data.data !== "undefined") {
           _this.app.history = response.data.data
@@ -593,7 +593,7 @@ export default {
     },
     async getCommodities() {
       const _this = this
-      await axios.get("/api/v1/response/route_recycle/route-commodity/" + _this.$route.params.id).then(function (response) {
+      await this.$auth.plugins.http.get("/api/v1/response/route_recycle/route-commodity/" + _this.$route.params.id).then(function (response) {
 
         if (typeof response.data.data !== "undefined") {
           _this.list.products = response.data.data
@@ -614,7 +614,7 @@ export default {
     },
     async getDopCommodities() {
       const _this = this
-      await axios.get("/api/v1/response/route_recycle/route-commoditydop/" + _this.$route.params.id).then(function (response) {
+      await this.$auth.plugins.http.get("/api/v1/response/route_recycle/route-commoditydop/" + _this.$route.params.id).then(function (response) {
 
         if (typeof response.data.data !== "undefined") {
           _this.list.dopProducts = response.data.data

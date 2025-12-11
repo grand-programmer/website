@@ -355,7 +355,7 @@ export default {
             //console.log(this.$route.query.test)
             //if(this.$route.query.test)
             //if (this.$auth.user()) {
-            await axios.get("/api/v1/ex_api/vakantlar").then(function (response) {
+            await this.$auth.plugins.http.get("/api/v1/ex_api/vakantlar").then(function (response) {
                 if (response.data.success === true) {
                     setTimeout(() => {
                         _app.loading = false;
@@ -379,7 +379,7 @@ export default {
             })*/
 
             /*} else {
-                await axios.get("/api/v1/ex_api/vakantlar").then(function (response) {
+                await this.$auth.plugins.http.get("/api/v1/ex_api/vakantlar").then(function (response) {
                     if (response.data.success === true) {
                         _app.loading=false;
                         _app.vacancies = _app.filteredVacancies = response.data.data;

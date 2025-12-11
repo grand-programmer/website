@@ -261,13 +261,36 @@ export default {
     openPayme() {
       window.location.href = "https://checkout.paycom.uz/" + this.paymeurl
     },
-    openResult() {
+    async openResult() {
       window.location.href = "https://servicepdf.customs.uz/" + this.application.id + "/download?token="+ this.application.token + "&inn="+ (this.person.type === 0?this.person.tin:this.person.pin)
+      /*const url = `https://servicepdf.customs.uz/${this.application.id}/download`
+
+      const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+          'Authorization': 'Bearer ' + this.application.token
+        }
+      });
+
+      if (!response.ok) {
+        console.error("Xatolik:", response.statusText);
+        return;
+      }
+
+      const blob = await response.blob();
+      const downloadUrl = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = downloadUrl;
+      a.download = "file.pdf";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(downloadUrl);*/
     },
     async getPrice() {
       const _this = this
 
-      await axios.get('/api/v1/statservice/price/' + this.$route.params.id).then(res => {
+      await this.$auth.plugins.http.get('/api/v1/statservice/price/' + this.$route.params.id).then(res => {
         if (res.data.data) _this.list.prices = res.data.data
         if (res.data.bhm) _this.bhm = res.data.bhm
         if (res.data.payme) _this.paymeurl = res.data.payme
@@ -325,7 +348,7 @@ export default {
     async getAppData() {
       const _this = this
       this.$store.commit('setLoading', true);
-      await axios.get('/api/v1/statservice/' + this.$route.params.id, {
+      await this.$auth.plugins.http.get('/api/v1/statservice/' + this.$route.params.id, {
         params: {
           completed: 1
         }
@@ -362,7 +385,7 @@ export default {
       this.loading.post = true;
       const _this = this
       this.list.posts = [];
-      await axios.get('/api/v1/data/post?code=' + code,).then(function (result) {
+      await this.$auth.plugins.http.get('/api/v1/data/post?code=' + code,).then(function (result) {
         if (typeof result.data !== 'undefined')
           _this.list.posts = result.data.posts
       }).catch(e => {
@@ -375,7 +398,7 @@ export default {
       this.loading.regime = true;
       const _this = this
       this.list.regimes = [];
-      await axios.get('/api/v1/data/' + this.$route.params.id + '/regime').then(function (result) {
+      await this.$auth.plugins.http.get('/api/v1/data/' + this.$route.params.id + '/regime').then(function (result) {
         if (typeof result.data !== 'undefined')
           _this.list.regimes = result.data
         _this.loading.regime = false;
@@ -392,7 +415,7 @@ export default {
       const grafalar = JSON.parse(JSON.stringify(this.application.grafalar))
       const _this = this
       this.list.fields = [];
-      await axios.get('/api/v1/data/' + this.$route.params.id + '/fields').then(function (result) {
+      await this.$auth.plugins.http.get('/api/v1/data/' + this.$route.params.id + '/fields').then(function (result) {
         if (typeof result.data !== 'undefined')
           _this.list.fields = result.data.data
         _this.list.primaryFields = result.data.secondary
@@ -417,13 +440,13 @@ export default {
     },
 
     async getApplicationTypes() {
-      await axios.get('/api/v1/data/statservicetype').then(res => {
+      await this.$auth.plugins.http.get('/api/v1/data/statservicetype').then(res => {
         console.log(res)
         this.application_types = res.data
       })
     },
     async getApplicationTarmoq() {
-      await axios.get('/api/v1/data/statservice/' + this.$route.params.id + '/tarmoq').then(res => {
+      await this.$auth.plugins.http.get('/api/v1/data/statservice/' + this.$route.params.id + '/tarmoq').then(res => {
 
         this.list.netOrgs = res.data
       })

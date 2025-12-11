@@ -330,7 +330,7 @@ export default {
             const _this = this;
             setTimeout(async () => {
 
-                await axios.post('/api/v1/ex_api/services-registries',_this.hfilters).then(function (res) {
+                await this.$auth.plugins.http.post('/api/v1/ex_api/services-registries',_this.hfilters).then(function (res) {
                     _this.decisions = res.data.data;
                      if(typeof res.data.data[0] !=='undefined') _this.totalDecisions =parseInt(res.data.data[0].mycount); else _this.totalDecisions =0;
 

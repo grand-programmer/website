@@ -256,7 +256,7 @@ export default {
             const _this = this;
             this.filteredTranslates=[]
             this.translates=[]
-            await axios.get('/api/v1/admin/locales').then(function (res) {
+            await this.$auth.plugins.http.get('/api/v1/admin/locales').then(function (res) {
                 // _this[this.lang] = JSON.parse(JSON.stringify(res.data.data[this.lang]))
                 _this.en = JSON.parse(JSON.stringify(res.data.data['en']))
                 _this.uz = JSON.parse(JSON.stringify(res.data.data['uz']))
@@ -293,7 +293,7 @@ export default {
                 this.$toast.error(this.$t('Сиз калит сўзни киритимадингиз!'))
                 return
             }
-            axios.post('/api/v1/admin/addlocale', { ...this.newTranslate}).then(function (res) {
+            this.$auth.plugins.http.post('/api/v1/admin/addlocale', { ...this.newTranslate}).then(function (res) {
                 if (typeof res.data.success !== 'undefined' && res.data.success) {
                     _this.$toast.success('Омадли тарзда қўшилди!');
                     window.location.href='/admin/translate'
@@ -314,7 +314,7 @@ export default {
                                     this.en[key]=value.en;
                                     this.oz[key]=value.oz;
                                 }*/
-                await axios.post('/api/v1/admin/locales', {data: this.filteredTranslates, lang: _this.lang}).then(function (res) {
+                await this.$auth.plugins.http.post('/api/v1/admin/locales', {data: this.filteredTranslates, lang: _this.lang}).then(function (res) {
                     if (typeof res.data.success !== 'undefined' && res.data.success) {
                         _this.$toast.success('Омадли тарзда юкланди!');
                         window.location.href='/admin/translate'

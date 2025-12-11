@@ -155,7 +155,7 @@ export default {
     },
     methods: {
         async run() {
-            await axios.get('/api/v1/stat', {
+            await this.$auth.plugins.http.get('/api/v1/stat', {
                 params: {
                     name: 'tovarimex_n',
                     rejim: this.regime,

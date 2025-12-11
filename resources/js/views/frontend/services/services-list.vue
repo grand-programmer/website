@@ -387,15 +387,15 @@ export default {
         async getSessionId(type = null) {
             let returnObject;
             if (type === 'cabinet')
-                await axios.post("/api/v1/ex_api/gen_session", {type: 'cabinet'}).then(function (response) {
+                await this.$auth.plugins.http.post("/api/v1/ex_api/gen_session", {type: 'cabinet'}).then(function (response) {
                     returnObject = response;
                 }); else {
                 if (type === "dep") {
-                    await axios.post("/api/v1/ex_api/gen_session", {type: 'dep'}).then(function (response) {
+                    await this.$auth.plugins.http.post("/api/v1/ex_api/gen_session", {type: 'dep'}).then(function (response) {
                         returnObject = response;
                     })
                 } else
-                    await axios.get("/api/v1/ex_api/gen_session").then(function (response) {
+                    await this.$auth.plugins.http.get("/api/v1/ex_api/gen_session").then(function (response) {
                         returnObject = response;
                     })
             }
