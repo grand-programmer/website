@@ -117,10 +117,10 @@
             <!--==========End Main Slider area==========-->
             <component is="script" src="/js/theme.js"></component>
         </div>
-        <div class="section" style="min-height: 0 !important; margin-top: -100px">
+        <div class="section" style="min-height: 0 !important; margin-top: -65px; background: rgb(250, 249, 249)">
             <div class="row"><h3 class="text-center section_title" style="width: 100%">{{ $t("Асосий маълумотлар") }}</h3></div>
             <div class="container-fluid">
-                <div class="row" style="justify-content: center; row-gap: 35px">
+                <div class="row" style="justify-content: center; row-gap: 35px; padding-bottom: 4em">
                     <v-carousel :show-arrows="false" class="main-info-carousel" style="height: 325px !important;">
                         <v-carousel-item>
                             <router-link to="/page/jismoniy" class="card">
@@ -198,17 +198,17 @@
                 </div>
             </div>
         </div>
-        <div class="section yangiliklar" id="section3">
+        <div class="section yangiliklar" id="section3" style="margin-top: -30px; min-height: 0!important;">
             <MobileNews />
         </div>
 
-        <div class="section asosiy_korsatkichlari2">
+        <div class="section asosiy_korsatkichlari2" style="background: rgb(250, 249, 249); margin-top: -120px;">
             <MobileStatistics />
         </div>
 
 
         <!--==========End Our partner area==========-->
-        <div class="section">
+        <div class="section" style="margin-top: -100px">
             <div class="contact_faq" style="width: 100%; padding-left: 15px; padding-right: 15px; margin-top: 100px;">
                 <div class="row">
                     <div class="col-md-6">

@@ -16,7 +16,7 @@
         </router-link>
         <div class="container px-10 pt-0">
             <div class="news-head">
-                <div class="news-title">{{ $t("Янгиликлар") }}</div>
+                <div class="news-title mb-0">{{ $t("Янгиликлар") }}</div>
                 <router-link to="/news"  class="all-news_link"> <span>{{ $t("Барча янгиликлар") }}</span>
                     <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
                          xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -29,11 +29,11 @@
                 </svg>
                 </router-link>
             </div>
-
-            <v-carousel cycle interval="3000" hide-delimiters class="news-carousel">
+<!--          cycle interval="3000"-->
+            <v-carousel  hide-delimiters class="news-carousel">
                 <v-carousel-item v-for="(newsItem,key) in news" id="yangi">
                     <div class="news in-style">
-                        <div class="news-content" style="margin-top: -20%">
+                        <div class="news-content" style="margin-top: -25%">
                             <div class="row">
                                 <div class="col-lg-4 col-md-6 col-sm-6">
                                     <div  class="news-item">
@@ -67,7 +67,7 @@
                         </div>
                     </div>
                 </v-carousel-item>
-            </v-carousel>
+            </v-carousel >
         </div>
     </div>
 </template>

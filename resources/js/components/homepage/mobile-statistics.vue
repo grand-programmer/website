@@ -1,7 +1,7 @@
 <template>
-    <div class="row content" style="min-height: min-content; height: max-content" :style="[stat_type===3 ? 'min-height: 275vw' : '']">
+    <div class="row content" style="min-height: min-content; height: max-content; padding-top: 40px!important; padding-bottom: 40px!important;" :style="[stat_type===3 ? 'min-height: 275vw' : '']">
         <div style="height: max-content;">
-            <h3 style="font-size: 14px; color: #007F5F; font-weight: bold; text-transform: uppercase; text-align: center">
+            <h3 style="font-size: 18px; color: #007F5F; font-weight: bold; text-transform: uppercase; text-align: center">
                 {{ $t('Товарларнинг ташқи савдо') }}
                 <span>{{ $t('божхона статистикаси') }}</span>
             </h3>
