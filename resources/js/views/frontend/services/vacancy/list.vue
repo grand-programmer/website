@@ -424,6 +424,16 @@ export default {
             } else this.filteredVacancies = this.vacancies;
         }
 
+    },
+    metaInfo() {
+        return {
+            title: "Vakansiyalar - Bo'sh ish o'rinlari | Bojxona qo'mitasi - Customs.uz",
+            meta: [
+                { name: 'description', content: "Bojxona organlaridagi bo'sh ish o'rinlari va vakansiyalar. Nomzodlarni qabul qilish, ariza topshirish. Customs Committee Vacancies and Job Opportunities." },
+                { property: 'og:title', content: "Vakansiyalar - Bo'sh ish o'rinlari | Customs.uz" },
+                { property: 'og:description', content: "Bojxona organlaridagi vakansiyalar va nomzodlarni qabul qilish" }
+            ]
+        }
     }
 }
 

@@ -7,9 +7,49 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 
+    <meta name="description" content="O'zbekiston Respublikasi Bojxona qo'mitasi rasmiy veb-sayti. Bojxona xizmatlari, ariza topshirish, yangiliklar, hujjatlar va onlayn xizmatlar">
+    <meta name="keywords" content="bojxona, customs, O'zbekiston bojxonasi, bojxona qo'mitasi, bojxona to'lovlari, импорт, экспорт, to'lovlar, ariza">
+    <meta name="author" content="O'zbekiston Respublikasi Bojxona qo'mitasi">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <link rel="canonical" href="{{ url()->current() }}">
+    <link rel="shortcut icon" href="/favicon.ico">
+
+    <!-- Open Graph / Facebook / Telegram -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:title" content="Bojxona qo'mitasi rasmiy veb sayti - Customs.uz">
+    <meta property="og:description" content="O'zbekiston Respublikasi Bojxona qo'mitasi rasmiy veb-sayti. Bojxona xizmatlari, ariza topshirish, yangiliklar va onlayn xizmatlar.">
+    <meta property="og:image" content="{{ asset('/img/og-image.jpg') }}">
+    <meta property="og:locale" content="uz_UZ">
+    <meta property="og:locale:alternate" content="ru_RU">
+    <meta property="og:locale:alternate" content="en_US">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="{{ url()->current() }}">
+    <meta name="twitter:title" content="Bojxona qo'mitasi rasmiy veb sayti">
+    <meta name="twitter:description" content="O'zbekiston Respublikasi Bojxona qo'mitasi rasmiy veb-sayti. Bojxona xizmatlari va onlayn xizmatlar.">
+    <meta name="twitter:image" content="{{ asset('/img/og-image.jpg') }}">
+
+    <!-- Multilanguage hreflang -->
+    @php
+        $currentPath = request()->getPathInfo();
+        $pathWithoutLocale = preg_replace('#^/(oz|uz|ru|en)(/|$)#', '$2', $currentPath);
+        $cleanPath = $pathWithoutLocale ?: '/';
+    @endphp
+    <link rel="alternate" hreflang="uz-Latn" href="https://new.customs.uz/oz{{ $cleanPath }}" />
+    <link rel="alternate" hreflang="uz-Cyrl" href="https://new.customs.uz/uz{{ $cleanPath }}" />
+    <link rel="alternate" hreflang="ru" href="https://new.customs.uz/ru{{ $cleanPath }}" />
+    <link rel="alternate" hreflang="en" href="https://new.customs.uz/en{{ $cleanPath }}" />
+    <link rel="alternate" hreflang="x-default" href="https://new.customs.uz/oz{{ $cleanPath }}" />
+
+    <!-- Search Engine Verification -->
+    <!-- <meta name="google-site-verification" content="GOOGLE_VERIFICATION_CODE"> -->
+    <!-- <meta name="yandex-verification" content="YANDEX_VERIFICATION_CODE"> -->
+
     <!-- Font -->
     <link href="{{asset('css/font-awesome.min.css') }}" rel="stylesheet">
-<title>Bojxona qo'mitasi rasmiy veb sayti</title>
+    <title>Bojxona qo'mitasi rasmiy veb sayti</title>
     <!-- Bootstrap -->
     <link href="{{asset('/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{asset('/css/bootstrap-theme.min.css') }}" rel="stylesheet">
@@ -166,6 +206,63 @@
 <!---chatbot -->
 
 <!--<script src="//code.jivosite.com/widget/4yZcWqNleE" async></script>-->
+
+<!-- Structured Data (JSON-LD) for SEO -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "GovernmentOrganization",
+  "name": "O'zbekiston Respublikasi Bojxona qo'mitasi",
+  "alternateName": {
+    "@language": "ru",
+    "@value": "Таможенный комитет Республики Узбекистан"
+  },
+  "url": "https://new.customs.uz",
+  "logo": "https://new.customs.uz/img/logo.png",
+  "image": "https://new.customs.uz/img/og-image.jpg",
+  "description": "O'zbekiston Respublikasi Bojxona qo'mitasi rasmiy veb-sayti. Bojxona xizmatlari, ariza topshirish, yangiliklar, hujjatlar va onlayn xizmatlar.",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Islom Karimov ko'chasi",
+    "addressLocality": "Toshkent",
+    "addressRegion": "Toshkent shahri",
+    "postalCode": "100003",
+    "addressCountry": "UZ"
+  },
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+998-55-502-76-00",
+    "contactType": "customer service",
+    "areaServed": "UZ",
+    "availableLanguage": ["uz", "ru", "en"]
+  },
+  "sameAs": [
+    "https://t.me/customschannel",
+    "https://www.facebook.com/UZDBQ",
+    "https://www.instagram.com/bojxona.official"
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Bojxona qo'mitasi rasmiy veb sayti",
+  "url": "https://new.customs.uz",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://new.customs.uz/oz/page/search?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  },
+  "inLanguage": ["uz", "ru", "en"],
+  "publisher": {
+    "@type": "GovernmentOrganization",
+    "name": "O'zbekiston Respublikasi Bojxona qo'mitasi"
+  }
+}
+</script>
+
 <script src="https://code.responsivevoice.org/responsivevoice.js?key=vNL4fpv9"></script>
 </body>
 </html>

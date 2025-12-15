@@ -448,6 +448,24 @@ export default {
             return (new Date(this.vacancy.isactive)).getTime() > (new Date()).getTime()?diffDays:0;//new Date((new Date(this.vacancy.isactive)).getTime() - (new Date()).getTime()).getDate()
         }
 
+    },
+    metaInfo() {
+        if (this.vacancy && this.vacancy.seven) {
+            return {
+                title: this.vacancy.seven + " - Vakansiya tafsilotlari | Bojxona qo'mitasi - Customs.uz",
+                meta: [
+                    { name: 'description', content: (this.vacancy.seven || '') + ". " + (this.vacancy.lavozim || '') + ". Nomzodlar soni: " + (this.vacancy.vac_soni || '') + ". Ariza topshirish va tafsilotlar." },
+                    { property: 'og:title', content: this.vacancy.seven + " - Vakansiya | Customs.uz" },
+                    { property: 'og:description', content: this.vacancy.lavozim + " - " + this.vacancy.boshqarma_name }
+                ]
+            }
+        }
+        return {
+            title: "Vakansiya tafsilotlari - Bojxona qo'mitasi | Customs.uz",
+            meta: [
+                { name: 'description', content: "Bojxona organlaridagi vakansiya tafsilotlari. Vacancy details - Customs Committee." }
+            ]
+        }
     }
 
 

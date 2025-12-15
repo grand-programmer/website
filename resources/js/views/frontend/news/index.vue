@@ -161,6 +161,16 @@ export default {
                             this.$toast.error(i18n.t(`Маълумотларни юклашда хатолик содир бўлди!`))
                         })*/
         },
+    },
+    metaInfo() {
+        return {
+            title: this.$t('Янгиликлар') + " - Bojxona qo'mitasi | Customs.uz",
+            meta: [
+                { name: 'description', content: this.$t('Bojxona qo\'mitasi so\'ngi yangiliklari, e\'lonlar va tadbirlar haqida ma\'lumot. Customs Committee news and announcements.') },
+                { property: 'og:title', content: this.$t('Янгиликлар') + " - Bojxona qo'mitasi | Customs.uz" },
+                { property: 'og:description', content: this.$t('So\'ngi yangiliklar va e\'lonlar') }
+            ]
+        }
     }
 
 }

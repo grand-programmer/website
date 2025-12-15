@@ -40,18 +40,30 @@ const allRoutes = {
 }
 const servicesRoutes = [
     {
-        path: "", component: () => import('./views/frontend/services/yagona_oyna'),
+        path: "",
+        component: () => import('./views/frontend/services/yagona_oyna'),
+        meta: { title: "Onlayn xizmatlar - Bojxona qo'mitasi | Customs.uz" }
     }, {
         path: "appeals/",
         component: () => import('./views/frontend/services/appeal/index'),
+        meta: { title: "Murojaatlar - Onlayn xizmatlar | Customs.uz" },
         children: [{
-            path: "", component: () => import('./views/frontend/services/appeal/main'), query: {appeal_code: ''}
+            path: "",
+            component: () => import('./views/frontend/services/appeal/main'),
+            query: {appeal_code: ''},
+            meta: { title: "Murojaatlar - Onlayn xizmatlar | Customs.uz" }
         }, {
-            path: "create", component: () => import('./views/frontend/services/appeal/create'),
+            path: "create",
+            component: () => import('./views/frontend/services/appeal/create'),
+            meta: { title: "Murojaat yaratish - Onlayn xizmatlar | Customs.uz" }
         }, {
-            path: ":id", component: () => import('./views/frontend/services/appeal/info_view'),
+            path: ":id",
+            component: () => import('./views/frontend/services/appeal/info_view'),
+            meta: { title: "Murojaat ma'lumotlari - Onlayn xizmatlar | Customs.uz" }
         }, {
-            path: ":id/:key", component: () => import('./views/frontend/services/appeal/info_view'),
+            path: ":id/:key",
+            component: () => import('./views/frontend/services/appeal/info_view'),
+            meta: { title: "Murojaat ma'lumotlari - Onlayn xizmatlar | Customs.uz" }
         }]
     }, {
         path: "decisions/",
@@ -61,16 +73,25 @@ const servicesRoutes = [
             authRedirect: '/login',
             notFoundRedirect: '/403',
             forbiddenRedirect: '/403',
-            routeAuth: '/login'
+            routeAuth: '/login',
+            title: "Bojxona qiymati qarorlari - Onlayn xizmatlar | Customs.uz"
         },
         children: [{
-            path: "", component: ServicesDecisionsCreate,
+            path: "",
+            component: ServicesDecisionsCreate,
+            meta: { title: "Bojxona qiymati yaratish - Onlayn xizmatlar | Customs.uz" }
         }, {
-            path: "info", component: ServicesDecisionsInfo,
+            path: "info",
+            component: ServicesDecisionsInfo,
+            meta: { title: "Bojxona qiymati ma'lumotlari - Onlayn xizmatlar | Customs.uz" }
         }, {
-            path: "edit/:id", component: ServicesDecisionsEdit,
+            path: "edit/:id",
+            component: ServicesDecisionsEdit,
+            meta: { title: "Bojxona qiymati tahrirlash - Onlayn xizmatlar | Customs.uz" }
         }, {
-            path: ":id", component: ServicesDecisionsInfo,
+            path: ":id", component:
+            ServicesDecisionsInfo,
+            meta: { title: "Bojxona qiymati ma'lumotlari - Onlayn xizmatlar | Customs.uz" }
         }]
     }, {
         path: "intellectual/",
@@ -80,15 +101,22 @@ const servicesRoutes = [
             authRedirect: '/login',
             notFoundRedirect: '/403',
             forbiddenRedirect: '/403',
-            routeAuth: '/login'
+            routeAuth: '/login',
+            title: "Intellektual mulk - Onlayn xizmatlar | Customs.uz"
         },
         children: [
             {
-                path: "", component: ServicesIntellectualCreate,
+                path: "",
+                component: ServicesIntellectualCreate,
+                meta: { title: "Intellektual mulk yaratish - Onlayn xizmatlar | Customs.uz" }
             }, {
-                path: ":id", component: ServicesIntellectualInfo,
+                path: ":id",
+                component: ServicesIntellectualInfo,
+                meta: { title: "Intellektual mulk ma'lumotlari - Onlayn xizmatlar | Customs.uz" }
             }, {
-                path: "info", component: ServicesIntellectualInfo,
+                path: "info",
+                component: ServicesIntellectualInfo,
+                meta: { title: "Intellektual mulk ma'lumotlari - Onlayn xizmatlar | Customs.uz" }
             }/*, {
                                 path: "edit/:id", component: ServicesIntellectualEdit,
                             }*/
@@ -101,13 +129,18 @@ const servicesRoutes = [
             authRedirect: '/login',
             notFoundRedirect: '/403',
             forbiddenRedirect: '/403',
-            routeAuth: '/login'
+            routeAuth: '/login',
+            title: "Qaytarish - Onlayn xizmatlar | Customs.uz"
         },
         children: [
             {
-                path: "", component: () => import('./views/frontend/services/refund/create'),
+                path: "",
+                component: () => import('./views/frontend/services/refund/create'),
+                meta: { title: "Qaytarish yaratish - Onlayn xizmatlar | Customs.uz" }
             }, {
-                path: ":id", component: () => import('./views/frontend/services/refund/info'),
+                path: ":id",
+                component: () => import('./views/frontend/services/refund/info'),
+                meta: { title: "Qaytarish ma'lumotlari - Onlayn xizmatlar | Customs.uz" }
             },
         ]
     }, {
@@ -118,13 +151,18 @@ const servicesRoutes = [
             authRedirect: '/login',
             notFoundRedirect: '/403',
             forbiddenRedirect: '/403',
-            routeAuth: '/login'
+            routeAuth: '/login',
+            title: "To'lovlar - Onlayn xizmatlar | Customs.uz"
         },
         children: [
             {
-                path: "", component: () => import('./views/frontend/services/ppay/create'),
+                path: "",
+                component: () => import('./views/frontend/services/ppay/create'),
+                meta: { title: "To'lov yaratish - Onlayn xizmatlar | Customs.uz" }
             }, {
-                path: ":id", component: () => import('./views/frontend/services/ppay/info'),
+                path: ":id",
+                component: () => import('./views/frontend/services/ppay/info'),
+                meta: { title: "To'lov ma'lumotlari - Onlayn xizmatlar | Customs.uz" }
             },
         ]
     }, {
@@ -135,90 +173,107 @@ const servicesRoutes = [
             authRedirect: '/login',
             notFoundRedirect: '/403',
             forbiddenRedirect: '/403',
-            routeAuth: '/login'
+            routeAuth: '/login',
+            title: "Markalar - Onlayn xizmatlar | Customs.uz"
         },
         children: [
             {
-                path: "", component: () => import('./views/frontend/services/stamp/create'),
+                path: "",
+                component: () => import('./views/frontend/services/stamp/create'),
+                meta: { title: "Marka yaratish - Onlayn xizmatlar | Customs.uz" }
             }, {
-                path: ":id", component: () => import('./views/frontend/services/stamp/info'),
+                path: ":id",
+                component: () => import('./views/frontend/services/stamp/info'),
+                meta: { title: "Marka ma'lumotlari - Onlayn xizmatlar | Customs.uz" }
             },
         ]
     }, {
         path: "bko/",
         component: () => import('./views/frontend/services/bko/index'),
-
+        meta: { title: "BKO - Onlayn xizmatlar | Customs.uz" },
         children: [
             {
-                path: "create", component: () => import('./views/frontend/services/bko/create'),
+                path: "create",
+                component: () => import('./views/frontend/services/bko/create'),
                 meta: {
                     auth: true,
                     authRedirect: '/login',
                     notFoundRedirect: '/403',
                     forbiddenRedirect: '/403',
-                    routeAuth: '/login'
+                    routeAuth: '/login',
+                    title: "BKO yaratish - Onlayn xizmatlar | Customs.uz"
                 },
             },
             {
-                path: ":id", component: () => import('./views/frontend/services/bko/info'),
+                path: ":id",
+                component: () => import('./views/frontend/services/bko/info'),
                 meta: {
                     auth: true,
                     authRedirect: '/login',
                     notFoundRedirect: '/403',
                     forbiddenRedirect: '/403',
-                    routeAuth: '/login'
+                    routeAuth: '/login',
+                    title: "BKO ma'lumotlari - Onlayn xizmatlar | Customs.uz"
                 },
             },
         ]
     }, {
         path: "vio",
         component: () => import('./views/frontend/services/vio/index'),
-
+        meta: { title: "VIO - Onlayn xizmatlar | Customs.uz" },
         children: [
             {
-                path: "create", component: () => import('./views/frontend/services/vio/create'),
+                path: "create",
+                component: () => import('./views/frontend/services/vio/create'),
                 meta: {
                     auth: true,
                     authRedirect: '/login',
                     notFoundRedirect: '/403',
                     forbiddenRedirect: '/403',
-                    routeAuth: '/login'
+                    routeAuth: '/login',
+                    title: "VIO yaratish - Onlayn xizmatlar | Customs.uz"
                 },
             },
             {
-                path: ":id", component: () => import('./views/frontend/services/vio/info'),
+                path: ":id",
+                component: () => import('./views/frontend/services/vio/info'),
                 meta: {
                     auth: true,
                     authRedirect: '/login',
                     notFoundRedirect: '/403',
                     forbiddenRedirect: '/403',
-                    routeAuth: '/login'
+                    routeAuth: '/login',
+                    title: "VIO ma'lumotlari - Onlayn xizmatlar | Customs.uz"
                 },
             },
         ]
     }, {
         path: "spt",
         component: () => import('./views/frontend/services/spt/index'),
-
+        meta: { title: "SPT - Onlayn xizmatlar | Customs.uz" },
         children: [
             {
-                path: ":id", component: () => import('./views/frontend/services/spt/create'),
+                path: ":id",
+                component: () => import('./views/frontend/services/spt/create'),
                 meta: {
                     auth: true,
                     authRedirect: '/login',
                     notFoundRedirect: '/403',
                     forbiddenRedirect: '/403',
-                    routeAuth: '/login'
+                    routeAuth: '/login',
+                    title: "SPT yaratish - Onlayn xizmatlar | Customs.uz"
                 },
             },
             {
-                path: ":id/info", component: () => import('./views/frontend/services/spt/info'),
+                path: ":id/info",
+                component: () => import('./views/frontend/services/spt/info'),
                 meta: {
                     auth: true,
                     authRedirect: '/login',
                     notFoundRedirect: '/403',
                     forbiddenRedirect: '/403',
-                    routeAuth: '/login'
+                    routeAuth: '/login',
+                    title: "SPT ma'lumotlari - Onlayn xizmatlar | Customs.uz"
                 },
             },
         ]
@@ -232,20 +287,29 @@ const servicesRoutes = [
             authRedirect: '/login',
             notFoundRedirect: '/403',
             forbiddenRedirect: '/403',
-            routeAuth: '/login'
+            routeAuth: '/login',
+            title: "Utilizatsiya - Onlayn xizmatlar | Customs.uz"
         },
         children: [
             {
-                path: "", component: () => import('./views/frontend/services/recycle/create'),
+                path: "",
+                component: () => import('./views/frontend/services/recycle/create'),
+                meta: { title: "Utilizatsiya yaratish - Onlayn xizmatlar | Customs.uz" }
             },
             {
-                path: "new", component: () => import('./views/frontend/services/recycle1/create'),
+                path: "new",
+                component: () => import('./views/frontend/services/recycle1/create'),
+                meta: { title: "Yangi utilizatsiya - Onlayn xizmatlar | Customs.uz" }
             },
             {
-                path: ":id", component: () => import('./views/frontend/services/recycle/info'),
+                path: ":id",
+                component: () => import('./views/frontend/services/recycle/info'),
+                meta: { title: "Utilizatsiya ma'lumotlari - Onlayn xizmatlar | Customs.uz" }
             },
             {
-                path: "new/:id", component: () => import('./views/frontend/services/recycle1/info'),
+                path: "new/:id",
+                component: () => import('./views/frontend/services/recycle1/info'),
+                meta: { title: "Yangi utilizatsiya ma'lumotlari - Onlayn xizmatlar | Customs.uz" }
             }
         ]
     }, {
@@ -254,32 +318,50 @@ const servicesRoutes = [
             authRedirect: '/login',
             notFoundRedirect: '/403',
             forbiddenRedirect: '/403',
-            routeAuth: '/login'
+            routeAuth: '/login',
+            title: "TFTN - Onlayn xizmatlar | Customs.uz"
         }, children: [{
-            path: "", component: ServicesTftnCreate,
+            path: "",
+            component: ServicesTftnCreate,
+            meta: { title: "TFTN yaratish - Onlayn xizmatlar | Customs.uz" }
         }, {
-            path: "info", component: ServicesTftnInfo,
+            path: "info",
+            component: ServicesTftnInfo,
+            meta: { title: "TFTN ma'lumotlari - Onlayn xizmatlar | Customs.uz" }
         }, {
-            path: "edit/:id", component: ServicesTftnEdit,
+            path: "edit/:id",
+            component: ServicesTftnEdit,
+            meta: { title: "TFTN tahrirlash - Onlayn xizmatlar | Customs.uz" }
         }, {
-            path: ":id", component: ServicesTftnInfo,
+            path: ":id",
+            component: ServicesTftnInfo,
+            meta: { title: "TFTN ma'lumotlari - Onlayn xizmatlar | Customs.uz" }
         }]
     }, {
-        path: "stat/", component: () => import('./views/frontend/services/stat/index'), meta: {}, children: [{
-            path: ":id", component: () => import('./views/frontend/services/stat/create'), meta: {
+        path: "stat/",
+        component: () => import('./views/frontend/services/stat/index'),
+        meta: {title: "Statistika - Onlayn xizmatlar | Customs.uz"},
+        children: [{
+            path: ":id",
+            component: () => import('./views/frontend/services/stat/create'),
+            meta: {
                 auth: true,
                 authRedirect: '/login',
                 notFoundRedirect: '/403',
                 forbiddenRedirect: '/403',
-                routeAuth: '/login'
+                routeAuth: '/login',
+                title: "Statistika yaratish - Onlayn xizmatlar | Customs.uz"
             }
         },{
-            path: "info/:id", component: () => import('./views/frontend/services/stat/info'), meta: {
+            path: "info/:id",
+            component: () => import('./views/frontend/services/stat/info'),
+            meta: {
                 auth: true,
                 authRedirect: '/login',
                 notFoundRedirect: '/403',
                 forbiddenRedirect: '/403',
-                routeAuth: '/login'
+                routeAuth: '/login',
+                title: "Statistika ma'lumotlari - Onlayn xizmatlar | Customs.uz"
             }
         }]
         /*, {
@@ -295,22 +377,39 @@ const servicesRoutes = [
     }, {
         path: "vacancy/",
         component: () => import('./views/frontend/services/vacancy/index'),
-        children: [{
-            path: "", component: ServiceVacancyList,
-        },
-
+        meta: { title: "Bo'sh ish o'rinlari - Bojxona qo'mitasi | Customs.uz" },
+        children: [
             {
-                path: "create", component: ServiceVacancyCreate,
-            }, {
-                path: "questions", component: ServiceVacancyQuestions,
-            }, {
-                path: "documents", component: ServiceVacancyDocuments,
-            }, {
-                path: ":id", component: ServiceVacancyShow,
-
-            }, {
-                path: ":id/resume", component: ServiceVacancyResume,
-            }, {
+                path: "",
+                component: ServiceVacancyList,
+                meta: { title: "Bo'sh ish o'rinlari - Bojxona qo'mitasi | Customs.uz" }
+            },
+            {
+                path: "create",
+                component: ServiceVacancyCreate,
+                meta: { title: "Ariza topshirish - Bo'sh ish o'rinlari | Customs.uz"}
+            },
+            {
+                path: "questions",
+                component: ServiceVacancyQuestions,
+                meta: { title: "Savollar - Bo'sh ish o'rinlari | Customs.uz" }
+            },
+            {
+                path: "documents",
+                component: ServiceVacancyDocuments,
+                meta: { title: "Hujjatlar - Bo'sh ish o'rinlari | Customs.uz" }
+            },
+            {
+                path: ":id",
+                component: ServiceVacancyShow,
+                meta: { title: "Vakansiya ma'lumotlari - Bo'sh ish o'rinlari | Customs.uz" }
+            },
+            {
+                path: ":id/resume",
+                component: ServiceVacancyResume,
+                meta: { title: "Rezyume - Bo'sh ish o'rinlari | Customs.uz" }
+            },
+            {
                 path: "*", redirect: "/services/vacancy"
             }]
     },]
@@ -340,114 +439,195 @@ const userRoutes =
             },],
         },
             {
-
-                path: '/', component: () => import('./views/frontend/one_page'), children: [
+                path: '/',
+                component: () => import('./views/frontend/one_page'),
+                children: [
                     {
                         path: "singlewindow/",
                         component: () => import('./views/frontend/services/yagona_oyna'),
                         children: servicesRoutes
 
                     },
-
                     {
-                        path: "services/", component: Services, children: servicesRoutes
+                        path: "services/",
+                        component: Services,
+                        meta: { title: "Onlayn xizmatlar - Bojxona qo'mitasi | Customs.uz" },
+                        children: servicesRoutes
                     },
                     {
-                        name: '403', path: '403', component: () => import('./views/pages/403')
+                        name: '403',
+                        path: '403',
+                        component: () => import('./views/pages/403'),
+                        meta: { title: "Kirish taqiqlangan - 403 | Customs.uz" }
                     },
                     {
-                        name: '404', path: '404', component: () => import('./views/pages/404')
+                        name: '404',
+                        path: '404',
+                        component: () => import('./views/pages/404'),
+                        meta: { title: "Sahifa topilmadi - 404 | Customs.uz" }
                     },
                     {
-                        name: 'test', path: 'test', component: () => import('./views/frontend/test')
+                        name: 'test',
+                        path: 'test',
+                        component: () => import('./views/frontend/test')
                     },
                     {
-                        path: 'applications', component: () => import('./views/frontend/applications'), meta: {
+                        path: 'applications',
+                        component: () => import('./views/frontend/applications'),
+                        meta: {
                             auth: true,
                             authRedirect: '/login',
                             notFoundRedirect: '/403',
                             forbiddenRedirect: '/403',
-                            routeAuth: '/login'
-                        }, children: [{
-                            path: '', component: () => import('./views/frontend/applications/list')
+                            routeAuth: '/login',
+                            title: "Mening arizalarim - Bojxona qo'mitasi | Customs.uz"
+                        },
+                        children: [{
+                            path: '',
+                            component: () => import('./views/frontend/applications/list')
                         }]
-
-                    }, {
-                        path: "registries/", component: {
-                            template: '<router-view></router-view>', script: ' export default {}'
-                        }, children: [
-                            {path: "decisions", component: () => import("./views/frontend/registries/customvalue")},
-                            {path: "services", component: () => import("./views/frontend/registries/old_services")}
+                    },
+                    {
+                        path: "registries/",
+                        component: {
+                            template: '<router-view></router-view>',
+                            script: ' export default {}'
+                        },
+                        meta: { title: "Reestrlar - Bojxona qo'mitasi | Customs.uz" },
+                        children: [
+                            {
+                                path: "decisions",
+                                component: () => import("./views/frontend/registries/customvalue"),
+                                meta: { title: "Bojxona qiymati qarorlari - Reestrlar | Customs.uz" }
+                            },
+                            {
+                                path: "services",
+                                component: () => import("./views/frontend/registries/old_services"),
+                                meta: { title: "Xizmatlar - Reestrlar | Customs.uz" }
+                            }
                         ]
-
-                    }, {
-                        path: 'category/:slug', component: () => import('./views/frontend/news/category')
                     },
                     {
-                        path: 'news', component: () => import('./views/frontend/news/index')
+                        path: 'category/:slug',
+                        component: () => import('./views/frontend/news/category'),
+                        meta: { title: "Turkum - Yangiliklar | Customs.uz" }
                     },
                     {
-                        path: 'news/:slug', component: () => import('./views/frontend/news/news')
+                        path: 'news',
+                        component: () => import('./views/frontend/news/index'),
+                        meta: { title: 'Yangiliklar - Bojxona qo\'mitasi | Customs.uz' }
+                    },
+                    {
+                        path: 'news/:slug',
+                        component: () => import('./views/frontend/news/news'),
+                        meta: { title: 'Yangiliklar - Bojxona qo\'mitasi | Customs.uz' }
                     },
                     {
                         path: 'page',
                         name: 'Sahifalar',
                         component: {template: '<router-view></router-view>'},
                         children: [
-                            {path: 'search',name:'Qidirish', component: () => import("./views/frontend/pages/search")},
-                            {path: 'faqs',name:'Faqs', component: () => import("./views/pages/Faq"), meta:{auth:undefined}},
-                            {path: 'hududiy',name:'Hududiy', component: () => import("./components/layout/hududiy")},
-                            {path: 'votes/', name:'Votes',component: () => import("./views/frontend/pages/votes")},
-                            {path: 'opendata/',name:'openData', component: () => import("./views/frontend/pages/opendata")},
+                            {
+                                path: 'search',name:'Qidirish',
+                                component: () => import("./views/frontend/pages/search"),
+                                meta:{title:"Qidiruv - Bojxona qo'mitasi | Customs.uz"}
+                            },
+                            {
+                                path: 'faqs',name:'Faqs',
+                                component: () => import("./views/pages/Faq"),
+                                meta:{
+                                    auth:undefined,
+                                    title:"Savol-javoblar (FAQ) - Bojxona qo'mitasi | Customs.uz"
+                                }
+                            },
+                            {
+                                path: 'hududiy',
+                                name:'Hududiy',
+                                component: () => import("./components/layout/hududiy"),
+                                meta:{title:"Hududiy bo'linmalar - Bojxona qo'mitasi | Customs.uz"}
+                            },
+                            {
+                                path: 'votes/',
+                                name:'Votes',
+                                component: () => import("./views/frontend/pages/votes"),
+                                meta:{title:"So'rovnomalar - Bojxona qo'mitasi | Customs.uz"}
+                            },
+                            {
+                                path: 'opendata/',
+                                name:'openData',
+                                component: () => import("./views/frontend/pages/opendata"),
+                                meta:{title:"Ochiq ma'lumotlar - Bojxona qo'mitasi | Customs.uz"}
+                            },
                             {
                                 path: 'rahbariyat/',
                                 component: {template: '<router-view></router-view>', script: ' export default {}'},
+                                meta: {title:"Rahbariyat - Bojxona qo'mitasi | Customs.uz"},
                                 children: [
-                                    {path: '', component: () => import("./views/frontend/pages/rahbariyat/rahbariyat")},
+                                    {path: '', component: () => import("./views/frontend/pages/rahbariyat/rahbariyat"), meta:{title:"Rahbariyat - Bojxona qo'mitasi | Customs.uz"}},
                                     {
                                         path: 'institut/',
                                         name:'Institut',
-                                        component: () => import("./views/frontend/pages/rahbariyat/institut")
+                                        component: () => import("./views/frontend/pages/rahbariyat/institut"),
+                                        meta:{title:"Institut - Rahbariyat | Customs.uz"}
                                     },
                                 ]
                             },
                             {
                                 path: 'markaziy',
                                 component: {template: '<router-view></router-view>', script: ' export default {}'},
+                                meta:{title:"Markaziy apparat - Bojxona qo'mitasi | Customs.uz"},
                                 children: [
-                                    {path: '', component: () => import("./views/frontend/pages/markaziy/markaziy")},
+                                    {path: '', component: () => import("./views/frontend/pages/markaziy/markaziy"), meta:{title:"Markaziy apparat - Bojxona qo'mitasi | Customs.uz"}},
                                     {
                                         path: 'institut',
                                         name:'MarkaziyInstitut',
-                                        component: () => import("./views/frontend/pages/markaziy/institut")
+                                        component: () => import("./views/frontend/pages/markaziy/institut"),
+                                        meta:{title:"Institut - Markaziy apparat | Customs.uz"}
                                     },
                                 ]
                             },
-                            {path: 'documents', component: () => import("./views/frontend/pages/documents/index")},
-                            {path: 'structure', component: () => import("./views/frontend/pages/structure/markaziy")},
+                            {path: 'documents', component: () => import("./views/frontend/pages/documents/index"), meta:{title:"Hujjatlar - Bojxona qo'mitasi | Customs.uz"}},
+                            {path: 'structure', component: () => import("./views/frontend/pages/structure/markaziy"), meta:{title:"Tuzilma - Bojxona qo'mitasi | Customs.uz"}},
                             {
                                 path: 'structure/tashkiliy',
-                                component: () => import("./views/frontend/pages/structure/tashkiliy")
+                                component: () => import("./views/frontend/pages/structure/tashkiliy"),
+                                meta:{title:"Tashkiliy tuzilma - Bojxona qo'mitasi | Customs.uz"}
                             },
                             {
                                 path: 'structure/institute',
-                                component: () => import("./views/frontend/pages/structure/institut")
+                                component: () => import("./views/frontend/pages/structure/institut"),
+                                meta:{title:"Institut - Tuzilma | Customs.uz"}
                             },
                             {
                                 path: 'structure/hududiy',
-                                component: () => import("./views/frontend/pages/structure/hududiy")
+                                component: () => import("./views/frontend/pages/structure/hududiy"),
+                                meta:{title:"Hududiy tuzilma - Bojxona qo'mitasi | Customs.uz"}
                             },
                             {
                                 path: 'structure/kinologiya',
-                                component: () => import("./views/frontend/pages/structure/kinologiya")
+                                component: () => import("./views/frontend/pages/structure/kinologiya"),
+                                meta:{title:"Kinologiya - Bojxona qo'mitasi | Customs.uz"}
                             },
                             {
                                 path: 'structure/labor',
-                                component: () => import("./views/frontend/pages/structure/labor")
+                                component: () => import("./views/frontend/pages/structure/labor"),
+                                meta:{title:"Laboratoriya - Bojxona qo'mitasi | Customs.uz"}
                             },
-                            {path: 'jismoniy', component: () => import("./views/frontend/pages/jismoniy")},
-                            {path: 'boshqarma/:id', component: () => import("./views/frontend/pages/org")},
-                            {path: ':id', component: Page}
+                            {
+                                path: 'jismoniy',
+                                component: () => import("./views/frontend/pages/jismoniy"),
+                                meta:{title:"Jismoniy shaxslar - Bojxona qo'mitasi | Customs.uz"}
+                            },
+                            {
+                                path: 'boshqarma/:id',
+                                component: () => import("./views/frontend/pages/org"),
+                                meta:{title:"Boshqarma - Bojxona qo'mitasi | Customs.uz"}
+                            },
+                            {
+                                path: ':id',
+                                component: Page,
+                                meta:{title:"Sahifa - Bojxona qo'mitasi | Customs.uz"}
+                            }
                         ]
                     },
                     {
@@ -464,7 +644,8 @@ const userRoutes =
                             authRedirect: '/403',
                             notFoundRedirect: '/403',
                             forbiddenRedirect: '/403',
-                            routeAuth: '/403'
+                            routeAuth: '/403',
+                            title: "Kirish - Bojxona qo'mitasi | Customs.uz"
                         }
                     },
                     {
@@ -479,6 +660,7 @@ const userRoutes =
 
                         meta: {
                             auth: undefined,
+                            title: "Kirish - Bojxona qo'mitasi | Customs.uz"
                         }
                     },
                     {
@@ -495,7 +677,8 @@ const userRoutes =
                             authRedirect: '/403',
                             notFoundRedirect: '/403',
                             forbiddenRedirect: '/403',
-                            routeAuth: '/403'
+                            routeAuth: '/403',
+                            title: "Chiqish - Bojxona qo'mitasi | Customs.uz"
                         }
                     }, /*                {
                                         name: 'logout',
@@ -947,15 +1130,28 @@ if (location.host === '192.168.214.88') routes.push(adminRoute);
 routes.push(userRoutes);
 routes.push(allRoutes);
 //console.log(location.host);
-export default new vueRouter({
+
+const router = new vueRouter({
     mode: 'history',
     base: process.env.BASE_URL,
     routes: routes,
     scrollBehavior() {
         return {x: 0, y: 0}
     }
-
 });
 
+// Dynamic Title Update (SEO optimization)
+router.beforeEach((to, from, next) => {
+    // Default title
+    const defaultTitle = "Bojxona qo'mitasi rasmiy veb sayti - Customs.uz";
 
+    // Get title from route meta or use default
+    const pageTitle = to.meta.title || defaultTitle;
 
+    // Update document title
+    document.title = pageTitle;
+
+    next();
+});
+
+export default router;

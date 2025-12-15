@@ -146,6 +146,16 @@ export default {
             this.getQuestions()
         },1000)
         this.$store.commit('setLoading', false)
+    },
+    metaInfo() {
+        return {
+            title: "So'rovnomalar - Onlayn so'rov | Bojxona qo'mitasi - Customs.uz",
+            meta: [
+                { name: 'description', content: "Bojxona sohasiga oid onlayn so'rovnomalar va ovoz berishda ishtirok eting. Polls and Surveys - Customs Committee." },
+                { property: 'og:title', content: "So'rovnomalar - Bojxona qo'mitasi | Customs.uz" },
+                { property: 'og:description', content: "Bojxona sohasiga oid so'rovnomalar" }
+            ]
+        }
     }
 }
 </script>

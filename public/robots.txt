@@ -1,2 +1,80 @@
+# Bojxona qo'mitasi rasmiy veb sayti - robots.txt
+# customs.uz - SEO optimized robots file
+
+# General rules for all bots
 User-agent: *
-Disallow:
+
+# Admin panel and secure pages (hidden)
+Disallow: /admin/
+Disallow: /admin
+Disallow: /login
+Disallow: /logout
+Disallow: /register
+Disallow: /password/
+Disallow: /profile
+Disallow: /applications
+
+# API and technical paths (closed)
+Disallow: /api/
+Disallow: /_debugbar/
+Disallow: /vendor/
+
+# URLs with dynamic parameters (duplicate prevention)
+Disallow: /*?*print=
+Disallow: /*?*sessionid=
+Disallow: /*?*sid=
+
+# Allowed paths (open content)
+Allow: /oz/
+Allow: /uz/
+Allow: /ru/
+Allow: /en/
+Allow: /css/
+Allow: /js/
+Allow: /images/
+Allow: /img/
+Allow: /vendors/
+
+# Sitemap
+Sitemap: https://new.customs.uz/sitemap.xml
+
+# ===== Settings for custom bots =====
+
+# Yandex bot
+User-agent: Yandex
+Disallow: /admin/
+Disallow: /api/
+Allow: /
+Crawl-delay: 1
+Host: new.customs.uz
+
+# Google bot
+User-agent: Googlebot
+Disallow: /admin/
+Disallow: /api/
+Allow: /
+
+# Google Image bot
+User-agent: Googlebot-Image
+Allow: /images/
+Allow: /img/
+Disallow: /admin/
+
+# Bing bot (Microsoft)
+User-agent: Bingbot
+Disallow: /admin/
+Disallow: /api/
+Allow: /
+
+# Block spam bots (spam, scraper)
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /

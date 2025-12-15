@@ -180,6 +180,16 @@ export default {
             this.loadingsearchCategory = false
 
         }
+    },
+    metaInfo() {
+        return {
+            title: "Qidiruv - Saytda qidirish tizimi | Bojxona qo'mitasi - Customs.uz",
+            meta: [
+                { name: 'description', content: "Bojxona qo'mitasi rasmiy veb-sayti bo'yicha qidiruv. Yangiliklar, sahifalar va hujjatlarni qidirish. Search across Customs Committee website." },
+                { property: 'og:title', content: "Qidiruv - Bojxona qo'mitasi | Customs.uz" },
+                { property: 'og:description', content: "Bojxona sayti bo'yicha qidiruv tizimi" }
+            ]
+        }
     }
 }
 </script>

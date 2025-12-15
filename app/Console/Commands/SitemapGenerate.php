@@ -19,7 +19,7 @@ class SitemapGenerate extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Generate sitemap.xml file with all site URLs (static pages, news, categories, dynamic pages)';
 
     /**
      * Create a new command instance.
@@ -38,7 +38,25 @@ class SitemapGenerate extends Command
      */
     public function handle()
     {
-        SitemapService::generate();
-        $this->info('Sitemap generated!');
+        $this->info('Starting sitemap generation...');
+
+        try {
+            SitemapService::generate();
+
+            $filePath = public_path('sitemap.xml');
+            $fileSize = file_exists($filePath) ? filesize($filePath) : 0;
+
+            $this->info('✓ Sitemap generated successfully!');
+            $this->info('  Location: public/sitemap.xml');
+            $this->info('  Size: ' . round($fileSize / 1024, 2) . ' KB');
+            $this->info('  URL: ' . url('sitemap.xml'));
+
+            return 0;
+        } catch (\Exception $e) {
+            $this->error('✗ Sitemap generation failed!');
+            $this->error('  Error: ' . $e->getMessage());
+
+            return 1;
+        }
     }
 }

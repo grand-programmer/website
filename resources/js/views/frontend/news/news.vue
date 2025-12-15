@@ -289,6 +289,29 @@ export default {
             })
 
         }
+    },
+    metaInfo() {
+        if (this.news && this.news.title) {
+            const description = this.news.description
+                ? this.news.description.replace(/<[^>]*>/g, '').substring(0, 160)
+                : 'Bojxona qo\'mitasi yangilik maqolasi';
+
+            return {
+                title: this.news.title + " - Bojxona qo'mitasi | Customs.uz",
+                meta: [
+                    { name: 'description', content: description },
+                    { property: 'og:title', content: this.news.title + " | Customs.uz" },
+                    { property: 'og:description', content: description },
+                    { property: 'og:image', content: this.news.image ? '/storage/uploads/' + this.news.image : '/img/og-image.jpg' }
+                ]
+            }
+        }
+        return {
+            title: "Yangilik - Bojxona qo'mitasi | Customs.uz",
+            meta: [
+                { name: 'description', content: "Bojxona qo'mitasi so'ngi yangiliklari. Latest news from Customs Committee." }
+            ]
+        }
     }
 
 }

@@ -36,8 +36,12 @@ import 'fullpage.js/vendors/scrolloverflow' // Optional. When using scrollOverfl
 
 //import vuetify from './vuetify';
 import VueMask from 'v-mask'
+import VueMeta from 'vue-meta'
 
 Vue.use(VueMask);
+Vue.use(VueMeta, {
+  refreshOnceOnNavigation: true
+});
 
 ///^[-+][0-9]+\.[0-9]+[eE][-+]?[0-9]+$
 
@@ -278,10 +282,8 @@ const app = new Vue({
             }
         },*/
 }).$mount('#app');
-document.title = app.$t('Божхона қўмитаси расмий веб сайти');
 router.beforeEach((to, from, next) => {
     i18n.locale = localStorage.getItem('language') || 'uz'
-    document.title = to.meta.title || app.$t('Божхона қўмитаси расмий веб сайти');
 
     app.$store.commit('setLoading', true)
 ///console.log("----+ " + i18n.locale)
@@ -336,8 +338,3 @@ router.beforeEach((to, from, next) => {
 router.afterEach(() => {
     app.$store.commit('setLoading', false)
 });
-
-
-
-
-

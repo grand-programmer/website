@@ -367,7 +367,7 @@
                                                     </template>
                                                     <template v-if="user_add.malumotlar.length<1">
                                                         <tr>
-                                                            <td colspan="8" align="center">Маълумот топилмади!</td>
+                                                            <td colspan="8" class="text-center">Маълумот топилмади!</td>
                                                         </tr>
                                                     </template>
                                                     </tbody>
@@ -417,4 +417,23 @@
                                                                             >
                                                                                 <v-text-field
                                                                                     label="Ўқув муассасаси"
-                                                          
+                                                                            </ValidationProvider>
+                                                                        </v-col>
+                                                                    </v-row>
+                                                                </v-container>
+                                                            </v-card-text>
+                                                        </v-card>
+                                                    </validation-observer>
+                                                </v-dialog>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </section>
+            </v-container>
+        </div>
+    </div>
+</template>

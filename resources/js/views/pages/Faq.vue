@@ -62,7 +62,17 @@ export default {
           faq2,
             ValidationProvider,
             ValidationObserver,
+        },
+    metaInfo() {
+        return {
+            title: "Savol-javoblar (FAQ) - Bojxona qo'mitasi | Customs.uz",
+            meta: [
+                { name: 'description', content: "Ko'p so'raladigan savollar va javoblar. Bojxona xizmatlari, to'lovlar, hujjatlar haqida ma'lumot. Frequently Asked Questions - Customs Committee." },
+                { property: 'og:title', content: "FAQ - Bojxona qo'mitasi | Customs.uz" },
+                { property: 'og:description', content: "Ko'p so'raladigan savollar va javoblar" }
+            ]
         }
+    }
 
 }
 </script>

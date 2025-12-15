@@ -536,6 +536,16 @@ export default {
             }
         },
 
+    },
+    metaInfo() {
+        return {
+            title: "Xizmatlar - Interaktiv xizmatlar | Bojxona qo'mitasi - Customs.uz",
+            meta: [
+                { name: 'description', content: "Bojxona qo'mitasi interaktiv onlayn xizmatlari. Ariza topshirish, murojaatlar, vakansiyalar va boshqa elektron xizmatlar. Online Services - Customs Committee." },
+                { property: 'og:title', content: "Xizmatlar - Bojxona qo'mitasi | Customs.uz" },
+                { property: 'og:description', content: "Bojxona interaktiv onlayn xizmatlari" }
+            ]
+        }
     }
 
 }

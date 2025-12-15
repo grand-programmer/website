@@ -286,6 +286,16 @@ export default {
             }
         }
 
+    },
+    metaInfo() {
+        return {
+            title: "Ochiq ma'lumotlar - Open Data | Bojxona qo'mitasi - Customs.uz",
+            meta: [
+                { name: 'description', content: "Bojxona qo'mitasi ochiq ma'lumotlar portali. XML, CSV, JSON, XLS, RDF formatlarda statistik ma'lumotlar. Open Data Portal - Customs Committee." },
+                { property: 'og:title', content: "Ochiq ma'lumotlar - Bojxona qo'mitasi | Customs.uz" },
+                { property: 'og:description', content: "Bojxona statistik ma'lumotlari - ochiq formatda" }
+            ]
+        }
     }
 }
 </script>

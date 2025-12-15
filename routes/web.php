@@ -121,6 +121,21 @@ fetch first 10 rows only");
 });*/
 //Route::get('/social-login',[App\Http\Controllers\AuthController::class, 'loginWithOneId']);
 //Route::get('/logout',[App\Http\Controllers\AuthController::class, 'logoutForWeb']);
+
+// Sitemap route (must be before catch-all route)
+Route::get('sitemap.xml', function() {
+    $filePath = public_path('sitemap.xml');
+
+    if (!file_exists($filePath)) {
+        abort(404, 'Sitemap not found. Please generate it first using: php artisan sitemap:generate');
+    }
+
+    return response()->file($filePath, [
+        'Content-Type' => 'application/xml',
+        'Cache-Control' => 'public, max-age=3600',
+    ]);
+});
+
 Route::get('rate_customs_service', [App\Http\Controllers\VoteController::class, 'baholash']);
 Route::get('{any}', [App\Http\Controllers\HomeController::class, 'index'])->where('any','.*');
 

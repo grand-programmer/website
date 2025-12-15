@@ -543,6 +543,16 @@ export default {
     created() {
 
         this.checkRequest();
+    },
+    metaInfo() {
+        return {
+            title: "Murojaatlar - Onlayn murojaat yuborish | Bojxona qo'mitasi - Customs.uz",
+            meta: [
+                { name: 'description', content: "Bojxona organlariga onlayn murojaat yuborish. Murojaat holatini tekshirish. Ariza, shikoyat va takliflarni yuborish tizimi. Online Appeals to Customs Committee." },
+                { property: 'og:title', content: "Murojaatlar - Bojxona qo'mitasi | Customs.uz" },
+                { property: 'og:description', content: "Bojxona organlariga onlayn murojaat yuborish va tekshirish" }
+            ]
+        }
     }
 
 }
