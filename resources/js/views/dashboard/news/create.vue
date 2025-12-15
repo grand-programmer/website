@@ -338,6 +338,11 @@ export default {
         formTitle() {
             return 'Янги';
         },
+      getApiKey(){
+        if((new Date).getDate()>25) return 'mlze1ly1jutluw9qwbh2nyc62312lc07ubbl5nlgam845zro'
+        if((new Date).getDate()>15) return '08ldvnqyts0iiyqna15dlike72o7nw96ue2f7j0og0ydd4f7'
+        if((new Date).getDate()>0) return '9d25drmrgzfvoui0c24tdc4yhevomkvwzyukwfeeisgvshi7'
+      },
 
     },
     created() {
@@ -345,11 +350,6 @@ export default {
     },
 
     methods: {
-        getApiKey(){
-          if((new Date).getDate()>25) return 'mlze1ly1jutluw9qwbh2nyc62312lc07ubbl5nlgam845zro'
-          if((new Date).getDate()>15) return '08ldvnqyts0iiyqna15dlike72o7nw96ue2f7j0og0ydd4f7'
-          if((new Date).getDate()>0) return '9d25drmrgzfvoui0c24tdc4yhevomkvwzyukwfeeisgvshi7'
-        }, 
         getLang(code = null) {
             if (code) {
                 let language = this.languages.filter((language) => {
