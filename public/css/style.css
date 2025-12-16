@@ -183,6 +183,10 @@
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
+<<<<<<< HEAD
+=======
+@charset "UTF-8";
+>>>>>>> 6285e6df8d52df1fe74839990d12ae5f6ef57762
 /*----------------------------------------------------
 @File: Default Styles
 @Author: Rocky
@@ -2748,9 +2752,15 @@ audio, canvas, img, svg, video {
   padding-top: 130px;
   margin: 0 auto;
   width: 95%;
+<<<<<<< HEAD
   /*    height: 0;
       position: absolute;
       top: -100%;*/
+=======
+  height: 0;
+  position: absolute;
+  top: -100%;
+>>>>>>> 6285e6df8d52df1fe74839990d12ae5f6ef57762
 }
 #sharedMap > div > .row {
   justify-content: center;
@@ -2863,9 +2873,16 @@ audio, canvas, img, svg, video {
   margin-bottom: 40px;
 }
 
+<<<<<<< HEAD
 /*#fp-nav ul li:first-child {
     display: none;
 }*/
+=======
+#fp-nav ul li:first-child {
+  display: none;
+}
+
+>>>>>>> 6285e6df8d52df1fe74839990d12ae5f6ef57762
 /* End Footer area css
 ============================================================================================ */
 /*---------------------------------------------------- */

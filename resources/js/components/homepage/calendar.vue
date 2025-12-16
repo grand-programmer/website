@@ -1,5 +1,5 @@
 <template>
-    <div class="col-md-6 last_page_right">
+    <div class="col-md-6">
 
         <div class="section_tittle">
             <h2>{{ $t("Божхонага доир муҳим саналар") }}</h2>
