@@ -75,7 +75,7 @@
               </v-expansion-panel-header>
               <v-expansion-panel-content>
                 <template
-                    v-if="![1,2,8].includes(application.status) && list.prices && (list.prices.reduce((sum, item) => sum + parseFloat(item.price), 0))>0">
+                    v-if="![1,2,8].includes(application.status) && listPrices && (listPrices.reduce((sum, item) => sum + parseFloat(item.price), 0))>0">
                   <v-simple-table class="py-2 pt-1 resultTable" style="text-align: center">
                     <template v-slot:default>
                       <thead style="border-bottom: 1px solid #ccc">
@@ -88,7 +88,7 @@
                       </tr>
                       </thead>
                       <tbody>
-                      <tr v-for="listItem in list.prices">
+                      <tr v-for="listItem in listPrices">
                         <td style="max-width: 20%">
                           {{ listItem.tarif ? listItem.tarif['name_' + $i18n.locale] : $t('Аниқланмади') }}
                         </td>
@@ -119,13 +119,13 @@
 
                       <tr>
                         <td style="max-width: 20%;font-weight:bold;" colspan="2">{{ $t('Жами') }}</td>
-                        <td style="width: 20%; font-weight:bold;" v-if="list.prices">
+                        <td style="width: 20%; font-weight:bold;" v-if="listPrices">
 
                           {{
                             (new Intl.NumberFormat("en-US", {
                               style: "currency",
                               currency: "USD",
-                            }).format(list.prices.reduce((sum, item) => sum + parseFloat(item.price), 0))).replace('$', '')
+                            }).format(listPrices.reduce((sum, item) => sum + parseFloat(item.price), 0))).replace('$', '')
                           }} {{ $t('сўм') }}
 
 
@@ -146,7 +146,7 @@
 
                     <h6 class="pa-10 text-center font-weight-bold text"
                         style="color: var(--mycolor)">
-                      {{ (list.prices.length > 0) ? $t('Ушбу ариза бўйича маълумот топилмади') : '' }}</h6>
+                      {{ (listPrices.length > 0) ? $t('Ушбу ариза бўйича маълумот топилмади') : '' }}</h6>
                   </div>
                 </template>
 
@@ -464,6 +464,9 @@ export default {
       await this.getPrice()
   },
   computed: {
+    listPrices(){
+      return listPrices
+    },
     additions() {
       if (!this.list.fields) return []
       if (this.application.application_type === 0) return Object.values(this.list.fields)

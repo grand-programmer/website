@@ -462,6 +462,7 @@ class StatController extends Controller
 
     public function getPrice(StatServiceApplication $statservice, Request $request)
     {
+
         $data = $request->only(['calculate']);
         if ($statservice->status()->first()->id === 2)
             return response()->json(['error' => _('Ҳисоблаш жараёнида'), 'status' => $statservice->status()->first()->id]);
