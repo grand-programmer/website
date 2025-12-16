@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+@charset "UTF-8";
+>>>>>>> 6285e6df8d52df1fe74839990d12ae5f6ef57762
 :root {
   --mycolor: #39ae69;
 }
@@ -479,6 +483,12 @@ ul#pills-tab {
 
 .opendata-container {
   display: flex;
+<<<<<<< HEAD
+=======
+  --s: $s;
+  --m: $m;
+  --f: $f;
+>>>>>>> 6285e6df8d52df1fe74839990d12ae5f6ef57762
 }
 
 .opendata {
@@ -494,7 +504,11 @@ ul#pills-tab {
   width: calc(260px / 2 + (45px) * 4 / 3);
   float: left;
   height: 144%;
+<<<<<<< HEAD
   /*shape-outside: repeating-linear-gradient(#0000 0 calc(calc(1.732 * 260px + (-6 * 45px) - 1px) - 1vw), #000 0 $f);*/
+=======
+  shape-outside: repeating-linear-gradient(#0000 0 calc(calc(1.732 * 260px + (-6 * 45px) - 1px) - 1vw), #000 0 calc(1.732 * 260px + (-6 * 45px) - 1px));
+>>>>>>> 6285e6df8d52df1fe74839990d12ae5f6ef57762
 }
 .opendata .portfolio_single.p2 {
   width: 260px;
@@ -761,7 +775,11 @@ section.content_block .tab-content > .tab-pane {
   background-size: contain;
 }
 #mobil-ilovalar .mobil-ilovalar a.mobil-ilova .mobil-ilova-text {
+<<<<<<< HEAD
   margin-top: -15px;
+=======
+  margin-top: -15 px;
+>>>>>>> 6285e6df8d52df1fe74839990d12ae5f6ef57762
   width: 95%;
   padding: 0 5px;
   color: #000;
@@ -1642,6 +1660,7 @@ a.read_more {
   position: static;
 }
 
+<<<<<<< HEAD
 .hududiy.section {
   height: 100vh;
   display: block;
@@ -1653,6 +1672,8 @@ a.read_more {
   top: 0;
 }
 
+=======
+>>>>>>> 6285e6df8d52df1fe74839990d12ae5f6ef57762
 body .logo_area {
   overflow: unset;
   top: 0;
@@ -3371,7 +3392,11 @@ a.read_more {
 }
 .one-page .section {
   height: auto !important;
+<<<<<<< HEAD
   min-height: 94.4vh;
+=======
+  min-height: 70.4vh;
+>>>>>>> 6285e6df8d52df1fe74839990d12ae5f6ef57762
 }
 
 .asosiy_korsatkichlari2 .row.content {
@@ -4572,7 +4597,12 @@ html body .Vue-Toastification__container.top-right {
   display: flex;
   justify-content: center;
   align-items: center;
+<<<<<<< HEAD
   top: 74px;
+=======
+  top: 70px;
+  /*old 74px*/
+>>>>>>> 6285e6df8d52df1fe74839990d12ae5f6ef57762
   z-index: 10;
   background-image: linear-gradient(180deg, #005e2778, transparent);
   height: 62px;

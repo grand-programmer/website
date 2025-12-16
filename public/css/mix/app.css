@@ -93,6 +93,7 @@
   background-color: #000;
 }
 
+<<<<<<< HEAD
 .single_blog_content .accordion > input[name=collapse] {
   display: none;
 }
@@ -222,6 +223,8 @@
   background-color: #eeeeee;
 }
 
+=======
+>>>>>>> 6285e6df8d52df1fe74839990d12ae5f6ef57762
 .structure-comitete .widget_tittle {
   border: none !important;
 }

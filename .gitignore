@@ -20,3 +20,4 @@ yarn-error.log
 /.vscode
 /public/css/mix/one.css
 /public/.htaccess
+/public/storage/*

@@ -1,5 +1,5 @@
 <template>
-    <div class="section page-container">
+    <div v-if="!isMobile" class="section page-container">
         <div class="background"></div>
         <div class="whitebreadcrumb breadcrumb-site">
             <v-container>
@@ -282,13 +282,14 @@ description=orinbosar.biografiyasi && orinbosar.biografiyasi.length>10? '<h3>' +
 
         </v-dialog>
     </div>
+    <mobile-rahbariyat v-else/>
 </template>
 
 <script>
 
 import api from "./../../../../src/services/apiService";
 import i18n from "../../../../i18n";
-
+import mobileRahbariyat from "./mobile-rahbariyat.vue";
 export default {
     name: "rahbariyat",
     data() {
@@ -315,8 +316,12 @@ export default {
             image: null,
             description: null,
             orinbosarlar: [],
-            maslahatchilar: []
+            maslahatchilar: [],
+            isMobile: false
         }
+    },
+    components: {
+      mobileRahbariyat
     },
     methods: {
         async initialize() {
@@ -340,10 +345,23 @@ export default {
                 });
             });
 
+        },
+        mobileCheck() {
+          return /android|iphone|ipad|ipod|mobile/i.test(
+              navigator.userAgent || navigator.vendor || window.opera
+          )
+        },
+        getWidth() {
+          return window.innerWidth
+        },
+        checkDevice() {
+          this.isMobile = this.mobileCheck() && this.getWidth() < 1100
         }
     },
     created() {
         this.initialize()
+        this.checkDevice()
+        window.addEventListener('resize', this.checkDevice)
     },
   mounted(){
     const script = document.createElement('script')
@@ -362,7 +380,10 @@ export default {
       }
     })
     document.head.appendChild(script)
-  }
+  },
+  beforeUnmount() {
+    window.removeEventListener('resize', this.checkDevice)
+  },
 }
 </script>
 <style>
