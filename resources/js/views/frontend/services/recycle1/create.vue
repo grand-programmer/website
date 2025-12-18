@@ -2484,7 +2484,7 @@ export default {
 
         } else
           _this.$toast.error(error.response.statusText);
-        console.log(e)
+        console.log(error)
       })
       _this.loading.init = false
 

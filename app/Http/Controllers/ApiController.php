@@ -993,10 +993,10 @@ class ApiController extends Controller
                 if (isset($data['type']) and $data['type'] === 'dep') {
 
 
-                    $query = "Insert into Logging  (SESID,INN,NAME,IP,SER_NUM) values ('" . Str::uuid() . "','" . Auth::guard('api')->user()->pin . "','" . Auth::guard('api')->user()->sur_name . " " . Auth::guard('api')->user()->first_name . " " . Auth::guard('api')->user()->mid_name . "','" . $request->getClientIp() . "', '" . substr(Str::uuid(), 0, 8) . "')";
+                    $query = "Insert into Logging  (SESID,INN,NAME,IP,SER_NUM) values ('" . Str::uuid() . "','" . ((Auth::guard('api')->user()->type === 2) ? Auth::guard('api')->user()->legal_tin : Auth::guard('api')->user()->pin) . "','" . Auth::guard('api')->user()->sur_name . " " . Auth::guard('api')->user()->first_name . " " . Auth::guard('api')->user()->mid_name . "','" . $request->ip() . "', '" . substr(Str::uuid(), 0, 8) . "')";
                     DB::connection("databaseconfig212_227")->insert($query);
                     //else return response()->json(['data' => $sessions[0]]);
-                    $sessions = DB::connection("databaseconfig212_227")->select("Select * from Logging where INN='" . Auth::guard('api')->user()->pin . "' and exit is null and Last > '" . Carbon::now()->subDays(1) . "' order by last desc");
+                    $sessions = DB::connection("databaseconfig212_227")->select("Select * from Logging where INN='" . ((Auth::guard('api')->user()->type === 2) ? Auth::guard('api')->user()->legal_tin : Auth::guard('api')->user()->pin) . "' and exit is null and Last > '" . Carbon::now()->subDays(1) . "' order by last desc");
 
                     return response()->json(['data' => $sessions[0]]);
 
@@ -1062,14 +1062,14 @@ class ApiController extends Controller
             $header = $request->headers->get('content-type');
 
             if ($header === 'multipart/form-data')
-                $httpClient = Http::asMultipart();
-            else $httpClient = Http::withHeaders($request->headers->all());
+                $httpClient = Http::timeout(600)->asMultipart();
+            else $httpClient = Http::timeout(600)->withHeaders($request->headers->all());
 
             if ($request->hasFile('file')) {
                 $file = $request->file('file');
 
                 // So'rov yuborish
-                $response = Http::asMultipart() // multipart/form-data formatini o'rnatish
+                $response = Http::timeout(600)->asMultipart() // multipart/form-data formatini o'rnatish
                 ->attach(
                     'file',                          // Form-data kaliti (Postmandagi 'file' bilan bir xil)
                     file_get_contents($file),        // Fayl mazmuni

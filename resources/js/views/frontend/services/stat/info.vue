@@ -465,7 +465,7 @@ export default {
   },
   computed: {
     listPrices(){
-      return listPrices
+      return this.list.prices
     },
     additions() {
       if (!this.list.fields) return []

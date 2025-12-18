@@ -155,12 +155,8 @@ export default {
     },
     methods: {
         async run() {
-<<<<<<< HEAD
             await this.$auth.plugins.http.get('/api/v1/stat', {
-=======
-            /* vaqtinchalik https://customs.uz/ ishlatib turilibdi*/
-            await axios.get('https://customs.uz/api/v1/stat', {
->>>>>>> 6285e6df8d52df1fe74839990d12ae5f6ef57762
+
                 params: {
                     name: 'tovarimex_n',
                     rejim: this.regime,

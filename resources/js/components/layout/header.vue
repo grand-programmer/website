@@ -20,11 +20,14 @@
                             <router-link to="/" class="header-logo">
                                 <img src="/img/gtk_image.png" alt="logo customs">
                                 <img src="/img/flag01.svg" alt="logo customs" style="margin-right: 10px!important">
-                                <div>
-                                    <span style="display: block;">{{ $t("Ўзбекистон Республикаси") }}</span>
-                                    <span style="display: block;">{{ $t("Иқтисодиёт ва молия вазирлиги") }}</span>
-                                    <span style="display: block;">{{ $t("ҳузуридаги Божхона қўмитаси") }}</span>
-                                </div>
+                              <div style="text-align: center; max-width: 20rem;     font-family: 'Montserrat-Medium', sans-serif;
+    color: #13502c;
+    max-width: 350px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+    line-height: 1.5;
+    font-size: 14px; "> {{ $t("Ўзбекистон Республикаси Иқтисодиёт ва молия вазирлиги ҳузуридаги Божхона қўмитаси") }}</div>
                             </router-link>
                         </div>
                         <!--end logo area-->
@@ -78,7 +81,7 @@
                         <!--end menu area-->
                         <div class="header-settings">
                             <div class="header-item header-mail">
-<<<<<<< HEAD
+
                                 <li class="hududiy_boshqarmalar1  ">
                                   <a href="tel:1108" class="d-flex">
                                     <i class="tortlink fas fa-phone mr-1"></i>
@@ -93,13 +96,7 @@
                                                                         <li><a href="contact.html">Contact</a></li>
                                                                         <li><a href="contact-2.html">Contact - 02</a></li>
                                                                     </ul>-->
-=======
-                                <li class="hududiy_boshqarmalar">
-                                    <a href=".hududiy.section" class="d-inline">
-                                        <i class="tortlink fas fa-map-marker-alt mr-1 "></i>
-                                        <span class="tort" style="text-transform: initial; font-size: 16px!important;">{{ $t("Ҳудудий бошқармалар") }}</span>
-                                    </a>
->>>>>>> 6285e6df8d52df1fe74839990d12ae5f6ef57762
+
                                 </li>
                                 <router-link v-if="!$auth.check()" to="/login" style="width: min-content; line-height: 16px"><i
                                     class="fas fa-sign-in-alt"></i><span style="text-transform: initial; font-size: 16px!important;"   > {{
@@ -481,7 +478,7 @@ $(document).on("click", "ul.lang-list li", function () {
 
 </script>
 <style>
-<<<<<<< HEAD
+
 .hududiy_boshqarmalar1 {
   align-items: center;
   display: flex;
@@ -498,20 +495,7 @@ $(document).on("click", "ul.lang-list li", function () {
   color: var(--mycolor);
 
 }
-=======
-/*.side {
-  position: fixed;
-  top: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: silver;
-  margin-left: -100vw;
-  transition: all .2s ease-in-out;
-}
-.side.show {
-  margin-left: 0px;
-} */
->>>>>>> 6285e6df8d52df1fe74839990d12ae5f6ef57762
+
 .subscribe-notification{
     position: absolute;
     top: 10px;

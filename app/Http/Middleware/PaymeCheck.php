@@ -30,6 +30,7 @@ class PaymeCheck
         }
 
         $ip = $request->ip();
+        Log::info("Payme IP: $ip");
         if (!in_array($ip, config('payme.allowed_ips'))) {
 
             throw new PaymeException(PaymeException::AUTH_ERROR);

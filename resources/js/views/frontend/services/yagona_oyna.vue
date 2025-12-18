@@ -832,7 +832,7 @@ export default {
                         s.innerHTML = '' +
                             '<input type="hidden" name="SessionID" value="' + result_data.data.data.sesid + '"/>'
                             + '<input type="hidden" name="serialNumberHex" value="' + result_data.data.data.ser_num + '"/>'
-                            + '<input type="hidden" name="INN" value="' + result_data.data.data.inn + '"/>'
+                            + '<input type="hidden" name="INN" value="' + ((_this.$auth.user().type===2)? _this.$auth.user().legal_tin : _this.$auth.user().pin) + '"/>'
                             //+ '<input type="hidden" name="PNFL" value="' + _this.$auth.user().pin + '"/>'
                             + '<input type="hidden" name="clName" value="' + result_data.data.data.name.replaceAll("", "'") + '"/>'
                             + '<input type="hidden" name="DEP" value="DEP"/>';

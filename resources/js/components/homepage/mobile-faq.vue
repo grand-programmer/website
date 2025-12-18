@@ -8,7 +8,7 @@
                 v-if="fkey<5" v-for="(faq,fkey) in faqs"
                 :key="fkey"
             >
-                <v-expansion-panel-header expand-icon="mdi-menu-down">
+                <v-expansion-panel-header expand-icon="mdi-menu-down" style="font-size: 13px">
                     <template v-slot:default>
                         {{
                             typeof faq.question !== 'undefined' ? faq.question : ''
@@ -54,7 +54,7 @@ export default {
 <style>
 .chose_inner_area .v-expansion-panel-header{
     color: #0a0a0a;
-    font-size: 16px;
+    font-size: 13px;
     font-family: "latosm";
     height: 65px;
     border-bottom: 1px solid #39ae69;

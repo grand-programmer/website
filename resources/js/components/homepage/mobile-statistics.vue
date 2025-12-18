@@ -2,8 +2,7 @@
     <div class="row content" style="min-height: min-content; height: max-content; padding-top: 40px!important; padding-bottom: 40px!important;" :style="[stat_type===3 ? 'min-height: 275vw' : '']">
         <div style="height: max-content;">
             <h3 style="font-size: 18px; color: #007F5F; font-weight: bold; text-transform: uppercase; text-align: center">
-                {{ $t('Товарларнинг ташқи савдо') }}
-                <span>{{ $t('божхона статистикаси') }}</span>
+              {{ $t("товарлар ташқи савдо божхона статистикаси") }}
             </h3>
             <ul class="stat_ul">
                 <li v-for="(rejimItem, index) in regimes" :class="['tab', {active: activeTab===index}]" @click="setActiveTab(index)">
