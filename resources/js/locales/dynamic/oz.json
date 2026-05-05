@@ -59,6 +59,7 @@
     "Oʼzbekiston Respublikasi Ochiq ma'lumotlar portali": "Oʼzbekiston Respublikasi Ochiq ma'lumotlar portali",
     "Bojxona instituti": "Bojxona instituti",
     "Ўзбекистон Республикаси Иқтисодиёт ва молия вазирлиги ҳузуридаги Божхона қўмитаси": "O‘zbekiston Respublikasi Iqtisodiyot va moliya vazirligi huzuridagi Bojxona qo‘mitasi",
+    "Основными задачами таможенных органов являются: защита прав, свобод и охраняемых законом интересов физических и юридических лиц; в пределах своей компетенции защита экономических интересов и обеспечение экономической безопасности Республики Узбекистан; осуществление таможенного контроля и оформления; взимание таможенных платежей; осуществление контроля за соблюдением таможенного законодательства, предотвращение, выявление и пресечение нарушений законодательства, в том числе контрабанды; осуществление мониторинга внешнеторговых операций, анализ исполнения экспортно-импортных контрактов, а также соблюдение валютного законодательства при проведении внешнеторговых операций, в части, касающейся таможенных органов": "Bojxona organlarining asosiy vazifalari quyidagilardan iborat: jismoniy va yuridik shaxslarning huquqlari, erkinliklari hamda qonun bilan qo‘riqlanadigan manfaatlarini himoya qilish; o‘z vakolatlari doirasida O‘zbekiston Respublikasining iqtisodiy manfaatlarini himoya qilish va iqtisodiy xavfsizligini ta’minlash; bojxona nazorati va rasmiylashtiruvini amalga oshirish; bojxona to‘lovlarini undirish; bojxona to‘g‘risidagi qonun hujjatlariga rioya etilishi ustidan nazoratni amalga oshirish, qonun hujjatlari buzilishining, shu jumladan kontrabandaning oldini olish, uni aniqlash va unga chek qo‘yish; tashqi savdo operatsiyalari monitoringini amalga oshirish, eksport-import kontraktlari bajarilishini tahlil qilish, shuningdek tashqi savdo operatsiyalarini amalga oshirishda valyuta to‘g‘risidagi qonun hujjatlariga bojxona organlariga taalluqli qismi bo‘yicha rioya etish.",
     "Ҳудудий бошқармалар": "Hududiy boshqarmalar",
     "Менинг профилим": "Mening profilim",
     "Менинг аризаларим": "Mening arizalarim",
@@ -689,6 +690,7 @@
     "Асосий товарлар": "Аsosiy tovarlar",
     "Жами": "Jami",
     "Божхона қўмитаси": "Bojxona qoʼmitasi",
+    "Bojxona qo'mitasi rasmiy veb sayti": "Bojxona qo'mitasi rasmiy veb sayti",
     "Иқтисодиёт тармоқлари": "Iqtisodiyot tarmoqlari",
     "Ҳудудий корхоналар": "Hududiy korxonalar",
     "Жисмоний шахслар": "Jismoniy shaxslar",
@@ -1149,5 +1151,13 @@
     "Қайта ишланмаган тери": "Qayta ishlanmagan teri",
     "Ватан учун, миллат учун, халқ учун!": "Vatan uchun, millat uchun, xalq uchun!",
     "Генерал ва ёшлар учрашуви": "General va yoshlar uchrashuvi",
-    "Франция": "Fransiya"
+    "Товар / Ҳудуд / Асосий ташкилотлар": "Tovar / Hudud / Asosiy tashkilotlar",
+    "вазни":"vazni",
+    "қиймати": "qiymati",
+    "минг долл.":"ming doll.",
+    "тн": "tn",
+    "Озиқ-овқат": "Oziq-ovqat",
+    "Ноозиқ-овқат":"Nooziq-ovqat",
+    "Мухим товарлар": "Muxim tovarlar",
+    "Аcосий истеъмол товарлари импорти тўғрисида маълумот":"Acosiy iste’mol tovarlari importi to‘g‘risida ma’lumot"
 }

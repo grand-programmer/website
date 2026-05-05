@@ -1283,6 +1283,12 @@ export default {
       }
     },
     addData(code = 'tftn', length = 2) {
+      if(code==='tftn'){
+        if(this.application[code].length>9){
+          this.$toast.error(this.$t('Сиз 10 тадан кам ТИФ ТН коди киритишингиз мумкин'))
+          return
+        }
+      }
       if (!this.temp[code] || this.temp[code].length < length) {
         this.$toast.error(this.$t('Сиз {length} тадан кўп ракам киритишингиз керак', {length: (length - 1)}))
         return

@@ -25,6 +25,7 @@ class StatService
         // 'davlatimex' => 'getDavlatImExData',
         // 'tovarimex' => 'getTovarImExData',
         // 'oyimex' => 'getOyImExData',
+        'istemoltovarhudud' => 'getIstemolTovarDataHudud',
         'istemoltovar_n' => 'getIstemolTovarDataNew',
         'istemolimex_n' => 'getIstemolDataNew',
         'davlatimex_n' => 'getDavlatImExDataNew',
@@ -403,6 +404,150 @@ GROUP BY
             })->sortByDesc('category', SORT_ASC)->all());
         }
     }
+    public function getIstemolTovarDataHudud($year = 0, $month = 0,$selectedrejim = 0, $toMonth = 0)
+    {
+
+        $selectedrejim = 0;
+        if ($selectedrejim === 0) {
+            $data['rejim'] = "ИМ";
+        } elseif ($selectedrejim == 1) {
+            $data['rejim'] = "ИМ";
+        } else {
+            $selectedrejim = 2;
+            $data['rejim'] = "ЭК";
+        }
+
+        if (!isset($data['rejim'])) {
+            $data['rejim'] = 'ИМ';
+        }
+
+        if (is_array($data['rejim'])) {
+            $rejim = "and G01A in ('" . implode("','", $data['rejim']) . "')";
+        } else
+            $rejim = "and G01A in ('" . $data['rejim'] . "')";
+
+        if ($year == 0) $year = date('Y');
+        $params['year'] = $year;
+
+        if ($month != 0) {
+            $params['month'] = $month;
+        }
+        if ($toMonth != 0) {
+            $params['toMonth'] = $toMonth;
+        }
+        /// +++ $this->fromRepl=false;
+        if ($this->fromRepl) {
+            $statData = StatData::where([
+                'name' => 'istemoltovarhudud',
+                'rejim' => $selectedrejim,
+                'month' => $month,
+                'year' => $year,
+                'tomonth' => $toMonth,
+            ])->first();
+            if (!$statData) return [];
+            return collect(json_decode($statData->data))->values();
+        }
+        else {
+
+            //$month = "month(d.g7b)=" . date("m");
+            $year = "year(v.g54d)=" . date("Y");
+            $year1 = "year(v.g54d)=" . (date("Y") - 1);
+            $year2 = "year(v.g54d) in (" . (int)date("Y") . ", " . ((int)date("Y") - 1) . ")";
+
+            if (isset($params['year'])) {
+                $year = "year(v.g54d)=" . $params['year'];
+                $year1 = "year(v.g54d)=" . ($params['year'] - 1);
+                $year2 = "year(v.g54d) in (" . (int)$params['year'] . ", " . ((int)$params['year'] - 1) . ")";
+            }
+
+
+            if (isset($params['month'])) {
+                $month = "and month(v.g54d)=" . $params['month'];
+                if (isset($params['toMonth'])) {
+                    if($params['toMonth']===$params['month'] and $params['month']===0) $month=""; else
+                        $month = "and month(v.g54d) BETWEEN ". $params['month'] ." AND " . $params['toMonth'];
+                }
+            } else $month = "and month(v.g54d) < " . ((int)date("m"));
+
+
+
+            $query = 'select
+                        sp.TOVAR_2_N categoryKod,
+                       sp.TOVAR_LOTIN_2 catTitleoz,
+                       sp.TOVAR_KIRIL_2 catTitleuz,
+                       sp.TOVAR_RU_2 catTitleru,
+                       sp.TOVAR_ENG_2 catTitleen,
+                si.KB,
+                si.NOMI "tashkilot",
+                si.INN,
+        
+                sum(case when ' . $year1 . ' ' . $month . ' then value(float(v.g38)/1000,0) else 0 end) kol_2023,
+                sum(case when ' . $year1 . ' ' . $month . ' then value(v.g46,0) else 0 end) qiymat_2023,
+                
+                sum(case when ' . $year . ' ' . $month . ' then value(float(v.g38)/1000,0) else 0 end) kol_2024,
+                sum(case when ' . $year . ' ' . $month . ' then value(v.g46,0) else 0 end) qiymat_2024
+                
+                
+                from tst_stat.VTO_2022_07 v 
+                left join tst_stat.SPR_TOVAR st on st.kod=v.G33A
+                left join tst_stat.spr_potr2 sp on sp.kod=v.G33A
+                left join tst_stat.SPR_DAVLAT sd on sd.KOD=v.G15_17
+                left join tst_stat.SPR_INN si on si.INN=v.INN
+                left join tst_stat.SPR_SOOGU ss on ss.SOOGU=si.KB
+                
+                ---------------->>>>>сана>>>>>>-----------------------------------------------------------------
+                where ' . $year2 . ' ' . $month . '
+                ---------------->>>>>филтр>>>>>>----------------------------------------------------------------
+                ' . $rejim . '
+                and st.spr_n3 in (\'020101\',\'020107\',\'020103\',\'021105\',\'020402\',\'020606\',\'021203\',\'020701\',\'020601\')
+                ---------------->>>>>group by>>>>>>-------------------------------------------------------------
+                group by 
+                sp.TOVAR_2_N,
+                sp.TOVAR_LOTIN_2,
+                sp.TOVAR_KIRIL_2,
+                sp.TOVAR_RU_2,
+                sp.TOVAR_ENG_2,
+                si.KB,
+                si.NOMI,
+                si.INN
+                ';
+
+            $returnData = DB::connection('db2_odbc_stat')->select($query);
+
+            if ($returnData) {
+                return (collect($returnData)->groupBy('categorykod')->transform(function ($item, $key) {
+                    return [
+                        'category' => $item->first()->categorykod,
+                        'titleoz' => $item->first()->cattitleoz,
+                        'titleuz' => $item->first()->cattitleuz,
+                        'titleru' => $item->first()->cattitleru,
+                        'titleen' => $item->first()->cattitleen,
+                        'kol_2023' => $item->sum('kol_2023'),
+                        'qiymat_2023' => $item->sum('qiymat_2023'),
+                        'kol_2024' => $item->sum('kol_2024'),
+                        'qiymat_2024' => $item->sum('qiymat_2024'),
+                        'subItems' => $item->sortBy('qiymat_2024')->groupBy('kb')->transform(function ($catItem) {
+                            return [
+                                'kb' => $catItem->first()->kb,
+                                'kol_2023' => $catItem->sum('kol_2023'),
+                                'qiymat_2023' => $catItem->sum('qiymat_2023'),
+                                'kol_2024' => $catItem->sum('kol_2024'),
+                                'qiymat_2024' => $catItem->sum('qiymat_2024'),
+                                'orgs' => $catItem->sortBy('qiymat_2024')
+                                    ->whereNotIn('inn',['305162024','204522125','305375313','311084626','305114881'])
+                                    ->take(5)->transform(function ($subItem) {
+                                        return $subItem->tashkilot;
+                                    })->all(),
+                            ];
+                        })->sortBy('kb')->all()
+                    ];
+
+                })->sortByDesc('category', SORT_ASC)->all());
+
+            }
+        }
+    }
+
 
     public function getDavlatImExDataNew($year = 0, $month = 0, $selectedrejim = 0, $toMonth = 0)
     {

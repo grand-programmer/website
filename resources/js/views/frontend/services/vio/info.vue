@@ -402,7 +402,7 @@
                                                 <p> {{ new Date(appstatus.insTime).toLocaleString() }}</p>
                                                 <br>
                                                 <p v-if="appstatus.status==='400'" style="font-size: 15px"><a
-                                                    :href="'http://192.168.214.152:7070/DECAPP/s10decisionPdfDownloadAppeal/?appId=' + app.id">
+                                                    :href="'http://172.16.212.43:7070/DECAPP/s10decisionPdfDownloadAppeal/?appId=' + app.id">
                                                     {{ $t('Қарорни юклаб олинг!') }} </a></p>
                                                 <p v-if="1===2 && appstatus.status==='600'" style="font-size: 15px"> <a :href="'https://qaror.customs.uz/s09decisionPdfDownloadAppeal?stId=' + appstatus.id"> {{ $t('Рухсатномани юклаб олинг!') }} </a></p>
                                                 <p v-if="1===2 && appstatus.status==='201' || appstatus.status==='600'" style="font-size: 15px"> <a :href="'https://qaror.customs.uz/s09decisionPdfDownloadAppeal?stId=' + appstatus.id"> {{ $t('Аризангиз жавоб хатини юклаб олинг!') }} </a></p>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Exports\StatMuhimProductsExport;
 use App\Exports\StatProductsExport;
 use App\Http\Controllers\PaymeController;
 use App\Models\News;
@@ -9,6 +10,7 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Schema;
 use App\Services\NewsToSocial;
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\Log;
 use Maatwebsite\Excel\Facades\Excel;
 
 
@@ -52,11 +54,26 @@ use Maatwebsite\Excel\Facades\Excel;
                                 $service->saveData('istemoltovar_n',2024,1,0, 2);*/
 
 
-                return Excel::download(new StatProductsExport($cat,$year,(int)$month,(int)$tomonth), 'products.xlsx');
+                $contents = Excel::raw(new StatProductsExport($cat,$year,(int)$month,(int)$tomonth), \Maatwebsite\Excel\Excel::XLSX);
+
+                return response($contents, 200, [
+                    'Content-Type' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                    'Content-Disposition' => 'attachment; filename="products.xlsx"',
+                ]);
 
             }
-            catch(Exception $exception) {
-                die($exception->getMessage());
+            catch(\Throwable $exception) {
+                Log::error('StatProductsExport failed', [
+                    'cat' => $cat,
+                    'year' => $year,
+                    'month' => $month,
+                    'tomonth' => $tomonth,
+                    'message' => $exception->getMessage(),
+                ]);
+
+                return response()->json([
+                    'message' => 'Exportda xatolik yuz berdi',
+                ], 500);
             }
             // Notification::via('telegram')->notify($message);
             // phpinfo();
@@ -66,6 +83,31 @@ use Maatwebsite\Excel\Facades\Excel;
                        print_r($date1->month);
                        print_r($date1->year);
                         dd($date1->subDay()->getTimestamp() === $date2->subYears(10)->getTimestamp());*/
+        });
+        Route::get('statdatamuhim/{cat}/{year}/{month}/{tomonth?}', function($cat,$year,$month,$tomonth=0){
+            try {
+                $contents = Excel::raw(new StatMuhimProductsExport($cat,$year,(int)$month,(int)$tomonth), \Maatwebsite\Excel\Excel::XLSX);
+
+                return response($contents, 200, [
+                    'Content-Type' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                    'Content-Disposition' => 'attachment; filename="products.xlsx"',
+                ]);
+
+            }
+            catch(\Throwable $exception) {
+                Log::error('StatProductsExport failed', [
+                    'route' => 'statdatamuhim',
+                    'cat' => $cat,
+                    'year' => $year,
+                    'month' => $month,
+                    'tomonth' => $tomonth,
+                    'message' => $exception->getMessage(),
+                ]);
+
+                return response()->json([
+                    'message' => 'Exportda xatolik yuz berdi',
+                ], 500);
+            }
         });
         /*    Route::get('test',function(){
 
@@ -184,7 +226,7 @@ use Maatwebsite\Excel\Facades\Excel;
         Route::get('/data/{statservice}/regime', 'App\Http\Controllers\DataController@getStatServiceRegime');
         Route::get('/data/{statservice}/fields', 'App\Http\Controllers\DataController@getStatServiceFields');
         Route::get('/data/tariffs', 'App\Http\Controllers\DataController@getStatServiceTarifs');
-        Route::get('/data/contract', 'App\Http\Controllers\DataController@getEisvoContract');
+        Route::get('/data/contract', 'App\Http\Controllers\DataController@getEisvoContract')->middleware('auth:api');
         Route::get('/users-viewed', 'App\Http\Controllers\UsersCountController@getCount');
         Route::post('/spreaded-search', 'App\Http\Controllers\NewsController@spreadedSearch');
         Route::group(['prefix' => 'payments'], function () {

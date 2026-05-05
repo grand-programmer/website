@@ -250,7 +250,7 @@
                     </v-col>
                     <v-col cols="4">
                       <ValidationProvider
-                          :name="$t('Қайта ишловчи СТИРи')"
+                          :name="$t('Қайта ишловчи')"
                           rules="required"
                           v-slot="{ errors }">
                         <v-autocomplete
@@ -271,6 +271,20 @@
                             :error-messages="errors[0]"
                         >
                         </v-autocomplete>
+                      </ValidationProvider>
+                      <ValidationProvider
+                          v-if="app.common.repubInOut===200"
+                          :name="$t('Қайта ишловчи ташкилот')"
+                          rules="required"
+                          v-slot="{ errors }">
+                        <v-text-field
+                            v-model="app.common.recycleNameOut"
+                            :label="$t('Қайта ишловчи ташкилот')"
+                            required
+                            persistent-placeholder
+                            :error-messages="errors[0]"
+                        >
+                        </v-text-field>
                       </ValidationProvider>
                       <ValidationProvider
                           :name="$t('Товар қайта ишланадиган жой локацияси')"
@@ -411,20 +425,20 @@
                           <div style="display: flex;justify-content: space-between;">
                             <v-radio
                                 style="width: 40%"
-                                :label="$t('Бир турдаги маҳсулотни олиб келиб, бир ёки бир нечта турдаги товарлар чиқариш')"
+                                :label="[200].includes(repubInOutComputed)?$t('Бир турдаги маҳсулотни олиб чиқиб, бир ёки бир нечта турдаги товарлар чиқариш'):$t('Бир турдаги маҳсулотни олиб келиб, бир ёки бир нечта турдаги товарлар чиқариш')"
                                 :value="1"
                                 color="#20CB5B"
                             >{{
-                                $t('Бир турдаги маҳсулотни олиб келиб, бир ёки бир нечта турдаги товарлар чиқариш')
+                                [200].includes(repubInOutComputed)?$t('Бир турдаги маҳсулотни олиб чиқиб, бир ёки бир нечта турдаги товарлар чиқариш'):$t('Бир турдаги маҳсулотни олиб келиб, бир ёки бир нечта турдаги товарлар чиқариш')
                               }}
                             </v-radio>
                             <v-radio
                                 style="width: 40%"
-                                :label="$t('Бир нечта товарлар олиб келиниб, бир ва ундан ортиқ турдаги товарлар ишлаб чиқилганда чиқиш нормасини белгилаш')"
+                                :label="[200].includes(repubInOutComputed)?$t('Бир нечта товарлар олиб чиқилиб, бир ва ундан ортиқ турдаги товарлар ишлаб чиқилганда чиқиш нормасини белгилаш'):$t('Бир нечта товарлар олиб келиниб, бир ва ундан ортиқ турдаги товарлар ишлаб чиқилганда чиқиш нормасини белгилаш')"
                                 :value="2"
                                 color="#20CB5B"
                             >{{
-                                $t('Бир нечта товарлар олиб келиниб, бир ва ундан ортиқ турдаги товарлар ишлаб чиқилганда чиқиш нормасини белгилаш')
+                                [200].includes(repubInOutComputed)?$t('Бир нечта товарлар олиб чиқилиб, бир ва ундан ортиқ турдаги товарлар ишлаб чиқилганда чиқиш нормасини белгилаш'):$t('Бир нечта товарлар олиб келиниб, бир ва ундан ортиқ турдаги товарлар ишлаб чиқилганда чиқиш нормасини белгилаш')
                               }}
                             </v-radio>
                           </div>
@@ -1364,7 +1378,7 @@ export default {
       ],
       maqomlar: [
         {
-          text: typeof this.application !== 'undefined' && this.application.rejim === 200 ? i18n.t("Олиб чиқиладиган товарлар") : i18n.t("Олиб кириладиган товарлар"),
+          text: ([100,300].includes(this.repubInOutComputed)) ? i18n.t("Олиб кириладиган товарлар"):i18n.t("Олиб чиқиладиган товарлар"),
           value: '1'
         },
         {
@@ -1532,6 +1546,7 @@ export default {
           recycleCost: null, /// Қайта ишлаш оператцияларининг қиймати *
           recycleCurrency: null, //valyuta
           recycleName: null,
+          recycleNameOut: null,
           recycleTin: "", /// INN
           recycleAddress: null,
           recycleLocation: null,
@@ -2577,17 +2592,15 @@ export default {
     },
 
 
-    getContracts(val) {
+    async getContracts(val) {
       const _this = this
       if (!val || (val && val.length !== 9)) return;
       this.loading.contract = true;
-      fetch(window.location.origin + "/api/v1/data/contract?inn=" + val)
-          .then((res) => res.json())
+      await this.$auth.plugins.http.get(window.location.origin + "/api/v1/data/contract?inn=" + val)
           .then(res => {
             this.loading.contract = false
-            //this.contracts.push(res.data[0]);
             this.contracts = []
-            this.contracts = this.contracts.concat(res.data.filter((item) => this.contracts.indexOf(item) < 0));
+            this.contracts = this.contracts.concat(res.data.data.filter((item) => this.contracts.indexOf(item) < 0));
           })
           .catch(err => {
             _this.$toast.error('Контракт маълумотларини олишда хатолик юз берди')
@@ -2622,7 +2635,11 @@ export default {
     "app.common.repubInOut": {
       handler: function (val) {
         if (val === 200 && !(this.loading.init)) {
+         this.app.common.recycleTin = null
           this.app.common.contractIdenNumber = []
+          this.contracts=[]
+        } else {
+          this.app.common.recycleNameOut = null
         }
       },
       deep: true
@@ -2708,7 +2725,7 @@ export default {
       deep: true
     },
     search_contract: {
-      handler: function (val) {
+      handler: async function (val) {
         if (!val) return;
         //if (val.length ) return
         //if (this.tftncodes.length > 0) return
@@ -2718,12 +2735,11 @@ export default {
 
 
         // Lazily load input items
-        fetch(window.location.origin + "/api/v1/data/contract?code=" + val)
-            .then((res) => res.json())
+        await this.$auth.plugins.http.get(window.location.origin + "/api/v1/data/contract?code=" + val)
             .then(res => {
               this.loading.contract = false
               //this.contracts.push(res.data[0]);
-              this.contracts = this.contracts.concat(res.data.filter((item) => this.contracts.indexOf(item) < 0));
+              this.contracts = this.contracts.concat(res.data.data.filter((item) => this.contracts.indexOf(item) < 0));
             })
             .catch(err => {
               console.log(err)
@@ -2811,6 +2827,9 @@ export default {
     repubTypeComputed() {
       return this.app.common.repubType
     },
+    repubInOutComputed() {
+      return this.app.common.repubInOut
+    },
     dopheadersComputed() {
       if (this.app.common.repubType === 2) {
         return this.headers.filter(headerItem => headerItem.value !== 'shareQty')
@@ -2849,9 +2868,12 @@ export default {
 
     statusList() {
 
-      if (this.application.rejim === 200) {
-        this.maqomlar[0].text = i18n.t("Олиб чиқиладиган товарлар");
+      if (this.repubInOutComputed === 200) {
         this.maqomlar[1].text = i18n.t("Ишлатиладиган чет эл товари");
+        this.maqomlar[0].text = i18n.t("Олиб чиқиладиган товарлар");
+      } else {
+        this.maqomlar[1].text = i18n.t("Ўзбекистон товари");
+        this.maqomlar[0].text = i18n.t("Олиб кириладиган товарлар");
       }
 
       return this.maqomlar;

@@ -220,7 +220,7 @@ export default {
     async run() {
       const _this = this
       this.items = []
-      await this.$auth.plugins.http.get('/api/v1/stat', {
+      await axios.get('/api/v1/stat', {
         params: {
           name: 'hududimex_n',
           rejim: this.regime,

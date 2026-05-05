@@ -84,6 +84,9 @@ class StatProductsExport implements WithEvents, WithCustomStartCell, FromCollect
                 return $event->getWriter()->getSheetByIndex(0);
             },
             AfterSheet::class => function (AfterSheet $event) {
+                $dataCount = count($this->data ?? []);
+                $lastDataRow = 4 + $dataCount;
+
                 $objDrawing = new Drawing();
                 $objDrawing->setPath(public_path('img/gtk_image.png')); //your image path
                 $objDrawing->setCoordinates('A1');
@@ -91,23 +94,37 @@ class StatProductsExport implements WithEvents, WithCustomStartCell, FromCollect
                 $objDrawing->setOffsetY(10);
                 $objDrawing->setOffsetX(50);
                 $event->sheet->addDrawings($objDrawing);
-                $event->sheet->getStyle('A5:F' . (count($this->data) + 4))->applyFromArray([
-                    'borders' => [
-                        'allBorders' => [
-                            'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_DASHED,
-                            'color' => ['argb' => '000000'],
-                        ]
-                    ],
-                ]);
-                $event->sheet->getStyle('A5:F' . (count($this->data) + 4))->applyFromArray([
-                    'borders' => [
-                        'outline' => [
-                            'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_MEDIUM,
-                            'color' => ['argb' => '000000'],
-                        ]
-                    ],
-                ]);
-                $event->sheet->getStyle('B3:B' . (count($this->data) + 4))->applyFromArray([
+                if ($dataCount > 0) {
+                    $event->sheet->getStyle('A5:F' . $lastDataRow)->applyFromArray([
+                        'borders' => [
+                            'allBorders' => [
+                                'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_DASHED,
+                                'color' => ['argb' => '000000'],
+                            ]
+                        ],
+                    ]);
+                    $event->sheet->getStyle('A5:F' . $lastDataRow)->applyFromArray([
+                        'borders' => [
+                            'outline' => [
+                                'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_MEDIUM,
+                                'color' => ['argb' => '000000'],
+                            ]
+                        ],
+                    ]);
+                    $event->sheet->getStyle('C5:D' . $lastDataRow)->applyFromArray([
+                        'borders' => [
+                            'left' => [
+                                'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                                'color' => ['argb' => '000000'],
+                            ],
+                            'right' => [
+                                'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                                'color' => ['argb' => '000000'],
+                            ],
+                        ],
+                    ]);
+                }
+                $event->sheet->getStyle('B3:B' . max($lastDataRow, 4))->applyFromArray([
                     'borders' => [
                         'left' => [
                             'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
@@ -119,18 +136,6 @@ class StatProductsExport implements WithEvents, WithCustomStartCell, FromCollect
                         ],
                     ],
                 ])->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
-                $event->sheet->getStyle('C5:D' . (count($this->data) + 4))->applyFromArray([
-                    'borders' => [
-                        'left' => [
-                            'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
-                            'color' => ['argb' => '000000'],
-                        ],
-                        'right' => [
-                            'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
-                            'color' => ['argb' => '000000'],
-                        ],
-                    ],
-                ]);
                 $event->sheet->getStyle('A5:F5')->applyFromArray([
                     'font' => [
                         'color' => ['rgb' => 'ea4b5a'],
@@ -172,9 +177,11 @@ class StatProductsExport implements WithEvents, WithCustomStartCell, FromCollect
 
 
                 $event->sheet->setCellValue('F4',$objRichText);
-                $event->sheet->setCellValue('A1',MainHelper::translateText("Истеъмол товарлар импорти тўғрисида маълумот")."\r\n(".$this->title.")" )->getStyle('A1:F1')->applyFromArray(array(
-                    'wrapText'	 	=> true
-                ));
+                $event->sheet->setCellValue('A1',MainHelper::translateText("Истеъмол товарлар импорти тўғрисида маълумот")."\r\n(".$this->title.")" )->getStyle('A1:F1')->applyFromArray([
+                    'alignment' => [
+                        'wrapText' => true,
+                    ],
+                ]);
 
 /*                $event->sheet->getStyle('A6:' . ($this->highestRow . (7 + count($this->data))))->getAlignment()->setHorizontal('center')->setVertical('center')->setWrapText(true);
                 $event->sheet->mergeCells('A2:' . ($this->highestRow . 3));
@@ -217,46 +224,59 @@ class StatProductsExport implements WithEvents, WithCustomStartCell, FromCollect
     {
         $statservice= new StatService(true);
         $categories = $statservice->getIstemolTovarDataNew($this->year,$this->month,0,$this->toMonth)->where('category',$this->category)->values();
-
         $data = collect();
+        $this->myarray = [];
         $titleuz='title'.app()->getLocale();
-        $this->title = $categories[0]->$titleuz;
+        $this->title = '-';
+
+        if ($categories->isEmpty()) {
+            $this->data = $data;
+            $this->headers = ['titleuz', 'unituz', 'kol_2023', 'qiymat_2023', 'kol_2024', 'qiymat_2024'];
+
+            return collect($this->headers)->map(function ($header) {
+                return $this->heads[$header]['label'];
+            })->all();
+        }
+
+        $categoryRoot = $categories->first();
+        $this->title = data_get($categoryRoot, $titleuz, '-');
         $data->push([
             'titleuz'=>MainHelper::translateText('Жами'),
             'unituz'=>'-',
             'kol_2023'=>'-',
-            'qiymat_2023'=>number_format((float)$categories[0]->qiymat_2023,1, ',',' '),
+            'qiymat_2023'=>number_format((float)data_get($categoryRoot, 'qiymat_2023', 0),1, ',',' '),
             'kol_2024'=>'-',
-            'qiymat_2024'=>number_format((float)$categories[0]->qiymat_2024,1, ',',' '),
+            'qiymat_2024'=>number_format((float)data_get($categoryRoot, 'qiymat_2024', 0),1, ',',' '),
         ]);
 $cat = 5;
         // Kategoriyalarni birin-ketin qo'shing
 
-        foreach (collect((array)$categories[0]->subItems)->sortByDesc('qiymat_2024') as $category) {
+        foreach (collect((array)data_get($categoryRoot, 'subItems', []))->sortByDesc('qiymat_2024') as $category) {
             $cat++;
             $category = (array)$category;
+            $hasSubProducts = count((array)data_get($category, 'subProducts', [])) > 0;
             $data->push([
-                'titleuz' => $category['title'.app()->getLocale()],
-                'unituz' => $category['unit'.app()->getLocale()],
-                'kol_2023' =>$category['subProducts']?'':number_format((float)$category['kol_2023'],1, ',',' '),
-                'qiymat_2023' =>number_format((float)$category['qiymat_2023'],1, ',',' '),
-                'kol_2024' =>$category['subProducts']?'':number_format((float)$category['kol_2024'],1, ',',' '),
-                'qiymat_2024' =>number_format((float)$category['qiymat_2024'],1, ',',' '),
+                'titleuz' => data_get($category, 'title'.app()->getLocale(), ''),
+                'unituz' => data_get($category, 'unit'.app()->getLocale(), ''),
+                'kol_2023' =>$hasSubProducts?'':number_format((float)data_get($category, 'kol_2023', 0),1, ',',' '),
+                'qiymat_2023' =>number_format((float)data_get($category, 'qiymat_2023', 0),1, ',',' '),
+                'kol_2024' =>$hasSubProducts?'':number_format((float)data_get($category, 'kol_2024', 0),1, ',',' '),
+                'qiymat_2024' =>number_format((float)data_get($category, 'qiymat_2024', 0),1, ',',' '),
             ]);
-            if($category['subProducts']) {
+            if($hasSubProducts) {
                 $this->myarray[] = 'A' . $cat . ':F' . $cat;
-                foreach (collect($category['subProducts'])->sortByDesc('qiymat_2024') as $product) {
+                foreach (collect(data_get($category, 'subProducts', []))->sortByDesc('qiymat_2024') as $product) {
 
                     $product = (array)$product;
-                    if (isset($product['subitemtitleuz'])) {
+                    if (data_get($product, 'subitemtitleuz')) {
                         $cat++;
                         $data->push([
-                            'category' => "       " . $product['subitemtitle'.app()->getLocale()],
-                            'unit' => $product['unit'.app()->getLocale()],
-                            'kol_2023' => number_format((float)$product['kol_2023'], 1, ',', ' '),
-                            'qiymat_2023' => number_format((float)$product['qiymat_2023'], 1, ',', ' '),
-                            'kol_2024' => number_format((float)$product['kol_2024'], 1, ',', ' '),
-                            'qiymat_2024' => number_format((float)$product['qiymat_2024'], 1, ',', ' '),
+                            'titleuz' => "       " . data_get($product, 'subitemtitle'.app()->getLocale(), ''),
+                            'unituz' => data_get($product, 'unit'.app()->getLocale(), ''),
+                            'kol_2023' => number_format((float)data_get($product, 'kol_2023', 0), 1, ',', ' '),
+                            'qiymat_2023' => number_format((float)data_get($product, 'qiymat_2023', 0), 1, ',', ' '),
+                            'kol_2024' => number_format((float)data_get($product, 'kol_2024', 0), 1, ',', ' '),
+                            'qiymat_2024' => number_format((float)data_get($product, 'qiymat_2024', 0), 1, ',', ' '),
                         ]);
                     }
                 }
@@ -276,7 +296,7 @@ $cat = 5;
         $headers = array_keys((array)$this->data[0]);
         $this->headers = $headers;
         foreach ($headers as $hKey => $head) {
-            $headers[$hKey] = $this->heads[$head]["label"];
+            $headers[$hKey] = data_get($this->heads, $head . '.label', $head);
         }
         return $headers;
 
@@ -329,6 +349,9 @@ $cat = 5;
 
     public function columnWidths(): array
     {
+        if (empty($this->headers)) {
+            $this->headings();
+        }
 
 
         $column_names = [
@@ -343,7 +366,7 @@ $cat = 5;
         $highest=0;
         $columnWidths = [];
         foreach ($this->headers as $valHead) {
-            $columnWidths[$column_names[$index]] = $this->heads[$valHead]['width'];
+            $columnWidths[$column_names[$index]] = data_get($this->heads, $valHead . '.width', 15);
             $index++;
         }
         $index--;

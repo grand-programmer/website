@@ -1324,11 +1324,11 @@ export default {
 
 
                         }
-
+                      _this.loadingButton.second = false;
                     })
 
 
-                    this.loadingButton.second = false;
+
 
                     // },3000);
                     //isValid = true;

@@ -2378,7 +2378,7 @@ export default {
   },
   computed: {
     statusList(){
-
+console.log(this.application.rejim)
       if(this.application.rejim===200){
         this.maqomlar[0].text=i18n.t("Олиб чиқиладиган товарлар");
         this.maqomlar[1].text=i18n.t("Ишлатиладиган чет эл товари");

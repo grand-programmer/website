@@ -152,7 +152,7 @@ class ApiController extends Controller
                 if (!$user) return response()->json([
                     'success' => false,
                     'data' => 'Foydalanuvchi avtorizatsiyadan otishi talab etiladi'], 401);
-                $response = Http::contentType("application/json")->send('POST', 'http://192.168.214.152:7070/DECAPP/s05appealrestapi/saveapps', [
+                $response = Http::contentType("application/json")->send('POST', 'http://172.16.212.43:7070/DECAPP/s05appealrestapi/saveapps', [
                     'body' => json_encode($request->all())
                 ]);
                 break;
@@ -162,7 +162,7 @@ class ApiController extends Controller
                 if (!$user) return response()->json([
                     'success' => false,
                     'data' => 'Foydalanuvchi avtorizatsiyadan otishi talab etiladi'], 401);
-                $response = Http::contentType("application/json")->send('POST', 'http://192.168.214.152:7070/DECAPP/s05appealrestapi/savecommodity', [
+                $response = Http::contentType("application/json")->send('POST', 'http://172.16.212.43:7070/DECAPP/s05appealrestapi/savecommodity', [
                     'body' => json_encode($request->all())
                 ]);
                 break;
@@ -170,14 +170,14 @@ class ApiController extends Controller
                 $appData = $request->only(['app_id', 'person_id', 'page', 'size']);
                 if (isset($appData['app_id'])) {
                     $app_id = isset($appData['app_id']) ? $appData['app_id'] : null;
-                    $response = Http::contentType("application/json")->get('http://192.168.214.152:7070/DECAPP/s05appealrestapi/getoneapp', [
+                    $response = Http::contentType("application/json")->get('http://172.16.212.43:7070/DECAPP/s05appealrestapi/getoneapp', [
                         "appId" => $app_id,
                     ]);
                 } elseif (isset($appData['person_id'])) {
                     $person_id = isset($appData['person_id']) ? $appData['person_id'] : null;
                     $page = $appData['page'] ?? 0;
                     $size = $appData['size'] ?? 50;
-                    $response = Http::contentType("application/json")->get('http://192.168.214.152:7070/DECAPP/s05appealrestapi/getresult', [
+                    $response = Http::contentType("application/json")->get('http://172.16.212.43:7070/DECAPP/s05appealrestapi/getresult', [
                         "personPin" => $person_id,
                         "page" => $page,
                         "size" => $size,
@@ -199,7 +199,7 @@ class ApiController extends Controller
                 if (!$user) return response()->json([
                     'success' => false,
                     'data' => 'Foydalanuvchi avtorizatsiyadan otishi talab etiladi'], 401);
-                $response = Http::contentType("application/json")->send('POST', 'http://192.168.214.152:7070/DECAPP/s10vio/person', [
+                $response = Http::contentType("application/json")->send('POST', 'http://172.16.212.43:7070/DECAPP/s10vio/person', [
                     'body' => json_encode($request->all())
                 ]);
                 break;
@@ -209,7 +209,7 @@ class ApiController extends Controller
                 if (!$user) return response()->json([
                     'success' => false,
                     'data' => 'Foydalanuvchi avtorizatsiyadan otishi talab etiladi'], 401);
-                $response = Http::contentType("application/json")->send('POST', 'http://192.168.214.152:7070/DECAPP/s10vio', [
+                $response = Http::contentType("application/json")->send('POST', 'http://172.16.212.43:7070/DECAPP/s10vio', [
                     'body' => json_encode($request->all())
                 ]);
                 break;
@@ -218,7 +218,7 @@ class ApiController extends Controller
                 if (isset($appData['app_id'])) {
                     $app_id = isset($appData['app_id']) ? $appData['app_id'] : null;
                     $user = Auth::guard('api')->user();
-                    $response = Http::contentType("application/json")->get('http://192.168.214.152:7070/DECAPP/s10vio', [
+                    $response = Http::contentType("application/json")->get('http://172.16.212.43:7070/DECAPP/s10vio', [
                         "appId" => $app_id,
                         "pin" => $user->pin,
                     ]);
@@ -226,7 +226,7 @@ class ApiController extends Controller
                     $person_id = isset($appData['person_id']) ? $appData['person_id'] : null;
                     $page = $appData['page'] ?? 0;
                     $size = $appData['size'] ?? 50;
-                    $response = Http::contentType("application/json")->get('http://192.168.214.152:7070/DECAPP/s05appealrestapi/getresult', [
+                    $response = Http::contentType("application/json")->get('http://172.16.212.43:7070/DECAPP/s05appealrestapi/getresult', [
                         "personPin" => $person_id,
                         "page" => $page,
                         "size" => $size,
@@ -248,7 +248,7 @@ class ApiController extends Controller
                 if (!$user) return response()->json([
                     'success' => false,
                     'data' => 'Foydalanuvchi avtorizatsiyadan otishi talab etiladi'], 401);
-                $response = Http::contentType("application/json")->send('POST', 'http://192.168.214.152:7070/DECAPP/personsrestapi', [
+                $response = Http::contentType("application/json")->send('POST', 'http://172.16.212.43:7070/DECAPP/personsrestapi', [
                     'body' => json_encode($request->all())
                 ]);
                 break;
@@ -258,7 +258,7 @@ class ApiController extends Controller
                 if (!$user) return response()->json([
                     'success' => false,
                     'data' => 'Foydalanuvchi avtorizatsiyadan otishi talab etiladi'], 401);
-                $response = Http::contentType("application/json")->send('POST', 'http://192.168.214.152:7070/DECAPP/s01appsrestapi/saveapps', [
+                $response = Http::contentType("application/json")->send('POST', 'http://172.16.212.43:7070/DECAPP/s01appsrestapi/saveapps', [
                     'body' => json_encode($request->all())
                 ]);
                 break;
@@ -268,7 +268,7 @@ class ApiController extends Controller
                 if (!$user) return response()->json([
                     'success' => false,
                     'data' => 'Foydalanuvchi avtorizatsiyadan otishi talab etiladi'], 401);
-                $response = Http::contentType("application/json")->send('POST', 'http://192.168.214.152:7070/DECAPP/s01commodityrestapi/savecommodity', [
+                $response = Http::contentType("application/json")->send('POST', 'http://172.16.212.43:7070/DECAPP/s01commodityrestapi/savecommodity', [
                     'body' => json_encode($request->all())
                 ]);
                 break;
@@ -276,14 +276,14 @@ class ApiController extends Controller
                 $appData = $request->only(['app_id', 'person_id', 'page', 'size']);
                 if (isset($appData['app_id'])) {
                     $app_id = isset($appData['app_id']) ? $appData['app_id'] : null;
-                    $response = Http::contentType("application/json")->get('http://192.168.214.152:7070/DECAPP/s01apiresponse/getoneapp', [
+                    $response = Http::contentType("application/json")->get('http://172.16.212.43:7070/DECAPP/s01apiresponse/getoneapp', [
                         "appId" => $app_id,
                     ]);
                 } elseif (isset($appData['person_id'])) {
                     $person_id = isset($appData['person_id']) ? $appData['person_id'] : null;
                     $page = $appData['page'] ?? 0;
                     $size = $appData['size'] ?? 50;
-                    $response = Http::contentType("application/json")->get('http://192.168.214.152:7070/DECAPP/s01apiresponse/getresult', [
+                    $response = Http::contentType("application/json")->get('http://172.16.212.43:7070/DECAPP/s01apiresponse/getresult', [
                         "personPin" => $person_id,
                         "page" => $page,
                         "size" => $size,
@@ -306,7 +306,7 @@ class ApiController extends Controller
                 if (!$user) return response()->json([
                     'success' => false,
                     'data' => 'Foydalanuvchi avtorizatsiyadan otishi talab etiladi'], 401);
-                $response = Http::contentType("application/json")->send('POST', 'http://192.168.214.152:7070/DECAPP/personsrestapi', [
+                $response = Http::contentType("application/json")->send('POST', 'http://172.16.212.43:7070/DECAPP/personsrestapi', [
                     'body' => json_encode($request->all())
                 ]);
                 break;
@@ -316,7 +316,7 @@ class ApiController extends Controller
                 if (!$user) return response()->json([
                     'success' => false,
                     'data' => 'Foydalanuvchi avtorizatsiyadan otishi talab etiladi'], 401);
-                $response = Http::contentType("application/json")->send('POST', 'http://192.168.214.152:7070/DECAPP/s03appealrestapi/saveapps', [
+                $response = Http::contentType("application/json")->send('POST', 'http://172.16.212.43:7070/DECAPP/s03appealrestapi/saveapps', [
                     'body' => json_encode($request->all())
                 ]);
                 break;
@@ -327,7 +327,7 @@ class ApiController extends Controller
                     'success' => false,
                     'data' => 'Foydalanuvchi avtorizatsiyadan otishi talab etiladi'], 401);
 
-                $response = Http::contentType("application/json")->send('POST', 'http://192.168.214.152:7070/DECAPP/s03commodityrestapi/savecommoditys', [
+                $response = Http::contentType("application/json")->send('POST', 'http://172.16.212.43:7070/DECAPP/s03commodityrestapi/savecommoditys', [
                     'body' => json_encode($request->all())
                 ]);
 
@@ -336,14 +336,14 @@ class ApiController extends Controller
                 $appData = $request->only(['app_id', 'person_id', 'page', 'size']);
                 if (isset($appData['app_id'])) {
                     $app_id = isset($appData['app_id']) ? $appData['app_id'] : null;
-                    $response = Http::contentType("application/json")->get('http://192.168.214.152:7070/DECAPP/s03apiresponse/getoneapp', [
+                    $response = Http::contentType("application/json")->get('http://172.16.212.43:7070/DECAPP/s03apiresponse/getoneapp', [
                         "appId" => $app_id,
                     ]);
                 } elseif (isset($appData['person_id'])) {
                     $person_id = isset($appData['person_id']) ? $appData['person_id'] : null;
                     $page = $appData['page'] ?? 0;
                     $size = $appData['size'] ?? 50;
-                    $response = Http::contentType("application/json")->get('http://192.168.214.152:7070/DECAPP/s01apiresponse/getresult', [
+                    $response = Http::contentType("application/json")->get('http://172.16.212.43:7070/DECAPP/s01apiresponse/getresult', [
                         "personPin" => $person_id,
                         "page" => $page,
                         "size" => $size,
@@ -366,7 +366,7 @@ class ApiController extends Controller
                 if (!$user) return response()->json([
                     'success' => false,
                     'data' => 'Foydalanuvchi avtorizatsiyadan otishi talab etiladi'], 401);
-                $response = Http::contentType("application/json")->send('POST', 'http://192.168.214.152:7070/DECAPP/s04appealrestapi/saveapps', [
+                $response = Http::contentType("application/json")->send('POST', 'http://172.16.212.43:7070/DECAPP/s04appealrestapi/saveapps', [
                     'body' => json_encode($request->all())
                 ]);
                 break;
@@ -374,14 +374,14 @@ class ApiController extends Controller
                 $appData = $request->only(['app_id', 'person_id', 'page', 'size']);
                 if (isset($appData['app_id'])) {
                     $app_id = isset($appData['app_id']) ? $appData['app_id'] : null;
-                    $response = Http::contentType("application/json")->get('http://192.168.214.152:7070/DECAPP/s04apiresponse/getoneapp', [
+                    $response = Http::contentType("application/json")->get('http://172.16.212.43:7070/DECAPP/s04apiresponse/getoneapp', [
                         "appId" => $app_id,
                     ]);
                 } elseif (isset($appData['person_id'])) {
                     $person_id = isset($appData['person_id']) ? $appData['person_id'] : null;
                     $page = $appData['page'] ?? 0;
                     $size = $appData['size'] ?? 50;
-                    $response = Http::contentType("application/json")->get('http://192.168.214.152:7070/DECAPP/s04apiresponse/getresult', [
+                    $response = Http::contentType("application/json")->get('http://172.16.212.43:7070/DECAPP/s04apiresponse/getresult', [
                         "personPin" => $person_id,
                         "page" => $page,
                         "size" => $size,
@@ -405,7 +405,7 @@ class ApiController extends Controller
                 if (!$user) return response()->json([
                     'success' => false,
                     'data' => 'Foydalanuvchi avtorizatsiyadan otishi talab etiladi'], 401);
-                $response = Http::contentType("application/json")->send('POST', 'http://192.168.214.152:7070/DECAPP/s08appsrestapi/saveapps', [
+                $response = Http::contentType("application/json")->send('POST', 'http://172.16.212.43:7070/DECAPP/s08appsrestapi/saveapps', [
                     'body' => json_encode($request->all())
                 ]);
                 break;
@@ -413,14 +413,14 @@ class ApiController extends Controller
                 $appData = $request->only(['app_id', 'person_id', 'page', 'size']);
                 if (isset($appData['app_id'])) {
                     $app_id = isset($appData['app_id']) ? $appData['app_id'] : null;
-                    $response = Http::contentType("application/json")->get('http://192.168.214.152:7070/DECAPP/s08appsrestapi/getoneapp', [
+                    $response = Http::contentType("application/json")->get('http://172.16.212.43:7070/DECAPP/s08appsrestapi/getoneapp', [
                         "appId" => $app_id,
                     ]);
                 } elseif (isset($appData['person_id'])) {
                     $person_id = isset($appData['person_id']) ? $appData['person_id'] : null;
                     $page = $appData['page'] ?? 0;
                     $size = $appData['size'] ?? 50;
-                    $response = Http::contentType("application/json")->get('http://192.168.214.152:7070/DECAPP/s08appsrestapi/getresult', [
+                    $response = Http::contentType("application/json")->get('http://172.16.212.43:7070/DECAPP/s08appsrestapi/getresult', [
                         "personPin" => $person_id,
                         "page" => $page,
                         "size" => $size,
@@ -444,7 +444,7 @@ class ApiController extends Controller
                 if (!$user) return response()->json([
                     'success' => false,
                     'data' => 'Foydalanuvchi avtorizatsiyadan otishi talab etiladi'], 401);
-                $response = Http::contentType("application/json")->send('POST', 'http://192.168.214.152:7070/DECAPP/s09appsrestapi/saveapps', [
+                $response = Http::contentType("application/json")->send('POST', 'http://172.16.212.43:7070/DECAPP/s09appsrestapi/saveapps', [
                     'body' => json_encode($request->all())
                 ]);
                 break;
@@ -452,14 +452,14 @@ class ApiController extends Controller
                 $appData = $request->only(['app_id', 'person_id', 'page', 'size']);
                 if (isset($appData['app_id'])) {
                     $app_id = isset($appData['app_id']) ? $appData['app_id'] : null;
-                    $response = Http::contentType("application/json")->get('http://192.168.214.152:7070/DECAPP/s09appsrestapi/getoneapp', [
+                    $response = Http::contentType("application/json")->get('http://172.16.212.43:7070/DECAPP/s09appsrestapi/getoneapp', [
                         "appId" => $app_id,
                     ]);
                 } elseif (isset($appData['person_id'])) {
                     $person_id = isset($appData['person_id']) ? $appData['person_id'] : null;
                     $page = $appData['page'] ?? 0;
                     $size = $appData['size'] ?? 50;
-                    $response = Http::contentType("application/json")->get('http://192.168.214.152:7070/DECAPP/s09appsrestapi/getresult', [
+                    $response = Http::contentType("application/json")->get('http://172.16.212.43:7070/DECAPP/s09appsrestapi/getresult', [
                         "personPin" => $person_id,
                         "page" => $page,
                         "size" => $size,
@@ -778,7 +778,7 @@ class ApiController extends Controller
             case "posts":
                 $appData = $request->only('code');
                 $code = isset($appData['code']) ? $appData['code'] : "";
-                $response = Http::contentType("application/json")->get('http://192.168.214.152:7070/DECAPP/s05appealrestapi/postsWith', [
+                $response = Http::contentType("application/json")->get('http://172.16.212.43:7070/DECAPP/s05appealrestapi/postsWith', [
                     "code" => $code,
                 ]);
                 if ($response->status() == 200) {
@@ -795,7 +795,7 @@ class ApiController extends Controller
 
 
                 /*
-                                $response = Http::contentType("application/json")->get('http://192.168.214.152:7070/DECAPP/s09appsrestapi/postsWith2', [
+                                $response = Http::contentType("application/json")->get('http://172.16.212.43:7070/DECAPP/s09appsrestapi/postsWith2', [
                                     "code" => $code,
                                 ]);
                                 if ($response->status() == 200) {
@@ -858,7 +858,8 @@ class ApiController extends Controller
                 ]);*/
 
 
-                $response = Http::post('http://172.16.112.17:8888/api/passport', [
+                $response = Http::withBasicAuth('ebr-system','Nd7706+-')
+                    ->post('http://172.16.112.17:8888/api/passport', [
                     "document" => $pnum,
                     "birth_date" => $pdate,
                     "sender_pinfl" => '31103927250012',
@@ -890,59 +891,65 @@ class ApiController extends Controller
                 }
                 break;
             case "appeal":
-                $data = $request->all();
-                $validator = Validator::make($data, [
-                    'phoneNumber' => 'required',
-                ]);
-                if ($request->method() !== 'POST') {
-                    // dd($request->method());
-                    return response()->json(['error' => 'This request method not supported'], 400);
-                };
-
-                if ($validator->fails()) {
-                    return response()->json(['error' => $validator->errors()], 401);
-                }
-                //$data['positionNm']='asdasd ';
-                if (!isset($data['positionNm'])) $data['positionNm'] = " ----- ";
-                $data['phoneNumber'] = str_replace('-', "", $data['phoneNumber']);
-                $data['phoneNumber'] = str_replace(' ', "", $data['phoneNumber']);
-                $data['phoneNumber'] = "+998" . $data['phoneNumber'];
-                $data['appealType'] = $data['appealType'] ? 1 : 0;
-                $data['position'] = $data['appealType'] ? '02' : '01';
-                unset($data['multipartFile']);
-                $response = Http::asMultipart();
-                // check file is present and has no problem uploading it
-                if ($request->hasFile('multipartFile') && $request->file('multipartFile')->isValid()) {
-                    // get Illuminate\Http\UploadedFile instance
-                    $image = $request->file('multipartFile');
-                    $response->attach('multipartFile', file_get_contents($image), $image->getClientOriginalName());
-                }
-                $response = $response
-                    ->post('http://192.168.214.152:7070/DECAPP/s06appealrestapi/upload', $data);
-                if ($response->status() === 200) {
-                    $appeal = $response->json('data');
-
-                    $response1 = Http::asMultipart()->acceptJson();
-                    $response1 = $response1->get('http://192.168.214.152:7070/DECAPP/s06appealrestapianswer/getResult', [
-                        'password' => isset($appeal['password']) ? $appeal['password'] : null,
-                        'appNum' => isset($appeal['AppNum']) ? $appeal['AppNum'] : null
+                try {
+                    $data = $request->all();
+                    $validator = Validator::make($data, [
+                        'phoneNumber' => 'required',
                     ]);
+                    if ($request->method() !== 'POST' && $request->method() !== 'OPTIONS') {
+                        return response()->json(['error' => 'This request method not supported'], 400);
+                    }
 
+                    if ($validator->fails()) {
+                        return response()->json(['error' => $validator->errors()], 422);
+                    }
+                    //$data['positionNm']='asdasd ';
+                    if (!isset($data['positionNm'])) $data['positionNm'] = " ----- ";
+                    $data['phoneNumber'] = str_replace('-', "", $data['phoneNumber']);
+                    $data['phoneNumber'] = str_replace(' ', "", $data['phoneNumber']);
+                    $data['phoneNumber'] = "+998" . $data['phoneNumber'];
+                    $data['appealType'] = $data['appealType'] ? 1 : 0;
+                    $data['position'] = $data['appealType'] ? '02' : '01';
+                    unset($data['multipartFile']);
+                    $response = Http::asMultipart();
+                    // check file is present and has no problem uploading it
+                    if ($request->hasFile('multipartFile') && $request->file('multipartFile')->isValid()) {
+                        // get Illuminate\Http\UploadedFile instance
+                        $image = $request->file('multipartFile');
+                        $response->attach('multipartFile', file_get_contents($image), $image->getClientOriginalName());
+                    }
+                    $response = $response->timeout(20)
+                        ->post('http://172.16.212.43:7070/DECAPP/s06appealrestapi/upload', $data);
 
-                    if ($response1->status() === 200) {
-                        return response()->json([
-                            'number' => isset($appeal['AppNum']) ? $appeal['AppNum'] : null,
-                            'code' => isset($appeal['password']) ? $appeal['password'] : null,
-                            'appeal' => $response1->json()
-                            //'created_at' => date('d-m-Y H:i:s', strtotime($appeal->created_at)),
-                        ], 200);
-                    } else
-                        return response()->json([
-                            'number' => isset($appeal['AppNum']) ? $appeal['AppNum'] : null,
-                            'code' => isset($appeal['password']) ? $appeal['password'] : null,
-                            //'created_at' => date('d-m-Y H:i:s', strtotime($appeal->created_at)),
-                        ], 200);
-                } else return response()->json(['error' => $response->json(), 'status' => $response->status()], 400);
+                    if ($response->status() === 200) {
+                        $appeal = $response->json('data');
+
+                        $response1 = Http::asMultipart()->acceptJson();
+                        $response1 = $response1->get('http://172.16.212.43:7070/DECAPP/s06appealrestapianswer/getResult', [
+                            'password' => isset($appeal['password']) ? $appeal['password'] : null,
+                            'appNum' => isset($appeal['AppNum']) ? $appeal['AppNum'] : null
+                        ]);
+
+                        if ($response1->status() === 200) {
+                            return response()->json([
+                                'number' => isset($appeal['AppNum']) ? $appeal['AppNum'] : null,
+                                'code' => isset($appeal['password']) ? $appeal['password'] : null,
+                                'appeal' => $response1->json()
+                                //'created_at' => date('d-m-Y H:i:s', strtotime($appeal->created_at)),
+                            ], 200);
+                        } else
+                            return response()->json([
+                                'number' => isset($appeal['AppNum']) ? $appeal['AppNum'] : null,
+                                'code' => isset($appeal['password']) ? $appeal['password'] : null,
+                                //'created_at' => date('d-m-Y H:i:s', strtotime($appeal->created_at)),
+                            ]);
+                    } else return response()->json(['error' => $response->json(), 'status' => $response->status()], 400);
+                } catch (\Throwable $e) {
+                    return response()->json([
+                        'error' => 'External API error',
+                        'message' => $e->getMessage()
+                    ], 500);
+                }
             case "appeal-check":
                 $data = $request->only('appNum', 'password');
                 if (Auth::guard('api')->user()) {
@@ -950,7 +957,7 @@ class ApiController extends Controller
                     //unset($data['password']);
                 }
                 $response = Http::asMultipart()->acceptJson()
-                    ->get('http://192.168.214.152:7070/DECAPP/s06appealrestapianswer/getResult', $data);
+                    ->get('http://172.16.212.43:7070/DECAPP/s06appealrestapianswer/getResult', $data);
                 if ($response->status() == 200) {
                     return response()->json([
                         'data' => $response->json(),
@@ -993,10 +1000,10 @@ class ApiController extends Controller
                 if (isset($data['type']) and $data['type'] === 'dep') {
 
 
-                    $query = "Insert into Logging  (SESID,INN,NAME,IP,SER_NUM) values ('" . Str::uuid() . "','" . ((Auth::guard('api')->user()->type === 2) ? Auth::guard('api')->user()->legal_tin : Auth::guard('api')->user()->pin) . "','" . Auth::guard('api')->user()->sur_name . " " . Auth::guard('api')->user()->first_name . " " . Auth::guard('api')->user()->mid_name . "','" . $request->ip() . "', '" . substr(Str::uuid(), 0, 8) . "')";
+                    $query = "Insert into Logging  (SESID,INN,NAME,IP,SER_NUM) values ('" . Str::uuid() . "','" . (Auth::guard('api')->user()->type == 2 ? Auth::guard('api')->user()->legal_tin : Auth::guard('api')->user()->pin) . "','" . Auth::guard('api')->user()->sur_name . " " . Auth::guard('api')->user()->first_name . " " . Auth::guard('api')->user()->mid_name . "','" . $request->getClientIp() . "', '" . substr(Str::uuid(), 0, 8) . "')";
                     DB::connection("databaseconfig212_227")->insert($query);
                     //else return response()->json(['data' => $sessions[0]]);
-                    $sessions = DB::connection("databaseconfig212_227")->select("Select * from Logging where INN='" . ((Auth::guard('api')->user()->type === 2) ? Auth::guard('api')->user()->legal_tin : Auth::guard('api')->user()->pin) . "' and exit is null and Last > '" . Carbon::now()->subDays(1) . "' order by last desc");
+                    $sessions = DB::connection("databaseconfig212_227")->select("Select * from Logging where INN='" . (Auth::guard('api')->user()->type == 2 ? Auth::guard('api')->user()->legal_tin : Auth::guard('api')->user()->pin) . "' and exit is null and Last > '" . Carbon::now()->subDays(1) . "' order by last desc");
 
                     return response()->json(['data' => $sessions[0]]);
 
@@ -1062,14 +1069,14 @@ class ApiController extends Controller
             $header = $request->headers->get('content-type');
 
             if ($header === 'multipart/form-data')
-                $httpClient = Http::timeout(600)->asMultipart();
-            else $httpClient = Http::timeout(600)->withHeaders($request->headers->all());
+                $httpClient = Http::asMultipart();
+            else $httpClient = Http::withHeaders($request->headers->all());
 
             if ($request->hasFile('file')) {
                 $file = $request->file('file');
 
                 // So'rov yuborish
-                $response = Http::timeout(600)->asMultipart() // multipart/form-data formatini o'rnatish
+                $response = Http::asMultipart() // multipart/form-data formatini o'rnatish
                 ->attach(
                     'file',                          // Form-data kaliti (Postmandagi 'file' bilan bir xil)
                     file_get_contents($file),        // Fayl mazmuni
@@ -1080,7 +1087,6 @@ class ApiController extends Controller
                 // Javobni qaytarish
                 return response()->json($response->json(), $response->status());
             }
-
 
 
             $request = $httpClient->$method($httpUrl . '/' . $route, $request->all());

@@ -30,6 +30,8 @@
                             {{ $t('Озиқ-овқат') }}</v-btn>
                         <v-btn :color="type===2?'primary':'#F1F5F9'" :style="type!==2?'color: #39ae69;':'' " small class="ma-0 py-4" @click="type=2">
                             {{ $t('Ноозиқ-овқат') }}</v-btn>
+                        <v-btn :color="type===3?'primary':'#F1F5F9'" :style="type!==3?'color: #39ae69;':'' " small class="ma-0 py-4" @click="type=3">
+                            {{ $t('Мухим товарлар') }}</v-btn>
                     </div>
                     <div class="date_rangers">
 
@@ -77,7 +79,8 @@
                   <stat-states  :regime="paramRegime" :month="paramMonth" :year="paramYear" :to-month="paramToMonth" />
                 </template>
               <template v-if="stat_type===4">
-                  <oziq-ovqat  :regime="paramType" :month="paramMonth" :to-month="paramToMonth" :year="paramYear" />
+                  <muhim-oziq-ovqat v-if="paramType===3" :key="`${paramYear}-${paramMonth}-${paramToMonth}-${paramRegime}`"  :regime="paramRegime" :month="paramMonth" :to-month="paramToMonth" :year="paramYear" />
+                  <oziq-ovqat v-else :regime="paramType" :month="paramMonth" :to-month="paramToMonth" :year="paramYear" />
                 </template>
             </div>
         </template>
@@ -89,6 +92,7 @@ import StatProducts from "../../views/frontend/stat/products";
 import StatCountries from "../../views/frontend/stat/countries";
 import StatStates from "../../views/frontend/stat/states";
 import OziqOvqat from "../../views/frontend/stat/oziqOvqat";
+import MuhimOziqOvqat from "../../views/frontend/stat/muhimOziqOvqat.vue";
 
 
 export default {
@@ -218,6 +222,7 @@ export default {
 
     },
     components: {
+      MuhimOziqOvqat,
       OziqOvqat,
         StatStates,
         StatCountries,

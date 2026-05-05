@@ -1,32 +1,33 @@
 <template>
   <div class="slide_oziqovqat" v-if="collectionItems.length">
     <VueSlickCarousel
+        :key="carouselKey"
         v-bind="settings"
     >
       <div class="slide_item" v-for="item in collectionItems">
         <div class="slide_item_wrapper">
           <div class="slide_item_sub_wrapper">
             <div class="product_header">
-              <div class="text-center"><span>{{ item['name' + $i18n.locale] }}</span></div>
-              <v-icon color="primary" size="100" class="my-2">{{ icons[item.kod] }}</v-icon>
+              <div class="text-center"><span>{{ item['title' + $i18n.locale] }}</span></div>
+              <v-icon color="primary" size="100" class="my-2">{{ icons[item.category] }}</v-icon>
             </div>
             <div class="slide_item_total_difference">
 
-              <div v-html="moneyFormat(parseFloat(item.column1))" class="currentyearprice">
+              <div v-html="moneyFormat(parseFloat(item.qiymat_2024))" class="currentyearprice">
 
               </div>
               <span class="difference-percent">
-                              <v-icon color="primary" v-if="(parseFloat(item.column1) - parseFloat(item.column2))>0">mdi-trending-up</v-icon>
+                              <v-icon color="primary" v-if="(parseFloat(item.qiymat_2024) - parseFloat(item.qiymat_2023))>0">mdi-trending-up</v-icon>
                               <v-icon color="red" v-else>mdi-trending-down</v-icon>
                             <p>{{
-                                (((parseFloat(item.column1) - parseFloat(item.column2)) * 100) / parseFloat(item.column2)).toFixed(1)
+                                (((parseFloat(item.qiymat_2024) - parseFloat(item.qiymat_2023)) * 100) / parseFloat(item.qiymat_2023)).toFixed(1)
                               }} % </p>
                             <p>{{ $t('ўтган йилга нисбатан') }}</p>
                         </span>
 
             </div>
-            <div class="downloadExcel" @click="openExcel(item.kod, year, month, toMonth)">
-              <v-btn icon text :loading="findElementInlist(loading,item.kod,'category').bool">
+            <div class="downloadExcel" @click="openExcel(item.category, year, month, toMonth)">
+              <v-btn icon text :loading="findElementInlist(loading,item.category,'category').bool">
                 <v-icon size="50">mdi-download</v-icon>
               </v-btn>
             </div>
@@ -58,7 +59,7 @@ import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css'
 import CountryFlag from 'vue-country-flag'
 
 export default {
-  name: "oziqOvqat",
+  name: "muhimOziqOvqat",
   components: {VueSlickCarousel},
   props: {
     regime: {
@@ -90,14 +91,15 @@ export default {
         '10': 'mdi-water',
         '11': 'mdi-soy-sauce',
         '12': 'mdi-tree',
-        '13': 'mdi-spoon-sugar',
-        '14': 'mdi-scanner',
-        '15': 'mdi-cup',
-        '16': 'mdi-beer-outline',
-        '17': 'mdi-glass-wine',
-        '18': 'mdi-tree-outline',
-        '19': 'mdi-smoking',
-        '20': 'mdi-oil',
+        '40': 'mdi-spoon-sugar',
+        '39': 'mdi-flower',
+        '38': 'mdi-grain',
+        '37': 'mdi-rice',
+        '36': 'mdi-barley',
+        '35': 'mdi-peanut',
+        '34': 'mdi-food-drumstick',
+        '33': 'mdi-sheep',
+        '32': 'mdi-food-steak',
         '21': 'mdi-basket-fill',
         '22': 'mdi-chemical-weapon',
         '23': 'mdi-layers-outline',
@@ -118,10 +120,11 @@ export default {
         "infinite": false,
         "speed": 500,
         "rows": 2,
-        "slidesPerRow": 6,
-        "slidesToShow": 12,
+        "slidesPerRow": 5,
+        "slidesToShow": 9,
         "slidesToScroll": 2,
         "initialSlide": 0,
+        "centerMode":true,
         "responsive": [
           {
             "breakpoint": 1024,
@@ -199,7 +202,7 @@ export default {
       window.URL.revokeObjectURL(url)
     },
     async downloadWithAxios(url, title) {
-      await axios({
+      await this.$auth.plugins.http({
         method: 'get',
         url,
         responseType: 'blob',
@@ -215,25 +218,24 @@ export default {
     async openExcel(category) {
       this.findElementInlist(this.loading, category, 'category').bool = true
 
-      await this.downloadWithAxios('/api/v1/statdata/' + category + '/' + this.year + '/' + this.month + '/' + this.computedToMonth, 'products.xlsx')
+      await this.downloadWithAxios('/api/v1/statdatamuhim/' + category + '/' + this.year + '/' + this.month + '/' + this.computedToMonth, 'products.xlsx')
       this.findElementInlist(this.loading, category, 'category').bool = false
-      // window.open('/api/v1/statdata/' + category + '/' + this.year + '/' + this.month + '/' + this.computedToMonth)
+
     },
     async run() {
-      this.items = []
-      await axios.get('/api/v1/stat', {
+      await this.$auth.plugins.http.get('/api/v1/stat', {
         params: {
-          name: 'istemolimex_n',
+          name: 'istemoltovarhudud',
           rejim: this.regime,
           month: this.month ? this.month : 0,
           toMonth: this.toMonth ? this.toMonth : 0,
           year: this.year ? this.year : 0
         }
       }).then(res => {
-
         this.items = JSON.parse(JSON.stringify(res.data.data))
+        this.loading = []
         this.items.forEach(item => {
-          this.loading.push({category: item.kod, bool: false})
+          this.loading.push({ category: item.category, bool: false })
         })
       })
     },
@@ -263,6 +265,9 @@ export default {
     computedToMonth() {
       if (!this.toMonth) return 0;
       return this.toMonth
+    },
+    carouselKey() {
+      return `${this.year}-${this.month}-${this.toMonth}-${this.regime}`
     }
   }
 }

@@ -236,10 +236,13 @@ const servicesRoutes = [
         },
         children: [
             {
-                path: "", component: () => import('./views/frontend/services/recycle/create'),
+                path: "", component: () => import('./views/frontend/services/recycle1/create'),
             },
             {
                 path: "new", component: () => import('./views/frontend/services/recycle1/create'),
+            },
+            {
+                path: "old", component: () => import('./views/frontend/services/recycle/create'),
             },
             {
                 path: ":id", component: () => import('./views/frontend/services/recycle/info'),

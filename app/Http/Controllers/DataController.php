@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\StatServiceApplication;
 use http\Env\Response;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Validator;
@@ -169,7 +170,7 @@ class DataController extends Controller
         if (isset($data['inn'])) {
             //dd("select KNTID from contracts where KNTTYPE in (11,12,16,17,'06') and ACTIVE_PR=0 and KNTRINN =" . $data['inn']);
             $returnData = DB::connection('databaseconfig2_10_EISVO')->select(
-                "select KNTID from contracts where KNTTYPE in (11,12,16,17,'06','02','01') and ACTIVE_PR=0 and KNTRINN = ?", [$data['inn']]);
+                "select KNTID from contracts where KNTTYPE in (11,12,16,17,'06','02','01') and ACTIVE_PR=0 and KNTRINN in ('" . (Auth::guard('api')->user()->type == 2 ? Auth::guard('api')->user()->legal_tin : Auth::guard('api')->user()->pin) ."', '?')", [$data['inn']]);
             if ($returnData) return response()->json(['data' => $returnData]);
         }
         if (isset($data['code'])) {
@@ -187,7 +188,7 @@ class DataController extends Controller
         //$currencies = DB::table('countries');
         if (!isset($data['code']))
             return response()->json([]);
-        $response = Http::contentType("application/json")->timeout(10)->get('http://192.168.214.152:7070/DECAPP/s04apiresponse/getMfo', [
+        $response = Http::contentType("application/json")->timeout(10)->get('http://172.16.212.43:7070/DECAPP/s04apiresponse/getMfo', [
             "mfoCode" => $data['code'],
         ]);
 

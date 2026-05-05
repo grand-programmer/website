@@ -187,7 +187,7 @@ dd($e);
         try {
             $response = Http::asMultipart();
             $response = $response->timeout(10)
-                ->get('http://192.168.214.152:7070/DECAPP/s06appealrestapianswer/getResult', [
+                ->get('http://172.16.212.43:7070/DECAPP/s06appealrestapianswer/getResult', [
                     'personPin' => Auth::guard('api')->user()->pin,
                     "personTin" => ((auth()->user()->type === 2) ? auth()->user()->legal_tin : auth()->user()->tin)
                     ])->throw(function ($response, $e) {
@@ -265,7 +265,7 @@ dd($e);
         };
         /// Intellektual
         try {
-            $response = Http::contentType("application/json")->timeout(10)->get('http://192.168.214.152:7070/DECAPP/s01apiresponse/getresult', [
+            $response = Http::contentType("application/json")->timeout(10)->get('http://172.16.212.43:7070/DECAPP/s01apiresponse/getresult', [
                 "personPin" => Auth::guard('api')->user()->pin,
                 "personTin" => ((auth()->user()->type === 2) ? auth()->user()->legal_tin : auth()->user()->tin),
             ])->throw(function ($response, $e) {
@@ -301,7 +301,7 @@ dd($e);
         };
         /// Recycle
         try {
-            $response = Http::contentType("application/json")->timeout(10)->get('http://192.168.214.152:7070/DECAPP/s03apiresponse/getresult', [
+            $response = Http::contentType("application/json")->timeout(10)->get('http://172.16.212.43:7070/DECAPP/s03apiresponse/getresult', [
                 "personPin" => Auth::guard('api')->user()->pin,
                 "personTin" => ((auth()->user()->type === 2) ? auth()->user()->legal_tin : auth()->user()->tin),
             ])->throw(function ($response, $e) {
@@ -338,7 +338,7 @@ dd($e);
 
         /// Refund
         try {
-            $response = Http::contentType("application/json")->timeout(10)->get('http://192.168.214.152:7070/DECAPP/s04apiresponse/getresult', [
+            $response = Http::contentType("application/json")->timeout(10)->get('http://172.16.212.43:7070/DECAPP/s04apiresponse/getresult', [
                 "personPin" => Auth::guard('api')->user()->pin,
                 "personTin" => ((auth()->user()->type === 2) ? auth()->user()->legal_tin : auth()->user()->tin),
             ])->throw(function ($response, $e) {
@@ -375,7 +375,7 @@ dd($e);
 
         /// Ppay
         try {
-            $response = Http::contentType("application/json")->timeout(10)->get('http://192.168.214.152:7070/DECAPP/s08appsrestapi/getresult', [
+            $response = Http::contentType("application/json")->timeout(10)->get('http://172.16.212.43:7070/DECAPP/s08appsrestapi/getresult', [
                 "personPin" => Auth::guard('api')->user()->pin,
                 "personTin" => ((auth()->user()->type === 2) ? auth()->user()->legal_tin : auth()->user()->tin),
             ])->throw(function ($response, $e) {
@@ -412,7 +412,7 @@ dd($e);
 
         /// stamp
         try {
-            $response = Http::contentType("application/json")->timeout(10)->get('http://192.168.214.152:7070/DECAPP/s09appsrestapi/getresult', [
+            $response = Http::contentType("application/json")->timeout(10)->get('http://172.16.212.43:7070/DECAPP/s09appsrestapi/getresult', [
                 "personPin" => Auth::guard('api')->user()->pin,
                 "personTin" => ((auth()->user()->type === 2) ? auth()->user()->legal_tin : auth()->user()->tin),
             ])->throw(function ($response, $e) {
@@ -452,7 +452,7 @@ dd($e);
         try {
             $response = Http::asMultipart();
             $response = $response->timeout(10)
-                ->get('http://192.168.214.152:7070/DECAPP/s05appealrestapi/getresult', [
+                ->get('http://172.16.212.43:7070/DECAPP/s05appealrestapi/getresult', [
                     'personPin' => Auth::guard('api')->user()->pin,
                     "personTin" => ((auth()->user()->type === 2) ? auth()->user()->legal_tin : auth()->user()->tin),
                 ])->throw(function ($response, $e) {
@@ -489,7 +489,7 @@ dd($e);
         try {
             $response = Http::asMultipart();
             $response = $response->timeout(10)
-                ->get('http://192.168.214.152:7070/DECAPP/s10vio', ['pin' => Auth::guard('api')->user()->pin])->throw(function ($response, $e) {
+                ->get('http://172.16.212.43:7070/DECAPP/s10vio', ['pin' => Auth::guard('api')->user()->pin])->throw(function ($response, $e) {
                 });
             if ($response->status() == 200) {
                 $appealdata = $response->json();
