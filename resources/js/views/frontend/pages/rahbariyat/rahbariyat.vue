@@ -10,7 +10,7 @@
                 </v-breadcrumbs>
             </v-container>
         </div>
-        <div class="container">
+        <div class="container-fluid" style="padding: 0 10rem">
 
             <div class="row">
                 <!---->
@@ -18,9 +18,7 @@
                     <div class="single_blog_content">
                         <div class="widget_tittle"><h3>{{ $t("Иқтисодиёт ва молия вазирлиги ҳузуридаги Божхона қўмитаси Раҳбарияти") }}</h3></div>
                         <div>
-
-
-                            <div class="container">
+                            <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-12 rais">
                                         <div class="wrapper">
@@ -70,7 +68,7 @@
                                             </v-expand-transition>
                                         </v-row>
                                     </div>
-                                    <div class="col-12 orinbosarlar" style="/* margin: 20px auto;">
+                                    <div class="col-12 orinbosarlar " style="/* margin: 20px auto;">
                                         <div class="row">
                                             <h3 style="text-align: center;">&nbsp;</h3>
                                         </div>
@@ -207,7 +205,7 @@ description=orinbosar.biografiyasi && orinbosar.biografiyasi.length>10? '<h3>' +
                                         </div>
                                     </div>
                                   <!-- maslahatchilar-->
-                                    <div class="col-12 orinbosarlar">
+                                    <div class="col-12 orinbosarlar maslahatchi">
                                         <div class="row">
                                             <h3 style="text-align: center;">&nbsp;</h3>
                                         </div>
@@ -406,6 +404,10 @@ export default {
 .rahbar_description p{
     line-height: 36px;
     text-align: justify;
+}
+.orinbosarlar:not(.maslahatchi) .orinbosar{
+    width: 20% !important;
+    flex: 0 0 20%;
 }
 </style>
 

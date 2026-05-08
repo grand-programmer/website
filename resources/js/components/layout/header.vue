@@ -38,18 +38,18 @@
                                     <li class="dropdown nav-item" :class="($route.params.id==link.id) ? 'active' : '' "
                                         v-for="(link,index) in links" :key="index">
                                         <router-link class="nav-link"
-                                                     :to="link.url"
+                                                     :to="normalizeRoute(link.url)"
                                                      v-if="link.children && link.children[0]">
                                             <span class="menu_slider"></span>{{ link.title }}
                                         </router-link>
-                                        <router-link class="nav-link" :to="link.url" v-else><span
+                                        <router-link class="nav-link" :to="normalizeRoute(link.url)" v-else><span
                                             class="menu_slider"></span>{{ link.title }}
                                         </router-link>
                                         <ul class="dropdown-menu "
                                             v-if="(link.children && link.children[0])">
                                             <li v-for="(sublink,index) in link.children" :key="index"
                                                 v-if="sublink && index<10">
-                                                <router-link v-if="!sublink.url.includes('http')" :to="sublink.url" class="dropdown-item">
+                                                <router-link v-if="!isExternal(sublink.url)" :to="normalizeRoute(sublink.url)" class="dropdown-item">
                                                     {{ sublink.title }} <span v-if="(sublink.children && sublink.children[0])"><v-icon>mdi-chevron-down</v-icon></span>
                                                 </router-link>
                                                 <a v-else  class="dropdown-item" target="_blank" :href="sublink.url" >{{ sublink.title }} <span v-if="(sublink.children && sublink.children[0])"><v-icon>mdi-chevron-down</v-icon></span></a>
@@ -57,7 +57,7 @@
                                                     v-if="(sublink.children && sublink.children[0])">
                                                     <li v-for="(sublinkchildren,index) in sublink.children" :key="index"
                                                         v-if="sublinkchildren">
-                                                        <router-link :to="sublinkchildren.url" class="dropdown-item">
+                                                        <router-link :to="normalizeRoute(sublinkchildren.url)" class="dropdown-item">
                                                             {{ sublinkchildren.title }}
                                                         </router-link>
                                                         <ul class="submenu dropdown-menu"
@@ -65,7 +65,7 @@
                                                             <li v-for="(slch,index) in sublinkchildren.children"
                                                                 :key="index + slch.id "
                                                                 v-if="slch">
-                                                                <router-link :to="slch.url" class="dropdown-item">
+                                                                <router-link :to="normalizeRoute(slch.url)" class="dropdown-item">
                                                                     {{ slch.title }}
                                                                 </router-link>
                                                             </li>
@@ -183,7 +183,7 @@
                                     >
                                         <template v-slot:activator>
                                             <v-list-item-title
-                                                :to="link.url"
+                                                :to="normalizeRoute(link.url)"
                                                 class="link_title"
                                             >
                                                 {{ link.title }}
@@ -197,8 +197,8 @@
                                             <v-list-group v-if="sublink.children && sublink.children[0]">
                                                 <template v-slot:activator>
                                                     <v-list-item-title
-                                                        v-if="!sublink.url.includes('http')"
-                                                        :to="sublink.url"
+                                                        v-if="!isExternal(sublink.url)"
+                                                        :to="normalizeRoute(sublink.url)"
                                                         class="sublink_title"
                                                     >
                                                         {{ sublink.title }}
@@ -211,8 +211,8 @@
                                                 >
                                                     <v-list-item
                                                         link
-                                                        :to="sublinkchildren.url"
-                                                        :href="sublinkchildren.url"
+                                                        :to="normalizeRoute(sublinkchildren.url)"
+                                                        :href="normalizeRoute(sublinkchildren.url)"
                                                     >
                                                         <v-list-item-title class="sublinkchildren_title">{{ sublinkchildren.title }}</v-list-item-title>
                                                     </v-list-item>
@@ -221,8 +221,8 @@
                                             <v-list-item
                                                 v-else
                                                 link
-                                                :to="sublink.url"
-                                                :href="sublink.url"
+                                                :to="normalizeRoute(sublink.url)"
+                                                :href="normalizeRoute(sublink.url)"
                                             >
                                                 <v-list-item-title
                                                     class="sublink_title"
@@ -235,8 +235,8 @@
                                     <v-list-item
                                         v-else
                                         link
-                                        :to="link.url"
-                                        :href="link.url"
+                                        :to="normalizeRoute(link.url)"
+                                        :href="normalizeRoute(link.url)"
                                     >
                                         <v-list-item-title
                                             class="link_title"
@@ -316,6 +316,15 @@ export default {
         },
     },
     methods: {
+        isExternal(url) {
+            return /^https?:\/\//i.test(String(url || ''));
+        },
+        normalizeRoute(url) {
+            const value = String(url || '');
+            if (this.isExternal(value)) return value;
+
+            return `/${value.replace(/^\/+/, '')}`;
+        },
         // sideOpenClose() {
         //   document.querySelector('.side').classList.toggle('show');
         // },

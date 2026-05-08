@@ -18,13 +18,13 @@
               <ul>
                 <li :class="(related_item!=null && $route.params.id==parseInt(related_item.id) || $route.params.id==related_item.url.substr(6)) ? 'active' : ''"
                     v-for="related_item in relates">
-                  <router-link v-if="related_item" :to="related_item.url"><i aria-hidden="true"
+                  <router-link v-if="related_item" :to="normalizeRoute(related_item.url)"><i aria-hidden="true"
                                                                              class="fa fa-caret-right"></i>{{ related_item.title }}
                   </router-link>
                   <ul>
                     <li :class="(childRelated!=null && childRelated.url!=null && ($route.params.id==parseInt(childRelated.id) || $route.params.id==childRelated.url.substr(6))) ? 'active' : ''"
                         v-for="childRelated in related_item.children">
-                      <router-link v-if="childRelated" :to="childRelated.url"><i aria-hidden="true"
+                      <router-link v-if="childRelated" :to="normalizeRoute(childRelated.url)"><i aria-hidden="true"
                                                                                  class="fa fa-caret-right"></i>{{ childRelated.title }}
                       </router-link>
                     </li>
@@ -112,7 +112,10 @@ export default {
   }),
   watch: {
     $route(to, from) {
-      this.initialize();
+      console.log(to)
+      if (to.params.id !== from.params.id || to.params.locale !== from.params.locale) {
+        this.initialize(to.params.id);
+      }
     }
   },
   async created() {
@@ -128,6 +131,9 @@ export default {
   },
 
   methods: {
+    normalizeRoute(url) {
+      return `/${String(url || '').replace(/^\/+/, '')}`;
+    },
     sendCommit() {
 
       if (!this.rateitem.rating || !this.rateitem.text) {
@@ -142,10 +148,10 @@ export default {
     close() {
       this.$router.replace('/');
     },
-    async initialize() {
-      console.log(this.$route.params.id)
+    async initialize(url = this.$route.params.id) {
+
       this.page.title = ''
-      await api.readPage(this.$route.params.id).then((response) => {
+      await api.readPage(url).then((response) => {
         this.page = response.data.data;
         if (!this.page.id) this.$router.replace('/404')
         if (this.page.parent && typeof this.page.parent.url !== 'undefined') {
@@ -166,7 +172,7 @@ export default {
         this.$router.replace("/").catch(() => {
         });
       })
-      api.readRelated(this.$route.params.id).then((response) => {
+      api.readRelated(url).then((response) => {
         this.relates = response.data;
       }).catch((error) => {
         this.$toast.error(i18n.t(`Маълумотларни юклашда хатолик содир бўлди!`))
